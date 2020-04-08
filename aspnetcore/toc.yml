@@ -1082,6 +1082,8 @@
       uid: security/enforcing-ssl
     - name: Héberger Docker avec HTTPS
       uid: security/docker-https
+    - name: Docker Compose avec HTTPS
+      uid: security/docker-compose-https
     - name: Prise en charge du règlement général sur la protection des données (RGPD) de l’Union Européenne
       uid: security/gdpr
     - name: Protection contre la falsification de requête
