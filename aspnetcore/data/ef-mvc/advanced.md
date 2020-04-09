@@ -1,5 +1,5 @@
 ---
-title: 'Didacticiel : en savoir plus sur les scénarios avancés-ASP.NET MVC avec EF Core'
+title: 'Tutorial: En savoir plus sur les scénarios avancés - ASP.NET MVC avec EF Core'
 description: Ce tutoriel présente plusieurs rubriques pratiques pour aller au-delà des principes de base du développement d’applications web ASP.NET Core qui utilisent Entity Framework Core.
 author: rick-anderson
 ms.author: riande
@@ -8,13 +8,13 @@ ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/advanced
 ms.openlocfilehash: fc6f8d8c4ab09848cf316be2e522bf5ce3b9ac76
-ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/16/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "79416232"
 ---
-# <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>Didacticiel : en savoir plus sur les scénarios avancés-ASP.NET MVC avec EF Core
+# <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>Tutorial: En savoir plus sur les scénarios avancés - ASP.NET MVC avec EF Core
 
 Dans le didacticiel précédent, vous avez implémenté l’héritage TPH (table par hiérarchie). Ce didacticiel présente plusieurs rubriques qu’il est utile de connaître lorsque vous allez au-delà des principes de base du développement d’applications web ASP.NET Core qui utilisent Entity Framework Core.
 
@@ -31,7 +31,7 @@ Dans ce tutoriel, vous allez :
 > * En savoir plus sur le code source et les plans de développement EF Core
 > * Apprendre à utiliser du code dynamique LINQ pour simplifier le code
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * [Implémenter l’héritage](inheritance.md)
 
@@ -103,13 +103,13 @@ Exécutez la méthode `UpdateCourseCredits` en sélectionnant l’onglet **Cours
 
 ![Page de mise à jour des crédits de cours](advanced/_static/update-credits.png)
 
-Cliquez sur **Update**. Vous voyez le nombre de lignes affectées :
+Cliquez sur **Mettre à jour**. Vous voyez le nombre de lignes affectées :
 
 ![Page de mise à jour des crédits de cours – lignes affectées](advanced/_static/update-credits-rows-affected.png)
 
 Cliquez sur **Revenir à la liste** pour afficher la liste des cours avec le nombre révisé de crédits.
 
-Notez que le code de production garantit que les mises à jour fourniront toujours des données valides. Le code simplifié indiqué ici peut multiplier le nombre de crédits suffisamment pour générer des nombres supérieurs à 5. (La propriété `Credits` a un attribut `[Range(0, 5)]`.) La requête de mise à jour fonctionne, mais les données non valides peuvent entraîner des résultats inattendus dans d’autres parties du système qui supposent que le nombre de crédits est inférieur ou égal à 5.
+Notez que le code de production garantit que les mises à jour fourniront toujours des données valides. Le code simplifié indiqué ici peut multiplier le nombre de crédits suffisamment pour générer des nombres supérieurs à 5. (La `Credits` propriété `[Range(0, 5)]` a un attribut.) La requête de mise à jour fonctionnerait, mais les données invalides pourraient entraîner des résultats inattendus dans d’autres parties du système qui supposent que le nombre de crédits est de 5 ou moins.
 
 Pour plus d’informations sur les requêtes SQL brutes, consultez [Requêtes SQL brutes](/ef/core/querying/raw-sql).
 
@@ -181,7 +181,7 @@ _context.ChangeTracker.AutoDetectChangesEnabled = false;
 
 ## <a name="ef-core-source-code-and-development-plans"></a>Code source et plans de développement EF Core
 
-La source d’Entity Framework Core se trouve à l’adresse [https://github.com/dotnet/efcore](https://github.com/dotnet/efcore). Le dépôt EF Core contient les builds nocturnes, le suivi des problèmes, les spécifications des fonctionnalités, les notes des réunions de conception et [la feuille de route de développement futur](https://github.com/dotnet/efcore/wiki/Roadmap). Vous pouvez signaler ou rechercher des bogues, et apporter votre contribution.
+La source de base [https://github.com/dotnet/efcore](https://github.com/dotnet/efcore)du cadre de l’entité est à . Le dépôt EF Core contient les builds nocturnes, le suivi des problèmes, les spécifications des fonctionnalités, les notes des réunions de conception et [la feuille de route de développement futur](https://github.com/dotnet/efcore/wiki/Roadmap). Vous pouvez signaler ou rechercher des bogues, et apporter votre contribution.
 
 Bien que le code source soit ouvert, Entity Framework Core est entièrement pris en charge comme produit Microsoft. L’équipe Microsoft Entity Framework garde le contrôle sur le choix des contributions qui sont acceptées et teste toutes les modifications du code pour garantir la qualité de chaque version.
 
@@ -279,4 +279,4 @@ Dans ce tutoriel, vous allez :
 Cette étape termine cette série de tutoriels sur l’utilisation d’Entity Framework Core dans une application ASP.NET Core MVC. Cette série a fait appel à une nouvelle base de données ; une alternative consiste à rétroconcevoir un modèle à partir d’une base de données existante.
 
 > [!div class="nextstepaction"]
-> [Didacticiel : EF Core avec MVC, base de données existante](/ef/core/get-started/aspnetcore/existing-db?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json)
+> [Tutorial: EF Core avec MVC, base de données existante](/ef/core/get-started/aspnetcore/existing-db?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json)

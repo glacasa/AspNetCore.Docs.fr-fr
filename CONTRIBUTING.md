@@ -2,9 +2,9 @@
 
 Ce document aborde le processus de contribution aux articles et exemples de code qui sont hébergés sur le [site de la documentation ASP.NET](https://docs.microsoft.com/aspnet/). Les corrections de fautes de frappe et les nouveaux articles sont des contributions bienvenues.
 
-## <a name="how-to-make-a-simple-correction-or-suggestion"></a>Comment effectuer une correction ou suggestion simple
+## <a name="how-to-make-a-simple-correction-or-suggestion"></a>Comment apporter une correction ou suggestion simple
 
-Les articles sont stockés dans le dépôt en tant que fichiers Markdown. Pour apporter des modifications simples au contenu d’un fichier Markdown, dans le navigateur, vous devez sélectionner le lien **Modifier** dans le coin supérieur droit de la fenêtre du navigateur. (Dans une fenêtre de navigateur fine, développez la barre d' **options** pour afficher le lien **modifier** .) Suivez les instructions pour créer une demande de tirage (pull request). Nous examinerons la demande de tirage et l’accepterons ou suggérerons des modifications.
+Les articles sont stockés dans le dépôt en tant que fichiers Markdown. Pour apporter des modifications simples au contenu d’un fichier Markdown, dans le navigateur, vous devez sélectionner le lien **Modifier** dans le coin supérieur droit de la fenêtre du navigateur. (Dans une fenêtre de navigateur étroite, étendre la barre **d’options** pour voir le lien **Edit.)** Suivez les instructions pour créer une demande de traction (PR). Nous examinerons la demande de tirage et l’accepterons ou suggérerons des modifications.
 
 ## <a name="how-to-make-a-more-complex-submission"></a>Comment effectuer une soumission plus complexe
 
@@ -67,7 +67,7 @@ Ces restrictions réduisent la taille du dépôt.
 
 ## <a name="code-snippets"></a>Extraits de code
 
-Les articles contiennent souvent des extraits de code pour illustrer les points abordés. DFM vous permet de copier le code dans le fichier Markdown ou de faire référence à un fichier de code distinct. Nous préférons l’utilisation de fichiers de code distincts si possible afin de limiter les risques d’erreurs dans le code. Les fichiers de code sont stockés dans le dépôt, conformément à la structure de dossiers décrite précédemment pour les exemples de projets. 
+Les articles contiennent fréquemment des extraits de code pour illustrer les points abordés. DFM vous permet de copier le code dans le fichier Markdown ou de faire référence à un fichier de code distinct. Nous préférons l’utilisation de fichiers de code distincts si possible afin de limiter les risques d’erreurs dans le code. Les fichiers de code sont stockés dans le dépôt, conformément à la structure de dossiers décrite précédemment pour les exemples de projets. 
 
 Les exemples suivants illustrent la [syntaxe d’extraits de code DFM](https://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html#code-snippet) à utiliser dans un fichier *configuration/index.md*.
 
@@ -77,7 +77,7 @@ Pour afficher un fichier de code entier en tant qu’extrait de code :
 [!code-csharp[](configuration/index/sample/Program.cs)]
 ```
 
-Pour afficher une partie d’un fichier en tant qu’extrait de code à l’aide de numéros de ligne :
+Pour afficher une partie d’un fichier en tant qu’extrait de code en utilisant des numéros de ligne :
 
 ```md
 [!code-csharp[](configuration/index/sample/Program.cs?range=1-10,20,30,40-50]
@@ -113,7 +113,7 @@ DocFX nécessite :
 ### <a name="windows-instructions"></a>Instructions pour Windows
 
 * Téléchargez et décompressez *docfx.zip* à partir des [versions DocFX](https://github.com/dotnet/docfx/releases).
-* Ajoutez DocFX à votre chemin d’accès.
+* Ajoutez DocFX à votre chemin (PATH).
 * Dans un shell de commande, accédez au dossier qui contient le fichier *docfx.json* (*aspnet* pour du contenu ASP.NET ou *aspnetcore* pour du contenu ASP.NET Core) et exécutez la commande suivante :
 
   ```console

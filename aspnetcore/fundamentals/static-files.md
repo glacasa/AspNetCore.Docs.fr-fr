@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 10/07/2019
 uid: fundamentals/static-files
 ms.openlocfilehash: 95a77defc7e98328e1f4e3615648b1d14485e51e
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78660124"
 ---
 # <a name="static-files-in-aspnet-core"></a>Fichiers statiques dans ASP.NET Core
@@ -19,11 +19,11 @@ Par [Rick Anderson](https://twitter.com/RickAndMSFT) et [Scott Addie](https://tw
 
 Les fichiers statiques, comme les fichiers HTML, CSS, images et JavaScript, sont des ressources qu’une application ASP.NET Core délivre directement aux clients. Une configuration est nécessaire pour pouvoir délivrer ces fichiers.
 
-[Affichez ou téléchargez l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/static-files/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
+[Afficher ou télécharger le code de l’échantillon](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/static-files/samples) ([comment télécharger](xref:index#how-to-download-a-sample))
 
 ## <a name="serve-static-files"></a>Délivrer des fichiers statiques
 
-Les fichiers statiques sont stockés dans le répertoire [racine Web](xref:fundamentals/index#web-root) du projet. Le répertoire par défaut est *{content root}/wwwroot*, mais il peut être modifié à l’aide de la méthode [UseWebRoot](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.usewebroot#Microsoft_AspNetCore_Hosting_HostingAbstractionsWebHostBuilderExtensions_UseWebRoot_Microsoft_AspNetCore_Hosting_IWebHostBuilder_System_String_) . Pour plus d’informations, consultez [Racine du contenu](xref:fundamentals/index#content-root) et [Racine web](xref:fundamentals/index#web-root).
+Les fichiers statiques sont stockés dans l’annuaire [web](xref:fundamentals/index#web-root) du projet. L’annuaire par défaut est *'contenu root'/wwwroot*, mais il peut être changé via la méthode [UseWebRoot.](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.usewebroot#Microsoft_AspNetCore_Hosting_HostingAbstractionsWebHostBuilderExtensions_UseWebRoot_Microsoft_AspNetCore_Hosting_IWebHostBuilder_System_String_) Pour plus d’informations, consultez [Racine du contenu](xref:fundamentals/index#content-root) et [Racine web](xref:fundamentals/index#web-root).
 
 L’hôte web de l’application doit être informé du répertoire racine du contenu.
 
@@ -43,14 +43,14 @@ Définissez le répertoire actif comme racine du contenu en appelant [UseContent
 
 ::: moniker-end
 
-Les fichiers statiques sont accessibles via un chemin d’accès relatif à la [racine Web](xref:fundamentals/index#web-root). Par exemple, le modèle de projet **Application web** contient plusieurs dossiers dans le dossier *wwwroot* :
+Les fichiers statiques sont accessibles via un chemin par rapport à la [racine web](xref:fundamentals/index#web-root). Par exemple, le modèle de projet **Application web** contient plusieurs dossiers dans le dossier *wwwroot* :
 
 * **wwwroot**
   * **css**
   * **images**
-  * **js**
+  * **Js**
 
-Le format d’URI pour accéder à un fichier dans le sous-dossier *images* est *http://\<adresse_serveur>/images/\<nom_fichier_image>* . Par exemple : *http://localhost:9189/images/banner3.svg* .
+Le format d’URI pour accéder à un fichier dans le sous-dossier *images* est *http://\<adresse_serveur>/images/\<nom_fichier_image>*. Par exemple, *http://localhost:9189/images/banner3.svg*.
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -78,20 +78,20 @@ Appelez la méthode [UseStaticFiles](/dotnet/api/microsoft.aspnetcore.builder.st
 
 [!code-csharp[](static-files/samples/1x/StartupStaticFiles.cs?name=snippet_ConfigureMethod&highlight=3)]
 
-La surcharge de méthode `UseStaticFiles` sans paramètre marque les fichiers dans la [racine Web](xref:fundamentals/index#web-root) comme étant desservis. Le balisage suivant référence *wwwroot/images/banner1.svg* :
+La surcharge `UseStaticFiles` de méthode sans paramètres marque les fichiers dans la [racine web](xref:fundamentals/index#web-root) comme servable. Le balisage suivant référence *wwwroot/images/banner1.svg* :
 
 [!code-cshtml[](static-files/samples/1x/Views/Home/Index.cshtml?name=snippet_static_file_wwwroot)]
 
-Dans le code précédent, le caractère tilde `~/` pointe vers la [racine Web](xref:fundamentals/index#web-root).
+Dans le code précédent, `~/` le caractère tilde pointe vers la [racine web](xref:fundamentals/index#web-root).
 
 ### <a name="serve-files-outside-of-web-root"></a>Délivrer des fichiers en dehors de la racine web
 
-Prenons l’exemple d’une hiérarchie de répertoires dans laquelle les fichiers statiques à prendre en charge se trouvent en dehors de la [racine Web](xref:fundamentals/index#web-root):
+Considérez une hiérarchie d’annuaire dans laquelle les fichiers statiques à servir résident en dehors de la [racine web](xref:fundamentals/index#web-root):
 
 * **wwwroot**
   * **css**
   * **images**
-  * **js**
+  * **Js**
 * **MyStaticFiles**
   * **images**
     * *banner1.svg*
@@ -108,7 +108,7 @@ Le balisage suivant référence *MyStaticFiles/images/banner1.svg* :
 
 ### <a name="set-http-response-headers"></a>Définir des en-têtes de réponse HTTP
 
-Un objet [StaticFileOptions](/dotnet/api/microsoft.aspnetcore.builder.staticfileoptions) peut être utilisé pour définir des en-têtes de réponse HTTP. En plus de configurer le service de fichiers statiques à partir de la [racine Web](xref:fundamentals/index#web-root), le code suivant définit l’en-tête `Cache-Control` :
+Un objet [StaticFileOptions](/dotnet/api/microsoft.aspnetcore.builder.staticfileoptions) peut être utilisé pour définir des en-têtes de réponse HTTP. En plus de configurer la portion de fichier statique `Cache-Control` à partir de la racine [web](xref:fundamentals/index#web-root), le code suivant définit l’en-tête:
 
 [!code-csharp[](static-files/samples/1x/StartupAddHeader.cs?name=snippet_ConfigureMethod)]
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
@@ -172,7 +172,7 @@ Le code suivant change le nom de fichier par défaut en *mydefault.html* :
 
 ## <a name="usefileserver"></a>UseFileServer
 
-<xref:Microsoft.AspNetCore.Builder.FileServerExtensions.UseFileServer*> combine les fonctionnalités de `UseStaticFiles`, `UseDefaultFiles`et éventuellement `UseDirectoryBrowser`.
+<xref:Microsoft.AspNetCore.Builder.FileServerExtensions.UseFileServer*>combine la fonctionnalité `UseStaticFiles` `UseDefaultFiles`de , `UseDirectoryBrowser`, , et d’option .
 
 Le code suivant active la possibilité de délivrer des fichiers statiques et le fichier par défaut. L’exploration des répertoires n’est pas activée.
 
@@ -191,7 +191,7 @@ Considérez la hiérarchie de répertoires suivante :
 * **wwwroot**
   * **css**
   * **images**
-  * **js**
+  * **Js**
 * **MyStaticFiles**
   * **images**
     * *banner1.svg*
@@ -240,14 +240,14 @@ Avec le code précédent, une requête pour un fichier avec un type de contenu i
 > [!WARNING]
 > L’activation de [ServeUnknownFileTypes](/dotnet/api/microsoft.aspnetcore.builder.staticfileoptions.serveunknownfiletypes#Microsoft_AspNetCore_Builder_StaticFileOptions_ServeUnknownFileTypes) présente un risque de sécurité. Il est désactivé par défaut et son utilisation est déconseillée. [FileExtensionContentTypeProvider](#fileextensioncontenttypeprovider) fournit une alternative plus sûre pour délivrer des fichiers avec des extensions non standard.
 
-## <a name="serve-files-from-multiple-locations"></a>Servir des fichiers à partir de plusieurs emplacements
+## <a name="serve-files-from-multiple-locations"></a>Servir les fichiers à partir de plusieurs endroits
 
-`UseStaticFiles` et `UseFileServer` par défaut le fournisseur de fichiers pointant sur *wwwroot*. Vous pouvez fournir des instances supplémentaires de `UseStaticFiles` et `UseFileServer` avec d’autres fournisseurs de fichiers pour servir des fichiers à partir d’autres emplacements. Pour plus d’informations, consultez [ce problème GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/15578).
+`UseStaticFiles`et `UseFileServer` par défaut au fournisseur de fichiers pointant vers *wwwroot*. Vous pouvez fournir `UseStaticFiles` des `UseFileServer` instances supplémentaires et avec d’autres fournisseurs de fichiers pour servir des fichiers à partir d’autres endroits. Pour plus d’informations, consultez [ce problème GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/15578).
 
 ### <a name="considerations"></a>Considérations
 
 > [!WARNING]
-> `UseDirectoryBrowser` et `UseStaticFiles` peuvent entraîner une fuite de secrets. La désactivation de l’exploration de répertoires est fortement recommandée en production. Examinez attentivement les répertoires qui sont activés via `UseStaticFiles` ou `UseDirectoryBrowser`. L’ensemble du répertoire et de ses sous-répertoires deviennent accessibles publiquement. Stockez les fichiers qui peuvent être délivrés au public dans un dossier dédié, comme *\<racine-contenu>/wwwroot*. Séparez ces fichiers des vues MVC, des Pages Razor (2.x uniquement), des fichiers de configuration, etc.
+> `UseDirectoryBrowser` et `UseStaticFiles` peuvent entraîner une fuite de secrets. La désactivation de l’exploration de répertoires est fortement recommandée en production. Examinez attentivement les répertoires qui sont activés via `UseStaticFiles` ou `UseDirectoryBrowser`. L’ensemble du répertoire et de ses sous-répertoires deviennent accessibles publiquement. Stockez des fichiers adaptés au service du public dans un répertoire dédié, comme * \<content_root>/wwwroot*. Séparez ces fichiers des vues MVC, des Pages Razor (2.x uniquement), des fichiers de configuration, etc.
 
 * Les URL pour le contenu exposé avec `UseDirectoryBrowser` et `UseStaticFiles` sont soumises aux restrictions de respect de la casse et de caractères du système de fichiers sous-jacent. Par exemple, Windows ne respecte pas la casse, mais macOS et Linux la respectent.
 
@@ -261,9 +261,9 @@ Avec le code précédent, une requête pour un fichier avec un type de contenu i
 > [!WARNING]
 > Si le gestionnaire de fichiers statiques d’IIS est activé **et** que le module ASP.NET Core est incorrectement configuré, les fichiers statiques peuvent être délivrés. Cela se produit par exemple si le fichier *web.config* n’est pas déployé.
 
-* Placez les fichiers de code (y compris les fichiers *. cs* et *. cshtml*) en dehors de la [racine Web](xref:fundamentals/index#web-root)du projet d’application. Par conséquent, une séparation logique est créée entre le contenu côté client et le code basé sur le serveur de l’application. Ceci empêche la fuite de code côté serveur.
+* Placez les fichiers de code (y compris *.cs* et *.cshtml*) en dehors de la [racine web](xref:fundamentals/index#web-root)du projet d’application . Par conséquent, une séparation logique est créée entre le contenu côté client et le code basé sur le serveur de l’application. Ceci empêche la fuite de code côté serveur.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Middleware](xref:fundamentals/middleware/index)
-* [Présentation d’ASP.NET Core](xref:index)
+* [Introduction à ASP.NET Core](xref:index)

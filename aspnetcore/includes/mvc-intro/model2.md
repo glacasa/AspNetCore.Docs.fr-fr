@@ -14,7 +14,7 @@ Le code précédent crée une propriété `DbSet` pour le jeu d’entités. Dans
 
 ### <a name="add-a-database-connection-string"></a>Ajouter une chaîne de connexion de base de données
 
-Ajoutez une chaîne de connexion au fichier *appsettings.json* :
+Ajoutez une chaîne de connexion au fichier *appsettings.json* :
 
 [!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/appsettings_SQLite.json?highlight=10-12)]
 
@@ -26,7 +26,7 @@ Ajoutez une chaîne de connexion au fichier *appsettings.json* :
 
 ### <a name="register-the-database-context"></a>Inscrire le contexte de base de données
 
-En tête du fichier `using`Startup.cs *, ajoutez les instructions*  suivantes :
+En tête du fichier *Startup.cs*, ajoutez les instructions `using` suivantes :
 
 ```csharp
 using MvcMovie.Data;
@@ -53,7 +53,7 @@ Le code précédent crée une propriété `DbSet` pour le jeu d’entités. Dans
 
 ### <a name="add-a-database-connection-string"></a>Ajouter une chaîne de connexion de base de données
 
-Ajoutez une chaîne de connexion au fichier *appsettings.json* :
+Ajoutez une chaîne de connexion au fichier *appsettings.json* :
 
 [!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie/appsettings_SQLite.json?highlight=8-10)]
 
@@ -72,7 +72,7 @@ Le package `Microsoft.VisualStudio.Web.CodeGeneration.Design` est nécessaire à
 
 ### <a name="register-the-database-context"></a>Inscrire le contexte de base de données
 
-En tête du fichier `using`Startup.cs *, ajoutez les instructions*  suivantes :
+En tête du fichier *Startup.cs*, ajoutez les instructions `using` suivantes :
 
 ```csharp
 using MvcMovie.Models;

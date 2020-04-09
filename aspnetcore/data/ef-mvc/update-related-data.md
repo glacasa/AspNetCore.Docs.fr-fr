@@ -1,6 +1,6 @@
 ---
-title: 'Didacticiel : mettre à jour les données associées-ASP.NET MVC avec EF Core'
-description: Dans ce didacticiel, vous allez mettre à jour des données associées en mettant à jour des propriétés de navigation et des champs de clé étrangère.
+title: 'Tutorial: Mise à jour des données connexes - ASP.NET MVC avec EF Core'
+description: Dans ce didacticiel, vous mettez à jour des données associées en mettant à jour des champs de clé étrangère et des propriétés de navigation.
 author: rick-anderson
 ms.author: riande
 ms.custom: mvc
@@ -8,13 +8,13 @@ ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/update-related-data
 ms.openlocfilehash: 83d662659fb4bc7a2867be563e4e36927d2adafe
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78657142"
 ---
-# <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Didacticiel : mettre à jour les données associées-ASP.NET MVC avec EF Core
+# <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Tutorial: Mise à jour des données connexes - ASP.NET MVC avec EF Core
 
 Dans le didacticiel précédent, vous avez affiché des données associées ; dans ce didacticiel, vous mettez à jour des données associées en mettant à jour des champs de clé étrangère et des propriétés de navigation.
 
@@ -33,13 +33,13 @@ Dans ce tutoriel, vous allez :
 > * Mettre à jour la page Delete
 > * Ajouter des emplacements de bureau et des cours à la page Create
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * [Lire les données associées](read-related-data.md)
 
 ## <a name="customize-courses-pages"></a>Personnaliser les pages de cours
 
-Quand une entité Course est créée, elle doit avoir une relation avec un département existant. Pour faciliter cela, le code du modèle généré automatiquement inclut des méthodes de contrôleur, et des vues Create et Edit qui incluent une liste déroulante pour sélectionner le département. La liste déroulante définit la propriété de clé étrangère `Course.DepartmentID`, qui est tout ce dont Entity Framework a besoin pour charger la propriété de navigation `Department` avec l’entité Department appropriée. Vous utilisez le code du modèle généré automatiquement, mais que vous modifiez un peu pour ajouter la gestion des erreurs et trier la liste déroulante.
+Quand une entité de cours est créée, elle doit avoir une relation à un département existant. Pour faciliter cela, le code du modèle généré automatiquement inclut des méthodes de contrôleur, et des vues Create et Edit qui incluent une liste déroulante pour sélectionner le département. La liste déroulante définit la propriété de clé étrangère `Course.DepartmentID`, qui est tout ce dont Entity Framework a besoin pour charger la propriété de navigation `Department` avec l’entité Department appropriée. Vous utilisez le code du modèle généré automatiquement, mais que vous modifiez un peu pour ajouter la gestion des erreurs et trier la liste déroulante.
 
 Dans *CoursesController.cs*, supprimez les quatre méthodes Create et Edit, et remplacez-les par le code suivant :
 
@@ -95,7 +95,7 @@ Dans *Views/Courses/Delete.cshtml*, ajoutez un champ pour le numéro de cours en
 
 Dans *Views/Courses/Details.cshtml*, faites la même modification que celle que vous venez de faire pour *Delete.cshtml*.
 
-### <a name="test-the-course-pages"></a>Tester les pages des cours
+### <a name="test-the-course-pages"></a>Tester les pages de cours
 
 Exécutez l’application, sélectionnez l’onglet **Courses**, cliquez sur **Create New** et entrez les données pour un nouveau cours :
 
@@ -171,13 +171,13 @@ Exécutez l’application, sélectionnez l’onglet **Instructors**, puis clique
 
 ## <a name="add-courses-to-edit-page"></a>Ajouter des cours à la page de modification
 
-Les formateurs peuvent donner un nombre quelconque de cours. Maintenant, vous allez améliorer la page de modification des formateurs en ajoutant la possibilité de modifier les affectations de cours avec un groupe de cases à cocher, comme le montre la capture d’écran suivante :
+Les instructeurs peuvent enseigner dans n’importe quel nombre de cours. Maintenant, vous allez améliorer la page de modification des formateurs en ajoutant la possibilité de modifier les affectations de cours avec un groupe de cases à cocher, comme le montre la capture d’écran suivante :
 
-![Page de modification des formateurs avec des cours](update-related-data/_static/instructor-edit-courses.png)
+![Page de modification de formateur avec des cours](update-related-data/_static/instructor-edit-courses.png)
 
 La relation entre les entités Course et Instructor est plusieurs-à-plusieurs. Pour ajouter et supprimer des relations, vous ajoutez et vous supprimez des entités dans le jeu d’entités de la jointure CourseAssignments.
 
-L’interface utilisateur qui vous permet de changer les cours auxquels un formateur est affecté est un groupe de cases à cocher. Une case à cocher est affichée pour chaque cours de la base de données, et ceux auxquels le formateur est actuellement affecté sont sélectionnés. L’utilisateur peut cocher ou décocher les cases pour modifier les affectations de cours. Si le nombre de cours était beaucoup plus important, vous pourriez utiliser une autre méthode de présentation des données dans la vue, mais vous utiliseriez la même méthode de manipulation d’une entité de jointure pour créer ou supprimer des relations.
+L’interface utilisateur qui vous permet de changer les cours auxquels un formateur est affecté est un groupe de cases à cocher. Une case à cocher est affichée pour chaque cours de la base de données, et ceux auxquels le formateur est actuellement affecté sont sélectionnés. L’utilisateur peut cocher ou décocher les cases pour changer les affectations de cours. Si le nombre de cours était beaucoup plus important, vous pourriez utiliser une autre méthode de présentation des données dans la vue, mais vous utiliseriez la même méthode de manipulation d’une entité de jointure pour créer ou supprimer des relations.
 
 ### <a name="update-the-instructors-controller"></a>Mettre à jour le contrôleur Instructors
 
@@ -187,7 +187,7 @@ Créez *AssignedCourseData.cs* dans le dossier *SchoolViewModels* et remplacez l
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/AssignedCourseData.cs)]
 
-Dans *InstructorsController.cs*, remplacez la méthode HttpGet `Edit` par le code suivant. Les modifications apparaissent en surbrillance.
+Dans *InstructorsController.cs*, remplacez la méthode HttpGet `Edit` par le code suivant. Les modifications sont mises en surbrillance.
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?highlight=10,17,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36&name=snippet_EditGetCourses)]
 
@@ -225,7 +225,7 @@ Dans *Views/Instructors/Edit.cshtml*, ajoutez un champ **Courses** avec un table
 
 <a id="notepad"></a>
 > [!NOTE]
-> Quand vous collez le code dans Visual Studio, les sauts de ligne peuvent être changés d’une façon qui casse le code. Si le code semble différent après un collage, appuyez une fois sur Ctrl+Z pour annuler la mise en forme automatique. Ceci permet de corriger les sauts de ligne de façon à ce qu’ils apparaissent comme ce que vous voyez ici. L’indentation ne doit pas nécessairement être parfaite, mais les lignes `@</tr><tr>`, `@:<td>`, `@:</td>` et `@:</tr>` doivent chacune tenir sur une seule ligne comme dans l’illustration, sinon vous recevrez une erreur d’exécution. Avec le bloc de nouveau code sélectionné, appuyez trois fois sur la touche Tab pour aligner le nouveau code avec le code existant. Ce problème est résolu dans Visual Studio 2019.
+> Quand vous collez le code dans Visual Studio, les sauts de ligne peuvent être changés d’une façon qui casse le code. Si le code semble différent après un collage, appuyez une fois sur Ctrl+Z pour annuler la mise en forme automatique. Ceci permet de corriger les sauts de ligne de façon à ce qu’ils apparaissent comme ce que vous voyez ici. L’indentation ne doit pas nécessairement être parfaite, mais les lignes `@</tr><tr>`, `@:<td>`, `@:</td>` et `@:</tr>` doivent chacune tenir sur une seule ligne comme dans l’illustration, sinon vous recevrez une erreur d’exécution. Avec le bloc de nouveau code sélectionné, appuyez trois fois sur Tab pour aligner le nouveau code avec le code existant. Ce problème est résolu dans Visual Studio 2019.
 
 [!code-html[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=35-61)]
 
@@ -235,7 +235,7 @@ Quand les cases à cocher sont affichées à l’origine, celles qui corresponde
 
 Exécutez l’application, sélectionnez l’onglet **Instructors**, puis cliquez sur **Edit** pour un formateur pour voir la page **Edit**.
 
-![Page de modification des formateurs avec des cours](update-related-data/_static/instructor-edit-courses.png)
+![Page de modification de formateur avec des cours](update-related-data/_static/instructor-edit-courses.png)
 
 Changez quelques affectations de cours et cliquez sur Save. Les modifications que vous apportez sont reflétées dans la page Index.
 
@@ -252,7 +252,7 @@ Ce code apporte les modifications suivantes :
 
 * Il effectue un chargement hâtif pour la propriété de navigation `CourseAssignments`. Vous devez inclure ceci car sinon, EF ne dispose pas d’informations sur les entités `CourseAssignment` associées et ne les supprime pas. Pour éviter de devoir les lire ici, vous pouvez configurer une suppression en cascade dans la base de données.
 
-* Si le formateur à supprimer est affecté en tant qu’administrateur d’un département, il supprime l’affectation du formateur de ces départements.
+* Si le formateur à supprimer est attribué en tant qu’administrateur d’un département, supprime l’attribution de l'instructeur de ces départements.
 
 ## <a name="add-office-location-and-courses-to-create-page"></a>Ajouter des emplacements de bureau et des cours à la page Create
 
@@ -312,7 +312,7 @@ Dans ce tutoriel, vous allez :
 > * Ajoutez une page de modification de formateur
 > * Ajoutez des cours à la page de modification
 > * Mettez à jour la page Delete
-> * Ajoutez des emplacements de bureau et des cours à la page Create
+> * Emplacements de bureau et cours ajoutés à la page Create
 
 Passez au tutoriel suivant pour découvrir comment gérer les conflits d’accès concurrentiel.
 

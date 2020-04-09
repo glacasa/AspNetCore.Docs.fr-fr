@@ -3,14 +3,14 @@ title: Zones dans ASP.NET Core
 author: rick-anderson
 description: Découvrez les zones, fonctionnalité d’ASP.NET MVC utilisée pour organiser des fonctionnalités connexes dans un groupe sous la forme d’un espace de noms distinct (pour le routage) et d’une structure de dossiers (pour les vues).
 ms.author: riande
-ms.date: 12/05/2019
+ms.date: 03/21/2019
 uid: mvc/controllers/areas
-ms.openlocfilehash: 41f7bdd6dbb3e33f843cb2a765dd30f98c81ce21
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 8859bc52416ff657036198c73f63b8b0a0201e11
+ms.sourcegitcommit: 9675db7bf4b67ae269f9226b6f6f439b5cce4603
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78665402"
+ms.lasthandoff: 04/03/2020
+ms.locfileid: "80625928"
 ---
 # <a name="areas-in-aspnet-core"></a>Zones dans ASP.NET Core
 
@@ -18,10 +18,10 @@ Par [Dhananjay Kumar](https://twitter.com/debug_mode) et [Rick Anderson](https:/
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Les zones sont une fonctionnalité ASP.NET qui permet d’organiser les fonctionnalités associées dans un groupe séparément :
+Les zones sont une fonctionnalité ASP.NET utilisée pour organiser les fonctionnalités connexes en un groupe en tant que distinct :
 
-* Espace de noms pour le routage.
-* Structure de dossiers pour les vues et les Razor Pages.
+* Namespace pour le routage.
+* Structure de dossier pour les vues et les pages Razor.
 
 L’utilisation de zones a pour effet de créer une hiérarchie pour les besoins du routage en ajoutant un autre paramètre de route, `area`, à `controller` et `action` ou une Razor Page `page`.
 
@@ -41,11 +41,11 @@ Si vous utilisez Razor Pages, consultez [Zones avec Razor Pages](#areas-with-raz
 Une application web ASP.NET Core type qui utilise des zones, des contrôleurs et des vues est constituée des éléments suivants :
 
 * Une [structure de dossiers Zone](#area-folder-structure).
-* Les contrôleurs avec l’attribut [`[Area]`](#attribute) pour associer le contrôleur à la zone :
+* Contrôleurs avec [`[Area]`](#attribute) l’attribut d’associer le contrôleur à la zone :
 
   [!code-csharp[](areas/31samples/MVCareas/Areas/Products/Controllers/ManageController.cs?name=snippet2)]
 
-* La [route de zone ajoutée au démarrage](#add-area-route) :
+* [L’itinéraire de zone ajouté au démarrage](#add-area-route):
 
   [!code-csharp[](areas/31samples/MVCareas/Startup.cs?name=snippet2&highlight=3-6)]
 
@@ -54,7 +54,7 @@ Une application web ASP.NET Core type qui utilise des zones, des contrôleurs et
 Imaginez une application qui contient deux groupes logiques, *Produits* et *Services*. En utilisant des zones, la structure de dossiers se présenterait comme suit :
 
 * Nom du projet
-  * Domaines
+  * Zones (Areas)
     * Products
       * Controllers
         * HomeController.cs
@@ -85,22 +85,22 @@ Si la disposition précédente est classique dans les cas où des zones sont uti
 
 ### <a name="associate-the-controller-with-an-area"></a>Associer le contrôleur à une zone
 
-Les contrôleurs de zone sont désignés à l’aide de l’attribut [&lbrack;Area&rbrack;](xref:Microsoft.AspNetCore.Mvc.AreaAttribute) :
+Les contrôleurs régionaux sont désignés avec l’attribut [ &lbrack;de zone&rbrack; ](xref:Microsoft.AspNetCore.Mvc.AreaAttribute) :
 
 [!code-csharp[](areas/31samples/MVCareas/Areas/Products/Controllers/ManageController.cs?highlight=5&name=snippet)]
 
 ### <a name="add-area-route"></a>Ajouter une route de zone
 
-Les itinéraires de zone utilisent généralement le [routage conventionnel](xref:mvc/controllers/routing#cr) plutôt que le [routage d’attributs](xref:mvc/controllers/routing#ar). Le routage conventionnel est dépendant de l’ordre. En général, les routes avec des zones doivent être placées plus haut dans la table de routage, car elles sont plus spécifiques que les routes sans zone.
+Les itinéraires de zone utilisent typiquement [le routage conventionnel](xref:mvc/controllers/routing#cr) plutôt que [l’acheminement d’attribut.](xref:mvc/controllers/routing#ar) Le routage conventionnel est dépendant de l’ordre. En général, les routes avec des zones doivent être placées plus haut dans la table de routage, car elles sont plus spécifiques que les routes sans zone.
 
 `{area:...}` peut être utilisé comme jeton dans les modèles de route si l’espace d’url est uniforme dans toutes les zones :
 
 [!code-csharp[](areas/31samples/MVCareas/Startup.cs?name=snippet&highlight=21-23)]
 
-Dans le code précédent, `exists` applique une contrainte qui impose à la route de correspondre à une zone. Utilisation de `{area:...}` avec `MapControllerRoute`:
+Dans le code précédent, `exists` applique une contrainte qui impose à la route de correspondre à une zone. Utilisation `{area:...}` `MapControllerRoute`avec :
 
-* Est le mécanisme le moins compliqué pour ajouter le routage à des zones.
-* Correspond à tous les contrôleurs avec l’attribut `[Area("Area name")]`.
+* Est le mécanisme le moins compliqué pour ajouter le routage dans les zones.
+* Correspond à tous `[Area("Area name")]` les contrôleurs avec l’attribut.
 
 Le code suivant utilise <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> pour créer deux routes de zone nommées :
 
@@ -114,35 +114,35 @@ Le code suivant tiré de l’[exemple de code téléchargeable](https://github.c
 
 [!code-cshtml[](areas/31samples/MVCareas/Views/Shared/_testLinksPartial.cshtml?name=snippet)]
 
-L’exemple de téléchargement inclut une [vue partielle](xref:mvc/views/partial) qui contient les éléments suivants :
+Le téléchargement de l’échantillon comprend une [vue partielle](xref:mvc/views/partial) qui contient :
 
-* Liens précédents.
-* Les liens semblables au précédent, sauf `area`, ne sont pas spécifiés.
+* Les liens précédents.
+* Les liens similaires `area` au précédent sauf n’est pas spécifié.
 
 La vue partielle étant référencée dans le [fichier de disposition](xref:mvc/views/layout), chaque page de l’application affiche les liens générés. Les liens générés sans spécification de la zone sont valides uniquement quand ils sont référencés dans une page contenue dans la même zone et le même contrôleur.
 
-Quand la zone ou le contrôleur n’est pas spécifié, le routage dépend des valeurs [ambiantes](xref:mvc/controllers/routing#ambient). Les valeurs de route actuelles de la requête actuelle sont considérées comme des valeurs ambiantes pour la génération de liens. Dans de nombreux cas pour l’exemple d’application, l’utilisation des valeurs ambiantes génère des liens incorrects avec le balisage qui ne spécifie pas la zone.
+Quand la zone ou le contrôleur n’est pas spécifié, le routage dépend des valeurs [ambiantes](xref:mvc/controllers/routing#ambient). Les valeurs de route actuelles de la requête actuelle sont considérées comme des valeurs ambiantes pour la génération de liens. Dans de nombreux cas pour l’application d’échantillon, l’utilisation des valeurs ambiantes génère des liens incorrects avec la balisage qui ne spécifie pas la zone.
 
 Pour plus d’informations, consultez [Routage vers des actions de contrôleur](xref:mvc/controllers/routing).
 
 ### <a name="shared-layout-for-areas-using-the-_viewstartcshtml-file"></a>Disposition partagée pour les zones en utilisant le fichier _ViewStart.cshtml
 
-Pour partager une disposition commune pour l’ensemble de l’application, conservez le *_ViewStart. cshtml* dans le [dossier racine](#arf)de l’application. Pour plus d'informations, consultez <xref:mvc/views/layout>
+Pour partager une mise en page commune pour l’ensemble de l’application, gardez le *_ViewStart.cshtml* dans le [dossier de racine d’application](#arf). Pour plus d'informations, consultez <xref:mvc/views/layout>
 
 <a name="arf"></a>
 
-### <a name="application-root-folder"></a>Dossier racine de l’application
+### <a name="application-root-folder"></a>Dossier de racine d’application
 
-Le dossier racine de l’application est le dossier qui contient *Startup.cs* dans l’application Web créée avec les modèles ASP.net core.
+Le dossier racine d’application est le dossier contenant *Startup.cs* dans l’application web créée avec les modèles ASP.NET Core.
 
 ### <a name="_viewimportscshtml"></a>_ViewImports.cshtml
 
- */Views/_ViewImports. cshtml*, pour MVC et */pages/_ViewImports. cshtml* pour Razor pages, n’est pas importé dans les vues dans les zones. Utilisez l’une des approches suivantes pour fournir des importations d’affichage à tous les affichages :
+ */Vues/_ViewImports.cshtml*, pour MVC, et */Pages/_ViewImports.cshtml* pour Razor Pages, n’est pas importé aux vues dans les zones. Utilisez l’une des approches suivantes pour donner une vue des importations à tous les points de vue :
 
-* Ajoutez *_ViewImports. cshtml* au [dossier racine](#arf)de l’application. Un *_ViewImports. cshtml* dans le dossier racine de l’application s’applique à toutes les vues de l’application.
-* Copiez le fichier *_ViewImports. cshtml* dans le dossier d’affichage approprié sous zones.
+* Ajouter *_ViewImports.cshtml* au [dossier racine d’application.](#arf) Un *_ViewImports.cshtml* dans le dossier de racine d’application s’appliquera à toutes les vues de l’application.
+* Copiez le fichier *_ViewImports.cshtml* au dossier de vue approprié sous les zones.
 
-Le fichier *_ViewImports. cshtml* [contient généralement](xref:mvc/views/tag-helpers/intro) des instructions import, `@using`et `@inject`. Pour plus d’informations, consultez [importation de directives partagées](xref:mvc/views/layout#importing-shared-directives).
+Le *fichier _ViewImports.cshtml* contient généralement [des importations d’aide tag,](xref:mvc/views/tag-helpers/intro) `@using`et `@inject` des déclarations. Pour plus d’informations, voir [Importing Shared Directives](xref:mvc/views/layout#importing-shared-directives).
 
 <a name="rename"></a>
 
@@ -156,10 +156,10 @@ Le code suivant remplace le dossier de zone par défaut `"Areas"` par `"MyAreas"
 
 ## <a name="areas-with-razor-pages"></a>Zones avec Razor Pages
 
-Les zones avec Razor Pages requièrent un dossier `Areas/<area name>/Pages` à la racine de l’application. La structure de dossiers suivante est utilisée avec [l’exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples) :
+Les zones avec `Areas/<area name>/Pages` des pages Razor nécessitent un dossier dans la racine de l’application. La structure de dossiers suivante est utilisée avec [l’exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples) :
 
 * Nom du projet
-  * Domaines
+  * Zones (Areas)
     * Products
       * Pages
         * _ViewImports
@@ -210,7 +210,7 @@ Le balisage suivant montre Razor Page */Products/About* :
 
 [!code-cshtml[](areas/31samples/RPareas/Areas/Products/Pages/About.cshtml)]
 
-Dans le fichier précédent, l’espace de noms et la directive `@addTagHelper` sont importés dans le fichier par le fichier *Areas/Products/Pages/_ViewImports.cshtml*.
+Dans le fichier précédent, `@addTagHelper` l’espace nom et la directive sont importés au fichier par le fichier *Zones/Produits/Pages/_ViewImports.cshtml.*
 
 Pour plus d’informations, consultez [Gestion de l’étendue des Tag Helpers](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) et [Importation de directives partagées](xref:mvc/views/layout#importing-shared-directives).
 
@@ -243,11 +243,11 @@ Si vous utilisez Razor Pages, consultez [Zones avec Razor Pages](#areas-with-raz
 Une application web ASP.NET Core type qui utilise des zones, des contrôleurs et des vues est constituée des éléments suivants :
 
 * Une [structure de dossiers Zone](#area-folder-structure).
-* Les contrôleurs avec l’attribut [`[Area]`](#attribute) pour associer le contrôleur à la zone :
+* Contrôleurs avec [`[Area]`](#attribute) l’attribut d’associer le contrôleur à la zone :
 
   [!code-csharp[](areas/samples/MVCareas/Areas/Products/Controllers/ManageController.cs?name=snippet2)]
 
-* La [route de zone ajoutée au démarrage](#add-area-route) :
+* [L’itinéraire de zone ajouté au démarrage](#add-area-route):
 
   [!code-csharp[](areas/samples/MVCareas/Startup.cs?name=snippet2&highlight=3-6)]
 
@@ -256,7 +256,7 @@ Une application web ASP.NET Core type qui utilise des zones, des contrôleurs et
 Imaginez une application qui contient deux groupes logiques, *Produits* et *Services*. En utilisant des zones, la structure de dossiers se présenterait comme suit :
 
 * Nom du projet
-  * Domaines
+  * Zones (Areas)
     * Products
       * Controllers
         * HomeController.cs
@@ -287,7 +287,7 @@ Si la disposition précédente est classique dans les cas où des zones sont uti
 
 ### <a name="associate-the-controller-with-an-area"></a>Associer le contrôleur à une zone
 
-Les contrôleurs de zone sont désignés à l’aide de l’attribut [&lbrack;Area&rbrack;](xref:Microsoft.AspNetCore.Mvc.AreaAttribute) :
+Les contrôleurs régionaux sont désignés avec l’attribut [ &lbrack;de zone&rbrack; ](xref:Microsoft.AspNetCore.Mvc.AreaAttribute) :
 
 [!code-csharp[](areas/samples/MVCareas/Areas/Products/Controllers/ManageController.cs?highlight=5&name=snippet)]
 
@@ -329,7 +329,7 @@ Pour partager une disposition commune pour l’ensemble de l’application, dép
 
 ### <a name="_viewimportscshtml"></a>_ViewImports.cshtml
 
-Dans son emplacement standard, */Views/_ViewImports.cshtml* ne s’applique pas aux zones. Pour utiliser des [Tag Helpers](xref:mvc/views/tag-helpers/intro) courants, `@using` ou `@inject` dans votre zone, vérifiez qu’un fichier *_ViewImports.cshtml* correct [s’applique à vos vues de zone](xref:mvc/views/layout#importing-shared-directives). Si vous souhaitez obtenir le même comportement dans toutes vos vues, déplacez */Views/_ViewImports.cshtml* vers la racine de l’application.
+Dans son emplacement standard, */Views/_ViewImports.cshtml* ne s’applique pas aux zones. Pour utiliser [Tag Helpers](xref:mvc/views/tag-helpers/intro)les aides `@using`Tag `@inject` courantes , , ou dans votre région, assurez-vous *qu’un fichier _ViewImports.cshtml* approprié [s’applique à vos vues de secteur](xref:mvc/views/layout#importing-shared-directives). Si vous souhaitez obtenir le même comportement dans toutes vos vues, déplacez */Views/_ViewImports.cshtml* vers la racine de l’application.
 
 <a name="rename"></a>
 
@@ -343,10 +343,10 @@ Le code suivant remplace le dossier de zone par défaut `"Areas"` par `"MyAreas"
 
 ## <a name="areas-with-razor-pages"></a>Zones avec Razor Pages
 
-Les zones avec Razor Pages requièrent un dossier `Areas/<area name>/Pages` à la racine de l’application. La structure de dossiers suivante est utilisée avec [l’exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) :
+Les zones avec `Areas/<area name>/Pages` des pages Razor nécessitent un dossier dans la racine de l’application. La structure de dossiers suivante est utilisée avec [l’exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) :
 
 * Nom du projet
-  * Domaines
+  * Zones (Areas)
     * Products
       * Pages
         * _ViewImports
@@ -399,7 +399,7 @@ Le balisage suivant montre Razor Page */Products/About* :
 
 [!code-cshtml[](areas/samples/RPareas/Areas/Products/Pages/About.cshtml)]
 
-Dans le fichier précédent, l’espace de noms et la directive `@addTagHelper` sont importés dans le fichier par le fichier *Areas/Products/Pages/_ViewImports.cshtml*.
+Dans le fichier précédent, `@addTagHelper` l’espace nom et la directive sont importés au fichier par le fichier *Zones/Produits/Pages/_ViewImports.cshtml.*
 
 Pour plus d’informations, consultez [Gestion de l’étendue des Tag Helpers](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) et [Importation de directives partagées](xref:mvc/views/layout#importing-shared-directives).
 

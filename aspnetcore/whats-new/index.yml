@@ -1,22 +1,24 @@
 ### YamlMime:Landing
-title: Documentation ASP.NET Core-nouveautés
-summary: Bienvenue dans les nouveautés de ASP.NET Core docs. Utilisez cette page pour rechercher rapidement les dernières modifications.
+title: ASP.NET documentation de base - quoi de neuf?
+summary: Bienvenue dans ce qui est nouveau dans ASP.NET docs Core. Utilisez cette page pour trouver rapidement les dernières modifications.
 metadata:
-  title: Documentation ASP.NET Core-nouveautés
-  description: En savoir plus sur le contenu nouveau et mis à jour dans ASP.NET Core docs.
+  title: ASP.NET documentation de base - Quoi de neuf?
+  description: Renseignez-vous sur le contenu nouveau et mis à jour dans ASP.NET documents core.
   ms.topic: landing-page
-  ms.date: 03/02/2020
-  ms.openlocfilehash: dd10c004215718e372a43afacdef117aab7ef05a
-  ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+  ms.date: 04/01/2020
+  ms.openlocfilehash: 4d1e63bafe1a40110c0b514fcaf0f1eb2f180722
+  ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/06/2020
-  ms.locfileid: "78663799"
+  ms.lasthandoff: 04/06/2020
+  ms.locfileid: "80538989"
 landingContent:
-- title: Rechercher les mises à jour de ASP.NET Core docs
+- title: Trouver ASP.NET mises à jour de documents de base
   linkLists:
   - linkListType: whats-new
     links:
+    - text: Mars 2020
+      url: 2020-03.md
     - text: Février 2020
       url: 2020-02.md
     - text: Janvier 2020
@@ -27,39 +29,37 @@ landingContent:
       url: 2019-11.md
     - text: 2 octobre 2019
       url: 2019-10.md
-    - text: Septembre 2019
-      url: 2019-09.md
-- title: Participer-contribuer à ASP.NET Core docs
+- title: Impliquez-vous - contribuer à ASP.NET docs Core
   linkLists:
   - linkListType: overview
     links:
-    - text: Référentiel ASP.NET Core docs
+    - text: ASP.NET dépôt de documents de base
       url: https://github.com/dotnet/AspNetCore.Docs/blob/master/README.md
-    - text: Structure de projet et étiquettes pour les problèmes et les demandes de tirage
+    - text: Structure de projet et étiquettes pour les problèmes et les demandes de traction
       url: https://github.com/dotnet/docs/blob/master/styleguide/labels-projects.md
   - linkListType: concept
     links:
-    - text: Guide du contributeur Microsoft docs
+    - text: Guide de contributeur Microsoft docs
       url: https://docs.microsoft.com/contribute
-    - text: Guide du contributeur ASP.NET Core docs
+    - text: ASP.NET Guide de contributeur de docs de base
       url: https://github.com/dotnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md
-    - text: Guide du contributeur de documentation de référence sur les API ASP.NET Core
+    - text: ASP.NET Guide de référence de référence API de base
       url: https://github.com/dotnet/AspNetApiDocs/blob/master/CONTRIBUTING.md
-- title: Nouvelles pages relatives aux nouveautés
+- title: A lire quelles sont les nouvelles pages
   linkLists:
   - linkListType: whats-new
     links:
-    - text: Mises à jour de Xamarin docs
+    - text: Mises à jour Xamarin docs
       url: /xamarin/whats-new/
-    - text: Notes de publication de .NET Core
+    - text: .NET Notes de sortie de base
       url: https://github.com/dotnet/core/blob/master/release-notes/README.md
-    - text: Notes de publication de ASP.NET Core
+    - text: Notes de sortie ASP.NET Core
       url: /aspnet/core/release-notes/aspnetcore-3.1
-    - text: C#Notes de publication du compilateur (Roslyn)
+    - text: Notes de sortie du compilateur CMD (Roslyn)
       url: https://github.com/dotnet/roslyn/tree/master/docs/ide
-    - text: Notes de publication de Visual Studio
+    - text: Notes de sortie Visual Studio
       url: /visualstudio/releases/2019/release-notes
-    - text: Notes de publication de Visual Studio pour Mac
+    - text: Visual Studio pour Mac notes de sortie
       url: /visualstudio/releasenotes/vs2019-mac-relnotes
-    - text: Notes de publication de Visual Studio Code
+    - text: Notes de sortie de Visual Studio Code
       url: https://code.visualstudio.com/updates

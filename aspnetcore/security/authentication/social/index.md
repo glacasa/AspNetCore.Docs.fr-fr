@@ -1,25 +1,25 @@
 ---
 title: Authentification à l’aide de fournisseurs externes (Facebook, Google et autres) dans ASP.NET Core
 author: rick-anderson
-description: Ce didacticiel montre comment créer une application ASP.NET Core à l’aide d’OAuth 2,0 avec des fournisseurs d’authentification externes.
+description: Ce tutoriel démontre comment construire une application ASP.NET Core en utilisant OAuth 2.0 avec des fournisseurs d’authentification externes.
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/23/2020
 uid: security/authentication/social/index
 ms.openlocfilehash: c698edbd85d665509366287b1dcad08e276e71cc
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78668041"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>Authentification à l’aide de fournisseurs externes (Facebook, Google et autres) dans ASP.NET Core
 
 Par [Valeriy Novytskyy](https://github.com/01binary) et [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Ce didacticiel montre comment créer une application ASP.NET Core 3,0 qui permet aux utilisateurs de se connecter à l’aide d’OAuth 2,0 avec les informations d’identification des fournisseurs d’authentification externes.
+Ce tutoriel démontre comment construire une application ASP.NET Core 3.0 qui permet aux utilisateurs de se connecter à l’aide d’OAuth 2.0 avec des informations d’identification de fournisseurs d’authentification externes.
 
-Les fournisseurs [Facebook](xref:security/authentication/facebook-logins), [Twitter](xref:security/authentication/twitter-logins), [Google](xref:security/authentication/google-logins)et [Microsoft](xref:security/authentication/microsoft-logins) sont traités dans les sections suivantes et utilisent le projet de démarrage créé dans cet article. D’autres fournisseurs sont disponibles dans des packages tiers, comme [AspNet.Security.OAuth.Providers](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers) et [AspNet.Security.OpenId.Providers](https://github.com/aspnet-contrib/AspNet.Security.OpenId.Providers).
+[Facebook](xref:security/authentication/facebook-logins), [Twitter](xref:security/authentication/twitter-logins), [Google](xref:security/authentication/google-logins), et les fournisseurs [Microsoft](xref:security/authentication/microsoft-logins) sont couverts dans les sections suivantes et utilisent le projet de démarrage créé dans cet article. D’autres fournisseurs sont disponibles dans des packages tiers, comme [AspNet.Security.OAuth.Providers](https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers) et [AspNet.Security.OpenId.Providers](https://github.com/aspnet-contrib/AspNet.Security.OpenId.Providers).
 
 Permettre aux utilisateurs de se connecter avec leurs informations d’identification existantes :
 
@@ -35,13 +35,13 @@ Pour obtenir des exemples de la façon dont les connexions des réseaux sociaux 
 * Créez un projet.
 * Sélectionnez **Nouvelle application web ASP.NET Core** et **Suivant**.
 * Fournissez un **Nom de projet** et confirmez ou changez l’**Emplacement**. Sélectionnez **Create** (Créer).
-* Sélectionnez la dernière version de ASP.NET Core dans la liste déroulante (**ASP.net Core {X. Y}** ), puis sélectionnez **application Web**.
+* Sélectionnez la dernière version de ASP.NET Core dans le drop-down (**ASP.NET Core 'X.Y'),** puis sélectionnez **l’application Web**.
 * Sous **Authentification**, sélectionnez **Changer** et définissez l’authentification sur **Comptes d’utilisateur individuels**. Sélectionnez **OK**.
 * Dans la fenêtre **Créer une application web ASP.NET Core**, sélectionnez **Créer**.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio pour Mac](#tab/visual-studio-code+visual-studio-mac)
 
-* Ouvrez le terminal.  Pour Visual Studio Code vous pouvez ouvrir le [Terminal intégré](https://code.visualstudio.com/docs/editor/integrated-terminal).
+* Ouvrez le terminal.  Pour Visual Studio Code, vous pouvez ouvrir le [terminal intégré](https://code.visualstudio.com/docs/editor/integrated-terminal).
 
 * Accédez à un répertoire (`cd`) destiné à contenir le projet.
 
@@ -51,7 +51,7 @@ Pour obtenir des exemples de la façon dont les connexions des réseaux sociaux 
   dotnet new webapp -o WebApp1 -au Individual -uld
   ```
 
-  Pour macOS et Linux, exécutez la commande suivante :
+  Pour macOS et Linux, exécutez la commande suivante :
 
   ```dotnetcli
   dotnet new webapp -o WebApp1 -au Individual
@@ -59,7 +59,7 @@ Pour obtenir des exemples de la façon dont les connexions des réseaux sociaux 
 
   * La commande `dotnet new` crée un nouveau projet Razor Pages dans le dossier *WebApp1*.
   * `-au Individual` crée le code servant à l’authentification individuelle.
-  * `-uld` utilise la base de données locale, une version allégée de SQL Server Express pour Windows. Omettez `-uld` pour utiliser SQLite.
+  * `-uld`utilise LocalDB, une version légère de SQL Server Express pour Windows. Omettez `-uld` pour utiliser SQLite.
   * La commande `code` ouvre le dossier *WebApp1* dans une nouvelle instance de Visual Studio Code.
 
 ---
@@ -111,7 +111,7 @@ Pour créer un mot de passe et vous connecter à l’aide de l’e-mail que vous
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour plus d’informations sur la personnalisation des boutons de connexion, consultez [ce problème GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/10563) .
+* Consultez [ce numéro GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/10563) pour plus d’informations sur la façon de personnaliser les boutons de connexion.
 * Cet article a présenté l’authentification externe et expliqué les prérequis nécessaires pour ajouter des connexions externes à votre application ASP.NET Core.
 * Référencez les pages spécifiques au fournisseur pour configurer les connexions pour les fournisseurs nécessaires à votre application.
 * Vous souhaiterez peut-être conserver des données supplémentaires relatives à l’utilisateur et à ses jetons d’accès et d’actualisation. Pour plus d’informations, consultez <xref:security/authentication/social/additional-claims>.

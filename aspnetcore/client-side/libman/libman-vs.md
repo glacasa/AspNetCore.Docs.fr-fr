@@ -1,75 +1,75 @@
 ---
-title: Utiliser LibMan avec ASP.NET Core dans Visual Studio
+title: Utilisez LibMan avec ASP.NET Core dans Visual Studio
 author: scottaddie
-description: Découvrez comment utiliser LibMan dans un projet ASP.NET Core avec Visual Studio.
+description: Apprenez à utiliser LibMan dans un projet ASP.NET Core avec Visual Studio.
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/20/2018
 uid: client-side/libman/libman-vs
 ms.openlocfilehash: e92e6bc28ec58b26785dd6c79e71512368202a26
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78658311"
 ---
-# <a name="use-libman-with-aspnet-core-in-visual-studio"></a>Utiliser LibMan avec ASP.NET Core dans Visual Studio
+# <a name="use-libman-with-aspnet-core-in-visual-studio"></a>Utilisez LibMan avec ASP.NET Core dans Visual Studio
 
 Par [Scott Addie](https://twitter.com/Scott_Addie)
 
-Visual Studio offre une prise en charge intégrée de [LibMan](xref:client-side/libman/index) dans ASP.net Core projets, notamment :
+Visual Studio a intégré le soutien de [LibMan](xref:client-side/libman/index) dans ASP.NET projets de base, notamment :
 
-* Prise en charge de la configuration et de l’exécution des opérations de restauration LibMan sur Build.
-* Éléments de menu pour déclencher des opérations de restauration et de nettoyage LibMan.
-* Boîte de dialogue Rechercher pour rechercher des bibliothèques et ajouter les fichiers à un projet.
-* La prise en charge de la modification de *Libman. json*&mdash;le fichier manifeste Libman.
+* Soutien à la configuration et à la gestion de LibMan restaurer les opérations sur la construction.
+* Éléments de menu pour déclencher LibMan restaurer et nettoyer les opérations.
+* Rechercher le dialogue pour trouver des bibliothèques et ajouter les fichiers à un projet.
+* Modification du support pour *libman.json*&mdash;le fichier manifeste LibMan.
 
-[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/client-side/libman/samples/) [(procédure de téléchargement)](xref:index#how-to-download-a-sample)
+[Afficher ou télécharger le code de l’échantillon](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/client-side/libman/samples/) [(comment télécharger)](xref:index#how-to-download-a-sample)
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
-* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) avec la charge de travail **Développement ASP.NET et web**
+* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) avec la charge **de travail ASP.NET et le développement web**
 
 ## <a name="add-library-files"></a>Ajouter des fichiers de bibliothèque
 
-Les fichiers de bibliothèque peuvent être ajoutés à un projet ASP.NET Core de deux manières différentes :
+Les dossiers de bibliothèque peuvent être ajoutés à un projet ASP.NET Core de deux façons différentes :
 
-1. [Utilisez la boîte de dialogue Ajouter une bibliothèque côté client](#use-the-add-client-side-library-dialog)
-1. [Configurer manuellement les entrées du fichier manifeste LibMan](#manually-configure-libman-manifest-file-entries)
+1. [Utilisez le dialogue Add Client-Side Library](#use-the-add-client-side-library-dialog)
+1. [Configurer manuellement les entrées de fichiers manifestes LibMan](#manually-configure-libman-manifest-file-entries)
 
-### <a name="use-the-add-client-side-library-dialog"></a>Utilisez la boîte de dialogue Ajouter une bibliothèque côté client
+### <a name="use-the-add-client-side-library-dialog"></a>Utilisez le dialogue Add Client-Side Library
 
-Procédez comme suit pour installer une bibliothèque côté client :
+Suivez ces étapes pour installer une bibliothèque côté client :
 
-* Dans **Explorateur de solutions**, cliquez avec le bouton droit sur le dossier du projet dans lequel les fichiers doivent être ajoutés. Choisissez **ajouter** > **bibliothèque côté client**. La boîte de dialogue **Ajouter une bibliothèque côté client** s’affiche :
+* Dans **Solution Explorer**, cliquez à droite sur le dossier de projet dans lequel les fichiers doivent être ajoutés. Choisissez **Ajouter** > **la bibliothèque Client-Side**. Le **dialogue Add Client-Side Library** apparaît :
 
-  ![Boîte de dialogue Ajouter une bibliothèque côté client](_static/add-library-dialog.png)
+  ![Ajouter le dialogue de la bibliothèque client-côté](_static/add-library-dialog.png)
 
-* Sélectionnez le fournisseur de bibliothèque dans la liste déroulante **fournisseur** . CDNJS est le fournisseur par défaut.
-* Tapez le nom de la bibliothèque à extraire dans la zone de texte **bibliothèque** . IntelliSense fournit une liste de bibliothèques qui commencent par le texte fourni.
-* Sélectionnez la bibliothèque dans la liste IntelliSense. Notez que le nom de la bibliothèque est suivi du symbole de `@` et de la dernière version stable connue du fournisseur sélectionné.
-* Choisir les fichiers à inclure :
-  * Sélectionnez la case d’option **inclure tous les fichiers de bibliothèque** pour inclure tous les fichiers de la bibliothèque.
-  * Sélectionnez la case d’option **choisir des fichiers spécifiques** pour inclure un sous-ensemble des fichiers de la bibliothèque. Lorsque la case d’option est sélectionnée, l’arborescence du sélecteur de fichiers est activée. Activez les cases à cocher à gauche des noms de fichiers à télécharger.
-* Spécifiez le dossier du projet pour le stockage des fichiers dans la zone de texte **emplacement cible** . En guise de recommandation, stockez chaque bibliothèque dans un dossier distinct.
+* Sélectionnez le fournisseur de bibliothèque du **fournisseur** déposer. CDNJS est le fournisseur par défaut.
+* Tapez le nom de la bibliothèque pour aller chercher dans la boîte à texte **de la Bibliothèque.** IntelliSense fournit une liste de bibliothèques commençant par le texte fourni.
+* Sélectionnez la bibliothèque de la liste IntelliSense. Notez que le nom de `@` la bibliothèque est suffisant avec le symbole et la dernière version stable connue du fournisseur sélectionné.
+* Décider quels fichiers inclure :
+  * Sélectionnez **le bouton Inclure tous les fichiers** de bibliothèque pour inclure tous les fichiers de la bibliothèque.
+  * Sélectionnez le bouton radio **De fichiers spécifiques Choisir** pour inclure un sous-ensemble des fichiers de la bibliothèque. Lorsque le bouton radio est sélectionné, l’arbre du sélecteur de fichiers est activé. Cochez les cases à gauche des noms de fichiers à télécharger.
+* Spécifiez le dossier de projet pour stocker les fichiers dans la boîte de texte **Target Location.** Par recommandation, entreposez chaque bibliothèque dans un dossier séparé.
 
-  Le dossier d' **emplacement cible** suggéré est basé sur l’emplacement à partir duquel la boîte de dialogue a été lancée :
+  Le dossier **Target Location** suggéré est basé sur l’emplacement à partir duquel le dialogue a été lancé :
 
-  * S’il est lancé à partir de la racine du projet :
+  * Si elle est lancée à partir de la racine du projet :
     * *wwwroot/lib* est utilisé si *wwwroot* existe.
     * *lib* est utilisé si *wwwroot* n’existe pas.
-  * S’il est lancé à partir d’un dossier de projet, le nom de dossier correspondant est utilisé.
+  * Si elle est lancée à partir d’un dossier de projet, le nom correspondant du dossier est utilisé.
 
-  La suggestion de dossier est suivie du suffixe du nom de la bibliothèque. Le tableau suivant illustre les suggestions de dossiers lors de l’installation de jQuery dans un projet de Razor Pages.
+  La suggestion de dossier est suffixe avec le nom de la bibliothèque. Le tableau suivant illustre les suggestions de dossier lors de l’installation de jQuery dans un projet Razor Pages.
   
   |Emplacement de lancement                           |Dossier suggéré      |
   |------------------------------------------|----------------------|
-  |racine du projet (si *wwwroot* existe)        |*wwwroot/lib/jQuery/* |
-  |racine du projet (si *wwwroot* n’existe pas) |*lib/jQuery/*         |
-  |Dossier *pages* dans Project                 |*Pages/jQuery/*       |
+  |racine du projet (si *wwwroot* existe)        |*wwwroot/lib/jquery/* |
+  |racine du projet (si *wwwroot* n’existe pas) |*lib/jquery/*         |
+  |*Dossier de pages* dans le projet                 |*Pages/jquery/*       |
 
-* Cliquez sur le bouton **installer** pour télécharger les fichiers, conformément à la configuration de *Libman. JSON*.
-* Consultez le flux du **Gestionnaire de bibliothèques** de la fenêtre **sortie** pour plus d’informations sur l’installation. Par exemple :
+* Cliquez sur le bouton **Installer** pour télécharger les fichiers, par configuration dans *libman.json*.
+* Examinez l’alimentation **du gestionnaire** de bibliothèque de la fenêtre de sortie pour obtenir **des** détails d’installation. Par exemple :
 
   ```console
   Restore operation started...
@@ -82,53 +82,53 @@ Procédez comme suit pour installer une bibliothèque côté client :
   1 libraries restored in 2.32 seconds
   ```
 
-### <a name="manually-configure-libman-manifest-file-entries"></a>Configurer manuellement les entrées du fichier manifeste LibMan
+### <a name="manually-configure-libman-manifest-file-entries"></a>Configurer manuellement les entrées de fichiers manifestes LibMan
 
-Toutes les opérations LibMan dans Visual Studio sont basées sur le contenu du manifeste LibMan de la racine du projet (*LibMan. JSON*). Vous pouvez modifier manuellement *Libman. JSON* pour configurer des fichiers de bibliothèque pour le projet. Visual Studio restaure tous les fichiers de bibliothèque une fois *Libman. JSON* enregistré.
+Toutes les opérations LibMan dans Visual Studio sont basées sur le contenu du manifeste LibMan de la racine du projet (*libman.json*). Vous pouvez modifier manuellement *libman.json* pour configurer les fichiers de bibliothèque pour le projet. Visual Studio restaure tous les fichiers de bibliothèque une fois *que libman.json* est enregistré.
 
-Pour ouvrir *Libman. JSON* à des fins de modification, les options suivantes sont disponibles :
+Pour ouvrir *libman.json* pour l’édition, les options suivantes existent:
 
-* Double-cliquez sur le fichier *Libman. JSON* dans **Explorateur de solutions**.
-* Dans **Explorateur de solutions** , cliquez avec le bouton droit sur le projet, puis sélectionnez **gérer les bibliothèques côté client**. **&#8224;**
-* Sélectionnez **gérer les bibliothèques côté client** dans le menu **projet** de Visual Studio. **&#8224;**
+* Double-cliquez sur le fichier *libman.json* dans **Solution Explorer**.
+* Cliquez à droite sur le projet dans **Solution Explorer** et **sélectionnez Gérer les bibliothèques client-côté**. **&#8224;**
+* Sélectionnez **Gérer les bibliothèques client-côté** dans le menu Visual Studio **Project.** **&#8224;**
 
-**&#8224;** Si le fichier *Libman. JSON* n’existe pas encore dans la racine du projet, il sera créé avec le contenu du modèle d’élément par défaut.
+**&#8224;** Si le fichier *libman.json* n’existe pas déjà dans la racine du projet, il sera créé avec le contenu du modèle d’élément par défaut.
 
-Visual Studio offre une prise en charge enrichie de l’édition JSON, comme la colorisation, la mise en forme, IntelliSense et la validation de schéma. Le schéma JSON du manifeste LibMan se trouve sur [https://json.schemastore.org/libman](https://json.schemastore.org/libman).
+Visual Studio offre un support d’édition JSON riche tels que la colorisation, le formatage, IntelliSense, et la validation de schémas. Le schéma JSON du manifeste LibMan [https://json.schemastore.org/libman](https://json.schemastore.org/libman)se trouve à .
 
-Avec le fichier manifeste suivant, LibMan récupère les fichiers selon la configuration définie dans la propriété `libraries`. Une explication des littéraux d’objet définis dans `libraries` suit :
+Avec le fichier manifeste suivant, LibMan récupère les `libraries` fichiers par configuration définie dans la propriété. Une explication des littérals `libraries` d’objet définis dans les suivants :
 
-* Un sous-ensemble de [jQuery](https://jquery.com/) version 3.3.1 est récupéré à partir du fournisseur CDNJS. Le sous-ensemble est défini dans la propriété `files`&mdash;*jQuery. min. js*, *jQuery. js*et *jQuery. min. map*. Les fichiers sont placés dans le dossier *wwwroot/lib/jQuery* du projet.
-* L’intégralité de la version de [bootstrap](https://getbootstrap.com/) 4.1.3 est extraite et placée dans un dossier *wwwroot/lib/bootstrap* . La propriété `provider` du littéral d’objet remplace la valeur de la propriété `defaultProvider`. LibMan récupère les fichiers de démarrage à partir du fournisseur unpkg.
-* Un sous-ensemble de [Lodash](https://lodash.com/) a été approuvé par un corps fédérateur au sein de l’organisation. Les fichiers *lodash. js* et *lodash. min. js* sont récupérés à partir du système de fichiers local à l’adresse *C :\\Temp\\lodash\\* . Les fichiers sont copiés dans le dossier *wwwroot/lib/lodash* du projet.
+* Un sous-ensemble de [version jQuery](https://jquery.com/) 3.3.1 est récupéré auprès du fournisseur CDNJS. Le sous-ensemble est `files` &mdash;défini dans la propriété*jquery.min.js*, *jquery.js*, et *jquery.min.map*. Les fichiers sont placés dans le dossier *wwwroot/lib/jquery* du projet.
+* L’intégralité de la version [Bootstrap](https://getbootstrap.com/) 4.1.3 est récupérée et placée dans un dossier *wwwroot/lib/bootstrap.* La propriété littérale `provider` de l’objet `defaultProvider` l’emporte sur la valeur de la propriété. LibMan récupère les fichiers Bootstrap du fournisseur de dépkg.
+* Un sous-ensemble de [Lodash](https://lodash.com/) a été approuvé par un organe directeur au sein de l’organisation. Les fichiers *lodash.js* et *lodash.min.js* sont récupérés à partir du système de fichiers local à *C:\\temp\\lodash\\*. Les fichiers sont copiés sur le dossier *wwwroot/lib/lodash* du projet.
 
 [!code-json[](samples/LibManSample/libman.json)]
 
 > [!NOTE]
-> LibMan ne prend en charge qu’une seule version de chaque bibliothèque de chaque fournisseur. Le fichier *Libman. JSON* échoue à la validation de schéma s’il contient deux bibliothèques avec le même nom de bibliothèque pour un fournisseur donné.
+> LibMan ne prend en charge qu’une version de chaque bibliothèque de chaque fournisseur. Le fichier *libman.json* échoue à la validation du schéma s’il contient deux bibliothèques avec le même nom de bibliothèque pour un fournisseur donné.
 
-## <a name="restore-library-files"></a>Restaurer les fichiers de bibliothèque
+## <a name="restore-library-files"></a>Restaurer les fichiers de la bibliothèque
 
-Pour restaurer des fichiers de bibliothèque dans Visual Studio, il doit y avoir un fichier *Libman. JSON* valide dans la racine du projet. Les fichiers restaurés sont placés dans le projet à l’emplacement spécifié pour chaque bibliothèque.
+Pour restaurer les fichiers de bibliothèque à partir de Visual Studio, il doit y avoir un fichier *libman.json* valide dans la racine du projet. Les fichiers restaurés sont placés dans le projet à l’endroit spécifié pour chaque bibliothèque.
 
-Les fichiers de bibliothèque peuvent être restaurés dans un projet ASP.NET Core de deux manières :
+Les dossiers de bibliothèque peuvent être restaurés dans le cadre d’un projet ASP.NET Core de deux façons :
 
-1. [Restaurer des fichiers pendant la génération](#restore-files-during-build)
+1. [Restaurer les fichiers pendant la construction](#restore-files-during-build)
 1. [Restaurer manuellement les fichiers](#restore-files-manually)
 
-### <a name="restore-files-during-build"></a>Restaurer des fichiers pendant la génération
+### <a name="restore-files-during-build"></a>Restaurer les fichiers pendant la construction
 
-LibMan peut restaurer les fichiers de bibliothèque définis dans le cadre du processus de génération. Par défaut, le comportement *de Restore-on-Build* est désactivé.
+LibMan peut restaurer les fichiers de bibliothèque définis dans le cadre du processus de construction. Par défaut, le comportement *de restauration sur la construction* est désactivé.
 
-Pour activer et tester le comportement de Restore-on-Build :
+Pour activer et tester le comportement de restauration sur la construction :
 
-* Dans **Explorateur de solutions** , cliquez avec le bouton droit sur *Libman. JSON* , puis sélectionnez **activer la restauration des bibliothèques côté client sur la build** dans le menu contextuel.
-* Cliquez sur le bouton **Oui** lorsque vous êtes invité à installer un package NuGet. Le package NuGet [Microsoft. Web. librarymanager. Build](https://www.nuget.org/packages/Microsoft.Web.LibraryManager.Build/) est ajouté au projet :
+* Clic droit *libman.json* dans **Solution Explorer** et **sélectionnez Enable Restore Client-Side Libraries on Build** à partir du menu context.
+* Cliquez sur le bouton **Oui** lorsqu’on vous demande d’installer un forfait NuGet. Le paquet [NuGet Microsoft.Web.LibraryManager.Build](https://www.nuget.org/packages/Microsoft.Web.LibraryManager.Build/) est ajouté au projet :
 
   [!code-xml[](samples/LibManSample/LibManSample.csproj?name=snippet_RestoreOnBuildPackage)]
 
-* Générez le projet pour confirmer la restauration du fichier LibMan. Le package `Microsoft.Web.LibraryManager.Build` injecte une cible MSBuild qui exécute LibMan pendant l’opération de génération du projet.
-* Examinez le flux de **génération** de la fenêtre **sortie** pour un journal d’activité LibMan :
+* Construire le projet pour confirmer la restauration du fichier LibMan se produit. Le `Microsoft.Web.LibraryManager.Build` paquet injecte une cible MSBuild qui exécute LibMan pendant l’opération de construction du projet.
+* Passez en revue le flux **Build** de la fenêtre **de sortie** pour un journal d’activité LibMan :
 
   ```console
   1>------ Build started: Project: LibManSample, Configuration: Debug Any CPU ------
@@ -142,25 +142,25 @@ Pour activer et tester le comportement de Restore-on-Build :
   ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
   ```
 
-Lorsque le comportement de Restore-on-Build est activé, le menu contextuel *Libman. JSON* affiche une option de **désactivation de la restauration des bibliothèques côté client sur la build** . La sélection de cette option supprime le `Microsoft.Web.LibraryManager.Build` référence du package du fichier projet. Par conséquent, les bibliothèques côté client ne sont plus restaurées sur chaque Build.
+Lorsque le comportement de restauration sur la construction est activé, le menu de contexte *libman.json* affiche une option **Disable Restore Client-Side Libraries on Build.** La sélection de cette `Microsoft.Web.LibraryManager.Build` option supprime la référence du paquet du fichier de projet. Par conséquent, les bibliothèques côté client ne sont plus restaurées sur chaque construction.
 
-Quel que soit le paramètre Restore-on-Build, vous pouvez procéder à une restauration manuelle à tout moment à partir du menu contextuel *Libman. JSON* . Pour plus d’informations, consultez [restaurer des fichiers manuellement](#restore-files-manually).
+Indépendamment du réglage de restauration sur la construction, vous pouvez restaurer manuellement à tout moment à partir du menu de contexte *libman.json.* Pour plus d’informations, voir [Restaurer les fichiers manuellement](#restore-files-manually).
 
 ### <a name="restore-files-manually"></a>Restaurer manuellement les fichiers
 
-Pour restaurer manuellement les fichiers de bibliothèque :
+Pour restaurer manuellement les fichiers de bibliothèque :
 
-* Pour tous les projets de la solution :
-  * Dans **Explorateur de solutions**, cliquez avec le bouton droit sur le nom de la solution.
-  * Sélectionnez l’option **restaurer les bibliothèques côté client** .
-* Pour un projet spécifique :
-  * Cliquez avec le bouton droit sur le fichier *Libman. JSON* dans **Explorateur de solutions**.
-  * Sélectionnez l’option **restaurer les bibliothèques côté client** .
+* Pour tous les projets de la solution :
+  * Cliquez à droite sur le nom de la solution dans **Solution Explorer**.
+  * Sélectionnez l’option Restaurer les **bibliothèques côté client.**
+* Pour un projet spécifique :
+  * Cliquez à droite sur le fichier *libman.json* dans **Solution Explorer**.
+  * Sélectionnez l’option Restaurer les **bibliothèques côté client.**
 
-Pendant l’exécution de l’opération de restauration :
+Pendant que l’opération de restauration est en cours d’exécution :
 
-* L’icône d’Centre d’état des tâches (TSC) dans la barre d’état de Visual Studio est animée et l' *opération de restauration est lancée*. Cliquer sur l’icône ouvre une info-bulle qui répertorie les tâches d’arrière-plan connues.
-* Les messages sont envoyés à la barre d’État et au flux du **Gestionnaire de bibliothèques** de la fenêtre **sortie** . Par exemple :
+* L’icône du Task Status Center (TSC) sur la barre d’état Visual Studio sera animée et lira *l’opération Restaurer commencée.* En cliquant sur l’icône ouvre une boîte à outils énumérant les tâches d’arrière-plan connues.
+* Les messages seront envoyés à la barre d’état et au flux de la fenêtre **De sortie** du gestionnaire de **bibliothèque.** Par exemple :
 
   ```console
   Restore operation started...
@@ -175,17 +175,17 @@ Pendant l’exécution de l’opération de restauration :
 
 ## <a name="delete-library-files"></a>Supprimer les fichiers de bibliothèque
 
-Pour effectuer l’opération de *nettoyage* , qui supprime les fichiers de bibliothèque précédemment restaurés dans Visual Studio :
+Pour effectuer l’opération *propre,* qui supprime les fichiers de bibliothèque précédemment restaurés dans Visual Studio :
 
-* Cliquez avec le bouton droit sur le fichier *Libman. JSON* dans **Explorateur de solutions**.
-* Sélectionnez l’option **nettoyer les bibliothèques côté client** .
+* Cliquez à droite sur le fichier *libman.json* dans **Solution Explorer**.
+* Sélectionnez l’option **Bibliothèques côté client propre.**
 
-Pour éviter la suppression accidentelle de fichiers non-bibliothèque, l’opération de nettoyage ne supprime pas les répertoires entiers. Elle supprime uniquement les fichiers qui ont été inclus dans la restauration précédente.
+Pour empêcher la suppression involontaire de fichiers non-bibliothèque, l’opération propre ne supprime pas les répertoires entiers. Il supprime uniquement les fichiers qui ont été inclus dans la restauration précédente.
 
-Pendant que l’opération de nettoyage est en cours d’exécution :
+Pendant que l’opération propre est en cours d’exécution:
 
-* L’icône TSC dans la barre d’état de Visual Studio sera animée et lira l' *opération des bibliothèques clientes démarrée*. Cliquer sur l’icône ouvre une info-bulle qui répertorie les tâches d’arrière-plan connues.
-* Les messages sont envoyés à la barre d’État et au flux du **Gestionnaire de bibliothèques** de la fenêtre **sortie** . Par exemple :
+* L’icône TSC sur le bar d’état Visual Studio sera animée et lira *l’opération des bibliothèques clientes commencée.* En cliquant sur l’icône ouvre une boîte à outils énumérant les tâches d’arrière-plan connues.
+* Les messages sont envoyés à la barre d’état et au flux **library Manager** de la fenêtre **De sortie.** Par exemple :
 
 ```console
 Clean libraries operation started...
@@ -193,41 +193,41 @@ Clean libraries operation completed
 2 libraries were successfully deleted in 1.91 secs
 ```
 
-L’opération de nettoyage supprime uniquement les fichiers du projet. Les fichiers de bibliothèque restent dans le cache pour une récupération plus rapide sur les futures opérations de restauration. Pour gérer les fichiers de bibliothèque stockés dans le cache de l’ordinateur local, utilisez l' [interface CLI LibMan](xref:client-side/libman/libman-cli).
+L’opération propre ne supprime que les fichiers du projet. Les fichiers de bibliothèque restent dans le cache pour une récupération plus rapide sur les opérations de restauration futures. Pour gérer les fichiers de bibliothèque stockés dans le cache de la machine locale, utilisez le [LibMan CLI](xref:client-side/libman/libman-cli).
 
 ## <a name="uninstall-library-files"></a>Désinstaller les fichiers de bibliothèque
 
-Pour désinstaller les fichiers de bibliothèque :
+Pour désinstaller les fichiers de bibliothèque :
 
-* Ouvrez *Libman. JSON*.
-* Placer le signe insertion à l’intérieur du littéral d’objet `libraries` correspondant.
-* Cliquez sur l’icône d’ampoule qui apparaît dans la marge de gauche, puis sélectionnez **désinstaller \<library_name > @\<library_version**>:
+* Ouvrez *libman.json*.
+* Placez le caret `libraries` à l’intérieur de l’objet correspondant littéral.
+* Cliquez sur l’icône de l’ampoule qui apparaît dans la marge gauche, et **sélectionnez Uninstall \<library_name>\<library_version>**:
 
-  ![Option de menu contextuel de la bibliothèque Uninstall](_static/uninstall-menu-option.png)
+  ![Désinstaller l’option de menu contextuelle de bibliothèque](_static/uninstall-menu-option.png)
 
-Vous pouvez également modifier et enregistrer manuellement le manifeste LibMan (*LibMan. JSON*). L' [opération de restauration](#restore-library-files) s’exécute lors de l’enregistrement du fichier. Les fichiers de bibliothèque qui ne sont plus définis dans *Libman. JSON* sont supprimés du projet.
+Alternativement, vous pouvez modifier manuellement et enregistrer le manifeste LibMan (*libman.json*). [L’opération de restauration s’exécute](#restore-library-files) lorsque le fichier est enregistré. Les fichiers de bibliothèque qui ne sont plus définis dans *libman.json* sont supprimés du projet.
 
-## <a name="update-library-version"></a>Version de la bibliothèque de mises à jour
+## <a name="update-library-version"></a>Mettre à jour la version de la bibliothèque
 
-Pour rechercher une version de bibliothèque mise à jour :
+Pour vérifier une version de bibliothèque mise à jour :
 
-* Ouvrez *Libman. JSON*.
-* Placer le signe insertion à l’intérieur du littéral d’objet `libraries` correspondant.
-* Cliquez sur l’icône représentant une ampoule qui apparaît dans la marge de gauche. Placez le curseur sur **vérifier les mises à jour**.
+* Ouvrez *libman.json*.
+* Placez le caret `libraries` à l’intérieur de l’objet correspondant littéral.
+* Cliquez sur l’icône de l’ampoule qui apparaît dans la marge gauche. Planer au-dessus **de vérifier pour les mises à jour**.
 
-LibMan recherche une version de bibliothèque plus récente que la version installée. Les résultats suivants peuvent se produire :
+LibMan vérifie une version bibliothèque plus récente que la version installée. Les résultats suivants peuvent se produire :
 
-* Un message **aucune mise à jour trouvée** s’affiche si la version la plus récente est déjà installée.
+* Un aucun message **trouvé de mise à jour** est affiché si la dernière version est déjà installée.
 * La dernière version stable est affichée si elle n’est pas déjà installée.
 
-  ![Option de menu contextuel Rechercher les mises à jour](_static/update-menu-option.png)
+  ![Vérifiez l’option de menu contextuelle mises à jour](_static/update-menu-option.png)
 
-* Si une version préliminaire antérieure à la version installée est disponible, la version préliminaire est affichée.
+* Si une version préalable plus récente que la version installée est disponible, la pré-version s’affiche.
 
-Pour passer à une version antérieure de la bibliothèque, modifiez manuellement le fichier *Libman. JSON* . Une fois le fichier enregistré, l' [opération de restauration](#restore-library-files)LibMan :
+Pour rétrograder à une ancienne version de bibliothèque, modifiez manuellement le fichier *libman.json.* Lorsque le fichier est enregistré, le LibMan [restaurent l’opération](#restore-library-files):
 
 * Supprime les fichiers redondants de la version précédente.
-* Ajoute des fichiers nouveaux et mis à jour à partir de la nouvelle version.
+* Ajoute des fichiers nouveaux et mis à jour de la nouvelle version.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

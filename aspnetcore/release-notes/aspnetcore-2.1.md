@@ -9,10 +9,10 @@ no-loc:
 - SignalR
 uid: aspnetcore-2.1
 ms.openlocfilehash: af5807b782d4acec8c7d40111dc508dfa6127057
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78667544"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>Nouveautés d’ASP.NET Core 2.1
@@ -21,7 +21,7 @@ Cet article met en évidence les modifications les plus importantes dans ASP.NET
 
 ## SignalR
 
-SignalR a été réécrite pour ASP.NET Core 2,1. ASP.NET Core SignalR comprend un certain nombre d’améliorations :
+SignalRa été réécrit pour ASP.NET Core 2.1. ASP.NET Core SignalR comprend un certain nombre d’améliorations :
 
 * Un modèle simplifié de montée en puissance parallèle.
 * Un nouveau client JavaScript sans dépendance de jQuery.
@@ -30,7 +30,7 @@ SignalR a été réécrite pour ASP.NET Core 2,1. ASP.NET Core SignalR comprend 
 * Un nouveau modèle réponse de streaming.
 * Prise en charge des clients basés sur des WebSocket nus.
 
-Pour plus d’informations, consultez [ASP.NET Core SignalR](xref:signalr/introduction).
+Pour plus d’informations, voir [ASP.NET Core SignalR ](xref:signalr/introduction).
 
 ## <a name="razor-class-libraries"></a>Bibliothèques de classes Razor
 
@@ -51,7 +51,7 @@ Pour plus d’informations, consultez [Identité de vue de structure dans les pr
 
 ## <a name="https"></a>HTTPS
 
-L’importance croissante accordée à la sécurité et à la confidentialité justifie l’activation du protocole HTTPS pour les applications web. La mise en œuvre du protocole HTTPS devient de plus en plus stricte sur le web. Les sites qui n’utilisent pas le protocole HTTPs sont considérés comme non sécurisés. Les navigateurs (Chrome, Mozilla) commencent à imposer l’utilisation des fonctionnalités web dans un contexte sécurisé. Le [RGPD](xref:security/gdpr) exige l’utilisation du protocole HTTPS pour protéger la confidentialité des utilisateurs. L’utilisation du protocole HTTPS en production est critique et son utilisation en développement peut aider à éviter les problèmes liés au déploiement (tels que les liens non sécurisés). ASP.NET Core 2.1 inclut un certain nombre d’améliorations qui facilitent l’utilisation du protocole HTTPS pendant le développement et sa configuration en production. Pour plus d’informations, consultez [Appliquer le protocole HTTPS](xref:security/enforcing-ssl).
+L’importance croissante accordée à la sécurité et à la confidentialité justifie l’activation du protocole HTTPS pour les applications web. La mise en œuvre du protocole HTTPS devient de plus en plus stricte sur le web. Les sites qui n’utilisent pas HTTPS sont considérés comme peu sûrs. Les navigateurs (Chrome, Mozilla) commencent à imposer l’utilisation des fonctionnalités web dans un contexte sécurisé. Le [RGPD](xref:security/gdpr) exige l’utilisation du protocole HTTPS pour protéger la confidentialité des utilisateurs. L’utilisation du protocole HTTPS en production est critique et son utilisation en développement peut aider à éviter les problèmes liés au déploiement (tels que les liens non sécurisés). ASP.NET Core 2.1 inclut un certain nombre d’améliorations qui facilitent l’utilisation du protocole HTTPS pendant le développement et sa configuration en production. Pour plus d’informations, consultez [Appliquer le protocole HTTPS](xref:security/enforcing-ssl).
 
 ### <a name="on-by-default"></a>Activé par défaut
 
@@ -83,7 +83,7 @@ ASP.NET Core fournit des API et des modèles qui aident à satisfaire à certain
 
 Un nouveau package est introduit qui simplifie la création et l’exécution de tests. Le package [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/) gère les tâches suivantes :
 
-* Il copie le fichier de dépendance ( *\*.deps*) à partir de l’application testée dans le dossier *bin* du projet de test.
+* Copie du fichier de dépendance (*\*.deps*) de l’application testée dans le dossier *poubelle* du projet de test.
 * Il définit la racine du contenu sur la racine du projet de l’application testée afin que soient trouvés les pages/vues et fichiers statiques quand les tests sont exécutés.
 * Il fournit la classe [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) afin de simplifier l’amorçage de l’application testée avec [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver).
 
@@ -167,7 +167,7 @@ Razor Pages prend désormais en charge les [zones](xref:mvc/controllers/areas). 
 
 ## <a name="mvc-compatibility-version"></a>Version de compatibilité MVC
 
-La méthode <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> permet à une application d’accepter ou de refuser les changements de comportement potentiellement cassants été introduits dans ASP.NET Core MVC 2.1 ou version ultérieure.
+La méthode <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> permet à une application d’accepter ou de refuser les changements de comportement potentiellement cassants introduits dans ASP.NET Core MVC 2.1 ou version ultérieure.
 
 Pour plus d’informations, consultez <xref:mvc/compatibility-version>.
 

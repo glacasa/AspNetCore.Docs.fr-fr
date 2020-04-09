@@ -6,10 +6,10 @@ ms.author: riande
 ms.date: 07/22/2019
 uid: data/ef-rp/migrations
 ms.openlocfilehash: 86fd83c898fce8e121e4d259aaca12c59591e606
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78656533"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---migrations---4-of-8"></a>Pages Razor avec EF Core dans ASP.NET Core - Migrations - 4 sur 8
@@ -42,13 +42,13 @@ Drop-Database
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* Exécutez la commande suivante à l’invite de commandes pour installer l’interface de ligne de commande EF :
+* Exécutez la commande suivante à une invite de commande pour installer le CLI EF :
 
   ```dotnetcli
   dotnet tool install --global dotnet-ef
   ```
 
-* Dans l’invite de commandes, accédez au dossier du projet. Le dossier de projet contient le fichier *ContosoUniversity.csproj*.
+* Dans l’invite de commandes, accédez au dossier du projet. Le dossier du projet contient le fichier *ContosoUniversity.csproj*.
 
 * Supprimez le fichier *CU.db* ou exécutez la commande suivante :
 
@@ -92,7 +92,7 @@ Le code précédent concerne la migration initiale. Le code :
 * Est exécuté par la commande `database update`.
 * Crée une base de données pour le modèle de données spécifié par la classe du contexte de base de données.
 
-Le paramètre de nom de migration (« InitialCreate » dans l’exemple) est utilisé comme nom de fichier. Le nom de la migration peut être n’importe quel nom de fichier valide. Nous vous conseillons de choisir un mot ou une expression qui résume ce qui est effectué dans la migration. Par exemple, une migration ajoutant une table de département pourrait se nommer « TableAjoutDépartement ».
+Le paramètre de nom de migration (« InitialCreate » dans l’exemple) est utilisé comme nom de fichier. Le nom de la migration peut être n’importe quel nom de fichier valide. Nous vous conseillons néanmoins de choisir un mot ou une expression qui résume ce qui est effectué dans la migration. Par exemple, une migration ajoutant une table de département pourrait se nommer « TableAjoutDépartement ».
 
 ## <a name="the-migrations-history-table"></a>Table d’historique des migrations
 
@@ -104,7 +104,7 @@ Le paramètre de nom de migration (« InitialCreate » dans l’exemple) est uti
 
 Les migrations créent une *capture instantanée* du modèle de données actif dans *Migrations/SchoolContextModelSnapshot.cs*. Quand vous ajoutez une migration, EF détermine ce qui a changé en comparant le modèle de données actif au fichier de capture instantanée.
 
-Comme le fichier de capture instantané suit l’état du modèle de données, vous ne pouvez pas supprimer une migration en supprimant le fichier `<timestamp>_<migrationname>.cs`. Pour annuler la migration la plus récente, vous devez utiliser la commande `migrations remove`. Cette commande supprime la migration et vérifie que la capture instantanée est correctement réinitialisée. Pour plus d’informations, consultez [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).
+Comme le fichier de capture instantané suit l’état du modèle de données, vous ne pouvez pas supprimer une migration en supprimant le fichier `<timestamp>_<migrationname>.cs`. Pour annuler la migration la plus récente, vous devez utiliser la commande `migrations remove`. Cette commande supprime la migration et vérifie que la capture instantanée est correctement réinitialisée. Pour plus d’informations, voir [les migrations dotnet ef supprimer](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).
 
 ## <a name="remove-ensurecreated"></a>Supprimer EnsureCreated
 
@@ -150,8 +150,8 @@ La solution peut consister à exécuter `dotnet ef database update` à partir d�
 Le tutoriel suivant crée le modèle de données en ajoutant des propriétés d’entité et de nouvelles entités.
 
 > [!div class="step-by-step"]
-> [Tutoriel précédent](xref:data/ef-rp/sort-filter-page)
-> [Tutoriel suivant](xref:data/ef-rp/complex-data-model)
+> [Tutoriel précédent](xref:data/ef-rp/sort-filter-page)[Next tutoriel](xref:data/ef-rp/complex-data-model) 
+> 
 
 ::: moniker-end
 
@@ -224,9 +224,9 @@ La commande EF Core `migrations add` a généré du code pour créer la base de 
 
 [!code-csharp[](intro/samples/cu21/Migrations/20180626224812_InitialCreate.cs?range=7-24,77-88)]
 
-Les migrations appellent la méthode `Up` pour implémenter les modifications du modèle de données pour une migration. Quand vous entrez une commande pour restaurer la mise à jour, les migrations appellent la méthode `Down`.
+La fonctionnalité Migrations appelle la méthode `Up` pour implémenter les modifications du modèle de données pour une migration. Quand vous entrez une commande pour restaurer la mise à jour, les migrations appellent la méthode `Down`.
 
-Le code précédent concerne la migration initiale. Ce code a été créé quand la commande `migrations add InitialCreate` a été exécutée. Le paramètre de nom de migration (« InitialCreate » dans l’exemple) est utilisé comme nom de fichier. Le nom de la migration peut être n’importe quel nom de fichier valide. Nous vous conseillons de choisir un mot ou une expression qui résume ce qui est effectué dans la migration. Par exemple, une migration ajoutant une table de département pourrait se nommer « TableAjoutDépartement ».
+Le code précédent concerne la migration initiale. Ce code a été créé quand la commande `migrations add InitialCreate` a été exécutée. Le paramètre de nom de migration (« InitialCreate » dans l’exemple) est utilisé comme nom de fichier. Le nom de la migration peut être n’importe quel nom de fichier valide. Nous vous conseillons néanmoins de choisir un mot ou une expression qui résume ce qui est effectué dans la migration. Par exemple, une migration ajoutant une table de département pourrait se nommer « TableAjoutDépartement ».
 
 Si la migration initiale est créée et que la base de données existe :
 
@@ -253,7 +253,7 @@ Remove-Migration
 dotnet ef migrations remove
 ```
 
-Pour plus d’informations, consultez [dotnet ef migrations remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).
+Pour plus d’informations, voir [les migrations dotnet ef supprimer](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).
 
 ---
 
@@ -311,14 +311,14 @@ Solution : Exécutez `dotnet ef database update`.
 ### <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Version YouTube de ce tutoriel](https://www.youtube.com/watch?v=OWSUuMLKTJo)
-* [CLI .NET Core](/ef/core/miscellaneous/cli/dotnet).
+* [.NET Core CLI](/ef/core/miscellaneous/cli/dotnet).
 * [Console du Gestionnaire de package (Visual Studio)](/ef/core/miscellaneous/cli/powershell)
 
 
 
 > [!div class="step-by-step"]
-> [Précédent](xref:data/ef-rp/sort-filter-page)
-> [Suivant](xref:data/ef-rp/complex-data-model)
+> [Suivant précédent](xref:data/ef-rp/sort-filter-page)
+> [Next](xref:data/ef-rp/complex-data-model)
 
 ::: moniker-end
 

@@ -2,14 +2,14 @@
 
 ## <a name="visual-studio-help"></a>Aide de Visual Studio
 
-* [Apprendre à déboguer le code C# avec Visual Studio](https://docs.microsoft.com/visualstudio/debugger/getting-started-with-the-debugger?view=vs-2017)
-* [Introduction à l’IDE Visual Studio](https://docs.microsoft.com/visualstudio/ide/visual-studio-ide?view=vs-2017)
+* [Apprenez à déboiffer le code Cmd à l’aide de Visual Studio](https://docs.microsoft.com/visualstudio/debugger/getting-started-with-the-debugger?view=vs-2017)
+* [Introduction à l’environnement IDE Visual Studio](https://docs.microsoft.com/visualstudio/ide/visual-studio-ide?view=vs-2017)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 ## <a name="visual-studio-code-help"></a>Aide de Visual Studio Code
 
-* [Bien démarrer](https://code.visualstudio.com/docs)
+* [Commencer](https://code.visualstudio.com/docs)
 * [Débogage](https://code.visualstudio.com/docs/editor/debugging)
 * [Terminal intégré](https://code.visualstudio.com/docs/editor/integrated-terminal)
 * [Raccourcis clavier](https://code.visualstudio.com/docs/getstarted/keybindings#_keyboard-shortcuts-reference)

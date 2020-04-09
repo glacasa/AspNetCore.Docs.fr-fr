@@ -1,5 +1,5 @@
 ---
-title: 'Didacticiel : gérer la concurrence-ASP.NET MVC avec EF Core'
+title: 'Tutorial: Handle concordrency - ASP.NET MVC avec EF Core'
 description: Ce didacticiel montre comment gérer les conflits quand plusieurs utilisateurs mettent à jour la même entité en même temps.
 author: rick-anderson
 ms.author: riande
@@ -8,13 +8,13 @@ ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/concurrency
 ms.openlocfilehash: 6839e383093b993ff55095f26cf88cd68708f001
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78657394"
 ---
-# <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>Didacticiel : gérer la concurrence-ASP.NET MVC avec EF Core
+# <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>Tutorial: Handle concordrency - ASP.NET MVC avec EF Core
 
 Dans les didacticiels précédents, vous avez découvert comment mettre à jour des données. Ce didacticiel montre comment gérer les conflits quand plusieurs utilisateurs mettent à jour la même entité en même temps.
 
@@ -37,7 +37,7 @@ Dans ce tutoriel, vous allez :
 > * Mettre à jour la page Delete
 > * Mettre à jour les vues Details et Create
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * [Mettre à jour les données associées](update-related-data.md)
 
@@ -55,11 +55,11 @@ La gestion des verrous présente des inconvénients. Elle peut être complexe à
 
 La solution alternative à l’accès concurrentiel pessimiste est l’accès concurrentiel optimiste. L’accès concurrentiel optimiste signifie autoriser la survenance des conflits d’accès concurrentiel, puis de réagir correctement quand ils surviennent. Par exemple, Jane consulte la page Department Edit et change le montant de « Budget » pour le département « English » en le passant de $350 000,00 à $0,00.
 
-![Modification du budget en 0](concurrency/_static/change-budget.png)
+![Modification de la valeur de budget sur 0](concurrency/_static/change-budget.png)
 
 Avant que Jane clique sur **Save**, John consulte la même page et change le champ Start Date de 01/09/2007 en 01/09/2013.
 
-![Modification de la date de début en 2013](concurrency/_static/change-date.png)
+![Modification de la date de début sur 2013](concurrency/_static/change-date.png)
 
 Jane clique la première sur **Save** et voit sa modification quand le navigateur revient à la page Index.
 
@@ -73,13 +73,13 @@ Voici quelques-unes des options :
 
      Dans l’exemple de scénario, aucune donnée ne serait perdue, car des propriétés différentes ont été mises à jour par chacun des deux utilisateurs. La prochaine fois que quelqu’un examine le département « English », il voit à la fois les modifications de Jane et de John : une date de début au 01/09/2013 et un budget de zéro dollars. Cette méthode de mise à jour peut réduire le nombre de conflits qui peuvent entraîner des pertes de données, mais elle ne peut pas éviter la perte de données si des modifications concurrentes sont apportées à la même propriété d’une entité. Un tel fonctionnement d’Entity Framework dépend de la façon dont vous implémentez votre code de mise à jour. Il n’est pas souvent pratique dans une application web, car il peut nécessiter la gestion de grandes quantités d’états pour effectuer le suivi de toutes les valeurs de propriété d’origine d’une entité, ainsi que des nouvelles valeurs. La gestion de grandes quantités d’états peut affecter les performances de l’application, car elle nécessite des ressources serveur, ou doit être incluse dans la page web elle-même (par exemple dans des champs masqués) ou dans un cookie.
 
-* Vous pouvez laisser les modifications de John remplacer celles de Jane.
+* Vous pouvez laisser les modifications de John remplacer les modifications de Jane.
 
-     La prochaine fois que quelqu’un consultera le département « English », il verra la date du 01/09/2013 et la valeur $350 000,00 restaurée. Ceci s’appelle un scénario *Priorité au client* ou *Priorité au dernier entré* (Last in Wins). (Toutes les valeurs du client sont prioritaires par rapport à ce qui se trouve dans le magasin de données.) Comme indiqué dans la présentation de cette section, si vous n’effectuez aucun codage pour la gestion de l’accès concurrentiel, cela se produit automatiquement.
+     La prochaine fois que quelqu’un consultera le département « English », il verra la date du 01/09/2013 et la valeur $350 000,00 restaurée. Ceci s’appelle un scénario *Priorité au client* ou *Priorité au dernier entré* (Last in Wins). (Toutes les valeurs du client priment sur ce qu’il y a dans le magasin de données.) Comme indiqué dans l’introduction à cette section, si vous ne faites pas de codage pour la manipulation de concurrence, cela se produira automatiquement.
 
 * Vous pouvez empêcher les modifications de John de faire l’objet d’une mise à jour dans la base de données.
 
-     En règle générale, vous affichez un message d’erreur, vous lui montrez l’état actuel des données et vous lui permettez de réappliquer ses modifications s’il veut toujours les faire. Il s’agit alors d’un scénario *Priorité au magasin*. (Les valeurs du magasin de données ont priorité sur les valeurs soumises par le client.) Vous allez implémenter le scénario de stockage WINS dans ce didacticiel. Cette méthode garantit qu’aucune modification n’est remplacée sans qu’un utilisateur soit averti de ce qui se passe.
+     En règle générale, vous affichez un message d’erreur, vous lui montrez l’état actuel des données et vous lui permettez de réappliquer ses modifications s’il veut toujours les faire. Il s’agit alors d’un scénario *Priorité au magasin*. (Les valeurs des magasins de données priment sur les valeurs soumises par le client.) Vous implémenterez le scénario Store Wins dans ce tutoriel. Cette méthode garantit qu’aucune modification n’est remplacée sans qu’un utilisateur soit averti de ce qui se passe.
 
 ### <a name="detecting-concurrency-conflicts"></a>Détection des conflits d’accès concurrentiel
 
@@ -99,7 +99,7 @@ Dans le reste de ce didacticiel, vous ajoutez une propriété de suivi `rowversi
 
 ## <a name="add-a-tracking-property"></a>Ajouter une propriété de suivi
 
-Dans *Models/Department.cs*, ajoutez une propriété de suivi nommée RowVersion :
+Dans *Models/Department.cs*, ajoutez une propriété de suivi nommée RowVersion :
 
 [!code-csharp[](intro/samples/cu/Models/Department.cs?name=snippet_Final&highlight=26,27)]
 
@@ -180,7 +180,7 @@ Enfin, le code affecte la nouvelle valeur récupérée auprès de la base de don
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?range=199-200)]
 
-L’instruction `ModelState.Remove` est nécessaire, car `ModelState` contient l’ancienne valeur de `RowVersion`. Dans la vue, la valeur `ModelState` d’un champ est prioritaire par rapport aux valeurs de propriétés du modèle quand les deux sont présentes.
+L’instruction `ModelState.Remove` est nécessaire car `ModelState` contient l’ancienne valeur `RowVersion`. Dans la vue, la valeur `ModelState` d’un champ est prioritaire par rapport aux valeurs de propriétés du modèle quand les deux sont présentes.
 
 ## <a name="update-edit-view"></a>Mettre à jour la vue Edit
 
@@ -198,19 +198,19 @@ Exécutez l’application et accédez à la page Index des départements. Clique
 
 Changez un champ sous le premier onglet du navigateur, puis cliquez sur **Save**.
 
-![Page Edit 1 du département après changement](concurrency/_static/edit-after-change-1.png)
+![Page 1 de modification de département après changement](concurrency/_static/edit-after-change-1.png)
 
 Le navigateur affiche la page Index avec la valeur modifiée.
 
 Changez un champ sous le deuxième onglet du navigateur.
 
-![Page 2 de modification de département après changement](concurrency/_static/edit-after-change-2.png)
+![Page Edit 2 du département après changement](concurrency/_static/edit-after-change-2.png)
 
 Cliquez sur **Enregistrer**. Vous voyez un message d’erreur :
 
-![Message d’erreur de page Edit du département](concurrency/_static/edit-error.png)
+![Message d’erreur de page de modification de département](concurrency/_static/edit-error.png)
 
-Cliquez à nouveau sur **Save**. La valeur que vous avez entrée sous le deuxième onglet du navigateur est enregistrée. Vous voyez les valeurs enregistrées quand la page Index apparaît.
+Cliquez à nouveau sur **Enregistrer**. La valeur que vous avez entrée sous le deuxième onglet du navigateur est enregistrée. Vous voyez les valeurs enregistrées quand la page Index apparaît.
 
 ## <a name="update-the-delete-page"></a>Mettre à jour la page Delete
 
@@ -240,7 +240,7 @@ Vous avez changé ce paramètre en une instance d’entité Department créée p
 public async Task<IActionResult> Delete(Department department)
 ```
 
-Vous avez également changé le nom de la méthode d’action de `DeleteConfirmed` en `Delete`. Le code du modèle généré automatiquement utilisait le nom `DeleteConfirmed` pour donner à la méthode HttpPost une signature unique. (Le CLR exige que les méthodes surchargées aient des paramètres de méthode différents.) Maintenant que les signatures sont uniques, vous pouvez respecter la convention MVC et utiliser le même nom pour les méthodes de suppression HttpPost et HttpGet.
+Vous avez également changé le nom de la méthode d’action de `DeleteConfirmed` en `Delete`. Le code du modèle généré automatiquement utilisait le nom `DeleteConfirmed` pour donner à la méthode HttpPost une signature unique. (Le CLR exige des méthodes surchargées pour avoir des paramètres de méthode différents.) Maintenant que les signatures sont uniques, vous pouvez vous en tenir à la convention MVC et utiliser le même nom pour les méthodes de suppression HttpPost et HttpGet.
 
 Si le département est déjà supprimé, la méthode `AnyAsync` retourne la valeur false et l’application revient simplement à la méthode Index.
 
@@ -248,7 +248,7 @@ Si une erreur d’accès concurrentiel est interceptée, le code réaffiche la p
 
 ### <a name="update-the-delete-view"></a>Mettre à jour la vue Delete
 
-Dans *Views/Departments/Delete.cshtml*, remplacez le code du modèle généré automatiquement par le code suivant, qui ajoute un champ de message d’erreur et des champs masqués pour les propriétés DepartmentID et RowVersion. Les modifications apparaissent en surbrillance.
+Dans *Views/Departments/Delete.cshtml*, remplacez le code du modèle généré automatiquement par le code suivant, qui ajoute un champ de message d’erreur et des champs masqués pour les propriétés DepartmentID et RowVersion. Les modifications sont mises en surbrillance.
 
 [!code-html[](intro/samples/cu/Views/Departments/Delete.cshtml?highlight=9,38,44,45,48)]
 
@@ -256,7 +256,7 @@ Ceci apporte les modifications suivantes :
 
 * Ajoute un message d’erreur entre les titres `h2` et `h3`.
 
-* Remplace FirstMidName par FullName dans le champ **Administrator**.
+* Il remplace FirstMidName par FullName dans le champ **Administrator**.
 
 * Supprime le champ RowVersion.
 
@@ -306,10 +306,10 @@ Dans ce tutoriel, vous allez :
 > * Méthodes de modification mises à jour
 > * Vue Edit mise à jour
 > * Conflits d’accès concurrentiel testés
-> * Page Delete mise à jour
+> * Mettre à jour la page Delete
 > * Vues Details et Create mises à jour
 
 Passez au tutoriel suivant pour découvrir comment implémenter l’héritage table par hiérarchie pour les entités Instructor et Student.
 
 > [!div class="nextstepaction"]
-> [Étape suivante : implémenter l’héritage TPH (table par hiérarchie)](inheritance.md)
+> [Suivant : Mettre en œuvre l’héritage de table par hiérarchie](inheritance.md)

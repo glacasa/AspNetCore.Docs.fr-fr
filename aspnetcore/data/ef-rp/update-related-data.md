@@ -6,10 +6,10 @@ ms.author: riande
 ms.date: 07/22/2019
 uid: data/ef-rp/update-related-data
 ms.openlocfilehash: fdfdb14ff8414b8bf30f9b95be7ba0a6bcbd2995
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78656421"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---update-related-data---7-of-8"></a>Pages Razor avec EF Core dans ASP.NET Core - Mise à jour de données associées - 7 sur 8
@@ -35,7 +35,7 @@ Créez un fichier *Pages/Courses/DepartmentNamePageModel.cs* comportant le code 
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/DepartmentNamePageModel.cs)]
 
-Le code précédent crée un [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist?view=aspnetcore-2.0) pour contenir la liste des noms de département. Si `selectedDepartment` est spécifié, ce département est sélectionné dans le `SelectList`.
+Le code précédent crée un [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist?view=aspnetcore-2.0) pour contenir la liste des noms de département.  Si `selectedDepartment` est spécifié, ce département est sélectionné dans le `SelectList`. 
 
 Les classes de modèle de page Create et Edit doivent dériver de `DepartmentNamePageModel`.
 
@@ -65,8 +65,8 @@ Mettez à jour *Pages/Courses/Create.cshtml* à l’aide du code suivant :
 
 Le code précédent apporte les modifications suivantes :
 
-* Modifie la légende de **DepartmentID** en **Department**.
-* Remplace `"ViewBag.DepartmentID"` par `DepartmentNameSL` (à partir de la classe de base).
+* Modifie la légende de **DepartmentID** en **Department**. 
+* Il remplace `"ViewBag.DepartmentID"` par `DepartmentNameSL` (à partir de la classe de base).
 * Il ajoute l’option « Select Department ». Si vous n’avez pas encore sélectionné de département, ce changement affiche l’option « Select Department » dans la liste déroulante, plutôt que le premier département.
 * Il ajoute un message de validation quand le département n’est pas sélectionné.
 
@@ -94,7 +94,7 @@ Le code précédent apporte les modifications suivantes :
 
 * Affiche l’identificateur du cours. En général la clé primaire (PK) d’une entité n’est pas affichée. Les clés primaires sont généralement sans signification pour les utilisateurs. Dans ce cas, la clé est le numéro de cours.
 * Change la légende de la liste déroulante en remplaçant **DepartmentID** par **Department**.
-* Remplace `"ViewBag.DepartmentID"` par `DepartmentNameSL` (à partir de la classe de base).
+* Il remplace `"ViewBag.DepartmentID"` par `DepartmentNameSL` (à partir de la classe de base).
 
 La page contient un champ masqué (`<input type="hidden">`) pour le numéro de cours. L’ajout d’un Tag Helper `<label>` avec `asp-for="Course.CourseID"` n’élimine pas la nécessité de la présence du champ masqué. `<input type="hidden">` est obligatoire pour que le numéro de cours soit inclus dans les données publiées quand l’utilisateur clique sur **Save**.
 
@@ -122,15 +122,15 @@ Apportez les mêmes modifications à la page Details.
 
 [!code-cshtml[](intro/samples/cu30/Pages/Courses/Details.cshtml?highlight=14-19,36)]
 
-## <a name="test-the-course-pages"></a>Tester les pages des cours
+## <a name="test-the-course-pages"></a>Tester les pages de cours
 
 Testez les pages de création, de modification, de détails et de suppression.
 
 ## <a name="update-the-instructor-create-and-edit-pages"></a>Mettre à jour les pages de création et de modification du formateur
 
-Les formateurs peuvent donner un nombre quelconque de cours. L’illustration suivante montre la page de modification du formateur avec un tableau comportant les cases à cocher qui correspondent aux cours.
+Les instructeurs peuvent enseigner dans n’importe quel nombre de cours. L’illustration suivante montre la page de modification du formateur avec un tableau comportant les cases à cocher qui correspondent aux cours.
 
-![Page de modification des formateurs avec des cours](update-related-data/_static/instructor-edit-courses30.png)
+![Page de modification de formateur avec des cours](update-related-data/_static/instructor-edit-courses30.png)
 
 Les cases à cocher permettent de modifier les cours auxquels un formateur est affecté. Une case à cocher est affichée pour chaque cours de la base de données. Les cours auxquels le formateur est affecté sont cochés. L’utilisateur peut cocher ou décocher les cases pour changer les affectations de cours. Si le nombre de cours était bien plus important, une autre interface utilisateur serait probablement plus pratique. Toutefois, la méthode de gestion d’une relation plusieurs à plusieurs présentée ici resterait la même. Pour créer ou supprimer des relations, vous devez manipuler une entité de jointure.
 
@@ -170,8 +170,8 @@ Si la case pour un cours a été cochée mais que le cours est dans la propriét
 
 La page de modification doit également gérer la relation « un à zéro/zéro ou un » qui existe entre l’entité de l’instructeur et l’entité `OfficeAssignment`. Le code de modification du formateur doit gérer les scénarios suivants : 
 
-* Si l’utilisateur efface l’attribution d'un bureau, supprimer l'entité `OfficeAssignment`.
-* Si l’utilisateur entre une attribution et qu'elle était vide, créer une nouvelle entité `OfficeAssignment`.
+* Si l’utilisateur efface l’attribution d'un bureau, supprimer l'entité `OfficeAssignment`. 
+* Si l’utilisateur entre une attribution et qu'elle était vide, créer une nouvelle entité `OfficeAssignment`. 
 * Si l’utilisateur change l’attribution de bureau, mettre à jour l’entité `OfficeAssignment`.
 
 ### <a name="update-the-instructor-edit-page-model"></a>Mettre à jour le modèle de page de modification du formateur
@@ -223,15 +223,15 @@ Le code précédent apporte les modifications suivantes :
 
 * Utilise un chargement hâtif pour la propriété de navigation `CourseAssignments`. Les `CourseAssignments` doivent être inclus ou ils ne seront pas supprimés lorsque l'instructeur est supprimé. Pour éviter d’avoir à les lire, configurez la suppression en cascade dans la base de données.
 
-* Si le formateur à supprimer est affecté en tant qu’administrateur d’un département, il supprime l’affectation du formateur de ces départements.
+* Si le formateur à supprimer est attribué en tant qu’administrateur d’un département, supprime l’attribution de l'instructeur de ces départements.
 
 Exécutez l’application et testez la page de suppression.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="step-by-step"]
-> [Tutoriel précédent](xref:data/ef-rp/read-related-data)
-> [Tutoriel suivant](xref:data/ef-rp/concurrency)
+> [Tutoriel précédent](xref:data/ef-rp/read-related-data)[Next tutoriel](xref:data/ef-rp/concurrency) 
+> 
 
 ::: moniker-end
 
@@ -252,17 +252,17 @@ Les pages de création et de modification de cours ont chacune besoin d’une li
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/DepartmentNamePageModel.cshtml.cs?highlight=9,11,20-21)]
 
-Le code précédent crée un [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist?view=aspnetcore-2.0) pour contenir la liste des noms de département. Si `selectedDepartment` est spécifié, ce département est sélectionné dans le `SelectList`.
+Le code précédent crée un [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist?view=aspnetcore-2.0) pour contenir la liste des noms de département.  Si `selectedDepartment` est spécifié, ce département est sélectionné dans le `SelectList`. 
 
 Les classes de modèle de page Create et Edit doivent dériver de `DepartmentNamePageModel`.
 
 ## <a name="customize-the-courses-pages"></a>Personnaliser les pages de cours
 
-Quand une entité Course est créée, elle doit avoir une relation avec un département existant. Pour ajouter un département lors de la création d’un cours, la classe de base pour Create et Edit contient une liste déroulante de sélection du département. La liste déroulante définit la propriété de clé étrangère `Course.DepartmentID`. EF Core utilise la clé étrangère `Course.DepartmentID` pour charger la propriété de navigation `Department`.
+Quand une entité de cours est créée, elle doit avoir une relation à un département existant. Pour ajouter un département lors de la création d’un cours, la classe de base pour Create et Edit contient une liste déroulante de sélection du département. La liste déroulante définit la propriété de clé étrangère `Course.DepartmentID`. EF Core utilise la clé étrangère `Course.DepartmentID` pour charger la propriété de navigation `Department`.
 
 ![Créer le cours](update-related-data/_static/ddl.png)
 
-Mettez à jour le modèle de la page Create avec le code suivant :
+Mettez à jour le modèle de la page Create avec le code suivant : 
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Create.cshtml.cs?highlight=7,18,32-999)]
 
@@ -270,7 +270,7 @@ Le code précédent :
 
 * Dérive de `DepartmentNamePageModel`.
 * Utilise `TryUpdateModelAsync` pour empêcher la [sur-validation](xref:data/ef-rp/crud#overposting).
-* Remplace `ViewData["DepartmentID"]` par `DepartmentNameSL` (à partir de la classe de base).
+* Il remplace `ViewData["DepartmentID"]` par `DepartmentNameSL` (à partir de la classe de base).
 
 `ViewData["DepartmentID"]` est remplacé par le `DepartmentNameSL` fortement typé. Les modèles fortement typés sont préférables aux modèles faiblement typés. Pour plus d’informations, consultez [Données faiblement typées (ViewData et ViewBag)](xref:mvc/views/overview#VD_VB).
 
@@ -282,8 +282,8 @@ Mettez à jour *Pages/Courses/Create.cshtml* à l’aide du code suivant :
 
 Le balisage précédent apporte les modifications suivantes :
 
-* Modifie la légende de **DepartmentID** en **Department**.
-* Remplace `"ViewBag.DepartmentID"` par `DepartmentNameSL` (à partir de la classe de base).
+* Modifie la légende de **DepartmentID** en **Department**. 
+* Il remplace `"ViewBag.DepartmentID"` par `DepartmentNameSL` (à partir de la classe de base).
 * Il ajoute l’option « Select Department ». Cette modification entraîne l’affichage de « Select Department » plutôt que du premier département.
 * Il ajoute un message de validation quand le département n’est pas sélectionné.
 
@@ -308,8 +308,8 @@ Mettez à jour *Pages/Courses/Edit.cshtml* avec le balisage suivant :
 Le balisage précédent apporte les modifications suivantes :
 
 * Affiche l’identificateur du cours. En général la clé primaire (PK) d’une entité n’est pas affichée. Les clés primaires sont généralement sans signification pour les utilisateurs. Dans ce cas, la clé est le numéro de cours.
-* Modifie la légende de **DepartmentID** en **Department**.
-* Remplace `"ViewBag.DepartmentID"` par `DepartmentNameSL` (à partir de la classe de base).
+* Modifie la légende de **DepartmentID** en **Department**. 
+* Il remplace `"ViewBag.DepartmentID"` par `DepartmentNameSL` (à partir de la classe de base).
 
 La page contient un champ masqué (`<input type="hidden">`) pour le numéro de cours. L’ajout d’un Tag Helper `<label>` avec `asp-for="Course.CourseID"` n’élimine pas la nécessité de la présence du champ masqué. `<input type="hidden">` est obligatoire pour que le numéro de cours soit inclus dans les données publiées quand l’utilisateur clique sur **Save**.
 
@@ -333,7 +333,7 @@ Mettez à jour la page Razor Delete avec le balisage suivant :
 
 Apportez les mêmes modifications à la page Details.
 
-### <a name="test-the-course-pages"></a>Tester les pages des cours
+### <a name="test-the-course-pages"></a>Tester les pages de cours
 
 Testez les fonctionnalités de création, de modification, de détails et de suppression.
 
@@ -345,8 +345,8 @@ Les sections suivantes mettent à jour les pages d'instructeur.
 
 Lors de la modification d’un enregistrement de formateur, vous souhaiterez peut-être mettre à jour l’attribution de bureau du formateur. L’entité `Instructor` a une relation un-à-zéro-ou-un avec l’entité `OfficeAssignment`. Le code de formateur doit gérer ce qui suit :
 
-* Si l’utilisateur efface l’attribution d'un bureau, supprimer l'entité `OfficeAssignment`.
-* Si l’utilisateur entre une attribution et qu'elle était vide, créer une nouvelle entité `OfficeAssignment`.
+* Si l’utilisateur efface l’attribution d'un bureau, supprimer l'entité `OfficeAssignment`. 
+* Si l’utilisateur entre une attribution et qu'elle était vide, créer une nouvelle entité `OfficeAssignment`. 
 * Si l’utilisateur change l’attribution de bureau, mettre à jour l’entité `OfficeAssignment`.
 
 Mettez à jour le modèle de page Edit d'instructeur avec le code suivant :
@@ -369,13 +369,13 @@ Vérifiez que vous pouvez modifier l'emplacement de bureau d'un instructeur.
 
 ## <a name="add-course-assignments-to-the-instructor-edit-page"></a>Ajouter des affectations de cours à la page Edit de l'instructeur
 
-Les formateurs peuvent donner un nombre quelconque de cours. Dans cette section, vous ajoutez la possibilité de modifier les affectations de cours. L’illustration suivante montre la page de modification de l'instructeur mise à jour :
+Les instructeurs peuvent enseigner dans n’importe quel nombre de cours. Dans cette section, vous ajoutez la possibilité de modifier les affectations de cours. L’illustration suivante montre la page de modification de l'instructeur mise à jour :
 
-![Page de modification des formateurs avec des cours](update-related-data/_static/instructor-edit-courses.png)
+![Page de modification de formateur avec des cours](update-related-data/_static/instructor-edit-courses.png)
 
 `Course` et `Instructor` entretiennent une relation plusieurs-à-plusieurs. Pour ajouter et supprimer des relations, vous ajoutez et supprimez des entités à partir du jeu d’entités de jointures `CourseAssignments`.
 
-Les cases à cocher permettent de changer les cours auxquels un formateur est assigné. Une case à cocher est affichée pour chaque cours dans la base de données. Les cours auxquels le formateur est affecté sont cochés. L’utilisateur peut cocher ou décocher les cases pour modifier les affectations de cours. Si le nombre de cours était beaucoup plus élevé :
+Les cases à cocher permettent de changer les cours auxquels un formateur est assigné. Une case à cocher est affichée pour chaque cours dans la base de données. Les cours auxquels le formateur est affecté sont cochés. L’utilisateur peut cocher ou décocher les cases pour changer les affectations de cours. Si le nombre de cours était beaucoup plus élevé :
 
 * Vous utiliseriez sans doute une interface utilisateur différente pour afficher les cours.
 * La méthode de manipulation d’une entité de jointure pour créer ou supprimer des relations ne changerait pas.
@@ -408,7 +408,7 @@ Mettez à jour la vue Razor Instructeur :
 
 <a id="notepad"></a>
 > [!NOTE]
-> Quand vous collez le code dans Visual Studio, les sauts de ligne sont modifiés de telle manière que le code est rompu. Appuyez une fois sur Ctrl+Z pour annuler la mise en forme automatique. Ctrl + Z corrige les sauts de ligne afin qu’ils aient l’aspect visible ici. La mise en retrait ne doit pas nécessairement être parfaite, mais les lignes `@:</tr><tr>`, `@:<td>`, `@:</td>` et `@:</tr>` doivent chacune être sur une seule distincte comme indiqué. Avec le bloc de nouveau code sélectionné, appuyez trois fois sur la touche Tab pour aligner le nouveau code avec le code existant. Votez ou vérifiez l’état de ce bogue [avec ce lien](https://developercommunity.visualstudio.com/content/problem/147795/razor-editor-malforms-pasted-markup-and-creates-in.html).
+> Quand vous collez le code dans Visual Studio, les sauts de ligne sont modifiés de telle manière que le code est rompu. Appuyez une fois sur Ctrl + Z pour annuler la mise en forme automatique. Ctrl + Z corrige les sauts de ligne afin qu’ils aient l’aspect visible ici. La mise en retrait ne doit pas nécessairement être parfaite, mais les lignes `@:</tr><tr>`, `@:<td>`, `@:</td>` et `@:</tr>` doivent chacune être sur une seule distincte comme indiqué. Avec le bloc de nouveau code sélectionné, appuyez trois fois sur Tab pour aligner le nouveau code avec le code existant. Votez ou vérifiez l’état de ce bogue [avec ce lien](https://developercommunity.visualstudio.com/content/problem/147795/razor-editor-malforms-pasted-markup-and-creates-in.html).
 
 Le code précédent crée une table HTML avec trois colonnes. Chaque colonne a une case à cocher et une légende contenant le numéro et le titre du cours. Les cases à cocher ont toutes le même nom (« selectedCourses »). L’utilisation du même nom signale au classeur de modèles qu’il doit les traiter en tant que groupe. L’attribut de valeur de chaque case à cocher est défini sur `CourseID`. Quand la page est publiée, le classeur de modèles transmet un tableau composé des valeurs `CourseID` correspondant uniquement aux cases à cocher sélectionnées.
 
@@ -442,7 +442,7 @@ Le code précédent apporte les modifications suivantes :
 
 * Utilise un chargement hâtif pour la propriété de navigation `CourseAssignments`. Les `CourseAssignments` doivent être inclus ou ils ne seront pas supprimés lorsque l'instructeur est supprimé. Pour éviter d’avoir à les lire, configurez la suppression en cascade dans la base de données.
 
-* Si le formateur à supprimer est affecté en tant qu’administrateur d’un département, il supprime l’affectation du formateur de ces départements.
+* Si le formateur à supprimer est attribué en tant qu’administrateur d’un département, supprime l’attribution de l'instructeur de ces départements.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
@@ -450,7 +450,7 @@ Le code précédent apporte les modifications suivantes :
 * [Version YouTube de ce tutoriel (Partie 2)](https://www.youtube.com/watch?v=mOAankB_Zgc)
 
 > [!div class="step-by-step"]
-> [Précédent](xref:data/ef-rp/read-related-data)
-> [Suivant](xref:data/ef-rp/concurrency)
+> [Suivant précédent](xref:data/ef-rp/read-related-data)
+> [Next](xref:data/ef-rp/concurrency)
 
 ::: moniker-end

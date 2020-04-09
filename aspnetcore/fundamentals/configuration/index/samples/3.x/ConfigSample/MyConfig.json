@@ -1,6 +1,6 @@
 {
     "Position": {
-        "Title": "Mon titre de configuration",
+        "Title": "Mon titre Config",
         "Name": "My Config Smith"
     },
     "MyKey": "MyConfig.json Value",

@@ -8,23 +8,23 @@ ms.custom: mvc
 ms.date: 02/02/2020
 uid: web-api/index
 ms.openlocfilehash: be88b8d58f1f660f3a815c395c210c05a7b4917c
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78666004"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>Créer des API web avec ASP.NET Core
 
 De [Scott Addie](https://github.com/scottaddie) et [Tom Dykstra](https://github.com/tdykstra)
 
-ASP.NET Core prend en charge la création de services RESTful, également appelés API web, à l’aide de C#. Pour traiter les demandes, une API web utilise des contrôleurs. Les *contrôleurs* dans une API web sont des classes qui dérivent de `ControllerBase`. Cet article explique comment utiliser des contrôleurs pour gérer les demandes d’API Web.
+ASP.NET Core prend en charge la création de services RESTful, également appelés API web, à l’aide de C#. Pour traiter les demandes, une API web utilise des contrôleurs. Les *contrôleurs* dans une API web sont des classes qui dérivent de `ControllerBase`. Cet article montre comment utiliser les contrôleurs pour traiter les demandes d’API Web.
 
-[Affichez ou téléchargez l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/index/samples). ([Guide pratique de téléchargement](xref:index#how-to-download-a-sample)).
+[Affichez ou téléchargez l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/index/samples). ([Comment télécharger](xref:index#how-to-download-a-sample)).
 
 ## <a name="controllerbase-class"></a>Classe ControllerBase
 
-Une API Web se compose d’une ou de plusieurs classes de contrôleur qui dérivent de <xref:Microsoft.AspNetCore.Mvc.ControllerBase>. Le modèle de projet d’API Web fournit un contrôleur de démarrage :
+Une API web se compose d’une <xref:Microsoft.AspNetCore.Mvc.ControllerBase>ou plusieurs classes de contrôleur qui dérivent de . Le modèle de projet web API fournit un contrôleur de démarrage :
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -38,7 +38,7 @@ Une API Web se compose d’une ou de plusieurs classes de contrôleur qui dériv
 
 ::: moniker-end
 
-Ne créez pas de contrôleur d’API web en effectuant une dérivation de la classe <xref:Microsoft.AspNetCore.Mvc.Controller>. `Controller` dérive de `ControllerBase` et ajoute la prise en charge pour les vues ; ainsi, il est destiné à la gestion des pages web, pas des demandes d’API web. Il existe une exception à cette règle : Si vous envisagez d’utiliser le même contrôleur pour les vues et les API Web, dérivez-le de `Controller`.
+Ne créez pas de contrôleur d’API web en effectuant une dérivation de la classe <xref:Microsoft.AspNetCore.Mvc.Controller>. `Controller` dérive de `ControllerBase` et ajoute la prise en charge pour les vues ; ainsi, il est destiné à la gestion des pages web, pas des demandes d’API web. Il ya une exception à cette règle: si vous prévoyez d’utiliser le même `Controller`contrôleur pour les vues et les API web, le tirer de .
 
 La classe `ControllerBase` fournit de nombreuses propriétés et méthodes qui sont utiles pour gérer les requêtes HTTP. Par exemple, `ControllerBase.CreatedAtAction` retourne un code d’état 201 :
 
@@ -58,7 +58,7 @@ Pour obtenir la liste complète des méthodes et propriétés disponibles, consu
 
 ## <a name="attributes"></a>Attributs
 
-L’espace de noms <xref:Microsoft.AspNetCore.Mvc> fournit des attributs qui peuvent être utilisés pour configurer le comportement des contrôleurs d’API web et des méthodes d’action. L’exemple suivant utilise des attributs pour spécifier le verbe d’action HTTP pris en charge et tous les codes d’état HTTP connus qui peuvent être retournés :
+L’espace de noms <xref:Microsoft.AspNetCore.Mvc> fournit des attributs qui peuvent être utilisés pour configurer le comportement des contrôleurs d’API web et des méthodes d’action. L’exemple suivant utilise des attributs pour spécifier le verbe d’action HTTP pris en charge et tous les codes de statut HTTP connus qui pourraient être retournés :
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_400And201&highlight=1-3)]
 
@@ -68,7 +68,7 @@ Voici d’autres exemples d’attributs disponibles.
 |---------|-----|
 |[`[Route]`](<xref:Microsoft.AspNetCore.Mvc.RouteAttribute>)      |Spécifie le modèle d’URL pour un contrôleur ou une action.|
 |[`[Bind]`](<xref:Microsoft.AspNetCore.Mvc.BindAttribute>)        |Spécifie le préfixe et les propriétés à inclure pour la liaison de modèle.|
-|[`[HttpGet]`](<xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute>)  |Identifie une action qui prend en charge le verbe d’action HTTP.|
+|[`[HttpGet]`](<xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute>)  |Identifie une action qui prend en charge le verbe d’action HTTP GET.|
 |[`[Consumes]`](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>)|Spécifie les types de données acceptés par une action.|
 |[`[Produces]`](<xref:Microsoft.AspNetCore.Mvc.ProducesAttribute>)|Spécifie les types de données retournés par une action.|
 
@@ -76,7 +76,7 @@ Pour obtenir la liste des attributs disponibles, consultez l’espace de noms <x
 
 ## <a name="apicontroller-attribute"></a>Attribut ApiController
 
-L’attribut [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) peut être appliqué à une classe de contrôleur pour activer les consignes strictes suivants, comportements spécifiques à l’API :
+L’attribut [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) peut être appliqué à une classe de contrôleur pour activer les comportements suivants, spécifiques à l’API :
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -86,7 +86,7 @@ L’attribut [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttr
 * [Inférence de demande multipart/form-data](#multipartform-data-request-inference)
 * [Fonctionnalité Détails du problème pour les codes d’état erreur](#problem-details-for-error-status-codes)
 
-La fonctionnalité *Détails du problème pour les codes d’état d’erreur* requiert une [version de compatibilité](xref:mvc/compatibility-version) 2,2 ou ultérieure. Les autres fonctionnalités nécessitent une version de compatibilité 2,1 ou ultérieure.
+Les détails du problème pour la fonction *de codes d’état d’erreur* nécessitent une version de [compatibilité](xref:mvc/compatibility-version) de 2.2 ou plus tard. Les autres fonctionnalités nécessitent une version de compatibilité de 2.1 ou plus tard.
 
 ::: moniker-end
 
@@ -119,7 +119,7 @@ L’attribut `[ApiController]` peut être appliqué à des contrôleurs spécifi
 
 ### <a name="attribute-on-multiple-controllers"></a>Attribut sur plusieurs contrôleurs
 
-Une façon d’utiliser l’attribut sur plusieurs contrôleurs consiste à créer une classe de contrôleur de base personnalisée annotée avec l’attribut `[ApiController]`. L’exemple suivant montre une classe de base personnalisée et un contrôleur qui dérive de celle-ci :
+Une façon d’utiliser l’attribut sur plusieurs contrôleurs consiste à créer une classe de contrôleur de base personnalisée annotée avec l’attribut `[ApiController]`. L’exemple suivant montre une classe de base personnalisée et un contrôleur qui en dérive :
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/MyControllerBase.cs?name=snippet_MyControllerBase)]
 
@@ -137,9 +137,9 @@ Une façon d’utiliser l’attribut sur plusieurs contrôleurs consiste à cré
 
 ::: moniker range=">= aspnetcore-2.2"
 
-### <a name="attribute-on-an-assembly"></a>Attribut sur un assembly
+### <a name="attribute-on-an-assembly"></a>Attribut sur une assemblée
 
-Si la [version de compatibilité](xref:mvc/compatibility-version) est définie sur 2.2 ou une version ultérieure, l’attribut `[ApiController]` peut être appliqué à un assembly. De cette manière, l’annotation applique le comportement de l’API web à tous les contrôleurs de l’assembly. Les contrôleurs individuels n’ont aucun moyen de refuser. Appliquez l’attribut assembly au niveau de l’assembly à la déclaration d’espace de noms qui entoure la classe `Startup` :
+Si la [version de compatibilité](xref:mvc/compatibility-version) est définie sur 2.2 ou une version ultérieure, l’attribut `[ApiController]` peut être appliqué à un assembly. De cette manière, l’annotation applique le comportement de l’API web à tous les contrôleurs de l’assembly. Les contrôleurs individuels n’ont aucun moyen de refuser. Appliquer l’attribut de niveau d’assemblage `Startup` à la déclaration d’espace de nom entourant la classe :
 
 ```csharp
 [assembly: ApiController]
@@ -162,7 +162,7 @@ L’attribut `[ApiController]` rend nécessaire le routage d’attributs. Par ex
 
 [!code-csharp[](index/samples/3.x/Controllers/WeatherForecastController.cs?name=snippet_ControllerSignature&highlight=2)]
 
-Les actions sont inaccessibles par le biais des [itinéraires conventionnels](xref:mvc/controllers/routing#conventional-routing) définis par `UseEndpoints`, <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A>ou <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A> dans `Startup.Configure`.
+Les actions sont inaccessibles `UseEndpoints` <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A>via <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A> des `Startup.Configure` [itinéraires conventionnels définis](xref:mvc/controllers/routing#conventional-routing) par , , ou en .
 
 ::: moniker-end
 
@@ -185,11 +185,11 @@ if (!ModelState.IsValid)
 }
 ```
 
-ASP.NET Core MVC utilise le filtre d’action <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter> pour effectuer la vérification précédente.
+ASP.NET Core MVC utilise <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter> le filtre d’action pour effectuer la vérification précédente.
 
 ### <a name="default-badrequest-response"></a>Réponse BadRequest par défaut
 
-Avec une version de compatibilité de 2,1, le type de réponse par défaut pour une réponse HTTP 400 est <xref:Microsoft.AspNetCore.Mvc.SerializableError>. Le corps de la requête suivant est un exemple de type sérialisé :
+Avec une version de compatibilité de 2.1, le type de <xref:Microsoft.AspNetCore.Mvc.SerializableError>réponse par défaut pour une réponse HTTP 400 est . Le corps de demande suivant est un exemple du type sérialisé :
 
 ```json
 {
@@ -201,7 +201,7 @@ Avec une version de compatibilité de 2,1, le type de réponse par défaut pour 
 
 ::: moniker range=">= aspnetcore-2.2"
 
-Avec une version de compatibilité 2,2 ou ultérieure, le type de réponse par défaut pour une réponse HTTP 400 est <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails>. Le corps de la requête suivant est un exemple de type sérialisé :
+Avec une version de compatibilité de 2.2 ou plus tard, le <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails>type de réponse par défaut pour une réponse HTTP 400 est . Le corps de demande suivant est un exemple du type sérialisé :
 
 ```json
 {
@@ -217,16 +217,16 @@ Avec une version de compatibilité 2,2 ou ultérieure, le type de réponse par d
 }
 ```
 
-Type de `ValidationProblemDetails` :
+Le `ValidationProblemDetails` type:
 
-* Fournit un format lisible par l’ordinateur pour spécifier les erreurs dans les réponses de l’API Web.
-* Est conforme à la [spécification RFC 7807](https://tools.ietf.org/html/rfc7807).
+* Fournit un format lisible à la machine pour spécifier les erreurs dans les réponses de l’API Web.
+* Conforme aux [spécifications du RFC 7807](https://tools.ietf.org/html/rfc7807).
 
 ::: moniker-end
 
 ### <a name="log-automatic-400-responses"></a>Consigner automatiquement 400 réponses
 
-Voir [Guide pratique pour consigner automatiquement 400 réponses en cas d’erreurs de validation de modèle (aspnet/AspNetCore.Docs n](https://github.com/dotnet/AspNetCore.Docs/issues/12157)o{3} 12157){4}.
+Voir Guide pratique pour consigner automatiquement 400 réponses en cas d’erreurs de validation de modèle (aspnet/AspNetCore.Docs no 12157).
 
 ### <a name="disable-automatic-400-response"></a>Désactiver la réponse automatique 400
 
@@ -337,9 +337,9 @@ Pour désactiver l’inférence de la source de liaison, définissez <xref:Micro
 
 ## <a name="multipartform-data-request-inference"></a>Inférence de demande multipart/form-data
 
-L’attribut `[ApiController]` applique une règle d’inférence lorsqu’un paramètre d’action est annoté avec l’attribut [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) . Le type de contenu de la demande `multipart/form-data` est déduit.
+L’attribut `[ApiController]` applique une règle d’inférence lorsqu’un paramètre d’action est annoté avec l’attribut. [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) Le `multipart/form-data` type de contenu de demande est déduit.
 
-Pour désactiver le comportement par défaut, affectez à la propriété <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressConsumesConstraintForFormFileParameters> la valeur `true` dans `Startup.ConfigureServices`:
+Pour désactiver le comportement par <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressConsumesConstraintForFormFileParameters> défaut, définissez la propriété `true` dans `Startup.ConfigureServices`:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -369,7 +369,7 @@ Prenons le code suivant dans une action de contrôleur :
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_ProblemDetailsStatusCode)]
 
-La méthode `NotFound` produit un code d’état HTTP 404 avec un corps de `ProblemDetails`. Par exemple :
+La `NotFound` méthode produit un code d’état `ProblemDetails` HTTP 404 avec un corps. Par exemple :
 
 ```json
 {
@@ -382,7 +382,7 @@ La méthode `NotFound` produit un code d’état HTTP 404 avec un corps de `Prob
 
 ### <a name="disable-problemdetails-response"></a>Désactiver la réponse ProblemDetails
 
-La création automatique d’un `ProblemDetails` pour les codes d’état d’erreur est désactivée lorsque la propriété <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors%2A> est définie sur `true`. Ajoutez le code suivant dans `Startup.ConfigureServices` :
+La création automatique `ProblemDetails` d’un code de <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors%2A> statut d’erreur est désactivée lorsque la propriété est réglée à `true`. Ajoutez le code suivant dans `Startup.ConfigureServices` :
 
 ::: moniker-end
 
@@ -400,11 +400,11 @@ La création automatique d’un `ProblemDetails` pour les codes d’état d’er
 
 <a name="consumes"></a>
 
-## <a name="define-supported-request-content-types-with-the-consumes-attribute"></a>Définir les types de contenu de demande pris en charge avec l’attribut [consomme]
+## <a name="define-supported-request-content-types-with-the-consumes-attribute"></a>Définir les types de contenu de demande pris en charge avec l’attribut [Consumes]
 
-Par défaut, une action prend en charge tous les types de contenu de demande disponibles. Par exemple, si une application est configurée pour prendre en charge à la fois les [formateurs d’entrée](xref:mvc/models/model-binding#input-formatters)JSON et XML, une action prend en charge plusieurs types de contenu, y compris `application/json` et `application/xml`.
+Par défaut, une action prend en charge tous les types de contenu de demande disponibles. Par exemple, si une application est configurée pour prendre en charge les [formateurs d’entrée](xref:mvc/models/model-binding#input-formatters)JSON et XML, une action prend en charge plusieurs types de contenu, y compris `application/json` et `application/xml`.
 
-L’attribut [[Consommed]](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>) permet à une action de limiter les types de contenu de demande pris en charge. Appliquez l’attribut `[Consumes]` à une action ou à un contrôleur, en spécifiant un ou plusieurs types de contenu :
+[L’attribut [Consumes]](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>) permet une action pour limiter les types de contenu de demande pris en charge. Appliquer `[Consumes]` l’attribut à une action ou à un contrôleur, en spécifiant un ou plusieurs types de contenu :
 
 ```csharp
 [HttpPost]
@@ -412,15 +412,15 @@ L’attribut [[Consommed]](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>) pe
 public IActionResult CreateProduct(Product product)
 ```
 
-Dans le code précédent, l’action `CreateProduct` spécifie le type de contenu `application/xml`. Les demandes routées vers cette action doivent spécifier un en-tête `Content-Type` de `application/xml`. Les demandes qui ne spécifient pas d’en-tête `Content-Type` de `application/xml` entraînent une réponse de [type support non prise en charge 415](https://developer.mozilla.org/docs/Web/HTTP/Status/415) .
+Dans le code `CreateProduct` précédent, l’action `application/xml`spécifie le type de contenu . Les demandes acheminées à `Content-Type` cette `application/xml`action doivent spécifier un en-tête de . Demandes qui ne spécifient pas un `Content-Type` en-tête d’aboutir `application/xml` à une réponse de type média [415 non étayée.](https://developer.mozilla.org/docs/Web/HTTP/Status/415)
 
 L’attribut `[Consumes]` permet également à une action d’influencer sa sélection en fonction du type de contenu d’une demande entrante en appliquant une contrainte de type. Prenons l’exemple suivant :
 
 [!code-csharp[](index/samples/3.x/Controllers/ConsumesController.cs?name=snippet_Class)]
 
-Dans le code précédent, `ConsumesController` est configuré pour gérer les demandes envoyées à l’URL de `https://localhost:5001/api/Consumes`. Les actions du contrôleur, `PostJson` et `PostForm`, gèrent les demandes de publication avec la même URL. Sans l’attribut `[Consumes]` appliquant une contrainte de type, une exception de correspondance ambiguë est levée.
+Dans le code `ConsumesController` précédent, est configuré `https://localhost:5001/api/Consumes` pour traiter les demandes envoyées à l’URL. Les deux actions du `PostJson` contrôleur, et `PostForm`, gérer les demandes POST avec la même URL. Sans `[Consumes]` l’attribut appliquant une contrainte de type, une exception de match ambigue est jetée.
 
-L’attribut `[Consumes]` est appliqué aux deux actions. L’action `PostJson` gère les demandes envoyées avec un en-tête `Content-Type` de `application/json`. L’action `PostForm` gère les demandes envoyées avec un en-tête `Content-Type` de `application/x-www-form-urlencoded`. 
+L’attribut `[Consumes]` est appliqué aux deux actions. L’action `PostJson` gère les `Content-Type` demandes `application/json`envoyées avec un en-tête de . L’action `PostForm` gère les `Content-Type` demandes `application/x-www-form-urlencoded`envoyées avec un en-tête de . 
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

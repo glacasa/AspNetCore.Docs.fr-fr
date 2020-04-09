@@ -9,10 +9,10 @@ products:
 - vs
 urlFragment: create-grpc-client
 ms.openlocfilehash: b9feb9eed62177358fffc0d7da582f625a431e32
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78660929"
 ---
 # <a name="create-a-grpc-client-and-server-in-aspnet-core-30-using-visual-studio"></a>Créer un serveur et un client gRPC dans ASP.NET Core 3.0 avec Visual Studio
@@ -66,17 +66,17 @@ info: Microsoft.Hosting.Lifetime[0]
 
 Fichiers projet *GrpcGreeter* :
 
-* *Greeter. proto*: le fichier *protos/Greeter. proto* définit le `Greeter` gRPC et est utilisé pour générer les ressources du serveur gRPC. Pour plus d’informations, consultez [Introduction à gRPC](xref:grpc/index).
-* Dossier *services* : contient l’implémentation du service `Greeter`.
-* *appSettings. JSON*: contient des données de configuration, telles que le protocole utilisé par Kestrel. Pour plus d’informations, consultez <xref:fundamentals/configuration/index>.
-* *Program.cs*: contient le point d’entrée pour le service gRPC. Pour plus d’informations, consultez <xref:fundamentals/host/generic-host>.
-* *Startup.cs*: contient le code qui configure le comportement de l’application. Pour plus d’informations, consultez [Démarrage des applications](xref:fundamentals/startup).
+* *greet.proto*: Le fichier *Protos/greet.proto* définit le `Greeter` gRPC et est utilisé pour générer les actifs du serveur gRPC. Pour plus d’informations, consultez [Introduction à gRPC](xref:grpc/index).
+* *Dossier de services* : Contient `Greeter` la mise en œuvre du service.
+* *appSettings.json*: Contient des données de configuration, telles que le protocole utilisé par Kestrel. Pour plus d’informations, consultez <xref:fundamentals/configuration/index>.
+* *Program.cs*: Contient le point d’entrée du service gRPC. Pour plus d’informations, consultez <xref:fundamentals/host/generic-host>.
+* *Startup.cs*: Contient du code qui configure le comportement de l’application. Pour plus d’informations, consultez [Démarrage des applications](xref:fundamentals/startup).
 
 ## <a name="create-the-grpc-client-in-a-net-console-app"></a>Créer le client gRPC dans une application console .NET
 
 * Ouvrez une deuxième instance de Visual Studio.
-* Sélectionnez **Fichier** > **Nouveau** > **Projet** dans la barre de menus.
-* Dans la boîte de dialogue **Créer un projet**, sélectionnez **Application console (.NET Core)** .
+* Sélectionnez **File** > **New** > **Project** à partir de la barre de menu.
+* Dans la boîte de dialogue **Créer un projet**, sélectionnez **Application console (.NET Core)**.
 * Sélectionnez **Suivant**.
 * Dans la zone de texte **Nom**, entrez « GrpcGreeterClient ».
 * Sélectionnez **Create** (Créer).
@@ -93,7 +93,7 @@ Installez les packages à l’aide de la console PMC (console du Gestionnaire de
 
 #### <a name="pmc-option-to-install-packages"></a>Option de la console du Gestionnaire de package pour installer des packages
 
-* Dans Visual Studio, sélectionnez **Outils** > **Gestionnaire de package NuGet** > **Console du Gestionnaire de package**.
+* De Visual Studio, sélectionnez **Tools** > **NuGet Package Manager** > **Package Manager Console**
 * Dans la fenêtre **Console du Gestionnaire de Package**, accédez au répertoire où se trouve le fichier *GrpcGreeterClient.csproj*.
 * Exécutez les commandes suivantes :
 
@@ -105,7 +105,7 @@ Install-Package Grpc.Tools
 
 #### <a name="manage-nuget-packages-option-to-install-packages"></a>Option Gérer les packages NuGet pour installer les packages
 
-* Cliquez avec le bouton droit sur le projet dans **l’Explorateur de solutions** > **Gérer les packages NuGet**.
+* Cliquez à droite sur le projet dans **Solution Explorer** > **Manage NuGet Packages**
 * Sélectionnez l’onglet **Parcourir**.
 * Entrez **Grpc.Net.Client** dans la zone de recherche.
 * Sélectionnez le package **Grpc.Net.Client** sous l’onglet **Parcourir** et sélectionnez **Installer**.
@@ -164,7 +164,7 @@ namespace GrpcGreeterClient
 Le client Greeter est créé en :
 
 * Instanciant un `GrpcChannel` contenant les informations de création de la connexion au service gRPC.
-* Utilisation de l' `GrpcChannel` pour construire le client Greeter.
+* Utilisation `GrpcChannel` du client Greeter pour construire.
 
 ## <a name="test-the-grpc-client-with-the-grpc-greeter-service"></a>Tester le client gRPC avec le service Greeter gRPC
 

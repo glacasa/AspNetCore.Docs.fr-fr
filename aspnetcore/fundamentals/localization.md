@@ -6,10 +6,10 @@ ms.author: riande
 ms.date: 11/30/2019
 uid: fundamentals/localization
 ms.openlocfilehash: b175354220a8a71c029e005f27443d5a72749a11
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78662119"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalisation et localisation dans ASP.NET Core
@@ -30,7 +30,7 @@ La localisation d’une application implique les étapes suivantes :
 
 3. Implémenter une stratégie de sélection de la langue/culture pour chaque requête
 
-[Affichez ou téléchargez l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/Localization) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
+[Afficher ou télécharger le code de l’échantillon](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/Localization) ([comment télécharger](xref:index#how-to-download-a-sample))
 
 ## <a name="make-the-apps-content-localizable"></a>Rendre le contenu de l’application localisable
 
@@ -60,13 +60,13 @@ Certains développeurs utilisent la classe `Startup` pour contenir des chaînes 
 
 [!code-csharp[](localization/sample/Localization/Controllers/InfoController.cs?range=9-26)]
 
-## <a name="view-localization"></a>Localisation de vue
+## <a name="view-localization"></a>Localisation de l’affichage
 
 Le service `IViewLocalizer` fournit des chaînes localisées à une [vue](xref:mvc/views/overview). La classe `ViewLocalizer` implémente cette interface et recherche l’emplacement de la ressource à partir du chemin du fichier de la vue. Le code suivant montre comment utiliser l’implémentation par défaut de `IViewLocalizer` :
 
 [!code-cshtml[](localization/sample/Localization/Views/Home/About.cshtml)]
 
-L’implémentation par défaut de `IViewLocalizer` recherche le fichier de ressources en fonction du nom de fichier de la vue. Il n’existe aucune option pour utiliser un fichier de ressources partagées globales. `ViewLocalizer` implémente le localiseur en utilisant `IHtmlLocalizer`, si bien que Razor n’encode pas en HTML la chaîne localisée. Vous pouvez paramétrer des chaînes de ressources pour que `IViewLocalizer` encode en HTML les paramètres, mais pas les chaînes de ressources. Examinez le balisage Razor suivant :
+L’implémentation par défaut de `IViewLocalizer` recherche le fichier de ressources en fonction du nom de fichier de l’affichage. Il n’existe aucune option pour utiliser un fichier de ressources partagées globales. `ViewLocalizer` implémente le localiseur en utilisant `IHtmlLocalizer`, si bien que Razor n’encode pas en HTML la chaîne localisée. Vous pouvez paramétrer des chaînes de ressources pour que `IViewLocalizer` encode en HTML les paramètres, mais pas les chaînes de ressources. Examinez le balisage Razor suivant :
 
 ```cshtml
 @Localizer["<i>Hello</i> <b>{0}!</b>", UserManager.GetUserName(User)]
@@ -78,11 +78,11 @@ Un fichier de ressources en français peut contenir ce qui suit :
 | ----- | ------ |
 | `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
 
-La vue contient le balisage HTML provenant du fichier de ressources.
+L’affichage contient le balisage HTML provenant du fichier de ressources.
 
 **Remarque :** Vous avez généralement besoin de localiser uniquement le texte et pas le code HTML.
 
-Pour utiliser un fichier de ressources partagées dans une vue, injectez `IHtmlLocalizer<T>` :
+Pour utiliser un fichier de ressources partagées dans un affichage, injectez `IHtmlLocalizer<T>` :
 
 [!code-cshtml[](../fundamentals/localization/sample/Localization/Views/Test/About.cshtml?highlight=5,12)]
 
@@ -90,7 +90,7 @@ Pour utiliser un fichier de ressources partagées dans une vue, injectez `IHtmlL
 
 Les messages d’erreur DataAnnotations sont localisés avec `IStringLocalizer<T>`. En utilisant l’option `ResourcesPath = "Resources"`, les messages d’erreur inclus dans `RegisterViewModel` peuvent être stockés dans les chemins suivants :
 
-* *Resources/ViewModels.Account.RegisterViewModel.fr.resx*
+* *Ressources/ViewModels.Account.RegisterViewViewModel.fr.resx*
 * *Resources/ViewModels/Account/RegisterViewModel.fr.resx*
 
 [!code-csharp[](localization/sample/Localization/ViewModels/Account/RegisterViewModel.cs?start=9&end=26)]
@@ -154,20 +154,20 @@ Dans l’exemple de projet, la méthode `ConfigureServices` affecte à `Resource
 | Resources/Controllers/HomeController.fr.resx  | Path |
 |    |     |
 
-Les fichiers de ressources qui utilisent `@inject IViewLocalizer` dans les vues Razor suivent un modèle similaire. Le fichier de ressources d’une vue peut être nommé selon la convention avec des points ou un chemin. Les fichiers de ressources d’une vue Razor imitent le chemin de son fichier de vue associé. Si nous affectons à `ResourcesPath` la valeur « Resources », le fichier de ressources en français associé à la vue *Views/Home/About.cshtml* peut porter l’un des noms suivants :
+Les fichiers de ressources qui utilisent `@inject IViewLocalizer` dans les affichages Razor suivent un modèle similaire. Le fichier de ressources d’une vue peut être nommé selon la convention avec des points ou un chemin. Les fichiers de ressources d’une vue Razor imitent le chemin de son fichier de vue associé. Si nous affectons à `ResourcesPath` la valeur « Resources », le fichier de ressources en français associé à l’affichage *Views/Home/About.cshtml* peut porter l’un des noms suivants :
 
 * Resources/Views/Home/About.fr.resx
 
 * Resources/Views.Home.About.fr.resx
 
-Si vous n’utilisez pas l’option `ResourcesPath`, le fichier *.resx* d’une vue se trouve dans le même dossier que la vue.
+Si vous n’utilisez pas l’option `ResourcesPath`, le fichier *.resx* d’un affichage se trouve dans le même dossier que l’affichage.
 
 ### <a name="rootnamespaceattribute"></a>RootNamespaceAttribute 
 
 L’attribut [RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1) fournit l’espace de noms racine d’un assembly quand il est différent du nom de l’assembly. 
 
 > [!WARNING]
-> Cela peut se produire lorsque le nom d’un projet n’est pas un identificateur .NET valide. Par exemple `my-project-name.csproj` utilise l’espace de noms racine `my_project_name` et le nom de l’assembly `my-project-name` conduisant à cette erreur. 
+> Cela peut se produire lorsque le nom d’un projet n’est pas un identifiant .NET valide. Par `my-project-name.csproj` exemple, utilisera `my_project_name` l’espace `my-project-name` de nom racine et le nom d’assemblage menant à cette erreur. 
 
 Si l’espace de noms racine d’un assembly est différent du nom de l’assembly :
 
@@ -204,7 +204,7 @@ Si vous créez un fichier de ressources dans Visual Studio sans culture dans le 
 
 ### <a name="add-other-cultures"></a>Ajouter d’autres cultures
 
-Chaque combinaison de langue et de culture (autres que la langue par défaut) nécessite un fichier de ressources unique. Vous créez des fichiers de ressources pour différentes cultures et différents paramètres régionaux en créant des fichiers de ressources dans lesquels les codes de langue ISO font partie du nom de fichier (par exemple, **en-us**, **fr-ca** et  **en gb**). Ces codes ISO sont placés entre le nom de fichier et l’extension de fichier *.resx*, comme dans *Welcome.es-MX.resx* (Espagnol/Mexique).
+Chaque combinaison de langue et de culture (autres que la langue par défaut) nécessite un fichier de ressources unique. Vous créez des fichiers de ressources pour différentes cultures et différents paramètres régionaux en créant des fichiers de ressources dans lesquels les codes de langue ISO font partie du nom de fichier (par exemple, **en-us**, **fr-ca** et ** en gb**). Ces codes ISO sont placés entre le nom de fichier et l’extension de fichier *.resx*, comme dans *Welcome.es-MX.resx* (Espagnol/Mexique).
 
 ## <a name="implement-a-strategy-to-select-the-languageculture-for-each-request"></a>Implémenter une stratégie de sélection de la langue/culture pour chaque requête
 
@@ -216,7 +216,7 @@ La localisation est configurée dans la méthode `Startup.ConfigureServices` :
 
 * `AddLocalization` ajoute les services de localisation au conteneur de services. Le code ci-dessus affecte également au chemin des ressources la valeur « Resources ».
 
-* `AddViewLocalization` ajoute la prise en charge des fichiers de vues localisées. Dans cet exemple de vue, la localisation se base sur le suffixe du fichier de la vue. Par exemple, « fr » dans le fichier *Index.fr.cshtml*.
+* `AddViewLocalization` ajoute la prise en charge des fichiers d’affichage localisés. Dans cet exemple d’affichage, la localisation se base sur le suffixe du fichier d’affichage. Par exemple, « fr » dans le fichier *Index.fr.cshtml*.
 
 * `AddDataAnnotationsLocalization` ajoute la prise en charge des messages de validation `DataAnnotations` localisés par le biais d’abstractions `IStringLocalizer`.
 
@@ -249,7 +249,7 @@ Si vous passez uniquement l’une des deux (`culture` ou `ui-culture`), le fourn
 
 Les applications de production fournissent souvent un mécanisme permettant de définir la culture à l’aide du cookie de culture ASP.NET Core. Utilisez la méthode `MakeCookieValue` pour créer un cookie.
 
-L' `CookieRequestCultureProvider` `DefaultCookieName` retourne le nom de cookie par défaut utilisé pour suivre les informations de culture préférées de l’utilisateur. Le nom du cookie par défaut est `.AspNetCore.Culture`.
+Les `CookieRequestCultureProvider` `DefaultCookieName` retours du nom de cookie par défaut utilisé pour suivre les informations de culture préférées de l’utilisateur. Le nom du cookie par défaut est `.AspNetCore.Culture`.
 
 Le format du cookie est `c=%LANGCODE%|uic=%LANGCODE%`, où `c` correspond à `Culture` et `uic` correspond à `UICulture`, par exemple :
 
@@ -278,21 +278,21 @@ L’[en-tête Accept-Language](https://www.w3.org/International/questions/qa-acc
 6. Tapez sur la langue, puis sur **Monter**.
 
 ::: moniker range="> aspnetcore-3.1"
-### <a name="the-content-language-http-header"></a>En-tête HTTP Content-Language
+### <a name="the-content-language-http-header"></a>L’en-tête content-langage HTTP
 
-En-tête d’entité [Content-Language](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Language) :
+L’en-tête [de l’entité Content-Language](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Language) :
 
- - Est utilisé pour décrire la ou les langues destinées au public.
- - Permet à un utilisateur de faire la distinction en fonction de la langue préférée de l’utilisateur.
+ - Est utilisé pour décrire la langue (s) destinée au public.
+ - Permet à un utilisateur de se différencier selon la langue préférée des utilisateurs.
 
-Les en-têtes d’entité sont utilisés dans les requêtes et les réponses HTTP.
+Les en-têtes d’entité sont utilisés dans les demandes et réponses HTTP.
 
-Vous pouvez ajouter l’en-tête `Content-Language` en définissant la propriété `ApplyCurrentCultureToResponseHeaders`.
+L’en-tête `Content-Language` peut être `ApplyCurrentCultureToResponseHeaders`ajouté en définissant la propriété .
 
-Ajout de l’en-tête `Content-Language` :
+Ajout `Content-Language` de l’en-tête:
 
- - Permet à RequestLocalizationMiddleware de définir l’en-tête de `Content-Language` avec le `CurrentUICulture`.
- - Élimine la nécessité de définir l’en-tête de réponse `Content-Language` explicitement.
+ - Permet à la RequestLocalizationMiddleware de régler l’en-tête `Content-Language` avec le `CurrentUICulture`.
+ - Élimine explicitement la nécessité de `Content-Language` définir explicitement l’en-tête de réponse.
 
 ```csharp
 app.UseRequestLocalization(new RequestLocalizationOptions
@@ -364,7 +364,7 @@ Cet exemple de projet **Localization.StarterWeb** sur [GitHub](https://github.co
 
 [!code-cshtml[](localization/sample/Localization/Views/Shared/_SelectLanguagePartial.cshtml)]
 
-Le fichier *Views/Shared/_SelectLanguagePartial.cshtml* est ajouté à la section `footer` du fichier de disposition afin d’être disponible pour toutes les vues :
+Le fichier *Views/Shared/_SelectLanguagePartial.cshtml* est ajouté à la section `footer` du fichier de disposition afin d’être disponible pour tous les affichages :
 
 [!code-cshtml[](localization/sample/Localization/Views/Shared/_Layout.cshtml?range=43-56&highlight=10)]
 
@@ -374,9 +374,9 @@ La méthode `SetLanguage` définit le cookie de la culture.
 
 Vous ne pouvez pas incorporer *_SelectLanguagePartial.cshtml* dans l’exemple de code de ce projet. Le projet **Localization.StarterWeb** sur [GitHub](https://github.com/aspnet/entropy) comporte du code pour faire passer `RequestLocalizationOptions` à une ligne de code partiellement exécutée Razor par le biais du conteneur [Injection de dépendances](dependency-injection.md).
 
-## <a name="model-binding-route-data-and-query-strings"></a>Données d’itinéraire de liaison de modèle et chaînes de requête
+## <a name="model-binding-route-data-and-query-strings"></a>Données d’itinéraires de liaison de modèle et chaînes de requête
 
-Consultez [comportement de la globalisation des données de routage de liaison de modèle et des chaînes de requête](xref:mvc/models/model-binding#glob).
+Voir [Le comportement de la mondialisation des données d’itinéraire de liaison de modèle et](xref:mvc/models/model-binding#glob)des chaînes de requête.
 
 ## <a name="globalization-and-localization-terms"></a>Terminologie de la globalisation et de la localisation
 

@@ -6,10 +6,10 @@ ms.author: scaddie
 ms.date: 10/18/2019
 uid: migration/proper-to-2x/index
 ms.openlocfilehash: 68a45dc50e00bead564500a12509b62a4a193ec4
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/18/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "79511085"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>Migrer d’ASP.NET vers ASP.NET Core
@@ -18,9 +18,9 @@ De [Isaac Levin](https://isaaclevin.com)
 
 Cet article sert de guide de référence pour la migration d’applications ASP.NET vers ASP.NET Core.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
-[Kit SDK .NET Core 2.2 ou version ultérieure](https://dotnet.microsoft.com/download)
+[.NET Core SDK 2.2 ou plus tard](https://dotnet.microsoft.com/download)
 
 ## <a name="target-frameworks"></a>Versions cibles de .NET Framework
 
@@ -50,7 +50,7 @@ Le format de fichier *.csproj* a été simplifié dans ASP.NET Core. Voici certa
 
 ## <a name="globalasax-file-replacement"></a>Remplacement du fichier Global.asax
 
-ASP.NET Core a introduit un nouveau mécanisme pour le démarrage d’une application. Le point d’entrée des applications ASP.NET est le fichier *Global.asax*. Les tâches telles que la configuration du routing ou l’inscription des filtres et des zones sont traitées dans le fichier *Global.asax*.
+ASP.NET Core a introduit un nouveau mécanisme pour le démarrage d’une application. Le point d’entrée des applications ASP.NET est le fichier *Global.asax*. Les tâches telles que la configuration de l’itinéraire ou l’inscription des filtres et des zones sont traitées dans le fichier *Global.asax*.
 
 [!code-csharp[](samples/globalasax-sample.cs)]
 
@@ -58,9 +58,9 @@ Cette approche couple l’application au serveur sur lequel elle est déployée 
 
 [!code-csharp[](samples/webapi-owin.cs)]
 
-Cela permet de configurer vos routes par défaut, et de privilégier la XmlSerialization à JSON. Ajoutez d’autres intergiciels (middleware) à ce pipeline selon les besoins (services de chargement, paramètres de configuration, fichiers statiques, etc.).
+Cela permet de configurer vos itinéraires par défaut, et de privilégier XmlSerialization à JSON. Ajoutez d’autres intergiciels (middleware) à ce pipeline selon les besoins (services de chargement, paramètres de configuration, fichiers statiques, etc.).
 
-ASP.NET Core utilise une approche similaire mais n’a pas besoin d’OWIN pour prendre en charge l’entrée. Au lieu de cela, c’est à l’aide de la méthode *Program.cs* `Main` (similaire aux applications console) et `Startup` est chargé à partir de là.
+ASP.NET Core utilise une approche similaire mais n’a pas besoin d’OWIN pour prendre en charge l’entrée. Au lieu de cela, *Program.cs* `Main` cela se fait à travers `Startup` la méthode Program.cs (semblable aux applications de console) et est chargé par là.
 
 [!code-csharp[](samples/program.cs)]
 
@@ -143,7 +143,7 @@ Une partie importante du développement web réside dans la capacité de traitem
 
 Avec ASP.NET, les fichiers statiques sont stockés dans différents répertoires et référencés dans des vues.
 
-Avec ASP.NET Core, les fichiers statiques sont stockés à la « racine web » ( *&lt;racine du contenu&gt;/wwwroot*), sauf si la configuration est différente. Les fichiers sont chargés dans le pipeline de requêtes via l’appel de la méthode d’extension `UseStaticFiles` à partir de `Startup.Configure` :
+Dans ASP.NET Core, les fichiers statiques sont stockés dans la « racine web »*&lt;(racine&gt;de contenu /wwwroot*), sauf configuré autrement. Les fichiers sont chargés dans le pipeline de requêtes via l’appel de la méthode d’extension `UseStaticFiles` à partir de `Startup.Configure` :
 
 [!code-csharp[](../../fundamentals/static-files/samples/1x/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 
@@ -155,13 +155,13 @@ Par exemple, un composant image dans le dossier *wwwroot/images* est accessible 
 > [!NOTE]
 > Pour obtenir des informations de référence plus approfondies sur le traitement des fichiers statiques dans ASP.NET Core, consultez [Fichiers statiques](xref:fundamentals/static-files).
 
-## <a name="multi-value-cookies"></a>Cookies à valeurs multiples
+## <a name="multi-value-cookies"></a>Biscuits multi valeurs
 
-[Les cookies à valeurs multiples](xref:System.Web.HttpCookie.Values) ne sont pas pris en charge dans ASP.net core. Créez un cookie par valeur.
+[Les cookies multi valeurs](xref:System.Web.HttpCookie.Values) ne sont pas pris en charge dans ASP.NET Core. Créez un cookie par valeur.
 
-## <a name="partial-app-migration"></a>Migration d’application partielle
+## <a name="partial-app-migration"></a>Migration partielle de l’application
 
-L’une des approches de la migration partielle d’applications consiste à créer une sous-application IIS et à déplacer uniquement certains itinéraires de ASP.NET 4. x vers ASP.NET Core tout en conservant la structure de l’URL de l’application. Par exemple, considérez la structure de l’URL de l’application à partir du fichier *ApplicationHost. config* :
+Une approche de la migration partielle de l’application consiste à créer une sous-application IIS et à ne déplacer certains itinéraires de ASP.NET 4.x à ASP.NET Core tout en préservant la structure d’URL de l’application. Par exemple, considérez la structure d’URL de l’application à partir du fichier *applicationHost.config* :
 
 ```xml
 <sites>
@@ -181,7 +181,7 @@ L’une des approches de la migration partielle d’applications consiste à cr�
 </sites>
 ```
 
-Structure de répertoire :
+Structure d’annuaire :
 
 ```
 .

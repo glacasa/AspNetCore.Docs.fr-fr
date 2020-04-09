@@ -6,15 +6,15 @@ ms.author: riande
 ms.date: 04/13/2017
 uid: tutorials/first-mvc-app/validation
 ms.openlocfilehash: ecf3d011b38347eb32020df00e44d93ca789443a
-ms.sourcegitcommit: 99e71ae03319ab386baf2ebde956fc2d511df8b8
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/25/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "80242534"
 ---
 # <a name="add-validation-to-an-aspnet-core-mvc-app"></a>Ajouter une validation à une application ASP.NET Core MVC
 
-De [Rick Anderson](https://twitter.com/RickAndMSFT)
+Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 Dans cette section :
 
@@ -55,7 +55,7 @@ La première méthode d’action (HTTP GET) `Create` affiche le formulaire de cr
 
 Vous pouvez définir un point d’arrêt dans la méthode `[HttpPost] Create` et vérifier que la méthode n’est jamais appelée. La validation côté client n’enverra pas les données du formulaire quand des erreurs de validation seront détectées. Si vous désactivez JavaScript dans votre navigateur et que vous envoyez ensuite le formulaire avec des erreurs, le point d’arrêt sera atteint. Vous bénéficiez toujours d’une validation complète sans JavaScript. 
 
-L’illustration suivante montre comment désactiver JavaScript dans le navigateur Firefox.
+L’image suivante montre comment désactiver JavaScript dans le navigateur Firefox.
 
 ![Firefox : dans Options, sous l’onglet Contenu, décochez la case Activer JavaScript.](~/tutorials/first-mvc-app/validation/_static/ff.png)
 
@@ -73,7 +73,7 @@ La partie du modèle d’affichage *Create.cshtml* est indiqué dans le balisage
 
 Le balisage précédent est utilisé par les méthodes d’action pour afficher le formulaire initial et pour le réafficher en cas d’erreur.
 
-Le [Tag Helper Input](xref:mvc/views/working-with-forms) utilise les attributs [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) et produit les attributs HTML nécessaires à la validation jQuery côté client. Le [Tag Helper de validation](xref:mvc/views/working-with-forms#the-validation-tag-helpers) affiche les erreurs de validation. Pour plus d’informations, consultez [Validation](xref:mvc/models/validation).
+Le [Tag Helper Input](xref:mvc/views/working-with-forms) utilise les attributs [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) et produit les attributs HTML nécessaires à la validation jQuery côté client. Le [Tag Helper Validation](xref:mvc/views/working-with-forms#the-validation-tag-helpers) affiche les erreurs de validation. Pour plus d’informations, consultez [Validation](xref:mvc/models/validation).
 
 Le grand avantage de cette approche est que ni le contrôleur ni le modèle de vue `Create` ne savent rien des règles de validation appliquées ou des messages d’erreur affichés. Les règles de validation et les chaînes d’erreur sont spécifiées uniquement dans la classe `Movie`. Ces mêmes règles de validation sont automatiquement appliquées à la vue `Edit` et à tous les autres modèles de vues que vous pouvez créer et qui modifient votre modèle.
 
@@ -89,7 +89,7 @@ Les attributs `DataType` fournissent uniquement des indices permettant au moteur
 
 `DataType.Date` ne spécifie pas le format de la date qui s’affiche. Par défaut, le champ de données est affiché conformément aux formats par défaut basés sur le `CultureInfo` du serveur.
 
-L’attribut `DisplayFormat` est utilisé pour spécifier explicitement le format de date :
+L’attribut `DisplayFormat` est utilisé pour spécifier explicitement le format de date :
 
 ```csharp
 [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -98,7 +98,7 @@ public DateTime ReleaseDate { get; set; }
 
 Le paramètre `ApplyFormatInEditMode` indique que la mise en forme doit également être appliquée quand la valeur est affichée dans une zone de texte à des fins de modification. (Ceci peut ne pas être souhaitable pour certains champs ; par exemple, pour les valeurs monétaires, vous ne souhaiterez sans doute pas que le symbole monétaire figure dans la zone de texte.)
 
-Vous pouvez utiliser l’attribut `DisplayFormat` par lui-même, mais il est généralement préférable d’utiliser l’attribut `DataType`. L’attribut `DataType` donne la sémantique des données, au lieu de d’expliquer comment les afficher sur un écran. Il présente, par ailleurs, les avantages suivants dont vous ne bénéficiez pas avec DisplayFormat :
+Vous pouvez utiliser l’attribut `DisplayFormat` par lui-même, mais il est généralement préférable d’utiliser l’attribut `DataType`. L’attribut `DataType` donne la sémantique des données, plutôt que de décrire comment effectuer le rendu sur un écran, et il offre les avantages suivants dont vous ne bénéficiez pas avec DisplayFormat :
 
 * Le navigateur peut activer des fonctionnalités HTML5 (par exemple pour afficher un contrôle de calendrier, le symbole monétaire correspondant aux paramètres régionaux, des liens de messagerie, etc.).
 
@@ -111,9 +111,9 @@ Vous pouvez utiliser l’attribut `DisplayFormat` par lui-même, mais il est gé
 >
 > `[Range(typeof(DateTime), "1/1/1966", "1/1/2020")]`
 
-Vous devez désactiver la validation de date jQuery pour utiliser l’attribut `Range` avec `DateTime`. Il n’est généralement pas recommandé de compiler des dates en dur dans vos modèles. Par conséquent, l’utilisation de l’attribut `Range` et de `DateTime` est déconseillée.
+Vous devez désactiver la validation de date jQuery pour utiliser l’attribut `Range` avec `DateTime`. Il n’est généralement pas recommandé de compiler des dates dures dans vos modèles. Par conséquent, l’utilisation de l’attribut `Range` et de `DateTime` est déconseillée.
 
-Le code suivant illustre la combinaison d’attributs sur une seule ligne :
+Le code suivant illustre la combinaison d’attributs sur une seule ligne :
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Models/MovieDateRatingDAmult.cs?name=snippet1)]
 
@@ -127,5 +127,5 @@ Dans la partie suivante de la série, nous examinons l’application et nous app
 * [Créer des Tag Helpers](xref:mvc/views/tag-helpers/authoring)
 
 > [!div class="step-by-step"]
-> [Précédent](new-field.md)
-> [Suivant](details.md)  
+> [Suivant précédent](new-field.md)
+> [Next](details.md)  

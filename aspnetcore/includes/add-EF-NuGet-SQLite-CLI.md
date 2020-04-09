@@ -11,11 +11,11 @@ dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 
 Les commandes précédentes ajoutent :
 
-* L' [outil de génération de modèles automatique ASPNET-CodeGenerator](xref:fundamentals/tools/dotnet-aspnet-codegenerator).
-* Les outils de Entity Framework Core pour le CLI .NET Core.
+* [L’outil d’échafaudage aspnet-codegenerator](xref:fundamentals/tools/dotnet-aspnet-codegenerator).
+* Les outils de base du cadre d’entité pour l’ICI CLI de base .NET.
 * Le fournisseur EF Core SQLite, qui installe le package EF Core comme une dépendance.
 * Les packages nécessaires à la génération de modèles automatique : `Microsoft.VisualStudio.Web.CodeGeneration.Design` et `Microsoft.EntityFrameworkCore.SqlServer`.
 
-Pour obtenir des conseils sur la configuration de plusieurs environnements qui permet à une application de configurer ses contextes de base de données par environnement, consultez <xref:fundamentals/environments#environment-based-startup-class-and-methods>.
+Pour obtenir des conseils sur la configuration de l’environnement <xref:fundamentals/environments#environment-based-startup-class-and-methods>multiple qui permet à une application de configurer ses contextes de base de données par environnement, voir .
 
 [!INCLUDE[](~/includes/scaffoldTFM.md)]

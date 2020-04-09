@@ -6,15 +6,15 @@ ms.author: riande
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/search
 ms.openlocfilehash: 89f1fa84783430f160ca0b840bf7ae9699520cb7
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78662868"
 ---
 # <a name="add-search-to-an-aspnet-core-mvc-app"></a>Ajouter une fonction de recherche à une application ASP.NET Core MVC
 
-De [Rick Anderson](https://twitter.com/RickAndMSFT)
+Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 Dans cette section, vous ajoutez une fonctionnalité de recherche à la méthode d’action `Index` qui vous permet de rechercher des films par *genre* ou par *nom*.
 
@@ -29,7 +29,7 @@ var movies = from m in _context.Movie
              select m;
 ```
 
-La requête est *seulement* définie à ce stade ; elle n’a **pas** été exécutée sur la base de données.
+La requête est *seulement* définie à ce stade, elle n’a **pas** été exécutée sur la base de données.
 
 Si le paramètre `searchString` contient une chaîne, la requête de films est modifiée de façon à filtrer sur la valeur de la chaîne de recherche :
 
@@ -59,7 +59,7 @@ La méthode `Index` mise à jour avec le paramètre `id` :
 
 Vous pouvez maintenant passer le titre de la recherche en tant que données de routage (un segment de l’URL) et non pas en tant que valeur de chaîne de requête.
 
-![Vue Index avec le mot « ghost » ajouté à l’URL, et une liste des films retournés avec deux films, Ghostbusters et Ghostbusters 2](~/tutorials/first-mvc-app/search/_static/g2.png)
+![Vue Index avec le mot « ghost » ajouté à l’URL et une liste de films retournée contenant deux films, Ghostbusters et Ghostbusters 2](~/tutorials/first-mvc-app/search/_static/g2.png)
 
 Cependant, vous ne pouvez pas attendre des utilisateurs qu’ils modifient l’URL à chaque fois qu’ils veulent rechercher un film. Vous allez donc maintenant ajouter des éléments d’interface utilisateur pour les aider à filtrer les films. Si vous avez changé la signature de la méthode `Index` pour tester comment passer le paramètre `ID` lié à une route, rétablissez-la de façon à ce qu’elle prenne un paramètre nommé `searchString` :
 
@@ -71,7 +71,7 @@ Ouvrez le fichier *Views/Movies/Index.cshtml* et ajoutez le balisage `<form>` mi
 
 La balise HTML `<form>` utilise le [Tag Helper de formulaire](xref:mvc/views/working-with-forms), de façon que quand vous envoyez le formulaire, la chaîne de filtrage soit envoyée à l’action `Index` du contrôleur de films. Enregistrez vos modifications puis testez le filtre.
 
-![Vue Index avec le mot « ghost » tapé dans la zone de texte du filtre Title](~/tutorials/first-mvc-app/search/_static/filter.png)
+![Vue Index avec le mot « ghost » tapé dans la zone de texte de filtre des titres](~/tutorials/first-mvc-app/search/_static/filter.png)
 
 Contrairement à ce que vous pourriez penser, une surcharge de `[HttpPost]` dans la méthode `Index` n’est pas nécessaire. Vous n’en avez pas besoin, car la méthode ne change pas l’état de l’application, elle filtre seulement les données.
 
@@ -136,7 +136,7 @@ Mettez à jour `Index.cshtml` trouvé dans *Views/Movies/* comme suit :
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexFormGenreNoRating.cshtml?highlight=1,15,16,17,19,28,31,34,37,43)]
 
-Examinez l’expression lambda utilisée dans le Helper HTML suivant :
+Examinez l’expression lambda utilisée dans le HTML Helper suivant :
 
 `@Html.DisplayNameFor(model => model.Movies[0].Title)`
 
@@ -147,5 +147,5 @@ Testez l’application en effectuant une recherche par genre, par titre de film 
 ![Fenêtre du navigateur montrant les résultats de https://localhost:5001/Movies?MovieGenre=Comedy&SearchString=2](~/tutorials/first-mvc-app/search/_static/s2.png)
 
 > [!div class="step-by-step"]
-> [Précédent](controller-methods-views.md)
-> [Suivant](new-field.md)
+> [Suivant précédent](controller-methods-views.md)
+> [Next](new-field.md)

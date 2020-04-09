@@ -1,5 +1,5 @@
 ---
-title: 'Didacticiel : prise en main de EF Core dans une application Web MVC ASP.NET'
+title: 'Tutorial: Démarrer avec EF Core dans une application web ASP.NET MVC'
 description: Ce document est le premier d’une série de didacticiels qui expliquent comment générer à partir de zéro l’exemple d’application Contoso University.
 author: rick-anderson
 ms.author: riande
@@ -8,18 +8,18 @@ ms.date: 02/06/2019
 ms.topic: tutorial
 uid: data/ef-mvc/intro
 ms.openlocfilehash: fca9fdc425506ec8b4eec5c609237208f4c0d7b5
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/18/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "79511299"
 ---
-# <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Didacticiel : prise en main de EF Core dans une application Web MVC ASP.NET
+# <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Tutorial: Démarrer avec EF Core dans une application web ASP.NET MVC
 
-Ce tutoriel n’a **pas** été mis à jour vers ASP.NET Core 3.0. La [version de Razor Pages](xref:data/ef-rp/intro) a été mise à jour. La plupart des modifications de code pour le ASP.NET Core 3,0 et la version ultérieure de ce didacticiel :
+Ce tutoriel n’a **pas** été mis à jour vers ASP.NET Core 3.0. La [version de Razor Pages](xref:data/ef-rp/intro) a été mise à jour. La plupart des modifications de code pour le ASP.NET Core 3.0 et la version ultérieure de ce tutoriel:
 
-* Se trouvent dans les fichiers *Startup.cs* et *Program.cs* .
-* Se trouve dans la [version Razor pages](xref:data/ef-rp/intro). 
+* Sont dans les *fichiers Startup.cs* et *Program.cs.*
+* Peut être trouvé dans la [version Razor Pages](xref:data/ef-rp/intro). 
 
 Pour plus d’informations sur le moment où cette mise à jour pourrait avoir lieu, consultez [ce problème GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/13920).
 
@@ -33,7 +33,7 @@ Dans ce tutoriel, vous allez :
 
 > [!div class="checklist"]
 > * Créer une application web ASP.NET Core MVC
-> * Définir le style de site
+> * Configurer le style du site
 > * En savoir plus sur les packages NuGet EF Core
 > * Créer le modèle de données
 > * Créer le contexte de base de données
@@ -42,7 +42,7 @@ Dans ce tutoriel, vous allez :
 > * Créer un contrôleur et des vues
 > * Afficher la base de données
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * [Kit SDK .NET Core 2.2](https://dotnet.microsoft.com/download)
 * [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) avec les charges de travail suivantes :
@@ -51,10 +51,10 @@ Dans ce tutoriel, vous allez :
 
 ## <a name="troubleshooting"></a>Dépannage
 
-Si vous rencontrez un problème que vous ne pouvez pas résoudre, vous pouvez généralement trouver la solution en comparant votre code au [projet terminé](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final). Pour obtenir une liste d’erreurs courantes et comment les résoudre, consultez [la section Dépannage du dernier didacticiel de la série](advanced.md#common-errors). Si vous n’y trouvez pas ce dont vous avez besoin, vous pouvez publier une question sur StackOverflow.com pour [ASP.NET Core](https://stackoverflow.com/questions/tagged/asp.net-core) ou [EF Core](https://stackoverflow.com/questions/tagged/entity-framework-core).
+Si vous rencontrez un problème que vous ne pouvez pas résoudre, vous pouvez généralement trouver la solution en comparant votre code au [projet terminé](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final). Pour obtenir la liste des erreurs courantes et comment les résoudre, consultez [la section Dépannage du dernier didacticiel de la série](advanced.md#common-errors). Si vous n’y trouvez pas ce dont vous avez besoin, vous pouvez publier une question sur StackOverflow.com pour [ASP.NET Core](https://stackoverflow.com/questions/tagged/asp.net-core) ou [EF Core](https://stackoverflow.com/questions/tagged/entity-framework-core).
 
 > [!TIP]
-> Il s’agit d’une série de 10 didacticiels, dont chacun s’appuie sur les opérations réalisées dans les précédents. Pensez à enregistrer une copie du projet après avoir fini chaque didacticiel. Ainsi, si vous rencontrez des problèmes, vous pouvez recommencer à la fin du didacticiel précédent au lieu de revenir au début de la série entière.
+> Il s’agit d’une série de 10 didacticiels, dont chacun s’appuie sur les opérations réalisées dans les précédents. Pensez à enregistrer une copie du projet à la fin de chaque didacticiel réussi. Ainsi, si vous rencontrez des problèmes, vous pouvez recommencer à la fin du didacticiel précédent au lieu de revenir au début de la série entière.
 
 ## <a name="contoso-university-web-app"></a>Application web Contoso University
 
@@ -62,7 +62,7 @@ L’application que vous allez générer dans ces didacticiels est un site web s
 
 Les utilisateurs peuvent afficher et mettre à jour les informations relatives aux étudiants, aux cours et aux formateurs. Voici quelques écrans que vous allez créer.
 
-![Page Index des étudiants](intro/_static/students-index.png)
+![Page d’index des étudiants](intro/_static/students-index.png)
 
 ![Page de modification des étudiants](intro/_static/student-edit.png)
 
@@ -82,15 +82,15 @@ Les utilisateurs peuvent afficher et mettre à jour les informations relatives a
 
 * Patientez jusqu’à l’affichage de la boîte de dialogue **Nouvelle application web ASP.NET Core**.
 
-* Sélectionnez **.NET Core**, **ASP.NET Core 2.2** et le modèle **Application web (Model-View-Controller)** .
+* Sélectionnez **.NET Core**, **ASP.NET Core 2.2** et le modèle **Application web (Model-View-Controller)**.
 
-* Vérifiez que le paramètre **Authentification** a pour valeur **Aucune authentification**.
+* Assurez-vous que **l’authentification** est réglée **sans authentification**.
 
 * Sélectionnez **OK**.
 
   ![Boîte de dialogue Nouveau projet ASP.NET Core](intro/_static/new-aspnet2.png)
 
-## <a name="set-up-the-site-style"></a>Définir le style de site
+## <a name="set-up-the-site-style"></a>Configurer le style du site
 
 Quelques changements simples configureront le menu, la disposition et la page d’accueil du site.
 
@@ -100,7 +100,7 @@ Ouvrez *Views/Shared/_Layout.cshtml* et apportez les modifications suivantes :
 
 * Ajoutez des entrées de menu pour **About**, **Students**, **Courses**, **Instructors**, et **Departments**, et supprimez l’entrée de menu **Privacy**.
 
-Les modifications apparaissent en surbrillance.
+Les modifications sont mises en surbrillance.
 
 [!code-cshtml[](intro/samples/cu/Views/Shared/_Layout.cshtml?highlight=6,34-48,63)]
 
@@ -124,13 +124,13 @@ Pour obtenir des informations sur les autres fournisseurs de bases de données q
 
 Ensuite, vous allez créer des classes d’entités pour l’application Contoso University. Vous commencerez avec les trois entités suivantes.
 
-![Diagramme de modèle de données Cours-Inscription-Étudiant](intro/_static/data-model-diagram.png)
+![Diagramme du modèle de données Course-Enrollment-Student](intro/_static/data-model-diagram.png)
 
 Il existe une relation un-à-plusieurs entre les entités `Student` et `Enrollment`, et une relation un-à-plusieurs entre les entités `Course` et `Enrollment`. En d’autres termes, un étudiant peut être inscrit dans un nombre quelconque de cours et un cours peut avoir un nombre quelconque d’élèves inscrits.
 
 Dans les sections suivantes, vous allez créer une classe pour chacune de ces entités.
 
-### <a name="the-student-entity"></a>Entité Student
+### <a name="the-student-entity"></a>L’entité Student
 
 ![Diagramme de l’entité Student](intro/_static/student-entity.png)
 
@@ -140,11 +140,11 @@ Dans le dossier *Models*, créez un fichier de classe nommé *Student.cs* et rem
 
 La propriété `ID` devient la colonne de clé primaire de la table de base de données qui correspond à cette classe. Par défaut, Entity Framework interprète une propriété nommée `ID` ou `classnameID` comme clé primaire.
 
-La propriété `Enrollments` est une [propriété de navigation](/ef/core/modeling/relationships). Les propriétés de navigation contiennent d’autres entités qui sont associées à cette entité. Dans ce cas, la propriété `Enrollments` d’un `Student entity` contient toutes les entités `Enrollment` associées à l’entité `Student`. En d’autres termes, si une ligne Student donnée dans la base de données a deux lignes Enrollment associées (lignes qui contiennent la valeur de clé primaire de cet étudiant dans la colonne de clé étrangère StudentID), la propriété de navigation `Student` de cette entité `Enrollments` contiendra ces deux entités `Enrollment`.
+La `Enrollments` propriété est une [propriété de navigation](/ef/core/modeling/relationships). Les propriétés de navigation contiennent d’autres entités qui sont associées à cette entité. Dans ce cas, la propriété `Enrollments` d’un `Student entity` contient toutes les entités `Enrollment` associées à l’entité `Student`. En d’autres termes, si une ligne Student donnée dans la base de données a deux lignes Enrollment associées (lignes qui contiennent la valeur de clé primaire de cet étudiant dans la colonne de clé étrangère StudentID), la propriété de navigation `Enrollments` de cette entité `Student` contiendra ces deux entités `Enrollment`.
 
 Si une propriété de navigation peut contenir plusieurs entités (comme dans des relations plusieurs à plusieurs ou un -à-plusieurs), son type doit être une liste dans laquelle les entrées peuvent être ajoutées, supprimées et mises à jour, telle que `ICollection<T>`. Vous pouvez spécifier `ICollection<T>` ou un type tel que `List<T>` ou `HashSet<T>`. Si vous spécifiez `ICollection<T>`, EF crée une collection `HashSet<T>` par défaut.
 
-### <a name="the-enrollment-entity"></a>Entité Enrollment
+### <a name="the-enrollment-entity"></a>L’entité Enrollment
 
 ![Diagramme de l’entité Enrollment](intro/_static/enrollment-entity.png)
 
@@ -156,13 +156,13 @@ La propriété `EnrollmentID` sera la clé primaire. Cette entité utilise le mo
 
 La propriété `Grade` est un `enum`. Le point d’interrogation après la déclaration de type `Grade` indique que la propriété `Grade` est nullable. Une note (Grade) qui a la valeur Null est différente d’une note égale à zéro : la valeur Null signifie qu’une note n’est pas connue ou n’a pas encore été affectée.
 
-La propriété `StudentID` est une clé étrangère et la propriété de navigation correspondante est `Student`. Une entité `Enrollment` est associée à une entité `Student`, donc la propriété peut contenir uniquement une entité `Student` unique (contrairement à la propriété de navigation `Student.Enrollments` que vous avez vue précédemment, qui peut contenir plusieurs entités `Enrollment`).
+La propriété `StudentID` est une clé étrangère, et la propriété de navigation correspondante est `Student`. Une entité `Enrollment` est associée à une entité `Student`, donc la propriété peut contenir uniquement une entité `Student` unique (contrairement à la propriété de navigation `Student.Enrollments` que vous avez vue précédemment, qui peut contenir plusieurs entités `Enrollment`).
 
-La propriété `CourseID` est une clé étrangère et la propriété de navigation correspondante est `Course`. Une entité `Enrollment` est associée à une entité `Course`.
+La propriété `CourseID` est une clé étrangère, et la propriété de navigation correspondante est `Course`. Une entité `Enrollment` est associée à une entité `Course`.
 
 Entity Framework interprète une propriété comme une propriété de clé étrangère si elle est nommée `<navigation property name><primary key property name>` (par exemple, `StudentID` pour la propriété de navigation `Student`, puisque la clé primaire de l’entité `Student` est `ID`). Les propriétés de clé étrangère peuvent également être nommées simplement `<primary key property name>` (par exemple, `CourseID`, puisque la clé primaire de l’entité `Course` est `CourseID`).
 
-### <a name="the-course-entity"></a>Entité Course
+### <a name="the-course-entity"></a>L’entité Course
 
 ![Diagramme de l’entité Course](intro/_static/course-entity.png)
 
@@ -176,7 +176,7 @@ Nous fournirons plus de détails sur l’attribut `DatabaseGenerated` dans un [d
 
 ## <a name="create-the-database-context"></a>Créer le contexte de base de données
 
-La classe principale qui coordonne les fonctionnalités d’Entity Framework pour un modèle de données spécifié est la classe de contexte de base de données. Vous créez cette classe en dérivant de la classe `Microsoft.EntityFrameworkCore.DbContext`. Dans votre code, vous spécifiez les entités qui sont incluses dans le modèle de données. Vous pouvez également personnaliser un certain comportement d’Entity Framework. Dans ce projet, la classe se nomme `SchoolContext`.
+La classe principale qui coordonne les fonctionnalités d’Entity Framework pour un modèle de données spécifié est la classe de contexte de base de données. Vous créez cette classe en dérivant de la classe `Microsoft.EntityFrameworkCore.DbContext`. Dans votre code, vous spécifiez les entités qui sont incluses dans le modèle de données. Vous pouvez également personnaliser un certain comportement d’Entity Framework. Dans ce projet, la classe est nommée `SchoolContext`.
 
 Dans le dossier du projet, créez un dossier nommé *Data*.
 
@@ -224,12 +224,12 @@ Dans le dossier *Data*, créez un nouveau fichier de classe nommé *DbInitialize
 
 [!code-csharp[](intro/samples/cu/Data/DbInitializer.cs?name=snippet_Intro)]
 
-Le code vérifie si des étudiants figurent dans la base de données et, dans la négative, il suppose que la base de données est nouvelle et doit être initialement peuplée avec des données de test. Il charge les données de test dans les tableaux plutôt que dans les collections `List<T>` afin d’optimiser les performances.
+Le code vérifie si des étudiants figurent dans la base de données et, dans la négative, il suppose que la base de données est nouvelle et doit être initialement peuplée avec des données de test. Il charge les données de test dans des tableaux plutôt que des collections `List<T>` afin d’optimiser les performances.
 
 Dans *Program.cs*, modifiez la méthode `Main` pour effectuer les opérations suivantes au démarrage de l’application :
 
 * Obtenir une instance de contexte de base de données à partir du conteneur d’injection de dépendance.
-* Appeler la méthode seed et la passer au contexte.
+* Appeler la méthode de remplissage initial, en lui transmettant le contexte.
 * Supprimer le contexte une fois l’exécution de la méthode de peuplement initial terminée.
 
 [!code-csharp[](intro/samples/cu/Program.cs?name=snippet_Seed&highlight=3-20)]
@@ -254,7 +254,7 @@ La création automatique de vues et de méthodes d’action CRUD porte le nom de
 
   * Sélectionnez **Contrôleur MVC avec vues, utilisant Entity Framework**.
 
-  * Cliquez sur **Ajouter**. La boîte de dialogue **Ajouter un contrôleur MVC avec vues, utilisant Entity Framework** s’affiche.
+  * Cliquez sur **Add**. La boîte de dialogue **Ajouter un contrôleur MVC avec vues, utilisant Entity Framework** s’affiche.
 
     ![Génération de modèles automatique – Étudiant](intro/_static/scaffold-student2.png)
 
@@ -264,7 +264,7 @@ La création automatique de vues et de méthodes d’action CRUD porte le nom de
 
   * Acceptez la valeur par défaut **StudentsController** comme nom.
 
-  * Cliquez sur **Ajouter**.
+  * Cliquez sur **Add**.
 
   Lorsque vous cliquez sur **Ajouter**, le moteur de génération de modèles automatique de Visual Studio crée un fichier *StudentsController.cs* et un ensemble de vues (fichiers *.cshtml*) qui fonctionnent avec le contrôleur.
 
@@ -292,7 +292,7 @@ Cliquez sur l’onglet Students pour afficher les données de test que la métho
 
 ![Page d’accueil étroite de Contoso University](intro/_static/home-page-narrow.png)
 
-![Page Index des étudiants](intro/_static/students-index.png)
+![Page d’index des étudiants](intro/_static/students-index.png)
 
 ## <a name="view-the-database"></a>Afficher la base de données
 
@@ -312,7 +312,7 @@ Cliquez avec le bouton droit sur la table **Student** et cliquez sur **Afficher 
 
 ![Table Student dans SSOX](intro/_static/ssox-student-table.png)
 
-Les fichiers de base de données *.mdf* et *.ldf* se trouvent dans le dossier *C:\Users\\\<votre_nom_utilisateur>* .
+Les fichiers de base de données *.mdf* et *.ldf* sont dans le dossier *C:'Users\\\<yourusername>.*
 
 Étant donné que vous appelez `EnsureCreated` dans la méthode d’initialiseur qui s’exécute au démarrage de l’application, vous pouvez maintenant apporter une modification à la classe `Student`, supprimer la base de données ou réexécuter l’application, et la base de données serait automatiquement recréée conformément à votre modification. Par exemple, si vous ajoutez une propriété `EmailAddress` à la classe `Student`, vous voyez une nouvelle colonne `EmailAddress` dans la table recréée.
 
@@ -326,7 +326,7 @@ La quantité de code que vous deviez écrire pour qu’Entity Framework puisse c
 
 * Les propriétés d’entité nommées ID ou classnameID sont reconnues comme propriétés de clé primaire.
 
-* Une propriété est interprétée comme propriété de clé étrangère si elle se nomme *\<nom de la propriété de navigation>\<nom de la propriété de clé primaire>* (par exemple `StudentID` pour la propriété de navigation `Student`, puisque la clé primaire de l’entité `Student` est `ID`). Les propriétés de clé étrangère peuvent également être nommées simplement *\<nom de la propriété de clé primaire>* (par exemple, `EnrollmentID`, puisque la clé primaire de l’entité `Enrollment` est `EnrollmentID`).
+* Une propriété est interprétée comme une propriété clé étrangère si elle est `StudentID` nommée `Student` `Student` `ID` * \<nom \<* de propriété de navigation>nom principal de propriété clé>(par exemple, pour la propriété de navigation puisque la clé principale de l’entité est ). Les propriétés clés étrangères peuvent également être nommées `Enrollment` simplement `EnrollmentID` * \<nom de propriété clé primaire>* (par exemple, `EnrollmentID` puisque la clé principale de l’entité est ).
 
 Le comportement conventionnel peut être remplacé. Par exemple, vous pouvez spécifier explicitement les noms de tables, comme vous l’avez vu précédemment dans ce didacticiel. De plus, vous pouvez définir des noms de colonne et définir une propriété quelconque en tant que clé primaire ou clé étrangère, comme vous le verrez dans un [didacticiel ultérieur](complex-data-model.md) dans cette série.
 
@@ -334,11 +334,11 @@ Le comportement conventionnel peut être remplacé. Par exemple, vous pouvez sp�
 
 La programmation asynchrone est le mode par défaut pour ASP.NET Core et EF Core.
 
-Un serveur web a un nombre limité de threads disponibles et, dans les situations de forte charge, tous les threads disponibles peuvent être utilisés. Quand cela se produit, le serveur ne peut pas traiter de nouvelle requête tant que les threads ne sont pas libérés. Avec le code synchrone, plusieurs threads peuvent être bloqués alors qu’ils n’effectuent en fait aucun travail, car ils attendent que des E/S se terminent. Avec le code asynchrone, quand un processus attend que des E/S se terminent, son thread est libéré afin d’être utilisé par le serveur pour traiter d’autres demandes. Le code asynchrone permet ainsi d’utiliser plus efficacement les ressources serveur, et le serveur peut gérer plus de trafic sans retard.
+Un serveur web a un nombre limité de threads disponibles et, dans les situations de forte charge, tous les threads disponibles peuvent être utilisés. Quand cela se produit, le serveur ne peut pas traiter de nouvelle requête tant que les threads ne sont pas libérés. Avec le code synchrone, plusieurs threads peuvent être bloqués alors qu’ils n’effectuent en fait aucun travail, car ils attendent que des E/S se terminent. Avec le code asynchrone, quand un processus attend que des E/S se terminent, son thread est libéré afin d’être utilisé par le serveur pour traiter d’autres demandes. Il permet ainsi d’utiliser les ressources serveur plus efficacement, et le serveur peut gérer plus de trafic sans retard.
 
 Le code asynchrone introduit néanmoins une petite surcharge au moment de l’exécution, mais dans les situations de faible trafic, la baisse de performances est négligeable, alors qu’en cas de trafic élevé, l’amélioration potentielle des performances est importante.
 
-Dans le code suivant, le mot clé `async`, la valeur de retour `Task<T>`, le mot clé `await` et la méthode `ToListAsync` provoquent l’exécution asynchrone du code.
+Dans le code suivant, le mot clé `async`, la valeur renvoyée `Task<T>`, le mot clé `await` et la méthode `ToListAsync` provoquent l’exécution asynchrone du code.
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_ScaffoldedIndex)]
 
@@ -346,7 +346,7 @@ Dans le code suivant, le mot clé `async`, la valeur de retour `Task<T>`, le mot
 
 * Le type de retour `Task<IActionResult>` représente le travail en cours avec un résultat de type `IActionResult`.
 
-* Le mot clé `await` fait en sorte que le compilateur fractionne la méthode en deux parties. La première partie se termine par l’opération qui est démarrée de façon asynchrone. La seconde partie est placée dans une méthode de rappel qui est appelée quand l’opération se termine.
+* Le mot clé `await` indique au compilateur de fractionner la méthode en deux parties. La première partie se termine par l’opération qui est démarrée de façon asynchrone. La seconde partie est placée dans une méthode de rappel qui est appelée quand l’opération se termine.
 
 * `ToListAsync` est la version asynchrone de la méthode d’extension `ToList`.
 
@@ -358,7 +358,7 @@ Voici quelques éléments à connaître lorsque vous écrivez un code asynchrone
 
 * Si vous souhaitez tirer profit des meilleures performances du code asynchrone, assurez-vous que tous les packages de bibliothèque que vous utilisez (par exemple pour changer de page) utilisent également du code asynchrone s’ils appellent des méthodes Entity Framework qui provoquent l’envoi des requêtes à la base de données.
 
-Pour plus d’informations sur les méthodes asynchrones dans .NET, consultez [Vue d’ensemble d’async](/dotnet/articles/standard/async).
+Pour plus d’informations sur la programmation asynchrone dans .NET, consultez [Vue d’ensemble du code asynchrone](/dotnet/articles/standard/async).
 
 ## <a name="get-the-code"></a>Obtenir le code
 
@@ -370,7 +370,7 @@ Dans ce tutoriel, vous allez :
 
 > [!div class="checklist"]
 > * Créer une application web ASP.NET Core MVC
-> * Définir le style de site
+> * Configurer le style du site
 > * En savoir plus sur les packages NuGet EF Core
 > * Créer le modèle de données
 > * Créer le contexte de base de données

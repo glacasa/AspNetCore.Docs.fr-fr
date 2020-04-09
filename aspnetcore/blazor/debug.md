@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core de débogage Blazor webassembly
+title: Debug ASP.NET Core Blazor WebAssembly
 author: guardrex
-description: Découvrez comment déboguer des applications Blazor.
+description: Apprenez à déboiffer Blazor les applications.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -10,148 +10,148 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 5dbc900ab68682068a7f9e3ffdaabef89a0c7798
-ms.sourcegitcommit: 6ffb583991d6689326605a24565130083a28ef85
+ms.openlocfilehash: eaa67d63f6d15249885d78d3de197ae53e73f072
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "80306466"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80381870"
 ---
-# <a name="debug-aspnet-core-opno-locblazor-webassembly"></a>ASP.NET Core de débogage Blazor webassembly
+# <a name="debug-aspnet-core-opno-locblazor-webassembly"></a>Debug ASP.NET Core Blazor WebAssembly
 
 [Daniel Roth](https://github.com/danroth27)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Blazor les applications webassembly peuvent être déboguées à l’aide des outils de développement de navigateur dans les navigateurs basés sur le chrome (Edge/chrome).  Vous pouvez également déboguer votre application à l’aide de Visual Studio ou Visual Studio Code.
+BlazorLes applications WebAssembly peuvent être déboisées à l’aide des outils de développement du navigateur dans les navigateurs basés sur le Chrome (Edge/Chrome).  Vous pouvez également déboiffer votre application à l’aide de Visual Studio ou de Visual Studio Code.
 
-Les scénarios disponibles sont les suivants :
+Les scénarios disponibles comprennent :
 
-* Définir et supprimer des points d’arrêt.
-* Exécutez l’application avec prise en charge du débogage dans Visual Studio et Visual Studio Code (prise en charge de<kbd>F5</kbd> ).
-* Une étape (<kbd>F10</kbd>) à l’aide du code.
-* Reprendre l’exécution du code avec <kbd>F8</kbd> dans un navigateur ou <kbd>F5</kbd> dans Visual Studio ou Visual Studio code.
-* Dans l' *affichage des variables locales,* observez les valeurs des variables locales.
-* Consultez la pile des appels, y compris les chaînes d’appel qui passent de JavaScript à .NET et de .NET à JavaScript.
+* Réglez et supprimez les points d’arrêt.
+* Exécutez l’application avec un support de débogage dans Visual Studio et Visual Studio Code (support<kbd>F5).</kbd>
+* Une seule étape (<kbd>F10</kbd>) à travers le code.
+* Reprenez l’exécution du code avec <kbd>F8</kbd> dans un navigateur ou <kbd>F5</kbd> dans Visual Studio ou Visual Studio Code.
+* Dans l’affichage local, observez les valeurs des variables *locales.*
+* Voir la pile d’appels, y compris les chaînes d’appels qui vont de JavaScript en .NET et de .NET à JavaScript.
 
-Pour le moment, vous *ne pouvez pas*:
+Pour *l’instant,* vous ne pouvez pas :
 
 * Inspectez les tableaux.
-* Pointez sur inspecter les membres.
-* Déboguez l’étape dans ou hors du code managé.
-* Bénéficiez d’une prise en charge complète pour l’inspection des types valeur.
-* Arrêt sur les exceptions non gérées.
-* Atteindre les points d’arrêt pendant le démarrage de l’application.
-* Déboguez une application avec un service Worker.
+* Planer pour inspecter les membres.
+* Débogé d’étape dans ou hors du code géré.
+* Ayez un soutien complet pour inspecter les types de valeur.
+* Cassez-vous sur des exceptions non manipulées.
+* Hit points d’arrêt pendant le démarrage de l’application.
+* Débogé d’une application avec un travailleur de service.
 
-Nous continuerons à améliorer l’expérience de débogage dans les versions à venir.
+Nous continuerons d’améliorer l’expérience de débogage dans les prochaines versions.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
-Le débogage requiert l’un des navigateurs suivants :
+Le débogage nécessite l’un ou l’autre des navigateurs suivants :
 
-* Microsoft Edge (version 80 ou ultérieure)
-* Google Chrome (version 70 ou ultérieure)
+* Microsoft Edge (version 80 ou plus tard)
+* Google Chrome (version 70 ou plus tard)
 
-## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Activer le débogage pour Visual Studio et Visual Studio Code
+## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Activez le débogage pour Visual Studio et Visual Studio Code
 
-Le débogage est activé automatiquement pour les nouveaux projets créés à l’aide du modèle de projet ASP.NET Core 3,2 Preview 3 ou version ultérieure Blazor webassembly.
+Le débogage est activé automatiquement pour les nouveaux projets qui sont créés à Blazor l’aide du modèle de projet ASP.NET Core 3.2 Preview 3 ou plus tard WebAssembly.
 
-Pour activer le débogage pour une application Blazor webassembly existante, mettez à jour le fichier *launchSettings. JSON* dans le projet de démarrage pour inclure la propriété `inspectUri` suivante dans chaque profil de lancement :
+Pour permettre le débogage d’une application WebAssembly existante, Blazor mettez à jour le fichier *launchSettings.json* dans le projet de démarrage afin d’inclure la propriété suivante `inspectUri` dans chaque profil de lancement :
 
 ```json
 "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
 ```
 
-Une fois mis à jour, le fichier *launchSettings. JSON* doit ressembler à l’exemple suivant :
+Une fois mis à jour, le fichier *launchSettings.json* doit ressembler à l’exemple suivant :
 
 [!code-json[](debug/launchSettings.json?highlight=14,22)]
 
-Propriété `inspectUri` :
+La `inspectUri` propriété:
 
-* Permet à l’IDE de détecter que l’application est une application Blazor webassembly.
-* Indique à l’infrastructure de débogage de script de se connecter au navigateur via le proxy de débogage de Blazor.
+* Permet à l’IDE de Blazor détecter que l’application est une application WebAssembly.
+* Instructe l’infrastructure de débogage de Blazorscript pour se connecter au navigateur par le proxy de débogage de '.
 
 ## <a name="visual-studio"></a>Visual Studio
 
-Pour déboguer une application Blazor webassembly dans Visual Studio :
+Pour débomber Blazor une application WebAssembly dans Visual Studio :
 
-1. Vérifiez que vous avez [installé la dernière version d’évaluation de Visual Studio 2019 16,6](https://visualstudio.com/preview) (Preview 2 ou version ultérieure).
-1. Créez une nouvelle ASP.NET Core hébergée Blazor application webassembly.
-1. Appuyez sur <kbd>F5</kbd> pour exécuter l’application dans le débogueur.
-1. Définissez un point d’arrêt dans *Counter. Razor* dans la méthode `IncrementCount`.
-1. Accédez à l’onglet **compteur** et sélectionnez le bouton pour atteindre le point d’arrêt :
+1. Assurez-vous d’avoir [installé la dernière version préliminaire de Visual Studio 2019 16.6](https://visualstudio.com/preview) (Aperçu 2 ou plus tard).
+1. Créez une nouvelle application WebAssembly hébergée Blazor ASP.NET Core.
+1. Appuyez sur <kbd>F5</kbd> pour exécuter l’application dans le débbugger.
+1. Définissez un point d’arrêt `IncrementCount` dans *Counter.razor* dans la méthode.
+1. Naviguez sur l’onglet **Compteur** et sélectionnez le bouton pour appuyer sur le point d’arrêt :
 
-   ![Compteur de débogage](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-counter.png)
+   ![Compteur Debug](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-counter.png)
 
-1. Examinez la valeur du champ `currentCount` dans la fenêtre variables locales :
+1. Découvrez la valeur `currentCount` du terrain dans la fenêtre locale:
 
-   ![Afficher les variables locales](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-locals.png)
+   ![Voir les habitants](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-locals.png)
 
-1. Appuyez sur <kbd>F5</kbd> pour poursuivre l’exécution.
+1. Appuyez <kbd>sur F5</kbd> pour continuer l’exécution.
 
-Lors du débogage de votre application Blazor webassembly, vous pouvez également déboguer votre code serveur :
+Tout en débogage de votre Blazor application WebAssembly, vous pouvez également déboguer votre code serveur :
 
-1. Définissez un point d’arrêt dans la page *fetchData. Razor* dans `OnInitializedAsync`.
-1. Définissez un point d’arrêt dans la `WeatherForecastController` dans la méthode d’action `Get`.
-1. Accédez à l’onglet **extraire les données** pour atteindre le premier point d’arrêt dans le composant `FetchData` juste avant qu’il envoie une requête HTTP au serveur :
+1. Définissez un point d’arrêt dans `OnInitializedAsync`la page *FetchData.razor* dans .
+1. Définissez un point `WeatherForecastController` d’arrêt dans la méthode d’action. `Get`
+1. Naviguez sur l’onglet **Fetch Data** pour `FetchData` atteindre le premier point d’arrêt du composant juste avant qu’il n’émete une demande HTTP au serveur :
 
-   ![Déboguer extraire des données](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-fetch-data.png)
+   ![Debug Fetch Données](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-fetch-data.png)
 
-1. Appuyez sur <kbd>F5</kbd> pour poursuivre l’exécution, puis appuyez sur le point d’arrêt sur le serveur dans la `WeatherForecastController`:
+1. Appuyez sur <kbd>F5</kbd> pour continuer l’exécution, `WeatherForecastController`puis frapper le point d’arrêt sur le serveur dans le :
 
-   ![Serveur de débogage](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-server.png)
+   ![Serveur Debug](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-server.png)
 
-1. Appuyez de nouveau sur <kbd>F5</kbd> pour permettre à l’exécution de se poursuivre et consultez le tableau prévisions météo rendu.
+1. Appuyez à nouveau sur <kbd>F5</kbd> pour que l’exécution se poursuive et que la table de prévision météorologique soit rendue.
 
 ## <a name="visual-studio-code"></a>Visual Studio Code
 
-Pour déboguer une application Blazor webassembly dans Visual Studio Code :
+Pour débomber Blazor une application WebAssembly dans Visual Studio Code :
  
-1. Installez l' [ C# extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) et l’extension de [débogueur JavaScript (nocturne)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) avec `debug.javascript.usePreview` défini sur `true`.
+1. Installez [l’extension C et l’extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) [JavaScript Debugger (Nightly)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) avec `debug.javascript.usePreview` ensemble à `true`.
 
    ![Extensions](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-extensions.png)
 
-   ![Débogueur JS preview](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-js-use-preview.png)
+   ![JS aperçu debugger](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-js-use-preview.png)
 
-1. Ouvrez une application Blazor webassembly existante avec le débogage activé.
+1. Ouvrez Blazor une application WebAssembly existante avec un débogage activé.
 
-   * Si vous recevez la notification suivante indiquant qu’une configuration supplémentaire est requise pour activer le débogage, vérifiez que les extensions appropriées sont installées et que le débogage de l’aperçu JavaScript est activé, puis rechargez la fenêtre :
+   * Si vous obtenez la notification suivante que la configuration supplémentaire est nécessaire pour activer le débogage, confirmez que vous avez les extensions correctes installées et JavaScript aperçu de débogage activé, puis recharger la fenêtre:
 
-     ![Installation supplémentaire obligatoire](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-additional-setup.png)
+     ![Configuration supplémentaire requried](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-additional-setup.png)
 
-   * Une notification propose d’ajouter les ressources requises à l’application pour la génération et le débogage. Sélectionnez **Oui**:
+   * Une notification offre d’ajouter les actifs requis à l’application pour la construction et le débogage. Sélectionnez **Oui**:
 
-     ![Ajouter les ressources requises](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-required-assets.png)
+     ![Ajouter les actifs requis](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-required-assets.png)
 
-1. Le démarrage de l’application dans le débogueur est un processus en deux étapes :
+1. Démarrer l’application dans le débbugger est un processus en deux étapes:
 
-   1 \. **Tout d’abord**, démarrez l’application à l’aide de la configuration de lancement de **.net Core (Blazor Standalone)** .
+   1\. **Tout d’abord,** démarrer l’application en utilisant la configuration de lancement **.NET Core Launch (Blazor Standalone).**
 
-   2 \. **Une fois l’application démarrée**, démarrez le navigateur à l’aide de l' **assembly de débogage .net Core Blazor assembly dans** la configuration de lancement chrome (nécessite chrome). Pour utiliser Edge au lieu de chrome, modifiez la `type` de la configuration Launch dans *. vscode/Launch. JSON* de `pwa-chrome` à `pwa-edge`.
+   2\. **Après le début de l’application,** démarrez le navigateur à l’aide de **l’assemblage Web .NET Core Debug Blazor dans la** configuration de lancement Chrome (nécessite Chrome). Pour utiliser Edge au lieu `type` de Chrome, modifiez la configuration du `pwa-chrome` `pwa-msedge`lancement dans *.vscode/launch.json* de .
 
-1. Définissez un point d’arrêt dans la méthode `IncrementCount` du composant `Counter`, puis sélectionnez le bouton pour atteindre le point d’arrêt :
+1. Définissez un point `IncrementCount` d’arrêt dans la méthode du `Counter` composant, puis sélectionnez le bouton pour appuyer sur le point d’arrêt :
 
-   ![Déboguer le compteur dans VS Code](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-debug-counter.png)
+   ![Compteur de débbug dans le code VS](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-debug-counter.png)
 
-## <a name="debug-in-the-browser"></a>Déboguer dans le navigateur
+## <a name="debug-in-the-browser"></a>Debug dans le navigateur
 
-1. Exécutez une version Debug de l’application dans l’environnement de développement.
+1. Exécuter une version Debug de l’application dans l’environnement Développement.
 
-1. Appuyez sur <kbd>maj</kbd>+<kbd>ALT</kbd>+<kbd>D</kbd>.
+1. Changement <kbd>de</kbd>+presse<kbd>Alt</kbd>+<kbd>D</kbd>.
 
-1. Le navigateur doit être exécuté avec le débogage distant activé. Si le débogage distant est désactivé, une page d’erreur **Impossible de trouver un onglet de navigateur pouvant être débogué** est générée. La page d’erreur contient des instructions pour l’exécution du navigateur avec le port de débogage ouvert afin que le Blazor le proxy de débogage puisse se connecter à l’application. *Fermez toutes les instances de navigateur* et redémarrez le navigateur comme indiqué.
+1. Le navigateur doit être exécuté avec un débogage à distance activé. Si le débogage à distance est désactivé, une page d’erreur **de l’onglet de navigateur débbuggable** est générée. La page d’erreur contient des instructions pour exécuter le Blazor navigateur avec le port de débogage ouvert de sorte que le proxy de débogage peut se connecter à l’application. *Fermez toutes les instances du navigateur* et redémarrez le navigateur tel qu’il est indiqué.
 
-Une fois que le navigateur est en cours d’exécution avec le débogage distant activé, le raccourci clavier de débogage ouvre un nouvel onglet du débogueur. Après un moment, l’onglet **sources** affiche une liste des assemblys .net dans l’application. Développez chaque assembly et recherchez les fichiers sources *. cs*/ *. Razor* disponibles pour le débogage. Définissez des points d’arrêt, revenez à l’onglet de l’application, et les points d’arrêt sont atteints lorsque le code s’exécute. Une fois le point d’arrêt atteint, une seule étape (<kbd>F10</kbd>) passe par l’exécution du code ou de la reprise (<kbd>F8</kbd>).
+Une fois que le navigateur est en cours d’exécution avec un débogage à distance activé, le raccourci clavier débogage ouvre un nouvel onglet de débogage. Après un moment, l’onglet **Sources** affiche une liste des assemblages .NET dans l’application. Élargissez chaque assemblage et trouvez les fichiers source *.cs*/*.razor* disponibles pour le débogage. Définissez les points de rupture, revenez à l’onglet de l’application et les points d’arrêt sont touchés lorsque le code s’exécute. Après qu’un point d’arrêt est touché, une seule étape (<kbd>F10</kbd>) à travers le code ou le résumé (<kbd>F8</kbd>) exécution de code normalement.
 
-Blazor fournit un proxy de débogage qui implémente le [protocole chrome devtools](https://chromedevtools.github.io/devtools-protocol/) et qui augmente le protocole avec. Informations spécifiques à .net. Quand l’utilisateur clique sur le raccourci de débogage, Blazor pointe le chrome DevTools au niveau du proxy. Le proxy se connecte à la fenêtre du navigateur que vous cherchez à déboguer (par conséquent, il est nécessaire d’activer le débogage distant).
+Blazorfournit un proxy de débogage qui implémente le [protocole Chrome DevTools](https://chromedevtools.github.io/devtools-protocol/) et augmente le protocole avec . Informations spécifiques à NET. Lorsque le raccourci clavier de Blazor débogage est pressé, pointe les Chrome DevTools au proxy. Le proxy se connecte à la fenêtre du navigateur que vous cherchez à déboguer (d’où la nécessité d’activer le débogage à distance).
 
-## <a name="browser-source-maps"></a>Mappages des sources du navigateur
+## <a name="browser-source-maps"></a>Cartes source de navigateur
 
-Les mappages de source de navigateur permettent au navigateur de mapper les fichiers compilés à leurs fichiers sources d’origine et sont couramment utilisés pour le débogage côté client. Toutefois, Blazor n’est pas C# actuellement mappé directement à JavaScript/WASM. Au lieu de cela, Blazor effectue une interprétation IL dans le navigateur, de sorte que les mappages de source ne sont pas pertinents.
+Les cartes source du navigateur permettent au navigateur de cartographier les fichiers compilés vers leurs fichiers sources d’origine et sont couramment utilisés pour le débogage côté client. Cependant, Blazor ne carte pas actuellement C directement à JavaScript / WASM. Au Blazor lieu de cela, ne l’interprétation IL dans le navigateur, de sorte que les cartes source ne sont pas pertinentes.
 
 ## <a name="troubleshoot"></a>Dépanner
 
-Si vous rencontrez des erreurs, le Conseil suivant peut vous aider :
+Si vous tombez dans des erreurs, la pointe suivante peut aider:
 
-Dans l’onglet **débogueur** , ouvrez les outils de développement de votre navigateur. Dans la console, exécutez `localStorage.clear()` pour supprimer les points d’arrêt.
+Dans l’onglet **Debugger,** ouvrez les outils de développeur dans votre navigateur. Dans la console, exécutez `localStorage.clear()` pour supprimer tous les points d’arrêt.

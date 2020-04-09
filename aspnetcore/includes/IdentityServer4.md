@@ -1,14 +1,14 @@
-ASP.NET Core identité ajoute la fonctionnalité de connexion de l’interface utilisateur à ASP.NET Core Web Apps. Pour sécuriser les API Web et la commande SPAs, utilisez l’une des méthodes suivantes :
+ASP.NET Core Identity ajoute la fonctionnalité de connexion de l’interface utilisateur (interface utilisateur) (interface utilisateur) aux applications Web ASP.NET Core. Pour sécuriser les API web et les APE, utilisez l’un des éléments suivants :
 
 * [Azure Active Directory](/azure/api-management/api-management-howto-protect-backend-with-aad)
-* [Azure Active Directory B2C](/azure/active-directory-b2c/active-directory-b2c-custom-rest-api-netfw) (Azure ad B2C)]
+* [Azure Active Directory B2C](/azure/active-directory-b2c/active-directory-b2c-custom-rest-api-netfw) (Azure AD B2C)]
 * [IdentityServer4](https://identityserver.io)
 
-IdentityServer4 est un Framework OpenID Connect et OAuth 2,0 pour ASP.NET Core 3,0. IdentityServer4 active les fonctionnalités de sécurité suivantes :
+IdentityServer4 est un cadre OpenID Connect et OAuth 2.0 pour ASP.NET Core 3.0. IdentityServer4 permet les caractéristiques de sécurité suivantes :
 
 * Authentification en tant que service (AaaS)
-* Authentification unique (SSO) sur plusieurs types d’applications
+* Signature unique/off (SSO) sur plusieurs types d’applications
 * Contrôle d’accès pour les API
-* Passerelle de Fédération
+* Porte d’entrée de la Fédération
 
-Pour plus d’informations, consultez [Bienvenue dans IdentityServer4](http://docs.identityserver.io/en/latest/index.html).
+Pour plus d’informations, voir [Bienvenue à IdentityServer4](http://docs.identityserver.io/en/latest/index.html).

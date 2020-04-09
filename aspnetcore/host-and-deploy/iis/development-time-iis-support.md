@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 02/07/2020
 uid: host-and-deploy/iis/development-time-iis-support
 ms.openlocfilehash: f87a1d8cf41248f14932908c0633f98a7198853f
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78664044"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>Prise en charge d’IIS pendant le développement dans Visual Studio pour ASP.NET Core
@@ -22,17 +22,17 @@ De [Sourabh Shirhatti](https://twitter.com/sshirhatti)
 
 Cet article décrit la prise en charge de [Visual Studio](https://visualstudio.microsoft.com) pour le débogage des applications ASP.NET Core s’exécutant avec IIS sur Windows Server. Cette rubrique présente ce scénario et la configuration d’un projet.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
-* [Visual Studio pour Windows](https://visualstudio.microsoft.com/downloads/)
+* [Studio visuel pour Windows](https://visualstudio.microsoft.com/downloads/)
 * Charge de travail **Développement web et ASP.NET**
 * Charge de travail **Développement multiplateforme .NET Core**
 * Certificat de sécurité X.509 (pour la prise en charge HTTPS)
 
 ## <a name="enable-iis"></a>Activer IIS
 
-1. Dans Windows, accédez à **panneau de configuration** > **programmes** > **programmes et fonctionnalités** > **activer ou désactiver des fonctionnalités Windows** (côté gauche de l’écran).
-1. Cochez la case **Services IIS (Internet Information Services)** . Sélectionnez **OK**.
+1. Dans Windows, accédez à **Panneau de configuration** > **Programmes** > **Programmes et fonctionnalités** > **Activer ou désactiver des fonctionnalités Windows** (à gauche de l’écran).
+1. Cochez la case **Services IIS (Internet Information Services)**. Sélectionnez **OK**.
 
 L’installation d’IIS peut nécessiter un redémarrage du système.
 
@@ -40,7 +40,7 @@ L’installation d’IIS peut nécessiter un redémarrage du système.
 
 IIS doit avoir un site web configuré avec les éléments suivants :
 
-* **Nom d’hôte** &ndash; en général, le **site Web par défaut** est utilisé avec un **nom d’hôte** `localhost`. Toutefois, n’importe quel site web IIS valide avec un nom d’hôte unique fonctionnera.
+* **Nom d’hôte** &ndash; C’est en règle générale le **Site web par défaut** qui est utilisé avec le **Nom d’hôte**`localhost`. Toutefois, n’importe quel site web IIS valide avec un nom d’hôte unique fonctionnera.
 * **Liaison de site**
   * Pour les applications qui exigent le protocole HTTPS, créez une liaison au port 443 avec un certificat. On utilise en général le **certificat de développement IIS Express**, mais tous les certificats valides conviennent.
   * Pour les applications qui utilisent le protocole HTTP, vérifiez l’existence d’une liaison au port 80 ou créez-en une pour un nouveau site.
@@ -68,7 +68,7 @@ Pour un projet qui utilise le protocole HTTP, [Redirection HTTPS et middleware H
 
 Créez un profil de lancement pour ajouter la prise en charge d’IIS pendant le développement :
 
-1. Cliquez avec le bouton droit sur le projet dans **l’Explorateur de solutions**. Sélectionner **Propriétés**. Ouvrez l’onglet **Déboguer**.
+1. Cliquez avec le bouton droit sur le projet dans **l’Explorateur de solutions**. Sélectionner **Propriétés**. Ouvrez l’onglet **Debug.**
 1. Pour **Profil**, sélectionnez le bouton **Nouveau**. Nommez le profil « IIS » dans la fenêtre contextuelle. Sélectionnez **OK** pour créer le profil.
 1. Pour le paramètre **Lancer**, sélectionnez **IIS** dans la liste.
 1. Cochez la case **Lancer le navigateur** et indiquez l’URL du point de terminaison.
@@ -117,7 +117,7 @@ Vérifiez que les points de terminaison `applicationUrl` et `launchUrl` coïncid
 Exécutez Visual Studio en tant qu’administrateur :
 
 * Vérifiez que la liste déroulante des configurations de build est définie sur **Déboguer**.
-* Définissez le [bouton Démarrer le débogage](/visualstudio/debugger/debugger-feature-tour) sur le profil **IIS** , puis sélectionnez le bouton pour démarrer l’application.
+* Réglez le [bouton Démarrer Debugging](/visualstudio/debugger/debugger-feature-tour) sur le profil **IIS** et sélectionnez le bouton pour démarrer l’application.
 
 Visual Studio peut demander un redémarrage si vous ne l’exécutez pas en tant qu’administrateur. Si vous y êtes invité, redémarrez Visual Studio.
 
@@ -137,17 +137,17 @@ Si vous utilisez un certificat de développement non approuvé, le navigateur pe
 
 Cet article décrit la prise en charge de [Visual Studio](https://visualstudio.microsoft.com) pour le débogage des applications ASP.NET Core s’exécutant avec IIS sur Windows Server. Cette rubrique présente ce scénario et la configuration d’un projet.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
-* [Visual Studio pour Windows](https://visualstudio.microsoft.com/downloads/)
+* [Studio visuel pour Windows](https://visualstudio.microsoft.com/downloads/)
 * Charge de travail **Développement web et ASP.NET**
 * Charge de travail **Développement multiplateforme .NET Core**
 * Certificat de sécurité X.509 (pour la prise en charge HTTPS)
 
 ## <a name="enable-iis"></a>Activer IIS
 
-1. Dans Windows, accédez à **panneau de configuration** > **programmes** > **programmes et fonctionnalités** > **activer ou désactiver des fonctionnalités Windows** (côté gauche de l’écran).
-1. Cochez la case **Services IIS (Internet Information Services)** . Sélectionnez **OK**.
+1. Dans Windows, accédez à **Panneau de configuration** > **Programmes** > **Programmes et fonctionnalités** > **Activer ou désactiver des fonctionnalités Windows** (à gauche de l’écran).
+1. Cochez la case **Services IIS (Internet Information Services)**. Sélectionnez **OK**.
 
 L’installation d’IIS peut nécessiter un redémarrage du système.
 
@@ -155,7 +155,7 @@ L’installation d’IIS peut nécessiter un redémarrage du système.
 
 IIS doit avoir un site web configuré avec les éléments suivants :
 
-* **Nom d’hôte** &ndash; en général, le **site Web par défaut** est utilisé avec un **nom d’hôte** `localhost`. Toutefois, n’importe quel site web IIS valide avec un nom d’hôte unique fonctionnera.
+* **Nom d’hôte** &ndash; C’est en règle générale le **Site web par défaut** qui est utilisé avec le **Nom d’hôte**`localhost`. Toutefois, n’importe quel site web IIS valide avec un nom d’hôte unique fonctionnera.
 * **Liaison de site**
   * Pour les applications qui exigent le protocole HTTPS, créez une liaison au port 443 avec un certificat. On utilise en général le **certificat de développement IIS Express**, mais tous les certificats valides conviennent.
   * Pour les applications qui utilisent le protocole HTTP, vérifiez l’existence d’une liaison au port 80 ou créez-en une pour un nouveau site.
@@ -183,7 +183,7 @@ Pour un projet qui utilise le protocole HTTP, [Redirection HTTPS et middleware H
 
 Créez un profil de lancement pour ajouter la prise en charge d’IIS pendant le développement :
 
-1. Cliquez avec le bouton droit sur le projet dans **l’Explorateur de solutions**. Sélectionner **Propriétés**. Ouvrez l’onglet **Déboguer**.
+1. Cliquez avec le bouton droit sur le projet dans **l’Explorateur de solutions**. Sélectionner **Propriétés**. Ouvrez l’onglet **Debug.**
 1. Pour **Profil**, sélectionnez le bouton **Nouveau**. Nommez le profil « IIS » dans la fenêtre contextuelle. Sélectionnez **OK** pour créer le profil.
 1. Pour le paramètre **Lancer**, sélectionnez **IIS** dans la liste.
 1. Cochez la case **Lancer le navigateur** et indiquez l’URL du point de terminaison.
@@ -232,7 +232,7 @@ Vérifiez que les points de terminaison `applicationUrl` et `launchUrl` coïncid
 Exécutez Visual Studio en tant qu’administrateur :
 
 * Vérifiez que la liste déroulante des configurations de build est définie sur **Déboguer**.
-* Définissez le [bouton Démarrer le débogage](/visualstudio/debugger/debugger-feature-tour) sur le profil **IIS** , puis sélectionnez le bouton pour démarrer l’application.
+* Réglez le [bouton Démarrer Debugging](/visualstudio/debugger/debugger-feature-tour) sur le profil **IIS** et sélectionnez le bouton pour démarrer l’application.
 
 Visual Studio peut demander un redémarrage si vous ne l’exécutez pas en tant qu’administrateur. Si vous y êtes invité, redémarrez Visual Studio.
 

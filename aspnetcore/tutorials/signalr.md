@@ -1,7 +1,7 @@
 ---
-title: Prise en main de ASP.NET Core SignalR
+title: Démarrer avec ASP.NET CoreSignalR
 author: bradygaster
-description: Dans ce didacticiel, vous allez créer une application de conversation qui utilise ASP.NET Core SignalR.
+description: Dans ce tutoriel, vous créez une application de SignalRchat qui utilise ASP.NET Core .
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/21/2019
@@ -9,10 +9,10 @@ no-loc:
 - SignalR
 uid: tutorials/signalr
 ms.openlocfilehash: 55ebdbfa4556deca74a6cdf0638307425cd1a01a
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78666746"
 ---
 # <a name="tutorial-get-started-with-aspnet-core-signalr"></a>Tutoriel : Bien démarrer avec ASP.NET Core SignalR
@@ -32,7 +32,7 @@ Ce tutoriel explique les principes fondamentaux de la création d’une applicat
 
 ![Exemple d’application SignalR](signalr/_static/3.x/signalr-get-started-finished.png)
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -58,7 +58,7 @@ Ce tutoriel explique les principes fondamentaux de la création d’une applicat
 
 * Dans la boîte de dialogue **Configurer votre nouveau projet**, sélectionnez *SignalRChat*, puis **Créer**.
 
-* Dans la boîte de dialogue **créer une application web ASP.net Core** , sélectionnez **.net Core** et **ASP.net Core 3,0**. 
+* Dans la **création d’un nouveau ASP.NET core web Application** dialogue, sélectionnez **.NET Core** et ASP.NET Core **3.0**. 
 
 * Sélectionnez **Application web** pour créer un projet qui utilise Razor Pages, puis **Créer**.
 
@@ -79,7 +79,7 @@ Ce tutoriel explique les principes fondamentaux de la création d’une applicat
 
 * Dans le menu, sélectionnez **Fichier > Nouvelle solution**.
 
-* Sélectionnez **.NET Core > Application > Application web** (ne sélectionnez pas **Application web (modèle-vue-contrôleur)** ), puis **Suivant**.
+* Sélectionnez **.NET Core > Application > Application web** (ne sélectionnez pas **Application web (modèle-vue-contrôleur)**), puis **Suivant**.
 
 * Veillez à sélectionner **.NET Core 3.0** comme **Framework cible**, puis sélectionnez **Suivant**.
 
@@ -89,11 +89,11 @@ Ce tutoriel explique les principes fondamentaux de la création d’une applicat
 
 ## <a name="add-the-signalr-client-library"></a>Ajouter la bibliothèque de client SignalR
 
-La bibliothèque de serveur SignalR est incluse dans le framework partagé ASP.NET Core 3.0. La bibliothèque cliente JavaScript n’est pas incluse automatiquement dans le projet. Pour ce tutoriel, vous utilisez le gestionnaire de bibliothèque (LibMan) pour obtenir la bibliothèque de client à partir de *unpkg*. unpkg est un réseau de distribution de contenu (CDN) qui peut fournir tout ce qui est trouvé dans npm, le gestionnaire de package Node.js.
+La bibliothèque de serveur SignalR est incluse dans le framework partagé ASP.NET Core 3.0. La bibliothèque cliente JavaScript n’est pas incluse automatiquement dans le projet. Pour ce tutoriel, vous utilisez le Gestionnaire de bibliothèque (LibMan) pour obtenir la bibliothèque cliente à partir de *unpkg*. unpkg est un réseau de distribution de contenu (CDN) qui peut fournir tout ce qui est trouvé dans npm, le gestionnaire de package Node.js.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
-* Dans **Explorateur de solutions**, cliquez avec le bouton droit sur le projet, puis sélectionnez **Ajouter** > **bibliothèque côté client**.
+* Dans **l’Explorateur de solutions**, cliquez avec le bouton droit sur le projet, puis sélectionnez **Ajouter** > **Bibliothèque côté client**.
 
 * Dans la boîte de dialogue **Ajouter une bibliothèque côté Client**, pour **Fournisseur** sélectionnez **unpkg**.
 
@@ -101,11 +101,11 @@ La bibliothèque de serveur SignalR est incluse dans le framework partagé ASP.N
 
 * Sélectionnez **Choisir des fichiers spécifiques**, développez le dossier *dist/browser*, puis sélectionnez *signalr.js* et *signalr.min.js*.
 
-* Définissez **emplacement cible** sur *wwwroot/js/signalr/* , puis sélectionnez **installer**.
+* Définir **l’emplacement cible** à *wwwroot/js/signalr/*, et **sélectionnez Installer**.
 
   ![Boîte de dialogue Ajouter une bibliothèque côté client - sélectionner la bibliothèque](signalr/_static/3.x/find-signalr-client-libs-select-files.png)
 
-  LibMan crée un dossier *wwwroot/js/signalr* et y copie les fichiers sélectionnés.
+  LibMan crée un dossier *wwwroot/js/signaler* et lui copie les fichiers sélectionnés.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code/)
 
@@ -123,7 +123,7 @@ La bibliothèque de serveur SignalR est incluse dans le framework partagé ASP.N
 
   Les paramètres spécifient les options suivantes :
   * Utilisez le fournisseur unpkg.
-  * Copiez les fichiers vers la destination *wwwroot/js/signalr* .
+  * Copiez les fichiers à la destination *wwwroot/js/signalr.*
   * Copiez uniquement les fichiers spécifiés.
 
   La sortie ressemble à l’exemple suivant :
@@ -152,7 +152,7 @@ La bibliothèque de serveur SignalR est incluse dans le framework partagé ASP.N
 
   Les paramètres spécifient les options suivantes :
   * Utilisez le fournisseur unpkg.
-  * Copiez les fichiers vers la destination *wwwroot/js/signalr* .
+  * Copiez les fichiers à la destination *wwwroot/js/signalr.*
   * Copiez uniquement les fichiers spécifiés.
 
   La sortie ressemble à l’exemple suivant :
@@ -242,7 +242,7 @@ Vous devez configurer le serveur SignalR pour que celui-ci transmette les requê
 > [!TIP]
 > * Si l’application ne fonctionne pas, ouvrez vos outils de développement (F12) de navigateur et accédez à la console. Vous pouvez observer des erreurs liées à votre code HTML et JavaScript. Par exemple, supposez que vous placez *signalr.js* dans un dossier autre que celui stipulé. Dans ce cas, la référence à ce fichier ne fonctionnera pas et vous verrez une erreur 404 dans la console.
 >   ![Erreur de fichier SignalR.js introuvable](signalr/_static/3.x/f12-console.png)
-> * Si vous recevez l’erreur ERR_SPDY_INADEQUATE_TRANSPORT_SECURITY dans Chrome, exécutez les commandes suivantes pour mettre à jour votre certificat de développement :
+> * Si vous obtenez l’erreur ERR_SPDY_INADEQUATE_TRANSPORT_SECURITY dans Chrome, exécutez ces commandes pour mettre à jour votre certificat de développement :
 >
 >   ```dotnetcli
 >   dotnet dev-certs https --clean
@@ -261,9 +261,9 @@ Ce tutoriel explique les principes fondamentaux de la création d’une applicat
 > * Créer un hub SignalR.   
 > * Configurer le projet pour utiliser SignalR.   
 > * Ajouter du code qui envoie des messages de n’importe quel client vers tous les clients connectés.  
-À la fin, vous disposerez d’une application de conversation active : ![exemple d’application Signalr](signalr/_static/2.x/signalr-get-started-finished.png) 
+À la fin, vous disposerez d’une application de chat de travail : ![l’application d’échantillon SignalR](signalr/_static/2.x/signalr-get-started-finished.png) 
 
-## <a name="prerequisites"></a>Conditions préalables requises    
+## <a name="prerequisites"></a>Prérequis    
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)   
 
@@ -310,7 +310,7 @@ Ce tutoriel explique les principes fondamentaux de la création d’une applicat
 
 * Dans le menu, sélectionnez **Fichier > Nouvelle solution**.    
 
-* Sélectionnez **.NET Core > Application > Application web ASP.NET Core** (ne sélectionnez pas **Application web ASP.NET Core (MVC)** ).  
+* Sélectionnez **.NET Core > Application > Application web ASP.NET Core** (ne sélectionnez pas **Application web ASP.NET Core (MVC)**).  
 
 * Sélectionnez **Suivant**.  
 
@@ -320,11 +320,11 @@ Ce tutoriel explique les principes fondamentaux de la création d’une applicat
 
 ## <a name="add-the-signalr-client-library"></a>Ajouter la bibliothèque de client SignalR   
 
-La bibliothèque de serveur SignalR est incluse dans le métapackage `Microsoft.AspNetCore.App`. La bibliothèque cliente JavaScript n’est pas incluse automatiquement dans le projet. Pour ce tutoriel, vous utilisez le gestionnaire de bibliothèque (LibMan) pour obtenir la bibliothèque de client à partir de *unpkg*. unpkg est un réseau de distribution de contenu (CDN) qui peut fournir tout ce qui est trouvé dans npm, le gestionnaire de package Node.js.    
+La bibliothèque de serveur SignalR est incluse dans le métapackage `Microsoft.AspNetCore.App`. La bibliothèque cliente JavaScript n’est pas incluse automatiquement dans le projet. Pour ce tutoriel, vous utilisez le Gestionnaire de bibliothèque (LibMan) pour obtenir la bibliothèque cliente à partir de *unpkg*. unpkg est un réseau de distribution de contenu (CDN) qui peut fournir tout ce qui est trouvé dans npm, le gestionnaire de package Node.js.    
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)  
 
-* Dans **Explorateur de solutions**, cliquez avec le bouton droit sur le projet, puis sélectionnez **Ajouter** > **bibliothèque côté client**.  
+* Dans **l’Explorateur de solutions**, cliquez avec le bouton droit sur le projet, puis sélectionnez **Ajouter** > **Bibliothèque côté client**.  
 
 * Dans la boîte de dialogue **Ajouter une bibliothèque côté Client**, pour **Fournisseur** sélectionnez **unpkg**. 
 
@@ -334,7 +334,7 @@ La bibliothèque de serveur SignalR est incluse dans le métapackage `Microsoft.
 
 * Sélectionnez **Choisir des fichiers spécifiques**, développez le dossier *dist/browser*, puis sélectionnez *signalr.js* et *signalr.min.js*. 
 
-* Définissez **Emplacement cible** sur *wwwroot/lib/signalr/* , puis sélectionnez **Installer**.    
+* Définissez **Emplacement cible** sur *wwwroot/lib/signalr/*, puis sélectionnez **Installer**.    
 
   ![Boîte de dialogue Ajouter une bibliothèque côté client - sélectionner les fichiers et la destination](signalr/_static/2.x/libman2.png) 
 
@@ -470,12 +470,12 @@ Vous devez configurer le serveur SignalR pour que celui-ci transmette les requê
 
   Le nom et le message sont affichés instantanément dans les deux pages.   
 
-  ![SignalR exemple d’application](signalr/_static/2.x/signalr-get-started-finished.png) 
+  ![SignalRexemple d’application](signalr/_static/2.x/signalr-get-started-finished.png) 
 
 > [!TIP]    
 > Si l’application ne fonctionne pas, ouvrez vos outils de développement (F12) de navigateur et accédez à la console. Vous pouvez observer des erreurs liées à votre code HTML et JavaScript. Par exemple, supposez que vous placez *signalr.js* dans un dossier autre que celui stipulé. Dans ce cas, la référence à ce fichier ne fonctionnera pas et vous verrez une erreur 404 dans la console.   
 > ![Erreur de fichier SignalR.js introuvable](signalr/_static/2.x/f12-console.png)    
 ## <a name="additional-resources"></a>Ressources supplémentaires 
-* [Version YouTube de ce tutoriel](https://www.youtube.com/watch?v=iKlVmu-r0JQ)   
+* [Version Youtube de ce tutoriel](https://www.youtube.com/watch?v=iKlVmu-r0JQ)   
 
 ::: moniker-end

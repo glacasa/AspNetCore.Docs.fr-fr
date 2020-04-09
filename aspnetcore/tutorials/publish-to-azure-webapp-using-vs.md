@@ -7,15 +7,15 @@ ms.custom: mvc
 ms.date: 07/10/2019
 uid: tutorials/publish-to-azure-webapp-using-vs
 ms.openlocfilehash: 7fc3644df3dcb957f2537538aaa9506c6b38a480
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78662203"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>Publier une application ASP.NET Core sur Azure avec Visual Studio
 
-De [Rick Anderson](https://twitter.com/RickAndMSFT)
+Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 ::: moniker range=">= aspnetcore-3.0"
 
 [!INCLUDE [Azure App Service Preview Notice](../includes/azure-apps-preview-notice.md)]
@@ -23,7 +23,7 @@ De [Rick Anderson](https://twitter.com/RickAndMSFT)
 ::: moniker-end
 
 
-Consultez [publier une application Web sur Azure App service à l’aide de Visual Studio pour Mac](https://docs.microsoft.com/visualstudio/mac/publish-app-svc?view=vsmac-2019) si vous travaillez sur MacOS.
+Voir [Publiez une application Web à Azure App Service en utilisant Visual Studio pour Mac](https://docs.microsoft.com/visualstudio/mac/publish-app-svc?view=vsmac-2019) si vous travaillez sur macOS.
 
 Pour résoudre un problème de déploiement App Service, consultez <xref:test/troubleshoot-azure-iis>.
 
@@ -39,7 +39,7 @@ Dans la page de démarrage de Visual Studio, sélectionnez **Fichier > Nouveau >
 
 Renseignez la boîte de dialogue **Nouveau projet** :
 
-* Dans le volet gauche, sélectionnez **.NET Core**.
+* Dans la vitre gauche, sélectionnez **.NET Core**.
 * Dans le volet central, sélectionnez **Application web ASP.NET Core**.
 * Sélectionnez **OK**.
 
@@ -47,7 +47,7 @@ Renseignez la boîte de dialogue **Nouveau projet** :
 
 Dans la boîte de dialogue **Nouvelle application web ASP.NET Core** :
 
-* Sélectionnez **Application web**.
+* Sélectionnez **application Web**.
 * Sélectionnez **Modifier l’authentification**.
 
 ![Boîte de dialogue Nouveau projet](publish-to-azure-webapp-using-vs/_static/new_prj_2.png)
@@ -72,7 +72,7 @@ Visual Studio crée la solution.
 
 * Sélectionnez **S’inscrire**, puis inscrivez un nouvel utilisateur. Vous pouvez utiliser une adresse e-mail fictive. Quand vous effectuez l’envoi, la page affiche l’erreur suivante :
 
-    *«Erreur de serveur interne : une opération de base de données a échoué lors du traitement de la demande. Exception SQL : impossible d’ouvrir la base de données. L’application de migrations existantes pour le contexte de la base de la base de la base de de l’application peut résoudre ce problème*
+    *« Erreur interne du serveur : une opération de base de données a échoué pendant le traitement de la demande. Exception SQL : Impossible d’ouvrir la base de données. L’application des migrations existantes pour le contexte de la DB de demande peut résoudre ce problème.*
 * Sélectionnez **Appliquer les migrations**, puis, une fois la page mise à jour, actualisez-la.
 
 ![Erreur de serveur interne : Une opération de base de données a échoué lors du traitement de la requête. Exception SQL : Impossible d’ouvrir la base de données. Appliquer des migrations existantes pour le contexte de base de données d’application peut résoudre ce problème.](publish-to-azure-webapp-using-vs/_static/mig.png)
@@ -83,7 +83,7 @@ L’application affiche l’adresse e-mail utilisée pour inscrire le nouvel uti
 
 ## <a name="deploy-the-app-to-azure"></a>Déploiement de l’application dans Azure
 
-Cliquez avec le bouton droit sur le projet dans l’Explorateur de solutions, puis sélectionnez **Publier...**
+Cliquez à droite sur le projet dans Solution Explorer et **sélectionnez Publier...**.
 
 ![Menu contextuel ouvert avec le lien Publier mis en surbrillance](publish-to-azure-webapp-using-vs/_static/pub.png)
 
@@ -97,7 +97,7 @@ Dans la boîte de dialogue **Publier** :
 
 ### <a name="create-azure-resources"></a>Créer des ressources Azure
 
-La boîte de dialogue **Créer App Service** s’affiche :
+Le dialogue **Create App Service** apparaît :
 
 * Entrez votre abonnement.
 * Les champs d’entrée **Nom de l’application**, **Groupe de ressources** et **Plan App Service** sont renseignés. Vous pouvez conserver ces noms ou les changer.
@@ -106,7 +106,7 @@ La boîte de dialogue **Créer App Service** s’affiche :
 
 * Sélectionnez l’onglet **Services** pour créer une base de données.
 
-* Sélectionnez l’icône **+** verte pour créer une base de données SQL.
+* Sélectionnez **+** l’icône verte pour créer une nouvelle base de données SQL
 
 ![New SQL Database](publish-to-azure-webapp-using-vs/_static/sql.png)
 
@@ -116,7 +116,7 @@ La boîte de dialogue **Créer App Service** s’affiche :
 
 La boîte de dialogue **Configurer le serveur SQL Server** s’affiche.
 
-* Entrez un nom d’utilisateur et un mot de passe administrateur, puis sélectionnez **OK**. Vous pouvez conserver le **Nom du serveur** par défaut. 
+* Entrez un nom d’utilisateur et un mot de passe administrateur, puis sélectionnez **OK**. Vous pouvez conserver le nom par défaut **du serveur**. 
 
 > [!NOTE]
 > « admin » n’est pas autorisé comme nom d’utilisateur administrateur.
@@ -139,8 +139,8 @@ Quand le déploiement est terminé, sélectionnez **Paramètres** :
 
 Dans la page **Paramètres** de la boîte de dialogue **Publier** :
 
-* Développez **Bases de données**, puis cochez **Utilisez cette chaîne de connexion au moment de l’exécution**.
-* Développez **Migrations Entity Framework**, puis cochez **Appliquer cette migration lors de la publication**.
+* Élargissez les **bases de données** et vérifiez Utilisez cette chaîne de connexion au moment de **l’exécution**.
+* Élargir **les migrations-cadres de l’entité** et vérifier **Appliquer cette migration sur publier**.
 
 * Sélectionnez **Enregistrer**. Visual Studio retourne à la boîte de dialogue **Publier**. 
 
@@ -150,7 +150,7 @@ Cliquez sur **Publier**. Visual Studio publie votre application sur Azure. Quand
 
 ### <a name="test-your-app-in-azure"></a>Tester votre application dans Azure
 
-* Testez les liens **À propos de** et **Contact**
+* Testez les liens **About** et **Contact**
 
 * Enregistre un nouvel utilisateur
 

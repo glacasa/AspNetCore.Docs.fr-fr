@@ -6,7 +6,7 @@ Dans le projet RazorPagesMovie, créez un nouveau dossier nommé *Data*. Ajoutez
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Data/RazorPagesMovieContext.cs)]
 
-Le code précédent crée une propriété `DbSet` pour le jeu d’entités. Dans la terminologie Entity Framework, un jeu d’entités correspond généralement à une table de base de données, et une entité correspond à une ligne dans la table. Le code n’est pas compilé tant que les dépendances n’ont pas été ajoutées dans une étape ultérieure.
+Le code précédent crée une propriété `DbSet` pour le jeu d’entités. Dans la terminologie Entity Framework, un jeu d’entités correspond généralement à une table de base de données, et une entité correspond à une ligne dans la table. Le code ne compile pas tant que les dépendances ne seront pas ajoutées plus tard.
 
 <a name="cs"></a>
 
@@ -26,7 +26,7 @@ Ajoutez une chaîne de connexion au fichier *appsettings.JSON* comme indiqué da
 
 ### <a name="register-the-database-context"></a>Inscrire le contexte de base de données
 
-En tête du fichier `using`Startup.cs *, ajoutez les instructions*  suivantes :
+En tête du fichier *Startup.cs*, ajoutez les instructions `using` suivantes :
 
 ```csharp
 using RazorPagesMovie.Data;
@@ -45,7 +45,7 @@ Inscrivez le contexte de base de données auprès du conteneur d’[injection de
 
 ### <a name="add-required-nuget-packages"></a>Ajouter les packages NuGet exigés
 
-Exécutez la commande CLI .NET Core suivante pour ajouter SQLite et CodeGeneration. Design au projet :
+Exécutez la commande CLI CLI de base suivante pour ajouter SQLite et CodeGeneration.Design au projet :
 
 ```dotnetcli
 dotnet add package Microsoft.EntityFrameworkCore.SQLite
@@ -59,7 +59,7 @@ Le package `Microsoft.VisualStudio.Web.CodeGeneration.Design` est nécessaire à
 
 ### <a name="register-the-database-context"></a>Inscrire le contexte de base de données
 
-En tête du fichier `using`Startup.cs *, ajoutez les instructions*  suivantes :
+En tête du fichier *Startup.cs*, ajoutez les instructions `using` suivantes :
 
 ```csharp
 using RazorPagesMovie.Models;

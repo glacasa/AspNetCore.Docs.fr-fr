@@ -7,15 +7,15 @@ ms.author: riande
 ms.date: 07/04/2019
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
 ms.openlocfilehash: 1043a578f66d5bb57f4a81e9fe21afa5e3c37cb8
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78665185"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
-De [Rick Anderson](https://twitter.com/RickAndMSFT)
+Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 `dotnet aspnet-codegenerator` - Exécute le moteur de génération de modèles automatique ASP.NET Core. `dotnet aspnet-codegenerator` étant uniquement requis pour générer automatiquement des modèles à partir de la ligne de commande, il n’est pas nécessaire d’utiliser la génération de modèles automatique avec Visual Studio.
 
@@ -110,18 +110,18 @@ Utilisation : `dotnet aspnet-codegenerator area AreaNameToGenerate`
 
 La commande précédente génère les dossiers suivants :
 
-* *Zones*
+* *Les zones (areas)*
   * *AreaNameToGenerate*
     * *Contrôleurs*
-    * *Données*
+    * *Data*
     * *Modèles*
-    * *Views*
+    * *Affichage*
 
 <a name="ctl"></a>
 
 ### <a name="controller-options"></a>Options de contrôleur
 
-Le tableau suivant répertorie les options de `aspnet-codegenerator` `controller` et `razorpage`:
+Le tableau suivant `aspnet-codegenerator` `controller` répertorie les options pour et `razorpage`:
 
 [!INCLUDE [aspnet-codegenerator-args-md.md](~/includes/aspnet-codegenerator-args-md.md)]
 
@@ -170,7 +170,7 @@ En règle générale, le modèle et le nom de fichier générés ne sont pas sp�
 * `Details`
 * `List`
 
-Le tableau suivant répertorie les options de `aspnet-codegenerator` `razorpage` et `controller`:
+Le tableau suivant `aspnet-codegenerator` `razorpage` répertorie les options pour et `controller`:
 
 [!INCLUDE [aspnet-codegenerator-args-md.md](~/includes/aspnet-codegenerator-args-md.md)]
 

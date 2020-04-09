@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Découvrez comment ajouter Swashbuckle à votre projet d’API web ASP.NET Core pour intégrer l’interface utilisateur Swagger.
+description: Découvrez comment ajouter Swashbuckle à votre projet d’API web ASP.NET Core pour intégrer l’IU Swagger.
 languages:
 - csharp
 products:
@@ -11,15 +11,15 @@ products:
 - vs-mac
 urlFragment: getstarted-swashbuckle-aspnetcore
 ms.openlocfilehash: e02247325f430b0ce23dbb3f5bc344a60a1a164a
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78659935"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Bien démarrer avec Swashbuckle et ASP.NET Core
 
-Les différentes méthodes qui permettent d’utiliser une API web ne sont pas toujours simples à comprendre pour les développeurs. [Swagger](https://swagger.io/), également appelé [OpenAPI](https://www.openapis.org/), résout le problème de la génération de pages d’aide et de documentation qu’utilisent les API web. Ses avantages sont, entre autres, la documentation interactive, la génération de SDK client et la découvrabilité des API.
+Les différentes méthodes qui permettent d’utiliser une API web ne sont pas toujours simples à comprendre pour les développeurs. [Swagger](https://swagger.io/), également appelé [OpenAPI](https://www.openapis.org/), résout le problème de la génération de pages d’aide et de documentation qu’utilisent les API web. Ses avantages sont, entre autres, la documentation interactive, la génération de SDK client et la découvertibilité des API.
 
 Dans cet exemple, l’implémentation .NET [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) est indiquée.
 
@@ -40,7 +40,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Dans la méthode `Startup.Configure`, activez l’intergiciel pour traiter le document JSON généré et l’interface utilisateur Swagger :
+Dans la méthode `Startup.Configure`, activez l’intergiciel pour traiter le document JSON généré et l’IU Swagger :
 
 ```csharp
 public void Configure(IApplicationBuilder app)
@@ -63,14 +63,14 @@ public void Configure(IApplicationBuilder app)
 }
 ```
 
-L’appel de méthode `UseSwaggerUI` précédent active le [middleware (intergiciel) des fichiers statiques](https://docs.microsoft.com/aspnet/core/fundamentals/static-files). Si vous ciblez le .NET Framework ou .NET Core 1.x, ajoutez le package NuGet [Microsoft.AspNetCore.StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) au projet.
+L’appel de méthode `UseSwaggerUI` précédent active le [middleware (intergiciel) des fichiers statiques](https://docs.microsoft.com/aspnet/core/fundamentals/static-files). Si vous ciblez .NET Framework ou .NET Core 1.x, ajoutez le package [Microsoft.AspNetCore.StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) NuGet au projet.
 
 Lancez l’application et accédez à `http://localhost:<port>/swagger/v1/swagger.json`. Le document généré décrivant les points de terminaison s’affiche comme illustré dans la [spécification Swagger (swagger.json)](https://docs.microsoft.com/aspnet/core/tutorials/web-api-help-pages-using-swagger#swagger-specification-swaggerjson).
 
 L’interface utilisateur Swagger se trouve à l’adresse `http://localhost:<port>/swagger`. Explorez l’API via l’interface utilisateur Swagger et incorporez-la dans d’autres programmes.
 
 > [!TIP]
-> Pour utiliser l’interface utilisateur Swagger à la racine de l’application (`http://localhost:<port>/`), définissez la propriété `RoutePrefix` sur une chaîne vide :
+> Pour utiliser l’IU Swagger à la racine de l’application (`http://localhost:<port>/`), définissez la propriété `RoutePrefix` sur une chaîne vide :
 >
 > ```csharp
 >app.UseSwaggerUI(c =>
@@ -144,7 +144,7 @@ Vous pouvez activer les commentaires XML en adoptant l’une des approches suiva
 
 #### <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-* Dans le *Panneau Solutions*, appuyez sur **contrôle** et cliquez sur le nom du projet. Accédez à **Outils** > **Modifier le fichier**.
+* Dans le *Panneau Solutions*, appuyez sur **contrôle** et cliquez sur le nom du projet. Naviguez vers **Tools** > **Edit File**.
 * Ajoutez manuellement les lignes en surbrillance au fichier *.csproj* :
 
 ```xml
@@ -179,7 +179,7 @@ Pour supprimer des avertissements à l’échelle d’un projet, définissez une
 <NoWarn>$(NoWarn);1591</NoWarn>
 ```
 
-Pour supprimer des avertissements uniquement pour des membres spécifiques, placez le code dans les directives de préprocesseur [#pragma warning](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-pragma-warning). Cette approche est utile pour le code qui ne doit pas être exposé via les docs de l’API. Dans l’exemple suivant, le code d’avertissement CS1591 est ignoré pour l’ensemble de la classe `Program`. La mise en œuvre de code d’avertissement est restaurée à la fin de la définition de classe. Spécifier plusieurs codes d’avertissement avec une liste délimitée par des virgules.
+Pour supprimer des avertissements uniquement pour des membres spécifiques, placez le code dans les directives de préprocesseur [#pragma warning](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-pragma-warning). Cette approche est utile pour le code qui ne devrait pas être exposé via les documents API. Dans l’exemple suivant, le code d’avertissement CS1591 est ignoré pour toute `Program` la classe. La mise en œuvre de code d’avertissement est restaurée à la fin de la définition de classe. Spécifier plusieurs codes d’avertissement avec une liste délimitée par des virgules.
 
 ```csharp
 namespace TodoApi
@@ -239,9 +239,9 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Dans le code précédent, la [réflexion](/dotnet/csharp/programming-guide/concepts/reflection) est utilisée pour générer un nom de fichier XML correspondant à celui du projet d’API web. La propriété [AppContext.BaseDirectory](/dotnet/api/system.appcontext.basedirectory) est utilisée pour construire le chemin du fichier XML. Certaines fonctionnalités de Swagger (par exemple, les schémas de paramètres d’entrée ou les méthodes HTTP et les codes de réponse issus des attributs respectifs) fonctionnent sans fichier de documentation XML. Pour la plupart des fonctionnalités cependant, à savoir les résumés de méthode et les descriptions des paramètres et des codes de réponse, l’utilisation d’un fichier XML est obligatoire.
+Dans le code précédent, [Reflection](/dotnet/csharp/programming-guide/concepts/reflection) est utilisé pour construire un nom de fichier XML correspondant à celui du projet API web. La propriété [AppContext.BaseDirectory](/dotnet/api/system.appcontext.basedirectory) est utilisée pour construire le chemin du fichier XML. Certaines fonctionnalités de Swagger (par exemple, les schémas de paramètres d’entrée ou les méthodes HTTP et les codes de réponse issus des attributs respectifs) fonctionnent sans fichier de documentation XML. Pour la plupart des fonctionnalités cependant, à savoir les résumés de méthode et les descriptions des paramètres et des codes de réponse, l’utilisation d’un fichier XML est obligatoire.
 
-Quand vous ajoutez des commentaires avec trois barres obliques à une action, la description est ajoutée à l’en-tête de section dans l’interface utilisateur Swagger. Ajoutez un élément [\<summary>](/dotnet/csharp/programming-guide/xmldoc/summary) au dessus de l’action `Delete` :
+Quand vous ajoutez des commentaires avec trois barres obliques à une action, la description est ajoutée à l’en-tête de section dans l’interface utilisateur Swagger. Ajoutez [ \<](/dotnet/csharp/programming-guide/xmldoc/summary) un résumé>élément `Delete` au-dessus de l’action :
 
 ```csharp
 /// <summary>
@@ -264,11 +264,11 @@ public IActionResult Delete(long id)
     return NoContent();
 }
 ```
-L’interface utilisateur Swagger affiche le texte interne de l’élément `<summary>` du code précédent :
+L’IU Swagger affiche le texte interne de l’élément `<summary>` du code précédent :
 
 ![Interface utilisateur de Swagger affichant le commentaire XML « Deletes a specific TodoItem. » pour la méthode DELETE.](sample_images/triple-slash-comments.png)
 
-L’interface utilisateur est définie par le schéma JSON généré :
+L’IU est définie par le schéma JSON généré :
 
 ```json
 "delete": {
@@ -296,7 +296,7 @@ L’interface utilisateur est définie par le schéma JSON généré :
     }
 }
 ```
-Ajoutez un élément [\<remarks>](/dotnet/csharp/programming-guide/xmldoc/remarks) à la documentation de la méthode de l’action `Create`. Il complète les informations spécifiées dans l’élément `<summary>` et fournit une interface utilisateur Swagger plus robuste. Le contenu de l’élément `<remarks>` peut être du texte, du code JSON ou du code XML.
+Ajoutez [ \<](/dotnet/csharp/programming-guide/xmldoc/remarks) une remarque>élément `Create` à la documentation de la méthode d’action. Il complète les informations spécifiées dans l’élément `<summary>` et fournit une interface utilisateur Swagger plus robuste. Le contenu de l’élément `<remarks>` peut être du texte, du code JSON ou du code XML.
 
 ```csharp
 /// <summary>
@@ -328,13 +328,13 @@ public ActionResult<TodoItem> Create(TodoItem item)
     return CreatedAtRoute("GetTodo", new { id = item.Id }, item);
 }
 ```
-Notez les améliorations de l’interface utilisateur avec ces commentaires supplémentaires :
+Notez les améliorations de l’IU avec ces commentaires supplémentaires :
 
 ![Interface utilisateur de Swagger avec des commentaires supplémentaires affichés](sample_images/xml-comments-extended.png)
 
 ### <a name="data-annotations"></a>Annotations de données
 
-Marquez le modèle avec des attributs, qui se trouvent dans l’espace de noms [System. ComponentModel. DataAnnotations](/dotnet/api/system.componentmodel.dataannotations) , pour aider à piloter les composants de l’interface utilisateur Swagger.
+Marquez le modèle avec des attributs, trouvés dans l’espace de nom [System.ComponentModel.DataAnnotations,](/dotnet/api/system.componentmodel.dataannotations) pour aider à conduire les composants de l’interface utilisateur Swagger.
 
 Ajoutez l’attribut `[Required]` à la propriété `Name` de la classe `TodoItem` :
 
@@ -421,4 +421,4 @@ L’interface utilisateur de Swagger documente maintenant clairement les codes d
 
 Dans ASP.NET Core 2.2 ou une version ultérieure, les conventions peuvent être utilisées comme alternatives à la décoration explicites des actions individuelles avec `[ProducesResponseType]`. Pour plus d'informations, consultez [Utiliser les conventions d’API web](https://docs.microsoft.com/aspnet/core/web-api/advanced/conventions).
 
-Pour plus d’informations sur la personnalisation de l’interface utilisateur, consultez [personnaliser l’interface utilisateur](/aspnet/core/tutorials/getting-started-with-swashbuckle?#customize-and-extend) .
+Pour plus d’informations sur la personnalisation de l’interface utilisateur voir: [Personnaliser l’interface utilisateur](/aspnet/core/tutorials/getting-started-with-swashbuckle?#customize-and-extend)

@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 02/07/2020
 uid: host-and-deploy/proxy-load-balancer
 ms.openlocfilehash: b5c81e0cfa29cddeb1aeed1119a711fca4d91ae4
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78659382"
 ---
 # <a name="configure-aspnet-core-to-work-with-proxy-servers-and-load-balancers"></a>Configurer ASP.NET Core pour l’utilisation de serveurs proxy et d’équilibreurs de charge
@@ -41,9 +41,9 @@ L’intergiciel des en-têtes transférés, dans le package [Microsoft.AspNetCor
 
 Le middleware met à jour les éléments suivants :
 
-* [HttpContext. Connection. RemoteIpAddress](xref:Microsoft.AspNetCore.Http.ConnectionInfo.RemoteIpAddress) &ndash; défini à l’aide de la valeur d’en-tête `X-Forwarded-For`. Des paramètres supplémentaires déterminent la façon dont le middleware définit `RemoteIpAddress`. Pour plus d’informations, consultez les [options du middleware des en-têtes transférés](#forwarded-headers-middleware-options).
-* [HttpContext. Request. scheme](xref:Microsoft.AspNetCore.Http.HttpRequest.Scheme) &ndash; défini à l’aide de la valeur d’en-tête `X-Forwarded-Proto`.
-* [HttpContext. Request. Host](xref:Microsoft.AspNetCore.Http.HttpRequest.Host) &ndash; défini à l’aide de la valeur d’en-tête `X-Forwarded-Host`.
+* [HttpContext.Connection.RemoteIpAddress](xref:Microsoft.AspNetCore.Http.ConnectionInfo.RemoteIpAddress) &ndash; Défini à l’aide de la valeur d’en-tête `X-Forwarded-For`. Des paramètres supplémentaires déterminent la façon dont le middleware définit `RemoteIpAddress`. Pour plus d’informations, consultez les [options du middleware des en-têtes transférés](#forwarded-headers-middleware-options).
+* [HttpContext.Request.Scheme](xref:Microsoft.AspNetCore.Http.HttpRequest.Scheme) &ndash; Défini à l’aide de la valeur d’en-tête `X-Forwarded-Proto`.
+* [HttpContext.Request.Host](xref:Microsoft.AspNetCore.Http.HttpRequest.Host) &ndash; Défini à l’aide de la valeur d’en-tête `X-Forwarded-Host`.
 
 Vous pouvez configurer les [paramètres par défaut](#forwarded-headers-middleware-options) du middleware des en-têtes transférés. Les paramètres par défaut sont :
 
@@ -258,38 +258,38 @@ if (string.Equals(
 
 ### <a name="azure"></a>Azure
 
-Pour configurer Azure App Service pour le transfert de certificats, consultez [configurer l’authentification mutuelle TLS pour les Azure App service](/azure/app-service/app-service-web-configure-tls-mutual-auth). Les instructions suivantes concernent la configuration de l’application ASP.NET Core.
+Pour configurer Azure App Service pour l’endage des certificats, voir [l’authentification mutuelle Configure TLS pour Azure App Service](/azure/app-service/app-service-web-configure-tls-mutual-auth). Les directives suivantes portent sur la configuration de l’application ASP.NET Core.
 
-Dans `Startup.Configure`, ajoutez le code suivant avant l’appel à `app.UseAuthentication();`:
+Dans `Startup.Configure`, ajouter le code `app.UseAuthentication();`suivant avant l’appel à :
 
 ```csharp
 app.UseCertificateForwarding();
 ```
 
 
-Configurez l’intergiciel (middleware) de transfert de certificats pour spécifier le nom d’en-tête utilisé par Azure. Dans `Startup.ConfigureServices`, ajoutez le code suivant pour configurer l’en-tête à partir duquel l’intergiciel génère un certificat :
+Configurer Certificate Forwarding Middleware pour spécifier le nom d’en-tête qu’Azure utilise. Dans `Startup.ConfigureServices`, ajouter le code suivant pour configurer l’en-tête à partir duquel le middleware construit un certificat:
 
 ```csharp
 services.AddCertificateForwarding(options =>
     options.CertificateHeader = "X-ARR-ClientCert");
 ```
 
-### <a name="other-web-proxies"></a>Autres proxys Web
+### <a name="other-web-proxies"></a>Autres procurations web
 
-Si vous utilisez un proxy qui n’est pas IIS ou le Application Request Routing d’Azure App Service (ARR), configurez le proxy pour transférer le certificat qu’il a reçu dans un en-tête HTTP. Dans `Startup.Configure`, ajoutez le code suivant avant l’appel à `app.UseAuthentication();`:
+Si un proxy est utilisé qui n’est pas IIS ou Azure App Service’s Application Request Routing (ARR), configurez le proxy pour transmettre le certificat qu’il a reçu dans un en-tête HTTP. Dans `Startup.Configure`, ajouter le code `app.UseAuthentication();`suivant avant l’appel à :
 
 ```csharp
 app.UseCertificateForwarding();
 ```
 
-Configurez l’intergiciel (middleware) de transfert de certificat pour spécifier le nom d’en-tête. Dans `Startup.ConfigureServices`, ajoutez le code suivant pour configurer l’en-tête à partir duquel l’intergiciel génère un certificat :
+Configurer le certificat En transmettant Middleware pour spécifier le nom d’en-tête. Dans `Startup.ConfigureServices`, ajouter le code suivant pour configurer l’en-tête à partir duquel le middleware construit un certificat:
 
 ```csharp
 services.AddCertificateForwarding(options =>
     options.CertificateHeader = "YOUR_CERTIFICATE_HEADER_NAME");
 ```
 
-Si le proxy n’encodage pas en base64 du certificat (comme c’est le cas avec Nginx), définissez l’option `HeaderConverter`. Prenons l’exemple suivant dans `Startup.ConfigureServices` :
+Si le proxy n’est pas base64-encodage du certificat (comme c’est le cas avec Nginx), définissez l’option. `HeaderConverter` Prenons l’exemple suivant dans `Startup.ConfigureServices` :
 
 ```csharp
 services.AddCertificateForwarding(options =>
@@ -419,9 +419,9 @@ L’intergiciel des en-têtes transférés, dans le package [Microsoft.AspNetCor
 
 Le middleware met à jour les éléments suivants :
 
-* [HttpContext. Connection. RemoteIpAddress](xref:Microsoft.AspNetCore.Http.ConnectionInfo.RemoteIpAddress) &ndash; défini à l’aide de la valeur d’en-tête `X-Forwarded-For`. Des paramètres supplémentaires déterminent la façon dont le middleware définit `RemoteIpAddress`. Pour plus d’informations, consultez les [options du middleware des en-têtes transférés](#forwarded-headers-middleware-options).
-* [HttpContext. Request. scheme](xref:Microsoft.AspNetCore.Http.HttpRequest.Scheme) &ndash; défini à l’aide de la valeur d’en-tête `X-Forwarded-Proto`.
-* [HttpContext. Request. Host](xref:Microsoft.AspNetCore.Http.HttpRequest.Host) &ndash; défini à l’aide de la valeur d’en-tête `X-Forwarded-Host`.
+* [HttpContext.Connection.RemoteIpAddress](xref:Microsoft.AspNetCore.Http.ConnectionInfo.RemoteIpAddress) &ndash; Défini à l’aide de la valeur d’en-tête `X-Forwarded-For`. Des paramètres supplémentaires déterminent la façon dont le middleware définit `RemoteIpAddress`. Pour plus d’informations, consultez les [options du middleware des en-têtes transférés](#forwarded-headers-middleware-options).
+* [HttpContext.Request.Scheme](xref:Microsoft.AspNetCore.Http.HttpRequest.Scheme) &ndash; Défini à l’aide de la valeur d’en-tête `X-Forwarded-Proto`.
+* [HttpContext.Request.Host](xref:Microsoft.AspNetCore.Http.HttpRequest.Host) &ndash; Défini à l’aide de la valeur d’en-tête `X-Forwarded-Host`.
 
 Vous pouvez configurer les [paramètres par défaut](#forwarded-headers-middleware-options) du middleware des en-têtes transférés. Les paramètres par défaut sont :
 

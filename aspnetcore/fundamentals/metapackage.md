@@ -8,17 +8,17 @@ ms.custom: mvc
 ms.date: 10/25/2018
 uid: fundamentals/metapackage
 ms.openlocfilehash: cc00c075909da5c17a4aa2fd252c9e662e5a0fc9
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/18/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "79511065"
 ---
 # <a name="microsoftaspnetcoreall-metapackage-for-aspnet-core-20"></a>Métapackage Microsoft.AspNetCore.All pour ASP.NET Core 2.0
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Le `Microsoft.AspNetCore.All` repackage n’est pas inclus dans ASP.NET Core 3,0 et versions ultérieures. Pour plus d’informations, consultez [ce problème GitHub](https://github.com/aspnet/Announcements/issues/314).
+Le `Microsoft.AspNetCore.All` métapackage n’est pas inclus dans ASP.NET Core 3.0 et plus tard. Pour plus d’informations, consultez [ce problème GitHub](https://github.com/aspnet/Announcements/issues/314).
 
 ::: moniker-end
 
@@ -55,7 +55,7 @@ La spécification d’un numéro de version sur la référence de package `Micro
 
 Le SDK du projet doit être défini sur `Microsoft.NET.Sdk.Web` dans le fichier projet pour utiliser la version implicite de `Microsoft.AspNetCore.All`. Lorsque le SDK `Microsoft.NET.Sdk` est spécifié (`<Project Sdk="Microsoft.NET.Sdk">` en haut du fichier projet), l’avertissement suivant est généré :
 
-*AVERTISSEMENT NU1604 : dépendance de projet Microsoft. AspNetCore. All ne contient pas de limite inférieure inclusive. Incluez une limite inférieure dans la version de dépendance pour garantir la cohérence des résultats de la restauration.*
+*Avertissement NU1604: La dépendance du projet Microsoft.AspNetCore.All ne contient pas une limite inférieure inclusive. Inclure une limite inférieure dans la version dépendance pour assurer des résultats de restauration cohérents.*
 
 C’est un problème connu avec le kit SDK .NET Core 2.1 ; il sera corrigé dans le kit SDK .NET Core 2.2.
 

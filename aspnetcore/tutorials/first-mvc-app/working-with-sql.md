@@ -6,17 +6,17 @@ ms.author: riande
 ms.date: 8/16/2019
 uid: tutorials/first-mvc-app/working-with-sql
 ms.openlocfilehash: d556f07111fb2022a1c2f1a066459566e302835d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78665038"
 ---
 # <a name="work-with-sql-in-aspnet-core"></a>Utiliser SQL dans ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
-De [Rick Anderson](https://twitter.com/RickAndMSFT)
+Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 L’objet `MvcMovieContext` gère la tâche de connexion à la base de données et de mappage d’objets `Movie` à des enregistrements de la base de données. Le contexte de base de données est inscrit auprès du conteneur [Injection de dépendances](xref:fundamentals/dependency-injection) dans la méthode `ConfigureServices` du fichier *Startup.cs* :
 
@@ -44,13 +44,13 @@ Quand l’application est déployée sur un serveur de test ou de production, un
 
 ## <a name="sql-server-express-localdb"></a>Base de données locale SQL Server Express
 
-LocalDB est une version allégée du moteur de base de données SQL Server Express qui est ciblée pour le développement de programmes. LocalDB démarre à la demande et s’exécute en mode utilisateur, ce qui n’implique aucune configuration complexe. Par défaut, la base de données LocalDB crée des fichiers *.mdf* dans le répertoire *C:/Users/{utilisateur}* .
+LocalDB est une version allégée du moteur de base de données SQL Server Express qui est ciblée pour le développement de programmes. LocalDB démarre à la demande et s’exécute en mode utilisateur, ce qui n’implique aucune configuration complexe. Par défaut, la base de données LocalDB crée des fichiers *.mdf* dans le répertoire *C:/Users/{utilisateur}*.
 
 * Dans le menu **Affichage**, ouvrez **l’Explorateur d’objets SQL Server** (SSOX).
 
   ![Menu Affichage](working-with-sql/_static/ssox.png)
 
-* Cliquez avec le bouton droit sur la table `Movie` **> Concepteur de vue**.
+* Cliquez avec le bouton droit sur la table `Movie`**> Concepteur de vue**.
 
   ![Menu contextuel ouvert sur la table Movie](working-with-sql/_static/design.png)
 
@@ -58,7 +58,7 @@ LocalDB est une version allégée du moteur de base de données SQL Server Expre
 
 Notez l’icône de clé en regard de `ID`. Par défaut, EF fait d’une propriété nommée `ID` la clé primaire.
 
-* Cliquez avec le bouton droit sur la table `Movie` **> Afficher les données**.
+* Cliquez avec le bouton droit sur la table `Movie`**> Afficher les données**
 
   ![Menu contextuel ouvert sur la table Movie](working-with-sql/_static/ssox2.png)
 
@@ -91,7 +91,7 @@ if (context.Movie.Any())
 
 ### <a name="add-the-seed-initializer"></a>Ajouter l’initialiseur de valeur initiale
 
-Remplacez le contenu de *Program.cs* par le code suivant :
+Remplacer le contenu de *Program.cs* par le code suivant :
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Program.cs)]
 
@@ -117,18 +117,18 @@ Supprimez tous les enregistrements dans la base de données (pour que la méthod
 
 ---
 
-L’application affiche les données de valeurs de départ.
+L’application affiche les données de départ.
 
 ![Application MVC Movie ouverte dans Microsoft Edge, affichant les données relatives aux films](working-with-sql/_static/m55.png)
 
 > [!div class="step-by-step"]
-> [Précédent](adding-model.md)
-> [Suivant](controller-methods-views.md)
+> [Suivant précédent](adding-model.md)
+> [Next](controller-methods-views.md)
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-De [Rick Anderson](https://twitter.com/RickAndMSFT)
+Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 L’objet `MvcMovieContext` gère la tâche de connexion à la base de données et de mappage d’objets `Movie` à des enregistrements de la base de données. Le contexte de base de données est inscrit auprès du conteneur [Injection de dépendances](xref:fundamentals/dependency-injection) dans la méthode `ConfigureServices` du fichier *Startup.cs* :
 
@@ -156,13 +156,13 @@ Quand vous déployez l’application sur un serveur de test ou de production, vo
 
 ## <a name="sql-server-express-localdb"></a>Base de données locale SQL Server Express
 
-LocalDB est une version allégée du moteur de base de données SQL Server Express qui est ciblée pour le développement de programmes. LocalDB démarre à la demande et s’exécute en mode utilisateur, ce qui n’implique aucune configuration complexe. Par défaut, la base de données LocalDB crée des fichiers *.mdf* dans le répertoire *C:/Users/{utilisateur}* .
+LocalDB est une version allégée du moteur de base de données SQL Server Express qui est ciblée pour le développement de programmes. LocalDB démarre à la demande et s’exécute en mode utilisateur, ce qui n’implique aucune configuration complexe. Par défaut, la base de données LocalDB crée des fichiers *.mdf* dans le répertoire *C:/Users/{utilisateur}*.
 
 * Dans le menu **Affichage**, ouvrez **l’Explorateur d’objets SQL Server** (SSOX).
 
   ![Menu Affichage](working-with-sql/_static/ssox.png)
 
-* Cliquez avec le bouton droit sur la table `Movie` **> Concepteur de vue**.
+* Cliquez avec le bouton droit sur la table `Movie`**> Concepteur de vue**.
 
   ![Menu contextuel ouvert sur la table Movie](working-with-sql/_static/design.png)
 
@@ -170,7 +170,7 @@ LocalDB est une version allégée du moteur de base de données SQL Server Expre
 
 Notez l’icône de clé en regard de `ID`. Par défaut, EF fait d’une propriété nommée `ID` la clé primaire.
 
-* Cliquez avec le bouton droit sur la table `Movie` **> Afficher les données**.
+* Cliquez avec le bouton droit sur la table `Movie`**> Afficher les données**
 
   ![Menu contextuel ouvert sur la table Movie](working-with-sql/_static/ssox2.png)
 
@@ -203,7 +203,7 @@ if (context.Movie.Any())
 
 ### <a name="add-the-seed-initializer"></a>Ajouter l’initialiseur de valeur initiale
 
-Remplacez le contenu de *Program.cs* par le code suivant :
+Remplacer le contenu de *Program.cs* par le code suivant :
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Program.cs)]
 
@@ -229,12 +229,12 @@ Supprimez tous les enregistrements dans la base de données (pour que la méthod
 
 ---
 
-L’application affiche les données de valeurs de départ.
+L’application affiche les données de départ.
 
 ![Application MVC Movie ouverte dans Microsoft Edge, affichant les données relatives aux films](working-with-sql/_static/m55_mac.png)
 
 > [!div class="step-by-step"]
-> [Précédent](adding-model.md)
-> [Suivant](controller-methods-views.md)
+> [Suivant précédent](adding-model.md)
+> [Next](controller-methods-views.md)
 
 ::: moniker-end

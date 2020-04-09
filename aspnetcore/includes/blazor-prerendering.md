@@ -3,15 +3,15 @@ no-loc:
 - Blazor
 - SignalR
 ms.openlocfilehash: 5f3e22e04fe18149ec5a8acb42f42a8ef83a7664
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78659718"
 ---
-Bien qu’une application Blazor Server soit prérestitué, certaines actions, telles que l’appel en JavaScript, ne sont pas possibles, car une connexion avec le navigateur n’a pas été établie. Les composants peuvent avoir besoin d’être restitués différemment lorsqu’ils sont prérendus.
+Alors Blazor qu’une application Server est pré-implantation, certaines actions, telles que l’appel dans JavaScript, ne sont pas possibles parce qu’une connexion avec le navigateur n’a pas été établie. Les composants peuvent devoir rendre différemment lorsqu’ils sont préditeurs.
 
-Pour différer les appels Interop JavaScript jusqu’à ce que la connexion avec le navigateur soit établie, vous pouvez utiliser l' [événement du cycle de vie du composant OnAfterRenderAsync](xref:blazor/lifecycle#after-component-render). Cet événement est appelé uniquement une fois que l’application est entièrement rendue et que la connexion cliente est établie.
+Pour retarder les appels interop JavaScript jusqu’à ce que la connexion avec le navigateur soit établie, vous pouvez utiliser [l’événement sur le cycle de vie des composants OnAfterRenderAsync](xref:blazor/lifecycle#after-component-render). Cet événement n’est appelé qu’après que l’application est entièrement rendue et que la connexion client est établie.
 
 ```cshtml
 @using Microsoft.JSInterop
@@ -33,7 +33,7 @@ Pour différer les appels Interop JavaScript jusqu’à ce que la connexion avec
 }
 ```
 
-Pour l’exemple de code précédent, fournissez une fonction JavaScript `setElementText` à l’intérieur de l’élément `<head>` de *wwwroot/index.html* (Blazor webassembly) ou *pages/_Host. cshtml* (serveurBlazor). La fonction est appelée avec `IJSRuntime.InvokeVoidAsync` et ne retourne pas de valeur :
+Pour l’exemple précédent, `setElementText` fournissez une `<head>` fonction JavaScript àBlazor l’intérieur de l’élément de *wwwroot/index.html* (WebAssembly) ou *Pages/_Host.cshtml* (Blazor Serveur). La fonction est `IJSRuntime.InvokeVoidAsync` appelée avec et ne retourne pas une valeur:
 
 ```html
 <script>
@@ -42,13 +42,13 @@ Pour l’exemple de code précédent, fournissez une fonction JavaScript `setEle
 ```
 
 > [!WARNING]
-> L’exemple précédent modifie directement le Document Object Model (DOM) à des fins de démonstration uniquement. La modification directe du DOM avec JavaScript n’est pas recommandée dans la plupart des scénarios, car JavaScript peut interférer avec le suivi des modifications de Blazor.
+> L’exemple précédent modifie directement le modèle d’objet de document (DOM) à des fins de démonstration seulement. Modifier directement le DOM avec JavaScript n’est pas recommandé dans Blazorla plupart des scénarios parce que JavaScript peut interférer avec le suivi des modifications.
 
-Le composant suivant montre comment utiliser l’interopérabilité JavaScript dans le cadre de la logique d’initialisation d’un composant d’une manière compatible avec le prérendu. Le composant montre qu’il est possible de déclencher une mise à jour de rendu depuis l’intérieur de `OnAfterRenderAsync`. Le développeur doit éviter de créer une boucle infinie dans ce scénario.
+Le composant suivant montre comment utiliser l’interop JavaScript dans le cadre de la logique d’initialisation d’un composant d’une manière compatible avec le prérendering. Le composant montre qu’il est possible de `OnAfterRenderAsync`déclencher une mise à jour de rendu de l’intérieur . Le développeur doit éviter de créer une boucle infinie dans ce scénario.
 
-Lorsque `JSRuntime.InvokeAsync` est appelée, `ElementRef` est utilisé uniquement dans `OnAfterRenderAsync` et non dans une méthode de cycle de vie antérieure, car il n’y a pas d’élément JavaScript tant que le composant n’est pas rendu.
+Où `JSRuntime.InvokeAsync` est `ElementRef` appelé, `OnAfterRenderAsync` est seulement utilisé dans et non pas dans une méthode de cycle de vie plus tôt parce qu’il n’y a pas d’élément JavaScript jusqu’à ce que le composant est rendu.
 
-[StateHasChanged](xref:blazor/lifecycle#state-changes) est appelé pour rerestituer le composant avec le nouvel état obtenu à partir de l’appel JavaScript Interop. Le code ne crée pas de boucle infinie car `StateHasChanged` est appelé uniquement lorsque `infoFromJs` est `null`.
+[StateHasChanged](xref:blazor/lifecycle#state-changes) est appelé à rerender le composant avec le nouvel état obtenu de l’appel InterOp JavaScript. Le code ne crée pas `StateHasChanged` une boucle `infoFromJs` infinie parce qu’il n’est appelé que lorsqu’il est `null`.
 
 ```cshtml
 @page "/prerendered-interop"
@@ -81,7 +81,7 @@ Set value via JS interop call:
 }
 ```
 
-Pour l’exemple de code précédent, fournissez une fonction JavaScript `setElementText` à l’intérieur de l’élément `<head>` de *wwwroot/index.html* (Blazor webassembly) ou *pages/_Host. cshtml* (serveurBlazor). La fonction est appelée avec `IJSRuntime.InvokeAsync` et retourne une valeur :
+Pour l’exemple précédent, `setElementText` fournissez une `<head>` fonction JavaScript àBlazor l’intérieur de l’élément de *wwwroot/index.html* (WebAssembly) ou *Pages/_Host.cshtml* (Blazor Serveur). La fonction est `IJSRuntime.InvokeAsync` appelée avec et retourne une valeur:
 
 ```html
 <script>
@@ -93,4 +93,4 @@ Pour l’exemple de code précédent, fournissez une fonction JavaScript `setEle
 ```
 
 > [!WARNING]
-> L’exemple précédent modifie directement le Document Object Model (DOM) à des fins de démonstration uniquement. La modification directe du DOM avec JavaScript n’est pas recommandée dans la plupart des scénarios, car JavaScript peut interférer avec le suivi des modifications de Blazor.
+> L’exemple précédent modifie directement le modèle d’objet de document (DOM) à des fins de démonstration seulement. Modifier directement le DOM avec JavaScript n’est pas recommandé dans Blazorla plupart des scénarios parce que JavaScript peut interférer avec le suivi des modifications.

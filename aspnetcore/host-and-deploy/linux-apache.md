@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 02/05/2020
 uid: host-and-deploy/linux-apache
 ms.openlocfilehash: 3a3edd961b08c1952e6ded8038ed7ada381c54b0
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78657898"
 ---
 # <a name="host-aspnet-core-on-linux-with-apache"></a>Héberger ASP.NET Core sur Linux avec Apache
@@ -20,17 +20,17 @@ Par [Shayne Boyer](https://github.com/spboyer)
 
 À l’aide de ce guide, découvrez comment configurer [Apache](https://httpd.apache.org/) comme serveur proxy inverse sur [CentOS 7](https://www.centos.org/) pour rediriger le trafic HTTP vers une application web ASP.NET Core s’exécutant sur un serveur [Kestrel](xref:fundamentals/servers/kestrel). [L’extension mod_proxy](https://httpd.apache.org/docs/2.4/mod/mod_proxy.html) et les modules associés créent le proxy inverse du serveur.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * Serveur exécutant CentOS 7 avec un compte d’utilisateur standard disposant du privilège sudo.
 * Installez le runtime .NET Core sur le serveur.
-   1. Visitez la [page Télécharger .net Core](https://dotnet.microsoft.com/download/dotnet-core).
-   1. Sélectionnez la dernière version non préliminaire de .NET Core.
-   1. Téléchargez le dernier Runtime non Preview dans le tableau sous **exécuter des applications-Runtime**.
-   1. Sélectionnez le lien **des instructions du gestionnaire de package** Linux et suivez les instructions CentOS.
+   1. Visitez la [page Télécharger .NET Core](https://dotnet.microsoft.com/download/dotnet-core).
+   1. Sélectionnez la dernière version .NET Core non-preview.
+   1. Téléchargez le dernier temps d’exécution non-aperçu dans le tableau sous **les applications Run - Runtime**.
+   1. Sélectionnez le lien **d’instructions du gestionnaire de forfait** Linux et suivez les instructions CentOS.
 * Une application ASP.NET Core existante.
 
-À tout moment après la mise à niveau de l’infrastructure partagée, redémarrez le ASP.NET Core les applications hébergées par le serveur.
+À tout moment dans l’avenir après la mise à niveau du cadre partagé, redémarrez les applications ASP.NET Core hébergées par le serveur.
 
 ## <a name="publish-and-copy-over-the-app"></a>Publier et copier sur l’application
 
@@ -60,7 +60,7 @@ Un proxy inverse est une configuration courante pour traiter les applications we
 
 Un serveur proxy est un serveur qui transfère les requêtes des clients à un autre serveur, au lieu de traiter celles-ci lui-même. Un proxy inverse transfère à une destination fixe, en général pour le compte de clients arbitraires. Dans ce guide, Apache est configuré comme proxy inverse s’exécutant sur le même serveur où Kestrel traite l’application ASP.NET Core.
 
-Les requêtes étant transférées par le proxy inverse, utilisez le [middleware (intergiciel) des en-têtes transférés](xref:host-and-deploy/proxy-load-balancer) à partir du package [Microsoft.AspNetCore.HttpOverrides](https://www.nuget.org/packages/Microsoft.AspNetCore.HttpOverrides/). Le middleware met à jour le `Request.Scheme`, à l’aide de l’en-tête `X-Forwarded-Proto`, afin que les URI de redirection et d’autres stratégies de sécurité fonctionnent correctement.
+Parce que les demandes sont transmises par proxy inverse, utilisez le [Middleware Forwarded Headers](xref:host-and-deploy/proxy-load-balancer) du package [Microsoft.AspNetCore.HttpOverrides.](https://www.nuget.org/packages/Microsoft.AspNetCore.HttpOverrides/) Le middleware met à jour le `Request.Scheme`, à l’aide de l’en-tête `X-Forwarded-Proto`, afin que les URI de redirection et d’autres stratégies de sécurité fonctionnent correctement.
 
 Tout composant qui dépend du schéma, tel que l’authentification, la génération de lien, les redirections et la géolocalisation, doit être placé après l’appel du middleware des en-têtes transférés. En règle générale, le middleware des en-têtes transférés doit être exécuté avant les autres middlewares, à l’exception des middlewares de gestion des erreurs et de diagnostic. Cet ordre permet au middleware qui repose sur les informations des en-têtes transférés d’utiliser les valeurs d’en-tête pour le traitement.
 
@@ -202,9 +202,9 @@ Environment=ASPNETCORE_ENVIRONMENT=Production
 WantedBy=multi-user.target
 ```
 
-Dans l’exemple précédent, l’utilisateur qui gère le service est spécifié par l’option `User`. L’utilisateur (`apache`) doit exister et avoir la propriété correcte des fichiers de l’application.
+Dans l’exemple précédent, l’utilisateur qui `User` gère le service est spécifié par l’option. L’utilisateur`apache`( ) doit exister et avoir la propriété appropriée des fichiers de l’application.
 
-Utilisez `TimeoutStopSec` pour configurer la durée d’attente de l’arrêt de l’application après la réception du signal d’interruption initial. Si l’application ne s’arrête pas pendant cette période, le signal SIGKILL est émis pour mettre fin à l’application. Indiquez la valeur en secondes sans unité (par exemple, `150`), une valeur d’intervalle de temps (par exemple, `2min 30s`) ou `infinity` pour désactiver le délai d’attente. `TimeoutStopSec` prend la valeur par défaut de `DefaultTimeoutStopSec` dans le fichier de configuration du gestionnaire (*systemd-system.conf*, *system.conf.d*, *systemd-user.conf*,  *user.conf.d*). Le délai d’expiration par défaut pour la plupart des distributions est de 90 secondes.
+Utilisez `TimeoutStopSec` pour configurer la durée d’attente de l’arrêt de l’application après la réception du signal d’interruption initial. Si l’application ne s’arrête pas pendant cette période, le signal SIGKILL est émis pour mettre fin à l’application. Indiquez la valeur en secondes sans unité (par exemple, `150`), une valeur d’intervalle de temps (par exemple, `2min 30s`) ou `infinity` pour désactiver le délai d’attente. `TimeoutStopSec` prend la valeur par défaut de `DefaultTimeoutStopSec` dans le fichier de configuration du gestionnaire (*systemd-system.conf*, *system.conf.d*, *systemd-user.conf*, * user.conf.d*). Le délai d’expiration par défaut pour la plupart des distributions est de 90 secondes.
 
 ```
 # The default value is 90 seconds for most distributions.
@@ -323,7 +323,7 @@ rich rules:
 
 **Configurer l’application pour les connexions locales sécurisées (HTTPS)**
 
-La commande [dotnet run](/dotnet/core/tools/dotnet-run) utilise le fichier *Properties/launchSettings.json* de l’application, qui configure l’application pour l’écoute sur les URL fournies par la propriété `applicationUrl` (par exemple `https://localhost:5001; http://localhost:5000`).
+La commande [dotnet run](/dotnet/core/tools/dotnet-run) utilise le fichier *Properties/launchSettings.json* de l’application, qui configure l’application pour l’écoute sur les URL fournies par la propriété `applicationUrl` (par exemple `https://localhost:5001;http://localhost:5000`).
 
 Configurez l’application pour utiliser un certificat en développement pour la commande `dotnet run` ou l’environnement de développement (F5 ou Ctrl+F5 dans Visual Studio Code) en adoptant l’une de ces approches :
 
@@ -388,9 +388,9 @@ sudo systemctl restart httpd
 
 ## <a name="additional-apache-suggestions"></a>Autres suggestions pour Apache
 
-### <a name="restart-apps-with-shared-framework-updates"></a>Redémarrer des applications avec des mises à jour de Framework partagé
+### <a name="restart-apps-with-shared-framework-updates"></a>Redémarrer les applications avec des mises à jour de cadre partagées
 
-Après la mise à niveau de l’infrastructure partagée sur le serveur, redémarrez le ASP.NET Core les applications hébergées par le serveur.
+Après la mise à niveau du cadre partagé sur le serveur, redémarrez les applications ASP.NET Core hébergées par le serveur.
 
 ### <a name="additional-headers"></a>En-têtes supplémentaires
 
@@ -495,7 +495,7 @@ L’exemple de fichier limite la bande passante à 600 Ko/s sous l’emplacement
 
 ### <a name="long-request-header-fields"></a>Longs champs d'en-tête de demande
 
-Les paramètres par défaut du serveur proxy limitent généralement les champs d’en-tête de demande à 8 190 octets. Une application peut nécessiter des champs plus longs que la valeur par défaut (par exemple, les applications qui utilisent [Azure Active Directory](https://azure.microsoft.com/services/active-directory/)). Si des champs plus longs sont requis, la directive [LimitRequestFieldSize](https://httpd.apache.org/docs/2.4/mod/core.html#LimitRequestFieldSize) du serveur proxy doit être ajustée. La valeur à appliquer dépend du scénario. Pour plus d'informations, voir la documentation du serveur.
+Les paramètres par défaut du serveur proxy limitent généralement les champs d’en-tête des demandes à 8 190 octets. Une application peut nécessiter des champs plus longs que la valeur par défaut (par exemple, les applications qui utilisent [Azure Active Directory](https://azure.microsoft.com/services/active-directory/)). Si des champs plus longs sont nécessaires, la directive [LimitRequestFieldSize](https://httpd.apache.org/docs/2.4/mod/core.html#LimitRequestFieldSize) du serveur proxy nécessite un ajustement. La valeur à appliquer dépend du scénario. Pour plus d'informations, voir la documentation du serveur.
 
 > [!WARNING]
 > N’augmentez pas la valeur par défaut de `LimitRequestFieldSize` à moins que ce ne soit nécessaire. Son augmentation augmente le risque de dépassement de mémoire tampon (dépassement de capacité) et d’attaques par déni de service (DoS) par des utilisateurs malveillants.

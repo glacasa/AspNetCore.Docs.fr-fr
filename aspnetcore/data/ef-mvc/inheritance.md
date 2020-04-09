@@ -1,5 +1,5 @@
 ---
-title: 'Didacticiel : implémenter l’héritage-ASP.NET MVC avec EF Core'
+title: 'Tutorial: Implémenter l’héritage - ASP.NET MVC avec EF Core'
 description: Ce didacticiel vous indiquera comment implémenter l’héritage dans le modèle de données en utilisant Entity Framework Core dans une application ASP.NET Core.
 author: rick-anderson
 ms.author: riande
@@ -8,13 +8,13 @@ ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/inheritance
 ms.openlocfilehash: dab3d2b057162f6d986db10e74e3681acc0ada3b
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78657240"
 ---
-# <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>Didacticiel : implémenter l’héritage-ASP.NET MVC avec EF Core
+# <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>Tutorial: Implémenter l’héritage - ASP.NET MVC avec EF Core
 
 Dans le didacticiel précédent, vous avez géré les exceptions d’accès concurrentiel. Ce didacticiel vous indiquera comment implémenter l’héritage dans le modèle de données.
 
@@ -30,7 +30,7 @@ Dans ce tutoriel, vous allez :
 > * Créer et mettre à jour des migrations
 > * Tester l’implémentation
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * [Gérer l’accès concurrentiel](concurrency.md)
 
@@ -166,9 +166,9 @@ Dans ce tutoriel, vous allez :
 > * Mettez à jour Student et Instructor
 > * Classe Person ajoutée au modèle
 > * Migrations créées et mises à jour
-> * Testez l’implémentation
+> * Implémentation testée
 
 Passez au tutoriel suivant pour découvrir comment gérer divers scénarios Entity Framework relativement avancés.
 
 > [!div class="nextstepaction"]
-> [Rubrique suivante : Rubriques avancées](advanced.md)
+> [Suivant: Sujets avancés](advanced.md)

@@ -6,15 +6,15 @@ ms.author: riande
 ms.date: 12/20/2018
 uid: tutorials/razor-pages/da1
 ms.openlocfilehash: 0f6535462fe2d308825bf7289c10d2b0690cebd4
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78666214"
 ---
 # <a name="update-the-generated-pages-in-an-aspnet-core-app"></a>Mettre à jour les pages générées dans une application ASP.NET Core
 
-De [Rick Anderson](https://twitter.com/RickAndMSFT)
+Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -54,9 +54,9 @@ Utilisez **Afficher la Source** dans votre navigateur favori pour examiner le ba
 
 Les liens générés dynamiquement passent l’ID de film avec une chaîne de requête (par exemple `?id=1` dans `https://localhost:5001/Movies/Details?id=1`).
 
-### <a name="add-route-template"></a>Ajouter un modèle de route
+### <a name="add-route-template"></a>Ajouter le modèle d’itinéraire
 
-Mettez à jour les pages Razor Edit, Details et Delete pour utiliser le modèle d’itinéraire « {id:int} ». Remplacez la directive de chacune de ces pages (`@page`) par `@page "{id:int}"`. Exécuter l’application, puis affichez le code source. Le code HTML généré ajoute l’ID à la partie de chemin de l’URL :
+Mettez à jour les pages Razor Edit, Details et Delete pour utiliser le modèle d’itinéraire « {id:int} ». Remplacez la directive de chacune de ces pages (`@page "{id:int}"`) par `@page`. Exécuter l’application, puis affichez le code source. Le code HTML généré ajoute l’ID à la partie de chemin de l’URL :
 
 ```html
 <td>
@@ -66,7 +66,7 @@ Mettez à jour les pages Razor Edit, Details et Delete pour utiliser le modèle 
 </td>
 ```
 
-Une requête à la page avec le modèle d’itinéraire « {id:int} » qui n’inclut **pas** l’entier retourne une erreur HTTP 404 (introuvable). Par exemple, `http://localhost:5000/Movies/Details` retourne une erreur 404. Pour que l’ID soit facultatif, ajoutez `?` à la contrainte de route :
+Une requête à la page avec le modèle d’itinéraire « {id:int} » qui n’inclut **pas** l’entier retourne une erreur HTTP 404 (introuvable). Par exemple, `http://localhost:5000/Movies/Details` retourne une erreur 404. Pour que l’ID soit facultatif, ajoutez `?` à la contrainte d’itinéraire :
 
  ```cshtml
 @page "{id:int?}"
@@ -99,7 +99,7 @@ Dans le code destiné à la production, il est nécessaire de détecter les conf
 
 ### <a name="posting-and-binding-review"></a>Validation de la publication et de la liaison
 
-Examinez le fichier *Pages/Movies/Edit.cshtml.cs* :
+Examinez le fichier *Pages/Movies/Edit.cshtml.cs* : 
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/SnapShots/Edit.cshtml.cs?name=snippet2)]
 
@@ -126,8 +126,8 @@ Les méthodes HTTP GET dans les pages Razor Index, Create et Delete suivent un m
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 > [!div class="step-by-step"]
-> [Précédent : Utilisation d’une base de données](xref:tutorials/razor-pages/sql)
-> [Suivant : Ajouter une fonction de recherche](xref:tutorials/razor-pages/search)
+> [Précédent: Travailler avec une base de données](xref:tutorials/razor-pages/sql)
+> [Suivant: Ajouter la recherche](xref:tutorials/razor-pages/search)
 
 ::: moniker-end
 
@@ -169,7 +169,7 @@ Utilisez **Afficher la Source** dans votre navigateur favori pour examiner le ba
 
 Les liens générés dynamiquement passent l’ID de film avec une chaîne de requête (par exemple `?id=1` dans `https://localhost:5001/Movies/Details?id=1`).
 
-Mettez à jour les pages Razor Edit, Details et Delete pour utiliser le modèle d’itinéraire « {id:int} ». Remplacez la directive de chacune de ces pages (`@page`) par `@page "{id:int}"`. Exécuter l’application, puis affichez le code source. Le code HTML généré ajoute l’ID à la partie de chemin de l’URL :
+Mettez à jour les pages Razor Edit, Details et Delete pour utiliser le modèle d’itinéraire « {id:int} ». Remplacez la directive de chacune de ces pages (`@page "{id:int}"`) par `@page`. Exécuter l’application, puis affichez le code source. Le code HTML généré ajoute l’ID à la partie de chemin de l’URL :
 
 ```html
 <td>
@@ -179,7 +179,7 @@ Mettez à jour les pages Razor Edit, Details et Delete pour utiliser le modèle 
 </td>
 ```
 
-Une requête à la page avec le modèle d’itinéraire « {id:int} » qui n’inclut **pas** l’entier retourne une erreur HTTP 404 (introuvable). Par exemple, `http://localhost:5000/Movies/Details` retourne une erreur 404. Pour que l’ID soit facultatif, ajoutez `?` à la contrainte de route :
+Une requête à la page avec le modèle d’itinéraire « {id:int} » qui n’inclut **pas** l’entier retourne une erreur HTTP 404 (introuvable). Par exemple, `http://localhost:5000/Movies/Details` retourne une erreur 404. Pour que l’ID soit facultatif, ajoutez `?` à la contrainte d’itinéraire :
 
  ```cshtml
 @page "{id:int?}"
@@ -212,7 +212,7 @@ Dans le code destiné à la production, il est nécessaire de détecter les conf
 
 ### <a name="posting-and-binding-review"></a>Validation de la publication et de la liaison
 
-Examinez le fichier *Pages/Movies/Edit.cshtml.cs* :
+Examinez le fichier *Pages/Movies/Edit.cshtml.cs* : 
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Edit21.cshtml.cs?name=snippet2)]
 
@@ -243,7 +243,7 @@ La fonction de recherche est ajoutée dans le prochain didacticiel.
 * [Version YouTube de ce tutoriel](https://youtu.be/yLnnleREMtQ)
 
 > [!div class="step-by-step"]
-> [Précédent : Utilisation d’une base de données](xref:tutorials/razor-pages/sql)
-> [Suivant : Ajouter une fonction de recherche](xref:tutorials/razor-pages/search)
+> [Précédent: Travailler avec une base de données](xref:tutorials/razor-pages/sql)
+> [Suivant: Ajouter la recherche](xref:tutorials/razor-pages/search)
 
 ::: moniker-end

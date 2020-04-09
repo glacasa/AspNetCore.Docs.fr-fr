@@ -4,7 +4,7 @@ Cet exemple illustre l’utilisation de l’intergiciel (middleware) de réécri
 
 Quand vous exécutez l’exemple, des réponses autres que des réponses de fichier retournent l’URL réécrite ou redirigée quand une des règles est appliquée à une URL de requête. Pour les exemples de fichier XML et texte, le middleware de fichiers statiques délivre le fichier une fois qu’il a réécrit l’URL de requête.
 
-## <a name="examples-in-this-sample"></a>Extraits de cet exemple
+## <a name="examples-in-this-sample"></a>Exemples dans cet exemple
 
 * `AddRedirect("redirect-rule/(.*)", "redirected/$1")`
   - Code d’état de réussite : 302 (Trouvé)

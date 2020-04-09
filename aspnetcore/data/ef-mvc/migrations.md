@@ -1,5 +1,5 @@
 ---
-title: 'Didacticiel : utilisation de la fonctionnalité migrations-ASP.NET MVC avec EF Core'
+title: 'Tutorial: Utilisation de la fonction migrations - ASP.NET MVC avec EF Core'
 description: Dans ce didacticiel, vous utilisez la fonctionnalité Migrations d’EF Core pour gérer les modifications du modèle de données dans une application ASP.NET Core MVC.
 author: rick-anderson
 ms.author: riande
@@ -8,13 +8,13 @@ ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/migrations
 ms.openlocfilehash: 8b3417205457a5ce5fa16994701a06e2a4d7d350
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78665724"
 ---
-# <a name="tutorial-using-the-migrations-feature---aspnet-mvc-with-ef-core"></a>Didacticiel : utilisation de la fonctionnalité migrations-ASP.NET MVC avec EF Core
+# <a name="tutorial-using-the-migrations-feature---aspnet-mvc-with-ef-core"></a>Tutorial: Utilisation de la fonction migrations - ASP.NET MVC avec EF Core
 
 Dans ce didacticiel, vous utilisez la fonctionnalité Migrations d’EF Core pour gérer les modifications du modèle de données. Dans les didacticiels suivants, vous allez ajouter d’autres migrations au fil de la modification du modèle de données.
 
@@ -28,7 +28,7 @@ Dans ce tutoriel, vous allez :
 > * En savoir plus sur la capture instantanée du modèle de données
 > * Appliquer la migration
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * [Tri, filtrage et pagination](sort-filter-page.md)
 
@@ -38,7 +38,7 @@ Quand vous développez une nouvelle application, votre modèle de données chang
 
 Cette méthode pour conserver la base de données en synchronisation avec le modèle de données fonctionne bien jusqu’au déploiement de l’application en production. Quand l’application s’exécute en production, elle stocke généralement les données que vous voulez conserver, et vous ne voulez pas tout perdre chaque fois que vous apportez une modification, comme ajouter une nouvelle colonne. La fonctionnalité Migrations d’EF Core résout ce problème en permettant à EF de mettre à jour le schéma de base de données au lieu de créer une nouvelle base de données.
 
-Pour travailler avec des migrations, vous pouvez utiliser la **console du gestionnaire de package** (PMC) ou l’interface CLI.  Ces didacticiels montrent comment utiliser des commandes CLI. Vous trouverez des informations sur la console du Gestionnaire de package [à la fin de ce didacticiel](#pmc).
+Pour travailler avec les migrations, vous pouvez utiliser la **console Package Manager** (PMC) ou l’IMC.  Ces didacticiels montrent comment utiliser des commandes CLI. Vous trouverez des informations sur la console du Gestionnaire de package [à la fin de ce didacticiel](#pmc).
 
 ## <a name="change-the-connection-string"></a>Changer la chaîne de connexion
 
@@ -49,7 +49,7 @@ Dans le fichier *appsettings.json*, remplacez le nom de la base de données dans
 Cette modification configure le projet de façon à ce que la première migration crée une nouvelle base de données. Ce n’est pas obligatoire pour commencer à utiliser les migrations, mais vous verrez plus tard pourquoi c’est judicieux.
 
 > [!NOTE]
-> Au lieu de changer le nom de la base de données, vous pouvez la supprimer. Utilisez **l’Explorateur d’objets SQL Server** (SSOX) ou la commande CLI `database drop` :
+> Comme alternative au changement de nom de la base de données, vous pouvez supprimer la base de données. Utilisez **SQL Server Object Explorer** (SSOX) ou la commande CLI `database drop` :
 >
 > ```dotnetcli
 > dotnet ef database drop
@@ -84,9 +84,9 @@ Done. To undo this action, use 'ef migrations remove'
 ```
 
 > [!NOTE]
-> Si vous voyez un message d’erreur *Aucun exécutable trouvé correspondant à la commande « dotnet-ef »* , consultez [ce billet de blog](https://thedatafarm.com/data-access/no-executable-found-matching-command-dotnet-ef/) pour résoudre ce problème.
+> Si vous voyez un message d’erreur *Aucun exécutable trouvé correspondant à la commande « dotnet-ef »*, consultez [ce billet de blog](https://thedatafarm.com/data-access/no-executable-found-matching-command-dotnet-ef/) pour résoudre ce problème.
 
-Si vous voyez un message d’erreur «*Impossible d’accéder au fichier... ContosoUniversity. dll, car il est utilisé par un autre processus.* », recherchez l’icône IIS Express dans la barre d’état système de Windows, cliquez dessus avec le bouton droit, puis cliquez sur **ContosoUniversity > arrêter le site**.
+Si vous voyez un message d’erreur "*ne peut pas accéder au fichier ... ContosoUniversity.dll parce qu’il est utilisé par un autre processus.*", trouver l’icône IIS Express dans le plateau du système Windows, et à droite-cliquer, puis cliquez sur **ContosoUniversity > Stop Site**.
 
 ## <a name="examine-up-and-down-methods"></a>Examiner les méthodes Up et Down
 
@@ -94,9 +94,9 @@ Quand vous avez exécuté la commande `migrations add`, EF a généré le code q
 
 [!code-csharp[](intro/samples/cu/Migrations/20170215220724_InitialCreate.cs?range=92-118)]
 
-Les migrations appellent la méthode `Up` pour implémenter les modifications du modèle de données pour une migration. Quand vous entrez une commande pour annuler la mise à jour, Migrations appelle la méthode `Down`.
+La fonctionnalité Migrations appelle la méthode `Up` pour implémenter les modifications du modèle de données pour une migration. Quand vous entrez une commande pour annuler la mise à jour, Migrations appelle la méthode `Down`.
 
-Ce code est celui de la migration initiale qui a été créé quand vous avez entré la commande `migrations add InitialCreate`. Le paramètre de nom de la migration (« InitialCreate » dans l’exemple) est utilisé comme nom de fichier ; vous pouvez le choisir librement. Nous vous conseillons de choisir un mot ou une expression qui résume ce qui est effectué dans la migration. Par exemple, vous pouvez nommer une migration ultérieure « AjouterTableDépartement ».
+Ce code est celui de la migration initiale qui a été créé quand vous avez entré la commande `migrations add InitialCreate`. Le paramètre de nom de la migration (« InitialCreate » dans l’exemple) est utilisé comme nom de fichier ; vous pouvez le choisir librement. Nous vous conseillons néanmoins de choisir un mot ou une expression qui résume ce qui est effectué dans la migration. Par exemple, vous pouvez nommer une migration ultérieure « AjouterTableDépartement ».
 
 Si vous avez créé la migration initiale alors que la base de données existait déjà, le code de création de la base de données est généré, mais il n’est pas nécessaire de l’exécuter, car la base de données correspond déjà au modèle de données. Quand vous déployez l’application sur un autre environnement où la base de données n’existe pas encore, ce code est exécuté pour créer votre base de données : il est donc judicieux de le tester au préalable. C’est la raison pour laquelle vous avez précédemment changé le nom de la base de données dans la chaîne de connexion : les migrations doivent pouvoir créer une base de données à partir de zéro.
 
@@ -104,7 +104,7 @@ Si vous avez créé la migration initiale alors que la base de données existait
 
 Migrations crée une *capture instantanée* du schéma de base de données actuel dans *Migrations/SchoolContextModelSnapshot.cs*. Quand vous ajoutez une migration, EF détermine ce qui a changé en comparant le modèle de données au fichier de capture instantanée.
 
-Utilisez la commande [dotnet EF migrations Remove](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove) pour supprimer une migration. `dotnet ef migrations remove` supprime la migration et garantit que la capture instantanée est correctement réinitialisée. Si `dotnet ef migrations remove` échoue, utilisez `dotnet ef migrations remove -v` pour obtenir plus d’informations sur l’échec.
+Utilisez les [migrations de dotnet ef supprimer la](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove) commande pour supprimer une migration. `dotnet ef migrations remove` supprime la migration et garantit que la capture instantanée est correctement réinitialisée. En `dotnet ef migrations remove` cas `dotnet ef migrations remove -v` d’échec, utilisez-le pour obtenir plus d’informations sur l’échec.
 
 Pour plus d’informations sur l’utilisation du fichier de capture instantanée, consultez [Migrations EF Core dans les environnements d’équipe](/ef/core/managing-schemas/migrations/teams).
 
@@ -151,7 +151,7 @@ Utilisez **l’Explorateur d’objets SQL Server** pour inspecter la base de don
 
 Exécutez l’application pour vérifier que tout fonctionne toujours comme avant.
 
-![Page Index des étudiants](migrations/_static/students-index.png)
+![Page d’index des étudiants](migrations/_static/students-index.png)
 
 <a id="pmc"></a>
 
@@ -182,9 +182,9 @@ Dans ce tutoriel, vous allez :
 > * Créer une migration initiale
 > * Examiner les méthodes Up et Down
 > * Découvrir des informations sur la capture instantanée du modèle de données
-> * Appliquer la migration
+> * Migration appliquée
 
-Passez au tutoriel suivant pour aborder des sujets plus avancés sur le développement du modèle de données. Au cours de ce processus, vous allez créer et appliquer d’autres migrations.
+Passez au tutoriel suivant pour aborder des sujets plus avancés sur le développement du modèle de données. Au cour de ce processus, vous allez créer et appliquer d’autres migrations.
 
 > [!div class="nextstepaction"]
 > [Créer et appliquer d’autres migrations](complex-data-model.md)

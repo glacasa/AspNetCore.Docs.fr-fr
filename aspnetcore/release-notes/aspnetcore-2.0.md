@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 12/05/2019
 uid: aspnetcore-2.0
 ms.openlocfilehash: 5ca43bab1496aa9fda65282cbb0b1177ad8689eb
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78667257"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>Nouveautés d’ASP.NET Core 2.0
@@ -80,13 +80,13 @@ Des modèles de projet SPA (Single Page Application) pour Angular, Aurelia, Knoc
 
 ## <a name="kestrel-improvements"></a>Améliorations apportées à Kestrel
 
-Le serveur web Kestrel offre de nouvelles fonctionnalités qui le rendent plus adapté en tant que serveur connecté à Internet. Plusieurs options de configuration de contrainte de serveur ont été ajoutées à la nouvelle propriété `KestrelServerOptions` de la classe `Limits`. Ajoutez des limites pour les éléments suivants :
+Le serveur web Kestrel offre de nouvelles fonctionnalités qui le rendent plus adapté en tant que serveur connecté à Internet. Plusieurs options de configuration de contrainte de serveur ont été ajoutées à la nouvelle propriété `Limits` de la classe `KestrelServerOptions`. Ajoutez des limites pour les éléments suivants :
 
 * Nombre maximale de connexions client
 * Taille maximale du corps de la requête
 * Débit données minimal du corps de la requête
 
-Pour plus d’informations, consultez [Implémentation du serveur web Kestrel dans ASP.NET Core](xref:fundamentals/servers/kestrel).
+Pour plus d’informations, consultez [Kestrel web server implementation in ASP.NET Core](xref:fundamentals/servers/kestrel) (Implémentation du serveur web Kestrel dans ASP.NET Core).
 
 ## <a name="weblistener-renamed-to-httpsys"></a>WebListener a été renommé HTTP.sys
 
@@ -104,7 +104,7 @@ var entityTag = new EntityTagHeaderValue("\"MyCalculatedEtagValue\"");
 return File(data, "text/plain", "downloadName.txt", lastModified: DateTime.UtcNow.AddSeconds(-5), entityTag: entityTag);
 ```
 
-Le fichier retourné à vos visiteurs contient les en-têtes HTTP appropriés pour les valeurs `ETag` et `LastModified`.
+Le fichier retourné à vos visiteurs a `ETag` les `LastModified` en-têtes HTTP appropriés pour le et les valeurs.
 
 Si un visiteur de l’application demande du contenu avec un en-tête de requête de plage, ASP.NET Core reconnaît la requête et gère l’en-tête. Si le contenu demandé peut être remis partiellement, ASP.NET Core retourne uniquement le jeu d’octets demandé. Vous n’avez pas besoin d’écrire des gestionnaires spéciaux dans vos méthodes pour adapter ou gérer cette fonctionnalité. Elle est gérée automatiquement pour vous.
 
@@ -143,8 +143,8 @@ Pour plus d’informations sur l’état des fonctionnalités de C# 7.1, consult
 * [Profils de publication Visual Studio pour le déploiement d’applications ASP.NET Core](xref:host-and-deploy/visual-studio-publish-profiles)
 * [Gestion des clés](xref:security/data-protection/implementation/key-management)
 * [Comment configurer votre application App Service de manière à utiliser la connexion via Facebook](xref:security/authentication/facebook-logins)
-* [Comment configurer votre application App Service de manière à utiliser la connexion via Twitter](xref:security/authentication/twitter-logins)
-* [Comment configurer votre application App Service de manière à utiliser la connexion via Google](xref:security/authentication/google-logins)
+* [Configurer l’authentification Twitter](xref:security/authentication/twitter-logins)
+* [Configurer l’authentification Google](xref:security/authentication/google-logins)
 * [Configurer l’authentification de compte Microsoft](xref:security/authentication/microsoft-logins)
 
 ## <a name="migration-guidance"></a>Recommandations en matière de migration

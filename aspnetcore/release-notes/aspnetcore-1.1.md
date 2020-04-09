@@ -6,18 +6,18 @@ ms.author: riande
 ms.date: 12/18/2018
 uid: aspnetcore-1.1
 ms.openlocfilehash: df9fd6bda00ac5f5516f40507001463fd7d0b92e
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78668090"
 ---
 # <a name="whats-new-in-aspnet-core-11"></a>Nouveautés d’ASP.NET Core 1.1
 
 ASP.NET Core 1.1 inclut les nouvelles fonctionnalités suivantes :
 
-- [Intergiciel de réécriture d’URL](xref:fundamentals/url-rewriting)
-- [Intergiciel de mise en cache des réponses](xref:performance/caching/middleware)
+- [URL Réécrit middleware](xref:fundamentals/url-rewriting)
+- [Middleware de mise en cache des réponses](xref:performance/caching/middleware)
 - [Afficher les composants sous forme de Tag Helpers](xref:mvc/views/view-components#invoking-a-view-component-as-a-tag-helper)
 - [Intergiciel en tant que filtres MVC](xref:mvc/controllers/filters#using-middleware-in-the-filter-pipeline)
 - [Fournisseur de TempData basé sur les cookies](xref:fundamentals/app-state#tempdata)
@@ -29,7 +29,7 @@ ASP.NET Core 1.1 inclut les nouvelles fonctionnalités suivantes :
 
 ## <a name="choosing-between-versions-10-and-11-of-aspnet-core"></a>Choix entre les versions 1.0 et 1.1 d’ASP.NET Core
 
-ASP.NET Core 1,1 possède plus de fonctionnalités que ASP.NET Core 1,0. D’une façon générale, nous vous recommandons d’utiliser la version la plus récente.
+ASP.NET Core 1.1 a plus de fonctionnalités que ASP.NET Core 1.0. D’une façon générale, nous vous recommandons d’utiliser la version la plus récente.
 
 ## <a name="additional-information"></a>Informations supplémentaires
 

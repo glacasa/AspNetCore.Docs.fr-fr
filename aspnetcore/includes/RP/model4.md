@@ -14,4 +14,4 @@ Utilisez le commutateur `h` pour obtenir de l’aide sur la commande `aspnet-cod
 dotnet aspnet-codegenerator razorpage -h
 ```
 
-Pour plus d’informations, consultez [dotnet ASPNET-CodeGenerator](xref:fundamentals/tools/dotnet-aspnet-codegenerator).
+Pour plus d’informations, voir [dotnet aspnet-codegenerator](xref:fundamentals/tools/dotnet-aspnet-codegenerator).

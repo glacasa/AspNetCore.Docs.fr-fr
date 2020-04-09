@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 01/13/2020
 uid: host-and-deploy/web-farm
 ms.openlocfilehash: 316c87e5f49593c05991a94cbe5e55d175a49bb3
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78659368"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>Héberger ASP.NET Core dans une batterie de serveurs web
@@ -20,10 +20,10 @@ Par [Chris Ross](https://github.com/Tratcher)
 
 Une *batterie de serveurs Web* est un groupe d’au moins deux serveurs web (ou *nœuds*) qui héberge plusieurs instances d’une application. Lorsque les requêtes des utilisateurs arrivent à une batterie de serveurs web, un *équilibreur de charge* les répartit sur les nœuds de la batterie de serveurs web. Les batteries de serveurs web apportent les améliorations suivantes :
 
-* **Fiabilité/disponibilité** &ndash; en cas d’échec d’un ou de plusieurs nœuds, l’équilibreur de charge peut acheminer les demandes vers d’autres nœuds opérationnels pour poursuivre le traitement des demandes.
-* **Capacité/performance** &ndash; plusieurs nœuds peuvent traiter plus de demandes qu’un seul serveur. L’équilibreur de charge équilibre la charge de travail en répartissant les requêtes sur les nœuds.
-* L' **extensibilité** &ndash; lorsque plus ou moins de capacité est nécessaire, le nombre de nœuds actifs peut être augmenté ou réduit pour correspondre à la charge de travail. Les technologies de plateformes de batterie de serveurs web, telles qu’[Azure App Service](https://azure.microsoft.com/services/app-service/), peuvent automatiquement ajouter ou supprimer des nœuds, à la demande de l’administrateur système ou automatiquement, sans intervention humaine.
-* La **maintenabilité** &ndash; nœuds d’une batterie de serveurs Web peut reposer sur un ensemble de services partagés, ce qui permet une gestion plus facile du système. Par exemple, les nœuds d’une batterie de serveurs web peuvent reposer sur un serveur de base de données unique et un emplacement réseau commun pour les ressources statiques, telles que les images et les fichiers téléchargeables.
+* **Fiabilité/disponibilité** &ndash; Lorsqu’un ou plusieurs nœuds échouent, l’équilibreur de charge peut acheminer les requêtes vers d’autres nœuds qui fonctionnent pour continuer le traitement des requêtes.
+* **Capacité/niveau de performances** &ndash; Plusieurs nœuds peuvent traiter plus de requêtes qu’un serveur unique. L’équilibreur de charge équilibre la charge de travail en répartissant les requêtes sur les nœuds.
+* **Évolutivité** &ndash; Lorsqu’une capacité supérieure ou inférieure est requise, le nombre de nœuds actifs peut être augmenté ou réduit pour l’adapter à la charge de travail. Les technologies de plateformes de batterie de serveurs web, telles qu’[Azure App Service](https://azure.microsoft.com/services/app-service/), peuvent automatiquement ajouter ou supprimer des nœuds, à la demande de l’administrateur système ou automatiquement, sans intervention humaine.
+* **Facilité de maintenance** &ndash; Les nœuds d’une batterie de serveurs web peuvent s’appuyer sur un ensemble de services partagés, ce qui facilite la gestion système. Par exemple, les nœuds d’une batterie de serveurs web peuvent reposer sur un serveur de base de données unique et un emplacement réseau commun pour les ressources statiques, telles que les images et les fichiers téléchargeables.
 
 Cette rubrique décrit la configuration et les dépendances des applications ASP.NET Core hébergées dans une batterie de serveurs web qui s’appuie sur des ressources partagées.
 
@@ -60,10 +60,10 @@ Les scénarios suivants ne nécessitent pas une configuration supplémentaire, m
 
 | Scénario | Dépend de &hellip; |
 | -------- | ------------------- |
-| Authentication | Protection des données (voir <xref:security/data-protection/configuration/overview>).<br><br>Pour plus d’informations, consultez <xref:security/authentication/cookie> et <xref:security/cookie-sharing>. |
+| Authentification | Protection des données (voir <xref:security/data-protection/configuration/overview>).<br><br>Pour plus d’informations, consultez <xref:security/authentication/cookie> et <xref:security/cookie-sharing>. |
 | Identité | Authentification et configuration de la base de données.<br><br>Pour plus d’informations, consultez <xref:security/authentication/identity>. |
-| session | Protection des données (cookies chiffrés) (voir <xref:security/data-protection/configuration/overview>) et Mise en cache (voir <xref:performance/caching/distributed>).<br><br>Pour plus d’informations, consultez [session and State Management : état de session](xref:fundamentals/app-state#session-state). |
-| TempData | Protection des données (cookies chiffrés) (voir <xref:security/data-protection/configuration/overview>) ou session (voir la rubrique [gestion de session et d’État : état de session](xref:fundamentals/app-state#session-state)).<br><br>Pour plus d’informations, consultez [session and State Management : TempData](xref:fundamentals/app-state#tempdata). |
+| session | Protection des données (cookies chiffrés) (voir <xref:security/data-protection/configuration/overview>) et Mise en cache (voir <xref:performance/caching/distributed>).<br><br>Pour plus d’informations, voir [Session et gestion de l’État: État de session](xref:fundamentals/app-state#session-state). |
+| TempData | Protection des données (cookies <xref:security/data-protection/configuration/overview>cryptés) (voir ) ou Session (voir [Session et gestion de l’État : État de session).](xref:fundamentals/app-state#session-state)<br><br>Pour plus d’informations, voir [Session et gestion de l’Etat: TempData](xref:fundamentals/app-state#tempdata). |
 | Anti-contrefaçon | Protection des données (voir <xref:security/data-protection/configuration/overview>).<br><br>Pour plus d’informations, consultez <xref:security/anti-request-forgery>. |
 
 ## <a name="troubleshoot"></a>Dépanner
@@ -74,7 +74,7 @@ Lorsque la protection des données ou la mise en cache ne sont pas configurées 
 
 Prenons l’exemple d’un utilisateur qui se connecte à l’application à l’aide de l’authentification basée sur les cookies. L’utilisateur se connecte à l’application sur un nœud de batterie de serveurs web. Si sa prochaine requête arrive sur ce même nœud où il est connecté, l’application est en mesure de déchiffrer le cookie d’authentification et autorise l’accès aux ressources de l’application. Si sa prochaine requête arrive sur un autre nœud, l’application ne peut pas déchiffrer le cookie d’authentification à partir du nœud où l’utilisateur est connecté, et autorisation d’accès à la ressource demandée échoue.
 
-En présence de l’un des symptômes suivants **par intermittence**, le problème provient généralement d’une configuration incorrecte de la protection des données ou de la mise en cache dans un environnement de batterie de serveurs web :
+Lorsque l’un des symptômes suivants se produit **par intermittence,** le problème est généralement attribué à une mauvaise protection des données ou à la configuration de mise en cache d’un environnement de ferme Web :
 
 * Interruptions d’authentification &ndash; Le cookie d’authentification est mal configuré ou ne peut pas être déchiffré. OAuth (Facebook, Microsoft, Twitter) ou les connexions OpenIdConnect échouent avec l’erreur « Échec de la corrélation ».
 * Interruptions d’autorisation &ndash; L’identité est perdue.
@@ -91,6 +91,6 @@ Si les applications de la batterie de serveurs web sont capables de répondre au
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* L' [extension de script personnalisé pour Windows](/azure/virtual-machines/extensions/custom-script-windows) &ndash; télécharge et exécute des scripts sur des machines virtuelles Azure, ce qui est utile pour la configuration et l’installation de logiciels après le déploiement.
+* [Extension de script personnalisé pour Windows](/azure/virtual-machines/extensions/custom-script-windows) &ndash; Téléchargements et exécute des scripts sur les machines virtuelles Azure, ce qui est utile pour la configuration post-déploiement et l’installation de logiciels.
 * <xref:host-and-deploy/proxy-load-balancer>
  

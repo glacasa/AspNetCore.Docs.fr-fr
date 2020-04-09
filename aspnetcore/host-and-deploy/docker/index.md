@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 01/08/2018
 uid: host-and-deploy/docker/index
 ms.openlocfilehash: cb5f774db5fab46a57f8ca4bbbca148f20f371ba
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78664079"
 ---
 # <a name="host-aspnet-core-in-docker-containers"></a>Héberger ASP.NET Core dans des conteneurs Docker
@@ -20,7 +20,7 @@ Les articles suivants sont disponibles pour en savoir plus sur l’hébergement 
 [Introduction aux conteneurs et à Docker](/dotnet/standard/microservices-architecture/container-docker-introduction/index)  
 Découvrez dans quelle mesure la mise en conteneur est une approche de développement de logiciels qui consiste à empaqueter une application ou un service, ses dépendances et sa configuration sous forme d’image de conteneur. L’image peut être testée, puis déployée sur un hôte.
 
-[Présentation de Docker](/dotnet/standard/microservices-architecture/container-docker-introduction/docker-defined)  
+[Qu’est-ce que Docker](/dotnet/standard/microservices-architecture/container-docker-introduction/docker-defined)  
 Découvrez Docker, projet open source permettant d’automatiser le déploiement d’applications en tant que conteneurs portables et autonomes exécutables sur le cloud ou localement.
 
 [Terminologie Docker](/dotnet/standard/microservices-architecture/container-docker-introduction/docker-terminology)  
@@ -31,7 +31,7 @@ Découvrez comment les images de conteneur Docker sont stockées dans un registr
 
 <xref:host-and-deploy/docker/building-net-docker-images>Découvrez comment générer et dockeriser une application ASP.NET Core. Explorez les images Docker gérées par Microsoft et examinez des cas d’usage.
 
-[Outils de conteneur Visual Studio](xref:host-and-deploy/docker/visual-studio-tools-for-docker)  
+[Outils de conteneurs de studio visuel](xref:host-and-deploy/docker/visual-studio-tools-for-docker)  
 Découvrez dans quelle mesure Visual Studio prend en charge la création, le débogage et l’exécution d’applications ASP.NET Core ciblant le .NET Framework ou .NET Core sur Docker pour Windows. Les conteneurs Windows et Linux sont pris en charge.
 
 [Publier sur Azure Container Registry](/azure/vs-azure-tools-docker-hosting-web-apps-in-docker)  

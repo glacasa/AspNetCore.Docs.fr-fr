@@ -1,7 +1,7 @@
 ---
 title: Choisir entre ASP.NET 4.x et ASP.NET Core
 author: rick-anderson
-description: Explique ASP.NET Core et ASP.NET 4. x et comment choisir entre eux.
+description: Explique ASP.NET Core vs ASP.NET 4.x et comment choisir entre eux.
 ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 02/12/2020
@@ -9,10 +9,10 @@ no-loc:
 - SignalR
 uid: fundamentals/choose-between-aspnet-and-aspnetcore
 ms.openlocfilehash: a7280b59578ee1d96edeeccf9c9df0b0e4eb4eb8
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78665241"
 ---
 # <a name="choose-between-aspnet-4x-and-aspnet-core"></a>Choisir entre ASP.NET 4.x et ASP.NET Core
@@ -36,7 +36,7 @@ Le tableau suivant compare ASP.NET Core à ASP.NET 4.x.
 | ASP.NET Core | ASP.NET 4.x |
 |---|---|
 |Générer pour Windows, macOS ou Linux|Générer pour Windows|
-|Nous vous recommandons d’utiliser les [pages Razor](xref:razor-pages/index) pour créer une interface utilisateur web à partir d’ASP.NET Core 2. Voir aussi [MVC](xref:mvc/overview), [API Web](xref:tutorials/first-web-api)et [SignalR](xref:signalr/introduction).|Utiliser [Web Forms](/aspnet/web-forms), [SignalR](/aspnet/signalr), [MVC](/aspnet/mvc), [API Web](/aspnet/web-api/), [webhooks](/aspnet/webhooks/)ou [pages Web](/aspnet/web-pages)|
+|Nous vous recommandons d’utiliser les [pages Razor](xref:razor-pages/index) pour créer une interface utilisateur web à partir d’ASP.NET Core 2. Voir aussi [MVC](xref:mvc/overview), Web [SignalR](xref:signalr/introduction) [API](xref:tutorials/first-web-api), et .|Utilisez [les formulaires Web](/aspnet/web-forms), [SignalR](/aspnet/signalr), [MVC](/aspnet/mvc), [Web API](/aspnet/web-api/), [WebHooks](/aspnet/webhooks/), ou [Pages Web](/aspnet/web-pages)|
 |Plusieurs versions par machine|Une seule version par machine|
 |Développer avec [Visual Studio](https://visualstudio.microsoft.com/vs/), [Visual Studio pour Mac](https://visualstudio.microsoft.com/vs/mac/) ou [Visual Studio Code](https://code.visualstudio.com/) en utilisant C# ou F#|Développer avec [Visual Studio](https://visualstudio.microsoft.com/vs/) en utilisant C#, VB ou F#|
 |Performances supérieures à celles d’ASP.NET 4.x|Bonnes performances|
@@ -46,14 +46,14 @@ Consultez [ASP.NET Core ciblant le .NET Framework](xref:index#target-framework) 
 
 ## <a name="aspnet-core-scenarios"></a>Scénarios ASP.NET Core
 
-* [Sites Web](xref:tutorials/first-mvc-app/index)
+* [Sites web](xref:tutorials/first-mvc-app/index)
 * [API](xref:tutorials/first-web-api)
 * [Temps réel](xref:signalr/introduction)
 * [Déployer une application ASP.NET Core sur Azure](/azure/app-service/app-service-web-get-started-dotnet)
 
 ## <a name="aspnet-4x-scenarios"></a>Scénarios ASP.NET 4.x
 
-* [Sites Web](/aspnet/mvc)
+* [Sites web](/aspnet/mvc)
 * [API](/aspnet/web-api)
 * [Temps réel](/aspnet/signalr)
 * [Créer une application web ASP.NET 4.x dans Azure](/azure/app-service/app-service-web-get-started-dotnet-framework)
@@ -61,5 +61,5 @@ Consultez [ASP.NET Core ciblant le .NET Framework](xref:index#target-framework) 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Présentation d’ASP.NET](/aspnet/overview)
-* [Présentation d’ASP.NET Core](xref:index)
+* [Introduction à ASP.NET Core](xref:index)
 * <xref:host-and-deploy/azure-apps/index>

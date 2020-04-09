@@ -6,15 +6,15 @@ ms.author: riande
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/controller-methods-views
 ms.openlocfilehash: 87b3cb2f4429157123d30274d1f12cd589c1cc99
-ms.sourcegitcommit: 99e71ae03319ab386baf2ebde956fc2d511df8b8
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/25/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "80242508"
 ---
 # <a name="controller-methods-and-views-in-aspnet-core"></a>Méthodes et vues de contrôleur dans ASP.NET Core
 
-De [Rick Anderson](https://twitter.com/RickAndMSFT)
+Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 Nous avons une bonne ébauche de l’application de films, mais sa présentation n’est pas idéale, par exemple, **ReleaseDate** devrait être écrit en deux mots.
 
@@ -36,7 +36,7 @@ Les liens **Edit**, **Details** et **Delete** sont générés par le Tag Helper 
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
 
-Les [Tag Helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les fichiers Razor. Dans le code ci-dessus, le `AnchorTagHelper` génère dynamiquement la valeur de l’attribut HTML `href` à partir de la méthode d’action du contrôleur et de l’ID de l’itinéraire. Vous utilisez **afficher la source** à partir de votre navigateur favori ou utiliser les outils de développement pour examiner le balisage généré. Une partie du code HTML généré est affichée ci-dessous :
+Les [Tag Helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les fichiers Razor. Dans le code `AnchorTagHelper` ci-dessus, le `href` génère dynamiquement la valeur d’attribut HTML à partir de la méthode d’action du contrôleur et de l’identifiant d’itinéraire. Vous utilisez **View Source** à partir de votre navigateur préféré ou utilisez les outils du développeur pour examiner la balisage générée. Une partie du code HTML généré est affichée ci-dessous :
 
 ```html
  <td>
@@ -114,7 +114,7 @@ Notez que le modèle de vue comporte une instruction `@model MvcMovie.Models.Mov
 
 Le code de génération de modèles automatique utilise plusieurs méthodes Tag Helper afin de rationaliser le balisage HTML. Le [Tag Helper Label](xref:mvc/views/working-with-forms) affiche le nom du champ (« Title », « ReleaseDate », « Genre » ou « Price »). Le [Tag Helper Input](xref:mvc/views/working-with-forms) affiche l’élément `<input>` HTML. Le [Tag Helper Validation](xref:mvc/views/working-with-forms) affiche les messages de validation associés à cette propriété.
 
-Exécutez l’application et accédez à l’URL `/Movies`. Cliquez sur un lien **Edit**. Dans le navigateur, affichez la source de la page. Le code HTML généré pour l’élément `<form>` est indiqué ci-dessous.
+Exécutez l’application et accédez à l’URL `/Movies`. Cliquez sur un lien **Edit.** Dans le navigateur, affichez la source de la page. Le code HTML généré pour l’élément `<form>` est indiqué ci-dessous.
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Shared/edit_view_source.html?highlight=1,6,10,17,24,28)]
 
@@ -151,7 +151,7 @@ Toutes les méthodes `HttpGet` du contrôleur Movies suivent un modèle similair
 * [Globalisation et localisation](xref:fundamentals/localization)
 * [Introduction aux Tag Helpers](xref:mvc/views/tag-helpers/intro)
 * [Créer des Tag Helpers](xref:mvc/views/tag-helpers/authoring)
-* [Protection contre la falsification de requête](xref:security/anti-request-forgery)
+* [Contrefaçon anti-demande](xref:security/anti-request-forgery)
 * Protéger votre contrôleur contre la [sur-publication](/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-basic-crud-functionality-with-the-entity-framework-in-asp-net-mvc-application)
 * [ViewModels](https://rachelappel.com/use-viewmodels-to-manage-data-amp-organize-code-in-asp-net-mvc-applications/)
 * [Tag Helper Form](xref:mvc/views/working-with-forms)
@@ -161,5 +161,5 @@ Toutes les méthodes `HttpGet` du contrôleur Movies suivent un modèle similair
 * [Tag Helper Validation](xref:mvc/views/working-with-forms)
 
 > [!div class="step-by-step"]
-> [Précédent](working-with-sql.md)
-> [Suivant](search.md)  
+> [Suivant précédent](working-with-sql.md)
+> [Next](search.md)  

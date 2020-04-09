@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 03/20/2020
 uid: host-and-deploy/directory-structure
 ms.openlocfilehash: 0e7bf40520385b7719cb37120709e0a3fd2442e3
-ms.sourcegitcommit: 9b6e7f421c243963d5e419bdcfc5c4bde71499aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/21/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "79989728"
 ---
 # <a name="aspnet-core-directory-structure"></a>Structure de répertoires ASP.NET Core
@@ -28,8 +28,8 @@ Le répertoire *publier* contient les ressources de l’application qui peuvent 
 
 | Type d'application | Structure de répertoires |
 | -------- | ------------------- |
-| [Exécutable dépendant du Framework (FDE)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>publish&dagger;<ul><li>Vues&dagger; les applications MVC ; Si les vues ne sont pas précompilées</li><li>Pages&dagger; les applications MVC ou Razor Pages, si les pages ne sont pas précompilées</li><li>wwwroot&dagger;</li><li>Fichiers \*.dll</li><li>{NOM de l’ASSEMBLY}.deps.json</li><li>{NOM de l’ASSEMBLY}.dll</li><li>{NOM DE L’ASSEMBLY} {. Extension} *. exe* extension sur Windows, aucune extension sur MacOS ou Linux</li><li>{NOM de l’ASSEMBLY}.pdb</li><li>{NOM de l’ASSEMBLY}.Views.dll</li><li>{NOM de l’ASSEMBLY}.Views.pdb</li><li>{NOM de l’ASSEMBLY}.runtimeconfig.json</li><li>web.config (déploiements IIS)</li><li>createdump ([utilitaire Linux createdump](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy))</li><li>\*. so (bibliothèque d’objets partagés Linux)</li><li>\*. a (Archive macOS)</li><li>\*. dylib (bibliothèque dynamique macOS)</li></ul></li></ul> |
-| [Déploiement autonome (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>publish&dagger;<ul><li>Vues&dagger; les applications MVC, si les vues ne sont pas précompilées</li><li>Pages&dagger; les applications MVC ou Razor Pages, si les pages ne sont pas précompilées</li><li>wwwroot&dagger;</li><li>Fichiers \*.dll</li><li>{NOM de l’ASSEMBLY}.deps.json</li><li>{NOM de l’ASSEMBLY}.dll</li><li>{NOM de l’ASSEMBLY}.exe</li><li>{NOM de l’ASSEMBLY}.pdb</li><li>{NOM de l’ASSEMBLY}.Views.dll</li><li>{NOM de l’ASSEMBLY}.Views.pdb</li><li>{NOM de l’ASSEMBLY}.runtimeconfig.json</li><li>web.config (déploiements IIS)</li></ul></li></ul> |
+| [Cadre-dépendant Exécutable (FDE)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>publish&dagger;<ul><li>Vues&dagger; des applications MVC; si les vues ne sont pas précompilées</li><li>Pages&dagger; MVC ou Razor Pages applications, si les pages ne sont pas précompilées</li><li>wwwroot&dagger;</li><li>Fichiers \*.dll</li><li>{NOM de l’ASSEMBLY}.deps.json</li><li>{NOM de l’ASSEMBLY}.dll</li><li>NOM DE L’ASSEMBLÉE {. EXTENSION. *.exe*</li><li>{NOM de l’ASSEMBLY}.pdb</li><li>{NOM de l’ASSEMBLY}.Views.dll</li><li>{NOM de l’ASSEMBLY}.Views.pdb</li><li>{NOM de l’ASSEMBLY}.runtimeconfig.json</li><li>web.config (déploiements IIS)</li><li>createdump ([Linux createdump utilitaire](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy))</li><li>\*.so (Linux bibliothèque d’objets partagés)</li><li>\*.a (archives macOS)</li><li>\*.dylib (bibliothèque dynamique macOS)</li></ul></li></ul> |
+| [Déploiement autonome (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>publish&dagger;<ul><li>Vues&dagger; des applications MVC, si les vues ne sont pas précompilées</li><li>Pages&dagger; MVC ou Razor Pages applications, si les pages ne sont pas précompilées</li><li>wwwroot&dagger;</li><li>Fichiers \*.dll</li><li>{NOM de l’ASSEMBLY}.deps.json</li><li>{NOM de l’ASSEMBLY}.dll</li><li>{NOM de l’ASSEMBLY}.exe</li><li>{NOM de l’ASSEMBLY}.pdb</li><li>{NOM de l’ASSEMBLY}.Views.dll</li><li>{NOM de l’ASSEMBLY}.Views.pdb</li><li>{NOM de l’ASSEMBLY}.runtimeconfig.json</li><li>web.config (déploiements IIS)</li></ul></li></ul> |
 
 &dagger;Indique un répertoire
 
@@ -40,8 +40,8 @@ Le répertoire *wwwroot*, s’il existe, contient uniquement des ressources stat
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [dotnet publish](/dotnet/core/tools/dotnet-publish)
-* [Déploiement d’applications .NET Core](/dotnet/core/deploying/)
-* [Frameworks cibles](/dotnet/standard/frameworks)
+* [.NET Déploiement d’applications de base](/dotnet/core/deploying/)
+* [Versions cibles de .NET Framework](/dotnet/standard/frameworks)
 * [Catalogue RID .NET Core](/dotnet/core/rid-catalog)
 
 ::: moniker-end
@@ -58,8 +58,8 @@ Le répertoire *publier* contient les ressources de l’application qui peuvent 
 
 | Type d'application | Structure de répertoires |
 | -------- | ------------------- |
-| [Exécutable dépendant du Framework (FDE)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>publish&dagger;<ul><li>Vues&dagger; les applications MVC ; Si les vues ne sont pas précompilées</li><li>Pages&dagger; les applications MVC ou Razor Pages, si les pages ne sont pas précompilées</li><li>wwwroot&dagger;</li><li>Fichiers \*.dll</li><li>{NOM de l’ASSEMBLY}.deps.json</li><li>{NOM de l’ASSEMBLY}.dll</li><li>{NOM DE L’ASSEMBLY} {. Extension} *. exe* extension sur Windows, aucune extension sur MacOS ou Linux</li><li>{NOM de l’ASSEMBLY}.pdb</li><li>{NOM de l’ASSEMBLY}.Views.dll</li><li>{NOM de l’ASSEMBLY}.Views.pdb</li><li>{NOM de l’ASSEMBLY}.runtimeconfig.json</li><li>web.config (déploiements IIS)</li><li>createdump ([utilitaire Linux createdump](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy))</li><li>\*. so (bibliothèque d’objets partagés Linux)</li><li>\*. a (Archive macOS)</li><li>\*. dylib (bibliothèque dynamique macOS)</li></ul></li></ul> |
-| [Déploiement autonome (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>publish&dagger;<ul><li>Vues&dagger; les applications MVC, si les vues ne sont pas précompilées</li><li>Pages&dagger; les applications MVC ou Razor Pages, si les pages ne sont pas précompilées</li><li>wwwroot&dagger;</li><li>Fichiers \*.dll</li><li>{NOM de l’ASSEMBLY}.deps.json</li><li>{NOM de l’ASSEMBLY}.dll</li><li>{NOM de l’ASSEMBLY}.exe</li><li>{NOM de l’ASSEMBLY}.pdb</li><li>{NOM de l’ASSEMBLY}.Views.dll</li><li>{NOM de l’ASSEMBLY}.Views.pdb</li><li>{NOM de l’ASSEMBLY}.runtimeconfig.json</li><li>web.config (déploiements IIS)</li></ul></li></ul> |
+| [Cadre-dépendant Exécutable (FDE)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>publish&dagger;<ul><li>Vues&dagger; des applications MVC; si les vues ne sont pas précompilées</li><li>Pages&dagger; MVC ou Razor Pages applications, si les pages ne sont pas précompilées</li><li>wwwroot&dagger;</li><li>Fichiers \*.dll</li><li>{NOM de l’ASSEMBLY}.deps.json</li><li>{NOM de l’ASSEMBLY}.dll</li><li>NOM DE L’ASSEMBLÉE {. EXTENSION. *.exe*</li><li>{NOM de l’ASSEMBLY}.pdb</li><li>{NOM de l’ASSEMBLY}.Views.dll</li><li>{NOM de l’ASSEMBLY}.Views.pdb</li><li>{NOM de l’ASSEMBLY}.runtimeconfig.json</li><li>web.config (déploiements IIS)</li><li>createdump ([Linux createdump utilitaire](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy))</li><li>\*.so (Linux bibliothèque d’objets partagés)</li><li>\*.a (archives macOS)</li><li>\*.dylib (bibliothèque dynamique macOS)</li></ul></li></ul> |
+| [Déploiement autonome (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>publish&dagger;<ul><li>Vues&dagger; des applications MVC, si les vues ne sont pas précompilées</li><li>Pages&dagger; MVC ou Razor Pages applications, si les pages ne sont pas précompilées</li><li>wwwroot&dagger;</li><li>Fichiers \*.dll</li><li>{NOM de l’ASSEMBLY}.deps.json</li><li>{NOM de l’ASSEMBLY}.dll</li><li>{NOM de l’ASSEMBLY}.exe</li><li>{NOM de l’ASSEMBLY}.pdb</li><li>{NOM de l’ASSEMBLY}.Views.dll</li><li>{NOM de l’ASSEMBLY}.Views.pdb</li><li>{NOM de l’ASSEMBLY}.runtimeconfig.json</li><li>web.config (déploiements IIS)</li></ul></li></ul> |
 -
 &dagger;Indique un répertoire
 
@@ -93,8 +93,8 @@ Le répertoire de déploiement requiert des autorisations de lecture et d’exé
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [dotnet publish](/dotnet/core/tools/dotnet-publish)
-* [Déploiement d’applications .NET Core](/dotnet/core/deploying/)
-* [Frameworks cibles](/dotnet/standard/frameworks)
+* [.NET Déploiement d’applications de base](/dotnet/core/deploying/)
+* [Versions cibles de .NET Framework](/dotnet/standard/frameworks)
 * [Catalogue RID .NET Core](/dotnet/core/rid-catalog)
 
 ::: moniker-end

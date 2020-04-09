@@ -1,25 +1,25 @@
 ---
-title: Sécuriser une application hébergée ASP.NET Core Blazor webassembly avec Azure Active Directory
+title: Sécurisez Blazor une application WebAssembly ASP.NET Core avec Azure Active Directory
 author: guardrex
 description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/16/2020
+ms.date: 04/08/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: fc16a7212254e73efd4cea8155975f293e5d9ebb
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.openlocfilehash: 8fec9f585f42469665cf29069674a199e1626629
+ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80219283"
+ms.lasthandoff: 04/08/2020
+ms.locfileid: "80977130"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-azure-active-directory"></a>Sécuriser une application hébergée ASP.NET Core Blazor webassembly avec Azure Active Directory
+# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-azure-active-directory"></a>Sécurisez Blazor une application WebAssembly ASP.NET Core avec Azure Active Directory
 
-Par [Javier Calvarro Nelson](https://github.com/javiercn) et [Luke Latham](https://github.com/guardrex)
+Par [Javier Calvarro Nelson](https://github.com/javiercn) et Luke [Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
@@ -27,122 +27,137 @@ Par [Javier Calvarro Nelson](https://github.com/javiercn) et [Luke Latham](https
 
 
 
-Cet article explique comment créer une [application hébergée parBlazor Webassembly](xref:blazor/hosting-models#blazor-webassembly) qui utilise [Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) pour l’authentification.
+Cet article décrit comment créer une [ Blazor application hébergée Par WebAssembly](xref:blazor/hosting-models#blazor-webassembly) qui utilise [Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) pour l’authentification.
 
-## <a name="register-apps-in-aad-b2c-and-create-solution"></a>Inscrire des applications dans AAD B2C et créer une solution
+## <a name="register-apps-in-aad-b2c-and-create-solution"></a>Enregistrez les applications dans AAD B2C et créez une solution
 
 ### <a name="create-a-tenant"></a>Créer un client
 
-Suivez les instructions de [démarrage rapide : configurer un locataire](/azure/active-directory/develop/quickstart-create-new-tenant) pour créer un locataire dans AAD.
+Suivez les conseils dans [Quickstart: Mettre en place un locataire](/azure/active-directory/develop/quickstart-create-new-tenant) pour créer un locataire dans AAD.
 
-### <a name="register-a-server-api-app"></a>Inscrire une application API serveur
+### <a name="register-a-server-api-app"></a>Enregistrez une application API serveur
 
-Suivez les instructions du Guide de [démarrage rapide : inscrire une application auprès de la plateforme Microsoft Identity et les](/azure/active-directory/develop/quickstart-register-app) rubriques Azure AAD suivantes pour inscrire une application AAD pour l' *application API serveur* dans le **Azure Active Directory** > zone **inscriptions d’applications** de la portail Azure :
+Suivez les conseils de [Quickstart : Enregistrez une application avec la plate-forme d’identité Microsoft](/azure/active-directory/develop/quickstart-register-app) et les sujets Azure AAD suivants pour enregistrer une application AAD pour *l’application Server API* dans la zone**d’enregistrement** **azure Active Directory** > App du portail Azure :
 
 1. Sélectionnez **Nouvelle inscription**.
-1. Fournissez un **nom** pour l’application (par exemple, **Blazor Server AAD**).
-1. Choisissez un **type de compte pris en charge**. Pour cette expérience, vous pouvez sélectionner des **comptes dans ce répertoire d’organisation uniquement** (un seul locataire).
-1. L' *application API serveur* ne requiert pas d' **URI de redirection** dans ce scénario, laissez la liste déroulante définie sur **Web** et n’entrez pas d’URI de redirection.
-1. Désactivez la case à cocher accorder les **autorisations > ** **accorder à l’administrateur de openid et de offline_access** .
+1. Fournir un **nom** pour l’application (par exemple, ** Blazor Server AAD**).
+1. Choisissez un **type de compte pris en charge**. Vous pouvez sélectionner **des comptes dans cet annuaire organisationnel uniquement** (locataire unique) pour cette expérience.
+1. *L’application Server API* ne nécessite pas **d’URI Redirect dans** ce scénario, alors laissez la baisse vers le **Web** et n’entrez pas dans une URI rediriger.
+1. Désactiver **l’administration de** > la subvention d’autorisation d’autorisation concent à la case à cocher**des autorisations openid et offline_access.**
 1. Sélectionnez **Inscription**.
 
-Dans **autorisations d’API**, supprimez le **Microsoft Graph** > autorisation **User. Read** , car l’application ne nécessite pas d’accès de profil UER ou de connexion.
+Dans **les autorisations API**, supprimez l’autorisation **Microsoft Graph** > **User.Read,** car l’application ne nécessite pas d’accès au profil de connexion ou d’uer.
 
-Dans **exposer une API**:
+Dans **Expose une API**:
 
 1. sélectionner **Ajouter une étendue**.
 1. Sélectionnez **Enregistrer et continuer**.
-1. Spécifiez un **nom d’étendue** (par exemple, `API.Access`).
-1. Indiquez un **nom d’affichage du consentement** de l’administrateur (par exemple, `Access API`).
-1. Fournissez une **Description du consentement** de l’administrateur (par exemple, `Allows the app to access server app API endpoints.`).
-1. Confirmez que l' **État** est défini sur **activé**.
+1. Fournir un **nom scope** `API.Access`(par exemple, ).
+1. Fournir un **nom d’affichage de consentement d’administration** (par exemple, `Access API`).
+1. Fournir une description du consentement `Allows the app to access server app API endpoints.`de **l’administration** (par exemple, ).
+1. Confirmez que **l’Etat** est prêt à **Enabled**.
 1. Sélectionnez **Ajouter une étendue**.
 
-Notez les informations suivantes :
+Enregistrez les informations suivantes :
 
 * *Application API serveur* ID d’application (ID client) (par exemple, `11111111-1111-1111-1111-111111111111`)
-* ID de répertoire (ID de locataire) (par exemple, `222222222-2222-2222-2222-222222222222`)
-* Domaine du locataire AAD (par exemple, `contoso.onmicrosoft.com`)
-* Étendue par défaut (par exemple, `API.Access`)
+* App ID URI (par exemple, `https://contoso.onmicrosoft.com/11111111-1111-1111-1111-111111111111`, `api://11111111-1111-1111-1111-111111111111`, ou la valeur personnalisée que vous avez fournie)
+* Id d’annuaire (Id locataire) `222222222-2222-2222-2222-222222222222`(par exemple, )
+* Domaine AAD Tenant (par exemple, `contoso.onmicrosoft.com`)
+* Portée par défaut `API.Access`(par exemple, )
 
 ### <a name="register-a-client-app"></a>Inscrire une application cliente
 
-Suivez les instructions du Guide de [démarrage rapide : inscrire une application auprès de la plateforme Microsoft Identity et les](/azure/active-directory/develop/quickstart-register-app) rubriques Azure AAD suivantes pour inscrire une application AAD pour l' *application cliente* dans la zone de **inscriptions d’applications** > **Azure Active Directory** de la portail Azure :
+Suivez les conseils de [Quickstart : Enregistrez une application avec la plate-forme d’identité Microsoft](/azure/active-directory/develop/quickstart-register-app) et les sujets Azure AAD suivants pour enregistrer une application AAD pour *l’application Client* dans la zone **Azure Active Directory** > **App des enregistrements** du portail Azure :
 
 1. Sélectionnez **Nouvelle inscription**.
-1. Fournissez un **nom** pour l’application (par exemple, **Blazor client AAD**).
-1. Choisissez un **type de compte pris en charge**. Pour cette expérience, vous pouvez sélectionner des **comptes dans ce répertoire d’organisation uniquement** (un seul locataire).
-1. Laissez la liste déroulante **URI de redirection** définie sur **Web**et fournissez un URI de redirection de `https://localhost:5001/authentication/login-callback`.
-1. Désactivez la case à cocher accorder les **autorisations > ** **accorder à l’administrateur de openid et de offline_access** .
+1. Fournir un **nom** pour l’application (par exemple, ** Blazor Client AAD**).
+1. Choisissez un **type de compte pris en charge**. Vous pouvez sélectionner **des comptes dans cet annuaire organisationnel uniquement** (locataire unique) pour cette expérience.
+1. Laissez la **redirection URI** déposer vers le bas `https://localhost:5001/authentication/login-callback`fixé sur le **Web**, et de fournir une redirection URI de .
+1. Désactiver **l’administration de** > la subvention d’autorisation d’autorisation concent à la case à cocher**des autorisations openid et offline_access.**
 1. Sélectionnez **Inscription**.
 
-Dans > **d’authentification** **configurations de plateforme** > **Web**:
+Dans les > **configurations de plate-forme** **d’authentification** > **Web**:
 
-1. Confirmez que l' **URI de redirection** de `https://localhost:5001/authentication/login-callback` est présent.
-1. Pour **octroi implicite**, activez les cases à cocher pour les **jetons d’accès** et les **jetons d’ID**.
-1. Les valeurs par défaut restantes pour l’application sont acceptables pour cette expérience.
+1. Confirmez **l’URI Redirect** de `https://localhost:5001/authentication/login-callback` est présent.
+1. Pour **la subvention implicite**, sélectionnez les cases à cocher pour les **jetons d’accès** et **les jetons d’identité**.
+1. Les autres défauts de paiement de l’application sont acceptables pour cette expérience.
 1. Sélectionnez le bouton **Enregistrer**.
 
-Dans **autorisations d’API**:
+Dans **les autorisations de l’API**:
 
-1. Vérifiez que l’application a **Microsoft Graph** > autorisation **User. Read** .
-1. Sélectionnez **Ajouter une autorisation** suivi de **mes API**.
-1. Sélectionnez l' *application API serveur* dans la colonne **nom** (par exemple, **Blazor Server AAD**).
-1. Ouvrez la liste des **API** .
-1. Activez l’accès à l’API (par exemple, `API.Access`).
+1. Confirmez que l’application dispose de l’autorisation **Microsoft Graph** > **User.Read.**
+1. Sélectionnez **Ajouter une permission** suivie par Mes **API**.
+1. Sélectionnez *l’application Server API* à partir de la colonne **Nom** (par exemple, ** Blazor Server AAD**).
+1. Ouvrez la liste **API.**
+1. Activer l’accès à l’API (par exemple, `API.Access`).
 1. Sélectionnez **Ajouter des autorisations**.
-1. Sélectionnez le bouton **Grant admin content for {locataire Name}** . Sélectionnez **Oui** pour confirmer.
+1. Sélectionnez le **contenu de l’administrateur Grant pour le bouton 'TENANT NAME'.** Sélectionnez **Oui** pour confirmer.
 
-Enregistrez l’ID de l’application *cliente* (ID client) (par exemple, `33333333-3333-3333-3333-333333333333`).
+Enregistrez l’ID *d’application* de l’application Client (IDENTIFIANT client) (par exemple, `33333333-3333-3333-3333-333333333333`).
 
 ### <a name="create-the-app"></a>Créer l’application
 
-Remplacez les espaces réservés dans la commande suivante par les informations enregistrées précédemment et exécutez la commande dans une interface de commande :
+Remplacez les titulaires de place dans la commande suivante par les informations enregistrées plus tôt et exécutez la commande dans une coque de commande :
 
 ```dotnetcli
-dotnet new blazorwasm -au SingleOrg --api-client-id "{SERVER API APP CLIENT ID}" --app-id-uri "{SERVER API APP CLIENT ID}" --client-id "{CLIENT APP CLIENT ID}" --default-scope "{DEFAULT SCOPE}" --domain "{DOMAIN}" -ho --tenant-id "{TENANT ID}"
+dotnet new blazorwasm -au SingleOrg --api-client-id "{SERVER API APP CLIENT ID}" --app-id-uri "{SERVER API APP ID URI}" --client-id "{CLIENT APP CLIENT ID}" --default-scope "{DEFAULT SCOPE}" --domain "{DOMAIN}" -ho --tenant-id "{TENANT ID}"
 ```
 
-Pour spécifier l’emplacement de sortie, qui crée un dossier de projet s’il n’existe pas, incluez l’option de sortie dans la commande avec un chemin d’accès (par exemple, `-o BlazorSample`). Le nom du dossier devient également une partie du nom du projet.
+Pour spécifier l’emplacement de sortie, qui crée un dossier de projet s’il n’existe pas, inclure l’option de sortie dans la commande avec un chemin (par exemple, `-o BlazorSample`). Le nom du dossier fait également partie du nom du projet.
 
 > [!NOTE]
-> Consultez la section [prise en charge du service d’authentification](#Authentication service support) pour obtenir une modification importante de la configuration de l’étendue du jeton d’accès par défaut. La valeur fournie par le modèle Blazor webassembly doit être modifiée manuellement une fois que l' *application cliente* a été créée à partir du modèle.
+> Passez l’App ID URI à l’option, `app-id-uri` mais notez qu’un changement de configuration peut être nécessaire dans l’application client, qui est décrite dans la section portée des [jetons d’accès.](#access-token-scopes)
 
 ## <a name="server-app-configuration"></a>Configuration de l’application serveur
 
-*Cette section se rapporte à l’application **serveur** de la solution.*
+*Cette section concerne l’application **Server** de la solution.*
 
-### <a name="authentication-package"></a>Package d’authentification
+### <a name="authentication-package"></a>Forfait d’authentification
 
-La prise en charge de l’authentification et de l’autorisation des appels à ASP.NET Core API Web est assurée par le `Microsoft.AspNetCore.Authentication.AzureAD.UI`:
+Le support pour l’authentification et l’autorisation des appels `Microsoft.AspNetCore.Authentication.AzureAD.UI`à ASP.NET API Web de base est fourni par le :
 
 ```xml
 <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" 
     Version="3.1.0" />
 ```
 
-### <a name="authentication-service-support"></a>Prise en charge du service d’authentification
+### <a name="authentication-service-support"></a>Support de service d’authentification
 
-La méthode `AddAuthentication` définit les services d’authentification au sein de l’application et configure le gestionnaire du porteur JWT comme méthode d’authentification par défaut. La méthode `AddAzureADBearer` définit les paramètres spécifiques dans le gestionnaire du porteur JWT requis pour valider les jetons émis par le Azure Active Directory :
+La `AddAuthentication` méthode configure les services d’authentification dans l’application et configure le gestionnaire JWT Bearer comme méthode d’authentification par défaut. La `AddAzureADBearer` méthode définit les paramètres spécifiques du gestionnaire JWT Bearer nécessaires pour valider les jetons émis par l’annuaire actif Azure :
 
 ```csharp
 services.AddAuthentication(AzureADDefaults.BearerAuthenticationScheme)
     .AddAzureADBearer(options => Configuration.Bind("AzureAd", options));
 ```
 
-`UseAuthentication` et `UseAuthorization` Assurez-vous que :
+`UseAuthentication`et `UseAuthorization` s’assurer que :
 
 * L’application tente d’analyser et de valider les jetons sur les demandes entrantes.
-* Toute demande d’accès à une ressource protégée sans informations d’identification appropriées échoue.
+* Toute demande visant à accéder à une ressource protégée sans informations d’identification appropriées échoue.
 
 ```csharp
 app.UseAuthentication();
 app.UseAuthorization();
 ```
 
+### <a name="useridentityname"></a>User.Identity.Name
+
+Par défaut, l’application Server `User.Identity.Name` API remplit `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name` la valeur du `2d64b3da-d9d5-42c6-9352-53d8df33d770@contoso.onmicrosoft.com`type de réclamation (par exemple, ).
+
+Pour configurer l’application pour `name` recevoir la valeur du type de réclamation, configurez le <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions> [TokenValidationParameters.NameClaimType](xref:Microsoft.IdentityModel.Tokens.TokenValidationParameters.NameClaimType) of the in `Startup.ConfigureServices`:
+
+```csharp
+services.Configure<JwtBearerOptions>(
+    AzureADDefaults.JwtBearerAuthenticationScheme, options =>
+    {
+        options.TokenValidationParameters.NameClaimType = "name";
+    });
+```
+
 ### <a name="app-settings"></a>Paramètres de l’application
 
-Le fichier *appSettings. JSON* contient les options permettant de configurer le gestionnaire du porteur JWT utilisé pour valider les jetons d’accès.
+Le fichier *appsettings.json* contient les options pour configurer le gestionnaire de porteur JWT utilisé pour valider les jetons d’accès.
 
 ```json
 {
@@ -157,10 +172,10 @@ Le fichier *appSettings. JSON* contient les options permettant de configurer le 
 
 ### <a name="weatherforecast-controller"></a>Contrôleur WeatherForecast
 
-Le contrôleur WeatherForecast (*Controllers/WeatherForecastController. cs*) expose une API protégée avec l’attribut `[Authorize]` appliqué au contrôleur. Il est **important** de comprendre que :
+Le contrôleur WeatherForecast *(Controllers/WeatherForecastController.cs*) expose une `[Authorize]` API protégée avec l’attribut appliqué au contrôleur. Il est **important** de comprendre que :
 
-* L’attribut `[Authorize]` dans ce contrôleur d’API est la seule chose qui protège cette API contre tout accès non autorisé.
-* L’attribut `[Authorize]` utilisé dans l’application Blazor webassembly sert uniquement d’indicateur à l’application que l’utilisateur doit être autorisé à utiliser correctement pour l’application.
+* L’attribut `[Authorize]` dans ce contrôleur API est la seule chose qui protège cette API contre l’accès non autorisé.
+* L’attribut `[Authorize]` utilisé Blazor dans l’application WebAssembly ne sert qu’à indicer à l’application que l’utilisateur doit être autorisé à travailler correctement pour l’application.
 
 ```csharp
 [Authorize]
@@ -176,32 +191,30 @@ public class WeatherForecastController : ControllerBase
 }
 ```
 
-## <a name="client-app-configuration"></a>Configuration de l’application cliente
+## <a name="client-app-configuration"></a>Configuration de l’application client
 
-*Cette section se rapporte à l’application **cliente** de la solution.*
+*Cette section concerne l’application **Client** de la solution.*
 
-### <a name="authentication-package"></a>Package d’authentification
+### <a name="authentication-package"></a>Forfait d’authentification
 
-Quand une application est créée pour utiliser des comptes professionnels ou scolaires (`SingleOrg`), l’application reçoit automatiquement une référence de package pour la [bibliothèque d’authentification Microsoft](/azure/active-directory/develop/msal-overview) (`Microsoft.Authentication.WebAssembly.Msal`). Le package fournit un ensemble de primitives qui aident l’application à authentifier les utilisateurs et à obtenir des jetons pour appeler des API protégées.
+Lorsqu’une application est créée pour`SingleOrg`utiliser les comptes de travail ou d’école`Microsoft.Authentication.WebAssembly.Msal`(), l’application reçoit automatiquement une référence de paquet pour la [bibliothèque d’authentification Microsoft](/azure/active-directory/develop/msal-overview) (). Le paquet fournit un ensemble de primitifs qui aident l’application authentifier les utilisateurs et obtenir des jetons pour appeler des API protégées.
 
-Si vous ajoutez l’authentification à une application, ajoutez manuellement le package au fichier projet de l’application :
+Si vous ajoutez de l’authentification à une application, ajoutez manuellement le paquet au fichier de projet de l’application :
 
 ```xml
 <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" 
     Version="{VERSION}" />
 ```
 
-Remplacez `{VERSION}` dans la référence de package précédente par la version du package `Microsoft.AspNetCore.Blazor.Templates` présentée dans l’article <xref:blazor/get-started>.
+Remplacez `{VERSION}` dans la référence du `Microsoft.AspNetCore.Blazor.Templates` paquet précédent <xref:blazor/get-started> avec la version du paquet indiquée dans l’article.
 
-Le package `Microsoft.Authentication.WebAssembly.Msal` ajoute transitivement le package `Microsoft.AspNetCore.Components.WebAssembly.Authentication` à l’application.
+Le `Microsoft.Authentication.WebAssembly.Msal` paquet ajoute transitivement le `Microsoft.AspNetCore.Components.WebAssembly.Authentication` paquet à l’application.
 
-### <a name="authentication-service-support"></a>Prise en charge du service d’authentification
+### <a name="authentication-service-support"></a>Support de service d’authentification
 
-La prise en charge de l’authentification des utilisateurs est inscrite dans le conteneur de service à l’aide de la méthode d’extension `AddMsalAuthentication` fournie par le package `Microsoft.Authentication.WebAssembly.Msal`. Cette méthode configure tous les services requis pour que l’application interagisse avec le fournisseur d’identité (IP).
+La prise en charge de l’authentification des utilisateurs est enregistrée dans le conteneur de service avec la `AddMsalAuthentication` méthode d’extension fournie par le `Microsoft.Authentication.WebAssembly.Msal` paquet. Cette méthode met en place tous les services requis pour que l’application interagit avec le fournisseur d’identité (IP).
 
-*Program.cs* :
-
-Lorsque l' *application cliente* est générée, l’étendue du jeton d’accès par défaut est au format `api://{SERVER API APP CLIENT ID}/{DEFAULT SCOPE}`. **Supprimez la partie `api://` de la valeur de portée.** Ce problème sera résolu dans une prochaine version préliminaire.
+*Program.cs*:
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -209,37 +222,53 @@ builder.Services.AddMsalAuthentication(options =>
     var authentication = options.ProviderOptions.Authentication;
     authentication.Authority = "https://login.microsoftonline.com/{TENANT ID}";
     authentication.ClientId = "{CLIENT ID}";
-    options.ProviderOptions.DefaultAccessTokenScopes.Add(
-        "{SERVER API APP CLIENT ID}/{DEFAULT SCOPE}");
+    options.ProviderOptions.DefaultAccessTokenScopes.Add("{SCOPE URI}");
 });
 ```
 
-> [!NOTE]
-> L’étendue du jeton d’accès par défaut doit être au format `{SERVER API APP CLIENT ID}/{DEFAULT SCOPE}` (par exemple, `11111111-1111-1111-1111-111111111111/API.Access`). Si un modèle ou un schéma et un hôte sont fournis au paramètre d’étendue (comme indiqué dans le portail Azure), l' *application cliente* lève une exception non gérée lorsqu’elle reçoit une réponse *non autorisée 401* de l' *application API serveur*.
+La `AddMsalAuthentication` méthode accepte un rappel pour configurer les paramètres nécessaires pour authentifier une application. Les valeurs requises pour configurer l’application peuvent être obtenues à partir de la configuration Azure Portal AAD lorsque vous enregistrez l’application.
 
-La méthode `AddMsalAuthentication` accepte un rappel pour configurer les paramètres requis pour authentifier une application. Les valeurs requises pour la configuration de l’application peuvent être obtenues à partir de la configuration AAD du portail Azure lorsque vous inscrivez l’application.
+### <a name="access-token-scopes"></a>Portée symbolique d’accès
 
-Les étendues de jeton d’accès par défaut représentent la liste des étendues de jeton d’accès qui sont :
+Les portées symboliques d’accès par défaut représentent la liste des portées symboliques d’accès qui sont :
 
-* Inclus par défaut dans la demande de connexion.
-* Utilisé pour approvisionner un jeton d’accès immédiatement après l’authentification.
+* Inclus par défaut dans le signe en demande.
+* Utilisé pour fournir un jeton d’accès immédiatement après l’authentification.
 
-Toutes les étendues doivent appartenir à la même application par Azure Active Directory règles. Des étendues supplémentaires peuvent être ajoutées pour d’autres applications API en fonction des besoins :
+Toutes les portées doivent appartenir à la même application par les règles Azure Active Directory. Des étendues supplémentaires peuvent être ajoutées pour d’autres applications API au besoin :
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
 {
     ...
-    options.ProviderOptions.DefaultAccessTokenScopes.Add(
-        "{SERVER API APP CLIENT ID}/{SCOPE}");
+    options.ProviderOptions.DefaultAccessTokenScopes.Add("{SCOPE URI}");
 });
 ```
+
+> [!NOTE]
+> Si le portail Azure fournit une portée URI et **que l’application jette une exception non gérée** lorsqu’elle reçoit une réponse non autorisée *401* de l’API, essayez d’utiliser une portée URI qui n’inclut pas le système et l’hôte. Par exemple, le portail Azure peut fournir l’un des formats URI de portée suivants :
+>
+> * `https://{ORGANIZATION}.onmicrosoft.com/{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
+> * `api://{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
+>
+> Fournir la portée URI sans le régime et l’hôte:
+>
+> ```csharp
+> options.ProviderOptions.DefaultAccessTokenScopes.Add(
+>     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
+> ```
+
+Pour plus d’informations, consultez <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>.
+
+### <a name="imports-file"></a>Fichier d’importations
+
+[!INCLUDE[](~/includes/blazor-security/imports-file-hosted.md)]
 
 ### <a name="index-page"></a>Page d'index
 
 [!INCLUDE[](~/includes/blazor-security/index-page-msal.md)]
 
-### <a name="app-component"></a>Composant d’application
+### <a name="app-component"></a>Composant de l’application
 
 [!INCLUDE[](~/includes/blazor-security/app-component.md)]
 
@@ -261,10 +290,16 @@ builder.Services.AddMsalAuthentication(options =>
 
 ## <a name="run-the-app"></a>Exécuter l’application
 
-Exécutez l’application à partir du projet serveur. Quand vous utilisez Visual Studio, sélectionnez le projet serveur dans **Explorateur de solutions** , puis cliquez sur le bouton **exécuter** dans la barre d’outils ou démarrez l’application à partir du menu **Déboguer** .
+Exécutez l’application à partir du projet Server. Lorsque vous utilisez Visual Studio, sélectionnez le projet Server dans **Solution Explorer** et sélectionnez le bouton **Run** dans la barre d’outils ou démarrez l’application à partir du menu **Debug.**
+
+<!-- HOLD
+[!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]
+-->
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
+* [Demander des jetons d’accès supplémentaires](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
 * <xref:security/authentication/azure-active-directory/index>
+* [Documentation sur la plateforme d’identités Microsoft](/azure/active-directory/develop/)

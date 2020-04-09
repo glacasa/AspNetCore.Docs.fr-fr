@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 12/05/2019
 uid: migration/1x-to-2x/index
 ms.openlocfilehash: c46f50a418cf630980ac2ba94407e4370d36e7d5
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78667614"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>Migrer d’ASP.NET Core 1.x vers la version 2.0
@@ -23,7 +23,7 @@ Les applications ASP.NET Core 1.x existantes sont basées sur des modèles de pr
 
 <a name="prerequisites"></a>
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Consultez [Bien démarrer avec ASP.NET Core](xref:getting-started).
 
@@ -48,7 +48,7 @@ Si le fichier projet contient `<RuntimeFrameworkVersion>1.{sub-version}</Runtime
 
 ## <a name="update-net-core-sdk-version-in-globaljson"></a>Mettre à jour la version du SDK .NET Core dans global.json
 
-Si votre solution repose sur un fichier [global. JSON](/dotnet/core/tools/global-json) pour cibler une version spécifique de kit SDK .net Core, mettez à jour sa propriété `version` pour utiliser la version 2,0 installée sur votre ordinateur :
+Si votre solution s’appuie sur un fichier [global.json](/dotnet/core/tools/global-json) pour cibler une version spécifique du SDK .NET Core, mettez à jour sa propriété `version` de façon à utiliser la version 2.0 installée sur votre ordinateur :
 
 [!code-json[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/global.json?highlight=3)]
 

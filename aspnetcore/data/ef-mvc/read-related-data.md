@@ -1,5 +1,5 @@
 ---
-title: 'Didacticiel : lire les données associées-ASP.NET MVC avec EF Core'
+title: 'Tutorial: Lire les données connexes - ASP.NET MVC avec EF Core'
 description: Dans ce didacticiel, vous allez lire et afficher les données associées, à savoir les données qu’Entity Framework charge dans les propriétés de navigation.
 author: rick-anderson
 ms.author: riande
@@ -7,15 +7,15 @@ ms.date: 09/28/2019
 ms.topic: tutorial
 uid: data/ef-mvc/read-related-data
 ms.openlocfilehash: a6e63723101ab09219db81ee9796c3938a612226
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78657107"
 ---
-# <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>Didacticiel : lire les données associées-ASP.NET MVC avec EF Core
+# <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>Tutorial: Lire les données connexes - ASP.NET MVC avec EF Core
 
-Dans le didacticiel précédent, vous avez élaboré le modèle de données School. Dans ce didacticiel, vous allez lire et afficher les données associées, à savoir les données qu’Entity Framework charge dans les propriétés de navigation.
+Dans le didacticiel précédent, vous a élaboré le modèle de données School. Dans ce didacticiel, vous allez lire et afficher les données associées, à savoir les données qu’Entity Framework charge dans les propriétés de navigation.
 
 Les illustrations suivantes montrent les pages que vous allez utiliser.
 
@@ -31,7 +31,7 @@ Dans ce tutoriel, vous allez :
 > * Créer une page Instructors
 > * En savoir plus sur le chargement explicite
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * [Créer un modèle de données complexe](complex-data-model.md)
 
@@ -73,13 +73,13 @@ Remplacez la méthode `Index` par le code suivant qui utilise un nom plus approp
 
 [!code-csharp[](intro/samples/cu/Controllers/CoursesController.cs?name=snippet_RevisedIndexMethod)]
 
-Ouvrez *Views/Courses/Index.cshtml* et remplacez le code de modèle par le code suivant. Les modifications sont mises en surbrillance :
+Ouvrez *Views/Courses/Index.cshtml* et remplacez le code de modèle par le code suivant. Les modifications apparaissent en surbrillance :
 
 [!code-html[](intro/samples/cu/Views/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
 
 Vous avez apporté les modifications suivantes au code généré automatiquement :
 
-* Changement de l’en-tête : Index a été remplacé par Course.
+* Changement de l’en-tête : Index a été remplacé par Courses.
 
 * Ajout d’une colonne **Number** qui affiche la valeur de la propriété `CourseID`. Par défaut, les clés primaires ne sont pas générées automatiquement, car elles ne sont normalement pas significatives pour les utilisateurs finaux. Toutefois, dans le cas présent, la clé primaire est significative et vous voulez l’afficher.
 
@@ -99,7 +99,7 @@ Dans cette section, vous allez créer un contrôleur et une vue pour l’entité
 
 ![Page d’index des formateurs](read-related-data/_static/instructors-index.png)
 
-Cette page lit et affiche les données associées comme suit :
+Cette page lit et affiche les données associées comme suit :
 
 * La liste des formateurs affiche les données associées de l’entité OfficeAssignment. Il existe une relation un-à-zéro-ou-un entre les entités Instructor et OfficeAssignment. Vous allez utiliser un chargement hâtif pour les entités OfficeAssignment. Comme expliqué précédemment, le chargement hâtif est généralement plus efficace lorsque vous avez besoin des données associées pour toutes les lignes extraites de la table primaire. Dans ce cas, vous souhaitez afficher les affectations de bureaux pour tous les formateurs affichés.
 
@@ -151,7 +151,7 @@ Le code suivant s’exécute quand un formateur a été sélectionné. Le format
 
 La méthode `Where` renvoie une collection, mais dans ce cas, les critères transmis à cette méthode entraînent le renvoi d’une seule entité Instructor. La méthode `Single` convertit la collection en une seule entité Instructor, ce qui vous permet d’accéder à la propriété `CourseAssignments` de cette entité. La propriété `CourseAssignments` contient des entités `CourseAssignment`, à partir desquelles vous souhaitez uniquement les entités `Course` associées.
 
-Vous utilisez la méthode `Single` sur une collection lorsque vous savez que la collection aura un seul élément. La méthode Single lève une exception si la collection transmise est vide ou s’il y a plusieurs éléments. Une alternative est `SingleOrDefault`, qui retourne une valeur par défaut (Null dans le cas présent) si la collection est vide. Toutefois, dans ce cas, cela entraînerait encore une exception (en tentant de trouver une propriété `Courses` sur une référence null) et le message d’exception indiquerait moins clairement la cause du problème. Lorsque vous appelez la méthode `Single`, vous pouvez également transmettre la condition Where au lieu d’appeler séparément la méthode `Where` :
+Vous utilisez la méthode `Single` sur une collection lorsque vous savez que la collection aura un seul élément. La méthode Single lève une exception si la collection transmise est vide ou s’il y a plusieurs éléments. Une alternative est `SingleOrDefault`, qui renvoie une valeur par défaut (Null dans ce cas) si la collection est vide. Toutefois, dans ce cas, cela entraînerait encore une exception (en tentant de trouver une propriété `Courses` sur une référence null) et le message d’exception indiquerait moins clairement la cause du problème. Lorsque vous appelez la méthode `Single`, vous pouvez également transmettre la condition Where au lieu d’appeler séparément la méthode `Where` :
 
 ```csharp
 .Single(i => i.ID == id.Value)
@@ -169,7 +169,7 @@ Ensuite, si un cours a été sélectionné, le cours sélectionné est récupér
 
 ### <a name="modify-the-instructor-index-view"></a>Modifier la vue d’index des formateurs
 
-Dans *Views/Instructors/Index.cshtml*, remplacez le code du modèle par le code suivant. Les modifications apparaissent en surbrillance.
+Dans *Views/Instructors/Index.cshtml*, remplacez le code du modèle par le code suivant. Les modifications sont mises en surbrillance.
 
 [!code-html[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=1-64&highlight=1,3-7,15-19,24,26-31,41-54,56)]
 
@@ -188,7 +188,7 @@ Vous avez apporté les modifications suivantes au code existant :
   }
   ```
 
-* Ajout d’une colonne **Courses** qui affiche les cours dispensés par chaque formateur. Pour plus d’informations, consultez la section relative à la [transition de ligne explicite](xref:mvc/views/razor#explicit-line-transition) de l’article syntaxe Razor.
+* Vous avez ajouté une colonne **Courses** qui affiche les cours animés par chaque formateur. Pour plus d’informations, consultez la section de [transition de la ligne explicite](xref:mvc/views/razor#explicit-line-transition) de l’article de syntaxe Razor.
 
 * Vous avez ajouté un code qui ajoute dynamiquement `class="success"` à l’élément `tr` du formateur sélectionné. Cela définit une couleur d’arrière-plan pour la ligne sélectionnée à l’aide d’une classe d’amorçage.
 
@@ -207,7 +207,7 @@ Vous avez apporté les modifications suivantes au code existant :
   <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
   ```
 
-Exécutez l’application et sélectionnez l’onglet **Instructors** . La page affiche la propriété d’emplacement des entités OfficeAssignment associées et une cellule de table vide lorsqu’il n’y a pas d’entité OfficeAssignment associée.
+Exécutez l’application et sélectionnez l’onglet **Instructeurs.** La page affiche la propriété de localisation des entités relatives OfficeAssignment et une cellule de table vide lorsqu’il n’y a pas d’entité d’instruction Office.
 
 ![Page d’index des formateurs sans aucun élément sélectionné](read-related-data/_static/instructors-index-no-selection.png)
 

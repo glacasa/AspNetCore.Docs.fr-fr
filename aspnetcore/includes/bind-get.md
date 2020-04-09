@@ -1,10 +1,10 @@
 > [!WARNING]
-> Pour des raisons de sécurité, vous devez choisir de lier les données de requête `GET` aux propriétés du modèle de page. Vérifiez l’entrée utilisateur avant de la mapper à des propriétés. L’utilisation de la liaison de `GET` est utile lors de l’adressage de scénarios qui reposent sur une chaîne de requête ou des valeurs de route.
+> Pour des raisons de sécurité, vous devez choisir de lier les données de requête `GET` aux propriétés du modèle de page. Vérifiez l’entrée utilisateur avant de la mapper à des propriétés. Opter `GET` pour la fixation est utile pour aborder des scénarios qui reposent sur des valeurs de chaîne ou d’itinéraires.
 >
-> Pour lier une propriété à des demandes `GET`, affectez à la propriété `SupportsGet` de l’attribut [`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) la valeur `true`:
+> Pour lier `GET` une propriété [`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) sur les `SupportsGet` demandes, définissez la propriété de l’attribut à `true`:
 >
 > ```csharp
 > [BindProperty(SupportsGet = true)]
 > ```
 >
-> Pour plus d’informations, consultez [ASP.net Core de la communauté réunions : lier sur obtenir une discussion (YouTube)](https://www.youtube.com/watch?v=p7iHB9V-KVU&feature=youtu.be&t=54m27s).
+> Pour plus d’informations, voir [ASP.NET Core Community Standup: Bind on GET discussion (YouTube)](https://www.youtube.com/watch?v=p7iHB9V-KVU&feature=youtu.be&t=54m27s).

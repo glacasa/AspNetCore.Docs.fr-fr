@@ -1,6 +1,6 @@
-## <a name="debug-diagnostics"></a>Diagnostics de débogage
+## <a name="debug-diagnostics"></a>Diagnostics de débbug
 
-Pour obtenir une sortie de diagnostic de routage détaillée, définissez `Logging:LogLevel:Microsoft` sur `Debug`. Par exemple, dans l’environnement de développement, définissez *appSettings. Development. JSON*:
+Pour la sortie diagnostique `Logging:LogLevel:Microsoft` détaillée `Debug`de routage, réglé à . Par exemple, dans l’environnement de développement, *définissez des applications. Development.json*:
 
 ```JSON
 {

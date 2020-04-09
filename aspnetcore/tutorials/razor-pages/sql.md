@@ -6,10 +6,10 @@ ms.author: riande
 ms.date: 7/22/2019
 uid: tutorials/razor-pages/sql
 ms.openlocfilehash: b5acb573f8fa39e5300ecdb359113d8697d78934
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78664338"
 ---
 # <a name="work-with-a-database-and-aspnet-core"></a>Utiliser une base de données et ASP.NET Core
@@ -32,7 +32,7 @@ L’objet `RazorPagesMovieContext` gère la tâche de connexion à la base de do
 
 ---
 
-Le système de [configuration](xref:fundamentals/configuration/index) d’ASP.NET Core lit `ConnectionString`. Pour un développement local, il obtient la chaîne de connexion à partir du fichier *appsettings.json*.
+Le système de [configuration](xref:fundamentals/configuration/index) d’ASP.NET Core lit `ConnectionString`. Pour le développement local, il obtient la chaîne de connexion à partir du fichier *appsettings.json.*
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -100,14 +100,14 @@ if (context.Movie.Any())
 Dans *Program.cs*, modifiez la méthode `Main` pour effectuer les opérations suivantes :
 
 * Obtenir une instance de contexte de base de données à partir du conteneur d’injection de dépendances.
-* Appeler la méthode seed et la passer au contexte.
+* Appeler la méthode de remplissage initial, en lui transmettant le contexte.
 * Supprimer le contexte une fois la méthode seed terminée.
 
 Le code suivant montre le fichier *Program.cs* mis à jour.
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Program.cs)]
 
-L’exception suivante se produit lorsque `Update-Database` n’a pas été exécutée :
+L’exception suivante `Update-Database` se produit lorsque n’a pas été exécuté:
 
 > `SqlException: Cannot open database "RazorPagesMovieContext-" requested by the login. The login failed.`
 > `Login failed for user 'user name'.`
@@ -116,10 +116,10 @@ L’exception suivante se produit lorsque `Update-Database` n’a pas été exé
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Supprimez tous les enregistrements de la base de données. Pour ce faire, utilisez les liens de suppression disponibles dans le navigateur ou à partir de [SSOX](xref:tutorials/razor-pages/new-field#ssox)
+* Supprimez tous les enregistrements de la base de données. Vous pouvez le faire avec les liens de suppression dans le navigateur ou à partir de [SSOX](xref:tutorials/razor-pages/new-field#ssox)
 * Forcez l’application à s’initialiser (appelez les méthodes de la classe `Startup`) pour que la méthode seed s’exécute. Pour forcer l’initialisation, IIS Express doit être arrêté et redémarré. Pour cela, adoptez l’une des approches suivantes :
 
-  * Cliquez avec le bouton droit sur l’icône de barre d’état système IIS Express dans la zone de notification, puis appuyez sur **Quitter** ou sur **Arrêter le site** :
+  * Cliquez à droite sur l’icône du plateau système IIS Express dans la zone de notification et appuyez sur **Exit** or **Stop Site**:
 
     ![Icône de la barre d’état système IIS Express](../first-mvc-app/working-with-sql/_static/iisExIcon.png)
 
@@ -132,7 +132,7 @@ L’exception suivante se produit lorsque `Update-Database` n’a pas été exé
 
 Supprimez tous les enregistrements dans la base de données (pour que la méthode seed s’exécute). Arrêtez et démarrez l’application pour amorcer la base de données.
 
-L’application affiche les données de valeurs de départ.
+L’application affiche les données de départ.
 
 ---
 
@@ -141,8 +141,8 @@ Le tutoriel suivant sert à améliorer la présentation des données.
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 > [!div class="step-by-step"]
-> [Précédent : Pages Razor obtenues par génération de modèles automatiques](xref:tutorials/razor-pages/page)
-> [Suivant : Mises à jour des pages](xref:tutorials/razor-pages/da1)
+> [Précédent: Scaffolded Razor Pages](xref:tutorials/razor-pages/page)
+> [Next: Mise à jour des pages](xref:tutorials/razor-pages/da1)
 
 ::: moniker-end
 
@@ -167,7 +167,7 @@ Pour plus d’informations sur les méthodes utilisées dans `ConfigureServices`
 * [Prise en charge du règlement général sur la protection des données (RGPD) de l’Union Européenne dans ASP.NET Core](xref:security/gdpr) pour `CookiePolicyOptions`.
 * [SetCompatibilityVersion](xref:mvc/compatibility-version)
 
-Le système de [configuration](xref:fundamentals/configuration/index) d’ASP.NET Core lit `ConnectionString`. Pour un développement local, il obtient la chaîne de connexion à partir du fichier *appsettings.json*.
+Le système de [configuration](xref:fundamentals/configuration/index) d’ASP.NET Core lit `ConnectionString`. Pour le développement local, il obtient la chaîne de connexion à partir du fichier *appsettings.json.*
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -244,7 +244,7 @@ if (context.Movie.Any())
 Dans *Program.cs*, modifiez la méthode `Main` pour effectuer les opérations suivantes :
 
 * Obtenir une instance de contexte de base de données à partir du conteneur d’injection de dépendances.
-* Appeler la méthode seed et la passer au contexte.
+* Appeler la méthode de remplissage initial, en lui transmettant le contexte.
 * Supprimer le contexte une fois la méthode seed terminée.
 
 Le code suivant montre le fichier *Program.cs* mis à jour.
@@ -260,7 +260,7 @@ SqlException: impossible d’ouvrir la base de données 'RazorPagesMovieContext-
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Supprimez tous les enregistrements de la base de données. Pour ce faire, utilisez les liens de suppression disponibles dans le navigateur ou à partir de [SSOX](xref:tutorials/razor-pages/new-field#ssox)
+* Supprimez tous les enregistrements de la base de données. Vous pouvez le faire avec les liens de suppression dans le navigateur ou à partir de [SSOX](xref:tutorials/razor-pages/new-field#ssox)
 * Forcez l’application à s’initialiser (appelez les méthodes de la classe `Startup`) pour que la méthode seed s’exécute. Pour forcer l’initialisation, IIS Express doit être arrêté et redémarré. Pour cela, adoptez l’une des approches suivantes :
 
   * Cliquez avec le bouton droit sur l’icône de barre d’état système IIS Express dans la zone de notification, puis appuyez sur **Quitter** ou sur **Arrêter le site** :
@@ -276,13 +276,13 @@ SqlException: impossible d’ouvrir la base de données 'RazorPagesMovieContext-
 
 Supprimez tous les enregistrements dans la base de données (pour que la méthode seed s’exécute). Arrêtez et démarrez l’application pour amorcer la base de données.
 
-L’application affiche les données de valeurs de départ.
+L’application affiche les données de départ.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
 Supprimez tous les enregistrements dans la base de données (pour que la méthode seed s’exécute). Arrêtez et démarrez l’application pour amorcer la base de données.
 
-L’application affiche les données de valeurs de départ.
+L’application affiche les données de départ.
 
 ---
 
@@ -297,7 +297,7 @@ Le didacticiel suivant nettoie la présentation des données.
 * [Version YouTube de ce tutoriel](https://youtu.be/A_5ff11sDHY)
 
 > [!div class="step-by-step"]
-> [Précédent : Pages Razor obtenues par génération de modèles automatiques](xref:tutorials/razor-pages/page)
-> [Suivant : Mises à jour des pages](xref:tutorials/razor-pages/da1)
+> [Précédent: Scaffolded Razor Pages](xref:tutorials/razor-pages/page)
+> [Next: Mise à jour des pages](xref:tutorials/razor-pages/da1)
 
 ::: moniker-end

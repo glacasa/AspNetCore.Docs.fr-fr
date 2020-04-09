@@ -1,48 +1,48 @@
 ---
-title: ASP.NET Core le test de charge/stress
+title: ASP.NET Tests de charge/stress de base
 author: Jeremy-Meng
-description: Découvrez plusieurs outils et approches notables pour le test de charge et les tests de stress ASP.NET Core les applications.
+description: Renseignez-vous sur plusieurs outils et approches notables pour les tests de charge et les tests de résistance ASP.NET les applications Core.
 ms.author: riande
 ms.custom: mvc
 ms.date: 4/05/2019
 uid: test/loadtests
 ms.openlocfilehash: 1fd77a767fb53b9276081dd712e13108094a0382
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78664688"
 ---
-# <a name="aspnet-core-loadstress-testing"></a>ASP.NET Core le test de charge/stress
+# <a name="aspnet-core-loadstress-testing"></a>ASP.NET Tests de charge/stress de base
 
-Les tests de charge et les tests de stress sont importants pour garantir qu’une application Web est performante et évolutive. Leurs objectifs sont différents même s’ils partagent souvent des tests similaires.
+Les tests de charge et les tests de résistance sont importants pour s’assurer qu’une application Web est performante et évolutive. Leurs objectifs sont différents même s’ils partagent souvent des tests similaires.
 
-Les **tests de charge** &ndash; testent si l’application peut gérer une charge spécifiée d’utilisateurs pour un certain scénario tout en répondant à l’objectif de réponse. L’application est exécutée dans des conditions normales.
+**Test de charge** &ndash; Si l’application peut gérer une charge spécifiée d’utilisateurs pour un certain scénario tout en satisfaisant l’objectif de réponse. L’application est exécutée dans des conditions normales.
 
-Les **tests de Stress** &ndash; la stabilité des applications de test lors de l’exécution dans des conditions extrêmes, souvent pendant une longue période de temps. Les tests mettent en place une charge utilisateur élevée, des pics ou une augmentation progressive de la charge, sur l’application, ou ils limitent les ressources informatiques de l’application.
+**Tests de stress** &ndash; Testez la stabilité de l’application lorsque vous courez dans des conditions extrêmes, souvent pendant une longue période de temps. Les tests placent une charge utilisateur élevée, soit des pics ou une augmentation progressive de la charge, sur l’application, ou ils limitent les ressources informatiques de l’application.
 
-Les tests de contrainte déterminent si une application en contrainte peut récupérer après une défaillance et retourner normalement au comportement attendu. En cas de stress, l’application n’est pas exécutée dans des conditions normales.
+Les tests de résistance déterminent si une application stressée peut se remettre d’une défaillance et revenir gracieusement au comportement attendu. Sous le stress, l’application n’est pas exécutée dans des conditions normales.
 
-Visual Studio 2019 est la dernière version de Visual Studio avec des fonctionnalités de test de charge. Pour les clients nécessitant des outils de test de charge à l’avenir, nous vous recommandons d’autres outils, tels que Apache JMeter, Akamai CloudTest et BlazeMeter. Pour plus d’informations, consultez les [notes de publication de Visual Studio 2019](/visualstudio/releases/2019/release-notes-v16.0#test-tools).
+Visual Studio 2019 est la dernière version de Visual Studio avec des fonctionnalités de test de charge. Pour les clients nécessitant des outils de test de charge à l’avenir, nous recommandons d’autres outils, tels que Apache JMeter, Akamai CloudTest et BlazeMeter. Pour plus d’informations, voir le [Visual Studio 2019 Release Notes](/visualstudio/releases/2019/release-notes-v16.0#test-tools).
 
 ## <a name="visual-studio-tools"></a>Outils Visual Studio
 
-Visual Studio permet aux utilisateurs de créer, développer et déboguer des tests de charge et de performances Web. Une option est disponible pour créer des tests en enregistrant des actions dans un navigateur Web.
+Visual Studio permet aux utilisateurs de créer, de développer et de déboiffer des tests de performance web et de charge. Une option est disponible pour créer des tests en enregistrant des actions dans un navigateur Web.
 
-Pour plus d’informations sur la création, la configuration et l’exécution de projets de test de charge à l’aide de Visual Studio 2017, consultez [démarrage rapide : créer un projet de test de charge](/visualstudio/test/quickstart-create-a-load-test-project?view=vs-2017).
+Pour plus d’informations sur la façon de créer, configurer et exécuter un projet de test de chargement à l’aide de Visual Studio 2017, voir [Quickstart: Créer un projet de test de charge](/visualstudio/test/quickstart-create-a-load-test-project?view=vs-2017).
 
-Les tests de charge peuvent être configurés pour s’exécuter sur site ou dans le Cloud à l’aide d’Azure DevOps.
+Les tests de chargement peuvent être configurés pour s’exécuter sur place ou s’exécuter dans le cloud à l’aide d’Azure DevOps.
 
 ## <a name="third-party-tools"></a>Outils tiers
 
-La liste suivante contient des outils de performances Web tiers avec différents ensembles de fonctionnalités :
+La liste suivante contient des outils de performance Web tiers avec divers ensembles de fonctionnalités :
 
 * [Apache JMeter](https://jmeter.apache.org/)
-* [ApacheBench (AB)](https://httpd.apache.org/docs/2.4/programs/ab.html)
+* [ApacheBench (ab)](https://httpd.apache.org/docs/2.4/programs/ab.html)
 * [Gatling](https://gatling.io/)
-* [K6](https://k6.io)
-* [Caroubes](https://locust.io/)
-* [Surtension de l’ouest du vent](https://websurge.west-wind.com/)
-* [Netlingue](https://github.com/hallatore/Netling)
+* [k6 (en)](https://k6.io)
+* [Locust](https://locust.io/)
+* [West Wind WebSurge](https://websurge.west-wind.com/)
+* [Netling (en)](https://github.com/hallatore/Netling)
 * [Vegeta](https://github.com/tsenart/vegeta)
 

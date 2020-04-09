@@ -8,10 +8,10 @@ ms.custom: mvc
 ms.date: 12/16/2019
 uid: host-and-deploy/azure-apps/index
 ms.openlocfilehash: ba9671f68a0faf99ff5232a6d5dd132d0a1d5ac5
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78665143"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Déployer des applications ASP.NET Core sur Azure App Service
@@ -28,9 +28,9 @@ Utilisez Visual Studio pour créer et déployer une application web ASP.NET Core
 [Créer une application ASP.NET Core dans App Service sur Linux](/azure/app-service/containers/quickstart-dotnetcore)  
 Utilisez la ligne de commande pour créer et déployer une application web ASP.NET Core dans Azure App Service sur Linux.
 
-Consultez le [tableau de bord ASP.net Core sur app service](https://aspnetcoreon.azurewebsites.net/) pour connaître la version de ASP.net Core disponible sur Azure App service.
+Voir le [ASP.NET Core on App Service Dashboard](https://aspnetcoreon.azurewebsites.net/) pour la version de ASP.NET Core disponible sur le service Azure App.
 
-Abonnez-vous au référentiel d' [annonces App service](https://github.com/Azure/app-service-announcements/) et surveillez les problèmes. L’équipe App Service publie régulièrement les annonces et les scénarios arrivant dans App Service.
+Abonnez-vous au référentiel [App Service Announcements](https://github.com/Azure/app-service-announcements/) et surveillez les problèmes. L’équipe d’App Service publie régulièrement des annonces et des scénarios arrivant dans App Service.
 
 Les articles suivants sont disponibles dans la documentation d’ASP.NET Core :
 
@@ -53,7 +53,7 @@ Comprenez et résolvez les avertissements et les erreurs avec les projets ASP.NE
 
 ### <a name="platform"></a>Plateforme
 
-L’architecture de la plateforme (x86/x64) d’une application App Services est définie dans les paramètres de l’application dans le portail Azure pour les applications hébergées sur un niveau d’hébergement de calcul (de base) de série A. Vérifiez que les paramètres de publication de l’application (par exemple, dans le [profil de publication Visual Studio (. pubxml)](xref:host-and-deploy/visual-studio-publish-profiles)) correspondent au paramètre dans la configuration de service de l’application dans le portail Azure.
+L’architecture de la plate-forme (x86/x64) d’une application App Services est définie dans les paramètres de l’application dans le portail Azure pour les applications hébergées sur un calcul de la série A (Basic) ou un niveau d’hébergement supérieur. Confirmez que les paramètres de publication de l’application (par exemple, dans le visual Studio publiez le [profil (.pubxml)](xref:host-and-deploy/visual-studio-publish-profiles)) correspondent au paramètre dans la configuration de service de l’application dans le portail Azure.
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -67,7 +67,7 @@ Concernant les applications avec des dépendances natives, des runtimes pour les
 
 ::: moniker-end
 
-Pour plus d’informations sur les composants .NET Core Framework et les méthodes de distribution, telles que les informations sur le Runtime .NET Core et le kit SDK .NET Core, consultez [à propos de .net Core : composition](/dotnet/core/about#composition).
+Pour plus d’informations sur les composants-cadres et les méthodes de distribution .NET Core, tels que les informations sur le runtime .NET Core et le .NET Core SDK, voir [About .NET Core: Composition](/dotnet/core/about#composition).
 
 ### <a name="packages"></a>.
 
@@ -87,13 +87,13 @@ Quand un paramètre d’application est créé ou modifié dans le portail Azure
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Quand une application utilise l' [hôte générique](xref:fundamentals/host/generic-host), les variables d’environnement sont chargées dans la configuration de l’application lorsque <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> est appelé pour générer l’hôte. Pour plus d’informations, voir <xref:fundamentals/host/generic-host> et [Fournisseur de configuration des variables d’environnement](xref:fundamentals/configuration/index#environment-variables-configuration-provider).
+Lorsqu’une application utilise [l’hôte générique,](xref:fundamentals/host/generic-host)les variables <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> de l’environnement sont chargées dans la configuration de l’application lorsqu’elles sont appelées pour construire l’hôte. Pour plus d’informations, voir <xref:fundamentals/host/generic-host> et [Fournisseur de configuration des variables d’environnement](xref:fundamentals/configuration/index#environment-variables-configuration-provider).
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-Quand une application utilise l' [hôte Web](xref:fundamentals/host/web-host), les variables d’environnement sont chargées dans la configuration de l’application lorsque <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> est appelé pour générer l’hôte. Pour plus d’informations, voir <xref:fundamentals/host/web-host> et [Fournisseur de configuration des variables d’environnement](xref:fundamentals/configuration/index#environment-variables-configuration-provider).
+Lorsqu’une application utilise l’hébergeur [Web,](xref:fundamentals/host/web-host)les variables <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> de l’environnement sont chargées dans la configuration de l’application lorsqu’elles sont appelées pour construire l’hôte. Pour plus d’informations, voir <xref:fundamentals/host/web-host> et [Fournisseur de configuration des variables d’environnement](xref:fundamentals/configuration/index#environment-variables-configuration-provider).
 
 ::: moniker-end
 
@@ -120,7 +120,7 @@ Pour des informations de surveillance, de journalisation et de dépannage, consu
 [Surveiller les applications dans Azure App Service](/azure/app-service/web-sites-monitor)  
 Découvrez comment consulter les quotas et les métriques des applications et des plans App Service.
 
-[Activer la journalisation des diagnostics pour les applications dans Azure App Service](/azure/app-service/web-sites-enable-diagnostic-log)  
+[Activez la connexion diagnostique pour les applications dans Azure App Service](/azure/app-service/web-sites-enable-diagnostic-log)  
 Découvrez comment activer et accéder à la journalisation des diagnostics pour les codes d’état HTTP, les requêtes en échec et les activités de serveur web.
 
 <xref:fundamentals/error-handling>  
@@ -146,34 +146,34 @@ Lors d’une permutation entre les emplacements de déploiement, aucun système 
 Pour plus d’informations, consultez <xref:security/data-protection/implementation/key-storage-providers>.
 <a name="deploy-aspnet-core-preview-release-to-azure-app-service"></a>
 
-## <a name="deploy-an-aspnet-core-app-that-uses-a-net-core-preview"></a>Déployer une application ASP.NET Core qui utilise une version préliminaire de .NET Core
+## <a name="deploy-an-aspnet-core-app-that-uses-a-net-core-preview"></a>Déployer une application ASP.NET Core qui utilise un aperçu .NET Core
 
-Pour déployer une application qui utilise une version préliminaire de .NET Core, consultez les ressources suivantes. Ces approches sont également utilisées lorsque le runtime est disponible, mais que le kit de développement logiciel (SDK) n’a pas été installé sur Azure App Service.
+Pour déployer une application qui utilise une version prévisualisante de .NET Core, voir les ressources suivantes. Ces approches sont également utilisées lorsque l’heure d’exécution est disponible, mais le SDK n’a pas été installé sur Azure App Service.
 
-* [Spécifier la version de kit SDK .NET Core à l’aide de Azure Pipelines](#specify-the-net-core-sdk-version-using-azure-pipelines)
-* [Déployer une application de prévisualisation autonome](#deploy-a-self-contained-preview-app)
+* [Spécifier la version SDK Core .NET à l’aide de Azure Pipelines](#specify-the-net-core-sdk-version-using-azure-pipelines)
+* [Déployer une application d’aperçu autonome](#deploy-a-self-contained-preview-app)
 * [Utiliser Docker avec Web Apps pour conteneurs](#use-docker-with-web-apps-for-containers)
 * [Installer l’extension de site de version Preview](#install-the-preview-site-extension)
 
-Consultez le [tableau de bord ASP.net Core sur app service](https://aspnetcoreon.azurewebsites.net/) pour connaître la version de ASP.net Core disponible sur Azure App service.
+Voir le [ASP.NET Core on App Service Dashboard](https://aspnetcoreon.azurewebsites.net/) pour la version de ASP.NET Core disponible sur le service Azure App.
 
-### <a name="specify-the-net-core-sdk-version-using-azure-pipelines"></a>Spécifier la version de kit SDK .NET Core à l’aide de Azure Pipelines
+### <a name="specify-the-net-core-sdk-version-using-azure-pipelines"></a>Spécifier la version SDK Core .NET à l’aide de Azure Pipelines
 
-Utilisez [Azure App service scénarios ci/CD](/azure/app-service/deploy-continuous-deployment) pour configurer une build d’intégration continue avec Azure DevOps. Une fois la build Azure DevOps créée, vous pouvez éventuellement configurer la build pour qu’elle utilise une version spécifique du kit de développement logiciel (SDK). 
+Utilisez les [scénarios CI/CD d’Azure App Pour](/azure/app-service/deploy-continuous-deployment) configurer une intégration continue avec Azure DevOps. Une fois la version Azure DevOps créée, configurez la version en option pour utiliser une version SDK spécifique. 
 
-#### <a name="specify-the-net-core-sdk-version"></a>Spécifier la version de kit SDK .NET Core
+#### <a name="specify-the-net-core-sdk-version"></a>Spécifier la version SDK Core .NET
 
-Lorsque vous utilisez le centre de déploiement App Service pour créer une build Azure DevOps, le pipeline de build par défaut comprend des étapes pour `Restore`, `Build`, `Test`et `Publish`. Pour spécifier la version du kit de développement logiciel (SDK), cliquez sur le bouton **Ajouter (+)** dans la liste des travaux de l’agent pour ajouter une nouvelle étape. Recherchez **Kit SDK .net Core** dans la barre de recherche. 
+Lors de l’utilisation du centre de déploiement App Service pour créer une `Restore` `Build`version `Test`Azure DevOps, le pipeline de construction par défaut comprend des étapes pour , , , et `Publish`. Pour spécifier la version SDK, sélectionnez le bouton **Ajouter ()** dans la liste d’emploi Agent pour ajouter une nouvelle étape. Recherchez **.NET Core SDK** dans la barre de recherche. 
 
-![Ajouter l’étape kit SDK .NET Core](index/add-sdk-step.png)
+![Ajouter l’étape SDK de base .NET](index/add-sdk-step.png)
 
-Déplacez l’étape dans la première position de la build afin que les étapes qui suivent utilisent la version spécifiée du kit SDK .NET Core. Spécifiez la version du kit SDK .NET Core. Dans cet exemple, le kit de développement logiciel (SDK) est défini sur `3.0.100`.
+Déplacez l’étape dans la première position de la construction de sorte que les étapes qui la suivent utilisent la version spécifiée du SDK core .NET. Spécifier la version du .NET Core SDK. Dans cet exemple, le SDK est configuré à `3.0.100`.
 
-![Étape du SDK terminée](index/sdk-step-first-place.png)
+![Étape SDK terminée](index/sdk-step-first-place.png)
 
-Pour publier un [Déploiement autonome (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd), configurez la SCD à l’étape `Publish` et fournissez l' [identificateur de Runtime (RID)](/dotnet/core/rid-catalog).
+Pour publier un [déploiement autonome (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd), `Publish` configurer SCD dans l’étape et fournir [l’identifiant Runtime (RID)](/dotnet/core/rid-catalog).
 
-![Publication autonome](index/self-contained.png)
+![Publier des contenus autonomes](index/self-contained.png)
 
 ### <a name="deploy-a-self-contained-preview-app"></a>Déployer une application en préversion autonome
 
@@ -192,7 +192,7 @@ Suivez les instructions de la section [Déployer l’application autonome](#depl
 
 ### <a name="install-the-preview-site-extension"></a>Installer l’extension de site de version Preview
 
-Si un problème se produit à l’aide de l’extension de site en version préliminaire, ouvrez un [problème dotnet/AspNetCore](https://github.com/dotnet/AspNetCore/issues).
+Si un problème se produit à l’aide de l’extension du site d’aperçu, ouvrez un [problème dotnet/AspNetCore](https://github.com/dotnet/AspNetCore/issues).
 
 1. Dans le portail Azure, accédez à App Service.
 1. Sélectionnez l’application web.
@@ -207,7 +207,7 @@ Une fois l’opération effectuée, la dernière préversion de .NET Core est in
 
 1. Sélectionnez **Outils avancés**.
 1. Sélectionnez **Go** dans **Outils avancés**.
-1. Sélectionnez l’élément de menu **Console de débogage** > **PowerShell**.
+1. Sélectionnez l’élément de menu > **PowerShell** de la **console Debug.**
 1. À l’invite PowerShell, exécutez la commande suivante. Remplacez `{X.Y}` par la version du runtime ASP.NET Core et `{PLATFORM}` par la plateforme dans la commande :
 
    ```powershell
@@ -217,11 +217,11 @@ Une fois l’opération effectuée, la dernière préversion de .NET Core est in
    La commande retourne `True` quand le runtime de la préversion x64 est installée.
 
 > [!NOTE]
-> L’architecture de la plateforme (x86/x64) d’une application App Services est définie dans les paramètres de l’application dans le portail Azure pour les applications hébergées sur un niveau d’hébergement de calcul (de base) de série A. Vérifiez que les paramètres de publication de l’application (par exemple, dans le [profil de publication Visual Studio (. pubxml)](xref:host-and-deploy/visual-studio-publish-profiles)) correspondent au paramètre dans la configuration de service de l’application dans la portail Azure.
+> L’architecture de la plate-forme (x86/x64) d’une application App Services est définie dans les paramètres de l’application dans le portail Azure pour les applications hébergées sur un calcul de la série A (Basic) ou un niveau d’hébergement supérieur. Confirmez que les paramètres de publication de l’application (par exemple, dans le visual Studio publiez le [profil (.pubxml)](xref:host-and-deploy/visual-studio-publish-profiles)) correspondent au paramètre dans la configuration de service de l’application dans le portail Azure.
 >
-> Si l’application s’exécute en mode in-process et si la plateforme est configurée pour une architecture 64 bits (x64), le module ASP.NET Core utilise le runtime de la préversion 64 bits, le cas échéant. Installez l’extension d' **exécution de ASP.net Core {X. Y} (x64)** à l’aide du portail Azure.
+> Si l’application s’exécute en mode in-process et si la plateforme est configurée pour une architecture 64 bits (x64), le module ASP.NET Core utilise le runtime de la préversion 64 bits, le cas échéant. Installez **l’extension Runtime ASP.NET Core 'X.Y' (x64)** à l’aide du portail Azure.
 >
-> Après l’installation du runtime d’évaluation x64, exécutez la commande suivante dans la fenêtre de commande Azure Kudu PowerShell pour vérifier l’installation. Remplacez la version ASP.NET Core Runtime pour `{X.Y}` dans la commande suivante :
+> Après l’installation de l’heure d’exécution x64 aperçu, exécuter la commande suivante dans la fenêtre de commande Azure Kudu PowerShell pour vérifier l’installation. Remplacez la version ASP.NET Core `{X.Y}` runtime dans la commande suivante :
 >
 > ```powershell
 > Test-Path D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64\
@@ -232,7 +232,7 @@ Une fois l’opération effectuée, la dernière préversion de .NET Core est in
 > [!NOTE]
 > Les **extensions ASP.NET Core** permettent d’activer des fonctionnalités supplémentaires pour ASP.NET Core sur Azure App Services, par exemple la journalisation Azure. L’extension est installée automatiquement quand vous effectuez le déploiement à partir de Visual Studio. Si l’extension n’est pas installée, installez-la pour l’application.
 
-**Utiliser l’extension de site de la version Preview avec un modèle ARM**
+**Utiliser l’extension de site en préversion avec un modèle ARM**
 
 Si un modèle ARM est utilisé pour créer et déployer des applications, le type de ressource `siteextensions` peut être utilisé pour ajouter l’extension de site à une application web. Par exemple :
 
@@ -242,7 +242,7 @@ Si un modèle ARM est utilisé pour créer et déployer des applications, le typ
 
 ::: moniker range=">= aspnetcore-2.2"
 
-Pour un déploiement de 64 bits :
+Pour un déploiement 64 bits :
 
 * Utilisez un SDK .NET Core 64 bits pour générer une application 64 bits.
 * Définissez **Plateforme** sur **64 bits** dans **Configuration** > **Paramètres généraux** d’App Service. L’application doit utiliser un plan de service De base ou supérieur pour permettre le choix du nombre de bits de la plateforme.
@@ -253,7 +253,7 @@ Pour un déploiement de 64 bits :
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Sélectionnez **Générer** > **Publier {nom de l’application}** dans la barre d’outils de Visual Studio, ou cliquez avec le bouton droit sur le projet dans l’**Explorateur de solutions**, puis sélectionnez **Publier**.
+1. Sélectionnez **Build** > Publier le nom de**l’application** à partir de la barre d’outils Visual Studio ou cliquer à droite sur le projet dans **Solution Explorer** et **sélectionnez Publier**.
 1. Dans la boîte de dialogue **Choisir une cible de publication**, confirmez qu’**App Service** est sélectionné.
 1. Sélectionnez **Avancé**. La boîte de dialogue **Publier** s’ouvre.
 1. Dans la boîte de dialogue **Publier** :
@@ -280,11 +280,11 @@ Pour un déploiement de 64 bits :
 
 ### <a name="deploy-the-app-self-contained"></a>Déployer l’application autonome
 
-Utilisez Visual Studio ou le CLI .NET Core pour un [Déploiement autonome (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
+Utilisez Visual Studio ou le CLI Core .NET pour un [déploiement autonome (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Sélectionnez **Générer** > **Publier {nom de l’application}** dans la barre d’outils de Visual Studio, ou cliquez avec le bouton droit sur le projet dans l’**Explorateur de solutions**, puis sélectionnez **Publier**.
+1. Sélectionnez **Build** > Publier le nom de**l’application** à partir de la barre d’outils Visual Studio ou cliquer à droite sur le projet dans **Solution Explorer** et **sélectionnez Publier**.
 1. Dans la boîte de dialogue **Choisir une cible de publication**, confirmez qu’**App Service** est sélectionné.
 1. Sélectionnez **Avancé**. La boîte de dialogue **Publier** s’ouvre.
 1. Dans la boîte de dialogue **Publier** :
@@ -318,7 +318,7 @@ Utilisez Visual Studio ou le CLI .NET Core pour un [Déploiement autonome (SCD)]
 
 ## <a name="protocol-settings-https"></a>Paramètres de protocole (HTTPS)
 
-Les liaisons de protocole sécurisées permettent de spécifier un certificat à utiliser pour répondre à des requêtes sur HTTPS. La liaison nécessite un certificat privé valide ( *.pfx*) émis pour le nom d’hôte spécifique. Pour plus d’informations, consultez [Didacticiel : lier un certificat SSL personnalisé existant à Azure App service](/azure/app-service/app-service-web-tutorial-custom-ssl).
+Les liaisons de protocole sécurisées permettent de spécifier un certificat à utiliser pour répondre à des requêtes sur HTTPS. La liaison nécessite un certificat privé valide (*.pfx*) émis pour le nom d’hôte spécifique. Pour plus d’informations, voir [Tutorial: Bind an existing custom SSL certificate to Azure App Service](/azure/app-service/app-service-web-tutorial-custom-ssl).
 
 ## <a name="transform-webconfig"></a>Transformer web.config
 
@@ -329,7 +329,7 @@ Si vous devez transformer *web.config* lors de la publication (par exemple, déf
 * [Vue d'ensemble d'App Service](/azure/app-service/app-service-web-overview)
 * [Azure App Service: The Best Place to Host your .NET Apps (55-minute overview video)](https://channel9.msdn.com/events/dotnetConf/2017/T222)
 * [Azure Friday: Azure App Service Diagnostic and Troubleshooting Experience (12-minute video)](https://channel9.msdn.com/Shows/Azure-Friday/Azure-App-Service-Diagnostic-and-Troubleshooting-Experience)
-* [Vue d’ensemble des diagnostics Azure App Service](/azure/app-service/app-service-diagnostics)
+* [Présentation des diagnostics Azure App Service](/azure/app-service/app-service-diagnostics)
 * <xref:host-and-deploy/web-farm>
 
 Azure App Service sur Windows Server utilise [IIS (Internet Information Services)](https://www.iis.net/). Les rubriques suivantes se rapportent à la technologie IIS sous-jacente :

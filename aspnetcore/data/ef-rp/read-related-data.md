@@ -7,10 +7,10 @@ ms.custom: mvc
 ms.date: 09/28/2019
 uid: data/ef-rp/read-related-data
 ms.openlocfilehash: d244ce1527486466bcbc6557ec35869aa206bc4f
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78656575"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---read-related-data---6-of-8"></a>Pages Razor avec EF Core dans ASP.NET Core - Lire des données associées - 6 sur 8
@@ -33,7 +33,7 @@ Les illustrations suivantes montrent les pages terminées pour ce didacticiel :
 
 EF Core peut charger des données associées dans les propriétés de navigation d’une entité de plusieurs manières :
 
-* [Chargement hâtif](/ef/core/querying/related-data#eager-loading). Le chargement hâtif a lieu quand une requête pour un type d’entité charge également des entités associées. Quand une entité est lue, ses données associées sont récupérées. Cela génère en général une requête de jointure unique qui récupère toutes les données nécessaires. EF Core émet plusieurs requêtes pour certains types de chargement hâtif. Il peut s’avérer plus efficace d’émettre plusieurs requêtes plutôt qu’une seule très grande. Le chargement hâtif est spécifié avec les méthodes `Include` et `ThenInclude`.
+* [Chargement avide](/ef/core/querying/related-data#eager-loading). Le chargement hâtif a lieu quand une requête pour un type d’entité charge également des entités associées. Quand une entité est lue, ses données associées sont récupérées. Cela génère en général une requête de jointure unique qui récupère toutes les données nécessaires. EF Core émet plusieurs requêtes pour certains types de chargement hâtif. Il peut s’avérer plus efficace d’émettre plusieurs requêtes plutôt qu’une seule très grande. Le chargement hâtif est spécifié avec les méthodes `Include` et `ThenInclude`.
 
   ![Exemple de chargement hâtif](read-related-data/_static/eager-loading.png)
  
@@ -52,7 +52,7 @@ EF Core peut charger des données associées dans les propriétés de navigation
 
   ![Exemple de chargement explicite](read-related-data/_static/explicit-loading.png)
 
-* [Chargement différé](/ef/core/querying/related-data#lazy-loading). [Le chargement différé a été ajouté à EF Core dans la version 2.1](/ef/core/querying/related-data#lazy-loading). Quand l’entité est lue pour la première fois, les données associées ne sont pas récupérées. Lors du premier accès à une propriété de navigation, les données requises pour cette propriété de navigation sont récupérées automatiquement. Une requête est envoyée à la base de données chaque fois qu’une propriété de navigation fait pour la première fois l’objet d’un accès.
+* [Chargement paresseux](/ef/core/querying/related-data#lazy-loading). [Le chargement différé a été ajouté à EF Core dans la version 2.1](/ef/core/querying/related-data#lazy-loading). Quand l’entité est lue pour la première fois, les données associées ne sont pas récupérées. Lors du premier accès à une propriété de navigation, les données requises pour cette propriété de navigation sont récupérées automatiquement. Une requête est envoyée à la base de données chaque fois qu’une propriété de navigation fait pour la première fois l’objet d’un accès.
 
 ## <a name="create-course-pages"></a>Créer des pages Course
 
@@ -63,7 +63,7 @@ L’entité `Course` comprend une propriété de navigation qui contient l’ent
 Pour afficher le nom du service (« department ») affecté pour un cours (« course ») :
 
 * Chargez l’entité `Department` associée dans la propriété de navigation `Course.Department`.
-* Obtenez le nom à partir de la propriété `Department` de l’entité `Name`.
+* Obtenez le nom à partir de la propriété `Name` de l’entité `Department`.
 
 <a name="scaffold"></a>
 
@@ -83,13 +83,13 @@ Pour afficher le nom du service (« department ») affecté pour un cours («�
 
 * Exécutez la commande suivante pour générer automatiquement des modèles de pages Course.
 
-  **Sur Windows :**
+  **Sur Windows:**
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Course -dc SchoolContext -udl -outDir Pages\Courses --referenceScriptLibraries
   ```
 
-  **Sur Linux ou macOS :**
+  **Sur Linux ou macOS :**
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Course -dc SchoolContext -udl -outDir Pages/Courses --referenceScriptLibraries
@@ -148,9 +148,9 @@ Pour obtenir un exemple complet, consultez [IndexSelect.cshtml](https://github.c
 Cette section génère automatiquement des modèles de pages Instructor et ajoute les cours et les inscriptions associés à la page d’index des formateurs.
 
 <a name="IP"></a>
-![Page d’index des formateurs](read-related-data/_static/instructors-index30.png)
+![Page d’index des instructeurs](read-related-data/_static/instructors-index30.png)
 
-Cette page lit et affiche les données associées comme suit :
+Cette page lit et affiche les données associées comme suit :
 
 * La liste des formateurs affiche des données associées de l’entité `OfficeAssignment` (Office dans l’image précédente). Il existe une relation un-à-zéro-ou-un entre les entités `Instructor` et `OfficeAssignment`. Le chargement hâtif est utilisé pour les entités `OfficeAssignment`. Le chargement hâtif est généralement plus efficace quand les données associées doivent être affichées. Ici, les affectations de bureau pour les formateurs sont affichées.
 * Quand l’utilisateur sélectionne un formateur, les entités `Course` associées sont affichées. Il existe une relation plusieurs-à-plusieurs entre les entités `Instructor` et `Course`. Le chargement hâtif est utilisé pour les entités `Course` et leurs entités `Department` associées. Dans le cas présent, des requêtes distinctes peuvent être plus efficaces, car seuls les cours du formateur sélectionné sont nécessaires. Cet exemple montre comment utiliser le chargement hâtif pour des propriétés de navigation dans des entités qui se trouvent dans des propriétés de navigation.
@@ -180,13 +180,13 @@ Créez *SchoolViewModels/InstructorIndexData.cs* avec le code suivant :
 
 * Exécutez la commande suivante pour générer automatiquement des modèles de pages Instructor.
 
-  **Sur Windows :**
+  **Sur Windows:**
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Instructor -dc SchoolContext -udl -outDir Pages\Instructors --referenceScriptLibraries
   ```
 
-  **Sur Linux ou macOS :**
+  **Sur Linux ou macOS :**
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Instructor -dc SchoolContext -udl -outDir Pages/Instructors --referenceScriptLibraries
@@ -196,7 +196,7 @@ Créez *SchoolViewModels/InstructorIndexData.cs* avec le code suivant :
 
 Pour voir à quoi ressemble la page générée automatiquement avant de la mettre à jour, exécutez l’application et accédez à la page Instructors.
 
-Mettez à jour *Pages/Instructors/Index.cshtml.cs* avec le code suivant :
+Mise à jour *Pages/Instructors/Index.cshtml.cs* avec le code suivant :
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Instructors/Index1.cshtml.cs?name=snippet_all&highlight=2,19-53)]
 
@@ -227,7 +227,7 @@ La méthode `Where` retourne une collection. Mais dans ce cas, le filtre sélect
 
 ![Instructor-to-Courses m:M](complex-data-model/_static/courseassignment.png)
 
-La méthode `Single` est utilisée sur une collection quand la collection ne compte qu’un seul élément. La méthode `Single` lève une exception si la collection est vide ou s’il y a plusieurs éléments. Une alternative est `SingleOrDefault`, qui retourne une valeur par défaut (Null dans le cas présent) si la collection est vide.
+La méthode `Single` est utilisée sur une collection quand la collection ne compte qu’un seul élément. La méthode `Single` lève une exception si la collection est vide ou s’il y a plusieurs éléments. Une alternative est `SingleOrDefault`, qui renvoie une valeur par défaut (Null dans ce cas) si la collection est vide.
 
 Le code suivant renseigne la propriété `Enrollments` du modèle d’affichage quand un cours est sélectionné :
 
@@ -241,7 +241,7 @@ Mettez à jour *Pages/Instructors/Index.cshtml* avec le code suivant.
 
 Le code précédent apporte les modifications suivantes :
 
-* Met à jour la directive `page` en remplaçant `@page` par `@page "{id:int?}"`. `"{id:int?}"` est un modèle de route. Le modèle de route change les chaînes de requête entières dans l’URL en données de route. Par exemple, si vous cliquez sur le lien **Select** pour un formateur avec seulement la directive `@page`, une URL comme celle-ci est générée :
+* Il met à jour la directive `page` en remplaçant `@page` par `@page "{id:int?}"`. `"{id:int?}"` est un modèle de route. Le modèle de route change les chaînes de requête entières dans l’URL en données de route. Par exemple, si vous cliquez sur le lien **Select** pour un formateur avec seulement la directive `@page`, une URL comme celle-ci est générée :
 
   `https://localhost:5001/Instructors?id=2`
 
@@ -258,7 +258,7 @@ Le code précédent apporte les modifications suivantes :
   }
   ```
 
-* Ajoute une colonne **Courses** qui affiche les cours animés par chaque formateur. Pour plus d’informations sur cette syntaxe Razor, consultez [transition de ligne explicite](xref:mvc/views/razor#explicit-line-transition) .
+* Ajoute une colonne **Courses** qui affiche les cours animés par chaque formateur. Voir [la transition de ligne explicite](xref:mvc/views/razor#explicit-line-transition) pour en savoir plus sur cette syntaxe de rasoir.
 
 * Ajoute du code qui ajoute dynamiquement `class="success"` à l’élément `tr` du formateur et du cours sélectionnés. Cela définit une couleur d’arrière-plan pour la ligne sélectionnée à l’aide d’une classe d’amorçage.
 
@@ -281,7 +281,7 @@ Le code précédent apporte les modifications suivantes :
 
 * Ajoute un tableau d’inscriptions d’étudiants pour le cours sélectionné.
 
-Exécutez l’application et sélectionnez l’onglet **Instructors** . La page affiche le `Location` (Office) à partir de l’entité `OfficeAssignment` associée. Si `OfficeAssignment` a la valeur Null, une cellule de tableau vide est affichée.
+Exécutez l’application et sélectionnez l’onglet **Instructeurs.** La page `Location` affiche le (bureau) de l’entité connexe. `OfficeAssignment` Si `OfficeAssignment` a la valeur Null, une cellule de tableau vide est affichée.
 
 Cliquez sur le lien **Select** pour un formateur. Le style de ligne change et les cours attribués à ce formateur s’affichent.
 
@@ -323,8 +323,8 @@ Tester l'application. Du point de vue d’un utilisateur, l’application se com
 Le didacticiel suivant montre comment mettre à jour les données associées.
 
 >[!div class="step-by-step"]
->[Tutoriel précédent](xref:data/ef-rp/complex-data-model)
->[Tutoriel suivant](xref:data/ef-rp/update-related-data)
+>[Tutoriel précédent](xref:data/ef-rp/complex-data-model)[Next tutoriel](xref:data/ef-rp/update-related-data) 
+>
 
 ::: moniker-end
 
@@ -340,11 +340,11 @@ Les illustrations suivantes montrent les pages terminées pour ce didacticiel :
 
 ![Page d’index des formateurs](read-related-data/_static/instructors-index.png)
 
-## <a name="eager-explicit-and-lazy-loading-of-related-data"></a>Chargement hâtif, explicite et différé de données associées
+## <a name="eager-explicit-and-lazy-loading-of-related-data"></a>Chargement hâtif, explicite et différé des données associées
 
 EF Core peut charger des données associées dans les propriétés de navigation d’une entité de plusieurs manières :
 
-* [Chargement hâtif](/ef/core/querying/related-data#eager-loading). Le chargement hâtif a lieu quand une requête pour un type d’entité charge également des entités associées. Quand l’entité est lue, ses données associées sont récupérées. Cela génère en général une requête de jointure unique qui récupère toutes les données nécessaires. EF Core émet plusieurs requêtes pour certains types de chargement hâtif. L’émission de requêtes multiples peut être plus efficace que ce n’était le cas pour certaines requêtes dans EF6 où une seule requête était émise. Le chargement hâtif est spécifié avec les méthodes `Include` et `ThenInclude`.
+* [Chargement avide](/ef/core/querying/related-data#eager-loading). Le chargement hâtif a lieu quand une requête pour un type d’entité charge également des entités associées. Quand l’entité est lue, ses données associées sont récupérées. Cela génère en général une requête de jointure unique qui récupère toutes les données nécessaires. EF Core émet plusieurs requêtes pour certains types de chargement hâtif. L’émission de requêtes multiples peut être plus efficace que ce n’était le cas pour certaines requêtes dans EF6 où une seule requête était émise. Le chargement hâtif est spécifié avec les méthodes `Include` et `ThenInclude`.
 
   ![Exemple de chargement hâtif](read-related-data/_static/eager-loading.png)
  
@@ -363,7 +363,7 @@ EF Core peut charger des données associées dans les propriétés de navigation
 
   ![Exemple de chargement explicite](read-related-data/_static/explicit-loading.png)
 
-* [Chargement différé](/ef/core/querying/related-data#lazy-loading). [Le chargement différé a été ajouté à EF Core dans la version 2.1](/ef/core/querying/related-data#lazy-loading). Quand l’entité est lue pour la première fois, les données associées ne sont pas récupérées. Lors du premier accès à une propriété de navigation, les données requises pour cette propriété de navigation sont récupérées automatiquement. Une requête est envoyée à la base de données chaque fois qu’une propriété de navigation est sollicitée pour la première fois.
+* [Chargement paresseux](/ef/core/querying/related-data#lazy-loading). [Le chargement différé a été ajouté à EF Core dans la version 2.1](/ef/core/querying/related-data#lazy-loading). Quand l’entité est lue pour la première fois, les données associées ne sont pas récupérées. Lors du premier accès à une propriété de navigation, les données requises pour cette propriété de navigation sont récupérées automatiquement. Une requête est envoyée à la base de données chaque fois qu’une propriété de navigation est sollicitée pour la première fois.
 
 * L’opérateur `Select` charge uniquement les données associées nécessaires.
 
@@ -414,7 +414,7 @@ Mettez à jour *Pages/Courses/Index.cshtml* avec le balisage en surbrillance sui
 
 Les modifications suivantes ont été apportées au code généré automatiquement :
 
-* Changement de l’en-tête : Index a été remplacé par Course.
+* Changement de l’en-tête : Index a été remplacé par Courses.
 * Ajout d’une colonne **Number** qui affiche la valeur de la propriété `CourseID`. Par défaut, les clés primaires ne sont pas générées automatiquement, car elles ne sont normalement pas significatives pour les utilisateurs finaux. Toutefois, dans le cas présent la clé primaire est significative.
 * Modification de la colonne **Department** afin d’afficher le nom du département. Le code affiche la propriété `Name` de l’entité `Department` qui est chargée dans la propriété de navigation `Department` :
 
@@ -451,9 +451,9 @@ Pour obtenir un exemple complet, consultez [IndexSelect.cshtml](https://github.c
 Dans cette section, nous allons créer la page Instructors.
 
 <a name="IP"></a>
-![Page d’index des formateurs](read-related-data/_static/instructors-index.png)
+![Page d’index des instructeurs](read-related-data/_static/instructors-index.png)
 
-Cette page lit et affiche les données associées comme suit :
+Cette page lit et affiche les données associées comme suit :
 
 * La liste des formateurs affiche des données associées de l’entité `OfficeAssignment` (Office dans l’image précédente). Il existe une relation un-à-zéro-ou-un entre les entités `Instructor` et `OfficeAssignment`. Le chargement hâtif est utilisé pour les entités `OfficeAssignment`. Le chargement hâtif est généralement plus efficace quand les données associées doivent être affichées. Ici, les affectations de bureau pour les formateurs sont affichées.
 * Quand l’utilisateur sélectionne un formateur (Harui dans l’image précédente), les entités `Course` associées sont affichées. Il existe une relation plusieurs-à-plusieurs entre les entités `Instructor` et `Course`. Le chargement hâtif est utilisé pour les entités `Course` et leurs entités `Department` associées. Dans le cas présent, des requêtes distinctes peuvent être plus efficaces, car seuls les cours du formateur sélectionné sont nécessaires. Cet exemple montre comment utiliser le chargement hâtif pour des propriétés de navigation dans des entités qui se trouvent dans des propriétés de navigation.
@@ -509,7 +509,7 @@ Mettez à jour *Pages/Instructors/Index.cshtml* avec le balisage suivant :
 
 Le balisage précédent apporte les modifications suivantes :
 
-* Met à jour la directive `page` en remplaçant `@page` par `@page "{id:int?}"`. `"{id:int?}"` est un modèle de route. Le modèle de route change les chaînes de requête entières dans l’URL en données de route. Par exemple, si vous cliquez sur le lien **Select** pour un formateur avec seulement la directive `@page`, une URL comme celle-ci est générée :
+* Il met à jour la directive `page` en remplaçant `@page` par `@page "{id:int?}"`. `"{id:int?}"` est un modèle de route. Le modèle de route change les chaînes de requête entières dans l’URL en données de route. Par exemple, si vous cliquez sur le lien **Select** pour un formateur avec seulement la directive `@page`, une URL comme celle-ci est générée :
 
   `http://localhost:1234/Instructors?id=2`
 
@@ -527,7 +527,7 @@ Le balisage précédent apporte les modifications suivantes :
   }
   ```
 
-* Ajout d’une colonne **Courses** qui affiche les cours dispensés par chaque formateur. Pour plus d’informations sur cette syntaxe Razor, consultez [transition de ligne explicite](xref:mvc/views/razor#explicit-line-transition) .
+* Vous avez ajouté une colonne **Courses** qui affiche les cours animés par chaque formateur. Voir [la transition de ligne explicite](xref:mvc/views/razor#explicit-line-transition) pour en savoir plus sur cette syntaxe de rasoir.
 
 * Vous avez ajouté un code qui ajoute dynamiquement `class="success"` à l’élément `tr` du formateur sélectionné. Cela définit une couleur d’arrière-plan pour la ligne sélectionnée à l’aide d’une classe d’amorçage.
 
@@ -546,7 +546,7 @@ Le balisage précédent apporte les modifications suivantes :
   <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
   ```
 
-Exécutez l’application et sélectionnez l’onglet **Instructors** . La page affiche le `Location` (Office) à partir de l’entité `OfficeAssignment` associée. Si OfficeAssignment` est Null, une cellule de table vide est affichée.
+Exécutez l’application et sélectionnez l’onglet **Instructeurs.** La page `Location` affiche le (bureau) de l’entité connexe. `OfficeAssignment` Si OfficeAssignment` est Null, une cellule de table vide est affichée.
 
 Cliquez sur le lien **Select**. Le style de ligne change.
 
@@ -574,7 +574,7 @@ La méthode `Where` retourne une collection. Dans la méthode `Where` précéden
 
 ![Instructor-to-Courses m:M](complex-data-model/_static/courseassignment.png)
 
-La méthode `Single` est utilisée sur une collection quand la collection ne compte qu’un seul élément. La méthode `Single` lève une exception si la collection est vide ou s’il y a plusieurs éléments. Une alternative est `SingleOrDefault`, qui retourne une valeur par défaut (Null dans le cas présent) si la collection est vide. L’utilisation de `SingleOrDefault` sur une collection vide :
+La méthode `Single` est utilisée sur une collection quand la collection ne compte qu’un seul élément. La méthode `Single` lève une exception si la collection est vide ou s’il y a plusieurs éléments. Une alternative est `SingleOrDefault`, qui renvoie une valeur par défaut (Null dans ce cas) si la collection est vide. L’utilisation de `SingleOrDefault` sur une collection vide :
 
 * Génère une exception (à cause de la tentative de trouver une propriété `Courses` sur une référence Null).
 * Le message d’exception indique moins clairement la cause du problème.
@@ -646,7 +646,7 @@ Le didacticiel suivant montre comment mettre à jour les données associées.
 * [Version YouTube de ce tutoriel (partie 2)](https://www.youtube.com/watch?v=xvDDrIHv5ko)
 
 >[!div class="step-by-step"]
->[Précédent](xref:data/ef-rp/complex-data-model)
->[Suivant](xref:data/ef-rp/update-related-data)
+>[Suivant précédent](xref:data/ef-rp/complex-data-model)
+>[Next](xref:data/ef-rp/update-related-data)
 
 ::: moniker-end

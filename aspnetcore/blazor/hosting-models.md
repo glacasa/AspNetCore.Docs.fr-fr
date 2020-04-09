@@ -1,152 +1,154 @@
 ---
-title: ASP.NET Core Blazor des modèles d’hébergement
+title: ASP.NET modèles d’hébergement de base Blazor
 author: guardrex
-description: Découvrez les modèles d’hébergement Blazor webassembly et Blazor Server.
+description: Comprendre Blazor les modèles Blazor d’hébergement WebAssembly et Server.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/18/2020
+ms.date: 03/31/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: e6ce2be53c35268854e0e8d408b649a8c6ef497e
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 0dfc991f76acb227ce9ea27a07fbae50571f0117
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78658318"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80471832"
 ---
-# <a name="aspnet-core-opno-locblazor-hosting-models"></a>ASP.NET Core Blazor des modèles d’hébergement
+# <a name="aspnet-core-opno-locblazor-hosting-models"></a>ASP.NET modèles d’hébergement de base Blazor
 
 Par [Daniel Roth](https://github.com/danroth27)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Blazor est un Framework Web conçu pour s’exécuter côté client dans le navigateur sur un Runtime .NET basé sur [Webassembly](https://webassembly.org/)( *Blazor webassembly*) ou côté serveur dans ASP.net Core ( *serveurBlazor* ). Quel que soit le modèle d’hébergement, les modèles d’application et de composant *sont les mêmes*.
+Blazorest un cadre web conçu pour exécuter le côté client dans le navigateur sur un [WebAssembly-basé](https://webassembly.org/).NET runtime* Blazor *(* Blazor WebAssembly*) ou côté serveur dans ASP.NET Core ( Server ). Quel que soit le modèle d’hébergement, les modèles d’applications et de composants *sont les mêmes*.
 
-Pour créer un projet pour les modèles d’hébergement décrits dans cet article, consultez <xref:blazor/get-started>.
+Pour créer un projet pour les modèles <xref:blazor/get-started>d’hébergement décrits dans cet article, voir .
 
-Pour une configuration avancée, consultez <xref:blazor/hosting-model-configuration>.
+Pour une configuration <xref:blazor/hosting-model-configuration>avancée, voir .
 
-## <a name="opno-locblazor-webassembly"></a>Blazor webassembly
+## <a name="opno-locblazor-webassembly"></a>BlazorWebAssembly (en)
 
-Le modèle d’hébergement principal pour Blazor s’exécute côté client dans le navigateur sur webassembly. L’application Blazor, ses dépendances et le Runtime .NET sont téléchargés dans le navigateur. L’application est exécutée directement sur le thread d’interface utilisateur du navigateur. Les mises à jour de l’interface utilisateur et la gestion des événements se produisent dans le même processus. Les ressources de l’application sont déployées en tant que fichiers statiques sur un serveur Web ou un service qui prend en charge le contenu statique sur les clients.
+Le modèle d’hébergement principal pour Blazor est l’exécution du côté client dans le navigateur sur WebAssembly. L’application, Blazor ses dépendances et le temps d’exécution .NET sont téléchargés sur le navigateur. L’application est exécutée directement sur le thread d’interface utilisateur du navigateur. Les mises à jour de l’interface utilisateur et le traitement des événements se produisent dans le même processus. Les actifs de l’application sont déployés sous forme de fichiers statiques sur un serveur web ou un service capable de servir du contenu statique aux clients.
 
-![Blazor webassembly : l’application Blazor s’exécute sur un thread d’interface utilisateur dans le navigateur.](hosting-models/_static/blazor-webassembly.png)
+![BlazorWebAssembly: Blazor L’application s’exécute sur un thread d’interface utilisateur à l’intérieur du navigateur.](hosting-models/_static/blazor-webassembly.png)
 
-Pour créer une application Blazor à l’aide du modèle d’hébergement côté client, utilisez le modèle d' **applicationBlazor Webassembly** ([dotnet New blazorwasm](/dotnet/core/tools/dotnet-new)).
+Pour créer Blazor une application à l’aide du modèle d’hébergement côté client, utilisez le ** Blazor modèle WebAssembly App** [(dotnet nouveau blazorwasm](/dotnet/core/tools/dotnet-new)).
 
-Après avoir sélectionné le modèle d' **applicationBlazor Webassembly** , vous avez la possibilité de configurer l’application pour utiliser un serveur principal ASP.net core en activant la case à cocher **ASP.net Core hébergé** ([dotnet New blazorwasm--Hosted](/dotnet/core/tools/dotnet-new)). L’application ASP.NET Core sert l’application Blazor aux clients. L’application Blazor webassembly peut interagir avec le serveur sur le réseau à l’aide d’appels d’API Web ou de [SignalR](xref:signalr/introduction) (<xref:tutorials/signalr-blazor-webassembly>).
+Après avoir sélectionné le **ASP.NET Core hosted** ** Blazor modèle WebAssembly App,** vous avez la possibilité de configurer l’application pour utiliser un backend ASP.NET Core en sélectionnant la case à cocher hébergée ASP.NET Core[(dotnet nouveau blazorwasm --hébergé](/dotnet/core/tools/dotnet-new)). L’application ASP.NET Core sert Blazor l’application aux clients. L’application Blazor WebAssembly peut interagir avec le serveur sur [SignalR](xref:signalr/introduction) <xref:tutorials/signalr-blazor-webassembly>le réseau à l’aide d’appels Web API ou (
 
-Les modèles incluent le `blazor.webassembly.js` script qui gère :
+Les modèles incluent `blazor.webassembly.js` le script qui gère :
 
-* Téléchargement du Runtime .NET, de l’application et des dépendances de l’application.
-* Initialisation du runtime pour exécuter l’application.
+* Téléchargement de l’heure d’exécution .NET, l’application, et les dépendances de l’application.
+* Initialisation de l’exécution de l’application.
 
-Le modèle d’hébergement webassembly Blazor offre plusieurs avantages :
+Le Blazor modèle d’hébergement WebAssembly offre plusieurs avantages :
 
-* Il n’existe aucune dépendance côté serveur .NET. L’application fonctionne entièrement après son téléchargement sur le client.
-* Les ressources et les fonctionnalités du client sont pleinement exploitées.
-* Le travail est déchargé du serveur vers le client.
-* Un serveur Web ASP.NET Core n’est pas requis pour héberger l’application. Les scénarios de déploiement sans serveur sont possibles (par exemple, pour servir l’application à partir d’un CDN).
+* Il n’y a pas de dépendance .NET côté serveur. L’application fonctionne pleinement après avoir été téléchargée sur le client.
+* Les ressources et les capacités des clients sont pleinement exploitées.
+* Le travail est déchargé du serveur au client.
+* Un serveur web ASP.NET Core n’est pas nécessaire pour héberger l’application. Des scénarios de déploiement sans serveur sont possibles (par exemple, au service de l’application à partir d’un CDN).
 
-Il existe des inconvénients à Blazor l’hébergement webassembly :
+Il ya des Blazor inconvénients à l’hébergement WebAssembly:
 
-* L’application est limitée aux fonctionnalités du navigateur.
-* Le matériel et le logiciel client compatibles (par exemple, la prise en charge de webassembly) sont requis.
-* La taille du téléchargement est supérieure, et les applications prennent plus de temps à se charger.
-* Le Runtime .NET et la prise en charge des outils sont moins matures. Par exemple, des limitations existent dans la prise en charge de [.NET standard](/dotnet/standard/net-standard) et le débogage.
+* L’application est limitée aux capacités du navigateur.
+* Le matériel et les logiciels clients compétents (par exemple, le support WebAssembly) sont nécessaires.
+* La taille du téléchargement est plus grande, et les applications prennent plus de temps à charger.
+* .NET runtime et le support d’outillage est moins mature. Par exemple, il existe des limites dans le support et le débogage [.NET Standard.](/dotnet/standard/net-standard)
 
-## <a name="opno-locblazor-server"></a>Serveur de Blazor
+Le Blazor modèle d’application Hébergé prend en charge [les conteneurs Docker](/dotnet/standard/microservices-architecture/container-docker-introduction/index). Cliquez à droite sur le projet Server dans Visual Studio et sélectionnez **Add** > **Docker Support**.
 
-Avec le modèle d’hébergement Blazor Server, l’application est exécutée sur le serveur à partir d’une application ASP.NET Core. Les mises à jour de l’interface utilisateur, la gestion des événements et les appels JavaScript sont gérés via une connexion [SignalR](xref:signalr/introduction) .
+## <a name="opno-locblazor-server"></a>BlazorServeur
 
-![le navigateur interagit avec l’application (hébergée dans une application ASP.NET Core) sur le serveur via une connexion SignalR.](hosting-models/_static/blazor-server.png)
+Avec Blazor le modèle d’hébergement Server, l’application est exécutée sur le serveur à partir d’une application ASP.NET Core. Les mises à jour de l’interface utilisateur, [SignalR](xref:signalr/introduction) la gestion des événements et les appels JavaScript sont traités sur une connexion.
 
-Pour créer une application Blazor à l’aide du modèle d’hébergement Blazor Server, utilisez le modèle d' **application ASP.NET CoreBlazor Server** ([dotnet New blazorserver](/dotnet/core/tools/dotnet-new)). L’application ASP.NET Core héberge l’application Blazor Server et crée le point de terminaison SignalR où les clients se connectent.
+![Le navigateur interagit avec l’application (hébergée à l’intérieur SignalR d’une application ASP.NET Core) sur le serveur sur une connexion.](hosting-models/_static/blazor-server.png)
 
-L’application ASP.NET Core fait référence à la classe de `Startup` de l’application à ajouter :
+Pour créer Blazor une Blazor application à l’aide du modèle d’hébergement Server, utilisez le modèle ASP.NET Core ** Blazor Server App** [(dotnet nouveau blazorserver](/dotnet/core/tools/dotnet-new)). L’application ASP.NET Core héberge Blazor l’application SignalR Server et crée le point de terminaison où les clients se connectent.
+
+L’application ASP.NET Core fait référence `Startup` à la classe de l’application pour ajouter :
 
 * Services côté serveur.
-* L’application vers le pipeline de traitement des demandes.
+* L’application au pipeline de manutention de la demande.
 
-Le script de `blazor.server.js`&dagger; établit la connexion client. Il est de la responsabilité de l’application de conserver et de restaurer l’état de l’application en fonction des besoins (par exemple, en cas de perte de connexion réseau).
+Le `blazor.server.js` script établit la connexion client. Il incombe à l’application de persister et de restaurer l’état de l’application au besoin (par exemple, en cas de perte de connexion réseau). Le `blazor.server.js` script est servi à partir d’une ressource intégrée dans le cadre partagé ASP.NET Core.
 
-Le modèle d’hébergement Blazor Server offre plusieurs avantages :
+Le Blazor modèle d’hébergement Server offre plusieurs avantages :
 
-* La taille du téléchargement est beaucoup plus petite qu’une application Blazor webassembly, et l’application est chargée beaucoup plus rapidement.
-* L’application tire pleinement parti des fonctionnalités du serveur, notamment de l’utilisation de toutes les API compatibles avec .NET Core.
-* .NET Core sur le serveur est utilisé pour exécuter l’application, de sorte que les outils .NET existants, tels que le débogage, fonctionnent comme prévu.
-* Les clients légers sont pris en charge. Par exemple, les applications Blazor Server fonctionnent avec des navigateurs qui ne prennent pas en charge webassembly et sur des appareils à ressources restreintes.
-* Le .NET/C# base de code de l’application, y compris le code du composant de l’application, n’est pas pris en charge par les clients.
+* La taille du téléchargement Blazor est significativement plus petite qu’une application WebAssembly, et l’application se charge beaucoup plus rapidement.
+* L’application tire pleinement parti des capacités du serveur, y compris l’utilisation de toutes les API compatibles .NET Core.
+* .NET Core sur le serveur est utilisé pour exécuter l’application, de sorte que l’outillage .NET existant, comme le débogage, fonctionne comme prévu.
+* Les clients minces sont pris en charge. Par exemple, Blazor les applications Server fonctionnent avec des navigateurs qui ne prennent pas en charge WebAssembly et sur les périphériques à ressources limitées.
+* La base de code .NET/CMD de l’application, y compris le code composant de l’application, n’est pas servie aux clients.
 
-Blazor Hébergement de serveur présente des inconvénients :
+Il ya des Blazor inconvénients à l’hébergement Server:
 
-* Une latence plus élevée existe généralement. Chaque interaction utilisateur implique un tronçon réseau.
-* Il n’existe aucune prise en charge hors connexion. Si la connexion cliente échoue, l’application cesse de fonctionner.
-* L’évolutivité est difficile pour les applications avec de nombreux utilisateurs. Le serveur doit gérer plusieurs connexions clientes et gérer l’état du client.
-* Un serveur de ASP.NET Core est requis pour servir l’application. Les scénarios de déploiement sans serveur ne sont pas possibles (par exemple, pour servir l’application à partir d’un CDN).
+* Il existe généralement une latence plus élevée. Chaque interaction utilisateur implique un saut réseau.
+* Il n’y a pas de support hors ligne. Si la connexion client échoue, l’application cesse de fonctionner.
+* L’évolutivité est difficile pour les applications avec de nombreux utilisateurs. Le serveur doit gérer plusieurs connexions client et gérer l’état du client.
+* Un serveur ASP.NET Core est nécessaire pour servir l’application. Les scénarios de déploiement sans serveur ne sont pas possibles (par exemple, au service de l’application à partir d’un CDN).
 
-&dagger;le script `blazor.server.js` est pris en charge à partir d’une ressource incorporée dans le ASP.NET Core Framework partagé.
+Le Blazor modèle d’application Server prend en charge [les conteneurs Docker](/dotnet/standard/microservices-architecture/container-docker-introduction/index). Cliquez à droite sur le projet dans Visual Studio et sélectionnez **Add** > **Docker Support**.
 
-### <a name="comparison-to-server-rendered-ui"></a>Comparaison avec l’interface utilisateur du rendu serveur
+### <a name="comparison-to-server-rendered-ui"></a>Comparaison avec l’interface utilisateur rendue par le serveur
 
-L’une des façons de comprendre les applications Blazor Server consiste à comprendre la différence entre les modèles traditionnels pour le rendu de l’interface utilisateur dans les applications de ASP.NET Core à l’aide de vues Razor ou Razor Pages. Les deux modèles utilisent le langage Razor pour décrire le contenu HTML, mais ils diffèrent considérablement dans le mode de rendu du balisage.
+Une façon Blazor de comprendre les applications Server est de comprendre comment il diffère des modèles traditionnels pour le rendu de l’interface utilisateur dans ASP.NET applications Core en utilisant des vues Razor ou Des pages Razor. Les deux modèles utilisent le langage Razor pour décrire le contenu HTML, mais ils diffèrent considérablement dans la façon dont la balisage est rendu.
 
-Quand une page Razor ou une vue est restituée, chaque ligne de code Razor émet du code HTML sous forme de texte. Après le rendu, le serveur supprime l’instance de la page ou de la vue, y compris tout état produit. Lorsqu’une autre demande pour la page se produit, par exemple lorsque la validation du serveur échoue et que le résumé des validations s’affiche :
+Lorsqu’une page ou une vue Razor est rendue, chaque ligne de code Razor émet HTML sous forme de texte. Après le rendu, le serveur dispose de la page ou l’instance de vue, y compris tout état qui a été produit. Lorsqu’une autre demande de la page se produit, par exemple lorsque la validation du serveur échoue et que le résumé de validation s’affiche :
 
-* La page entière est de nouveau restituée au texte HTML.
+* La page entière est redevenue sur le texte HTML.
 * La page est envoyée au client.
 
-Une application Blazor est composée d’éléments réutilisables de l’interface utilisateur appelée *composants*. Un composant contient C# du code, un balisage et d’autres composants. Quand un composant est rendu, Blazor produit un graphique des composants inclus similaires à un Document Object Model XML ou XML (DOM). Ce graphique comprend l’état des composants contenus dans les propriétés et les champs. Blazor évalue le graphique du composant pour produire une représentation binaire de la balise. Le format binaire peut être :
+Une Blazor application est composée d’éléments réutilisables de l’interface utilisateur appelés *composants*. Un composant contient du code C, une balisage et d’autres composants. Lorsqu’un composant est Blazor rendu, produit un graphique des composants inclus semblable à un modèle d’objet de document HTML ou XML (DOM). Ce graphique comprend l’état des composants conservé dans les propriétés et les champs. Blazorévalue le graphique des composants pour produire une représentation binaire de la majoration. Le format binaire peut être :
 
-* Converti en texte HTML (lors du prérendu&dagger;).
-* Utilisé pour mettre à jour efficacement le balisage pendant le rendu normal.
+* Transformé en texte HTML (pendant&dagger;le prérendering ).
+* Utilisé pour mettre à jour efficacement la majoration lors du rendu régulier.
 
-&dagger;le *prérendu* &ndash; le composant Razor demandé est compilé sur le serveur en code HTML statique et envoyé au client, où il est rendu à l’utilisateur. Une fois la connexion établie entre le client et le serveur, les éléments statiques prérendus du composant sont remplacés par des éléments interactifs. Le prérendu rend l’application plus réactive pour l’utilisateur.
+&dagger;*Prerendering* &ndash; Le composant Razor demandé est compilé sur le serveur en HTML statique et envoyé au client, où il est rendu à l’utilisateur. Une fois la connexion effectuée entre le client et le serveur, les éléments statiques préditables du composant sont remplacés par des éléments interactifs. Prerendering rend l’application plus sensible à l’utilisateur.
 
-Une mise à jour de l’interface utilisateur dans Blazor est déclenchée par :
+Une mise à Blazor jour de l’interface utilisateur est déclenchée par :
 
-* Intervention de l’utilisateur, telle que la sélection d’un bouton.
-* Déclencheurs d’application, tels qu’un minuteur.
+* Interaction utilisateur, comme la sélection d’un bouton.
+* Déclencheurs d’applications, comme une minuterie.
 
-Le graphique est rerendu et *une différence d’interface utilisateur* (différence) est calculée. Cette différence est le plus petit ensemble de modifications DOM requis pour mettre à jour l’interface utilisateur sur le client. Le diff est envoyé au client dans un format binaire et appliqué par le navigateur.
+Le graphique est rendu, et un *diff d’interface* utilisateur (différence) est calculé. Ce diff est le plus petit ensemble de modifications DOM nécessaires pour mettre à jour l’interface utilisateur sur le client. Le diff est envoyé au client dans un format binaire et appliqué par le navigateur.
 
-Un composant est supprimé une fois que l’utilisateur l’a quittée sur le client. Lorsqu’un utilisateur interagit avec un composant, l’état du composant (services, ressources) doit être conservé dans la mémoire du serveur. Étant donné que l’état de nombreux composants peut être géré simultanément par le serveur, l’épuisement de la mémoire est un problème qui doit être résolu. Pour obtenir des conseils sur la création d’une application Blazor Server afin de garantir la meilleure utilisation de la mémoire du serveur, consultez <xref:security/blazor/server>.
+Un composant est éliminé après que l’utilisateur navigue loin de lui sur le client. Pendant qu’un utilisateur interagit avec un composant, l’état du composant (services, ressources) doit être maintenu dans la mémoire du serveur. Étant donné que l’état de nombreux composants peut être maintenu par le serveur en même temps, l’épuisement de la mémoire est une préoccupation qui doit être abordée. Pour obtenir des conseils Blazor sur la façon d’écrire une <xref:security/blazor/server>application Server pour assurer la meilleure utilisation de la mémoire du serveur, voir .
 
 ### <a name="circuits"></a>Circuits
 
-Une application Blazor Server s’appuie sur [ASP.NET Core SignalR](xref:signalr/introduction). Chaque client communique avec le serveur sur une ou plusieurs connexions SignalR appelées *circuit*. Un circuit est l’abstraction de Blazorsur SignalR connexions qui peuvent tolérer des interruptions réseau temporaires. Lorsqu’un client Blazor constate que la connexion SignalR est déconnectée, il tente de se reconnecter au serveur à l’aide d’une nouvelle connexion SignalR.
+Une Blazor application Server est construite au-dessus de [ASP.NET Core SignalR ](xref:signalr/introduction). Chaque client communique au serveur sur SignalR une ou plusieurs connexions appelées *circuit*. Un circuit Blazorest l’abstraction des SignalR connexions qui peuvent tolérer des interruptions temporaires du réseau. Lorsqu’un Blazor client SignalR voit que la connexion est déconnectée, il SignalR tente de se reconnecter au serveur à l’aide d’une nouvelle connexion.
 
-Chaque écran de navigateur (onglet ou IFRAME) qui est connecté à une application Blazor Server utilise une connexion SignalR. Il s’agit encore d’une autre distinction importante par rapport aux applications classiques affichées par le serveur. Dans une application affichée sur un serveur, l’ouverture de la même application dans plusieurs écrans de navigateur n’est généralement pas convertie en demandes de ressources supplémentaires sur le serveur. Dans une application Blazor Server, chaque écran du navigateur requiert un circuit distinct et des instances distinctes de l’état du composant à gérer par le serveur.
+Chaque écran de navigateur (onglet navigateur ou iframe) connecté à une Blazor application Server utilise une SignalR connexion. Il s’agit d’une autre distinction importante par rapport aux applications typiques rendues par le serveur. Dans une application rendue par un serveur, l’ouverture de la même application dans plusieurs écrans de navigateur ne se traduit généralement pas par des demandes de ressources supplémentaires sur le serveur. Dans Blazor une application Server, chaque écran de navigateur nécessite un circuit distinct et des instances distinctes de l’état des composants pour être géré par le serveur.
 
-Blazor envisage de fermer un onglet de navigateur ou de naviguer vers une URL externe un arrêt *normal* . En cas de résiliation appropriée, le circuit et les ressources associées sont immédiatement libérés. Un client peut également se déconnecter de manière non appropriée, par exemple en raison d’une interruption du réseau. Blazor Server stocke les circuits déconnectés pour un intervalle configurable afin de permettre au client de se reconnecter.
+Blazorenvisage de fermer un onglet de navigateur ou de naviguer vers une URL externe une résiliation *gracieuse.* En cas de résiliation gracieuse, le circuit et les ressources associées sont immédiatement libérés. Un client peut également se déconnecter non-gracieusement, par exemple en raison d’une interruption de réseau. BlazorServer stocke des circuits déconnectés pour un intervalle configurable pour permettre au client de se reconnecter.
 
-Blazor Server permet au code de définir un *Gestionnaire de circuit*qui permet d’exécuter du code sur les modifications de l’état du circuit d’un utilisateur. Pour plus d’informations, consultez <xref:blazor/advanced-scenarios#blazor-server-circuit-handler>.
+BlazorServer permet au code de définir un *gestionnaire de circuit*, ce qui permet d’exécuter du code sur les modifications apportées à l’état du circuit d’un utilisateur. Pour plus d’informations, consultez <xref:blazor/advanced-scenarios#blazor-server-circuit-handler>.
 
-### <a name="ui-latency"></a>Latence de l’interface utilisateur
+### <a name="ui-latency"></a>Latence de l’assurance-chômage
 
-La latence de l’interface utilisateur est le temps qu’il faut après une action initiée jusqu’au moment où l’interface utilisateur est mise à jour. Des valeurs plus petites pour la latence de l’interface utilisateur sont impératives pour qu’une application soit réactive à un utilisateur. Dans une application Blazor Server, chaque action est envoyée au serveur, traitée et une comparaison d’interface utilisateur est renvoyée. Par conséquent, la latence de l’interface utilisateur est la somme de la latence du réseau et de la latence du serveur lors du traitement de l’action.
+La latence de l’interface utilisateur est le temps qu’il faut d’une action initiée au moment où l’interface utilisateur est mise à jour. De plus petites valeurs pour la latence de l’interface utilisateur sont impératives pour qu’une application se sente sensible à un utilisateur. Dans Blazor une application Server, chaque action est envoyée au serveur, traitée, et un diff d’interface utilisateur est renvoyé. Par conséquent, la latence de l’interface utilisateur est la somme de la latence du réseau et de la latence du serveur dans le traitement de l’action.
 
-Pour une application métier limitée à un réseau d’entreprise privé, l’effet sur les perceptions des utilisateurs de la latence en raison de la latence du réseau est généralement inperceptible. Pour une application déployée sur Internet, la latence peut devenir perceptible pour les utilisateurs, en particulier si les utilisateurs sont largement répartis géographiquement.
+Pour une application d’entreprise limitée à un réseau privé d’entreprise, l’effet sur les perceptions des utilisateurs de la latence due à la latence du réseau est généralement imperceptible. Pour une application déployée sur Internet, la latence peut devenir perceptible pour les utilisateurs, en particulier si les utilisateurs sont largement distribués géographiquement.
 
-L’utilisation de la mémoire peut également contribuer à la latence de l’application. L’augmentation de l’utilisation de la mémoire permet de garbage collection fréquentes ou la pagination de la mémoire sur le disque, qui dégradent les performances des applications et augmentent la latence de l’interface utilisateur. Pour plus d’informations, consultez <xref:security/blazor/server>.
+L’utilisation de la mémoire peut également contribuer à la latence de l’application. L’utilisation accrue de la mémoire entraîne une collecte fréquente des ordures ou de la mémoire de l’acuisation au disque, qui dégradent les performances de l’application et, par conséquent, augmentent la latence de l’interface utilisateur. Pour plus d’informations, consultez <xref:security/blazor/server>.
 
-Blazor applications serveur doivent être optimisées pour réduire la latence de l’interface utilisateur en réduisant la latence du réseau et l’utilisation de la mémoire. Pour une approche de la mesure de la latence du réseau, consultez <xref:host-and-deploy/blazor/server#measure-network-latency>. Pour plus d’informations sur les SignalR et les Blazor, consultez :
+BlazorLes applications serveur doivent être optimisées pour minimiser la latence de l’interface utilisateur en réduisant la latence du réseau et l’utilisation de la mémoire. Pour une approche de mesure de <xref:host-and-deploy/blazor/server#measure-network-latency>la latence réseau, voir . Pour plus SignalR d’informations sur et Blazor, voir:
 
 * <xref:host-and-deploy/blazor/server>
 * <xref:security/blazor/server>
 
 ### <a name="connection-to-the-server"></a>Connexion au serveur
 
-Blazor applications serveur requièrent une connexion SignalR active au serveur. Si la connexion est perdue, l’application tente de se reconnecter au serveur. Tant que l’état du client est toujours en mémoire, la session client reprend sans perte d’État.
+BlazorLes applications serveur SignalR nécessitent une connexion active au serveur. Si la connexion est perdue, l’application tente de se reconnecter au serveur. Tant que l’état du client est encore dans la mémoire, la session client reprend sans perdre d’état.
 
-Une application Blazor Server effectue un prérendu en réponse à la première demande du client, qui configure l’état de l’interface utilisateur sur le serveur. Lorsque le client tente de créer une connexion SignalR, le client doit se reconnecter au même serveur. Blazor applications serveur qui utilisent plusieurs serveurs principaux doivent implémenter des *sessions rémanentes* pour les connexions SignalR.
+Une Blazor application Server précède en réponse à la première demande du client, qui met en place l’état de l’interface utilisateur sur le serveur. Lorsque le client tente SignalR de créer une connexion, le client doit se reconnecter au même serveur. BlazorLes applications serveur qui utilisent plus d’un SignalR serveur backend doivent implémenter des sessions *collantes* pour les connexions.
 
-Nous vous recommandons d’utiliser le [service Azure SignalR](/azure/azure-signalr) pour les applications Blazor Server. Le service permet la mise à l’échelle d’une application Blazor Server vers un grand nombre de connexions SignalR simultanées. Les sessions rémanentes sont activées pour le service Azure SignalR en définissant l’option de `ServerStickyMode` ou la valeur de configuration du service sur `Required`. Pour plus d’informations, consultez <xref:host-and-deploy/blazor/server#signalr-configuration>.
+Nous vous recommandons d’utiliser le [service Azure SignalR ](/azure/azure-signalr) pour Blazor les applications Server. Le service permet d’intensifier Blazor une application Server à SignalR un grand nombre de connexions simultanées. Des sessions collantes sont SignalR activées pour le `ServerStickyMode` service Azure `Required`en définissant l’option du service ou la valeur de configuration à . Pour plus d’informations, consultez <xref:host-and-deploy/blazor/server#signalr-configuration>.
 
-Lorsque vous utilisez IIS, les sessions rémanentes sont activées avec Application Request Routing. Pour plus d’informations, consultez [équilibrage de charge http à l’aide de application Request Routing](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing).
+Lors de l’utilisation de l’IIS, les sessions collantes sont activées avec le routage de demande d’application. Pour plus d’informations, voir [HTTP Load Balancing à l’aide de l’application Request Routing](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

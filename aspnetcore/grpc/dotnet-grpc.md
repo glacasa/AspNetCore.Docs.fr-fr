@@ -1,27 +1,27 @@
 ---
 title: Gérer les références Protobuf avec dotnet-GRPC
 author: juntaoluo
-description: En savoir plus sur l’ajout, la mise à jour, la suppression et la liste de références Protobuf avec l’outil Global dotnet-GRPC.
+description: Renseignez-vous sur l’ajout, la mise à jour, la suppression et la liste des références Protobuf avec l’outil global dotnet-grpc.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 10/17/2019
 uid: grpc/dotnet-grpc
 ms.openlocfilehash: 994597c854a95bb33de1686ab025cb3744cf6845
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78667334"
 ---
 # <a name="manage-protobuf-references-with-dotnet-grpc"></a>Gérer les références Protobuf avec dotnet-GRPC
 
 Par [John Luo](https://github.com/juntaoluo)
 
-`dotnet-grpc` est un outil Global .NET Core pour la gestion des références [Protobuf ( *. proto*)](xref:grpc/basics#proto-file) dans un projet .net gRPC. L’outil peut être utilisé pour ajouter, actualiser, supprimer et répertorier des références Protobuf.
+`dotnet-grpc`est un outil mondial de base .NET pour gérer les références [Protobuf (*.proto)*](xref:grpc/basics#proto-file) au sein d’un projet .NET gRPC. L’outil peut être utilisé pour ajouter, actualiser, supprimer et énumérer les références Protobuf.
 
 ## <a name="installation"></a>Installation
 
-Pour installer l' [outil Global .net Core](/dotnet/core/tools/global-tools)`dotnet-grpc`, exécutez la commande suivante :
+Pour installer `dotnet-grpc` l’outil [global de base .NET](/dotnet/core/tools/global-tools), exécutez la commande suivante :
 
 ```dotnetcli
 dotnet tool install -g dotnet-grpc
@@ -29,28 +29,28 @@ dotnet tool install -g dotnet-grpc
 
 ## <a name="add-references"></a>Ajouter des références
 
-`dotnet-grpc` peut être utilisé pour ajouter des références Protobuf en tant qu’éléments de `<Protobuf />` au fichier *. csproj* :
+`dotnet-grpc`peut être utilisé pour ajouter `<Protobuf />` des références Protobuf comme éléments du fichier *.csproj* :
 
 ```xml
 <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
 ```
 
-Les références Protobuf sont utilisées pour générer les C# ressources client et/ou serveur. L’outil `dotnet-grpc` peut :
+Les références Protobuf sont utilisées pour générer les actifs du client et/ou du serveur C. L’outil `dotnet-grpc` peut :
 
-* Créez une référence Protobuf à partir de fichiers locaux sur le disque.
-* Crée une référence Protobuf à partir d’un fichier distant spécifié par une URL.
-* Vérifiez que les dépendances de package gRPC correctes sont ajoutées au projet.
+* Créez une référence Protobuf à partir de fichiers locaux sur disque.
+* Créez une référence Protobuf à partir d’un fichier distant spécifié par une URL.
+* Assurez-vous que les bonnes dépendances de paquet de gRPC sont ajoutées au projet.
 
-Par exemple, le package `Grpc.AspNetCore` est ajouté à une application Web. `Grpc.AspNetCore` contient les bibliothèques clientes et de serveur gRPC et la prise en charge des outils. En guise d’alternative, les packages `Grpc.Net.Client`, `Grpc.Tools` et `Google.Protobuf`, qui contiennent uniquement les bibliothèques clientes gRPC et la prise en charge des outils, sont ajoutés à une application console.
+Par exemple, `Grpc.AspNetCore` le paquet est ajouté à une application web. `Grpc.AspNetCore`contient des bibliothèques de serveurs et de clients gRPC et le support d’outillage. Alternativement, `Grpc.Net.Client`le `Grpc.Tools` `Google.Protobuf` , et les paquets, qui ne contiennent que les bibliothèques de clients gRPC et le support d’outillage, sont ajoutés à une application Console.
 
 ### <a name="add-file"></a>Ajouter un fichier
 
-La commande `add-file` est utilisée pour ajouter des fichiers locaux sur le disque en tant que références Protobuf. Chemins d’accès aux fichiers fournis :
+La `add-file` commande est utilisée pour ajouter des fichiers locaux sur disque comme références Protobuf. Les trajectoires de fichiers fournies :
 
-* Peut être relatif au répertoire actif ou aux chemins d’accès absolus.
-* Peut contenir des caractères génériques pour les [globbing](https://wikipedia.org/wiki/Glob_(programming))de fichiers basés sur des modèles.
+* Peut être par rapport à l’annuaire actuel ou des chemins absolus.
+* Peut contenir des wild cards pour le [glissement](https://wikipedia.org/wiki/Glob_(programming))de fichier basé sur le modèle .
 
-Si des fichiers se trouvent en dehors du répertoire du projet, un élément `Link` est ajouté pour afficher le fichier dans le dossier `Protos` dans Visual Studio.
+Si des fichiers sont en dehors `Link` de l’annuaire du projet, `Protos` un élément est ajouté pour afficher le fichier sous le dossier dans Visual Studio.
 
 ### <a name="usage"></a>Usage
 
@@ -62,20 +62,20 @@ dotnet grpc add-file [options] <files>...
 
 | Argument | Description |
 |-|-|
-| files | Références du fichier protobuf. Il peut s’agir d’un chemin d’accès à glob pour les fichiers protobuf locaux. |
+| files | Les références de fichiers protobuf. Ceux-ci peuvent être un chemin à glob pour les fichiers protobuf locaux. |
 
 #### <a name="options"></a>Options
 
-| Option Short | Option longue | Description |
+| Option courte | Option longue | Description |
 |-|-|-|
-| -p | --projet | Chemin d’accès au fichier projet sur lequel effectuer l’opération. Si aucun fichier n’est spécifié, la commande effectue une recherche dans le répertoire actif.
-| -S | --services | Type des services gRPC qui doivent être générés. Si `Default` est spécifié, `Both` est utilisé pour les projets Web et `Client` est utilisé pour les projets non Web. Les valeurs acceptées sont `Both`, `Client`, `Default`, `None`, `Server`.
-| -i | --Import-dirs | Répertoires supplémentaires à utiliser lors de la résolution des importations des fichiers protobuf. Il s’agit d’une liste de chemins séparés par des points-virgules.
-| | --accès | Modificateur d’accès à utiliser pour les classes C# générées. La valeur par défaut est `Public`. Les valeurs acceptées sont `Internal` et `Public`.
+| -p | --projet | Le chemin vers le dossier du projet pour fonctionner. Si un fichier n’est pas spécifié, la commande recherche un répertoire actuel.
+| -S | --services | Le type de services gRPC qui devraient être générés. Si `Default` elle `Both` est spécifiée, `Client` est utilisée pour des projets Web et est utilisée pour des projets non-Web. Les valeurs `Both` `Client`acceptées `None` `Server`sont , , `Default`, .
+| -i | --dirs supplémentaires-importation | D’autres répertoires à utiliser lors de la résolution des importations pour les fichiers protobuf. Il s’agit d’une liste de chemins séparés par le point-virgule.
+| | --accès | Le modificateur d’accès à utiliser pour les classes C générées. La valeur par défaut est `Public`. Les valeurs acceptées sont `Internal` et `Public`.
 
 ### <a name="add-url"></a>Ajouter une URL
 
-La commande `add-url` est utilisée pour ajouter un fichier distant spécifié par une URL source en tant que référence Protobuf. Un chemin d’accès de fichier doit être fourni pour spécifier l’emplacement de téléchargement du fichier distant. Le chemin d’accès du fichier peut être relatif au répertoire actif ou à un chemin d’accès absolu. Si le chemin d’accès au fichier se trouve en dehors du répertoire du projet, un élément `Link` est ajouté pour afficher le fichier dans le dossier virtuel `Protos` dans Visual Studio.
+La `add-url` commande est utilisée pour ajouter un fichier distant spécifié par une URL source comme référence Protobuf. Un chemin de fichier doit être fourni pour spécifier où télécharger le fichier à distance. Le chemin de fichier peut être par rapport à l’annuaire actuel ou un chemin absolu. Si le chemin de fichier est `Link` en dehors de l’annuaire du `Protos` projet, un élément est ajouté pour afficher le fichier sous le dossier virtuel dans Visual Studio.
 
 ### <a name="usage"></a>Usage
 
@@ -87,24 +87,24 @@ dotnet-grpc add-url [options] <url>
 
 | Argument | Description |
 |-|-|
-| url | URL d’un fichier protobuf distant. |
+| url | L’URL d’un fichier protobuf distant. |
 
 #### <a name="options"></a>Options
 
-| Option Short | Option longue | Description |
+| Option courte | Option longue | Description |
 |-|-|-|
 | -o | --output | Spécifie le chemin de téléchargement du fichier protobuf distant. C'est une option obligatoire.
-| -p | --projet | Chemin d’accès au fichier projet sur lequel effectuer l’opération. Si aucun fichier n’est spécifié, la commande effectue une recherche dans le répertoire actif.
-| -S | --services | Type des services gRPC qui doivent être générés. Si `Default` est spécifié, `Both` est utilisé pour les projets Web et `Client` est utilisé pour les projets non Web. Les valeurs acceptées sont `Both`, `Client`, `Default`, `None`, `Server`.
-| -i | --Import-dirs | Répertoires supplémentaires à utiliser lors de la résolution des importations des fichiers protobuf. Il s’agit d’une liste de chemins séparés par des points-virgules.
-| | --accès | Modificateur d’accès à utiliser pour les classes C# générées. La valeur par défaut est `Public`. Les valeurs acceptées sont `Internal` et `Public`.
+| -p | --projet | Le chemin vers le dossier du projet pour fonctionner. Si un fichier n’est pas spécifié, la commande recherche un répertoire actuel.
+| -S | --services | Le type de services gRPC qui devraient être générés. Si `Default` elle `Both` est spécifiée, `Client` est utilisée pour des projets Web et est utilisée pour des projets non-Web. Les valeurs `Both` `Client`acceptées `None` `Server`sont , , `Default`, .
+| -i | --dirs supplémentaires-importation | D’autres répertoires à utiliser lors de la résolution des importations pour les fichiers protobuf. Il s’agit d’une liste de chemins séparés par le point-virgule.
+| | --accès | Le modificateur d’accès à utiliser pour les classes C générées. La valeur par défaut est `Public`. Les valeurs acceptées sont `Internal` et `Public`.
 
 ## <a name="remove"></a>Supprimer
 
-La commande `remove` est utilisée pour supprimer les références Protobuf du fichier *. csproj* . La commande accepte les arguments de chemin d’accès et les URL source comme arguments. L’outil :
+La `remove` commande est utilisée pour supprimer les références Protobuf du fichier *.csproj.* La commande accepte les arguments de voie et les URL de source comme arguments. L’outil :
 
 * Supprime uniquement la référence Protobuf.
-* Ne supprime pas le fichier *. proto* , même s’il a été téléchargé à l’origine à partir d’une URL distante.
+* Ne supprime pas le fichier *.proto,* même s’il a été téléchargé à l’origine à partir d’une URL à distance.
 
 ### <a name="usage"></a>Usage
 
@@ -116,22 +116,22 @@ dotnet-grpc remove [options] <references>...
 
 | Argument | Description |
 |-|-|
-| Références | URL ou chemins de fichier des références protobuf à supprimer. |
+| references | Les URL ou les trajectoires de fichier des références protobuf à supprimer. |
 
 ### <a name="options"></a>Options
 
-| Option Short | Option longue | Description |
+| Option courte | Option longue | Description |
 |-|-|-|
-| -p | --projet | Chemin d’accès au fichier projet sur lequel effectuer l’opération. Si aucun fichier n’est spécifié, la commande effectue une recherche dans le répertoire actif.
+| -p | --projet | Le chemin vers le dossier du projet pour fonctionner. Si un fichier n’est pas spécifié, la commande recherche un répertoire actuel.
 
 ## <a name="refresh"></a>Actualiser
 
-La commande `refresh` est utilisée pour mettre à jour une référence distante avec le contenu le plus récent à partir de l’URL source. Le chemin d’accès au fichier de téléchargement et l’URL source peuvent être utilisés pour spécifier la référence à mettre à jour. Remarque :
+La `refresh` commande est utilisée pour mettre à jour une référence à distance avec le dernier contenu de l’URL source. Le chemin du fichier de téléchargement et l’URL source peuvent être utilisés pour spécifier la référence à mettre à jour. Remarque :
 
 * Les hachages du contenu du fichier sont comparés pour déterminer si le fichier local doit être mis à jour.
-* Aucune information d’horodatage n’est comparée.
+* Aucune information sur l’allphe n’est comparée.
 
-L’outil remplace toujours le fichier local par le fichier distant si une mise à jour est nécessaire.
+L’outil remplace toujours le fichier local par le fichier à distance si une mise à jour est nécessaire.
 
 ### <a name="usage"></a>Usage
 
@@ -143,18 +143,18 @@ dotnet-grpc refresh [options] [<references>...]
 
 | Argument | Description |
 |-|-|
-| Références | URL ou chemins d’accès aux références protobuf distantes qui doivent être mises à jour. Laissez cet argument vide pour actualiser toutes les références distantes. |
+| references | Les URL ou les trajectoires de fichiers vers des références protobuf à distance qui doivent être mises à jour. Laissez cet argument vide pour rafraîchir toutes les références à distance. |
 
 ### <a name="options"></a>Options
 
-| Option Short | Option longue | Description |
+| Option courte | Option longue | Description |
 |-|-|-|
-| -p | --projet | Chemin d’accès au fichier projet sur lequel effectuer l’opération. Si aucun fichier n’est spécifié, la commande effectue une recherche dans le répertoire actif.
-| | --à sec-exécution | Génère une liste des fichiers qui seraient mis à jour sans télécharger de nouveau contenu.
+| -p | --projet | Le chemin vers le dossier du projet pour fonctionner. Si un fichier n’est pas spécifié, la commande recherche un répertoire actuel.
+| | --à sec | Sortie d’une liste de fichiers qui seraient mis à jour sans télécharger de nouveau contenu.
 
 ## <a name="list"></a>List
 
-La commande `list` est utilisée pour afficher toutes les références Protobuf dans le fichier projet. Si toutes les valeurs d’une colonne sont des valeurs par défaut, la colonne peut être omise.
+La `list` commande est utilisée pour afficher toutes les références Protobuf dans le fichier du projet. Si toutes les valeurs d’une colonne sont des valeurs par défaut, la colonne peut être omise.
 
 ### <a name="usage"></a>Usage
 
@@ -164,9 +164,9 @@ dotnet-grpc list [options]
 
 ### <a name="options"></a>Options
 
-| Option Short | Option longue | Description |
+| Option courte | Option longue | Description |
 |-|-|-|
-| -p | --projet | Chemin d’accès au fichier projet sur lequel effectuer l’opération. Si aucun fichier n’est spécifié, la commande effectue une recherche dans le répertoire actif.
+| -p | --projet | Le chemin vers le dossier du projet pour fonctionner. Si un fichier n’est pas spécifié, la commande recherche un répertoire actuel.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

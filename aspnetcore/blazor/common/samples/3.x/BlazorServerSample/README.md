@@ -1,3 +1,3 @@
-# <a name="blazor-server-sample-app"></a>Exemple d’application de serveur éblouissant
+# <a name="blazor-server-sample-app"></a>Blazor Server Sample App
 
-Cet exemple illustre l’utilisation de scénarios éblouissants décrits dans la documentation de éblouissant.
+Cet échantillon illustre l’utilisation des scénarios Blazor décrits dans la documentation Blazor.

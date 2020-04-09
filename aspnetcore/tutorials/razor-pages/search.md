@@ -6,15 +6,15 @@ ms.author: riande
 ms.date: 12/05/2019
 uid: tutorials/razor-pages/search
 ms.openlocfilehash: 8228207b0f37a6923b29891ac3115dd0be115501
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78667705"
 ---
 # <a name="add-search-to-aspnet-core-razor-pages"></a>Ajouter une fonction de recherche aux pages Razor dans ASP.NET Core
 
-De [Rick Anderson](https://twitter.com/RickAndMSFT)
+Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -26,14 +26,14 @@ Ajoutez les propriétés en surbrillance suivantes à *Pages/Movies/Index.cshtml
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=11-999)]
 
-* `SearchString` : contient le texte que les utilisateurs entrent dans la zone de texte de recherche. `SearchString` a l’attribut [`[BindProperty]`](/dotnet/api/microsoft.aspnetcore.mvc.bindpropertyattribute) . `[BindProperty]` lie les valeurs de formulaire et les chaînes de requête avec le même nom que la propriété. `(SupportsGet = true)` est obligatoire pour la liaison sur les requêtes GET.
+* `SearchString` : contient le texte que les utilisateurs entrent dans la zone de texte de recherche. `SearchString`a [`[BindProperty]`](/dotnet/api/microsoft.aspnetcore.mvc.bindpropertyattribute) l’attribut. `[BindProperty]` lie les valeurs de formulaire et les chaînes de requête avec le même nom que la propriété. `(SupportsGet = true)` est obligatoire pour la liaison sur les requêtes GET.
 * `Genres` : contient la liste des genres. `Genres` permet à l’utilisateur de sélectionner un genre dans la liste. `SelectList` nécessite `using Microsoft.AspNetCore.Mvc.Rendering;`
 * `MovieGenre` : contient le genre spécifique sélectionné par l’utilisateur (par exemple, « Western »).
 * `Genres` et `MovieGenre` sont utilisés plus loin dans ce tutoriel.
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
-Mettez à jour la méthode `OnGetAsync` de la page Index avec le code suivant :
+Mettez à jour la méthode `OnGetAsync` de la page d’index avec le code suivant :
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_1stSearch)]
 
@@ -45,7 +45,7 @@ var movies = from m in _context.Movie
              select m;
 ```
 
-La requête est *seulement* définie à ce stade ; elle n’a **pas** été exécutée sur la base de données.
+La requête est *seulement* définie à ce stade, elle n’a **pas** été exécutée sur la base de données.
 
 Si la propriété `SearchString` n’est pas nulle ou vide, la requête sur les films est modifiée de façon à filtrer sur la chaîne de recherche :
 
@@ -60,7 +60,7 @@ Accédez à la page Movies, puis ajoutez une chaîne de requête telle que `?sea
 
 ![Vue Index](search/_static/ghost.png)
 
-Si le modèle de routing suivant est ajouté à la page d’index, la chaîne de recherche peut être passée comme un segment d’URL (par exemple, `https://localhost:5001/Movies/Ghost`).
+Si le modèle d’itinéraire suivant est ajouté à la page d’index, la chaîne de recherche peut être passée comme un segment d’URL (par exemple, `https://localhost:5001/Movies/Ghost`).
 
 ```cshtml
 @page "{searchString?}"
@@ -68,7 +68,7 @@ Si le modèle de routing suivant est ajouté à la page d’index, la chaîne de
 
 La contrainte d’itinéraire précédente permet de rechercher le titre comme données d’itinéraire (un segment d’URL) et non comme valeur de chaîne de requête.  Le `?` dans `"{searchString?}"` signifie qu’il s’agit d’un paramètre d’itinéraire facultatif.
 
-![Vue Index avec le mot « ghost » ajouté à l’URL, et une liste des films retournés avec deux films, Ghostbusters et Ghostbusters 2](search/_static/g2.png)
+![Vue Index avec le mot « ghost » ajouté à l’URL et une liste de films retournée contenant deux films, Ghostbusters et Ghostbusters 2](search/_static/g2.png)
 
 Le runtime ASP.NET Core utilise la [liaison de modèle](xref:mvc/models/model-binding) pour définir la valeur de la propriété `SearchString` à partir de la chaîne de requête (`?searchString=Ghost`) ou des données de la route (`https://localhost:5001/Movies/Ghost`). La liaison de modèle ne respecte pas la casse.
 
@@ -80,12 +80,12 @@ Ouvrez le fichier *Pages/Movies/Index.cshtml*, puis ajoutez la balise `<form>` m
 
 La balise HTML `<form>` utilise les [Tag Helpers](xref:mvc/views/tag-helpers/intro) suivants :
 
-* [Tag Helper Form](xref:mvc/views/working-with-forms#the-form-tag-helper). Quand le formulaire est envoyé, la chaîne de filtrage est envoyée à la page *Pages/Movies/Index* via la chaîne de requête.
+* [Form Tag Helper](xref:mvc/views/working-with-forms#the-form-tag-helper). Quand le formulaire est envoyé, la chaîne de filtrage est envoyée à la page *Pages/Movies/Index* via la chaîne de requête.
 * [Tag Helper Input](xref:mvc/views/working-with-forms#the-input-tag-helper)
 
 Enregistrez les modifications apportées, puis testez le filtre.
 
-![Vue Index avec le mot « ghost » tapé dans la zone de texte du filtre Title](search/_static/filter.png)
+![Vue Index avec le mot « ghost » tapé dans la zone de texte de filtre des titres](search/_static/filter.png)
 
 ## <a name="search-by-genre"></a>Rechercher par genre
 
@@ -114,8 +114,8 @@ Testez l’application en effectuant une recherche par genre, par titre de film 
 * [Version YouTube de ce tutoriel](https://youtu.be/4B6pHtdyo08)
 
 > [!div class="step-by-step"]
-> [Précédent : Mise à jour des pages](xref:tutorials/razor-pages/da1)
-> [Suivant : Ajout d’un nouveau champ](xref:tutorials/razor-pages/new-field)
+> [Précédent: Mise à jour des pages](xref:tutorials/razor-pages/da1)
+> [Suivant: Ajout d’un nouveau champ](xref:tutorials/razor-pages/new-field)
 
 ::: moniker-end
 
@@ -129,14 +129,14 @@ Ajoutez les propriétés en surbrillance suivantes à *Pages/Movies/Index.cshtml
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_newProps&highlight=11-999)]
 
-* `SearchString` : contient le texte que les utilisateurs entrent dans la zone de texte de recherche. `SearchString` a l’attribut [`[BindProperty]`](/dotnet/api/microsoft.aspnetcore.mvc.bindpropertyattribute) . `[BindProperty]` lie les valeurs de formulaire et les chaînes de requête avec le même nom que la propriété. `(SupportsGet = true)` est obligatoire pour la liaison sur les requêtes GET.
+* `SearchString` : contient le texte que les utilisateurs entrent dans la zone de texte de recherche. `SearchString`a [`[BindProperty]`](/dotnet/api/microsoft.aspnetcore.mvc.bindpropertyattribute) l’attribut. `[BindProperty]` lie les valeurs de formulaire et les chaînes de requête avec le même nom que la propriété. `(SupportsGet = true)` est obligatoire pour la liaison sur les requêtes GET.
 * `Genres` : contient la liste des genres. `Genres` permet à l’utilisateur de sélectionner un genre dans la liste. `SelectList` nécessite `using Microsoft.AspNetCore.Mvc.Rendering;`
 * `MovieGenre` : contient le genre spécifique sélectionné par l’utilisateur (par exemple, « Western »).
 * `Genres` et `MovieGenre` sont utilisés plus loin dans ce tutoriel.
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
-Mettez à jour la méthode `OnGetAsync` de la page Index avec le code suivant :
+Mettez à jour la méthode `OnGetAsync` de la page d’index avec le code suivant :
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_1stSearch)]
 
@@ -148,7 +148,7 @@ var movies = from m in _context.Movie
              select m;
 ```
 
-La requête est *seulement* définie à ce stade ; elle n’a **pas** été exécutée sur la base de données.
+La requête est *seulement* définie à ce stade, elle n’a **pas** été exécutée sur la base de données.
 
 Si la propriété `SearchString` n’est pas nulle ou vide, la requête sur les films est modifiée de façon à filtrer sur la chaîne de recherche :
 
@@ -162,7 +162,7 @@ Accédez à la page Movies, puis ajoutez une chaîne de requête telle que `?sea
 
 ![Vue Index](search/_static/ghost.png)
 
-Si le modèle de routing suivant est ajouté à la page d’index, la chaîne de recherche peut être passée comme un segment d’URL (par exemple, `https://localhost:5001/Movies/Ghost`).
+Si le modèle d’itinéraire suivant est ajouté à la page d’index, la chaîne de recherche peut être passée comme un segment d’URL (par exemple, `https://localhost:5001/Movies/Ghost`).
 
 ```cshtml
 @page "{searchString?}"
@@ -170,7 +170,7 @@ Si le modèle de routing suivant est ajouté à la page d’index, la chaîne de
 
 La contrainte d’itinéraire précédente permet de rechercher le titre comme données d’itinéraire (un segment d’URL) et non comme valeur de chaîne de requête.  Le `?` dans `"{searchString?}"` signifie qu’il s’agit d’un paramètre d’itinéraire facultatif.
 
-![Vue Index avec le mot « ghost » ajouté à l’URL, et une liste des films retournés avec deux films, Ghostbusters et Ghostbusters 2](search/_static/g2.png)
+![Vue Index avec le mot « ghost » ajouté à l’URL et une liste de films retournée contenant deux films, Ghostbusters et Ghostbusters 2](search/_static/g2.png)
 
 Le runtime ASP.NET Core utilise la [liaison de modèle](xref:mvc/models/model-binding) pour définir la valeur de la propriété `SearchString` à partir de la chaîne de requête (`?searchString=Ghost`) ou des données de la route (`https://localhost:5001/Movies/Ghost`). La liaison de modèle ne respecte pas la casse.
 
@@ -182,12 +182,12 @@ Ouvrez le fichier *Pages/Movies/Index.cshtml*, puis ajoutez la balise `<form>` m
 
 La balise HTML `<form>` utilise les [Tag Helpers](xref:mvc/views/tag-helpers/intro) suivants :
 
-* [Tag Helper Form](xref:mvc/views/working-with-forms#the-form-tag-helper). Quand le formulaire est envoyé, la chaîne de filtrage est envoyée à la page *Pages/Movies/Index* via la chaîne de requête.
+* [Form Tag Helper](xref:mvc/views/working-with-forms#the-form-tag-helper). Quand le formulaire est envoyé, la chaîne de filtrage est envoyée à la page *Pages/Movies/Index* via la chaîne de requête.
 * [Tag Helper Input](xref:mvc/views/working-with-forms#the-input-tag-helper)
 
 Enregistrez les modifications apportées, puis testez le filtre.
 
-![Vue Index avec le mot « ghost » tapé dans la zone de texte du filtre Title](search/_static/filter.png)
+![Vue Index avec le mot « ghost » tapé dans la zone de texte de filtre des titres](search/_static/filter.png)
 
 ## <a name="search-by-genre"></a>Rechercher par genre
 
@@ -210,14 +210,14 @@ Mettez à jour *Index.cshtml* comme suit :
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/IndexFormGenreNoRating.cshtml?highlight=16-18&range=1-26)]
 
 Testez l’application en effectuant une recherche par genre, par titre de film et selon ces deux critères.
-Le code précédent utilise le [tag Helper Select](xref:mvc/views/working-with-forms#the-select-tag-helper) et option tag Helper.
+Le code précédent utilise [l’assistant Select Tag](xref:mvc/views/working-with-forms#the-select-tag-helper) et l’aide à l’option Tag.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Version YouTube de ce tutoriel](https://youtu.be/4B6pHtdyo08)
 
 > [!div class="step-by-step"]
-> [Précédent : Mise à jour des pages](xref:tutorials/razor-pages/da1)
-> [Suivant : Ajout d’un nouveau champ](xref:tutorials/razor-pages/new-field)
+> [Précédent: Mise à jour des pages](xref:tutorials/razor-pages/da1)
+> [Suivant: Ajout d’un nouveau champ](xref:tutorials/razor-pages/new-field)
 
 ::: moniker-end

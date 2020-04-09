@@ -7,15 +7,15 @@ ms.custom: mvc
 ms.date: 7/23/2019
 uid: tutorials/razor-pages/new-field
 ms.openlocfilehash: d34b938dbd1b512ddb167cac0c035837889cd38f
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78657814"
 ---
 # <a name="add-a-new-field-to-a-razor-page-in-aspnet-core"></a>Ajouter un nouveau champ à une page Razor dans ASP.NET Core
 
-De [Rick Anderson](https://twitter.com/RickAndMSFT)
+Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -28,7 +28,7 @@ Dans cette section, Migrations [Entity Framework](/ef/core/get-started/aspnetcor
 
 Quand vous utilisez EF Code First pour créer automatiquement une base de données, Code First :
 
-* Ajoute une table `__EFMigrationsHistory` à la base de données pour déterminer si le schéma de la base de données est synchronisé avec les classes de modèle à partir desquelles il a été généré.
+* Ajoute `__EFMigrationsHistory` un tableau à la base de données pour déterminer si le schéma de la base de données est synchronisé avec les classes de modèles qu’elle a générées.
 * Si les classes de modèle ne sont pas synchronisées avec la base de données, EF lève une exception.
 
 La vérification automatique de la synchronisation du schéma et du modèle facilite la détection des problèmes d’incohérence et de code de base de données.
@@ -53,19 +53,19 @@ Mettez à jour les pages suivantes :
 * Mettez à jour [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml) avec un champ `Rating`.
 * Ajoutez le champ `Rating` à la Page Edit.
 
-L’application ne fonctionne pas tant que la base de données n’est pas mise à jour pour inclure le nouveau champ. L’exécution de l’application sans mettre à jour la base de données lève une `SqlException`:
+L’application ne fonctionne pas tant que la base de données n’est pas mise à jour pour inclure le nouveau champ. Exécution de l’application sans `SqlException`mettre à jour la base de données jette un :
 
 `SqlException: Invalid column name 'Rating'.`
 
-L’exception `SqlException` est provoquée par la classe de modèle Movie mise à jour qui est différente de celle du schéma de la table Movie de la base de données. (Il n’existe pas de colonne `Rating` dans la table de base de données.)
+L’exception `SqlException` est causée par la mise à jour classe de modèle de film étant différent du schéma de la table de film de la base de données. (Il n’existe pas de colonne `Rating` dans la table de base de données.)
 
 Plusieurs approches sont possibles pour résoudre l’erreur :
 
 1. Laisser Entity Framework supprimer et recréer automatiquement la base de données avec le nouveau schéma de classes du modèle. Cette approche est très utile au début du cycle de développement. Elle permet de faire évoluer rapidement le modèle et le schéma de base de données ensemble. L’inconvénient est que vous perdez les données existantes dans la base de données. N’utilisez pas cette approche sur une base de données de production ! La suppression de la base de données lors des changements de schéma et l’utilisation d’un initialiseur pour amorcer automatiquement la base de données avec des données de test est souvent un moyen efficace pour développer une application.
 
-2. Modifiez explicitement le schéma de la base de données existante pour le faire correspondre aux classes du modèle. L’avantage de cette approche est que vous conservez vos données. Vous pouvez apporter cette modification manuellement ou en créant un script de modification de la base de données.
+2. Modifier explicitement le schéma de la base de données existante pour le faire correspondre aux classes du modèle. L’avantage de cette approche est que vous conservez vos données. Vous pouvez apporter cette modification manuellement ou en créant un script de modification de la base de données.
 
-3. Utilisez Migrations Code First pour mettre à jour le schéma de base de données.
+3. Utilisez les migrations Code First pour mettre à jour le schéma de base de données.
 
 Pour ce didacticiel, nous allons utiliser les migrations Code First.
 
@@ -83,8 +83,8 @@ Générez la solution.
 
 ### <a name="add-a-migration-for-the-rating-field"></a>Ajouter une migration pour le champ d’évaluation
 
-Dans le menu **Outils**, sélectionnez **Gestionnaire de package NuGet > Console du Gestionnaire de package**.
-Dans la console du Gestionnaire de package, entrez les commandes suivantes :
+Dans le menu **Outils**, sélectionnez **Gestionnaire de package NuGet > Console du gestionnaire de package**.
+Dans la console du gestionnaire de package, entrez les commandes suivantes :
 
 ```powershell
 Add-Migration Rating
@@ -96,9 +96,9 @@ La commande `Add-Migration` indique au framework qu’il doit :
 * Comparer le modèle `Movie` au schéma de base de données `Movie`
 * Créer du code pour migrer le schéma de base de données vers le nouveau modèle
 
-Le nom « Rating » est arbitraire et est utilisé pour nommer le fichier de migration. Il est utile d’utiliser un nom explicite pour le fichier de migration.
+Le nom « Rating » est arbitraire et utilisé pour nommer le fichier de migration. Il est utile d’utiliser un nom explicite pour le fichier de migration.
 
-La commande `Update-Database` indique à l’infrastructure d’appliquer les modifications de schéma à la base de données et de conserver les données existantes.
+La `Update-Database` commande indique au cadre d’appliquer les modifications du schéma à la base de données et de préserver les données existantes.
 
 <a name="ssox"></a>
 
@@ -108,9 +108,9 @@ Une autre option consiste à supprimer la base de données et à utiliser des mi
 
 * Sélectionnez la base de données dans SSOX.
 * Cliquez avec le bouton droit sur la base de données, puis sélectionnez *Supprimer*.
-* Cochez **Fermer les connexions existantes**.
+* Vérifiez **fermer les connexions existantes**.
 * Sélectionnez **OK**.
-* Dans la [console du gestionnaire de package](xref:tutorials/razor-pages/new-field#pmc), mettez à jour la base de données :
+* Dans le [PMC](xref:tutorials/razor-pages/new-field#pmc), mettre à jour la base de données:
 
   ```powershell
   Update-Database
@@ -139,8 +139,8 @@ Exécutez l’application et vérifiez que vous pouvez créer/modifier/afficher 
 * [Version YouTube de ce tutoriel](https://youtu.be/3i7uMxiGGR8)
 
 > [!div class="step-by-step"]
-> [Précédent : Ajout de la recherche](xref:tutorials/razor-pages/search)
-> [Suivant : Ajout de la validation](xref:tutorials/razor-pages/validation)
+> [Précédent: Ajout de la recherche](xref:tutorials/razor-pages/search)
+> [suivante: Ajout de validation](xref:tutorials/razor-pages/validation)
 
 ::: moniker-end
 
@@ -188,9 +188,9 @@ Plusieurs approches sont possibles pour résoudre l’erreur :
 
 1. Laisser Entity Framework supprimer et recréer automatiquement la base de données avec le nouveau schéma de classes du modèle. Cette approche est très utile au début du cycle de développement. Elle permet de faire évoluer rapidement le modèle et le schéma de base de données ensemble. L’inconvénient est que vous perdez les données existantes dans la base de données. N’utilisez pas cette approche sur une base de données de production ! La suppression de la base de données lors des changements de schéma et l’utilisation d’un initialiseur pour amorcer automatiquement la base de données avec des données de test est souvent un moyen efficace pour développer une application.
 
-2. Modifiez explicitement le schéma de la base de données existante pour le faire correspondre aux classes du modèle. L’avantage de cette approche est que vous conservez vos données. Vous pouvez apporter cette modification manuellement ou en créant un script de modification de la base de données.
+2. Modifier explicitement le schéma de la base de données existante pour le faire correspondre aux classes du modèle. L’avantage de cette approche est que vous conservez vos données. Vous pouvez apporter cette modification manuellement ou en créant un script de modification de la base de données.
 
-3. Utilisez Migrations Code First pour mettre à jour le schéma de base de données.
+3. Utilisez les migrations Code First pour mettre à jour le schéma de base de données.
 
 Pour ce didacticiel, nous allons utiliser les migrations Code First.
 
@@ -208,8 +208,8 @@ Générez la solution.
 
 ### <a name="add-a-migration-for-the-rating-field"></a>Ajouter une migration pour le champ d’évaluation
 
-Dans le menu **Outils**, sélectionnez **Gestionnaire de package NuGet > Console du Gestionnaire de package**.
-Dans la console du Gestionnaire de package, entrez les commandes suivantes :
+Dans le menu **Outils**, sélectionnez **Gestionnaire de package NuGet > Console du gestionnaire de package**.
+Dans la console du gestionnaire de package, entrez les commandes suivantes :
 
 ```powershell
 Add-Migration Rating
@@ -221,7 +221,7 @@ La commande `Add-Migration` indique au framework qu’il doit :
 * Comparer le modèle `Movie` au schéma de base de données `Movie`
 * Créer du code pour migrer le schéma de base de données vers le nouveau modèle
 
-Le nom « Rating » est arbitraire et est utilisé pour nommer le fichier de migration. Il est utile d’utiliser un nom explicite pour le fichier de migration.
+Le nom « Rating » est arbitraire et utilisé pour nommer le fichier de migration. Il est utile d’utiliser un nom explicite pour le fichier de migration.
 
 La commande `Update-Database` demande à l’infrastructure d’appliquer les modifications de schéma à la base de données.
 
@@ -233,9 +233,9 @@ Une autre option consiste à supprimer la base de données et à utiliser des mi
 
 * Sélectionnez la base de données dans SSOX.
 * Cliquez avec le bouton droit sur la base de données, puis sélectionnez *Supprimer*.
-* Cochez **Fermer les connexions existantes**.
+* Vérifiez **fermer les connexions existantes**.
 * Sélectionnez **OK**.
-* Dans la [console du gestionnaire de package](xref:tutorials/razor-pages/new-field#pmc), mettez à jour la base de données :
+* Dans le [PMC](xref:tutorials/razor-pages/new-field#pmc), mettre à jour la base de données:
 
   ```powershell
   Update-Database
@@ -262,7 +262,7 @@ Exécutez l’application et vérifiez que vous pouvez créer/modifier/afficher 
 * [Version YouTube de ce tutoriel](https://youtu.be/3i7uMxiGGR8)
 
 > [!div class="step-by-step"]
-> [Précédent : Ajout de la recherche](xref:tutorials/razor-pages/search)
-> [Suivant : Ajout de la validation](xref:tutorials/razor-pages/validation)
+> [Précédent: Ajout de la recherche](xref:tutorials/razor-pages/search)
+> [suivante: Ajout de validation](xref:tutorials/razor-pages/validation)
 
 ::: moniker-end

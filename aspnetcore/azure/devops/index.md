@@ -7,10 +7,10 @@ ms.date: 08/07/2018
 ms.custom: mvc, seodec18
 uid: azure/devops/index
 ms.openlocfilehash: f45bb2a5dd4b3d1a820085ede7ce3219045ed80b
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78658080"
 ---
 # <a name="devops-with-aspnet-core-and-azure"></a>DevOps avec ASP.NET Core et Azure
@@ -49,7 +49,7 @@ Découvrez les différentes méthodes de déploiement d’une application ASP.NE
 
 Créez une solution d’intégration et de déploiement continus de bout en bout pour votre application ASP.NET Core avec GitHub, Azure DevOps Services et Azure.
 
-### <a name="monitor-and-debug"></a>[Surveiller et déboguer](xref:azure/devops/monitor)
+### <a name="monitor-and-debug"></a>[Surveiller et débouger](xref:azure/devops/monitor)
 
 Utilisez les outils d’Azure pour surveiller, dépanner et optimiser votre application.
 

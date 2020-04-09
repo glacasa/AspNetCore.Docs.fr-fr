@@ -6,10 +6,10 @@ ms.author: riande
 ms.date: 01/24/2019
 uid: fundamentals/troubleshoot-aspnet-core-localization
 ms.openlocfilehash: 229e274a22e170d984a16d3b1ee64ebc38c4ef77
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78660376"
 ---
 # <a name="troubleshoot-aspnet-core-localization"></a>Résoudre les problèmes liés à la localisation ASP.NET Core
@@ -50,7 +50,7 @@ Les causes courantes de ressources introuvables sont notamment les suivantes :
 - La ressource est manquante dans le `resx` pour certaines langues, mais elle existe dans d’autres.
 - Si le problème persiste, vérifiez les messages du journal de localisation (qui se trouvent au niveau du journal `Debug`) pour obtenir plus de détails sur les ressources manquantes.
 
-_**Indicateur :** Lorsque vous utilisez `CookieRequestCultureProvider`, vérifiez que les guillemets simples ne sont pas utilisés avec les cultures à l’intérieur de la valeur du cookie de localisation. Par exemple, `c='en-UK'|uic='en-US'` est une valeur de cookie non valide, tandis que `c=en-UK|uic=en-US` est un valide._
+_**Astuce:** Lors `CookieRequestCultureProvider`de l’utilisation, vérifier les citations simples ne sont pas utilisés avec les cultures à l’intérieur de la valeur de cookie de localisation. Par exemple, `c='en-UK'|uic='en-US'` est une valeur `c=en-UK|uic=en-US` de cookie invalide, alors qu’il est valide._
 
 ## <a name="resources--class-libraries-issues"></a>Problèmes liés aux ressources et aux bibliothèques de classes
 
@@ -102,7 +102,7 @@ options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async 
 Si l’espace de noms racine d’un assembly est différent du nom de l’assembly, la localisation ne fonctionne pas par défaut. Pour éviter ce problème, utilisez [RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1), qui est décrit en détail [ici](xref:fundamentals/localization?view=aspnetcore-2.2#resource-file-naming).
 
 > [!WARNING]
-> Cela peut se produire lorsque le nom d’un projet n’est pas un identificateur .NET valide. Par exemple `my-project-name.csproj` utilise l’espace de noms racine `my_project_name` et le nom de l’assembly `my-project-name` conduisant à cette erreur. 
+> Cela peut se produire lorsque le nom d’un projet n’est pas un identifiant .NET valide. Par `my-project-name.csproj` exemple, utilisera `my_project_name` l’espace `my-project-name` de nom racine et le nom d’assemblage menant à cette erreur. 
 
 ## <a name="resources--build-action"></a>Ressources et action de génération
 

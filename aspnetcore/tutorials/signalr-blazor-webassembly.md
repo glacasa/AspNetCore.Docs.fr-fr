@@ -1,7 +1,7 @@
 ---
-title: Utiliser ASP.NET Core SignalR avec Blazor webassembly
+title: Utiliser ASP.NET Core SignalR Blazor avec WebAssembly
 author: guardrex
-description: Créez une application de conversation qui utilise ASP.NET Core SignalR avec Blazor webassembly.
+description: Créez une application de chat qui SignalR Blazor utilise ASP.NET Core avec WebAssembly.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -11,32 +11,32 @@ no-loc:
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
 ms.openlocfilehash: c4843dc282e1978b39738e206ecc79ded87fcff9
-ms.sourcegitcommit: 6ffb583991d6689326605a24565130083a28ef85
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "80306574"
 ---
-# <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Utiliser ASP.NET Core Signalr avec le webassembly éblouissant
+# <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Utilisez ASP.NET SignalR de base avec Blazor WebAssembly
 
 Par [Daniel Roth](https://github.com/danroth27) et [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Ce didacticiel enseigne les bases de la création d’une application en temps réel à l’aide de Signalr avec le webassembly éblouissant. Vous allez apprendre à effectuer les actions suivantes :
+Ce tutoriel enseigne les bases de la construction d’une application en temps réel en utilisant SignalR avec Blazor WebAssembly. Vous allez apprendre à effectuer les actions suivantes :
 
 > [!div class="checklist"]
-> * Créer un projet d’application hébergée webassembly éblouissant
+> * Créer un projet d’application Blazor WebAssembly Hébergé
 > * Ajouter la bibliothèque de client SignalR
-> * Ajouter un concentrateur Signalr
-> * Ajouter des services Signalr et un point de terminaison pour le concentrateur Signalr
-> * Ajouter du code de composant Razor pour la conversation
+> * Ajouter un hub SignalR
+> * Ajouter des services SignalR et un point de terminaison pour le hub SignalR
+> * Ajouter le code de composant Razor pour le chat
 
-À la fin de ce didacticiel, vous disposerez d’une application de conversation de travail.
+À la fin de ce tutoriel, vous aurez une application de chat de travail.
 
-[Affichez ou téléchargez l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-blazor-webassembly/samples/) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
+[Afficher ou télécharger le code de l’échantillon](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-blazor-webassembly/samples/) ([comment télécharger](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -56,58 +56,58 @@ Ce didacticiel enseigne les bases de la création d’une application en temps r
 
 ---
 
-## <a name="create-a-hosted-blazor-webassembly-app-project"></a>Créer un projet d’application webassembly éblouissant hébergé
+## <a name="create-a-hosted-blazor-webassembly-app-project"></a>Créer un projet d’application Blazor WebAssembly hébergé
 
-Si vous n’utilisez pas Visual Studio version 16,6 Preview 2 ou une version ultérieure, installez le modèle de [Webassembly éblouissant](xref:blazor/hosting-models#blazor-webassembly) . Le package [Microsoft. AspNetCore. Components. Webassembly. Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/) a une préversion alors que le composant webassembly éblouissant est en version préliminaire. Dans une interface de commande, exécutez la commande suivante :
+Lorsque vous n’utilisez pas la version Visual Studio 16.6 Aperçu 2 ou plus tard, installez le modèle [WebAssembly Blazor.](xref:blazor/hosting-models#blazor-webassembly) Le paquet [Microsoft.AspNetCore.Components.WebAssembly.Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/) a une version de prévisualisation tandis que Blazor WebAssembly est en avant-première. Dans une coque de commande, exécutez la commande suivante :
 
 ```dotnetcli
 dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview3.20168.3
 ```
 
-Suivez les instructions de votre choix d’outils :
+Suivez les conseils pour votre choix d’outillage :
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Créez un projet.
 
-1. Sélectionnez l' **application éblouissant** , puis sélectionnez **suivant**.
+1. Sélectionnez **Blazor App** et sélectionnez **Next**.
 
-1. Tapez « BlazorSignalRApp » dans le champ **nom du projet** . Confirmez que l’entrée d' **emplacement** est correcte ou indiquez un emplacement pour le projet. Sélectionnez **Create** (Créer).
+1. Tapez "BlazorSignalRApp" dans le champ du **nom du projet.** Confirmez que **l’entrée de localisation** est correcte ou fournissez un emplacement pour le projet. Sélectionnez **Create** (Créer).
 
-1. Choisissez le modèle **application éblouissant Webassembly** .
+1. Choisissez le modèle **Blazor WebAssembly App.**
 
-1. Sous **avancé**, activez la case à cocher **ASP.net Core hébergé** .
+1. Sous **Advanced**, sélectionnez la case à cocher **hébergée ASP.NET Core.**
 
 1. Sélectionnez **Create** (Créer).
 
 > [!NOTE]
-> Si vous avez mis à niveau ou installé une nouvelle version de Visual Studio et que le modèle de webassembly éblouissant n’apparaît pas dans l’interface utilisateur VS, réinstallez le modèle à l’aide de la commande `dotnet new` présentée précédemment.
+> Si vous avez mis à niveau ou installé une nouvelle version de Visual Studio et que le modèle WebAssembly de Blazor n’apparaît pas dans l’interface utilisateur VS, réinstaller le modèle à l’aide de la `dotnet new` commande indiquée précédemment.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-1. Dans une interface de commande, exécutez la commande suivante :
+1. Dans une coque de commande, exécutez la commande suivante :
 
    ```dotnetcli
    dotnet new blazorwasm --hosted --output BlazorSignalRApp
    ```
 
-1. Dans Visual Studio Code, ouvrez le dossier du projet de l’application.
+1. Dans Visual Studio Code, ouvrez le dossier de projet de l’application.
 
-1. Quand la boîte de dialogue semble ajouter des éléments multimédias pour générer et déboguer l’application, sélectionnez **Oui**. Visual Studio Code ajoute automatiquement le dossier *. vscode* avec les fichiers *Launch. JSON* et *Tasks. JSON* générés.
+1. Lorsque le dialogue semble ajouter des actifs pour construire et déboger l’application, sélectionnez **Oui**. Visual Studio Code ajoute automatiquement le dossier *.vscode* avec des fichiers *launch.json* et *tasks.json* générés.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-1. Dans une interface de commande, exécutez la commande suivante :
+1. Dans une coque de commande, exécutez la commande suivante :
 
    ```dotnetcli
    dotnet new blazorwasm --hosted --output BlazorSignalRApp
    ```
 
-1. Dans Visual Studio pour Mac, ouvrez le projet en accédant au dossier du projet et en ouvrant le fichier solution du projet ( *. sln*).
+1. Dans Visual Studio for Mac, ouvrez le projet en naviguant vers le dossier du projet et en ouvrant le fichier de solution du projet (*.sln*).
 
 # <a name="net-core-cli"></a>[CLI .NET Core](#tab/netcore-cli/)
 
-Dans une interface de commande, exécutez la commande suivante :
+Dans une coque de commande, exécutez la commande suivante :
 
 ```dotnetcli
 dotnet new blazorwasm --hosted --output BlazorSignalRApp
@@ -119,21 +119,21 @@ dotnet new blazorwasm --hosted --output BlazorSignalRApp
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
-1. Dans **Explorateur de solutions**, cliquez avec le bouton droit sur le projet **BlazorSignalRApp. client** , puis sélectionnez **gérer les packages NuGet**.
+1. Dans **Solution Explorer**, cliquez à droite sur le projet **BlazorSignalRApp.Client** et **sélectionnez Manage NuGet Packages**.
 
-1. Dans la boîte de dialogue **gérer les packages NuGet** , vérifiez que la **source du package** est définie sur *NuGet.org*.
+1. Dans le dialogue **Manage NuGet Packages,** confirmer que la **source du paquet** est configurée à *nuget.org*.
 
-1. Avec l’option **Parcourir** sélectionnée, tapez « Microsoft. AspNetCore. signalr. client » dans la zone de recherche.
+1. Avec **Browse** sélectionné, tapez "Microsoft.AspNetCore.SignalR.Client" dans la zone de recherche.
 
-1. Dans les résultats de la recherche, sélectionnez le package `Microsoft.AspNetCore.SignalR.Client`, puis sélectionnez **installer**.
+1. Dans les résultats de `Microsoft.AspNetCore.SignalR.Client` recherche, sélectionnez le paquet et sélectionnez **Installer**.
 
-1. Si la boîte de dialogue **aperçu des modifications** s’affiche, sélectionnez **OK**.
+1. Si le dialogue **de modifications d’aperçu** apparaît, sélectionnez **OK**.
 
-1. Si la boîte de dialogue acceptation de la **licence** s’affiche, sélectionnez **J’accepte** si vous acceptez les termes du contrat de licence.
+1. Si le dialogue **d’acceptation de licence** apparaît, sélectionnez **J’accepte** si vous êtes d’accord avec les conditions de licence.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code/)
 
-Dans le **Terminal intégré** (**Afficher** > **Terminal** à partir de la barre d’outils), exécutez les commandes suivantes :
+Dans le **terminal intégré** **(voir** > **le terminal** depuis la barre d’outils), exécutez les commandes suivantes :
 
 ```dotnetcli
 dotnet add Client package Microsoft.AspNetCore.SignalR.Client
@@ -141,19 +141,19 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-1. Dans la barre latérale **solution** , cliquez avec le bouton droit sur le projet **BlazorSignalRApp. client** , puis sélectionnez **gérer les packages NuGet**.
+1. Dans la barre latérale **Solution,** cliquez à droite sur le projet **BlazorSignalRApp.Client** et **sélectionnez Manage NuGet Packages**.
 
-1. Dans la boîte de dialogue **gérer les packages NuGet** , vérifiez que la liste déroulante source est définie sur *NuGet.org*.
+1. Dans le dialogue **Manage NuGet Packages,** confirmer que la source de décrochage est configuré pour *nuget.org*.
 
-1. Avec l’option **Parcourir** sélectionnée, tapez « Microsoft. AspNetCore. signalr. client » dans la zone de recherche.
+1. Avec **Browse** sélectionné, tapez "Microsoft.AspNetCore.SignalR.Client" dans la zone de recherche.
 
-1. Dans les résultats de la recherche, activez la case à cocher située en regard du package `Microsoft.AspNetCore.SignalR.Client`, puis sélectionnez **Ajouter un package**.
+1. Dans les résultats de recherche, sélectionnez la case à cocher à côté du `Microsoft.AspNetCore.SignalR.Client` paquet et sélectionnez Add **Package**.
 
-1. Si la boîte de dialogue acceptation de la **licence** s’affiche, sélectionnez **accepter** si vous acceptez les termes du contrat de licence.
+1. Si le dialogue **d’acceptation de licence** apparaît, **sélectionnez Accept** si vous êtes d’accord avec les conditions de licence.
 
 # <a name="net-core-cli"></a>[CLI .NET Core](#tab/netcore-cli/)
 
-Dans une interface de commande, exécutez les commandes suivantes :
+Dans une coque de commande, exécutez les commandes suivantes :
 
 ```dotnetcli
 cd BlazorSignalRApp
@@ -162,83 +162,83 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 ---
 
-## <a name="add-a-signalr-hub"></a>Ajouter un concentrateur Signalr
+## <a name="add-a-signalr-hub"></a>Ajouter un hub SignalR
 
-Dans le projet **BlazorSignalRApp. Server** , créez un dossier *hubs* (plural) et ajoutez la classe de `ChatHub` suivante (*hubs/ChatHub. cs*) :
+Dans le cadre du projet **BlazorSignalRApp.Server,** créez un dossier `ChatHub` *Hubs* (pluriel) et ajoutez la classe suivante *(Hubs/ChatHub.cs*) :
 
 [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Hubs/ChatHub.cs)]
 
-## <a name="add-signalr-services-and-an-endpoint-for-the-signalr-hub"></a>Ajouter des services Signalr et un point de terminaison pour le concentrateur Signalr
+## <a name="add-signalr-services-and-an-endpoint-for-the-signalr-hub"></a>Ajouter des services SignalR et un point de terminaison pour le hub SignalR
 
-1. Dans le projet **BlazorSignalRApp. Server** , ouvrez le fichier *Startup.cs* .
+1. Dans le cadre du projet **BlazorSignalRApp.Server,** ouvrez le *fichier Startup.cs.*
 
-1. Ajoutez l’espace de noms de la classe `ChatHub` au début du fichier :
+1. Ajouter l’espace `ChatHub` nom pour la classe en haut du fichier :
 
    ```csharp
    using BlazorSignalRApp.Server.Hubs;
    ```
 
-1. Ajoutez les services Signalr à `Startup.ConfigureServices`:
+1. Ajoutez les services `Startup.ConfigureServices`SignalR à :
 
    ```csharp
    services.AddSignalR();
    ```
 
-1. Dans `Startup.Configure` entre les points de terminaison pour l’itinéraire du contrôleur par défaut et le secours côté client, ajoutez un point de terminaison pour le Hub :
+1. Entre `Startup.Configure` les points de terminaison pour l’itinéraire du contrôleur par défaut et le repli côté client, ajoutez un point de terminaison pour le hub :
 
    [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet&highlight=4)]
 
-## <a name="add-razor-component-code-for-chat"></a>Ajouter du code de composant Razor pour la conversation
+## <a name="add-razor-component-code-for-chat"></a>Ajouter le code de composant Razor pour le chat
 
-1. Dans le projet **BlazorSignalRApp. client** , ouvrez le fichier *pages/index. Razor* .
+1. Dans le cadre du projet **BlazorSignalRApp.Client,** ouvrez le fichier *Pages/Index.razor.*
 
-1. Remplacez le balisage par le code suivant :
+1. Remplacez la balisage par le code suivant :
 
 [!code-razor[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Client/Pages/Index.razor)]
 
 ## <a name="run-the-app"></a>Exécuter l’application
 
-1. Suivez les instructions pour vos outils :
+1. Suivez les conseils pour votre outillage :
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Dans **Explorateur de solutions**, sélectionnez le projet **BlazorSignalRApp. Server** . Appuyez sur **CTRL + F5** pour exécuter l’application sans débogage.
+1. Dans **Solution Explorer**, sélectionnez le projet **BlazorSignalRApp.Server.** Appuyez sur **Ctrl-F5** pour exécuter l’application sans déboguer.
 
 1. Copiez l’URL à partir de la barre d’adresse, ouvrez un autre onglet ou instance du navigateur, puis collez l’URL dans la barre d’adresse.
 
-1. Choisissez l’un des navigateurs, entrez un nom et un message, puis sélectionnez le bouton **Envoyer**. Le nom et le message s’affichent instantanément sur les deux pages :
+1. Choisissez l’un des navigateurs, entrez un nom et un message, puis sélectionnez le bouton **Envoyer**. Le nom et le message sont affichés instantanément sur les deux pages :
 
-   ![L’exemple d’application signalr du webassembly éblouissant est ouvert dans deux fenêtres de navigateur qui affichent les messages échangés.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![SignalR Blazor WebAssembly exemple app ouvert dans deux fenêtres de navigateur montrant des messages échangés.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
-   Devis : *Star Trek VI : le pays indécouvert* [&copy;1991](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
+   Citations: *Star Trek VI: The Undiscovered Country* &copy;1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-1. Sélectionnez **Déboguer** > **exécuter sans débogage** à partir de la barre d’outils.
+1. Sélectionnez **Debug** > **Run Sans débogage** à partir de la barre d’outils.
 
 1. Copiez l’URL à partir de la barre d’adresse, ouvrez un autre onglet ou instance du navigateur, puis collez l’URL dans la barre d’adresse.
 
-1. Choisissez l’un des navigateurs, entrez un nom et un message, puis sélectionnez le bouton **Envoyer**. Le nom et le message s’affichent instantanément sur les deux pages :
+1. Choisissez l’un des navigateurs, entrez un nom et un message, puis sélectionnez le bouton **Envoyer**. Le nom et le message sont affichés instantanément sur les deux pages :
 
-   ![L’exemple d’application signalr du webassembly éblouissant est ouvert dans deux fenêtres de navigateur qui affichent les messages échangés.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![SignalR Blazor WebAssembly exemple app ouvert dans deux fenêtres de navigateur montrant des messages échangés.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
-   Devis : *Star Trek VI : le pays indécouvert* [&copy;1991](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
+   Citations: *Star Trek VI: The Undiscovered Country* &copy;1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-1. Dans la barre latérale **solution** , sélectionnez le projet **BlazorSignalRApp. Server** . Dans le menu, sélectionnez **exécuter** > **Démarrer sans débogage**.
+1. Dans la barre latérale **Solution,** sélectionnez le projet **BlazorSignalRApp.Server.** Dans le menu, sélectionnez **Run** > **Start Without Debugging**.
 
 1. Copiez l’URL à partir de la barre d’adresse, ouvrez un autre onglet ou instance du navigateur, puis collez l’URL dans la barre d’adresse.
 
-1. Choisissez l’un des navigateurs, entrez un nom et un message, puis sélectionnez le bouton **Envoyer**. Le nom et le message s’affichent instantanément sur les deux pages :
+1. Choisissez l’un des navigateurs, entrez un nom et un message, puis sélectionnez le bouton **Envoyer**. Le nom et le message sont affichés instantanément sur les deux pages :
 
-   ![L’exemple d’application signalr du webassembly éblouissant est ouvert dans deux fenêtres de navigateur qui affichent les messages échangés.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![SignalR Blazor WebAssembly exemple app ouvert dans deux fenêtres de navigateur montrant des messages échangés.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
-   Devis : *Star Trek VI : le pays indécouvert* [&copy;1991](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
+   Citations: *Star Trek VI: The Undiscovered Country* &copy;1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
 # <a name="net-core-cli"></a>[CLI .NET Core](#tab/netcore-cli/)
 
-1. Dans une interface de commande, exécutez les commandes suivantes :
+1. Dans une coque de commande, exécutez les commandes suivantes :
 
    ```dotnetcli
    cd Server
@@ -247,11 +247,11 @@ Dans le projet **BlazorSignalRApp. Server** , créez un dossier *hubs* (plural) 
 
 1. Copiez l’URL à partir de la barre d’adresse, ouvrez un autre onglet ou instance du navigateur, puis collez l’URL dans la barre d’adresse.
 
-1. Choisissez l’un des navigateurs, entrez un nom et un message, puis sélectionnez le bouton **Envoyer**. Le nom et le message s’affichent instantanément sur les deux pages :
+1. Choisissez l’un des navigateurs, entrez un nom et un message, puis sélectionnez le bouton **Envoyer**. Le nom et le message sont affichés instantanément sur les deux pages :
 
-   ![L’exemple d’application signalr du webassembly éblouissant est ouvert dans deux fenêtres de navigateur qui affichent les messages échangés.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![SignalR Blazor WebAssembly exemple app ouvert dans deux fenêtres de navigateur montrant des messages échangés.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
-   Devis : *Star Trek VI : le pays indécouvert* [&copy;1991](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
+   Citations: *Star Trek VI: The Undiscovered Country* &copy;1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
 ---
 
@@ -260,13 +260,13 @@ Dans le projet **BlazorSignalRApp. Server** , créez un dossier *hubs* (plural) 
 Dans ce didacticiel, vous avez appris à :
 
 > [!div class="checklist"]
-> * Créer un projet d’application hébergée Blazor webassembly
-> * Ajouter la bibliothèque cliente SignalR
-> * Ajouter un hub SignalR
-> * Ajouter des services de SignalR et un point de terminaison pour le Hub SignalR
-> * Ajouter du code de composant Razor pour la conversation
+> * Créer Blazor un projet d’application WebAssembly Hosted
+> * Ajouter SignalR la bibliothèque client
+> * Ajouter SignalR un hub
+> * Ajouter SignalR des services et SignalR un point de terminaison pour le hub
+> * Ajouter le code de composant Razor pour le chat
 
-Pour en savoir plus sur la création d’applications Blazor, consultez la documentation Blazor :
+Pour en savoir Blazor plus sur Blazor la création d’applications, consultez la documentation :
 
 > [!div class="nextstepaction"]
 > <xref:blazor/index>
