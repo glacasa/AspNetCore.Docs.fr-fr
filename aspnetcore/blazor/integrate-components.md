@@ -1,7 +1,7 @@
 ---
-title: Intégrer des composants ASP.NET Core Razor dans des applications Razor Pages et MVC
+title: Intégrer les composants ASP.NET Core Razor dans les applications Razor Pages et MVC
 author: guardrex
-description: En savoir plus sur les scénarios de liaison de données pour les composants et les éléments DOM dans Blazor applications.
+description: Renseignez-vous sur les scénarios de Blazor liaison de données pour les composants et les éléments DOM dans les applications.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -11,43 +11,43 @@ no-loc:
 - SignalR
 uid: blazor/integrate-components
 ms.openlocfilehash: cf6056e0985d5433bddecac8dd183ca3f4c2af5b
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "80218932"
 ---
-# <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a><span data-ttu-id="3a6e1-103">Intégrer des composants ASP.NET Core Razor dans des applications Razor Pages et MVC</span><span class="sxs-lookup"><span data-stu-id="3a6e1-103">Integrate ASP.NET Core Razor components into Razor Pages and MVC apps</span></span>
+# <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a><span data-ttu-id="c357f-103">Intégrer les composants ASP.NET Core Razor dans les applications Razor Pages et MVC</span><span class="sxs-lookup"><span data-stu-id="c357f-103">Integrate ASP.NET Core Razor components into Razor Pages and MVC apps</span></span>
 
-<span data-ttu-id="3a6e1-104">Par [Luke Latham](https://github.com/guardrex) et [Daniel Roth](https://github.com/danroth27)</span><span class="sxs-lookup"><span data-stu-id="3a6e1-104">By [Luke Latham](https://github.com/guardrex) and [Daniel Roth](https://github.com/danroth27)</span></span>
+<span data-ttu-id="c357f-104">Par [Luke Latham](https://github.com/guardrex) et [Daniel Roth](https://github.com/danroth27)</span><span class="sxs-lookup"><span data-stu-id="c357f-104">By [Luke Latham](https://github.com/guardrex) and [Daniel Roth](https://github.com/danroth27)</span></span>
 
-<span data-ttu-id="3a6e1-105">Les composants Razor peuvent être intégrés dans des applications Razor Pages et MVC.</span><span class="sxs-lookup"><span data-stu-id="3a6e1-105">Razor components can be integrated into Razor Pages and MVC apps.</span></span> <span data-ttu-id="3a6e1-106">Lorsque la page ou la vue est restituée, les composants peuvent être prérendus en même temps.</span><span class="sxs-lookup"><span data-stu-id="3a6e1-106">When the page or view is rendered, components can be prerendered at the same time.</span></span>
+<span data-ttu-id="c357f-105">Les composants Razor peuvent être intégrés dans les pages Razor et les applications MVC.</span><span class="sxs-lookup"><span data-stu-id="c357f-105">Razor components can be integrated into Razor Pages and MVC apps.</span></span> <span data-ttu-id="c357f-106">Lorsque la page ou la vue est rendue, les composants peuvent être prédilués en même temps.</span><span class="sxs-lookup"><span data-stu-id="c357f-106">When the page or view is rendered, components can be prerendered at the same time.</span></span>
 
-## <a name="prepare-the-app-to-use-components-in-pages-and-views"></a><span data-ttu-id="3a6e1-107">Préparer l’application pour utiliser des composants dans les pages et les vues</span><span class="sxs-lookup"><span data-stu-id="3a6e1-107">Prepare the app to use components in pages and views</span></span>
+## <a name="prepare-the-app-to-use-components-in-pages-and-views"></a><span data-ttu-id="c357f-107">Préparer l’application à utiliser des composants dans les pages et les vues</span><span class="sxs-lookup"><span data-stu-id="c357f-107">Prepare the app to use components in pages and views</span></span>
 
-<span data-ttu-id="3a6e1-108">Une Razor Pages ou une application MVC existante peut intégrer des composants Razor dans des pages et des vues :</span><span class="sxs-lookup"><span data-stu-id="3a6e1-108">An existing Razor Pages or MVC app can integrate Razor components into pages and views:</span></span>
+<span data-ttu-id="c357f-108">Une application existante Razor Pages ou MVC peut intégrer des composants Razor dans les pages et les vues :</span><span class="sxs-lookup"><span data-stu-id="c357f-108">An existing Razor Pages or MVC app can integrate Razor components into pages and views:</span></span>
 
-1. <span data-ttu-id="3a6e1-109">Dans le fichier de disposition de l’application ( *_Layout. cshtml*) :</span><span class="sxs-lookup"><span data-stu-id="3a6e1-109">In the app's layout file (*_Layout.cshtml*):</span></span>
+1. <span data-ttu-id="c357f-109">Dans le fichier de mise en page de l’application (*_Layout.cshtml )*:</span><span class="sxs-lookup"><span data-stu-id="c357f-109">In the app's layout file (*_Layout.cshtml*):</span></span>
 
-   * <span data-ttu-id="3a6e1-110">Ajoutez la balise `<base>` suivante à l’élément `<head>` :</span><span class="sxs-lookup"><span data-stu-id="3a6e1-110">Add the following `<base>` tag to the `<head>` element:</span></span>
+   * <span data-ttu-id="c357f-110">Ajouter l’étiquette `<base>` `<head>` suivante à l’élément :</span><span class="sxs-lookup"><span data-stu-id="c357f-110">Add the following `<base>` tag to the `<head>` element:</span></span>
 
      ```html
      <base href="~/" />
      ```
 
-     <span data-ttu-id="3a6e1-111">La valeur `href` (le *chemin d’accès de base*de l’application) dans l’exemple précédent suppose que l’application se trouve dans le chemin d’URL racine (`/`).</span><span class="sxs-lookup"><span data-stu-id="3a6e1-111">The `href` value (the *app base path*) in the preceding example assumes that the app resides at the root URL path (`/`).</span></span> <span data-ttu-id="3a6e1-112">Si l’application est une sous-application, suivez les instructions de la section *chemin d’accès* à la base de l’application de l’article <xref:host-and-deploy/blazor/index#app-base-path>.</span><span class="sxs-lookup"><span data-stu-id="3a6e1-112">If the app is a sub-application, follow the guidance in the *App base path* section of the <xref:host-and-deploy/blazor/index#app-base-path> article.</span></span>
+     <span data-ttu-id="c357f-111">La `href` valeur (le *chemin de base de l’application*) dans l’exemple précédent suppose que l’application réside sur le chemin de l’URL racine (`/`).</span><span class="sxs-lookup"><span data-stu-id="c357f-111">The `href` value (the *app base path*) in the preceding example assumes that the app resides at the root URL path (`/`).</span></span> <span data-ttu-id="c357f-112">Si l’application est une sous-application, suivez les conseils <xref:host-and-deploy/blazor/index#app-base-path> dans la section du chemin de base de l’application de l’article. *App base path*</span><span class="sxs-lookup"><span data-stu-id="c357f-112">If the app is a sub-application, follow the guidance in the *App base path* section of the <xref:host-and-deploy/blazor/index#app-base-path> article.</span></span>
 
-     <span data-ttu-id="3a6e1-113">Le fichier *_Layout. cshtml* se trouve dans le dossier *pages/Shared* d’une application Razor pages ou d’un dossier *Views/Shared* dans une application MVC.</span><span class="sxs-lookup"><span data-stu-id="3a6e1-113">The *_Layout.cshtml* file is located in the *Pages/Shared* folder in a Razor Pages app or *Views/Shared* folder in an MVC app.</span></span>
+     <span data-ttu-id="c357f-113">Le fichier *_Layout.cshtml* est situé dans le dossier *Pages/Shared* dans une application Razor Pages ou un dossier *Vues/Partage* dans une application MVC.</span><span class="sxs-lookup"><span data-stu-id="c357f-113">The *_Layout.cshtml* file is located in the *Pages/Shared* folder in a Razor Pages app or *Views/Shared* folder in an MVC app.</span></span>
 
-   * <span data-ttu-id="3a6e1-114">Ajoutez une balise `<script>` pour le script *éblouissant. Server. js* immédiatement avant la balise de fermeture `</body>` :</span><span class="sxs-lookup"><span data-stu-id="3a6e1-114">Add a `<script>` tag for the *blazor.server.js* script immediately before of the closing `</body>` tag:</span></span>
+   * <span data-ttu-id="c357f-114">Ajoutez `<script>` une balise pour le script *blazor.server.js* immédiatement avant l’étiquette de clôture `</body>` :</span><span class="sxs-lookup"><span data-stu-id="c357f-114">Add a `<script>` tag for the *blazor.server.js* script immediately before of the closing `</body>` tag:</span></span>
 
      ```html
      <script src="_framework/blazor.server.js"></script>
      ```
 
-     <span data-ttu-id="3a6e1-115">L’infrastructure ajoute le script *éblouissant. Server. js* à l’application.</span><span class="sxs-lookup"><span data-stu-id="3a6e1-115">The framework adds the *blazor.server.js* script to the app.</span></span> <span data-ttu-id="3a6e1-116">Il n’est pas nécessaire d’ajouter manuellement le script à l’application.</span><span class="sxs-lookup"><span data-stu-id="3a6e1-116">There's no need to manually add the script to the app.</span></span>
+     <span data-ttu-id="c357f-115">Le cadre ajoute le script *blazor.server.js* à l’application.</span><span class="sxs-lookup"><span data-stu-id="c357f-115">The framework adds the *blazor.server.js* script to the app.</span></span> <span data-ttu-id="c357f-116">Il n’est pas nécessaire d’ajouter manuellement le script à l’application.</span><span class="sxs-lookup"><span data-stu-id="c357f-116">There's no need to manually add the script to the app.</span></span>
 
-1. <span data-ttu-id="3a6e1-117">Ajoutez un fichier *_Imports. Razor* au dossier racine du projet avec le contenu suivant (modifiez le dernier espace de noms, `MyAppNamespace`, en lui attribuant l’espace de noms de l’application) :</span><span class="sxs-lookup"><span data-stu-id="3a6e1-117">Add an *_Imports.razor* file to the root folder of the project with the following content (change the last namespace, `MyAppNamespace`, to the namespace of the app):</span></span>
+1. <span data-ttu-id="c357f-117">Ajoutez un fichier *_Imports.razor* au dossier racine du projet avec le contenu suivant `MyAppNamespace`(changer l’espace de nom de famille, , à l’espace nom de l’application):</span><span class="sxs-lookup"><span data-stu-id="c357f-117">Add an *_Imports.razor* file to the root folder of the project with the following content (change the last namespace, `MyAppNamespace`, to the namespace of the app):</span></span>
 
    ```razor
    @using System.Net.Http
@@ -60,29 +60,29 @@ ms.locfileid: "80218932"
    @using MyAppNamespace
    ```
 
-1. <span data-ttu-id="3a6e1-118">Dans `Startup.ConfigureServices`, inscrivez le service Blazor Server :</span><span class="sxs-lookup"><span data-stu-id="3a6e1-118">In `Startup.ConfigureServices`, register the Blazor Server service:</span></span>
+1. <span data-ttu-id="c357f-118">Dans `Startup.ConfigureServices`, Blazor enregistrez le service Server :</span><span class="sxs-lookup"><span data-stu-id="c357f-118">In `Startup.ConfigureServices`, register the Blazor Server service:</span></span>
 
    ```csharp
    services.AddServerSideBlazor();
    ```
 
-1. <span data-ttu-id="3a6e1-119">Dans `Startup.Configure`, ajoutez le point de terminaison Blazor Hub à `app.UseEndpoints`:</span><span class="sxs-lookup"><span data-stu-id="3a6e1-119">In `Startup.Configure`, add the Blazor Hub endpoint to `app.UseEndpoints`:</span></span>
+1. <span data-ttu-id="c357f-119">Dans `Startup.Configure`, Blazor ajouter le `app.UseEndpoints`point de terminaison Hub à :</span><span class="sxs-lookup"><span data-stu-id="c357f-119">In `Startup.Configure`, add the Blazor Hub endpoint to `app.UseEndpoints`:</span></span>
 
    ```csharp
    endpoints.MapBlazorHub();
    ```
 
-1. <span data-ttu-id="3a6e1-120">Intégrer des composants dans n’importe quelle page ou vue.</span><span class="sxs-lookup"><span data-stu-id="3a6e1-120">Integrate components into any page or view.</span></span> <span data-ttu-id="3a6e1-121">Pour plus d’informations, consultez la section [rendre les composants à partir d’une page ou d’une vue](#render-components-from-a-page-or-view) .</span><span class="sxs-lookup"><span data-stu-id="3a6e1-121">For more information, see the [Render components from a page or view](#render-components-from-a-page-or-view) section.</span></span>
+1. <span data-ttu-id="c357f-120">Intégrer les composants dans n’importe quelle page ou vue.</span><span class="sxs-lookup"><span data-stu-id="c357f-120">Integrate components into any page or view.</span></span> <span data-ttu-id="c357f-121">Pour plus d’informations, consultez les [composants Render à partir d’une page ou d’une](#render-components-from-a-page-or-view) section de vue.</span><span class="sxs-lookup"><span data-stu-id="c357f-121">For more information, see the [Render components from a page or view](#render-components-from-a-page-or-view) section.</span></span>
 
-## <a name="use-routable-components-in-a-razor-pages-app"></a><span data-ttu-id="3a6e1-122">Utiliser des composants routables dans une application Razor Pages</span><span class="sxs-lookup"><span data-stu-id="3a6e1-122">Use routable components in a Razor Pages app</span></span>
+## <a name="use-routable-components-in-a-razor-pages-app"></a><span data-ttu-id="c357f-122">Utilisez des composants routables dans une application Razor Pages</span><span class="sxs-lookup"><span data-stu-id="c357f-122">Use routable components in a Razor Pages app</span></span>
 
-<span data-ttu-id="3a6e1-123">*Cette section concerne l’ajout de composants qui sont directement routables à partir des demandes des utilisateurs.*</span><span class="sxs-lookup"><span data-stu-id="3a6e1-123">*This section pertains to adding components that are directly routable from user requests.*</span></span>
+<span data-ttu-id="c357f-123">*Cette section concerne l’ajout de composants qui sont directement routables des demandes des utilisateurs.*</span><span class="sxs-lookup"><span data-stu-id="c357f-123">*This section pertains to adding components that are directly routable from user requests.*</span></span>
 
-<span data-ttu-id="3a6e1-124">Pour prendre en charge les composants Razor routables dans les applications Razor Pages :</span><span class="sxs-lookup"><span data-stu-id="3a6e1-124">To support routable Razor components in Razor Pages apps:</span></span>
+<span data-ttu-id="c357f-124">Pour prendre en charge les composants Razor routables dans les applications Razor Pages :</span><span class="sxs-lookup"><span data-stu-id="c357f-124">To support routable Razor components in Razor Pages apps:</span></span>
 
-1. <span data-ttu-id="3a6e1-125">Suivez les instructions de la section [préparer l’application à utiliser les composants des pages et des vues](#prepare-the-app-to-use-components-in-pages-and-views) .</span><span class="sxs-lookup"><span data-stu-id="3a6e1-125">Follow the guidance in the [Prepare the app to use components in pages and views](#prepare-the-app-to-use-components-in-pages-and-views) section.</span></span>
+1. <span data-ttu-id="c357f-125">Suivez les conseils de [l’application Préparer à utiliser des composants dans la](#prepare-the-app-to-use-components-in-pages-and-views) section pages et vues.</span><span class="sxs-lookup"><span data-stu-id="c357f-125">Follow the guidance in the [Prepare the app to use components in pages and views](#prepare-the-app-to-use-components-in-pages-and-views) section.</span></span>
 
-1. <span data-ttu-id="3a6e1-126">Ajoutez un fichier *app. Razor* à la racine du projet avec le contenu suivant :</span><span class="sxs-lookup"><span data-stu-id="3a6e1-126">Add an *App.razor* file to the project root with the following content:</span></span>
+1. <span data-ttu-id="c357f-126">Ajoutez un fichier *App.razor* à la racine du projet avec le contenu suivant :</span><span class="sxs-lookup"><span data-stu-id="c357f-126">Add an *App.razor* file to the project root with the following content:</span></span>
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -98,7 +98,7 @@ ms.locfileid: "80218932"
    </Router>
    ```
 
-1. <span data-ttu-id="3a6e1-127">Ajoutez un fichier *_Host. cshtml* au dossier *pages* avec le contenu suivant :</span><span class="sxs-lookup"><span data-stu-id="3a6e1-127">Add a *_Host.cshtml* file to the *Pages* folder with the following content:</span></span>
+1. <span data-ttu-id="c357f-127">Ajoutez un fichier *_Host.cshtml* au dossier *Pages* avec le contenu suivant :</span><span class="sxs-lookup"><span data-stu-id="c357f-127">Add a *_Host.cshtml* file to the *Pages* folder with the following content:</span></span>
 
    ```cshtml
    @page "/blazor"
@@ -111,9 +111,9 @@ ms.locfileid: "80218932"
    </app>
    ```
 
-   <span data-ttu-id="3a6e1-128">Les composants utilisent le fichier *_Layout. cshtml* partagé pour leur disposition.</span><span class="sxs-lookup"><span data-stu-id="3a6e1-128">Components use the shared *_Layout.cshtml* file for their layout.</span></span>
+   <span data-ttu-id="c357f-128">Les composants utilisent le fichier *_Layout.cshtml* partagé pour leur mise en page.</span><span class="sxs-lookup"><span data-stu-id="c357f-128">Components use the shared *_Layout.cshtml* file for their layout.</span></span>
 
-1. <span data-ttu-id="3a6e1-129">Ajoutez un itinéraire de priorité basse pour la page *_Host. cshtml* à la configuration du point de terminaison dans `Startup.Configure`:</span><span class="sxs-lookup"><span data-stu-id="3a6e1-129">Add a low-priority route for the *_Host.cshtml* page to endpoint configuration in `Startup.Configure`:</span></span>
+1. <span data-ttu-id="c357f-129">Ajoutez un itinéraire de faible priorité pour la page *_Host.cshtml* à la configuration de point de terminaison dans `Startup.Configure`:</span><span class="sxs-lookup"><span data-stu-id="c357f-129">Add a low-priority route for the *_Host.cshtml* page to endpoint configuration in `Startup.Configure`:</span></span>
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -124,7 +124,7 @@ ms.locfileid: "80218932"
    });
    ```
 
-1. <span data-ttu-id="3a6e1-130">Ajoutez des composants routables à l’application.</span><span class="sxs-lookup"><span data-stu-id="3a6e1-130">Add routable components to the app.</span></span> <span data-ttu-id="3a6e1-131">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="3a6e1-131">For example:</span></span>
+1. <span data-ttu-id="c357f-130">Ajoutez des composants routables à l’application.</span><span class="sxs-lookup"><span data-stu-id="c357f-130">Add routable components to the app.</span></span> <span data-ttu-id="c357f-131">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="c357f-131">For example:</span></span>
 
    ```razor
    @page "/counter"
@@ -134,17 +134,17 @@ ms.locfileid: "80218932"
    ...
    ```
 
-   <span data-ttu-id="3a6e1-132">Pour plus d’informations sur les espaces de noms, consultez la section [espaces de noms de composants](#component-namespaces) .</span><span class="sxs-lookup"><span data-stu-id="3a6e1-132">For more information on namespaces, see the [Component namespaces](#component-namespaces) section.</span></span>
+   <span data-ttu-id="c357f-132">Pour plus d’informations sur les espaces de nom, consultez la section [Espaces de noms de composant.](#component-namespaces)</span><span class="sxs-lookup"><span data-stu-id="c357f-132">For more information on namespaces, see the [Component namespaces](#component-namespaces) section.</span></span>
 
-## <a name="use-routable-components-in-an-mvc-app"></a><span data-ttu-id="3a6e1-133">Utiliser des composants routables dans une application MVC</span><span class="sxs-lookup"><span data-stu-id="3a6e1-133">Use routable components in an MVC app</span></span>
+## <a name="use-routable-components-in-an-mvc-app"></a><span data-ttu-id="c357f-133">Utilisez des composants routables dans une application MVC</span><span class="sxs-lookup"><span data-stu-id="c357f-133">Use routable components in an MVC app</span></span>
 
-<span data-ttu-id="3a6e1-134">*Cette section concerne l’ajout de composants qui sont directement routables à partir des demandes des utilisateurs.*</span><span class="sxs-lookup"><span data-stu-id="3a6e1-134">*This section pertains to adding components that are directly routable from user requests.*</span></span>
+<span data-ttu-id="c357f-134">*Cette section concerne l’ajout de composants qui sont directement routables des demandes des utilisateurs.*</span><span class="sxs-lookup"><span data-stu-id="c357f-134">*This section pertains to adding components that are directly routable from user requests.*</span></span>
 
-<span data-ttu-id="3a6e1-135">Pour prendre en charge les composants Razor routables dans les applications MVC :</span><span class="sxs-lookup"><span data-stu-id="3a6e1-135">To support routable Razor components in MVC apps:</span></span>
+<span data-ttu-id="c357f-135">Pour prendre en charge les composants Razor routables dans les applications MVC :</span><span class="sxs-lookup"><span data-stu-id="c357f-135">To support routable Razor components in MVC apps:</span></span>
 
-1. <span data-ttu-id="3a6e1-136">Suivez les instructions de la section [préparer l’application à utiliser les composants des pages et des vues](#prepare-the-app-to-use-components-in-pages-and-views) .</span><span class="sxs-lookup"><span data-stu-id="3a6e1-136">Follow the guidance in the [Prepare the app to use components in pages and views](#prepare-the-app-to-use-components-in-pages-and-views) section.</span></span>
+1. <span data-ttu-id="c357f-136">Suivez les conseils de [l’application Préparer à utiliser des composants dans la](#prepare-the-app-to-use-components-in-pages-and-views) section pages et vues.</span><span class="sxs-lookup"><span data-stu-id="c357f-136">Follow the guidance in the [Prepare the app to use components in pages and views](#prepare-the-app-to-use-components-in-pages-and-views) section.</span></span>
 
-1. <span data-ttu-id="3a6e1-137">Ajoutez un fichier *app. Razor* à la racine du projet avec le contenu suivant :</span><span class="sxs-lookup"><span data-stu-id="3a6e1-137">Add an *App.razor* file to the root of the project with the following content:</span></span>
+1. <span data-ttu-id="c357f-137">Ajoutez un fichier *App.razor* à la racine du projet avec le contenu suivant :</span><span class="sxs-lookup"><span data-stu-id="c357f-137">Add an *App.razor* file to the root of the project with the following content:</span></span>
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -160,7 +160,7 @@ ms.locfileid: "80218932"
    </Router>
    ```
 
-1. <span data-ttu-id="3a6e1-138">Ajoutez un fichier *_Host. cshtml* au dossier *views/de démarrage* avec le contenu suivant :</span><span class="sxs-lookup"><span data-stu-id="3a6e1-138">Add a *_Host.cshtml* file to the *Views/Home* folder with the following content:</span></span>
+1. <span data-ttu-id="c357f-138">Ajoutez un fichier *_Host.cshtml* au dossier *Vues/Accueil* avec le contenu suivant :</span><span class="sxs-lookup"><span data-stu-id="c357f-138">Add a *_Host.cshtml* file to the *Views/Home* folder with the following content:</span></span>
 
    ```cshtml
    @{
@@ -172,9 +172,9 @@ ms.locfileid: "80218932"
    </app>
    ```
 
-   <span data-ttu-id="3a6e1-139">Les composants utilisent le fichier *_Layout. cshtml* partagé pour leur disposition.</span><span class="sxs-lookup"><span data-stu-id="3a6e1-139">Components use the shared *_Layout.cshtml* file for their layout.</span></span>
+   <span data-ttu-id="c357f-139">Les composants utilisent le fichier *_Layout.cshtml* partagé pour leur mise en page.</span><span class="sxs-lookup"><span data-stu-id="c357f-139">Components use the shared *_Layout.cshtml* file for their layout.</span></span>
 
-1. <span data-ttu-id="3a6e1-140">Ajoutez une action au contrôleur d’hébergement :</span><span class="sxs-lookup"><span data-stu-id="3a6e1-140">Add an action to the Home controller:</span></span>
+1. <span data-ttu-id="c357f-140">Ajoutez une action au contrôleur à domicile :</span><span class="sxs-lookup"><span data-stu-id="c357f-140">Add an action to the Home controller:</span></span>
 
    ```csharp
    public IActionResult Blazor()
@@ -183,7 +183,7 @@ ms.locfileid: "80218932"
    }
    ```
 
-1. <span data-ttu-id="3a6e1-141">Ajoutez un itinéraire de faible priorité pour l’action de contrôleur qui retourne la vue *_Host. cshtml* à la configuration du point de terminaison dans `Startup.Configure`:</span><span class="sxs-lookup"><span data-stu-id="3a6e1-141">Add a low-priority route for the controller action that returns the *_Host.cshtml* view to the endpoint configuration in `Startup.Configure`:</span></span>
+1. <span data-ttu-id="c357f-141">Ajoutez un itinéraire peu prioritaire pour l’action du contrôleur qui renvoie la vue `Startup.Configure` *_Host.cshtml* à la configuration du point de terminaison dans :</span><span class="sxs-lookup"><span data-stu-id="c357f-141">Add a low-priority route for the controller action that returns the *_Host.cshtml* view to the endpoint configuration in `Startup.Configure`:</span></span>
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -194,7 +194,7 @@ ms.locfileid: "80218932"
    });
    ```
 
-1. <span data-ttu-id="3a6e1-142">Créez un dossier *pages* et ajoutez des composants routables à l’application.</span><span class="sxs-lookup"><span data-stu-id="3a6e1-142">Create a *Pages* folder and add routable components to the app.</span></span> <span data-ttu-id="3a6e1-143">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="3a6e1-143">For example:</span></span>
+1. <span data-ttu-id="c357f-142">Créez un dossier *Pages* et ajoutez des composants routables à l’application.</span><span class="sxs-lookup"><span data-stu-id="c357f-142">Create a *Pages* folder and add routable components to the app.</span></span> <span data-ttu-id="c357f-143">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="c357f-143">For example:</span></span>
 
    ```razor
    @page "/counter"
@@ -204,30 +204,30 @@ ms.locfileid: "80218932"
    ...
    ```
 
-   <span data-ttu-id="3a6e1-144">Pour plus d’informations sur les espaces de noms, consultez la section [espaces de noms de composants](#component-namespaces) .</span><span class="sxs-lookup"><span data-stu-id="3a6e1-144">For more information on namespaces, see the [Component namespaces](#component-namespaces) section.</span></span>
+   <span data-ttu-id="c357f-144">Pour plus d’informations sur les espaces de nom, consultez la section [Espaces de noms de composant.](#component-namespaces)</span><span class="sxs-lookup"><span data-stu-id="c357f-144">For more information on namespaces, see the [Component namespaces](#component-namespaces) section.</span></span>
 
-## <a name="component-namespaces"></a><span data-ttu-id="3a6e1-145">Espaces de noms de composants</span><span class="sxs-lookup"><span data-stu-id="3a6e1-145">Component namespaces</span></span>
+## <a name="component-namespaces"></a><span data-ttu-id="c357f-145">Espaces de noms de composant</span><span class="sxs-lookup"><span data-stu-id="c357f-145">Component namespaces</span></span>
 
-<span data-ttu-id="3a6e1-146">Lorsque vous utilisez un dossier personnalisé pour stocker les composants de l’application, ajoutez l’espace de noms qui représente le dossier à la page/la vue ou au fichier *_ViewImports. cshtml* .</span><span class="sxs-lookup"><span data-stu-id="3a6e1-146">When using a custom folder to hold the app's components, add the namespace representing the folder to either the page/view or to the *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="3a6e1-147">Dans l’exemple suivant :</span><span class="sxs-lookup"><span data-stu-id="3a6e1-147">In the following example:</span></span>
+<span data-ttu-id="c357f-146">Lorsque vous utilisez un dossier personnalisé pour contenir les composants de l’application, ajoutez l’espace de nom représentant le dossier à la page/vue ou au fichier *_ViewImports.cshtml.*</span><span class="sxs-lookup"><span data-stu-id="c357f-146">When using a custom folder to hold the app's components, add the namespace representing the folder to either the page/view or to the *_ViewImports.cshtml* file.</span></span> <span data-ttu-id="c357f-147">Dans l’exemple suivant :</span><span class="sxs-lookup"><span data-stu-id="c357f-147">In the following example:</span></span>
 
-* <span data-ttu-id="3a6e1-148">Remplacez `MyAppNamespace` par l’espace de noms de l’application.</span><span class="sxs-lookup"><span data-stu-id="3a6e1-148">Change `MyAppNamespace` to the app's namespace.</span></span>
-* <span data-ttu-id="3a6e1-149">Si un dossier nommé *Components* n’est pas utilisé pour contenir les composants, remplacez `Components` par le dossier dans lequel se trouvent les composants.</span><span class="sxs-lookup"><span data-stu-id="3a6e1-149">If a folder named *Components* isn't used to hold the components, change `Components` to the folder where the components reside.</span></span>
+* <span data-ttu-id="c357f-148">Changez `MyAppNamespace` pour l’espace nom de l’application.</span><span class="sxs-lookup"><span data-stu-id="c357f-148">Change `MyAppNamespace` to the app's namespace.</span></span>
+* <span data-ttu-id="c357f-149">Si un dossier nommé *Composants* n’est pas utilisé `Components` pour contenir les composants, changez-vous au dossier où résident les composants.</span><span class="sxs-lookup"><span data-stu-id="c357f-149">If a folder named *Components* isn't used to hold the components, change `Components` to the folder where the components reside.</span></span>
 
 ```cshtml
 @using MyAppNamespace.Components
 ```
 
-<span data-ttu-id="3a6e1-150">Le fichier *_ViewImports. cshtml* se trouve dans le dossier *pages* d’une application Razor pages ou du dossier *views* d’une application MVC.</span><span class="sxs-lookup"><span data-stu-id="3a6e1-150">The *_ViewImports.cshtml* file is located in the *Pages* folder of a Razor Pages app or the *Views* folder of an MVC app.</span></span>
+<span data-ttu-id="c357f-150">Le fichier *_ViewImports.cshtml* est situé dans le dossier *Pages* d’une application Razor Pages ou dans le dossier *Vues* d’une application MVC.</span><span class="sxs-lookup"><span data-stu-id="c357f-150">The *_ViewImports.cshtml* file is located in the *Pages* folder of a Razor Pages app or the *Views* folder of an MVC app.</span></span>
 
-<span data-ttu-id="3a6e1-151">Pour plus d’informations, consultez <xref:blazor/components#import-components>.</span><span class="sxs-lookup"><span data-stu-id="3a6e1-151">For more information, see <xref:blazor/components#import-components>.</span></span>
+<span data-ttu-id="c357f-151">Pour plus d’informations, consultez <xref:blazor/components#import-components>.</span><span class="sxs-lookup"><span data-stu-id="c357f-151">For more information, see <xref:blazor/components#import-components>.</span></span>
 
-## <a name="render-components-from-a-page-or-view"></a><span data-ttu-id="3a6e1-152">Rendre les composants à partir d’une page ou d’une vue</span><span class="sxs-lookup"><span data-stu-id="3a6e1-152">Render components from a page or view</span></span>
+## <a name="render-components-from-a-page-or-view"></a><span data-ttu-id="c357f-152">Rendre les composants à partir d’une page ou d’une vue</span><span class="sxs-lookup"><span data-stu-id="c357f-152">Render components from a page or view</span></span>
 
-<span data-ttu-id="3a6e1-153">*Cette section se rapporte à l’ajout de composants à des pages ou à des vues, où les composants ne sont pas directement routés à partir des demandes de l’utilisateur.*</span><span class="sxs-lookup"><span data-stu-id="3a6e1-153">*This section pertains to adding components to pages or views, where the components aren't directly routable from user requests.*</span></span>
+<span data-ttu-id="c357f-153">*Cette section concerne l’ajout de composants aux pages ou aux vues, où les composants ne sont pas directement routables des demandes des utilisateurs.*</span><span class="sxs-lookup"><span data-stu-id="c357f-153">*This section pertains to adding components to pages or views, where the components aren't directly routable from user requests.*</span></span>
 
-<span data-ttu-id="3a6e1-154">Pour afficher un composant à partir d’une page ou d’une vue, utilisez le [tag Helper Component](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper).</span><span class="sxs-lookup"><span data-stu-id="3a6e1-154">To render a component from a page or view, use the [Component Tag Helper](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper).</span></span>
+<span data-ttu-id="c357f-154">Pour rendre un composant à partir d’une page ou d’une vue, utilisez [l’aide à l’étiquette de composant](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper).</span><span class="sxs-lookup"><span data-stu-id="c357f-154">To render a component from a page or view, use the [Component Tag Helper](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper).</span></span>
 
-<span data-ttu-id="3a6e1-155">Pour plus d’informations sur la façon dont les composants sont rendus, l’état des composants et le tag Helper `Component`, consultez les articles suivants :</span><span class="sxs-lookup"><span data-stu-id="3a6e1-155">For more information on how components are rendered, component state, and the `Component` Tag Helper, see the following articles:</span></span>
+<span data-ttu-id="c357f-155">Pour plus d’informations sur la façon dont `Component` les composants sont rendus, l’état des composants et l’aide Tag, voir les articles suivants:</span><span class="sxs-lookup"><span data-stu-id="c357f-155">For more information on how components are rendered, component state, and the `Component` Tag Helper, see the following articles:</span></span>
 
 * <xref:blazor/hosting-models>
 * <xref:blazor/hosting-model-configuration>

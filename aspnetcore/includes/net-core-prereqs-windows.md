@@ -1,10 +1,10 @@
-<span data-ttu-id="43492-101">[Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) avec les charges de travail suivantes :</span><span class="sxs-lookup"><span data-stu-id="43492-101">[Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) with the following workloads:</span></span>
+<span data-ttu-id="de6e4-101">[Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) avec les charges de travail suivantes :</span><span class="sxs-lookup"><span data-stu-id="de6e4-101">[Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) with the following workloads:</span></span>
 
-* <span data-ttu-id="43492-102">**Développement web et ASP.NET**</span><span class="sxs-lookup"><span data-stu-id="43492-102">**ASP.NET and web development**</span></span>
-* <span data-ttu-id="43492-103">**Développement multiplateforme .NET Core**</span><span class="sxs-lookup"><span data-stu-id="43492-103">**.NET Core cross-platform development**</span></span>
+* <span data-ttu-id="de6e4-102">**Développement web et ASP.NET**</span><span class="sxs-lookup"><span data-stu-id="de6e4-102">**ASP.NET and web development**</span></span>
+* <span data-ttu-id="de6e4-103">**Développement multiplateforme .NET Core**</span><span class="sxs-lookup"><span data-stu-id="de6e4-103">**.NET Core cross-platform development**</span></span>
 
 ::: moniker range=">= aspnetcore-2.1"
 
-[<span data-ttu-id="43492-104">Kit de développement logiciel (SDK) .NET Core 2.1 ou version ultérieure</span><span class="sxs-lookup"><span data-stu-id="43492-104">.NET Core 2.1 SDK or later</span></span>](https://dotnet.microsoft.com/download)
+[<span data-ttu-id="de6e4-104">Kit de développement logiciel (SDK) .NET Core 2.1 ou version ultérieure</span><span class="sxs-lookup"><span data-stu-id="de6e4-104">.NET Core 2.1 SDK or later</span></span>](https://dotnet.microsoft.com/download)
 
 ::: moniker-end
