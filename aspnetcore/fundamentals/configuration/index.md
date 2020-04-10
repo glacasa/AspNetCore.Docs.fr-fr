@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 3/29/2020
 uid: fundamentals/configuration/index
-ms.openlocfilehash: d76ca78bc988f859b4e99752a0e88735e1df1d82
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 506f01ace72d6e915c0f3ebdaae5b4a3328a79b9
+ms.sourcegitcommit: e72a58d6ebde8604badd254daae8077628f9d63e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80501329"
+ms.lasthandoff: 04/10/2020
+ms.locfileid: "81007156"
 ---
 # <a name="configuration-in-aspnet-core"></a>Configuration dans ASP.NET Core
 
@@ -311,7 +311,7 @@ Clés de configuration :
 * Clés hiérarchiques
   * Dans l’API Configuration, un séparateur sous forme de signe deux-points (`:`) fonctionne sur toutes les plateformes.
   * Dans les variables d’environnement, un séparateur sous forme de signe deux-points peut ne pas fonctionner sur toutes les plateformes. Un double `__`soulignement, , est pris en charge `:`par toutes les plates-formes et est automatiquement converti en un côlon .
-  * Dans Azure Key Vault, les `--` touches hiérarchiques servent de séparateur. Écrivez du `--` code `:` pour remplacer le lorsque les secrets sont chargés dans la configuration de l’application.
+  * Dans Azure Key Vault, les `--` touches hiérarchiques servent de séparateur. Le [fournisseur de configuration Azure Key Vault](xref:security/key-vault-configuration) remplace `--` automatiquement par un `:` lorsque les secrets sont chargés dans la configuration de l’application.
 * <xref:Microsoft.Extensions.Configuration.ConfigurationBinder> prend en charge la liaison de tableaux à des objets à l’aide d’index de tableau dans les clés de configuration. La liaison de tableau est décrite dans la section [Lier un tableau à une classe](#boa).
 
 Valeurs de configuration :

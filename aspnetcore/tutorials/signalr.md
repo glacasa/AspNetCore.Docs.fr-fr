@@ -8,12 +8,12 @@ ms.date: 11/21/2019
 no-loc:
 - SignalR
 uid: tutorials/signalr
-ms.openlocfilehash: 55ebdbfa4556deca74a6cdf0638307425cd1a01a
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 869eb325ee95a78e4b16c61c5b0573bb094292e3
+ms.sourcegitcommit: 9a46e78c79d167e5fa0cddf89c1ef584e5fe1779
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78666746"
+ms.lasthandoff: 04/09/2020
+ms.locfileid: "80994624"
 ---
 # <a name="tutorial-get-started-with-aspnet-core-signalr"></a>Tutoriel : Bien démarrer avec ASP.NET Core SignalR
 
@@ -89,7 +89,7 @@ Ce tutoriel explique les principes fondamentaux de la création d’une applicat
 
 ## <a name="add-the-signalr-client-library"></a>Ajouter la bibliothèque de client SignalR
 
-La bibliothèque de serveur SignalR est incluse dans le framework partagé ASP.NET Core 3.0. La bibliothèque cliente JavaScript n’est pas incluse automatiquement dans le projet. Pour ce tutoriel, vous utilisez le Gestionnaire de bibliothèque (LibMan) pour obtenir la bibliothèque cliente à partir de *unpkg*. unpkg est un réseau de distribution de contenu (CDN) qui peut fournir tout ce qui est trouvé dans npm, le gestionnaire de package Node.js.
+La bibliothèque de serveur SignalR est incluse dans le framework partagé ASP.NET Core 3.0. La bibliothèque cliente JavaScript n’est pas incluse automatiquement dans le projet. Pour ce tutoriel, vous utilisez le Gestionnaire de bibliothèque (LibMan) pour obtenir la bibliothèque cliente à partir de *unpkg*. unpkg est un réseau de diffusion de contenu (CDN) qui peut livrer tout ce qui se trouve dans npm, le gestionnaire de paquets Node.js.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
@@ -320,7 +320,7 @@ Ce tutoriel explique les principes fondamentaux de la création d’une applicat
 
 ## <a name="add-the-signalr-client-library"></a>Ajouter la bibliothèque de client SignalR   
 
-La bibliothèque de serveur SignalR est incluse dans le métapackage `Microsoft.AspNetCore.App`. La bibliothèque cliente JavaScript n’est pas incluse automatiquement dans le projet. Pour ce tutoriel, vous utilisez le Gestionnaire de bibliothèque (LibMan) pour obtenir la bibliothèque cliente à partir de *unpkg*. unpkg est un réseau de distribution de contenu (CDN) qui peut fournir tout ce qui est trouvé dans npm, le gestionnaire de package Node.js.    
+La bibliothèque de serveur SignalR est incluse dans le métapackage `Microsoft.AspNetCore.App`. La bibliothèque cliente JavaScript n’est pas incluse automatiquement dans le projet. Pour ce tutoriel, vous utilisez le Gestionnaire de bibliothèque (LibMan) pour obtenir la bibliothèque cliente à partir de *unpkg*. unpkg est un réseau de diffusion de contenu (CDN) qui peut livrer tout ce qui se trouve dans npm, le gestionnaire de paquets Node.js. 
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)  
 

@@ -2,132 +2,36 @@
 title: Compilation de fichiers Razor dans ASP.NET Core
 author: rick-anderson
 description: Découvrez comment se produit la compilation de fichiers Razor dans une application ASP.NET Core.
-monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 4/8/2020
 uid: mvc/views/view-compilation
-ms.openlocfilehash: cd096bba5eb580c0a606699a2bf7c36442fb56f7
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 7f329ffb4c63e8699663f49720145984bb8802fd
+ms.sourcegitcommit: 9a46e78c79d167e5fa0cddf89c1ef584e5fe1779
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78661104"
+ms.lasthandoff: 04/09/2020
+ms.locfileid: "80994607"
 ---
 # <a name="razor-file-compilation-in-aspnet-core"></a>Compilation de fichiers Razor dans ASP.NET Core
 
-De [Rick Anderson](https://twitter.com/RickAndMSFT)
-
-::: moniker range="= aspnetcore-1.1"
-
-Un fichier Razor est compilé au moment de l’exécution, quand la vue MVC associée est appelée. La publication de fichiers Razor au moment de la génération n’est pas prise en charge. Vous pouvez éventuellement compiler les fichiers Razor au moment de la publication et les déployer avec l’application&mdash;en utilisant l’outil de précompilation.
-
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.0"
-
-Un fichier Razor est compilé au moment de l’exécution, quand la vue MVC ou la page Razor associée est appelée. La publication de fichiers Razor au moment de la génération n’est pas prise en charge. Vous pouvez éventuellement compiler les fichiers Razor au moment de la publication et les déployer avec l’application&mdash;en utilisant l’outil de précompilation.
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
-
-Un fichier Razor est compilé au moment de l’exécution, quand la vue MVC ou la page Razor associée est appelée. Les fichiers Razor sont compilés au moment de la génération et de la publication à l’aide du kit [SDK Razor](xref:razor-pages/sdk).
-
-::: moniker-end
+Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Les fichiers Razor avec une extension *. cshtml* sont compilés au moment de la génération et de la publication à l’aide du [Kit de développement logiciel (SDK) Razor](xref:razor-pages/sdk). La compilation au moment de l’exécution peut éventuellement être activée en configurant votre application.
-
-::: moniker-end
+Les fichiers Razor avec une extension *.cshtml* sont compilés à la fois le temps de construction et de publication en utilisant le [Razor SDK](xref:razor-pages/sdk). La compilation au moment de l’exécution peut éventuellement être activée en configurant votre application.
 
 ## <a name="razor-compilation"></a>Compilation Razor
 
-::: moniker range=">= aspnetcore-3.0"
-
 La compilation au moment de la génération et de la publication des fichiers Razor est activée par défaut par le kit SDK Razor. Quand elle est activée, la compilation au moment de l’exécution complète la compilation au moment de la génération, ce qui permet aux fichiers Razor d’être mis à jour s’ils sont modifiés.
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
-
-La compilation au moment de la génération et de la publication des fichiers Razor est activée par défaut par le kit SDK Razor. La modification des fichiers Razor une fois que ceux-ci sont mis à jour est prise en charge au moment de la génération. Par défaut, seuls les fichiers *Views.dll* et les fichiers autres que *.cshtml* compilés ou les assemblys de référence nécessaires à la compilation des fichiers Razor sont déployés avec votre application.
-
-> [!IMPORTANT]
-> L’outil de précompilation est désormais déprécié et sera supprimé dans ASP.NET Core 3.0. Nous vous recommandons de migrer vers le [SDK Razor](xref:razor-pages/sdk).
->
-> Le kit SDK Razor est actif seulement si aucune propriété spécifique à la précompilation n’est définie dans le fichier projet. Par exemple, la définition de la propriété *du fichier*.csproj`MvcRazorCompileOnPublish` sur la valeur `true` désactive le kit SDK Razor.
-
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.0"
-
-Si votre projet cible le .NET Framework, installez le package NuGet [Microsoft.AspNetCore.Mvc.Razor.ViewCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation/) :
-
-[!code-xml[](view-compilation/sample/DotNetFrameworkProject.csproj?name=snippet_ViewCompilationPackage)]
-
-Si votre projet cible .NET Core, aucune modification n’est nécessaire.
-
-Les modèles de projet ASP.NET Core 2.x définissent implicitement la propriété `MvcRazorCompileOnPublish` sur la valeur `true` par défaut. Par conséquent, cet élément peut être supprimé sans problème du fichier *.csproj*.
-
-> [!IMPORTANT]
-> L’outil de précompilation est désormais déprécié et sera supprimé dans ASP.NET Core 3.0. Nous vous recommandons de migrer vers le [SDK Razor](xref:razor-pages/sdk).
->
-> La précompilation de fichiers Razor n’est pas disponible quand vous effectuez un [déploiement autonome (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) dans ASP.NET Core 2.0.
-
-::: moniker-end
-
-::: moniker range="= aspnetcore-1.1"
-
-Définissez la propriété `MvcRazorCompileOnPublish` sur la valeur `true`, puis installez le package NuGet [Microsoft.AspNetCore.Mvc.Razor.ViewCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation/). Le fichier *.csproj* suivant en est un exemple, avec en surbrillance ces paramètres :
-
-[!code-xml[](view-compilation/sample/MvcRazorCompileOnPublish.csproj?highlight=4,10)]
-
-::: moniker-end
-
-::: moniker range="<= aspnetcore-2.0"
-
-Préparer l’application pour un [déploiement dépendant de l’infrastructure](/dotnet/core/deploying/#framework-dependent-deployments-fdd) avec la [commande de publication .NET Core CLI](/dotnet/core/tools/dotnet-publish). Par exemple, exécutez la commande suivante à la racine du projet :
-
-```dotnetcli
-dotnet publish -c Release
-```
-
-Un fichier *\<nom_projet>.PrecompiledViews.dll*, contenant les fichiers Razor compilés, est généré lorsque la précompilation réussit. Par exemple, la capture d’écran ci-dessous illustre le contenu du fichier *Index.cshtml* à l’intérieur de *WebApplication1.PrecompiledViews.dll*:
-
-![Vues Razor dans la DLL](view-compilation/_static/razor-views-in-dll.png)
-
-::: moniker-end
 
 ## <a name="runtime-compilation"></a>Compilation du runtime
 
-::: moniker range="= aspnetcore-2.1"
+Pour activer la compilation de temps d’exécution pour tous les environnements et modes de configuration :
 
-La compilation au moment de la génération est complétée par la compilation au moment de l’exécution des fichiers Razor. ASP.NET Core MVC recompile les fichiers Razor quand le contenu d’un fichier *.cshtml* change.
+1. Installez le package [NuGet Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/)
 
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.2"
-
-La compilation au moment de la génération est complétée par la compilation au moment de l’exécution des fichiers Razor. La <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions> <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions.AllowRecompilingViewsOnFileChange> obtient ou définit une valeur qui détermine si les fichiers Razor (vues Razor et Razor Pages) sont recompilés et mis à jour si les fichiers sont modifiés sur le disque.
-
-La valeur par défaut de `true` pour :
-
-* Si la version de compatibilité de l’application est définie sur <xref:Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1> ou une version antérieure
-* Si la version de compatibilité de l’application est définie sur <xref:Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2> ou ultérieur et que l’application se trouve dans l’environnement de développement <xref:Microsoft.AspNetCore.Hosting.HostingEnvironmentExtensions.IsDevelopment*>. En d’autres termes, les fichiers Razor ne sont pas recompilés dans un environnement de non-développement, sauf si <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions.AllowRecompilingViewsOnFileChange> est défini explicitement.
-
-Pour des conseils et des exemples concernant la définition de la version de compatibilité de l’application, consultez <xref:mvc/compatibility-version>.
-
-::: moniker-end
-
-::: moniker range=">= aspnetcore-3.0"
-
-Pour activer la compilation au moment de l’exécution pour tous les environnements et modes de configuration :
-
-1. Installer le package NuGet [Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/).
-
-1. Mettez à jour la méthode `Startup.ConfigureServices` du projet pour inclure un appel à `AddRazorRuntimeCompilation`. Par exemple :
+1. Mettre à jour `Startup.ConfigureServices` la méthode du `AddRazorRuntimeCompilation`projet pour inclure un appel à . Par exemple :
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -139,23 +43,23 @@ Pour activer la compilation au moment de l’exécution pour tous les environnem
     }
     ```
 
-### <a name="conditionally-enable-runtime-compilation"></a>Activation conditionnelle de la compilation du Runtime
+### <a name="conditionally-enable-runtime-compilation"></a>Activer conditionnellement la compilation de l’exécution
 
-La compilation au moment de l’exécution peut être activée de sorte qu’elle ne soit disponible que pour le développement local. L’activation conditionnelle de cette manière garantit que la sortie publiée :
+La compilation Runtime peut être activée de telle sorte qu’elle n’est disponible que pour le développement local. L’activation conditionnelle de cette manière garantit que la sortie publiée :
 
-* Utilise des vues compilées.
-* Est de taille inférieure.
+* Utilise les vues compilées.
+* Est plus petit dans la taille.
 * N’active pas les observateurs de fichiers en production.
 
-Pour activer la compilation au moment de l’exécution en fonction de l’environnement et du mode de configuration :
+Pour activer la compilation en temps d’exécution en fonction de l’environnement et du mode configuration :
 
-1. Référencez de manière conditionnelle le package [Microsoft. AspNetCore. Mvc. Razor. RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) en fonction de la valeur active `Configuration` :
+1. Référence conditionnelle du package [Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) `Configuration` basé sur la valeur active :
 
     ```xml
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.0" Condition="'$(Configuration)' == 'Debug'" />
     ```
 
-1. Mettez à jour la méthode `Startup.ConfigureServices` du projet pour inclure un appel à `AddRazorRuntimeCompilation`. Exécutez une `AddRazorRuntimeCompilation` de manière conditionnelle, de sorte qu’elle s’exécute uniquement en mode débogage lorsque la variable `ASPNETCORE_ENVIRONMENT` est définie sur `Development`:
+1. Mettre à jour `Startup.ConfigureServices` la méthode du `AddRazorRuntimeCompilation`projet pour inclure un appel à . Exécuter `AddRazorRuntimeCompilation` sous condition de telle sorte qu’il `ASPNETCORE_ENVIRONMENT` ne fonctionne `Development`en mode Debug que lorsque la variable est réglée sur :
 
     ```csharp
     public IWebHostEnvironment Env { get; set; }
@@ -175,24 +79,32 @@ Pour activer la compilation au moment de l’exécution en fonction de l’envir
     }
     ```
 
-::: moniker-end
-
 ## <a name="additional-resources"></a>Ressources supplémentaires
-
-::: moniker range="= aspnetcore-1.1"
-
-* <xref:mvc/views/overview>
-
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.0"
 
 * <xref:razor-pages/index>
 * <xref:mvc/views/overview>
+* <xref:razor-pages/sdk>
 
 ::: moniker-end
 
-::: moniker range=">= aspnetcore-2.1"
+::: moniker range="< aspnetcore-3.0"
+
+Un fichier Razor est compilé au moment de l’exécution, quand la vue MVC ou la page Razor associée est appelée. Les fichiers Razor sont compilés au moment de la génération et de la publication à l’aide du kit [SDK Razor](xref:razor-pages/sdk).
+
+## <a name="razor-compilation"></a>Compilation Razor
+
+La compilation au moment de la génération et de la publication des fichiers Razor est activée par défaut par le kit SDK Razor. La modification des fichiers Razor une fois que ceux-ci sont mis à jour est prise en charge au moment de la génération. Par défaut, seuls les fichiers *Views.dll* et les fichiers autres que *.cshtml* compilés ou les assemblys de référence nécessaires à la compilation des fichiers Razor sont déployés avec votre application.
+
+> [!IMPORTANT]
+> L’outil de précompilation est désormais déprécié et sera supprimé dans ASP.NET Core 3.0. Nous vous recommandons de migrer vers le [SDK Razor](xref:razor-pages/sdk).
+>
+> Le kit SDK Razor est actif seulement si aucune propriété spécifique à la précompilation n’est définie dans le fichier projet. Par exemple, la définition de la propriété `MvcRazorCompileOnPublish` du fichier *.csproj* sur la valeur `true` désactive le kit SDK Razor.
+
+## <a name="runtime-compilation"></a>Compilation du runtime
+
+La compilation au moment de la génération est complétée par la compilation au moment de l’exécution des fichiers Razor. ASP.NET Core MVC recompile les fichiers Razor quand le contenu d’un fichier *.cshtml* change.
+
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:razor-pages/index>
 * <xref:mvc/views/overview>

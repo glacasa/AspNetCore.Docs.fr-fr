@@ -3,14 +3,14 @@ title: Créer un serveur et un client gRPC .NET Core dans ASP.NET Core
 author: juntaoluo
 description: Ce tutoriel montre comment créer un service gRPC et un client gRPC sur ASP.NET Core. Découvrez comment créer un projet de service gRPC, modifier un fichier proto et ajouter un appel duplex de streaming.
 ms.author: johluo
-ms.date: 12/05/2019
+ms.date: 04/08/2020
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 0cedeb021427455c3f60a8a8cc36b52794a055bc
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 2bbd40b4b89af170dae40b8a5277749d6bcd5faf
+ms.sourcegitcommit: 9a46e78c79d167e5fa0cddf89c1ef584e5fe1779
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78665822"
+ms.lasthandoff: 04/09/2020
+ms.locfileid: "80994628"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>Tutorial: Créer un client et un serveur gRPC dans ASP.NET Core
 
@@ -298,7 +298,7 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 ```
 
 > [!NOTE]
-> Le code de cet article requiert le certificat de développement ASP.NET Core HTTPS pour sécuriser le service gRPC. Si le client échoue avec le message `The remote certificate is invalid according to the validation procedure.`, le certificat de développement n’est pas approuvé. Pour obtenir des instructions afin de résoudre ce problème, consultez [Faire confiance au certificat de développement ASP.NET Core HTTPS sur Windows et macOS](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos).
+> Le code de cet article requiert le certificat de développement ASP.NET Core HTTPS pour sécuriser le service gRPC. Si le client .NET gRPC `The remote certificate is invalid according to the validation procedure.` `The SSL connection could not be established.`échoue avec le message ou, le certificat de développement n’est pas fiable. Pour résoudre ce problème, consultez [un service gRPC avec un certificat non fiable/invalide](xref:grpc/troubleshoot#call-a-grpc-service-with-an-untrustedinvalid-certificate).
 
 [!INCLUDE[](~/includes/gRPCazure.md)]
 
