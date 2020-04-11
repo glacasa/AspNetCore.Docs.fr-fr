@@ -5,17 +5,17 @@ description: Renseignez-vous sur les scénarios de Blazor liaison de données po
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/17/2020
+ms.date: 04/01/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/integrate-components
-ms.openlocfilehash: cf6056e0985d5433bddecac8dd183ca3f4c2af5b
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 6efa84c550a4605bde5e1f2bca4f2d1aa4a2667b
+ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218932"
+ms.lasthandoff: 04/11/2020
+ms.locfileid: "81123360"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Intégrer les composants ASP.NET Core Razor dans les applications Razor Pages et MVC
 
@@ -60,13 +60,13 @@ Une application existante Razor Pages ou MVC peut intégrer des composants Razor
    @using MyAppNamespace
    ```
 
-1. Dans `Startup.ConfigureServices`, Blazor enregistrez le service Server :
+1. Dans `Startup.ConfigureServices`, enregistrez le service Blazor Server :
 
    ```csharp
    services.AddServerSideBlazor();
    ```
 
-1. Dans `Startup.Configure`, Blazor ajouter le `app.UseEndpoints`point de terminaison Hub à :
+1. Dans `Startup.Configure`, ajouter le point de `app.UseEndpoints`terminaison Blazor Hub à :
 
    ```csharp
    endpoints.MapBlazorHub();
@@ -112,6 +112,19 @@ Pour prendre en charge les composants Razor routables dans les applications Razo
    ```
 
    Les composants utilisent le fichier *_Layout.cshtml* partagé pour leur mise en page.
+
+   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>configure si `App` le composant :
+
+   * Est préditulé dans la page.
+   * Est rendu comme HTML statique sur la page ou si elle inclut les informations nécessaires pour bootstrap une application Blazor de l’agent utilisateur.
+
+   | Mode Rendu | Description |
+   | ----------- | ----------- |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Rend le `App` composant en HTML statique et Blazor inclut un marqueur pour une application Server. Lorsque l’agent utilisateur démarre, ce marqueur Blazor est utilisé pour bootstrap une application. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Rend un marqueur Blazor pour une application Server. La sortie `App` du composant n’est pas incluse. Lorsque l’agent utilisateur démarre, ce marqueur Blazor est utilisé pour bootstrap une application. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Rend le `App` composant en HTML statique. |
+
+   Pour plus d’informations sur l’aide à l’étiquette de composant, voir <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
 
 1. Ajoutez un itinéraire de faible priorité pour la page *_Host.cshtml* à la configuration de point de terminaison dans `Startup.Configure`:
 

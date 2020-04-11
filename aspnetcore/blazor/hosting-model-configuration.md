@@ -5,17 +5,17 @@ description: Renseignez-vous sur Blazor la configuration du modèle d’héberge
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/24/2020
+ms.date: 04/07/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: 1f71ac63bbe9dc9d56cfca2ded19a5b863be828f
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: ca1b3ea9092640ca561b3fbe02ddce6f974c525e
+ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80306434"
+ms.lasthandoff: 04/11/2020
+ms.locfileid: "81123370"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET configuration du modèle d’hébergement Core Blazor
 
@@ -27,14 +27,73 @@ Cet article couvre la configuration du modèle d’hébergement.
 
 ## <a name="blazor-webassembly"></a>WebAssembly Blazor
 
+### <a name="environment"></a>Environnement
+
+Lors de l’exécution d’une application localement, l’environnement est par défaut pour le développement. Lorsque l’application est publiée, l’environnement est par défaut à la production.
+
+Une application Hébergée Blazor WebAssembly capte l’environnement du serveur via un middleware `blazor-environment` qui communique l’environnement au navigateur en ajoutant l’en-tête. La valeur de l’en-tête est l’environnement. L’application Blazor hébergée et l’application serveur partagent le même environnement. Pour plus d’informations, y compris <xref:fundamentals/environments>la façon de configurer l’environnement, voir .
+
+Pour une application autonome fonctionnant localement, le `blazor-environment` serveur de développement ajoute l’en-tête pour spécifier l’environnement de développement. Pour spécifier l’environnement `blazor-environment` pour d’autres environnements d’hébergement, ajoutez l’en-tête.
+
+Dans l’exemple suivant pour IIS, ajoutez l’en-tête personnalisé au fichier *web.config* publié. Le fichier *web.config* est situé dans le *dossier bin/Release/TARGET FRAMEWORK/publish:*
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <system.webServer>
+
+    ...
+
+    <httpProtocol>
+      <customHeaders>
+        <add name="blazor-environment" value="Staging" />
+      </customHeaders>
+    </httpProtocol>
+  </system.webServer>
+</configuration>
+```
+
+> [!NOTE]
+> Pour utiliser un fichier *web.config* personnalisé pour IIS qui n’est pas écrasé <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig>lorsque l’application est publiée dans le dossier *de publication,* voir .
+
+Obtenir l’environnement de l’application `IWebAssemblyHostEnvironment` dans un `Environment` composant en injectant et en lisant la propriété :
+
+```razor
+@page "/"
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@inject IWebAssemblyHostEnvironment HostEnvironment
+
+<h1>Environment example</h1>
+
+<p>Environment: @HostEnvironment.Environment</p>
+```
+
+### <a name="configuration"></a>Configuration
+
 À la ASP.NET version Core 3.2 Preview 3, Blazor WebAssembly prend en charge la configuration de :
 
 * *wwwroot/appsettings.json (en)*
 * *wwwroot/appsettings. 'ENVIRONNEMENT'.json*
 
-Dans une application Blazor Hosted, [l’environnement de temps d’exécution](xref:fundamentals/environments) est le même que la valeur de l’application serveur.
+Ajoutez un fichier *appsettings.json* dans le dossier *wwwroot* :
 
-Lors de l’exécution de l’application localement, l’environnement par défaut à Développement. Lorsque l’application est publiée, l’environnement est par défaut à la production. Pour plus d’informations, y compris <xref:fundamentals/environments>la façon de configurer l’environnement, voir .
+```json
+{
+  "message": "Hello from config!"
+}
+```
+
+Injecter <xref:Microsoft.Extensions.Configuration.IConfiguration> une instance dans un composant pour accéder aux données de configuration :
+
+```razor
+@page "/"
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<h1>Configuration example</h1>
+
+<p>Message: @Configuration["message"]</p>
+```
 
 > [!WARNING]
 > La configuration d’une application WebAssembly De Blazor est visible pour les utilisateurs. **Ne stockez pas de secrets d’applications ou d’informations d’identification en configuration.**
