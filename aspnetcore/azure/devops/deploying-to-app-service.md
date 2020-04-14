@@ -6,12 +6,12 @@ ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: df41f296e9c4e1eff6e31d45b29ec30ee1e20cf4
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: d7ee3e42d320d35c2aaff6e097203c45289ec5b1
+ms.sourcegitcommit: fbdb8b9ab5a52656384b117ff6e7c92ae070813c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78657744"
+ms.lasthandoff: 04/13/2020
+ms.locfileid: "81228125"
 ---
 # <a name="deploy-an-app-to-app-service"></a>Déployer une application sur App Service
 
@@ -85,7 +85,7 @@ Pour déployer l’application, vous devrez créer une [application Web](/azure/
 
     b. Créez un groupe de ressources. Les groupes de ressources fournissent un moyen d’agréger les ressources Azure à gérer en tant que groupe.
 
-    ```azure-cli
+    ```azurecli
     az group create --location centralus --name AzureTutorial
     ```
 
@@ -93,25 +93,25 @@ Pour déployer l’application, vous devrez créer une [application Web](/azure/
 
     c. Créez un plan app Service dans le niveau S1. Un plan App Service est un regroupement d’applications Web qui partagent le même niveau de prix. Le niveau S1 n’est pas gratuit, mais il est nécessaire pour la fonction de fentes de mise en scène.
 
-    ```azure-cli
+    ```azurecli
     az appservice plan create --name $webappname --resource-group AzureTutorial --sku S1
     ```
 
     d. Créez la ressource web app à l’aide du plan App Service dans le même groupe de ressources.
 
-    ```azure-cli
+    ```azurecli
     az webapp create --name $webappname --resource-group AzureTutorial --plan $webappname
     ```
 
     e. Définissez les informations d’identification de déploiement. Ces informations d’identification de déploiement s’appliquent à toutes les applications web de votre abonnement. N’utilisez pas de caractères spéciaux dans le nom d’utilisateur.
 
-    ```azure-cli
+    ```azurecli
     az webapp deployment user set --user-name REPLACE_WITH_USER_NAME --password REPLACE_WITH_PASSWORD
     ```
 
     f. Configurez l’application web pour accepter les déploiements de Git locaux et afficher l’URL de *déploiement Git*. **Notez cette URL pour référence plus tard**.
 
-    ```azure-cli
+    ```azurecli
     echo Git deployment URL: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --query url --output tsv)
     ```
 
@@ -170,13 +170,13 @@ Les emplacements de déploiement prennent en charge la mise en scène des modifi
 
     a. Créez une fente de déploiement avec la *mise en scène*du nom .
 
-    ```azure-cli
+    ```azurecli
     az webapp deployment slot create --name $webappname --resource-group AzureTutorial --slot staging
     ```
 
     b. Configurez la fente de mise en scène pour utiliser le déploiement à partir de Git local et obtenir l’URL de déploiement **de mise en scène.** **Notez cette URL pour référence plus tard**.
 
-    ```azure-cli
+    ```azurecli
     echo Git deployment URL for staging: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --slot staging --query url --output tsv)
     ```
 
@@ -216,7 +216,7 @@ Les emplacements de déploiement prennent en charge la mise en scène des modifi
 
 7. Dans le Cloud Shell, entrez la fente de mise en scène vérifiée/réchauffée en production.
 
-    ```azure-cli
+    ```azurecli
     az webapp deployment slot swap --name $webappname --resource-group AzureTutorial --slot staging
     ```
 
@@ -224,7 +224,7 @@ Les emplacements de déploiement prennent en charge la mise en scène des modifi
 
     ![Comparaison des fenêtres du navigateur après l’échange](./media/deploying-to-app-service/swapped.png)
 
-## <a name="summary"></a>Résumé
+## <a name="summary"></a>Récapitulatif
 
 Dans cette section, les tâches suivantes ont été accomplies :
 

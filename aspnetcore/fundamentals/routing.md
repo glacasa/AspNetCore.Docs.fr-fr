@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/1/2020
 uid: fundamentals/routing
-ms.openlocfilehash: 5742ac6879ce46e01247ddd2f8bfe3e3b8a2a02a
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 0fc89ccf15c14c67f284a7084a21159af300a195
+ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80751149"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81277221"
 ---
 # <a name="routing-in-aspnet-core"></a>Routage dans ASP.NET Core
 
@@ -454,6 +454,8 @@ L’utilisation d’un modèle est généralement l’approche la plus simple po
 
 Les segments complexes sont traités en faisant correspondre les délimitatrices littérales de droite à gauche d’une manière [non gourmande.](#greedy) Par exemple, `[Route("/a{b}c{d}")]` est un segment complexe.
 Les segments complexes fonctionnent d’une manière particulière qui doit être comprise pour les utiliser avec succès. L’exemple de cette section montre pourquoi les segments complexes ne fonctionnent vraiment bien que lorsque le texte de délimitant n’apparaît pas à l’intérieur des valeurs de paramètres. L’utilisation [d’un regex,](/dotnet/standard/base-types/regular-expressions) puis l’extraction manuelle des valeurs est nécessaire pour les cas plus complexes.
+
+[!INCLUDE[](~/includes/regex.md)]
 
 Il s’agit d’un résumé des étapes `/a{b}c{d}` que l’itinéraire effectue avec le modèle et le chemin `/abcd`DE l’URL . L’est `|` utilisé pour aider à visualiser le fonctionnement de l’algorithme:
 
