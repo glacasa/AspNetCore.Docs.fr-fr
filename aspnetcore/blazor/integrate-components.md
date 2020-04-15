@@ -5,17 +5,17 @@ description: Renseignez-vous sur les scénarios de Blazor liaison de données po
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/01/2020
+ms.date: 04/14/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/integrate-components
-ms.openlocfilehash: 6efa84c550a4605bde5e1f2bca4f2d1aa4a2667b
-ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
+ms.openlocfilehash: c242fbef70d289929d5c005abc0aa431619862b3
+ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/11/2020
-ms.locfileid: "81123360"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81383968"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Intégrer les composants ASP.NET Core Razor dans les applications Razor Pages et MVC
 
@@ -23,7 +23,14 @@ Par [Luke Latham](https://github.com/guardrex) et [Daniel Roth](https://github.c
 
 Les composants Razor peuvent être intégrés dans les pages Razor et les applications MVC. Lorsque la page ou la vue est rendue, les composants peuvent être prédilués en même temps.
 
-## <a name="prepare-the-app-to-use-components-in-pages-and-views"></a>Préparer l’application à utiliser des composants dans les pages et les vues
+Après [la préparation de l’application,](#prepare-the-app)utilisez les conseils dans les sections suivantes en fonction des exigences de l’application :
+
+* Composants routables &ndash; Pour les composants qui sont directement routables des demandes d’utilisateur. Suivez ces conseils lorsque les visiteurs doivent être en mesure de [`@page`](xref:mvc/views/razor#page) faire une demande HTTP dans leur navigateur pour un composant avec une directive.
+  * [Utilisez des composants routables dans une application Razor Pages](#use-routable-components-in-a-razor-pages-app)
+  * [Utilisez des composants routables dans une application MVC](#use-routable-components-in-an-mvc-app)
+* [Rendre les composants à partir d’une page ou d’une vue](#render-components-from-a-page-or-view) &ndash; Pour les composants qui ne sont pas directement routables des demandes des utilisateurs. Suivez ces conseils lorsque l’application intègre des composants dans les pages et les vues existantes avec [l’assistant d’étiquette de composant](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper).
+
+## <a name="prepare-the-app"></a>Préparer l’application
 
 Une application existante Razor Pages ou MVC peut intégrer des composants Razor dans les pages et les vues :
 
@@ -80,7 +87,7 @@ Une application existante Razor Pages ou MVC peut intégrer des composants Razor
 
 Pour prendre en charge les composants Razor routables dans les applications Razor Pages :
 
-1. Suivez les conseils de [l’application Préparer à utiliser des composants dans la](#prepare-the-app-to-use-components-in-pages-and-views) section pages et vues.
+1. Suivez les conseils dans la section [Préparer l’application.](#prepare-the-app)
 
 1. Ajoutez un fichier *App.razor* à la racine du projet avec le contenu suivant :
 
@@ -120,8 +127,8 @@ Pour prendre en charge les composants Razor routables dans les applications Razo
 
    | Mode Rendu | Description |
    | ----------- | ----------- |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Rend le `App` composant en HTML statique et Blazor inclut un marqueur pour une application Server. Lorsque l’agent utilisateur démarre, ce marqueur Blazor est utilisé pour bootstrap une application. |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Rend un marqueur Blazor pour une application Server. La sortie `App` du composant n’est pas incluse. Lorsque l’agent utilisateur démarre, ce marqueur Blazor est utilisé pour bootstrap une application. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Rend le `App` composant en HTML statique et inclut un marqueur pour une application Blazor Server. Lorsque l’agent utilisateur démarre, ce marqueur est utilisé pour bootstrap une application Blazor. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Rend un marqueur pour une application Blazor Server. La sortie `App` du composant n’est pas incluse. Lorsque l’agent utilisateur démarre, ce marqueur est utilisé pour bootstrap une application Blazor. |
    | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Rend le `App` composant en HTML statique. |
 
    Pour plus d’informations sur l’aide à l’étiquette de composant, voir <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
@@ -147,7 +154,7 @@ Pour prendre en charge les composants Razor routables dans les applications Razo
    ...
    ```
 
-   Pour plus d’informations sur les espaces de nom, consultez la section [Espaces de noms de composant.](#component-namespaces)
+Pour plus d’informations sur les espaces de nom, consultez la section [Espaces de noms de composant.](#component-namespaces)
 
 ## <a name="use-routable-components-in-an-mvc-app"></a>Utilisez des composants routables dans une application MVC
 
@@ -155,7 +162,7 @@ Pour prendre en charge les composants Razor routables dans les applications Razo
 
 Pour prendre en charge les composants Razor routables dans les applications MVC :
 
-1. Suivez les conseils de [l’application Préparer à utiliser des composants dans la](#prepare-the-app-to-use-components-in-pages-and-views) section pages et vues.
+1. Suivez les conseils dans la section [Préparer l’application.](#prepare-the-app)
 
 1. Ajoutez un fichier *App.razor* à la racine du projet avec le contenu suivant :
 
@@ -186,6 +193,19 @@ Pour prendre en charge les composants Razor routables dans les applications MVC 
    ```
 
    Les composants utilisent le fichier *_Layout.cshtml* partagé pour leur mise en page.
+   
+   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>configure si `App` le composant :
+
+   * Est préditulé dans la page.
+   * Est rendu comme HTML statique sur la page ou si elle inclut les informations nécessaires pour bootstrap une application Blazor de l’agent utilisateur.
+
+   | Mode Rendu | Description |
+   | ----------- | ----------- |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Rend le `App` composant en HTML statique et Blazor inclut un marqueur pour une application Server. Lorsque l’agent utilisateur démarre, ce marqueur Blazor est utilisé pour bootstrap une application. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Rend un marqueur Blazor pour une application Server. La sortie `App` du composant n’est pas incluse. Lorsque l’agent utilisateur démarre, ce marqueur Blazor est utilisé pour bootstrap une application. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Rend le `App` composant en HTML statique. |
+
+   Pour plus d’informations sur l’aide à l’étiquette de composant, voir <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
 
 1. Ajoutez une action au contrôleur à domicile :
 
@@ -217,7 +237,19 @@ Pour prendre en charge les composants Razor routables dans les applications MVC 
    ...
    ```
 
-   Pour plus d’informations sur les espaces de nom, consultez la section [Espaces de noms de composant.](#component-namespaces)
+Pour plus d’informations sur les espaces de nom, consultez la section [Espaces de noms de composant.](#component-namespaces)
+
+## <a name="render-components-from-a-page-or-view"></a>Rendre les composants à partir d’une page ou d’une vue
+
+*Cette section concerne l’ajout de composants aux pages ou aux vues, où les composants ne sont pas directement routables des demandes des utilisateurs.*
+
+Pour rendre un composant à partir d’une page ou d’une vue, utilisez [l’aide à l’étiquette de composant](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper).
+
+Pour plus d’informations sur la façon dont `Component` les composants sont rendus, l’état des composants et l’aide Tag, voir les articles suivants:
+
+* <xref:blazor/hosting-models>
+* <xref:blazor/hosting-model-configuration>
+* <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>
 
 ## <a name="component-namespaces"></a>Espaces de noms de composant
 
@@ -233,15 +265,3 @@ Lorsque vous utilisez un dossier personnalisé pour contenir les composants de l
 Le fichier *_ViewImports.cshtml* est situé dans le dossier *Pages* d’une application Razor Pages ou dans le dossier *Vues* d’une application MVC.
 
 Pour plus d’informations, consultez <xref:blazor/components#import-components>.
-
-## <a name="render-components-from-a-page-or-view"></a>Rendre les composants à partir d’une page ou d’une vue
-
-*Cette section concerne l’ajout de composants aux pages ou aux vues, où les composants ne sont pas directement routables des demandes des utilisateurs.*
-
-Pour rendre un composant à partir d’une page ou d’une vue, utilisez [l’aide à l’étiquette de composant](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper).
-
-Pour plus d’informations sur la façon dont `Component` les composants sont rendus, l’état des composants et l’aide Tag, voir les articles suivants:
-
-* <xref:blazor/hosting-models>
-* <xref:blazor/hosting-model-configuration>
-* <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>

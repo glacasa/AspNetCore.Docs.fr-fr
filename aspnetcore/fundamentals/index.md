@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/30/2020
 uid: fundamentals/index
-ms.openlocfilehash: da2b42a7cf5d116a36d1dd9fa586d40ab31fc52d
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: c675644d8480ef7a5290045067e6cec2ea6f4764
+ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80417644"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81384059"
 ---
 # <a name="aspnet-core-fundamentals"></a>Notions de base d’ASP.NET Core
 
@@ -205,7 +205,7 @@ La racine de contenu est le chemin de base pour:
   * Fichiers de données (*.db*)
 * La [racine Web](#web-root), généralement le dossier *wwwroot.*
 
-Pendant le développement, la racine de contenu par défaut à l’annuaire racine du projet. Ce répertoire est également le chemin de base pour les fichiers de contenu de l’application et la [racine Web](#web-root). Spécifier une racine de contenu différente en fixant son chemin lors [de la construction de l’hôte](#host). Pour plus d’informations, consultez [Racine de contenu](xref:fundamentals/host/generic-host#contentrootpath-1).
+Pendant le développement, la racine de contenu par défaut à l’annuaire racine du projet. Ce répertoire est également le chemin de base pour les fichiers de contenu de l’application et la [racine Web](#web-root). Spécifier une racine de contenu différente en fixant son chemin lors [de la construction de l’hôte](#host). Pour plus d’informations, consultez [Racine de contenu](xref:fundamentals/host/generic-host#contentroot).
 
 ## <a name="web-root"></a>Racine web
 
@@ -215,7 +215,7 @@ La racine du Web est le chemin de base pour les fichiers de ressources publiques
 * JavaScript (*.js*)
 * Images (*.png*, *.jpg*)
 
-Par défaut, les fichiers statiques ne sont servis que par le répertoire de racine web et ses sous-répertoires. Le chemin de racine web par défaut à *'contenu racine'/wwwroot*. Spécifier une racine web différente en fixant son chemin lors [de la construction de l’hôte](#host). Pour plus d’informations, consultez [Racine web](xref:fundamentals/host/generic-host#webroot-1).
+Par défaut, les fichiers statiques ne sont servis que par le répertoire de racine web et ses sous-répertoires. Le chemin de racine web par défaut à *'contenu racine'/wwwroot*. Spécifier une racine web différente en fixant son chemin lors [de la construction de l’hôte](#host). Pour plus d’informations, consultez [Racine web](xref:fundamentals/host/generic-host#webroot).
 
 Empêchez de publier des fichiers dans *wwwroot* avec [ \<l’élément de projet Content>](/visualstudio/msbuild/common-msbuild-project-items#content) dans le fichier du projet. L’exemple suivant empêche la publication de contenu dans *wwwroot/local* et ses sous-annuaires :
 
