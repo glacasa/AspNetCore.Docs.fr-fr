@@ -9,12 +9,12 @@ ms.date: 04/08/2020
 no-loc:
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: a99c1dd2aba6ef6ff925783762a98e2c81ed7225
-ms.sourcegitcommit: 9a46e78c79d167e5fa0cddf89c1ef584e5fe1779
+ms.openlocfilehash: 43b2cacf9f415ec422a00b28246f30c8ad74de29
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80994581"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440855"
 ---
 # <a name="aspnet-core-opno-locsignalr-javascript-client"></a>ASP.NET client SignalR JavaScript de base
 
@@ -145,7 +145,7 @@ SignalRdétermine la méthode du client à appeler en `SendAsync` faisant `conne
 
 Enchaîner une `catch` méthode `start` jusqu’à la fin de la méthode pour gérer les erreurs côté client. Utilisez `console.error` pour les erreurs de sortie sur la console du navigateur.
 
-[!code-javascript[Error handling](javascript-client/sample/wwwroot/js/chat.js?range=49-51)]
+[!code-javascript[Error handling](javascript-client/sample/wwwroot/js/chat.js?range=50)]
 
 Configurez le traçage des journaux côté client en passant un enregistreur et un type d’événement à enregistrer lorsque la connexion est effectuée. Les messages sont enregistrés avec le niveau de journal spécifié et plus élevé. Les niveaux de journal disponibles sont les suivants :
 
@@ -178,7 +178,7 @@ Sans aucun paramètre, `withAutomaticReconnect()` configure le client pour atten
 Avant de commencer toute `HubConnection` tentative de `HubConnectionState.Reconnecting` reconnexion, la transition à l’état et le feu de ses `onreconnecting` rappels au lieu de la transition à l’état et le `Disconnected` déclenchement de ses `onclose` rappels comme un `HubConnection` sans reconnecter automatique configuré. Cela donne l’occasion d’avertir les utilisateurs que la connexion a été perdue et de désactiver les éléments d’interface utilisateur.
 
 ```javascript
-connection.onreconnecting((error) => {
+connection.onreconnecting(error => {
     console.assert(connection.state === signalR.HubConnectionState.Reconnecting);
 
     document.getElementById("messageInput").disabled = true;
@@ -197,7 +197,7 @@ Si le client se reconnecte avec `HubConnection` succès au cours `Connected` de 
 > Le `onreconnected` paramètre `connectionId` du rappel ne sera pas `HubConnection` défini si le a été configuré pour [sauter la négociation](xref:signalr/configuration#configure-client-options).
 
 ```javascript
-connection.onreconnected((connectionId) => {
+connection.onreconnected(connectionId => {
     console.assert(connection.state === signalR.HubConnectionState.Connected);
 
     document.getElementById("messageInput").disabled = false;
@@ -227,7 +227,7 @@ async function start() {
 Si le client ne réussit pas à `HubConnection` se reconnecter `Disconnected` au cours de ses quatre premières tentatives, le sera la transition vers l’état et le feu de ses [rappels onclose.](/javascript/api/%40aspnet/signalr/hubconnection#onclose) Cela donne l’occasion d’informer les utilisateurs de la connexion a été définitivement perdu et recommande de rafraîchir la page:
 
 ```javascript
-connection.onclose((error) => {
+connection.onclose(error => {
     console.assert(connection.state === signalR.HubConnectionState.Disconnected);
 
     document.getElementById("messageInput").disabled = true;
