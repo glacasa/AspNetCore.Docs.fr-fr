@@ -5,17 +5,17 @@ description: Démarssez-vous Blazor Blazor par la construction d’une applicati
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/09/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: e9e6eeeb1d29aa529e43d75f5d3951d2c4384d7e
-ms.sourcegitcommit: 4506a8f71ece921010ad6b7edebc8b200618f40d
+ms.openlocfilehash: 7fe4fbb082f08d4f71684c836a826d8b6dd888f6
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "81002910"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488726"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>Lancez-vous avec ASP.NET Core Blazor
 
@@ -25,13 +25,19 @@ Par [Daniel Roth](https://github.com/danroth27) et [Luke Latham](https://github.
 
 Pour commencer avec Blazor, suivez les conseils pour votre choix d’outillage:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Pour créer des applications Blazor Server, installez la dernière version de [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) avec la charge de travail **ASP.NET et le développement web.**
 
    Pour créer des applications Blazor Server et Blazor WebAssembly, installez le dernier aperçu de [Visual Studio 2019](https://visualstudio.microsoft.com/vs/preview/) avec la charge de travail **ASP.NET et le développement web.**
 
    Pour plus d’informations sur les deux modèles d’hébergement Blazor, <xref:blazor/hosting-models> *Blazor WebAssembly* et *Blazor Server*, voir .
+
+1. Installez le modèle de prévisualisation [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) en exécutant la commande suivante :
+
+   ```dotnetcli
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview4.20210.8
+   ```
 
 1. Créez un projet.
 
@@ -50,11 +56,11 @@ Pour commencer avec Blazor, suivez les conseils pour votre choix d’outillage:
 1. Installez le modèle [d’aperçu WebAssembly De Blazor](xref:blazor/hosting-models#blazor-webassembly) en exécutant la commande suivante :
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview3.20168.3
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview4.20210.8
    ```
 
    > [!NOTE]
-   > La [version SDK Core .NET 3.1.201 ou plus tard](https://dotnet.microsoft.com/download/dotnet-core/3.1) est **nécessaire** pour utiliser le modèle WebAssembly 3.2 Preview 3 Blazor. Confirmez la version SDK core `dotnet --version` .NET installée en exécutant dans une coque de commande.
+   > La [version SDK Core .NET 3.1.201 ou plus tard](https://dotnet.microsoft.com/download/dotnet-core/3.1) est **nécessaire** pour utiliser le modèle WebAssembly 3.2 Preview 4 Blazor. Confirmez la version SDK core `dotnet --version` .NET installée en exécutant dans une coque de commande.
 
 1. Installer [Visual Studio Code](https://code.visualstudio.com/).
 
@@ -113,11 +119,11 @@ Si une invite semble faire confiance au certificat de développement, faites con
 1. Installez le modèle [d’aperçu WebAssembly De Blazor](xref:blazor/hosting-models#blazor-webassembly) en exécutant la commande suivante :
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview3.20168.3
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview4.20210.8
    ```
 
    > [!NOTE]
-   > La [version SDK Core .NET 3.1.201 ou plus tard](https://dotnet.microsoft.com/download/dotnet-core/3.1) est **nécessaire** pour utiliser le modèle WebAssembly 3.2 Preview 3 Blazor. Confirmez la version SDK core `dotnet --version` .NET installée en exécutant dans une coque de commande.
+   > La [version SDK Core .NET 3.1.201 ou plus tard](https://dotnet.microsoft.com/download/dotnet-core/3.1) est **nécessaire** pour utiliser le modèle WebAssembly 3.2 Preview 4 Blazor. Confirmez la version SDK core `dotnet --version` .NET installée en exécutant dans une coque de commande.
 
 1. Pour une expérience Blazor Server, exécutez les commandes suivantes dans une coque de commande :
 
@@ -144,7 +150,7 @@ Si une invite semble faire confiance au certificat de développement, faites con
 Plusieurs pages sont disponibles à partir des onglets dans la barre latérale:
 
 * Accueil
-* Counter
+* Compteur
 * Aller chercher des données
 
 Sur la page Counter, sélectionnez le bouton **Click me** pour incrémenter le compteur sans actualisation de la page. Incrémenter un compteur dans une page Web nécessite Blazor normalement l’écriture JavaScript, mais avec vous pouvez utiliser C .

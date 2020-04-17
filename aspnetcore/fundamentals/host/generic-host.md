@@ -7,18 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/17/2020
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: b528a33fa52bfe56faaf9f3ff8c7e43db0d4e184
-ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
+ms.openlocfilehash: 46a56c278e889778e58a1fbb41ec217aaf023b13
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81384035"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488772"
 ---
 # <a name="net-generic-host"></a>Hôte générique .NET
 
 ::: moniker range=">= aspnetcore-3.0 <= aspnetcore-3.1"
 
-Les modèles ASP.NET Core créent un hôte générique<xref:Microsoft.Extensions.Hosting.HostBuilder>de base .NET ( ).
+Les modèles ASP.NET Core créent un hôte générique <xref:Microsoft.Extensions.Hosting.HostBuilder>de base .NET, .
 
 ## <a name="host-definition"></a>Définition de l’hôte
 
@@ -40,7 +40,7 @@ L’hôte est généralement configuré, généré et exécuté par du code dans
 * Appelle une méthode `CreateHostBuilder` pour créer et configurer un objet builder.
 * Appelle les méthodes `Build` et `Run` sur l’objet builder.
 
-Les modèles Web ASP.NET Core génèrent le code suivant pour créer un hôte :
+Les modèles Web ASP.NET Core génèrent le code suivant pour créer un hôte générique :
 
 ```csharp
 public class Program
@@ -59,7 +59,7 @@ public class Program
 }
 ```
 
-Le code suivant crée une charge `IHostedService` de travail non-HTTP avec une implémentation ajoutée au conteneur DI.
+Le code suivant crée un hôte générique en utilisant la charge de travail non-HTTP. La `IHostedService` mise en œuvre est ajoutée au conteneur DI :
 
 ```csharp
 public class Program
@@ -88,6 +88,8 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
             webBuilder.UseStartup<Startup>();
         });
 ```
+
+Le code précédent est généré par les modèles ASP.NET Core.
 
 Si l’application utilise Entity Framework Core, ne changez pas le nom ou la signature de la méthode `CreateHostBuilder`. Les [outils Entity Framework Core tools](/ef/core/miscellaneous/cli/) s’attendent à trouver une méthode `CreateHostBuilder` qui configure l’hôte sans exécuter l’application. Pour plus d’informations, consultez [Création de DbContext au moment du design](/ef/core/miscellaneous/cli/dbcontext-creation).
 
@@ -153,7 +155,7 @@ L’implémentation de <xref:Microsoft.Extensions.Hosting.IHostLifetime> contrô
 
 Injecter <xref:Microsoft.Extensions.Hosting.IHostEnvironment> le service dans une classe pour obtenir des informations sur les paramètres suivants :
 
-* [ApplicationName](#applicationname)
+* [Applicationname](#applicationname)
 * [EnvironmentName (en)](#environmentname)
 * [ContentRootPath](#contentroot)
 
@@ -1128,7 +1130,7 @@ L’implémentation de <xref:Microsoft.Extensions.Hosting.IHostLifetime> contrô
 
 Injecter <xref:Microsoft.Extensions.Hosting.IHostEnvironment> le service dans une classe pour obtenir des informations sur les paramètres suivants :
 
-* [ApplicationName](#applicationname)
+* [Applicationname](#applicationname)
 * [EnvironmentName (en)](#environmentname)
 * [ContentRootPath](#contentroot)
 

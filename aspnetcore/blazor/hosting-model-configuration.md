@@ -5,17 +5,17 @@ description: Renseignez-vous sur Blazor la configuration du modèle d’héberge
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/07/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: ca1b3ea9092640ca561b3fbe02ddce6f974c525e
-ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
+ms.openlocfilehash: 1b0f5f4071be7134d7de08615ec016ca6567385d
+ms.sourcegitcommit: 49c91ad4b69f4f8032394cbf2d5ae1b19a7f863b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/11/2020
-ms.locfileid: "81123370"
+ms.lasthandoff: 04/17/2020
+ms.locfileid: "81544841"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET configuration du modèle d’hébergement Core Blazor
 
@@ -68,9 +68,39 @@ Obtenir l’environnement de l’application `IWebAssemblyHostEnvironment` dans 
 <p>Environment: @HostEnvironment.Environment</p>
 ```
 
+Pendant le `WebAssemblyHostBuilder` démarrage, `IWebAssemblyHostEnvironment` l’expose à travers la `HostEnvironment` propriété, ce qui permet aux développeurs d’avoir une logique spécifique à l’environnement dans leur code:
+
+```csharp
+if (builder.HostEnvironment.Environment == "Custom")
+{
+    ...
+};
+```
+
+Les méthodes d’extension de commodité suivantes permettent de vérifier l’environnement actuel pour les noms de développement, de production, de mise en scène et d’environnement personnalisé :
+
+* `IsDevelopment()`
+* `IsProduction()`
+* `IsStaging()`
+* 'IsEnvironment ("''ENVIRONNEMENT NAME')
+
+```csharp
+if (builder.HostEnvironment.IsStaging())
+{
+    ...
+};
+
+if (builder.HostEnvironment.IsEnvironment("Custom"))
+{
+    ...
+};
+```
+
+La `IWebAssemblyHostEnvironment.BaseAddress` propriété peut être utilisée `NavigationManager` pendant le démarrage lorsque le service n’est pas disponible.
+
 ### <a name="configuration"></a>Configuration
 
-À la ASP.NET version Core 3.2 Preview 3, Blazor WebAssembly prend en charge la configuration de :
+À partir de la version ASP.NET Core 3.2 Preview 3[(la version actuelle est de 3,2 Aperçu 4](xref:blazor/get-started)), Blazor WebAssembly prend en charge la configuration de :
 
 * *wwwroot/appsettings.json (en)*
 * *wwwroot/appsettings. 'ENVIRONNEMENT'.json*

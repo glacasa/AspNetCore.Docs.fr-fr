@@ -5,12 +5,12 @@ description: Découvrez comment ajouter des classes pour gérer des films dans u
 ms.author: riande
 ms.date: 12/05/2019
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: f6dbac81b4efceb30c379ab06dd715005d879228
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 7f7c2a09b74e6007ee3ea9c038398bac54988186
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78658934"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488869"
 ---
 # <a name="add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>Ajouter un modèle à une application de pages Razor dans ASP.NET Core
 
@@ -20,7 +20,7 @@ Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 <!-- In the next update on the CLI version, let the scaffolder do the same work the VS driven scaffolder does. That is, create the DB context, etc -->
 
-Dans cette section, des cours sont ajoutés pour la gestion des films dans une base de [données transplateforme SQLite](https://www.sqlite.org/index.html). Les applications créées à partir d’un modèle ASP.NET Core utilisent une base de données SQLite. Les catégories de modèles de l’application sont utilisées avec [Entity Framework Core (EF Core)](/ef/core) ([SQLite EF Core Database Provider](/ef/core/providers/sqlite)) pour travailler avec la base de données. EF Core est un framework de mappage relationnel d’objets qui simplifie l’accès aux données.
+Dans cette section, des cours sont ajoutés pour la gestion des films. Les classes modèles de l’application utilisent [Entity Framework Core (EF Core)](/ef/core) pour travailler avec la base de données. EF Core est un mapper relationnel objet (O/RM) qui simplifie l’accès aux données.
 
 Les classes de modèle portent le nom de classes OCT (« Objet CLR Traditionnel »), car elles n’ont pas de dépendances envers EF Core. Elles définissent les propriétés des données stockées dans la base de données.
 
@@ -28,7 +28,7 @@ Les classes de modèle portent le nom de classes OCT (« Objet CLR Traditionnel 
 
 ## <a name="add-a-data-model"></a>Ajouter un modèle de données
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Cliquez avec le bouton droit sur le projet **RazorPagesMovie** > **Ajouter** > **Nouveau dossier**. Nommez le dossier *Models*.
 
@@ -65,7 +65,7 @@ Générez le projet pour vérifier qu’il n’y a pas d’erreur de compilation
 
 Dans cette section, le modèle de film est généré automatiquement. Autrement dit, l’outil de génération de modèles automatique génère des pages pour les opérations de création, de lecture, de mise à jour et de suppression (CRUD) pour le modèle de film.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Créer un dossier *Pages/Movies* :
 
@@ -158,7 +158,7 @@ La commande précédente ajoute les outils de base du cadre d’entité pour le 
 
 ### <a name="files-created"></a>Fichiers créés
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Le processus de génération de modèles automatique crée et met à jour les fichiers suivants :
 
@@ -198,7 +198,7 @@ Les fichiers créés sont expliqués dans la section suivante.
 
 ## <a name="initial-migration"></a>Migration initiale
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Dans cette section, la console du gestionnaire de package est utilisée pour :
 
@@ -234,7 +234,7 @@ La commande de migrations génère du code pour créer le schéma initial de bas
 
 La `update` commande `Up` exécute la méthode dans les migrations qui n’ont pas été appliquées. Dans ce `update` cas, `Up` exécute la méthode dans *les migrations /\<délai>_InitialCreate.cs* fichier, qui crée la base de données.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ### <a name="examine-the-context-registered-with-dependency-injection"></a>Examiner le contexte inscrit avec l’injection de dépendances
 
@@ -309,7 +309,7 @@ Les classes de modèle portent le nom de classes OCT (« Objet CLR Traditionnel 
 
 ## <a name="add-a-data-model"></a>Ajouter un modèle de données
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Cliquez avec le bouton droit sur le projet **RazorPagesMovie** > **Ajouter** > **Nouveau dossier**. Nommez le dossier *Models*.
 
@@ -346,7 +346,7 @@ Générez le projet pour vérifier qu’il n’y a pas d’erreur de compilation
 
 Dans cette section, le modèle de film est généré automatiquement. Autrement dit, l’outil de génération de modèles automatique génère des pages pour les opérations de création, de lecture, de mise à jour et de suppression (CRUD) pour le modèle de film.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Créer un dossier *Pages/Movies* :
 
@@ -440,7 +440,7 @@ Les fichiers créés et mis à jour sont expliqués dans la section suivante.
 
 ## <a name="initial-migration"></a>Migration initiale
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Dans cette section, la console du gestionnaire de package est utilisée pour :
 
@@ -474,7 +474,7 @@ La commande `Update-Database` exécute la méthode `Up` dans le fichier *Migrati
 > [!NOTE]
 > Les commandes précédentes génèrent l’avertissement suivant : «*Aucun type n’a été spécifié pour la colonne décimale 'Price' sur le type d’entité 'Movie'. Cela entraînera des valeurs silencieusement tronquées si elles ne rentrent pas dans la précision et l’échelle par défaut. Spécifier explicitement le type de colonne de serveur SQL qui peut accueillir toutes les valeurs à l’aide de 'HasColumnType'.* Vous pouvez ignorer cet avertissement, il sera fixé dans un tutoriel ultérieur.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ### <a name="examine-the-context-registered-with-dependency-injection"></a>Examiner le contexte inscrit avec l’injection de dépendances
 

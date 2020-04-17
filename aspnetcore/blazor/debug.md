@@ -5,17 +5,17 @@ description: Apprenez à déboiffer Blazor les applications.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: eaa67d63f6d15249885d78d3de197ae53e73f072
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 8b63444ba5c8cd45e64e722c8978ba4e6d90af36
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80381870"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488746"
 ---
 # <a name="debug-aspnet-core-opno-locblazor-webassembly"></a>Debug ASP.NET Core Blazor WebAssembly
 
@@ -55,7 +55,7 @@ Le débogage nécessite l’un ou l’autre des navigateurs suivants :
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Activez le débogage pour Visual Studio et Visual Studio Code
 
-Le débogage est activé automatiquement pour les nouveaux projets qui sont créés à Blazor l’aide du modèle de projet ASP.NET Core 3.2 Preview 3 ou plus tard WebAssembly.
+Le débogage est activé automatiquement pour les nouveaux projets créés à l’aide Blazor du ASP.NET Core 3.2 Preview 3 ou plus tard du modèle de projet WebAssembly[(la version actuelle est de 3,2 Aperçu 4](xref:blazor/get-started)).
 
 Pour permettre le débogage d’une application WebAssembly existante, Blazor mettez à jour le fichier *launchSettings.json* dans le projet de démarrage afin d’inclure la propriété suivante `inspectUri` dans chaque profil de lancement :
 

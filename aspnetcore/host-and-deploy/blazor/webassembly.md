@@ -5,17 +5,17 @@ description: Découvrez comment héberger Blazor et déployer une application à
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/06/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: f364d94085d175fde5596c222ef21852c0106ec1
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: f3508144f1e472ee906a35e427fc57f536008ab6
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80751121"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488856"
 ---
 # <a name="host-and-deploy-aspnet-core-opno-locblazor-webassembly"></a>Hébergez et déployez ASP.NET WebAssembly Core Blazor
 
@@ -25,13 +25,17 @@ Par [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.tim
 
 Avec le [ Blazor modèle d’hébergement WebAssembly](xref:blazor/hosting-models#blazor-webassembly):
 
-* L’application, Blazor ses dépendances et le temps d’exécution .NET sont téléchargés sur le navigateur.
+* L’application, Blazor ses dépendances et le temps d’exécution .NET sont téléchargés sur le navigateur en parallèle.
 * L’application est exécutée directement sur le thread d’interface utilisateur du navigateur.
 
 Les stratégies de déploiement suivantes sont prises en charge :
 
 * L’application Blazor est desservie par une application ASP.NET Core. Cette stratégie est abordée dans la section [Déploiement hébergé avec ASP.NET Core](#hosted-deployment-with-aspnet-core).
 * L’application Blazor est placée sur un serveur ou un service Web d’hébergement statique, où .NET n’est pas utilisé pour servir l’application. Blazor Cette stratégie est couverte dans la section de déploiement Blazor [Standalone,](#standalone-deployment) qui comprend des informations sur l’hébergement d’une application WebAssembly sous forme de sous-application IIS.
+
+## <a name="brotli-precompression"></a>Précompression Brotli
+
+Lorsqu’une Blazor application WebAssembly est publiée, la sortie est précompressée à l’aide de [l’algorithme de compression Brotli](https://tools.ietf.org/html/rfc7932) au plus haut niveau pour réduire la taille de l’application et supprimer le besoin de compression en temps d’exécution.
 
 ## <a name="rewrite-urls-for-correct-routing"></a>Réécriture d’URL pour un routage correct
 

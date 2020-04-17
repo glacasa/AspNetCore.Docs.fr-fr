@@ -5,17 +5,17 @@ description: Créez une application de chat qui SignalR Blazor utilise ASP.NET C
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: c4843dc282e1978b39738e206ecc79ded87fcff9
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 798068c83e16070d3279c88c44af0cd96d182fe2
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80306574"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488882"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Utilisez ASP.NET SignalR de base avec Blazor WebAssembly
 
@@ -38,7 +38,7 @@ Ce tutoriel enseigne les bases de la construction d’une application en temps r
 
 ## <a name="prerequisites"></a>Prérequis
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
@@ -61,12 +61,12 @@ Ce tutoriel enseigne les bases de la construction d’une application en temps r
 Lorsque vous n’utilisez pas la version Visual Studio 16.6 Aperçu 2 ou plus tard, installez le modèle [WebAssembly Blazor.](xref:blazor/hosting-models#blazor-webassembly) Le paquet [Microsoft.AspNetCore.Components.WebAssembly.Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/) a une version de prévisualisation tandis que Blazor WebAssembly est en avant-première. Dans une coque de commande, exécutez la commande suivante :
 
 ```dotnetcli
-dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview3.20168.3
+dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview4.20210.8
 ```
 
 Suivez les conseils pour votre choix d’outillage :
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Créez un projet.
 
@@ -117,7 +117,7 @@ dotnet new blazorwasm --hosted --output BlazorSignalRApp
 
 ## <a name="add-the-signalr-client-library"></a>Ajouter la bibliothèque de client SignalR
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
 1. Dans **Solution Explorer**, cliquez à droite sur le projet **BlazorSignalRApp.Client** et **sélectionnez Manage NuGet Packages**.
 
@@ -196,11 +196,11 @@ Dans le cadre du projet **BlazorSignalRApp.Server,** créez un dossier `ChatHub`
 
 [!code-razor[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Client/Pages/Index.razor)]
 
-## <a name="run-the-app"></a>Exécuter l’application
+## <a name="run-the-app"></a>Exécuter l'application
 
 1. Suivez les conseils pour votre outillage :
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Dans **Solution Explorer**, sélectionnez le projet **BlazorSignalRApp.Server.** Appuyez sur **Ctrl-F5** pour exécuter l’application sans déboguer.
 
