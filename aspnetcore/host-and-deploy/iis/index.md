@@ -5,16 +5,27 @@ description: Découvrez comment héberger des applications ASP.NET Core sur Wind
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/07/2020
+ms.date: 04/17/2020
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 819c53f945c1e5bb2cedcef8fc39d4c8761e4549
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: 77f07ba89de4449c6d13006a5fd61499cb5cdfc0
+ms.sourcegitcommit: 3d07e21868dafc503530ecae2cfa18a7490b58a6
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977026"
+ms.lasthandoff: 04/18/2020
+ms.locfileid: "81642751"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>Héberger ASP.NET Core sur Windows avec IIS
+
+<!-- 
+
+    NOTE FOR 5.0
+    
+    When making the 5.0 version of this topic, remove the Hosting Bundle
+    direct download section from the (new) <5.0 & >2.2 version and modify 
+    the text and heading for the *Earlier versions of the installer* 
+    section. See the 2.2 version for an example.
+    
+-->
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -250,9 +261,9 @@ Téléchargez le programme d’installation à l’aide du lien suivant :
 Pour obtenir une version antérieure du programme d’installation :
 
 1. Naviguez vers la page [Télécharger .NET Core.](https://dotnet.microsoft.com/download/dotnet-core)
-1. Cliquez sur la version .NET Core souhaitée.
+1. Sélectionnez la version .NET Core souhaitée.
 1. Dans la colonne **Run apps - Runtime**, recherchez la ligne de la version du runtime .NET Core souhaitée.
-1. Téléchargez le programme d’installation à l’aide du lien **Runtime & Hosting Bundle**.
+1. Téléchargez l’installateur à l’aide du lien **Hosting Bundle.**
 
 > [!WARNING]
 > Certains programmes d’installation contiennent des versions qui sont arrivées à leur fin de vie (EOL) et qui ne sont plus prises en charge par Microsoft. Pour plus d’informations, consultez la [politique de support](https://dotnet.microsoft.com/platform/support/policy/dotnet-core).
@@ -371,7 +382,7 @@ Les fichiers dans le dossier de déploiement sont verrouillés quand l’applica
 
   ```
 
-## <a name="data-protection"></a>Protection de données
+## <a name="data-protection"></a>Protection des données
 
 La [pile de protection des données ASP.NET Core](xref:security/data-protection/introduction) est utilisée par plusieurs [intergiciels (middlewares)](xref:fundamentals/middleware/index) ASP.NET Core, y compris l’intergiciel utilisé dans l’authentification. Même si les API de protection des données ne sont pas appelées par le code de l’utilisateur, la protection des données doit être configurée avec un script de déploiement ou dans un code utilisateur pour créer un [magasin de clés](xref:security/data-protection/implementation/key-management) de chiffrement persistantes. Si la protection des données n’est pas configurée, les clés sont conservées en mémoire et ignorées au redémarrage de l’application.
 
@@ -846,20 +857,12 @@ Installez le *bundle d’hébergement .NET Core* sur le système hôte. Le paque
 >
 > Si le bundle d’hébergement est installé après l’installation de la version 64 bits (x 64) de .NET Core, les SDK peuvent apparaître manquants ([Aucun SDK .NET Core n’a été détecté](xref:test/troubleshoot#no-net-core-sdks-were-detected)). Pour résoudre le problème, consultez <xref:test/troubleshoot#missing-sdk-after-installing-the-net-core-hosting-bundle>.
 
-### <a name="direct-download-current-version"></a>Téléchargement direct (version actuelle)
-
-Téléchargez le programme d’installation à l’aide du lien suivant :
-
-[Programme d’installation du bundle d’hébergement .NET Core actuel (téléchargement direct)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
-
-### <a name="earlier-versions-of-the-installer"></a>Versions antérieures du programme d’installation
-
-Pour obtenir une version antérieure du programme d’installation :
+### <a name="download"></a>Téléchargement
 
 1. Naviguez vers la page [Télécharger .NET Core.](https://dotnet.microsoft.com/download/dotnet-core)
-1. Cliquez sur la version .NET Core souhaitée.
+1. Sélectionnez la version .NET Core souhaitée.
 1. Dans la colonne **Run apps - Runtime**, recherchez la ligne de la version du runtime .NET Core souhaitée.
-1. Téléchargez le programme d’installation à l’aide du lien **Runtime & Hosting Bundle**.
+1. Téléchargez l’installateur à l’aide du lien **Hosting Bundle.**
 
 > [!WARNING]
 > Certains programmes d’installation contiennent des versions qui sont arrivées à leur fin de vie (EOL) et qui ne sont plus prises en charge par Microsoft. Pour plus d’informations, consultez la [politique de support](https://dotnet.microsoft.com/platform/support/policy/dotnet-core).
@@ -975,7 +978,7 @@ Les fichiers dans le dossier de déploiement sont verrouillés quand l’applica
 
   ```
 
-## <a name="data-protection"></a>Protection de données
+## <a name="data-protection"></a>Protection des données
 
 La [pile de protection des données ASP.NET Core](xref:security/data-protection/introduction) est utilisée par plusieurs [intergiciels (middlewares)](xref:fundamentals/middleware/index) ASP.NET Core, y compris l’intergiciel utilisé dans l’authentification. Même si les API de protection des données ne sont pas appelées par le code de l’utilisateur, la protection des données doit être configurée avec un script de déploiement ou dans un code utilisateur pour créer un [magasin de clés](xref:security/data-protection/implementation/key-management) de chiffrement persistantes. Si la protection des données n’est pas configurée, les clés sont conservées en mémoire et ignorées au redémarrage de l’application.
 
@@ -1422,20 +1425,12 @@ Installez le *bundle d’hébergement .NET Core* sur le système hôte. Le paque
 >
 > Si le bundle d’hébergement est installé après l’installation de la version 64 bits (x 64) de .NET Core, les SDK peuvent apparaître manquants ([Aucun SDK .NET Core n’a été détecté](xref:test/troubleshoot#no-net-core-sdks-were-detected)). Pour résoudre le problème, consultez <xref:test/troubleshoot#missing-sdk-after-installing-the-net-core-hosting-bundle>.
 
-### <a name="direct-download-current-version"></a>Téléchargement direct (version actuelle)
-
-Téléchargez le programme d’installation à l’aide du lien suivant :
-
-[Programme d’installation du bundle d’hébergement .NET Core actuel (téléchargement direct)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
-
-### <a name="earlier-versions-of-the-installer"></a>Versions antérieures du programme d’installation
-
-Pour obtenir une version antérieure du programme d’installation :
+### <a name="download"></a>Téléchargement
 
 1. Naviguez vers la page [Télécharger .NET Core.](https://dotnet.microsoft.com/download/dotnet-core)
-1. Cliquez sur la version .NET Core souhaitée.
+1. Sélectionnez la version .NET Core souhaitée.
 1. Dans la colonne **Run apps - Runtime**, recherchez la ligne de la version du runtime .NET Core souhaitée.
-1. Téléchargez le programme d’installation à l’aide du lien **Runtime & Hosting Bundle**.
+1. Téléchargez l’installateur à l’aide du lien **Hosting Bundle.**
 
 > [!WARNING]
 > Certains programmes d’installation contiennent des versions qui sont arrivées à leur fin de vie (EOL) et qui ne sont plus prises en charge par Microsoft. Pour plus d’informations, consultez la [politique de support](https://dotnet.microsoft.com/platform/support/policy/dotnet-core).
@@ -1551,7 +1546,7 @@ Les fichiers dans le dossier de déploiement sont verrouillés quand l’applica
 
   ```
 
-## <a name="data-protection"></a>Protection de données
+## <a name="data-protection"></a>Protection des données
 
 La [pile de protection des données ASP.NET Core](xref:security/data-protection/introduction) est utilisée par plusieurs [intergiciels (middlewares)](xref:fundamentals/middleware/index) ASP.NET Core, y compris l’intergiciel utilisé dans l’authentification. Même si les API de protection des données ne sont pas appelées par le code de l’utilisateur, la protection des données doit être configurée avec un script de déploiement ou dans un code utilisateur pour créer un [magasin de clés](xref:security/data-protection/implementation/key-management) de chiffrement persistantes. Si la protection des données n’est pas configurée, les clés sont conservées en mémoire et ignorées au redémarrage de l’application.
 

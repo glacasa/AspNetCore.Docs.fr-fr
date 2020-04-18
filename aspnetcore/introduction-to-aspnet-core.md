@@ -1,35 +1,37 @@
 ---
 title: Présentation d’ASP.NET Core
 author: rick-anderson
-description: Découvrez une introduction à ASP.NET Core, framework multiplateforme à hautes performances et open source qui permet de créer des applications cloud modernes et connectées à Internet.
+description: Obtenez une introduction à ASP.NET Core, un cadre interplateforme, haute performance et open source pour la construction d’applications modernes, connectées au cloud et connectées à Internet.
 ms.author: riande
 ms.custom: mvc
-ms.date: 11/12/2019
+ms.date: 04/17/2020
 no-loc:
 - Blazor
 - SignalR
 uid: index
-ms.openlocfilehash: fd7fa9dd70502f51222e457dd887ef668d377278
-ms.sourcegitcommit: 4b166b49ec557a03f99f872dd069ca5e56faa524
+ms.openlocfilehash: c5a5a0ada996d88cb9252da25b5580fe0cf46f0b
+ms.sourcegitcommit: 636efd1afc0a1e6fd4b12ae3a542917b356abb93
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80366658"
+ms.lasthandoff: 04/17/2020
+ms.locfileid: "81615945"
 ---
 # <a name="introduction-to-aspnet-core"></a>Présentation d’ASP.NET Core
 
 Par [Daniel Roth](https://github.com/danroth27), [Rick Anderson](https://twitter.com/RickAndMSFT) et [Shaun Luttin](https://twitter.com/dicshaunary)
 
-ASP.NET Core est un framework multiplateforme à hautes performances et [open source](https://github.com/aspnet/home) pour créer des applications cloud modernes et connectées à Internet. Avec ASP.NET Core, vous pouvez :
+::: moniker range=">= aspnetcore-3.0"
 
-* Créer des applications et des services web, des applications [IoT](https://www.microsoft.com/internet-of-things/) et des back-ends mobiles.
-* Utilisez vos outils de développement préférés sur Windows, macOS et Linux.
-* Déployer sur le cloud ou localement.
-* Exécuter sur [.NET Core ou .NET Framework](/dotnet/articles/standard/choosing-core-framework-server).
+ASP.NET Core est un cadre interplateforme, haute performance et [open source](https://github.com/dotnet/aspnetcore) pour la construction d’applications modernes, connectées au cloud et connectées à Internet. Avec ASP.NET Core, vous pouvez :
+
+* Construisez des applications et des services Web, des applications [Internet des objets (IoT)](https://www.microsoft.com/internet-of-things/) et des backends mobiles.
+* Utiliser vos outils de développement préférés sur Windows, macOS et Linux.
+* Déployer dans le cloud ou localement.
+* Exécuter sur [.NET Core](/dotnet/core/introduction).
 
 ## <a name="why-choose-aspnet-core"></a>Pourquoi utiliser ASP.NET Core ?
 
-Des millions de développeurs utilisent ou ont utilisé [ASP.net 4. x](/aspnet/overview) pour créer des applications Web. ASP.NET Core est une reconception d’ASP.NET 4.x, avec des modifications d’architecture qui aboutissent à un framework plus léger et modulaire.
+Des millions de développeurs utilisent ou ont utilisé [ASP.NET 4.x](/aspnet/overview) pour créer des applications Web. ASP.NET Core est une refonte de ASP.NET 4.x, y compris les changements architecturaux qui se traduisent par un cadre plus maigre, plus modulaire.
 
 [!INCLUDE[](~/includes/benefits.md)]
 
@@ -38,11 +40,90 @@ Des millions de développeurs utilisent ou ont utilisé [ASP.net 4. x](/aspnet/o
 Le modèle MVC d’ASP.NET Core fournit des fonctionnalités pour créer des [API web](xref:tutorials/first-web-api) et des [applications web](xref:tutorials/razor-pages/index) :
 
 * Le [modèle MVC (Modèle-Vue-Contrôleur)](xref:mvc/overview) permet de rendre vos API web et vos applications web testables.
-* [Razor Pages](xref:razor-pages/index) est un modèle de programmation basé sur les pages qui rend la création d’une interface utilisateur web plus facile et plus productive.
-* Le [balisage Razor](xref:mvc/views/razor) fournit une syntaxe efficace pour [Razor Pages](xref:razor-pages/index) et les [vues MVC](xref:mvc/views/overview).
+* [Razor Pages](xref:razor-pages/index) est un modèle de programmation basé sur des pages qui facilite et rend la construction d’interface utilisateur Web plus facile et plus productive.
+* Le [balisage Razor](xref:mvc/views/razor) fournit une syntaxe efficace pour les [pages Razor](xref:razor-pages/index) et les [vues MVC](xref:mvc/views/overview).
 * Les [Tag Helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les fichiers Razor.
 * La prise en charge intégrée de [plusieurs formats de données et de la négociation de contenu](xref:web-api/advanced/formatting) permet à vos API web d’être utilisées par un large éventail de clients, notamment des navigateurs et des appareils mobiles.
-* La [liaison de modèle](xref:mvc/models/model-binding) mappe automatiquement les données des requêtes HTTP aux paramètres des méthodes d’action.
+* Le principe de la [liaison de modèle](xref:mvc/models/model-binding) permet le mappage automatiquement des données des requêtes HTTP aux paramètres des méthodes d’action.
+* La [validation de modèle](xref:mvc/models/validation) effectue automatiquement la validation côté client et côté serveur.
+
+## <a name="client-side-development"></a>Développement côté client
+
+ASP.NET Core s’intègre parfaitement avec les frameworks et les bibliothèques populaires côté client, notamment [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react) et [Bootstrap](https://getbootstrap.com/). Pour plus d’informations, consultez <xref:blazor/index> et les rubriques connexes sous *Développement côté client*.
+
+<a name="target-framework"></a>
+
+## <a name="aspnet-core-target-frameworks"></a>cadres cibles ASP.NET Core
+
+ASP.NET Core 3.x et plus tard ne peut cibler .NET Core. En général, ASP.NET Core est composé de bibliothèques [.NET Standard.](/dotnet/standard/net-standard) Les bibliothèques écrites avec .NET Standard 2.0 s’exécutent sur [n’importe quelle plateforme .NET qui implémente .NET Standard 2.0](/dotnet/standard/net-standard#net-implementation-support).
+
+Le ciblage de .NET Core présente plusieurs avantages, qui sont plus nombreux à chaque version. Voici certains avantages de .NET Core par rapport à .NET Framework :
+
+* Multiplateforme. S’exécute sur Windows, macOS et Linux.
+* performances améliorées
+* [Version côte à côte](/dotnet/standard/choosing-core-framework-server#a-need-for-side-by-side-of-net-versions-per-application-level)
+* Nouvelles API
+* Open source
+
+## <a name="recommended-learning-path"></a>Parcours d’apprentissage recommandé
+
+Nous recommandons la séquence suivante de tutoriels pour une introduction au développement d’applications ASP.NET Core:
+
+1. Suivez un tutoriel pour le type d’application que vous souhaitez développer ou maintenir.
+
+   |Type d’application  |Scénario  |Didacticiel  |
+   |----------|----------|----------|
+   |Application web                   | Nouveau développement d’interface utilisateur web côté serveur |[Bien démarrer avec les pages Razor](xref:tutorials/razor-pages/razor-pages-start) |
+   |Application web                   | Maintenir une application MVC |[Bien démarrer avec MVC](xref:tutorials/first-mvc-app/start-mvc)|
+   |Application web                   | Développement de l’interface utilisateur Web côté client |[Commence avec Blazor](xref:tutorials/first-blazor-app) |
+   |API web                   | Services HTTP RESTful |[Créer une API web](xref:tutorials/first-web-api)&dagger; |
+   |Application d’appel de procédure à distance | Services de premier contrat utilisant Protocol Buffers |[Bien démarrer avec un service gRPC](xref:tutorials/grpc/grpc-start) |
+   |Application en temps réel             | Communication bidirectionnelle entre serveurs et clients connectés |[Bien démarrer avec SignalR](xref:tutorials/signalr) |
+
+1. Suivez un tutoriel qui montre comment faire l’accès aux données de base.
+
+   |Scénario  |Didacticiel  |
+   |----------|----------|
+   |Nouveau développement        |[Pages Razor avec Entity Framework Core](xref:data/ef-rp/intro) |
+   |Maintenir une application MVC |[MVC avec Entity Framework Core](xref:data/ef-mvc/intro) |
+
+1. Lisez un aperçu des [principes fondamentaux](xref:fundamentals/index) ASP.NET Core qui s’appliquent à tous les types d’applications.
+
+1. Parcourez la table du contenu pour d’autres sujets d’intérêt.
+
+&dagger;Il ya aussi un [tutoriel interactif aPI web](/learn/modules/build-web-api-net-core). Aucune installation locale d’outils de développement n’est requise. Le code s’exécute dans une [coquille Cloud Azure](https://azure.microsoft.com/features/cloud-shell/) dans votre navigateur, et [curl](https://curl.haxx.se/) est utilisé pour les tests.
+
+## <a name="migrate-from-net-framework"></a>Migrer à partir de .NET Framework
+
+Pour un guide de référence sur la migration ASP.NET applications 4.x <xref:migration/proper-to-2x/index>pour ASP.NET Core, voir .
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+ASP.NET Core est un cadre interplateforme, haute performance et [open source](https://github.com/dotnet/aspnetcore) pour la construction d’applications modernes, connectées au cloud et connectées à Internet. Avec ASP.NET Core, vous pouvez :
+
+* Construisez des applications et des services Web, des applications [Internet des objets (IoT)](https://www.microsoft.com/internet-of-things/) et des backends mobiles.
+* Utiliser vos outils de développement préférés sur Windows, macOS et Linux.
+* Déployer dans le cloud ou localement.
+* Exécuter sur [.NET Core ou .NET Framework](/dotnet/articles/standard/choosing-core-framework-server).
+
+## <a name="why-choose-aspnet-core"></a>Pourquoi utiliser ASP.NET Core ?
+
+Des millions de développeurs utilisent ou ont utilisé [ASP.NET 4.x](/aspnet/overview) pour créer des applications Web. ASP.NET Core est une refonte d’ASP.NET 4.x, avec des modifications d’architecture qui aboutissent à un framework plus léger et modulaire.
+
+[!INCLUDE[](~/includes/benefits.md)]
+
+## <a name="build-web-apis-and-web-ui-using-aspnet-core-mvc"></a>Créer des API web et une interface utilisateur web en utilisant le modèle MVC d’ASP.NET Core
+
+Le modèle MVC d’ASP.NET Core fournit des fonctionnalités pour créer des [API web](xref:tutorials/first-web-api) et des [applications web](xref:tutorials/razor-pages/index) :
+
+* Le [modèle MVC (Modèle-Vue-Contrôleur)](xref:mvc/overview) permet de rendre vos API web et vos applications web testables.
+* [Razor Pages](xref:razor-pages/index) est un modèle de programmation basé sur des pages qui facilite et rend la construction d’interface utilisateur Web plus facile et plus productive.
+* Le [balisage Razor](xref:mvc/views/razor) fournit une syntaxe efficace pour les [pages Razor](xref:razor-pages/index) et les [vues MVC](xref:mvc/views/overview).
+* Les [Tag Helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les fichiers Razor.
+* La prise en charge intégrée de [plusieurs formats de données et de la négociation de contenu](xref:web-api/advanced/formatting) permet à vos API web d’être utilisées par un large éventail de clients, notamment des navigateurs et des appareils mobiles.
+* Le principe de la [liaison de modèle](xref:mvc/models/model-binding) permet le mappage automatiquement des données des requêtes HTTP aux paramètres des méthodes d’action.
 * La [validation de modèle](xref:mvc/models/validation) effectue automatiquement la validation côté client et côté serveur.
 
 ## <a name="client-side-development"></a>Développement côté client
@@ -57,7 +138,7 @@ ASP.NET Core 2.x peut cibler .NET Core ou le .NET Framework. Les applications A
 
 ASP.NET Core 2.x est pris en charge sur les versions .NET Framework compatibles avec .NET Standard 2.0 :
 
-* La dernière version de .NET framework est fortement recommandée.
+* .NET Framework dernière version est recommandée.
 * .NET Framework 4.6.1 et versions ultérieures.
 
 ASP.NET Core 3.0 et ultérieur s’exécute uniquement sur .NET Core. Pour plus de détails concernant ce changement, consultez [A first look at changes coming in ASP.NET Core 3.0](https://blogs.msdn.microsoft.com/webdev/2018/10/29/a-first-look-at-changes-coming-in-asp-net-core-3-0/).
@@ -66,7 +147,7 @@ Le ciblage de .NET Core présente plusieurs avantages, qui sont plus nombreux à
 
 * Multiplateforme. S’exécute sur macOS, Linux et Windows
 * performances améliorées
-* [Contrôle de version côte à côte](/dotnet/standard/choosing-core-framework-server#a-need-for-side-by-side-of-net-versions-per-application-level)
+* [Version côte à côte](/dotnet/standard/choosing-core-framework-server#a-need-for-side-by-side-of-net-versions-per-application-level)
 * Nouvelles API
 * Open source
 
@@ -76,35 +157,33 @@ Nous nous efforçons de combler l’écart d’API qui existe entre .NET Framewo
 
 Nous vous recommandons la séquence de tutoriels et d’articles suivante comme introduction au développement des applications ASP.NET Core :
 
-1. Suivez un tutoriel pour le type d’application que vous souhaitez développer ou gérer :
+1. Suivez un tutoriel pour le type d’application que vous souhaitez développer ou maintenir.
 
    |Type d’application  |Scénario  |Didacticiel  |
    |----------|----------|----------|
    |Application web                   | Pour un nouveau développement        |[Bien démarrer avec les pages Razor](xref:tutorials/razor-pages/razor-pages-start) |
    |Application web                   | Pour maintenir une application MVC |[Bien démarrer avec MVC](xref:tutorials/first-mvc-app/start-mvc)|
-   |API Web                   |                            |[Créer une API web](xref:tutorials/first-web-api)\*  |
+   |API web                   |                            |[Créer une API web](xref:tutorials/first-web-api)&dagger; |
    |Application en temps réel             |                            |[Bien démarrer avec SignalR](xref:tutorials/signalr) |
-   |Application éblouissante                |                            |[Prise en main de éblouissant](xref:blazor/get-started) |
-   |Application d’appel de procédure distante |                            |[Prise en main d’un service gRPC](xref:tutorials/grpc/grpc-start) |
 
-1. Suivez un tutoriel qui montre comment exécuter l’accès aux données de base :
+1. Suivez un tutoriel qui montre comment faire l’accès aux données de base.
 
    |Scénario  |Didacticiel  |
    |----------|----------|
    | Pour un nouveau développement        |[Pages Razor avec Entity Framework Core](xref:data/ef-rp/intro) |
-   | Pour maintenir une application MVC |[MVC avec Entity Framework Core](xref:data/ef-mvc/intro)
+   | Pour maintenir une application MVC |[MVC avec Entity Framework Core](xref:data/ef-mvc/intro) |
 
-1. Lisez une présentation des fonctionnalités d’ASP.NET Core qui s’appliquent à tous les types d’application :
-
-   * [Fondamentaux](xref:fundamentals/index)
+1. Lisez un aperçu des [principes fondamentaux](xref:fundamentals/index) ASP.NET Core qui s’appliquent à tous les types d’applications.
 
 1. Parcourez la Table des matières pour d’autres rubriques qui vous intéressent.
 
-\* Il existe un nouveau [tutoriel sur l’API web que vous pouvez suivre entièrement dans le navigateur](https://docs.microsoft.com/learn/modules/build-web-api-net-core) (aucune installation d’IDE locale requise).  Le code s’exécute dans [Azure Cloud Shell](https://azure.microsoft.com/features/cloud-shell/), et [curl](https://curl.haxx.se/) est utilisé à des fins de test.
+&dagger;Il ya aussi un [tutoriel API web que vous suivez entièrement dans le navigateur](/learn/modules/build-web-api-net-core), aucune installation locale IDE nécessaire. Le code s’exécute dans [Azure Cloud Shell](https://azure.microsoft.com/features/cloud-shell/), et [curl](https://curl.haxx.se/) est utilisé à des fins de test.
 
-## <a name="migration-from-the-net-framework"></a>Migration à partir de la .NET Framework
+## <a name="migrate-from-net-framework"></a>Migrer à partir de .NET Framework
 
-Pour obtenir un guide de référence sur la migration d’applications ASP.NET vers ASP.NET Core, consultez <xref:migration/proper-to-2x/index>.
+Pour un guide de référence sur la migration des applications ASP.NET <xref:migration/proper-to-2x/index>pour ASP.NET Core, voir .
+
+::: moniker-end
 
 ## <a name="how-to-download-a-sample"></a>Comment télécharger un exemple
 
@@ -116,7 +195,7 @@ La plupart des articles et tutoriels contiennent des liens vers des exemples de 
 
 ### <a name="preprocessor-directives-in-sample-code"></a>Directives de préprocesseur dans l’exemple de code
 
-Pour illustrer plusieurs scénarios, les exemples d’applications utilisent les directives de préprocesseur `#define` et `#if-#else/#elif-#endif` pour compiler et exécuter de manière sélective différentes sections d’exemples de code. Pour les exemples qui utilisent cette approche, définissez la directive `#define` en haut des C# fichiers pour définir le symbole associé au scénario que vous souhaitez exécuter. Certains exemples requièrent la définition du symbole en haut de plusieurs fichiers afin d’exécuter un scénario.
+Pour démontrer plusieurs scénarios, les `#define` `#if-#else/#elif-#endif` applications d’échantillons utilisent les directives et les préprocesseurs pour compiler sélectivement et exécuter différentes sections de code d’échantillon. Pour les échantillons qui utilisent cette `#define` approche, définissez la directive en haut des fichiers C pour définir le symbole associé au scénario que vous souhaitez exécuter. Certains échantillons nécessitent la définition du symbole en haut de plusieurs fichiers afin d’exécuter un scénario.
 
 Par exemple, la liste des symboles `#define` suivante indique que les quatre scénarios sont disponibles (un scénario par symbole). La configuration actuelle de l’exemple exécute le scénario `TemplateCode` :
 
@@ -134,7 +213,7 @@ Pour plus d’informations sur l’utilisation des [directives de préprocesseur
 
 ### <a name="regions-in-sample-code"></a>Régions dans l’exemple de code
 
-Certains exemples d’applications contiennent des sections de code entourées de [#region](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-region) et de directives de [#endregion](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-endregion) C# . Le système de génération de documentation injecte ces régions dans les rubriques de documentation affichées.  
+Certains exemples d’applications contiennent des sections de code entourées [de #region](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-region) et [de #endregion](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-endregion) directives C. Le système de génération de documentation injecte ces régions dans les rubriques de documentation affichées.  
 
 Les noms des régions contiennent généralement le mot « snippet ». L’exemple suivant montre une région nommée `snippet_WebHostDefaults` :
 
@@ -154,7 +233,7 @@ L’extrait de code C# précédent est référencé dans le fichier Markdown de 
 [!code-csharp[](sample/SampleApp/Program.cs?name=snippet_WebHostDefaults)]
 ```
 
-Vous pouvez ignorer (ou supprimer) en toute sécurité les directives `#region` et `#endregion` qui entourent le code. Ne modifiez pas le code dans ces directives si vous envisagez d’exécuter les exemples de scénarios décrits dans la rubrique. N’hésitez pas à modifier le code quand vous testez d’autres scénarios.
+Vous pouvez ignorer (ou supprimer) en toute sécurité les `#region` directives et `#endregion` directives qui entourent le code. Ne modifiez pas le code dans ces directives si vous prévoyez d’exécuter les scénarios d’exemple décrits dans le sujet. N’hésitez pas à modifier le code quand vous testez d’autres scénarios.
 
 Pour plus d’informations, consultez [Contribuer à la documentation ASP.NET : extraits de code](https://github.com/dotnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md#code-snippets).
 
@@ -165,4 +244,4 @@ Pour plus d’informations, consultez les ressources suivantes :
 * <xref:getting-started>
 * <xref:tutorials/publish-to-azure-webapp-using-vs>
 * [Notions de base d’ASP.NET Core](xref:fundamentals/index)
-* [Le point hebdomadaire de la communauté ASP.NET](https://live.asp.net/) couvre l’avancement et les plans de l’équipe. Il comprend de nouveaux blogs et des logiciels de tiers.
+* [Le point hebdomadaire de la communauté ASP.NET](https://live.asp.net/) couvre l’avancement et les plans des équipes de développement. Il met en avant de nouveaux blogs et des logiciels de tiers.
