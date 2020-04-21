@@ -5,17 +5,17 @@ description: Découvrez comment appeler une API Blazor Web à partir d’une app
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/16/2020
+ms.date: 04/19/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: 2f2d4150f4fa1e7f47310f2a88b816f445cd1d3a
-ms.sourcegitcommit: 49c91ad4b69f4f8032394cbf2d5ae1b19a7f863b
+ms.openlocfilehash: 943f9d440adbe11ac1977f28aebee53a5510a86b
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "81544854"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661577"
 ---
 # <a name="call-a-web-api-from-aspnet-core-opno-locblazor"></a>Appelez une API web de ASP.NET CoreBlazor
 
@@ -120,7 +120,11 @@ Les méthodes d’assistance JSON envoient des demandes à un URI (une API Web d
   }
   ```
   
-  Appels `PostAsJsonAsync` à <xref:System.Net.Http.HttpResponseMessage>retourner un .
+  Appels `PostAsJsonAsync` à <xref:System.Net.Http.HttpResponseMessage>retourner un . Pour déséialiser le contenu JSON à `ReadFromJsonAsync<T>` partir du message de réponse, utilisez la méthode d’extension :
+  
+  ```csharp
+  var content = response.content.ReadFromJsonAsync<WeatherForecast>();
+  ```
 
 * `PutAsJsonAsync`&ndash; Envoie une demande HTTP PUT, y compris le contenu codé par JSON.
 
@@ -149,7 +153,11 @@ Les méthodes d’assistance JSON envoient des demandes à un URI (une API Web d
   }
   ```
   
-  Appels `PutAsJsonAsync` à <xref:System.Net.Http.HttpResponseMessage>retourner un .
+  Appels `PutAsJsonAsync` à <xref:System.Net.Http.HttpResponseMessage>retourner un . Pour déséialiser le contenu JSON à `ReadFromJsonAsync<T>` partir du message de réponse, utilisez la méthode d’extension :
+  
+  ```csharp
+  var content = response.content.ReadFromJsonAsync<WeatherForecast>();
+  ```
 
 <xref:System.Net.Http>comprend des méthodes d’extension supplémentaires pour envoyer des demandes HTTP et recevoir des réponses HTTP. [HttpClient.DeleteAsync](xref:System.Net.Http.HttpClient.DeleteAsync*) est utilisé pour envoyer une demande HTTP DELETE à une API web.
 

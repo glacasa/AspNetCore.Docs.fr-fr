@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/14/2019
 uid: security/authorization/iauthorizationpolicyprovider
-ms.openlocfilehash: 2a8b189cc9f17529a962a1f9642c7bb199d5781b
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: 2c67e25ff73bc8c3a5f3af4730a509b2385fc1cf
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440920"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661772"
 ---
 # <a name="custom-authorization-policy-providers-using-iauthorizationpolicyprovider-in-aspnet-core"></a>Fournisseurs de politiques d’autorisation personnalisées utilisant IAuthorizationPolicyProvider dans ASP.NET Core 
 
@@ -25,7 +25,7 @@ Voici quelques exemples de scénarios où un [IAuthorizationPolicyProvider](/dot
 * En utilisant un large éventail de politiques (pour différents numéros de pièce ou âges, `AuthorizationOptions.AddPolicy` par exemple), il n’est donc pas logique d’ajouter chaque politique d’autorisation individuelle avec un appel.
 * Créer des stratégies à l’exécution en fonction de l’information d’une source de données externe (comme une base de données) ou déterminer les exigences d’autorisation de manière dynamique par le biais d’un autre mécanisme.
 
-Afficher ou télécharger le [code d’échantillon](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/CustomPolicyProvider) du [référentiel AspNetCore GitHub](https://github.com/dotnet/AspNetCore). Téléchargez le fichier zip de dépôt dotnet/AspNetCore. Décompressez le dossier. Naviguez vers le dossier du projet *src/Security/samples/CustomPolicyProvider.*
+Afficher ou télécharger le [code d’échantillon](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider) du [référentiel AspNetCore GitHub](https://github.com/dotnet/AspNetCore). Téléchargez le fichier zip de dépôt dotnet/AspNetCore. Décompressez le dossier. Naviguez vers le dossier du projet *src/Security/samples/CustomPolicyProvider.*
 
 ## <a name="customize-policy-retrieval"></a>Personnaliser la récupération des politiques
 
@@ -183,4 +183,4 @@ Pour utiliser les `IAuthorizationPolicyProvider`stratégies personnalisées à p
 services.AddSingleton<IAuthorizationPolicyProvider, MinimumAgePolicyProvider>();
 ```
 
-Un échantillon `IAuthorizationPolicyProvider` complet personnalisé est disponible dans le [référentiel GitHub dotnet/aspnetcore](https://github.com/dotnet/aspnetcore/tree/ea555458dc61e04314598c25b3ab8c56362a5123/src/Security/samples/CustomPolicyProvider).
+Un échantillon `IAuthorizationPolicyProvider` complet personnalisé est disponible dans le [référentiel GitHub dotnet/aspnetcore](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider).

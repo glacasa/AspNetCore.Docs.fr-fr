@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/26/2020
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 943ea30c2e4887638f69b6dcdb7e323bcee40240
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 4e990329b7ebcfc9cbbff8a3c9895604a22461d3
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80405979"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661698"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>Injection de dépendances dans ASP.NET Core
 
@@ -196,7 +196,7 @@ Des services à durée de vie temporaire (<xref:Microsoft.Extensions.DependencyI
 Les services à durée de vie délimitée (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped*>) sont créés une seule fois par requête de client (connexion).
 
 > [!WARNING]
-> Si vous utilisez un service Scoped dans un middleware, injectez le service dans la méthode `Invoke` ou `InvokeAsync`. Ne faites pas l’injection via l’injection du constructeur, car elle force le service à se comporter comme un singleton. Pour plus d’informations, consultez <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
+> Si vous utilisez un service Scoped dans un middleware, injectez le service dans la méthode `Invoke` ou `InvokeAsync`. Ne pas injecter par [injection de constructeurs](xref:mvc/controllers/dependency-injection#constructor-injection) parce qu’il force le service à se comporter comme un singleton. Pour plus d’informations, consultez <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
 
 ### <a name="singleton"></a>Singleton
 
@@ -261,9 +261,9 @@ Les services peuvent être résolus par deux mécanismes :
 
 Les constructeurs peuvent accepter des arguments qui ne sont pas fournis par l’injection de dépendances, mais les arguments doivent affecter des valeurs par défaut.
 
-Lorsque des services sont résolus par `IServiceProvider` ou `ActivatorUtilities`, l’injection de constructeurs exige un constructeur *public*.
+Lorsque les services `IServiceProvider` `ActivatorUtilities`sont résolus par ou, [l’injection de constructeur](xref:mvc/controllers/dependency-injection#constructor-injection) nécessite un constructeur *public.*
 
-Lorsque des services sont résolus par `ActivatorUtilities`, l’injection de constructeurs exige qu’un seul constructeur applicable existe. Les surcharges de constructeurs sont prises en charge, mais une seule peut exister dont les arguments peuvent tous être satisfaits par l’injection de dépendances.
+Lorsque les services `ActivatorUtilities`sont résolus par , [l’injection de constructeurs](xref:mvc/controllers/dependency-injection#constructor-injection) exige qu’un seul constructeur applicable existe. Les surcharges de constructeurs sont prises en charge, mais une seule peut exister dont les arguments peuvent tous être satisfaits par l’injection de dépendances.
 
 ## <a name="entity-framework-contexts"></a>Contextes Entity Framework
 
@@ -733,7 +733,7 @@ Des services à durée de vie temporaire (<xref:Microsoft.Extensions.DependencyI
 Les services à durée de vie délimitée (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped*>) sont créés une seule fois par requête de client (connexion).
 
 > [!WARNING]
-> Si vous utilisez un service Scoped dans un middleware, injectez le service dans la méthode `Invoke` ou `InvokeAsync`. Ne faites pas l’injection via l’injection du constructeur, car elle force le service à se comporter comme un singleton. Pour plus d’informations, consultez <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
+> Si vous utilisez un service Scoped dans un middleware, injectez le service dans la méthode `Invoke` ou `InvokeAsync`. Ne pas injecter par [injection de constructeurs](xref:mvc/controllers/dependency-injection#constructor-injection) parce qu’il force le service à se comporter comme un singleton. Pour plus d’informations, consultez <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
 
 ### <a name="singleton"></a>Singleton
 
@@ -798,9 +798,9 @@ Les services peuvent être résolus par deux mécanismes :
 
 Les constructeurs peuvent accepter des arguments qui ne sont pas fournis par l’injection de dépendances, mais les arguments doivent affecter des valeurs par défaut.
 
-Lorsque des services sont résolus par `IServiceProvider` ou `ActivatorUtilities`, l’injection de constructeurs exige un constructeur *public*.
+Lorsque les services `IServiceProvider` `ActivatorUtilities`sont résolus par ou, [l’injection de constructeur](xref:mvc/controllers/dependency-injection#constructor-injection) nécessite un constructeur *public.*
 
-Lorsque des services sont résolus par `ActivatorUtilities`, l’injection de constructeurs exige qu’un seul constructeur applicable existe. Les surcharges de constructeurs sont prises en charge, mais une seule peut exister dont les arguments peuvent tous être satisfaits par l’injection de dépendances.
+Lorsque les services `ActivatorUtilities`sont résolus par , [l’injection de constructeurs](xref:mvc/controllers/dependency-injection#constructor-injection) exige qu’un seul constructeur applicable existe. Les surcharges de constructeurs sont prises en charge, mais une seule peut exister dont les arguments peuvent tous être satisfaits par l’injection de dépendances.
 
 ## <a name="entity-framework-contexts"></a>Contextes Entity Framework
 

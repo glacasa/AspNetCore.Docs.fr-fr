@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 8b63444ba5c8cd45e64e722c8978ba4e6d90af36
-ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
+ms.openlocfilehash: 7273ae3d240de0b59a58069fdcc1880247379751
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81488746"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661607"
 ---
 # <a name="debug-aspnet-core-opno-locblazor-webassembly"></a>Debug ASP.NET Core Blazor WebAssembly
 
@@ -103,6 +103,8 @@ Tout en débogage de votre Blazor application WebAssembly, vous pouvez égalemen
    ![Serveur Debug](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-server.png)
 
 1. Appuyez à nouveau sur <kbd>F5</kbd> pour que l’exécution se poursuive et que la table de prévision météorologique soit rendue.
+
+<a id="vscode"></a>
 
 ## <a name="visual-studio-code"></a>Visual Studio Code
 

@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 671f68da2ea261cb8ae32a9d5ef875217859054d
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: f994cd1274bda9082a7cd8b637968b2769db1671
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78655329"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661709"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Dépannage ASP.NET Core sur Azure App Service et IIS
 
@@ -159,6 +159,15 @@ Pour corriger cette erreur, réparez l’installation du [bundle d’hébergemen
 ANCM n’a pas pu démarrer dans le délai imparti spécifié. Par défaut, le délai d’expiration est de 120 secondes.
 
 Cette erreur peut se produire quand un grand nombre d’applications démarrent sur la même machine. Recherchez les pics d’utilisation du processeur/de la mémoire sur le serveur durant le démarrage. Vous devrez peut-être décaler le processus de démarrage de plusieurs applications.
+
+### <a name="50038-ancm-application-dll-not-found"></a>500.38 AnCM Application DLL Non trouvé
+
+ANCM n’a pas réussi à localiser l’application DLL, qui devrait être à côté de l’exécutable.
+
+Cette erreur se produit lors de l’hébergement d’une application emballée comme un [fichier unique exécutable](/dotnet/core/whats-new/dotnet-core-3-0#single-file-executables) à l’aide du modèle d’hébergement en cours. Le modèle en cours exige que l’ANCM charge l’application .NET Core dans le processus IIS existant. Ce scénario n’est pas pris en charge par le modèle de déploiement d’un seul fichier. Utilisez **l’une** des approches suivantes dans le fichier de projet de l’application pour corriger cette erreur :
+
+1. Désactiver la publication à un `PublishSingleFile` seul fichier en `false`fixant la propriété MSBuild à .
+1. Passez au modèle d’hébergement hors-processus `AspNetCoreHostingModel` en définissant `OutOfProcess`la propriété MSBuild à .
 
 ### <a name="5025-process-failure"></a>Échec de processus 502.5
 

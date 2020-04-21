@@ -5,17 +5,17 @@ description: Renseignez-vous sur Blazor les modèles Blazor d’applications ASP
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 04/19/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: 71a9d9eee8637dda0b3cecac82ff96a0c3bfedb5
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 0a4a508beeae3d7bc665372d925989aa4e34ad52
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80320981"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661727"
 ---
 # <a name="aspnet-core-opno-locblazor-templates"></a>modèles ASP.NET Core Blazor
 
@@ -31,6 +31,13 @@ Le Blazor cadre fournit des modèles pour Blazor développer des applications po
 Pour plus Blazord’informations sur <xref:blazor/hosting-models>les modèles d’hébergement de ', voir .
 
 Pour obtenir des instructions étape Blazor par étape sur <xref:blazor/get-started>la création d’une application à partir d’un modèle, voir .
+
+Les options de gabarit sont disponibles en passant l’option `--help` à la nouvelle commande CLI [dotnet](/dotnet/core/tools/dotnet-new) :
+
+```dotnetcli
+dotnet new blazorwasm --help
+dotnet new blazorserver --help
+```
 
 ## <a name="opno-locblazor-project-structure"></a>Blazorstructure du projet
 

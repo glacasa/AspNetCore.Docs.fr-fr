@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 8fec9f585f42469665cf29069674a199e1626629
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: a80be8d145b7c58be35e2c353a448db7e234e20b
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977130"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661829"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-azure-active-directory"></a>Sécurisez Blazor une application WebAssembly ASP.NET Core avec Azure Active Directory
 
@@ -24,8 +24,6 @@ Par [Javier Calvarro Nelson](https://github.com/javiercn) et Luke [Latham](https
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-
 
 Cet article décrit comment créer une [ Blazor application hébergée Par WebAssembly](xref:blazor/hosting-models#blazor-webassembly) qui utilise [Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) pour l’authentification.
 
@@ -288,7 +286,7 @@ Pour plus d’informations, consultez <xref:security/blazor/webassembly/addition
 
 [!INCLUDE[](~/includes/blazor-security/fetchdata-component.md)]
 
-## <a name="run-the-app"></a>Exécuter l’application
+## <a name="run-the-app"></a>Exécuter l'application
 
 Exécutez l’application à partir du projet Server. Lorsque vous utilisez Visual Studio, sélectionnez le projet Server dans **Solution Explorer** et sélectionnez le bouton **Run** dans la barre d’outils ou démarrez l’application à partir du menu **Debug.**
 
