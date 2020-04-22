@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/17/2020
 uid: fundamentals/logging/index
-ms.openlocfilehash: a3c63b738d3eaa51249475b88d78572038348a7a
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: b897d0d775da62a11f01a64f39b47b6c5abebc8b
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440738"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791560"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>Journalisation dans .NET Core et ASP.NET Core
 
@@ -164,6 +164,23 @@ Si vous devez configurer un service qui dépend de `ILogger<T>`, vous pouvez tou
 [!code-csharp[](index/samples/3.x/TodoApiSample/Startup.cs?name=snippet_ConfigureServices&highlight=6-10)]
 
 Le code en surbrillance précédent est une `Func` qui s’exécute la première fois que le conteneur d’injection de dépendances doit construire une instance de `MyService`. Vous pouvez accéder à tous les services inscrits de cette manière.
+
+### <a name="create-logs-in-blazor-webassembly"></a>Créer des journaux dans Blazor WebAssembly
+
+Configurez la connexion dans les applications WebAssembly De Blazor avec la `WebAssemblyHostBuilder.Logging` propriété dans `Program.Main`:
+
+```csharp
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+
+...
+
+var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
+builder.Logging.SetMinimumLevel(LogLevel.Debug);
+builder.Logging.AddProvider(new CustomLoggingProvider());
+```
+
+La `Logging` propriété est <xref:Microsoft.Extensions.Logging.ILoggingBuilder>de type , de <xref:Microsoft.Extensions.Logging.ILoggingBuilder> sorte que `Logging`toutes les méthodes d’extension disponibles sur sont également disponibles sur .
 
 ### <a name="no-asynchronous-logger-methods"></a>Aucune méthode d’enregistreur d’événements asynchrone
 

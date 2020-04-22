@@ -5,21 +5,21 @@ description: Apprenez à créer et à utiliser des composants Razor, y compris c
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/25/2020
+ms.date: 04/21/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: bc1d07aef9cd60b89343a034168daa6754f4421b
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 4434636992cb2506ef6525996690946f97c43764
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80306512"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791489"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Créer et utiliser ASP.NET composants Core Razor
 
-Par [Luke Latham](https://github.com/guardrex) et [Daniel Roth](https://github.com/danroth27)
+Par [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27), et Tobias [Bartsch](https://www.aveo-solutions.com/)
 
 [Afficher ou télécharger le code de l’échantillon](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([comment télécharger](xref:index#how-to-download-a-sample))
 
@@ -141,6 +141,9 @@ Dans l’exemple suivant de `ParentComponent` l’application d’échantillon, 
 *Pages/ParentComponent.razor*:
 
 [!code-razor[](components/samples_snapshot/ParentComponent.razor?highlight=5-6)]
+
+> [!WARNING]
+> Ne créez pas de composants qui écrivent à leurs propres *paramètres de composant,* utilisez plutôt un champ privé. Pour plus d’informations, voir le [Don’t create components qui écrivent à leur propre section propriétés de paramètres.](#dont-create-components-that-write-to-their-own-parameter-properties)
 
 ## <a name="child-content"></a>Contenu pour enfants
 
@@ -400,7 +403,7 @@ Prenons l’exemple suivant :
 
 Le contenu `People` de la collection peut changer avec des entrées insérées, supprimées ou réédiffues. Lorsque le composant rerenders, le `<DetailsEditor>` composant `Details` peut changer pour recevoir différentes valeurs de paramètres. Cela peut entraîner un rerendering plus complexe que prévu. Dans certains cas, le rerendering peut conduire à des différences de comportement visibles, telles que la concentration d’éléments perdus.
 
-Le processus de cartographie peut `@key` être contrôlé avec l’attribut de directive. `@key`oblige l’algorithme à garantir la préservation d’éléments ou de composants en fonction de la valeur de la clé :
+Le processus de cartographie peut [`@key`](xref:mvc/views/razor#key) être contrôlé avec l’attribut de directive. `@key`oblige l’algorithme à garantir la préservation d’éléments ou de composants en fonction de la valeur de la clé :
 
 ```csharp
 @foreach (var person in People)
@@ -453,6 +456,99 @@ En général, il est logique de fournir `@key`l’un des types suivants de valeu
 * Identifiants uniques (par exemple, valeurs `int` `string`clés `Guid`primaires de type, , ou ).
 
 Assurez-vous que `@key` les valeurs utilisées pour ne pas s’opposer. Si des valeurs contradictoires sont détectées Blazor dans le même élément parent, jette une exception parce qu’elle ne peut pas cartographier de façon déterministe de vieux éléments ou composants à de nouveaux éléments ou composants. N’utilisez que des valeurs distinctes, telles que des instances d’objets ou des valeurs clés primaires.
+
+## <a name="dont-create-components-that-write-to-their-own-parameter-properties"></a>Ne créez pas de composants qui écrivent à leurs propres propriétés de paramètres
+
+Les paramètres sont dépassés dans les conditions suivantes :
+
+* Le contenu d’un composant enfant `RenderFragment`est rendu avec un .
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>est appelé dans la composante parente.
+
+Les paramètres sont réinitialisés <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> parce que le composant parent rerenders quand est appelé et de nouvelles valeurs de paramètres sont fournis à la composante enfant.
+
+Considérez `Expander` le composant suivant qui :
+
+* Rend le contenu de l’enfant.
+* Bascules montrant le contenu de l’enfant avec un paramètre de composant.
+
+```razor
+<div @onclick="@Toggle">
+    Toggle (Expanded = @Expanded)
+
+    @if (Expanded)
+    {
+        @ChildContent
+    }
+</div>
+
+@code {
+    [Parameter]
+    public bool Expanded { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private void Toggle()
+    {
+        Expanded = !Expanded;
+    }
+}
+```
+
+Le `Expander` composant est ajouté à un `StateHasChanged`composant parent qui peut appeler :
+
+```razor
+<Expander Expanded="true">
+    <h1>Hello, world!</h1>
+</Expander>
+
+<Expander Expanded="true" />
+
+<button @onclick="@(() => StateHasChanged())">
+    Call StateHasChanged
+</button>
+```
+
+Initialement, `Expander` les composants se comportent `Expanded` indépendamment lorsque leurs propriétés sont basculer. Les composants de l’enfant maintiennent leurs états comme prévu. Lorsqu’il `StateHasChanged` est appelé `Expanded` chez le parent, le paramètre du`true`premier composant enfant est réinitialisé à sa valeur initiale ( ). La `Expander` valeur du `Expanded` deuxième composant n’est pas réinitialisée parce qu’aucun contenu pour enfants n’est rendu dans le deuxième composant.
+
+Pour maintenir l’état dans le scénario `Expander` précédent, utilisez un champ *privé* dans la composante pour maintenir son état basculeux.
+
+Le `Expander` composant suivant :
+
+* Accepte la `Expanded` valeur du paramètre de composant du parent.
+* Attribue la valeur du paramètre`_expanded`de composant à un champ *privé* ( ) dans [l’événement OnInitialized](xref:blazor/lifecycle#component-initialization-methods).
+* Utilise le champ privé pour maintenir son état de basculement interne.
+
+```razor
+<div @onclick="@Toggle">
+    Toggle (Expanded = @_expanded)
+
+    @if (_expanded)
+    {
+        @ChildContent
+    }
+</div>
+
+@code {
+    [Parameter]
+    public bool Expanded { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private bool _expanded;
+
+    protected override void OnInitialized()
+    {
+        _expanded = Expanded;
+    }
+
+    private void Toggle()
+    {
+        _expanded = !_expanded;
+    }
+}
+```
 
 ## <a name="partial-class-support"></a>Soutien partiel de la classe
 

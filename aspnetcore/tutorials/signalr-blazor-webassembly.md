@@ -5,17 +5,17 @@ description: Créez une application de chat qui SignalR Blazor utilise ASP.NET C
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/16/2020
+ms.date: 04/21/2020
 no-loc:
 - Blazor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 798068c83e16070d3279c88c44af0cd96d182fe2
-ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
+ms.openlocfilehash: 03db8b48bdacec1d6877a4ea09f97c242761c42d
+ms.sourcegitcommit: f976dce28ad887bbd31720c318fd4a97cf96cc6d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81488882"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81738009"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Utilisez ASP.NET SignalR de base avec Blazor WebAssembly
 
@@ -38,7 +38,7 @@ Ce tutoriel enseigne les bases de la construction d’une application en temps r
 
 ## <a name="prerequisites"></a>Prérequis
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
@@ -66,7 +66,7 @@ dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-previ
 
 Suivez les conseils pour votre choix d’outillage :
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Créez un projet.
 
@@ -117,7 +117,7 @@ dotnet new blazorwasm --hosted --output BlazorSignalRApp
 
 ## <a name="add-the-signalr-client-library"></a>Ajouter la bibliothèque de client SignalR
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
 1. Dans **Solution Explorer**, cliquez à droite sur le projet **BlazorSignalRApp.Client** et **sélectionnez Manage NuGet Packages**.
 
@@ -168,7 +168,7 @@ Dans le cadre du projet **BlazorSignalRApp.Server,** créez un dossier `ChatHub`
 
 [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Hubs/ChatHub.cs)]
 
-## <a name="add-signalr-services-and-an-endpoint-for-the-signalr-hub"></a>Ajouter des services SignalR et un point de terminaison pour le hub SignalR
+## <a name="add-services-and-an-endpoint-for-the-signalr-hub"></a>Ajouter des services et un point de terminaison pour le hub SignalR
 
 1. Dans le cadre du projet **BlazorSignalRApp.Server,** ouvrez le *fichier Startup.cs.*
 
@@ -178,15 +178,13 @@ Dans le cadre du projet **BlazorSignalRApp.Server,** créez un dossier `ChatHub`
    using BlazorSignalRApp.Server.Hubs;
    ```
 
-1. Ajoutez les services `Startup.ConfigureServices`SignalR à :
+1. Ajoutez les services SignalR et `Startup.ConfigureServices`Response Compression Middleware à :
 
-   ```csharp
-   services.AddSignalR();
-   ```
+   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
 
-1. Entre `Startup.Configure` les points de terminaison pour l’itinéraire du contrôleur par défaut et le repli côté client, ajoutez un point de terminaison pour le hub :
+1. Entre `Startup.Configure` les points de terminaison pour les contrôleurs et le repli côté client, ajoutez un point de terminaison pour le hub :
 
-   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet&highlight=4)]
+   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_UseEndpoints&highlight=4)]
 
 ## <a name="add-razor-component-code-for-chat"></a>Ajouter le code de composant Razor pour le chat
 
@@ -196,13 +194,13 @@ Dans le cadre du projet **BlazorSignalRApp.Server,** créez un dossier `ChatHub`
 
 [!code-razor[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Client/Pages/Index.razor)]
 
-## <a name="run-the-app"></a>Exécuter l'application
+## <a name="run-the-app"></a>Exécuter l’application
 
 1. Suivez les conseils pour votre outillage :
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Dans **Solution Explorer**, sélectionnez le projet **BlazorSignalRApp.Server.** Appuyez sur **Ctrl-F5** pour exécuter l’application sans déboguer.
+1. Dans **Solution Explorer**, sélectionnez le projet **BlazorSignalRApp.Server.** Appuyez sur <kbd>F5</kbd> pour exécuter l’application avec débogage ou <kbd>Ctrl</kbd>+<kbd>F5</kbd> pour exécuter l’application sans débogage.
 
 1. Copiez l’URL à partir de la barre d’adresse, ouvrez un autre onglet ou instance du navigateur, puis collez l’URL dans la barre d’adresse.
 
@@ -214,7 +212,13 @@ Dans le cadre du projet **BlazorSignalRApp.Server,** créez un dossier `ChatHub`
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-1. Sélectionnez **Debug** > **Run Sans débogage** à partir de la barre d’outils.
+1. Lorsque VS Code propose de créer un profil de lancement pour l’application Server (*.vscode/launch.json*), l’entrée `program` apparaît similaire à ce qui suit pour indiquer l’assemblage de l’application (`{APPLICATION NAME}.Server.dll`
+
+   ```json
+   "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/{APPLICATION NAME}.Server.dll"
+   ```
+
+1. Appuyez sur <kbd>F5</kbd> pour exécuter l’application avec débogage ou <kbd>Ctrl</kbd>+<kbd>F5</kbd> pour exécuter l’application sans débogage.
 
 1. Copiez l’URL à partir de la barre d’adresse, ouvrez un autre onglet ou instance du navigateur, puis collez l’URL dans la barre d’adresse.
 
@@ -226,7 +230,7 @@ Dans le cadre du projet **BlazorSignalRApp.Server,** créez un dossier `ChatHub`
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-1. Dans la barre latérale **Solution,** sélectionnez le projet **BlazorSignalRApp.Server.** Dans le menu, sélectionnez **Run** > **Start Without Debugging**.
+1. Dans la barre latérale **Solution,** sélectionnez le projet **BlazorSignalRApp.Server.** +<kbd>⌘</kbd>+<kbd>↩</kbd> <kbd>⌥</kbd><kbd>↩</kbd> <kbd>⌘</kbd>+Appuyez sur ↩ pour exécuter l’application avec débogage ou ↩ pour exécuter l’application sans débogage.
 
 1. Copiez l’URL à partir de la barre d’adresse, ouvrez un autre onglet ou instance du navigateur, puis collez l’URL dans la barre d’adresse.
 
