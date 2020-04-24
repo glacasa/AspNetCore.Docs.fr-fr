@@ -1,7 +1,7 @@
-<span data-ttu-id="7bf53-101">Le `RedirectToLogin` composant (*Shared/RedirectToLogin. Razor*) :</span><span class="sxs-lookup"><span data-stu-id="7bf53-101">The `RedirectToLogin` component (*Shared/RedirectToLogin.razor*):</span></span>
+<span data-ttu-id="41228-101">Le `RedirectToLogin` composant (*Shared/RedirectToLogin. Razor*) :</span><span class="sxs-lookup"><span data-stu-id="41228-101">The `RedirectToLogin` component (*Shared/RedirectToLogin.razor*):</span></span>
 
-* <span data-ttu-id="7bf53-102">Gère la redirection des utilisateurs non autorisés vers la page de connexion.</span><span class="sxs-lookup"><span data-stu-id="7bf53-102">Manages redirecting unauthorized users to the login page.</span></span>
-* <span data-ttu-id="7bf53-103">Conserve l’URL actuelle à laquelle l’utilisateur tente d’accéder afin qu’il puisse être renvoyé à cette page si l’authentification réussit.</span><span class="sxs-lookup"><span data-stu-id="7bf53-103">Preserves the current URL that the user is attempting to access so that they can be returned to that page if authentication is successful.</span></span>
+* <span data-ttu-id="41228-102">Gère la redirection des utilisateurs non autorisés vers la page de connexion.</span><span class="sxs-lookup"><span data-stu-id="41228-102">Manages redirecting unauthorized users to the login page.</span></span>
+* <span data-ttu-id="41228-103">Conserve l’URL actuelle à laquelle l’utilisateur tente d’accéder afin qu’il puisse être renvoyé à cette page si l’authentification réussit.</span><span class="sxs-lookup"><span data-stu-id="41228-103">Preserves the current URL that the user is attempting to access so that they can be returned to that page if authentication is successful.</span></span>
 
 ```razor
 @inject NavigationManager Navigation
@@ -9,8 +9,8 @@
 @code {
     protected override void OnInitialized()
     {
-        Navigation.NavigateTo(
-            $"authentication/login?returnUrl={Uri.EscapeDataString(Navigation.Uri)}");
+        Navigation.NavigateTo($"authentication/login?returnUrl=" +
+            Uri.EscapeDataString(Navigation.Uri));
     }
 }
 ```
