@@ -1,8 +1,8 @@
-La page générée par le composant `Authentication` (*pages/Authentication. Razor*) définit les itinéraires requis pour la gestion des différentes étapes d’authentification.
+La page produite par le `Authentication` composant (*pages/Authentication. Razor*) définit les itinéraires requis pour la gestion des différentes étapes d’authentification.
 
-Le composant `RemoteAuthenticatorView` :
+Le `RemoteAuthenticatorView` composant :
 
-* Est fourni par le package de `Microsoft.AspNetCore.Components.WebAssembly.Authentication`.
+* Est fourni par le package [Microsoft. AspNetCore. Components. Webassembly. Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) .
 * Gère l’exécution des actions appropriées à chaque étape de l’authentification.
 
 ```razor
