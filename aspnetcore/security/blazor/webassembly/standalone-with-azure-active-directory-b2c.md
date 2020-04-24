@@ -1,79 +1,82 @@
 ---
-title: Sécurisez une Blazor application autonome WebAssembly ASP.NET Core avec Azure Active Directory B2C
+title: Sécuriser une Blazor application autonome webassembly ASP.NET Core avec Azure Active Directory B2C
 author: guardrex
 description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/09/2020
+ms.date: 04/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
-ms.openlocfilehash: 96e39a4c975a65fd11776f774fb1799acab525b9
-ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
+ms.openlocfilehash: 7d1031d3eac0e1d6790ca946809038127eb59a73
+ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/11/2020
-ms.locfileid: "81123451"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82111160"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>Sécurisez une Blazor application autonome WebAssembly ASP.NET Core avec Azure Active Directory B2C
+# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>Sécuriser une Blazor application autonome webassembly ASP.NET Core avec Azure Active Directory B2C
 
-Par [Javier Calvarro Nelson](https://github.com/javiercn) et Luke [Latham](https://github.com/guardrex)
+Par [Javier Calvarro Nelson](https://github.com/javiercn) et [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
-Pour créer Blazor une application autonome WebAssembly qui utilise [Azure Active Directory (AAD) B2C](/azure/active-directory-b2c/overview) pour l’authentification :
+> [!NOTE]
+> Les instructions de cet article s’appliquent à ASP.NET Core 3,2 Preview 4. Cette rubrique sera mise à jour pour couvrir l’aperçu 5 le vendredi 24 avril.
 
-1. Suivez les conseils dans les sujets suivants pour créer un locataire et enregistrer une application web dans le portail Azure :
+Pour créer une Blazor application webassembly autonome qui utilise [Azure Active Directory (AAD) B2C](/azure/active-directory-b2c/overview) pour l’authentification :
 
-   * Créez un enregistrement de locataire &ndash; [AAD B2C](/azure/active-directory-b2c/tutorial-create-tenant) des informations suivantes :
+1. Suivez les instructions des rubriques suivantes pour créer un locataire et inscrire une application Web dans le portail Azure :
 
-     1\. AAD B2C instance (par exemple, , `https://contoso.b2clogin.com/`qui comprend la barre oblique de fuite)<br>
-     2\. Domaine AAD B2C Tenant `contoso.onmicrosoft.com`(par exemple, )
+   * [Créez un AAD B2C](/azure/active-directory-b2c/tutorial-create-tenant) &ndash; enregistrement de locataire avec les informations suivantes :
 
-   * [Enregistrez une application](/azure/active-directory-b2c/tutorial-register-applications) &ndash; Web Faites les sélections suivantes lors de l’inscription de l’application :
+     1 \. AAD B2C instance (par exemple, `https://contoso.b2clogin.com/`, qui comprend la barre oblique finale)<br>
+     2 \. AAD B2C domaine de locataire (par exemple `contoso.onmicrosoft.com`,)
 
-     1\. Définissez **l’application Web / API Web** à **Oui**.<br>
-     2\. Définir **Permettre le flux implicite** à **Oui**.<br>
-     3\. Ajouter une URL `https://localhost:5001/authentication/login-callback`de **réponse** de .
+   * [Inscrire une application](/azure/active-directory-b2c/tutorial-register-applications) &ndash; Web effectuez les sélections suivantes lors de l’inscription de l’application :
 
-     Enregistrez l’ID d’application (ID client) (par exemple, `11111111-1111-1111-1111-111111111111`).
+     1 \. Définissez **application Web/API Web** sur **Oui**.<br>
+     2 \. Définissez **autoriser le Flow implicite** sur **Oui**.<br>
+     3 \. Ajoutez une **URL** de réponse `https://localhost:5001/authentication/login-callback`de.
 
-   * [Créer des flux d’utilisateurs](/azure/active-directory-b2c/tutorial-create-user-flows) &ndash; Créer un flux d’identifiants et d’inscription.
+     Enregistrez l’ID d’application (ID client) (par exemple `11111111-1111-1111-1111-111111111111`,).
 
-     Au minimum, sélectionnez **l’attribut** > utilisateur**de l’utilisateur Display Name** des revendications d’application pour remplir le `context.User.Identity.Name` `LoginDisplay` composant *(Shared/LoginDisplay.razor*).
+   * [Créer des flux](/azure/active-directory-b2c/tutorial-create-user-flows) &ndash; d’utilisateurs créez un flux d’utilisateur d’inscription et de connexion.
 
-     Enregistrez le nom de flux d’utilisateur d’inscription et `B2C_1_signupsignin`d’inscription créé pour l’application (par exemple, ).
+     Au minimum, sélectionnez l’attribut utilisateur des **revendications** > d’application**nom complet** pour remplir `context.User.Identity.Name` le dans `LoginDisplay` le composant (*Shared/LoginDisplay. Razor*).
 
-1. Remplacez les titulaires de place dans la commande suivante par les informations enregistrées plus tôt et exécutez la commande dans une coque de commande :
+     Notez le nom du workflow d’inscription et de connexion de l’utilisateur créé pour l’application (par exemple `B2C_1_signupsignin`,).
+
+1. Remplacez les espaces réservés dans la commande suivante par les informations enregistrées précédemment et exécutez la commande dans une interface de commande :
 
    ```dotnetcli
    dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" --client-id "{CLIENT ID}" --domain "{DOMAIN}" -ssp "{SIGN UP OR SIGN IN POLICY}"
    ```
 
-   Pour spécifier l’emplacement de sortie, qui crée un dossier de projet s’il n’existe pas, inclure l’option de sortie dans la commande avec un chemin (par exemple, `-o BlazorSample`). Le nom du dossier fait également partie du nom du projet.
+   Pour spécifier l’emplacement de sortie, qui crée un dossier de projet s’il n’existe pas, incluez l’option de sortie dans la commande avec un `-o BlazorSample`chemin d’accès (par exemple,). Le nom du dossier devient également une partie du nom du projet.
 
-## <a name="authentication-package"></a>Forfait d’authentification
+## <a name="authentication-package"></a>Package d’authentification
 
-Lorsqu’une application est créée pour utiliser`IndividualB2C`un compte B2C individuel ( ), l’application reçoit automatiquement une référence de paquet pour la [bibliothèque Microsoft Authentication](/azure/active-directory/develop/msal-overview) ().`Microsoft.Authentication.WebAssembly.Msal` Le paquet fournit un ensemble de primitifs qui aident l’application authentifier les utilisateurs et obtenir des jetons pour appeler des API protégées.
+Quand une application est créée pour utiliser un compte B2C individuel (`IndividualB2C`), l’application reçoit automatiquement une référence de package pour la [bibliothèque d’authentification Microsoft](/azure/active-directory/develop/msal-overview) (`Microsoft.Authentication.WebAssembly.Msal`). Le package fournit un ensemble de primitives qui aident l’application à authentifier les utilisateurs et à obtenir des jetons pour appeler des API protégées.
 
-Si vous ajoutez de l’authentification à une application, ajoutez manuellement le paquet au fichier de projet de l’application :
+Si vous ajoutez l’authentification à une application, ajoutez manuellement le package au fichier projet de l’application :
 
 ```xml
 <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" 
     Version="{VERSION}" />
 ```
 
-Remplacez `{VERSION}` dans la référence du `Microsoft.AspNetCore.Blazor.Templates` paquet précédent <xref:blazor/get-started> avec la version du paquet indiquée dans l’article.
+Remplacez `{VERSION}` dans la référence de package précédente par la version du `Microsoft.AspNetCore.Blazor.Templates` package présentée dans l' <xref:blazor/get-started> article.
 
-Le `Microsoft.Authentication.WebAssembly.Msal` paquet ajoute transitivement le `Microsoft.AspNetCore.Components.WebAssembly.Authentication` paquet à l’application.
+Le `Microsoft.Authentication.WebAssembly.Msal` package ajoute transitivement le `Microsoft.AspNetCore.Components.WebAssembly.Authentication` package à l’application.
 
-## <a name="authentication-service-support"></a>Support de service d’authentification
+## <a name="authentication-service-support"></a>Prise en charge du service d’authentification
 
-La prise en charge de l’authentification des utilisateurs est enregistrée dans le conteneur de service avec la `AddMsalAuthentication` méthode d’extension fournie par le `Microsoft.Authentication.WebAssembly.Msal` paquet. Cette méthode met en place tous les services requis pour que l’application interagit avec le fournisseur d’identité (IP).
+La prise en charge de l’authentification des utilisateurs est inscrite `AddMsalAuthentication` dans le conteneur de service `Microsoft.Authentication.WebAssembly.Msal` avec la méthode d’extension fournie par le package. Cette méthode configure tous les services requis pour que l’application interagisse avec le fournisseur d’identité (IP).
 
 *Program.cs*:
 
@@ -88,11 +91,11 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-La `AddMsalAuthentication` méthode accepte un rappel pour configurer les paramètres nécessaires pour authentifier une application. Les valeurs requises pour configurer l’application peuvent être obtenues à partir de la configuration Azure Portal AAD lorsque vous enregistrez l’application.
+La `AddMsalAuthentication` méthode accepte un rappel pour configurer les paramètres requis pour authentifier une application. Les valeurs requises pour la configuration de l’application peuvent être obtenues à partir de la configuration AAD du portail Azure lorsque vous inscrivez l’application.
 
-## <a name="access-token-scopes"></a>Portée symbolique d’accès
+## <a name="access-token-scopes"></a>Étendues de jeton d’accès
 
-Le Blazor modèle WebAssembly ne configure pas automatiquement l’application pour demander un jeton d’accès pour une API sécurisée. Pour fournir un jeton dans le cadre du flux d’inscription, ajoutez la `MsalProviderOptions`portée aux portées symboliques d’accès par défaut des :
+Le Blazor modèle webassembly ne configure pas automatiquement l’application pour demander un jeton d’accès pour une API sécurisée. Pour approvisionner un jeton dans le cadre du processus de connexion, ajoutez l’étendue aux étendues de jeton d’accès par défaut `MsalProviderOptions`du :
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -103,12 +106,12 @@ builder.Services.AddMsalAuthentication(options =>
 ```
 
 > [!NOTE]
-> Si le portail Azure fournit une portée URI et **que l’application jette une exception non gérée** lorsqu’elle reçoit une réponse non autorisée *401* de l’API, essayez d’utiliser une portée URI qui n’inclut pas le système et l’hôte. Par exemple, le portail Azure peut fournir l’un des formats URI de portée suivants :
+> Si le Portail Azure fournit un URI d’étendue et **que l’application lève une exception non gérée** lorsqu’elle reçoit une réponse *non autorisée 401* de l’API, essayez d’utiliser un URI d’étendue qui n’inclut pas le schéma et l’hôte. Par exemple, le Portail Azure peut fournir l’un des formats d’URI d’étendue suivants :
 >
 > * `https://{ORGANIZATION}.onmicrosoft.com/{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
 > * `api://{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
 >
-> Fournir la portée URI sans le régime et l’hôte:
+> Fournissez l’URI d’étendue sans le schéma et l’hôte :
 >
 > ```csharp
 > options.ProviderOptions.DefaultAccessTokenScopes.Add(
@@ -117,7 +120,11 @@ builder.Services.AddMsalAuthentication(options =>
 
 Pour plus d’informations, consultez <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>.
 
-## <a name="imports-file"></a>Fichier d’importations
+<!--
+    For more information, see <xref:security/blazor/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests>.
+-->
+
+## <a name="imports-file"></a>Fichier d’importation
 
 [!INCLUDE[](~/includes/blazor-security/imports-file-standalone.md)]
 
@@ -125,7 +132,7 @@ Pour plus d’informations, consultez <xref:security/blazor/webassembly/addition
 
 [!INCLUDE[](~/includes/blazor-security/index-page-msal.md)]
 
-## <a name="app-component"></a>Composant de l’application
+## <a name="app-component"></a>Composant d’application
 
 [!INCLUDE[](~/includes/blazor-security/app-component.md)]
 
@@ -147,7 +154,7 @@ Pour plus d’informations, consultez <xref:security/blazor/webassembly/addition
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* [Demander des jetons d’accès supplémentaires](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
+* <xref:security/blazor/webassembly/additional-scenarios>
 * <xref:security/authentication/azure-ad-b2c>
 * [Didacticiel : créer un locataire Azure Active Directory B2C](/azure/active-directory-b2c/tutorial-create-tenant)
 * [Documentation sur la plateforme d’identités Microsoft](/azure/active-directory/develop/)

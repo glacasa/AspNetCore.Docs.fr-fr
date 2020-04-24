@@ -1,23 +1,23 @@
 ---
-title: ASP.NET Principaux Blazor scénarios de sécurité supplémentaires WebAssembly
+title: Scénarios Blazor de sécurité supplémentaires pour l’ASP.net Core webassembly
 author: guardrex
 description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/19/2020
+ms.date: 04/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: 314a7b54ab87295b8ca814f5e369942ae911407e
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
+ms.openlocfilehash: 2dbb2bbd07c427c594a12b8037f35cfff2228191
+ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661597"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82111173"
 ---
-# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly scénarios de sécurité supplémentaires
+# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>Scénarios de sécurité supplémentaires ASP.NET Core éblouissant webassembly
 
 Par [Javier Calvarro Nelson](https://github.com/javiercn)
 
@@ -25,11 +25,14 @@ Par [Javier Calvarro Nelson](https://github.com/javiercn)
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
+> [!NOTE]
+> Les instructions de cet article s’appliquent à ASP.NET Core 3,2 Preview 4. Cette rubrique sera mise à jour pour couvrir l’aperçu 5 le vendredi 24 avril.
+
 ## <a name="request-additional-access-tokens"></a>Demander des jetons d’accès supplémentaires
 
-La plupart des applications ne nécessitent qu’un jeton d’accès pour interagir avec les ressources protégées qu’elles utilisent. Dans certains scénarios, une application peut nécessiter plus d’un jeton afin d’interagir avec deux ressources ou plus.
+La plupart des applications ont uniquement besoin d’un jeton d’accès pour interagir avec les ressources protégées qu’elles utilisent. Dans certains scénarios, une application peut nécessiter plusieurs jetons pour interagir avec au moins deux ressources.
 
-Dans l’exemple suivant, d’autres étendues d’API Microsoft Graph (AAD) d’Azure Active Directory (AAD) sont requises par une application pour lire les données des utilisateurs et envoyer du courrier. Après avoir ajouté les autorisations d’API Microsoft Graph dans le portail Azure`Program.Main`AAD, les portées supplémentaires sont configurées dans l’application Client ( , *Program.cs*) :
+Dans l’exemple suivant, des Azure Active Directory supplémentaires (AAD) Microsoft Graph des étendues d’API sont requises par une application pour lire les données utilisateur et envoyer des messages électroniques. Après avoir ajouté les autorisations Microsoft Graph API dans le portail Azure AAD, les étendues supplémentaires sont configurées dans l’application`Program.Main`cliente (, *Program.cs*) :
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -43,7 +46,7 @@ builder.Services.AddMsalAuthentication(options =>
 }
 ```
 
-La `IAccessTokenProvider.RequestToken` méthode fournit une surcharge qui permet à une application de fournir un jeton avec un ensemble donné de portées, comme on le voit dans l’exemple suivant:
+La `IAccessTokenProvider.RequestToken` méthode fournit une surcharge qui permet à une application de configurer un jeton avec un ensemble donné d’étendues, comme illustré dans l’exemple suivant :
 
 ```csharp
 var tokenResult = await AuthenticationService.RequestAccessToken(
@@ -59,41 +62,143 @@ if (tokenResult.TryGetToken(out var token))
 }
 ```
 
-`TryGetToken`Retourne:
+`TryGetToken`Cette
 
-* `true`avec `token` le pour une utilisation.
-* `false`si le jeton n’est pas récupéré.
+* `true`avec le `token` à utiliser.
+* `false`Si le jeton n’est pas récupéré.
 
-## <a name="handle-token-request-errors"></a>Gérer les erreurs de demande de jetons
+## <a name="attach-tokens-to-outgoing-requests"></a>Attacher des jetons aux demandes sortantes
 
-Lorsqu’une application à page unique (SPA) authentifie un utilisateur utilisant Open ID Connect (OIDC), l’état d’authentification est maintenu localement au sein de la SPA et dans le fournisseur d’identité (IP) sous la forme d’un cookie de session défini par l’utilisateur fournissant ses informations d’identification.
+Le `AuthorizationMessageHandler` service peut être utilisé avec `HttpClient` pour joindre des jetons d’accès aux demandes sortantes. Les jetons sont acquis à l’aide `IAccessTokenProvider` du service existant. Si un jeton ne peut pas être acquis `AccessTokenNotAvailableException` , une exception est levée. `AccessTokenNotAvailableException`dispose d' `Redirect` une méthode qui peut être utilisée pour accéder au fournisseur d’identité de l’utilisateur afin d’acquérir un nouveau jeton. `AuthorizationMessageHandler` Peut être configuré avec les URL, les portées et l’URL de retour autorisées à `ConfigureHandler` l’aide de la méthode.
 
-Les jetons que l’IP émet pour l’utilisateur sont généralement valables pour de courtes périodes de temps, environ une heure normalement, de sorte que l’application client doit régulièrement aller chercher de nouveaux jetons. Dans le cas contraire, l’utilisateur serait déconnecté après l’expiration des jetons accordés. Dans la plupart des cas, les clients d’OIDC sont en mesure de fournir de nouveaux jetons sans obliger l’utilisateur à s’authentifier à nouveau grâce à l’état d’authentification ou à la « session » qui est conservé dans la propriété intellectuelle.
+Dans l’exemple suivant, `AuthorizationMessageHandler` configure un `HttpClient` en `Program.Main` (*Program.cs*) :
 
-Il y a certains cas dans lesquels le client ne peut pas obtenir un jeton sans interaction utilisateur, par exemple, quand pour une raison quelconque l’utilisateur se connecte explicitement à partir de l’IP. Ce scénario se produit `https://login.microsoftonline.com` si un utilisateur visite et se connecte. Dans ces scénarios, l’application ne sait pas immédiatement que l’utilisateur s’est déconnecté. Tout signe que le client détient peut ne plus être valide. En outre, le client n’est pas en mesure de fournir un nouveau jeton sans interaction utilisateur après l’expiration du jeton actuel.
+```csharp
+builder.Services.AddSingleton(sp =>
+{
+    return new HttpClient(sp.GetRequiredService<AuthorizationMessageHandler>()
+        .ConfigureHandler(
+            new [] { "https://www.example.com/base" },
+            scopes: new[] { "example.read", "example.write" }))
+        {
+            BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+        };
+});
+```
 
-Ces scénarios ne sont pas spécifiques à l’authentification basée sur les jetons. Ils font partie de la nature des APE. Un SPA utilisant des cookies ne parvient pas non plus à appeler un serveur API si le cookie d’authentification est supprimé.
+Pour plus de commodité `BaseAddressAuthorizationMessageHandler` , une est incluse et préconfigurée avec l’adresse de base de l’application en tant qu’URL autorisée. Les modèles de webassembly éblouissants compatibles avec l’authentification utilisent désormais [IHttpClientFactory](https://docs.microsoft.com/aspnet/core/fundamentals/http-requests) pour `HttpClient` configurer un `BaseAddressAuthorizationMessageHandler`avec les éléments suivants :
 
-Lorsqu’une application effectue des appels API vers des ressources protégées, vous devez être conscient des éléments suivants :
+```csharp
+builder.Services.AddHttpClient("BlazorWithIdentityApp1.ServerAPI", 
+    client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+        .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
-* Pour fournir un nouveau jeton d’accès pour appeler l’API, l’utilisateur pourrait être tenu de s’authentifier à nouveau.
-* Même si le client a un jeton qui semble être valide, l’appel au serveur peut échouer parce que le jeton a été révoqué par l’utilisateur.
+builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("BlazorWithIdentityApp1.ServerAPI"));
+```
 
-Lorsque l’application demande un jeton, il y a deux résultats possibles :
+Dans le cas où le client `CreateClient` est créé avec dans l’exemple `HttpClient` précédent, est fourni les instances qui incluent des jetons d’accès lors de l’exécution de demandes au projet serveur.
 
-* La demande réussit, et l’application a un jeton valide.
-* La demande échoue, et l’application doit authentifier à nouveau l’utilisateur pour obtenir un nouveau jeton.
+Le configuré `HttpClient` est ensuite utilisé pour effectuer des demandes autorisées à l' `try-catch` aide d’un modèle simple. Le composant `FetchData` suivant demande des données de prévisions météorologiques :
 
-Lorsqu’une demande symbolique échoue, vous devez décider si vous souhaitez enregistrer un état actuel avant d’effectuer une redirection. Plusieurs approches existent avec des niveaux croissants de complexité :
+```csharp
+protected override async Task OnInitializedAsync()
+{
+    try
+    {
+        forecasts = 
+            await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+    }
+    catch (AccessTokenNotAvailableException exception)
+    {
+        exception.Redirect();
+    }
+}
+```
 
-* Stockez l’état actuel de la page dans le stockage de session. Pendant `OnInitializeAsync`, vérifiez si l’état peut être restauré avant de continuer.
-* Ajoutez un paramètre de chaîne de requête et utilisez-le comme moyen de signaler à l’application qu’elle doit réhydrater l’état précédemment enregistré.
-* Ajoutez un paramètre de chaîne de requête avec un identifiant unique pour stocker des données dans le stockage de session sans risquer de collisions avec d’autres éléments.
+Vous pouvez également définir un client typé qui gère tous les problèmes d’acquisition de jeton et HTTP au sein d’une même classe :
+
+*WeatherClient.cs*:
+
+```csharp
+public class WeatherClient
+{
+    private readonly HttpClient httpClient;
+ 
+    public WeatherClient(HttpClient httpClient)
+    {
+        this.httpClient = httpClient;
+    }
+ 
+    public async Task<IEnumerable<WeatherForecast>> GetWeatherForeacasts()
+    {
+        IEnumerable<WeatherForecast> forecasts = new WeatherForecast[0];
+
+        try
+        {
+            forecasts = await httpClient.GetFromJsonAsync<WeatherForecast[]>(
+                "WeatherForecast");
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+
+        return forecasts;
+    }
+}
+```
+
+*Program.cs*:
+
+```csharp
+builder.Services.AddHttpClient<WeatherClient>(
+    client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+    .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+```
+
+*FetchData. Razor*:
+
+```razor
+@inject WeatherClient WeatherClient
+
+...
+
+protected override async Task OnInitializedAsync()
+{
+    forecasts = await WeatherClient.GetWeatherForeacasts();
+}
+```
+
+## <a name="handle-token-request-errors"></a>Gérer les erreurs de demande de jeton
+
+Lorsqu’une application à page unique (SPA) authentifie un utilisateur à l’aide d’Open ID Connect (OIDC), l’état d’authentification est conservé localement au sein du SPA et dans le fournisseur d’identité (IP) sous la forme d’un cookie de session défini à la suite de l’utilisateur qui fournit ses informations d’identification.
+
+Les jetons que l’adresse IP émet pour l’utilisateur sont généralement valides pendant de courtes périodes, environ une heure normalement, de sorte que l’application cliente doit régulièrement extraire les nouveaux jetons. Dans le cas contraire, l’utilisateur est déconnecté après l’expiration des jetons accordés. Dans la plupart des cas, les clients OIDC sont en mesure de configurer de nouveaux jetons sans que l’utilisateur soit obligé de s’authentifier à nouveau grâce à l’état d’authentification ou à la « session » qui est conservée au sein de l’adresse IP.
+
+Dans certains cas, le client ne peut pas obtenir un jeton sans intervention de l’utilisateur, par exemple, lorsque, pour une raison quelconque, l’utilisateur se déconnecte explicitement de l’adresse IP. Ce scénario se produit si un utilisateur `https://login.microsoftonline.com` visite et se déconnecte. Dans ces scénarios, l’application ne sait pas immédiatement que l’utilisateur s’est déconnecté. Tout jeton que le client contient peut ne plus être valide. En outre, le client n’est pas en mesure d’approvisionner un nouveau jeton sans interaction de l’utilisateur après l’expiration du jeton actuel.
+
+Ces scénarios ne sont pas spécifiques à l’authentification basée sur les jetons. Elles font partie de la nature des SPAs. Un SPA utilisant des cookies ne peut pas non plus appeler une API serveur si le cookie d’authentification est supprimé.
+
+Quand une application effectue des appels d’API vers des ressources protégées, vous devez tenir compte des éléments suivants :
+
+* Pour approvisionner un nouveau jeton d’accès pour appeler l’API, l’utilisateur peut être amené à s’authentifier à nouveau.
+* Même si le client possède un jeton qui semble être valide, l’appel au serveur peut échouer parce que le jeton a été révoqué par l’utilisateur.
+
+Lorsque l’application demande un jeton, deux résultats sont possibles :
+
+* La demande a échoué et l’application a un jeton valide.
+* La demande échoue et l’application doit authentifier à nouveau l’utilisateur pour obtenir un nouveau jeton.
+
+En cas d’échec d’une demande de jeton, vous devez décider si vous souhaitez enregistrer un état actuel avant d’effectuer une redirection. Il existe plusieurs approches avec des niveaux de complexité de plus en plus complexes :
+
+* Stocke l’état actuel de la page dans le stockage de session. Pendant `OnInitializeAsync`, vérifiez si l’État peut être restauré avant de continuer.
+* Ajoutez un paramètre de chaîne de requête et utilisez-le comme méthode pour signaler à l’application qu’elle doit réalimenter l’état enregistré précédemment.
+* Ajoutez un paramètre de chaîne de requête avec un identificateur unique pour stocker les données dans le stockage de session sans risquer des collisions avec d’autres éléments.
 
 L’exemple suivant montre comment :
 
-* Préserver l’état avant de rediriger vers la page de connexion.
-* Récupérez l’état précédent par la suite authentification à l’aide du paramètre de chaîne de requête.
+* Conserver l’état avant la redirection vers la page de connexion.
+* Récupérez l’état précédent après l’authentification à l’aide du paramètre de chaîne de requête.
 
 ```razor
 <EditForm Model="User" @onsubmit="OnSaveAsync">
@@ -156,9 +261,9 @@ L’exemple suivant montre comment :
 
 ## <a name="save-app-state-before-an-authentication-operation"></a>Enregistrer l’état de l’application avant une opération d’authentification
 
-Au cours d’une opération d’authentification, il y a des cas où vous souhaitez enregistrer l’état de l’application avant que le navigateur ne soit redirigé vers l’IP. Cela peut être le cas lorsque vous utilisez quelque chose comme un conteneur d’état et que vous voulez restaurer l’état après l’authentification réussit. Vous pouvez utiliser un objet d’état d’authentification personnalisé pour préserver l’état spécifique à l’application ou une référence à celui-ci et restaurer cet état une fois que l’opération d’authentification terminée avec succès.
+Au cours d’une opération d’authentification, il existe des cas où vous souhaitez enregistrer l’état de l’application avant que le navigateur soit redirigé vers l’adresse IP. Cela peut être le cas lorsque vous utilisez un conteneur d’État et que vous souhaitez restaurer l’État une fois l’authentification réussie. Vous pouvez utiliser un objet d’état d’authentification personnalisé pour conserver l’état spécifique à l’application ou une référence à celui-ci, et restaurer cet État une fois l’opération d’authentification terminée.
 
-`Authentication`composant (*Pages/Authentication.razor*):
+`Authentication`composant (*pages/Authentication. Razor*) :
 
 ```razor
 @page "/authentication/{action}"
@@ -202,27 +307,27 @@ Au cours d’une opération d’authentification, il y a des cas où vous souhai
 }
 ```
 
-## <a name="customize-app-routes"></a>Personnaliser les itinéraires d’applications
+## <a name="customize-app-routes"></a>Personnaliser les itinéraires de l’application
 
-Par défaut, `Microsoft.AspNetCore.Components.WebAssembly.Authentication` la bibliothèque utilise les itinéraires indiqués dans le tableau suivant pour représenter différents états d’authentification.
+Par défaut, la `Microsoft.AspNetCore.Components.WebAssembly.Authentication` bibliothèque utilise les itinéraires indiqués dans le tableau suivant pour représenter des États d’authentification différents.
 
 | Routage                            | Objectif |
 | -------------------------------- | ------- |
 | `authentication/login`           | Déclenche une opération de connexion. |
 | `authentication/login-callback`  | Gère le résultat de toute opération de connexion. |
 | `authentication/login-failed`    | Affiche des messages d’erreur lorsque l’opération de connexion échoue pour une raison quelconque. |
-| `authentication/logout`          | Déclenche une opération de signalisation. |
-| `authentication/logout-callback` | Gère le résultat d’une opération d’affichage. |
-| `authentication/logout-failed`   | Affiche des messages d’erreur lorsque l’opération de signalisation échoue pour une raison quelconque. |
-| `authentication/logged-out`      | Indique que l’utilisateur a réussi logout. |
-| `authentication/profile`         | Déclenche une opération pour modifier le profil utilisateur. |
-| `authentication/register`        | Déclenche une opération pour enregistrer un nouvel utilisateur. |
+| `authentication/logout`          | Déclenche une opération de déconnexion. |
+| `authentication/logout-callback` | Gère le résultat d’une opération de déconnexion. |
+| `authentication/logout-failed`   | Affiche des messages d’erreur lorsque l’opération de déconnexion échoue pour une raison quelconque. |
+| `authentication/logged-out`      | Indique que l’utilisateur a réussi à se déconnecter. |
+| `authentication/profile`         | Déclenche une opération de modification du profil utilisateur. |
+| `authentication/register`        | Déclenche une opération pour inscrire un nouvel utilisateur. |
 
-Les itinéraires indiqués dans le `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths`tableau précédent sont configurables via . Lorsque vous définissez des options pour fournir des itinéraires personnalisés, confirmez que l’application dispose d’un itinéraire qui gère chaque chemin.
+Les itinéraires indiqués dans le tableau précédent sont configurables via `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths`. Quand vous définissez des options pour fournir des itinéraires personnalisés, vérifiez que l’application a un itinéraire qui gère chaque chemin d’accès.
 
-Dans l’exemple suivant, tous les `/security`chemins sont préfixés avec .
+Dans l’exemple suivant, tous les chemins d’accès ont pour `/security`préfixe.
 
-`Authentication`composant (*Pages/Authentication.razor*):
+`Authentication`composant (*pages/Authentication. Razor*) :
 
 ```razor
 @page "/security/{action}"
@@ -236,7 +341,7 @@ Dans l’exemple suivant, tous les `/security`chemins sont préfixés avec .
 }
 ```
 
-`Program.Main`(*Program.cs*) :
+`Program.Main`(*Program.cs*) :
 
 ```csharp
 builder.Services.AddApiAuthorization(options => { 
@@ -252,7 +357,7 @@ builder.Services.AddApiAuthorization(options => {
 });
 ```
 
-Si l’exigence exige des chemins complètement différents, définissez les itinéraires comme décrit précédemment et rendre le `RemoteAuthenticatorView` paramètre d’action explicite :
+Si la spécification exige des chemins d’accès complètement différents, définissez les itinéraires comme décrit précédemment et `RemoteAuthenticatorView` Affichez le avec un paramètre d’action explicite :
 
 ```razor
 @page "/register"
@@ -260,13 +365,13 @@ Si l’exigence exige des chemins complètement différents, définissez les iti
 <RemoteAuthenticatorView Action="@RemoteAuthenticationActions.Register" />
 ```
 
-Vous êtes autorisé à casser l’interface utilisateur en différentes pages si vous choisissez de le faire.
+Si vous le souhaitez, vous avez la possibilité de scinder l’interface utilisateur en différentes pages.
 
-## <a name="customize-the-authentication-user-interface"></a>Personnaliser l’interface utilisateur d’authentification
+## <a name="customize-the-authentication-user-interface"></a>Personnaliser l’interface utilisateur de l’authentification
 
-`RemoteAuthenticatorView`comprend un ensemble par défaut de pièces d’interface utilisateur pour chaque état d’authentification. Chaque état peut être personnalisé en `RenderFragment`passant dans une coutume . Pour personnaliser le texte affiché pendant le processus `RemoteAuthenticatorView` de connexion initial, peut changer les éléments suivants.
+`RemoteAuthenticatorView`comprend un ensemble par défaut de parties de l’interface utilisateur pour chaque État d’authentification. Chaque État peut être personnalisé en passant un personnalisé `RenderFragment`. Pour personnaliser le texte affiché pendant le processus de connexion initial, peut modifier `RemoteAuthenticatorView` le comme suit.
 
-`Authentication`composant (*Pages/Authentication.razor*):
+`Authentication`composant (*pages/Authentication. Razor*) :
 
 ```razor
 @page "/security/{action}"
@@ -284,7 +389,7 @@ Vous êtes autorisé à casser l’interface utilisateur en différentes pages s
 }
 ```
 
-Le `RemoteAuthenticatorView` a un fragment qui peut être utilisé par itinéraire d’authentification montré dans le tableau suivant.
+Le `RemoteAuthenticatorView` a un fragment qui peut être utilisé par itinéraire d’authentification, comme indiqué dans le tableau suivant.
 
 | Routage                            | Fragment                |
 | -------------------------------- | ----------------------- |
@@ -297,3 +402,130 @@ Le `RemoteAuthenticatorView` a un fragment qui peut être utilisé par itinérai
 | `authentication/logged-out`      | `<LogOutSucceeded>`     |
 | `authentication/profile`         | `<UserProfile>`         |
 | `authentication/register`        | `<Registering>`         |
+
+## <a name="support-prerendering-with-authentication"></a>Prendre en charge le prérendu avec l’authentification
+
+Après avoir utilisé les instructions de l’une des Blazor rubriques de l’application webassembly hébergées, suivez les instructions ci-dessous pour créer une application qui :
+
+* Prérend les chemins d’accès pour lesquels l’autorisation n’est pas requise.
+* N’effectue pas de prérendu des chemins pour lesquels une autorisation est requise.
+
+Dans la classe de `Program` l’application cliente (*Program.cs*), les inscriptions de service courantes de facteur dans une méthode distincte `ConfigureCommonServices`(par exemple,) :
+
+```csharp
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        var builder = WebAssemblyHostBuilder.CreateDefault(args);
+        builder.RootComponents.Add<App>("app");
+
+        builder.Services.AddSingleton(new HttpClient 
+        {
+            BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+        });
+
+        services.Add...;
+
+        ConfigureCommonServices(builder.Services);
+
+        await builder.Build().RunAsync();
+    }
+
+    public static void ConfigureCommonServices(IServiceCollection services)
+    {
+        // Common service registrations
+    }
+}
+```
+
+Dans l’application serveur `Startup.ConfigureServices`, inscrivez les services supplémentaires suivants :
+
+```csharp
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.Server;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+public void ConfigureServices(IServiceCollection services)
+{
+    ...
+
+    services.AddRazorPages();
+    services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
+    services.AddScoped<SignOutSessionStateManager>();
+
+    Client.Program.ConfigureCommonServices(services);
+}
+```
+
+Dans la méthode de `Startup.Configure` l’application serveur, `endpoints.MapFallbackToFile("index.html")` remplacez `endpoints.MapFallbackToPage("/_Host")`par :
+
+```csharp
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapFallbackToPage("/_Host");
+});
+```
+
+Dans l’application serveur, créez un dossier *pages* s’il n’existe pas. Créez une page *_Host. cshtml* dans le dossier *pages* de l’application serveur. Collez le contenu du fichier *wwwroot/index.html* de l’application cliente dans le fichier *pages/_Host. cshtml* . Mettez à jour le contenu du fichier :
+
+* Ajoutez `@page "_Host"` en haut du fichier.
+* Remplacez la `<app>Loading...</app>` balise par le suivant :
+
+  ```cshtml
+  <app>
+      @if (!HttpContext.Request.Path.StartsWithSegments("/authentication"))
+      {
+          <component type="typeof(Wasm.Authentication.Client.App)" render-mode="Static" />
+      }
+      else
+      {
+          <text>Loading...</text>
+      }
+  </app>
+  ```
+  
+## <a name="options-for-hosted-apps-and-third-party-login-providers"></a>Options pour les applications hébergées et les fournisseurs de connexion tiers
+
+Lors de l’authentification et de l' Blazor autorisation d’une application webassembly hébergée auprès d’un fournisseur tiers, plusieurs options sont disponibles pour l’authentification de l’utilisateur. Celui que vous choisissez dépend de votre scénario.
+
+Pour plus d’informations, consultez <xref:security/authentication/social/additional-claims>.
+
+### <a name="authenticate-users-to-only-call-protected-third-party-apis"></a>Authentifier les utilisateurs pour appeler uniquement des API tierces protégées
+
+Authentifiez l’utilisateur avec un fluide OAuth côté client par rapport au fournisseur d’API tiers :
+
+ ```csharp
+ builder.services.AddOidcAuthentication(options => { ... });
+ ```
+ 
+ Dans ce scénario :
+
+* Le serveur hébergeant l’application ne joue aucun rôle.
+* Les API sur le serveur ne peuvent pas être protégées.
+* L’application ne peut appeler que des API tierces protégées.
+
+### <a name="authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party"></a>Authentifier les utilisateurs auprès d’un fournisseur tiers et appeler des API protégées sur le serveur hôte et le tiers
+
+Configurez l’identité avec un fournisseur de connexion tiers. Obtenez les jetons requis pour l’accès de l’API tierce et stockez-les.
+
+Lorsqu’un utilisateur se connecte, l’identité collecte les jetons d’accès et d’actualisation dans le cadre du processus d’authentification. À ce stade, il existe deux approches disponibles pour effectuer des appels d’API à des API tierces.
+
+#### <a name="use-a-server-access-token-to-retrieve-the-third-party-access-token"></a>Utiliser un jeton d’accès au serveur pour récupérer le jeton d’accès tiers
+
+Utilisez le jeton d’accès généré sur le serveur pour récupérer le jeton d’accès tiers à partir d’un point de terminaison d’API serveur. À partir de là, utilisez le jeton d’accès tiers pour appeler des ressources d’API tierces directement à partir de l’identité sur le client.
+
+Nous ne recommandons pas cette approche. Cette approche nécessite le traitement du jeton d’accès tiers comme s’il avait été généré pour un client public. Dans les termes OAuth, l’application publique n’a pas de clé secrète client, car elle ne peut pas être approuvée pour stocker des secrets en toute sécurité, et le jeton d’accès est généré pour un client confidentiel. Un client confidentiel est un client qui a une clé secrète client et est supposé être en mesure de stocker des secrets en toute sécurité.
+
+* Le jeton d’accès tiers peut recevoir des étendues supplémentaires pour effectuer des opérations sensibles en fonction du fait que le tiers a émis le jeton pour un client plus fiable.
+* De même, les jetons d’actualisation ne doivent pas être émis pour un client qui n’est pas approuvé, car cela donne au client un accès illimité, sauf si d’autres restrictions sont mises en place.
+
+#### <a name="make-api-calls-from-the-client-to-the-server-api-in-order-to-call-third-party-apis"></a>Effectuer des appels d’API à partir du client vers l’API du serveur afin d’appeler des API tierces
+
+Effectuez un appel d’API à partir du client vers l’API serveur. À partir du serveur, récupérez le jeton d’accès pour la ressource d’API tierce et émettez l’appel nécessaire.
+
+Bien que cette approche nécessite un saut de réseau supplémentaire par le biais du serveur pour appeler une API tierce, elle a finalement pour résultat une expérience plus sûre :
+
+* Le serveur peut stocker des jetons d’actualisation et s’assurer que l’application ne perd pas l’accès aux ressources tierces.
+* L’application ne peut pas perdre les jetons d’accès du serveur qui peuvent contenir des autorisations plus sensibles.

@@ -1,8 +1,8 @@
-Le composant `App` (*app. Razor*) est semblable au composant `App` des applications serveur éblouissantes :
+Le `App` composant (*app. Razor*) est semblable au `App` composant des applications serveur éblouissantes :
 
-* Le composant `CascadingAuthenticationState` gère l’exposition du `AuthenticationState` au reste de l’application.
-* Le composant `AuthorizeRouteView` permet de s’assurer que l’utilisateur actuel est autorisé à accéder à une page donnée, ou à restituer le composant `RedirectToLogin`.
-* Le composant `RedirectToLogin` gère la redirection des utilisateurs non autorisés vers la page de connexion.
+* Le `CascadingAuthenticationState` composant gère l' `AuthenticationState` exposition de au reste de l’application.
+* Le `AuthorizeRouteView` composant permet de s’assurer que l’utilisateur actuel est autorisé à accéder à une page donnée ou à `RedirectToLogin` effectuer un rendu du composant.
+* Le `RedirectToLogin` composant gère la redirection des utilisateurs non autorisés vers la page de connexion.
 
 ```razor
 <CascadingAuthenticationState>
@@ -11,7 +11,17 @@ Le composant `App` (*app. Razor*) est semblable au composant `App` des applicati
             <AuthorizeRouteView RouteData="@routeData" 
                 DefaultLayout="@typeof(MainLayout)">
                 <NotAuthorized>
-                    <RedirectToLogin />
+                    @if (!context.User.Identity.IsAuthenticated)
+                    {
+                        <RedirectToLogin />
+                    }
+                    else
+                    {
+                        <p>
+                            You are not authorized to access 
+                            this resource.
+                        </p>
+                    }
                 </NotAuthorized>
             </AuthorizeRouteView>
         </Found>
