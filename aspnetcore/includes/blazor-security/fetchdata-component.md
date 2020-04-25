@@ -39,5 +39,3 @@ Si la requête a échoué parce que le jeton n’a pas pu être approvisionné s
     }
 }
 ```
-
-Pour plus d’informations, consultez [enregistrer l’état de l’application avant une opération d’authentification](xref:security/blazor/webassembly/additional-scenarios#save-app-state-before-an-authentication-operation).

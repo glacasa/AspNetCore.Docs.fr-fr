@@ -1,22 +1,34 @@
 ## <a name="troubleshoot"></a>Dépanner
 
-### <a name="cookies-and-site-data"></a>Cookies et données du site
+### <a name="cookies-and-site-data"></a>Cookies et données de site
 
-Les cookies et les données du site peuvent persister dans les mises à jour de l’application et interférer avec les tests et les dépannages. Effacer ce qui suit lors de l’apport de modifications de code d’application, les modifications de compte utilisateur avec le fournisseur, ou les modifications de configuration de l’application fournisseur:
+Les cookies et les données de site peuvent persister sur les mises à jour des applications et perturber les tests et le dépannage. Désactivez les éléments suivants lorsque vous apportez des modifications de code d’application, des modifications de compte d’utilisateur avec le fournisseur ou des modifications de configuration d’application de fournisseur :
 
-* Cookies d’inscription de l’utilisateur
-* Cookies App
-* Données du site mises en cache et stockées
+* Cookies de connexion de l’utilisateur
+* Cookies de l’application
+* Données de site mises en cache et stockées
 
-Une approche pour empêcher les cookies persistants et les données du site d’interférer avec les tests et le dépannage est de :
+L’une des méthodes permettant d’empêcher les cookies en attente et les données de site d’interférer avec les tests et la résolution des problèmes consiste à :
 
-* Utilisez un navigateur pour les tests que vous pouvez configurer pour supprimer toutes les données de cookie et de site chaque fois que le navigateur est fermé.
-* Fermez le navigateur entre toute modification de l’application, de l’utilisateur de test ou de la configuration du fournisseur.
+* Configurer un navigateur
+  * Utilisez un navigateur pour le test que vous pouvez configurer pour supprimer tous les cookies et les données de site chaque fois que le navigateur est fermé.
+  * Assurez-vous que le navigateur est fermé manuellement ou par l’IDE entre toute modification apportée à l’application, à l’utilisateur de test ou à la configuration du fournisseur.
+* Utilisez une commande personnalisée pour ouvrir un navigateur en mode Incognito ou privé dans Visual Studio :
+  * Ouvrez la boîte de dialogue **naviguer avec** à partir du bouton **exécuter** de Visual Studio.
+  * Sélectionnez le bouton **Ajouter**.
+  * Indiquez le chemin d’accès à votre navigateur dans le champ **programme** .
+  * Dans le champ **arguments** , fournissez l’option de ligne de commande utilisée par le navigateur pour ouvrir en mode Incognito ou privé et l’URL de l’application. Par exemple :
+    * Google Chrome &ndash;`--incognito --new-window https://localhost:5001`
+    * Mozilla Firefox &ndash;`-private -url https://localhost:5001`
+  * Entrez un nom dans le champ **nom convivial** . Par exemple, `Firefox Auth Testing`.
+  * Sélectionnez le bouton **OK** .
+  * Pour éviter d’avoir à sélectionner le profil de navigateur pour chaque itération de test avec une application, définissez le profil par défaut avec le bouton **définir comme valeur par défaut** .
+  * Assurez-vous que le navigateur est fermé par l’IDE entre toute modification apportée à l’application, à l’utilisateur de test ou à la configuration du fournisseur.
 
-### <a name="run-the-server-app"></a>Exécuter l’application Server
+### <a name="run-the-server-app"></a>Exécuter l’application serveur
 
-Lors du test et du dépannage d’une application Blazor hébergée, assurez-vous que vous exécutez l’application à partir du projet **Server.** Par exemple dans Visual Studio, confirmez que le projet Server est mis en surbrillance dans **Solution Explorer** avant de commencer l’application avec l’une des approches suivantes :
+Lors du test et du dépannage d’une application éblouissante hébergée, assurez-vous que vous exécutez l’application à partir du projet **serveur** . Par exemple, dans Visual Studio, vérifiez que le projet serveur est mis en surbrillance dans **Explorateur de solutions** avant de démarrer l’application avec l’une des approches suivantes :
 
 * Sélectionnez le bouton **Exécuter**.
-* Utilisez **Debug** > **Start Debugging** à partir du menu.
+*  > Utilisez **débogage****Démarrer le débogage** à partir du menu.
 * Appuyez sur <kbd>F5</kbd>.
