@@ -5,17 +5,17 @@ description: En savoir Blazor plus sur l’hébergement de la configuration de m
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/23/2020
+ms.date: 04/25/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: cf5776109368dc7353d7e21bcad1e947561e7eb4
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: c7e8d1f2dcba6432072a5cc11a6c5d78e50c2398
+ms.sourcegitcommit: c6f5ea6397af2dd202632cf2be66fc30f3357bcc
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82111056"
+ms.lasthandoff: 04/26/2020
+ms.locfileid: "82159617"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>Configuration du modèle d’hébergement ASP.NET Core éblouissant
 
@@ -302,53 +302,6 @@ Les applications serveur éblouissantes sont configurées par défaut pour prér
 | `Static`            | Génère le rendu du composant en HTML statique. |
 
 Le rendu des composants serveur à partir d’une page HTML statique n’est pas pris en charge.
-
-### <a name="render-stateful-interactive-components-from-razor-pages-and-views"></a>Restituer des composants interactifs avec état à partir de pages et de vues Razor
-
-Les composants interactifs avec état peuvent être ajoutés à une page ou à une vue Razor.
-
-Lors du rendu de la page ou de la vue :
-
-* Le composant est prérendu avec la page ou la vue.
-* L’état initial du composant utilisé pour le prérendu est perdu.
-* Un nouvel état de composant est créé SignalR lorsque la connexion est établie.
-
-La page Razor suivante affiche un `Counter` composant :
-
-```cshtml
-<h1>My Razor Page</h1>
-
-<component type="typeof(Counter)" render-mode="ServerPrerendered" 
-    param-InitialValue="InitialValue" />
-
-@code {
-    [BindProperty(SupportsGet=true)]
-    public int InitialValue { get; set; }
-}
-```
-
-### <a name="render-noninteractive-components-from-razor-pages-and-views"></a>Rendre des composants non interactifs à partir de pages et de vues Razor
-
-Dans la page Razor suivante, le `Counter` composant est rendu statiquement avec une valeur initiale spécifiée à l’aide d’un formulaire :
-
-```cshtml
-<h1>My Razor Page</h1>
-
-<form>
-    <input type="number" asp-for="InitialValue" />
-    <button type="submit">Set initial value</button>
-</form>
-
-<component type="typeof(Counter)" render-mode="Static" 
-    param-InitialValue="InitialValue" />
-
-@code {
-    [BindProperty(SupportsGet=true)]
-    public int InitialValue { get; set; }
-}
-```
-
-Étant `MyComponent` donné que est rendu statiquement, le composant ne peut pas être interactif.
 
 ### <a name="configure-the-opno-locsignalr-client-for-opno-locblazor-server-apps"></a>Configurer le SignalR client pour Blazor les applications serveur
 
