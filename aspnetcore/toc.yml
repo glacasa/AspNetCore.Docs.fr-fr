@@ -348,7 +348,13 @@
                 - name: Autres cas de figure
                   uid: security/blazor/webassembly/additional-scenarios
             - name: Serveur Blazor
-              uid: security/blazor/server
+              items:
+                - name: Vue d'ensemble
+                  uid: security/blazor/server/index
+                - name: Atténuation des menaces
+                  uid: security/blazor/server/threat-mitigation
+                - name: Autres cas de figure
+                  uid: security/blazor/server/additional-scenarios
             - name: Stratégie de sécurité du contenu
               uid: security/blazor/content-security-policy
         - name: Gestion de l’état
@@ -1135,7 +1141,13 @@
             - name: Autres cas de figure
               uid: security/blazor/webassembly/additional-scenarios
         - name: Serveur Blazor
-          uid: security/blazor/server
+          items:
+            - name: Vue d'ensemble
+              uid: security/blazor/server/index
+            - name: Atténuation des menaces
+              uid: security/blazor/server/threat-mitigation
+            - name: Autres cas de figure
+              uid: security/blazor/server/additional-scenarios
         - name: Stratégie de sécurité du contenu
           uid: security/blazor/content-security-policy
 - name: Performances
