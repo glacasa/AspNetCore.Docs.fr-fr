@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
 uid: mvc/models/validation
-ms.openlocfilehash: cf6b77de78f2c5dda48ffcd8ac1f9ed2f8d28bd7
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 0e3d4f4705dbfdae00943de2d85c603b6762a2f8
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78661125"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82205889"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>Validation de modèle dans ASP.NET Core MVC et Razor Pages
 
@@ -41,7 +41,7 @@ La validation est automatique, mais vous souhaiterez peut-être la répéter man
 
 ## <a name="validation-attributes"></a>Attributs de validation
 
-Les attributs de validation vous permettent de spécifier des règles de validation pour des propriétés de modèle. L’exemple suivant de l’exemple d’application montre une classe de modèle annotée avec des attributs de validation. L’attribut `[ClassicMovie]` est un attribut de validation personnalisé, et les autres sont prédéfinis. Non affiché est `[ClassicMovieWithClientValidator]`. `[ClassicMovieWithClientValidator]` illustre une autre façon d’implémenter un attribut personnalisé.
+Les attributs de validation vous permettent de spécifier des règles de validation pour des propriétés de modèle. L’exemple suivant tiré de l’exemple d’application montre une classe de modèle qui est annotée avec des attributs de validation. L’attribut `[ClassicMovie]` est un attribut de validation personnalisé, et les autres sont prédéfinis. Non affiché est `[ClassicMovieWithClientValidator]`. `[ClassicMovieWithClientValidator]`montre une autre façon d’implémenter un attribut personnalisé.
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Models/Movie.cs?name=snippet_Class)]
 
@@ -49,16 +49,16 @@ Les attributs de validation vous permettent de spécifier des règles de validat
 
 Voici certains des attributs de validation prédéfinis :
 
-* `[CreditCard]`: vérifie que la propriété a un format de carte de crédit.
-* `[Compare]`: valide que deux propriétés d’un modèle correspondent.
-* `[EmailAddress]`: valide que la propriété a un format d’e-mail.
-* `[Phone]`: valide que la propriété a un format de numéro de téléphone.
-* `[Range]`: valide que la valeur de la propriété est comprise dans une plage spécifiée.
-* `[RegularExpression]`: valide le fait que la valeur de propriété corresponde à une expression régulière spécifiée.
-* `[Required]`: vérifie que le champ n’a pas la valeur null. Pour plus d’informations sur le comportement de cet attribut, consultez [`[Required]` attribut](#required-attribute) .
-* `[StringLength]`: valide le fait qu’une valeur de propriété de chaîne ne dépasse pas une limite de longueur spécifiée.
-* `[Url]`: valide que la propriété a un format d’URL.
-* `[Remote]`: valide l’entrée sur le client en appelant une méthode d’action sur le serveur. Pour plus d’informations sur le comportement de cet attribut, consultez [`[Remote]` attribut](#remote-attribute) .
+* `[CreditCard]`: Vérifie que la propriété a un format de carte de crédit.
+* `[Compare]`: Valide que deux propriétés d’un modèle correspondent.
+* `[EmailAddress]`: Vérifie que la propriété a un format d’e-mail.
+* `[Phone]`: Vérifie que la propriété a un format de numéro de téléphone.
+* `[Range]`: Vérifie que la valeur de la propriété est comprise dans une plage spécifiée.
+* `[RegularExpression]`: Valide le fait que la valeur de propriété corresponde à une expression régulière spécifiée.
+* `[Required]`: Vérifie que le champ n’a pas la valeur null. Pour plus d’informations sur le comportement de cet attribut, consultez [ `[Required]` attribut](#required-attribute) .
+* `[StringLength]`: Valide le fait qu’une valeur de propriété de type chaîne ne dépasse pas une limite de longueur spécifiée.
+* `[Url]`: Vérifie que la propriété a un format d’URL.
+* `[Remote]`: Valide l’entrée sur le client en appelant une méthode d’action sur le serveur. Pour plus d’informations sur le comportement de cet attribut, consultez [ `[Remote]` attribut](#remote-attribute) .
 
 Vous trouverez la liste complète des attributs de validation dans l’espace de noms [System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations).
 
@@ -78,11 +78,11 @@ En interne, les attributs appellent `String.Format` avec un espace réservé pou
 
 Appliqué à une propriété `Name`, le message d’erreur créé par le code précédent serait « Name length must be between 6 and 8 ».
 
-Pour savoir quels paramètres sont passés à `String.Format` pour le message d’erreur d’un attribut particulier, consultez le [code source de DataAnnotations](https://github.com/dotnet/corefx/tree/master/src/System.ComponentModel.Annotations/src/System/ComponentModel/DataAnnotations).
+Pour savoir quels paramètres sont passés à `String.Format` pour le message d’erreur d’un attribut particulier, consultez le [code source de DataAnnotations](https://github.com/dotnet/runtime/tree/master/src/libraries/System.ComponentModel.Annotations/src/System/ComponentModel/DataAnnotations).
 
 ## <a name="required-attribute"></a>Attribut [Required]
 
-Le système de validation dans .NET Core 3,0 et versions ultérieures traite les paramètres non Nullable ou les propriétés liées comme s’ils avaient un attribut `[Required]`. Les [types valeur](/dotnet/csharp/language-reference/keywords/value-types) comme `decimal` et `int` n’acceptent pas les valeurs Null. Vous pouvez désactiver ce comportement en configurant <xref:Microsoft.AspNetCore.Mvc.MvcOptions.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes> dans `Startup.ConfigureServices`:
+Le système de validation dans .NET Core 3,0 et versions ultérieures traite les paramètres non Nullable ou les propriétés liées comme `[Required]` s’ils avaient un attribut. Les [types valeur](/dotnet/csharp/language-reference/keywords/value-types) comme `decimal` et `int` n’acceptent pas les valeurs Null. Vous pouvez désactiver ce comportement en configurant <xref:Microsoft.AspNetCore.Mvc.MvcOptions.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes> dans `Startup.ConfigureServices`:
 
 ```csharp
 services.AddControllers(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
@@ -90,7 +90,7 @@ services.AddControllers(options => options.SuppressImplicitRequiredAttributeForN
 
 ### <a name="required-validation-on-the-server"></a>Validation de [Required] sur le serveur
 
-Sur le serveur, une valeur obligatoire est considérée comme manquante si la propriété est Null. Un champ qui n’accepte pas les valeurs NULL est toujours valide et le message d’erreur de l’attribut `[Required]` n’est jamais affiché.
+Sur le serveur, une valeur obligatoire est considérée comme manquante si la propriété est Null. Un champ qui n’accepte pas les valeurs NULL est toujours `[Required]` valide et le message d’erreur de l’attribut n’est jamais affiché.
 
 Toutefois, la liaison de modèle pour une propriété n’acceptant pas les valeurs Null peut échouer, entraînant l’affichage d’un message d’erreur tel que `The value '' is invalid`. Pour spécifier un message d’erreur personnalisé pour la validation côté serveur des types n’acceptant pas les valeurs Null, vous disposez des options suivantes :
 
@@ -130,7 +130,7 @@ Pour implémenter la validation à distance
 
    [!code-csharp[](validation/samples/3.x/ValidationSample/Models/User.cs?name=snippet_Email)]
  
-   L'attribut `[Remote]` se trouve dans l'espace de noms `Microsoft.AspNetCore.Mvc`.
+   L’attribut `[Remote]` se trouve dans l’espace de noms `Microsoft.AspNetCore.Mvc`.
    
 ### <a name="additional-fields"></a>Champs supplémentaires
 
@@ -138,7 +138,7 @@ La propriété `AdditionalFields` de l’attribut `[Remote]` vous permet de vali
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Models/User.cs?name=snippet_Name&highlight=1,5)]
 
-`AdditionalFields` peut être défini explicitement avec les chaînes « FirstName » et « LastName », mais l’utilisation de l’opérateur [nameof](/dotnet/csharp/language-reference/keywords/nameof) simplifie la refactorisation ultérieure. La méthode d’action pour cette validation doit accepter les arguments `firstName` et `lastName` :
+`AdditionalFields`peut être défini explicitement avec les chaînes « FirstName » et « LastName », mais l’utilisation de l’opérateur [nameof](/dotnet/csharp/language-reference/keywords/nameof) simplifie la refactorisation ultérieure. La méthode d’action pour cette validation doit accepter `firstName` les `lastName` arguments et :
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Controllers/UsersController.cs?name=snippet_VerifyName)]
 
@@ -166,7 +166,7 @@ Pour les scénarios non gérés par les attributs de validation prédéfinis, vo
 
 La méthode `IsValid` accepte un objet nommé *value*, qui est l’entrée à valider. Une surcharge accepte également un objet `ValidationContext`, qui fournit des informations supplémentaires telles que l’instance de modèle créée par la liaison de modèle.
 
-L’exemple suivant vérifie que la date de sortie d’un film appartenant au genre *Classic* n’est pas ultérieure à une année spécifiée. L’attribut `[ClassicMovie]` :
+L’exemple suivant vérifie que la date de sortie d’un film appartenant au genre *Classic* n’est pas ultérieure à une année spécifiée. L' `[ClassicMovie]` attribut :
 
 * S’exécute uniquement sur le serveur.
 * Pour les films classiques, valide la date de publication :
@@ -198,7 +198,7 @@ Les nœuds de niveau supérieur peuvent utiliser <xref:Microsoft.AspNetCore.Mvc.
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Controllers/UsersController.cs?name=snippet_CheckAgeSignature)]
 
-Dans la page de vérification de l’âge (*CheckAge.cshtml*), il existe deux formulaires. Le premier formulaire envoie une valeur `Age` de `99` sous la forme d’un paramètre de chaîne de requête : `https://localhost:5001/Users/CheckAge?Age=99`.
+Dans la page de vérification de l’âge (*CheckAge.cshtml*), il existe deux formulaires. Le premier formulaire envoie une `Age` valeur sous la `99` forme d’un paramètre de chaîne `https://localhost:5001/Users/CheckAge?Age=99`de requête :.
 
 Quand un paramètre `age` au format approprié est envoyé à partir de la chaîne de requête, le formulaire est validé.
 
@@ -212,7 +212,7 @@ La validation s’arrête quand le nombre maximal d’erreurs est atteint (200 p
 
 ## <a name="maximum-recursion"></a>Récursivité maximale
 
-<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor> parcourt le graphe d’objet du modèle en cours de validation. Pour les modèles en profondeur ou récursifs à l’infini, la validation peut entraîner un dépassement de capacité de la pile. [MvcOptions.MaxValidationDepth](xref:Microsoft.AspNetCore.Mvc.MvcOptions.MaxValidationDepth) fournit un moyen d’interrompre la validation de manière anticipée si la récursivité du visiteur dépasse une profondeur configurée. La valeur par défaut de `MvcOptions.MaxValidationDepth` est 32.
+<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor> parcourt le graphe d’objet du modèle en cours de validation. Pour les modèles en profondeur ou récursifs à l’infini, la validation peut entraîner un dépassement de capacité de la pile. [MvcOptions.MaxValidationDepth](xref:Microsoft.AspNetCore.Mvc.MvcOptions.MaxValidationDepth) fournit un moyen d’interrompre la validation de manière anticipée si la récursivité du visiteur dépasse une profondeur configurée. La valeur par défaut `MvcOptions.MaxValidationDepth` de est 32.
 
 ## <a name="automatic-short-circuit"></a>Court-circuit automatique
 
@@ -259,7 +259,7 @@ Les balises d’assistance précédentes affichent le code HTML suivant :
 </div>
 ```
 
-Notez que les attributs `data-` dans la sortie HTML correspondent aux attributs de validation pour la propriété `Movie.ReleaseDate`. L’attribut `data-val-required` contient un message d’erreur à afficher si l’utilisateur ne renseigne pas le champ correspondant à la date de sortie. la validation jQuery discrète passe cette valeur à la méthode jQuery Validate [Required ()](https://jqueryvalidation.org/required-method/) , qui affiche ensuite ce message dans l’élément de **>\<span** qui l’accompagne.
+Notez que les attributs `data-` dans la sortie HTML correspondent aux attributs de validation pour la propriété `Movie.ReleaseDate`. L’attribut `data-val-required` contient un message d’erreur à afficher si l’utilisateur ne renseigne pas le champ correspondant à la date de sortie. la validation jQuery discrète passe cette valeur à la méthode jQuery Validate [Required ()](https://jqueryvalidation.org/required-method/) , qui affiche ensuite ce message dans l’élément ** \<span>** associé.
 
 La validation du type de données est basée sur le type .NET d’une propriété, sauf en cas de substitution par un attribut `[DataType]`. Les navigateurs ont leurs propres messages d’erreur par défaut, mais le package jQuery Validation Unobtrusive Validation peut remplacer ces messages. Les attributs `[DataType]` et les sous-classes comme `[EmailAddress]` vous permettent de spécifier le message d’erreur.
 
@@ -374,14 +374,14 @@ Le code suivant désactive la validation du client dans Razor Pages :
 Autres options pour désactiver la validation côté client :
 
 * Commentez la référence à `_ValidationScriptsPartial` dans tous les fichiers *. cshtml* .
-* Supprimez le contenu du fichier *Pages\Shared\_ValidationScriptsPartial. cshtml* .
+* Supprimez le contenu du *fichier\_Pages\Shared ValidationScriptsPartial. cshtml* .
 
 L’approche précédente n’empêchera pas la validation côté client de ASP.NET Core bibliothèque de classes Razor d’identité. Pour plus d’informations, consultez <xref:security/authentication/scaffold-identity>.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Espace de noms System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations)
-* [Liaison de données](model-binding.md)
+* [Liaison de modèle](model-binding.md)
 
 ::: moniker-end
 
@@ -417,18 +417,18 @@ Les attributs de validation vous permettent de spécifier des règles de validat
 
 Les attributs de validation intégrés sont les suivants :
 
-* `[CreditCard]`: vérifie que la propriété a un format de carte de crédit.
-* `[Compare]`: valide que deux propriétés d’un modèle correspondent. Par exemple, le fichier *Register.cshtml.cs* utilise `[Compare]` pour valider les deux correspondances de mots de passe entrées. L’identité de l' [échafaudage](xref:security/authentication/scaffold-identity) pour afficher le code du Registre.
-* `[EmailAddress]`: valide que la propriété a un format d’e-mail.
-* `[Phone]`: valide que la propriété a un format de numéro de téléphone.
-* `[Range]`: valide que la valeur de la propriété est comprise dans une plage spécifiée.
-* `[RegularExpression]`: valide le fait que la valeur de propriété corresponde à une expression régulière spécifiée.
-* `[Required]`: vérifie que le champ n’a pas la valeur null. Pour plus d’informations sur le comportement de cet attribut, consultez [`[Required]` attribut](#required-attribute) .
-* `[StringLength]`: valide le fait qu’une valeur de propriété de chaîne ne dépasse pas une limite de longueur spécifiée.
-* `[Url]`: valide que la propriété a un format d’URL.
-* `[Remote]`: valide l’entrée sur le client en appelant une méthode d’action sur le serveur. Pour plus d’informations sur le comportement de cet attribut, consultez [`[Remote]` attribut](#remote-attribute) .
+* `[CreditCard]`: Vérifie que la propriété a un format de carte de crédit.
+* `[Compare]`: Valide que deux propriétés d’un modèle correspondent. Par exemple, le fichier *Register.cshtml.cs* utilise `[Compare]` pour valider les deux correspondances de mots de passe entrées. L’identité de l' [échafaudage](xref:security/authentication/scaffold-identity) pour afficher le code du Registre.
+* `[EmailAddress]`: Vérifie que la propriété a un format d’e-mail.
+* `[Phone]`: Vérifie que la propriété a un format de numéro de téléphone.
+* `[Range]`: Vérifie que la valeur de la propriété est comprise dans une plage spécifiée.
+* `[RegularExpression]`: Valide le fait que la valeur de propriété corresponde à une expression régulière spécifiée.
+* `[Required]`: Vérifie que le champ n’a pas la valeur null. Pour plus d’informations sur le comportement de cet attribut, consultez [ `[Required]` attribut](#required-attribute) .
+* `[StringLength]`: Valide le fait qu’une valeur de propriété de type chaîne ne dépasse pas une limite de longueur spécifiée.
+* `[Url]`: Vérifie que la propriété a un format d’URL.
+* `[Remote]`: Valide l’entrée sur le client en appelant une méthode d’action sur le serveur. Pour plus d’informations sur le comportement de cet attribut, consultez [ `[Remote]` attribut](#remote-attribute) .
 
-Lors de l’utilisation de l’attribut `[RegularExpression]` avec la validation côté client, l’expression régulière est exécutée dans JavaScript sur le client. Cela signifie que le comportement de correspondance [ECMAScript](/dotnet/standard/base-types/regular-expression-options#ecmascript-matching-behavior) sera utilisé. Pour plus d’informations, consultez [ce problème GitHub](https://github.com/dotnet/corefx/issues/42487).
+Lors de l' `[RegularExpression]` utilisation de l’attribut avec la validation côté client, l’expression régulière est exécutée dans JavaScript sur le client. Cela signifie que le comportement de correspondance [ECMAScript](/dotnet/standard/base-types/regular-expression-options#ecmascript-matching-behavior) sera utilisé. Pour plus d’informations, consultez [ce problème GitHub](https://github.com/dotnet/corefx/issues/42487).
 
 Vous trouverez la liste complète des attributs de validation dans l’espace de noms [System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations).
 
@@ -496,7 +496,7 @@ Pour implémenter la validation à distance
 
    [!code-csharp[](validation/samples/2.x/ValidationSample/Models/User.cs?name=snippet_UserEmailProperty)]
  
-   L'attribut `[Remote]` se trouve dans l'espace de noms `Microsoft.AspNetCore.Mvc`. Installez le package NuGet [Microsoft.AspNetCore.Mvc.ViewFeatures](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures), si vous n’utilisez pas le métapaquet `Microsoft.AspNetCore.App` ou `Microsoft.AspNetCore.All`.
+   L’attribut `[Remote]` se trouve dans l’espace de noms `Microsoft.AspNetCore.Mvc`. Installez le package NuGet [Microsoft.AspNetCore.Mvc.ViewFeatures](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures), si vous n’utilisez pas le métapaquet `Microsoft.AspNetCore.App` ou `Microsoft.AspNetCore.All`.
    
 ### <a name="additional-fields"></a>Champs supplémentaires
 
@@ -504,7 +504,7 @@ La propriété `AdditionalFields` de l’attribut `[Remote]` vous permet de vali
 
 [!code-csharp[](validation/samples/2.x/ValidationSample/Models/User.cs?name=snippet_UserNameProperties)]
 
-`AdditionalFields` peut être défini explicitement avec les chaînes `"FirstName"` et `"LastName"`, mais l’utilisation de l’opérateur [nameof](/dotnet/csharp/language-reference/keywords/nameof) simplifie la refactorisation ultérieure. La méthode d’action pour cette validation doit accepter les arguments de nom et de prénom :
+`AdditionalFields`peut être défini explicitement sur les chaînes `"FirstName"` et `"LastName"`, mais l’utilisation de l’opérateur [nameof](/dotnet/csharp/language-reference/keywords/nameof) simplifie la refactorisation ultérieure. La méthode d’action pour cette validation doit accepter les arguments de nom et de prénom :
 
 [!code-csharp[](validation/samples/2.x/ValidationSample/Controllers/UsersController.cs?name=snippet_VerifyName)]
 
@@ -579,7 +579,7 @@ La validation s’arrête quand le nombre maximal d’erreurs est atteint (200 p
 
 ## <a name="maximum-recursion"></a>Récursivité maximale
 
-<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor> parcourt le graphe d’objet du modèle en cours de validation. Pour les modèles très profonds ou infiniment récursifs, la validation peut entraîner un dépassement de la capacité de la pile. [MvcOptions.MaxValidationDepth](xref:Microsoft.AspNetCore.Mvc.MvcOptions.MaxValidationDepth) fournit un moyen d’interrompre la validation de manière anticipée si la récursivité du visiteur dépasse une profondeur configurée. La valeur par défaut de `MvcOptions.MaxValidationDepth` est 32 lors de l’exécution avec `CompatibilityVersion.Version_2_2` ou version ultérieure. Pour les versions antérieures, la valeur est Null, ce qui signifie qu’il n’y a aucune contrainte de profondeur.
+<xref:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationVisitor> parcourt le graphe d’objet du modèle en cours de validation. Pour les modèles très profonds ou infiniment récursifs, la validation peut entraîner un dépassement de la capacité de la pile. [MvcOptions.MaxValidationDepth](xref:Microsoft.AspNetCore.Mvc.MvcOptions.MaxValidationDepth) fournit un moyen d’interrompre la validation de manière anticipée si la récursivité du visiteur dépasse une profondeur configurée. La valeur par défaut `MvcOptions.MaxValidationDepth` de est 32 lors de `CompatibilityVersion.Version_2_2` l’exécution avec ou version ultérieure. Pour les versions antérieures, la valeur est Null, ce qui signifie qu’il n’y a aucune contrainte de profondeur.
 
 ## <a name="automatic-short-circuit"></a>Court-circuit automatique
 
@@ -634,7 +634,7 @@ Les Tag Helpers précédents restituent le code HTML suivant.
 </form>
 ```
 
-Notez que les attributs `data-` dans la sortie HTML correspondent aux attributs de validation pour la propriété `ReleaseDate`. L’attribut `data-val-required` contient un message d’erreur à afficher si l’utilisateur ne renseigne pas le champ correspondant à la date de sortie. la validation jQuery discrète passe cette valeur à la méthode jQuery Validate [Required ()](https://jqueryvalidation.org/required-method/) , qui affiche ensuite ce message dans l’élément de **>\<span** qui l’accompagne.
+Notez que les attributs `data-` dans la sortie HTML correspondent aux attributs de validation pour la propriété `ReleaseDate`. L’attribut `data-val-required` contient un message d’erreur à afficher si l’utilisateur ne renseigne pas le champ correspondant à la date de sortie. la validation jQuery discrète passe cette valeur à la méthode jQuery Validate [Required ()](https://jqueryvalidation.org/required-method/) , qui affiche ensuite ce message dans l’élément ** \<span>** associé.
 
 La validation du type de données est basée sur le type .NET d’une propriété, sauf en cas de substitution par un attribut `[DataType]`. Les navigateurs ont leurs propres messages d’erreur par défaut, mais le package jQuery Validation Unobtrusive Validation peut remplacer ces messages. Les attributs `[DataType]` et les sous-classes comme `[EmailAddress]` vous permettent de spécifier le message d’erreur.
 
@@ -751,6 +751,6 @@ Une autre option permettant de désactiver la validation côté client consiste 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Espace de noms System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations)
-* [Liaison de données](model-binding.md)
+* [Liaison de modèle](model-binding.md)
 
 ::: moniker-end

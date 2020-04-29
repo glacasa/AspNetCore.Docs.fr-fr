@@ -1,7 +1,7 @@
 ---
-title: Hébergez et déployez ASP.NET Serveur de base Blazor
+title: Héberger et déployer Blazor ASP.net Core serveur
 author: guardrex
-description: Découvrez comment héberger Blazor et déployer une application Server à l’aide de ASP.NET Core.
+description: Découvrez comment héberger et déployer une Blazor application serveur à l’aide de ASP.net core.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -10,56 +10,56 @@ no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/server
-ms.openlocfilehash: 866bb348180c872d8ab20787283cfb7217183a8d
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 380bbab8898b4fbeab4efa514b17b807accbb1ac
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79025425"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82205863"
 ---
-# <a name="host-and-deploy-opno-locblazor-server"></a>Hébergez Blazor et déployez Server
+# <a name="host-and-deploy-blazor-server"></a>Héberger et Blazor déployer un serveur
 
 Par [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com) et [Daniel Roth](https://github.com/danroth27)
 
 ## <a name="host-configuration-values"></a>Valeurs de configuration de l’hôte
 
-Les applications serveur peuvent accepter [les valeurs de configuration d’hôte générique](xref:fundamentals/host/generic-host#host-configuration). [ Blazor ](xref:blazor/hosting-models#blazor-server)
+Les applications serveur peuvent accepter des [valeurs de configuration d’hôte générique](xref:fundamentals/host/generic-host#host-configuration). [ Blazor ](xref:blazor/hosting-models#blazor-server)
 
 ## <a name="deployment"></a>Déploiement
 
-L’utilisation du [ Blazor modèle d’hébergement Server](xref:blazor/hosting-models#blazor-server), Blazor est exécutée sur le serveur à partir d’une application ASP.NET Core. Les mises à jour de l’interface utilisateur, [SignalR](xref:signalr/introduction) la gestion des événements et les appels JavaScript sont traités sur une connexion.
+À l’aide du [ Blazor modèle](xref:blazor/hosting-models#blazor-server)d' Blazor Hébergement de serveur, est exécuté sur le serveur à partir d’une application ASP.net core. Les mises à jour de l’interface utilisateur, la gestion des événements et les [SignalR](xref:signalr/introduction) appels JavaScript sont gérés sur une connexion.
 
-Un serveur web capable d’héberger une application ASP.NET Core est nécessaire. Visual Studio inclut le modèle`blazorserverside` ** Blazor de** projet Server App (modèle lors de l’utilisation de la nouvelle commande [dotnet).](/dotnet/core/tools/dotnet-new)
+Un serveur web capable d’héberger une application ASP.NET Core est nécessaire. Visual Studio comprend`blazorserverside` le ** Blazor ** modèle de projet d’application serveur (modèle lors de l’utilisation de la commande [dotnet New](/dotnet/core/tools/dotnet-new) ).
 
 ## <a name="scalability"></a>Extensibilité
 
-Planifiez un déploiement pour tirer le meilleur Blazor parti de l’infrastructure disponible pour une application Server. Voir les ressources Blazor suivantes pour répondre à l’évolutivité de l’application Server :
+Planifiez un déploiement pour tirer le meilleur parti de l’infrastructure disponible pour Blazor une application serveur. Consultez les ressources suivantes pour résoudre Blazor l’extensibilité des applications serveur :
 
-* [Principes fondamentaux des Blazor applications Server](xref:blazor/hosting-models#blazor-server)
-* <xref:security/blazor/server>
+* [Notions de base Blazor des applications serveur](xref:blazor/hosting-models#blazor-server)
+* <xref:security/blazor/server/threat-mitigation>
 
 ### <a name="deployment-server"></a>Serveur de déploiement
 
-Lorsque l’on considère l’évolutivité d’un seul serveur (à l’échelle), la mémoire disponible pour une application est probablement la première ressource que l’application épuisera à mesure que les demandes de l’utilisateur augmentent. La mémoire disponible sur le serveur affecte le :
+Lorsque vous envisagez l’évolutivité d’un serveur unique (montée en puissance), la mémoire disponible pour une application est probablement la première ressource que l’application épuisera en fonction des demandes des utilisateurs. La mémoire disponible sur le serveur affecte les éléments suivants :
 
 * Nombre de circuits actifs qu’un serveur peut prendre en charge.
-* Latence de l’assurance-chômage sur le client.
+* Latence de l’interface utilisateur sur le client.
 
-Pour obtenir des conseils sur Blazor la création <xref:security/blazor/server>d’applications serveur sécurisées et évolutives, voir .
+Pour obtenir des conseils sur la création Blazor d’applications serveur sécurisées et évolutives, consultez <xref:security/blazor/server/threat-mitigation>.
 
-Chaque circuit utilise environ 250 KB de mémoire pour une application minimale de style *Hello World.* La taille d’un circuit dépend du code de l’application et des exigences de maintenance de l’État associées à chaque composant. Nous vous recommandons de mesurer les demandes de ressources pendant le développement de votre application et de votre infrastructure, mais la ligne de base suivante peut être un point de départ dans la planification de votre objectif de déploiement : si vous vous attendez à ce que votre application puisse prendre en charge 5 000 utilisateurs simultanés, envisagez de budgétiser au moins 1,3 Go de mémoire du serveur à l’application (ou 273 KB par utilisateur).
+Chaque circuit utilise environ 250 Ko de mémoire pour une application de type *Hello World*minimale. La taille d’un circuit dépend du code de l’application et des exigences de maintenance d’état associées à chaque composant. Nous vous recommandons de mesurer les demandes de ressources pendant le développement de votre application et de votre infrastructure, mais la ligne de base suivante peut être un point de départ pour la planification de votre cible de déploiement : Si vous pensez que votre application prend en charge 5 000 utilisateurs simultanés, envisagez de budgétiser au moins 1,3 Go de mémoire serveur vers l’application (ou ~ 273 Ko par utilisateur)
 
-### <a name="opno-locsignalr-configuration"></a>SignalRConfiguration
+### <a name="signalr-configuration"></a>SignalRconfiguré
 
-BlazorLes applications serveur utilisent SignalR ASP.NET Core pour communiquer avec le navigateur. les conditions d’hébergement et Blazor de mise à [l’échelle s’appliquent aux applications SignalR](xref:signalr/publish-to-azure-web-app) Server.
+BlazorLes applications serveur utilisent SignalR ASP.net Core pour communiquer avec le navigateur. les conditions d’hébergement et de mise à Blazor [l’échelle de s’appliquent aux applications SignalR](xref:signalr/publish-to-azure-web-app) serveur.
 
-Blazorfonctionne mieux lors de l’utilisation de WebSockets comme le SignalR transport en raison de la latence plus faible, la fiabilité et la [sécurité](xref:signalr/security). Long Polling est SignalR utilisé lorsque WebSockets n’est pas disponible ou lorsque l’application est explicitement configurée pour utiliser Long Polling. Lors du déploiement vers Azure App Service, configurez l’application pour utiliser WebSockets dans les paramètres du portail Azure pour le service. Pour plus de détails sur la configuration de [ SignalR ](xref:signalr/publish-to-azure-web-app)l’application pour Azure App Service, consultez les directives de publication .
+Blazorfonctionne mieux lorsque vous utilisez WebSocket en tant SignalR que transport en raison d’une latence, d’une fiabilité et d’une [sécurité](xref:signalr/security)moindres. L’interrogation longue est utilisée SignalR par lorsque WebSocket n’est pas disponible ou lorsque l’application est configurée explicitement pour utiliser une interrogation longue. Lors du déploiement sur Azure App Service, configurez l’application pour qu’elle utilise WebSockets dans les paramètres Portail Azure pour le service. Pour plus d’informations sur la configuration de l’application pour Azure App service, consultez les [ SignalR instructions de publication](xref:signalr/publish-to-azure-web-app).
 
-#### <a name="azure-opno-locsignalr-service"></a>Azure SignalR Service
+#### <a name="azure-signalr-service"></a>Service SignalR Azure
 
-Nous vous recommandons d’utiliser le [service Azure SignalR ](/azure/azure-signalr) pour Blazor les applications Server. Le service permet d’intensifier Blazor une application Server à SignalR un grand nombre de connexions simultanées. En outre, SignalR la portée mondiale et les centres de données de haute performance du service aident considérablement à réduire la latence due à la géographie. Pour configurer une application (et une SignalR disposition optionnelle) le service Azure :
+Nous vous recommandons d’utiliser le [service Azure SignalR ](/azure/azure-signalr) pour Blazor les applications serveur. Le service permet la mise à l’échelle Blazor d’une application serveur vers un grand nombre SignalR de connexions simultanées. En outre, la SignalR portée mondiale et les centres de données haute performance du service contribuent de manière significative à réduire la latence en raison de la géographie. Pour configurer une application (et éventuellement approvisionner) le service SignalR Azure :
 
-1. Activez le service pour prendre en charge *les sessions collantes,* où les clients sont [redirigés vers le même serveur lors du précommande](xref:blazor/hosting-models#connection-to-the-server). Définissez `ServerStickyMode` la valeur `Required`de l’option ou de la configuration à . En règle générale, une application crée la configuration à **l’aide d’une** des approches suivantes :
+1. Activez le service pour prendre en charge les *sessions rémanentes*, où les clients sont [redirigés vers le même serveur lors du prérendu](xref:blazor/hosting-models#connection-to-the-server). Définissez l' `ServerStickyMode` option ou la valeur de `Required`configuration sur. En règle générale, une application crée la configuration à l’aide de l' **une** des approches suivantes :
 
    * `Startup.ConfigureServices`:
   
@@ -71,30 +71,30 @@ Nous vous recommandons d’utiliser le [service Azure SignalR ](/azure/azure-sig
      });
      ```
 
-   * Configuration (utiliser **l’une** des approches suivantes) :
+   * Configuration (utilisez l' **une** des approches suivantes) :
   
-     * *appsettings.json*:
+     * *appSettings. JSON*:
 
        ```json
        "Azure:SignalR:ServerStickyMode": "Required"
        ```
 
-     * Les paramètres **d’application configuration** > **Application settings** du service d’application dans le portail Azure (**Nom**: `Azure:SignalR:ServerStickyMode`, **Valeur**: `Required`).
+     * Les**paramètres d’application** de **configuration** > de l’app service dans le portail Azure `Azure:SignalR:ServerStickyMode`(**nom**: `Required`, **valeur**:).
 
-1. Créez un profil de publication Azure Blazor Apps dans Visual Studio pour l’application Server.
-1. Ajoutez la dépendance **au service Azure SignalR ** au profil. Si l’abonnement Azure n’a pas SignalR d’instance de service Azure préexistant à attribuer à l’application, **sélectionnez Créer une nouvelle instance de service Azure SignalR ** pour fournir une nouvelle instance de service.
+1. Créez un profil de publication Azure Apps dans Visual Studio pour Blazor l’application serveur.
+1. Ajoutez la dépendance du **service Azure SignalR ** au profil. Si l’abonnement Azure n’a pas d’instance de service SignalR Azure préexistante à attribuer à l’application, sélectionnez **créer une SignalR nouvelle instance de service Azure** pour approvisionner une nouvelle instance de service.
 1. Publiez l’application dans Azure.
 
 #### <a name="iis"></a>IIS
 
-Lors de l’utilisation de l’IIS, activez :
+Lorsque vous utilisez IIS, activez :
 
-* [WebSockets sur IIS](xref:fundamentals/websockets#enabling-websockets-on-iis).
-* [Séances collantes avec itinéraire de demande d’application](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing).
+* [WebSocket sur IIS](xref:fundamentals/websockets#enabling-websockets-on-iis).
+* [Sessions rémanentes avec application Request Routing](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing).
 
 #### <a name="kubernetes"></a>Kubernetes
 
-Créez une définition d’entrée avec les [annotations suivantes de Kubernetes pour des sessions collantes](https://kubernetes.github.io/ingress-nginx/examples/affinity/cookie/):
+Créez une définition d’entrée avec les [Annotations Kubernetes suivantes pour les sessions rémanentes](https://kubernetes.github.io/ingress-nginx/examples/affinity/cookie/):
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -110,10 +110,10 @@ metadata:
 
 #### <a name="linux-with-nginx"></a>Linux avec Nginx
 
-Pour SignalR que WebSockets fonctionne correctement, confirmez `Upgrade` `Connection` que les proxy et les `$connection_upgrade` en-têtes sont réglés sur les valeurs suivantes et que cela est cartographié à l’un ou l’autre:
+Pour SignalR que WebSocket fonctionne correctement, vérifiez que les en-têtes `Upgrade` et `Connection` du proxy sont définis sur les valeurs suivantes et qu' `$connection_upgrade` ils sont mappés à l’un ou l’autre des éléments suivants :
 
-* La valeur d’en-tête De mise à niveau par défaut.
-* `close`lorsque l’en-tête De mise à niveau est manquant ou vide.
+* Valeur d’en-tête de mise à niveau par défaut.
+* `close`Lorsque l’en-tête de mise à niveau est manquant ou vide.
 
 ```
 http {
@@ -142,12 +142,12 @@ http {
 Pour plus d’informations, consultez les articles suivants :
 
 * [NGINX en tant que proxy WebSocket](https://www.nginx.com/blog/websocket-nginx/)
-* [Proxying WebSocket](http://nginx.org/docs/http/websocket.html)
+* [Proxy WebSocket](http://nginx.org/docs/http/websocket.html)
 * <xref:host-and-deploy/linux-nginx>
 
 ### <a name="measure-network-latency"></a>Mesurer la latence du réseau
 
-[JS interop](xref:blazor/call-javascript-from-dotnet) peut être utilisé pour mesurer la latence du réseau, comme le montre l’exemple suivant :
+L' [interopérabilité js](xref:blazor/call-javascript-from-dotnet) peut être utilisée pour mesurer la latence du réseau, comme le montre l’exemple suivant :
 
 ```razor
 @inject IJSRuntime JS
@@ -175,4 +175,4 @@ else
 }
 ```
 
-Pour une expérience raisonnable de l’assurance-chômage, nous recommandons une latence d’assurance-chômage soutenue de 250ms ou moins.
+Pour une expérience d’interface utilisateur raisonnable, nous recommandons une latence d’interface utilisateur soutenue de 250 ms ou moins.
