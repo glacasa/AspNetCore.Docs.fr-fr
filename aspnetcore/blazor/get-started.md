@@ -5,17 +5,17 @@ description: Commencez Blazor par créer une Blazor application avec les outils 
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/16/2020
+ms.date: 04/30/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: 2f10b00adce31c020d46d107c087159c17341beb
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: 8ef55b92c45aa07113fd4601a3c7464b42125623
+ms.sourcegitcommit: 6318d2bdd63116e178c34492a904be85ec9ac108
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82111069"
+ms.lasthandoff: 04/30/2020
+ms.locfileid: "82604764"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>Prise en main d’ASP.NET Core éblouissante
 
@@ -25,7 +25,7 @@ Par [Daniel Roth](https://github.com/danroth27) et [Luke Latham](https://github.
 
 Pour vous familiariser avec éblouissant, suivez les instructions de votre choix d’outils :
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Pour créer des applications de serveur éblouissantes, installez la dernière version de [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) avec la charge de travail **développement Web et ASP.net** .
 
@@ -36,16 +36,16 @@ Pour vous familiariser avec éblouissant, suivez les instructions de votre choix
 1. Installez le modèle d’aperçu de [Webassembly éblouissant](xref:blazor/hosting-models#blazor-webassembly) en exécutant la commande suivante :
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
    ```
 
 1. Créez un projet.
 
 1. Sélectionnez l' **application éblouissant**. Sélectionnez **Suivant**.
 
-1. Indiquez un nom de projet dans le champ **Nom du projet**, ou acceptez le nom de projet par défaut. Confirmez que l’entrée d' **emplacement** est correcte ou indiquez un emplacement pour le projet. Sélectionnez **Créer**.
+1. Indiquez un nom de projet dans le champ **Nom du projet**, ou acceptez le nom de projet par défaut. Confirmez que l’entrée d' **emplacement** est correcte ou indiquez un emplacement pour le projet. Sélectionnez **Create** (Créer).
 
-1. Pour une expérience webassembly éblouissant (Visual Studio 16,6 Preview 2 ou version ultérieure), choisissez le modèle **application éblouissant Webassembly** . Pour une expérience de serveur éblouissant (Visual Studio 16,4 ou version ultérieure), choisissez le modèle **application de serveur éblouissant** . Sélectionnez **Créer**.
+1. Pour une expérience webassembly éblouissant (Visual Studio 16,6 Preview 2 ou version ultérieure), choisissez le modèle **application éblouissant Webassembly** . Pour une expérience de serveur éblouissant (Visual Studio 16,4 ou version ultérieure), choisissez le modèle **application de serveur éblouissant** . Sélectionnez **Create** (Créer).
 
 1. Appuyez sur <kbd>CTRL</kbd>+<kbd>F5</kbd> pour exécuter l’application.
 
@@ -56,13 +56,13 @@ Pour vous familiariser avec éblouissant, suivez les instructions de votre choix
 1. Si vous le souhaitez, vous pouvez installer le modèle d’aperçu de [Webassembly éblouissant](xref:blazor/hosting-models#blazor-webassembly) en exécutant la commande suivante :
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
    ```
 
    > [!NOTE]
    > La [version kit SDK .net Core 3.1.201 ou ultérieure](https://dotnet.microsoft.com/download/dotnet-core/3.1) est **requise** pour utiliser le modèle webassembly 3,2 Preview 4. Confirmez la version de kit SDK .NET Core installée `dotnet --version` en exécutant dans un interpréteur de commandes.
 
-1. Installez [Visual Studio code](https://code.visualstudio.com/).
+1. Installez [Visual Studio Code](https://code.visualstudio.com/).
 
 1. Installez la dernière [extension C# for Visual Studio code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) et l’extension de [débogueur JavaScript (nocturne)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) avec `debug.javascript.usePreview` la valeur `true`.
 
@@ -98,19 +98,19 @@ Le serveur éblouissant est pris en charge dans Visual Studio pour Mac. Le webas
 
 1. Sélectionnez **fichier** > **nouvelle solution** ou créer un **nouveau projet**.
 
-1. Dans la barre latérale, sélectionnez**application** **.net Core** > .
+1. Dans la barre latérale, sélectionnez**application** **Web et console** > .
 
-1. Sélectionnez le modèle **application de serveur éblouissant** . Sélectionnez **Créer**.
+1. Sélectionnez le modèle **application de serveur éblouissant** . Sélectionnez **Suivant**.
 
    Pour plus d’informations sur le modèle d’hébergement de serveur <xref:blazor/hosting-models>éblouissant, consultez.
 
-1. Définissez la version **cible** de **.NET Framework sur .net Core 3,1** , puis sélectionnez **suivant**.
+1. Vérifiez que la version cible de .NET **Framework** est définie sur **.net Core 3,1** , puis sélectionnez **suivant**.
 
-1. Dans le champ **nom du projet** , nommez `WebApplication1`l’application. Sélectionnez **Créer**.
+1. Dans le champ **nom du projet** , nommez `WebApplication1`l’application. Sélectionnez **Create** (Créer).
 
-1.  > Sélectionnez **exécuter****exécuter sans débogage** pour exécuter l’application *sans le débogueur*. Exécutez l’application avec **Démarrer le débogage** pour exécuter l’application *avec le débogueur*.
+1.  > Sélectionnez **exécuter****exécuter sans débogage** pour exécuter l’application *sans le débogueur*. Exécutez l’application avec le bouton **Démarrer le débogage** ou l’exécution (&#9654;) pour exécuter l’application *avec le débogueur*.
 
-Si une invite s’affiche pour faire confiance au certificat de développement, approuvez le certificat et continuez.
+Si une invite s’affiche pour faire confiance au certificat de développement, approuvez le certificat et continuez. Les mots de passe utilisateur et trousseau sont requis pour approuver le certificat.
 
 # <a name="net-core-cli"></a>[CLI .NET Core](#tab/netcore-cli/)
 
@@ -119,7 +119,7 @@ Si une invite s’affiche pour faire confiance au certificat de développement, 
 1. Si vous le souhaitez, vous pouvez installer le modèle d’aperçu de [Webassembly éblouissant](xref:blazor/hosting-models#blazor-webassembly) en exécutant la commande suivante :
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
    ```
 
    > [!NOTE]
