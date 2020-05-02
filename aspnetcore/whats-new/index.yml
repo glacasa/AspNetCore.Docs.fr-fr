@@ -6,17 +6,19 @@ metadata:
   description: En savoir plus sur le contenu nouveau et mis à jour dans ASP.NET Core docs.
   ms.topic: landing-page
   ms.date: 04/26/2020
-  ms.openlocfilehash: 1650541ec9a6c6160f65ce1a3e83caf4b5cd092e
-  ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+  ms.openlocfilehash: 0866238f4954d61afae169e972893b7bb12c58a7
+  ms.sourcegitcommit: 755952496316fdb0923689109b536b609ce525ee
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/28/2020
-  ms.locfileid: "82206084"
+  ms.lasthandoff: 05/01/2020
+  ms.locfileid: "82643036"
 landingContent:
 - title: Rechercher les mises à jour de ASP.NET Core docs
   linkLists:
   - linkListType: whats-new
     links:
+    - text: Avril 2020
+      url: 2020-04.md
     - text: Mars 2020
       url: 2020-03.md
     - text: Février 2020
@@ -27,8 +29,6 @@ landingContent:
       url: 2019-12.md
     - text: Novembre 2019
       url: 2019-11.md
-    - text: 2 octobre 2019
-      url: 2019-10.md
 - title: Participer-contribuer à ASP.NET Core docs
   linkLists:
   - linkListType: overview
