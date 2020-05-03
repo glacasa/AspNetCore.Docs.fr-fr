@@ -5,17 +5,17 @@ description: Découvrez comment sécuriser Blazor des applications serveur en ta
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/27/2020
+ms.date: 05/02/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/server/index
-ms.openlocfilehash: 0021911b731e57bc6eabf857c27a13462e7400ae
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 324b3e8ed2d931c81bb41381caa469b0ec2f2fda
+ms.sourcegitcommit: c19e388c83c981232e6f128d97440262adfe06e2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206367"
+ms.lasthandoff: 05/02/2020
+ms.locfileid: "82727809"
 ---
 # <a name="secure-aspnet-core-blazor-server-apps"></a>Sécuriser les applications de serveur ASP.NET Core éblouissantes
 
@@ -101,3 +101,7 @@ Les valeurs autorisées d’authentification (`{AUTHENTICATION}`) sont présent�
 Pour plus d’informations, consultez la commande [dotnet new](/dotnet/core/tools/dotnet-new) dans le Guide .NET Core.
 
 ---
+
+## <a name="secure-an-existing-app"></a>Sécuriser une application existante
+
+BlazorLes applications serveur sont configurées pour la sécurité de la même façon que les applications ASP.NET Core. Pour plus d’informations, consultez les articles <xref:security/index>sous.
