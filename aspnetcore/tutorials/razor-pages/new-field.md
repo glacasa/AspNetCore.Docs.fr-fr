@@ -1,17 +1,23 @@
 ---
-title: Ajouter un nouveau champ à une page Razor dans ASP.NET Core
+title: Ajouter un nouveau champ à une Razor Page dans ASP.net Core
 author: rick-anderson
-description: Montre comment ajouter un nouveau champ à une page Razor avec Entity Framework Core
+description: Montre comment ajouter un nouveau champ à une Razor Page avec Entity Framework Core
 ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: d34b938dbd1b512ddb167cac0c035837889cd38f
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 683d6718f4dcdb73c45cbcf94f6ac4f477b71bcd
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78657814"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82769732"
 ---
 # <a name="add-a-new-field-to-a-razor-page-in-aspnet-core"></a>Ajouter un nouveau champ à une page Razor dans ASP.NET Core
 
@@ -28,7 +34,7 @@ Dans cette section, Migrations [Entity Framework](/ef/core/get-started/aspnetcor
 
 Quand vous utilisez EF Code First pour créer automatiquement une base de données, Code First :
 
-* Ajoute `__EFMigrationsHistory` un tableau à la base de données pour déterminer si le schéma de la base de données est synchronisé avec les classes de modèles qu’elle a générées.
+* Ajoute une `__EFMigrationsHistory` table à la base de données pour déterminer si le schéma de la base de données est synchronisé avec les classes de modèle à partir desquelles il a été généré.
 * Si les classes de modèle ne sont pas synchronisées avec la base de données, EF lève une exception.
 
 La vérification automatique de la synchronisation du schéma et du modèle facilite la détection des problèmes d’incohérence et de code de base de données.
@@ -53,11 +59,11 @@ Mettez à jour les pages suivantes :
 * Mettez à jour [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml) avec un champ `Rating`.
 * Ajoutez le champ `Rating` à la Page Edit.
 
-L’application ne fonctionne pas tant que la base de données n’est pas mise à jour pour inclure le nouveau champ. Exécution de l’application sans `SqlException`mettre à jour la base de données jette un :
+L’application ne fonctionne pas tant que la base de données n’est pas mise à jour pour inclure le nouveau champ. L’exécution de l’application sans mettre à jour la base `SqlException`de données lève une exception :
 
 `SqlException: Invalid column name 'Rating'.`
 
-L’exception `SqlException` est causée par la mise à jour classe de modèle de film étant différent du schéma de la table de film de la base de données. (Il n’existe pas de colonne `Rating` dans la table de base de données.)
+L' `SqlException` exception est due au fait que la classe de modèle Movie mise à jour est différente du schéma de la table Movie de la base de données. (Il n’existe pas de colonne `Rating` dans la table de base de données.)
 
 Plusieurs approches sont possibles pour résoudre l’erreur :
 
@@ -98,7 +104,7 @@ La commande `Add-Migration` indique au framework qu’il doit :
 
 Le nom « Rating » est arbitraire et utilisé pour nommer le fichier de migration. Il est utile d’utiliser un nom explicite pour le fichier de migration.
 
-La `Update-Database` commande indique au cadre d’appliquer les modifications du schéma à la base de données et de préserver les données existantes.
+La `Update-Database` commande indique à l’infrastructure d’appliquer les modifications de schéma à la base de données et de conserver les données existantes.
 
 <a name="ssox"></a>
 
@@ -108,9 +114,9 @@ Une autre option consiste à supprimer la base de données et à utiliser des mi
 
 * Sélectionnez la base de données dans SSOX.
 * Cliquez avec le bouton droit sur la base de données, puis sélectionnez *Supprimer*.
-* Vérifiez **fermer les connexions existantes**.
+* Cochez **Fermer les connexions existantes**.
 * Sélectionnez **OK**.
-* Dans le [PMC](xref:tutorials/razor-pages/new-field#pmc), mettre à jour la base de données:
+* Dans le [PMC](xref:tutorials/razor-pages/new-field#pmc), mettez à jour la base de données :
 
   ```powershell
   Update-Database
@@ -139,8 +145,8 @@ Exécutez l’application et vérifiez que vous pouvez créer/modifier/afficher 
 * [Version YouTube de ce tutoriel](https://youtu.be/3i7uMxiGGR8)
 
 > [!div class="step-by-step"]
-> [Précédent: Ajout de la recherche](xref:tutorials/razor-pages/search)
-> [suivante: Ajout de validation](xref:tutorials/razor-pages/validation)
+> [Précédent : ajout de la recherche](xref:tutorials/razor-pages/search)
+> [suivant : ajout](xref:tutorials/razor-pages/validation) de la validation
 
 ::: moniker-end
 
@@ -233,9 +239,9 @@ Une autre option consiste à supprimer la base de données et à utiliser des mi
 
 * Sélectionnez la base de données dans SSOX.
 * Cliquez avec le bouton droit sur la base de données, puis sélectionnez *Supprimer*.
-* Vérifiez **fermer les connexions existantes**.
+* Cochez **Fermer les connexions existantes**.
 * Sélectionnez **OK**.
-* Dans le [PMC](xref:tutorials/razor-pages/new-field#pmc), mettre à jour la base de données:
+* Dans le [PMC](xref:tutorials/razor-pages/new-field#pmc), mettez à jour la base de données :
 
   ```powershell
   Update-Database
@@ -262,7 +268,7 @@ Exécutez l’application et vérifiez que vous pouvez créer/modifier/afficher 
 * [Version YouTube de ce tutoriel](https://youtu.be/3i7uMxiGGR8)
 
 > [!div class="step-by-step"]
-> [Précédent: Ajout de la recherche](xref:tutorials/razor-pages/search)
-> [suivante: Ajout de validation](xref:tutorials/razor-pages/validation)
+> [Précédent : ajout de la recherche](xref:tutorials/razor-pages/search)
+> [suivant : ajout](xref:tutorials/razor-pages/validation) de la validation
 
 ::: moniker-end

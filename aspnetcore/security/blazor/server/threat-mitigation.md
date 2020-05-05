@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/27/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/server/threat-mitigation
-ms.openlocfilehash: 9a5e313153e5c5c17fc723cc9768c49ffd828007
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 2c87e6cef5a16b394b03dac1635f18d09593eb94
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206381"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774182"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>Guide d’atténuation des menaces pour ASP.NET Core serveur éblouissant
 
@@ -38,7 +41,7 @@ L’épuisement des ressources peut se produire lorsqu’un client interagit ave
 
 * [UC](#cpu)
 * [Mémoire](#memory)
-* [Connexions clientes](#client-connections)
+* [Connexions client](#client-connections)
 
 Les attaques par déni de service (DoS) cherchent généralement à épuiser les ressources d’une application ou d’un serveur. Toutefois, l’épuisement des ressources n’est pas nécessairement le résultat d’une attaque sur le système. Par exemple, les ressources limitées peuvent être épuisées en raison d’une demande élevée de l’utilisateur. DoS est abordé plus en détail dans la section [attaques par déni de service (dos)](#denial-of-service-dos-attacks) .
 
@@ -342,9 +345,9 @@ Outre les protections implémentées par le Framework, l’application doit êtr
 
 Pour qu’une vulnérabilité XSS existe, l’application doit incorporer une entrée d’utilisateur dans la page rendue. BlazorLes composants serveur exécutent une étape de compilation dans laquelle le balisage d’un fichier *. Razor* est transformé en logique C# procédurale. Au moment de l’exécution, la logique C# génère une *arborescence de rendu* décrivant les éléments, le texte et les composants enfants. Elle est appliquée au DOM du navigateur via une séquence d’instructions JavaScript (ou est sérialisée en HTML dans le cas du prérendu) :
 
-* L’entrée utilisateur rendue par le biais d’une syntaxe Razor `@someStringValue`normale (par exemple,) n’expose pas de vulnérabilité XSS car le syntaxe Razor est ajouté au DOM via des commandes qui peuvent uniquement écrire du texte. Même si la valeur comprend le balisage HTML, la valeur est affichée sous forme de texte statique. Lors du prérendu, la sortie est codée au format HTML, ce qui affiche également le contenu sous forme de texte statique.
+* L’entrée utilisateur rendue via Razor une syntaxe normale (par `@someStringValue`exemple,) n’expose pas de Razor vulnérabilité XSS car la syntaxe est ajoutée au DOM via des commandes qui peuvent uniquement écrire du texte. Même si la valeur comprend le balisage HTML, la valeur est affichée sous forme de texte statique. Lors du prérendu, la sortie est codée au format HTML, ce qui affiche également le contenu sous forme de texte statique.
 * Les balises de script ne sont pas autorisées et ne doivent pas être incluses dans l’arborescence de rendu des composants de l’application. Si une balise de script est incluse dans le balisage d’un composant, une erreur de compilation est générée.
-* Les auteurs de composants peuvent créer des composants en C# sans utiliser Razor. L’auteur du composant est chargé d’utiliser les API appropriées lors de l’émission de la sortie. Par exemple, utilisez `builder.AddContent(0, someUserSuppliedString)` et *non* `builder.AddMarkupContent(0, someUserSuppliedString)`, car ces derniers peuvent créer une vulnérabilité XSS.
+* Les auteurs de composants peuvent créer des composants en RazorC# sans utiliser. L’auteur du composant est chargé d’utiliser les API appropriées lors de l’émission de la sortie. Par exemple, utilisez `builder.AddContent(0, someUserSuppliedString)` et *non* `builder.AddMarkupContent(0, someUserSuppliedString)`, car ces derniers peuvent créer une vulnérabilité XSS.
 
 Dans le cadre de la protection contre les attaques XSS, envisagez d’implémenter des atténuations XSS, telles que la [stratégie de sécurité du contenu (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP).
 

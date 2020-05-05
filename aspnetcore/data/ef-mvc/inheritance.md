@@ -1,20 +1,26 @@
 ---
-title: 'Tutorial: Implémenter l’héritage - ASP.NET MVC avec EF Core'
+title: 'Didacticiel : implémenter l’héritage-ASP.NET MVC avec EF Core'
 description: Ce didacticiel vous indiquera comment implémenter l’héritage dans le modèle de données en utilisant Entity Framework Core dans une application ASP.NET Core.
 author: rick-anderson
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: dab3d2b057162f6d986db10e74e3681acc0ada3b
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 4883c697e950cac298dec961b4cd5a5096d8e946
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78657240"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773573"
 ---
-# <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>Tutorial: Implémenter l’héritage - ASP.NET MVC avec EF Core
+# <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>Didacticiel : implémenter l’héritage-ASP.NET MVC avec EF Core
 
 Dans le didacticiel précédent, vous avez géré les exceptions d’accès concurrentiel. Ce didacticiel vous indiquera comment implémenter l’héritage dans le modèle de données.
 
@@ -171,4 +177,4 @@ Dans ce tutoriel, vous allez :
 Passez au tutoriel suivant pour découvrir comment gérer divers scénarios Entity Framework relativement avancés.
 
 > [!div class="nextstepaction"]
-> [Suivant: Sujets avancés](advanced.md)
+> [Rubrique suivante : Rubriques avancées](advanced.md)

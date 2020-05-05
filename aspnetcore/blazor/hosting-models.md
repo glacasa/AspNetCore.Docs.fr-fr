@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 03/31/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 48f5b09199091b2b55974010a2b0715c28eb1bae
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 524fd015278d1a5f784fa306f077d06b865201c4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205967"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772085"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>Modèles Blazor d’hébergement ASP.net Core
 
@@ -94,9 +97,9 @@ Le Blazor modèle d’application serveur prend en charge les [conteneurs docker
 
 ### <a name="comparison-to-server-rendered-ui"></a>Comparaison avec l’interface utilisateur du rendu serveur
 
-L’une des façons Blazor de comprendre les applications serveur consiste à comprendre comment elle diffère des modèles traditionnels pour le rendu de l’interface utilisateur dans les applications de ASP.net core à l’aide de vues Razor ou de Razor pages. Les deux modèles utilisent le langage Razor pour décrire le contenu HTML, mais ils diffèrent considérablement dans le mode de rendu du balisage.
+Une façon de comprendre Blazor les applications serveur consiste à comprendre la différence entre les modèles traditionnels de rendu de l’interface utilisateur Razor dans les Razor applications de ASP.net core à l’aide de vues ou de pages. Les deux modèles utilisent Razor le langage pour décrire le contenu HTML, mais ils diffèrent sensiblement dans le mode de rendu du balisage.
 
-Quand une page Razor ou une vue est restituée, chaque ligne de code Razor émet du code HTML sous forme de texte. Après le rendu, le serveur supprime l’instance de la page ou de la vue, y compris tout état produit. Lorsqu’une autre demande pour la page se produit, par exemple lorsque la validation du serveur échoue et que le résumé des validations s’affiche :
+Quand une Razor page ou une vue est restituée, chaque Razor ligne de code émet du code HTML sous forme de texte. Après le rendu, le serveur supprime l’instance de la page ou de la vue, y compris tout état produit. Lorsqu’une autre demande pour la page se produit, par exemple lorsque la validation du serveur échoue et que le résumé des validations s’affiche :
 
 * La page entière est de nouveau restituée au texte HTML.
 * La page est envoyée au client.

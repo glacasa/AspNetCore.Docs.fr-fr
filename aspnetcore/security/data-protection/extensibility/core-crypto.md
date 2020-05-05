@@ -4,20 +4,26 @@ author: rick-anderson
 description: En savoir plus sur IAuthenticatedEncryptor, IAuthenticatedEncryptorDescriptor, IAuthenticatedEncryptorDescriptorDeserializer et la fabrique de niveau supérieur.
 ms.author: riande
 ms.date: 08/11/2017
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/extensibility/core-crypto
-ms.openlocfilehash: a5f651e3313cc579b995b45905826a5bffcc241c
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: c63cc124e1893f23c18581841194fa66848a2a1e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78663568"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776420"
 ---
 # <a name="core-cryptography-extensibility-in-aspnet-core"></a>Extensibilité du chiffrement de base dans ASP.NET Core
 
 <a name="data-protection-extensibility-core-crypto"></a>
 
 >[!WARNING]
-> Types qui implémentent les interfaces suivantes doivent être thread-safe pour les appelants plusieurs.
+> Les types qui implémentent l’une des interfaces suivantes doivent être thread-safe pour plusieurs appelants.
 
 <a name="data-protection-extensibility-core-crypto-iauthenticatedencryptor"></a>
 
@@ -68,7 +74,7 @@ byte[] roundTripped = encryptor2.Decrypt(new ArraySegment<byte>(ciphertext), aad
 // the 'roundTripped' and 'plaintext' buffers should be equivalent
 ```
 
-# <a name="aspnet-core-1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
+# <a name="aspnet-core-1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
 
 L’interface **IAuthenticatedEncryptorDescriptor** représente un type qui sait comment créer une instance [IAuthenticatedEncryptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptor) . Son API se présente comme suit.
 
@@ -108,7 +114,7 @@ L’interface **IAuthenticatedEncryptorDescriptor** représente un type qui sait
 
 * ExportToXml() : XmlSerializedDescriptorInfo
 
-# <a name="aspnet-core-1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
+# <a name="aspnet-core-1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
 
 ---
 
@@ -120,7 +126,7 @@ La principale différence entre IAuthenticatedEncryptor et IAuthenticatedEncrypt
 
 Le descripteur peut être sérialisé par le biais de sa routine ExportToXml. Cette routine retourne un XmlSerializedDescriptorInfo qui contient deux propriétés : la représentation XElement du descripteur et le type qui représente un [IAuthenticatedEncryptorDescriptorDeserializer](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptordeserializer) qui peut être utilisé pour ressusciter ce descripteur en fonction du XElement correspondant.
 
-Le descripteur sérialisé peut contenir des informations sensibles telles que le matériel de clé de chiffrement. Le système de protection des données offre une prise en charge intégrée du chiffrement des informations avant qu’elles ne soient rendues persistantes dans le stockage. Pour tirer parti de cela, le descripteur doit marquer l’élément qui contient des informations sensibles avec le nom d’attribut « requiresEncryption » (xmlns «<http://schemas.asp.net/2015/03/dataProtection>»), valeur « true ».
+Le descripteur sérialisé peut contenir des informations sensibles telles que le matériel de clé de chiffrement. Le système de protection des données offre une prise en charge intégrée du chiffrement des informations avant qu’elles ne soient rendues persistantes dans le stockage. Pour tirer parti de cela, le descripteur doit marquer l’élément qui contient des informations sensibles avec le nom d’attribut « requiresEncryption<http://schemas.asp.net/2015/03/dataProtection>» (xmlns « »), la valeur «true ».
 
 >[!TIP]
 > Il existe une API d’assistance pour définir cet attribut. Appelez la méthode d’extension XElement. MarkAsRequiresEncryption () située dans l’espace de noms Microsoft. AspNetCore. DataProtection. AuthenticatedEncryption. distribuée.
@@ -139,9 +145,9 @@ La méthode ImportFromXml prend le XElement qui a été retourné par [IAuthenti
 
 Les types qui implémentent IAuthenticatedEncryptorDescriptorDeserializer doivent avoir l’un des deux constructeurs publics suivants :
 
-* .ctor(IServiceProvider)
+* . ctor (IServiceProvider)
 
-* .ctor()
+* . ctor ()
 
 > [!NOTE]
 > Le IServiceProvider passé au constructeur peut avoir la valeur null.
@@ -160,7 +166,7 @@ Quand CreateNewDescriptor est appelé, le matériel de clé actualisé est cré�
 
 Le type AlgorithmConfiguration sert de point d’entrée pour les routines de création de clés telles que le [déroulement automatique de clés](xref:security/data-protection/implementation/key-management#key-expiration-and-rolling). Pour modifier l’implémentation pour toutes les futures clés, définissez la propriété AuthenticatedEncryptorConfiguration dans KeyManagementOptions.
 
-# <a name="aspnet-core-1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
+# <a name="aspnet-core-1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
 
 L’interface **IAuthenticatedEncryptorConfiguration** représente un type qui sait comment créer des instances [IAuthenticatedEncryptorDescriptor](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptor) . Il expose une seule API.
 

@@ -5,13 +5,19 @@ description: Découvrez comment fonctionne la liaison de modèle avec ASP.NET Co
 ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: riande
 ms.date: 12/18/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: 19580768679f30131683717792252c03aade68f9
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 2e604cd1869ea077fc0465df91ec083b9db83763
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78666277"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768968"
 ---
 # <a name="model-binding-in-aspnet-core"></a>Liaison de données dans ASP.NET Core
 
@@ -23,10 +29,10 @@ Cet article explique ce qu’est la liaison de modèle, comment elle fonctionne 
 
 ## <a name="what-is-model-binding"></a>Description de la liaison de modèle
 
-Les contrôleurs et Razor Pages utilisent des données provenant de requêtes HTTP. Par exemple, les données de routage peuvent fournir une clé d’enregistrement, et les champs de formulaire posté peuvent fournir des valeurs pour les propriétés du modèle. L’écriture du code permettant de récupérer chacune de ces valeurs et de les convertir en types .NET à partir de chaînes est fastidieuse et source d’erreurs. La liaison de modèle automatise ce processus. Le système de liaison de modèle :
+Les contrôleurs et les Razor pages fonctionnent avec des données provenant de requêtes http. Par exemple, les données de routage peuvent fournir une clé d’enregistrement, et les champs de formulaire posté peuvent fournir des valeurs pour les propriétés du modèle. L’écriture du code permettant de récupérer chacune de ces valeurs et de les convertir en types .NET à partir de chaînes est fastidieuse et source d’erreurs. La liaison de modèle automatise ce processus. Le système de liaison de modèle :
 
 * Récupère les données de diverses sources telles que les données de routage, les champs de formulaire et les chaînes de requête
-* Fournit les données aux contrôleurs et à Razor Pages dans les paramètres de méthode et les propriétés publiques
+* Fournit les données aux contrôleurs Razor et aux pages dans les paramètres de méthode et les propriétés publiques.
 * Convertit les données de chaîne en types .NET
 * Met à jour les propriétés des types complexes
 
@@ -60,7 +66,7 @@ Dans l’exemple précédent, les cibles de liaison de modèle sont des paramèt
 La liaison de modèle tente de trouver des valeurs pour les genres de cible suivants :
 
 * Paramètres de la méthode d’action de contrôleur vers laquelle une requête est routée.
-* Paramètres de la méthode de gestionnaire Razor Pages vers laquelle une requête est routée. 
+* Paramètres de la Razor méthode de gestionnaire de pages vers laquelle une requête est routée. 
 * Propriétés publiques d’un contrôleur ou d’une classe `PageModel`, si elles sont spécifiées par des attributs.
 
 ### <a name="bindproperty-attribute"></a>Attribut [BindProperty]
@@ -98,11 +104,11 @@ Pour chaque paramètre ou propriété cible, les sources sont analysées dans l�
 
 Si la source par défaut n’est pas correcte, utilisez l’un des attributs suivants pour spécifier la source :
 
-* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute) -obtient des valeurs à partir de la chaîne de requête. 
-* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute) -obtient des valeurs à partir des données d’itinéraire.
-* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) -obtient des valeurs à partir de champs de formulaire publiés.
-* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute) : obtient les valeurs du corps de la demande.
-* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) -obtient des valeurs à partir des en-têtes HTTP.
+* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute)-Obtient des valeurs à partir de la chaîne de requête. 
+* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute)-Obtient des valeurs à partir des données d’itinéraire.
+* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)-Obtient des valeurs à partir de champs de formulaire publiés.
+* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute)-Obtient les valeurs du corps de la demande.
+* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute)-Obtient des valeurs à partir des en-têtes HTTP.
 
 Ces attributs :
 
@@ -116,15 +122,15 @@ Ces attributs :
 
 ### <a name="frombody-attribute"></a>Attribut [FromBody]
 
-Appliquez l’attribut `[FromBody]` à un paramètre pour remplir ses propriétés à partir du corps d’une requête HTTP. Le runtime ASP.NET Core délègue la responsabilité de lire le corps dans un formateur d’entrée. Les formateurs d’entrée sont décrits [plus loin dans cet article](#input-formatters).
+Appliquez l' `[FromBody]` attribut à un paramètre pour remplir ses propriétés à partir du corps d’une requête http. Le runtime ASP.NET Core délègue la responsabilité de lire le corps dans un formateur d’entrée. Les formateurs d’entrée sont décrits [plus loin dans cet article](#input-formatters).
 
-Lorsque `[FromBody]` est appliqué à un paramètre de type complexe, tous les attributs de source de liaison appliqués à ses propriétés sont ignorés. Par exemple, l’action `Create` suivante spécifie que son paramètre `pet` est renseigné à partir du corps :
+Lorsque `[FromBody]` est appliqué à un paramètre de type complexe, tous les attributs de source de liaison appliqués à ses propriétés sont ignorés. Par exemple, l’action `Create` suivante spécifie que `pet` son paramètre est rempli à partir du corps :
 
 ```csharp
 public ActionResult<Pet> Create([FromBody] Pet pet)
 ```
 
-La classe `Pet` spécifie que sa propriété `Breed` est remplie à partir d’un paramètre de chaîne de requête :
+La `Pet` classe spécifie que `Breed` sa propriété est remplie à partir d’un paramètre de chaîne de requête :
 
 ```csharp
 public class Pet
@@ -138,12 +144,12 @@ public class Pet
 
 Dans l'exemple précédent :
 
-* L’attribut `[FromQuery]` est ignoré.
-* La propriété `Breed` n’est pas remplie à partir d’un paramètre de chaîne de requête. 
+* L' `[FromQuery]` attribut est ignoré.
+* La `Breed` propriété n’est pas remplie à partir d’un paramètre de chaîne de requête. 
 
-Les formateurs d’entrée lisent uniquement le corps et ne comprennent pas les attributs de source de liaison. Si une valeur appropriée est trouvée dans le corps, cette valeur est utilisée pour remplir la propriété `Breed`.
+Les formateurs d’entrée lisent uniquement le corps et ne comprennent pas les attributs de source de liaison. Si une valeur appropriée est trouvée dans le corps, cette valeur est utilisée pour remplir la `Breed` propriété.
 
-N’appliquez pas `[FromBody]` à plus d’un paramètre par méthode d’action. Une fois que le flux de requête est lu par un formateur d’entrée, il ne peut plus être lu pour lier d’autres paramètres de `[FromBody]`.
+N’appliquez pas `[FromBody]` à plus d’un paramètre par méthode d’action. Une fois que le flux de requête est lu par un formateur d’entrée, il ne peut plus être lu pour la `[FromBody]` liaison d’autres paramètres.
 
 ### <a name="additional-sources"></a>Sources supplémentaires
 
@@ -168,7 +174,7 @@ Par défaut, aucune erreur d’état de modèle n’est créée, s’il n’exis
 * Pour les types complexes, la liaison de modèle crée une instance à l’aide du constructeur par défaut, sans définir de propriétés.
 * Les tableaux ont la valeur `Array.Empty<T>()`, sauf les tableaux `byte[]` qui ont une valeur `null`.
 
-Si l’état du modèle doit être invalidé lorsque rien n’est trouvé dans les champs de formulaire d’une propriété de modèle, utilisez l’attribut [`[BindRequired]`](#bindrequired-attribute) .
+Si l’état du modèle doit être invalidé lorsque rien n’est trouvé dans les champs de formulaire d’une propriété de [`[BindRequired]`](#bindrequired-attribute) modèle, utilisez l’attribut.
 
 Notez que ce comportement de `[BindRequired]` s’applique à la liaison de modèle des données de formulaire postées, et non aux données JSON ou XML d’un corps de requête. Les données du corps de requête sont prises en charge par les [formateurs d’entrée](#input-formatters).
 
@@ -178,11 +184,11 @@ Si une source est localisée mais qu’elle ne peut pas être convertie vers le 
 
 Dans un contrôleur d’API ayant l’attribut `[ApiController]`, un état de modèle non valide entraîne une réponse HTTP 400 automatique.
 
-Dans une page Razor Pages, réaffichez la page avec un message d’erreur :
+Dans une Razor page, réaffichez la page avec un message d’erreur :
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/Instructors/Create.cshtml.cs?name=snippet_HandleMBError&highlight=3-6)]
 
-La validation côté client intercepte la plupart des données incorrectes qui sont envoyées à un formulaire Razor Pages. Cette validation rend difficile le déclenchement du code en surbrillance indiqué plus haut. L’exemple d’application comprend un bouton **Submit with Invalid Date** (Envoyer avec une date non valide), qui place les données incorrectes dans le champ **Hire Date** (Date d’embauche) et envoie le formulaire. Ce bouton montre comment fonctionne le code permettant de réafficher la page quand des erreurs de conversion de données se produisent.
+La validation côté client intercepte la plupart des données incorrectes qui seraient Razor autrement soumises à un formulaire de pages. Cette validation rend difficile le déclenchement du code en surbrillance indiqué plus haut. L’exemple d’application comprend un bouton **Submit with Invalid Date** (Envoyer avec une date non valide), qui place les données incorrectes dans le champ **Hire Date** (Date d’embauche) et envoie le formulaire. Ce bouton montre comment fonctionne le code permettant de réafficher la page quand des erreurs de conversion de données se produisent.
 
 Quand la page est réaffichée par le code précédent, l’entrée non valide n’est pas visible dans le champ de formulaire. En effet, la propriété de modèle à une valeur null ou une valeur par défaut. L’entrée non valide apparaît dans un message d’erreur. Toutefois, si vous souhaitez réafficher les données incorrectes dans le champ de formulaire, transformez la propriété de modèle en chaîne et procédez à la conversion des données manuellement.
 
@@ -197,9 +203,9 @@ Les types simples que le lieur de modèle peut convertir en chaînes sources son
 * [Char](xref:System.ComponentModel.CharConverter)
 * [DateTime](xref:System.ComponentModel.DateTimeConverter)
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
-* [Decimal](xref:System.ComponentModel.DecimalConverter)
-* [Double](xref:System.ComponentModel.DoubleConverter)
-* [Enum](xref:System.ComponentModel.EnumConverter)
+* [Décimal](xref:System.ComponentModel.DecimalConverter)
+* [Cliquer](xref:System.ComponentModel.DoubleConverter)
+* [Variables](xref:System.ComponentModel.EnumConverter)
 * [Guid](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
 * [Unique](xref:System.ComponentModel.SingleConverter)
@@ -446,17 +452,17 @@ Pour utiliser les formateurs d’entrée XML intégrés :
 
 ### <a name="customize-model-binding-with-input-formatters"></a>Personnaliser la liaison de modèle avec des formateurs d’entrée
 
-Un formateur d’entrée est entièrement chargé de lire les données dans le corps de la requête. Pour personnaliser ce processus, configurez les API utilisées par le formateur d’entrée. Cette section décrit comment personnaliser le formateur d’entrée basé sur `System.Text.Json`pour comprendre un type personnalisé nommé `ObjectId`. 
+Un formateur d’entrée est entièrement chargé de lire les données dans le corps de la requête. Pour personnaliser ce processus, configurez les API utilisées par le formateur d’entrée. Cette section décrit comment personnaliser le `System.Text.Json`formateur d’entrée basé sur pour comprendre un type personnalisé nommé `ObjectId`. 
 
-Prenons le modèle suivant, qui contient une propriété de `ObjectId` personnalisée nommée `Id`:
+Prenons le modèle suivant, qui contient une propriété `ObjectId` personnalisée nommée `Id`:
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/ModelWithObjectId.cs?name=snippet_Class&highlight=3)]
 
-Pour personnaliser le processus de liaison de modèle lors de l’utilisation de `System.Text.Json`, créez une classe dérivée de <xref:System.Text.Json.Serialization.JsonConverter%601>:
+Pour personnaliser le processus de liaison de modèle `System.Text.Json`lors de l’utilisation de, <xref:System.Text.Json.Serialization.JsonConverter%601>créez une classe dérivée de :
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/JsonConverters/ObjectIdConverter.cs?name=snippet_Class)]
 
-Pour utiliser un convertisseur personnalisé, appliquez l’attribut <xref:System.Text.Json.Serialization.JsonConverterAttribute> au type. Dans l’exemple suivant, le type de `ObjectId` est configuré avec `ObjectIdConverter` comme convertisseur personnalisé :
+Pour utiliser un convertisseur personnalisé, appliquez l' <xref:System.Text.Json.Serialization.JsonConverterAttribute> attribut au type. Dans l’exemple suivant, le `ObjectId` type est configuré avec `ObjectIdConverter` comme son convertisseur personnalisé :
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/ObjectId.cs?name=snippet_Class&highlight=1)]
 
@@ -484,9 +490,9 @@ Vous pouvez appeler la liaison de modèle manuellement à l’aide de la méthod
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
 
-<xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> utilise des fournisseurs de valeurs pour obtenir des données à partir du corps du formulaire, de la chaîne de requête et des données d’itinéraire. `TryUpdateModelAsync` est généralement : 
+<xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*>utilise des fournisseurs de valeurs pour obtenir des données à partir du corps du formulaire, la chaîne de requête et les données d’itinéraire. `TryUpdateModelAsync`est généralement : 
 
-* Utilisé avec les applications Razor Pages et MVC à l’aide de contrôleurs et de vues pour empêcher la survalidation.
+* Utilisé avec Razor les pages et les applications MVC à l’aide de contrôleurs et de vues pour empêcher la survalidation.
 * Non utilisé avec une API Web, sauf s’il est consommé à partir des données de formulaire, des chaînes de requête et des données de routage. Les points de terminaison de l’API Web qui utilisent JSON utilisent des [formateurs d’entrée](#input-formatters) pour désérialiser le corps de la requête dans un objet.
 
 Pour plus d’informations, consultez [TryUpdateModelAsync](xref:data/ef-rp/crud#TryUpdateModelAsync).
@@ -509,10 +515,10 @@ Cet article explique ce qu’est la liaison de modèle, comment elle fonctionne 
 
 ## <a name="what-is-model-binding"></a>Description de la liaison de modèle
 
-Les contrôleurs et Razor Pages utilisent des données provenant de requêtes HTTP. Par exemple, les données de routage peuvent fournir une clé d’enregistrement, et les champs de formulaire posté peuvent fournir des valeurs pour les propriétés du modèle. L’écriture du code permettant de récupérer chacune de ces valeurs et de les convertir en types .NET à partir de chaînes est fastidieuse et source d’erreurs. La liaison de modèle automatise ce processus. Le système de liaison de modèle :
+Les contrôleurs et les Razor pages fonctionnent avec des données provenant de requêtes http. Par exemple, les données de routage peuvent fournir une clé d’enregistrement, et les champs de formulaire posté peuvent fournir des valeurs pour les propriétés du modèle. L’écriture du code permettant de récupérer chacune de ces valeurs et de les convertir en types .NET à partir de chaînes est fastidieuse et source d’erreurs. La liaison de modèle automatise ce processus. Le système de liaison de modèle :
 
 * Récupère les données de diverses sources telles que les données de routage, les champs de formulaire et les chaînes de requête
-* Fournit les données aux contrôleurs et à Razor Pages dans les paramètres de méthode et les propriétés publiques
+* Fournit les données aux contrôleurs Razor et aux pages dans les paramètres de méthode et les propriétés publiques.
 * Convertit les données de chaîne en types .NET
 * Met à jour les propriétés des types complexes
 
@@ -546,7 +552,7 @@ Dans l’exemple précédent, les cibles de liaison de modèle sont des paramèt
 La liaison de modèle tente de trouver des valeurs pour les genres de cible suivants :
 
 * Paramètres de la méthode d’action de contrôleur vers laquelle une requête est routée.
-* Paramètres de la méthode de gestionnaire Razor Pages vers laquelle une requête est routée. 
+* Paramètres de la Razor méthode de gestionnaire de pages vers laquelle une requête est routée. 
 * Propriétés publiques d’un contrôleur ou d’une classe `PageModel`, si elles sont spécifiées par des attributs.
 
 ### <a name="bindproperty-attribute"></a>Attribut [BindProperty]
@@ -584,11 +590,11 @@ Pour chaque paramètre ou propriété cible, les sources sont analysées dans l�
 
 Si la source par défaut n’est pas correcte, utilisez l’un des attributs suivants pour spécifier la source :
 
-* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute) -obtient des valeurs à partir de la chaîne de requête. 
-* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute) -obtient des valeurs à partir des données d’itinéraire.
-* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) -obtient des valeurs à partir de champs de formulaire publiés.
-* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute) : obtient les valeurs du corps de la demande.
-* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) -obtient des valeurs à partir des en-têtes HTTP.
+* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute)-Obtient des valeurs à partir de la chaîne de requête. 
+* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute)-Obtient des valeurs à partir des données d’itinéraire.
+* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)-Obtient des valeurs à partir de champs de formulaire publiés.
+* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute)-Obtient les valeurs du corps de la demande.
+* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute)-Obtient des valeurs à partir des en-têtes HTTP.
 
 Ces attributs :
 
@@ -602,15 +608,15 @@ Ces attributs :
 
 ### <a name="frombody-attribute"></a>Attribut [FromBody]
 
-Appliquez l’attribut `[FromBody]` à un paramètre pour remplir ses propriétés à partir du corps d’une requête HTTP. Le runtime ASP.NET Core délègue la responsabilité de lire le corps dans un formateur d’entrée. Les formateurs d’entrée sont décrits [plus loin dans cet article](#input-formatters).
+Appliquez l' `[FromBody]` attribut à un paramètre pour remplir ses propriétés à partir du corps d’une requête http. Le runtime ASP.NET Core délègue la responsabilité de lire le corps dans un formateur d’entrée. Les formateurs d’entrée sont décrits [plus loin dans cet article](#input-formatters).
 
-Lorsque `[FromBody]` est appliqué à un paramètre de type complexe, tous les attributs de source de liaison appliqués à ses propriétés sont ignorés. Par exemple, l’action `Create` suivante spécifie que son paramètre `pet` est renseigné à partir du corps :
+Lorsque `[FromBody]` est appliqué à un paramètre de type complexe, tous les attributs de source de liaison appliqués à ses propriétés sont ignorés. Par exemple, l’action `Create` suivante spécifie que `pet` son paramètre est rempli à partir du corps :
 
 ```csharp
 public ActionResult<Pet> Create([FromBody] Pet pet)
 ```
 
-La classe `Pet` spécifie que sa propriété `Breed` est remplie à partir d’un paramètre de chaîne de requête :
+La `Pet` classe spécifie que `Breed` sa propriété est remplie à partir d’un paramètre de chaîne de requête :
 
 ```csharp
 public class Pet
@@ -624,12 +630,12 @@ public class Pet
 
 Dans l'exemple précédent :
 
-* L’attribut `[FromQuery]` est ignoré.
-* La propriété `Breed` n’est pas remplie à partir d’un paramètre de chaîne de requête. 
+* L' `[FromQuery]` attribut est ignoré.
+* La `Breed` propriété n’est pas remplie à partir d’un paramètre de chaîne de requête. 
 
-Les formateurs d’entrée lisent uniquement le corps et ne comprennent pas les attributs de source de liaison. Si une valeur appropriée est trouvée dans le corps, cette valeur est utilisée pour remplir la propriété `Breed`.
+Les formateurs d’entrée lisent uniquement le corps et ne comprennent pas les attributs de source de liaison. Si une valeur appropriée est trouvée dans le corps, cette valeur est utilisée pour remplir la `Breed` propriété.
 
-N’appliquez pas `[FromBody]` à plus d’un paramètre par méthode d’action. Une fois que le flux de requête est lu par un formateur d’entrée, il ne peut plus être lu pour lier d’autres paramètres de `[FromBody]`.
+N’appliquez pas `[FromBody]` à plus d’un paramètre par méthode d’action. Une fois que le flux de requête est lu par un formateur d’entrée, il ne peut plus être lu pour la `[FromBody]` liaison d’autres paramètres.
 
 ### <a name="additional-sources"></a>Sources supplémentaires
 
@@ -654,7 +660,7 @@ Par défaut, aucune erreur d’état de modèle n’est créée, s’il n’exis
 * Pour les types complexes, la liaison de modèle crée une instance à l’aide du constructeur par défaut, sans définir de propriétés.
 * Les tableaux ont la valeur `Array.Empty<T>()`, sauf les tableaux `byte[]` qui ont une valeur `null`.
 
-Si l’état du modèle doit être invalidé lorsque rien n’est trouvé dans les champs de formulaire d’une propriété de modèle, utilisez l’attribut [`[BindRequired]`](#bindrequired-attribute) .
+Si l’état du modèle doit être invalidé lorsque rien n’est trouvé dans les champs de formulaire d’une propriété de [`[BindRequired]`](#bindrequired-attribute) modèle, utilisez l’attribut.
 
 Notez que ce comportement de `[BindRequired]` s’applique à la liaison de modèle des données de formulaire postées, et non aux données JSON ou XML d’un corps de requête. Les données du corps de requête sont prises en charge par les [formateurs d’entrée](#input-formatters).
 
@@ -664,11 +670,11 @@ Si une source est localisée mais qu’elle ne peut pas être convertie vers le 
 
 Dans un contrôleur d’API ayant l’attribut `[ApiController]`, un état de modèle non valide entraîne une réponse HTTP 400 automatique.
 
-Dans une page Razor Pages, réaffichez la page avec un message d’erreur :
+Dans une Razor page, réaffichez la page avec un message d’erreur :
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Pages/Instructors/Create.cshtml.cs?name=snippet_HandleMBError&highlight=3-6)]
 
-La validation côté client intercepte la plupart des données incorrectes qui sont envoyées à un formulaire Razor Pages. Cette validation rend difficile le déclenchement du code en surbrillance indiqué plus haut. L’exemple d’application comprend un bouton **Submit with Invalid Date** (Envoyer avec une date non valide), qui place les données incorrectes dans le champ **Hire Date** (Date d’embauche) et envoie le formulaire. Ce bouton montre comment fonctionne le code permettant de réafficher la page quand des erreurs de conversion de données se produisent.
+La validation côté client intercepte la plupart des données incorrectes qui seraient Razor autrement soumises à un formulaire de pages. Cette validation rend difficile le déclenchement du code en surbrillance indiqué plus haut. L’exemple d’application comprend un bouton **Submit with Invalid Date** (Envoyer avec une date non valide), qui place les données incorrectes dans le champ **Hire Date** (Date d’embauche) et envoie le formulaire. Ce bouton montre comment fonctionne le code permettant de réafficher la page quand des erreurs de conversion de données se produisent.
 
 Quand la page est réaffichée par le code précédent, l’entrée non valide n’est pas visible dans le champ de formulaire. En effet, la propriété de modèle à une valeur null ou une valeur par défaut. L’entrée non valide apparaît dans un message d’erreur. Toutefois, si vous souhaitez réafficher les données incorrectes dans le champ de formulaire, transformez la propriété de modèle en chaîne et procédez à la conversion des données manuellement.
 
@@ -683,9 +689,9 @@ Les types simples que le lieur de modèle peut convertir en chaînes sources son
 * [Char](xref:System.ComponentModel.CharConverter)
 * [DateTime](xref:System.ComponentModel.DateTimeConverter)
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
-* [Decimal](xref:System.ComponentModel.DecimalConverter)
-* [Double](xref:System.ComponentModel.DoubleConverter)
-* [Enum](xref:System.ComponentModel.EnumConverter)
+* [Décimal](xref:System.ComponentModel.DecimalConverter)
+* [Cliquer](xref:System.ComponentModel.DoubleConverter)
+* [Variables](xref:System.ComponentModel.EnumConverter)
 * [Guid](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
 * [Unique](xref:System.ComponentModel.SingleConverter)

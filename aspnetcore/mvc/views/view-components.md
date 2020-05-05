@@ -5,23 +5,29 @@ description: Découvrez comment les composants de vue sont utilisés dans ASP.NE
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/view-components
-ms.openlocfilehash: 910fffbf360ed0f62f7fe20bc8bfdf5be8198876
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 28696d246c5e1e6874e0d9058813750ed1955003
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78660649"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774650"
 ---
 # <a name="view-components-in-aspnet-core"></a>Composants de vue dans ASP.NET Core
 
-De [Rick Anderson](https://twitter.com/RickAndMSFT)
+Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[Affichez ou téléchargez l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/view-components/sample) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
+[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/view-components/sample) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
 ## <a name="view-components"></a>Composants de vue
 
-Les composants de vue sont similaires aux vues partielles, mais ils sont beaucoup plus puissants. Les composants de vue n’utilisent pas la liaison de données ; ils dépendent uniquement des données fournies en réponse à l’appel d’un composant de vue. Cet article a été écrit avec des contrôleurs et des vues, mais les composants de vue fonctionnent également avec les Razor Pages.
+Les composants de vue sont similaires aux vues partielles, mais ils sont beaucoup plus puissants. Les composants de vue n’utilisent pas la liaison de données ; ils dépendent uniquement des données fournies en réponse à l’appel d’un composant de vue. Cet article a été écrit à l’aide de contrôleurs et de vues, Razor mais les composants de vue fonctionnent également avec les pages.
 
 Un composant de vue a les caractéristiques suivantes :
 
@@ -42,7 +48,7 @@ Les composants de vue sont conçus pour être utilisés là où vous avez une lo
 
 Un composant de vue a deux éléments : sa classe (généralement dérivée de [ViewComponent](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponent)) et le résultat qu’il retourne (en général, une vue). Comme les contrôleurs, un composant de vue peut être un OCT, mais la plupart des développeurs préfèrent utiliser les méthodes et propriétés dérivées de `ViewComponent`.
 
-Lorsque vous vérifiez si des composants de vue répondent aux spécifications d’une application, utilisez plutôt des composants Razor. Les composants Razor combinent également un balisage avec un code C# pour produire des unités d’interface utilisateur réutilisables. Les composants Razor sont conçus pour la productivité des développeurs lorsque vous fournissez une logique d’interface utilisateur et une composition côté client. Pour plus d’informations, consultez <xref:blazor/components>.
+Si vous envisagez que les composants de vue répondent aux spécifications Razor d’une application, envisagez plutôt d’utiliser des composants. RazorLes composants combinent également le balisage avec du code C# pour produire des unités d’interface utilisateur réutilisables. RazorLes composants sont conçus pour la productivité des développeurs lorsqu’ils fournissent la logique de l’interface utilisateur côté client et la composition. Pour plus d’informations, consultez <xref:blazor/components>.
 
 ## <a name="creating-a-view-component"></a>Création d’un composant de vue
 
@@ -69,7 +75,7 @@ Une classe de composant de vue :
 Un composant de vue définit sa logique dans une méthode `InvokeAsync` qui retourne un `Task<IViewComponentResult>`, ou dans une méthode `Invoke` synchrone qui retourne un `IViewComponentResult`. Les paramètres sont fournis directement en réponse à l’appel du composant de vue ; ils ne proviennent pas de la liaison de données. Un composant de vue ne traite jamais une requête directement. En règle générale, un composant de vue initialise un modèle et le passe à une vue en appelant la méthode `View`. En résumé, les méthodes d’un composant de vue :
 
 * Définissent une `InvokeAsync` méthode qui retourne un `Task<IViewComponentResult>` ou une méthode `Invoke` synchrone qui retourne un `IViewComponentResult`.
-* Initialise généralement un modèle et le passe à une vue en appelant la méthode `ViewComponent` `View`.
+* Initialise généralement un modèle et le passe à une vue en appelant la `ViewComponent` `View` méthode.
 * Les paramètres proviennent de la méthode appelante, et non pas de HTTP. Il n’y a pas de liaison de modèle.
 * Ne sont pas accessibles directement comme point de terminaison HTTP. Elles sont appelées depuis votre code (généralement dans une vue). Un composant de vue ne traite jamais une requête.
 * Sont surchargées sur la signature, plutôt que sur des détails de la requête HTTP en cours.
@@ -82,19 +88,19 @@ Le Runtime recherche la vue dans les chemins suivants :
 * /Views/Shared/Components/{View Component Name}/{View Name}
 * /Pages/Shared/Components/{View Component Name}/{View Name}
 
-Le chemin de recherche s’applique aux projets utilisant des contrôleurs + des vues et des Razor Pages.
+Le chemin de recherche s’applique aux projets qui utilisent des Razor contrôleurs, des vues et des pages.
 
 Le nom de la vue par défaut pour un composant de vue est *Default*. Votre fichier de vue est donc normalement appelé *Default.cshtml*. Vous pouvez spécifier un nom de vue différent quand vous créez le résultat du composant de vue ou quand vous appelez la méthode `View`.
 
-Nous vous recommandons de nommer le fichier de vue *Default.cshtml* et d’utiliser le chemin *Views/Shared/Components/{View Component Name}/{View Name}* . Le composant de vue `PriorityList` montré dans cet exemple utilise le chemin *Views/Shared/Components/PriorityList/Default.cshtml* pour la vue.
+Nous vous recommandons de nommer le fichier de vue *Default.cshtml* et d’utiliser le chemin *Views/Shared/Components/{View Component Name}/{View Name}*. Le composant de vue `PriorityList` montré dans cet exemple utilise le chemin *Views/Shared/Components/PriorityList/Default.cshtml* pour la vue.
 
 ### <a name="customize-the-view-search-path"></a>Personnaliser le chemin de recherche d’affichage
 
-Pour personnaliser le chemin de recherche d’affichage, modifiez la collection de <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions.ViewLocationFormats> Razor. Par exemple, pour rechercher des affichages dans le chemin d’accès « /Components/{View Component Name}/{View Name} », ajoutez un nouvel élément à la collection :
+Pour personnaliser le chemin de recherche d’affichage Razor, <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions.ViewLocationFormats> la collection de la modification. Par exemple, pour rechercher des affichages dans le chemin d’accès « /Components/{View Component Name}/{View Name} », ajoutez un nouvel élément à la collection :
 
 [!code-cs[](view-components/samples_snapshot/2.x/Startup.cs?name=snippet_ViewLocationFormats&highlight=4)]
 
-Dans le code précédent, l’espace réservé «{0}» représente le chemin d’accès « Components/{View Component Name}/{View Name} ».
+Dans le code précédent, l’espace réservé{0}« » représente le chemin d’accès «Components/{View Component Name}/{view Name} ».
 
 ## <a name="invoking-a-view-component"></a>Appel d’un composant de vue
 
@@ -181,18 +187,18 @@ Remarques sur le code :
 * `InvokeAsync` expose une méthode qui peut être appelée à partir d’une vue et qui peut prendre un nombre arbitraire d’arguments.
 * La méthode `InvokeAsync` retourne l’ensemble des tâches `ToDo` qui correspondent aux paramètres `isDone` et `maxPriority` spécifiés.
 
-### <a name="create-the-view-component-razor-view"></a>Créer la vue Razor du composant de vue
+### <a name="create-the-view-component-razor-view"></a>Créer la vue de Razor composant de vue
 
 * Créez le dossier *Views/Shared/Components*. Ce dossier **doit** être nommé *Components*.
 
 * Créez le dossier *Views/Shared/Components/PriorityList*. Ce nom de dossier doit correspondre au nom de la classe du composant de vue, ou au nom de la classe sans le suffixe (dans le cas où vous avez suivi la convention et utilisé le suffixe *ViewComponent* dans le nom de la classe). Si vous avez utilisé l’attribut `ViewComponent`, le nom de la classe doit correspondre à la désignation de l’attribut.
 
-* Créer une vue Razor *Views/Shared/Components/PriorityList/Default.cshtml* :
+* Créer une vue *Views/Shared/Components/PriorityList/default. cshtml* Razor :
 
 
   [!code-cshtml[](view-components/sample/ViewCompFinal/Views/Shared/Components/PriorityList/Default1.cshtml)]
 
-   La vue Razor affiche une liste des tâches `TodoItem` retournées. Si la méthode `InvokeAsync` du composant de vue ne passe pas le nom de la vue (comme dans notre exemple), le nom de vue *Default* est utilisé par convention. Je vous montrerai comment passer le nom de la vue plus tard dans ce didacticiel. Pour substituer le style par défaut d’un contrôleur spécifique, ajoutez une vue dans le dossier des vues du contrôleur (par exemple, *Views/ToDo/Components/PriorityList/Default.cshtml)* .
+   La Razor vue prend la liste `TodoItem` et les affiche. Si la méthode `InvokeAsync` du composant de vue ne passe pas le nom de la vue (comme dans notre exemple), le nom de vue *Default* est utilisé par convention. Je vous montrerai comment passer le nom de la vue plus tard dans ce didacticiel. Pour substituer le style par défaut d’un contrôleur spécifique, ajoutez une vue dans le dossier des vues du contrôleur (par exemple, *Views/ToDo/Components/PriorityList/Default.cshtml)*.
 
     Si le composant de vue est spécifique au contrôleur, vous pouvez l’ajouter au dossier du contrôleur (*Views/ToDo/Components/PriorityList/Default.cshtml*).
 
@@ -260,7 +266,7 @@ Pour éviter d’éventuels problèmes au moment de la compilation, vous pouvez 
 
 [!code-csharp[](../../mvc/views/view-components/sample/ViewCompFinal/ViewComponents/PriorityList.cs?highlight=10&range=5-35)]
 
-Ajoutez une instruction `using` dans votre fichier de vue Razor et utilisez l’opérateur `nameof` :
+Ajoutez une `using` instruction à votre Razor fichier de vue et utilisez l' `nameof` opérateur :
 
 [!code-cshtml[](view-components/sample/ViewCompFinal/Views/ToDo/IndexNameof.cshtml?range=1-6,35-)]
 
@@ -279,7 +285,7 @@ public class PriorityList : ViewComponent
 }
 ```
 
-Le fichier Razor du composant de vue contient les chaînes passées à la méthode `Invoke` (*Views/Home/Components/PriorityList/Default.cshtml*) :
+Le fichier du composant Razor de vue répertorie les chaînes passées `Invoke` à la méthode (*views/domotique/Components/PriorityList/default. cshtml*) :
 
 ```cshtml
 @model List<string>
@@ -295,7 +301,7 @@ Le fichier Razor du composant de vue contient les chaînes passées à la métho
 
 ::: moniker range=">= aspnetcore-1.1"
 
-Le composant de vue est appelé dans un fichier Razor (par exemple, *Views/Home/Index.cshtml*) à l’aide d’une des approches suivantes :
+Le composant de vue est appelé dans un Razor fichier (par exemple, *views/orig/index. cshtml*) à l’aide de l’une des approches suivantes :
 
 * <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper>
 * [Tag Helper](xref:mvc/views/tag-helpers/intro)
@@ -306,7 +312,7 @@ Pour utiliser l’approche <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper>,
 
 ::: moniker range="< aspnetcore-1.1"
 
-Le composant de vue est appelé dans un fichier Razor (par exemple, *Views/Home/Index.cshtml*) avec <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper>.
+Le composant de vue est appelé dans un Razor fichier (par exemple, *views/orig/index. cshtml*) avec <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper>.
 
 Appelez `Component.InvokeAsync` :
 
@@ -324,7 +330,7 @@ Pour utiliser le Tag Helper, inscrivez l’assembly contenant le composant de vu
 @addTagHelper *, MyWebApp
 ```
 
-Utilisez le Tag Helper du composant de vue dans le fichier de balisage Razor :
+Utilisez le tag Helper du composant View dans le Razor fichier de balisage :
 
 ```cshtml
 <vc:priority-list max-priority="999" is-done="false">
@@ -333,7 +339,7 @@ Utilisez le Tag Helper du composant de vue dans le fichier de balisage Razor :
 
 ::: moniker-end
 
-La signature de méthode de `PriorityList.Invoke` est synchrone, mais Razor trouve et appelle la méthode avec `Component.InvokeAsync` dans le fichier de balisage.
+La signature de méthode `PriorityList.Invoke` de est synchrone, Razor mais elle recherche et appelle la `Component.InvokeAsync` méthode avec dans le fichier de balisage.
 
 ## <a name="all-view-component-parameters-are-required"></a>Tous les paramètres du composant de vue sont requis.
 

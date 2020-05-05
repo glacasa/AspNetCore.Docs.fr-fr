@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: prkrishn
 ms.custom: mvc
 ms.date: 12/10/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/handle-errors
-ms.openlocfilehash: e445fb3d50973643c9cea60395d1ed02c2f5f675
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 7c641fb12e0d06ebd7bb3ce9f878f0469b4a3d8e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78660887"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775061"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>Gérer les erreurs dans les API Web ASP.NET Core
 
@@ -22,7 +28,7 @@ Cet article explique comment gérer et personnaliser la gestion des erreurs avec
 
 ## <a name="developer-exception-page"></a>Page d’exceptions du développeur
 
-La [page exception du développeur](xref:fundamentals/error-handling) est un outil utile pour obtenir des traces de pile détaillées pour les erreurs de serveur. Il utilise <xref:Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware> pour capturer les exceptions synchrones et asynchrones à partir du pipeline HTTP et pour générer des réponses d’erreur. Pour illustrer ce propos, examinez l’action de contrôleur suivante :
+La [page exception du développeur](xref:fundamentals/error-handling) est un outil utile pour obtenir des traces de pile détaillées pour les erreurs de serveur. Il utilise <xref:Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware> pour capturer les exceptions synchrones et asynchrones à partir du pipeline http et pour générer des réponses d’erreur. Pour illustrer ce propos, examinez l’action de contrôleur suivante :
 
 [!code-csharp[](handle-errors/samples/3.x/Controllers/WeatherForecastController.cs?name=snippet_GetByCity)]
 
@@ -68,7 +74,7 @@ Host: localhost:44312
 User-Agent: curl/7.55.1
 ```
 
-Pour afficher une réponse au format HTML à la place, définissez le `Accept` en-tête de demande HTTP sur le type de média `text/html`. Par exemple :
+Pour afficher une réponse au format HTML à la place, `Accept` définissez l’en-tête `text/html` de la requête HTTP sur le type de média. Par exemple :
 
 ```bash
 curl -i -H "Accept: text/html" https://localhost:5001/weatherforecast/chicago
@@ -115,7 +121,7 @@ La réponse au format HTML devient utile lors des tests par le biais d’outils 
 ::: moniker-end
 
 > [!WARNING]
-> Activez la page d’exception de développeur **uniquement quand l’application est en cours d’exécution dans l’environnement de développement**. Il n’est pas souhaitable de partager publiquement des informations détaillées sur les exceptions quand l’application s’exécute en production. Pour plus d’informations sur la configuration des environnements, consultez <xref:fundamentals/environments>.
+> Activez la page exception du développeur **uniquement lorsque l’application s’exécute dans l’environnement de développement**. Il n’est pas souhaitable de partager publiquement des informations détaillées sur les exceptions quand l’application s’exécute en production. Pour plus d’informations sur la configuration des environnements, consultez <xref:fundamentals/environments>.
 
 ## <a name="exception-handler"></a>Gestionnaire d’exceptions
 
@@ -135,7 +141,7 @@ Dans les environnements non-développement, l’intergiciel (middleware) de [ges
 
     ::: moniker-end
 
-1. Configurez une action de contrôleur pour répondre à la `/error` route :
+1. Configurez une action de contrôleur pour `/error` répondre à l’itinéraire :
 
     ::: moniker range=">= aspnetcore-3.0"
 
@@ -149,7 +155,7 @@ Dans les environnements non-développement, l’intergiciel (middleware) de [ges
 
     ::: moniker-end
 
-L’action `Error` précédente envoie une charge utile conforme à la norme [RFC 7807](https://tools.ietf.org/html/rfc7807)au client.
+L’action `Error` précédente envoie une charge utile conforme à la [norme RFC 7807](https://tools.ietf.org/html/rfc7807)au client.
 
 L’intergiciel (middleware) de gestion des exceptions peut également fournir une sortie de négociation de contenu plus détaillée dans l’environnement de développement local. Utilisez les étapes suivantes pour créer un format de charge utile cohérent dans les environnements de développement et de production :
 
@@ -193,8 +199,8 @@ L’intergiciel (middleware) de gestion des exceptions peut également fournir u
 
     Dans le code précédent, l’intergiciel est inscrit avec :
 
-    * Itinéraire de `/error-local-development` dans l’environnement de développement.
-    * Un itinéraire de `/error` dans les environnements qui ne sont pas des développements.
+    * Itinéraire de dans `/error-local-development` l’environnement de développement.
+    * Un itinéraire de `/error` dans des environnements qui ne sont pas des développements.
     
 1. Appliquer le routage d’attribut aux actions du contrôleur :
 
@@ -212,13 +218,13 @@ L’intergiciel (middleware) de gestion des exceptions peut également fournir u
 
 ## <a name="use-exceptions-to-modify-the-response"></a>Utiliser des exceptions pour modifier la réponse
 
-Le contenu de la réponse peut être modifié à partir de l’extérieur du contrôleur. Dans l’API Web ASP.NET 4. x, l’une des façons d’effectuer cette opération était d’utiliser le type de <xref:System.Web.Http.HttpResponseException>. ASP.NET Core n’inclut pas de type équivalent. La prise en charge de `HttpResponseException` peut être ajoutée à l’aide des étapes suivantes :
+Le contenu de la réponse peut être modifié à partir de l’extérieur du contrôleur. Dans l’API Web ASP.NET 4. x, l’une des méthodes permettant d’effectuer <xref:System.Web.Http.HttpResponseException> cette opération était d’utiliser le type. ASP.NET Core n’inclut pas de type équivalent. La prise `HttpResponseException` en charge de peut être ajoutée avec les étapes suivantes :
 
 1. Créez un type d’exception connu nommé `HttpResponseException`:
 
     [!code-csharp[](handle-errors/samples/3.x/Exceptions/HttpResponseException.cs?name=snippet_HttpResponseException)]
 
-1. Créez un filtre d’action nommé `HttpResponseExceptionFilter`:
+1. Créez un filtre d’action `HttpResponseExceptionFilter`nommé :
 
     [!code-csharp[](handle-errors/samples/3.x/Filters/HttpResponseExceptionFilter.cs?name=snippet_HttpResponseExceptionFilter)]
 
@@ -244,7 +250,7 @@ Le contenu de la réponse peut être modifié à partir de l’extérieur du con
 
 ## <a name="validation-failure-error-response"></a>Réponse d’erreur d’échec de validation
 
-Pour les contrôleurs d’API Web, MVC répond avec un type de réponse <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> lors de l’échec de la validation du modèle. MVC utilise les résultats de <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.InvalidModelStateResponseFactory> pour construire la réponse d’erreur pour un échec de validation. L’exemple suivant utilise la fabrique pour modifier le type de réponse par défaut en <xref:Microsoft.AspNetCore.Mvc.SerializableError> dans `Startup.ConfigureServices`:
+Pour les contrôleurs d’API Web, MVC <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> répond avec un type de réponse lors de l’échec de la validation du modèle. MVC utilise les résultats de <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.InvalidModelStateResponseFactory> pour construire la réponse d’erreur pour un échec de validation. L’exemple suivant utilise la fabrique pour modifier le type de réponse par <xref:Microsoft.AspNetCore.Mvc.SerializableError> défaut `Startup.ConfigureServices`en in :
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -266,7 +272,7 @@ Pour les contrôleurs d’API Web, MVC répond avec un type de réponse <xref:Mi
 
 ## <a name="client-error-response"></a>Réponse d’erreur du client
 
-Un *résultat d’erreur* est défini en tant que résultat avec le code d’état HTTP 400 ou une version ultérieure. Pour les contrôleurs d’API Web, MVC transforme un résultat d’erreur en résultat avec <xref:Microsoft.AspNetCore.Mvc.ProblemDetails>.
+Un *résultat d’erreur* est défini en tant que résultat avec le code d’état HTTP 400 ou une version ultérieure. Pour les contrôleurs d’API Web, MVC transforme un résultat d’erreur en <xref:Microsoft.AspNetCore.Mvc.ProblemDetails>un résultat avec.
 
 ::: moniker range="= aspnetcore-2.1"
 
@@ -284,9 +290,9 @@ La réponse d’erreur peut être configurée de l’une des manières suivantes
 
 ### <a name="implement-problemdetailsfactory"></a>Implémenter ProblemDetailsFactory
 
-MVC utilise `Microsoft.AspNetCore.Mvc.ProblemDetailsFactory` pour générer toutes les instances de <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> et de <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails>. Cela comprend les réponses d’erreur du client, les réponses d’erreur de validation et les méthodes d’assistance de `Microsoft.AspNetCore.Mvc.ControllerBase.Problem` et <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem>.
+MVC utilise `Microsoft.AspNetCore.Mvc.ProblemDetailsFactory` pour générer toutes les instances <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> de <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails>et. Cela comprend les réponses d’erreur du client, les réponses d’erreur `Microsoft.AspNetCore.Mvc.ControllerBase.Problem` de <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem> validation et les méthodes d’assistance et.
 
-Pour personnaliser la réponse des détails du problème, inscrivez une implémentation personnalisée de `ProblemDetailsFactory` dans `Startup.ConfigureServices`:
+Pour personnaliser la réponse des détails du problème, inscrivez une implémentation `ProblemDetailsFactory` personnalisée `Startup.ConfigureServices`de dans :
 
 ```csharp
 public void ConfigureServices(IServiceCollection serviceCollection)
@@ -308,7 +314,7 @@ La réponse d’erreur peut être configurée comme indiqué dans la section [us
 
 ### <a name="use-apibehavioroptionsclienterrormapping"></a>Utilisez ApiBehaviorOptions. ClientErrorMapping
 
-Utilisez la propriété <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.ClientErrorMapping%2A> pour configurer le contenu de la réponse `ProblemDetails`. Par exemple, le code suivant dans `Startup.ConfigureServices` met à jour la propriété `type` pour les réponses 404 :
+Utilisez la propriété <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.ClientErrorMapping%2A> pour configurer le contenu de la réponse `ProblemDetails`. Par exemple, le code `Startup.ConfigureServices` suivant met à jour la propriété `type` pour les réponses 404 :
 
 ::: moniker-end
 

@@ -5,17 +5,23 @@ description: Découvrez comment accéder aux points d’extension RGPD dans une 
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/11/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/gdpr
-ms.openlocfilehash: 2ccba780ba81bd805d08c9b898617387a879bed3
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 68f8ebaafd1aaa725ef1ff41f2ffa9f605e49f7f
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78660544"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776322"
 ---
 # <a name="eu-general-data-protection-regulation-gdpr-support-in-aspnet-core"></a>Prise en charge de l’UE Règlement général sur la protection des données (RGPD) dans ASP.NET Core
 
-De [Rick Anderson](https://twitter.com/RickAndMSFT)
+Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ASP.NET Core fournit des API et des modèles pour vous aider à répondre à certaines exigences de l' [ue Règlement général sur la protection des données (RGPD)](https://www.eugdpr.org/) :
 
@@ -35,7 +41,7 @@ Pour activer la fonctionnalité de consentement de cookie par défaut comme cell
 
   [!code-cshtml[Main](gdpr/sample/RP3.0/Pages/Shared/_Layout.cshtml?name=snippet&highlight=4)]
 
-* Ajoutez le *\_fichier CookieConsentPartial. cshtml* au projet :
+* Ajoutez le * \_fichier CookieConsentPartial. cshtml* au projet :
 
   [!code-cshtml[Main](gdpr/sample/RP3.0/Pages/Shared/_CookieConsentPartial.cshtml)]
 
@@ -46,27 +52,27 @@ Pour activer la fonctionnalité de consentement de cookie par défaut comme cell
 ::: moniker range="= aspnetcore-2.2"
 
 * Les modèles de projet incluent des points d’extension et le balisage stub que vous pouvez remplacer par votre stratégie de confidentialité et d’utilisation des cookies.
-* Une fonctionnalité de consentement de cookie vous permet de demander (et de suivre) le consentement de vos utilisateurs pour le stockage des informations personnelles. Si un utilisateur n’a pas consenti à la collecte de données et que l’application a [CheckConsentNeeded](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions.checkconsentneeded) défini sur `true`, les cookies non essentiels ne sont pas envoyés au navigateur.
+* Une fonctionnalité de consentement de cookie vous permet de demander (et de suivre) le consentement de vos utilisateurs pour le stockage des informations personnelles. Si un utilisateur n’a pas consenti à la collecte de données et que [CheckConsentNeeded](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions.checkconsentneeded) l’application a `true`CheckConsentNeeded défini sur, les cookies non essentiels ne sont pas envoyés au navigateur.
 * Les cookies peuvent être marqués comme étant essentiels. Les cookies essentiels sont envoyés au navigateur même lorsque l’utilisateur n’a pas donné son consentement et que le suivi est désactivé.
 * [Les cookies TempData et de session](#tempdata) ne sont pas fonctionnels lorsque le suivi est désactivé.
 * La page [gestion des identités](#pd) fournit un lien permettant de télécharger et de supprimer des données utilisateur.
 
 L' [exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/gdpr/sample) vous permet de tester la plupart des points d’extension RGPD et des API ajoutés aux modèles ASP.net Core 2,1. Consultez le fichier [Lisez-moi](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/gdpr/sample) pour obtenir des instructions de test.
 
-[Affichez ou téléchargez l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/gdpr/sample) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
+[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/gdpr/sample) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
 ## <a name="aspnet-core-gdpr-support-in-template-generated-code"></a>ASP.NET Core la prise en charge RGPD dans le code généré par modèle
 
 Les projets Razor Pages et MVC créés avec les modèles de projet incluent la prise en charge RGPD suivante :
 
-* [CookiePolicyOptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) et [UseCookiePolicy](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy) sont définis dans la classe `Startup`.
-* [Vue partielle](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper)de la *\_CookieConsentPartial. cshtml* . Un bouton **accepter** est inclus dans ce fichier. Quand l’utilisateur clique sur le bouton **accepter** , le consentement de stocker les cookies est fourni.
-* La page *pages/privacy. cshtml* ou *vues/page d’affichage/privé/confidentialité. cshtml* fournit une page pour détailler la politique de confidentialité de votre site. Le fichier *\_CookieConsentPartial. cshtml* génère un lien vers la page de confidentialité.
+* [CookiePolicyOptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) et [UseCookiePolicy](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy) sont définis dans la `Startup` classe.
+* [Vue partielle](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper) * \_CookieConsentPartial. cshtml* . Un bouton **accepter** est inclus dans ce fichier. Quand l’utilisateur clique sur le bouton **accepter** , le consentement de stocker les cookies est fourni.
+* La page *pages/privacy. cshtml* ou *vues/page d’affichage/privé/confidentialité. cshtml* fournit une page pour détailler la politique de confidentialité de votre site. Le * \_fichier CookieConsentPartial. cshtml* génère un lien vers la page de confidentialité.
 * Pour les applications créées avec des comptes d’utilisateur individuels, la page gérer fournit des liens permettant de télécharger et de supprimer des [données utilisateur personnelles](#pd).
 
 ### <a name="cookiepolicyoptions-and-usecookiepolicy"></a>CookiePolicyOptions et UseCookiePolicy
 
-Les [CookiePolicyOptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) sont initialisés dans `Startup.ConfigureServices`:
+Les [CookiePolicyOptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) sont initialisés `Startup.ConfigureServices`dans :
 
 [!code-csharp[Main](gdpr/sample/Startup.cs?name=snippet1&highlight=14-20)]
 
@@ -74,16 +80,16 @@ Les [CookiePolicyOptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyo
 
 [!code-csharp[](gdpr/sample/Startup.cs?name=snippet1&highlight=51)]
 
-### <a name="_cookieconsentpartialcshtml-partial-view"></a>\_vue partielle CookieConsentPartial. cshtml
+### <a name="_cookieconsentpartialcshtml-partial-view"></a>\_Vue partielle de CookieConsentPartial. cshtml
 
-Vue partielle de la *\_CookieConsentPartial. cshtml* :
+Vue partielle * \_CookieConsentPartial. cshtml* :
 
 [!code-html[](gdpr/sample/RP2.2/Pages/Shared/_CookieConsentPartial.cshtml)]
 
 Voici ce qui est partiel :
 
-* Obtient l’état de suivi de l’utilisateur. Si l’application est configurée pour exiger un consentement, l’utilisateur doit donner son consentement avant de pouvoir effectuer le suivi des cookies. Si le consentement est requis, le volet de consentement du cookie est corrigé en haut de la barre de navigation créée par le fichier *\_Layout. cshtml* .
-* Fournit un élément de `<p>` HTML pour résumer votre stratégie de confidentialité et d’utilisation des cookies.
+* Obtient l’état de suivi de l’utilisateur. Si l’application est configurée pour exiger un consentement, l’utilisateur doit donner son consentement avant de pouvoir effectuer le suivi des cookies. Si le consentement est requis, le volet de consentement du cookie est corrigé en haut de la barre de navigation créée par le * \_fichier Layout. cshtml* .
+* Fournit un élément `<p>` html pour résumer votre stratégie de confidentialité et d’utilisation des cookies.
 * Fournit un lien vers la page de confidentialité ou une vue qui vous permet de détailler la politique de confidentialité de votre site.
 
 ## <a name="essential-cookies"></a>Cookies essentiels
@@ -96,7 +102,7 @@ Si le consentement de stocker des cookies n’a pas été fourni, seuls les cook
 
 ### <a name="tempdata-provider-and-session-state-cookies-arent-essential"></a>Les cookies du fournisseur TempData et de l’état de session ne sont pas essentiels
 
-Le cookie du [fournisseur TempData](xref:fundamentals/app-state#tempdata) n’est pas essentiel. Si le suivi est désactivé, le fournisseur TempData n’est pas fonctionnel. Pour activer le fournisseur TempData lorsque le suivi est désactivé, marquez le cookie TempData comme essentiel dans `Startup.ConfigureServices`:
+Le cookie du [fournisseur TempData](xref:fundamentals/app-state#tempdata) n’est pas essentiel. Si le suivi est désactivé, le fournisseur TempData n’est pas fonctionnel. Pour activer le fournisseur TempData lorsque le suivi est désactivé, marquez le cookie TempData comme `Startup.ConfigureServices`essentiel dans :
 
 [!code-csharp[Main](gdpr/sample/RP2.2/Startup.cs?name=snippet1)]
 
@@ -116,9 +122,9 @@ Sélectionnez le nom d’utilisateur, puis sélectionnez **données personnelles
 
 Remarques :
 
-* Pour générer le code de `Account/Manage`, consultez [structure Identity](xref:security/authentication/scaffold-identity).
+* Pour générer le `Account/Manage` code, consultez [structure Identity](xref:security/authentication/scaffold-identity).
 * Les liens **Delete** et **Download** agissent uniquement sur les données d’identité par défaut. Les applications qui créent des données utilisateur personnalisées doivent être étendues pour supprimer/télécharger les données utilisateur personnalisées. Pour plus d’informations, consultez [Ajouter, télécharger et supprimer des données utilisateur personnalisées dans identité](xref:security/authentication/add-user-data).
-* Les jetons enregistrés pour l’utilisateur qui sont stockés dans la table de base de données d’identité `AspNetUserTokens` sont supprimés lorsque l’utilisateur est supprimé par le biais du comportement de suppression en cascade en raison de la [clé étrangère](https://github.com/aspnet/Identity/blob/release/2.1/src/EF/IdentityUserContext.cs#L152).
+* Les jetons enregistrés pour l’utilisateur qui sont stockés dans la table `AspNetUserTokens` de base de données d’identité sont supprimés lorsque l’utilisateur est supprimé par le biais du comportement de suppression en cascade en raison de la [clé étrangère](https://github.com/aspnet/Identity/blob/release/2.1/src/EF/IdentityUserContext.cs#L152).
 * L' [authentification du fournisseur externe](xref:security/authentication/social/index), telle que Facebook et Google, n’est pas disponible avant que la stratégie de cookie soit acceptée.
 
 ::: moniker-end

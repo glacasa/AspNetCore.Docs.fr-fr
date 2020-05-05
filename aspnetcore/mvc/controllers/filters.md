@@ -5,13 +5,19 @@ description: Découvrez comment les filtres fonctionnent et comment les utiliser
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 03335811766ea3a1455901199863c6da0e35f7e4
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 7272e05b408ac6f8daeda586c6f40fcc5bd1f6eb
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78662784"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776784"
 ---
 # <a name="filters-in-aspnet-core"></a>Filtres dans ASP.NET Core
 
@@ -47,13 +53,13 @@ Chaque type de filtre est exécuté dans une étape différente du pipeline de f
 
 * Les [filtres d’autorisations](#authorization-filters) s’exécutent en premier et sont utilisés pour déterminer si l’utilisateur est autorisé pour la requête. Filtres d’autorisation court-circuiter le pipeline si la demande n’est pas autorisée.
 
-* [Filtres de ressources](#resource-filters) :
+* [Filtres de ressources](#resource-filters):
 
   * Exécuter après l’autorisation.  
-  * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*> exécute le code avant le reste du pipeline de filtre. Par exemple, `OnResourceExecuting` exécute le code avant la liaison de modèle.
-  * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted*> exécute le code une fois que le reste du pipeline est terminé.
+  * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*>exécute du code avant le reste du pipeline de filtre. Par exemple, `OnResourceExecuting` exécute le code avant la liaison de modèle.
+  * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted*>exécute du code une fois que le reste du pipeline est terminé.
 
-* [Filtres d’actions](#action-filters) :
+* [Filtres d’action](#action-filters):
 
   * Exécutez le code juste avant et après l’appel d’une méthode d’action.
   * Peut modifier les arguments passés dans une action.
@@ -76,21 +82,21 @@ Les filtres synchrones exécutent le code avant et après leur étape de pipelin
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MySampleActionFilter.cs?name=snippet_ActionFilter)]
 
-Les filtres asynchrones définissent une méthode `On-Stage-ExecutionAsync`. Par exemple, <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*>:
+Les filtres asynchrones `On-Stage-ExecutionAsync` définissent une méthode. Par exemple, <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*>:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/SampleAsyncActionFilter.cs?name=snippet)]
 
-Dans le code précédent, le `SampleAsyncActionFilter` a un <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate> (`next`) qui exécute la méthode d’action.
+Dans le code précédent, `SampleAsyncActionFilter` a un ( <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate> `next`) qui exécute la méthode d’action.
 
 ### <a name="multiple-filter-stages"></a>Plusieurs étapes de filtres
 
-Vous pouvez implémenter des interfaces pour plusieurs étapes de filtres dans une même classe. Par exemple, la classe <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> implémente :
+Vous pouvez implémenter des interfaces pour plusieurs étapes de filtres dans une même classe. Par exemple, la <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> classe implémente :
 
-* Synchrone : <xref:Microsoft.AspNetCore.Mvc.Filters.IActionFilter> et <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter>
-* Asynchrone : <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter> et <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>
+* Synchrone : <xref:Microsoft.AspNetCore.Mvc.Filters.IActionFilter> et<xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter>
+* Asynchrone : <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter> et<xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter>
 
-Implémentez la version synchrone **ou bien** la version asynchrone d’une interface de filtre, mais **pas** les deux. Le runtime vérifie d’abord si le filtre implémente l’interface asynchrone et, le cas échéant, il appelle cette interface. Dans le cas contraire, il appelle la ou les méthodes de l’interface synchrone. Si des interfaces synchrones et asynchrones sont implémentées dans une classe, seule la méthode asynchrone est appelée. Lorsque vous utilisez des classes abstraites comme <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute>, substituez uniquement les méthodes synchrones ou la méthode asynchrone pour chaque type de filtre.
+Implémentez la version synchrone ou asynchrone d’une interface de filtre, mais **pas** **les deux** . Le runtime vérifie d’abord si le filtre implémente l’interface asynchrone et, le cas échéant, il appelle cette interface. Dans le cas contraire, il appelle la ou les méthodes de l’interface synchrone. Si des interfaces synchrones et asynchrones sont implémentées dans une classe, seule la méthode asynchrone est appelée. Lorsque vous utilisez des classes <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute>abstraites telles que, remplacez uniquement les méthodes synchrones ou la méthode asynchrone pour chaque type de filtre.
 
 ### <a name="built-in-filter-attributes"></a>Attributs de filtre intégrés
 
@@ -104,9 +110,9 @@ Les attributs autorisent les filtres à accepter des arguments, comme indiqué d
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1)]
 
-Utilisez un outil tel que les [outils de développement du navigateur](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools) pour examiner les en-têtes. Sous **en-têtes de réponse**, `author: Rick Anderson` s’affiche.
+Utilisez un outil tel que les [outils de développement du navigateur](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools) pour examiner les en-têtes. Sous **en-têtes**de `author: Rick Anderson` réponse, est affiché.
 
-Le code suivant implémente une `ActionFilterAttribute` qui :
+Le code suivant implémente un `ActionFilterAttribute` qui :
 
 * Lit le titre et le nom à partir du système de configuration. Contrairement à l’exemple précédent, le code suivant ne nécessite pas l’ajout de paramètres de filtre au code.
 * Ajoute le titre et le nom à l’en-tête de réponse.
@@ -117,24 +123,24 @@ Les options de configuration sont fournies par le [système de configuration](xr
 
 [!code-csharp[](filters/3.1sample/FiltersSample/appsettings.json)]
 
-Dans la `StartUp.ConfigureServices`:
+Dans le `StartUp.ConfigureServices` :
 
-* La classe `PositionOptions` est ajoutée au conteneur de services avec la zone de configuration `"Position"`.
+* La `PositionOptions` classe est ajoutée au conteneur de services avec la `"Position"` zone de configuration.
 * Le `MyActionFilterAttribute` est ajouté au conteneur de services.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/StartupAF.cs?name=snippet)]
 
-Le code suivant illustre la classe `PositionOptions` :
+Le code suivant illustre la `PositionOptions` classe :
 
 [!code-csharp[](filters/3.1sample/FiltersSample/Helper/PositionOptions.cs?name=snippet)]
 
-Le code suivant applique l' `MyActionFilterAttribute` à la méthode `Index2` :
+Le code suivant applique `MyActionFilterAttribute` à la `Index2` méthode :
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet2&highlight=9)]
 
-Sous **en-têtes de réponse**, `author: Rick Anderson`et `Editor: Joe Smith` s’affichent lorsque le point de terminaison `Sample/Index2` est appelé.
+Sous **les en-têtes de réponse**, `author: Rick Anderson`et `Editor: Joe Smith` s’affiche `Sample/Index2` lorsque le point de terminaison est appelé.
 
-Le code suivant applique la `MyActionFilterAttribute` et la `AddHeaderAttribute` à la page Razor :
+Le code suivant applique le `MyActionFilterAttribute` et le `AddHeaderAttribute` à la page Razor :
 
 [!code-csharp[](filters/3.1sample/FiltersSample/Pages/Movies/Index.cshtml.cs?name=snippet)]
 
@@ -153,7 +159,7 @@ Les attributs de filtre :
 
 ## <a name="filter-scopes-and-order-of-execution"></a>Étendues de filtre et ordre d’exécution
 
-Un filtre peut être ajouté au pipeline à une des trois *étendues* :
+Un filtre peut être ajouté au pipeline à l’une des trois *étendues*suivantes :
 
 * Utilisation d’un attribut sur une action de contrôleur. Les attributs de filtre ne peuvent pas être appliqués aux méthodes de gestionnaire Razor Pages.
 * Utilisation d’un attribut sur un contrôleur ou une page Razor.
@@ -199,7 +205,7 @@ Par exemple, dans l’échantillon à télécharger, `MySampleActionFilter` est 
 
 `TestController` :
 
-* Applique la `SampleActionFilterAttribute` (`[SampleActionFilter]`) à l’action `FilterTest2`.
+* Applique le `SampleActionFilterAttribute` (`[SampleActionFilter]`) à l' `FilterTest2` action.
 * Remplace `OnActionExecuting` et `OnActionExecuted`.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/TestController.cs?name=snippet)]
@@ -227,7 +233,7 @@ Vous pouvez remplacer la séquence d’exécution par défaut en implémentant <
 * Exécute le code *avant* avant celui d’un filtre avec une valeur supérieure à `Order`.
 * Exécute le code *après* après celui d’un filtre avec une valeur `Order` supérieure.
 
-La propriété `Order` est définie à l’aide d’un paramètre de constructeur :
+La `Order` propriété est définie avec un paramètre de constructeur :
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/Test3Controller.cs?name=snippet)]
 
@@ -249,13 +255,13 @@ Les 3 filtres s’exécutent dans l’ordre suivant :
   * `MyAction2FilterAttribute.OnResultExecuting`
 * `Test2Controller.OnActionExecuted`
 
-La propriété `Order` remplace l’étendue lors de la détermination de l’ordre dans lequel les filtres s’exécutent. Les filtres sont d’abord classés par ordre, puis l’étendue est utilisée pour couper les liens. Tous les filtres intégrés implémentent `IOrderedFilter` et affectent 0 à la valeur `Order` par défaut. Comme mentionné précédemment, les filtres au niveau du contrôleur définissent la propriété [Order](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/Filters/ControllerActionFilter.cs#L15-L17) sur `int.MinValue` pour les filtres intégrés, Scope détermine l’ordre, sauf si `Order` est défini sur une valeur différente de zéro.
+La propriété `Order` remplace l’étendue lors de la détermination de l’ordre dans lequel les filtres s’exécutent. Les filtres sont d’abord classés par ordre, puis l’étendue est utilisée pour couper les liens. Tous les filtres intégrés implémentent `IOrderedFilter` et affectent 0 à la valeur `Order` par défaut. Comme mentionné précédemment, les filtres au niveau du contrôleur définissent la propriété [Order](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/Filters/ControllerActionFilter.cs#L15-L17) sur `int.MinValue` pour les filtres intégrés, `Order` Scope détermine l’ordre, à moins que ne soit défini sur une valeur différente de zéro.
 
-Dans le code précédent, `MySampleActionFilter` a une portée globale pour qu’elle s’exécute avant `MyAction2FilterAttribute`, qui a une portée de contrôleur. Pour que `MyAction2FilterAttribute` exécuter en premier, définissez l’ordre sur `int.MinValue`:
+Dans le code précédent, `MySampleActionFilter` a une portée globale pour qu’elle `MyAction2FilterAttribute`s’exécute avant, qui a une portée de contrôleur. Pour effectuer `MyAction2FilterAttribute` l’exécution en premier, définissez l' `int.MinValue`ordre sur :
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/Test2Controller.cs?name=snippet2)]
 
-Pour que le filtre global `MySampleActionFilter` s’exécuter en premier, définissez `Order` sur `int.MinValue`:
+Pour que le filtre `MySampleActionFilter` global s’exécute en premier `Order` , `int.MinValue`définissez sur :
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/StartupOrder2.cs?name=snippet&highlight=6)]
 
@@ -407,7 +413,7 @@ Le code suivant montre un exemple de filtre d’actions :
 
 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext> fournit les propriétés suivantes :
 
-* <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext.ActionArguments> : active la lecture des entrées dans une méthode d’action.
+* <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext.ActionArguments>-active la lecture des entrées dans une méthode d’action.
 * <xref:Microsoft.AspNetCore.Mvc.Controller> : permet de manipuler l’instance de contrôleur.
 * <xref:System.Web.Mvc.ActionExecutingContext.Result> : la définition de `Result` court-circuite l’exécution de la méthode d’action et les filtres d’actions suivants.
 
@@ -451,7 +457,7 @@ La méthode `OnActionExecuted` s’exécute après la méthode d’action :
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/ValidateModelAttribute.cs?name=snippet2&higlight=12-99)]
 
-## <a name="exception-filters"></a>Filtres d'exception
+## <a name="exception-filters"></a>Filtres d’exceptions
 
 Les filtres d’exceptions :
 
@@ -497,23 +503,23 @@ Le code suivant indique un filtre de résultats qui ajoute un en-tête HTTP :
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/LoggingAddHeaderFilter.cs?name=snippet_ResultFilter)]
 
-Le type de résultat à exécuter dépend de l’action. Une action qui retourne une vue comprend tout le traitement Razor dans le cadre de l’exécution du <xref:Microsoft.AspNetCore.Mvc.ViewResult>. Une méthode d’API peut effectuer une sérialisation dans le cadre de l’exécution du résultat. En savoir plus sur les [résultats des actions](xref:mvc/controllers/actions).
+Le type de résultat à exécuter dépend de l’action. Une action qui retourne une vue comprend tout le traitement Razor dans le <xref:Microsoft.AspNetCore.Mvc.ViewResult> cadre du en cours d’exécution. Une méthode d’API peut effectuer une sérialisation dans le cadre de l’exécution du résultat. En savoir plus sur les [résultats des actions](xref:mvc/controllers/actions).
 
 Les filtres de résultats ne sont exécutés que lorsqu’une action ou un filtre d’action produit un résultat d’action. Les filtres de résultats ne sont pas exécutés dans les cas suivants :
 
 * Un filtre d’autorisation ou des courts-circuits de filtre de ressources le pipeline.
 * Un filtre d’exception gère une exception en générant un résultat d’action.
 
-La méthode <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuting*?displayProperty=fullName> peut court-circuiter l’exécution du résultat d’action et les filtres de résultats suivants en définissant <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel?displayProperty=fullName> sur `true`. Écrivez dans l’objet de réponse quand vous court-circuitez pour éviter de générer une réponse vide. Levée d’une exception dans `IResultFilter.OnResultExecuting`:
+La méthode <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuting*?displayProperty=fullName> peut court-circuiter l’exécution du résultat d’action et les filtres de résultats suivants en définissant <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel?displayProperty=fullName> sur `true`. Écrivez dans l’objet de réponse quand vous court-circuitez pour éviter de générer une réponse vide. Levée d’une exception `IResultFilter.OnResultExecuting`dans :
 
 * Empêche l’exécution du résultat de l’action et des filtres suivants.
 * Est traité comme un échec au lieu d’un résultat réussi.
 
-Lorsque la méthode <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuted*?displayProperty=fullName> s’exécute, la réponse a probablement déjà été envoyée au client. Si la réponse a déjà été envoyée au client, elle ne peut pas être modifiée.
+Lorsque la <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuted*?displayProperty=fullName> méthode s’exécute, la réponse a probablement déjà été envoyée au client. Si la réponse a déjà été envoyée au client, elle ne peut pas être modifiée.
 
 `ResultExecutedContext.Canceled` est défini sur `true` si l’exécution du résultat d’action a été court-circuitée par un autre filtre.
 
-`ResultExecutedContext.Exception` est défini sur une valeur non Null si le résultat d’action ou un filtre de résultats suivant a levé une exception. La définition de `Exception` sur null gère efficacement une exception et empêche la levée de l’exception plus tard dans le pipeline. Il n’existe aucun moyen fiable pour écrire des données dans une réponse lors de la gestion d’une exception dans un filtre de résultats. Si les en-têtes ont été vidés pour le client lorsqu’un résultat d’action lance une exception, il n’existe aucun mécanisme fiable pour envoyer un code d’échec.
+`ResultExecutedContext.Exception` est défini sur une valeur non Null si le résultat d’action ou un filtre de résultats suivant a levé une exception. La `Exception` définition de la valeur null gère efficacement une exception et empêche la levée de l’exception plus tard dans le pipeline. Il n’existe aucun moyen fiable pour écrire des données dans une réponse lors de la gestion d’une exception dans un filtre de résultats. Si les en-têtes ont été vidés pour le client lorsqu’un résultat d’action lance une exception, il n’existe aucun mécanisme fiable pour envoyer un code d’échec.
 
 Pour un <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>, un appel à `await next` sur le <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate> exécute tous les filtres de résultats suivants et le résultat de l’action. Pour court-circuiter, définissez [ResultExecutingContext.Cancel](xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel) sur `true` et n’appelez pas `ResultExecutionDelegate` :
 
@@ -551,11 +557,11 @@ Testez le code précédent en exécutant l' [exemple Download](https://github.co
 
 Les outils de développement F12 affichent les en-têtes de réponse suivants ajoutés par l’exemple de code :
 
-* **Auteur :** `Rick Anderson`
+* **Auteur :**`Rick Anderson`
 * **globaladdheader :** `Result filter added to MvcOptions.Filters`
-* **interne :** `My header`
+* **interne :**`My header`
 
-Le code précédent crée l’en-tête de réponse **Internal :** `My header`.
+Le code précédent crée l’en-tête de réponse **interne :** `My header`.
 
 ### <a name="ifilterfactory-implemented-on-an-attribute"></a>IFilterFactory implémenté sur un attribut
 
@@ -629,7 +635,7 @@ Chaque type de filtre est exécuté dans une étape différente du pipeline de f
 
 * Les [filtres d’autorisations](#authorization-filters) s’exécutent en premier et sont utilisés pour déterminer si l’utilisateur est autorisé pour la requête. Les filtres d’autorisations peuvent court-circuiter le pipeline si la requête n’est pas autorisée.
 
-* [Filtres de ressources](#resource-filters) :
+* [Filtres de ressources](#resource-filters):
 
   * Exécuter après l’autorisation.  
   * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*> peut exécuter du code avant le reste du pipeline de filtres. Par exemple, `OnResourceExecuting` peut exécuter du code avant la liaison de données.
@@ -663,7 +669,7 @@ Dans le code précédent, le `SampleAsyncActionFilter` a un <xref:Microsoft.AspN
 
 Vous pouvez implémenter des interfaces pour plusieurs étapes de filtres dans une même classe. Par exemple, la classe <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> implémente `IActionFilter`, `IResultFilter` et leurs équivalents asynchrones.
 
-Implémentez la version synchrone **ou bien** la version asynchrone d’une interface de filtre, mais **pas** les deux. Le runtime vérifie d’abord si le filtre implémente l’interface asynchrone et, le cas échéant, il appelle cette interface. Dans le cas contraire, il appelle la ou les méthodes de l’interface synchrone. Si des interfaces synchrones et asynchrones sont implémentées dans une classe, seule la méthode asynchrone est appelée. Quand vous utilisez des classes abstraites comme <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute>, vous devez remplacer seulement les méthodes synchrones ou la méthode asynchrone pour chaque type de filtre.
+Implémentez la version synchrone ou asynchrone d’une interface de filtre, mais **pas** **les deux** . Le runtime vérifie d’abord si le filtre implémente l’interface asynchrone et, le cas échéant, il appelle cette interface. Dans le cas contraire, il appelle la ou les méthodes de l’interface synchrone. Si des interfaces synchrones et asynchrones sont implémentées dans une classe, seule la méthode asynchrone est appelée. Quand vous utilisez des classes abstraites comme <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute>, vous devez remplacer seulement les méthodes synchrones ou la méthode asynchrone pour chaque type de filtre.
 
 ### <a name="built-in-filter-attributes"></a>Attributs de filtre intégrés
 
@@ -692,7 +698,7 @@ Les attributs de filtre :
 
 ## <a name="filter-scopes-and-order-of-execution"></a>Étendues de filtre et ordre d’exécution
 
-Un filtre peut être ajouté au pipeline à une des trois *étendues* :
+Un filtre peut être ajouté au pipeline à l’une des trois *étendues*suivantes :
 
 * À l’aide d’un attribut sur une action.
 * À l’aide d’un attribut sur un contrôleur.
@@ -745,7 +751,7 @@ Par exemple, dans l’échantillon à télécharger, `MySampleActionFilter` est 
 
 `TestController` :
 
-* Applique la `SampleActionFilterAttribute` (`[SampleActionFilter]`) à l’action `FilterTest2`.
+* Applique le `SampleActionFilterAttribute` (`[SampleActionFilter]`) à l' `FilterTest2` action.
 * Remplace `OnActionExecuting` et `OnActionExecuted`.
 
 [!code-csharp[](./filters/sample/FiltersSample/Controllers/TestController.cs?name=snippet)]
@@ -925,7 +931,7 @@ Exemples de filtre de ressources :
 ## <a name="action-filters"></a>Filtres d’actions
 
 > [!IMPORTANT]
-> Les filtres d’action ne s’appliquent **pas** aux Razor Pages. Razor Pages prennent en charge <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> et <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> . Pour plus d’informations, consultez [Méthodes de filtre pour les pages Razor](xref:razor-pages/filter).
+> Les filtres d' **not** action ne s' Razor appliquent pas aux pages. RazorLes pages <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> prennent <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> en charge et. Pour plus d’informations, consultez [méthodes de Razor filtre pour les pages](xref:razor-pages/filter).
 
 Filtres d'actions :
 
@@ -982,7 +988,7 @@ La méthode `OnActionExecuted` s’exécute après la méthode d’action :
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/ValidateModelAttribute.cs?name=snippet2&higlight=12-99)]
 
-## <a name="exception-filters"></a>Filtres d'exception
+## <a name="exception-filters"></a>Filtres d’exceptions
 
 Les filtres d’exceptions :
 
@@ -997,7 +1003,7 @@ Les filtres d’exceptions :
 
 * N’ont pas d’événements avant et après.
 * Implémentent <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> ou <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*>.
-* Gèrent des exceptions non prises en charge qui se produisent dans Razor Page ou dans la création des contrôleurs, la [liaison de données](xref:mvc/models/model-binding), les filtres d’actions ou les méthodes d’action.
+* Gérer les exceptions non gérées qui se Razor produisent lors de la création d’une page ou d’un contrôleur, la [liaison de modèle](xref:mvc/models/model-binding), les filtres d’action ou les méthodes d’action.
 * N’interceptent **pas** les exceptions qui se produisent dans l’exécution des filtres de ressources, des filtres de résultats ou des résultats MVC.
 
 Pour gérer une exception, définissez la propriété <xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> sur `true` ou écrivez une réponse. Ceci arrête la propagation de l’exception. Un filtre d’exceptions ne peut pas changer une exception en « réussite ». Seul un filtre d’actions peut le faire.
@@ -1036,7 +1042,7 @@ La méthode <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuti
 * Empêche l’exécution du résultat d’action et des filtres suivants.
 * Est traitée comme une erreur et non comme une réussite.
 
-Lorsque la méthode <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuted*?displayProperty=fullName> s’exécute, la réponse a probablement déjà été envoyée au client. Si la réponse a déjà été envoyée au client, elle ne peut plus être modifiée.
+Lorsque la <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuted*?displayProperty=fullName> méthode s’exécute, la réponse a probablement déjà été envoyée au client. Si la réponse a déjà été envoyée au client, elle ne peut plus être modifiée.
 
 `ResultExecutedContext.Canceled` est défini sur `true` si l’exécution du résultat d’action a été court-circuitée par un autre filtre.
 
@@ -1074,11 +1080,11 @@ Le code précédent peut être testé en exécutant l’[échantillon de téléc
 
 Les outils de développement F12 affichent les en-têtes de réponse suivants ajoutés par l’exemple de code :
 
-* **Auteur :** `Joe Smith`
+* **Auteur :**`Joe Smith`
 * **globaladdheader :** `Result filter added to MvcOptions.Filters`
-* **interne :** `My header`
+* **interne :**`My header`
 
-Le code précédent crée l’en-tête de réponse **Internal :** `My header`.
+Le code précédent crée l’en-tête de réponse **interne :** `My header`.
 
 ### <a name="ifilterfactory-implemented-on-an-attribute"></a>IFilterFactory implémenté sur un attribut
 
@@ -1118,7 +1124,7 @@ Les filtres d’intergiciels s’exécutent à la même étape du pipeline de fi
 
 ## <a name="next-actions"></a>Actions suivantes
 
-* Consultez [les méthodes de filtre pour Razor pages](xref:razor-pages/filter).
+* Consultez [méthodes de filtre Razor pour les pages](xref:razor-pages/filter).
 * Pour expérimenter les filtres, [téléchargez, testez et modifiez l’échantillon Github](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample).
 
 ::: moniker-end

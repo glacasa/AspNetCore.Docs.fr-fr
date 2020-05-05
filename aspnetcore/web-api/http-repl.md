@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/11/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: d9beae68cc869b665ff5d2b6cf34f120406098dc
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 4d0200cd412cce6eda473a64d132d74d8641db34
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78661888"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777096"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>Tester des API web avec la boucle REPL HTTP
 
@@ -28,15 +34,15 @@ Les [verbes HTTP](https://github.com/microsoft/api-guidelines/blob/vNext/Guideli
 
 * [DELETE](#test-http-delete-requests)
 * [GET](#test-http-get-requests)
-* [HEAD](#test-http-head-requests)
-* [OPTIONS](#test-http-options-requests)
-* [PATCH](#test-http-patch-requests)
+* [SIÈGE](#test-http-head-requests)
+* [Options](#test-http-options-requests)
+* [CORRECTIF](#test-http-patch-requests)
 * [POST](#test-http-post-requests)
 * [PUT](#test-http-put-requests)
 
 Pour continuer, [consultez ou téléchargez l’exemple d’API web ASP.NET Core](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples) ([comment télécharger](xref:index#how-to-download-a-sample)).
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * [!INCLUDE [2.1-SDK](~/includes/2.1-SDK.md)]
 
@@ -229,7 +235,7 @@ Les [couleurs](#set-color-preferences) de la boucle REPL HTTP peuvent être pers
 
 *%HOME%/.httpreplprefs*
 
-# <a name="macos"></a>[macOS](#tab/macos)
+# <a name="macos"></a>[MacOS](#tab/macos)
 
 *%HOME%/.httpreplprefs*
 
@@ -341,7 +347,7 @@ Dans la commande précédente, `<EXECUTABLE>` est le chemin complet du fichier e
 pref set editor.command.default "/usr/bin/code"
 ```
 
-# <a name="macos"></a>[macOS](#tab/macos)
+# <a name="macos"></a>[MacOS](#tab/macos)
 
 ```console
 pref set editor.command.default "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
@@ -365,9 +371,9 @@ pref set editor.command.default.arguments "--disable-extensions --new-window"
 
 Par défaut, HTTP REPL possède un ensemble de chemins relatifs qu’il utilise pour rechercher le document Swagger lors de l'exécution de la commande `connect` sans l’option `--swagger`. Ces chemins relatifs sont combinés avec les chemins racine et de base spécifiés dans la commande `connect`. Les chemins relatifs par défaut sont les suivants :
 
-- *swagger.json*
-- *swagger/v1/swagger.json*
-- */swagger.json*
+- *Swagger. JSON*
+- *Swagger/v1/Swagger. JSON*
+- */Swagger.JSON*
 - */swagger/v1/swagger.json*
 
 Pour utiliser un autre ensemble de chemins de recherche dans votre environnement, définissez la préférence `swagger.searchPaths`. La valeur doit être une liste de chemins relatifs délimités par des barres verticales. Par exemple :
@@ -554,7 +560,7 @@ Paramètre de route, le cas échéant, attendu par la méthode d’action du con
 
 Pour émettre une requête HTTP PUT :
 
-1. *Facultatif*: exécutez la commande `get` pour afficher les données avant de les modifier :
+1. *Facultatif*: exécutez la `get` commande pour afficher les données avant de les modifier :
 
     ```console
     https://localhost:5001/fruits~ get
@@ -616,7 +622,7 @@ Pour émettre une requête HTTP PUT :
     Server: Kestrel
     ```
 
-1. *Facultatif*: émettez une commande `get` pour voir les modifications. Par exemple, si vous avez tapé « Cherry » dans l’éditeur de texte, une commande `get` retourne ce qui suit :
+1. *Facultatif*: émettez `get` une commande pour voir les modifications. Par exemple, si vous avez tapé « Cherry » dans l’éditeur de texte, une commande `get` retourne ce qui suit :
 
     ```console
     https://localhost:5001/fruits~ get
@@ -667,7 +673,7 @@ Paramètre de route, le cas échéant, attendu par la méthode d’action du con
 
 Pour émettre une requête HTTP DELETE :
 
-1. *Facultatif*: exécutez la commande `get` pour afficher les données avant de les modifier :
+1. *Facultatif*: exécutez la `get` commande pour afficher les données avant de les modifier :
 
     ```console
     https://localhost:5001/fruits~ get
@@ -707,7 +713,7 @@ Pour émettre une requête HTTP DELETE :
     Server: Kestrel
     ```
 
-1. *Facultatif*: émettez une commande `get` pour voir les modifications. Dans cet exemple, une commande `get` retourne ce qui suit :
+1. *Facultatif*: émettez `get` une commande pour voir les modifications. Dans cet exemple, une commande `get` retourne ce qui suit :
 
     ```console
     https://localhost:5001/fruits~ get
@@ -852,7 +858,7 @@ Pour accéder à un point de terminaison hébergé par Azure ou pour utiliser l'
     httprepl https://management.azure.com
     ```
 
-1. Définissez l’en-tête de requête HTTP `Authorization` :
+1. Définissez l' `Authorization` en-tête de requête http :
 
     ```console
     https://management.azure.com/> set header Authorization "bearer <ACCESS TOKEN>"

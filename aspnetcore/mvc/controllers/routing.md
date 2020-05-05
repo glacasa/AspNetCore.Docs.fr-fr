@@ -4,13 +4,19 @@ author: rick-anderson
 description: Découvrez comment ASP.NET Core MVC utilise le middleware (intergiciel) de routage pour mettre en correspondance les URL des requêtes entrantes et les mapper à des actions.
 ms.author: riande
 ms.date: 3/25/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 974a5e7653f2b71b124a96650733ff460e60637a
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 4208ef8fb7a9b10621f214f79679ff8d7fd83996
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206110"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775022"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>Routage vers les actions du contrôleur dans ASP.NET Core
 
@@ -195,7 +201,9 @@ L’exemple précédent :
 ### <a name="conventional-routing-order"></a>Ordre de routage conventionnel
 
 Le routage conventionnel correspond uniquement à une combinaison d’action et de contrôleur définie par l’application. Cela vise à simplifier les cas où les itinéraires conventionnels se chevauchent.
-L’ajout d' <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>itinéraires <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*>à l' <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> aide de, et assigne automatiquement une valeur de commande à leurs points de terminaison en fonction de l’ordre dans lequel ils sont appelés. Les correspondances d’un itinéraire qui apparaît précédemment ont une priorité plus élevée. Le routage conventionnel est dépendant de l’ordre. En général, les itinéraires avec des zones doivent être placés plus tôt, car ils sont plus spécifiques que les itinéraires sans zone. Les [itinéraires conventionnels dédiés](#dcr) avec intercepter `{*article}` tous les paramètres d’itinéraire comme peuvent rendre une route trop [gourmande](xref:fundamentals/routing#greedy), ce qui signifie qu’elle correspond aux URL que vous avez prévues pour être mises en correspondance par d’autres itinéraires. Mettez les itinéraires gourmands plus tard dans la table de routage pour empêcher les correspondances gourmandes.
+L’ajout d' <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>itinéraires <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*>à l' <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> aide de, et assigne automatiquement une valeur de commande à leurs points de terminaison en fonction de l’ordre dans lequel ils sont appelés. Les correspondances d’un itinéraire qui apparaît précédemment ont une priorité plus élevée. Le routage conventionnel est dépendant de l’ordre. En général, les itinéraires avec des zones doivent être placés plus tôt, car ils sont plus spécifiques que les itinéraires sans zone. Les [itinéraires conventionnels dédiés](#dcr) avec des paramètres d' `{*article}` itinéraire Catch-All comme peuvent rendre une route trop [gourmande](xref:fundamentals/routing#greedy), ce qui signifie qu’elle correspond aux URL que vous avez prévues pour être mises en correspondance par d’autres itinéraires. Mettez les itinéraires gourmands plus tard dans la table de routage pour empêcher les correspondances gourmandes.
+
+[!INCLUDE[](~/includes/catchall.md)]
 
 <a name="best"></a>
 
@@ -463,7 +471,7 @@ Avec le code précédent, `/home` exécute le `HomeController.Index` point de te
 * Le code précédent est un exemple ou une conception de routage médiocre. Il a été utilisé pour illustrer la `Order` propriété.
 * La `Order` propriété ne résout que l’ambiguïté, ce modèle ne peut pas être mis en correspondance. Il serait préférable de supprimer le `[Route("Home")]` modèle.
 
-Consultez [Razor pages conventions de routage et d’application : ordre de routage](xref:razor-pages/razor-pages-conventions#route-order) pour plus d’informations sur l’ordre des itinéraires avec Razor pages.
+Pour plus d’informations sur l’ordre des itinéraires avec les Razor pages, consultez [ Razor conventions des applications et des itinéraires](xref:razor-pages/razor-pages-conventions#route-order) de routage.
 
 Dans certains cas, une erreur HTTP 500 est retournée avec des itinéraires ambigus. Utilisez la [journalisation](xref:fundamentals/logging/index) pour voir quels points de `AmbiguousMatchException`terminaison ont provoqué le.
 
@@ -744,13 +752,13 @@ Le code précédent a démontré la génération d’une URL en passant le nom d
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/UrlGeneration2Controller.cs?name=snippet_1)]
 
-Le fichier Razor suivant génère un lien HTML vers le `Destination_Route`:
+Le fichier Razor suivant génère un lien HTML vers `Destination_Route`:
 
 [!code-cshtml[](routing/samples/3.x/main/Views/Shared/MyLink.cshtml)]
 
 <a name="routing-gen-urls-html-ref-label"></a>
 
-### <a name="generate-urls-in-html-and-razor"></a>Générer des URL en HTML et Razor
+### <a name="generate-urls-in-html-and-razor"></a>Générer des URL en HTML etRazor
 
 <xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper>fournit les <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper> méthodes [html. BeginForm](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.BeginForm*) et [html. ActionLink](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.ActionLink*) pour générer `<form>` des `<a>` éléments et respectivement. Ces méthodes utilisent la méthode [URL. action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) pour générer une URL et elles acceptent des arguments similaires. Les pendants de `Url.RouteUrl` pour `HtmlHelper` sont `Html.BeginRouteForm` et `Html.RouteLink`, qui ont des fonctionnalités similaires.
 
@@ -1212,7 +1220,7 @@ Les routes d’attribut peuvent configurer un ordre en utilisant la propriété 
 > [!TIP]
 > Évitez de dépendre de `Order`. Si votre espace d’URL nécessite des valeurs d’ordre explicites pour router correctement, il est probable qu’il prête également à confusion pour les clients. D’une façon générale, le routage par attributs sélectionne la route correcte avec la mise en correspondance d’URL. Si l’ordre par défaut utilisé pour la génération d’URL ne fonctionne pas, l’utilisation à titre de remplacement d’un nom de route est généralement plus simple que d’appliquer la propriété `Order`.
 
-Le routage de Razor Pages et celui du contrôleur MVC partagent une implémentation. Les informations relatives à l’ordre d’itinéraire dans les rubriques de Razor Pages sont disponibles à la page [Conventions d’itinéraires et d’applications Razor Pages : ordre d’itinéraire](xref:razor-pages/razor-pages-conventions#route-order).
+RazorLe routage des pages et le routage du contrôleur MVC partagent une implémentation. Des informations sur l’ordre des Razor itinéraires dans les rubriques pages sont disponibles à [ Razor la page conventions de routage et d’application : ordre de routage](xref:razor-pages/razor-pages-conventions#route-order).
 
 <a name="routing-token-replacement-templates-ref-label"></a>
 

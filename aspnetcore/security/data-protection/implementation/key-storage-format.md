@@ -1,29 +1,35 @@
 ---
-title: Format de stockage clé dans ASP.NET Core
+title: Format de stockage des clés dans ASP.NET Core
 author: rick-anderson
-description: Apprenez les détails de l’implémentation du format de stockage clé ASP.NET Core Data Protection.
+description: Découvrez les détails de l’implémentation du format de stockage de la clé de protection des données ASP.NET Core.
 ms.author: riande
 ms.date: 04/08/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/key-storage-format
-ms.openlocfilehash: 3072c673791b589027a910b80eaba52052eb9311
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: d284927e8ff4315b813fe36b9c335d8bd75ece11
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80976935"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776862"
 ---
-# <a name="key-storage-format-in-aspnet-core"></a>Format de stockage clé dans ASP.NET Core
+# <a name="key-storage-format-in-aspnet-core"></a>Format de stockage des clés dans ASP.NET Core
 
 <a name="data-protection-implementation-key-storage-format"></a>
 
-Les objets sont stockés au repos dans la représentation XML. L’annuaire par défaut pour le stockage des clés est :
+Les objets sont stockés au repos dans une représentation XML. Le répertoire par défaut pour le stockage des clés est le suivant :
 
-* Windows: '%LOCALAPPDATA%'ASP.NET-DataProtection-Keys\*
-* macOS / Linux: *$HOME/.aspnet/DataProtection-Keys*
+* Windows : *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys\*
+* macOS/Linux : *$Home/.AspNet/dataprotection-Keys*
 
-## <a name="the-key-element"></a>L’élément \<clé>
+## <a name="the-key-element"></a>Élément \<Key>
 
-Les clés existent en tant qu’objets de haut niveau dans le référentiel clé. Par les clés de convention ont le nom de fichier **clé-guid.xml**, où «guid» est l’id de la clé. Chaque fichier contient une seule clé. Le format du fichier est le suivant.
+Les clés existent en tant qu’objets de niveau supérieur dans le dépôt de clé. Les clés de Convention ont la clé de nom de fichier **-{GUID}. xml**, où {GUID} est l’ID de la clé. Chaque fichier de ce type contient une clé unique. Le format du fichier est le suivant.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -46,35 +52,35 @@ Les clés existent en tant qu’objets de haut niveau dans le référentiel clé
 </key>
 ```
 
-L’élément \<clé> contient les attributs suivants et les éléments pour enfants :
+L' \<élément Key> contient les attributs et les éléments enfants suivants :
 
-* L’id clé. Cette valeur est traitée comme faisant autorité; le nom de fichier est tout simplement une gentillesse pour la lisibilité humaine.
+* ID de la clé. Cette valeur est traitée comme faisant autorité ; le nom de fichier est simplement un nicety pour la lisibilité humaine.
 
-* La version \<de l’élément clé>, actuellement fixé à 1.
+* Version de la \<clé> élément, actuellement fixée à 1.
 
-* La création, l’activation et les dates d’expiration de la clé.
+* Dates de création, d’activation et d’expiration de la clé.
 
-* Un \<descripteur> élément, qui contient des informations sur la mise en œuvre de chiffrement authentifiée contenue dans cette clé.
+* Un \<élément descripteur>, qui contient des informations sur l’implémentation de chiffrement authentifié contenue dans cette clé.
 
-Dans l’exemple ci-dessus, l’id de la clé est '80732141-ec8f-4b80-af9c-c4d1ff8901', il a été créé et activé le 19 mars 2015, et il a une durée de vie de 90 jours. (Occasionnellement, la date d’activation peut être légèrement avant la date de création comme dans cet exemple. Cela est dû à un nit dans la façon dont les API fonctionnent et est inoffensif dans la pratique.)
+Dans l’exemple ci-dessus, l’ID de la clé est {80732141-ec8f-4B80-af9c-c4d2d1ff8901}, il a été créé et activé le 19 mars 2015, et sa durée de vie est de 90 jours. (Parfois, la date d’activation peut être légèrement antérieure à la date de création, comme dans cet exemple. Cela est dû à un Nil dans la manière dont les API fonctionnent et est sans conséquence dans la pratique.)
 
-## <a name="the-descriptor-element"></a>Le \<descripteur> élément
+## <a name="the-descriptor-element"></a>Élément \<descripteur>
 
-Le \<descripteur externe> élément contient un attribut deserializerType, qui est le nom d’assemblage qualifié d’un type qui implémente IAuthenticatedEncryptorDescriptorDeserializer. Ce type est responsable \<de la lecture du descripteur intérieur> élément et de l’analyse de l’information contenue dans.
+L’élément \<de descripteur externe> contient un attribut deserializerType, qui est le nom qualifié d’assembly d’un type qui implémente IAuthenticatedEncryptorDescriptorDeserializer. Ce type est chargé de lire le descripteur interne \<> élément et d’analyser les informations contenues dans.
 
-Le format particulier \<du descripteur> élément dépend de l’implémentation du crypteur authentifié encapsulé par la clé, et chaque type de déséialisateur s’attend à un format légèrement différent pour cela. En général, cependant, cet élément contiendra des informations algorithmiques (noms, types, OIDs, ou similaires) et du matériel clé secret. Dans l’exemple ci-dessus, le descripteur précise que cette clé enveloppe le chiffrement AES-256-CBC - validation HMACSHA256.
+Le format particulier du \<descripteur> élément dépend de l’implémentation de chiffreur authentifiée encapsulée par la clé, et chaque type de désérialiseur attend un format légèrement différent pour ce. En général, cependant, cet élément contient des informations algorithmiques (noms, types, OID ou similaires) et un matériel de clé secrète. Dans l’exemple ci-dessus, le descripteur spécifie que cette clé encapsule AES-256-CBC Encryption + HMACSHA256 validation.
 
-## <a name="the-encryptedsecret-element"></a>L’élément \<> cryptésecret
+## <a name="the-encryptedsecret-element"></a>Élément \<encryptedSecret>
 
-Un ** &lt;élément&gt; cryptésecret** qui contient la forme cryptée du matériel clé secret peut être présent si [le cryptage des secrets au repos est activé](xref:security/data-protection/implementation/key-encryption-at-rest). L’attribut `decryptorType` est le nom d’assemblage qualifié d’un type qui implémente [IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor). Ce type est responsable de la lecture de l’élément ** &lt;interne cryptéKey&gt; ** et de le décrypter pour récupérer le texte clair d’origine.
+Un ** &lt;élément&gt; encryptedSecret** qui contient la forme chiffrée du matériel de clé secrète peut être présent si le [chiffrement des secrets au repos est activé](xref:security/data-protection/implementation/key-encryption-at-rest). L’attribut `decryptorType` est le nom qualifié d’assembly d’un type qui implémente [IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor). Ce type est chargé de lire l’élément ** &lt;EncryptedKey&gt; ** interne et de le déchiffrer pour récupérer le texte en clair d’origine.
 
-Comme `<descriptor>`avec , le `<encryptedSecret>` format particulier de l’élément dépend du mécanisme de cryptage au repos dans l’utilisation. Dans l’exemple ci-dessus, la clé principale est cryptée à l’aide de Windows DPAPI par commentaire.
+Comme avec `<descriptor>`, le format particulier de l' `<encryptedSecret>` élément dépend du mécanisme de chiffrement au repos en cours d’utilisation. Dans l’exemple ci-dessus, la clé principale est chiffrée à l’aide de Windows DPAPI pour le commentaire.
 
-## <a name="the-revocation-element"></a>La \<révocation> élément
+## <a name="the-revocation-element"></a>Élément \<de> de révocation
 
-Les révocations existent en tant qu’objets de haut niveau dans le référentiel clé. Par les révocations de convention ont le nom de fichier **revocation-'timestamp.xml** (pour révoquer toutes les clés avant une date spécifique) ou **révocation-guid.xml** (pour révoquer une clé spécifique). Chaque fichier contient \<un seul élément de révocation>.
+Les révocations existent en tant qu’objets de niveau supérieur dans le dépôt de clé. Par Convention, les révocations de nom de fichier **-{timestamp}. xml** (pour révoquer toutes les clés avant une date spécifique) ou la **révocation-{GUID}. xml** (pour révoquer une clé spécifique). Chaque fichier contient un seul \<> élément de révocation.
 
-Pour les révocations de clés individuelles, le contenu du fichier sera comme ci-dessous.
+Pour les révocations de clés individuelles, le contenu du fichier se présente comme indiqué ci-dessous.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -85,7 +91,7 @@ Pour les révocations de clés individuelles, le contenu du fichier sera comme c
 </revocation>
 ```
 
-Dans ce cas, seule la clé spécifiée est révoquée. Toutefois, si l’id clé est « EN », comme dans l’exemple ci-dessous, toutes les clés dont la date de création est antérieure à la date de révocation spécifiée sont révoquées.
+Dans ce cas, seule la clé spécifiée est révoquée. Toutefois, si l’ID de clé est « * », comme dans l’exemple ci-dessous, toutes les clés dont la date de création est antérieure à la date de révocation spécifiée sont révoquées.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -97,4 +103,4 @@ Dans ce cas, seule la clé spécifiée est révoquée. Toutefois, si l’id clé
 </revocation>
 ```
 
-La \<raison> élément n’est jamais lue par le système. C’est tout simplement un endroit pratique pour stocker une raison lisible à l’homme pour la révocation.
+\<Raison pour laquelle> élément n’est jamais lu par le système. Il s’agit simplement d’un emplacement pratique pour stocker une raison explicite de révocation.

@@ -4,13 +4,19 @@ author: rick-anderson
 description: Découvrez les détails de l’implémentation des en-têtes de contexte de protection des données ASP.NET Core.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/context-headers
-ms.openlocfilehash: 518423f5df93924d3df144994e4beb1755cd0bfc
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 381cc137d1de87e87f36c3b32a6a551a318ed3cf
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78666578"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776953"
 ---
 # <a name="context-headers-in-aspnet-core"></a>En-têtes de contexte dans ASP.NET Core
 
@@ -20,9 +26,9 @@ ms.locfileid: "78666578"
 
 Dans le système de protection des données, une « clé » désigne un objet qui peut fournir des services de chiffrement authentifiés. Chaque clé est identifiée par un ID unique (GUID) et elle contient des informations algorithmiques et des documents Entropic. Il est prévu que chaque clé porte une entropie unique, mais le système ne peut pas le faire, et nous devons également tenir compte des développeurs qui peuvent changer manuellement l’anneau de clé en modifiant les informations algorithmiques d’une clé existante dans l’anneau de clé. Pour répondre à nos exigences de sécurité, le système de protection des données présente un concept d' [agilité cryptographique](https://www.microsoft.com/en-us/research/publication/cryptographic-agility-and-its-relation-to-circular-encryption/), qui permet d’utiliser en toute sécurité une valeur Entropic unique sur plusieurs algorithmes de chiffrement.
 
-La plupart des systèmes qui prennent en charge l’agilité de chiffrement le font en incluant des informations d’identification sur l’algorithme à l’intérieur de la charge utile. L’OID de l’algorithme est généralement un bon candidat pour cela. Toutefois, l’un des problèmes que nous avons rencontré est qu’il existe plusieurs façons de spécifier le même algorithme : « AES » (CNG) et les classes managées AES, AesManaged, AesCryptoServiceProvider, AesCng et RijndaelManaged (à partir de paramètres spécifiques) sont toutes identiques. et nous aurions besoin de conserver un mappage de tous ceux-ci sur l’OID correct. Si un développeur souhaitait fournir un algorithme personnalisé (ou même une autre implémentation d’AES !), il aurait à nous dire son OID. Cette étape d’enregistrement supplémentaire rend la configuration du système particulièrement pénible.
+La plupart des systèmes qui prennent en charge l’agilité de chiffrement le font en incluant des informations d’identification sur l’algorithme à l’intérieur de la charge utile. L’OID de l’algorithme est généralement un bon candidat pour cela. Toutefois, l’un des problèmes que nous avons rencontré est qu’il existe plusieurs façons de spécifier le même algorithme : « AES » (CNG) et les classes AES, AesManaged, AesCryptoServiceProvider, AesCng et RijndaelManaged (données spécifiques) managées sont toutes identiques, et nous devons conserver un mappage de tous ces éléments sur l’OID correct. Si un développeur souhaitait fournir un algorithme personnalisé (ou même une autre implémentation d’AES !), il aurait à nous dire son OID. Cette étape d’enregistrement supplémentaire rend la configuration du système particulièrement pénible.
 
-En arrière-plan, nous avons décidé que nous approchions le problème de la mauvaise direction. Un OID vous indique l’algorithme, mais ce n’est pas vraiment une préoccupation. Si nous avons besoin d’utiliser une seule valeur Entropic en toute sécurité dans deux algorithmes différents, il n’est pas nécessaire pour nous de savoir ce que sont les algorithmes. Ce dont nous sommes particulièrement soucis, c’est la façon dont ils se comportent. Tout autre algorithme de chiffrement par bloc symétrique est également une puissante permutation aléatoire : corriger les entrées (clé, mode de chaînage, IV, texte en clair) et la sortie de texte chiffré avec une probabilité écrasante est distincte de tout autre chiffrement par bloc symétrique algorithme étant donné les mêmes entrées. De même, toute fonction de hachage à clé correcte est également une fonction de chiffrement aléatoire forte (PRF), et étant donné un jeu de données d’entrée fixe, sa sortie est très lourdement différente de toute autre fonction de hachage à clé.
+En arrière-plan, nous avons décidé que nous approchions le problème de la mauvaise direction. Un OID vous indique l’algorithme, mais ce n’est pas vraiment une préoccupation. Si nous avons besoin d’utiliser une seule valeur Entropic en toute sécurité dans deux algorithmes différents, il n’est pas nécessaire pour nous de savoir ce que sont les algorithmes. Ce dont nous sommes particulièrement soucis, c’est la façon dont ils se comportent. Tout autre algorithme de chiffrement par bloc symétrique est également une puissante permutation aléatoire : corriger les entrées (clé, mode chaînage, IV, texte brut) et la sortie de texte chiffré avec une probabilité écrasante est distincte de tout autre algorithme de chiffrement par bloc symétrique en raison des mêmes entrées. De même, toute fonction de hachage à clé correcte est également une fonction de chiffrement aléatoire forte (PRF), et étant donné un jeu de données d’entrée fixe, sa sortie est très lourdement différente de toute autre fonction de hachage à clé.
 
 Nous utilisons ce concept de Strong mot et PRFs pour créer un en-tête de contexte. Cet en-tête de contexte agit essentiellement comme une empreinte numérique stable sur les algorithmes utilisés pour une opération donnée, et fournit l’agilité de chiffrement requise par le système de protection des données. Cet en-tête est reproductible et est utilisé ultérieurement dans le cadre du [processus de dérivation de sous-clés](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation). Il existe deux façons différentes de créer l’en-tête de contexte en fonction des modes de fonctionnement des algorithmes sous-jacents.
 
@@ -168,7 +174,7 @@ K_E = SP800_108_CTR (PRF = HMACSHA512, Key = "", étiquette = "", context = "")
 
 Tout d’abord, laissez K_E = SP800_108_CTR (PRF = HMACSHA512, Key = "", étiquette = "", context = ""), où | K_E | = 256 bits.
 
-K_E := 22BC6F1B171C08C4AE2F27444AF8FC8B3087A90006CAEA91FDCFB47C1B8733B8
+K_E : = 22BC6F1B171C08C4AE2F27444AF8FC8B3087A90006CAEA91FDCFB47C1B8733B8
 
 Ensuite, calculez l’étiquette d’authentification de Enc_GCM (K_E, nonce, "") pour AES-256-GCM donnée nonce = 096 et K_E comme indiqué ci-dessus.
 

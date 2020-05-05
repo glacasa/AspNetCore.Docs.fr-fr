@@ -1,20 +1,26 @@
 ---
-title: 'Tutorial: Implémenter la fonctionnalité CRUD - ASP.NET MVC avec EF Core'
+title: 'Didacticiel : implémenter la fonctionnalité CRUD-ASP.NET MVC avec EF Core'
 description: Dans ce didacticiel, vous allez examiner et personnaliser le code CRUD (créer, lire, mettre à jour, supprimer) que la génération de modèles automatique MVC a créé automatiquement pour vous dans des contrôleurs et des vues.
 author: rick-anderson
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 2aa4ef48509b9a34f3b25eb657b1ecac51c1374b
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 51334370b07709a773f6acd18d302f8b3ea88290
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79416211"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773586"
 ---
-# <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Tutorial: Implémenter la fonctionnalité CRUD - ASP.NET MVC avec EF Core
+# <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Didacticiel : implémenter la fonctionnalité CRUD-ASP.NET MVC avec EF Core
 
 Dans le didacticiel précédent, vous avez créé une application MVC qui stocke et affiche les données en utilisant Entity Framework et SQL Server LocalDB. Dans ce didacticiel, vous allez examiner et personnaliser le code CRUD (créer, lire, mettre à jour, supprimer) que la génération de modèles automatique MVC a créé automatiquement pour vous dans des contrôleurs et des vues.
 
@@ -64,7 +70,7 @@ La dernière partie de l’URL (« ?courseID=2021 ») est une valeur de chaîne 
 http://localhost:1230/Instructor/Index?id=1&CourseID=2021
 ```
 
-Dans la page Index, les URL des liens hypertexte sont créées par des instructions Tag Helper dans la vue Razor. Dans le code Razor suivant, le paramètre `id` correspond à la route par défaut : `id` est donc ajouté aux données de route.
+Dans la page index, les URL de lien hypertexte sont créées par des instructions tag Razor Helper dans la vue. Dans le code Razor suivant, le `id` paramètre correspond à l’itinéraire par défaut `id` . par conséquent, est ajouté aux données d’itinéraire.
 
 ```html
 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a>
@@ -76,7 +82,7 @@ Ceci génère le code HTML suivant quand `item.ID` vaut 6 :
 <a href="/Students/Edit/6">Edit</a>
 ```
 
-Dans le code Razor suivant, `studentID` ne correspond pas à un paramètre dans la route par défaut : il est donc ajouté en tant que chaîne de requête.
+Dans le code Razor suivant, `studentID` ne correspond pas à un paramètre de l’itinéraire par défaut. il est donc ajouté en tant que chaîne de requête.
 
 ```html
 <a asp-action="Edit" asp-route-studentID="@item.ID">Edit</a>
@@ -151,11 +157,11 @@ Une autre façon d’empêcher la survalidation qui est préférée par de nombr
 
 ### <a name="test-the-create-page"></a>Tester la page Create
 
-Le code dans *Views/Students/Create.cshtml* utilise, `label` `input`et `span` (pour les messages de validation) tag aides pour chaque domaine.
+Le code dans *views/Students/Create. cshtml* `label`utilise `input`,, `span` et (pour les messages de validation) tag helpers pour chaque champ.
 
 Exécutez l’application, sélectionnez l’onglet **Students**, puis cliquez sur **Create New**.
 
-Entrez des noms et une date. Si votre navigateur vous le permet, essayez d’entrer une date non valide. (Certains navigateurs vous obligent à utiliser un cueilleur de dates.) Cliquez ensuite sur **Créer** pour voir le message d’erreur.
+Entrez des noms et une date. Si votre navigateur vous le permet, essayez d’entrer une date non valide. (Certains navigateurs vous obligent à utiliser un sélecteur de dates.) Cliquez ensuite sur **créer** pour afficher le message d’erreur.
 
 ![Erreur de validation de date](crud/_static/date-error.png)
 
@@ -179,7 +185,7 @@ Ces modifications implémentent une bonne pratique de sécurité pour empêcher 
 
 Le nouveau code lit l’entité existante et appelle `TryUpdateModel` pour mettre à jour les champs dans l’entité récupérée [en fonction de l’entrée d’utilisateur dans les données du formulaire envoyé](xref:mvc/models/model-binding). Le suivi automatique des modifications d’Entity Framework définit l’indicateur `Modified` sur les champs qui sont modifiés via une entrée dans le formulaire. Quand la méthode `SaveChanges` est appelée, Entity Framework crée des instructions SQL pour mettre à jour la ligne de la base de données. Les conflits d’accès concurrentiel sont ignorés, et seules les colonnes de table qui ont été mises à jour par l’utilisateur sont mises à jour dans la base de données. (Un didacticiel suivant montre comment gérer les conflits d’accès concurrentiel.)
 
-Au titre de bonne pratique pour empêcher la survalidation, les champs dont vous voulez qu’ils puissent être mis à jour par la page **Edit** sont placés en liste verte dans les paramètres de `TryUpdateModel`. (La chaîne vide précédant la liste des champs dans la liste des paramètres est pour un préfixe à utiliser avec les noms de champs de formulaire.) Actuellement, il n’y a pas de champs supplémentaires que vous protégez, mais la liste des champs que vous voulez que le classeur modèle à lier assure que si vous ajoutez des champs au modèle de données à l’avenir, ils sont automatiquement protégés jusqu’à ce que vous les ajoutez explicitement ici.
+Au titre de bonne pratique pour empêcher la survalidation, les champs dont vous voulez qu’ils puissent être mis à jour par la page **Edit** sont placés en liste verte dans les paramètres de `TryUpdateModel`. (La chaîne vide qui précède la liste de champs dans la liste de paramètres correspond à un préfixe à utiliser avec les noms de champs de formulaire.) Actuellement, il n’y a aucun champ supplémentaire que vous protégez, mais la liste des champs que vous souhaitez lier au classeur de modèles garantit que si vous ajoutez des champs au modèle de données à l’avenir, ils sont automatiquement protégés jusqu’à ce que vous les ajoutiez explicitement ici.
 
 À la suite de ces modifications, la signature de méthode de la méthode HttpPost `Edit` est la même que celle de la méthode HttpGet `Edit` ; par conséquent, vous avez renommé la méthode `EditPost`.
 
@@ -289,7 +295,7 @@ Vous pouvez désactiver le suivi des objets entité en mémoire en appelant la m
 
 * Vous voulez attacher une entité pour pouvoir la mettre à jour, mais vous avez auparavant récupéré la même entité à d’autre fins. Comme l’entité est déjà suivie par le contexte de base de données, vous ne pouvez pas attacher l’entité que vous voulez modifier. Une façon de gérer cette situation est d’appeler `AsNoTracking` sur la requête précédente.
 
-Pour plus d’informations, voir [Tracking vs No-Tracking](/ef/core/querying/tracking).
+Pour plus d’informations, consultez [suivi et non-suivi](/ef/core/querying/tracking).
 
 ## <a name="get-the-code"></a>Obtenir le code
 
@@ -309,4 +315,4 @@ Dans ce tutoriel, vous allez :
 Passez au tutoriel suivant pour découvrir comment développer les fonctionnalités de la page **Index** en ajoutant le tri, le filtrage et la pagination.
 
 > [!div class="nextstepaction"]
-> [Suivant : Tri, filtrage et pagination](sort-filter-page.md)
+> [Suivant : tri, filtrage et pagination](sort-filter-page.md)

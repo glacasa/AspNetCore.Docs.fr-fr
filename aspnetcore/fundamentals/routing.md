@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 4/1/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 79a46cac4122728e84fa6f5acb3defa182092bec
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: e2b1672066a5b3c0bb6bc44e316bda93ae0f21b7
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206123"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774902"
 ---
 # <a name="routing-in-aspnet-core"></a>Routage dans ASP.NET Core
 
@@ -348,7 +354,7 @@ Les détails du fonctionnement de la précédence sont associés à la façon do
 * Un segment avec du texte littéral est considéré comme plus spécifique qu’un segment de paramètres.
 * Un segment de paramètre avec une contrainte est considéré comme plus spécifique qu’un segment sans.
 * Un segment complexe est considéré comme un segment de paramètre spécifique avec une contrainte.
-* Intercepter tous les paramètres sont les moins spécifiques.
+* Les paramètres Catch-All sont les moins spécifiques. Pour obtenir des informations importantes sur les itinéraires d’interception, consultez la section « **catch-all »** dans la [référence de modèle de routage](#rtr) .
 
 Consultez le [code source sur GitHub](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Template/RoutePrecedence.cs#L189) pour obtenir une référence des valeurs exactes.
 
@@ -415,6 +421,8 @@ Astérisque `*` ou double astérisque `**`:
 * Sont appelés paramètres **catch-all** . Par exemple, `blog/{**slug}`:
   * Correspond à n’importe quel URI `/blog` commençant par et dont la valeur est après.
   * La valeur suivante `/blog` est assignée à la valeur de route [Slug](https://developer.mozilla.org/docs/Glossary/Slug) .
+
+[!INCLUDE[](~/includes/catchall.md)]
 
 Les paramètres fourre-tout peuvent également établir une correspondance avec la chaîne vide.
 
@@ -492,7 +500,7 @@ Les contraintes de route s’exécutent quand une correspondance s’est produit
 
 Le tableau suivant montre des exemples de contraintes de routage et leur comportement attendu :
 
-| contrainte | Exemple | Exemples de correspondances | Notes |
+| contrainte | Exemple | Exemples de correspondances | Remarques |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier |
 | `bool` | `{active:bool}` | `true`, `FALSE` | Correspond `true` à `false`ou. Non-respect de la casse |
@@ -555,7 +563,7 @@ Pour `{`échapper les caractères de délimiteur de paramètre de routage, `}`, 
 
 Les expressions régulières utilisées dans le routage commencent `^` souvent par le caractère et correspondent à la position de départ de la chaîne. Les expressions se terminent souvent `$` par le caractère et correspondent à la fin de la chaîne. Les `^` caractères `$` et garantissent que l’expression régulière correspond à l’intégralité de la valeur du paramètre d’itinéraire. Sans les `^` caractères `$` et, l’expression régulière correspond à toute sous-chaîne de la chaîne, ce qui est souvent indésirable. Le tableau suivant fournit des exemples et explique pourquoi ils correspondent ou ne parviennent pas à faire correspondre :
 
-| Expression   | String    | Faire correspondre | Commentaire               |
+| Expression   | String    | Correspond | Commentaire               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
 | `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
@@ -1424,7 +1432,7 @@ Les contraintes de route s’exécutent quand une correspondance s’est produit
 
 Le tableau suivant montre des exemples de contrainte de route et leur comportement attendu.
 
-| contrainte | Exemple | Exemples de correspondances | Notes |
+| contrainte | Exemple | Exemples de correspondances | Remarques |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier. |
 | `bool` | `{active:bool}` | `true`, `FALSE` | Correspond `true` à ou à’false. Non-respect de la casse. |
@@ -1474,7 +1482,7 @@ Pour `{`échapper les caractères de délimiteur de paramètre de routage, `}`, 
 
 Les expressions régulières utilisées dans le routage commencent souvent par `^` le caractère de signe insertion et correspondent à la position de départ de la chaîne. Les expressions se terminent souvent par le `$` caractère de signe dollar et la fin de la chaîne. Les caractères `^` et `$` garantissent que l’expression régulière établit une correspondance avec la totalité de la valeur du paramètre de route. Sans les caractères `^` et `$`, l’expression régulière peut correspondre à n’importe quelle sous-chaîne dans la chaîne, ce qui est souvent indésirable. Le tableau suivant contient des exemples et explique pourquoi ils établissent ou non une correspondance.
 
-| Expression   | String    | Faire correspondre | Commentaire               |
+| Expression   | String    | Correspond | Commentaire               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
 | `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
@@ -1874,7 +1882,7 @@ Les contraintes de route s’exécutent quand une correspondance s’est produit
 
 Le tableau suivant montre des exemples de contrainte de route et leur comportement attendu.
 
-| contrainte | Exemple | Exemples de correspondances | Notes |
+| contrainte | Exemple | Exemples de correspondances | Remarques |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier |
 | `bool` | `{active:bool}` | `true`, `FALSE` | Correspond à `true` ou à `false` (non-respect de la casse) |
@@ -1918,7 +1926,7 @@ Les expressions régulières utilisent les délimiteurs et des jetons semblables
 
 Les expressions régulières utilisées dans le routage commencent souvent par un caret (`^`) et correspondent à la position de début de la chaîne. Les expressions se terminent souvent par le signe dollar (`$`) de caractère et correspondent à la fin de la chaîne. Les caractères `^` et `$` garantissent que l’expression régulière établit une correspondance avec la totalité de la valeur du paramètre de route. Sans les caractères `^` et `$`, l’expression régulière peut correspondre à n’importe quelle sous-chaîne dans la chaîne, ce qui est souvent indésirable. Le tableau suivant contient des exemples et explique pourquoi ils établissent ou non une correspondance.
 
-| Expression   | String    | Faire correspondre | Commentaire               |
+| Expression   | String    | Correspond | Commentaire               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
 | `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |

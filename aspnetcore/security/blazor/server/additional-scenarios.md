@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/27/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/server/additional-scenarios
-ms.openlocfilehash: 1a3e5a215daedbb9b97c1924275701915806983e
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 95e9e57889fdbb5270f895874c9b8148ae4ca48d
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206388"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772802"
 ---
 # <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>Scénarios Blazor de sécurité supplémentaires du serveur ASP.net Core
 
@@ -23,9 +26,9 @@ Par [Javier Calvarro Nelson](https://github.com/javiercn)
 
 ## <a name="pass-tokens-to-a-blazor-server-app"></a>Passer des jetons à une Blazor application serveur
 
-Les jetons disponibles en dehors des composants Razor dans une Blazor application serveur peuvent être passés aux composants avec l’approche décrite dans cette section. Pour obtenir un exemple de code, `Startup.ConfigureServices` y compris un exemple complet, consultez la page [transmission de jetons Blazor à une application côté serveur](https://github.com/javiercn/blazor-server-aad-sample).
+Les jetons disponibles en dehors des Razor composants d’une Blazor application serveur peuvent être passés aux composants avec l’approche décrite dans cette section. Pour obtenir un exemple de code, `Startup.ConfigureServices` y compris un exemple complet, consultez la page [transmission de jetons Blazor à une application côté serveur](https://github.com/javiercn/blazor-server-aad-sample).
 
-Authentifiez Blazor l’application serveur comme vous le feriez avec une Razor pages ou une application MVC standard. Approvisionnez et enregistrez les jetons dans le cookie d’authentification. Par exemple :
+Authentifiez Blazor l’application serveur comme vous le feriez Razor avec une application de pages ou MVC standard. Approvisionnez et enregistrez les jetons dans le cookie d’authentification. Par exemple :
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;

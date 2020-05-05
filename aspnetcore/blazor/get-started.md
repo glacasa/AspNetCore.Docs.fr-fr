@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 05/02/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: 6cf1de6e68d04505ce4ba5d18f2a7d0bbe5be333
-ms.sourcegitcommit: c19e388c83c981232e6f128d97440262adfe06e2
+ms.openlocfilehash: 052a787fbe6411dbaa953f10fcd982dfbd41f1af
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/02/2020
-ms.locfileid: "82727655"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82769453"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>Prise en main d’ASP.NET Core éblouissante
 
@@ -43,9 +46,9 @@ Pour vous familiariser avec éblouissant, suivez les instructions de votre choix
 
 1. Sélectionnez l' **application éblouissant**. Sélectionnez **Suivant**.
 
-1. Indiquez un nom de projet dans le champ **Nom du projet**, ou acceptez le nom de projet par défaut. Confirmez que l’entrée d' **emplacement** est correcte ou indiquez un emplacement pour le projet. Sélectionnez **Create** (Créer).
+1. Indiquez un nom de projet dans le champ **Nom du projet**, ou acceptez le nom de projet par défaut. Confirmez que l’entrée d' **emplacement** est correcte ou indiquez un emplacement pour le projet. Sélectionnez **Créer**.
 
-1. Pour une expérience webassembly éblouissant (Visual Studio 16,6 Preview 2 ou version ultérieure), choisissez le modèle **application éblouissant Webassembly** . Pour une expérience de serveur éblouissant (Visual Studio 16,4 ou version ultérieure), choisissez le modèle **application de serveur éblouissant** . Sélectionnez **Create** (Créer).
+1. Pour une expérience webassembly éblouissant (Visual Studio 16,6 Preview 2 ou version ultérieure), choisissez le modèle **application éblouissant Webassembly** . Pour une expérience de serveur éblouissant (Visual Studio 16,4 ou version ultérieure), choisissez le modèle **application de serveur éblouissant** . Sélectionnez **Créer**.
 
 1. Appuyez sur <kbd>CTRL</kbd>+<kbd>F5</kbd> pour exécuter l’application.
 
@@ -109,7 +112,7 @@ Le serveur éblouissant est pris en charge dans Visual Studio pour Mac. Le webas
    
    Sélectionnez **Suivant**.
 
-1. Dans le champ **nom du projet** , nommez `WebApplication1`l’application. Sélectionnez **Create** (Créer).
+1. Dans le champ **nom du projet** , nommez `WebApplication1`l’application. Sélectionnez **Créer**.
 
 1. Sélectionnez **exécuter** > **Démarrer sans débogage** pour exécuter l’application *sans le débogueur*. Le débogage n’est pas pris en charge pour l’instant.
 

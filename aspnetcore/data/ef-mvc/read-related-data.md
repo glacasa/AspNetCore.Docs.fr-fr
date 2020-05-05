@@ -1,19 +1,25 @@
 ---
-title: 'Tutorial: Lire les données connexes - ASP.NET MVC avec EF Core'
+title: 'Didacticiel : lire les données associées-ASP.NET MVC avec EF Core'
 description: Dans ce didacticiel, vous allez lire et afficher les données associées, à savoir les données qu’Entity Framework charge dans les propriétés de navigation.
 author: rick-anderson
 ms.author: riande
 ms.date: 09/28/2019
 ms.topic: tutorial
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: a6e63723101ab09219db81ee9796c3938a612226
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 7cc400218d7ad8717311e56ec5b3fc190857862c
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78657107"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773534"
 ---
-# <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>Tutorial: Lire les données connexes - ASP.NET MVC avec EF Core
+# <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>Didacticiel : lire les données associées-ASP.NET MVC avec EF Core
 
 Dans le didacticiel précédent, vous a élaboré le modèle de données School. Dans ce didacticiel, vous allez lire et afficher les données associées, à savoir les données qu’Entity Framework charge dans les propriétés de navigation.
 
@@ -188,7 +194,7 @@ Vous avez apporté les modifications suivantes au code existant :
   }
   ```
 
-* Vous avez ajouté une colonne **Courses** qui affiche les cours animés par chaque formateur. Pour plus d’informations, consultez la section de [transition de la ligne explicite](xref:mvc/views/razor#explicit-line-transition) de l’article de syntaxe Razor.
+* Vous avez ajouté une colonne **Courses** qui affiche les cours animés par chaque formateur. Pour plus d’informations, consultez la section relative à la transition Razor de [ligne explicite](xref:mvc/views/razor#explicit-line-transition) de l’article de syntaxe.
 
 * Vous avez ajouté un code qui ajoute dynamiquement `class="success"` à l’élément `tr` du formateur sélectionné. Cela définit une couleur d’arrière-plan pour la ligne sélectionnée à l’aide d’une classe d’amorçage.
 
@@ -207,7 +213,7 @@ Vous avez apporté les modifications suivantes au code existant :
   <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
   ```
 
-Exécutez l’application et sélectionnez l’onglet **Instructeurs.** La page affiche la propriété de localisation des entités relatives OfficeAssignment et une cellule de table vide lorsqu’il n’y a pas d’entité d’instruction Office.
+Exécutez l’application et sélectionnez l’onglet **Instructors** . La page affiche la propriété d’emplacement des entités OfficeAssignment associées et une cellule de table vide lorsqu’il n’y a pas d’entité OfficeAssignment associée.
 
 ![Page d’index des formateurs sans aucun élément sélectionné](read-related-data/_static/instructors-index-no-selection.png)
 
