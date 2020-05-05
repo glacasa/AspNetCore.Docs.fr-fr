@@ -5,13 +5,19 @@ description: Découvrez les attributs ASP.NET Core Tag Helper Ancre et le rôle 
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/13/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: 6bfbad39115c7823b5677d3c52ca64cfb0683037
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 142ad62bbbc25fc5390331b253a6173f064ef162
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78664002"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773963"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>Tag Helper Ancre dans ASP.NET Core
 
@@ -19,9 +25,9 @@ Par [Peter Kellner](https://peterkellner.net) et [Scott Addie](https://github.co
 
 Le [Tag Helper Ancre](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper) améliore la balise d’ancrage HTML standard (`<a ... ></a>`) en ajoutant de nouveaux attributs. Par convention, les noms d’attribut commencent par `asp-`. La valeur d’attribut de l’élément d’ancrage rendu `href` est déterminée par les valeurs des attributs `asp-`.
 
-Pour avoir une vue d’ensemble des Tag Helpers, consultez <xref:mvc/views/tag-helpers/intro>.
+Pour avoir une vue d’ensemble de Tag Helpers, consultez <xref:mvc/views/tag-helpers/intro>.
 
-[Affichez ou téléchargez l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
+[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
 *SpeakerController* est utilisé dans les exemples dans ce document :
 
@@ -41,7 +47,7 @@ Code HTML généré :
 <a href="/Speaker">All Speakers</a>
 ```
 
-Si l’attribut `asp-controller` est spécifié et que `asp-action` ne l’est pas, la valeur par défaut `asp-action` est l’action du contrôleur associée à la vue en cours d’exécution. Si `asp-action` est omis du balisage précédent, et le Tag Helper Ancre est utilisé dans la vue *Index* de *HomeController* ( */Home*), le code HTML généré est :
+Si l’attribut `asp-controller` est spécifié et que `asp-action` ne l’est pas, la valeur par défaut `asp-action` est l’action du contrôleur associée à la vue en cours d’exécution. Si `asp-action` est omis du balisage précédent, et le Tag Helper Ancre est utilisé dans la vue *Index* de *HomeController* (*/Home*), le code HTML généré est :
 
 ```html
 <a href="/Home">All Speakers</a>
@@ -139,7 +145,7 @@ Si `asp-controller` ou `asp-action` est spécifié en plus de `asp-route`, la ro
 
 L’attribut [asp-all-route-data](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) prend en charge la création d’un dictionnaire de paires clé-valeur. La clé est le nom du paramètre et la valeur est la valeur du paramètre.
 
-Dans l’exemple suivant, un dictionnaire est initialisé et transmis à une vue Razor. Les données peuvent également être transmises avec votre modèle.
+Dans l’exemple suivant, un dictionnaire est initialisé et passé à une Razor vue. Les données peuvent également être transmises avec votre modèle.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAllRouteData)]
 
@@ -173,23 +179,23 @@ Les balises de hachage sont utiles lors de la création des applications côté 
 
 L’attribut [asp-area](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area*) définit le nom de la zone utilisé pour définir l’itinéraire approprié. Les exemples suivants décrivent la façon dont l’attribut `asp-area` entraîne un remappage des itinéraires.
 
-#### <a name="usage-in-razor-pages"></a>Utilisation dans les pages Razor
+#### <a name="usage-in-razor-pages"></a>Utilisation dans Razor les pages
 
-Les zones de pages Razor sont prises en charge dans ASP.NET Core 2.1 ou les versions ultérieures.
+RazorLes zones de pages sont prises en charge dans ASP.NET Core 2,1 ou version ultérieure.
 
 Considérez la hiérarchie de répertoires suivante :
 
 * **{Nom du projet}**
   * **wwwroot**
-  * **Zones**
+  * **Zones (Areas)**
     * **Sessions**
       * **Pages**
-        * *\_ViewStart.cshtml*
+        * *\_ViewStart. cshtml*
         * *Index.cshtml*
         * *Index.cshtml.cs*
   * **Pages**
 
-Le balisage pour faire référence à la zone *Sessions* de la page Razor *Index* est :
+Le balisage pour référencer la page d' *index* Razor de la zone *sessions* est :
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAreaRazorPages)]
 
@@ -200,7 +206,7 @@ Code HTML généré :
 ```
 
 > [!TIP]
-> Pour prendre en charge des zones dans une application Razor Pages, effectuez l’une des opérations suivantes dans `Startup.ConfigureServices`:
+> Pour prendre en charge les Razor zones dans une application de pages, effectuez l' `Startup.ConfigureServices`une des opérations suivantes dans :
 >
 > * Définir la [version de compatibilité](xref:mvc/compatibility-version) sur 2.1 ou au-dessus.
 > * Définir la propriété [RazorPagesOptions.AllowAreas](xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.AllowAreas*) sur `true`:
@@ -213,15 +219,15 @@ Considérez la hiérarchie de répertoires suivante :
 
 * **{Nom du projet}**
   * **wwwroot**
-  * **Zones**
+  * **Zones (Areas)**
     * **Blogs**
       * **Contrôleurs**
         * *HomeController.cs*
       * **Views**
-        * **Accueil**
+        * **Page d'accueil**
           * *AboutBlog.cshtml*
           * *Index.cshtml*
-        * *\_ViewStart.cshtml*
+        * *\_ViewStart. cshtml*
   * **Contrôleurs**
 
 L’affectation de la valeur « Blogs » à `asp-area` préfixe le répertoire *Areas/Blogs* dans les itinéraires des vues et contrôleurs associés pour cette balise d’ancrage. Le balisage pour faire référence à la vue *AboutBlog* est :
@@ -235,7 +241,7 @@ Code HTML généré :
 ```
 
 > [!TIP]
-> Pour prendre en charge les zones dans une application MVC, le modèle de routage doit inclure une référence à la zone si elle existe. Ce modèle est représenté par le deuxième paramètre de l’appel de méthode `routes.MapRoute` dans *Startup.Configure* :
+> Pour prendre en charge les zones dans une application MVC, le modèle de routage doit inclure une référence à la zone si elle existe. Ce modèle est représenté par le deuxième paramètre de l' `routes.MapRoute` appel de méthode dans *Startup. configure*:
 >
 > [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=5)]
 
@@ -267,9 +273,9 @@ Code HTML généré :
 
 ### <a name="asp-page"></a>asp-page
 
-L’attribut [asp-page](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*) est utilisé avec les Pages Razor. Utilisez-le pour définir la valeur d’attribut `href` d’une balise d’ancrage sur une page spécifique. En ajoutant une barre oblique (« / ») comme préfixe au nom de la page, vous créez l’URL.
+L’attribut [asp-page](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*) est utilisé avec Razor les pages. Utilisez-le pour définir la valeur d’attribut `href` d’une balise d’ancrage sur une page spécifique. En ajoutant une barre oblique (« / ») comme préfixe au nom de la page, vous créez l’URL.
 
-L’exemple suivant pointe vers la Page Razor du participant :
+L’exemple suivant pointe vers la Razor page participant :
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspPage)]
 
@@ -291,7 +297,7 @@ Code HTML généré :
 
 ### <a name="asp-page-handler"></a>asp-page-handler
 
-L’attribut [asp-page-handler](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*) est utilisé avec les Pages Razor. Il est destiné à la liaison à des gestionnaires de page spécifiques.
+L’attribut [asp-page-Handler](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*) est utilisé avec Razor les pages. Il est destiné à la liaison à des gestionnaires de page spécifiques.
 
 Prenons le gestionnaire de page suivant :
 

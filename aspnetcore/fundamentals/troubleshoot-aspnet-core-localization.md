@@ -4,13 +4,19 @@ author: hishamco
 description: Découvrez comment diagnostiquer les problèmes liés à la localisation dans les applications ASP.NET Core.
 ms.author: riande
 ms.date: 01/24/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/troubleshoot-aspnet-core-localization
-ms.openlocfilehash: 229e274a22e170d984a16d3b1ee64ebc38c4ef77
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: f5c2be93be4f896b1822bf93deef24f091e30442
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78660376"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774286"
 ---
 # <a name="troubleshoot-aspnet-core-localization"></a>Résoudre les problèmes liés à la localisation ASP.NET Core
 
@@ -50,7 +56,7 @@ Les causes courantes de ressources introuvables sont notamment les suivantes :
 - La ressource est manquante dans le `resx` pour certaines langues, mais elle existe dans d’autres.
 - Si le problème persiste, vérifiez les messages du journal de localisation (qui se trouvent au niveau du journal `Debug`) pour obtenir plus de détails sur les ressources manquantes.
 
-_**Astuce:** Lors `CookieRequestCultureProvider`de l’utilisation, vérifier les citations simples ne sont pas utilisés avec les cultures à l’intérieur de la valeur de cookie de localisation. Par exemple, `c='en-UK'|uic='en-US'` est une valeur `c=en-UK|uic=en-US` de cookie invalide, alors qu’il est valide._
+_**Indicateur :** Lorsque vous `CookieRequestCultureProvider`utilisez, vérifiez que les guillemets simples ne sont pas utilisés avec les cultures à l’intérieur de la valeur du cookie de localisation. Par exemple, `c='en-UK'|uic='en-US'` est une valeur de cookie non valide `c=en-UK|uic=en-US` , tandis que est un valide._
 
 ## <a name="resources--class-libraries-issues"></a>Problèmes liés aux ressources et aux bibliothèques de classes
 
@@ -71,7 +77,7 @@ La classe `RequestLocalizationOptions` possède trois fournisseurs par défaut 
 
 [CustomRequestCultureProvider](/dotnet/api/microsoft.aspnetcore.localization.customrequestcultureprovider?view=aspnetcore-2.1) vous permet de personnaliser la façon dont la culture de localisation est fournie dans votre application. `CustomRequestCultureProvider` est utilisé quand les fournisseurs par défaut ne répondent pas à vos besoins.
 
-- Une raison courante pour laquelle un fournisseur personnalisé ne fonctionne pas correctement est qu’il n’est pas le premier fournisseur dans la liste `RequestCultureProviders`. Pour résoudre ce problème :
+- Une raison courante pour laquelle un fournisseur personnalisé ne fonctionne pas correctement est qu’il n’est pas le premier fournisseur dans la liste `RequestCultureProviders`. Pour résoudre ce problème :
 
 - Insérez le fournisseur personnalisé à la position 0 dans la liste `RequestCultureProviders`, comme suit :
 
@@ -102,7 +108,7 @@ options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async 
 Si l’espace de noms racine d’un assembly est différent du nom de l’assembly, la localisation ne fonctionne pas par défaut. Pour éviter ce problème, utilisez [RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1), qui est décrit en détail [ici](xref:fundamentals/localization?view=aspnetcore-2.2#resource-file-naming).
 
 > [!WARNING]
-> Cela peut se produire lorsque le nom d’un projet n’est pas un identifiant .NET valide. Par `my-project-name.csproj` exemple, utilisera `my_project_name` l’espace `my-project-name` de nom racine et le nom d’assemblage menant à cette erreur. 
+> Cela peut se produire lorsque le nom d’un projet n’est pas un identificateur .NET valide. Par exemple `my-project-name.csproj` , utilisera l’espace `my_project_name` de noms racine et `my-project-name` le nom de l’assembly menant à cette erreur. 
 
 ## <a name="resources--build-action"></a>Ressources et action de génération
 

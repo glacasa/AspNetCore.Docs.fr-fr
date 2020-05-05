@@ -5,13 +5,19 @@ description: Outils utiles pour diagnostiquer les problèmes de performances dan
 monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.date: 04/11/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: performance/diagnostic-tools
-ms.openlocfilehash: d273897b9ad26d57eb94b196b58f14019a96d07d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 82c724ec647dfe5547db775ebaf8c2479bb258bd
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78661076"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775854"
 ---
 # <a name="performance-diagnostic-tools"></a>Outils de diagnostic des performances
 
@@ -55,7 +61,7 @@ Pour plus d’informations, consultez [Application Insights pour ASP.NET Core](/
 
 Vous pouvez en savoir plus sur PerfView et la prise en main des [didacticiels vidéo PerfView](https://channel9.msdn.com/Series/PerfView-Tutorial) ou en lisant le Guide de l’utilisateur disponible dans l’outil ou [sur GitHub](https://github.com/Microsoft/perfview).
 
-## <a name="windows-performance-toolkit"></a>Kit de performances Windows
+## <a name="windows-performance-toolkit"></a>Windows Performance Toolkit
 
 [Windows performance Toolkit](/windows-hardware/test/wpt/) (WPT) est constitué de deux composants : l’enregistreur de performances Windows (WPR) et l’analyseur de performances Windows (WPA). Les outils produisent des profils de performances détaillés des applications et des systèmes d’exploitation Windows. WPT offre des méthodes plus riches de visualisation des données, mais la collecte des données est moins puissante que celle de PerfView.
 

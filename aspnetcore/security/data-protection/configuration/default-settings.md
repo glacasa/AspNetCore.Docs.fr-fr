@@ -1,20 +1,26 @@
 ---
-title: Gestion des clés et durée de vie de la protection des données dans ASP.NET Core
+title: Gestion et durée de vie des clés de protection des données dans ASP.NET Core
 author: rick-anderson
 description: En savoir plus sur la gestion et la durée de vie des clés de protection des données dans ASP.NET Core.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/configuration/default-settings
-ms.openlocfilehash: 2f022a4c7519485fe629ce47c27d214c8c27d5bc
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 1db5177230fd4076af080e208f094ce4d6537c62
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667964"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777447"
 ---
-# <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>Gestion des clés et durée de vie de la protection des données dans ASP.NET Core
+# <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>Gestion et durée de vie des clés de protection des données dans ASP.NET Core
 
-De [Rick Anderson](https://twitter.com/RickAndMSFT)
+Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ## <a name="key-management"></a>Gestion des clés
 
@@ -38,7 +44,7 @@ L’application tente de détecter son environnement d’exploitation et de gér
 
 1. Si aucune de ces conditions ne correspond, les clés ne sont pas conservées en dehors du processus en cours. Lorsque le processus s’arrête, toutes les clés générées sont perdues.
 
-Le développeur est toujours en contrôle total et peut remplacer le mode et l’emplacement de stockage des clés. Les trois premières options ci-dessus doivent fournir des valeurs par défaut correctes pour la plupart des applications similaires à la façon dont le ASP.NET **\<machineKey >** routines de génération automatique fonctionnaient dans le passé. L’option de secours finale est le seul scénario qui requiert que le développeur spécifie la [configuration](xref:security/data-protection/configuration/overview) avant s’il souhaite une persistance des clés, mais ce secours ne se produit que dans de rares cas.
+Le développeur est toujours en contrôle total et peut remplacer le mode et l’emplacement de stockage des clés. Les trois premières options ci-dessus doivent fournir des valeurs par défaut correctes pour la plupart des applications similaires à la façon dont les routines ASP.NET ** \<machineKey>** de génération automatique fonctionnaient dans le passé. L’option de secours finale est le seul scénario qui requiert que le développeur spécifie la [configuration](xref:security/data-protection/configuration/overview) avant s’il souhaite une persistance des clés, mais ce secours ne se produit que dans de rares cas.
 
 Lors de l’hébergement dans un conteneur d’ancrage, les clés doivent être rendues persistantes dans un dossier qui est un volume d’ancrage (un volume partagé ou un volume monté sur l’hôte qui persiste au-delà de la durée de vie du conteneur) ou dans un fournisseur externe, tel que [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) ou des [ReDim](https://redis.io/). Un fournisseur externe est également utile dans les scénarios de batterie de serveurs Web si les applications ne peuvent pas accéder à un volume réseau partagé (pour plus d’informations, consultez [PersistKeysToFileSystem](xref:security/data-protection/configuration/overview#persistkeystofilesystem) ).
 
