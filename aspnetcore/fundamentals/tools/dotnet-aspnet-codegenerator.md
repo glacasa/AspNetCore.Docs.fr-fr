@@ -5,13 +5,19 @@ description: La commande dotnet aspnet-codegenerator structure des projets ASP.N
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 07/04/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: 1043a578f66d5bb57f4a81e9fe21afa5e3c37cb8
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 58f7aa30d3e916307437d56c61e80765ac0c21cf
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78665185"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82766470"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
@@ -110,18 +116,18 @@ Utilisation : `dotnet aspnet-codegenerator area AreaNameToGenerate`
 
 La commande précédente génère les dossiers suivants :
 
-* *Les zones (areas)*
+* *Zones (Areas)*
   * *AreaNameToGenerate*
     * *Contrôleurs*
-    * *Data*
+    * *Données*
     * *Modèles*
-    * *Affichage*
+    * *Views*
 
 <a name="ctl"></a>
 
 ### <a name="controller-options"></a>Options de contrôleur
 
-Le tableau suivant `aspnet-codegenerator` `controller` répertorie les options pour et `razorpage`:
+Le tableau suivant répertorie les `aspnet-codegenerator` `controller` options `razorpage`pour et :
 
 [!INCLUDE [aspnet-codegenerator-args-md.md](~/includes/aspnet-codegenerator-args-md.md)]
 
@@ -170,7 +176,7 @@ En règle générale, le modèle et le nom de fichier générés ne sont pas sp�
 * `Details`
 * `List`
 
-Le tableau suivant `aspnet-codegenerator` `razorpage` répertorie les options pour et `controller`:
+Le tableau suivant répertorie les `aspnet-codegenerator` `razorpage` options `controller`pour et :
 
 [!INCLUDE [aspnet-codegenerator-args-md.md](~/includes/aspnet-codegenerator-args-md.md)]
 
@@ -190,6 +196,6 @@ dotnet aspnet-codegenerator razorpage -h
 
 Consultez [Générer automatiquement le modèle de film](/aspnet/core/tutorials/razor-pages/model) pour obtenir un exemple de `dotnet aspnet-codegenerator razorpage`.
 
-### <a name="identity"></a>Identité
+### Identity
 
-Voir [Modèle automatique d’identité](/aspnet/core/security/authentication/scaffold-identity)
+Voir [l' Identity échafaudage](/aspnet/core/security/authentication/scaffold-identity)

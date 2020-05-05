@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/07/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 380a14177d4bb8fa3de63a3c1cd9a39aeab13db3
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 2f12c2a05ef510c38f407ccd69f748aceafd55de
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205980"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767164"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>Appeler des fonctions JavaScript à partir de méthodes .NET dans ASP.NET CoreBlazor
 
@@ -56,7 +59,7 @@ Le composant suivant :
 
 Pour utiliser l' `IJSRuntime` abstraction, adoptez l’une des approches suivantes :
 
-* Injecter `IJSRuntime` l’abstraction dans le composant Razor (*. Razor*) :
+* Injecter `IJSRuntime` l’abstraction dans Razor le composant (*. Razor*) :
 
   [!code-razor[](call-javascript-from-dotnet/samples_snapshot/inject-abstraction.razor?highlight=1)]
 

@@ -4,13 +4,19 @@ author: ardalis
 description: Apprenez à utiliser des dispositions communes, à partager des directives et à exécuter le code commun avant d’afficher les vues dans une application ASP.NET Core.
 ms.author: riande
 ms.date: 07/30/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: db8c6c30397593c1a8375ebc800c1c0e34d241cb
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: fbae94f315c1bb49f1b04be7e71c841f46826216
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667901"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82766483"
 ---
 # <a name="layout-in-aspnet-core"></a>Disposition dans ASP.NET Core
 
@@ -22,9 +28,9 @@ Les pages et les vues ont souvent des éléments visuels et programmatiques en c
 * Partager des directives.
 * Exécuter du code commun avant d’afficher des pages ou des vues.
 
-Ce document traite des dispositions pour les deux approches différentes d’ASP.NET Core MVC : Razor Pages et les contrôleurs avec vues. Pour cette rubrique, les différences sont minimes :
+Ce document décrit les dispositions pour les deux approches différentes de ASP.NET Core MVC : Razor pages et contrôleurs avec des vues. Pour cette rubrique, les différences sont minimes :
 
-* Razor Pages se trouve dans le dossier *Pages*.
+* RazorLes pages se trouvent dans le dossier *pages* .
 * Les contrôleurs avec vues utilisent un dossier *Views* pour les vues.
 
 ## <a name="what-is-a-layout"></a>Qu’est-ce qu’une disposition ?
@@ -37,7 +43,7 @@ Les structures HTML communes comme les scripts et les feuilles de style sont aus
 
 Par convention, la disposition par défaut d’une application ASP.NET Core se nomme *_Layout.cshtml*. Les fichiers de disposition pour les projets ASP.NET Core créés avec les modèles sont les suivants :
 
-* Razor Pages : *Pages/Shared/_Layout.cshtml*
+* RazorPages : *pages/Shared/_Layout. cshtml*
 
   ![Dossier Pages dans l’Explorateur de solutions](layout/_static/rp-web-project-views.png)
 
@@ -53,11 +59,11 @@ Le code suivant montre le fichier de disposition pour un projet créé avec un m
 
 ## <a name="specifying-a-layout"></a>Spécification d’une disposition
 
-Les vues Razor ont une propriété `Layout`. Chaque vue spécifie une disposition en définissant cette propriété :
+Razorles vues ont `Layout` une propriété. Chaque vue spécifie une disposition en définissant cette propriété :
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 
-La disposition spécifiée peut utiliser un chemin complet (par exemple, */Pages/Shared/_Layout.cshtml* ou */Views/Shared/_Layout.cshtml*) ou un nom partiel (exemple : `_Layout`). Quand un nom partiel est fourni, le moteur de vue Razor recherche le fichier de disposition en utilisant son processus de détection habituel. Le dossier où se trouve la méthode de gestionnaire (ou contrôleur) est parcouru en premier, suivi du dossier *Shared*. Ce processus de détection est le même que celui utilisé pour détecter les [vues partielles](xref:mvc/views/partial#partial-view-discovery).
+La disposition spécifiée peut utiliser un chemin complet (par exemple, */Pages/Shared/_Layout.cshtml* ou */Views/Shared/_Layout.cshtml*) ou un nom partiel (exemple : `_Layout`). Quand un nom partiel est fourni, le Razor moteur d’affichage recherche le fichier de disposition à l’aide de son processus de découverte standard. Le dossier où se trouve la méthode de gestionnaire (ou contrôleur) est parcouru en premier, suivi du dossier *Shared*. Ce processus de détection est le même que celui utilisé pour détecter les [vues partielles](xref:mvc/views/partial#partial-view-discovery).
 
 Par défaut, chaque disposition doit appeler `RenderBody`. À chaque appel de `RenderBody`, le contenu de la vue est affiché.
 
@@ -73,9 +79,9 @@ Une disposition peut éventuellement faire référence à une ou plusieurs *sect
 @RenderSection("Scripts", required: false)
 ```
 
-Si une section obligatoire est introuvable, une exception est levée. Chacune des vues spécifient le contenu à afficher dans une section à l’aide de la syntaxe Razor `@section`. Si une page ou vue définit une section, elle doit être affichée (sinon, une erreur se produit).
+Si une section obligatoire est introuvable, une exception est levée. Les vues individuelles spécifient le contenu à restituer dans une section `@section` Razor à l’aide de la syntaxe. Si une page ou vue définit une section, elle doit être affichée (sinon, une erreur se produit).
 
-Exemple de définition `@section` dans une vue Razor Pages :
+Exemple `@section` de définition en Razor mode pages :
 
 ```html
 @section Scripts {
@@ -93,23 +99,23 @@ Le balisage suivant utilise le [Tag Helper Partial](xref:mvc/views/tag-helpers/b
 }
 ```
 
-Le balisage précédent était le résultat de la [génération d’un modèle automatique d’identité](xref:security/authentication/scaffold-identity).
+Le balisage précédent a été généré par la [génération de modèles Identity ](xref:security/authentication/scaffold-identity)automatique.
 
 Les sections définies dans une page ou vue sont disponibles uniquement dans sa page de disposition la plus proche. Elles ne peuvent pas être référencées à partir de vues partielles, de composants de vue ou d’autres parties du système de vue.
 
 ### <a name="ignoring-sections"></a>Ignorer des sections
 
-Par défaut, le corps et toutes les sections dans une page de contenu doivent intégralement être affichés par la page de disposition. Le moteur de vue Razor s’assure que c’est bien le cas en vérifiant que le corps et chaque section ont été affichés.
+Par défaut, le corps et toutes les sections dans une page de contenu doivent intégralement être affichés par la page de disposition. Le Razor moteur d’affichage applique cela en déterminant si le corps et chaque section ont été rendus.
 
 Pour indiquer au moteur de vue d’ignorer le corps ou les sections, appelez les méthodes `IgnoreBody` et `IgnoreSection`.
 
-Le corps et toutes les sections dans une page Razor doivent être soit affichés, soit ignorés.
+Le corps et chaque section d’une Razor page doivent être rendus ou ignorés.
 
 <a name="viewimports"></a>
 
 ## <a name="importing-shared-directives"></a>Importation de directives partagées
 
-Les vues et les pages peuvent utiliser des directives Razor pour importer des espaces de noms et utiliser l' [injection de dépendances](dependency-injection.md). Les directives partagées par plusieurs vues peuvent être spécifiées dans un fichier *_ViewImports.cshtml* commun. Le fichier `_ViewImports` prend en charge les directives suivantes :
+Les vues et les pages Razor peuvent utiliser des directives pour importer des espaces de noms et utiliser l' [injection de dépendances](dependency-injection.md). Les directives partagées par plusieurs vues peuvent être spécifiées dans un fichier *_ViewImports.cshtml* commun. Le fichier `_ViewImports` prend en charge les directives suivantes :
 
 * `@addTagHelper`
 * `@removeTagHelper`
@@ -119,7 +125,7 @@ Les vues et les pages peuvent utiliser des directives Razor pour importer des es
 * `@inherits`
 * `@inject`
 
-Le fichier ne prend pas en charge les autres fonctionnalités Razor, telles que les fonctions et les définitions de section.
+Le fichier ne prend pas Razor en charge d’autres fonctionnalités, telles que les fonctions et les définitions de section.
 
 Exemple de fichier `_ViewImports.cshtml` :
 

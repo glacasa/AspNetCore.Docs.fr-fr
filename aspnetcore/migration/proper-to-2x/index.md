@@ -4,13 +4,19 @@ author: isaac2004
 description: Recevoir des conseils de migration d’applications ASP.NET MVC ou Web API existantes vers ASP.NET Core.web
 ms.author: scaddie
 ms.date: 10/18/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: 68a45dc50e00bead564500a12509b62a4a193ec4
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 985c08e0994314cec8d52a6651681c93aca96514
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79511085"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82766509"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>Migrer d’ASP.NET vers ASP.NET Core
 
@@ -20,7 +26,7 @@ Cet article sert de guide de référence pour la migration d’applications ASP.
 
 ## <a name="prerequisites"></a>Prérequis
 
-[.NET Core SDK 2.2 ou plus tard](https://dotnet.microsoft.com/download)
+[Kit SDK .NET Core 2,2 ou version ultérieure](https://dotnet.microsoft.com/download)
 
 ## <a name="target-frameworks"></a>Versions cibles de .NET Framework
 
@@ -60,7 +66,7 @@ Cette approche couple l’application au serveur sur lequel elle est déployée 
 
 Cela permet de configurer vos itinéraires par défaut, et de privilégier XmlSerialization à JSON. Ajoutez d’autres intergiciels (middleware) à ce pipeline selon les besoins (services de chargement, paramètres de configuration, fichiers statiques, etc.).
 
-ASP.NET Core utilise une approche similaire mais n’a pas besoin d’OWIN pour prendre en charge l’entrée. Au lieu de cela, *Program.cs* `Main` cela se fait à travers `Startup` la méthode Program.cs (semblable aux applications de console) et est chargé par là.
+ASP.NET Core utilise une approche similaire mais n’a pas besoin d’OWIN pour prendre en charge l’entrée. Au lieu de cela, cette opération est effectuée via la méthode *Program.cs* `Main` (semblable aux `Startup` applications console) et est chargée par l’intermédiaire de là.
 
 [!code-csharp[](samples/program.cs)]
 
@@ -143,7 +149,7 @@ Une partie importante du développement web réside dans la capacité de traitem
 
 Avec ASP.NET, les fichiers statiques sont stockés dans différents répertoires et référencés dans des vues.
 
-Dans ASP.NET Core, les fichiers statiques sont stockés dans la « racine web »*&lt;(racine&gt;de contenu /wwwroot*), sauf configuré autrement. Les fichiers sont chargés dans le pipeline de requêtes via l’appel de la méthode d’extension `UseStaticFiles` à partir de `Startup.Configure` :
+Dans ASP.net Core, les fichiers statiques sont stockés dans la « racine Web » (*&lt;&gt;racine du contenu/wwwroot*), sauf si configuré dans le cas contraire. Les fichiers sont chargés dans le pipeline de requêtes via l’appel de la méthode d’extension `UseStaticFiles` à partir de `Startup.Configure` :
 
 [!code-csharp[](../../fundamentals/static-files/samples/1x/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 
@@ -155,13 +161,13 @@ Par exemple, un composant image dans le dossier *wwwroot/images* est accessible 
 > [!NOTE]
 > Pour obtenir des informations de référence plus approfondies sur le traitement des fichiers statiques dans ASP.NET Core, consultez [Fichiers statiques](xref:fundamentals/static-files).
 
-## <a name="multi-value-cookies"></a>Biscuits multi valeurs
+## <a name="multi-value-cookies"></a>Cookies à valeurs multiples
 
-[Les cookies multi valeurs](xref:System.Web.HttpCookie.Values) ne sont pas pris en charge dans ASP.NET Core. Créez un cookie par valeur.
+[Les cookies à valeurs multiples](xref:System.Web.HttpCookie.Values) ne sont pas pris en charge dans ASP.net core. Créez un cookie par valeur.
 
-## <a name="partial-app-migration"></a>Migration partielle de l’application
+## <a name="partial-app-migration"></a>Migration d’application partielle
 
-Une approche de la migration partielle de l’application consiste à créer une sous-application IIS et à ne déplacer certains itinéraires de ASP.NET 4.x à ASP.NET Core tout en préservant la structure d’URL de l’application. Par exemple, considérez la structure d’URL de l’application à partir du fichier *applicationHost.config* :
+L’une des approches de la migration partielle d’applications consiste à créer une sous-application IIS et à déplacer uniquement certains itinéraires de ASP.NET 4. x vers ASP.NET Core tout en conservant la structure de l’URL de l’application. Par exemple, considérez la structure de l’URL de l’application à partir du fichier *ApplicationHost. config* :
 
 ```xml
 <sites>
@@ -181,7 +187,7 @@ Une approche de la migration partielle de l’application consiste à créer une
 </sites>
 ```
 
-Structure d’annuaire :
+Structure de répertoire :
 
 ```
 .

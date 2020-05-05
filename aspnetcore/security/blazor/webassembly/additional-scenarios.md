@@ -5,17 +5,20 @@ description: Découvrez comment configurer Blazor webassembly pour des scénario
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/27/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: 093498c3e0d42430c66c66a0998bcc44f62d1e0d
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: e69b598431027aa540227b87dedfd091057a1af4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206149"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768167"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>Scénarios de sécurité supplémentaires ASP.NET Core éblouissant webassembly
 
@@ -25,45 +28,6 @@ Par [Javier Calvarro Nelson](https://github.com/javiercn)
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
-## <a name="request-additional-access-tokens"></a>Demander des jetons d’accès supplémentaires
-
-La plupart des applications ont uniquement besoin d’un jeton d’accès pour interagir avec les ressources protégées qu’elles utilisent. Dans certains scénarios, une application peut nécessiter plusieurs jetons pour interagir avec au moins deux ressources.
-
-Dans l’exemple suivant, des Azure Active Directory supplémentaires (AAD) Microsoft Graph des étendues d’API sont requises par une application pour lire les données utilisateur et envoyer des messages électroniques. Après avoir ajouté les autorisations Microsoft Graph API dans le portail Azure AAD, les étendues supplémentaires sont configurées dans l’application`Program.Main`cliente (, *Program.cs*) :
-
-```csharp
-builder.Services.AddMsalAuthentication(options =>
-{
-    ...
-
-    options.ProviderOptions.AdditionalScopesToConsent.Add(
-        "https://graph.microsoft.com/Mail.Send");
-    options.ProviderOptions.AdditionalScopesToConsent.Add(
-        "https://graph.microsoft.com/User.Read");
-}
-```
-
-La `IAccessTokenProvider.RequestToken` méthode fournit une surcharge qui permet à une application de configurer un jeton d’accès avec un ensemble donné d’étendues, comme illustré dans l’exemple suivant :
-
-```csharp
-var tokenResult = await AuthenticationService.RequestAccessToken(
-    new AccessTokenRequestOptions
-    {
-        Scopes = new[] { "https://graph.microsoft.com/Mail.Send", 
-            "https://graph.microsoft.com/User.Read" }
-    });
-
-if (tokenResult.TryGetToken(out var token))
-{
-    ...
-}
-```
-
-`TryGetToken`Cette
-
-* `true`avec le `token` à utiliser.
-* `false`Si le jeton n’est pas récupéré.
-
 ## <a name="attach-tokens-to-outgoing-requests"></a>Attacher des jetons aux demandes sortantes
 
 Le `AuthorizationMessageHandler` service peut être utilisé avec `HttpClient` pour joindre des jetons d’accès aux demandes sortantes. Les jetons sont acquis à l’aide `IAccessTokenProvider` du service existant. Si un jeton ne peut pas être acquis `AccessTokenNotAvailableException` , une exception est levée. `AccessTokenNotAvailableException`dispose d' `Redirect` une méthode qui peut être utilisée pour accéder au fournisseur d’identité de l’utilisateur afin d’acquérir un nouveau jeton. `AuthorizationMessageHandler` Peut être configuré avec les URL, les portées et l’URL de retour autorisées à `ConfigureHandler` l’aide de la méthode.
@@ -71,7 +35,7 @@ Le `AuthorizationMessageHandler` service peut être utilisé avec `HttpClient` p
 Dans l’exemple suivant, `AuthorizationMessageHandler` configure un `HttpClient` en `Program.Main` (*Program.cs*) :
 
 ```csharp
-builder.Services.AddSingleton(sp =>
+builder.Services.AddTransient(sp =>
 {
     return new HttpClient(sp.GetRequiredService<AuthorizationMessageHandler>()
         .ConfigureHandler(
@@ -166,6 +130,156 @@ protected override async Task OnInitializedAsync()
     forecasts = await WeatherClient.GetWeatherForeacasts();
 }
 ```
+
+## <a name="request-additional-access-tokens"></a>Demander des jetons d’accès supplémentaires
+
+Les jetons d’accès peuvent être obtenus manuellement en `IAccessTokenProvider.RequestAccessToken`appelant.
+
+Dans l’exemple suivant, des Azure Active Directory supplémentaires (AAD) Microsoft Graph des étendues d’API sont requises par une application pour lire les données utilisateur et envoyer des messages électroniques. Après avoir ajouté les autorisations Microsoft Graph API dans le portail Azure AAD, les étendues supplémentaires sont configurées dans l’application`Program.Main`cliente (, *Program.cs*) :
+
+```csharp
+builder.Services.AddMsalAuthentication(options =>
+{
+    ...
+
+    options.ProviderOptions.AdditionalScopesToConsent.Add(
+        "https://graph.microsoft.com/Mail.Send");
+    options.ProviderOptions.AdditionalScopesToConsent.Add(
+        "https://graph.microsoft.com/User.Read");
+}
+```
+
+La `IAccessTokenProvider.RequestToken` méthode fournit une surcharge qui permet à une application de configurer un jeton d’accès avec un ensemble donné d’étendues, comme illustré dans l’exemple suivant :
+
+```csharp
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject IAccessTokenProvider TokenProvider
+
+...
+
+var tokenResult = await TokenProvider.RequestAccessToken(
+    new AccessTokenRequestOptions
+    {
+        Scopes = new[] { "https://graph.microsoft.com/Mail.Send", 
+            "https://graph.microsoft.com/User.Read" }
+    });
+
+if (tokenResult.TryGetToken(out var token))
+{
+    ...
+}
+```
+
+`TryGetToken`Cette
+
+* `true`avec le `token` à utiliser.
+* `false`Si le jeton n’est pas récupéré.
+
+## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>HttpClient et HttpRequestMessage avec les options de demande d’API Fetch
+
+Lors de l’exécution sur webassembly dans une application de webassembly <xref:System.Net.Http.HttpRequestMessage> éblouissante, [httpclient](xref:fundamentals/http-requests) et peut être utilisé pour personnaliser les demandes. Par exemple, vous pouvez spécifier la méthode HTTP et les en-têtes de demande. L’exemple suivant effectue une `POST` demande à un point de terminaison de l’API list to do sur le serveur et affiche le corps de la réponse :
+
+```razor
+@page "/todorequest"
+@using System.Net.Http
+@using System.Net.Http.Headers
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject HttpClient Http
+@inject IAccessTokenProvider TokenProvider
+
+<h1>ToDo Request</h1>
+
+<button @onclick="PostRequest">Submit POST request</button>
+
+<p>Response body returned by the server:</p>
+
+<p>@_responseBody</p>
+
+@code {
+    private string _responseBody;
+
+    private async Task PostRequest()
+    {
+        var requestMessage = new HttpRequestMessage()
+        {
+            Method = new HttpMethod("POST"),
+            RequestUri = new Uri("https://localhost:10000/api/TodoItems"),
+            Content =
+                JsonContent.Create(new TodoItem
+                {
+                    Name = "My New Todo Item",
+                    IsComplete = false
+                })
+        };
+
+        var tokenResult = await TokenProvider.RequestAccessToken();
+
+        if (tokenResult.TryGetToken(out var token))
+        {
+            requestMessage.Headers.Authorization =
+                new AuthenticationHeaderValue("Bearer", token.Value);
+
+            requestMessage.Content.Headers.TryAddWithoutValidation(
+                "x-custom-header", "value");
+
+            var response = await Http.SendAsync(requestMessage);
+            var responseStatusCode = response.StatusCode;
+
+            _responseBody = await response.Content.ReadAsStringAsync();
+        }
+    }
+
+    public class TodoItem
+    {
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public bool IsComplete { get; set; }
+    }
+}
+```
+
+L’implémentation de .NET webassembly de `HttpClient` utilise [WindowOrWorkerGlobalScope. Fetch ()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch). L’extraction permet de configurer plusieurs [options spécifiques à la demande](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters). 
+
+Les options de requête HTTP FETCH peuvent être `HttpRequestMessage` configurées avec les méthodes d’extension indiquées dans le tableau suivant.
+
+| `HttpRequestMessage`méthode d’extension | Propriété de requête Fetch |
+| ------------------------------------- | ---------------------- |
+| `SetBrowserRequestCredentials`        | [informations d’identification](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
+| `SetBrowserRequestCache`              | [en](https://developer.mozilla.org/docs/Web/API/Request/cache) |
+| `SetBrowserRequestMode`               | [mode](https://developer.mozilla.org/docs/Web/API/Request/mode) |
+| `SetBrowserRequestIntegrity`          | [garantis](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
+
+Vous pouvez définir des options supplémentaires à l’aide `SetBrowserRequestOption` de la méthode d’extension plus générique.
+ 
+La réponse HTTP est généralement mise en mémoire tampon dans une application de webassembly éblouissante pour permettre la prise en charge des lectures de synchronisation sur le contenu de la réponse. Pour activer la prise en charge de la diffusion `SetBrowserResponseStreamingEnabled` en continu de réponse, utilisez la méthode d’extension sur la demande.
+
+Pour inclure des informations d’identification dans une demande Cross-Origin, `SetBrowserRequestCredentials` utilisez la méthode d’extension :
+
+```csharp
+requestMessage.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
+```
+
+Pour plus d’informations sur les options de l’API FETCH, consultez [MDN Web docs : WindowOrWorkerGlobalScope. Fetch () :P arameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).
+
+Lors de l’envoi d’informations d’identification (cookies/en-têtes d’autorisation `Authorization` ) sur les demandes cors, l’en-tête doit être autorisé par la stratégie cors.
+
+La stratégie suivante comprend la configuration pour :
+
+* Origines des demandes`http://localhost:5000`( `https://localhost:5001`,).
+* Toute méthode (verbe).
+* `Content-Type`et `Authorization` en-têtes. Pour autoriser un en-tête personnalisé (par `x-custom-header`exemple,), répertoriez l' <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>en-tête lors de l’appel de.
+* Informations d’identification définies par le code JavaScript côté client`credentials` (la propriété `include`a la valeur).
+
+```csharp
+app.UseCors(policy => 
+    policy.WithOrigins("http://localhost:5000", "https://localhost:5001")
+    .AllowAnyMethod()
+    .WithHeaders(HeaderNames.ContentType, HeaderNames.Authorization, "x-custom-header")
+    .AllowCredentials());
+```
+
+Pour plus d’informations, <xref:security/cors> consultez et le composant testeur de requêtes http de l’exemple d’application (*composants/HTTPRequestTester. Razor*).
 
 ## <a name="handle-token-request-errors"></a>Gérer les erreurs de demande de jeton
 
@@ -483,7 +597,7 @@ public class Program
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
         builder.RootComponents.Add<App>("app");
 
-        builder.Services.AddSingleton(new HttpClient 
+        builder.Services.AddTransient(new HttpClient 
         {
             BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
         });
@@ -573,13 +687,13 @@ Authentifiez l’utilisateur avec un fluide OAuth côté client par rapport au f
 
 ### <a name="authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party"></a>Authentifier les utilisateurs auprès d’un fournisseur tiers et appeler des API protégées sur le serveur hôte et le tiers
 
-Configurez l’identité avec un fournisseur de connexion tiers. Obtenez les jetons requis pour l’accès de l’API tierce et stockez-les.
+Configurez Identity avec un fournisseur de connexion tiers. Obtenez les jetons requis pour l’accès de l’API tierce et stockez-les.
 
-Lorsqu’un utilisateur se connecte, l’identité collecte les jetons d’accès et d’actualisation dans le cadre du processus d’authentification. À ce stade, il existe deux approches disponibles pour effectuer des appels d’API à des API tierces.
+Lorsqu’un utilisateur se connecte Identity , collecte les jetons d’accès et d’actualisation dans le cadre du processus d’authentification. À ce stade, il existe deux approches disponibles pour effectuer des appels d’API à des API tierces.
 
 #### <a name="use-a-server-access-token-to-retrieve-the-third-party-access-token"></a>Utiliser un jeton d’accès au serveur pour récupérer le jeton d’accès tiers
 
-Utilisez le jeton d’accès généré sur le serveur pour récupérer le jeton d’accès tiers à partir d’un point de terminaison d’API serveur. À partir de là, utilisez le jeton d’accès tiers pour appeler des ressources d’API tierces directement à partir de l’identité sur le client.
+Utilisez le jeton d’accès généré sur le serveur pour récupérer le jeton d’accès tiers à partir d’un point de terminaison d’API serveur. À partir de là, utilisez le jeton d’accès tiers pour appeler des ressources d’API tierces Identity directement à partir de sur le client.
 
 Nous ne recommandons pas cette approche. Cette approche nécessite le traitement du jeton d’accès tiers comme s’il avait été généré pour un client public. Dans les termes OAuth, l’application publique n’a pas de clé secrète client, car elle ne peut pas être approuvée pour stocker des secrets en toute sécurité, et le jeton d’accès est généré pour un client confidentiel. Un client confidentiel est un client qui a une clé secrète client et est supposé être en mesure de stocker des secrets en toute sécurité.
 
