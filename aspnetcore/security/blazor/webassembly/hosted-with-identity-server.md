@@ -1,5 +1,5 @@
 ---
-title: Sécuriser une Blazor application hébergée par l’ASP.net Core webassembly avec le serveur d’identité
+title: Sécuriser une Blazor application hébergée par l' Identity ASP.net Core webassembly avec le serveur
 author: guardrex
 description: Pour créer une application Blazor hébergée avec l’authentification à partir de Visual Studio qui utilise un backend [IdentityServer](https://identityserver.io/)
 monikerRange: '>= aspnetcore-3.1'
@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/24/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-identity-server
-ms.openlocfilehash: ffdcd30ae9ce5350113569a500e99cf8db82ad65
-ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
+ms.openlocfilehash: bf2298618e922df412e0742177afd390c4116388
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82138602"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768119"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-identity-server"></a>Sécuriser une Blazor application hébergée par l’ASP.net Core webassembly avec le serveur d’identité
+# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>Sécuriser une Blazor application hébergée par l' Identity ASP.net Core webassembly avec le serveur
 
 Par [Javier Calvarro Nelson](https://github.com/javiercn) et [Luke Latham](https://github.com/guardrex)
 
@@ -51,7 +54,7 @@ La `Startup` classe comporte les ajouts suivants :
 
 * Dans `Startup.ConfigureServices` :
 
-  * Identité :
+  * Identity:
 
     ```csharp
     services.AddDbContext<ApplicationDbContext>(options =>
@@ -104,7 +107,7 @@ La <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigura
 
 ### <a name="addidentityserverjwt"></a>AddIdentityServerJwt
 
-La <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> méthode d’assistance configure un modèle de stratégie pour l’application en tant que gestionnaire d’authentification par défaut. La stratégie est configurée pour autoriser l’identité à gérer toutes les demandes routées vers un sous-chemin dans `/Identity`l’espace d’URL d’identité. Le <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> gère toutes les autres requêtes. En outre, cette méthode :
+La <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> méthode d’assistance configure un modèle de stratégie pour l’application en tant que gestionnaire d’authentification par défaut. La stratégie est configurée pour Identity autoriser à gérer toutes les demandes routées vers n’importe quel Identity sous- `/Identity`chemin dans l’espace d’URL. Le <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> gère toutes les autres requêtes. En outre, cette méthode :
 
 * Inscrit une `{APPLICATION NAME}API` ressource API avec IdentityServer avec une étendue par défaut `{APPLICATION NAME}API`.
 * Configure l’intergiciel de jeton de porteur JWT pour valider les jetons émis par IdentityServer pour l’application.
@@ -115,9 +118,9 @@ Dans `WeatherForecastController` (*Controllers/WeatherForecastController. cs*), 
 
 ### <a name="applicationdbcontext"></a>ApplicationDbContext
 
-Dans `ApplicationDbContext` (*Data/ApplicationDbContext. cs*), le même <xref:Microsoft.EntityFrameworkCore.DbContext> est utilisé dans l’identité, avec l’exception qu’il <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> étend pour inclure le schéma pour IdentityServer. <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> est dérivé de <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext>.
+`ApplicationDbContext` Dans (*Data/ApplicationDbContext. cs*), le <xref:Microsoft.EntityFrameworkCore.DbContext> même est utilisé dans Identity , avec l’exception qu’il étend <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> pour inclure le schéma pour IdentityServer. <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> est dérivé de <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext>.
 
-Pour obtenir le contrôle total du schéma de base de données, héritez de l' <xref:Microsoft.EntityFrameworkCore.DbContext> une des classes d’identité disponibles et configurez le contexte `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` pour inclure `OnModelCreating` le schéma d’identité en appelant dans la méthode.
+Pour obtenir le contrôle total du schéma de base de données, héritez de Identity <xref:Microsoft.EntityFrameworkCore.DbContext> l’une des classes disponibles et configurez le contexte `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` pour inclure `OnModelCreating` le Identity schéma en appelant dans la méthode.
 
 ### <a name="oidcconfigurationcontroller"></a>OidcConfigurationController
 
@@ -185,7 +188,7 @@ Le `LoginDisplay` composant (*Shared/LoginDisplay. Razor*) est affiché dans `Ma
 
 * Pour les utilisateurs authentifiés :
   * Affiche le nom de l’utilisateur actuel.
-  * Propose un lien vers la page de profil utilisateur dans ASP.NET Core identité.
+  * Propose un lien vers la page de profil utilisateur dans IdentityASP.net core.
   * Offre un bouton permettant de se déconnecter de l’application.
 * Pour les utilisateurs anonymes :
   * Offre la possibilité de s’inscrire.

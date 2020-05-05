@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/24/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/webassembly/index
-ms.openlocfilehash: c096419f4866ea2f1db135594c4b88c89c7c90d1
-ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
+ms.openlocfilehash: e8ea5e6b6d7e28906e6109e6730ac25f190b4191
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82138415"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767998"
 ---
-# <a name="secure-aspnet-core-opno-locblazor-webassembly"></a>Sécuriser Blazor ASP.net Core webassembly
+# <a name="secure-aspnet-core-blazor-webassembly"></a>Sécuriser Blazor ASP.net Core webassembly
 
 Par [Javier Calvarro Nelson](https://github.com/javiercn)
 
@@ -29,14 +32,14 @@ BlazorLes applications webassembly sont sécurisées de la même façon que les 
 
 ## <a name="authentication-library"></a>Bibliothèque d’authentification
 
-BlazorWebassembly prend en charge l’authentification et l’autorisation d' `Microsoft.AspNetCore.Components.WebAssembly.Authentication` applications à l’aide de OIDC via la bibliothèque. La bibliothèque fournit un ensemble de primitives pour l’authentification en toute transparence par rapport aux principaux de ASP.NET Core. La bibliothèque intègre ASP.NET Core identité avec la prise en charge des autorisations d’API basée sur le [serveur d’identité](https://identityserver.io/). La bibliothèque peut s’authentifier auprès d’un fournisseur d’identité (IP) tiers qui prend en charge OIDC, qui sont appelés fournisseurs OpenID.
+BlazorWebassembly prend en charge l’authentification et l’autorisation d' `Microsoft.AspNetCore.Components.WebAssembly.Authentication` applications à l’aide de OIDC via la bibliothèque. La bibliothèque fournit un ensemble de primitives pour l’authentification en toute transparence par rapport aux principaux de ASP.NET Core. La bibliothèque intègre ASP.net Core Identity avec la prise en charge des autorisations d’API basée sur le [ Identity serveur](https://identityserver.io/). La bibliothèque peut s’authentifier auprès d’un Identity fournisseur tiers (IP) qui prend en charge OIDC, qui sont appelés fournisseurs OpenID (op).
 
 La prise en charge Blazor de l’authentification dans webassembly repose sur la bibliothèque *OIDC-client. js* , qui est utilisée pour gérer les détails du protocole d’authentification sous-jacent.
 
 D’autres options d’authentification de la fonction de l’interauthentification existent, telles que l’utilisation de cookies SameSite. Toutefois, la conception de l' Blazor ingénierie de webassembly est réglée sur OAUTH et OIDC comme meilleure option pour Blazor l’authentification dans les applications webassembly. [L’authentification basée sur les jetons](xref:security/anti-request-forgery#token-based-authentication) basée sur des [jetons Web JSON (jetons JWT)](https://self-issued.info/docs/draft-ietf-oauth-json-web-token.html) a été choisie via [l’authentification basée](xref:security/anti-request-forgery#cookie-based-authentication) sur les cookies pour des raisons fonctionnelles et de sécurité :
 
 * L’utilisation d’un protocole basé sur les jetons offre une surface d’attaque plus réduite, car les jetons ne sont pas envoyés dans toutes les demandes.
-* Les points de terminaison de serveur ne nécessitent pas de protection contre la [falsification de requête intersites (CSRF)](xref:security/anti-request-forgery) , car les jetons sont envoyés explicitement. Cela vous permet d’héberger Blazor des applications webassembly avec des applications MVC ou des pages Razor.
+* Les points de terminaison de serveur ne nécessitent pas de protection contre la [falsification de requête intersites (CSRF)](xref:security/anti-request-forgery) , car les jetons sont envoyés explicitement. Cela vous permet d’héberger Blazor des applications webassembly Razor en même temps que des applications MVC ou pages.
 * Les jetons ont des autorisations plus étroites que les cookies. Par exemple, les jetons ne peuvent pas être utilisés pour gérer le compte d’utilisateur ou modifier le mot de passe d’un utilisateur, sauf si une telle fonctionnalité est implémentée de manière explicite.
 * Les jetons ont une durée de vie brève, par défaut d’une heure, qui limite la fenêtre d’attaque. Les jetons peuvent également être révoqués à tout moment.
 * Les jetons JWT autonomes offrent des garanties au client et au serveur sur le processus d’authentification. Par exemple, un client a la possibilité de détecter et de valider que les jetons qu’il reçoit sont légitimes et ont été émis dans le cadre d’un processus d’authentification donné. Si un tiers tente de basculer un jeton au milieu du processus d’authentification, le client peut détecter le jeton commuté et éviter de l’utiliser.
@@ -49,7 +52,7 @@ La `Microsoft.AspNetCore.Components.WebAssembly.Authentication` bibliothèque pr
 
 * Lorsqu’un utilisateur anonyme sélectionne le bouton de connexion ou demande une page pour [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) laquelle l’attribut est appliqué, l’utilisateur est redirigé vers la page de connexion`/authentication/login`de l’application ().
 * Dans la page de connexion, la bibliothèque d’authentification prépare une redirection vers le point de terminaison d’autorisation. Le point de terminaison d’autorisation est Blazor en dehors de l’application webassembly et peut être hébergé à une origine distincte. Le point de terminaison est chargé de déterminer si l’utilisateur est authentifié et d’émettre un ou plusieurs jetons en réponse. La bibliothèque d’authentification fournit un rappel de connexion pour recevoir la réponse d’authentification.
-  * Si l’utilisateur n’est pas authentifié, l’utilisateur est redirigé vers le système d’authentification sous-jacent, qui est généralement ASP.NET Core identité.
+  * Si l’utilisateur n’est pas authentifié, l’utilisateur est redirigé vers le système d’authentification sous-jacent, qui Identityest généralement ASP.net core.
   * Si l’utilisateur a déjà été authentifié, le point de terminaison d’autorisation génère les jetons appropriés et redirige le navigateur vers le point de terminaison de`/authentication/login-callback`rappel de connexion ().
 * Lorsque l' Blazor application webassembly charge le point de terminaison`/authentication/login-callback`de rappel de connexion (), la réponse d’authentification est traitée.
   * Si le processus d’authentification se termine correctement, l’utilisateur est authentifié et éventuellement renvoyé à l’URL protégée d’origine que l’utilisateur a demandée.

@@ -4,13 +4,19 @@ author: rick-anderson
 description: Découvrez comment utiliser SQL Server LocalDB ou SQLite dans une application ASP.NET Core MVC.
 ms.author: riande
 ms.date: 8/16/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-mvc-app/working-with-sql
-ms.openlocfilehash: d556f07111fb2022a1c2f1a066459566e302835d
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 54b10f10fb048819fced223f77f06a32102512d0
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78665038"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776205"
 ---
 # <a name="work-with-sql-in-aspnet-core"></a>Utiliser SQL dans ASP.NET Core
 
@@ -91,7 +97,7 @@ if (context.Movie.Any())
 
 ### <a name="add-the-seed-initializer"></a>Ajouter l’initialiseur de valeur initiale
 
-Remplacer le contenu de *Program.cs* par le code suivant :
+Remplacez le contenu de *Program.cs* par le code suivant :
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Program.cs)]
 
@@ -122,8 +128,8 @@ L’application affiche les données de départ.
 ![Application MVC Movie ouverte dans Microsoft Edge, affichant les données relatives aux films](working-with-sql/_static/m55.png)
 
 > [!div class="step-by-step"]
-> [Suivant précédent](adding-model.md)
-> [Next](controller-methods-views.md)
+> [Précédent](adding-model.md)
+> [suivant](controller-methods-views.md)
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
@@ -203,7 +209,7 @@ if (context.Movie.Any())
 
 ### <a name="add-the-seed-initializer"></a>Ajouter l’initialiseur de valeur initiale
 
-Remplacer le contenu de *Program.cs* par le code suivant :
+Remplacez le contenu de *Program.cs* par le code suivant :
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Program.cs)]
 
@@ -234,7 +240,7 @@ L’application affiche les données de départ.
 ![Application MVC Movie ouverte dans Microsoft Edge, affichant les données relatives aux films](working-with-sql/_static/m55_mac.png)
 
 > [!div class="step-by-step"]
-> [Suivant précédent](adding-model.md)
-> [Next](controller-methods-views.md)
+> [Précédent](adding-model.md)
+> [suivant](controller-methods-views.md)
 
 ::: moniker-end

@@ -7,14 +7,18 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/12/2020
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: signalr/configuration
-ms.openlocfilehash: 7e0cd952fd152ff6adb6e0a7c56214d70d3c7b86
-ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
+ms.openlocfilehash: 054462c37fffd1973cbbe4f76ae4a3be5a6c1778
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82558995"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767302"
 ---
 # <a name="aspnet-core-signalr-configuration"></a>Configuration d’ASP.NET Core SignalR
 
@@ -192,8 +196,8 @@ Le tableau suivant répertorie les niveaux de journalisation disponibles. La val
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info`**ou**`information` | `LogLevel.Information` |
-| `warn`**ou**`warning`     | `LogLevel.Warning`     |
+| `info` **or** `information` | `LogLevel.Information` |
+| `warn` **or** `warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -578,8 +582,8 @@ Le tableau suivant répertorie les niveaux de journalisation disponibles. La val
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info`**ou**`information` | `LogLevel.Information` |
-| `warn`**ou**`warning`     | `LogLevel.Warning`     |
+| `info` **or** `information` | `LogLevel.Information` |
+| `warn` **or** `warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -962,8 +966,8 @@ Le tableau suivant répertorie les niveaux de journalisation disponibles. La val
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info`**ou**`information` | `LogLevel.Information` |
-| `warn`**ou**`warning`     | `LogLevel.Warning`     |
+| `info` **or** `information` | `LogLevel.Information` |
+| `warn` **or** `warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |

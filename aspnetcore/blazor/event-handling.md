@@ -1,29 +1,32 @@
 ---
-title: ASP.NET la gestion Blazor d’événements de base
+title: Gestion Blazor des événements ASP.net Core
 author: guardrex
-description: Renseignez-vous sur Blazorles fonctionnalités de traitement des événements, y compris les types d’arguments d’événements, les rappels d’événements et la gestion des événements par défaut du navigateur.
+description: Découvrez les Blazorfonctionnalités de gestion des événements de, notamment les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/16/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/event-handling
-ms.openlocfilehash: c144841805e07a136f153c25a78c7f9af7c5801b
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: a9b0d0efd4afd4941bd4d93f33adecdf3288992f
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79511364"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767068"
 ---
-# <a name="aspnet-core-blazor-event-handling"></a>ASP.NET gestion de l’événement Core Blazor
+# <a name="aspnet-core-blazor-event-handling"></a>ASP.NET Core la gestion des événements éblouissants
 
 Par [Luke Latham](https://github.com/guardrex) et [Daniel Roth](https://github.com/danroth27)
 
-Les composants Razor fournissent des caractéristiques de manipulation d’événements. Pour un attribut [`@on{EVENT}`](xref:mvc/views/razor#onevent) d’élément `@onclick`HTML nommé (par exemple) avec une valeur dactylographe, un composant Razor traite la valeur de l’attribut en tant que gestionnaire d’événements.
+Les composants Razor fournissent des fonctionnalités de gestion des événements. Pour un attribut d’élément HTML [`@on{EVENT}`](xref:mvc/views/razor#onevent) nommé (par exemple `@onclick`,) avec une valeur de type délégué, un composant Razor traite la valeur de l’attribut en tant que gestionnaire d’événements.
 
-Le code suivant `UpdateHeading` appelle la méthode lorsque le bouton est sélectionné dans l’interface utilisateur :
+Le code suivant appelle la `UpdateHeading` méthode lorsque le bouton est sélectionné dans l’interface utilisateur :
 
 ```razor
 <button class="btn btn-primary" @onclick="UpdateHeading">
@@ -38,7 +41,7 @@ Le code suivant `UpdateHeading` appelle la méthode lorsque le bouton est sélec
 }
 ```
 
-Le code suivant `CheckChanged` appelle la méthode lorsque la case à cocher est modifiée dans l’interface utilisateur :
+Le code suivant appelle la `CheckChanged` méthode lorsque la case à cocher est modifiée dans l’interface utilisateur :
 
 ```razor
 <input type="checkbox" class="form-check-input" @onchange="CheckChanged" />
@@ -51,9 +54,9 @@ Le code suivant `CheckChanged` appelle la méthode lorsque la case à cocher est
 }
 ```
 
-Les gestionnaires d’événements peuvent également être <xref:System.Threading.Tasks.Task>asynchrones et retourner un . Il n’est pas nécessaire d’appeler manuellement [StateHasChanged](xref:blazor/lifecycle#state-changes). Les exceptions sont enregistrées lorsqu’elles se produisent.
+Les gestionnaires d’événements peuvent également être asynchrones et <xref:System.Threading.Tasks.Task>retourner un. Il n’est pas nécessaire d’appeler manuellement [StateHasChanged](xref:blazor/lifecycle#state-changes). Les exceptions sont journalisées lorsqu’elles se produisent.
 
-Dans l’exemple `UpdateHeading` suivant, est appelé asynchrone lorsque le bouton est sélectionné:
+Dans l’exemple suivant, `UpdateHeading` est appelé de façon asynchrone quand le bouton est sélectionné :
 
 ```razor
 <button class="btn btn-primary" @onclick="UpdateHeading">
@@ -68,41 +71,41 @@ Dans l’exemple `UpdateHeading` suivant, est appelé asynchrone lorsque le bout
 }
 ```
 
-## <a name="event-argument-types"></a>Types d’argument d’événement
+## <a name="event-argument-types"></a>Types d’arguments d’événement
 
-Pour certains événements, les types d’arguments d’événements sont autorisés. La spécifier un type d’événement dans l’appel de méthode n’est nécessaire que si le type d’événement est utilisé dans la méthode.
+Pour certains événements, les types d’arguments d’événement sont autorisés. La spécification d’un type d’événement dans l’appel de méthode n’est nécessaire que si le type d’événement est utilisé dans la méthode.
 
-Les `EventArgs` prises en charge sont indiquées dans le tableau suivant.
+Les `EventArgs` informations prises en charge sont indiquées dans le tableau suivant.
 
-| Événement            | Classe                | Événements et notes DOM |
+| Événement            | Classe                | Remarques et événements DOM |
 | ---------------- | -------------------- | -------------------- |
 | Presse-papiers        | `ClipboardEventArgs` | `oncut`, `oncopy`, `onpaste` |
-| Glissement             | `DragEventArgs`      | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br>`DataTransfer`et `DataTransferItem` tenir les données de l’élément traîné. |
+| Glissement             | `DragEventArgs`      | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br>`DataTransfer`et `DataTransferItem` contiennent des données d’élément glissées. |
 | Error            | `ErrorEventArgs`     | `onerror` |
-| Événement            | `EventArgs`          | *Généralités*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*Presse-papiers*<br>`onbeforecut`, `onbeforecopy`, `onbeforepaste`<br><br>*Input*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, `onsubmit`<br><br>*Médias*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting` |
-| Focus            | `FocusEventArgs`     | `onfocus`, `onblur`, `onfocusin`, `onfocusout`<br><br>N’inclut pas `relatedTarget`le soutien pour . |
+| Événement            | `EventArgs`          | *Généralités*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*Presse-papiers*<br>`onbeforecut`, `onbeforecopy`, `onbeforepaste`<br><br>*Input*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, `onsubmit`<br><br>*Média*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting` |
+| Focus            | `FocusEventArgs`     | `onfocus`, `onblur`, `onfocusin`, `onfocusout`<br><br>N’inclut pas la `relatedTarget`prise en charge de. |
 | Entrée            | `ChangeEventArgs`    | `onchange`, `oninput` |
 | Clavier         | `KeyboardEventArgs`  | `onkeydown`, `onkeypress`, `onkeyup` |
 | Souris            | `MouseEventArgs`     | `onclick`, `oncontextmenu`, `ondblclick`, `onmousedown`, `onmouseup`, `onmouseover`, `onmousemove`, `onmouseout` |
 | Pointeur de souris    | `PointerEventArgs`   | `onpointerdown`, `onpointerup`, `onpointercancel`, `onpointermove`, `onpointerover`, `onpointerout`, `onpointerenter`, `onpointerleave`, `ongotpointercapture`, `onlostpointercapture` |
 | Roulette de la souris      | `WheelEventArgs`     | `onwheel`, `onmousewheel` |
 | Progress         | `ProgressEventArgs`  | `onabort`, `onload`, `onloadend`, `onloadstart`, `onprogress`, `ontimeout` |
-| Entrées tactiles            | `TouchEventArgs`     | `ontouchstart`, `ontouchend`, `ontouchmove`, `ontouchenter`, `ontouchleave`, `ontouchcancel`<br><br>`TouchPoint`représente un point de contact unique sur un appareil tactile. |
+| Toucher            | `TouchEventArgs`     | `ontouchstart`, `ontouchend`, `ontouchmove`, `ontouchenter`, `ontouchleave`, `ontouchcancel`<br><br>`TouchPoint`représente un point de contact unique sur un appareil tactile. |
 
 Pour plus d’informations, consultez les ressources suivantes :
 
-* [EventArgs classes dans la source de référence ASP.NET Core (dotnet/aspnetcore release/3.1 branch)](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/Components/Web/src/Web).
-* [DOCs Web MDN: GlobalEventHandlers](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers) &ndash; Inclut des informations sur les éléments HTML qui prennent en charge chaque événement DOM.
+* [Classes EventArgs dans la source de référence ASP.net Core (branche dotnet/aspnetcore ou version 3.1)](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/Components/Web/src/Web).
+* [MDN Web docs : GlobalEventHandlers](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers) &ndash; contient des informations sur les éléments HTML qui prennent en charge chaque événement DOM.
 
 ## <a name="lambda-expressions"></a>Expressions lambda
 
-[Les expressions Lambda](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions) peuvent également être utilisées :
+Les [expressions lambda](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions) peuvent également être utilisées :
 
 ```razor
 <button @onclick="@(e => Console.WriteLine("Hello, world!"))">Say hello</button>
 ```
 
-Il est souvent pratique de fermer sur des valeurs supplémentaires, comme lors de l’itération sur un ensemble d’éléments. L’exemple suivant crée trois boutons, `UpdateHeading` chacun d’entre eux passant un argument d’événement ()`MouseEventArgs`et son numéro de bouton (`buttonNumber`) lorsqu’il est sélectionné dans l’interface utilisateur:
+Il est souvent pratique de se rapprocher de valeurs supplémentaires, par exemple lors de l’itération sur un ensemble d’éléments. L’exemple suivant crée trois boutons, chacun d’entre eux `UpdateHeading` qui passe un argument d'`MouseEventArgs`événement () et son numéro`buttonNumber`de bouton () lorsqu’ils sont sélectionnés dans l’interface utilisateur :
 
 ```razor
 <h2>@_message</h2>
@@ -129,19 +132,19 @@ Il est souvent pratique de fermer sur des valeurs supplémentaires, comme lors d
 ```
 
 > [!NOTE]
-> N’utilisez **pas** la`i`variable `for` de boucle ( ) dans une boucle directement dans une expression lambda. Sinon, la même variable est utilisée `i`par toutes les expressions lambda causant la valeur de «être le même dans tous les lambdas. Toujours saisir sa valeur dans`buttonNumber` une variable locale (dans l’exemple précédent) et ensuite l’utiliser.
+> N’utilisez **pas** la variable de boucle`i`() dans `for` une boucle directement dans une expression lambda. Dans le cas contraire, la même variable est utilisée par `i`toutes les expressions lambda, ce qui signifie que la valeur de est identique dans toutes les expressions lambda. Capturez toujours sa valeur dans une variable locale`buttonNumber` (dans l’exemple précédent), puis utilisez-la.
 
-## <a name="eventcallback"></a>EventCallback
+## <a name="eventcallback"></a>EventCallback suivante
 
-Un scénario commun avec des composants imbriqués est le désir d’exécuter la méthode d’un composant parent lorsqu’un événement de composante enfant se produit&mdash;par exemple, lorsqu’un `onclick` événement se produit chez l’enfant. Pour exposer les événements à `EventCallback`travers les composants, utilisez un . Un composant parent peut attribuer une méthode de `EventCallback`rappel à un composant d’enfant.
+Un scénario courant avec des composants imbriqués est le désir d’exécuter la méthode d’un composant parent lorsqu’un événement de&mdash;composant enfant se produit, `onclick` par exemple, lorsqu’un événement se produit dans l’enfant. Pour exposer des événements entre les composants, `EventCallback`utilisez un. Un composant parent peut affecter une méthode de rappel à un composant enfant `EventCallback`.
 
-L’application `ChildComponent` de l’échantillon *(Composants/ChildComponent.razor*) montre `onclick` comment le gestionnaire `EventCallback` d’un bouton `ParentComponent`est configuré pour recevoir un délégué de l’échantillon. Le `EventCallback` est tapé avec `MouseEventArgs`, `onclick` qui est approprié pour un événement à partir d’un périphérique:
+`ChildComponent` Dans l’exemple d’application (*Components/ChildComponent. Razor*), vous montre comment `onclick` un gestionnaire de bouton est configuré pour `EventCallback` recevoir un délégué de l' `ParentComponent`exemple de. Le `EventCallback` est typé avec `MouseEventArgs`, ce qui est approprié pour `onclick` un événement à partir d’un périphérique :
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=5-7,17-18)]
 
-Le `ParentComponent` définit `EventCallback<T>` l’enfant`OnClickCallback`( `ShowMessage` ) à sa méthode.
+`ParentComponent` Définit le (`OnClickCallback`) de `EventCallback<T>` l’enfant sur sa `ShowMessage` méthode.
 
-*Pages/ParentComponent.razor*:
+*Pages/ParentComponent. Razor*:
 
 ```razor
 @page "/ParentComponent"
@@ -166,33 +169,33 @@ Le `ParentComponent` définit `EventCallback<T>` l’enfant`OnClickCallback`( `S
 }
 ```
 
-Lorsque le bouton est `ChildComponent`sélectionné dans le :
+Lorsque le bouton est sélectionné dans le `ChildComponent`:
 
-* La `ParentComponent`méthode `ShowMessage` est appelée. `_messageText`est mis à `ParentComponent`jour et affiché dans le .
-* Un appel à [StateHasChanged](xref:blazor/lifecycle#state-changes) n’est pas nécessaire`ShowMessage`dans la méthode du rappel ( ). `StateHasChanged`est appelé automatiquement pour `ParentComponent`rerender le , tout comme les événements de l’enfant déclenchent le rerendering composant dans les gestionnaires d’événements qui exécutent au sein de l’enfant.
+* La `ParentComponent`méthode `ShowMessage` de est appelée. `_messageText`est mis à jour et affiché `ParentComponent`dans le.
+* Un appel à [StateHasChanged](xref:blazor/lifecycle#state-changes) n’est pas requis dans la méthode du`ShowMessage`rappel (). `StateHasChanged`est appelé automatiquement pour rerestituer `ParentComponent`le, tout comme les événements enfants déclenchent le rerendu des composants dans les gestionnaires d’événements qui s’exécutent dans l’enfant.
 
-`EventCallback`et `EventCallback<T>` permettre aux délégués asynchrones. `EventCallback<T>`est fortement tapé et nécessite un type d’argument spécifique. `EventCallback`est faiblement tapé et permet n’importe quel type d’argument.
+`EventCallback`et `EventCallback<T>` autorisent les délégués asynchrones. `EventCallback<T>`est fortement typé et requiert un type d’argument spécifique. `EventCallback`est faiblement typé et autorise tout type d’argument.
 
 ```razor
 <ChildComponent 
     OnClickCallback="@(async () => { await Task.Yield(); _messageText = "Blaze It!"; })" />
 ```
 
-Invoquez un `EventCallback` ou `EventCallback<T>` avec `InvokeAsync` et attendez le <xref:System.Threading.Tasks.Task>:
+Appelez `EventCallback` ou `EventCallback<T>` avec et `InvokeAsync` en attente de <xref:System.Threading.Tasks.Task>:
 
 ```csharp
 await callback.InvokeAsync(arg);
 ```
 
-Utilisation `EventCallback` `EventCallback<T>` et pour la gestion des événements et les paramètres de composants contraignants.
+Utilisez `EventCallback` et `EventCallback<T>` pour la gestion des événements et les paramètres de composant de liaison.
 
-Préférez le fortement `EventCallback<T>` `EventCallback`tapé sur . `EventCallback<T>`fournit une meilleure rétroaction d’erreur aux utilisateurs du composant. Semblable à d’autres gestionnaires d’événements d’interface utilisateur, la spécifier le paramètre de l’événement est facultative. Utilisez `EventCallback` quand il n’y a aucune valeur passée à la rappel.
+Préférez le fortement typé `EventCallback<T>` `EventCallback`. `EventCallback<T>`fournit un meilleur retour d’erreur aux utilisateurs du composant. Comme pour d’autres gestionnaires d’événements d’interface utilisateur, la spécification du paramètre d’événement est facultative. Utilisez `EventCallback` quand aucune valeur n’est passée au rappel.
 
-## <a name="prevent-default-actions"></a>Prévenir les actions par défaut
+## <a name="prevent-default-actions"></a>Empêcher les actions par défaut
 
-Utilisez [`@on{EVENT}:preventDefault`](xref:mvc/views/razor#oneventpreventdefault) l’attribut de directive pour empêcher l’action par défaut pour un événement.
+Utilisez l' [`@on{EVENT}:preventDefault`](xref:mvc/views/razor#oneventpreventdefault) attribut directive pour empêcher l’action par défaut d’un événement.
 
-Lorsqu’une clé est sélectionnée sur un périphérique d’entrée et que l’élément se concentre sur une boîte de texte, un navigateur affiche normalement le caractère de la clé dans la boîte de texte. Dans l’exemple suivant, le comportement par `@onkeypress:preventDefault` défaut est évité en spécifiant l’attribut de directive. Les incréments de **+** compteur, et la `<input>` clé n’est pas capturé dans la valeur de l’élément:
+Quand une clé est sélectionnée sur un appareil d’entrée et que le focus de l’élément se trouve sur une zone de texte, un navigateur affiche normalement le caractère de la clé dans la zone de texte. Dans l’exemple suivant, le comportement par défaut est évité en spécifiant l' `@onkeypress:preventDefault` attribut directive. Le compteur est incrémenté et la **+** clé n’est pas capturée dans la `<input>` valeur de l’élément :
 
 ```razor
 <input value="@_count" @onkeypress="KeyHandler" @onkeypress:preventDefault />
@@ -210,21 +213,21 @@ Lorsqu’une clé est sélectionnée sur un périphérique d’entrée et que l�
 }
 ```
 
-Spécifier l’attribut `@on{EVENT}:preventDefault` sans `@on{EVENT}:preventDefault="true"`valeur équivaut à .
+La spécification `@on{EVENT}:preventDefault` de l’attribut sans valeur équivaut à `@on{EVENT}:preventDefault="true"`.
 
-La valeur de l’attribut peut également être une expression. Dans l’exemple `_shouldPreventDefault` suivant, est un `bool` champ mis à l’un ou l’autre `true` ou `false`:
+La valeur de l’attribut peut également être une expression. Dans l’exemple suivant, `_shouldPreventDefault` est un `bool` champ défini sur `true` ou `false`:
 
 ```razor
 <input @onkeypress:preventDefault="_shouldPreventDefault" />
 ```
 
-Un gestionnaire d’événements n’est pas tenu d’empêcher l’action par défaut. Le gestionnaire d’événements et de prévenir les scénarios d’action par défaut peuvent être utilisés de façon indépendante.
+Un gestionnaire d’événements n’est pas nécessaire pour empêcher l’action par défaut. Le gestionnaire d’événements et les scénarios d’action par défaut peuvent être utilisés indépendamment.
 
-## <a name="stop-event-propagation"></a>Arrêter la propagation de l’événement
+## <a name="stop-event-propagation"></a>Arrêter la propagation des événements
 
-Utilisez [`@on{EVENT}:stopPropagation`](xref:mvc/views/razor#oneventstoppropagation) l’attribut de la directive pour arrêter la propagation de l’événement.
+Utilisez l' [`@on{EVENT}:stopPropagation`](xref:mvc/views/razor#oneventstoppropagation) attribut directive pour arrêter la propagation des événements.
 
-Dans l’exemple suivant, la sélection de la case `<div>` à cocher empêche `<div>`les événements de clic du deuxième enfant de se propager au parent :
+Dans l’exemple suivant, la sélection de la case à cocher empêche les événements `<div>` Click du deuxième enfant de se `<div>`propager vers le parent :
 
 ```razor
 <label>

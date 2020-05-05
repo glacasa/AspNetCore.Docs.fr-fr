@@ -5,13 +5,19 @@ description: Un guide qui fournit des conseils de bout en bout sur la création 
 ms.author: casoper
 ms.date: 08/07/2018
 ms.custom: mvc, seodec18
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: azure/devops/index
-ms.openlocfilehash: f45bb2a5dd4b3d1a820085ede7ce3219045ed80b
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: da9d5365b6e3920dbf672f65d5fab4ea158932c2
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78658080"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82766899"
 ---
 # <a name="devops-with-aspnet-core-and-azure"></a>DevOps avec ASP.NET Core et Azure
 
@@ -41,7 +47,7 @@ Ce guide est centré sur une expérience de déploiement continu de bout en bout
 
 Découvrez où vous procurer les outils utilisés dans ce guide.
 
-### <a name="deploy-to-app-service"></a>[Déployer dans App Service](xref:azure/devops/deploy-to-app-service)
+### <a name="deploy-to-app-service"></a>[Déployer sur App Service](xref:azure/devops/deploy-to-app-service)
 
 Découvrez les différentes méthodes de déploiement d’une application ASP.NET Core sur Azure App Service.
 
@@ -49,7 +55,7 @@ Découvrez les différentes méthodes de déploiement d’une application ASP.NE
 
 Créez une solution d’intégration et de déploiement continus de bout en bout pour votre application ASP.NET Core avec GitHub, Azure DevOps Services et Azure.
 
-### <a name="monitor-and-debug"></a>[Surveiller et débouger](xref:azure/devops/monitor)
+### <a name="monitor-and-debug"></a>[Surveiller et déboguer](xref:azure/devops/monitor)
 
 Utilisez les outils d’Azure pour surveiller, dépanner et optimiser votre application.
 

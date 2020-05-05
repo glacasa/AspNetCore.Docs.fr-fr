@@ -5,13 +5,19 @@ description: Découvrez comment publier une application ASP.NET Core sur Azure A
 ms.author: riserrad
 ms.custom: mvc
 ms.date: 07/10/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/publish-to-azure-webapp-using-vscode
-ms.openlocfilehash: 5f117cb2867a6e7b54269ef39abe819256b429ec
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: fde0290020e08701bd19b72ebea0e2739462b232
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80242676"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767842"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio-code"></a>Publier une application ASP.NET Core sur Azure avec Visual Studio Code
 
@@ -28,10 +34,10 @@ Dans ce tutoriel, vous allez apprendre à créer une application ASP.Net Core MV
 ## <a name="set-up"></a>Configurer
 
 - Ouvrez un [compte Azure gratuit](https://azure.microsoft.com/free/dotnet/) si vous n’en avez pas.
-- Installer [.NET Core SDK](https://dotnet.microsoft.com/download)
-- Installer [le code visual studio](https://code.visualstudio.com/Download)
+- Installer [Kit SDK .net Core](https://dotnet.microsoft.com/download)
+- Installer [Visual Studio Code](https://code.visualstudio.com/Download)
   - Installez l’[extension C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) dans Visual Studio Code.
-  - Installez [l’extension du service d’application Azure](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice) au code de studio visuel et configurez-le avant de procéder
+  - Installer l' [extension de Azure App service](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice) pour la Visual Studio code et la configurer avant de continuer
 
 ## <a name="create-an-aspnet-core-mvc-project"></a>Créer un projet ASP.NET Core MVC
 

@@ -5,7 +5,7 @@ Le `FetchData` composant montre comment :
 
 La `@attribute [Authorize]` directive indique au système d’autorisation de webassembly éblouissant que l’utilisateur doit être autorisé à accéder à ce composant. La présence de l’attribut dans l’application *cliente* n’empêche pas l’appel de l’API sur le serveur sans les informations d’identification appropriées. L’application *serveur* doit également utiliser `[Authorize]` sur les points de terminaison appropriés pour les protéger correctement.
 
-`AuthenticationService.RequestAccessToken();`s’occupe de demander un jeton d’accès qui peut être ajouté à la demande d’appel de l’API. Si le jeton est mis en cache ou si le service est en mesure d’approvisionner un nouveau jeton d’accès sans intervention de l’utilisateur, la demande de jeton réussit. Dans le cas contraire, la demande de jeton échoue.
+`IAccessTokenProvider.RequestAccessToken();`s’occupe de demander un jeton d’accès qui peut être ajouté à la demande d’appel de l’API. Si le jeton est mis en cache ou si le service est en mesure d’approvisionner un nouveau jeton d’accès sans intervention de l’utilisateur, la demande de jeton réussit. Dans le cas contraire, la demande de `AccessTokenNotAvailableException` jeton échoue avec une erreur, qui `try-catch` est interceptée dans une instruction.
 
 Afin d’obtenir le jeton à inclure dans la demande, l’application doit vérifier que la demande a réussi en appelant `tokenResult.TryGetToken(out var token)`. 
 

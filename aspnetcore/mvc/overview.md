@@ -1,18 +1,24 @@
 ---
-title: Vue d’ensemble d’ASP.NET Core MVC
+title: Vue d’ensemble du modèle MVC d’ASP.NET Core
 author: ardalis
-description: ASP.NET Core MVC est une infrastructure riche pour la création d’applications web et d'API à l’aide du modèle de conception Model-View-Controller.
+description: Découvrez ASP.NET Core MVC, un puissant framework qui vous permet de générer des applications web et des API à l’aide du modèle de conception Model-View-Controller.
 ms.author: riande
 ms.date: 02/12/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/overview
-ms.openlocfilehash: 2911399f6ed4e14345171c908c4306b9c3e33805
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: c6c7fd1d0cb7a462b3a13d5e31a50c704a00c0ef
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78658430"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775464"
 ---
-# <a name="overview-of-aspnet-core-mvc"></a>Vue d’ensemble d’ASP.NET Core MVC
+# <a name="overview-of-aspnet-core-mvc"></a>Vue d’ensemble du modèle MVC d’ASP.NET Core
 
 Par [Steve Smith](https://ardalis.com/)
 
@@ -37,7 +43,7 @@ Le modèle d’une application MVC représente l’état de l’application, ain
 
 ### <a name="view-responsibilities"></a>Responsabilités de la vue
 
-Les vues sont responsables de la présentation du contenu via l’interface utilisateur. Elles utilisent le [moteur de vue Razor](#razor-view-engine) pour incorporer du code .NET dans les balises HTML. Il doit exister une logique minimale dans les vues, et cette logique doit être liée à la présentation du contenu. Si vous avez besoin d’exécuter une grande partie de la logique dans les fichiers de vue pour afficher les données d’un modèle complexe, utilisez un [composant de vue](views/view-components.md), ViewModel ou un modèle de vue pour simplifier la vue.
+Les vues sont responsables de la présentation du contenu via l’interface utilisateur. Ils utilisent le [ Razor moteur d’affichage](#razor-view-engine) pour incorporer le code .net dans le balisage HTML. Il doit exister une logique minimale dans les vues, et cette logique doit être liée à la présentation du contenu. Si vous avez besoin d’exécuter une grande partie de la logique dans les fichiers de vue pour afficher les données d’un modèle complexe, utilisez un [composant de vue](views/view-components.md), ViewModel ou un modèle de vue pour simplifier la vue.
 
 ### <a name="controller-responsibilities"></a>Responsabilités du contrôleur
 
@@ -57,20 +63,20 @@ ASP.NET Core MVC offre un fonctionnement basé sur des patterns pour créer des 
 
 ## <a name="features"></a>Fonctionnalités
 
-ASP.NET Core MVC inclut les éléments suivants :
+ASP.NET Core MVC inclut les éléments suivants :
 
 * [Routage](#routing)
-* [La liaison de modèle](#model-binding)
-* [La validation du modèle](#model-validation)
-* [L'injection de dépendances](../fundamentals/dependency-injection.md)
+* [Liaison de données](#model-binding)
+* [Validation du modèle](#model-validation)
+* [Injection de dépendances](../fundamentals/dependency-injection.md)
 * [Filtres](#filters)
-* [Zones](#areas)
-* [API web](#web-apis)
-* [La testabilité](#testability)
-* [Le moteur de vue Razor](#razor-view-engine)
-* [Les vues fortement typées](#strongly-typed-views)
+* [Zones (Areas)](#areas)
+* [API Web](#web-apis)
+* [Testabilité](#testability)
+* [Razormoteur d’affichage](#razor-view-engine)
+* [Vues fortement typées](#strongly-typed-views)
 * [Tag Helpers](#tag-helpers)
-* [Les composants de vues](#view-components)
+* [Afficher les composants](#view-components)
 
 ### <a name="routing"></a>Routage
 
@@ -98,7 +104,7 @@ public class ProductsController : Controller
 
 ### <a name="model-binding"></a>Liaison de données
 
-La [liaison de modèle](models/model-binding.md) ASP.NET Core MVC convertit les données de requête client (les valeurs de formulaire, les données de routage, les paramètres de chaîne de requête, les en-têtes HTTP) en objets que le contrôleur peut traiter. Par conséquent, votre logique de contrôleur ne doit pas nécessairement faire le travail d’identifier les données de requête entrante; Il a simplement les données en tant que paramètres dans ses méthodes d’action.
+La [liaison de modèle](models/model-binding.md) ASP.NET Core MVC convertit les données de requête client (les valeurs de formulaire, les données de routage, les paramètres de chaîne de requête, les en-têtes HTTP) en objets que le contrôleur peut traiter. Ainsi, la logique du contrôleur n’a pas besoin d’identifier les données de requête entrantes ; elle utilise simplement les données en tant que paramètres de ses méthodes d’action.
 
 ```csharp
 public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null) { ... }
@@ -106,7 +112,7 @@ public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = 
 
 ### <a name="model-validation"></a>Validation du modèle
 
-ASP.NET Core MVC prend en charge la [validation](models/validation.md) en décorant votre objet de modèle avec des attributs de validation de données d’annotation. Les attributs de validation sont vérifiés côté client avant que les valeurs ne soient postées sur le serveur, ainsi que sur le serveur avant l’appel de l’action du contrôleur.
+ASP.NET Core MVC prend en charge la [validation](models/validation.md) en décorant votre objet de modèle avec des attributs de validation d’annotation de données. Les attributs de validation sont vérifiés côté client avant que les valeurs ne soient postées sur le serveur, ainsi que sur le serveur avant l’appel de l’action du contrôleur.
 
 ```csharp
 using System.ComponentModel.DataAnnotations;
@@ -170,9 +176,9 @@ Les [filtres](controllers/filters.md) permettent aux développeurs d’intégrer
 public class AccountController : Controller
 ```
 
-### <a name="areas"></a>Domaines
+### <a name="areas"></a>Zones (Areas)
 
-Les [zones](controllers/areas.md) fournissent un moyen de partitionner une application Web ASP.NET Core MVC volumineuse en regroupements fonctionnels plus petits. Une zone est en réalité une structure MVC à l’intérieur d’une application. Dans un projet MVC, les composants logiques tels que les modèles, les contrôleurs et les vues sont conservés dans des dossiers différents et MVC utilise les conventions de nommage pour créer la relation entre ces composants. Pour une application volumineuse, il peut être avantageux de partitionner l’application en différentes zones de fonctionnalités de premier niveau. Par exemple, une application de commerce électronique avec plusieurs unités commerciales, telles que l’extraction, la facturation et la recherche, etc. Chacune de ces unités a ses propres affichages de composants logiques, contrôleurs et modèles.
+Les [zones](controllers/areas.md) permettent de partitionner une grande ASP.net Core application Web MVC en regroupements fonctionnels plus petits. Une zone est en réalité une structure MVC à l’intérieur d’une application. Dans un projet MVC, les composants logiques tels que les modèles, les contrôleurs et les vues sont conservés dans des dossiers différents et MVC utilise les conventions de nommage pour créer la relation entre ces composants. Pour une application volumineuse, il peut être avantageux de partitionner l’application en différentes zones de fonctionnalités de premier niveau. Par exemple, une application de commerce électronique avec plusieurs unités commerciales, telles que l’extraction, la facturation et la recherche, etc. Chacune de ces unités a ses propres affichages de composants logiques, contrôleurs et modèles.
 
 ### <a name="web-apis"></a>API Web
 
@@ -186,9 +192,9 @@ Utilisez la génération de lien pour activer la prise en charge de liens hyperm
 
 Le framework utilise les interfaces et l’injection de dépendances, ce qui le rend particulièrement adapté aux tests unitaires. De plus, le framework inclut des fonctionnalités (par exemple un fournisseur TestHost et InMemory pour Entity Framework) qui facilitent aussi les [tests d’intégration](xref:test/integration-tests). Découvrez en plus sur le [test de la logique du contrôleur](controllers/testing.md).
 
-### <a name="razor-view-engine"></a>Moteur de vue Razor
+### <a name="razor-view-engine"></a>Razormoteur d’affichage
 
-Les [vues ASP.NET Core MVC](views/overview.md) utilisent le [moteur de vue Razor](views/razor.md) pour afficher les vues. Razor est un langage de balisage de modèles compact, expressif et fluide qui permet de définir des vues avec du code C# incorporé. Razor est utilisé pour générer dynamiquement du contenu web sur le serveur. Vous pouvez mélanger sans problème du code serveur avec du contenu et du code côté client.
+[ASP.net Core vues MVC](views/overview.md) utilisent le [ Razor moteur d’affichage](views/razor.md) pour restituer les vues. Razorest un langage de balisage de modèle fluide, expressif et compact pour la définition de vues à l’aide de code C# incorporé. Razorest utilisé pour générer dynamiquement du contenu Web sur le serveur. Vous pouvez mélanger sans problème du code serveur avec du contenu et du code côté client.
 
 ```cshtml
 <ul>
@@ -198,11 +204,11 @@ Les [vues ASP.NET Core MVC](views/overview.md) utilisent le [moteur de vue Razor
 </ul>
 ```
 
-À l’aide du moteur de vue Razor, vous pouvez définir des [dispositions](views/layout.md), des [vues partielles](views/partial.md) et des sections remplaçables.
+À l' Razor aide du moteur d’affichage, vous pouvez définir des [dispositions](views/layout.md), des [vues partielles](views/partial.md) et des sections remplaçables.
 
 ### <a name="strongly-typed-views"></a>Vues fortement typées
 
-Les vues Razor dans MVC peuvent être fortement typées en fonction de votre modèle. Les contrôleurs peuvent passer un modèle fortement typé à des vues, ce qui leur permet de disposer du contrôle de type et de la prise en charge d’IntelliSense.
+Razorles vues dans MVC peuvent être fortement typées en fonction de votre modèle. Les contrôleurs peuvent passer un modèle fortement typé à des vues, ce qui leur permet de disposer du contrôle de type et de la prise en charge d’IntelliSense.
 
 Par exemple, la vue suivante affiche un modèle de type `IEnumerable<Product>` :
 
@@ -218,9 +224,9 @@ Par exemple, la vue suivante affiche un modèle de type `IEnumerable<Product>` 
 
 ### <a name="tag-helpers"></a>Tag Helpers
 
-Les [Tag helpers](views/tag-helpers/intro.md) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les fichiers Razor. Vous pouvez utiliser des Tag helpers pour définir des balises personnalisées (par exemple, `<environment>`) ou pour modifier le comportement de balises existantes (par exemple, `<label>`). Les Tag helpers associent des éléments spécifiques en fonction du nom de l’élément et des ses attributs. Ils fournissent les avantages de rendu côté serveur tout en conservant la possibilité d'éditer le HTML.
+Les [tag helpers](views/tag-helpers/intro.md) permettent au code côté serveur de participer à la création et au Razor rendu des éléments HTML dans les fichiers. Vous pouvez utiliser des Tag helpers pour définir des balises personnalisées (par exemple, `<environment>`) ou pour modifier le comportement de balises existantes (par exemple, `<label>`). Les Tag helpers associent des éléments spécifiques en fonction du nom de l’élément et des ses attributs. Ils fournissent les avantages de rendu côté serveur tout en conservant la possibilité d'éditer le HTML.
 
-Il existe de nombreux Tag helpers intégrés pour les tâches courantes - telles que la création de formulaires, des liens, de chargement de ressources et plus - et bien d'autres sont disponibles dans les dépôts GitHub publics et sous forme de NuGet packages. Les Tag Helpers sont créés en C# et ciblent les éléments HTML en fonction du nom de l’élément, du nom de l’attribut ou de la balise parente. Par exemple, le Tag Helper Link intégré permet de créer un lien vers l’action `Login` de `AccountsController` :
+Il existe de nombreux Tag Helpers pour les tâches courantes (par exemple la création de formulaires ou de liens, le chargement de ressources, etc.) et bien d’autres encore, dans les dépôts GitHub publics et sous forme de packages NuGet. Les Tag helpers sont créés en c#, et ils ciblent des éléments HTML en fonction de la balise parente, du nom d’attribut ou du nom de l’élément. Par exemple, le Tag Helper Link intégré permet de créer un lien vers l’action `Login` de `AccountsController` :
 
 ```cshtml
 <p>
@@ -243,7 +249,7 @@ Le `EnvironmentTagHelper` permet d’inclure différents scripts dans vos vues (
 </environment>
 ```
 
-Les Tag Helpers fournissent une expérience utilisateur de développement HTML et un riche environnement IntelliSense pour la création de balises HTML et Razor. La plupart des Tag Helpers intégrés ciblent les éléments HTML existants et fournissent des attributs côté serveur pour l’élément.
+Tag helpers offre une expérience de développement HTML et un environnement IntelliSense élaboré pour la création de code Razor html et de balises. La plupart des Tag Helpers intégrés ciblent les éléments HTML existants et fournissent des attributs côté serveur pour l’élément.
 
 ### <a name="view-components"></a>Composants de vues
 
@@ -251,11 +257,11 @@ Les [composants de vues](views/view-components.md) vous permettent de compresser
 
 ## <a name="compatibility-version"></a>Version de compatibilité
 
-La méthode <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> permet à une application d’accepter ou de refuser les changements de comportement potentiellement cassants été introduits dans ASP.NET Core MVC 2.1 ou version ultérieure.
+La méthode <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> permet à une application d’accepter ou de refuser les changements de comportement potentiellement cassants introduits dans ASP.NET Core MVC 2.1 ou version ultérieure.
 
 Pour plus d’informations, consultez <xref:mvc/compatibility-version>.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* [MyTested. AspNetCore. Mvc-bibliothèque de tests Fluent pour ASP.net Core Mvc](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) &ndash; bibliothèque de tests unitaires fortement typés, fournissant une interface Fluent pour tester les applications MVC et API Web. (*Non géré ou pris en charge par Microsoft.* )
+* [Bibliothèque de tests MyTested. AspNetCore. Mvc-Fluent pour ASP.net Core bibliothèque de](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) &ndash; tests unitaires fortement typés MVC, fournissant une interface Fluent pour tester les applications MVC et API Web. (*Non géré ou pris en charge par Microsoft.*)
 * <xref:blazor/integrate-components>

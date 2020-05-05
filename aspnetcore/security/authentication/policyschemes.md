@@ -4,13 +4,19 @@ author: rick-anderson
 description: Les schémas de stratégie d’authentification facilitent l’utilisation d’un seul schéma d’authentification logique.
 ms.author: riande
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/policyschemes
-ms.openlocfilehash: f02d8e5cac20a9b60c5eddbd28253efacf682ea1
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: ddedf62c5e8363bd93c9948fd2d3418abc566539
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78660733"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767315"
 ---
 # <a name="policy-schemes-in-aspnet-core"></a>Schémas de stratégie dans ASP.NET Core
 
@@ -19,7 +25,7 @@ Les schémas de stratégie d’authentification facilitent l’utilisation d’u
 * Action d’authentification facile à transférer vers un autre schéma.
 * Transférer dynamiquement en fonction de la requête.
 
-Tous les schémas d’authentification qui utilisent des <xref:Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions> dérivées et les [>s de\<AuthenticationHandler](/dotnet/api/microsoft.aspnetcore.authentication.authenticationhandler-1)associées sont les suivants :
+Tous les schémas d’authentification qui <xref:Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions> utilisent dérivés et les [>s de AuthenticationHandler\< ](/dotnet/api/microsoft.aspnetcore.authentication.authenticationhandler-1)associées sont les suivants :
 
 * Sont automatiquement des schémas de stratégie dans ASP.NET Core 2,1 et versions ultérieures.
 * Peut être activé par le biais de la configuration des options du schéma.

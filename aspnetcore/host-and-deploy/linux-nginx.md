@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/10/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: ceb2ad857649dcfa8d04420dcc37792495edc3ff
-ms.sourcegitcommit: 6f1b516e0c899a49afe9a29044a2383ce2ada3c7
+ms.openlocfilehash: af2bea1b3a149ef8d80970031e939dc083d94a03
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81224022"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775893"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>Héberger ASP.NET Core sur Linux avec Nginx
 
@@ -36,13 +42,13 @@ Ce guide montre comment effectuer les opérations suivantes :
 
 1. Accédez à un serveur Ubuntu 16.04 avec un compte d’utilisateur standard disposant de privilèges sudo.
 1. Installez le runtime .NET Core sur le serveur.
-   1. Visitez la [page Télécharger .NET Core](https://dotnet.microsoft.com/download/dotnet-core).
-   1. Sélectionnez la dernière version .NET Core non-preview.
-   1. Téléchargez le dernier temps d’exécution non-aperçu dans le tableau sous **les applications Run - Runtime**.
-   1. Sélectionnez le lien **d’instructions du gestionnaire de forfait** Linux et suivez les instructions Ubuntu pour votre version d’Ubuntu.
+   1. Visitez la [page Télécharger .net Core](https://dotnet.microsoft.com/download/dotnet-core).
+   1. Sélectionnez la dernière version non préliminaire de .NET Core.
+   1. Téléchargez le dernier Runtime non Preview dans le tableau sous **exécuter des applications-Runtime**.
+   1. Sélectionnez le lien **des instructions du gestionnaire de package** Linux et suivez les instructions Ubuntu pour votre version d’Ubuntu.
 1. Une application ASP.NET Core existante.
 
-À tout moment dans l’avenir après la mise à niveau du cadre partagé, redémarrez les applications ASP.NET Core hébergées par le serveur.
+À tout moment après la mise à niveau de l’infrastructure partagée, redémarrez le ASP.NET Core les applications hébergées par le serveur.
 
 ## <a name="publish-and-copy-over-the-app"></a>Publier et copier sur l’application
 
@@ -81,11 +87,11 @@ Kestrel est idéal pour servir du contenu dynamique à partir d’ASP.NET Core. 
 
 Pour les besoins de ce guide, nous utilisons une seule instance de Nginx. Elle s’exécute sur le même serveur, en plus du serveur HTTP. Selon les exigences, un paramétrage différent peut être choisi.
 
-Parce que les demandes sont transmises par proxy inverse, utilisez le [Middleware Forwarded Headers](xref:host-and-deploy/proxy-load-balancer) du package [Microsoft.AspNetCore.HttpOverrides.](https://www.nuget.org/packages/Microsoft.AspNetCore.HttpOverrides/) Le middleware met à jour le `Request.Scheme`, à l’aide de l’en-tête `X-Forwarded-Proto`, afin que les URI de redirection et d’autres stratégies de sécurité fonctionnent correctement.
+Étant donné que les demandes sont transférées par le proxy inverse, utilisez l' [intergiciel d’en-têtes transmis](xref:host-and-deploy/proxy-load-balancer) à partir du package [Microsoft. AspNetCore. HttpOverrides](https://www.nuget.org/packages/Microsoft.AspNetCore.HttpOverrides/) . Le middleware met à jour le `Request.Scheme`, à l’aide de l’en-tête `X-Forwarded-Proto`, afin que les URI de redirection et d’autres stratégies de sécurité fonctionnent correctement.
 
 Tout composant qui dépend du schéma, tel que l’authentification, la génération de lien, les redirections et la géolocalisation, doit être placé après l’appel du middleware des en-têtes transférés. En règle générale, le middleware des en-têtes transférés doit être exécuté avant les autres middlewares, à l’exception des middlewares de gestion des erreurs et de diagnostic. Cet ordre permet au middleware qui repose sur les informations des en-têtes transférés d’utiliser les valeurs d’en-tête pour le traitement.
 
-Invoquez la <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> `Startup.Configure` méthode en haut de avant d’appeler d’autres middleware. Configurez le middleware pour transférer les en-têtes `X-Forwarded-For` et `X-Forwarded-Proto` :
+Appelez la <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> méthode en haut de avant `Startup.Configure` d’appeler un autre intergiciel. Configurez le middleware pour transférer les en-têtes `X-Forwarded-For` et `X-Forwarded-Proto` :
 
 ```csharp
 // using Microsoft.AspNetCore.HttpOverrides;
@@ -149,7 +155,7 @@ server {
 }
 ```
 
-Si l’application est une application Blazor Server qui s’appuie sur Les photos WebSockets SignalR, consultez <xref:host-and-deploy/blazor/server#linux-with-nginx> pour obtenir des informations sur la façon de définir l’en-tête. `Connection`
+Si l’application est une Blazor application serveur qui s’appuie sur SignalR WebSockets, consultez <xref:host-and-deploy/blazor/server#linux-with-nginx> pour plus d’informations sur la façon `Connection` de définir l’en-tête.
 
 Si aucun `server_name` ne correspond, Nginx utilise le serveur par défaut. Si aucun serveur par défaut n’est défini, le premier serveur dans le fichier de configuration est le serveur par défaut. En guise de bonne pratique, ajoutez un serveur par défaut spécifique qui retourne un code d’état 444 dans votre fichier de configuration. Voici un exemple de configuration de serveur par défaut :
 
@@ -211,7 +217,7 @@ Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
 WantedBy=multi-user.target
 ```
 
-Dans l’exemple précédent, l’utilisateur qui `User` gère le service est spécifié par l’option. L’utilisateur`www-data`( ) doit exister et avoir la propriété appropriée des fichiers de l’application.
+Dans l’exemple précédent, l’utilisateur qui gère le service est spécifié par l' `User` option. L’utilisateur (`www-data`) doit exister et avoir la propriété correcte des fichiers de l’application.
 
 Utilisez `TimeoutStopSec` pour configurer la durée d’attente de l’arrêt de l’application après la réception du signal d’interruption initial. Si l’application ne s’arrête pas pendant cette période, le signal SIGKILL est émis pour mettre fin à l’application. Indiquez la valeur en secondes sans unité (par exemple, `150`), une valeur d’intervalle de temps (par exemple, `2min 30s`) ou `infinity` pour désactiver le délai d’attente. `TimeoutStopSec` prend la valeur par défaut de `DefaultTimeoutStopSec` dans le fichier de configuration du gestionnaire (*systemd-system.conf*, *system.conf.d*, *systemd-user.conf*, * user.conf.d*). Le délai d’expiration par défaut pour la plupart des distributions est de 90 secondes.
 
@@ -279,7 +285,7 @@ Si vous voulez appliquer un filtrage supplémentaire, des options chronologiques
 sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-10-18 04:00"
 ```
 
-## <a name="data-protection"></a>Protection de données
+## <a name="data-protection"></a>Protection des données
 
 La [pile de protection des données ASP.NET Core](xref:security/data-protection/introduction) est utilisée par plusieurs [intergiciels (middleware)](xref:fundamentals/middleware/index) ASP.NET Core, notamment le middleware d’authentification (par exemple, le middleware cookie) et les protections de la falsification de requête intersites (CSRF, Cross Site Request Forgery). Même si les API de protection des données ne sont pas appelées par le code de l’utilisateur, la protection des données doit être configurée pour créer un [magasin de clés](xref:security/data-protection/implementation/key-management) de chiffrement persistantes. Si la protection des données n’est pas configurée, les clés sont conservées en mémoire et ignorées au redémarrage de l’application.
 
@@ -296,7 +302,7 @@ Pour configurer la protection des données de façon à conserver et chiffrer le
 
 ## <a name="long-request-header-fields"></a>Longs champs d'en-tête de demande
 
-Les paramètres par défaut du serveur proxy limitent généralement les champs d’en-tête des demandes à 4 K ou 8 K selon la plate-forme. Une application peut nécessiter des champs plus longs que la valeur par défaut (par exemple, les applications qui utilisent [Azure Active Directory](https://azure.microsoft.com/services/active-directory/)). Si des champs plus longs sont nécessaires, les paramètres par défaut du serveur proxy nécessitent un ajustement. Les valeurs à appliquer dépendent du scénario. Pour plus d'informations, voir la documentation du serveur.
+Les paramètres par défaut du serveur proxy limitent généralement les champs d’en-tête de demande à 4 K ou 8 K en fonction de la plateforme. Une application peut nécessiter des champs plus longs que la valeur par défaut (par exemple, les applications qui utilisent [Azure Active Directory](https://azure.microsoft.com/services/active-directory/)). Si des champs plus longs sont requis, les paramètres par défaut du serveur proxy doivent être ajustés. Les valeurs à appliquer dépendent du scénario. Pour plus d'informations, voir la documentation du serveur.
 
 * [proxy_buffer_size](https://nginx.org/docs/http/ngx_http_proxy_module.html#proxy_buffer_size)
 * [proxy_buffers](https://nginx.org/docs/http/ngx_http_proxy_module.html#proxy_buffers)
@@ -314,7 +320,7 @@ Linux Security Modules (LSM) est un framework qui fait partie du noyau Linux dep
 
 ### <a name="configure-the-firewall"></a>Configurer le pare-feu
 
-Fermez tous les ports externes qui ne sont pas en cours d’utilisation. Pare-feu simple (ufw) fournit `iptables` une extrémité avant pour en fournissant un CLI pour configurer le pare-feu.
+Fermez tous les ports externes qui ne sont pas en cours d’utilisation. Le pare-feu UFW fournit une interface de `iptables` commande pour la configuration du pare-feu.
 
 > [!WARNING]
 > Un pare-feu mal configuré bloque l’accès à l’ensemble du système. Faute d’avoir spécifié le port SSH approprié, vous ne pourrez pas accéder au système si vous utilisez SSH pour vous y connecter. Le numéro de port par défaut est 22. Pour plus d’informations, consultez la [présentation d’ufw](https://help.ubuntu.com/community/UFW) et le [manuel](https://manpages.ubuntu.com/manpages/bionic/man8/ufw.8.html).
@@ -403,9 +409,9 @@ sudo nano /etc/nginx/nginx.conf
 
 Ajoutez la ligne `add_header X-Content-Type-Options "nosniff";` et enregistrez le fichier, puis redémarrez Nginx.
 
-## <a name="additional-nginx-suggestions"></a>Suggestions Nginx supplémentaires
+## <a name="additional-nginx-suggestions"></a>Suggestions supplémentaires pour Nginx
 
-Après la mise à niveau du cadre partagé sur le serveur, redémarrez les applications ASP.NET Core hébergées par le serveur.
+Après la mise à niveau de l’infrastructure partagée sur le serveur, redémarrez le ASP.NET Core les applications hébergées par le serveur.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
