@@ -1,36 +1,40 @@
 ---
-title: Construisez Blazor votre première application
+title: Créer votre première Blazor application
 author: guardrex
-description: Construire Blazor une application étape par étape.
+description: Générez Blazor une application pas à pas.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/20/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 138057c2ceb9ed01bdf958c01f5cf2275387df23
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 5a5a56ee646cba21a883df2cf686cb1ccb18d7f9
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79989430"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776602"
 ---
-# <a name="build-your-first-opno-locblazor-app"></a>Construisez Blazor votre première application
+# <a name="build-your-first-blazor-app"></a>Créer votre première Blazor application
 
 Par [Daniel Roth](https://github.com/danroth27) et [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Ce tutoriel vous montre comment Blazor construire et modifier une application.
+Ce didacticiel vous montre comment créer et modifier une Blazor application.
 
 ## <a name="build-components"></a>Construire des composants
 
-1. Suivez les conseils <xref:blazor/get-started> dans l’article pour créer un Blazor projet pour ce tutoriel. Nommez le projet *ToDoList*.
+1. Suivez les instructions de l' <xref:blazor/get-started> article pour créer un Blazor projet pour ce didacticiel. Nommez le projet *ToDoList*.
 
-1. Naviguez sur chacune des trois pages de l’application dans le dossier *Pages* : Données Accueil, Compteur et Fetch. Ces pages sont implémentées par les fichiers de composants Razor *Index.razor*, *Counter.razor* et *FetchData.razor*.
+1. Accédez à chacune des trois pages de l’application dans le dossier *pages* : Hébergement, compteur et extraction de données. Ces pages sont implémentées par Razor les fichiers de composant *index. Razor*, *Counter. Razor*et *fetchData. Razor*.
 
-1. Sur la page Counter, sélectionnez le bouton **Click me** pour incrémenter le compteur sans actualisation de la page. Incrémenter un compteur dans une page Web nécessite normalement d’écrire JavaScript. Avec Blazor, vous pouvez écrire C à la place.
+1. Sur la page Counter, sélectionnez le bouton **Click me** pour incrémenter le compteur sans actualisation de la page. L’incrémentation d’un compteur dans une page Web nécessite normalement l’écriture de code JavaScript. Avec Blazor, vous pouvez écrire en C# à la place.
 
 1. Examinez l’implémentation du composant `Counter` dans le fichier *Counter.razor*.
 
@@ -38,7 +42,7 @@ Ce tutoriel vous montre comment Blazor construire et modifier une application.
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Counter1.razor)]
 
-   L’interface utilisateur du composant `Counter` est définie à l’aide de HTML. La logique de rendu dynamique (par exemple, les boucles, conditions, expressions) est ajoutée à l’aide d’une syntaxe C# intégrée appelée [Razor](xref:mvc/views/razor). Le balisage HTML et la logique de rendu C# sont convertis en une classe de composants au moment de la génération. Le nom de la classe .NET générée correspond à celui du fichier.
+   L’interface utilisateur du composant `Counter` est définie à l’aide de HTML. La logique de rendu dynamique (par exemple, les boucles, les instructions conditionnelles, les expressions) est ajoutée [Razor](xref:mvc/views/razor)à l’aide d’une syntaxe C# incorporée appelée. Le balisage HTML et la logique de rendu C# sont convertis en une classe de composants au moment de la génération. Le nom de la classe .NET générée correspond à celui du fichier.
 
    Les membres de la classe de composants sont définis dans un bloc `@code`. Dans le bloc `@code`, l’état du composant (propriétés, champs) et les méthodes sont spécifiés pour la gestion des événements ou pour définir une autre logique de composant. Ces membres sont ensuite utilisés dans le cadre de la logique de rendu du composant et la gestion des événements.
 
@@ -61,7 +65,7 @@ Incluez un composant dans un autre composant utilisant une syntaxe HTML.
 
 1. Ajoutez le composant `Counter` au composant `Index` de l’application en ajoutant un élément `<Counter />` au composant `Index` (*Index.razor*).
 
-   Si vous utilisez Blazor WebAssembly pour cette `SurveyPrompt` expérience, un `Index` composant est utilisé par le composant. Remplacez l’élément `<SurveyPrompt>` par un élément `<Counter />`. Si vous utilisez Blazor une application Server pour `<Counter />` cette expérience, ajoutez l’élément au `Index` composant :
+   Si vous utilisez Blazor webassembly pour cette expérience, un `SurveyPrompt` composant est utilisé par le `Index` composant. Remplacez l’élément `<SurveyPrompt>` par un élément `<Counter />`. Si vous utilisez une Blazor application serveur pour cette expérience, ajoutez l' `<Counter />` élément au `Index` composant :
 
    *Pages/Index.razor* :
 
@@ -71,12 +75,12 @@ Incluez un composant dans un autre composant utilisant une syntaxe HTML.
 
 ## <a name="component-parameters"></a>Paramètres de composant
 
-Les composants peuvent également avoir des paramètres. Les paramètres des composants sont définis à `[Parameter]` l’aide de propriétés publiques sur la classe des composants avec l’attribut. Utilisez des attributs pour spécifier des arguments pour un composant dans le balisage.
+Les composants peuvent également avoir des paramètres. Les paramètres de composant sont définis à l’aide de propriétés publiques sur `[Parameter]` la classe de composant avec l’attribut. Utilisez des attributs pour spécifier des arguments pour un composant dans le balisage.
 
-1. Mettre à jour `@code` le code CMD du composant comme suit :
+1. Mettez à jour le `@code` code C# du composant comme suit :
 
-   * Ajoutez une `IncrementAmount` propriété `[Parameter]` publique avec l’attribut.
-   * Modifier `IncrementCount` la méthode `IncrementAmount` d’utilisation de `currentCount`la propriété lors de l’augmentation de la valeur de .
+   * Ajoutez une propriété `IncrementAmount` publique avec l' `[Parameter]` attribut.
+   * Modifiez la `IncrementCount` méthode pour utiliser la `IncrementAmount` propriété lors de l’incrémentation `currentCount`de la valeur de.
 
    *Pages/Counter.razor* :
 
@@ -101,13 +105,13 @@ La directive `@page` en haut du fichier *Counter.razor* spécifie que le composa
 
 ## <a name="dependency-injection"></a>Injection de dépendances
 
-### <a name="opno-locblazor-server-experience"></a>BlazorExpérience du serveur
+### <a name="blazor-server-experience"></a>BlazorExpérience du serveur
 
-Si vous Blazor travaillez avec `WeatherForecastService` une application Server, `Startup.ConfigureServices`le service est enregistré en tant que [singleton](xref:fundamentals/dependency-injection#service-lifetimes) dans . Une instance du service est disponible dans toute l’application via [injection de dépendance (DI)](xref:fundamentals/dependency-injection):
+Si vous utilisez une Blazor application serveur, le `WeatherForecastService` service est inscrit en tant [singleton](xref:fundamentals/dependency-injection#service-lifetimes) que singleton `Startup.ConfigureServices`dans. Une instance du service est disponible dans l’ensemble de l’application via l' [injection de dépendances (di)](xref:fundamentals/dependency-injection):
 
 [!code-csharp[](build-your-first-blazor-app/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-La `@inject` directive est utilisée pour `WeatherForecastService` injecter l’instance du service dans le `FetchData` composant.
+La `@inject` directive est utilisée pour injecter l’instance du `WeatherForecastService` service dans le `FetchData` composant.
 
 *Pages/FetchData.razor* :
 
@@ -117,15 +121,15 @@ Le composant `FetchData` utilise le service injecté, comme `ForecastService`, p
 
 [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData2.razor?highlight=6)]
 
-### <a name="opno-locblazor-webassembly-experience"></a>BlazorExpérience WebAssembly
+### <a name="blazor-webassembly-experience"></a>BlazorExpérience webassembly
 
-Si vous Blazor travaillez avec une `HttpClient` application WebAssembly, est injecté pour obtenir des données de prévisions météorologiques à partir du fichier *weather.json* dans le dossier *wwwroot/sample-data.*
+Si vous utilisez une Blazor application webassembly `HttpClient` , est injecté pour obtenir des données de prévision météorologiques à partir du fichier *Weather. JSON* dans le dossier *wwwroot/Sample-Data* .
 
 *Pages/FetchData.razor* :
 
 [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData1_client.razor?highlight=7-8)]
 
-Une [`@foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) boucle est utilisée pour rendre chaque instance de prévision comme une ligne dans le tableau des données météorologiques:
+Une [`@foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) boucle est utilisée pour afficher chaque instance de prévision sous la forme d’une ligne dans la table des données météorologiques :
 
 [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData3.razor?highlight=11-19)]
 
@@ -133,7 +137,7 @@ Une [`@foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) boucle e
 
 Ajoutez un nouveau composant à l’application qui implémente une liste de tâches simple.
 
-1. Ajoutez un `Todo` nouveau composant Razor à l’application dans le dossier *Pages.* Dans Visual Studio, cliquez à droite sur le dossier **Pages** et **sélectionnez Ajouter** > un nouveau composant de rasoir**d’élément** > **Razor Component**. Nommez le fichier du composant *Todo.razor*. Dans d’autres environnements de développement, ajoutez un fichier vierge au dossier **Pages** nommé *Todo.razor*.
+1. Ajoutez un nouveau `Todo` Razor composant à l’application dans le dossier *pages* . Dans Visual Studio, cliquez avec le bouton droit sur le dossier **pages** , puis sélectionnez **Ajouter** > **un nouvel élément**  >  ** Razor composant**. Nommez le fichier *TODO. Razor*du composant. Dans d’autres environnements de développement, ajoutez un fichier vide au dossier **pages** nommé *TODO. Razor*.
 
 1. Fournissez le balisage initial pour le composant :
 

@@ -6,17 +6,23 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/aspnet-core-module
-ms.openlocfilehash: 298d424557600735668217e1ef07ace606dac60b
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: c9cc340c9a3d6ff1b3783686bd779dfe04b14275
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78667299"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775269"
 ---
 # <a name="aspnet-core-module"></a>Module ASP.NET Core
 
-Par [Tom Dykstra](https://github.com/tdykstra), [Rick Strahl](https://github.com/RickStrahl), [Chris Ross](https://github.com/Tratcher), Rick [Anderson](https://twitter.com/RickAndMSFT), [Sourabh Shirhatti](https://twitter.com/sshirhatti), et [Justin Kotalik](https://github.com/jkotalik)
+Par [Tom Dykstra](https://github.com/tdykstra), [Rick Strahl](https://github.com/RickStrahl), [Chris Ross](https://github.com/Tratcher), [Rick Anderson](https://twitter.com/RickAndMSFT), [Sourabh Shirhatti](https://twitter.com/sshirhatti)et [Justin Kotalik](https://github.com/jkotalik)
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -32,13 +38,13 @@ Versions de Windows prises en charge :
 
 Lors de l’hébergement in-process, le module utilise une implémentation du serveur in-process pour IIS, nommée serveur HTTP IIS (`IISHttpServer`).
 
-Lors de l’hébergement out-of-process, le module fonctionne uniquement avec Kestrel. Le module ne fonctionne pas avec [HTTP.sys](xref:fundamentals/servers/httpsys).
+Lors de l’hébergement out-of-process, le module fonctionne uniquement avec Kestrel. Le module ne fonctionne pas avec [http. sys](xref:fundamentals/servers/httpsys).
 
 ## <a name="hosting-models"></a>Modèles d'hébergement
 
 ### <a name="in-process-hosting-model"></a>Modèle d’hébergement in-process
 
-ASP.NET applications Core par défaut au modèle d’hébergement en cours.
+ASP.NET Core les applications par défaut au modèle d’hébergement in-process.
 
 Les caractéristiques suivantes s’appliquent lors de l’hébergement in-process :
 
@@ -77,11 +83,11 @@ Les caractéristiques suivantes s’appliquent lors de l’hébergement in-proce
   }
   ```
   
-  * [Les déploiements de forfaits Web (un seul fichier)](/aspnet/web-forms/overview/deployment/web-deployment-in-the-enterprise/deploying-web-packages) ne sont pas pris en charge.
+  * [Les déploiements de package Web (à fichier unique)](/aspnet/web-forms/overview/deployment/web-deployment-in-the-enterprise/deploying-web-packages) ne sont pas pris en charge.
 
 ### <a name="out-of-process-hosting-model"></a>Modèle d’hébergement out-of-process
 
-Pour configurer une application pour l’hébergement hors `<AspNetCoreHostingModel>` processus, `OutOfProcess` définissez la valeur de la propriété dans le fichier du projet (*.csproj*) :
+Pour configurer une application pour l’hébergement hors processus, affectez à `<AspNetCoreHostingModel>` `OutOfProcess` la propriété la valeur dans le fichier projet (*. csproj*) :
 
 ```xml
 <PropertyGroup>
@@ -89,9 +95,9 @@ Pour configurer une application pour l’hébergement hors `<AspNetCoreHostingMo
 </PropertyGroup>
 ```
 
-L’hébergement en cours `InProcess`est défini avec , qui est la valeur par défaut.
+L’hébergement in-process est défini `InProcess`avec, qui est la valeur par défaut.
 
-La valeur `<AspNetCoreHostingModel>` de est insensible cas, ainsi `inprocess` et `outofprocess` sont des valeurs valides.
+La valeur de `<AspNetCoreHostingModel>` ne respecte pas la casse, `inprocess` donc `outofprocess` et sont des valeurs valides.
 
 Le serveur [Kestrel](xref:fundamentals/servers/kestrel) est utilisé à la place du serveur HTTP IIS (`IISHttpServer`).
 
@@ -165,7 +171,7 @@ Le fichier *web.config* suivant est publié pour un [déploiement autonome](/dot
 </configuration>
 ```
 
-La <xref:System.Configuration.SectionInformation.InheritInChildApplications*> propriété est `false` configurée pour indiquer que les paramètres spécifiés dans [ \<l’emplacement>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) élément ne sont pas hérités par les applications qui résident dans une sous-direction de l’application.
+La <xref:System.Configuration.SectionInformation.InheritInChildApplications*> propriété a la valeur `false` pour indiquer que les paramètres spécifiés dans l' [ \<emplacement>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) élément ne sont pas hérités par les applications qui résident dans un sous-répertoire de l’application.
 
 Lorsqu’une application est déployée sur [Azure App Service](https://azure.microsoft.com/services/app-service/), le chemin d’accès `stdoutLogFile` est défini sur `\\?\%home%\LogFiles\stdout`. Le chemin d’accès enregistre les journaux stdout dans le dossier *LogFiles*, un emplacement automatiquement créé par le service.
 
@@ -178,7 +184,7 @@ Pour plus d’informations sur la configuration d’une sous-application IIS, co
 | `arguments` | <p>Attribut de chaîne facultatif.</p><p>Arguments pour l’exécutable spécifié dans **processPath**.</p> | |
 | `disableStartUpErrorPage` | <p>Attribut booléen facultatif.</p><p>Si la valeur est true, la page **502.5 - Échec du processus** est supprimée, et la page de code d’état 502 configurée dans le fichier *web.config* est prioritaire.</p> | `false` |
 | `forwardWindowsAuthToken` | <p>Attribut booléen facultatif.</p><p>Si la valeur est true, le jeton est transmis au processus enfant qui écoute sur %ASPNETCORE_PORT% sous la forme d’un en-tête 'MS-ASPNETCORE-WINAUTHTOKEN' par demande. Il incombe à ce processus d’appeler CloseHandle sur ce jeton par demande.</p> | `true` |
-| `hostingModel` | <p>Attribut de chaîne facultatif.</p><p>Spécifie le modèle d’hébergement comme en cours ()`InProcess`/`inprocess`ou hors-processus (`OutOfProcess`/`outofprocess`).</p> | `InProcess`<br>`inprocess` |
+| `hostingModel` | <p>Attribut de chaîne facultatif.</p><p>Spécifie le modèle d’hébergement comme in-`InProcess`/`inprocess`process () ou out-of-`OutOfProcess`/`outofprocess`process ().</p> | `InProcess`<br>`inprocess` |
 | `processesPerApplication` | <p>Attribut entier facultatif.</p><p>Spécifie le nombre d’instances du processus indiqué dans le paramètre **processPath** qui peuvent être lancées par application.</p><p>&dagger;Pour l’hébergement in-process, la valeur est limitée à `1`.</p><p>Il est déconseillé de définir `processesPerApplication`. Cet attribut sera supprimé dans une version ultérieure.</p> | Valeur par défaut : `1`<br>Min : `1`<br>Max : `100`&dagger; |
 | `processPath` | <p>Attribut de chaîne requis.</p><p>Chemin d’accès au fichier exécutable lançant un processus d’écoute des requêtes HTTP. Les chemins d’accès relatifs sont pris en charge. Si le chemin d’accès commence par `.`, il est considéré comme étant relatif par rapport à la racine du site.</p> | |
 | `rapidFailsPerMinute` | <p>Attribut entier facultatif.</p><p>Indique le nombre de fois où le processus spécifié dans **processPath** est autorisé à se bloquer par minute. Si cette limite est dépassée, le module arrête le lancement du processus pour le reste de la minute.</p><p>Non pris en charge avec hébergement in-process.</p> | Valeur par défaut : `10`<br>Min : `0`<br>Max : `100` |
@@ -192,7 +198,7 @@ Pour plus d’informations sur la configuration d’une sous-application IIS, co
 
 Des variables d’environnement peuvent être spécifiées pour le processus dans l’attribut `processPath`. Spécifiez une variable d’environnement à l’aide de l’élément enfant `<environmentVariable>` d’un élément de collection `<environmentVariables>`. Les variables d’environnement définies dans cette section prévalent sur les variables d’environnement système.
 
-L’exemple suivant définit deux variables de l’environnement dans *web.config*. `ASPNETCORE_ENVIRONMENT` configure l’environnement de `Development`l’application pour . Un développeur peut définir temporairement cette valeur dans le fichier *web.config* afin de forcer le chargement de la [Page d’exception de développeur](xref:fundamentals/error-handling) lors du débogage d’une exception d’application. `CONFIG_DIR` est un exemple de variable d’environnement définie par l’utilisateur, dans laquelle le développeur a écrit du code qui lit la valeur de démarrage afin de former un chemin d’accès pour le chargement du fichier de configuration de l’application.
+L’exemple suivant définit deux variables d’environnement dans le *fichier Web. config*. `ASPNETCORE_ENVIRONMENT` configure l’environnement de l’application sur `Development`. Un développeur peut définir temporairement cette valeur dans le fichier *web.config* afin de forcer le chargement de la [Page d’exception de développeur](xref:fundamentals/error-handling) lors du débogage d’une exception d’application. `CONFIG_DIR` est un exemple de variable d’environnement définie par l’utilisateur, dans laquelle le développeur a écrit du code qui lit la valeur de démarrage afin de former un chemin d’accès pour le chargement du fichier de configuration de l’application.
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -208,7 +214,7 @@ L’exemple suivant définit deux variables de l’environnement dans *web.confi
 ```
 
 > [!NOTE]
-> Une alternative à la mise en place de `<EnvironmentName>` l’environnement directement dans *web.config* est d’inclure la propriété dans le profil de publication [(.pubxml)](xref:host-and-deploy/visual-studio-publish-profiles) ou le fichier de projet. Cette approche définit l’environnement dans *web.config* lorsque le projet est publié :
+> Une alternative à la définition de l’environnement directement dans *Web. config* consiste à `<EnvironmentName>` inclure la propriété dans le [profil de publication (. pubxml)](xref:host-and-deploy/visual-studio-publish-profiles) ou le fichier projet. Cette approche définit l’environnement dans *web.config* lorsque le projet est publié :
 >
 > ```xml
 > <PropertyGroup>
@@ -245,7 +251,7 @@ Le module ASP.NET Core redirige la sortie de console stdout et stderr vers le di
 
 Aucune rotation n’est appliquée aux journaux, sauf en cas de recyclage/redémarrage du processus. Il incombe à l’hébergeur de limiter l’espace disque utilisé par les journaux.
 
-L’utilisation du journal stdout est seulement recommandé pour dépanner les problèmes de démarrage de l’application lors de l’hébergement sur IIS ou lors de l’utilisation [de la prise en charge du temps de développement pour IIS avec Visual Studio](xref:host-and-deploy/iis/development-time-iis-support), pas tout en débogage localement et en cours d’exécution de l’application avec IIS Express.
+L’utilisation du journal stdout est recommandée uniquement pour résoudre les problèmes de démarrage d’application lors de l’hébergement sur IIS ou lors de l’utilisation [de la prise en charge au moment du développement pour IIS avec Visual Studio](xref:host-and-deploy/iis/development-time-iis-support), et non pendant le débogage local et l’exécution de l’application avec IIS Express.
 
 N’utilisez pas le journal stdout à des fins de journalisation d’application générale. Pour les opérations de journalisation courantes dans une application ASP.NET Core, utilisez une bibliothèque de journalisation qui limite la taille du fichier journal et applique une rotation aux journaux. Pour plus d’informations, consultez [Fournisseurs de journalisation tiers](xref:fundamentals/logging/index#third-party-logging-providers).
 
@@ -253,7 +259,7 @@ Un horodatage et une extension de fichier sont ajoutés automatiquement quand le
 
 Si `stdoutLogEnabled` a la valeur false, les erreurs qui se produisent au moment du démarrage de l’application sont capturées et émises dans le journal des événements (30 Ko maximum). Après le démarrage, tous les journaux supplémentaires sont ignorés.
 
-L’élément `aspNetCore` d’échantillon suivant configure l’enregistrement `.\log\`stdout à la trajectoire relative . Vérifiez que l’identité de l’utilisateur AppPool à l’autorisation d’écrire dans le chemin d’accès fourni.
+L’exemple `aspNetCore` d’élément suivant configure la journalisation stdout sur le `.\log\`chemin d’accès relatif. Vérifiez que l’identité de l’utilisateur AppPool à l’autorisation d’écrire dans le chemin d’accès fourni.
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -264,15 +270,15 @@ L’élément `aspNetCore` d’échantillon suivant configure l’enregistrement
 </aspNetCore>
 ```
 
-Lors de la publication d’une application pour le `stdoutLogFile` déploiement `\\?\%home%\LogFiles\stdout`d’Azure App Service, le Web SDK définit la valeur à . La `%home` variable environnement est prédéfinie pour les applications hébergées par Azure App Service.
+Lors de la publication d’une application pour le déploiement Azure App Service, le `stdoutLogFile` Kit de `\\?\%home%\LogFiles\stdout`développement logiciel (SDK) Web définit la valeur sur. La `%home` variable d’environnement est prédéfinie pour les applications hébergées par Azure App service.
 
-Pour créer des règles de filtrage d’enregistrement, consultez les sections de [filtrage](xref:fundamentals/logging/index#log-filtering) [configuration](xref:fundamentals/logging/index#log-filtering) et journalière de la documentation d’enregistrement ASP.NET Core.
+Pour créer des règles de filtre de journalisation, consultez les sections [configuration](xref:fundamentals/logging/index#log-filtering) et [filtrage des journaux](xref:fundamentals/logging/index#log-filtering) de la documentation ASP.net Core Logging.
 
-Pour plus d’informations sur les formats de parcours, voir [les formats de trajectoire de fichier sur les systèmes Windows](/dotnet/standard/io/file-path-formats).
+Pour plus d’informations sur les formats de chemin d’accès, consultez [formats de chemin d’accès de fichier sur les systèmes Windows](/dotnet/standard/io/file-path-formats).
 
 ## <a name="enhanced-diagnostic-logs"></a>Journaux de diagnostic améliorés
 
-Le module ASP.NET Core est configurable pour proposer des journaux de diagnostic améliorés. Ajouter `<handlerSettings>` l’élément `<aspNetCore>` à l’élément dans *web.config*. Définir `debugLevel` le `TRACE` pour exposer une plus grande fidélité de l’information diagnostique:
+Le module ASP.NET Core est configurable pour proposer des journaux de diagnostic améliorés. Ajoutez l' `<handlerSettings>` élément à l' `<aspNetCore>` élément dans *Web. config*. La définition `debugLevel` de `TRACE` la valeur pour expose une plus haute fidélité des informations de diagnostic :
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -306,8 +312,8 @@ Emplacements (plusieurs emplacements sont autorisés) :
 
 Les paramètres de gestionnaire peuvent également être fournis par le biais de variables d’environnement :
 
-* `ASPNETCORE_MODULE_DEBUG_FILE`&ndash; Chemin vers le fichier journal de déboise. (Par défaut : *aspnetcore-debug.log*)
-* `ASPNETCORE_MODULE_DEBUG`&ndash; Réglage de niveau Debug.
+* `ASPNETCORE_MODULE_DEBUG_FILE`&ndash; Chemin d’accès au fichier journal de débogage. (Par défaut : *aspnetcore-debug.log*)
+* `ASPNETCORE_MODULE_DEBUG`&ndash; Paramètre de niveau de débogage.
 
 > [!WARNING]
 > Ne laissez **pas** la journalisation du débogage activée dans le déploiement plus longtemps que nécessaire pour résoudre un problème. La taille du journal n’est pas limitée. Si vous laissez la journalisation du débogage activée, vous risquez d’épuiser l’espace disque disponible et de bloquer le serveur ou le service d’application.
@@ -316,9 +322,9 @@ Consultez [Configuration avec web.config](#configuration-with-webconfig) pour ob
 
 ## <a name="modify-the-stack-size"></a>Modifier la taille de pile
 
-*Ne s’applique que lors de l’utilisation du modèle d’hébergement en cours.*
+*S’applique uniquement lors de l’utilisation du modèle d’hébergement in-process.*
 
-Configurer la taille `stackSize` de la pile gérée à l’aide du paramètre dans les octets de *web.config*. La taille `1048576` par défaut est octets (1 Mo).
+Configurez la taille de la `stackSize` pile managée en utilisant le paramètre en octets dans *Web. config*. La taille par défaut `1048576` est de octets (1 Mo).
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -364,9 +370,9 @@ Pour déterminer la version du module ASP.NET Core installé :
 1. Sur le système hôte, accédez à *%windir%\System32\inetsrv*.
 1. Recherchez le fichier *aspnetcore.dll*.
 1. Cliquez avec le bouton droit sur le fichier, puis sélectionnez **Propriétés** dans le menu contextuel.
-1. Sélectionnez l’onglet **Détails.** La **version Fichier** et la version **produit** représentent la version installée du module.
+1. Sélectionnez l’onglet **Détails** . La version du **fichier** et la version du **produit** représentent la version installée du module.
 
-Les journaux d’installateur De bundle d’hébergement pour le module se trouvent à *C:\\\\Utilisateurs %UserName%\\AppData\\Local\\Temp*. Le fichier est nommé *dd_DotNetCoreWinSvrHosting__\<timestamp>_000_AspNetCoreModule_x64.log*.
+Les journaux du programme d’installation du bundle d’hébergement pour le module se trouvent sur *C\\:\\\\Users\\% username% AppData Local\\Temp*. Le fichier est nommé *dd_DotNetCoreWinSvrHosting__\<timestamp>_000_AspNetCoreModule_x64. log*.
 
 ## <a name="module-schema-and-configuration-file-locations"></a>Emplacements des fichiers du module, du schéma et de configuration
 
@@ -394,7 +400,7 @@ Les journaux d’installateur De bundle d’hébergement pour le module se trouv
 
 ### <a name="schema"></a>schéma
 
-**Iis**
+**IIS**
 
 * %windir%\System32\inetsrv\config\schema\aspnetcore_schema.xml
 
@@ -408,7 +414,7 @@ Les journaux d’installateur De bundle d’hébergement pour le module se trouv
 
 ### <a name="configuration"></a>Configuration
 
-**Iis**
+**IIS**
 
 * %windir%\System32\inetsrv\config\applicationHost.config
 
@@ -436,7 +442,7 @@ Versions de Windows prises en charge :
 
 Lors de l’hébergement in-process, le module utilise une implémentation du serveur in-process pour IIS, nommée serveur HTTP IIS (`IISHttpServer`).
 
-Lors de l’hébergement out-of-process, le module fonctionne uniquement avec Kestrel. Le module ne fonctionne pas avec [HTTP.sys](xref:fundamentals/servers/httpsys).
+Lors de l’hébergement out-of-process, le module fonctionne uniquement avec Kestrel. Le module ne fonctionne pas avec [http. sys](xref:fundamentals/servers/httpsys).
 
 ## <a name="hosting-models"></a>Modèles d'hébergement
 
@@ -452,7 +458,7 @@ Pour configurer l’hébergement in-process dans une application, ajoutez la pro
 
 Le modèle d’hébergement in-process n’est pas pris en charge pour les applications ASP.NET Core qui ciblent le .NET Framework.
 
-La valeur `<AspNetCoreHostingModel>` de est insensible cas, ainsi `inprocess` et `outofprocess` sont des valeurs valides.
+La valeur de `<AspNetCoreHostingModel>` ne respecte pas la casse, `inprocess` donc `outofprocess` et sont des valeurs valides.
 
 Si la propriété `<AspNetCoreHostingModel>` n’est pas présente dans le fichier, la valeur par défaut est `OutOfProcess`.
 
@@ -506,7 +512,7 @@ Pour configurer une application pour un hébergement out-of-process, utilisez l�
 </PropertyGroup>
 ```
 
-La valeur est insensible au `inprocess` cas, donc et `outofprocess` sont des valeurs valides.
+La valeur ne respecte pas la casse, `inprocess` donc `outofprocess` et sont des valeurs valides.
 
 Le serveur [Kestrel](xref:fundamentals/servers/kestrel) est utilisé à la place du serveur HTTP IIS (`IISHttpServer`).
 
@@ -580,7 +586,7 @@ Le fichier *web.config* suivant est publié pour un [déploiement autonome](/dot
 </configuration>
 ```
 
-La <xref:System.Configuration.SectionInformation.InheritInChildApplications*> propriété est `false` configurée pour indiquer que les paramètres spécifiés dans [ \<l’emplacement>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) élément ne sont pas hérités par les applications qui résident dans une sous-direction de l’application.
+La <xref:System.Configuration.SectionInformation.InheritInChildApplications*> propriété a la valeur `false` pour indiquer que les paramètres spécifiés dans l' [ \<emplacement>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) élément ne sont pas hérités par les applications qui résident dans un sous-répertoire de l’application.
 
 Lorsqu’une application est déployée sur [Azure App Service](https://azure.microsoft.com/services/app-service/), le chemin d’accès `stdoutLogFile` est défini sur `\\?\%home%\LogFiles\stdout`. Le chemin d’accès enregistre les journaux stdout dans le dossier *LogFiles*, un emplacement automatiquement créé par le service.
 
@@ -593,7 +599,7 @@ Pour plus d’informations sur la configuration d’une sous-application IIS, co
 | `arguments` | <p>Attribut de chaîne facultatif.</p><p>Arguments pour l’exécutable spécifié dans **processPath**.</p> | |
 | `disableStartUpErrorPage` | <p>Attribut booléen facultatif.</p><p>Si la valeur est true, la page **502.5 - Échec du processus** est supprimée, et la page de code d’état 502 configurée dans le fichier *web.config* est prioritaire.</p> | `false` |
 | `forwardWindowsAuthToken` | <p>Attribut booléen facultatif.</p><p>Si la valeur est true, le jeton est transmis au processus enfant qui écoute sur %ASPNETCORE_PORT% sous la forme d’un en-tête 'MS-ASPNETCORE-WINAUTHTOKEN' par demande. Il incombe à ce processus d’appeler CloseHandle sur ce jeton par demande.</p> | `true` |
-| `hostingModel` | <p>Attribut de chaîne facultatif.</p><p>Spécifie le modèle d’hébergement comme en cours ()`InProcess`/`inprocess`ou hors-processus (`OutOfProcess`/`outofprocess`).</p> | `OutOfProcess`<br>`outofprocess` |
+| `hostingModel` | <p>Attribut de chaîne facultatif.</p><p>Spécifie le modèle d’hébergement comme in-`InProcess`/`inprocess`process () ou out-of-`OutOfProcess`/`outofprocess`process ().</p> | `OutOfProcess`<br>`outofprocess` |
 | `processesPerApplication` | <p>Attribut entier facultatif.</p><p>Spécifie le nombre d’instances du processus indiqué dans le paramètre **processPath** qui peuvent être lancées par application.</p><p>&dagger;Pour l’hébergement in-process, la valeur est limitée à `1`.</p><p>Il est déconseillé de définir `processesPerApplication`. Cet attribut sera supprimé dans une version ultérieure.</p> | Valeur par défaut : `1`<br>Min : `1`<br>Max : `100`&dagger; |
 | `processPath` | <p>Attribut de chaîne requis.</p><p>Chemin d’accès au fichier exécutable lançant un processus d’écoute des requêtes HTTP. Les chemins d’accès relatifs sont pris en charge. Si le chemin d’accès commence par `.`, il est considéré comme étant relatif par rapport à la racine du site.</p> | |
 | `rapidFailsPerMinute` | <p>Attribut entier facultatif.</p><p>Indique le nombre de fois où le processus spécifié dans **processPath** est autorisé à se bloquer par minute. Si cette limite est dépassée, le module arrête le lancement du processus pour le reste de la minute.</p><p>Non pris en charge avec hébergement in-process.</p> | Valeur par défaut : `10`<br>Min : `0`<br>Max : `100` |
@@ -623,7 +629,7 @@ L’exemple suivant définit deux variables d'environnement. `ASPNETCORE_ENVIRON
 ```
 
 > [!NOTE]
-> Une alternative à la mise en place de `<EnvironmentName>` l’environnement directement dans *web.config* est d’inclure la propriété dans le profil de publication [(.pubxml)](xref:host-and-deploy/visual-studio-publish-profiles) ou le fichier de projet. Cette approche définit l’environnement dans *web.config* lorsque le projet est publié :
+> Une alternative à la définition de l’environnement directement dans *Web. config* consiste à `<EnvironmentName>` inclure la propriété dans le [profil de publication (. pubxml)](xref:host-and-deploy/visual-studio-publish-profiles) ou le fichier projet. Cette approche définit l’environnement dans *web.config* lorsque le projet est publié :
 >
 > ```xml
 > <PropertyGroup>
@@ -660,7 +666,7 @@ Le module ASP.NET Core redirige la sortie de console stdout et stderr vers le di
 
 Aucune rotation n’est appliquée aux journaux, sauf en cas de recyclage/redémarrage du processus. Il incombe à l’hébergeur de limiter l’espace disque utilisé par les journaux.
 
-L’utilisation du journal stdout est seulement recommandé pour dépanner les problèmes de démarrage de l’application lors de l’hébergement sur IIS ou lors de l’utilisation [de la prise en charge du temps de développement pour IIS avec Visual Studio](xref:host-and-deploy/iis/development-time-iis-support), pas tout en débogage localement et en cours d’exécution de l’application avec IIS Express.
+L’utilisation du journal stdout est recommandée uniquement pour résoudre les problèmes de démarrage d’application lors de l’hébergement sur IIS ou lors de l’utilisation [de la prise en charge au moment du développement pour IIS avec Visual Studio](xref:host-and-deploy/iis/development-time-iis-support), et non pendant le débogage local et l’exécution de l’application avec IIS Express.
 
 N’utilisez pas le journal stdout à des fins de journalisation d’application générale. Pour les opérations de journalisation courantes dans une application ASP.NET Core, utilisez une bibliothèque de journalisation qui limite la taille du fichier journal et applique une rotation aux journaux. Pour plus d’informations, consultez [Fournisseurs de journalisation tiers](xref:fundamentals/logging/index#third-party-logging-providers).
 
@@ -668,7 +674,7 @@ Un horodatage et une extension de fichier sont ajoutés automatiquement quand le
 
 Si `stdoutLogEnabled` a la valeur false, les erreurs qui se produisent au moment du démarrage de l’application sont capturées et émises dans le journal des événements (30 Ko maximum). Après le démarrage, tous les journaux supplémentaires sont ignorés.
 
-L’élément `aspNetCore` d’échantillon suivant configure l’enregistrement `.\log\`stdout à la trajectoire relative . Vérifiez que l’identité de l’utilisateur AppPool à l’autorisation d’écrire dans le chemin d’accès fourni.
+L’exemple `aspNetCore` d’élément suivant configure la journalisation stdout sur le `.\log\`chemin d’accès relatif. Vérifiez que l’identité de l’utilisateur AppPool à l’autorisation d’écrire dans le chemin d’accès fourni.
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -679,13 +685,13 @@ L’élément `aspNetCore` d’échantillon suivant configure l’enregistrement
 </aspNetCore>
 ```
 
-Lors de la publication d’une application pour le `stdoutLogFile` déploiement `\\?\%home%\LogFiles\stdout`d’Azure App Service, le Web SDK définit la valeur à . La `%home` variable environnement est prédéfinie pour les applications hébergées par Azure App Service.
+Lors de la publication d’une application pour le déploiement Azure App Service, le `stdoutLogFile` Kit de `\\?\%home%\LogFiles\stdout`développement logiciel (SDK) Web définit la valeur sur. La `%home` variable d’environnement est prédéfinie pour les applications hébergées par Azure App service.
 
-Pour plus d’informations sur les formats de parcours, voir [les formats de trajectoire de fichier sur les systèmes Windows](/dotnet/standard/io/file-path-formats).
+Pour plus d’informations sur les formats de chemin d’accès, consultez [formats de chemin d’accès de fichier sur les systèmes Windows](/dotnet/standard/io/file-path-formats).
 
 ## <a name="enhanced-diagnostic-logs"></a>Journaux de diagnostic améliorés
 
-Le module ASP.NET Core est configurable pour proposer des journaux de diagnostic améliorés. Ajouter `<handlerSettings>` l’élément `<aspNetCore>` à l’élément dans *web.config*. Définir `debugLevel` le `TRACE` pour exposer une plus grande fidélité de l’information diagnostique:
+Le module ASP.NET Core est configurable pour proposer des journaux de diagnostic améliorés. Ajoutez l' `<handlerSettings>` élément à l' `<aspNetCore>` élément dans *Web. config*. La définition `debugLevel` de `TRACE` la valeur pour expose une plus haute fidélité des informations de diagnostic :
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -719,8 +725,8 @@ Emplacements (plusieurs emplacements sont autorisés) :
 
 Les paramètres de gestionnaire peuvent également être fournis par le biais de variables d’environnement :
 
-* `ASPNETCORE_MODULE_DEBUG_FILE`&ndash; Chemin vers le fichier journal de déboise. (Par défaut : *aspnetcore-debug.log*)
-* `ASPNETCORE_MODULE_DEBUG`&ndash; Réglage de niveau Debug.
+* `ASPNETCORE_MODULE_DEBUG_FILE`&ndash; Chemin d’accès au fichier journal de débogage. (Par défaut : *aspnetcore-debug.log*)
+* `ASPNETCORE_MODULE_DEBUG`&ndash; Paramètre de niveau de débogage.
 
 > [!WARNING]
 > Ne laissez **pas** la journalisation du débogage activée dans le déploiement plus longtemps que nécessaire pour résoudre un problème. La taille du journal n’est pas limitée. Si vous laissez la journalisation du débogage activée, vous risquez d’épuiser l’espace disque disponible et de bloquer le serveur ou le service d’application.
@@ -759,9 +765,9 @@ Pour déterminer la version du module ASP.NET Core installé :
 1. Sur le système hôte, accédez à *%windir%\System32\inetsrv*.
 1. Recherchez le fichier *aspnetcore.dll*.
 1. Cliquez avec le bouton droit sur le fichier, puis sélectionnez **Propriétés** dans le menu contextuel.
-1. Sélectionnez l’onglet **Détails.** La **version Fichier** et la version **produit** représentent la version installée du module.
+1. Sélectionnez l’onglet **Détails** . La version du **fichier** et la version du **produit** représentent la version installée du module.
 
-Les journaux d’installateur De bundle d’hébergement pour le module se trouvent à *C:\\\\Utilisateurs %UserName%\\AppData\\Local\\Temp*. Le fichier est nommé *dd_DotNetCoreWinSvrHosting__\<timestamp>_000_AspNetCoreModule_x64.log*.
+Les journaux du programme d’installation du bundle d’hébergement pour le module se trouvent sur *C\\:\\\\Users\\% username% AppData Local\\Temp*. Le fichier est nommé *dd_DotNetCoreWinSvrHosting__\<timestamp>_000_AspNetCoreModule_x64. log*.
 
 ## <a name="module-schema-and-configuration-file-locations"></a>Emplacements des fichiers du module, du schéma et de configuration
 
@@ -789,7 +795,7 @@ Les journaux d’installateur De bundle d’hébergement pour le module se trouv
 
 ### <a name="schema"></a>schéma
 
-**Iis**
+**IIS**
 
 * %windir%\System32\inetsrv\config\schema\aspnetcore_schema.xml
 
@@ -803,7 +809,7 @@ Les journaux d’installateur De bundle d’hébergement pour le module se trouv
 
 ### <a name="configuration"></a>Configuration
 
-**Iis**
+**IIS**
 
 * %windir%\System32\inetsrv\config\applicationHost.config
 
@@ -836,7 +842,7 @@ Le schéma suivant illustre la relation entre IIS, le module ASP.NET Core et une
 
 Les requêtes arrivent du web au pilote HTTP.sys en mode noyau. Le pilote route les requêtes vers IIS sur le port configuré du site web, généralement 80 (HTTP) ou 443 (HTTPS). Le module transfère les requêtes à Kestrel sur un port aléatoire pour l’application, qui n’est ni le port 80 ni le port 443.
 
-Le module spécifie le port via une variable d’environnement en démarrage, `http://localhost:{port}`et [l’IIS Integration Middleware](xref:host-and-deploy/iis/index#enable-the-iisintegration-components) configure le serveur à écouter . Des vérifications supplémentaires sont effectuées, et les requêtes qui ne proviennent pas du module sont rejetées. Le module ne prend pas en charge le transfert HTTPS : les requêtes sont donc transférées via HTTP, même si IIS les reçoit via HTTPS.
+Le module spécifie le port via une variable d’environnement au démarrage, et l' [intergiciel (middleware) d’intégration IIS](xref:host-and-deploy/iis/index#enable-the-iisintegration-components) configure le `http://localhost:{port}`serveur pour l’écoute. Des vérifications supplémentaires sont effectuées, et les requêtes qui ne proviennent pas du module sont rejetées. Le module ne prend pas en charge le transfert HTTPS : les requêtes sont donc transférées via HTTP, même si IIS les reçoit via HTTPS.
 
 Dès que Kestrel sélectionne la requête dans le module, celle-ci est envoyée (push) dans le pipeline de middlewares d’ASP.NET Core. Le pipeline de middlewares traite la requête et la passe en tant qu’instance de `HttpContext` à la logique de l’application. L’intergiciel (middleware) ajouté par l’intégration d’IIS met à jour le schéma, l’adresse IP distante et la base du chemin pour prendre en compte le transfert de la requête à Kestrel. La réponse de l’application est ensuite repassée à IIS, qui la renvoie au client HTTP à l’origine de la requête.
 
@@ -951,13 +957,13 @@ Le module ASP.NET Core redirige la sortie de console stdout et stderr vers le di
 
 Aucune rotation n’est appliquée aux journaux, sauf en cas de recyclage/redémarrage du processus. Il incombe à l’hébergeur de limiter l’espace disque utilisé par les journaux.
 
-L’utilisation du journal stdout est seulement recommandé pour dépanner les problèmes de démarrage de l’application lors de l’hébergement sur IIS ou lors de l’utilisation [de la prise en charge du temps de développement pour IIS avec Visual Studio](xref:host-and-deploy/iis/development-time-iis-support), pas tout en débogage localement et en cours d’exécution de l’application avec IIS Express.
+L’utilisation du journal stdout est recommandée uniquement pour résoudre les problèmes de démarrage d’application lors de l’hébergement sur IIS ou lors de l’utilisation [de la prise en charge au moment du développement pour IIS avec Visual Studio](xref:host-and-deploy/iis/development-time-iis-support), et non pendant le débogage local et l’exécution de l’application avec IIS Express.
 
 N’utilisez pas le journal stdout à des fins de journalisation d’application générale. Pour les opérations de journalisation courantes dans une application ASP.NET Core, utilisez une bibliothèque de journalisation qui limite la taille du fichier journal et applique une rotation aux journaux. Pour plus d’informations, consultez [Fournisseurs de journalisation tiers](xref:fundamentals/logging/index#third-party-logging-providers).
 
 Un horodatage et une extension de fichier sont ajoutés automatiquement quand le fichier journal est créé. Le nom du fichier journal est créé en ajoutant l’horodatage, un ID de processus et une extension de fichier (*.log*) au dernier segment du chemin d'accès `stdoutLogFile` (généralement *stdout*), séparés par des traits de soulignement. Si le chemin d'accès `stdoutLogFile` se termine par *stdout*, un journal pour une application avec un PID de 1934 créé le 5/2/2018 à 19:42:32 affiche le nom de fichier *stdout_20180205194132_1934.log*.
 
-L’élément `aspNetCore` d’échantillon suivant configure l’enregistrement `.\log\`stdout à la trajectoire relative . Vérifiez que l’identité de l’utilisateur AppPool à l’autorisation d’écrire dans le chemin d’accès fourni.
+L’exemple `aspNetCore` d’élément suivant configure la journalisation stdout sur le `.\log\`chemin d’accès relatif. Vérifiez que l’identité de l’utilisateur AppPool à l’autorisation d’écrire dans le chemin d’accès fourni.
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -967,11 +973,11 @@ L’élément `aspNetCore` d’échantillon suivant configure l’enregistrement
 </aspNetCore>
 ```
 
-Lors de la publication d’une application pour le `stdoutLogFile` déploiement `\\?\%home%\LogFiles\stdout`d’Azure App Service, le Web SDK définit la valeur à . La `%home` variable environnement est prédéfinie pour les applications hébergées par Azure App Service.
+Lors de la publication d’une application pour le déploiement Azure App Service, le `stdoutLogFile` Kit de `\\?\%home%\LogFiles\stdout`développement logiciel (SDK) Web définit la valeur sur. La `%home` variable d’environnement est prédéfinie pour les applications hébergées par Azure App service.
 
-Pour créer des règles de filtrage d’enregistrement, consultez les sections de [filtrage](xref:fundamentals/logging/index#log-filtering) [configuration](xref:fundamentals/logging/index#log-filtering) et journalière de la documentation d’enregistrement ASP.NET Core.
+Pour créer des règles de filtre de journalisation, consultez les sections [configuration](xref:fundamentals/logging/index#log-filtering) et [filtrage des journaux](xref:fundamentals/logging/index#log-filtering) de la documentation ASP.net Core Logging.
 
-Pour plus d’informations sur les formats de parcours, voir [les formats de trajectoire de fichier sur les systèmes Windows](/dotnet/standard/io/file-path-formats).
+Pour plus d’informations sur les formats de chemin d’accès, consultez [formats de chemin d’accès de fichier sur les systèmes Windows](/dotnet/standard/io/file-path-formats).
 
 ## <a name="proxy-configuration-uses-http-protocol-and-a-pairing-token"></a>La configuration du proxy utilise le protocole HTTP et un jeton d’appariement
 
@@ -997,9 +1003,9 @@ Pour déterminer la version du module ASP.NET Core installé :
 1. Sur le système hôte, accédez à *%windir%\System32\inetsrv*.
 1. Recherchez le fichier *aspnetcore.dll*.
 1. Cliquez avec le bouton droit sur le fichier, puis sélectionnez **Propriétés** dans le menu contextuel.
-1. Sélectionnez l’onglet **Détails.** La **version Fichier** et la version **produit** représentent la version installée du module.
+1. Sélectionnez l’onglet **Détails** . La version du **fichier** et la version du **produit** représentent la version installée du module.
 
-Les journaux d’installateur De bundle d’hébergement pour le module se trouvent à *C:\\\\Utilisateurs %UserName%\\AppData\\Local\\Temp*. Le fichier est nommé *dd_DotNetCoreWinSvrHosting__\<timestamp>_000_AspNetCoreModule_x64.log*.
+Les journaux du programme d’installation du bundle d’hébergement pour le module se trouvent sur *C\\:\\\\Users\\% username% AppData Local\\Temp*. Le fichier est nommé *dd_DotNetCoreWinSvrHosting__\<timestamp>_000_AspNetCoreModule_x64. log*.
 
 ## <a name="module-schema-and-configuration-file-locations"></a>Emplacements des fichiers du module, du schéma et de configuration
 
@@ -1019,7 +1025,7 @@ Les journaux d’installateur De bundle d’hébergement pour le module se trouv
 
 ### <a name="schema"></a>schéma
 
-**Iis**
+**IIS**
 
 * %windir%\System32\inetsrv\config\schema\aspnetcore_schema.xml
 
@@ -1029,7 +1035,7 @@ Les journaux d’installateur De bundle d’hébergement pour le module se trouv
 
 ### <a name="configuration"></a>Configuration
 
-**Iis**
+**IIS**
 
 * %windir%\System32\inetsrv\config\applicationHost.config
 
@@ -1047,5 +1053,5 @@ Vous trouverez les fichiers en recherchant *aspnetcore* dans le fichier *applica
 
 * <xref:host-and-deploy/iis/index>
 * <xref:host-and-deploy/azure-apps/index>
-* [ASP.NET source de référence du module de base (branche principale)](https://github.com/dotnet/aspnetcore/tree/master/src/Servers/IIS/AspNetCoreModuleV2) &ndash; Utilisez la liste **des dépôts de la Branche** pour sélectionner une version spécifique (par exemple, `release/3.1`).
+* [Source de référence du module ASP.net Core (branche principale)](https://github.com/dotnet/aspnetcore/tree/master/src/Servers/IIS/AspNetCoreModuleV2) &ndash; utilisez la liste déroulante **branche** pour sélectionner une version spécifique ( `release/3.1`par exemple,).
 * <xref:host-and-deploy/iis/modules>

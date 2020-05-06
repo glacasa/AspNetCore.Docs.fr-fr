@@ -5,13 +5,19 @@ description: Découvrez comment publier une application ASP.NET Core sur Azure A
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/10/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/publish-to-azure-webapp-using-vs
-ms.openlocfilehash: 7fc3644df3dcb957f2537538aaa9506c6b38a480
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 634fb821ef0478dbcf57fdbb991a2e8bbb9402f1
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78662203"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777083"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>Publier une application ASP.NET Core sur Azure avec Visual Studio
 
@@ -23,7 +29,7 @@ Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 ::: moniker-end
 
 
-Voir [Publiez une application Web à Azure App Service en utilisant Visual Studio pour Mac](https://docs.microsoft.com/visualstudio/mac/publish-app-svc?view=vsmac-2019) si vous travaillez sur macOS.
+Consultez [publier une application Web sur Azure App service à l’aide de Visual Studio pour Mac](https://docs.microsoft.com/visualstudio/mac/publish-app-svc?view=vsmac-2019) si vous travaillez sur MacOS.
 
 Pour résoudre un problème de déploiement App Service, consultez <xref:test/troubleshoot-azure-iis>.
 
@@ -39,7 +45,7 @@ Dans la page de démarrage de Visual Studio, sélectionnez **Fichier > Nouveau >
 
 Renseignez la boîte de dialogue **Nouveau projet** :
 
-* Dans la vitre gauche, sélectionnez **.NET Core**.
+* Dans le volet gauche, sélectionnez **.net Core**.
 * Dans le volet central, sélectionnez **Application web ASP.NET Core**.
 * Sélectionnez **OK**.
 
@@ -72,7 +78,7 @@ Visual Studio crée la solution.
 
 * Sélectionnez **S’inscrire**, puis inscrivez un nouvel utilisateur. Vous pouvez utiliser une adresse e-mail fictive. Quand vous effectuez l’envoi, la page affiche l’erreur suivante :
 
-    *« Erreur interne du serveur : une opération de base de données a échoué pendant le traitement de la demande. Exception SQL : Impossible d’ouvrir la base de données. L’application des migrations existantes pour le contexte de la DB de demande peut résoudre ce problème.*
+    *«Erreur de serveur interne : une opération de base de données a échoué lors du traitement de la demande. Exception SQL : impossible d’ouvrir la base de données. L’application de migrations existantes pour le contexte de la base de la base de la base de de l’application peut résoudre ce problème*
 * Sélectionnez **Appliquer les migrations**, puis, une fois la page mise à jour, actualisez-la.
 
 ![Erreur de serveur interne : Une opération de base de données a échoué lors du traitement de la requête. Exception SQL : Impossible d’ouvrir la base de données. Appliquer des migrations existantes pour le contexte de base de données d’application peut résoudre ce problème.](publish-to-azure-webapp-using-vs/_static/mig.png)
@@ -83,7 +89,7 @@ L’application affiche l’adresse e-mail utilisée pour inscrire le nouvel uti
 
 ## <a name="deploy-the-app-to-azure"></a>Déploiement de l’application dans Azure
 
-Cliquez à droite sur le projet dans Solution Explorer et **sélectionnez Publier...**.
+Dans Explorateur de solutions, cliquez avec le bouton droit sur le projet, puis sélectionnez **publier...**.
 
 ![Menu contextuel ouvert avec le lien Publier mis en surbrillance](publish-to-azure-webapp-using-vs/_static/pub.png)
 
@@ -97,7 +103,7 @@ Dans la boîte de dialogue **Publier** :
 
 ### <a name="create-azure-resources"></a>Créer des ressources Azure
 
-Le dialogue **Create App Service** apparaît :
+La boîte de dialogue **créer un app service** s’affiche :
 
 * Entrez votre abonnement.
 * Les champs d’entrée **Nom de l’application**, **Groupe de ressources** et **Plan App Service** sont renseignés. Vous pouvez conserver ces noms ou les changer.
@@ -106,7 +112,7 @@ Le dialogue **Create App Service** apparaît :
 
 * Sélectionnez l’onglet **Services** pour créer une base de données.
 
-* Sélectionnez **+** l’icône verte pour créer une nouvelle base de données SQL
+* Sélectionnez l’icône **+** verte pour créer une SQL Database
 
 ![New SQL Database](publish-to-azure-webapp-using-vs/_static/sql.png)
 
@@ -116,7 +122,7 @@ Le dialogue **Create App Service** apparaît :
 
 La boîte de dialogue **Configurer le serveur SQL Server** s’affiche.
 
-* Entrez un nom d’utilisateur et un mot de passe administrateur, puis sélectionnez **OK**. Vous pouvez conserver le nom par défaut **du serveur**. 
+* Entrez un nom d’utilisateur et un mot de passe administrateur, puis sélectionnez **OK**. Vous pouvez conserver le **nom du serveur**par défaut. 
 
 > [!NOTE]
 > « admin » n’est pas autorisé comme nom d’utilisateur administrateur.
@@ -139,8 +145,8 @@ Quand le déploiement est terminé, sélectionnez **Paramètres** :
 
 Dans la page **Paramètres** de la boîte de dialogue **Publier** :
 
-* Élargissez les **bases de données** et vérifiez Utilisez cette chaîne de connexion au moment de **l’exécution**.
-* Élargir **les migrations-cadres de l’entité** et vérifier **Appliquer cette migration sur publier**.
+* Développez **bases de données** et cochez **la case utiliser cette chaîne de connexion au moment de l’exécution**.
+* Développez **Entity Framework migrations** et cochez **appliquer cette migration lors de la publication**.
 
 * Sélectionnez **Enregistrer**. Visual Studio retourne à la boîte de dialogue **Publier**. 
 
@@ -150,7 +156,7 @@ Cliquez sur **Publier**. Visual Studio publie votre application sur Azure. Quand
 
 ### <a name="test-your-app-in-azure"></a>Tester votre application dans Azure
 
-* Testez les liens **About** et **Contact**
+* Tester les liens **à propos** de et **contact**
 
 * Enregistre un nouvel utilisateur
 
@@ -158,7 +164,7 @@ Cliquez sur **Publier**. Visual Studio publie votre application sur Azure. Quand
 
 ### <a name="update-the-app"></a>Mettre à jour l’application
 
-* Modifiez la page Razor *Pages/About.cshtml*, puis changez son contenu. Par exemple, vous pouvez modifier le paragraphe pour indiquer « Hello ASP.NET Core! » :
+* Modifiez la page *pages/about. cshtml* Razor et modifiez son contenu. Par exemple, vous pouvez modifier le paragraphe pour indiquer « Hello ASP.NET Core! » :
 
     [!code-html[About](publish-to-azure-webapp-using-vs/sample/about.cshtml?highlight=9&range=1-9)]
 

@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: f87a1d8cf41248f14932908c0633f98a7198853f
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: a6719b4f84b1bc60c7c2aea2aa3a97ef79f43e2e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78664044"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777018"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>Prise en charge d’IIS pendant le développement dans Visual Studio pour ASP.NET Core
 
@@ -24,7 +30,7 @@ Cet article décrit la prise en charge de [Visual Studio](https://visualstudio.m
 
 ## <a name="prerequisites"></a>Prérequis
 
-* [Studio visuel pour Windows](https://visualstudio.microsoft.com/downloads/)
+* [Visual Studio pour Windows](https://visualstudio.microsoft.com/downloads/)
 * Charge de travail **Développement web et ASP.NET**
 * Charge de travail **Développement multiplateforme .NET Core**
 * Certificat de sécurité X.509 (pour la prise en charge HTTPS)
@@ -68,7 +74,7 @@ Pour un projet qui utilise le protocole HTTP, [Redirection HTTPS et middleware H
 
 Créez un profil de lancement pour ajouter la prise en charge d’IIS pendant le développement :
 
-1. Cliquez avec le bouton droit sur le projet dans **l’Explorateur de solutions**. Sélectionner **Propriétés**. Ouvrez l’onglet **Debug.**
+1. Cliquez avec le bouton droit sur le projet dans **l’Explorateur de solutions**. Sélectionner **Propriétés**. Ouvrez l’onglet **Déboguer** .
 1. Pour **Profil**, sélectionnez le bouton **Nouveau**. Nommez le profil « IIS » dans la fenêtre contextuelle. Sélectionnez **OK** pour créer le profil.
 1. Pour le paramètre **Lancer**, sélectionnez **IIS** dans la liste.
 1. Cochez la case **Lancer le navigateur** et indiquez l’URL du point de terminaison.
@@ -117,7 +123,7 @@ Vérifiez que les points de terminaison `applicationUrl` et `launchUrl` coïncid
 Exécutez Visual Studio en tant qu’administrateur :
 
 * Vérifiez que la liste déroulante des configurations de build est définie sur **Déboguer**.
-* Réglez le [bouton Démarrer Debugging](/visualstudio/debugger/debugger-feature-tour) sur le profil **IIS** et sélectionnez le bouton pour démarrer l’application.
+* Définissez le [bouton Démarrer le débogage](/visualstudio/debugger/debugger-feature-tour) sur le profil **IIS** , puis sélectionnez le bouton pour démarrer l’application.
 
 Visual Studio peut demander un redémarrage si vous ne l’exécutez pas en tant qu’administrateur. Si vous y êtes invité, redémarrez Visual Studio.
 
@@ -139,7 +145,7 @@ Cet article décrit la prise en charge de [Visual Studio](https://visualstudio.m
 
 ## <a name="prerequisites"></a>Prérequis
 
-* [Studio visuel pour Windows](https://visualstudio.microsoft.com/downloads/)
+* [Visual Studio pour Windows](https://visualstudio.microsoft.com/downloads/)
 * Charge de travail **Développement web et ASP.NET**
 * Charge de travail **Développement multiplateforme .NET Core**
 * Certificat de sécurité X.509 (pour la prise en charge HTTPS)
@@ -183,7 +189,7 @@ Pour un projet qui utilise le protocole HTTP, [Redirection HTTPS et middleware H
 
 Créez un profil de lancement pour ajouter la prise en charge d’IIS pendant le développement :
 
-1. Cliquez avec le bouton droit sur le projet dans **l’Explorateur de solutions**. Sélectionner **Propriétés**. Ouvrez l’onglet **Debug.**
+1. Cliquez avec le bouton droit sur le projet dans **l’Explorateur de solutions**. Sélectionner **Propriétés**. Ouvrez l’onglet **Déboguer** .
 1. Pour **Profil**, sélectionnez le bouton **Nouveau**. Nommez le profil « IIS » dans la fenêtre contextuelle. Sélectionnez **OK** pour créer le profil.
 1. Pour le paramètre **Lancer**, sélectionnez **IIS** dans la liste.
 1. Cochez la case **Lancer le navigateur** et indiquez l’URL du point de terminaison.
@@ -232,7 +238,7 @@ Vérifiez que les points de terminaison `applicationUrl` et `launchUrl` coïncid
 Exécutez Visual Studio en tant qu’administrateur :
 
 * Vérifiez que la liste déroulante des configurations de build est définie sur **Déboguer**.
-* Réglez le [bouton Démarrer Debugging](/visualstudio/debugger/debugger-feature-tour) sur le profil **IIS** et sélectionnez le bouton pour démarrer l’application.
+* Définissez le [bouton Démarrer le débogage](/visualstudio/debugger/debugger-feature-tour) sur le profil **IIS** , puis sélectionnez le bouton pour démarrer l’application.
 
 Visual Studio peut demander un redémarrage si vous ne l’exécutez pas en tant qu’administrateur. Si vous y êtes invité, redémarrez Visual Studio.
 

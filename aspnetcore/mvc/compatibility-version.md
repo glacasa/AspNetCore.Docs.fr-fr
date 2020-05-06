@@ -6,33 +6,39 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 9/25/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/compatibility-version
-ms.openlocfilehash: b29e2ee49aaf0f557f1acd0cf03e9e82d5ea0105
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 45eca0bedc2e4e5c74936ae5d1bf525774467b2a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667124"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774208"
 ---
 # <a name="compatibility-version-for-aspnet-core-mvc"></a>Version de compatibilité pour ASP.NET Core MVC
 
-De [Rick Anderson](https://twitter.com/RickAndMSFT)
+Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-La méthode <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> est une absence d’opération pour ASP.NET Core applications 3,0. Autrement dit, l’appel de `SetCompatibilityVersion` avec n’importe quelle valeur de <xref:Microsoft.AspNetCore.Mvc.CompatibilityVersion> n’a aucun impact sur l’application.
+La <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> méthode est une absence d’opération pour les applications ASP.net Core 3,0. Autrement dit, l' `SetCompatibilityVersion` appel avec n’importe <xref:Microsoft.AspNetCore.Mvc.CompatibilityVersion> quelle valeur n’a aucun impact sur l’application.
 
-* La version mineure suivante de ASP.NET Core peut fournir une nouvelle valeur de `CompatibilityVersion`.
-* les valeurs de `CompatibilityVersion` `Version_2_0` par `Version_2_2` sont marquées `[Obsolete(...)]`.
+* La version mineure suivante de ASP.NET Core peut fournir une `CompatibilityVersion` nouvelle valeur.
+* `CompatibilityVersion``Version_2_2` les `Version_2_0` valeurs sont marquées `[Obsolete(...)]`.
 * Consultez [rupture des modifications d’API dans anti-contrefaçon, cors, diagnostics, MVC et routage](https://github.com/aspnet/Announcements/issues/387). Cette liste comprend les modifications avec rupture pour les commutateurs de compatibilité.
 
-Pour voir comment `SetCompatibilityVersion` fonctionne avec ASP.NET Core applications 2. x, sélectionnez la [version ASP.NET Core 2,2 de cet article](https://docs.microsoft.com/aspnet/core/mvc/compatibility-version?view=aspnetcore-2.2).
+Pour voir comment `SetCompatibilityVersion` fonctionne avec les applications ASP.net Core 2. x, sélectionnez la [version ASP.net Core 2,2 de cet article](https://docs.microsoft.com/aspnet/core/mvc/compatibility-version?view=aspnetcore-2.2).
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-La méthode <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> permet à une application ASP.NET Core 2. x d’accepter ou de refuser les modifications de comportement potentiellement en rupture introduites dans ASP.NET Core MVC 2,1 ou 2,2. Ces changements de comportement potentiellement cassants concernent en général la façon dont le sous-système MVC se comporte et la façon dont **votre code** est appelé par le runtime. En acceptant, vous obtenez le comportement le plus récent et le comportement à long terme d’ASP.NET Core.
+La <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> méthode permet à un ASP.net Core application 2. x d’accepter ou de refuser les modifications de comportement potentiellement en rupture introduites dans ASP.NET Core MVC 2,1 ou 2,2. Ces changements de comportement potentiellement cassants concernent en général la façon dont le sous-système MVC se comporte et la façon dont **votre code** est appelé par le runtime. En acceptant, vous obtenez le comportement le plus récent et le comportement à long terme d’ASP.NET Core.
 
 Le code suivant définit le mode de compatibilité sur ASP.NET Core 2.2 :
 
@@ -40,12 +46,12 @@ Le code suivant définit le mode de compatibilité sur ASP.NET Core 2.2 :
 
 Nous vous recommandons de tester votre application avec la version la plus récente (`CompatibilityVersion.Latest`). Nous pensons que la plupart des applications ne connaîtront pas de changements de comportement cassants avec la version la plus récente.
 
-Les applications qui appellent des `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)` sont protégées contre les changements de comportement potentiellement inaltérables introduits dans les versions ASP.NET Core 2.1/2.2 MVC. Cette protection :
+Les applications qui `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)` appellent sont protégées contre les changements de comportement potentiellement inaltérables introduits dans les versions de ASP.net Core 2.1/2.2 Mvc. Cette protection :
 
 * Ne s’applique pas à tous les changements de 2.1 et ultérieur. Elle est destinée aux changements de comportement potentiellement cassants du runtime ASP.NET Core dans le sous-système MVC.
 * Ne s’étend pas à ASP.NET Core 3,0.
 
-La compatibilité par défaut pour les applications ASP.NET Core 2,1 et 2,2 qui n’appellent **pas** `SetCompatibilityVersion` est 2,0. Autrement dit, ne pas appeler `SetCompatibilityVersion` revient à appeler `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)`.
+La compatibilité par défaut pour les applications ASP.NET Core 2,1 et 2,2 **not** qui n' `SetCompatibilityVersion` appellent pas est 2,0. Autrement dit, ne pas appeler `SetCompatibilityVersion` revient à appeler `SetCompatibilityVersion(CompatibilityVersion.Version_2_0)`.
 
 Le code suivant définit le mode de compatibilité sur ASP.NET Core 2.2, sauf pour les comportements suivants :
 

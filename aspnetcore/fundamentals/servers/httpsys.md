@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 3e858a974d6a5c008969c3c51a507880cc25a7ff
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 5ff5eed1c8ad6f8863fe16e0c76ab104658ddc0c
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78666921"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82769869"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>Implémentation du serveur web HTTP.sys dans ASP.NET Core
 
@@ -40,7 +46,7 @@ Versions de Windows prises en charge :
 * Windows 7 ou version ultérieure
 * Windows Server 2008 R2 ou version ultérieure
 
-[Afficher ou télécharger le code de l’échantillon](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/httpsys/samples) ([comment télécharger](xref:index#how-to-download-a-sample))
+[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/httpsys/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-httpsys"></a>Quand utiliser HTTP.sys
 
@@ -88,14 +94,14 @@ Le reste de la configuration de HTTP.sys est géré par le biais des [paramètre
 | -------- | ----------- | :-----: |
 | [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Contrôle si l’entrée/sortie synchrone est autorisée pour le `HttpContext.Request.Body` et le `HttpContext.Response.Body`. | `false` |
 | [Authentication.AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Autorise les requêtes anonymes. | `true` |
-| [Authentication.Schemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.Schemes) | Spécifie les schémas d’authentification autorisés. Peut être modifié à tout moment avant la suppression de l’écouteur. Les valeurs sont fournies par [l’AuthentificationSchemes enum](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes) `Basic`: , `Kerberos`, `Negotiate`, `None`, et `NTLM`. | `None` |
+| [Authentication.Schemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.Schemes) | Spécifie les schémas d’authentification autorisés. Peut être modifié à tout moment avant la suppression de l’écouteur. Les valeurs sont fournies par l' [énumération AuthenticationSchemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes): `Basic`, `None` `NTLM` `Kerberos`, `Negotiate`, et. | `None` |
 | [EnableResponseCaching](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.EnableResponseCaching) | Tente la mise en cache [en mode noyau](/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) pour les réponses comportant un en-tête compatible. La réponse peut ne pas inclure d’en-tête `Set-Cookie`, `Vary` ou `Pragma`. Elle doit comporter un en-tête `Cache-Control``public` et soit une valeur `shared-max-age` ou `max-age`, soit un en-tête `Expires`. | `true` |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxAccepts> | Nombre maximal d'acceptations simultanées. | 5 &times; [Environment.<br>ProcessorCount](xref:System.Environment.ProcessorCount) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxConnections> | Nombre maximum de connexions simultanées à accepter. Utilisez `-1` pour signifier l’infini, et `null` pour utiliser le paramètre du Registre qui s’applique à l’ordinateur dans son ensemble. | `null`<br>(machine-large<br>réglage) |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxConnections> | Nombre maximum de connexions simultanées à accepter. Utilisez `-1` pour signifier l’infini, et `null` pour utiliser le paramètre du Registre qui s’applique à l’ordinateur dans son ensemble. | `null`<br>(au niveau de l’ordinateur<br>défini |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | Consultez la section <a href="#maxrequestbodysize">MaxRequestBodySize</a>. | 30 000 000 octets<br>(env. 28,6 Mo) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.RequestQueueLimit> | Nombre maximal de demandes pouvant être placées en file d'attente. | 1 000 |
-| `RequestQueueMode` | Cela indique si le serveur est responsable de la création et de la configuration de la file d’attente de demande, ou si elle doit s’attacher à une file d’attente existante.<br>La plupart des options de configuration existantes ne s’appliquent pas lors de l’attachement à une file d’attente existante. | `RequestQueueMode.Create` |
-| `RequestQueueName` | Le nom de la file d’attente de demande HTTP.sys. | `null`(File d’attente anonyme) |
+| `RequestQueueMode` | Cela indique si le serveur est responsable de la création et de la configuration de la file d’attente des demandes, ou s’il doit être attaché à une file d’attente existante.<br>La plupart des options de configuration existantes ne s’appliquent pas lors de l’attachement à une file d’attente existante. | `RequestQueueMode.Create` |
+| `RequestQueueName` | Nom de la file d’attente de demandes HTTP. sys. | `null`(File d’attente anonyme) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | Indique si les écritures dans le corps de la réponse qui échouent en raison d’une déconnexion du client doivent lever des exceptions ou se terminer normalement. | `false`<br>(se terminer normalement) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | Expose la configuration <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> de HTTP.sys, également paramétrable dans le Registre. Suivez les liens de l’API pour en savoir plus sur chaque paramètre, y compris les valeurs par défaut :<ul><li>[TimeoutManager.DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody) &ndash; Temps alloué à l’API de serveur HTTP pour décharger le corps de l’entité sur une connexion persistante.</li><li>[TimeoutManager.EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody) &ndash; Temps alloué pour que le corps de l'entité de la requête arrive.</li><li>[TimeoutManager.HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait) &ndash; Temps alloué à l’API de serveur HTTP pour analyser l’en-tête de la requête.</li><li>[TimeoutManager.IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection) &ndash; Temps alloué pour une connexion inactive.</li><li>[TimeoutManager.MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond) &ndash; Taux d’envoi minimal de la réponse.</li><li>[TimeoutManager.RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue) &ndash; Temps alloué à la demande pour rester dans la file d’attente des requêtes avant que l’application ne la récupère.</li></ul> |  |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | Spécifiez <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection> à inscrire auprès de HTTP.sys. La plus utile est [UrlPrefixCollection.Add](xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add*), qui permet d’ajouter un préfixe à la collection. Ces choix peuvent être modifiés à tout moment avant la suppression de l’écouteur. |  |
@@ -164,7 +170,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    HTTP.sys utilise les [formats de chaîne UrlPrefix de l’API de serveur HTTP](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx).
 
    > [!WARNING]
-   > Les liaisons génériques de niveau supérieur (`http://*:80/` et `http://+:80`) ne doivent **pas** être utilisées. Les liaisons génériques de niveau supérieur créent des failles de sécurité dans l’application. Cela s’applique aux caractères génériques forts et faibles. Utilisez des noms d’hôte ou des adresses IP explicites plutôt que des caractères génériques. Une liaison générique de sous-domaine (par exemple, `*.mysub.com`) ne constitue pas un risque de sécurité si vous contrôlez le domaine parent en entier (par opposition à `*.com`, qui est vulnérable). Pour plus d’informations, voir [RFC 7230: Section 5.4: Host](https://tools.ietf.org/html/rfc7230#section-5.4).
+   > Les liaisons génériques de niveau supérieur (`http://*:80/` et `http://+:80`) ne doivent **pas** être utilisées. Les liaisons génériques de niveau supérieur créent des failles de sécurité dans l’application. Cela s’applique aux caractères génériques forts et faibles. Utilisez des noms d’hôte ou des adresses IP explicites plutôt que des caractères génériques. Une liaison générique de sous-domaine (par exemple, `*.mysub.com`) ne constitue pas un risque de sécurité si vous contrôlez le domaine parent en entier (par opposition à `*.com`, qui est vulnérable). Pour plus d’informations, consultez [RFC 7230 : Section 5,4 : Host](https://tools.ietf.org/html/rfc7230#section-5.4).
 
 1. Préenregistrez les préfixes d’URL sur le serveur.
 
@@ -176,7 +182,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`&ndash; Le localisateur de ressources uniformes (URL) entièrement qualifié. N’utilisez pas une liaison de caractère générique. Utilisez un nom d’hôte ou une adresse IP locale valide. *L’URL doit inclure une barre oblique de fin.*
+   * `<URL>`&ndash; Uniform Resource Locator qualifié complet (URL). N’utilisez pas une liaison de caractère générique. Utilisez un nom d’hôte ou une adresse IP locale valide. *L’URL doit inclure une barre oblique de fin.*
    * `<USER>`&ndash; Spécifie le nom de l’utilisateur ou du groupe d’utilisateurs.
 
    Dans l’exemple suivant, l’adresse IP locale du serveur est `10.0.0.4` :
@@ -203,8 +209,8 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
    * `<IP>`&ndash; Spécifie l’adresse IP locale pour la liaison. N’utilisez pas une liaison de caractère générique. Utilisez une adresse IP valide.
    * `<PORT>`&ndash; Spécifie le port pour la liaison.
-   * `<THUMBPRINT>`&ndash; L’empreinte de pouce du certificat X.509.
-   * `<GUID>`&ndash; Un GUID généré par le développeur pour représenter l’application à des fins d’information.
+   * `<THUMBPRINT>`&ndash; Empreinte numérique du certificat X. 509.
+   * `<GUID>`&ndash; GUID généré par le développeur pour représenter l’application à des fins d’information.
 
    À titre de référence, stockez le GUID dans l’application en tant que balise de package :
 
@@ -244,7 +250,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
    Documentation de référence de *netsh.exe* :
 
-   * [Commandes netsh pour HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
+   * [Commandes netsh pour le protocole HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
    * [Chaînes UrlPrefix](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)
 
 1. Exécutez l'application.
@@ -293,7 +299,7 @@ Versions de Windows prises en charge :
 * Windows 7 ou version ultérieure
 * Windows Server 2008 R2 ou version ultérieure
 
-[Afficher ou télécharger le code de l’échantillon](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/httpsys/samples) ([comment télécharger](xref:index#how-to-download-a-sample))
+[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/httpsys/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-httpsys"></a>Quand utiliser HTTP.sys
 
@@ -341,10 +347,10 @@ Le reste de la configuration de HTTP.sys est géré par le biais des [paramètre
 | -------- | ----------- | :-----: |
 | [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Contrôle si l’entrée/sortie synchrone est autorisée pour le `HttpContext.Request.Body` et le `HttpContext.Response.Body`. | `false` |
 | [Authentication.AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Autorise les requêtes anonymes. | `true` |
-| [Authentication.Schemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.Schemes) | Spécifie les schémas d’authentification autorisés. Peut être modifié à tout moment avant la suppression de l’écouteur. Les valeurs sont fournies par [l’AuthentificationSchemes enum](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes) `Basic`: , `Kerberos`, `Negotiate`, `None`, et `NTLM`. | `None` |
+| [Authentication.Schemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.Schemes) | Spécifie les schémas d’authentification autorisés. Peut être modifié à tout moment avant la suppression de l’écouteur. Les valeurs sont fournies par l' [énumération AuthenticationSchemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes): `Basic`, `None` `NTLM` `Kerberos`, `Negotiate`, et. | `None` |
 | [EnableResponseCaching](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.EnableResponseCaching) | Tente la mise en cache [en mode noyau](/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) pour les réponses comportant un en-tête compatible. La réponse peut ne pas inclure d’en-tête `Set-Cookie`, `Vary` ou `Pragma`. Elle doit comporter un en-tête `Cache-Control``public` et soit une valeur `shared-max-age` ou `max-age`, soit un en-tête `Expires`. | `true` |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxAccepts> | Nombre maximal d'acceptations simultanées. | 5 &times; [Environment.<br>ProcessorCount](xref:System.Environment.ProcessorCount) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxConnections> | Nombre maximum de connexions simultanées à accepter. Utilisez `-1` pour signifier l’infini, et `null` pour utiliser le paramètre du Registre qui s’applique à l’ordinateur dans son ensemble. | `null`<br>(machine-large<br>réglage) |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxConnections> | Nombre maximum de connexions simultanées à accepter. Utilisez `-1` pour signifier l’infini, et `null` pour utiliser le paramètre du Registre qui s’applique à l’ordinateur dans son ensemble. | `null`<br>(au niveau de l’ordinateur<br>défini |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | Consultez la section <a href="#maxrequestbodysize">MaxRequestBodySize</a>. | 30 000 000 octets<br>(env. 28,6 Mo) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.RequestQueueLimit> | Nombre maximal de demandes pouvant être placées en file d'attente. | 1 000 |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | Indique si les écritures dans le corps de la réponse qui échouent en raison d’une déconnexion du client doivent lever des exceptions ou se terminer normalement. | `false`<br>(se terminer normalement) |
@@ -415,7 +421,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    HTTP.sys utilise les [formats de chaîne UrlPrefix de l’API de serveur HTTP](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx).
 
    > [!WARNING]
-   > Les liaisons génériques de niveau supérieur (`http://*:80/` et `http://+:80`) ne doivent **pas** être utilisées. Les liaisons génériques de niveau supérieur créent des failles de sécurité dans l’application. Cela s’applique aux caractères génériques forts et faibles. Utilisez des noms d’hôte ou des adresses IP explicites plutôt que des caractères génériques. Une liaison générique de sous-domaine (par exemple, `*.mysub.com`) ne constitue pas un risque de sécurité si vous contrôlez le domaine parent en entier (par opposition à `*.com`, qui est vulnérable). Pour plus d’informations, voir [RFC 7230: Section 5.4: Host](https://tools.ietf.org/html/rfc7230#section-5.4).
+   > Les liaisons génériques de niveau supérieur (`http://*:80/` et `http://+:80`) ne doivent **pas** être utilisées. Les liaisons génériques de niveau supérieur créent des failles de sécurité dans l’application. Cela s’applique aux caractères génériques forts et faibles. Utilisez des noms d’hôte ou des adresses IP explicites plutôt que des caractères génériques. Une liaison générique de sous-domaine (par exemple, `*.mysub.com`) ne constitue pas un risque de sécurité si vous contrôlez le domaine parent en entier (par opposition à `*.com`, qui est vulnérable). Pour plus d’informations, consultez [RFC 7230 : Section 5,4 : Host](https://tools.ietf.org/html/rfc7230#section-5.4).
 
 1. Préenregistrez les préfixes d’URL sur le serveur.
 
@@ -427,7 +433,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`&ndash; Le localisateur de ressources uniformes (URL) entièrement qualifié. N’utilisez pas une liaison de caractère générique. Utilisez un nom d’hôte ou une adresse IP locale valide. *L’URL doit inclure une barre oblique de fin.*
+   * `<URL>`&ndash; Uniform Resource Locator qualifié complet (URL). N’utilisez pas une liaison de caractère générique. Utilisez un nom d’hôte ou une adresse IP locale valide. *L’URL doit inclure une barre oblique de fin.*
    * `<USER>`&ndash; Spécifie le nom de l’utilisateur ou du groupe d’utilisateurs.
 
    Dans l’exemple suivant, l’adresse IP locale du serveur est `10.0.0.4` :
@@ -454,8 +460,8 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
    * `<IP>`&ndash; Spécifie l’adresse IP locale pour la liaison. N’utilisez pas une liaison de caractère générique. Utilisez une adresse IP valide.
    * `<PORT>`&ndash; Spécifie le port pour la liaison.
-   * `<THUMBPRINT>`&ndash; L’empreinte de pouce du certificat X.509.
-   * `<GUID>`&ndash; Un GUID généré par le développeur pour représenter l’application à des fins d’information.
+   * `<THUMBPRINT>`&ndash; Empreinte numérique du certificat X. 509.
+   * `<GUID>`&ndash; GUID généré par le développeur pour représenter l’application à des fins d’information.
 
    À titre de référence, stockez le GUID dans l’application en tant que balise de package :
 
@@ -495,7 +501,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
    Documentation de référence de *netsh.exe* :
 
-   * [Commandes netsh pour HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
+   * [Commandes netsh pour le protocole HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
    * [Chaînes UrlPrefix](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)
 
 1. Exécutez l'application.
@@ -544,7 +550,7 @@ Versions de Windows prises en charge :
 * Windows 7 ou version ultérieure
 * Windows Server 2008 R2 ou version ultérieure
 
-[Afficher ou télécharger le code de l’échantillon](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/httpsys/samples) ([comment télécharger](xref:index#how-to-download-a-sample))
+[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/httpsys/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-httpsys"></a>Quand utiliser HTTP.sys
 
@@ -580,7 +586,7 @@ HTTP.sys délègue l’authentification en mode noyau avec le protocole d’auth
 
 ### <a name="configure-the-aspnet-core-app-to-use-httpsys"></a>Configurer l’application ASP.NET Core afin d’utiliser HTTP.sys
 
-Une référence de paquet dans le fichier de projet n’est pas exigée lors de l’utilisation du [métapackage Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app) [(nuget.org](https://www.nuget.org/packages/Microsoft.AspNetCore.App/)). Si vous n'utilisez pas le métapaquet `Microsoft.AspNetCore.App`, ajoutez une référence de package à [Microsoft.AspNetCore.Server.HttpSys](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.HttpSys/).
+Une référence de package dans le fichier projet n’est pas requise lors de l’utilisation de l' [offre Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app) ([NuGet.org](https://www.nuget.org/packages/Microsoft.AspNetCore.App/)). Si vous n'utilisez pas le métapaquet `Microsoft.AspNetCore.App`, ajoutez une référence de package à [Microsoft.AspNetCore.Server.HttpSys](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.HttpSys/).
 
 Appelez la méthode d’extension <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderHttpSysExtensions.UseHttpSys*> au moment de générer l’hôte, en spécifiant les options <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions> nécessaires. L’exemple suivant définit les options sur leurs valeurs par défaut :
 
@@ -594,10 +600,10 @@ Le reste de la configuration de HTTP.sys est géré par le biais des [paramètre
 | -------- | ----------- | :-----: |
 | [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Contrôle si l’entrée/sortie synchrone est autorisée pour le `HttpContext.Request.Body` et le `HttpContext.Response.Body`. | `true` |
 | [Authentication.AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Autorise les requêtes anonymes. | `true` |
-| [Authentication.Schemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.Schemes) | Spécifie les schémas d’authentification autorisés. Peut être modifié à tout moment avant la suppression de l’écouteur. Les valeurs sont fournies par [l’AuthentificationSchemes enum](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes) `Basic`: , `Kerberos`, `Negotiate`, `None`, et `NTLM`. | `None` |
+| [Authentication.Schemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.Schemes) | Spécifie les schémas d’authentification autorisés. Peut être modifié à tout moment avant la suppression de l’écouteur. Les valeurs sont fournies par l' [énumération AuthenticationSchemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes): `Basic`, `None` `NTLM` `Kerberos`, `Negotiate`, et. | `None` |
 | [EnableResponseCaching](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.EnableResponseCaching) | Tente la mise en cache [en mode noyau](/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) pour les réponses comportant un en-tête compatible. La réponse peut ne pas inclure d’en-tête `Set-Cookie`, `Vary` ou `Pragma`. Elle doit comporter un en-tête `Cache-Control``public` et soit une valeur `shared-max-age` ou `max-age`, soit un en-tête `Expires`. | `true` |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxAccepts> | Nombre maximal d'acceptations simultanées. | 5 &times; [Environment.<br>ProcessorCount](xref:System.Environment.ProcessorCount) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxConnections> | Nombre maximum de connexions simultanées à accepter. Utilisez `-1` pour signifier l’infini, et `null` pour utiliser le paramètre du Registre qui s’applique à l’ordinateur dans son ensemble. | `null`<br>(machine-large<br>réglage) |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxConnections> | Nombre maximum de connexions simultanées à accepter. Utilisez `-1` pour signifier l’infini, et `null` pour utiliser le paramètre du Registre qui s’applique à l’ordinateur dans son ensemble. | `null`<br>(au niveau de l’ordinateur<br>défini |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | Consultez la section <a href="#maxrequestbodysize">MaxRequestBodySize</a>. | 30 000 000 octets<br>(env. 28,6 Mo) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.RequestQueueLimit> | Nombre maximal de demandes pouvant être placées en file d'attente. | 1 000 |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | Indique si les écritures dans le corps de la réponse qui échouent en raison d’une déconnexion du client doivent lever des exceptions ou se terminer normalement. | `false`<br>(se terminer normalement) |
@@ -668,7 +674,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    HTTP.sys utilise les [formats de chaîne UrlPrefix de l’API de serveur HTTP](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx).
 
    > [!WARNING]
-   > Les liaisons génériques de niveau supérieur (`http://*:80/` et `http://+:80`) ne doivent **pas** être utilisées. Les liaisons génériques de niveau supérieur créent des failles de sécurité dans l’application. Cela s’applique aux caractères génériques forts et faibles. Utilisez des noms d’hôte ou des adresses IP explicites plutôt que des caractères génériques. Une liaison générique de sous-domaine (par exemple, `*.mysub.com`) ne constitue pas un risque de sécurité si vous contrôlez le domaine parent en entier (par opposition à `*.com`, qui est vulnérable). Pour plus d’informations, voir [RFC 7230: Section 5.4: Host](https://tools.ietf.org/html/rfc7230#section-5.4).
+   > Les liaisons génériques de niveau supérieur (`http://*:80/` et `http://+:80`) ne doivent **pas** être utilisées. Les liaisons génériques de niveau supérieur créent des failles de sécurité dans l’application. Cela s’applique aux caractères génériques forts et faibles. Utilisez des noms d’hôte ou des adresses IP explicites plutôt que des caractères génériques. Une liaison générique de sous-domaine (par exemple, `*.mysub.com`) ne constitue pas un risque de sécurité si vous contrôlez le domaine parent en entier (par opposition à `*.com`, qui est vulnérable). Pour plus d’informations, consultez [RFC 7230 : Section 5,4 : Host](https://tools.ietf.org/html/rfc7230#section-5.4).
 
 1. Préenregistrez les préfixes d’URL sur le serveur.
 
@@ -680,7 +686,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`&ndash; Le localisateur de ressources uniformes (URL) entièrement qualifié. N’utilisez pas une liaison de caractère générique. Utilisez un nom d’hôte ou une adresse IP locale valide. *L’URL doit inclure une barre oblique de fin.*
+   * `<URL>`&ndash; Uniform Resource Locator qualifié complet (URL). N’utilisez pas une liaison de caractère générique. Utilisez un nom d’hôte ou une adresse IP locale valide. *L’URL doit inclure une barre oblique de fin.*
    * `<USER>`&ndash; Spécifie le nom de l’utilisateur ou du groupe d’utilisateurs.
 
    Dans l’exemple suivant, l’adresse IP locale du serveur est `10.0.0.4` :
@@ -707,8 +713,8 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
    * `<IP>`&ndash; Spécifie l’adresse IP locale pour la liaison. N’utilisez pas une liaison de caractère générique. Utilisez une adresse IP valide.
    * `<PORT>`&ndash; Spécifie le port pour la liaison.
-   * `<THUMBPRINT>`&ndash; L’empreinte de pouce du certificat X.509.
-   * `<GUID>`&ndash; Un GUID généré par le développeur pour représenter l’application à des fins d’information.
+   * `<THUMBPRINT>`&ndash; Empreinte numérique du certificat X. 509.
+   * `<GUID>`&ndash; GUID généré par le développeur pour représenter l’application à des fins d’information.
 
    À titre de référence, stockez le GUID dans l’application en tant que balise de package :
 
@@ -748,7 +754,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
    Documentation de référence de *netsh.exe* :
 
-   * [Commandes netsh pour HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
+   * [Commandes netsh pour le protocole HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
    * [Chaînes UrlPrefix](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)
 
 1. Exécutez l'application.
@@ -797,7 +803,7 @@ Versions de Windows prises en charge :
 * Windows 7 ou version ultérieure
 * Windows Server 2008 R2 ou version ultérieure
 
-[Afficher ou télécharger le code de l’échantillon](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/httpsys/samples) ([comment télécharger](xref:index#how-to-download-a-sample))
+[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/servers/httpsys/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
 ## <a name="when-to-use-httpsys"></a>Quand utiliser HTTP.sys
 
@@ -833,7 +839,7 @@ HTTP.sys délègue l’authentification en mode noyau avec le protocole d’auth
 
 ### <a name="configure-the-aspnet-core-app-to-use-httpsys"></a>Configurer l’application ASP.NET Core afin d’utiliser HTTP.sys
 
-Une référence de paquet dans le fichier de projet n’est pas exigée lors de l’utilisation du [métapackage Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app) [(nuget.org](https://www.nuget.org/packages/Microsoft.AspNetCore.App/)). Si vous n'utilisez pas le métapaquet `Microsoft.AspNetCore.App`, ajoutez une référence de package à [Microsoft.AspNetCore.Server.HttpSys](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.HttpSys/).
+Une référence de package dans le fichier projet n’est pas requise lors de l’utilisation de l' [offre Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app) ([NuGet.org](https://www.nuget.org/packages/Microsoft.AspNetCore.App/)). Si vous n'utilisez pas le métapaquet `Microsoft.AspNetCore.App`, ajoutez une référence de package à [Microsoft.AspNetCore.Server.HttpSys](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.HttpSys/).
 
 Appelez la méthode d’extension <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderHttpSysExtensions.UseHttpSys*> au moment de générer l’hôte, en spécifiant les options <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions> nécessaires. L’exemple suivant définit les options sur leurs valeurs par défaut :
 
@@ -847,10 +853,10 @@ Le reste de la configuration de HTTP.sys est géré par le biais des [paramètre
 | -------- | ----------- | :-----: |
 | [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Contrôle si l’entrée/sortie synchrone est autorisée pour le `HttpContext.Request.Body` et le `HttpContext.Response.Body`. | `true` |
 | [Authentication.AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Autorise les requêtes anonymes. | `true` |
-| [Authentication.Schemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.Schemes) | Spécifie les schémas d’authentification autorisés. Peut être modifié à tout moment avant la suppression de l’écouteur. Les valeurs sont fournies par [l’AuthentificationSchemes enum](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes) `Basic`: , `Kerberos`, `Negotiate`, `None`, et `NTLM`. | `None` |
+| [Authentication.Schemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.Schemes) | Spécifie les schémas d’authentification autorisés. Peut être modifié à tout moment avant la suppression de l’écouteur. Les valeurs sont fournies par l' [énumération AuthenticationSchemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes): `Basic`, `None` `NTLM` `Kerberos`, `Negotiate`, et. | `None` |
 | [EnableResponseCaching](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.EnableResponseCaching) | Tente la mise en cache [en mode noyau](/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) pour les réponses comportant un en-tête compatible. La réponse peut ne pas inclure d’en-tête `Set-Cookie`, `Vary` ou `Pragma`. Elle doit comporter un en-tête `Cache-Control``public` et soit une valeur `shared-max-age` ou `max-age`, soit un en-tête `Expires`. | `true` |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxAccepts> | Nombre maximal d'acceptations simultanées. | 5 &times; [Environment.<br>ProcessorCount](xref:System.Environment.ProcessorCount) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxConnections> | Nombre maximum de connexions simultanées à accepter. Utilisez `-1` pour signifier l’infini, et `null` pour utiliser le paramètre du Registre qui s’applique à l’ordinateur dans son ensemble. | `null`<br>(machine-large<br>réglage) |
+| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxConnections> | Nombre maximum de connexions simultanées à accepter. Utilisez `-1` pour signifier l’infini, et `null` pour utiliser le paramètre du Registre qui s’applique à l’ordinateur dans son ensemble. | `null`<br>(au niveau de l’ordinateur<br>défini |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | Consultez la section <a href="#maxrequestbodysize">MaxRequestBodySize</a>. | 30 000 000 octets<br>(env. 28,6 Mo) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.RequestQueueLimit> | Nombre maximal de demandes pouvant être placées en file d'attente. | 1 000 |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | Indique si les écritures dans le corps de la réponse qui échouent en raison d’une déconnexion du client doivent lever des exceptions ou se terminer normalement. | `false`<br>(se terminer normalement) |
@@ -921,7 +927,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    HTTP.sys utilise les [formats de chaîne UrlPrefix de l’API de serveur HTTP](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx).
 
    > [!WARNING]
-   > Les liaisons génériques de niveau supérieur (`http://*:80/` et `http://+:80`) ne doivent **pas** être utilisées. Les liaisons génériques de niveau supérieur créent des failles de sécurité dans l’application. Cela s’applique aux caractères génériques forts et faibles. Utilisez des noms d’hôte ou des adresses IP explicites plutôt que des caractères génériques. Une liaison générique de sous-domaine (par exemple, `*.mysub.com`) ne constitue pas un risque de sécurité si vous contrôlez le domaine parent en entier (par opposition à `*.com`, qui est vulnérable). Pour plus d’informations, voir [RFC 7230: Section 5.4: Host](https://tools.ietf.org/html/rfc7230#section-5.4).
+   > Les liaisons génériques de niveau supérieur (`http://*:80/` et `http://+:80`) ne doivent **pas** être utilisées. Les liaisons génériques de niveau supérieur créent des failles de sécurité dans l’application. Cela s’applique aux caractères génériques forts et faibles. Utilisez des noms d’hôte ou des adresses IP explicites plutôt que des caractères génériques. Une liaison générique de sous-domaine (par exemple, `*.mysub.com`) ne constitue pas un risque de sécurité si vous contrôlez le domaine parent en entier (par opposition à `*.com`, qui est vulnérable). Pour plus d’informations, consultez [RFC 7230 : Section 5,4 : Host](https://tools.ietf.org/html/rfc7230#section-5.4).
 
 1. Préenregistrez les préfixes d’URL sur le serveur.
 
@@ -933,7 +939,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`&ndash; Le localisateur de ressources uniformes (URL) entièrement qualifié. N’utilisez pas une liaison de caractère générique. Utilisez un nom d’hôte ou une adresse IP locale valide. *L’URL doit inclure une barre oblique de fin.*
+   * `<URL>`&ndash; Uniform Resource Locator qualifié complet (URL). N’utilisez pas une liaison de caractère générique. Utilisez un nom d’hôte ou une adresse IP locale valide. *L’URL doit inclure une barre oblique de fin.*
    * `<USER>`&ndash; Spécifie le nom de l’utilisateur ou du groupe d’utilisateurs.
 
    Dans l’exemple suivant, l’adresse IP locale du serveur est `10.0.0.4` :
@@ -960,8 +966,8 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
    * `<IP>`&ndash; Spécifie l’adresse IP locale pour la liaison. N’utilisez pas une liaison de caractère générique. Utilisez une adresse IP valide.
    * `<PORT>`&ndash; Spécifie le port pour la liaison.
-   * `<THUMBPRINT>`&ndash; L’empreinte de pouce du certificat X.509.
-   * `<GUID>`&ndash; Un GUID généré par le développeur pour représenter l’application à des fins d’information.
+   * `<THUMBPRINT>`&ndash; Empreinte numérique du certificat X. 509.
+   * `<GUID>`&ndash; GUID généré par le développeur pour représenter l’application à des fins d’information.
 
    À titre de référence, stockez le GUID dans l’application en tant que balise de package :
 
@@ -1001,7 +1007,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
    Documentation de référence de *netsh.exe* :
 
-   * [Commandes netsh pour HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
+   * [Commandes netsh pour le protocole HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
    * [Chaînes UrlPrefix](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)
 
 1. Exécutez l'application.

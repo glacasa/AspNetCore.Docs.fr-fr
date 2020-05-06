@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/index
-ms.openlocfilehash: 464d19bd63e1f0f06bd7d218e7644afde04a5672
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 796d7da76da6723ea996b57510da9c45ab21b3e7
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78657919"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775919"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>Héberger et déployer ASP.NET Core
 
@@ -43,8 +49,8 @@ Une application ASP.NET Core est une application console qui doit être démarr�
 * Linux
   * [Nginx](xref:host-and-deploy/linux-nginx)
   * [Apache](xref:host-and-deploy/linux-apache)
-* Windows
-  * [Iis](xref:host-and-deploy/iis/index)
+*  Windows
+  * [IIS](xref:host-and-deploy/iis/index)
   * [Service Windows](xref:host-and-deploy/windows-service)
 
 ## <a name="set-up-a-reverse-proxy"></a>Configurer un proxy inverse
@@ -73,13 +79,13 @@ Consultez <xref:host-and-deploy/visual-studio-publish-profiles> pour obtenir des
 
 ## <a name="internet-information-services-iis"></a>Internet Information Services (IIS)
 
-Pour les déploiements vers les services d’information Internet (IIS) avec <xref:host-and-deploy/iis/index>configuration fournie par le fichier *web.config,* voir les articles sous .
+Pour les déploiements vers Internet Information Services (IIS) avec la configuration fournie par le fichier *Web. config* , consultez les <xref:host-and-deploy/iis/index>Articles sous.
 
 ## <a name="host-in-a-web-farm"></a>Héberger dans une batterie de serveurs web
 
 Pour plus d’informations sur la configuration pour héberger des applications ASP.NET Core dans un environnement de batterie de serveurs web (par exemple, le déploiement de plusieurs instances de votre application pour la scalabilité), consultez <xref:host-and-deploy/web-farm>.
 
-## <a name="host-on-docker"></a>Hôte sur Docker
+## <a name="host-on-docker"></a>Héberger sur l’ancrage
 
 Pour plus d’informations, consultez <xref:host-and-deploy/docker/index>.
 
@@ -90,7 +96,7 @@ Utilisez Health Check Middleware pour effectuer des contrôles d’intégrité s
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:test/troubleshoot>
-* [ASP.NET Hébergement](https://dotnet.microsoft.com/apps/aspnet/hosting)
+* [Hébergement ASP.NET](https://dotnet.microsoft.com/apps/aspnet/hosting)
 
 ::: moniker-end
 
@@ -121,8 +127,8 @@ Une application ASP.NET Core est une application console qui doit être démarr�
 * Linux
   * [Nginx](xref:host-and-deploy/linux-nginx)
   * [Apache](xref:host-and-deploy/linux-apache)
-* Windows
-  * [Iis](xref:host-and-deploy/iis/index)
+*  Windows
+  * [IIS](xref:host-and-deploy/iis/index)
   * [Service Windows](xref:host-and-deploy/windows-service)
 
 ## <a name="set-up-a-reverse-proxy"></a>Configurer un proxy inverse
@@ -151,19 +157,19 @@ Consultez <xref:host-and-deploy/visual-studio-publish-profiles> pour obtenir des
 
 ## <a name="internet-information-services-iis"></a>Internet Information Services (IIS)
 
-Pour les déploiements vers les services d’information Internet (IIS) avec <xref:host-and-deploy/iis/index>configuration fournie par le fichier *web.config,* voir les articles sous .
+Pour les déploiements vers Internet Information Services (IIS) avec la configuration fournie par le fichier *Web. config* , consultez les <xref:host-and-deploy/iis/index>Articles sous.
 
 ## <a name="host-in-a-web-farm"></a>Héberger dans une batterie de serveurs web
 
 Pour plus d’informations sur la configuration pour héberger des applications ASP.NET Core dans un environnement de batterie de serveurs web (par exemple, le déploiement de plusieurs instances de votre application pour la scalabilité), consultez <xref:host-and-deploy/web-farm>.
 
-## <a name="host-on-docker"></a>Hôte sur Docker
+## <a name="host-on-docker"></a>Héberger sur l’ancrage
 
 Pour plus d’informations, consultez <xref:host-and-deploy/docker/index>.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:test/troubleshoot>
-* [ASP.NET Hébergement](https://dotnet.microsoft.com/apps/aspnet/hosting)
+* [Hébergement ASP.NET](https://dotnet.microsoft.com/apps/aspnet/hosting)
 
 ::: moniker-end

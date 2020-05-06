@@ -1,17 +1,23 @@
 ---
-title: Ajouter une validation à une page Razor ASP.NET Core
+title: Ajouter la validation à une Razor page ASP.net Core
 author: rick-anderson
-description: Découvrez comment ajouter la validation à une page Razor dans ASP.NET Core.
+description: Découvrez comment ajouter la validation à une Razor Page dans ASP.net core.
 ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: f283234ed8a32dc9b7904bc6fee1cc9c04741029
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 91f0ac5fcd607f2423f9fc4647413b2bbb2336fc
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78666018"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773773"
 ---
 # <a name="add-validation-to-an-aspnet-core-razor-page"></a>Ajouter une validation à une page Razor ASP.NET Core
 
@@ -93,7 +99,7 @@ Facultatif : Testez la validation côté serveur :
    }
   ```
   
-Alternativement, vous pouvez [désactiver la validation côté client sur le serveur](xref:mvc/models/validation#disable-client-side-validation).
+Vous pouvez également [désactiver la validation côté client sur le serveur](xref:mvc/models/validation#disable-client-side-validation).
 
 Le code suivant affiche la partie de la page *Create.cshtml* générée automatiquement plus tôt dans le tutoriel. Elle est utilisée par les pages Créer et Modifier pour afficher le formulaire initial et le réafficher en cas d’erreur.
 
@@ -209,9 +215,9 @@ Des migrations ne sont pas requises pour SQLite.
 
 ### <a name="publish-to-azure"></a>Publication dans Azure
 
-Pour plus d’informations sur le déploiement à Azure, voir [Tutorial: Build an ASP.NET Core app in Azure with SQL Database](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb).
+Pour plus d’informations sur le déploiement sur Azure, consultez [Didacticiel : créer une application ASP.net core dans Azure avec SQL Database](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb).
 
-Nous vous remercions d’avoir effectué cette introduction aux pages Razor. Pour compléter ce tutoriel, vous pouvez consulter [Bien démarrer avec Razor Pages et EF Core](xref:data/ef-rp/intro).
+Merci d’avoir effectué cette introduction Razor aux pages. La [prise en Razor main des Pages et des EF Core](xref:data/ef-rp/intro) est un excellent suivi de ce didacticiel.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

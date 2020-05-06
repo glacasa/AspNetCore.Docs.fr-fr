@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/23/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: 63bb791958785fa9a4a676f1aab79126c6873068
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: 7eefc988da275c0efccd97958d04e76f04e7cad4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82111043"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772111"
 ---
-# <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>Gérer les erreurs dans Blazor les applications ASP.net Core
+# <a name="handle-errors-in-aspnet-core-blazor-apps"></a>Gérer les erreurs dans Blazor les applications ASP.net Core
 
 Par [Steve Sanderson](https://github.com/SteveSandersonMS)
 
@@ -80,7 +83,7 @@ L' `blazor-error-ui` élément est masqué par les styles inclus dans les Blazor
 }
 ```
 
-## <a name="how-a-opno-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Comment une Blazor application serveur réagit aux exceptions non gérées
+## <a name="how-a-blazor-server-app-reacts-to-unhandled-exceptions"></a>Comment une Blazor application serveur réagit aux exceptions non gérées
 
 BlazorLe serveur est un Framework avec état. Tandis que les utilisateurs interagissent avec une application, ils maintiennent une connexion au serveur appelé « *circuit*». Le circuit contient des instances de composant actives, ainsi que de nombreux autres aspects de l’État, tels que :
 
@@ -216,7 +219,7 @@ Pour plus d’informations, consultez les articles suivants :
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 
-### <a name="opno-locblazor-server-prerendering"></a>BlazorPrérendu du serveur
+### <a name="blazor-server-prerendering"></a>BlazorPrérendu du serveur
 
 Blazorles composants peuvent être prérendus à l’aide du [tag Helper du composant](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) , afin que le balisage HTML rendu soit renvoyé dans le cadre de la requête http initiale de l’utilisateur. Cela fonctionne de la façon suivante :
 

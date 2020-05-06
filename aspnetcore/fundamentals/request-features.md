@@ -4,13 +4,19 @@ author: ardalis
 description: Découvrez les détails d’implémentation d’un serveur web relatifs aux requêtes et réponses HTTP qui sont définies dans les interfaces pour ASP.NET Core.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/request-features
-ms.openlocfilehash: d0f3ae521d1f314dd04cb581d9a921da4719273d
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: e26a1a7b35d40c1214bbc40269571545cbd2c235
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79416225"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776023"
 ---
 # <a name="request-features-in-aspnet-core"></a>Fonctionnalités de requête dans ASP.NET Core
 

@@ -5,17 +5,20 @@ description: Découvrez comment contrôler l’éditeur de liens en langage inte
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/29/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: host-and-deploy/blazor/configure-linker
-ms.openlocfilehash: 94cf1f09ddff47aa41181e9f5c52b4c65dc2ecf1
-ms.sourcegitcommit: 6318d2bdd63116e178c34492a904be85ec9ac108
+ms.openlocfilehash: b274752b375f68cca0c0a9adf9c146bc525d9eba
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82604777"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775178"
 ---
 # <a name="configure-the-linker-for-aspnet-core-blazor"></a>Configurer l’éditeur de liens pour ASP.NET Core Blazor
 
@@ -86,7 +89,7 @@ Contrôlez la liaison pour chaque assembly en fournissant un fichier de configur
 </linker>
 ```
 
-Pour plus d’informations, consultez [exemples de fichiers XML de liaison (référentiel GitHub mono/éditeur de liens)](https://github.com/mono/linker#link-xml-file-examples).
+Pour plus d’informations et d’exemples, consultez [formats de données (référentiel GitHub mono/éditeur de liens)](https://github.com/mono/linker/blob/master/docs/data-formats.md).
 
 ## <a name="add-an-xml-linker-configuration-file-to-a-library"></a>Ajouter un fichier de configuration de l’éditeur de liens XML à une bibliothèque
 

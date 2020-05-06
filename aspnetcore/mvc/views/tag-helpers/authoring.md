@@ -5,19 +5,25 @@ description: Découvrez comment créer des Tag Helpers dans ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: 43bd4eccfc06d27ade5de0e3387247a753609336
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 0b60468b96ded559d180e7b3bf5f799ce2f4d7e3
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78662371"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775087"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>Créer des Tag Helpers dans ASP.NET Core
 
-De [Rick Anderson](https://twitter.com/RickAndMSFT)
+Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[Affichez ou téléchargez l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/authoring/sample) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
+[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/authoring/sample) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
 ## <a name="get-started-with-tag-helpers"></a>Bien démarrer avec les Tag Helpers
 
@@ -49,7 +55,7 @@ Autrement dit, une balise d’ancrage qui en fait un lien e-mail. Vous pouvez ef
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/z1EmailTagHelperCopy.cs)]
 
-   * Les Tag Helpers utilisent une convention de nommage qui cible des éléments du nom de classe racine (moins la partie *TagHelper* du nom de classe). Dans cet exemple, comme le nom racine de **EmailTagHelper** est *email*, la balise `<email>` est ciblée. Cette convention de nommage doit fonctionner pour la plupart des Tag Helpers et je vous montrerai plus tard comment la remplacer.
+   * Les Tag Helpers utilisent une convention de nommage qui cible des éléments du nom de classe racine (moins la partie *TagHelper* du nom de classe). Dans cet exemple, le nom racine de **EmailTagHelper** est *email*, donc la `<email>` balise est ciblée. Cette convention de nommage doit fonctionner pour la plupart des Tag Helpers et je vous montrerai plus tard comment la remplacer.
 
    * La classe `EmailTagHelper` dérive de la classe `TagHelper`. La classe `TagHelper` fournit des méthodes et propriétés pour l’écriture des Tag Helpers.
 
@@ -65,11 +71,11 @@ Autrement dit, une balise d’ancrage qui en fait un lien e-mail. Vous pouvez ef
    public class Email : TagHelper
    ```
 
-1. Afin de rendre la classe `EmailTagHelper` disponible pour toutes les vues Razor, ajoutez la directive `addTagHelper` au fichier *Views/_ViewImports.cshtml* :
+1. Pour rendre la `EmailTagHelper` classe disponible pour toutes nos Razor vues, ajoutez la `addTagHelper` directive au fichier *views/_ViewImports. cshtml* :
 
    [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopyEmail.cshtml?highlight=2,3)]
 
-   Le code ci-dessus utilise la syntaxe d’expressions génériques pour spécifier que tous les Tag Helpers dans notre assembly seront disponibles. La première chaîne après `@addTagHelper` désigne le Tag Helper à charger (utilisez « * » pour tous les Tag Helpers), et la deuxième chaîne « AuthoringTagHelpers » indique l’assembly dans lequel se trouve le Tag Helper. En outre, Notez que la deuxième ligne insère les ASP.NET Core de balises MVC à l’aide de la syntaxe avec caractères génériques (ces informations sont présentées dans [Introduction aux balises d’aide](intro.md)). Il s’agit de la directive `@addTagHelper` qui met le tag Helper à la disposition de la vue Razor. Sinon, vous pouvez fournir le nom qualifié complet d’un Tag Helper comme indiqué ci-dessous :
+   Le code ci-dessus utilise la syntaxe d’expressions génériques pour spécifier que tous les Tag Helpers dans notre assembly seront disponibles. La première chaîne après `@addTagHelper` désigne le Tag Helper à charger (utilisez « * » pour tous les Tag Helpers), et la deuxième chaîne « AuthoringTagHelpers » indique l’assembly dans lequel se trouve le Tag Helper. En outre, Notez que la deuxième ligne insère les ASP.NET Core de balises MVC à l’aide de la syntaxe avec caractères génériques (ces informations sont présentées dans [Introduction aux balises d’aide](intro.md)). Il s’agit `@addTagHelper` de la directive qui met le tag Helper à la Razor disposition de l’affichage. Sinon, vous pouvez fournir le nom qualifié complet d’un Tag Helper comme indiqué ci-dessous :
 
 ```csharp
 @using AuthoringTagHelpers
@@ -92,7 +98,7 @@ Pour ajouter un Tag Helper à une vue à l’aide d’un nom qualifié complet, 
 
 ## <a name="setattribute-and-setcontent"></a>SetAttribute et SetContent
 
-Dans cette section, nous allons mettre à jour la classe `EmailTagHelper` afin qu’elle crée une balise d’ancrage valide pour les e-mails. Nous allons la mettre à jour pour extraire des informations d’une vue Razor (sous la forme d’un attribut `mail-to`) et les utiliser lors de la génération de l’ancre.
+Dans cette section, nous allons mettre à jour la classe `EmailTagHelper` afin qu’elle crée une balise d’ancrage valide pour les e-mails. Nous allons le mettre à jour pour prendre les Razor informations d’une vue (sous la `mail-to` forme d’un attribut) et l’utiliser pour générer l’ancre.
 
 Mettez à jour la classe `EmailTagHelper` avec le code suivant :
 
@@ -117,7 +123,7 @@ Cette approche fonctionne pour l’attribut « href » tant qu’il n’existe p
 <a name="self-closing"></a>
 
    > [!NOTE]
-   > Si vous deviez écrire la fermeture automatique de la balise e-mail (`<email mail-to="Rick" />`), la sortie finale se fermerait aussi automatiquement. Pour activer la possibilité d’écrire la balise avec uniquement une balise de début (`<email mail-to="Rick">`), vous devez marquer la classe avec ce qui suit :
+   > Si vous deviez écrire la fermeture automatique de la balise e-mail (`<email mail-to="Rick" />`), la sortie finale se fermerait aussi automatiquement. Pour permettre l’écriture de la balise avec uniquement une balise de`<email mail-to="Rick">`début (), vous devez marquer la classe avec ce qui suit :
    >
    > [!code-csharp[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/EmailTagHelperMailVoid.cs?highlight=1&range=6-10)]
 
@@ -193,7 +199,7 @@ Vous pouvez également utiliser l’attribut `[HtmlTargetElement]` pour modifier
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/WebsiteInformationTagHelper.cs)]
 
-   * Comme mentionné précédemment, les Tag Helpers convertissent les propriétés et noms de classe C# de casse Pascal en [casse kebab](https://wiki.c2.com/?KebabCase) (mots séparés par des tirets). Par conséquent, pour utiliser la classe `WebsiteInformationTagHelper` dans Razor, vous allez écrire `<website-information />`.
+   * Comme mentionné précédemment, les Tag Helpers convertissent les propriétés et noms de classe C# de casse Pascal en [casse kebab](https://wiki.c2.com/?KebabCase) (mots séparés par des tirets). Par conséquent, pour utiliser `WebsiteInformationTagHelper` dans Razor, vous allez écrire `<website-information />`.
 
    * Comme vous n’identifiez pas de manière explicite l’élément cible avec l’attribut `[HtmlTargetElement]`, la valeur par défaut de `website-information` est ciblée. Si vous avez appliqué l’attribut suivant (notez que la casse n’est pas kebab, mais il correspond au nom de la classe) :
 
@@ -207,7 +213,7 @@ Vous pouvez également utiliser l’attribut `[HtmlTargetElement]` pour modifier
    [HtmlTargetElement("Website-Information")]
    ```
 
-   * Les éléments de fermeture automatique n’ont aucun contenu. Pour cet exemple, le balisage Razor utilise une balise de fermeture automatique, mais le Tag Helper crée un élément [section](https://www.w3.org/TR/html5/sections.html#the-section-element) (qui ne se ferme pas automatiquement et vous écrivez le contenu à l’intérieur de l’élément `section`). Par conséquent, vous devez affecter à `TagMode` la valeur `StartTagAndEndTag` pour écrire la sortie. Sinon, vous pouvez commenter le paramètre de ligne `TagMode` et écrire le balisage avec une balise de fermeture. (Un exemple de balisage est fourni plus loin dans ce didacticiel.)
+   * Les éléments de fermeture automatique n’ont aucun contenu. Pour cet exemple, le Razor balisage utilise une balise de fermeture automatique, mais le tag Helper crée un élément [section](https://www.w3.org/TR/html5/sections.html#the-section-element) (qui n’est pas auto-fermé et vous écrivez du contenu à l' `section` intérieur de l’élément). Par conséquent, vous devez affecter à `TagMode` la valeur `StartTagAndEndTag` pour écrire la sortie. Sinon, vous pouvez commenter le paramètre de ligne `TagMode` et écrire le balisage avec une balise de fermeture. (Un exemple de balisage est fourni plus loin dans ce didacticiel.)
 
    * Le signe `$` (signe dollar) de la ligne suivante utilise une [chaîne interpolée](/dotnet/csharp/language-reference/keywords/interpolated-strings) :
 
@@ -220,11 +226,11 @@ Vous pouvez également utiliser l’attribut `[HtmlTargetElement]` pour modifier
    [!code-html[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?highlight=1,4-8, 18-999)]
 
    > [!NOTE]
-   > Dans le balisage Razor indiqué ci-dessous :
+   > Dans le Razor balisage illustré ci-dessous :
    >
    > [!code-html[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?range=18-18)]
    >
-   > Razor identifie que l’attribut `info` est une classe, et non une chaîne, et que vous souhaitez écrire du code C#. N’importe quel attribut de Tag Helper autre qu’une chaîne doit être écrit sans le caractère `@`.
+   > Razorsait que `info` l’attribut est une classe, et non une chaîne, et que vous souhaitez écrire du code C#. N’importe quel attribut de Tag Helper autre qu’une chaîne doit être écrit sans le caractère `@`.
 
 1. Exécutez l’application et accédez à la vue About (À propos de) pour afficher les informations de site web.
 

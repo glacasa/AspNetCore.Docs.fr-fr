@@ -1,20 +1,26 @@
 ---
-title: 'Tutorial: Handle concordrency - ASP.NET MVC avec EF Core'
+title: 'Didacticiel : gérer la concurrence-ASP.NET MVC avec EF Core'
 description: Ce didacticiel montre comment gérer les conflits quand plusieurs utilisateurs mettent à jour la même entité en même temps.
 author: rick-anderson
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: 6839e383093b993ff55095f26cf88cd68708f001
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: bbf04e3500b11a339dc59b6086d910b76eace735
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78657394"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773599"
 ---
-# <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>Tutorial: Handle concordrency - ASP.NET MVC avec EF Core
+# <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>Didacticiel : gérer la concurrence-ASP.NET MVC avec EF Core
 
 Dans les didacticiels précédents, vous avez découvert comment mettre à jour des données. Ce didacticiel montre comment gérer les conflits quand plusieurs utilisateurs mettent à jour la même entité en même temps.
 
@@ -75,11 +81,11 @@ Voici quelques-unes des options :
 
 * Vous pouvez laisser les modifications de John remplacer les modifications de Jane.
 
-     La prochaine fois que quelqu’un consultera le département « English », il verra la date du 01/09/2013 et la valeur $350 000,00 restaurée. Ceci s’appelle un scénario *Priorité au client* ou *Priorité au dernier entré* (Last in Wins). (Toutes les valeurs du client priment sur ce qu’il y a dans le magasin de données.) Comme indiqué dans l’introduction à cette section, si vous ne faites pas de codage pour la manipulation de concurrence, cela se produira automatiquement.
+     La prochaine fois que quelqu’un consultera le département « English », il verra la date du 01/09/2013 et la valeur $350 000,00 restaurée. Ceci s’appelle un scénario *Priorité au client* ou *Priorité au dernier entré* (Last in Wins). (Toutes les valeurs du client sont prioritaires par rapport à ce qui se trouve dans le magasin de données.) Comme indiqué dans la présentation de cette section, si vous n’effectuez aucun codage pour la gestion de l’accès concurrentiel, cela se produit automatiquement.
 
 * Vous pouvez empêcher les modifications de John de faire l’objet d’une mise à jour dans la base de données.
 
-     En règle générale, vous affichez un message d’erreur, vous lui montrez l’état actuel des données et vous lui permettez de réappliquer ses modifications s’il veut toujours les faire. Il s’agit alors d’un scénario *Priorité au magasin*. (Les valeurs des magasins de données priment sur les valeurs soumises par le client.) Vous implémenterez le scénario Store Wins dans ce tutoriel. Cette méthode garantit qu’aucune modification n’est remplacée sans qu’un utilisateur soit averti de ce qui se passe.
+     En règle générale, vous affichez un message d’erreur, vous lui montrez l’état actuel des données et vous lui permettez de réappliquer ses modifications s’il veut toujours les faire. Il s’agit alors d’un scénario *Priorité au magasin*. (Les valeurs du magasin de données ont priorité sur les valeurs soumises par le client.) Vous allez implémenter le scénario de stockage WINS dans ce didacticiel. Cette méthode garantit qu’aucune modification n’est remplacée sans qu’un utilisateur soit averti de ce qui se passe.
 
 ### <a name="detecting-concurrency-conflicts"></a>Détection des conflits d’accès concurrentiel
 
@@ -240,7 +246,7 @@ Vous avez changé ce paramètre en une instance d’entité Department créée p
 public async Task<IActionResult> Delete(Department department)
 ```
 
-Vous avez également changé le nom de la méthode d’action de `DeleteConfirmed` en `Delete`. Le code du modèle généré automatiquement utilisait le nom `DeleteConfirmed` pour donner à la méthode HttpPost une signature unique. (Le CLR exige des méthodes surchargées pour avoir des paramètres de méthode différents.) Maintenant que les signatures sont uniques, vous pouvez vous en tenir à la convention MVC et utiliser le même nom pour les méthodes de suppression HttpPost et HttpGet.
+Vous avez également changé le nom de la méthode d’action de `DeleteConfirmed` en `Delete`. Le code du modèle généré automatiquement utilisait le nom `DeleteConfirmed` pour donner à la méthode HttpPost une signature unique. (Le CLR exige que les méthodes surchargées aient des paramètres de méthode différents.) Maintenant que les signatures sont uniques, vous pouvez respecter la convention MVC et utiliser le même nom pour les méthodes de suppression HttpPost et HttpGet.
 
 Si le département est déjà supprimé, la méthode `AnyAsync` retourne la valeur false et l’application revient simplement à la méthode Index.
 
@@ -312,4 +318,4 @@ Dans ce tutoriel, vous allez :
 Passez au tutoriel suivant pour découvrir comment implémenter l’héritage table par hiérarchie pour les entités Instructor et Student.
 
 > [!div class="nextstepaction"]
-> [Suivant : Mettre en œuvre l’héritage de table par hiérarchie](inheritance.md)
+> [Étape suivante : implémenter l’héritage TPH (table par hiérarchie)](inheritance.md)
