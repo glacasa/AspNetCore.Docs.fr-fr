@@ -5,25 +5,31 @@ ms.author: riande
 description: Découvrez les attributs d’assistance de balise de script ASP.NET Core et le rôle joué par chaque attribut lors de l’extension du comportement de la balise de script HTML.
 ms.custom: mvc
 ms.date: 12/02/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/tag-helpers/builtin-th/script-tag-helper
-ms.openlocfilehash: a037abb6a454e6d06305e7d7f6ecad0c2a0ca717
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 4162221ef3401427c44fb54dee9c36b78b39564f
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78659837"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774663"
 ---
-# <a name="script-tag-helper-in-aspnet-core"></a><span data-ttu-id="e5ebb-103">Tag Helper de script dans ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="e5ebb-103">Script Tag Helper in ASP.NET Core</span></span>
+# <a name="script-tag-helper-in-aspnet-core"></a><span data-ttu-id="62c3c-103">Tag Helper de script dans ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="62c3c-103">Script Tag Helper in ASP.NET Core</span></span>
 
-<span data-ttu-id="e5ebb-104">De [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="e5ebb-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
+<span data-ttu-id="62c3c-104">Par [Rick Anderson](https://twitter.com/RickAndMSFT)</span><span class="sxs-lookup"><span data-stu-id="62c3c-104">By [Rick Anderson](https://twitter.com/RickAndMSFT)</span></span>
 
-<span data-ttu-id="e5ebb-105">Le [tag Helper script](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper) génère un lien vers un fichier de script principal ou de retour.</span><span class="sxs-lookup"><span data-stu-id="e5ebb-105">The [Script Tag Helper](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper) generates a link to a primary or fall back script file.</span></span> <span data-ttu-id="e5ebb-106">En général, le fichier de script principal se trouve sur un [réseau de distribution de contenu](/office365/enterprise/content-delivery-networks#what-exactly-is-a-cdn) (CDN).</span><span class="sxs-lookup"><span data-stu-id="e5ebb-106">Typically the primary script file is on a [Content Delivery Network](/office365/enterprise/content-delivery-networks#what-exactly-is-a-cdn) (CDN).</span></span>
+<span data-ttu-id="62c3c-105">Le [tag Helper script](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper) génère un lien vers un fichier de script principal ou de retour.</span><span class="sxs-lookup"><span data-stu-id="62c3c-105">The [Script Tag Helper](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper) generates a link to a primary or fall back script file.</span></span> <span data-ttu-id="62c3c-106">En général, le fichier de script principal se trouve sur un [réseau de distribution de contenu](/office365/enterprise/content-delivery-networks#what-exactly-is-a-cdn) (CDN).</span><span class="sxs-lookup"><span data-stu-id="62c3c-106">Typically the primary script file is on a [Content Delivery Network](/office365/enterprise/content-delivery-networks#what-exactly-is-a-cdn) (CDN).</span></span>
 
 [!INCLUDE[](~/includes/cdn.md)]
 
-<span data-ttu-id="e5ebb-107">Le tag Helper script vous permet de spécifier un CDN pour le fichier de script et un secours lorsque le CDN n’est pas disponible.</span><span class="sxs-lookup"><span data-stu-id="e5ebb-107">The Script Tag Helper allows you to specify a CDN for the script file and a fallback when the CDN is not available.</span></span> <span data-ttu-id="e5ebb-108">Le tag Helper script fournit l’avantage en termes de performances d’un CDN avec la robustesse de l’hébergement local.</span><span class="sxs-lookup"><span data-stu-id="e5ebb-108">The Script Tag Helper provides the performance advantage of a CDN with the robustness of local hosting.</span></span>
+<span data-ttu-id="62c3c-107">Le tag Helper script vous permet de spécifier un CDN pour le fichier de script et un secours lorsque le CDN n’est pas disponible.</span><span class="sxs-lookup"><span data-stu-id="62c3c-107">The Script Tag Helper allows you to specify a CDN for the script file and a fallback when the CDN is not available.</span></span> <span data-ttu-id="62c3c-108">Le tag Helper script fournit l’avantage en termes de performances d’un CDN avec la robustesse de l’hébergement local.</span><span class="sxs-lookup"><span data-stu-id="62c3c-108">The Script Tag Helper provides the performance advantage of a CDN with the robustness of local hosting.</span></span>
 
-<span data-ttu-id="e5ebb-109">Le balisage Razor suivant montre un élément `script` avec une solution de secours :</span><span class="sxs-lookup"><span data-stu-id="e5ebb-109">The following Razor markup shows a `script` element with a fallback:</span></span>
+<span data-ttu-id="62c3c-109">Le balisage suivant Razor montre `script` un élément avec une solution de secours :</span><span class="sxs-lookup"><span data-stu-id="62c3c-109">The following Razor markup shows a `script` element with a fallback:</span></span>
 
 ```html
 <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
@@ -34,21 +40,21 @@ ms.locfileid: "78659837"
 </script>
 ```
 
-<span data-ttu-id="e5ebb-110">N’utilisez pas l’attribut [defer](https://developer.mozilla.org/docs/Web/HTML/Element/script) de l’élément `<script>` pour différer le chargement du script CDN.</span><span class="sxs-lookup"><span data-stu-id="e5ebb-110">Don't use the `<script>` element's [defer](https://developer.mozilla.org/docs/Web/HTML/Element/script) attribute to defer loading the CDN script.</span></span> <span data-ttu-id="e5ebb-111">Le tag Helper script rend JavaScript qui exécute immédiatement l’expression [asp-Fallback-test](#asp-fallback-test) .</span><span class="sxs-lookup"><span data-stu-id="e5ebb-111">The Script Tag Helper renders JavaScript that immediately executes the [asp-fallback-test](#asp-fallback-test) expression.</span></span> <span data-ttu-id="e5ebb-112">L’expression échoue si le chargement du script CDN est différé.</span><span class="sxs-lookup"><span data-stu-id="e5ebb-112">The expression fails if loading the CDN script is deferred.</span></span>
+<span data-ttu-id="62c3c-110">N’utilisez pas `<script>` l’attribut [defer](https://developer.mozilla.org/docs/Web/HTML/Element/script) de l’élément pour différer le chargement du script CDN.</span><span class="sxs-lookup"><span data-stu-id="62c3c-110">Don't use the `<script>` element's [defer](https://developer.mozilla.org/docs/Web/HTML/Element/script) attribute to defer loading the CDN script.</span></span> <span data-ttu-id="62c3c-111">Le tag Helper script rend JavaScript qui exécute immédiatement l’expression [asp-Fallback-test](#asp-fallback-test) .</span><span class="sxs-lookup"><span data-stu-id="62c3c-111">The Script Tag Helper renders JavaScript that immediately executes the [asp-fallback-test](#asp-fallback-test) expression.</span></span> <span data-ttu-id="62c3c-112">L’expression échoue si le chargement du script CDN est différé.</span><span class="sxs-lookup"><span data-stu-id="62c3c-112">The expression fails if loading the CDN script is deferred.</span></span>
 
-## <a name="commonly-used-script-tag-helper-attributes"></a><span data-ttu-id="e5ebb-113">Attributs d’assistance de balise de script couramment utilisés</span><span class="sxs-lookup"><span data-stu-id="e5ebb-113">Commonly used Script Tag Helper attributes</span></span>
+## <a name="commonly-used-script-tag-helper-attributes"></a><span data-ttu-id="62c3c-113">Attributs d’assistance de balise de script couramment utilisés</span><span class="sxs-lookup"><span data-stu-id="62c3c-113">Commonly used Script Tag Helper attributes</span></span>
 
-<span data-ttu-id="e5ebb-114">Consultez [l’aide de balises de script](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper) pour obtenir tous les attributs, propriétés et méthodes du programme d’assistance des balises de script.</span><span class="sxs-lookup"><span data-stu-id="e5ebb-114">See [Script Tag Helper](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper) for all the Script Tag Helper attributes, properties, and methods.</span></span>
+<span data-ttu-id="62c3c-114">Consultez [l’aide de balises de script](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper) pour obtenir tous les attributs, propriétés et méthodes du programme d’assistance des balises de script.</span><span class="sxs-lookup"><span data-stu-id="62c3c-114">See [Script Tag Helper](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper) for all the Script Tag Helper attributes, properties, and methods.</span></span>
 
-### <a name="asp-fallback-test"></a><span data-ttu-id="e5ebb-115">ASP-Fallback-test</span><span class="sxs-lookup"><span data-stu-id="e5ebb-115">asp-fallback-test</span></span>
+### <a name="asp-fallback-test"></a><span data-ttu-id="62c3c-115">ASP-Fallback-test</span><span class="sxs-lookup"><span data-stu-id="62c3c-115">asp-fallback-test</span></span>
 
-<span data-ttu-id="e5ebb-116">Méthode de script définie dans le script principal à utiliser pour le test de secours.</span><span class="sxs-lookup"><span data-stu-id="e5ebb-116">The script method defined in the primary script to use for the fallback test.</span></span> <span data-ttu-id="e5ebb-117">Pour plus d’informations, consultez <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackTestExpression>.</span><span class="sxs-lookup"><span data-stu-id="e5ebb-117">For more information, see <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackTestExpression>.</span></span>
+<span data-ttu-id="62c3c-116">Méthode de script définie dans le script principal à utiliser pour le test de secours.</span><span class="sxs-lookup"><span data-stu-id="62c3c-116">The script method defined in the primary script to use for the fallback test.</span></span> <span data-ttu-id="62c3c-117">Pour plus d’informations, consultez <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackTestExpression>.</span><span class="sxs-lookup"><span data-stu-id="62c3c-117">For more information, see <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackTestExpression>.</span></span>
 
-### <a name="asp-fallback-src"></a><span data-ttu-id="e5ebb-118">ASP-Fallback-SRC</span><span class="sxs-lookup"><span data-stu-id="e5ebb-118">asp-fallback-src</span></span>
+### <a name="asp-fallback-src"></a><span data-ttu-id="62c3c-118">ASP-Fallback-SRC</span><span class="sxs-lookup"><span data-stu-id="62c3c-118">asp-fallback-src</span></span>
 
-<span data-ttu-id="e5ebb-119">URL d’une balise de script vers laquelle effectuer un secours dans le cas où le principal échoue.</span><span class="sxs-lookup"><span data-stu-id="e5ebb-119">The URL of a Script tag to fallback to in the case the primary one fails.</span></span> <span data-ttu-id="e5ebb-120">Pour plus d’informations, consultez <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc>.</span><span class="sxs-lookup"><span data-stu-id="e5ebb-120">For more information, see <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc>.</span></span>
+<span data-ttu-id="62c3c-119">URL d’une balise de script vers laquelle effectuer un secours dans le cas où le principal échoue.</span><span class="sxs-lookup"><span data-stu-id="62c3c-119">The URL of a Script tag to fallback to in the case the primary one fails.</span></span> <span data-ttu-id="62c3c-120">Pour plus d’informations, consultez <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc>.</span><span class="sxs-lookup"><span data-stu-id="62c3c-120">For more information, see <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc>.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="e5ebb-121">Ressources supplémentaires</span><span class="sxs-lookup"><span data-stu-id="e5ebb-121">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="62c3c-121">Ressources supplémentaires</span><span class="sxs-lookup"><span data-stu-id="62c3c-121">Additional resources</span></span>
 
 * <xref:mvc/views/tag-helpers/intro>
 * <xref:mvc/controllers/areas>
