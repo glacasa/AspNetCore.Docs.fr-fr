@@ -1,25 +1,31 @@
 ---
-title: 'Tutorial: Démarrer avec EF Core dans une application web ASP.NET MVC'
+title: 'Didacticiel : prise en main de EF Core dans une application Web MVC ASP.NET'
 description: Ce document est le premier d’une série de didacticiels qui expliquent comment générer à partir de zéro l’exemple d’application Contoso University.
 author: rick-anderson
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: fca9fdc425506ec8b4eec5c609237208f4c0d7b5
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 7f17352d2e7e3f4239b338ec961120ab3088c77a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79511299"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773547"
 ---
-# <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Tutorial: Démarrer avec EF Core dans une application web ASP.NET MVC
+# <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Didacticiel : prise en main de EF Core dans une application Web MVC ASP.NET
 
-Ce tutoriel n’a **pas** été mis à jour vers ASP.NET Core 3.0. La [version de Razor Pages](xref:data/ef-rp/intro) a été mise à jour. La plupart des modifications de code pour le ASP.NET Core 3.0 et la version ultérieure de ce tutoriel:
+Ce tutoriel n’a **pas** été mis à jour vers ASP.NET Core 3.0. La [ Razor version des pages](xref:data/ef-rp/intro) a été mise à jour. La plupart des modifications de code pour le ASP.NET Core 3,0 et la version ultérieure de ce didacticiel :
 
-* Sont dans les *fichiers Startup.cs* et *Program.cs.*
-* Peut être trouvé dans la [version Razor Pages](xref:data/ef-rp/intro). 
+* Se trouvent dans les fichiers *Startup.cs* et *Program.cs* .
+* Se trouve dans la [ Razor version des pages](xref:data/ef-rp/intro). 
 
 Pour plus d’informations sur le moment où cette mise à jour pourrait avoir lieu, consultez [ce problème GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/13920).
 
@@ -84,7 +90,7 @@ Les utilisateurs peuvent afficher et mettre à jour les informations relatives a
 
 * Sélectionnez **.NET Core**, **ASP.NET Core 2.2** et le modèle **Application web (Model-View-Controller)**.
 
-* Assurez-vous que **l’authentification** est réglée **sans authentification**.
+* Assurez-vous que **l’authentification** est définie sur **aucune authentification**.
 
 * Sélectionnez **OK**.
 
@@ -312,7 +318,7 @@ Cliquez avec le bouton droit sur la table **Student** et cliquez sur **Afficher 
 
 ![Table Student dans SSOX](intro/_static/ssox-student-table.png)
 
-Les fichiers de base de données *.mdf* et *.ldf* sont dans le dossier *C:'Users\\\<yourusername>.*
+Les fichiers de base de données *. mdf* et *. ldf* se trouvent dans le dossier *\\\<C:\Users yourusername>* .
 
 Étant donné que vous appelez `EnsureCreated` dans la méthode d’initialiseur qui s’exécute au démarrage de l’application, vous pouvez maintenant apporter une modification à la classe `Student`, supprimer la base de données ou réexécuter l’application, et la base de données serait automatiquement recréée conformément à votre modification. Par exemple, si vous ajoutez une propriété `EmailAddress` à la classe `Student`, vous voyez une nouvelle colonne `EmailAddress` dans la table recréée.
 
@@ -326,7 +332,7 @@ La quantité de code que vous deviez écrire pour qu’Entity Framework puisse c
 
 * Les propriétés d’entité nommées ID ou classnameID sont reconnues comme propriétés de clé primaire.
 
-* Une propriété est interprétée comme une propriété clé étrangère si elle est `StudentID` nommée `Student` `Student` `ID` * \<nom \<* de propriété de navigation>nom principal de propriété clé>(par exemple, pour la propriété de navigation puisque la clé principale de l’entité est ). Les propriétés clés étrangères peuvent également être nommées `Enrollment` simplement `EnrollmentID` * \<nom de propriété clé primaire>* (par exemple, `EnrollmentID` puisque la clé principale de l’entité est ).
+* Une propriété est interprétée comme une propriété de clé étrangère si elle est `StudentID` nommée `Student` `Student` * \<nom de \<la propriété de navigation>nom de la propriété de clé primaire>* (par exemple, pour la propriété `ID`de navigation dans la mesure où la clé primaire de l’entité est). Les propriétés de clé étrangère peuvent également être nommées simplement * \<nom de propriété de clé primaire>* ( `Enrollment` par exemple, `EnrollmentID` puisque la clé primaire de l’entité est `EnrollmentID`).
 
 Le comportement conventionnel peut être remplacé. Par exemple, vous pouvez spécifier explicitement les noms de tables, comme vous l’avez vu précédemment dans ce didacticiel. De plus, vous pouvez définir des noms de colonne et définir une propriété quelconque en tant que clé primaire ou clé étrangère, comme vous le verrez dans un [didacticiel ultérieur](complex-data-model.md) dans cette série.
 

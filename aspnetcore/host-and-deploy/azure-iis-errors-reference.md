@@ -6,23 +6,29 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/azure-iis-errors-reference
-ms.openlocfilehash: 635c4cf6f12e62ca7e795b3b3b47e9445b945551
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 7b3454fbd891ca26d44125810a10eb3b3c2c3933
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79511598"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775204"
 ---
 # <a name="common-errors-reference-for-azure-app-service-and-iis-with-aspnet-core"></a>Informations de référence sur les erreurs courantes pour Azure App Service et IIS avec ASP.NET Core
 
 ::: moniker range=">= aspnetcore-2.2"
 
-Ce sujet décrit les erreurs courantes et fournit des conseils de dépannage pour des erreurs spécifiques lors de l’hébergement ASP.NET applications Core sur Azure Apps Service et IIS.
+Cette rubrique décrit les erreurs courantes et fournit des conseils de dépannage pour les erreurs spécifiques lors de l’hébergement d’applications ASP.NET Core sur Azure Apps service et IIS.
 
-Pour les conseils généraux <xref:test/troubleshoot-azure-iis>de dépannage, voir .
+Pour obtenir des instructions générales sur <xref:test/troubleshoot-azure-iis>la résolution des problèmes, consultez.
 
-Collectez les informations suivantes :
+Collectez les informations suivantes :
 
 * Comportement du navigateur (code d’état et message d’erreur)
 * Entrées du journal des événements de l’application
@@ -46,19 +52,19 @@ La liste d’erreurs de cette rubrique n’est pas exhaustive. Si vous rencontre
 
 Résolution des problèmes :
 
-Les fichiers autres que les fichiers de système d’exploitation dans le répertoire **C:\Windows\SysWOW64\inetsrv** ne sont pas conservés pendant la mise à niveau du système d’exploitation. Si le module ASP.NET Core est installé avant la mise à niveau d’un système d’exploitation et si un pool d’applications est exécuté en mode 32 bits après la mise à niveau du système d’exploitation, ce problème se produit. Après une mise à niveau du système d’exploitation, réparez le Module ASP.NET Core. Voir [Installer le pack d’hébergement de base .NET](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle). Sélectionnez **Réparer** quand le programme d’installation est exécuté.
+Les fichiers autres que les fichiers de système d’exploitation dans le répertoire **C:\Windows\SysWOW64\inetsrv** ne sont pas conservés pendant la mise à niveau du système d’exploitation. Si le module ASP.NET Core est installé avant la mise à niveau d’un système d’exploitation et si un pool d’applications est exécuté en mode 32 bits après la mise à niveau du système d’exploitation, ce problème se produit. Après une mise à niveau du système d’exploitation, réparez le Module ASP.NET Core. Consultez [installer le bundle d’hébergement .net Core](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle). Sélectionnez **Réparer** quand le programme d’installation est exécuté.
 
 ## <a name="missing-site-extension-32-bit-x86-and-64-bit-x64-site-extensions-installed-or-wrong-process-bitness-set"></a>Extension de site manquante, extensions de site 32 bits (x86) et 64 bits (x64) installées ou nombre de bits de processus incorrect défini
 
 *S’applique aux applications hébergées par Azure App Services.*
 
-* **Navigateur:** ERREUR HTTP 500.0 - Défaillance de charge de gestionnaire en cours ANCM
+* **Navigateur :** Erreur HTTP 500,0-échec du chargement du gestionnaire in-process ANCM
 
-* **Carnet d’applications:** Invoquer hostfxr pour trouver le gestionnaire de demande de traitement a échoué sans trouver de dépendances indigènes. Le gestionnaire de requêtes in-process est introuvable. Sortie capturée en invoquant hostfxr: Il n’a pas été possible de trouver une version cadre compatible. Le framework spécifié « Microsoft.AspNetCore.App », version « {VERSION}-preview-\* » est introuvable. Échec du démarrage de l’application « /LM/W3SVC/1416782824/ROOT ». Code d’erreur : 0x8000ffff.
+* **Journal des applications :** Échec de l’appel de hostfxr pour rechercher le gestionnaire de demandes InProcess sans rechercher de dépendances natives. Le gestionnaire de requêtes in-process est introuvable. Sortie capturée de l’appel de hostfxr : il n’a pas été possible de trouver une version de Framework compatible. Le framework spécifié « Microsoft.AspNetCore.App », version « {VERSION}-preview-\* » est introuvable. Échec du démarrage de l’application « /LM/W3SVC/1416782824/ROOT ». Code d’erreur : 0x8000ffff.
 
-* **ASP.NET Module de base stdout Log:** Il n’a pas été possible de trouver une version cadre compatible. Le framework spécifié « Microsoft.AspNetCore.App », version « {VERSION}-preview-\* » est introuvable.
+* **Journal stdout du Module ASP.net Core :** Il n’était pas possible de trouver une version de Framework compatible. Le framework spécifié « Microsoft.AspNetCore.App », version « {VERSION}-preview-\* » est introuvable.
 
-* **ASP.NET Module de base Debug Log:** Invoquer hostfxr pour trouver le gestionnaire de demande de traitement a échoué sans trouver de dépendances indigènes. Cela signifie très probablement que l’application est mal configurée. Vérifiez les versions de Microsoft.NetCore.App et Microsoft.AspNetCore.App ciblées par l’application et installées sur la machine. Échec HRESULT retourné: 0x8000ffffff. Le gestionnaire de requêtes in-process est introuvable. Il n’a pas été possible de localiser une version compatible du framework. Le framework spécifié « Microsoft.AspNetCore.App », version « {VERSION}-preview-\* » est introuvable.
+* **Journal de débogage du Module ASP.net Core :** Échec de l’appel de hostfxr pour rechercher le gestionnaire de demandes InProcess sans rechercher de dépendances natives. Cela signifie très probablement que l’application est mal configurée. Vérifiez les versions de Microsoft.NetCore.App et Microsoft.AspNetCore.App ciblées par l’application et installées sur la machine. Échec de HRESULT retourné : 0x8000FFFF. Le gestionnaire de requêtes in-process est introuvable. Il n’a pas été possible de localiser une version compatible du framework. Le framework spécifié « Microsoft.AspNetCore.App », version « {VERSION}-preview-\* » est introuvable.
 
 Résolution des problèmes :
 
@@ -79,13 +85,13 @@ Pour plus d’informations, consultez <xref:host-and-deploy/azure-apps/index#ins
 
 ## <a name="an-x86-app-is-deployed-but-the-app-pool-isnt-enabled-for-32-bit-apps"></a>Une application x86 est déployée mais le pool d’applications n’est pas activé pour les applications 32 bits
 
-* **Navigateur:** ERREUR HTTP 500.30 - Échec du démarrage en cours de processus de l’ANCM
+* **Navigateur :** Erreur HTTP 500,30-échec du démarrage de ANCM in-process
 
-* **Carnet d’applications:** Application '/LM/W3SVC/5/ROOT' avec racine physique ''PATH'' a frappé l’exception gérée inattendue, le code d’exception '0xe0434352'. Pour plus d’informations, consultez les journaux stderr. L’application « /LM/W3SVC/5/ROOT » ayant pour racine physique « {PATH} » n’a pas pu charger clr et l’application managée. Sortie prématurée du thread de travail CLR
+* **Journal des applications :** L’application'/LM/W3SVC/5/ROOT’avec la racine physique' {PATH} 'a atteint une exception managée inattendue, code d’exception = ' 0xe0434352 '. Pour plus d’informations, consultez les journaux stderr. L’application « /LM/W3SVC/5/ROOT » ayant pour racine physique « {PATH} » n’a pas pu charger clr et l’application managée. Sortie prématurée du thread de travail CLR
 
-* **ASP.NET Module de base stdout Log:** Le fichier journal est créé mais vide.
+* **Journal stdout du Module ASP.net Core :** Le fichier journal est créé, mais vide.
 
-* **ASP.NET Module de base Debug Log:** Échec HRESULT retourné: 0x8007023e
+* **Journal de débogage du Module ASP.net Core :** Échec de HRESULT retourné : 0x8007023e
 
 Ce scénario est intercepté par le kit SDK au moment de la publication d’une application autonome. Le kit SDK génère une erreur si le RID ne correspond pas à la cible de la plateforme (par exemple, un RID `win10-x64` avec `<PlatformTarget>x86</PlatformTarget>` dans le fichier projet).
 
@@ -97,9 +103,9 @@ Pour un déploiement dépendant du framework x86 (`<PlatformTarget>x86</Platfor
 
 * **Navigateur :** Erreur HTTP 502.5 - Échec du processus
 
-* **Carnet d’applications:** Application 'MACHINE/WEBROOT/APPHOST/'ASSEMBLY' avec racine physique\{'C: PATH' n’a\' pas\{commencé le processus avec la ligne de commande '"C: PATH’ASSEMBLY'. 'exe’dll' ', ErrorCode '0x80004005 : ff.
+* **Journal des applications :** L’application’MACHINE/WEBROOT/APPHOST/{ASSEMBLy} 'avec la racine physique\{'C\' : Path} n’a pas pu démarrer le processus\{avec la ligne de commande' "c : Path} {assembly}. {exe | dll} "', ErrorCode = ' 0x80004005 : FF.
 
-* **ASP.NET Module de base stdout Log:** Exception non gérée: System.BadImageFormatException: Impossible de charger le fichier ou l’assemblage ''ASSEMBLY'.dll'. Tentative de chargement d’un programme au format incorrect.
+* **Journal stdout du Module ASP.net Core :** Exception non gérée : System. BadImageFormatException : impossible de charger le fichier ou l’assembly' {ASSEMBLy}. dll'. Tentative de chargement d’un programme au format incorrect.
 
 Résolution des problèmes :
 
@@ -109,13 +115,13 @@ Résolution des problèmes :
 
 ## <a name="uri-endpoint-wrong-or-stopped-website"></a>Point de terminaison d’URI incorrect ou site web arrêté
 
-* **Navigateur:** ERR_CONNECTION_REFUSED **-----** Incapable de se connecter
+* **Navigateur :** ERR_CONNECTION_REFUSED **--ou--** impossible de se connecter
 
 * **Journal des applications :** Aucune entrée
 
-* **ASP.NET Module de base stdout Log:** Le fichier journal n’est pas créé.
+* **Journal stdout du Module ASP.net Core :** Le fichier journal n’est pas créé.
 
-* **ASP.NET Module de base Debug Log:** Le fichier journal n’est pas créé.
+* **Journal de débogage du Module ASP.net Core :** Le fichier journal n’est pas créé.
 
 Résolution des problèmes :
 
@@ -137,9 +143,9 @@ Vérifiez que le rôle et les fonctionnalités appropriés sont activés. Consul
 
 * **Journal des applications :** Aucune entrée
 
-* **ASP.NET Module de base stdout Log:** Le fichier journal n’est pas créé.
+* **Journal stdout du Module ASP.net Core :** Le fichier journal n’est pas créé.
 
-* **ASP.NET Module de base Debug Log:** Le fichier journal n’est pas créé.
+* **Journal de débogage du Module ASP.net Core :** Le fichier journal n’est pas créé.
 
 Résolution des problèmes :
 
@@ -151,9 +157,9 @@ Consultez les **Paramètres de base** du site web IIS et le dossier d’applicat
 
 * **Journal des applications :** Aucune entrée
 
-* **ASP.NET Module de base stdout Log:** Le fichier journal n’est pas créé.
+* **Journal stdout du Module ASP.net Core :** Le fichier journal n’est pas créé.
 
-* **ASP.NET Module de base Debug Log:** Le fichier journal n’est pas créé.
+* **Journal de débogage du Module ASP.net Core :** Le fichier journal n’est pas créé.
 
 Résolution des problèmes :
 
@@ -165,7 +171,7 @@ Résolution des problèmes :
 
   Pour plus d’informations, consultez [Installer le bundle d’hébergement .NET Core](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle).
 
-* Vérifiez que **Pool d’applications** > **Modèle de processus** > **Identité** a la valeur **ApplicationPoolIdentity** ou que l’identité personnalisée dispose des autorisations appropriées pour accéder au dossier de déploiement de l’application.
+* Assurez-vous que le **modèle** > **Identity** de processus du **pool** > d’applications est défini sur **ApplicationPoolIdentity** ou que l’identité personnalisée dispose des autorisations appropriées pour accéder au dossier de déploiement de l’application.
 
 * Si vous avez désinstallé le bundle d’hébergement ASP.NET Core et installé une version antérieure du bundle d’hébergement, le fichier *applicationHost.config* ne contient pas de section pour le module ASP.NET Core. Ouvrez *applicationHost.config* sur *%windir%/System32/inetsrv/config* et recherchez le groupe de sections `<configuration><configSections><sectionGroup name="system.webServer">`. Si la section pour le module ASP.NET Core ne se trouve pas dans le groupe de sections, ajoutez l’élément de section :
 
@@ -177,13 +183,13 @@ Résolution des problèmes :
 
 ## <a name="incorrect-processpath-missing-path-variable-hosting-bundle-not-installed-systemiis-not-restarted-vc-redistributable-not-installed-or-dotnetexe-access-violation"></a>processPath incorrect, variable de chemin manquante, bundle d’hébergement non installé, système/IIS non redémarré, VC++ Redistributable non installé ou violation d’accès dotnet.exe
 
-* **Navigateur:** ERREUR HTTP 500.0 - Défaillance de charge de gestionnaire en cours ANCM
+* **Navigateur :** Erreur HTTP 500,0-échec du chargement du gestionnaire in-process ANCM
 
-* **Carnet d’applications:** Application 'MACHINE/WEBROOT/APPHOST/'ASSEMBLY' avec racine physique\{'C: PATH'\' n’a pas commencé le processus avec la ligne de commande '"..." ', ErrorCode '0x80070002 : 0. L’application « {PATH} » n’a pas pu démarrer. L’exécutable est introuvable sur « {PATH} ». Échec du démarrage de l’application « /LM/W3SVC/2/ROOT ». Code d’erreur : 0x8007023e.
+* **Journal des applications :** L’application’MACHINE/WEBROOT/APPHOST/{ASSEMBLy} 'avec la racine physique\{'C\' : Path} n’a pas pu démarrer le processus avec la ligne de commande' "{...}" ', ErrorCode = ' 0x80070002:0. L’application « {PATH} » n’a pas pu démarrer. L’exécutable est introuvable sur « {PATH} ». Échec du démarrage de l’application « /LM/W3SVC/2/ROOT ». Code d’erreur : 0x8007023e.
 
-* **ASP.NET Module de base stdout Log:** Le fichier journal n’est pas créé.
+* **Journal stdout du Module ASP.net Core :** Le fichier journal n’est pas créé.
 
-* **ASP.NET Module de base Debug Log:** Journal de l’événement : 'Application 'PATH'' n’a pas pu démarrer. L’exécutable est introuvable sur « {PATH} ». Échec HRESULT retourné: 0x8007023e
+* **Journal de débogage du Module ASP.net Core :** Journal des événements : «l’application' {PATH} 'n’a pas pu démarrer. L’exécutable est introuvable sur « {PATH} ». Échec de HRESULT retourné : 0x8007023e
 
 Résolution des problèmes :
 
@@ -207,13 +213,13 @@ Résolution des problèmes :
 
 ## <a name="incorrect-arguments-of-aspnetcore-element"></a>Arguments incorrects de l’élément \<aspNetCore>
 
-* **Navigateur:** ERREUR HTTP 500.0 - Défaillance de charge de gestionnaire en cours ANCM
+* **Navigateur :** Erreur HTTP 500,0-échec du chargement du gestionnaire in-process ANCM
 
-* **Carnet d’applications:** Invoquer hostfxr pour trouver le gestionnaire de demande de traitement a échoué sans trouver de dépendances indigènes. Cela signifie très probablement que l’application est mal configurée. Vérifiez les versions de Microsoft.NetCore.App et Microsoft.AspNetCore.App ciblées par l’application et installées sur la machine. Le gestionnaire de requêtes in-process est introuvable. Sortie capturée en invoquant hostfxr: Voulez-vous exécuter dotnet commandes SDK? Veuillez installer dotnet SDK à partir de: https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 N’a pas commencé l’application '/LM/W3SVC/3/ROOT', ErrorCode '0x8000ffff'.
+* **Journal des applications :** Échec de l’appel de hostfxr pour rechercher le gestionnaire de demandes InProcess sans rechercher de dépendances natives. Cela signifie très probablement que l’application est mal configurée. Vérifiez les versions de Microsoft.NetCore.App et Microsoft.AspNetCore.App ciblées par l’application et installées sur la machine. Le gestionnaire de requêtes in-process est introuvable. Sortie capturée de l’appel de hostfxr : souhaitiez-vous exécuter des commandes du kit de développement logiciel (SDK) dotnet ? Installez le kit de développement logiciel https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 (SDK) dotnet à partir de : échec du démarrage de l’application « /LM/W3SVC/3/root », ErrorCode « 0x8000FFFF ».
 
-* **ASP.NET Module de base stdout Log:** Voulez-vous exécuter des commandes dotnet SDK? Installez le kit SDK dotnet à partir de : https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409
+* **Journal stdout du Module ASP.net Core :** Souhaitiez-vous exécuter des commandes du kit de développement logiciel (SDK) dotnet ? Installez le kit SDK dotnet à partir de : https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409
 
-* **ASP.NET Module de base Debug Log:** Invoquer hostfxr pour trouver le gestionnaire de demande de traitement a échoué sans trouver de dépendances indigènes. Cela signifie très probablement que l’application est mal configurée. Vérifiez les versions de Microsoft.NetCore.App et Microsoft.AspNetCore.App ciblées par l’application et installées sur la machine. Échec HRESULT retourné: 0x8000ffffff ne pouvait pas trouver gestionnaire de demande de traitement. Sortie capturée en invoquant hostfxr: Voulez-vous exécuter dotnet commandes SDK? S’il vous plaît installer https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 dotnet SDK de: Failed HRESULT retourné: 0x8000ffff
+* **Journal de débogage du Module ASP.net Core :** Échec de l’appel de hostfxr pour rechercher le gestionnaire de demandes InProcess sans rechercher de dépendances natives. Cela signifie très probablement que l’application est mal configurée. Vérifiez les versions de Microsoft.NetCore.App et Microsoft.AspNetCore.App ciblées par l’application et installées sur la machine. Échec de HRESULT retourné : 0x8000FFFF n’a pas pu trouver le gestionnaire de demandes InProcess. Sortie capturée de l’appel de hostfxr : souhaitiez-vous exécuter des commandes du kit de développement logiciel (SDK) dotnet ? Installez le kit de développement logiciel https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 (SDK) dotnet à partir de : échec de HRESULT retourné : 0x8000FFFF
 
 Résolution des problèmes :
 
@@ -223,15 +229,15 @@ Résolution des problèmes :
 
 ## <a name="missing-net-core-shared-framework"></a>Framework partagé .NET Core manquant
 
-* **Navigateur:** ERREUR HTTP 500.0 - Défaillance de charge de gestionnaire en cours ANCM
+* **Navigateur :** Erreur HTTP 500,0-échec du chargement du gestionnaire in-process ANCM
 
-* **Carnet d’applications:** Invoquer hostfxr pour trouver le gestionnaire de demande de traitement a échoué sans trouver de dépendances indigènes. Cela signifie très probablement que l’application est mal configurée. Vérifiez les versions de Microsoft.NetCore.App et Microsoft.AspNetCore.App ciblées par l’application et installées sur la machine. Le gestionnaire de requêtes in-process est introuvable. Sortie capturée en invoquant hostfxr: Il n’a pas été possible de trouver une version cadre compatible. Le framework spécifié « Microsoft.AspNetCore.App », version « {VERSION} » est introuvable.
+* **Journal des applications :** Échec de l’appel de hostfxr pour rechercher le gestionnaire de demandes InProcess sans rechercher de dépendances natives. Cela signifie très probablement que l’application est mal configurée. Vérifiez les versions de Microsoft.NetCore.App et Microsoft.AspNetCore.App ciblées par l’application et installées sur la machine. Le gestionnaire de requêtes in-process est introuvable. Sortie capturée de l’appel de hostfxr : il n’a pas été possible de trouver une version de Framework compatible. Le framework spécifié « Microsoft.AspNetCore.App », version « {VERSION} » est introuvable.
 
 Échec du démarrage de l’application « /LM/W3SVC/5/ROOT ». Code d’erreur : 0x8000ffff.
 
-* **ASP.NET Module de base stdout Log:** Il n’a pas été possible de trouver une version cadre compatible. Le framework spécifié « Microsoft.AspNetCore.App », version « {VERSION} » est introuvable.
+* **Journal stdout du Module ASP.net Core :** Il n’était pas possible de trouver une version de Framework compatible. Le framework spécifié « Microsoft.AspNetCore.App », version « {VERSION} » est introuvable.
 
-* **ASP.NET Module de base Debug Log:** Échec HRESULT retourné: 0x8000ffffff
+* **Journal de débogage du Module ASP.net Core :** Échec de HRESULT retourné : 0x8000FFFF
 
 Résolution des problèmes :
 
@@ -243,9 +249,9 @@ Pour un déploiement dépendant du framework, vérifiez que le runtime appropri�
 
 * **Journal des applications :** Aucune entrée
 
-* **ASP.NET Module de base stdout Log:** Le fichier journal n’est pas créé.
+* **Journal stdout du Module ASP.net Core :** Le fichier journal n’est pas créé.
 
-* **ASP.NET Module de base Debug Log:** Le fichier journal n’est pas créé.
+* **Journal de débogage du Module ASP.net Core :** Le fichier journal n’est pas créé.
 
 Résolution des problèmes :
 
@@ -257,41 +263,41 @@ Vérifiez que le pool d’applications n’est pas à l’état *Arrêté*.
 
 * **Journal des applications :** Aucune entrée
 
-* **ASP.NET Module de base stdout Log:** Le fichier journal de l’application root est créé et affiche un fonctionnement normal. Le fichier journal de la sous-application n’est pas créé.
+* **Journal stdout du Module ASP.net Core :** Le fichier journal de l’application racine est créé et affiche un fonctionnement normal. Le fichier journal de la sous-application n’est pas créé.
 
-* **ASP.NET Module de base Debug Log:** Le fichier journal de l’application root est créé et affiche un fonctionnement normal. Le fichier journal de la sous-application n’est pas créé.
+* **Journal de débogage du Module ASP.net Core :** Le fichier journal de l’application racine est créé et affiche un fonctionnement normal. Le fichier journal de la sous-application n’est pas créé.
 
 Résolution des problèmes :
 
 Vérifiez que le fichier *web.config* de la sous-application n’inclut pas de section `<handlers>` ou que la sous-application n’hérite pas des gestionnaires de l’application parente.
 
-La section `<system.webServer>` de l’application parente de *web.config* est placée à l’intérieur d’un élément `<location>`. La <xref:System.Configuration.SectionInformation.InheritInChildApplications*> propriété est `false` configurée pour indiquer que les paramètres spécifiés dans [ \<l’emplacement>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) élément ne sont pas hérités par les applications qui résident dans une sous-direction de l’application mère. Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module>.
+La section `<system.webServer>` de l’application parente de *web.config* est placée à l’intérieur d’un élément `<location>`. La <xref:System.Configuration.SectionInformation.InheritInChildApplications*> propriété a la valeur `false` pour indiquer que les paramètres spécifiés dans l' [ \<emplacement>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) élément ne sont pas hérités par les applications qui résident dans un sous-répertoire de l’application parente. Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module>.
 
 ## <a name="stdout-log-path-incorrect"></a>Chemin du journal stdout incorrect
 
 * **Navigateur :** l’application répond normalement.
 
-* **Carnet d’applications:** Impossible de commencer la redirection stdout dans C: 'Program Files’IIS’Asp.Net Core Module’V2'aspnetcorev2.dll. Message d’exception : HRESULT 0x80070005 retourné à 'PATH’aspnetcoremodulev2'commonlib-fileoutmanager.cpp:84. Impossible d’arrêter la redirection de stdout dans C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll. Message d’exception : HRESULT 0x80070002 retourné à 'PATH'. Impossible de démarrer la redirection de stdout dans {CHEMIN}\aspnetcorev2_inprocess.dll.
+* **Journal des applications :** Impossible de démarrer la redirection stdout dans C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll. Message d’exception : HRESULT 0x80070005 renvoyé à {PATH} \aspnetcoremodulev2\commonlib\fileoutputmanager.cpp : 84. Impossible d’arrêter la redirection de stdout dans C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll. Message d’exception : HRESULT 0x80070002 retourné à {PATH}. Impossible de démarrer la redirection de stdout dans {CHEMIN}\aspnetcorev2_inprocess.dll.
 
-* **ASP.NET Module de base stdout Log:** Le fichier journal n’est pas créé.
+* **Journal stdout du Module ASP.net Core :** Le fichier journal n’est pas créé.
 
-* **ASP.NET Core Module debug Log:** Impossible de commencer la redirection stdout dans C: 'Program Files’IIS’Asp.Net Core Module’V2'aspnetcorev2.dll. Message d’exception : HRESULT 0x80070005 retourné à 'PATH’aspnetcoremodulev2'commonlib-fileoutmanager.cpp:84. Impossible d’arrêter la redirection de stdout dans C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll. Message d’exception : HRESULT 0x80070002 retourné à 'PATH'. Impossible de démarrer la redirection de stdout dans {CHEMIN}\aspnetcorev2_inprocess.dll.
+* **Journal de débogage du Module ASP.net Core :** Impossible de démarrer la redirection stdout dans C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll. Message d’exception : HRESULT 0x80070005 renvoyé à {PATH} \aspnetcoremodulev2\commonlib\fileoutputmanager.cpp : 84. Impossible d’arrêter la redirection de stdout dans C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll. Message d’exception : HRESULT 0x80070002 retourné à {PATH}. Impossible de démarrer la redirection de stdout dans {CHEMIN}\aspnetcorev2_inprocess.dll.
 
 Résolution des problèmes :
 
-* Le chemin `stdoutLogFile` spécifié dans l’élément `<aspNetCore>` de *web.config* n’existe pas. Pour plus d’informations, voir [ASP.NET Module de base : Création et réorientation de journal.](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection)
+* Le chemin `stdoutLogFile` spécifié dans l’élément `<aspNetCore>` de *web.config* n’existe pas. Pour plus d’informations, consultez [ASP.net Core Module : création et redirection de journaux](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection).
 
 * L’utilisateur du pool d’applications ne dispose pas d’un accès en écriture sur le chemin du journal stdout.
 
 ## <a name="application-configuration-general-issue"></a>Problème général lié à la configuration d’application
 
-* **Navigateur:** HTTP Erreur 500.0 - AnCM In-Process Handler Load Failure **--OR--** HTTP Error 500.30 - ANCM In-Process Start Failure
+* **Navigateur :** Erreur HTTP 500,0-échec de chargement du gestionnaire in-process **--ou--** erreur HTTP 500,30-échec de démarrage de ANCM in-process
 
-* **Carnet d’applications:** Variable
+* **Journal des applications :** Variable
 
-* **ASP.NET Module de base stdout Log:** Le fichier journal est créé mais vide ou créé avec des entrées normales jusqu’à ce que le point de l’application échoue.
+* **Journal stdout du Module ASP.net Core :** Le fichier journal est créé, mais vide ou créé avec des entrées normales jusqu’à ce que le point de l’application échoue.
 
-* **ASP.NET Module de base Debug Log:** Variable
+* **Journal de débogage du Module ASP.net Core :** Variable
 
 Résolution des problèmes :
 
@@ -306,11 +312,11 @@ Pour plus d'informations, voir les rubriques suivantes :
 
 ::: moniker range="< aspnetcore-2.2"
 
-Ce sujet décrit les erreurs courantes et fournit des conseils de dépannage pour des erreurs spécifiques lors de l’hébergement ASP.NET applications Core sur Azure Apps Service et IIS.
+Cette rubrique décrit les erreurs courantes et fournit des conseils de dépannage pour les erreurs spécifiques lors de l’hébergement d’applications ASP.NET Core sur Azure Apps service et IIS.
 
-Pour les conseils généraux <xref:test/troubleshoot-azure-iis>de dépannage, voir .
+Pour obtenir des instructions générales sur <xref:test/troubleshoot-azure-iis>la résolution des problèmes, consultez.
 
-Collectez les informations suivantes :
+Collectez les informations suivantes :
 
 * Comportement du navigateur (code d’état et message d’erreur)
 * Entrées du journal des événements de l’application
@@ -334,17 +340,17 @@ La liste d’erreurs de cette rubrique n’est pas exhaustive. Si vous rencontre
 
 Résolution des problèmes :
 
-Les fichiers autres que les fichiers de système d’exploitation dans le répertoire **C:\Windows\SysWOW64\inetsrv** ne sont pas conservés pendant la mise à niveau du système d’exploitation. Si le module ASP.NET Core est installé avant la mise à niveau d’un système d’exploitation et si un pool d’applications est exécuté en mode 32 bits après la mise à niveau du système d’exploitation, ce problème se produit. Après une mise à niveau du système d’exploitation, réparez le Module ASP.NET Core. Voir [Installer le pack d’hébergement de base .NET](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle). Sélectionnez **Réparer** quand le programme d’installation est exécuté.
+Les fichiers autres que les fichiers de système d’exploitation dans le répertoire **C:\Windows\SysWOW64\inetsrv** ne sont pas conservés pendant la mise à niveau du système d’exploitation. Si le module ASP.NET Core est installé avant la mise à niveau d’un système d’exploitation et si un pool d’applications est exécuté en mode 32 bits après la mise à niveau du système d’exploitation, ce problème se produit. Après une mise à niveau du système d’exploitation, réparez le Module ASP.NET Core. Consultez [installer le bundle d’hébergement .net Core](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle). Sélectionnez **Réparer** quand le programme d’installation est exécuté.
 
 ## <a name="missing-site-extension-32-bit-x86-and-64-bit-x64-site-extensions-installed-or-wrong-process-bitness-set"></a>Extension de site manquante, extensions de site 32 bits (x86) et 64 bits (x64) installées ou nombre de bits de processus incorrect défini
 
 *S’applique aux applications hébergées par Azure App Services.*
 
-* **Navigateur:** ERREUR HTTP 500.0 - Défaillance de charge de gestionnaire en cours ANCM
+* **Navigateur :** Erreur HTTP 500,0-échec du chargement du gestionnaire in-process ANCM
 
-* **Carnet d’applications:** Invoquer hostfxr pour trouver le gestionnaire de demande de traitement a échoué sans trouver de dépendances indigènes. Le gestionnaire de requêtes in-process est introuvable. Sortie capturée en invoquant hostfxr: Il n’a pas été possible de trouver une version cadre compatible. Le framework spécifié « Microsoft.AspNetCore.App », version « {VERSION}-preview-\* » est introuvable. Échec du démarrage de l’application « /LM/W3SVC/1416782824/ROOT ». Code d’erreur : 0x8000ffff.
+* **Journal des applications :** Échec de l’appel de hostfxr pour rechercher le gestionnaire de demandes InProcess sans rechercher de dépendances natives. Le gestionnaire de requêtes in-process est introuvable. Sortie capturée de l’appel de hostfxr : il n’a pas été possible de trouver une version de Framework compatible. Le framework spécifié « Microsoft.AspNetCore.App », version « {VERSION}-preview-\* » est introuvable. Échec du démarrage de l’application « /LM/W3SVC/1416782824/ROOT ». Code d’erreur : 0x8000ffff.
 
-* **ASP.NET Module de base stdout Log:** Il n’a pas été possible de trouver une version cadre compatible. Le framework spécifié « Microsoft.AspNetCore.App », version « {VERSION}-preview-\* » est introuvable.
+* **Journal stdout du Module ASP.net Core :** Il n’était pas possible de trouver une version de Framework compatible. Le framework spécifié « Microsoft.AspNetCore.App », version « {VERSION}-preview-\* » est introuvable.
 
 Résolution des problèmes :
 
@@ -365,11 +371,11 @@ Pour plus d’informations, consultez <xref:host-and-deploy/azure-apps/index#ins
 
 ## <a name="an-x86-app-is-deployed-but-the-app-pool-isnt-enabled-for-32-bit-apps"></a>Une application x86 est déployée mais le pool d’applications n’est pas activé pour les applications 32 bits
 
-* **Navigateur:** ERREUR HTTP 500.30 - Échec du démarrage en cours de processus de l’ANCM
+* **Navigateur :** Erreur HTTP 500,30-échec du démarrage de ANCM in-process
 
-* **Carnet d’applications:** Application '/LM/W3SVC/5/ROOT' avec racine physique ''PATH'' a frappé l’exception gérée inattendue, le code d’exception '0xe0434352'. Pour plus d’informations, consultez les journaux stderr. L’application « /LM/W3SVC/5/ROOT » ayant pour racine physique « {PATH} » n’a pas pu charger clr et l’application managée. Sortie prématurée du thread de travail CLR
+* **Journal des applications :** L’application'/LM/W3SVC/5/ROOT’avec la racine physique' {PATH} 'a atteint une exception managée inattendue, code d’exception = ' 0xe0434352 '. Pour plus d’informations, consultez les journaux stderr. L’application « /LM/W3SVC/5/ROOT » ayant pour racine physique « {PATH} » n’a pas pu charger clr et l’application managée. Sortie prématurée du thread de travail CLR
 
-* **ASP.NET Module de base stdout Log:** Le fichier journal est créé mais vide.
+* **Journal stdout du Module ASP.net Core :** Le fichier journal est créé, mais vide.
 
 Ce scénario est intercepté par le kit SDK au moment de la publication d’une application autonome. Le kit SDK génère une erreur si le RID ne correspond pas à la cible de la plateforme (par exemple, un RID `win10-x64` avec `<PlatformTarget>x86</PlatformTarget>` dans le fichier projet).
 
@@ -381,9 +387,9 @@ Pour un déploiement dépendant du framework x86 (`<PlatformTarget>x86</Platfor
 
 * **Navigateur :** Erreur HTTP 502.5 - Échec du processus
 
-* **Carnet d’applications:** Application 'MACHINE/WEBROOT/APPHOST/'ASSEMBLY' avec racine physique\{'C: PATH' n’a\' pas\{commencé le processus avec la ligne de commande '"C: PATH’ASSEMBLY'. 'exe’dll' ', ErrorCode '0x80004005 : ff.
+* **Journal des applications :** L’application’MACHINE/WEBROOT/APPHOST/{ASSEMBLy} 'avec la racine physique\{'C\' : Path} n’a pas pu démarrer le processus\{avec la ligne de commande' "c : Path} {assembly}. {exe | dll} "', ErrorCode = ' 0x80004005 : FF.
 
-* **ASP.NET Module de base stdout Log:** Exception non gérée: System.BadImageFormatException: Impossible de charger le fichier ou l’assemblage ''ASSEMBLY'.dll'. Tentative de chargement d’un programme au format incorrect.
+* **Journal stdout du Module ASP.net Core :** Exception non gérée : System. BadImageFormatException : impossible de charger le fichier ou l’assembly' {ASSEMBLy}. dll'. Tentative de chargement d’un programme au format incorrect.
 
 Résolution des problèmes :
 
@@ -393,11 +399,11 @@ Résolution des problèmes :
 
 ## <a name="uri-endpoint-wrong-or-stopped-website"></a>Point de terminaison d’URI incorrect ou site web arrêté
 
-* **Navigateur:** ERR_CONNECTION_REFUSED **-----** Incapable de se connecter
+* **Navigateur :** ERR_CONNECTION_REFUSED **--ou--** impossible de se connecter
 
 * **Journal des applications :** Aucune entrée
 
-* **ASP.NET Module de base stdout Log:** Le fichier journal n’est pas créé.
+* **Journal stdout du Module ASP.net Core :** Le fichier journal n’est pas créé.
 
 Résolution des problèmes :
 
@@ -419,7 +425,7 @@ Vérifiez que le rôle et les fonctionnalités appropriés sont activés. Consul
 
 * **Journal des applications :** Aucune entrée
 
-* **ASP.NET Module de base stdout Log:** Le fichier journal n’est pas créé.
+* **Journal stdout du Module ASP.net Core :** Le fichier journal n’est pas créé.
 
 Résolution des problèmes :
 
@@ -431,7 +437,7 @@ Consultez les **Paramètres de base** du site web IIS et le dossier d’applicat
 
 * **Journal des applications :** Aucune entrée
 
-* **ASP.NET Module de base stdout Log:** Le fichier journal n’est pas créé.
+* **Journal stdout du Module ASP.net Core :** Le fichier journal n’est pas créé.
 
 Résolution des problèmes :
 
@@ -443,7 +449,7 @@ Résolution des problèmes :
 
   Pour plus d’informations, consultez [Installer le bundle d’hébergement .NET Core](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle).
 
-* Vérifiez que **Pool d’applications** > **Modèle de processus** > **Identité** a la valeur **ApplicationPoolIdentity** ou que l’identité personnalisée dispose des autorisations appropriées pour accéder au dossier de déploiement de l’application.
+* Assurez-vous que le **modèle** > **Identity** de processus du **pool** > d’applications est défini sur **ApplicationPoolIdentity** ou que l’identité personnalisée dispose des autorisations appropriées pour accéder au dossier de déploiement de l’application.
 
 * Si vous avez désinstallé le bundle d’hébergement ASP.NET Core et installé une version antérieure du bundle d’hébergement, le fichier *applicationHost.config* ne contient pas de section pour le module ASP.NET Core. Ouvrez *applicationHost.config* sur *%windir%/System32/inetsrv/config* et recherchez le groupe de sections `<configuration><configSections><sectionGroup name="system.webServer">`. Si la section pour le module ASP.NET Core ne se trouve pas dans le groupe de sections, ajoutez l’élément de section :
 
@@ -457,9 +463,9 @@ Résolution des problèmes :
 
 * **Navigateur :** Erreur HTTP 502.5 - Échec du processus
 
-* **Carnet d’applications:** Application 'MACHINE/WEBROOT/APPHOST/'ASSEMBLY' avec racine physique\{'C: PATH'\' n’a pas commencé le processus avec la ligne de commande '"..." ', ErrorCode '0x80070002 : 0.
+* **Journal des applications :** L’application’MACHINE/WEBROOT/APPHOST/{ASSEMBLy} 'avec la racine physique\{'C\' : Path} n’a pas pu démarrer le processus avec la ligne de commande' "{...}" ', ErrorCode = ' 0x80070002:0.
 
-* **ASP.NET Module de base stdout Log:** Le fichier journal est créé mais vide.
+* **Journal stdout du Module ASP.net Core :** Le fichier journal est créé, mais vide.
 
 Résolution des problèmes :
 
@@ -485,9 +491,9 @@ Résolution des problèmes :
 
 * **Navigateur :** Erreur HTTP 502.5 - Échec du processus
 
-* **Carnet d’applications:** Application 'MACHINE/WEBROOT/APPHOST/'ASSEMBLY' avec racine physique\{'C: PATH'\' n’a pas commencé le processus avec la ligne de commande '"dotnet" . \{ASSEMBLY.dll', ErrorCode ' '0x80004005 : 80008081.
+* **Journal des applications :** L’application’MACHINE/WEBROOT/APPHOST/{ASSEMBLy} 'avec la racine physique\{'C\' : Path} n’a pas pu démarrer le processus avec la ligne de commande' « dotnet ». \{Assembly}. dll', ErrorCode = ' 0x80004005:80008081.
 
-* **ASP.NET Module de base stdout Log:** L’application d’exécution n’existe pas : 'PATH\{ASSEMBLY'.dll'
+* **Journal stdout du Module ASP.net Core :** L’application à exécuter n’existe pas : 'PATH\{assembly}. dll'
 
 Résolution des problèmes :
 
@@ -505,7 +511,7 @@ Pour un déploiement dépendant du framework, vérifiez que le runtime appropri�
 
 * **Journal des applications :** Aucune entrée
 
-* **ASP.NET Module de base stdout Log:** Le fichier journal n’est pas créé.
+* **Journal stdout du Module ASP.net Core :** Le fichier journal n’est pas créé.
 
 Résolution des problèmes :
 
@@ -517,7 +523,7 @@ Vérifiez que le pool d’applications n’est pas à l’état *Arrêté*.
 
 * **Journal des applications :** Aucune entrée
 
-* **ASP.NET Module de base stdout Log:** Le fichier journal de l’application root est créé et affiche un fonctionnement normal. Le fichier journal de la sous-application n’est pas créé.
+* **Journal stdout du Module ASP.net Core :** Le fichier journal de l’application racine est créé et affiche un fonctionnement normal. Le fichier journal de la sous-application n’est pas créé.
 
 Résolution des problèmes :
 
@@ -527,13 +533,13 @@ Vérifiez que le fichier *web.config* de la sous-application n’inclut pas de s
 
 * **Navigateur :** l’application répond normalement.
 
-* **Carnet d’applications:** Avertissement: Ne pouvait pas créer \\stdoutLogFile? \{PATH-path_doesnt_exist-stdout_ 'PROCESS ID''TIMESTAMP.log, ErrorCode '-2147024893.
+* **Journal des applications :** AVERTISSEMENT : impossible de créer stdoutLogFile \\? \{Path} \ path_doesnt_exist \ STDOUT_ {ID de processus} _ {timestamp}. log, ErrorCode =-2147024893.
 
-* **ASP.NET Module de base stdout Log:** Le fichier journal n’est pas créé.
+* **Journal stdout du Module ASP.net Core :** Le fichier journal n’est pas créé.
 
 Résolution des problèmes :
 
-* Le chemin `stdoutLogFile` spécifié dans l’élément `<aspNetCore>` de *web.config* n’existe pas. Pour plus d’informations, voir [ASP.NET Module de base : Création et réorientation de journal.](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection)
+* Le chemin `stdoutLogFile` spécifié dans l’élément `<aspNetCore>` de *web.config* n’existe pas. Pour plus d’informations, consultez [ASP.net Core Module : création et redirection de journaux](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection).
 
 * L’utilisateur du pool d’applications ne dispose pas d’un accès en écriture sur le chemin du journal stdout.
 
@@ -541,9 +547,9 @@ Résolution des problèmes :
 
 * **Navigateur :** Erreur HTTP 502.5 - Échec du processus
 
-* **Carnet d’applications:** Application 'MACHINE/WEBROOT/APPHOST/'ASSEMBLY' avec racine physique\{'C: PATH'\' a créé\{le\{processus avec la ligne de commande '"C: PATH' ASSEMBLY'. 'exe’dll' ' mais s’est écrasé ou n’a pas répondu ou n’a pas écouté sur le port donné ''PORT', ErrorCode '''''' 'ERROR CODE'
+* **Journal des applications :** L’application’MACHINE/WEBROOT/APPHOST/{ASSEMBLy} 'avec la racine physique\{'C\' : Path} a créé le processus avec\{la ligne\{de commande' "c : Path} assembly}. {exe | dll} "', mais l’incident est bloqué ou n’a pas répondu ou n’a pas écouté le port donné' {PORT} ', ErrorCode = ' {CODE d’erreur} '
 
-* **ASP.NET Module de base stdout Log:** Le fichier journal est créé mais vide.
+* **Journal stdout du Module ASP.net Core :** Le fichier journal est créé, mais vide.
 
 Résolution des problèmes :
 

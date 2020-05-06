@@ -1,20 +1,24 @@
 ---
-title: ASP.NET Core SignalR l’hébergement et la mise à l’échelle de la production
+title: ASP.NET Core SignalR de l’hébergement et de la mise à l’échelle de production
 author: bradygaster
-description: Découvrez comment éviter les problèmes de performances et de mise à l’échelle dans les applications qui utilisent ASP.NET Core SignalR.
+description: Découvrez comment éviter les problèmes de performances et de mise à l’échelle dans SignalRles applications qui utilisent ASP.net core.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/17/2020
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: 260e2f0c16288fec2e0a694d070f357529782d8d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 23ac2b1c80b9d73d6e9ac57f0ef774ac2ea54be4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78668153"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775074"
 ---
 # <a name="aspnet-core-signalr-hosting-and-scaling"></a>ASP.NET Core de l’hébergement et de la mise à l’échelle Signalr
 
@@ -52,7 +56,7 @@ Pour empêcher l’utilisation des ressources Signalr de provoquer des erreurs d
 
 Pour empêcher l’utilisation des ressources Signalr de provoquer des erreurs dans une application Signalr, augmentez la taille des instances pour limiter le nombre de connexions qu’un serveur doit gérer.
 
-## <a name="scale-out"></a>Montée en charge
+## <a name="scale-out"></a>Scale-out
 
 Une application qui utilise Signalr doit assurer le suivi de toutes ses connexions, ce qui crée des problèmes pour une batterie de serveurs. Ajoutez un serveur et il obtient les nouvelles connexions que les autres serveurs ne connaissent pas. Par exemple, Signalr sur chaque serveur dans le diagramme suivant n’a pas connaissance des connexions sur les autres serveurs. Lorsque Signalr sur l’un des serveurs souhaite envoyer un message à tous les clients, le message est envoyé uniquement aux clients connectés à ce serveur.
 
@@ -94,12 +98,12 @@ Les avantages du service Azure Signalr mentionnés précédemment sont les incon
   * Tous les clients sont configurés pour utiliser **uniquement** les WebSockets.
   * Le [paramètre SkipNegotiation](xref:signalr/configuration#configure-additional-options) est activé dans la configuration du client. 
    Une fois qu’une connexion est établie sur un serveur, la connexion doit rester sur ce serveur.
-* Une application SignalR doit monter en charge en fonction du nombre de clients, même si peu de messages sont envoyés.
-* Une application SignalR utilise beaucoup plus de ressources de connexion qu’une application Web sans SignalR.
+* Une SignalR application doit être montée en charge en fonction du nombre de clients, même si peu de messages sont envoyés.
+* Une SignalR application utilise beaucoup plus de ressources de connexion qu’une application SignalRWeb sans.
 
 ## <a name="iis-limitations-on-windows-client-os"></a>Limitations IIS sur le système d’exploitation client Windows
 
-Windows 10 et Windows 8. x sont des systèmes d’exploitation clients. IIS sur les systèmes d’exploitation clients est limité à 10 connexions simultanées. les connexions de SignalRsont les suivantes :
+Windows 10 et Windows 8. x sont des systèmes d’exploitation clients. IIS sur les systèmes d’exploitation clients est limité à 10 connexions simultanées. SignalRles connexions de sont :
 
 * Transitoire et fréquemment rétabli.
 * **N’est pas** supprimé immédiatement lorsqu’il n’est plus utilisé.
@@ -111,7 +115,7 @@ Les conditions précédentes permettent d’atteindre la limite de 10 connexions
 
 ## <a name="linux-with-nginx"></a>Linux avec Nginx
 
-Définissez les en-têtes `Connection` et `Upgrade` du proxy comme suit pour SignalR WebSocket :
+Définissez les en- `Connection` têtes `Upgrade` et du proxy sur les éléments SignalR suivants pour WebSocket :
 
 ```nginx
 proxy_set_header Upgrade $http_upgrade;
@@ -120,7 +124,7 @@ proxy_set_header Connection $connection_upgrade;
 
 Pour plus d’informations, consultez [Nginx comme proxy WebSocket](https://www.nginx.com/blog/websocket-nginx/).
 
-## <a name="third-party-opno-locsignalr-backplane-providers"></a>Fournisseurs de fond de panier de SignalR tiers
+## <a name="third-party-signalr-backplane-providers"></a>Fournisseurs de SignalR fond de panier tiers
 
 * [NCache](https://www.alachisoft.com/ncache/asp-net-core-signalr.html)
 * [Orléans](https://github.com/OrleansContrib/SignalR.Orleans)
@@ -129,5 +133,5 @@ Pour plus d’informations, consultez [Nginx comme proxy WebSocket](https://www.
 
 Pour plus d’informations, consultez les ressources suivantes :
 
-* [Documentation Azure SignalR service](/azure/azure-signalr/signalr-overview)
+* [Documentation SignalR du service Azure](/azure/azure-signalr/signalr-overview)
 * [Configurer un backplane ReDim](xref:signalr/redis-backplane)

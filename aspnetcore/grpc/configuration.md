@@ -1,60 +1,66 @@
 ---
-title: gRPC pour configuration .NET
+title: configuration de gRPC pour .NET
 author: jamesnk
 description: Découvrez comment configurer gRPC pour les applications .NET.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.custom: mvc
 ms.date: 02/26/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: grpc/configuration
-ms.openlocfilehash: 4c13c45ce745643c3cb089a1c984d2ef599db48b
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: 6e4259b538d32490d5281f189a04ab5a04dbcce5
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440829"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774689"
 ---
-# <a name="grpc-for-net-configuration"></a>gRPC pour configuration .NET
+# <a name="grpc-for-net-configuration"></a>configuration de gRPC pour .NET
 
-## <a name="configure-services-options"></a>Configurer les options de services
+## <a name="configure-services-options"></a>Configurer les options des services
 
-les services gRPC `AddGrpc` sont configurés avec dans *Startup.cs*. Le tableau suivant décrit les options de configuration des services gRPC :
+les services gRPC sont configurés avec `AddGrpc` dans *Startup.cs*. Le tableau suivant décrit les options de configuration des services gRPC :
 
 | Option | Valeur par défaut | Description |
 | ------ | ------------- | ----------- |
-| MaxSendMessageSize (en) | `null` | La taille maximale du message dans les octets qui peuvent être envoyés à partir du serveur. Tenter d’envoyer un message qui dépasse la taille maximale du message configurée entraîne une exception. Lorsqu’il `null`est configuré, la taille du message est illimitée. |
-| MaxReceiveMessageSize | 4 Mo | La taille maximale du message dans les octets qui peuvent être reçus par le serveur. Si le serveur reçoit un message qui dépasse cette limite, il lance une exception. L’augmentation de cette valeur permet au serveur de recevoir des messages plus grands, mais peut avoir un impact négatif sur la consommation de mémoire. Lorsqu’il `null`est configuré, la taille du message est illimitée. |
-| EnableDetailedErrors | `false` | Si `true`, des messages d’exception détaillés sont retournés aux clients lorsqu’une exception est projetée dans une méthode de service. Par défaut, il s’agit de `false`. Réglage `EnableDetailedErrors` `true` pour peut fuite d’informations sensibles. |
-| CompressionProvideurs | gzip | Une collection de fournisseurs de compressions utilisés pour comprimer et décompresser les messages. Les fournisseurs de compression personnalisés peuvent être créés et ajoutés à la collection. Les fournisseurs configurés par défaut prennent en charge la compression **de gzip.** |
-| <span style="word-break:normal;word-wrap:normal">RéponseCompressionAlgorithm</span> | `null` | L’algorithme de compression utilisé pour compresser les messages envoyés à partir du serveur. L’algorithme doit correspondre `CompressionProviders`à un fournisseur de compression dans . Pour que l’algorithme comprime une réponse, le client doit indiquer qu’il prend en charge l’algorithme en l’envoyant dans l’en-tête **grpc-accept-encoding.** |
-| RéponseCompressionLe niveau | `null` | Le niveau de compresse utilisé pour compresser les messages envoyés à partir du serveur. |
-| Intercepteurs | None | Une collection d’intercepteurs qui sont exécutés à chaque appel gRPC. Les intercepteurs sont exécutés dans l’ordre où ils sont enregistrés. Les intercepteurs configurés à l’échelle mondiale sont exécutés avant que les intercepteurs ne soient configurés pour un seul service. Pour plus d’informations sur les intercepteurs gRPC, voir [intercepteurs gRPC vs Middleware](xref:grpc/migration#grpc-interceptors-vs-middleware). |
+| MaxSendMessageSize | `null` | Taille maximale du message, en octets, qui peut être envoyée à partir du serveur. Toute tentative d’envoi d’un message qui dépasse la taille de message maximale configurée entraîne une exception. Lorsque la valeur `null`est, la taille du message est illimitée. |
+| MaxReceiveMessageSize | 4 Mo | Taille maximale du message, en octets, qui peut être reçue par le serveur. Si le serveur reçoit un message qui dépasse cette limite, il lève une exception. L’augmentation de cette valeur permet au serveur de recevoir des messages plus volumineux, mais peut avoir un impact négatif sur la consommation de mémoire. Lorsque la valeur `null`est, la taille du message est illimitée. |
+| EnableDetailedErrors | `false` | Si `true`la valeur est, les messages d’exception détaillés sont retournés aux clients lorsqu’une exception est levée dans une méthode de service. Par défaut, il s’agit de `false`. La `EnableDetailedErrors` définition `true` de sur peut entraîner une fuite d’informations sensibles. |
+| CompressionProviders | gzip | Collection de fournisseurs de compression utilisée pour compresser et décompresser des messages. Des fournisseurs de compression personnalisés peuvent être créés et ajoutés à la collection. Les fournisseurs configurés par défaut prennent en charge la compression **gzip** . |
+| <span style="word-break:normal;word-wrap:normal">ResponseCompressionAlgorithm</span> | `null` | Algorithme de compression utilisé pour compresser les messages envoyés à partir du serveur. L’algorithme doit correspondre à un fournisseur `CompressionProviders`de compression dans. Pour que l’algorithme compresse une réponse, le client doit indiquer qu’il prend en charge l’algorithme en l’envoyant dans l’en-tête **GRPC-Accept-Encoding** . |
+| ResponseCompressionLevel | `null` | Niveau de compression utilisé pour compresser les messages envoyés à partir du serveur. |
+| Intercepteurs | None | Collection d’intercepteurs exécutés avec chaque appel gRPC. Les intercepteurs sont exécutés dans l’ordre dans lequel ils sont inscrits. Les intercepteurs configurés globalement sont exécutés avant les intercepteurs configurés pour un service unique. Pour plus d’informations sur les intercepteurs gRPC, consultez [intercepteurs gRPC et intergiciel](xref:grpc/migration#grpc-interceptors-vs-middleware). |
 
-Les options peuvent être configurées pour tous `AddGrpc` les `Startup.ConfigureServices`services en fournissant un délégué aux options à l’appel :
+Les options peuvent être configurées pour tous les services en fournissant un délégué `AddGrpc` d’options `Startup.ConfigureServices`à l’appel dans :
 
 [!code-csharp[](~/grpc/configuration/sample/GrcpService/Startup.cs?name=snippet)]
 
-Les options pour un service unique `AddGrpc` remplacent les options `AddServiceOptions<TService>`globales fournies et peuvent être configurées à l’aide de :
+Les options pour un seul service remplacent les options globales `AddGrpc` fournies dans et peuvent être `AddServiceOptions<TService>`configurées à l’aide de :
 
 [!code-csharp[](~/grpc/configuration/sample/GrcpService/Startup2.cs?name=snippet)]
 
-## <a name="configure-client-options"></a>Configurer les options client
+## <a name="configure-client-options"></a>Configurer les options du client
 
-la configuration du client `GrpcChannelOptions`gRPC est définie sur . Le tableau suivant décrit les options de configuration des canaux gRPC :
+la configuration du `GrpcChannelOptions`client gRPC est activée. Le tableau suivant décrit les options de configuration des canaux gRPC :
 
 | Option | Valeur par défaut | Description |
 | ------ | ------------- | ----------- |
-| HttpClient | Nouvelle instance | L’utilisé `HttpClient` pour faire des appels gRPC. Un client peut être configuré pour configurer une coutume, `HttpClientHandler`ou ajouter des gestionnaires supplémentaires au pipeline HTTP pour les appels gRPC. Si `HttpClient` aucun n’est `HttpClient` spécifié, une nouvelle instance est créée pour le canal. Il sera automatiquement éliminé. |
-| Disposez-vous | `false` | Si `true`, `HttpClient` et un est `HttpClient` spécifié, alors l’instance sera éliminée lorsque l’est `GrpcChannel` éliminé. |
-| LoggerFactory | `null` | L’utilisé `LoggerFactory` par le client pour enregistrer des informations sur les appels gRPC. Une `LoggerFactory` instance peut être résolue à `LoggerFactory.Create`partir de l’injection de dépendance ou créée à l’aide de . Pour des exemples de configuration de l’exploitation forestière, voir <xref:grpc/diagnostics#grpc-client-logging>. |
-| MaxSendMessageSize (en) | `null` | La taille maximale du message dans les octets qui peuvent être envoyés par le client. Tenter d’envoyer un message qui dépasse la taille maximale du message configurée entraîne une exception. Lorsqu’il `null`est configuré, la taille du message est illimitée. |
-| <span style="word-break:normal;word-wrap:normal">MaxReceiveMessageSize</span> | 4 Mo | La taille maximale du message dans les octets qui peuvent être reçus par le client. Si le client reçoit un message qui dépasse cette limite, il jette une exception. L’augmentation de cette valeur permet au client de recevoir des messages plus grands, mais peut avoir un impact négatif sur la consommation de mémoire. Lorsqu’il `null`est configuré, la taille du message est illimitée. |
-| Informations d'identification | `null` | Une instance de `ChannelCredentials`. Les informations d’identification sont utilisées pour ajouter des métadonnées d’authentification aux appels gRPC. |
-| CompressionProvideurs | gzip | Une collection de fournisseurs de compressions utilisés pour comprimer et décompresser les messages. Les fournisseurs de compression personnalisés peuvent être créés et ajoutés à la collection. Les fournisseurs configurés par défaut prennent en charge la compression **de gzip.** |
+| HttpClient | Nouvelle instance | Utilisé `HttpClient` pour effectuer des appels gRPC. Un client peut être configuré pour configurer un personnalisé `HttpClientHandler`ou ajouter des gestionnaires supplémentaires au pipeline HTTP pour les appels gRPC. Si aucun `HttpClient` n’est spécifié, une nouvelle `HttpClient` instance est créée pour le canal. Elle est automatiquement supprimée. |
+| DisposeHttpClient | `false` | Si `true`, et un `HttpClient` est spécifié, l' `HttpClient` instance est supprimée lors de la suppression de `GrpcChannel` . |
+| LoggerFactory | `null` | Utilisé `LoggerFactory` par le client pour enregistrer des informations sur les appels gRPC. Une `LoggerFactory` instance peut être résolue à partir de l’injection `LoggerFactory.Create`de dépendances ou créée à l’aide de. Pour obtenir des exemples de configuration de la <xref:grpc/diagnostics#grpc-client-logging>journalisation, consultez. |
+| MaxSendMessageSize | `null` | Taille maximale du message, en octets, qui peut être envoyée à partir du client. Toute tentative d’envoi d’un message qui dépasse la taille de message maximale configurée entraîne une exception. Lorsque la valeur `null`est, la taille du message est illimitée. |
+| <span style="word-break:normal;word-wrap:normal">MaxReceiveMessageSize</span> | 4 Mo | Taille maximale du message, en octets, qui peut être reçue par le client. Si le client reçoit un message qui dépasse cette limite, il lève une exception. L’augmentation de cette valeur permet au client de recevoir des messages plus volumineux, mais peut avoir un impact négatif sur la consommation de mémoire. Lorsque la valeur `null`est, la taille du message est illimitée. |
+| Informations d'identification | `null` | Une instance de `ChannelCredentials`. Les informations d’identification sont utilisées pour ajouter des métadonnées d’authentification à des appels gRPC. |
+| CompressionProviders | gzip | Collection de fournisseurs de compression utilisée pour compresser et décompresser des messages. Des fournisseurs de compression personnalisés peuvent être créés et ajoutés à la collection. Les fournisseurs configurés par défaut prennent en charge la compression **gzip** . |
 
 Le code suivant :
 
-* Définit la taille maximale d’envoyer et de recevoir le message sur le canal.
+* Définit la taille maximale des messages d’envoi et de réception sur le canal.
 * Crée un client.
 
 [!code-csharp[](~/grpc/configuration/sample/Program.cs?name=snippet&highlight=3-8)]

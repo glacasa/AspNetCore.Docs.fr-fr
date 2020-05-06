@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/06/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/file-providers
-ms.openlocfilehash: 25607bd534cae05a6c6b11fa6d8902faa3c0684c
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 2f1151d7854aeeb3e315d0de2b0be5267fe2e8f0
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80751106"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776283"
 ---
 # <a name="file-providers-in-aspnet-core"></a>Fournisseurs de fichiers dans ASP.NET Core
 
@@ -20,14 +26,14 @@ Par [Steve Smith](https://ardalis.com/)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core fournit un accès au système de fichiers en utilisant des fournisseurs de fichiers. Les fournisseurs de fichiers sont utilisés dans l’ensemble du cadre ASP.NET Core. Par exemple :
+ASP.NET Core fournit un accès au système de fichiers en utilisant des fournisseurs de fichiers. Les fournisseurs de fichiers sont utilisés dans l’infrastructure ASP.NET Core. Par exemple :
 
-* <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment>expose la racine de [contenu](xref:fundamentals/index#content-root) et `IFileProvider` la racine [web](xref:fundamentals/index#web-root) de l’application en tant que types.
+* <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment>expose la racine de [contenu](xref:fundamentals/index#content-root) et la [racine Web](xref:fundamentals/index#web-root) de `IFileProvider` l’application en tant que types.
 * [L’intergiciel (middleware) de fichiers statiques](xref:fundamentals/static-files) utilise des fournisseurs de fichiers pour localiser les fichiers statiques.
 * [Razor](xref:mvc/views/razor) utilise des fournisseurs de fichiers pour localiser des pages et des vues.
 * Les outils .NET Core utilisent des fournisseurs de fichiers et des modèles d’utilisation des caractères génériques pour spécifier les fichiers qui doivent être publiés.
 
-[Afficher ou télécharger le code de l’échantillon](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/file-providers/samples) ([comment télécharger](xref:index#how-to-download-a-sample))
+[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/file-providers/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
 ## <a name="file-provider-interfaces"></a>Interfaces de fournisseur de fichiers
 
@@ -45,9 +51,9 @@ L’interface principale est <xref:Microsoft.Extensions.FileProviders.IFileProvi
 * <xref:Microsoft.Extensions.FileProviders.IFileInfo.Length> (en octets)
 * <xref:Microsoft.Extensions.FileProviders.IFileInfo.LastModified>date
 
-Vous pouvez lire à <xref:Microsoft.Extensions.FileProviders.IFileInfo.CreateReadStream*?displayProperty=nameWithType> partir du fichier en utilisant la méthode.
+Vous pouvez lire à partir du fichier à <xref:Microsoft.Extensions.FileProviders.IFileInfo.CreateReadStream*?displayProperty=nameWithType> l’aide de la méthode.
 
-*L’application d’échantillons FileProviderSample* montre comment `Startup.ConfigureServices` configurer un fournisseur de fichiers pour une utilisation dans toute l’application via injection [de dépendance](xref:fundamentals/dependency-injection).
+L’exemple d’application *FileProviderSample* montre comment configurer un fournisseur de fichiers `Startup.ConfigureServices` dans pour une utilisation dans l’ensemble de l’application via l' [injection de dépendances](xref:fundamentals/dependency-injection).
 
 ## <a name="file-provider-implementations"></a>Implémentations de fournisseur de fichiers
 
@@ -55,17 +61,17 @@ Le tableau suivant répertorie les implémentations de `IFileProvider`.
 
 | Implémentation | Description |
 | -------------- | ----------- |
-| [CompositeFileProvider](#compositefileprovider) | Utilisé pour fournir un accès combiné aux fichiers et annuaires d’un ou de plusieurs autres fournisseurs. |
-| [ManifestEmbeddedFileProvider](#manifestembeddedfileprovider) | Utilisé pour accéder aux fichiers intégrés dans les assemblages. |
+| [CompositeFileProvider](#compositefileprovider) | Utilisé pour fournir un accès combiné aux fichiers et aux répertoires à partir d’un ou de plusieurs autres fournisseurs. |
+| [ManifestEmbeddedFileProvider](#manifestembeddedfileprovider) | Utilisé pour accéder aux fichiers incorporés dans les assemblys. |
 | [PhysicalFileProvider](#physicalfileprovider) | Utilisé pour accéder aux fichiers physiques du système. |
 
 ### <a name="physicalfileprovider"></a>PhysicalFileProvider
 
 La classe <xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider> fournit un accès au système de fichiers physique. `PhysicalFileProvider` utilise le type <xref:System.IO.File?displayProperty=fullName> (pour le fournisseur physique) et définissant comme portée tous les chemins d’un répertoire et de ses enfants. Cette portée empêche l’accès au système de fichiers en dehors du répertoire spécifié et ses enfants. Le scénario le plus courant pour créer et utiliser un `PhysicalFileProvider` consiste à demander un `IFileProvider` dans un constructeur par le biais de l’[injection de dépendances](xref:fundamentals/dependency-injection).
 
-Lors de l’instantanéise de ce fournisseur directement, un chemin d’annuaire absolu est nécessaire et sert de voie de base pour toutes les demandes faites à l’aide du fournisseur. Les motifs glob ne sont pas pris en charge dans le chemin du répertoire.
+Lors de l’instanciation de ce fournisseur directement, un chemin d’accès absolu au répertoire est requis et sert de chemin de base pour toutes les requêtes effectuées à l’aide du fournisseur. Les modèles glob ne sont pas pris en charge dans le chemin d’accès du répertoire.
 
-Le code suivant montre `PhysicalFileProvider` comment utiliser pour obtenir le contenu de l’annuaire et les informations de fichier:
+Le code suivant montre comment utiliser `PhysicalFileProvider` pour obtenir le contenu du répertoire et les informations sur le fichier :
 
 ```csharp
 var provider = new PhysicalFileProvider(applicationRoot);
@@ -80,9 +86,9 @@ Types dans l’exemple précédent :
 * `contents` est une `IDirectoryContents`.
 * `fileInfo` est une `IFileInfo`.
 
-Le fournisseur de fichiers peut être utilisé pour itérer au sein du répertoire spécifié par `applicationRoot` ou pour appeler `GetFileInfo` afin d’obtenir des informations sur un fichier. Les motifs glob ne `GetFileInfo` peuvent pas être transmis à la méthode. Le fournisseur de fichiers n’a pas accès en dehors du répertoire `applicationRoot`.
+Le fournisseur de fichiers peut être utilisé pour itérer au sein du répertoire spécifié par `applicationRoot` ou pour appeler `GetFileInfo` afin d’obtenir des informations sur un fichier. Les modèles glob ne peuvent pas être `GetFileInfo` passés à la méthode. Le fournisseur de fichiers n’a pas accès en dehors du répertoire `applicationRoot`.
 
-*L’application d’échantillon FileProviderSample* crée le fournisseur dans la `Startup.ConfigureServices` méthode en utilisant <xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootFileProvider?displayProperty=nameWithType>:
+L’exemple d’application *FileProviderSample* crée le fournisseur dans `Startup.ConfigureServices` la méthode <xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootFileProvider?displayProperty=nameWithType>à l’aide de :
 
 ```csharp
 var physicalProvider = _env.ContentRootFileProvider;
@@ -92,16 +98,16 @@ var physicalProvider = _env.ContentRootFileProvider;
 
 <xref:Microsoft.Extensions.FileProviders.ManifestEmbeddedFileProvider> est utilisé pour accéder à des fichiers incorporés dans des assemblys. `ManifestEmbeddedFileProvider` utilise un manifeste compilé dans l’assembly pour reconstruire les chemins d’accès d’origine des fichiers intégrés.
 
-Pour générer un manifeste des fichiers intégrés :
+Pour générer un manifeste des fichiers incorporés :
 
-1. Ajoutez le package [Microsoft.Extensions.FileProviders.Embedded](https://www.nuget.org/packages/Microsoft.Extensions.FileProviders.Embedded) NuGet à votre projet.
-1. Attribuez à la propriété `<GenerateEmbeddedFilesManifest>` la valeur `true`. Spécifiez les fichiers à intégrer à [ \<EmbeddedResource>](/dotnet/core/tools/csproj#default-compilation-includes-in-net-core-projects):
+1. Ajoutez le package NuGet [Microsoft. extensions. FileProviders. Embedded](https://www.nuget.org/packages/Microsoft.Extensions.FileProviders.Embedded) à votre projet.
+1. Attribuez à la propriété `<GenerateEmbeddedFilesManifest>` la valeur `true`. Spécifiez les fichiers à incorporer avec [ \<EmbeddedResource>](/dotnet/core/tools/csproj#default-compilation-includes-in-net-core-projects):
 
     [!code-xml[](file-providers/samples/3.x/FileProviderSample/FileProviderSample.csproj?highlight=5,13)]
 
 Utilisez les [modèles glob](#glob-patterns) pour spécifier un ou plusieurs fichiers à incorporer dans l’assembly.
 
-*L’application d’échantillon FileProviderSample* crée un `ManifestEmbeddedFileProvider` assemblage et passe l’assemblage actuellement exécutant à son constructeur.
+L’exemple d’application *FileProviderSample* crée `ManifestEmbeddedFileProvider` un et passe l’assembly en cours d’exécution à son constructeur.
 
 *Startup.cs*:
 
@@ -126,23 +132,23 @@ Des surcharges supplémentaires vous permettent de :
 
 <xref:Microsoft.Extensions.FileProviders.CompositeFileProvider> combine des instances `IFileProvider`, en exposant une interface unique qui permet d’utiliser des fichiers de différents fournisseurs. Quand vous créez `CompositeFileProvider`, vous passez une ou plusieurs instances `IFileProvider` à son constructeur.
 
-Dans *l’application d’échantillon FileProviderSample,* a `PhysicalFileProvider` et un `ManifestEmbeddedFileProvider` fichier de fournir à un `CompositeFileProvider` enregistrement dans le conteneur de service de l’application. Le code suivant se trouve `Startup.ConfigureServices` dans la méthode du projet :
+Dans l’exemple d’application *FileProviderSample* , `PhysicalFileProvider` un et `ManifestEmbeddedFileProvider` un fournissent des fichiers `CompositeFileProvider` à un inscrit dans le conteneur de services de l’application. Le code suivant se trouve dans la méthode du `Startup.ConfigureServices` projet :
 
 [!code-csharp[](file-providers/samples/3.x/FileProviderSample/Startup.cs?name=snippet1)]
 
 ## <a name="watch-for-changes"></a>Suivre les modifications apportées
 
-La <xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*?displayProperty=nameWithType> méthode fournit un scénario pour regarder un ou plusieurs fichiers ou répertoires pour les changements. La méthode `Watch` :
+La <xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*?displayProperty=nameWithType> méthode fournit un scénario pour regarder un ou plusieurs fichiers ou répertoires pour les modifications. La méthode `Watch` :
 
-* Accepte une chaîne de trajectoire de fichier, qui peut utiliser [des modèles de glob](#glob-patterns) pour spécifier plusieurs fichiers.
+* Accepte une chaîne de chemin d’accès de fichier, qui peut utiliser des [modèles glob](#glob-patterns) pour spécifier plusieurs fichiers.
 * Retourne un <xref:Microsoft.Extensions.Primitives.IChangeToken>.
 
-Le jeton de changement qui en résulte expose :
+Le jeton de modification qui en résulte expose les éléments suivants :
 
-* <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged>&ndash;Une propriété qui peut être inspectée pour déterminer si un changement s’est produit.
-* <xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*>&ndash;Appelé lorsque des modifications sont détectées à la chaîne de chemin spécifiée. Chaque jeton de modification appelle uniquement son rappel associé en réponse à un changement unique. Pour activer une surveillance constante, vous pouvez utiliser une <xref:System.Threading.Tasks.TaskCompletionSource`1> comme indiqué ci-dessous, ou recréer des instances `IChangeToken` en réponse aux changements.
+* <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged>&ndash;Propriété qui peut être inspectée pour déterminer si une modification s’est produite.
+* <xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*>&ndash;Appelé lorsque des modifications sont détectées dans la chaîne de chemin d’accès spécifiée. Chaque jeton de modification appelle uniquement son rappel associé en réponse à un changement unique. Pour activer une surveillance constante, vous pouvez utiliser une <xref:System.Threading.Tasks.TaskCompletionSource`1> comme indiqué ci-dessous, ou recréer des instances `IChangeToken` en réponse aux changements.
 
-*L’application d’échantillon WatchConsole* écrit un message chaque fois qu’un fichier *.txt* dans le répertoire *TextFiles* est modifié :
+L’exemple d’application *WatchConsole* écrit un message chaque fois qu’un fichier *. txt* dans le répertoire *Textfiles* est modifié :
 
 [!code-csharp[](file-providers/samples/3.x/WatchConsole/Program.cs?name=snippet1)]
 
@@ -158,14 +164,14 @@ Les chemins de système de fichiers utilisent des modèles à caractères géné
 **`**`**  
 Établit une correspondance avec n’importe quel élément sur plusieurs niveaux de répertoire. Peut être utilisé pour établir une correspondance avec plusieurs fichiers dans une hiérarchie de répertoires de manière récursive.
 
-Le tableau suivant fournit des exemples communs de modèles de glob.
+Le tableau suivant fournit des exemples courants de modèles glob.
 
 |Modèle  |Description  |
 |---------|---------|
 |`directory/file.txt`|Établit une correspondance avec un fichier spécifique dans un répertoire spécifique.|
 |`directory/*.txt`|Établit une correspondance avec tous les fichiers ayant l’extension *.txt* dans un répertoire spécifique.|
-|`directory/*/appsettings.json`|Correspond à tous les fichiers *appsettings.json* dans les répertoires exactement un niveau en dessous du dossier *d’annuaire.*|
-|`directory/**/*.txt`|Correspond à tous les fichiers avec une extension *.txt* trouvé n’importe où sous le dossier *d’annuaire.*|
+|`directory/*/appsettings.json`|Met en correspondance tous les fichiers *appSettings. JSON* des répertoires exactement un niveau sous le dossier du *répertoire* .|
+|`directory/**/*.txt`|Correspond à tous les fichiers avec une extension *. txt* située n’importe où dans le dossier du *répertoire* .|
 
 ::: moniker-end
 
@@ -173,12 +179,12 @@ Le tableau suivant fournit des exemples communs de modèles de glob.
 
 ASP.NET Core fournit un accès au système de fichiers en utilisant des fournisseurs de fichiers. Des fournisseurs de fichiers sont utilisés dans l’infrastructure ASP.NET Core :
 
-* <xref:Microsoft.Extensions.Hosting.IHostingEnvironment>expose la racine de [contenu](xref:fundamentals/index#content-root) et `IFileProvider` la racine [web](xref:fundamentals/index#web-root) de l’application en tant que types.
+* <xref:Microsoft.Extensions.Hosting.IHostingEnvironment>expose la racine de [contenu](xref:fundamentals/index#content-root) et la [racine Web](xref:fundamentals/index#web-root) de `IFileProvider` l’application en tant que types.
 * [L’intergiciel (middleware) de fichiers statiques](xref:fundamentals/static-files) utilise des fournisseurs de fichiers pour localiser les fichiers statiques.
 * [Razor](xref:mvc/views/razor) utilise des fournisseurs de fichiers pour localiser des pages et des vues.
 * Les outils .NET Core utilisent des fournisseurs de fichiers et des modèles d’utilisation des caractères génériques pour spécifier les fichiers qui doivent être publiés.
 
-[Afficher ou télécharger le code de l’échantillon](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/file-providers/samples) ([comment télécharger](xref:index#how-to-download-a-sample))
+[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/file-providers/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
 ## <a name="file-provider-interfaces"></a>Interfaces de fournisseur de fichiers
 
@@ -242,7 +248,7 @@ var physicalProvider = _env.ContentRootFileProvider;
 
 <xref:Microsoft.Extensions.FileProviders.ManifestEmbeddedFileProvider> est utilisé pour accéder à des fichiers incorporés dans des assemblys. `ManifestEmbeddedFileProvider` utilise un manifeste compilé dans l’assembly pour reconstruire les chemins d’accès d’origine des fichiers intégrés.
 
-Pour générer un manifeste des fichiers incorporés, définissez la propriété `<GenerateEmbeddedFilesManifest>` sur `true`. Spécifier les fichiers à intégrer avec [ &lt;EmbeddedResource&gt;](/dotnet/core/tools/csproj#default-compilation-includes-in-net-core-projects):
+Pour générer un manifeste des fichiers incorporés, définissez la propriété `<GenerateEmbeddedFilesManifest>` sur `true`. Spécifiez les fichiers à incorporer avec [ &lt;EmbeddedResource&gt;](/dotnet/core/tools/csproj#default-compilation-includes-in-net-core-projects):
 
 [!code-csharp[](file-providers/samples/2.x/FileProviderSample/FileProviderSample.csproj?highlight=6,14)]
 
@@ -281,8 +287,8 @@ Dans l’exemple d’application, un `PhysicalFileProvider` et un `ManifestEmbed
 
 La méthode [IFileProvider.Watch](xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*) offre un moyen d’observer un ou plusieurs fichiers ou répertoires afin de détecter les changements. `Watch` accepte une chaîne de chemin, qui peut utiliser des [modèles d’utilisation des caractères génériques](#glob-patterns) pour spécifier plusieurs fichiers. `Watch`Retourne un <xref:Microsoft.Extensions.Primitives.IChangeToken>. Le jeton de modification expose :
 
-* <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged>&ndash; Une propriété qui peut être inspectée pour déterminer si un changement s’est produit.
-* <xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*>&ndash; Appelé lorsque des modifications sont détectées à la chaîne de chemin spécifiée. Chaque jeton de modification appelle uniquement son rappel associé en réponse à un changement unique. Pour activer une surveillance constante, vous pouvez utiliser une <xref:System.Threading.Tasks.TaskCompletionSource`1> comme indiqué ci-dessous, ou recréer des instances `IChangeToken` en réponse aux changements.
+* <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged>&ndash; Propriété qui peut être inspectée pour déterminer si une modification s’est produite.
+* <xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*>&ndash; Appelé lorsque des modifications sont détectées dans la chaîne de chemin d’accès spécifiée. Chaque jeton de modification appelle uniquement son rappel associé en réponse à un changement unique. Pour activer une surveillance constante, vous pouvez utiliser une <xref:System.Threading.Tasks.TaskCompletionSource`1> comme indiqué ci-dessous, ou recréer des instances `IChangeToken` en réponse aux changements.
 
 Dans l’exemple d’application, l’application console *WatchConsole* est configurée pour afficher un message chaque fois qu’un fichier texte est modifié :
 

@@ -5,26 +5,32 @@ description: Découvrez les nouvelles fonctionnalités d’ASP.NET Core 2.0.
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: aspnetcore-2.0
-ms.openlocfilehash: 5ca43bab1496aa9fda65282cbb0b1177ad8689eb
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: b1fc486633ab7c7d7bee4f8981a978747b2890da
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78667257"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775815"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>Nouveautés d’ASP.NET Core 2.0
 
 Cet article met en évidence les modifications les plus importantes dans ASP.NET 2.0 Core et fournit des liens vers la documentation appropriée.
 
-## <a name="razor-pages"></a>Pages Razor
+## <a name="razor-pages"></a>RazorPages
 
-Les pages Razor sont une nouvelle fonctionnalité d’ASP.NET Core MVC qui permet de développer des scénarios orientés page de façon plus simple et plus productive.
+RazorPages est une nouvelle fonctionnalité de ASP.NET Core MVC qui rend le codage des scénarios orientés page plus facile et plus productif.
 
 Pour plus d’informations, consultez l’introduction et le didacticiel :
 
-* [Présentation des pages Razor](xref:razor-pages/index)
-* [Bien démarrer avec les pages Razor](xref:tutorials/razor-pages/razor-pages-start)
+* [Présentation des Razor pages](xref:razor-pages/index)
+* [Prise en main Razor des pages](xref:tutorials/razor-pages/razor-pages-start)
 
 ## <a name="aspnet-core-metapackage"></a>Métapackage ASP.NET Core
 
@@ -64,15 +70,15 @@ De nouveaux modèles sont disponibles pour configurer l’authentification pour 
 
 Pour plus d’informations sur l’état de la documentation planifiée, consultez le [problème GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/3054).
 
-## <a name="identity-update"></a>Mise à jour d’Identity
+## <a name="identity-update"></a>Identity update
 
-Nous avons simplifié la génération d’API web sécurisées à l’aide d’Identity dans ASP.NET Core 2.0. Vous pouvez acquérir des jetons d’accès pour accéder à vos API web à l’aide de la [bibliothèque d’authentification Microsoft (MSAL, Microsoft Authentication Library)](https://www.nuget.org/packages/Microsoft.Identity.Client).
+Nous avons simplifié la création d’API Web sécurisées à Identity l’aide de dans ASP.net Core 2,0. Vous pouvez acquérir des jetons d’accès pour accéder à vos API web à l’aide de la [bibliothèque d’authentification Microsoft (MSAL, Microsoft Authentication Library)](https://www.nuget.org/packages/Microsoft.Identity.Client).
 
 Pour plus d’informations sur les modifications apportées à l’authentification dans la version 2.0, consultez les ressources suivantes :
 
 * [Account confirmation and password recovery in ASP.NET Core (Confirmation de compte et récupération de mot de passe dans ASP.NET Core)](xref:security/authentication/accconfirm)
 * [Activer la génération de code QR pour les applications d’authentification dans ASP.NET Core](xref:security/authentication/identity-enable-qrcodes)
-* [Migrer l’authentification et l’identité vers ASP.NET Core 2.0](xref:migration/1x-to-2x/identity-2x)
+* [Migrer l' Identity authentification et vers ASP.net Core 2,0](xref:migration/1x-to-2x/identity-2x)
 
 ## <a name="spa-templates"></a>Modèles SPA
 
@@ -104,7 +110,7 @@ var entityTag = new EntityTagHeaderValue("\"MyCalculatedEtagValue\"");
 return File(data, "text/plain", "downloadName.txt", lastModified: DateTime.UtcNow.AddSeconds(-5), entityTag: entityTag);
 ```
 
-Le fichier retourné à vos visiteurs a `ETag` les `LastModified` en-têtes HTTP appropriés pour le et les valeurs.
+Le fichier retourné à vos visiteurs possède les en-têtes HTTP appropriés pour `ETag` les `LastModified` valeurs et.
 
 Si un visiteur de l’application demande du contenu avec un en-tête de requête de plage, ASP.NET Core reconnaît la requête et gère l’en-tête. Si le contenu demandé peut être remis partiellement, ASP.NET Core retourne uniquement le jeu d’octets demandé. Vous n’avez pas besoin d’écrire des gestionnaires spéciaux dans vos méthodes pour adapter ou gérer cette fonctionnalité. Elle est gérée automatiquement pour vous.
 
@@ -124,13 +130,13 @@ Pour plus d’informations, consultez [Empêcher les attaques par falsification 
 
 ## <a name="automatic-precompilation"></a>Précompilation automatique
 
-La précompilation de vue Razor est activée par défaut pendant la publication, ce qui réduit la taille de sortie de publication et la durée de démarrage de l’application.
+Razorla précompilation de la vue est activée lors de la publication par défaut, ce qui réduit la taille de sortie de publication et le temps de démarrage de l’application.
 
-Pour plus d’informations, consultez [Précompilation et compilation de vues Razor dans ASP.NET Core](xref:mvc/views/view-compilation).
+Pour plus d’informations, consultez [ Razor afficher la compilation et la précompilation dans ASP.net Core](xref:mvc/views/view-compilation).
 
-## <a name="razor-support-for-c-71"></a>Prise en charge de Razor pour C# 7.1
+## <a name="razor-support-for-c-71"></a>Razorprise en charge de C# 7,1
 
-Le moteur de vue Razor a été mis à jour pour fonctionner avec le nouveau compilateur Roslyn. Cela comprend la prise en charge des fonctionnalités de C# 7.1 telles que les expressions par défaut, la déduction des noms de tuples et les critères spéciaux avec les génériques. Pour utiliser C# 7.1 dans votre projet, ajoutez la propriété suivante dans votre fichier projet, puis rechargez la solution :
+Le Razor moteur d’affichage a été mis à jour pour fonctionner avec le nouveau compilateur Roslyn. Cela comprend la prise en charge des fonctionnalités de C# 7.1 telles que les expressions par défaut, la déduction des noms de tuples et les critères spéciaux avec les génériques. Pour utiliser C# 7.1 dans votre projet, ajoutez la propriété suivante dans votre fichier projet, puis rechargez la solution :
 
 ```xml
 <LangVersion>latest</LangVersion>
@@ -142,7 +148,7 @@ Pour plus d’informations sur l’état des fonctionnalités de C# 7.1, consult
 
 * [Profils de publication Visual Studio pour le déploiement d’applications ASP.NET Core](xref:host-and-deploy/visual-studio-publish-profiles)
 * [Gestion des clés](xref:security/data-protection/implementation/key-management)
-* [Comment configurer votre application App Service de manière à utiliser la connexion via Facebook](xref:security/authentication/facebook-logins)
+* [Configurer l’authentification Facebook](xref:security/authentication/facebook-logins)
 * [Configurer l’authentification Twitter](xref:security/authentication/twitter-logins)
 * [Configurer l’authentification Google](xref:security/authentication/google-logins)
 * [Configurer l’authentification de compte Microsoft](xref:security/authentication/microsoft-logins)
@@ -152,7 +158,7 @@ Pour plus d’informations sur l’état des fonctionnalités de C# 7.1, consult
 Pour obtenir des conseils sur la migration d’applications ASP.NET Core 1.x vers ASP.NET Core 2.0, consultez les ressources suivantes :
 
 * [Migrer d’ASP.NET Core 1.x vers ASP.NET Core 2.0](xref:migration/1x-to-2x/index)
-* [Migrer l’authentification et l’identité vers ASP.NET Core 2.0](xref:migration/1x-to-2x/identity-2x)
+* [Migrer l' Identity authentification et vers ASP.net Core 2,0](xref:migration/1x-to-2x/identity-2x)
 
 ## <a name="additional-information"></a>Informations supplémentaires
 

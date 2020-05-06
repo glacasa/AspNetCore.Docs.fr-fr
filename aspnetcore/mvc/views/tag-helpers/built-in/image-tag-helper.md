@@ -5,13 +5,19 @@ description: Montre comment utiliser un Tag Helper Image.
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/06/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/tag-helpers/builtin-th/image-tag-helper
-ms.openlocfilehash: 964072ad276f7e3e411ee41cb03a2efb9d05c585
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: e1e3566f09c44d70650fa1f21e1921e76e46d384
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78663995"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777408"
 ---
 # <a name="image-tag-helper-in-aspnet-core"></a>Tag Helper Image dans ASP.NET Core
 
@@ -26,7 +32,7 @@ Si la source de l’image (`src`) est un fichier statique sur le serveur web hô
 * Une chaîne de cache-busting unique est ajoutée en tant que paramètre de requête à la source de l’image.
 * Si le fichier sur le serveur web hôte change, une URL de demande unique qui inclut le paramètre de demande mis à jour est générée.
 
-Pour avoir une vue d’ensemble des Tag Helpers, consultez <xref:mvc/views/tag-helpers/intro>.
+Pour avoir une vue d’ensemble de Tag Helpers, consultez <xref:mvc/views/tag-helpers/intro>.
 
 ## <a name="image-tag-helper-attributes"></a>Attributs de Tag Helper Image
 
@@ -46,7 +52,7 @@ L’exemple suivant utilise un Tag Helper Image :
 <img src="~/images/asplogo.png" asp-append-version="true">
 ```
 
-Si le fichier statique existe dans le répertoire */wwwroot/images/* , le code HTML généré est semblable au suivant (le hachage sera différent) :
+Si le fichier statique existe dans le répertoire */wwwroot/images/*, le code HTML généré est semblable au suivant (le hachage sera différent) :
 
 ```html
 <img src="/images/asplogo.png?v=Kl_dqr9NVtnMdsM2MUg4qthUnWZm5T1fCEimBPWDNgM">

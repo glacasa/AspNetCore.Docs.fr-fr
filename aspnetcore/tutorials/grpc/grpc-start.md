@@ -4,15 +4,21 @@ author: juntaoluo
 description: Ce tutoriel montre comment créer un service gRPC et un client gRPC sur ASP.NET Core. Découvrez comment créer un projet de service gRPC, modifier un fichier proto et ajouter un appel duplex de streaming.
 ms.author: johluo
 ms.date: 04/08/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 2bbd40b4b89af170dae40b8a5277749d6bcd5faf
-ms.sourcegitcommit: 9a46e78c79d167e5fa0cddf89c1ef584e5fe1779
+ms.openlocfilehash: ca9c7f9dba55e58e1e2fa2131d4e78d92aaa2838
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80994628"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774247"
 ---
-# <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>Tutorial: Créer un client et un serveur gRPC dans ASP.NET Core
+# <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>Didacticiel : créer un client et un serveur gRPC dans ASP.NET Core
 
 Par [John Luo](https://github.com/juntaoluo)
 
@@ -50,15 +56,15 @@ Dans ce tutoriel, vous allez :
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Démarrez Visual Studio et sélectionnez **Créer un projet**. Vous pouvez également, dans le menu **Fichier** de Visual Studio, sélectionner **Nouveau** > **Projet**.
-* Dans le cadre de la **création d’un nouveau dialogue de projet,** sélectionnez **le service gRPC** et sélectionnez **Next**:
+* Dans la boîte de dialogue **créer un nouveau projet** , sélectionnez **gRPC service** , puis cliquez sur **suivant**:
 
-  ![Créer un nouveau dialogue de projet](~/tutorials/grpc/grpc-start/static/cnp.png)
+  ![Boîte de dialogue créer un nouveau projet](~/tutorials/grpc/grpc-start/static/cnp.png)
 
 * Nommez le projet **GrpcGreeter**. Il est important de nommer le projet *GrpcGreeter* pour que les espaces de noms correspondent quand vous copiez et collez du code.
-* Sélectionnez **Create** (Créer).
+* Sélectionnez **Créer**.
 * Dans la boîte de dialogue **Créer un service gRPC** :
   * Le modèle **Service gRPC** est sélectionné.
-  * Sélectionnez **Create** (Créer).
+  * Sélectionnez **Créer**.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -74,7 +80,7 @@ Dans ce tutoriel, vous allez :
   * La commande `dotnet new` crée un nouveau service gRPC dans le dossier *GrpcGreeter*.
   * La commande `code` ouvre le dossier *GrpcGreeter* dans une nouvelle instance de Visual Studio Code.
 
-  Une boîte de dialogue apparaît avec **les actifs nécessaires à construire et débocher sont absents de 'GrpcGreeter'. Les ajouter ?**
+  Une boîte de dialogue s’affiche avec les **ressources requises pour la génération et le débogage dans’GrpcGreeter'. Ajoutez-les ?**
 * Sélectionnez **Oui**.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
@@ -90,7 +96,7 @@ Les commandes précédentes utilisent le [CLI .NET Core](/dotnet/core/tools/dotn
 
 ### <a name="open-the-project"></a>Ouvrir le projet
 
-De Visual Studio, sélectionnez **File** > **Open,** puis sélectionnez le fichier *GrpcGreeter.csproj.*
+Dans Visual Studio, sélectionnez **fichier** > **ouvrir**, puis sélectionnez le fichier *GrpcGreeter. csproj* .
 
 ---
 
@@ -119,7 +125,7 @@ info: Microsoft.Hosting.Lifetime[0]
 Fichiers projet *GrpcGreeter* :
 
 * *greet.proto* &ndash;Le fichier *Protos/greet.proto* définit gRPC `Greeter` et est utilisé pour générer les ressources du serveur gRPC. Pour plus d’informations, consultez [Introduction à gRPC](xref:grpc/index).
-* *Dossier de services* : Contient `Greeter` la mise en œuvre du service.
+* Dossier *services* : contient l’implémentation du `Greeter` service.
 * *appSettings.json* &ndash; contient des données de configuration, telles que le protocole utilisé par Kestrel. Pour plus d’informations, consultez <xref:fundamentals/configuration/index>.
 * *Program.cs* &ndash; contient le point d’entrée du service gRPC. Pour plus d’informations, consultez <xref:fundamentals/host/generic-host>.
 * *Startup.cs* &ndash; contient le code qui configure le comportement de l’application. Pour plus d’informations, consultez [Démarrage des applications](xref:fundamentals/startup).
@@ -163,7 +169,7 @@ Installez les packages à l’aide de la console PMC (console du Gestionnaire de
 
 #### <a name="pmc-option-to-install-packages"></a>Option de la console du Gestionnaire de package pour installer des packages
 
-* De Visual Studio, sélectionnez **Tools** > **NuGet Package Manager** > **Package Manager Console**
+* Dans Visual Studio, sélectionnez **Outils** > **Gestionnaire** > de package NuGet**console du gestionnaire** de package
 * Dans la fenêtre **Gestionnaire de package**, exécutez `cd GrpcGreeterClient` pour accéder au dossier contenant les fichiers *GrpcGreeterClient.csproj*.
 * Exécutez les commandes suivantes :
 
@@ -175,7 +181,7 @@ Installez les packages à l’aide de la console PMC (console du Gestionnaire de
 
 #### <a name="manage-nuget-packages-option-to-install-packages"></a>Option Gérer les packages NuGet pour installer les packages
 
-* Cliquez à droite sur le projet dans **Solution Explorer** > **Manage NuGet Packages**
+* Cliquez avec le bouton droit sur le projet dans **Explorateur de solutions** > **gérer les packages NuGet**
 * Sélectionnez l’onglet **Parcourir**.
 * Entrez **Grpc.Net.Client** dans la zone de recherche.
 * Sélectionnez le package **Grpc.Net.Client** sous l’onglet **Parcourir** et sélectionnez **Installer**.
@@ -193,7 +199,7 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-* Cliquez à droite sur le dossier **Paquets** dans les**paquets Solution** **Pad** > Add
+* Cliquez avec le bouton droit sur le dossier **packages** dans **panneau solutions** > **Ajouter des packages**
 * Entrez **Grpc.Net.Client** dans la zone de recherche.
 * Sélectionnez le package **Grpc.Net.Client** dans le volet de résultats, puis sélectionnez **Ajouter un package**
 * Répétez ces étapes pour `Google.Protobuf` et `Grpc.Tools`.
@@ -216,7 +222,7 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 
   # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-  Cliquez à droite sur le projet et sélectionnez **Tools** > **Edit File**.
+  Cliquez avec le bouton droit sur le projet, puis sélectionnez **Outils** > **modifier le fichier**.
 
   ---
 
@@ -269,7 +275,7 @@ Le client Greeter appelle la méthode `SayHello` asynchrone. Le résultat de l�
 
 ---
 
-Le client envoie un message de salutation au service avec un message contenant son nom, *GreeterClient*. Le service envoie le message « Hello GreeterClient » comme réponse. La réponse « Hello GreeterClient » s’affiche dans l’invite de commandes :
+Le client envoie un message d’accueil au service avec un message contenant son nom, *GreeterClient*. Le service envoie le message « Hello GreeterClient » comme réponse. La réponse « Hello GreeterClient » s’affiche dans l’invite de commandes :
 
 ```console
 Greeting: Hello GreeterClient
@@ -298,7 +304,7 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 ```
 
 > [!NOTE]
-> Le code de cet article requiert le certificat de développement ASP.NET Core HTTPS pour sécuriser le service gRPC. Si le client .NET gRPC `The remote certificate is invalid according to the validation procedure.` `The SSL connection could not be established.`échoue avec le message ou, le certificat de développement n’est pas fiable. Pour résoudre ce problème, consultez [un service gRPC avec un certificat non fiable/invalide](xref:grpc/troubleshoot#call-a-grpc-service-with-an-untrustedinvalid-certificate).
+> Le code de cet article requiert le certificat de développement ASP.NET Core HTTPS pour sécuriser le service gRPC. Si le client .NET gRPC échoue avec le message `The remote certificate is invalid according to the validation procedure.` ou `The SSL connection could not be established.`, le certificat de développement n’est pas approuvé. Pour résoudre ce problème, consultez [appeler un service gRPC avec un certificat non approuvé/non valide](xref:grpc/troubleshoot#call-a-grpc-service-with-an-untrustedinvalid-certificate).
 
 [!INCLUDE[](~/includes/gRPCazure.md)]
 

@@ -1,21 +1,24 @@
 ---
 title: Configuration Blazor du modèle d’hébergement ASP.net Core
 author: guardrex
-description: En savoir Blazor plus sur l’hébergement de la configuration de modèle, y compris l’intégration des composants Razor dans les applications Razor pages et MVC.
+description: En savoir Blazor plus sur l’hébergement de la configuration de Razor modèle, Razor y compris l’intégration de composants dans les pages et les applications MVC.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/25/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: c7e8d1f2dcba6432072a5cc11a6c5d78e50c2398
-ms.sourcegitcommit: c6f5ea6397af2dd202632cf2be66fc30f3357bcc
+ms.openlocfilehash: 17ed43a12643f067da73658bec72400acbe1be43
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/26/2020
-ms.locfileid: "82159617"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772072"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>Configuration du modèle d’hébergement ASP.NET Core éblouissant
 
@@ -100,12 +103,12 @@ La `IWebAssemblyHostEnvironment.BaseAddress` propriété peut être utilisée au
 
 ### <a name="configuration"></a>Configuration
 
-L’assembly éblouissant prend en charge la configuration à partir de :
+Webassembly éblouissant charge la configuration à partir de :
 
-* Le [fournisseur de configuration de fichiers](xref:fundamentals/configuration/index#file-configuration-provider) pour les fichiers de paramètres d’application par défaut :
+* Fichiers de paramètres d’application par défaut :
   * *wwwroot/appSettings. JSON*
   * *wwwroot/appSettings. {ENVIRONMENT}. JSON*
-* Autres [fournisseurs de configuration](xref:fundamentals/configuration/index) inscrits par l’application.
+* Autres [fournisseurs de configuration](xref:fundamentals/configuration/index) inscrits par l’application. Tous les fournisseurs ne sont pas appropriés pour les applications de webassembly éblouissantes. La clarification des fournisseurs pris en charge pour le webassembly éblouissant est suivie par [clarifier les fournisseurs de configuration pour éblouissant WASM (dotnet/AspNetCore. Docs #18134)](https://github.com/dotnet/AspNetCore.Docs/issues/18134).
 
 > [!WARNING]
 > La configuration dans une application de webassembly éblouissante est visible pour les utilisateurs. **Ne stockez pas les secrets ou les informations d’identification de l’application dans la configuration.**
@@ -136,12 +139,12 @@ Injecter <xref:Microsoft.Extensions.Configuration.IConfiguration> une instance d
 
 #### <a name="provider-configuration"></a>Configuration du fournisseur
 
-L’exemple suivant utilise un <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> et le [fournisseur de configuration de fichier](xref:fundamentals/configuration/index#file-configuration-provider) pour fournir une configuration supplémentaire :
+L’exemple suivant utilise un <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> pour fournir une configuration supplémentaire :
 
 `Program.Main`:
 
 ```csharp
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Memory;
 
 ...
 
@@ -159,9 +162,7 @@ var memoryConfig = new MemoryConfigurationSource { InitialData = vehicleData };
 
 ...
 
-builder.Configuration
-    .Add(memoryConfig)
-    .AddJsonFile("cars.json", optional: false, reloadOnChange: true);
+builder.Configuration.Add(memoryConfig);
 ```
 
 Injecter <xref:Microsoft.Extensions.Configuration.IConfiguration> une instance dans un composant pour accéder aux données de configuration :
@@ -176,10 +177,10 @@ Injecter <xref:Microsoft.Extensions.Configuration.IConfiguration> une instance d
 <h2>Wheels</h2>
 
 <ul>
-    <li>Count: @Configuration["wheels:count"]</p>
-    <li>Brand: @Configuration["wheels:brand"]</p>
-    <li>Type: @Configuration["wheels:brand:type"]</p>
-    <li>Year: @Configuration["wheels:year"]</p>
+    <li>Count: @Configuration["wheels:count"]</li>
+    <li>Brand: @Configuration["wheels:brand"]</li>
+    <li>Type: @Configuration["wheels:brand:type"]</li>
+    <li>Year: @Configuration["wheels:year"]</li>
 </ul>
 
 @code {
@@ -187,6 +188,36 @@ Injecter <xref:Microsoft.Extensions.Configuration.IConfiguration> une instance d
     
     ...
 }
+```
+
+Pour lire d’autres fichiers de configuration du dossier *wwwroot* dans la configuration, `HttpClient` utilisez un pour obtenir le contenu du fichier. Lors de l’utilisation de cette approche `HttpClient` , l’inscription de service existante peut utiliser le client local créé pour lire le fichier, comme le montre l’exemple suivant :
+
+*wwwroot/cars. JSON*:
+
+```json
+{
+    "size": "tiny"
+}
+```
+
+`Program.Main`:
+
+```csharp
+using Microsoft.Extensions.Configuration;
+
+...
+
+var client = new HttpClient()
+{
+    BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+};
+
+builder.Services.AddTransient(sp => client);
+
+using var response = await client.GetAsync("cars.json");
+using var stream = await response.Content.ReadAsStreamAsync();
+
+builder.Configuration.AddJsonStream(stream);
 ```
 
 #### <a name="authentication-configuration"></a>Configuration de l’authentification
@@ -303,7 +334,7 @@ Les applications serveur éblouissantes sont configurées par défaut pour prér
 
 Le rendu des composants serveur à partir d’une page HTML statique n’est pas pris en charge.
 
-### <a name="configure-the-opno-locsignalr-client-for-opno-locblazor-server-apps"></a>Configurer le SignalR client pour Blazor les applications serveur
+### <a name="configure-the-signalr-client-for-blazor-server-apps"></a>Configurer le SignalR client pour Blazor les applications serveur
 
 Parfois, vous devez configurer le client SignalR utilisé par Blazor les applications serveur. Par exemple, vous pouvez configurer la journalisation sur le SignalR client pour diagnostiquer un problème de connexion.
 

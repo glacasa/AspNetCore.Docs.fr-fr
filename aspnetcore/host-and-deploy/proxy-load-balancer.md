@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/proxy-load-balancer
-ms.openlocfilehash: b5c81e0cfa29cddeb1aeed1119a711fca4d91ae4
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: e329b8604b820818167a563b3a21f01f2ab2a6ca
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78659382"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776381"
 ---
 # <a name="configure-aspnet-core-to-work-with-proxy-servers-and-load-balancers"></a>Configurer ASP.NET Core pour l’utilisation de serveurs proxy et d’équilibreurs de charge
 
@@ -258,38 +264,38 @@ if (string.Equals(
 
 ### <a name="azure"></a>Azure
 
-Pour configurer Azure App Service pour l’endage des certificats, voir [l’authentification mutuelle Configure TLS pour Azure App Service](/azure/app-service/app-service-web-configure-tls-mutual-auth). Les directives suivantes portent sur la configuration de l’application ASP.NET Core.
+Pour configurer Azure App Service pour le transfert de certificats, consultez [configurer l’authentification mutuelle TLS pour les Azure App service](/azure/app-service/app-service-web-configure-tls-mutual-auth). Les instructions suivantes concernent la configuration de l’application ASP.NET Core.
 
-Dans `Startup.Configure`, ajouter le code `app.UseAuthentication();`suivant avant l’appel à :
+Dans `Startup.Configure`, ajoutez le code suivant avant l’appel à `app.UseAuthentication();`:
 
 ```csharp
 app.UseCertificateForwarding();
 ```
 
 
-Configurer Certificate Forwarding Middleware pour spécifier le nom d’en-tête qu’Azure utilise. Dans `Startup.ConfigureServices`, ajouter le code suivant pour configurer l’en-tête à partir duquel le middleware construit un certificat:
+Configurez l’intergiciel (middleware) de transfert de certificats pour spécifier le nom d’en-tête utilisé par Azure. Dans `Startup.ConfigureServices`, ajoutez le code suivant pour configurer l’en-tête à partir duquel l’intergiciel génère un certificat :
 
 ```csharp
 services.AddCertificateForwarding(options =>
     options.CertificateHeader = "X-ARR-ClientCert");
 ```
 
-### <a name="other-web-proxies"></a>Autres procurations web
+### <a name="other-web-proxies"></a>Autres proxys Web
 
-Si un proxy est utilisé qui n’est pas IIS ou Azure App Service’s Application Request Routing (ARR), configurez le proxy pour transmettre le certificat qu’il a reçu dans un en-tête HTTP. Dans `Startup.Configure`, ajouter le code `app.UseAuthentication();`suivant avant l’appel à :
+Si vous utilisez un proxy qui n’est pas IIS ou le Application Request Routing d’Azure App Service (ARR), configurez le proxy pour transférer le certificat qu’il a reçu dans un en-tête HTTP. Dans `Startup.Configure`, ajoutez le code suivant avant l’appel à `app.UseAuthentication();`:
 
 ```csharp
 app.UseCertificateForwarding();
 ```
 
-Configurer le certificat En transmettant Middleware pour spécifier le nom d’en-tête. Dans `Startup.ConfigureServices`, ajouter le code suivant pour configurer l’en-tête à partir duquel le middleware construit un certificat:
+Configurez l’intergiciel (middleware) de transfert de certificat pour spécifier le nom d’en-tête. Dans `Startup.ConfigureServices`, ajoutez le code suivant pour configurer l’en-tête à partir duquel l’intergiciel génère un certificat :
 
 ```csharp
 services.AddCertificateForwarding(options =>
     options.CertificateHeader = "YOUR_CERTIFICATE_HEADER_NAME");
 ```
 
-Si le proxy n’est pas base64-encodage du certificat (comme c’est le cas avec Nginx), définissez l’option. `HeaderConverter` Prenons l’exemple suivant dans `Startup.ConfigureServices` :
+Si le proxy n’encodage pas en base64 du certificat (comme c’est le cas avec Nginx) `HeaderConverter` , définissez l’option. Prenons l’exemple suivant dans `Startup.ConfigureServices` :
 
 ```csharp
 services.AddCertificateForwarding(options =>

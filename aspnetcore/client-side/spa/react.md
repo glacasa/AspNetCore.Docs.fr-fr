@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/07/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: spa/react
-ms.openlocfilehash: 9703a62eb7f779974382fe0fb01702d9fcd37d64
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 1dd352f1a00d30df915fe1936d7dcb34af1b6634
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78664961"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773674"
 ---
 # <a name="use-the-react-project-template-with-aspnet-core"></a>Utiliser le modèle de projet React avec ASP.NET Core
 
@@ -20,7 +26,7 @@ Le modèle de projet React mis à jour fournit un point de départ pratique pour
 
 Le modèle revient à créer un projet ASP.NET Core faisant office de backend d’API et un projet React CRA standard en guise d’interface utilisateur, qu’il héberge tous deux dans un projet d’application unique pouvant être généré et publié en tant qu’unité unique.
 
-Le modèle de projet React n’est pas destiné au rendu côté serveur (SSR). Pour SSR avec React et Node.js, considérez [Next.js](https://github.com/zeit/next.js/) ou [Razzle](https://github.com/jaredpalmer/razzle).
+Le modèle de projet REACT n’est pas destiné au rendu côté serveur (SSR). Pour SSR avec REACT et node. js, examinez [Next. js](https://github.com/zeit/next.js/) ou [Razzle](https://github.com/jaredpalmer/razzle).
 
 ## <a name="create-a-new-app"></a>Créer une application
 
@@ -82,13 +88,13 @@ Le projet est configuré pour démarrer sa propre instance du serveur de dévelo
 
 Cette configuration par défaut présente un inconvénient. Chaque fois que vous modifiez votre code C# et que votre application ASP.NET Core doit redémarrer, le serveur CRA redémarre. Quelques secondes sont nécessaires avant de démarrer la sauvegarde. Si vous apportez des modifications fréquentes au code C# et que vous ne souhaitez pas attendre que le serveur CRA redémarre, exécutez ce dernier en externe, indépendamment du processus ASP.NET Core. Pour ce faire :
 
-1. Ajoutez un fichier *.env* à la sous-direction de *ClientApp* avec le paramètre suivant :
+1. Ajoutez un fichier *. env* au sous-répertoire *ClientApp* avec le paramètre suivant :
 
     ```
     BROWSER=none
     ```
 
-    Cela empêchera votre navigateur Web d’ouvrir lors du démarrage du serveur CRA à l’extérieur.
+    Cela empêchera votre navigateur Web de s’ouvrir lors du démarrage du serveur arc en externe.
 
 2. Dans une invite de commandes, basculez vers le sous-répertoire *ClientApp* et lancez le serveur de développement CRA :
 
@@ -106,7 +112,7 @@ Cette configuration par défaut présente un inconvénient. Chaque fois que vous
 Quand vous démarrez votre application ASP.NET Core, celle-ci ne lance pas un serveur CRA. L’instance que vous avez démarrée manuellement est utilisée à la place. Cela lui permet de démarrer et de redémarrer plus rapidement. Elle n’attend plus que votre application React soit systématiquement regénérée.
 
 > [!IMPORTANT]
-> Le « rendu côté serveur » n’est pas une caractéristique prise en charge de ce modèle. Notre objectif avec ce modèle est de répondre à la parité avec "créer-réagir-app". En tant que tel, les scénarios et fonctionnalités non inclus dans un projet de « création-réagir-app » (comme SSR) ne sont pas pris en charge et sont laissés comme un exercice pour l’utilisateur.
+> « Rendu côté serveur » n’est pas une fonctionnalité prise en charge de ce modèle. L’objectif de ce modèle est de respecter la parité avec « Create-REACT-App ». Ainsi, les scénarios et les fonctionnalités qui ne sont pas inclus dans un projet « Create-REACT-App » (par exemple, SSR) ne sont pas pris en charge et sont laissés en tant qu’exercice pour l’utilisateur.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

@@ -1,20 +1,26 @@
 ---
-title: 'Tutorial: Mise à jour des données connexes - ASP.NET MVC avec EF Core'
+title: 'Didacticiel : mettre à jour les données associées-ASP.NET MVC avec EF Core'
 description: Dans ce didacticiel, vous mettez à jour des données associées en mettant à jour des champs de clé étrangère et des propriétés de navigation.
 author: rick-anderson
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 83d662659fb4bc7a2867be563e4e36927d2adafe
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 54783ebbac26a10a92716b5e53ed6cd7cc8bb65d
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78657142"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773495"
 ---
-# <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Tutorial: Mise à jour des données connexes - ASP.NET MVC avec EF Core
+# <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Didacticiel : mettre à jour les données associées-ASP.NET MVC avec EF Core
 
 Dans le didacticiel précédent, vous avez affiché des données associées ; dans ce didacticiel, vous mettez à jour des données associées en mettant à jour des champs de clé étrangère et des propriétés de navigation.
 

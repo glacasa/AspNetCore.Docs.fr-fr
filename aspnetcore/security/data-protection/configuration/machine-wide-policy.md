@@ -4,17 +4,23 @@ author: rick-anderson
 description: En savoir plus sur la prise en charge de la définition d’une stratégie par défaut au niveau de l’ordinateur pour toutes les applications qui consomment ASP.NET Core protection des données.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/configuration/machine-wide-policy
-ms.openlocfilehash: 70aaca7afcd3df22cebb4466fbd9845a2277688c
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 84f54b37dfff3112ea5ca84f931103624cfde90a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667950"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776836"
 ---
 # <a name="data-protection-machine-wide-policy-support-in-aspnet-core"></a>Prise en charge des stratégies à l’ensemble de la protection des données dans ASP.NET Core
 
-De [Rick Anderson](https://twitter.com/RickAndMSFT)
+Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 En cas d’exécution sous Windows, le système de protection des données offre une prise en charge limitée de la définition d’une stratégie par défaut à l’ensemble de l’ordinateur pour toutes les applications qui consomment ASP.NET Core protection des données. L’idée générale est qu’un administrateur peut souhaiter modifier un paramètre par défaut, tel que les algorithmes utilisés ou la durée de vie de la clé, sans qu’il soit nécessaire de mettre à jour manuellement chaque application sur l’ordinateur.
 
@@ -34,7 +40,7 @@ Les valeurs prises en charge sont indiquées ci-dessous.
 | Valeur              | Type   | Description |
 | ------------------ | :----: | ----------- |
 | EncryptionType     | string | Spécifie les algorithmes à utiliser pour la protection des données. La valeur doit être CNG-CBC, CNG-GCM ou géré et est décrit plus en détail ci-dessous. |
-| DefaultKeyLifetime | DWORD  | Spécifie la durée de vie des clés nouvellement générées. La valeur est spécifiée en jours et doit être > = 7. |
+| DefaultKeyLifetime | DWORD  | Spécifie la durée de vie des clés nouvellement générées. La valeur est spécifiée en jours et doit être >= 7. |
 | KeyEscrowSinks     | string | Spécifie les types utilisés pour le dépôt de la clé. La valeur est une liste délimitée par des points-virgules de récepteurs de dépôt de clé, où chaque élément de la liste est le nom qualifié d’assembly d’un type qui implémente [IKeyEscrowSink](/dotnet/api/microsoft.aspnetcore.dataprotection.keymanagement.ikeyescrowsink). |
 
 ## <a name="encryption-types"></a>Types de chiffrement

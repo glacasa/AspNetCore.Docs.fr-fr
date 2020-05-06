@@ -4,13 +4,19 @@ author: rick-anderson
 description: Découvrez les détails de l’implémentation du chiffrement à clé de protection des données ASP.NET Core au repos.
 ms.author: riande
 ms.date: 07/16/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/key-encryption-at-rest
-ms.openlocfilehash: 52c3137dbe467096364b42430c92aecc7c15e313
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: e68b8e09dbd876c6f0d37242ebaa415994b3b808
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78658388"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776927"
 ---
 # <a name="key-encryption-at-rest-in-aspnet-core"></a>Chiffrement à clé au repos dans ASP.NET Core
 
@@ -23,7 +29,7 @@ Le système de protection [des données utilise par défaut un mécanisme de dé
 
 ## <a name="azure-key-vault"></a>Azure Key Vault
 
-Pour stocker des clés dans [Azure Key Vault](https://azure.microsoft.com/services/key-vault/), configurez le système avec [ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) dans la classe `Startup` :
+Pour stocker des clés dans [Azure Key Vault](https://azure.microsoft.com/services/key-vault/), configurez le système avec `Startup` [ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) dans la classe :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -53,7 +59,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Si `ProtectKeysWithDpapi` est appelée sans paramètre, seul le compte d’utilisateur Windows actuel peut déchiffrer l’anneau de clé persistant. Vous pouvez éventuellement spécifier que n’importe quel compte d’utilisateur sur l’ordinateur (pas seulement le compte d’utilisateur actuel) soit en mesure de déchiffrer l’anneau de clé :
+Si `ProtectKeysWithDpapi` est appelé sans paramètre, seul le compte d’utilisateur Windows actuel peut déchiffrer l’anneau de clé persistant. Vous pouvez éventuellement spécifier que n’importe quel compte d’utilisateur sur l’ordinateur (pas seulement le compte d’utilisateur actuel) soit en mesure de déchiffrer l’anneau de clé :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -100,7 +106,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Il y a également une surcharge sans paramètre de `ProtectKeysWithDpapiNG`. Utilisez cette méthode pratique pour spécifier la règle « SID = {CURRENT_ACCOUNT_SID} », où *CURRENT_ACCOUNT_SID* est le SID du compte d’utilisateur Windows actuel :
+Il y a également une surcharge sans paramètre `ProtectKeysWithDpapiNG`de. Utilisez cette méthode pratique pour spécifier la règle « SID = {CURRENT_ACCOUNT_SID} », où *CURRENT_ACCOUNT_SID* est le SID du compte d’utilisateur Windows actuel :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

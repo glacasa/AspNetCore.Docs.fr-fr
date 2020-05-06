@@ -5,13 +5,19 @@ description: Découvrez les concepts de base de l’authentification, de l’aut
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/index
-ms.openlocfilehash: 0f8e96fb7d5246e746b95f8907745f849de60e24
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: b507832e34ac850d2bd4e80bab3066e73ea2ad95
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78656036"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776511"
 ---
 # <a name="overview-of-aspnet-core-security"></a>Vue d’ensemble de la sécurité ASP.NET Core
 
@@ -19,9 +25,9 @@ ASP.NET Core permet aux développeurs de configurer et de gérer facilement la s
 
 ## <a name="aspnet-core-security-features"></a>Fonctionnalités de sécurité ASP.NET Core
 
-ASP.NET Core offre un grand nombre d’outils et de bibliothèques pour sécuriser vos applications, notamment des fournisseurs d’identité intégrés. Cela dit, vous pouvez utiliser des services d’identité tiers tels que Facebook, Twitter ou LinkedIn. Avec ASP.NET Core, vous pouvez facilement gérer les secrets des applications, qui sont un moyen de stocker et d’utiliser des informations confidentielles sans avoir à les exposer dans le code.
+ASP.NET Core fournit de nombreux outils et bibliothèques pour sécuriser vos applications, y Identity compris les fournisseurs intégrés, mais vous pouvez utiliser des services d’identité tiers tels que Facebook, Twitter ou LinkedIn. Avec ASP.NET Core, vous pouvez facilement gérer les secrets des applications, qui sont un moyen de stocker et d’utiliser des informations confidentielles sans avoir à les exposer dans le code.
 
-## <a name="authentication-vs-authorization"></a>Authentification par rapport à l’autorisation
+## <a name="authentication-vs-authorization"></a>Authentification et autorisation
 
 L’authentification est un processus selon lequel un utilisateur fournit des informations d’identification qui sont ensuite comparées à celles stockées dans un système d’exploitation, une base de données, une application ou une ressource. Si elles correspondent, les utilisateurs sont authentifiés et peuvent alors effectuer les actions pour lesquelles ils disposent d’autorisations pendant un processus d’autorisation. L’autorisation désigne le processus qui détermine ce qu’un utilisateur est autorisé à faire.
 
@@ -36,4 +42,4 @@ ASP.NET Core et Entity Framework contiennent des fonctionnalités qui vous aiden
 * [Falsification de requête intersites (CSRF, Cross Site Request Forgery)](xref:security/anti-request-forgery)
 * [Attaques par redirection ouverte](xref:security/preventing-open-redirects)
 
-Il existe d’autres failles de sécurité que vous devez connaître. Pour plus d’informations, consultez les autres articles de la section **Sécurité et identité** de la table des matières.
+Il existe d’autres failles de sécurité que vous devez connaître. Pour plus d’informations, reportez-vous aux autres Articles de la section **sécurité et Identity ** de la table des matières.

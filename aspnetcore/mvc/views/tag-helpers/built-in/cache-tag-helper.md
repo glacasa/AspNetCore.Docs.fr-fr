@@ -5,13 +5,19 @@ description: Découvrez comment utiliser le Tag Helper Cache.
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
-ms.openlocfilehash: db9e1a968588410f11e5f137dfdd4542df505ebc
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: ced10a7b7b221188fdac2a4e3c54f66292110ece
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78662735"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773940"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>Tag Helper Cache dans ASP.NET Core MVC
 
@@ -19,7 +25,7 @@ Par [Peter Kellner](https://peterkellner.net)
 
 Le Tag Helper Cache permet d’améliorer les performances de votre application ASP.NET Core en mettant en cache son contenu dans le fournisseur de caches ASP.NET Core interne.
 
-Pour avoir une vue d’ensemble des Tag Helpers, consultez <xref:mvc/views/tag-helpers/intro>.
+Pour avoir une vue d’ensemble de Tag Helpers, consultez <xref:mvc/views/tag-helpers/intro>.
 
 Le balisage Razor suivant met en cache la date actuelle :
 
@@ -39,7 +45,7 @@ La première requête à la page qui contient le Tag Helper affiche la date actu
 
 `enabled` détermine si le contenu joint par le Tag Helper Cache est mis en cache. Par défaut, il s’agit de `true`. Si la valeur est `false`, la sortie rendue n’est **pas** mise en cache.
 
-Exemple :
+Exemple :
 
 ```cshtml
 <cache enabled="true">
@@ -71,7 +77,7 @@ L’exemple suivant met en cache le contenu du Tag Helper Cache jusqu’à 17:02
 
 `expires-after` définit la durée à partir de l’heure de la première demande pour mettre en cache le contenu.
 
-Exemple :
+Exemple :
 
 ```cshtml
 <cache expires-after="@TimeSpan.FromSeconds(120)">
@@ -89,7 +95,7 @@ Le moteur de vue Razor définit la valeur par défaut `expires-after` sur vingt 
 
 Définit l’heure à laquelle une entrée de cache doit être supprimée si sa valeur n’a fait l’objet d’aucun accès.
 
-Exemple :
+Exemple :
 
 ```cshtml
 <cache expires-sliding="@TimeSpan.FromSeconds(60)">
@@ -137,9 +143,9 @@ L’exemple suivant analyse les valeurs de `Make` et `Model`. L’exemple met en
 
 `vary-by-route` accepte une liste séparée par des virgules de noms de paramètre de route qui déclenchent une actualisation du cache quand la valeur du paramètre des données de route change.
 
-Exemple :
+Exemple :
 
-*Startup.cs* :
+*Startup.cs*:
 
 ```csharp
 routes.MapRoute(
@@ -147,7 +153,7 @@ routes.MapRoute(
     template: "{controller=Home}/{action=Index}/{Make?}/{Model?}");
 ```
 
-*Index.cshtml*:
+*Index. cshtml*:
 
 ```cshtml
 <cache vary-by-route="Make,Model">
@@ -212,7 +218,7 @@ public IActionResult Index(string myParam1, string myParam2, string myParam3)
 }
 ```
 
-*Index.cshtml*:
+*Index. cshtml*:
 
 ```cshtml
 <cache vary-by="@Model">
@@ -228,7 +234,7 @@ public IActionResult Index(string myParam1, string myParam2, string myParam3)
 
 `priority` fournit des instructions de suppression de cache au fournisseur de caches intégré. Le serveur web supprime d’abord les entrées de cache `Low` en cas de sollicitation de la mémoire.
 
-Exemple :
+Exemple :
 
 ```cshtml
 <cache priority="High">

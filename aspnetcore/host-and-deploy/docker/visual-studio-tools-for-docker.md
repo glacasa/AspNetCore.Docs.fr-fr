@@ -5,19 +5,25 @@ description: Découvrez comment utiliser les outils Visual Studio et Docker pour
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: ba79f0af8192ad9e8b263d4304ccc0df36c50f00
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: b73903eae2b289fd410599748c1f48bdb4601543
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440751"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776127"
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>Outils de conteneur Visual Studio avec ASP.NET Core
 
 Visual Studio 2017 et versions ultérieures prennent en charge la génération, le débogage et l’exécution d’applications ASP.NET Core conteneurisées ciblant .NET Core. Les conteneurs Windows et Linux sont pris en charge.
 
-[Afficher ou télécharger le code de l’échantillon](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/docker/visual-studio-tools-for-docker/samples) ([comment télécharger](xref:index#how-to-download-a-sample))
+[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/docker/visual-studio-tools-for-docker/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -54,13 +60,13 @@ Si la version cible du .NET Framework est .NET Core, la liste déroulante **OS**
 Pour les projets ASP.NET Core ciblant .NET Core, il existe deux options pour ajouter la prise en charge de Docker via les outils. Ouvrez le projet dans Visual Studio et choisissez l’une des options suivantes :
 
 * Sélectionnez **Prise en charge de Docker** dans le menu **Projet**.
-* Cliquez à droite sur le projet dans **Solution Explorer** et sélectionnez **Add** > **Docker Support**.
+* Dans **Explorateur de solutions** , cliquez avec le bouton droit sur le projet, puis sélectionnez **Ajouter** > la**prise en charge**de l’ancrage.
 
 Les outils de conteneur Visual Studio ne prennent pas en charge l’ajout de Docker à un projet ASP.NET Core existant ciblant le .NET Framework.
 
 ## <a name="dockerfile-overview"></a>Vue d’ensemble du fichier Dockerfile
 
-Un fichier *Dockerfile*, la recette de la création d’une image Docker finale, est ajouté à la racine du projet. Reportez-vous à [la référence Dockerfile](https://docs.docker.com/engine/reference/builder/) pour une compréhension des commandes en son sein. Ce fichier *Dockerfile* spécifique utilise une [build en plusieurs étapes](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) avec quatre différentes étapes de build nommées :
+Un fichier *Dockerfile*, la recette de la création d’une image Docker finale, est ajouté à la racine du projet. Reportez-vous à la [référence fichier dockerfile](https://docs.docker.com/engine/reference/builder/) pour connaître les commandes qu’il contient. Ce fichier *Dockerfile* spécifique utilise une [build en plusieurs étapes](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) avec quatre différentes étapes de build nommées :
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -82,7 +88,7 @@ Le fichier *Dockerfile* précédent est basé sur l’image [microsoft/aspnetcor
 
 ## <a name="add-container-orchestrator-support-to-an-app"></a>Ajouter la prise en charge des orchestrateurs de conteneurs à une application
 
-Visual Studio 2017 version 15.7 ou antérieure prend en charge [Docker Compose](https://docs.docker.com/compose/overview/) en tant que solution d’orchestration de conteneurs unique. Les artefacts Docker Compose sont ajoutés via **Add** > **Docker Support**.
+Visual Studio 2017 version 15.7 ou antérieure prend en charge [Docker Compose](https://docs.docker.com/compose/overview/) en tant que solution d’orchestration de conteneurs unique. Les artefacts docker compose sont ajoutés via **Ajouter** > la**prise en charge**de l’ancrage.
 
 Visual Studio 2017 version 15.8 ou ultérieure ajoute une solution d’orchestration seulement si cela lui est demandé. Cliquez avec le bouton droit sur le projet dans l’**Explorateur de solutions**, puis sélectionnez **Ajouter** > **Prise en charge de l’orchestrateur de conteneurs**. Deux choix différents sont proposés : [Docker Compose](#docker-compose) et [Service Fabric](#service-fabric).
 
@@ -107,7 +113,7 @@ Si vous souhaitez un autre comportement basé sur la configuration de build (par
 
 À l’aide des fichiers de substitution spécifiques à la configuration, vous pouvez spécifier différents paramètres de configuration (par exemple, des variables d’environnement ou des points d’entrée) pour les configurations de build Debug et Release.
 
-Pour que Docker Compose affiche une option pour fonctionner dans Visual Studio, le projet docker doit être le projet de démarrage.
+Par Docker Compose pour afficher une option à exécuter dans Visual Studio, le projet d’ancrage doit être le projet de démarrage.
 
 ### <a name="service-fabric"></a>Service Fabric
 
@@ -120,7 +126,7 @@ Service Fabric ne prend pas en charge les conteneurs Linux s’exécutant dans l
 
 Les outils de conteneur Visual Studio effectuent les tâches suivantes :
 
-* Ajoute un * &lt;projet&gt;d’application project_name* **d’application de tissu** de tissu à la solution.
+* Ajoute un * &lt;projet&gt;PROJECT_NAME application* **service Fabric application** à la solution.
 * Ajoute un fichier *Dockerfile* et un fichier *.dockerignore* au projet ASP.NET Core. S’il existe déjà un fichier *Dockerfile* dans le projet ASP.NET Core, il est renommé *Dockerfile.original*. Un nouveau fichier *Dockerfile*, semblable au suivant, est créé :
 
     [!code-dockerfile[](visual-studio-tools-for-docker/samples/2.1/HelloDockerTools/Dockerfile)]
@@ -174,7 +180,7 @@ microsoft/aspnetcore  2.0  c69d39472da9  13 days ago    347MB
 ::: moniker-end
 
 > [!NOTE]
-> *L’image dev* n’a pas le contenu de l’application, car les configurations **Debug** utilisent le montage de volume pour fournir l’expérience itérative. Pour placer une image, utilisez la configuration **release**.
+> L’image de *développement* ne contient pas le contenu de l’application, car les configurations de **débogage** utilisent le montage de volume pour fournir l’expérience itérative. Pour placer une image, utilisez la configuration **release**.
 
 Exécutez la commande `docker ps` dans la console du Gestionnaire de package. Notez que l’application s’exécute à l’aide du conteneur :
 
@@ -185,7 +191,7 @@ baf9a678c88d        hellodockertools:dev   "C:\\remote_debugge..."   21 seconds 
 
 ## <a name="edit-and-continue"></a>Modifier & Continuer
 
-Les modifications apportées à des fichiers statiques et à des vues Razor sont automatiquement mises à jour sans qu’une étape de compilation ne soit nécessaire. Apportez la modification, enregistrez et actualisez le navigateur pour afficher la mise à jour.
+Les modifications apportées Razor aux fichiers et aux vues statiques sont automatiquement mises à jour sans qu’une étape de compilation soit nécessaire. Apportez la modification, enregistrez et actualisez le navigateur pour afficher la mise à jour.
 
 Les modifications de fichiers de code nécessitent une compilation et un redémarrage de Kestrel au sein du conteneur. Après avoir effectué la modification, utilisez `CTRL+F5` pour exécuter le processus et démarrer l’application au sein du conteneur. Le conteneur Docker n’est pas regénéré ni arrêté. Exécutez la commande `docker ps` dans la console du Gestionnaire de package. Notez que le conteneur d’origine est toujours en cours d’exécution comme 10 minutes auparavant :
 
@@ -227,7 +233,7 @@ Les images `microsoft/aspnetcore-build` et `microsoft/aspnetcore` répertoriées
 ::: moniker-end
 
 > [!NOTE]
-> La `docker images` commande renvoie des images intermédiaires * \<* avec des noms de dépôt et des balises identifiés comme aucun>(non répertorié ci-dessus). Ces images sans nom sont produites par la [build en plusieurs étapes](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) *Dockerfile*. Elles améliorent l’efficacité de la création de l’image finale ; seules les couches nécessaires sont regénérées en cas de modifications. Quand les images intermédiaires ne sont plus nécessaires, supprimez-les à l’aide de la commande [docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/).
+> La `docker images` commande renvoie des images intermédiaires avec des noms de référentiel et des balises identifiés comme étant * \<aucun>* (non répertoriés ci-dessus). Ces images sans nom sont produites par la [build en plusieurs étapes](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) *Dockerfile*. Elles améliorent l’efficacité de la création de l’image finale ; seules les couches nécessaires sont regénérées en cas de modifications. Quand les images intermédiaires ne sont plus nécessaires, supprimez-les à l’aide de la commande [docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/).
 
 Vous pourriez vous attendre à ce que l’image de production ou de publication ait une taille inférieure à l’image de *développement*. En raison de l’utilisation du mappage de volume, le débogueur et l’application étaient exécutés à partir de l’ordinateur local et non dans le conteneur. L’image *latest* a empaqueté le code de l’application nécessaire pour l’exécuter sur un ordinateur hôte. Le delta correspond donc à la taille du code de l’application.
 
@@ -238,4 +244,4 @@ Vous pourriez vous attendre à ce que l’image de production ou de publication 
 * [Déployer une application .NET dans un conteneur Windows vers Azure Service Fabric](/azure/service-fabric/service-fabric-host-app-in-a-container)
 * [Détecter un problème de développement Visual Studio avec Docker](/azure/vs-azure-tools-docker-troubleshooting-docker-errors)
 * [Référentiel GitHub des outils de conteneur Visual Studio](https://github.com/Microsoft/DockerTools)
-* [GC à l’aide de Docker et de petits conteneurs](xref:performance/memory#sc)
+* [GC avec l’ancrage et les petits conteneurs](xref:performance/memory#sc)

@@ -1,66 +1,72 @@
 ---
-title: Liste de sécurité IP client pour ASP.NET Core
+title: Client IP safelier pour ASP.NET Core
 author: damienbod
-description: Découvrez comment écrire des middleware ou des filtres d’action pour valider les adresses IP à distance par rapport à une liste d’adresses IP approuvées.
+description: Découvrez comment écrire des filtres d’intergiciel ou d’action pour valider des adresses IP distantes par rapport à une liste d’adresses IP approuvées.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/12/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/ip-safelist
-ms.openlocfilehash: 2db879a6918245cbacff8b1a5dc15786ffab6a34
-ms.sourcegitcommit: 196e4a36df5be5b04fedcff484a4261f8046ec57
+ms.openlocfilehash: 7923a81e72124cfb0e11e3c1ac327c1e32194b21
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80471801"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776498"
 ---
-# <a name="client-ip-safelist-for-aspnet-core"></a>Liste de sécurité IP client pour ASP.NET Core
+# <a name="client-ip-safelist-for-aspnet-core"></a>Client IP safelier pour ASP.NET Core
 
 Par [Damien Bowden](https://twitter.com/damien_bod) et [Tom Dykstra](https://github.com/tdykstra)
  
-Cet article montre trois façons de mettre en œuvre une liste de sécurité d’adresse IP (également connue sous le nom de liste d’autorisation) dans une application ASP.NET Core. Une application d’échantillon d’accompagnement démontre les trois approches. Vous pouvez utiliser :
+Cet article présente trois façons d’implémenter une adresse IP safelit (également appelée « liste verte ») dans une application ASP.NET Core. Un exemple d’application associé illustre les trois approches. Vous pouvez utiliser :
 
-* Middleware pour vérifier l’adresse IP à distance de chaque demande.
-* Filtres d’action MVC pour vérifier l’adresse IP à distance des demandes de contrôleurs spécifiques ou méthodes d’action.
-* Razor Pages filtre pour vérifier l’adresse IP à distance des demandes de pages Razor.
+* Intergiciel pour vérifier l’adresse IP distante de chaque demande.
+* Filtres d’action MVC pour vérifier l’adresse IP distante des demandes pour des contrôleurs ou des méthodes d’action spécifiques.
+* RazorPages filtres pour vérifier l’adresse IP distante des Razor demandes de pages.
 
-Dans chaque cas, une chaîne contenant des adresses IP client approuvées est stockée dans un paramètre d’application. Le middleware ou le filtre :
+Dans chaque cas, une chaîne contenant des adresses IP clientes approuvées est stockée dans un paramètre d’application. Le middleware ou le filtre :
 
-* Parse la ficelle dans un tableau. 
-* Vérifie si l’adresse IP à distance existe dans le tableau.
+* Analyse la chaîne dans un tableau. 
+* Vérifie si l’adresse IP distante existe dans le tableau.
 
-L’accès est autorisé si le tableau contient l’adresse IP. Dans le cas contraire, un code de statut HTTP 403 Interdit est retourné.
+L’accès est autorisé si le tableau contient l’adresse IP. Dans le cas contraire, un code d’état HTTP 403 interdit est retourné.
 
-[Afficher ou télécharger le code de l’échantillon](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/ip-safelist/samples) ([comment télécharger](xref:index#how-to-download-a-sample))
+[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/ip-safelist/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
-## <a name="ip-address-safelist"></a>Liste de sécurité de l’adresse IP
+## <a name="ip-address-safelist"></a>Adresse IP safelit
 
-Dans l’application de l’échantillon, la liste de sécurité de l’adresse IP est :
+Dans l’exemple d’application, l’adresse IP safelit est :
 
-* Défini par `AdminSafeList` la propriété dans le fichier *appsettings.json.*
-* Une chaîne semi-alignée qui peut contenir à la fois [la version 4 du protocole Internet (IPv4)](https://wikipedia.org/wiki/IPv4) et [la version 6 (IPv6)](https://wikipedia.org/wiki/IPv6) du protocole Internet.
+* Défini par la `AdminSafeList` propriété dans le fichier *appSettings. JSON* .
+* Chaîne délimitée par des points-virgules qui peut contenir des adresses [IPv4 (Internet Protocol version 4)](https://wikipedia.org/wiki/IPv4) et [IPv6 (Internet Protocol version 6)](https://wikipedia.org/wiki/IPv6) .
 
 [!code-json[](ip-safelist/samples/3.x/ClientIpAspNetCore/appsettings.json?range=1-3&highlight=2)]
 
-Dans l’exemple précédent, les `127.0.0.1` adresses IPv4 de `192.168.1.5` et `::1` l’adresse `0:0:0:0:0:0:0:1`IPv6 loopback de (format compressé pour ) sont autorisés.
+Dans l’exemple précédent, les adresses IPv4 de `127.0.0.1` et `192.168.1.5` et l’adresse IPv6 de `::1` bouclage (format compressé pour `0:0:0:0:0:0:0:1`) sont autorisées.
 
-## <a name="middleware"></a>Middlewares
+## <a name="middleware"></a>Intergiciel (middleware)
 
-La `Startup.Configure` méthode ajoute `AdminSafeListMiddleware` le type de middleware personnalisé au pipeline de demande de l’application. La liste de sécurité est récupérée avec le fournisseur de configuration .NET Core et est passée comme paramètre constructeur.
+La `Startup.Configure` méthode ajoute le type `AdminSafeListMiddleware` d’intergiciel (middleware) personnalisé au pipeline de demande de l’application. L’offre safelit est récupérée avec le fournisseur de configuration .NET Core et transmise en tant que paramètre de constructeur.
 
 [!code-csharp[](ip-safelist/samples/3.x/ClientIpAspNetCore/Startup.cs?name=snippet_ConfigureAddMiddleware)]
 
-Le middleware analyse la chaîne dans un tableau et recherche l’adresse IP à distance dans le tableau. Si l’adresse IP à distance n’est pas trouvée, le middleware renvoie HTTP 403 Interdit. Ce processus de validation est contourné pour les demandes HTTP GET.
+L’intergiciel (middleware) analyse la chaîne dans un tableau et recherche l’adresse IP distante dans le tableau. Si l’adresse IP distante est introuvable, l’intergiciel (middleware) renvoie HTTP 403 interdit. Ce processus de validation est contourné pour les requêtes HTTP d’extraction.
 
 [!code-csharp[](ip-safelist/samples/Shared/ClientIpSafelistComponents/Middlewares/AdminSafeListMiddleware.cs?name=snippet_ClassOnly)]
 
 ## <a name="action-filter"></a>Filtre d’action
 
-Si vous souhaitez un contrôle d’accès piloté par une liste de sécurité pour des contrôleurs MVC spécifiques ou des méthodes d’action, utilisez un filtre d’action. Par exemple :
+Si vous souhaitez un contrôle d’accès piloté par safeli pour des contrôleurs MVC ou des méthodes d’action spécifiques, utilisez un filtre d’action. Par exemple :
 
 [!code-csharp[](ip-safelist/samples/Shared/ClientIpSafelistComponents/Filters/ClientIpCheckActionFilter.cs?name=snippet_ClassOnly)]
 
-Ajouter `Startup.ConfigureServices`le filtre d’action à la collection de filtres MVC. Dans l’exemple `ClientIpCheckActionFilter` suivant, un filtre d’action est ajouté. Une liste de sécurité et une instance d’enregistreur de console sont passées comme paramètres de constructeur.
+Dans `Startup.ConfigureServices`, ajoutez le filtre d’action à la collection de filtres Mvc. Dans l’exemple suivant, un `ClientIpCheckActionFilter` filtre d’action est ajouté. Un safelit et une instance d’enregistreur d’événements de console sont passés en tant que paramètres de constructeur.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -78,9 +84,9 @@ Le filtre d’action peut ensuite être appliqué à un contrôleur ou à une m�
 
 [!code-csharp[](ip-safelist/samples/3.x/ClientIpAspNetCore/Controllers/ValuesController.cs?name=snippet_ActionFilter&highlight=1)]
 
-Dans l’application d’échantillon, le filtre `Get` d’action est appliqué à la méthode d’action du contrôleur. Lorsque vous testez l’application en envoyant :
+Dans l’exemple d’application, le filtre d’action est appliqué à la `Get` méthode d’action du contrôleur. Lorsque vous testez l’application en envoyant :
 
-* Une demande HTTP `[ServiceFilter]` GET, l’attribut valide l’adresse IP du client. Si l’accès `Get` est autorisé à la méthode d’action, une variation de la sortie de la console suivante est produite par le filtre d’action et la méthode d’action :
+* Une requête HTTP d’extraction, `[ServiceFilter]` l’attribut valide l’adresse IP du client. Si l’accès est autorisé à `Get` la méthode d’action, une variante de la sortie de console suivante est générée par le filtre d’action et la méthode d’action :
 
     ```
     dbug: ClientIpSafelistComponents.Filters.ClientIpCheckActionFilter[0]
@@ -89,15 +95,15 @@ Dans l’application d’échantillon, le filtre `Get` d’action est appliqué 
           successful HTTP GET    
     ```
 
-* Un verbe de demande `AdminSafeListMiddleware` HTTP autre que GET, le middleware valide l’adresse IP du client.
+* Un verbe de requête HTTP autre que obtenir, `AdminSafeListMiddleware` l’intergiciel (middleware) valide l’adresse IP du client.
 
-## <a name="razor-pages-filter"></a>Filtre De pages de rasoir
+## <a name="razor-pages-filter"></a>RazorFiltre de pages
 
-Si vous souhaitez un contrôle d’accès safelist pour une application Razor Pages, utilisez un filtre Razor Pages. Par exemple :
+Si vous souhaitez un contrôle d’accès piloté par safelis Razor pour une application pages, Razor utilisez un filtre pages. Par exemple :
 
 [!code-csharp[](ip-safelist/samples/Shared/ClientIpSafelistComponents/Filters/ClientIpCheckPageFilter.cs?name=snippet_ClassOnly)]
 
-Dans `Startup.ConfigureServices`, activez le filtre Razor Pages en l’ajoutant à la collection de filtres MVC. Dans l’exemple `ClientIpCheckPageFilter` suivant, un filtre Razor Pages est ajouté. Une liste de sécurité et une instance d’enregistreur de console sont passées comme paramètres de constructeur.
+Dans `Startup.ConfigureServices`, activez le Razor filtre pages en l’ajoutant à la collection de filtres Mvc. Dans l’exemple suivant, un `ClientIpCheckPageFilter` Razor filtre de pages est ajouté. Un safelit et une instance d’enregistreur d’événements de console sont passés en tant que paramètres de constructeur.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -111,7 +117,7 @@ Dans `Startup.ConfigureServices`, activez le filtre Razor Pages en l’ajoutant 
 
 ::: moniker-end
 
-Lorsque la page *Razor Index* de l’application de l’échantillon est demandée, le filtre Razor Pages valide l’adresse IP du client. Le filtre produit une variation de la sortie de la console suivante :
+Quand la page d' *index* Razor de l’exemple d’application est Razor demandée, le filtre de pages valide l’adresse IP du client. Le filtre produit une variante de la sortie de console suivante :
 
 ```
 dbug: ClientIpSafelistComponents.Filters.ClientIpCheckPageFilter[0]

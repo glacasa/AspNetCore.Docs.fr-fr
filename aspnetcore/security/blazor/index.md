@@ -5,17 +5,20 @@ description: En savoir Blazor plus sur les scénarios d’authentification et d�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/index
-ms.openlocfilehash: ced8e90147b08bc75aec4534fdd8d8552506f88c
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: d55880265ed1ceedf8f115412e5ac47309521239
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206097"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772893"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>Authentification Blazor et autorisation ASP.net Core
 
@@ -35,10 +38,10 @@ Les scénarios de sécurité Blazor diffèrent Blazor entre les applications ser
 
 BlazorLes applications webassembly s’exécutent sur le client. L’autorisation est *uniquement* utilisée pour déterminer les options de l’interface utilisateur à afficher. Étant donné que les contrôles côté client peuvent être modifiés ou ignorés par un utilisateur Blazor , une application webassembly ne peut pas appliquer les règles d’accès d’autorisation.
 
-[Razor pages conventions d’autorisation](xref:security/authorization/razor-pages-authorization) ne s’appliquent pas aux composants Razor routables. Si un composant Razor non routable est [incorporé dans une page](xref:blazor/integrate-components#render-components-from-a-page-or-view), les conventions d’autorisation de la page affectent indirectement le composant Razor avec le reste du contenu de la page.
+Les conventions d’autorisation des pages ne s' Razor appliquent pas aux composants routables. [ Razor ](xref:security/authorization/razor-pages-authorization) Si un Razor composant non routable est [incorporé dans une page](xref:blazor/integrate-components#render-components-from-a-page-or-view), les conventions d’autorisation de la page affectent Razor indirectement le composant ainsi que le reste du contenu de la page.
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Identity.SignInManager%601>et <xref:Microsoft.AspNetCore.Identity.UserManager%601> ne sont pas pris en charge dans les composants Razor.
+> <xref:Microsoft.AspNetCore.Identity.SignInManager%601>et <xref:Microsoft.AspNetCore.Identity.UserManager%601> ne sont pas Razor pris en charge dans les composants.
 
 ## <a name="authentication"></a>Authentification
 
@@ -246,7 +249,7 @@ L’accès est généralement accordé ou refusé selon les conditions suivantes
 * Un utilisateur a une *revendication*.
 * Une *stratégie* est satisfaite.
 
-Tous ces concepts sont les mêmes que dans une application ASP.NET Core MVC ou Razor Pages. Pour plus d’informations sur la sécurité d’ASP.NET Core, consultez les articles sous [Sécurité et identité dans ASP.NET Core](xref:security/index).
+Chacun de ces concepts est identique à celui d’une application ASP.NET Core MVC Razor ou pages. Pour plus d’informations sur la sécurité de ASP.NET Core, consultez les articles sous [ASP.net Core sécurité et Identity ](xref:security/index).
 
 ## <a name="authorizeview-component"></a>Composant AuthorizeView
 
@@ -338,7 +341,7 @@ Cette approche n’est normalement pas Blazor applicable aux applications serveu
 
 ## <a name="authorize-attribute"></a>Attribut [Authorize]
 
-L' `[Authorize]` attribut peut être utilisé dans les composants Razor :
+L' `[Authorize]` attribut peut être utilisé dans Razor les composants :
 
 ```razor
 @page "/"
@@ -426,6 +429,7 @@ Si l’application détermine que les données d’état d’authentification so
 Si l’application est nécessaire pour vérifier les règles d’autorisation dans le cadre de la logique procédurale, utilisez un paramètre en cascade de type `Task<AuthenticationState>` pour obtenir le <xref:System.Security.Claims.ClaimsPrincipal> de l’utilisateur. `Task<AuthenticationState>` peut être combiné avec d’autres services, comme `IAuthorizationService`, pour évaluer les stratégies.
 
 ```razor
+@using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 
 <button @onclick="@DoSomething">Do something important</button>

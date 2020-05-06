@@ -7,14 +7,17 @@ ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: index
-ms.openlocfilehash: d70998d0149a0cc7018946a93ab63b5e10b76b78
-ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
+ms.openlocfilehash: 7f46051193681ecac59428b77ca1e36830c7bb63
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82558935"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776334"
 ---
 # <a name="introduction-to-aspnet-core"></a>Présentation d’ASP.NET Core
 
@@ -73,9 +76,9 @@ Pour une introduction au développement d’applications ASP.NET Core, nous vous
 
    |Type d’application  |Scénario  |Didacticiel  |
    |----------|----------|----------|
-   |Application web                   | Nouveau développement de l’interface utilisateur Web côté serveur |[Bien démarrer avec les pages Razor](xref:tutorials/razor-pages/razor-pages-start) |
-   |Application web                   | Maintenance d’une application MVC |[Bien démarrer avec MVC](xref:tutorials/first-mvc-app/start-mvc)|
-   |Application web                   | Développement de l’interface utilisateur Web côté client |[Prise en main de éblouissant](xref:tutorials/first-blazor-app) |
+   |Application web                   | Nouveau développement de l’interface utilisateur Web côté serveur |[Bien démarrer avec les pages Razor](xref:tutorials/razor-pages/razor-pages-start) |
+   |Application web                   | Maintenance d’une application MVC |[Bien démarrer avec MVC](xref:tutorials/first-mvc-app/start-mvc)|
+   |Application web                   | Développement de l’interface utilisateur Web côté client |[Prise en main de éblouissant](xref:tutorials/first-blazor-app) |
    |API web                   | Services HTTP RESTful |[Créer une API Web](xref:tutorials/first-web-api)&dagger; |
    |Application d’appel de procédure distante | Services contrat en premier à l’aide de mémoires tampons de protocole |[Bien démarrer avec un service gRPC](xref:tutorials/grpc/grpc-start) |
    |Application en temps réel             | Communication bidirectionnelle entre les serveurs et les clients connectés |[Bien démarrer avec SignalR](xref:tutorials/signalr) |
@@ -161,8 +164,8 @@ Nous vous recommandons la séquence de tutoriels et d’articles suivante comme 
 
    |Type d’application  |Scénario  |Didacticiel  |
    |----------|----------|----------|
-   |Application web                   | Pour un nouveau développement        |[Bien démarrer avec les pages Razor](xref:tutorials/razor-pages/razor-pages-start) |
-   |Application web                   | Pour maintenir une application MVC |[Bien démarrer avec MVC](xref:tutorials/first-mvc-app/start-mvc)|
+   |Application web                   | Pour un nouveau développement        |[Bien démarrer avec les pages Razor](xref:tutorials/razor-pages/razor-pages-start) |
+   |Application web                   | Pour maintenir une application MVC |[Bien démarrer avec MVC](xref:tutorials/first-mvc-app/start-mvc)|
    |API web                   |                            |[Créer une API Web](xref:tutorials/first-web-api)&dagger; |
    |Application en temps réel             |                            |[Bien démarrer avec SignalR](xref:tutorials/signalr) |
 
@@ -170,7 +173,7 @@ Nous vous recommandons la séquence de tutoriels et d’articles suivante comme 
 
    |Scénario  |Didacticiel  |
    |----------|----------|
-   | Pour un nouveau développement        |[Pages Razor avec Entity Framework Core](xref:data/ef-rp/intro) |
+   | Pour un nouveau développement        |[RazorPages avec Entity Framework Core](xref:data/ef-rp/intro) |
    | Pour maintenir une application MVC |[MVC avec Entity Framework Core](xref:data/ef-mvc/intro) |
 
 1. Lisez une vue d’ensemble de ASP.NET Core [notions de base](xref:fundamentals/index) qui s’appliquent à tous les types d’applications.

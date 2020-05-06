@@ -1,20 +1,26 @@
 ---
-title: 'Tutorial: En savoir plus sur les scénarios avancés - ASP.NET MVC avec EF Core'
+title: 'Didacticiel : en savoir plus sur les scénarios avancés-ASP.NET MVC avec EF Core'
 description: Ce tutoriel présente plusieurs rubriques pratiques pour aller au-delà des principes de base du développement d’applications web ASP.NET Core qui utilisent Entity Framework Core.
 author: rick-anderson
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: fc6f8d8c4ab09848cf316be2e522bf5ce3b9ac76
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 74153b9a185d382a3418dd9470ce6ca4c3c70041
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79416232"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773612"
 ---
-# <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>Tutorial: En savoir plus sur les scénarios avancés - ASP.NET MVC avec EF Core
+# <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>Didacticiel : en savoir plus sur les scénarios avancés-ASP.NET MVC avec EF Core
 
 Dans le didacticiel précédent, vous avez implémenté l’héritage TPH (table par hiérarchie). Ce didacticiel présente plusieurs rubriques qu’il est utile de connaître lorsque vous allez au-delà des principes de base du développement d’applications web ASP.NET Core qui utilisent Entity Framework Core.
 
@@ -93,7 +99,7 @@ Lorsque vous cliquez sur le bouton **Update**, la méthode HttpPost est appelée
 
 Dans l’**Explorateur de solutions**, cliquez avec le bouton droit sur le dossier *Views/Courses*, puis cliquez sur **Ajouter > Nouvel élément**.
 
-Dans la boîte de dialogue **Ajouter un nouvel élément**, cliquez sur **ASP.NET Core** sous **Installé** dans le volet gauche, cliquez sur **Vue Razor** et nommez la nouvelle vue *UpdateCourseCredits.cshtml*.
+Dans la boîte de dialogue **Ajouter un nouvel élément** , cliquez sur **ASP.net Core** sous **installé** dans le volet gauche, cliquez sur ** Razor afficher**, puis nommez la nouvelle vue *UpdateCourseCredits. cshtml*.
 
 Dans *Views/Courses/UpdateCourseCredits.cshtml*, remplacez le code du modèle par le code suivant :
 
@@ -103,13 +109,13 @@ Exécutez la méthode `UpdateCourseCredits` en sélectionnant l’onglet **Cours
 
 ![Page de mise à jour des crédits de cours](advanced/_static/update-credits.png)
 
-Cliquez sur **Mettre à jour**. Vous voyez le nombre de lignes affectées :
+Cliquez sur **Update**. Vous voyez le nombre de lignes affectées :
 
 ![Page de mise à jour des crédits de cours – lignes affectées](advanced/_static/update-credits-rows-affected.png)
 
 Cliquez sur **Revenir à la liste** pour afficher la liste des cours avec le nombre révisé de crédits.
 
-Notez que le code de production garantit que les mises à jour fourniront toujours des données valides. Le code simplifié indiqué ici peut multiplier le nombre de crédits suffisamment pour générer des nombres supérieurs à 5. (La `Credits` propriété `[Range(0, 5)]` a un attribut.) La requête de mise à jour fonctionnerait, mais les données invalides pourraient entraîner des résultats inattendus dans d’autres parties du système qui supposent que le nombre de crédits est de 5 ou moins.
+Notez que le code de production garantit que les mises à jour fourniront toujours des données valides. Le code simplifié indiqué ici peut multiplier le nombre de crédits suffisamment pour générer des nombres supérieurs à 5. (La `Credits` propriété a un `[Range(0, 5)]` attribut.) La requête de mise à jour fonctionne, mais les données non valides peuvent entraîner des résultats inattendus dans d’autres parties du système qui supposent que le nombre de crédits est inférieur ou égal à 5.
 
 Pour plus d’informations sur les requêtes SQL brutes, consultez [Requêtes SQL brutes](/ef/core/querying/raw-sql).
 
@@ -181,7 +187,7 @@ _context.ChangeTracker.AutoDetectChangesEnabled = false;
 
 ## <a name="ef-core-source-code-and-development-plans"></a>Code source et plans de développement EF Core
 
-La source de base [https://github.com/dotnet/efcore](https://github.com/dotnet/efcore)du cadre de l’entité est à . Le dépôt EF Core contient les builds nocturnes, le suivi des problèmes, les spécifications des fonctionnalités, les notes des réunions de conception et [la feuille de route de développement futur](https://github.com/dotnet/efcore/wiki/Roadmap). Vous pouvez signaler ou rechercher des bogues, et apporter votre contribution.
+La source de Entity Framework Core est [https://github.com/dotnet/efcore](https://github.com/dotnet/efcore). Le dépôt EF Core contient les builds nocturnes, le suivi des problèmes, les spécifications des fonctionnalités, les notes des réunions de conception et [la feuille de route de développement futur](https://github.com/dotnet/efcore/wiki/Roadmap). Vous pouvez signaler ou rechercher des bogues, et apporter votre contribution.
 
 Bien que le code source soit ouvert, Entity Framework Core est entièrement pris en charge comme produit Microsoft. L’équipe Microsoft Entity Framework garde le contrôle sur le choix des contributions qui sont acceptées et teste toutes les modifications du code pour garantir la qualité de chaque version.
 
@@ -279,4 +285,4 @@ Dans ce tutoriel, vous allez :
 Cette étape termine cette série de tutoriels sur l’utilisation d’Entity Framework Core dans une application ASP.NET Core MVC. Cette série a fait appel à une nouvelle base de données ; une alternative consiste à rétroconcevoir un modèle à partir d’une base de données existante.
 
 > [!div class="nextstepaction"]
-> [Tutorial: EF Core avec MVC, base de données existante](/ef/core/get-started/aspnetcore/existing-db?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json)
+> [Didacticiel : EF Core avec MVC, base de données existante](/ef/core/get-started/aspnetcore/existing-db?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json)

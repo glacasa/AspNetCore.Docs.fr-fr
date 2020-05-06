@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/iis/transform-webconfig
-ms.openlocfilehash: 069b9bb516644a1a722235b33d4916460488ebf2
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: f7e1fb0adc669b4bffa02e6688231c8f1447bd98
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78657933"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775932"
 ---
 # <a name="transform-webconfig"></a>Transformer web.config
 
@@ -23,12 +29,12 @@ Les transformations du fichier *web.config* peuvent être appliquées automatiqu
 * [Configuration de build](#build-configuration)
 * [Profil](#profile)
 * [Environnement](#environment)
-* [Custom](#custom)
+* [Personnalisée](#custom)
 
 Ces transformations se produisent pour l’un des scénarios de génération *web.config* suivants :
 
 * Généré automatiquement par le SDK `Microsoft.NET.Sdk.Web`.
-* Fourni par le développeur dans la racine de [contenu](xref:fundamentals/index#content-root) de l’application.
+* Fourni par le développeur dans la [racine de contenu](xref:fundamentals/index#content-root) de l’application.
 
 ## <a name="build-configuration"></a>Configuration de build
 

@@ -4,13 +4,19 @@ author: ardalis
 description: Découvrez comment lire et manipuler le modèle d’application pour modifier le comportement des éléments MVC dans ASP.NET Core.
 ms.author: riande
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/application-model
-ms.openlocfilehash: 4b6c978e5752eb320412a1c204df8e3d288fe4a1
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 5e31d2e6611321bec7442534ce41350de10478e0
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78666431"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768661"
 ---
 # <a name="work-with-the-application-model-in-aspnet-core"></a>Utiliser le modèle d’application dans ASP.NET Core
 
@@ -63,7 +69,7 @@ Ensuite (`Order=-990`) :
 * L’ajout de paramètres de méthode d’action au contexte
 * L’application de routes et d’autres attributs
 
-Certains comportements intégrés sont implémentées par le `DefaultApplicationModelProvider`. Ce fournisseur est responsable de la construction du [`ControllerModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.controllermodel), qui à son tour référence les instances de [`ActionModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.actionmodel), de [`PropertyModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.propertymodel) et de [`ParameterModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.parametermodel). La classe `DefaultApplicationModelProvider` est un détail d’implémentation interne du framework qui changera à coup sûr dans le futur. 
+Certains comportements intégrés sont implémentées par le `DefaultApplicationModelProvider`. Ce fournisseur est chargé de construire le, [`ControllerModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.controllermodel)qui à son tour référence [`ActionModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.actionmodel) [`PropertyModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.propertymodel)les instances, [`ParameterModel`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.parametermodel) et. La classe `DefaultApplicationModelProvider` est un détail d’implémentation interne du framework qui changera à coup sûr dans le futur. 
 
 Le `AuthorizationApplicationModelProvider` est responsable de l’application du comportement associé aux attributs `AuthorizeFilter` et `AllowAnonymousFilter`. [Découvrez plus d’informations sur ces fonctionnalités](xref:security/authorization/simple).
 
@@ -80,7 +86,7 @@ Les conventions suivantes sont disponibles :
 * [`IActionModelConvention`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.iactionmodelconvention)
 * [`IParameterModelConvention`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.iparametermodelconvention)
 
-Vous appliquez les conventions en les ajoutant aux options MVC, ou en implémentant des `Attribute` et en les appliquant à des contrôleurs, des actions ou des paramètres d’action (de façon similaire à des [`Filters`](xref:mvc/controllers/filters)). Contrairement aux filtres, les conventions sont exécutées seulement lors du démarrage de l’application, et non pas dans le cadre de chaque requête.
+Les conventions sont appliquées en les ajoutant aux options MVC ou en `Attribute`implémentant des et en les appliquant à des contrôleurs, des actions [`Filters`](xref:mvc/controllers/filters)ou des paramètres d’action (similaires à). Contrairement aux filtres, les conventions sont exécutées seulement lors du démarrage de l’application, et non pas dans le cadre de chaque requête.
 
 ### <a name="sample-modifying-the-applicationmodel"></a>Exemple : Modification du ApplicationModel
 
@@ -196,11 +202,11 @@ Le `UseWebApiParameterConventionsAttribute` est utilisé pour appliquer la conve
 
 Le `UseWebApiRoutesAttribute` spécifie si la convention de contrôleur `WebApiApplicationModelConvention` est appliquée. Quand elle est activée, cette convention est utilisée pour ajouter la prise en charge de [zones](xref:mvc/controllers/areas) pour la route.
 
-En plus d’un ensemble de conventions, le package de compatibilité inclut une classe de base `System.Web.Http.ApiController` qui remplace celle fournie par l’API web. Ceci permet à vos contrôleurs écrits pour API web et héritant de son `ApiController` de fonctionner comme prévu quand ils s’exécutent sur ASP.NET Core MVC. Tous les attributs de `UseWebApi*` répertoriés précédemment sont appliqués à la classe de contrôleur de base. Le `ApiController` expose les propriétés, les méthodes et les types de résultats qui sont compatibles avec ceux trouvés dans l’API web.
+En plus d’un ensemble de conventions, le package de compatibilité inclut une classe de base `System.Web.Http.ApiController` qui remplace celle fournie par l’API web. Ceci permet à vos contrôleurs écrits pour API web et héritant de son `ApiController` de fonctionner comme prévu quand ils s’exécutent sur ASP.NET Core MVC. Tous les `UseWebApi*` attributs répertoriés plus haut sont appliqués à la classe de contrôleur de base. Le `ApiController` expose les propriétés, les méthodes et les types de résultats qui sont compatibles avec ceux trouvés dans l’API web.
 
 ## <a name="using-apiexplorer-to-document-your-app"></a>Utilisation d’ApiExplorer pour documenter votre application
 
-Le modèle d’application expose une propriété [`ApiExplorer`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.apiexplorermodel) à chaque niveau qui peut être utilisé pour parcourir la structure de l’application. Ceci peut être utilisé pour [générer des pages d’aide pour votre API web avec des outils comme Swagger](xref:tutorials/web-api-help-pages-using-swagger). La propriété `ApiExplorer` expose une propriété `IsVisible` qui peut être définie pour spécifier les parties du modèle de votre application qui doivent être exposées. Vous pouvez configurer ce paramètre en utilisant une convention :
+Le modèle d’application expose [`ApiExplorer`](/dotnet/api/microsoft.aspnetcore.mvc.applicationmodels.apiexplorermodel) une propriété à chaque niveau qui peut être utilisé pour parcourir la structure de l’application. Ceci peut être utilisé pour [générer des pages d’aide pour votre API web avec des outils comme Swagger](xref:tutorials/web-api-help-pages-using-swagger). La propriété `ApiExplorer` expose une propriété `IsVisible` qui peut être définie pour spécifier les parties du modèle de votre application qui doivent être exposées. Vous pouvez configurer ce paramètre en utilisant une convention :
 
 [!code-csharp[](./application-model/sample/src/AppModelSample/Conventions/EnableApiExplorerApplicationConvention.cs)]
 

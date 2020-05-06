@@ -1,16 +1,22 @@
 ---
-title: Pages Razor obtenues par génération de modèles automatique dans ASP.NET Core
+title: Razor Pages de génération de modèles automatique dans ASP.net Core
 author: rick-anderson
-description: Décrit l’obtention de pages Razor par génération de modèles automatique.
+description: Explique les Razor pages générées par la génération de modèles automatique.
 ms.author: riande
 ms.date: 08/17/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: cec4295a2c08c89db0975808583f41c7d09bfc88
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 22afbc729cc73427b3d04bee379534cda38b39bd
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78662448"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774845"
 ---
 # <a name="scaffolded-razor-pages-in-aspnet-core"></a>Pages Razor obtenues par génération de modèles automatique dans ASP.NET Core
 
@@ -30,13 +36,13 @@ Examinez le modèle de page *Pages/Movies/Index.cshtml.cs* :
 
 Les pages Razor sont dérivées de `PageModel`. Par convention, la classe dérivée de `PageModel` s’appelle `<PageName>Model`. Le constructeur utilise l’[injection de dépendances](xref:fundamentals/dependency-injection) pour ajouter `RazorPagesMovieContext` à la page. Toutes les pages obtenues par génération de modèles automatique suivent ce modèle. Consultez [Code asynchrone](xref:data/ef-rp/intro#asynchronous-code) pour plus d’informations sur la programmation asynchrone avec Entity Framework.
 
-Quand une requête est effectuée pour la page, la méthode `OnGetAsync` retourne une liste de films à la page Razor. `OnGetAsync`ou `OnGet` est appelé à initialiser l’état de la page. Dans ce cas, `OnGetAsync` obtient une liste de films et les affiche.
+Quand une requête est effectuée pour la page, la méthode `OnGetAsync` retourne une liste de films à la page Razor. `OnGetAsync`ou `OnGet` est appelé pour initialiser l’état de la page. Dans ce cas, `OnGetAsync` obtient une liste de films et les affiche.
 
-Lorsque `OnGet` `void` les `OnGetAsync` `Task`déclarations ou les retours, aucune déclaration de retour n’est utilisée. Lorsque le type de retour est `IActionResult` ou `Task<IActionResult>`, une instruction de retour doit être spécifiée. Par exemple, la méthode *Pages/Movies/Create.cshtml.cs* `OnPostAsync` :
+Lorsque `OnGet` retourne `void` ou `OnGetAsync` retourne`Task`une valeur, aucune instruction return n’est utilisée. Lorsque le type de retour est `IActionResult` ou `Task<IActionResult>`, une instruction de retour doit être spécifiée. Par exemple, la méthode *Pages/Movies/Create.cshtml.cs* `OnPostAsync` :
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippet)]
 
-<a name="index"></a>Examinez les *Pages/Films/Index.cshtml* Razor Page:
+<a name="index"></a>Examinez la page Razor *pages/movies/index. cshtml* :
 
 [!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Index.cshtml)]
 
@@ -44,7 +50,7 @@ Razor peut passer du HTML au C# ou à des balises spécifiques à Razor. Quand u
 
 ### <a name="the-page-directive"></a>Directive @page
 
-La `@page` directive Razor fait du fichier une action MVC, ce qui signifie qu’il peut traiter les demandes. `@page` doit être la première directive Razor sur une page. `@page` est un exemple de conversion en balise spécifique à Razor. Pour plus d’informations, consultez [Syntaxe Razor](xref:mvc/views/razor#razor-syntax).
+La `@page` directive Razor fait du fichier une action MVC, ce qui signifie qu’elle peut gérer les demandes. `@page` doit être la première directive Razor sur une page. `@page` est un exemple de conversion en balise spécifique à Razor. Pour plus d’informations, consultez [Syntaxe Razor](xref:mvc/views/razor#razor-syntax).
 
 Examinez l’expression lambda utilisée dans le HTML Helper suivant :
 
@@ -52,7 +58,7 @@ Examinez l’expression lambda utilisée dans le HTML Helper suivant :
 @Html.DisplayNameFor(model => model.Movie[0].Title)
 ```
 
-Le HTML Helper `DisplayNameFor` inspecte la propriété `Title` référencée dans l’expression lambda pour déterminer le nom d’affichage. L’expression lambda est inspectée plutôt qu’évaluée. Cela signifie qu’il `model`n’y a pas de violation d’accès lorsque, `model.Movie`, ou `model.Movie[0]` est `null` vide. Quand l’expression lambda est évaluée (par exemple avec `@Html.DisplayFor(modelItem => item.Title)`), les valeurs de propriété du modèle sont évaluées.
+Le HTML Helper `DisplayNameFor` inspecte la propriété `Title` référencée dans l’expression lambda pour déterminer le nom d’affichage. L’expression lambda est inspectée plutôt qu’évaluée. Cela signifie qu’il n’y a aucune `model`violation `model.Movie`d’accès `model.Movie[0]` quand `null` , ou est ou est vide. Quand l’expression lambda est évaluée (par exemple avec `@Html.DisplayFor(modelItem => item.Title)`), les valeurs de propriété du modèle sont évaluées.
 
 <a name="md"></a>
 
@@ -83,7 +89,7 @@ Considérez la balise suivante du fichier *Pages/Movies/Index.cshtml* :
 
 La balise précédente en surbrillance est un exemple de passage de Razor au C#. Les caractères `{` et `}` délimitent un bloc de code C#.
 
-La `PageModel` classe de `ViewData` base contient une propriété de dictionnaire qui peut être utilisée pour transmettre des données à une vue. Des objets sont ajoutés au dictionnaire `ViewData` à l’aide d’un modèle clé/valeur. Dans l’exemple précédent, la propriété `"Title"` est ajoutée au dictionnaire `ViewData`.
+La `PageModel` classe de base contient `ViewData` une propriété de dictionnaire qui peut être utilisée pour passer des données à une vue. Des objets sont ajoutés au dictionnaire `ViewData` à l’aide d’un modèle clé/valeur. Dans l’exemple précédent, la propriété `"Title"` est ajoutée au dictionnaire `ViewData`.
 
 La propriété `"Title"` est utilisée dans le fichier * Pages/Shared/_Layout.cshtml*. La balise suivante montre les premières lignes du fichier *_Layout.cshtml*.
 
@@ -116,7 +122,7 @@ L’élément anchor précédent est un [Tag Helper](xref:mvc/views/tag-helpers/
 
 Enregistrez vos changements, puis testez l’application en cliquant sur le lien **RpMovie**. Consultez le fichier [_Layout.cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml) dans GitHub si vous rencontrez des problèmes.
 
-Testez les autres liens (**Home**, **RpMovie**, **Create**, **Edit** et **Delete**). Chaque page définit le titre, que vous pouvez voir dans l’onglet navigateur. Lorsque vous signez une page, le titre est utilisé pour le signet.
+Testez les autres liens (**Home**, **RpMovie**, **Create**, **Edit** et **Delete**). Chaque page définit le titre, que vous pouvez voir dans l’onglet navigateur. Lorsque vous ajoutez une page à un signet, le titre est utilisé pour le signet.
 
 > [!NOTE]
 > Vous ne pourrez peut-être pas entrer de virgules décimales dans le champ `Price`. Pour prendre en charge la [validation jQuery](https://jqueryvalidation.org/) pour les paramètres régionaux autres que l’anglais qui utilisent une virgule (« , ») comme décimale et des formats de date autres que l’anglais des États-Unis, vous devez effectuer des étapes pour localiser votre application. Consultez cette page [GitHub problème 4076](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) pour savoir comment ajouter une virgule décimale.
@@ -191,19 +197,19 @@ Le moteur de génération de modèles automatique crée le code Razor pour chaqu
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml?range=15-20)]
 
-Les [aides à l’étiquette de validation](xref:mvc/views/working-with-forms#the-validation-tag-helpers) (`<div asp-validation-summary` et `<span asp-validation-for`) affichent des erreurs de validation. La validation est traitée de manière plus détaillée plus loin dans cette série.
+Les [tag helpers](xref:mvc/views/working-with-forms#the-validation-tag-helpers) de validation`<div asp-validation-summary` ( `<span asp-validation-for`et) affichent des erreurs de validation. La validation est traitée de manière plus détaillée plus loin dans cette série.
 
-[L’aide Label](xref:mvc/views/working-with-forms#the-label-tag-helper) `<label asp-for="Movie.Title" class="control-label"></label>`Tag ( ) génère `for` la `Title` légende de l’étiquette et l’attribut pour la propriété.
+Le [tag Helper étiquette](xref:mvc/views/working-with-forms#the-label-tag-helper) (`<label asp-for="Movie.Title" class="control-label"></label>`) génère la légende et `for` l’attribut de l’étiquette `Title` pour la propriété.
 
-L’Aide à`<input asp-for="Movie.Title" class="form-control">` [l’étiquette d’entrée](xref:mvc/views/working-with-forms) ( ) utilise les [attributs DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) et produit les attributs HTML nécessaires pour la validation jQuery sur le côté client.
+Le [tag Helper d’entrée](xref:mvc/views/working-with-forms) (`<input asp-for="Movie.Title" class="form-control">`) utilise les attributs [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) et produit les attributs HTML nécessaires à la validation jQuery côté client.
 
 Pour plus d’informations sur les Tag Helpers, comme `<form method="post">`, consultez [Tag Helpers dans ASP.NET Core](xref:mvc/views/tag-helpers/intro).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 > [!div class="step-by-step"]
-> [Précédent: Ajout d’un modèle](xref:tutorials/razor-pages/model)
-> [Suivant: Base de données](xref:tutorials/razor-pages/sql)
+> [Précédent : ajout d’un modèle](xref:tutorials/razor-pages/model)
+> [suivant : base de données](xref:tutorials/razor-pages/sql)
 
 ::: moniker-end
 
@@ -229,7 +235,7 @@ Si `OnGet` retourne `void` ou que `OnGetAsync` retourne `Task`, aucune méthode 
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml.cs?name=snippet)]
 
-<a name="index"></a>Examinez les *Pages/Films/Index.cshtml* Razor Page:
+<a name="index"></a>Examinez la page Razor *pages/movies/index. cshtml* :
 
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml)]
 
@@ -257,7 +263,7 @@ La directive `@model` spécifie le type du modèle passé à la page Razor. Dans
 
 Sélectionnez les liens du menu (**RazorPagesMovie**, **Accueil** et **Confidentialité**). Chaque page affiche la même disposition de menu. La disposition du menu est implémentée dans le fichier *Pages/Shared/_Layout.cshtml*. Ouvrez le fichier *Pages/Shared/_Layout.cshtml*.
 
-Les modèles de [disposition](xref:mvc/views/layout) vous permettent de spécifier la disposition du conteneur HTML de votre site dans un emplacement unique, puis de l’appliquer sur plusieurs pages de votre site. Recherchez la ligne `@RenderBody()`. `RenderBody`est un espace réservé où toutes les vues spécifiques à la page que vous créez apparaissent, *enveloppées* dans la page de mise en page. Par exemple, si vous sélectionnez le lien **Confidentialité**, la vue **Pages/Privacy.cshtml** est restituée dans la méthode `RenderBody`.
+Les modèles de [disposition](xref:mvc/views/layout) vous permettent de spécifier la disposition du conteneur HTML de votre site dans un emplacement unique, puis de l’appliquer sur plusieurs pages de votre site. Recherchez la ligne `@RenderBody()`. `RenderBody`est un espace réservé dans lequel tous les affichages spécifiques à la page que vous créez s’affichent, *inclus* dans la page de disposition. Par exemple, si vous sélectionnez le lien **Confidentialité**, la vue **Pages/Privacy.cshtml** est restituée dans la méthode `RenderBody`.
 
 <a name="vd"></a>
 
@@ -302,7 +308,7 @@ L’élément anchor précédent est un [Tag Helper](xref:mvc/views/tag-helpers/
 
 Enregistrez vos changements, puis testez l’application en cliquant sur le lien **RpMovie**. Consultez le fichier [_Layout.cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) dans GitHub si vous rencontrez des problèmes.
 
-Testez les autres liens (**Home**, **RpMovie**, **Create**, **Edit** et **Delete**). Chaque page définit le titre, que vous pouvez voir dans l’onglet navigateur. Lorsque vous signez une page, le titre est utilisé pour le signet.
+Testez les autres liens (**Home**, **RpMovie**, **Create**, **Edit** et **Delete**). Chaque page définit le titre, que vous pouvez voir dans l’onglet navigateur. Lorsque vous ajoutez une page à un signet, le titre est utilisé pour le signet.
 
 > [!NOTE]
 > Vous ne pourrez peut-être pas entrer de virgules décimales dans le champ `Price`. Pour prendre en charge la [validation jQuery](https://jqueryvalidation.org/) pour les paramètres régionaux autres que l’anglais qui utilisent une virgule (« , ») comme décimale et des formats de date autres que l’anglais des États-Unis, vous devez effectuer des étapes pour localiser votre application. Consultez la page [GitHub problème 4076](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) pour savoir comment ajouter une virgule décimale.
@@ -355,22 +361,22 @@ Visual Studio pour Mac affiche la balise `<form method="post">` dans une police 
 
 L’élément `<form method="post">` est un [Tag Helper de formulaire](xref:mvc/views/working-with-forms#the-form-tag-helper). Le Tag Helper de formulaire inclut automatiquement un [jeton de protection contre les falsifications](xref:security/anti-request-forgery).
 
-Le moteur de génération de modèles automatique crée le code Razor pour chaque champ du modèle (sauf l’ID) de la manière suivante :
+Le moteur de génération de Razor modèles automatique crée un balisage pour chaque champ du modèle (à l’exception de l’ID) semblable à ce qui suit :
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml?range=15-20)]
 
-Les [aides à l’étiquette de validation](xref:mvc/views/working-with-forms#the-validation-tag-helpers) (`<div asp-validation-summary` et `<span asp-validation-for`) affichent des erreurs de validation. La validation est traitée de manière plus détaillée plus loin dans cette série.
+Les [tag helpers](xref:mvc/views/working-with-forms#the-validation-tag-helpers) de validation`<div asp-validation-summary` ( `<span asp-validation-for`et) affichent des erreurs de validation. La validation est traitée de manière plus détaillée plus loin dans cette série.
 
-[L’aide Label](xref:mvc/views/working-with-forms#the-label-tag-helper) `<label asp-for="Movie.Title" class="control-label"></label>`Tag ( ) génère `for` la `Title` légende de l’étiquette et l’attribut pour la propriété.
+Le [tag Helper étiquette](xref:mvc/views/working-with-forms#the-label-tag-helper) (`<label asp-for="Movie.Title" class="control-label"></label>`) génère la légende et `for` l’attribut de l’étiquette `Title` pour la propriété.
 
-L’Aide à`<input asp-for="Movie.Title" class="form-control">` [l’étiquette d’entrée](xref:mvc/views/working-with-forms) ( ) utilise les [attributs DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) et produit les attributs HTML nécessaires pour la validation jQuery sur le côté client.
+Le [tag Helper d’entrée](xref:mvc/views/working-with-forms) (`<input asp-for="Movie.Title" class="form-control">`) utilise les attributs [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) et produit les attributs HTML nécessaires à la validation jQuery côté client.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Version YouTube de ce tutoriel](https://youtu.be/zxgKjPYnOMM)
 
 > [!div class="step-by-step"]
-> [Précédent: Ajout d’un modèle](xref:tutorials/razor-pages/model)
-> [Suivant: Base de données](xref:tutorials/razor-pages/sql)
+> [Précédent : ajout d’un modèle](xref:tutorials/razor-pages/model)
+> [suivant : base de données](xref:tutorials/razor-pages/sql)
 
 ::: moniker-end

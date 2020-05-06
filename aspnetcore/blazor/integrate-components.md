@@ -1,5 +1,5 @@
 ---
-title: Intégrer des composants ASP.NET Core Razor dans des applications Razor Pages et MVC
+title: Intégrer des Razor composants de Razor ASP.net core dans des pages et des applications MVC
 author: guardrex
 description: En savoir plus sur les scénarios de liaison de données pour Blazor les composants et les éléments DOM dans les applications.
 monikerRange: '>= aspnetcore-3.1'
@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/25/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/integrate-components
-ms.openlocfilehash: 4e2103b7e8b65478808093d7a31e8cfe29b04984
-ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
+ms.openlocfilehash: eb4378223c40594ac52f50b7b890785067515555
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82558918"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82771772"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Intégrer des composants ASP.NET Core Razor dans des applications Razor Pages et MVC
 
@@ -247,7 +250,7 @@ Pour afficher un composant à partir d’une page ou d’une vue, utilisez le [t
 
 ### <a name="render-stateful-interactive-components"></a>Rendu des composants interactifs avec état
 
-Les composants interactifs avec état peuvent être ajoutés à une page ou à une vue Razor.
+Les composants interactifs avec état peuvent être Razor ajoutés à une page ou à une vue.
 
 Lors du rendu de la page ou de la vue :
 
@@ -305,6 +308,6 @@ Lorsque vous utilisez un dossier personnalisé pour stocker les composants de l�
 @using MyAppNamespace.Components
 ```
 
-Le fichier *_ViewImports. cshtml* se trouve dans le dossier *pages* d’une application Razor pages ou du dossier *views* d’une application MVC.
+Le fichier *_ViewImports. cshtml* se trouve dans le dossier *pages* d’une Razor application pages ou du dossier *views* d’une application MVC.
 
 Pour plus d’informations, consultez <xref:blazor/components#import-components>.
