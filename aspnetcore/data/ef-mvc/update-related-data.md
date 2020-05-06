@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 54783ebbac26a10a92716b5e53ed6cd7cc8bb65d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 32d3a22b85675d817286e3e72b8b9c8e63df6ca6
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773495"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850420"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Didacticiel : mettre à jour les données associées-ASP.NET MVC avec EF Core
 
@@ -231,7 +231,7 @@ Dans *Views/Instructors/Edit.cshtml*, ajoutez un champ **Courses** avec un table
 
 <a id="notepad"></a>
 > [!NOTE]
-> Quand vous collez le code dans Visual Studio, les sauts de ligne peuvent être changés d’une façon qui casse le code. Si le code semble différent après un collage, appuyez une fois sur Ctrl+Z pour annuler la mise en forme automatique. Ceci permet de corriger les sauts de ligne de façon à ce qu’ils apparaissent comme ce que vous voyez ici. L’indentation ne doit pas nécessairement être parfaite, mais les lignes `@</tr><tr>`, `@:<td>`, `@:</td>` et `@:</tr>` doivent chacune tenir sur une seule ligne comme dans l’illustration, sinon vous recevrez une erreur d’exécution. Avec le bloc de nouveau code sélectionné, appuyez trois fois sur Tab pour aligner le nouveau code avec le code existant. Ce problème est résolu dans Visual Studio 2019.
+> Quand vous collez le code dans Visual Studio, les sauts de ligne peuvent être changés d’une façon qui casse le code. Si le code semble différent après un collage, appuyez une fois sur Ctrl+Z pour annuler la mise en forme automatique. Ceci permet de corriger les sauts de ligne de façon à ce qu’ils apparaissent comme ce que vous voyez ici. L’indentation ne doit pas nécessairement être parfaite, mais les lignes `@:</tr><tr>`, `@:<td>`, `@:</td>` et `@:</tr>` doivent chacune tenir sur une seule ligne comme dans l’illustration, sinon vous recevrez une erreur d’exécution. Avec le bloc de nouveau code sélectionné, appuyez trois fois sur Tab pour aligner le nouveau code avec le code existant. Ce problème est résolu dans Visual Studio 2019.
 
 [!code-html[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=35-61)]
 

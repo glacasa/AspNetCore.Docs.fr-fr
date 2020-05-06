@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/azure-continuous-deployment
-ms.openlocfilehash: 3a865c2c42cb71e109331675460456a27dc500fc
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 0b9f5f15403c7d18d68a41baa2a59582cf039f44
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775308"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850563"
 ---
 # <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a>Déploiement continu sur Azure avec Visual Studio et Git avec ASP.NET Core
 
@@ -30,13 +30,13 @@ Ce tutoriel montre comment créer une application web ASP.NET Core à l’aide d
 Voir aussi [Créer votre premier pipeline avec Azure Pipelines](/azure/devops/pipelines/get-started-yaml), qui indique comment configurer un flux de travail de livraison continue pour [Azure App Service](/azure/app-service/app-service-web-overview) à l’aide d’Azure DevOps Services. Azure Pipelines (un service Azure DevOps Services) simplifie la configuration d’un pipeline de déploiement fiable pour publier les mises à jour des applications hébergées dans Azure App Service. Le pipeline peut être configuré à partir du portail Azure pour générer, exécuter des tests, déployer sur un emplacement de préproduction, puis déployer en production.
 
 > [!NOTE]
-> Pour la réalisation de ce tutoriel, un compte Microsoft Azure est nécessaire. Pour obtenir un compte, [activez les avantages d’abonné MSDN](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F) ou [inscrivez-vous pour un essai gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+> Pour la réalisation de ce tutoriel, un compte Microsoft Azure est nécessaire. Pour obtenir un compte, [activez les avantages d’abonné MSDN](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F) ou [inscrivez-vous pour un essai gratuit](https://azure.microsoft.com/free/dotnet/?WT.mc_id=A261C142F).
 
 ## <a name="prerequisites"></a>Prérequis
 
 Ce tutoriel suppose que les logiciels suivants sont installés :
 
-* [Visual Studio](https://visualstudio.microsoft.com)
+* [Visual Studio](https://visualstudio.microsoft.com)
 * [!INCLUDE [](~/includes/net-core-sdk-download-link.md)]
 * [Git](https://git-scm.com/downloads) pour Windows
 
@@ -88,7 +88,7 @@ Les étapes suivantes permettent de créer une application web dans le portail A
 
    Dans le panneau **Application web**, sélectionnez un **Plan/emplacement App Service** existant ou créez-en un. Si vous créez un plan, sélectionnez le niveau tarifaire, l’emplacement et les autres options. Pour plus d’informations sur les plans App Service, consultez [Présentation détaillée des plans Azure App Service](/azure/app-service/azure-web-sites-web-hosting-plans-in-depth-overview).
 
-1. Sélectionnez **Créer**. Azure provisionne et démarre l’application web.
+1. Sélectionnez **Create** (Créer). Azure provisionne et démarre l’application web.
 
    ![Portail Azure : Panneau Exemple d’application web Demo 01 Essentials](azure-continuous-deployment/_static/07-azure-webappblade.png)
 
@@ -143,7 +143,7 @@ Dans cette section, créez un dépôt Git local à l’aide de Visual Studio, et
    ![Boîte de dialogue Modifier un élément distant](azure-continuous-deployment/_static/11-add-remote.png)
 
    > [!NOTE]
-   > Vous pouvez aussi spécifier le dépôt distant à partir de la **Fenêtre Commande** en ouvrant la **Fenêtre Commande**, en accédant au répertoire du projet et en entrant la commande. Exemple :
+   > Vous pouvez aussi spécifier le dépôt distant à partir de la **Fenêtre Commande** en ouvrant la **Fenêtre Commande**, en accédant au répertoire du projet et en entrant la commande. Exemple :
    >
    > `git remote add Azure-SampleApp https://me@sampleapp.scm.azurewebsites.net:443/SampleApp.git`
 
@@ -156,7 +156,7 @@ Dans cette section, créez un dépôt Git local à l’aide de Visual Studio, et
    ![Onglet Connexion de Team Explorer](azure-continuous-deployment/_static/12-initial-commit.png)
 
    > [!NOTE]
-   > Vous pouvez aussi valider les modifications à partir de la **Fenêtre Commande** en ouvrant la **Fenêtre Commande**, en accédant au répertoire du projet et en entrant les commandes Git. Exemple :
+   > Vous pouvez aussi valider les modifications à partir de la **Fenêtre Commande** en ouvrant la **Fenêtre Commande**, en accédant au répertoire du projet et en entrant les commandes Git. Exemple :
    >
    > `git add .`
    >
@@ -224,7 +224,7 @@ Après avoir apporté des modifications au code local, effectuez une republicati
 1. Sélectionnez **démarrage** > **Sync** > **Actions**actions > **Push**Sync.
 
 > [!NOTE]
-> Vous pouvez aussi envoyer (push) les modifications à partir de la **Fenêtre Commande** en ouvrant la **Fenêtre Commande**, en accédant au répertoire du projet et en entrant une commande Git. Exemple :
+> Vous pouvez aussi envoyer (push) les modifications à partir de la **Fenêtre Commande** en ouvrant la **Fenêtre Commande**, en accédant au répertoire du projet et en entrant une commande Git. Exemple :
 > 
 > `git push -u Azure-SampleApp master`
 

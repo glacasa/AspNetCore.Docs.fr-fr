@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: e2b1672066a5b3c0bb6bc44e316bda93ae0f21b7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 2dd44a561debddac13250174a8e74dd912302d60
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774902"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850511"
 ---
 # <a name="routing-in-aspnet-core"></a>Routage dans ASP.NET Core
 
@@ -30,7 +30,7 @@ Le routage est responsable de la mise en correspondance des demandes HTTP entran
 
 Les applications peuvent configurer le routage à l’aide de :
 
-- Contrôleurs
+- Controllers
 - Pages Razor
 - SignalR
 - Services gRPC
@@ -500,7 +500,7 @@ Les contraintes de route s’exécutent quand une correspondance s’est produit
 
 Le tableau suivant montre des exemples de contraintes de routage et leur comportement attendu :
 
-| contrainte | Exemple | Exemples de correspondances | Remarques |
+| contrainte |  Exemple | Exemples de correspondances | Notes |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier |
 | `bool` | `{active:bool}` | `true`, `FALSE` | Correspond `true` à `false`ou. Non-respect de la casse |
@@ -569,8 +569,8 @@ Les expressions régulières utilisées dans le routage commencent `^` souvent p
 | `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
 | `[a-z]{2}`   | mz        | Oui   | Correspondance avec l’expression    |
 | `[a-z]{2}`   | MZ        | Oui   | Non-respect de la casse    |
-| `^[a-z]{2}$` | hello     | Non    | Voir `^` et `$` ci-dessus |
-| `^[a-z]{2}$` | 123abc456 | Non    | Voir `^` et `$` ci-dessus |
+| `^[a-z]{2}$` | hello     | Non     | Voir `^` et `$` ci-dessus |
+| `^[a-z]{2}$` | 123abc456 | Non     | Voir `^` et `$` ci-dessus |
 
 Pour plus d’informations sur la syntaxe des expressions régulières, consultez [Expressions régulières du .NET Framework](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -581,6 +581,8 @@ Pour contraindre un paramètre à un ensemble connu de valeurs possibles, utilis
 Vous pouvez créer des contraintes de routage personnalisées <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> en implémentant l’interface. L' `IRouteConstraint` interface contient <xref:System.Web.Routing.IRouteConstraint.Match*>, qui retourne `true` si la contrainte est satisfaite `false` et dans le cas contraire.
 
 Les contraintes de routage personnalisées sont rarement nécessaires. Avant d’implémenter une contrainte d’itinéraire personnalisée, envisagez d’autres méthodes, telles que la liaison de modèle.
+
+Le dossier ASP.NET Core [Constraints](https://github.com/dotnet/aspnetcore/tree/master/src/Http/Routing/src/Constraints) fournit de bons exemples de création de contraintes. Par exemple, [GuidRouteConstraint](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Constraints/GuidRouteConstraint.cs#L18).
 
 Pour utiliser un personnalisé `IRouteConstraint`, le type de contrainte d’itinéraire doit être enregistré avec l' <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> application dans le conteneur de service. Un `ConstraintMap` est un dictionnaire qui mappe les clés de contrainte d’itinéraire aux implémentations `IRouteConstraint` qui valident ces contraintes. Le `ConstraintMap` d’une application peut être mis à jour dans `Startup.ConfigureServices` dans le cadre d’un appel [services.AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) ou en configurant <xref:Microsoft.AspNetCore.Routing.RouteOptions> directement avec `services.Configure<RouteOptions>`. Par exemple :
 
@@ -1432,7 +1434,7 @@ Les contraintes de route s’exécutent quand une correspondance s’est produit
 
 Le tableau suivant montre des exemples de contrainte de route et leur comportement attendu.
 
-| contrainte | Exemple | Exemples de correspondances | Remarques |
+| contrainte |  Exemple | Exemples de correspondances | Notes |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier. |
 | `bool` | `{active:bool}` | `true`, `FALSE` | Correspond `true` à ou à’false. Non-respect de la casse. |
@@ -1488,8 +1490,8 @@ Les expressions régulières utilisées dans le routage commencent souvent par `
 | `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
 | `[a-z]{2}`   | mz        | Oui   | Correspondance avec l’expression    |
 | `[a-z]{2}`   | MZ        | Oui   | Non-respect de la casse    |
-| `^[a-z]{2}$` | hello     | Non    | Voir `^` et `$` ci-dessus |
-| `^[a-z]{2}$` | 123abc456 | Non    | Voir `^` et `$` ci-dessus |
+| `^[a-z]{2}$` | hello     | Non     | Voir `^` et `$` ci-dessus |
+| `^[a-z]{2}$` | 123abc456 | Non     | Voir `^` et `$` ci-dessus |
 
 Pour plus d’informations sur la syntaxe des expressions régulières, consultez [Expressions régulières du .NET Framework](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1882,7 +1884,7 @@ Les contraintes de route s’exécutent quand une correspondance s’est produit
 
 Le tableau suivant montre des exemples de contrainte de route et leur comportement attendu.
 
-| contrainte | Exemple | Exemples de correspondances | Remarques |
+| contrainte |  Exemple | Exemples de correspondances | Notes |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier |
 | `bool` | `{active:bool}` | `true`, `FALSE` | Correspond à `true` ou à `false` (non-respect de la casse) |
@@ -1932,8 +1934,8 @@ Les expressions régulières utilisées dans le routage commencent souvent par u
 | `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
 | `[a-z]{2}`   | mz        | Oui   | Correspondance avec l’expression    |
 | `[a-z]{2}`   | MZ        | Oui   | Non-respect de la casse    |
-| `^[a-z]{2}$` | hello     | Non    | Voir `^` et `$` ci-dessus |
-| `^[a-z]{2}$` | 123abc456 | Non    | Voir `^` et `$` ci-dessus |
+| `^[a-z]{2}$` | hello     | Non     | Voir `^` et `$` ci-dessus |
+| `^[a-z]{2}$` | 123abc456 | Non     | Voir `^` et `$` ci-dessus |
 
 Pour plus d’informations sur la syntaxe des expressions régulières, consultez [Expressions régulières du .NET Framework](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 

@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/tools-and-downloads
-ms.openlocfilehash: 321d506760d057914136f77c15e85043fa9d9832
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 1917a329a5dcbe60542541cfcdc746799307e3d5
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766535"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850407"
 ---
 # <a name="tools-and-downloads"></a>Outils et téléchargements
 
@@ -27,7 +27,7 @@ Azure dispose de plusieurs interfaces pour la configuration et la gestion des re
 
 Les abonnements suivants sont requis :
 
-* Azure &mdash; si vous n’avez pas de compte, [procurez-vous un essai gratuit](https://azure.microsoft.com/free/).
+* Azure &mdash; si vous n’avez pas de compte, [procurez-vous un essai gratuit](https://azure.microsoft.com/free/dotnet/).
 * Azure DevOps Services &mdash; votre abonnement et votre organisation Azure DevOps sont créés dans le chapitre 4.
 * GitHub &mdash; si vous n’avez pas de compte, inscrivez-vous [gratuitement](https://github.com/join).
 

@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: ca9c7f9dba55e58e1e2fa2131d4e78d92aaa2838
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 0541a85756e0084f4a420a0742ad923d732a9365
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774247"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850550"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>Didacticiel : créer un client et un serveur gRPC dans ASP.NET Core
 
@@ -37,23 +37,23 @@ Dans ce tutoriel, vous allez :
 
 ## <a name="prerequisites"></a>Prérequis
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vs-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.1.md)]
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-[!INCLUDE[](~/includes/net-core-prereqs-mac-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-mac-3.1.md)]
 
 ---
 
 ## <a name="create-a-grpc-service"></a>Créer un service gRPC
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Démarrez Visual Studio et sélectionnez **Créer un projet**. Vous pouvez également, dans le menu **Fichier** de Visual Studio, sélectionner **Nouveau** > **Projet**.
 * Dans la boîte de dialogue **créer un nouveau projet** , sélectionnez **gRPC service** , puis cliquez sur **suivant**:
@@ -61,10 +61,10 @@ Dans ce tutoriel, vous allez :
   ![Boîte de dialogue créer un nouveau projet](~/tutorials/grpc/grpc-start/static/cnp.png)
 
 * Nommez le projet **GrpcGreeter**. Il est important de nommer le projet *GrpcGreeter* pour que les espaces de noms correspondent quand vous copiez et collez du code.
-* Sélectionnez **Créer**.
+* Sélectionnez **Create** (Créer).
 * Dans la boîte de dialogue **Créer un service gRPC** :
   * Le modèle **Service gRPC** est sélectionné.
-  * Sélectionnez **Créer**.
+  * Sélectionnez **Create** (Créer).
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -126,17 +126,17 @@ Fichiers projet *GrpcGreeter* :
 
 * *greet.proto* &ndash;Le fichier *Protos/greet.proto* définit gRPC `Greeter` et est utilisé pour générer les ressources du serveur gRPC. Pour plus d’informations, consultez [Introduction à gRPC](xref:grpc/index).
 * Dossier *services* : contient l’implémentation du `Greeter` service.
-* *appSettings.json* &ndash; contient des données de configuration, telles que le protocole utilisé par Kestrel. Pour plus d’informations, consultez <xref:fundamentals/configuration/index>.
-* *Program.cs* &ndash; contient le point d’entrée du service gRPC. Pour plus d’informations, consultez <xref:fundamentals/host/generic-host>.
+* *appSettings.json* &ndash; contient des données de configuration, telles que le protocole utilisé par Kestrel. Pour plus d'informations, consultez <xref:fundamentals/configuration/index>.
+* *Program.cs* &ndash; contient le point d’entrée du service gRPC. Pour plus d'informations, consultez <xref:fundamentals/host/generic-host>.
 * *Startup.cs* &ndash; contient le code qui configure le comportement de l’application. Pour plus d’informations, consultez [Démarrage des applications](xref:fundamentals/startup).
 
 ## <a name="create-the-grpc-client-in-a-net-console-app"></a>Créer le client gRPC dans une application console .NET
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Ouvrez une deuxième instance de Visual Studio et sélectionnez **Créer un projet**.
 * Dans la boîte de dialogue **Créer un projet**, sélectionnez **Application console (.NET Core)**, puis sélectionnez **Suivant**.
-* Dans la zone de texte **Nom**, entrez **GrpcGreeterClient** et sélectionnez **Créer**.
+* Dans la zone de texte **nom du projet** , entrez **GrpcGreeterClient** , puis sélectionnez **créer**.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -163,7 +163,7 @@ Le projet client gRPC requiert les packages suivants :
 * [Google.Protobuf](https://www.nuget.org/packages/Google.Protobuf/), qui contient des API de messages protobuf pour C#.
 * [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/), qui contient la prise en charge des outils C# pour les fichiers protobuf. Le package d’outils n’est pas nécessaire lors de l’exécution. La dépendance est donc marquée avec `PrivateAssets="All"`.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Installez les packages à l’aide de la console PMC (console du Gestionnaire de package) ou à partir de Gérer les packages NuGet.
 
@@ -212,7 +212,7 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 * Copiez le fichier *Protos\greet.proto* du service Greeter gRPC vers le projet du client gRPC.
 * Modifiez le fichier projet *GrpcGreeterClient.csproj* :
 
-  # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+  # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
   Cliquez avec le bouton droit sur le projet et sélectionnez **Modifier le fichier de projet**.
 
@@ -257,7 +257,7 @@ Le client Greeter appelle la méthode `SayHello` asynchrone. Le résultat de l�
 
 ## <a name="test-the-grpc-client-with-the-grpc-greeter-service"></a>Tester le client gRPC avec le service Greeter gRPC
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Dans le service Greeter, appuyez sur `Ctrl+F5` pour démarrer le serveur sans le débogueur.
 * Dans le projet `GrpcGreeterClient`, appuyez sur `Ctrl+F5` pour démarrer le client sans le débogueur.

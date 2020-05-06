@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: 86808e6bdd3bb669a62ad9e333b11df4c09a9cd3
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d62889ba6dba6748ce3d047f0d37b3a904199496
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774637"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850433"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>Authentification Cloud avec Azure Active Directory B2C dans ASP.NET Core
 
@@ -40,7 +40,7 @@ Dans ce tutoriel, vous allez apprendre à effectuer les actions suivantes :
 
 Les éléments suivants sont requis pour cette procédure pas à pas :
 
-* [Abonnement Microsoft Azure](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
+* [Abonnement Microsoft Azure](https://azure.microsoft.com/free/dotnet/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
 * [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 
 ## <a name="create-the-azure-active-directory-b2c-tenant"></a>Créer le locataire Azure Active Directory B2C
@@ -60,7 +60,7 @@ Utilisez les valeurs suivantes :
 | **Autoriser le flux implicite**       | Oui                       |                                                                                                                                                                                                    |
 | **URL de réponse**                 | `https://localhost:44300/signin-oidc` | Les URL de réponse sont des points de terminaison auxquels Azure AD B2C retourne les jetons demandés par votre application. Visual Studio fournit l’URL de réponse à utiliser. Pour le moment, `https://localhost:44300/signin-oidc` entrez pour remplir le formulaire. |
 | **URI ID d’application**                | Laisser vide               | Non requis pour ce didacticiel.                                                                                                                                                                    |
-| **Inclure le client natif**     | Non                        |                                                                                                                                                                                                    |
+| **Inclure le client natif**     | Non                         |                                                                                                                                                                                                    |
 
 > [!WARNING]
 > Si vous configurez une URL de réponse non-localhost, tenez compte des [contraintes sur ce qui est autorisé dans la liste des URL de réponse](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application). 
@@ -90,7 +90,7 @@ Dans Visual Studio :
     | Paramètre                       | Valeur                                                 |
     |-------------------------------|-------------------------------------------------------|
     | **Nom de domaine**               | *&lt;nom de domaine de votre client B2C&gt;*          |
-    | **ID de l’application**            | *&lt;coller l’ID d’application à partir du presse-papiers&gt;* |
+    | **ID de l'application**            | *&lt;coller l’ID d’application à partir du presse-papiers&gt;* |
     | **Chemin de rappel**             | *&lt;utiliser la valeur par défaut&gt;*                       |
     | **Stratégie d’inscription ou de connexion** | `B2C_1_SiUpIn`                                        |
     | **Réinitialiser la stratégie de mot de passe**     | `B2C_1_SSPR`                                          |
@@ -168,4 +168,4 @@ Maintenant que l’application ASP.NET Core est configurée pour utiliser Azure 
 * Configurez des fournisseurs d’identité supplémentaires, tels que [Microsoft](/azure/active-directory-b2c/active-directory-b2c-setup-msa-app), [Facebook](/azure/active-directory-b2c/active-directory-b2c-setup-fb-app), [Google](/azure/active-directory-b2c/active-directory-b2c-setup-goog-app), [Amazon](/azure/active-directory-b2c/active-directory-b2c-setup-amzn-app), [Twitter](/azure/active-directory-b2c/active-directory-b2c-setup-twitter-app), etc.
 * [Utilisez le API Graph Azure ad](/azure/active-directory-b2c/active-directory-b2c-devquickstarts-graph-dotnet) pour récupérer des informations utilisateur supplémentaires, telles que l’appartenance à un groupe, à partir du locataire Azure ad B2C.
 * [Sécuriser une API web ASP.net core à l’aide de Azure ad B2C](https://azure.microsoft.com/resources/samples/active-directory-b2c-dotnetcore-webapi/).
-* [Appeler une API Web .net à partir d’une application Web .net à l’aide de Azure ad B2C](/azure/active-directory-b2c/active-directory-b2c-devquickstarts-web-api-dotnet).
+* [Didacticiel : accorder l’accès à une API web ASP.net à l’aide de Azure Active Directory B2C](/azure/active-directory-b2c/tutorial-web-api-dotnet).
