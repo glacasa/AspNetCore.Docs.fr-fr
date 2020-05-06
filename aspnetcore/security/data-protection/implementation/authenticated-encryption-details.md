@@ -4,13 +4,19 @@ author: rick-anderson
 description: Découvrez les détails de l’implémentation du chiffrement authentifié de la protection des données ASP.NET Core.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/authenticated-encryption-details
-ms.openlocfilehash: 9def03e6b27e19fc34a839e923d6152e086889db
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 3066cd505781ed2ddad46626dda9d9ce35307877
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667761"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776966"
 ---
 # <a name="authenticated-encryption-details-in-aspnet-core"></a>Détails du chiffrement authentifié dans ASP.NET Core
 
@@ -55,4 +61,4 @@ Les 128 bits suivants, ou 16 octets sont l’identificateur de clé (80 9C 81 0C
 Le reste contient la charge utile et est spécifique au format utilisé.
 
 > [!WARNING]
-> Toutes les charges utiles protégées à une clé donnée commencent par le même en-tête de 20 octets (valeur magique, ID de clé). Les administrateurs peuvent utiliser ce fait à des fins de diagnostic approximatifs lorsqu’une charge utile a été générée. Par exemple, la charge utile ci-dessus correspond à la clé {0c819c80-6619-4019-9536-53f8aaffee57}. Si, après avoir vérifié le référentiel de clés, vous constatez que la date d’activation de cette clé spécifique était 2015-01-01 et que sa date d’expiration était 2015-03-01, il est raisonnable de supposer que la charge utile (si elle n’a pas été falsifiée) a été générée dans cette fenêtre, d’attribuer ou de prendre une petite manœuvre facteur de part et d’autre.
+> Toutes les charges utiles protégées à une clé donnée commencent par le même en-tête de 20 octets (valeur magique, ID de clé). Les administrateurs peuvent utiliser ce fait à des fins de diagnostic approximatifs lorsqu’une charge utile a été générée. Par exemple, la charge utile ci-dessus correspond à la clé {0c819c80-6619-4019-9536-53f8aaffee57}. Si, après avoir vérifié le référentiel de clés, vous estimez que la date d’activation de cette clé spécifique était 2015-01-01 et que sa date d’expiration était 2015-03-01, il est raisonnable de supposer que la charge utile (si elle n’a pas été falsifiée) a été générée dans cette fenêtre, attribuez ou prenez un petit facteur manœuvre de chaque côté.

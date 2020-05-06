@@ -4,21 +4,27 @@ author: rick-anderson
 description: En savoir plus sur la hiérarchie des chaînes à usage général et sur l’architecture mutualisée en ce qui concerne les API de protection des données ASP.NET Core.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/consumer-apis/purpose-strings-multitenancy
-ms.openlocfilehash: 1133d40e7b325d58b3f70e7387494dae36ff8ac9
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 73edb8082d2df263bc1e6d73fee1360fa6840514
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78664751"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776771"
 ---
 # <a name="purpose-hierarchy-and-multi-tenancy-in-aspnet-core"></a>Hiérarchie des objectifs et architecture mutualisée dans ASP.NET Core
 
-Étant donné qu’une `IDataProtector` est également implicitement une `IDataProtectionProvider`, les objectifs peuvent être chaînés ensemble. Dans ce sens, `provider.CreateProtector([ "purpose1", "purpose2" ])` équivaut à `provider.CreateProtector("purpose1").CreateProtector("purpose2")`.
+Étant donné `IDataProtector` qu’un est également implicitement un `IDataProtectionProvider`, les objectifs peuvent être chaînés ensemble. Dans ce sens, `provider.CreateProtector([ "purpose1", "purpose2" ])` est équivalent à `provider.CreateProtector("purpose1").CreateProtector("purpose2")`.
 
-Cela permet d’obtenir des relations hiérarchiques intéressantes via le système de protection des données. Dans l’exemple précédent de [contoso. Messaging. SecureMessage](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-contoso-purpose), le composant SecureMessage peut appeler `provider.CreateProtector("Contoso.Messaging.SecureMessage")` une fois avant et mettre en cache le résultat dans un champ de `_myProvider` privé. Des protecteurs futurs peuvent ensuite être créés via des appels à `_myProvider.CreateProtector("User: username")`, et ces protecteurs sont utilisés pour sécuriser les messages individuels.
+Cela permet d’obtenir des relations hiérarchiques intéressantes via le système de protection des données. Dans l’exemple précédent de [contoso. Messaging. SecureMessage](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-contoso-purpose), le composant SecureMessage peut `provider.CreateProtector("Contoso.Messaging.SecureMessage")` appeler une fois en amont et mettre en cache le résultat `_myProvider` dans un champ privé. Des protecteurs futurs peuvent ensuite être créés via des `_myProvider.CreateProtector("User: username")`appels à et ces protecteurs sont utilisés pour sécuriser les messages individuels.
 
-Cela peut également être retourné. Prenons l’exemple d’une application logique unique qui héberge plusieurs locataires (un CMS paraît raisonnable) et chaque locataire peut être configuré avec son propre système de gestion d’État et d’authentification. L’application parapluie a un seul fournisseur principal, et elle appelle `provider.CreateProtector("Tenant 1")` et `provider.CreateProtector("Tenant 2")` pour attribuer à chaque locataire sa propre tranche isolée du système de protection des données. Les locataires peuvent ensuite dériver leurs propres Protecteurs individuels en fonction de leurs propres besoins, mais quelle que soit leur nature, ils ne peuvent pas créer de protecteurs qui sont en conflit avec les autres locataires du système. Graphiquement, ceci est représenté comme indiqué ci-dessous.
+Cela peut également être retourné. Prenons l’exemple d’une application logique unique qui héberge plusieurs locataires (un CMS paraît raisonnable) et chaque locataire peut être configuré avec son propre système de gestion d’État et d’authentification. L’application parapluie a un seul fournisseur principal, et elle appelle `provider.CreateProtector("Tenant 1")` et `provider.CreateProtector("Tenant 2")` donne à chaque locataire sa propre tranche isolée du système de protection des données. Les locataires peuvent ensuite dériver leurs propres Protecteurs individuels en fonction de leurs propres besoins, mais quelle que soit leur nature, ils ne peuvent pas créer de protecteurs qui sont en conflit avec les autres locataires du système. Graphiquement, ceci est représenté comme indiqué ci-dessous.
 
 ![À des fins d’architecture mutualisée](purpose-strings-multitenancy/_static/purposes-multi-tenancy.png)
 

@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: 316c87e5f49593c05991a94cbe5e55d175a49bb3
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 3474b6b1d85774a15a912efcb37ec8f206695eaf
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78659368"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776355"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>Héberger ASP.NET Core dans une batterie de serveurs web
 
@@ -61,9 +67,9 @@ Les scénarios suivants ne nécessitent pas une configuration supplémentaire, m
 | Scénario | Dépend de &hellip; |
 | -------- | ------------------- |
 | Authentification | Protection des données (voir <xref:security/data-protection/configuration/overview>).<br><br>Pour plus d’informations, consultez <xref:security/authentication/cookie> et <xref:security/cookie-sharing>. |
-| Identité | Authentification et configuration de la base de données.<br><br>Pour plus d’informations, consultez <xref:security/authentication/identity>. |
-| session | Protection des données (cookies chiffrés) (voir <xref:security/data-protection/configuration/overview>) et Mise en cache (voir <xref:performance/caching/distributed>).<br><br>Pour plus d’informations, voir [Session et gestion de l’État: État de session](xref:fundamentals/app-state#session-state). |
-| TempData | Protection des données (cookies <xref:security/data-protection/configuration/overview>cryptés) (voir ) ou Session (voir [Session et gestion de l’État : État de session).](xref:fundamentals/app-state#session-state)<br><br>Pour plus d’informations, voir [Session et gestion de l’Etat: TempData](xref:fundamentals/app-state#tempdata). |
+| Identity | Authentification et configuration de la base de données.<br><br>Pour plus d’informations, consultez <xref:security/authentication/identity>. |
+| session | Protection des données (cookies chiffrés) (voir <xref:security/data-protection/configuration/overview>) et Mise en cache (voir <xref:performance/caching/distributed>).<br><br>Pour plus d’informations, consultez [session and State Management : état de session](xref:fundamentals/app-state#session-state). |
+| TempData | Protection des données (cookies chiffrés) ( <xref:security/data-protection/configuration/overview>consultez) ou session (voir la rubrique [gestion de session et d’État : état de session](xref:fundamentals/app-state#session-state)).<br><br>Pour plus d’informations, consultez [session and State Management : TempData](xref:fundamentals/app-state#tempdata). |
 | Anti-contrefaçon | Protection des données (voir <xref:security/data-protection/configuration/overview>).<br><br>Pour plus d’informations, consultez <xref:security/anti-request-forgery>. |
 
 ## <a name="troubleshoot"></a>Dépanner
@@ -74,10 +80,10 @@ Lorsque la protection des données ou la mise en cache ne sont pas configurées 
 
 Prenons l’exemple d’un utilisateur qui se connecte à l’application à l’aide de l’authentification basée sur les cookies. L’utilisateur se connecte à l’application sur un nœud de batterie de serveurs web. Si sa prochaine requête arrive sur ce même nœud où il est connecté, l’application est en mesure de déchiffrer le cookie d’authentification et autorise l’accès aux ressources de l’application. Si sa prochaine requête arrive sur un autre nœud, l’application ne peut pas déchiffrer le cookie d’authentification à partir du nœud où l’utilisateur est connecté, et autorisation d’accès à la ressource demandée échoue.
 
-Lorsque l’un des symptômes suivants se produit **par intermittence,** le problème est généralement attribué à une mauvaise protection des données ou à la configuration de mise en cache d’un environnement de ferme Web :
+Lorsque l’un des symptômes suivants se produit par **intermittence**, le problème est généralement lié à une configuration de protection des données ou de mise en cache incorrecte pour un environnement de batterie de serveurs Web :
 
 * Interruptions d’authentification &ndash; Le cookie d’authentification est mal configuré ou ne peut pas être déchiffré. OAuth (Facebook, Microsoft, Twitter) ou les connexions OpenIdConnect échouent avec l’erreur « Échec de la corrélation ».
-* Interruptions d’autorisation &ndash; L’identité est perdue.
+* Les interruptions &ndash; Identity d’autorisation sont perdues.
 * L’état de session perd des données.
 * Des éléments mis en cache disparaissent.
 * TempData échoue.
@@ -91,6 +97,6 @@ Si les applications de la batterie de serveurs web sont capables de répondre au
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* [Extension de script personnalisé pour Windows](/azure/virtual-machines/extensions/custom-script-windows) &ndash; Téléchargements et exécute des scripts sur les machines virtuelles Azure, ce qui est utile pour la configuration post-déploiement et l’installation de logiciels.
+* L' [extension de script personnalisé pour Windows](/azure/virtual-machines/extensions/custom-script-windows) &ndash; télécharge et exécute des scripts sur des machines virtuelles Azure, ce qui est utile pour la configuration et l’installation de logiciels après le déploiement.
 * <xref:host-and-deploy/proxy-load-balancer>
  

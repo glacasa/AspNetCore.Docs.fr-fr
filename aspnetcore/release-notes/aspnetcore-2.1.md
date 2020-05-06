@@ -6,14 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: af5807b782d4acec8c7d40111dc508dfa6127057
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 1f68bd5347ba1f67e56b7a2fe8914ffdaef8010c
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78667544"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774078"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>Nouveautés d’ASP.NET Core 2.1
 
@@ -21,7 +25,7 @@ Cet article met en évidence les modifications les plus importantes dans ASP.NET
 
 ## SignalR
 
-SignalRa été réécrit pour ASP.NET Core 2.1. ASP.NET Core SignalR comprend un certain nombre d’améliorations :
+SignalRa été réécrite pour ASP.NET Core 2,1. ASP.NET Core SignalR comprend un certain nombre d’améliorations :
 
 * Un modèle simplifié de montée en puissance parallèle.
 * Un nouveau client JavaScript sans dépendance de jQuery.
@@ -30,28 +34,28 @@ SignalRa été réécrit pour ASP.NET Core 2.1. ASP.NET Core SignalR comprend un
 * Un nouveau modèle réponse de streaming.
 * Prise en charge des clients basés sur des WebSocket nus.
 
-Pour plus d’informations, voir [ASP.NET Core SignalR ](xref:signalr/introduction).
+Pour plus d’informations, [consultez SignalRASP.net Core ](xref:signalr/introduction).
 
-## <a name="razor-class-libraries"></a>Bibliothèques de classes Razor
+## <a name="razor-class-libraries"></a>Razorbibliothèques de classes
 
-Avec ASP.NET Core 2.1, il est plus facile de générer une interface utilisateur basée sur Razor, de l’inclure dans une bibliothèque et de la partager entre plusieurs projets. Le nouveau SDK Razor permet de générer des fichiers Razor dans un projet de bibliothèque de classes qui peut être placé dans un package NuGet. Les vues et les pages dans les bibliothèques sont automatiquement découvertes et peuvent être remplacées par l’application. Grâce à l’intégration de la compilation Razor dans la build :
+ASP.NET Core 2,1 facilite la génération et l’inclusion Razorde l’interface utilisateur basée sur dans une bibliothèque et la partage entre plusieurs projets. Le nouveau Razor Kit de développement Razor logiciel (SDK) permet de générer des fichiers dans un projet de bibliothèque de classes qui peut être empaqueté dans un package NuGet. Les vues et les pages dans les bibliothèques sont automatiquement découvertes et peuvent être remplacées par l’application. En intégrant Razor la compilation dans la build :
 
 * Le temps de démarrage de l’application est nettement plus rapide.
-* Les mises à jour rapides des pages et vues Razor au moment de l’exécution sont toujours disponibles dans le cadre d’un flux de travail de développement itératif.
+* Les mises à jour rapides Razor des affichages et des pages au moment de l’exécution sont toujours disponibles dans le cadre d’un flux de travail de développement itératif.
 
-Pour plus d’informations, consultez [Créer une interface utilisateur réutilisable à l’aide du projet Razor Class Library](xref:razor-pages/ui-class).
+Pour plus d’informations, consultez [créer une interface utilisateur réutilisable à l’aide du projet de bibliothèque de Razor classes](xref:razor-pages/ui-class).
 
-## <a name="identity-ui-library--scaffolding"></a>Bibliothèque de l’interface utilisateur d’identité et génération de modèles automatique
+## <a name="identity-ui-library--scaffolding"></a>IdentityGénération de modèles automatique & bibliothèque d’interface utilisateur
 
-ASP.NET Core 2.1 fournit [l’identité ASP.NET Core](xref:security/authentication/identity) comme [bibliothèque de classes Razor](xref:razor-pages/ui-class). Les applications qui incluent l’identité peuvent appliquer le nouveau générateur de modèles automatique d’identité de manière sélective pour ajouter le code source contenu dans la bibliothèque de classes Razor d’identité (RCL). Vous pouvez souhaiter générer le code source afin de pouvoir modifier le code et changer le comportement. Par exemple, vous pouvez demander au générateur de modèles automatique de générer le code utilisé dans l’inscription. Le code généré est prioritaire sur le même code dans la bibliothèque de classes Razor d’identité.
+ASP.net Core 2,1 fournit [ASP.net Core Identity ](xref:security/authentication/identity) sous la forme d’une [ Razor bibliothèque de classes](xref:razor-pages/ui-class). Les applications qui Identity incluent peuvent appliquer le Identity nouveau générateur de modèles automatique pour ajouter de manière sélective le code Identity Razor source contenu dans la bibliothèque de classes (RCL). Vous pouvez souhaiter générer le code source afin de pouvoir modifier le code et changer le comportement. Par exemple, vous pouvez demander au générateur de modèles automatique de générer le code utilisé dans l’inscription. Le code généré est prioritaire sur le même code dans Identity le RCL.
 
-Les applications qui **n’incluent pas** l’authentification peuvent appliquer le générateur de modèles automatique d’identité pour ajouter le package d’identité de la bibliothèque de classes. Vous pouvez sélectionner le code d’identité à générer.
+Les applications qui n’incluent **pas** l’authentification peuvent Identity appliquer l’échafaudage pour ajouter Identity le package RCL. Vous avez la possibilité de sélectionner Identity du code à générer.
 
-Pour plus d’informations, consultez [Identité de vue de structure dans les projets ASP.NET Core](xref:security/authentication/scaffold-identity).
+Pour plus d’informations, [consultez Identity structure dans les projets ASP.net Core](xref:security/authentication/scaffold-identity).
 
 ## <a name="https"></a>HTTPS
 
-L’importance croissante accordée à la sécurité et à la confidentialité justifie l’activation du protocole HTTPS pour les applications web. La mise en œuvre du protocole HTTPS devient de plus en plus stricte sur le web. Les sites qui n’utilisent pas HTTPS sont considérés comme peu sûrs. Les navigateurs (Chrome, Mozilla) commencent à imposer l’utilisation des fonctionnalités web dans un contexte sécurisé. Le [RGPD](xref:security/gdpr) exige l’utilisation du protocole HTTPS pour protéger la confidentialité des utilisateurs. L’utilisation du protocole HTTPS en production est critique et son utilisation en développement peut aider à éviter les problèmes liés au déploiement (tels que les liens non sécurisés). ASP.NET Core 2.1 inclut un certain nombre d’améliorations qui facilitent l’utilisation du protocole HTTPS pendant le développement et sa configuration en production. Pour plus d’informations, consultez [Appliquer le protocole HTTPS](xref:security/enforcing-ssl).
+L’importance croissante accordée à la sécurité et à la confidentialité justifie l’activation du protocole HTTPS pour les applications web. La mise en œuvre du protocole HTTPS devient de plus en plus stricte sur le web. Les sites qui n’utilisent pas le protocole HTTPs sont considérés comme non sécurisés. Les navigateurs (Chrome, Mozilla) commencent à imposer l’utilisation des fonctionnalités web dans un contexte sécurisé. Le [RGPD](xref:security/gdpr) exige l’utilisation du protocole HTTPS pour protéger la confidentialité des utilisateurs. L’utilisation du protocole HTTPS en production est critique et son utilisation en développement peut aider à éviter les problèmes liés au déploiement (tels que les liens non sécurisés). ASP.NET Core 2.1 inclut un certain nombre d’améliorations qui facilitent l’utilisation du protocole HTTPS pendant le développement et sa configuration en production. Pour plus d’informations, consultez [Appliquer le protocole HTTPS](xref:security/enforcing-ssl).
 
 ### <a name="on-by-default"></a>Activé par défaut
 
@@ -83,7 +87,7 @@ ASP.NET Core fournit des API et des modèles qui aident à satisfaire à certain
 
 Un nouveau package est introduit qui simplifie la création et l’exécution de tests. Le package [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/) gère les tâches suivantes :
 
-* Copie du fichier de dépendance (*\*.deps*) de l’application testée dans le dossier *poubelle* du projet de test.
+* Copie le fichier de dépendance (*\*. DEPS*) de l’application testée dans le dossier *bin* du projet de test.
 * Il définit la racine du contenu sur la racine du projet de l’application testée afin que soient trouvés les pages/vues et fichiers statiques quand les tests sont exécutés.
 * Il fournit la classe [WebApplicationFactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) afin de simplifier l’amorçage de l’application testée avec [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver).
 
@@ -153,17 +157,17 @@ Pour plus d'informations, consultez les pages suivantes :
 * <xref:spa/react>
 * <xref:spa/react-with-redux>
 
-## <a name="razor-pages-search-for-razor-assets"></a>Recherche Razor Pages de ressources Razor
+## <a name="razor-pages-search-for-razor-assets"></a>RazorRecherche de pages Razor pour les ressources
 
-Dans la version 2.1, Razor Pages recherche les ressources Razor (par exemple, les dispositions et pages partielles) dans les répertoires suivants dans l’ordre indiqué :
+Dans 2,1, Razor les pages recherchent les Razor ressources (telles que les mises en page et les éléments partiels) dans les répertoires suivants dans l’ordre indiqué :
 
 1. Dossier Pages en cours.
 1. */Pages/Shared/*
 1. */Views/Shared/*
 
-## <a name="razor-pages-in-an-area"></a>Razor Pages dans une zone
+## <a name="razor-pages-in-an-area"></a>RazorPages dans une zone
 
-Razor Pages prend désormais en charge les [zones](xref:mvc/controllers/areas). Pour obtenir un exemple de zones, créez une application web Razor Pages avec des comptes d’utilisateur individuels. Une application web Razor Pages avec des comptes d’utilisateur individuels inclut */Areas/Identity/Pages*.
+RazorLes pages prennent désormais en charge les [zones](xref:mvc/controllers/areas). Pour voir un exemple de zones, créez une application Razor Web de pages avec des comptes d’utilisateur individuels. Une Razor application Web de pages avec des comptes d’utilisateur individuels comprend */Areas/Identity/pages*.
 
 ## <a name="mvc-compatibility-version"></a>Version de compatibilité MVC
 

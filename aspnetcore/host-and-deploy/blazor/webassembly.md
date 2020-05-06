@@ -5,17 +5,20 @@ description: Découvrez comment héberger et déployer une Blazor application à
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/30/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: 2472fd499128a8807b76a3cc031d466140e180f5
-ms.sourcegitcommit: 23243f6d6a3100303802e4310b0634860cc0b268
+ms.openlocfilehash: 9bc1e3aaadb7310f6ea338eea2726bdc592aa06a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82619367"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776407"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>Héberger et déployer ASP.NET Core éblouissant webassembly
 
@@ -402,3 +405,53 @@ Une application de webassembly éblouissant peut être initialisée avec `loadBo
 Les sources externes doivent retourner les en-têtes CORS requis pour les navigateurs afin d’autoriser le chargement des ressources Cross-Origin. Les CDN fournissent généralement les en-têtes requis par défaut.
 
 Il vous suffit de spécifier des types pour les comportements personnalisés. Les types non spécifiés à sont chargés par le Framework en fonction de leurs comportements de `loadBootResource` chargement par défaut.
+
+## <a name="change-the-filename-extension-of-dll-files"></a>Modifier l’extension de nom de fichier des fichiers DLL
+
+Si vous avez besoin de modifier les extensions de nom de fichier des fichiers *. dll* publiés de l’application, suivez les instructions de cette section.
+
+Après avoir publié l’application, utilisez un script d’interpréteur de commandes ou un pipeline de build DevOps pour renommer les fichiers *. dll* afin d’utiliser une extension de fichier différente. Ciblez les fichiers *. dll* dans le répertoire *wwwroot* de la sortie publiée de l’application (par exemple, *{root content}/bin/Release/netstandard2.1/Publish/wwwroot*).
+
+Dans les exemples suivants, les fichiers *. dll* sont renommés pour utiliser l’extension de fichier *. bin* .
+
+Sur Windows :
+
+```powershell
+dir .\_framework\_bin | rename-item -NewName { $_.name -replace ".dll\b",".bin" }
+((Get-Content .\_framework\blazor.boot.json -Raw) -replace '.dll"','.bin"') | Set-Content .\_framework\blazor.boot.json
+```
+
+Sur Linux ou macOS :
+
+```console
+for f in _framework/_bin/*; do mv "$f" "`echo $f | sed -e 's/\.dll\b/.bin/g'`"; done
+sed -i 's/\.dll"/.bin"/g' _framework/blazor.boot.json
+```
+   
+Pour utiliser une extension de fichier différente de *. bin*, remplacez *. bin* dans les commandes précédentes.
+
+Pour adresser les fichiers *éblouissant. Boot. JSON. gz* et *blazor.Boot.JSON.br* compressés, adoptez l’une des approches suivantes :
+
+* Supprimez les fichiers *éblouissant. Boot. JSON. gz* et *blazor.Boot.JSON.br* compressés. La compression est désactivée avec cette approche.
+* Recompressez le fichier *éblouissant. Boot. JSON* mis à jour.
+
+L’exemple Windows suivant utilise un script PowerShell placé à la racine du projet.
+
+*ChangeDLLExtensions. ps1 :*:
+
+```powershell
+param([string]$filepath,[string]$tfm)
+dir $filepath\bin\Release\$tfm\wwwroot\_framework\_bin | rename-item -NewName { $_.name -replace ".dll\b",".bin" }
+((Get-Content $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json -Raw) -replace '.dll"','.bin"') | Set-Content $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json
+Remove-Item $filepath\bin\Release\$tfm\wwwroot\_framework\blazor.boot.json.gz
+```
+
+Dans le fichier projet, le script est exécuté après la publication de l’application :
+
+```xml
+<Target Name="ChangeDLLFileExtensions" AfterTargets="Publish" Condition="'$(Configuration)'=='Release'">
+  <Exec Command="powershell.exe -command &quot;&amp; { .\ChangeDLLExtensions.ps1 '$(SolutionDir)' '$(TargetFramework)'}&quot;" />
+</Target>
+```
+
+Pour nous faire part de vos commentaires, visitez [aspnetcore/issues #5477](https://github.com/dotnet/aspnetcore/issues/5477).

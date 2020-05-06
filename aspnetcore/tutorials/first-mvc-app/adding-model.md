@@ -4,13 +4,19 @@ author: rick-anderson
 description: Ajoutez un modèle à une application ASP.NET Core simple.
 ms.author: riande
 ms.date: 01/13/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: e7fc0496438734e13cfafcecf432da4a94737897
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 1347659ee25e2b85b0a479f6bbcc5eb1a956fab2
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79434510"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776758"
 ---
 # <a name="add-a-model-to-an-aspnet-core-mvc-app"></a>Ajouter un modèle dans une application ASP.NET Core MVC
 
@@ -38,7 +44,7 @@ Ajoutez un fichier nommé *Movie.cs* au dossier *Models*.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-Cliquez à droite sur le dossier *Modèles* > **ajouter** > **une nouvelle classe** > **vide classe**. Nommez le fichier *Movie.cs*.
+Cliquez avec le bouton droit sur le dossier *Models* > **Ajouter** > **New Class** > une classe**vide**Class. Nommez le fichier *Movie.cs*.
 
 ---
 
@@ -48,7 +54,7 @@ Mettez le fichier *Movie.cs* à jour avec le contenu suivant :
 
 La classe `Movie` contient un champ `Id`, qui est nécessaire à la base de données pour la clé primaire.
 
-<xref:System.ComponentModel.DataAnnotations.DataType> L’attribut `ReleaseDate` sur spécifie`Date`le type de données ( ). Avec cet attribut :
+L' <xref:System.ComponentModel.DataAnnotations.DataType> attribut sur `ReleaseDate` spécifie le type des données (`Date`). Avec cet attribut :
 
 * L’utilisateur n’est pas obligé d’entrer les informations de temps dans le champ de date.
 * Seule la date est affichée, pas les informations de temps.
@@ -77,17 +83,17 @@ La commande précédente ajoute le fournisseur EF Core SQL Server. Le package du
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-Dans le menu **du projet,** **sélectionnez Manage NuGet Packages**.
+Dans le menu **projet** , sélectionnez **gérer les packages NuGet**.
 
-Dans le champ **de recherche** `Microsoft.EntityFrameworkCore.SQLite` en haut à droite, entrez et appuyez sur la clé **Retour** pour rechercher. Sélectionnez le paquet NuGet correspondant et appuyez sur le bouton Ajouter le **paquet.**
+Dans le champ de **recherche** en haut à droite, `Microsoft.EntityFrameworkCore.SQLite` entrez et appuyez sur la touche **retour** pour effectuer la recherche. Sélectionnez le package NuGet correspondant, puis cliquez sur le bouton **Ajouter un package** .
 
-![Ajouter le paquet NuGet de base de cadre d’entité](~/tutorials/first-mvc-app-mac/adding-model/_static/add-nuget-packages.png)
+![Ajouter Entity Framework Core package NuGet](~/tutorials/first-mvc-app-mac/adding-model/_static/add-nuget-packages.png)
 
-Le dialogue **Select Projects** sera affiché, le `MvcMovie` projet ayant été sélectionné. Appuyez sur le bouton **Ok.**
+La boîte de dialogue **Sélectionner les projets** s’affiche, `MvcMovie` avec le projet sélectionné. Appuyez sur le bouton **OK** .
 
-Un dialogue **d’acceptation de licence** sera affiché. Examinez les licences comme vous le souhaitez, puis cliquez sur le bouton **Accepter.**
+Une boîte de dialogue d' **acceptation de licence** s’affiche. Passez en revue les licences comme vous le souhaitez, puis cliquez sur le bouton **accepter** .
 
-Répétez les étapes ci-dessus pour installer les paquets NuGet suivants :
+Répétez les étapes ci-dessus pour installer les packages NuGet suivants :
 
 * `Microsoft.VisualStudio.Web.CodeGeneration.Design`
 * `Microsoft.EntityFrameworkCore.SqlServer`
@@ -140,7 +146,7 @@ Le nom de la chaîne de connexion est transmis au contexte en appelant une méth
 
 ## <a name="add-a-database-connection-string"></a>Ajouter une chaîne de connexion de base de données
 
-Ajoutez une chaîne de connexion au fichier *appsettings.json* :
+Ajoutez une chaîne de connexion au fichier *appSettings. JSON* :
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -171,13 +177,13 @@ Dans la boîte de dialogue **Ajouter un modèle automatique**, sélectionnez **C
 Renseignez la boîte de dialogue **Ajouter un contrôleur** :
 
 * **Classe de modèle :** *Movie (MvcMovie.Models)*
-* **Classe de contexte de données :** *MvcMovieContext (MvcMovie.Data)*
+* **Classe de contexte de données :** *MvcMovieContext (MvcMovie. Data)*
 
 ![Ajouter un contexte de données](adding-model/_static/dc3.png)
 
 * **Affichages :** conservez la valeur par défaut de chaque option activée.
 * **Nom du contrôleur :** conservez la valeur par défaut *MoviesController*.
-* Sélectionnez **Ajouter**
+* Sélectionnez **Ajouter** .
 
 Visual Studio crée :
 
@@ -220,7 +226,7 @@ La création automatique de ces fichiers est appelée *génération de modèles 
 
 <!-- End of tabs                  -->
 
-Vous ne pouvez pas encore utiliser les pages générées automatiquement, car la base de données n’existe pas. Si vous exécutez l’application et cliquez sur le lien **Movie App,** vous obtenez une *base de données impossible à ouvrir* ou pas un tel tableau : message *d’erreur de film.*
+Vous ne pouvez pas encore utiliser les pages générées automatiquement, car la base de données n’existe pas. Si vous exécutez l’application et cliquez sur le lien de l' **application de film** , vous recevez un message d’erreur Impossible d' *ouvrir la base de données* ou une *table de ce type :* message d’erreur.
 
 <a name="migration"></a>
 
@@ -239,9 +245,9 @@ Add-Migration InitialCreate
 Update-Database
 ```
 
-* `Add-Migration InitialCreate`: Générer un fichier *de migrations/100 _InitialCreate.cs.* L’argument `InitialCreate` est le nom de la migration. Vous pouvez utiliser n’importe quel nom, mais par convention, un nom décrivant la migration est sélectionné. Étant donné qu’il s’agit de la première migration, la classe générée contient du code permettant de créer le schéma de la base de données. Le schéma de base de données est basé sur le modèle spécifié dans la classe `MvcMovieContext`.
+* `Add-Migration InitialCreate`: Génère un fichier de migration *_InitialCreate. cs migrations/{timestamp}* . L’argument `InitialCreate` est le nom de la migration. Vous pouvez utiliser n’importe quel nom, mais par convention, un nom décrivant la migration est sélectionné. Étant donné qu’il s’agit de la première migration, la classe générée contient du code permettant de créer le schéma de la base de données. Le schéma de base de données est basé sur le modèle spécifié dans la classe `MvcMovieContext`.
 
-* `Update-Database`: Mise à jour de la base de données sur la dernière migration, créée par la commande précédente. La commande exécute la méthode `Up` dans le fichier *Migrations/{horodatage}_InitialCreate.cs*, ce qui entraîne la création de la base de données.
+* `Update-Database`: Met à jour la base de données avec la dernière migration, créée par la commande précédente. La commande exécute la méthode `Up` dans le fichier *Migrations/{horodatage}_InitialCreate.cs*, ce qui entraîne la création de la base de données.
 
   La commande « database update » génère l’avertissement suivant : 
 
@@ -260,9 +266,9 @@ dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
 
-* `ef migrations add InitialCreate`: Générer un fichier *de migrations/100 _InitialCreate.cs.* L’argument `InitialCreate` est le nom de la migration. Vous pouvez utiliser n’importe quel nom, mais par convention, un nom décrivant la migration est sélectionné. Étant donné qu’il s’agit de la première migration, la classe générée contient du code permettant de créer le schéma de la base de données. Le schéma de base de donénes est basé sur le modèle spécifié dans la classe `MvcMovieContext` (dans *Data/MvcMovieContext.cs*).
+* `ef migrations add InitialCreate`: Génère un fichier de migration *_InitialCreate. cs migrations/{timestamp}* . L’argument `InitialCreate` est le nom de la migration. Vous pouvez utiliser n’importe quel nom, mais par convention, un nom décrivant la migration est sélectionné. Étant donné qu’il s’agit de la première migration, la classe générée contient du code permettant de créer le schéma de la base de données. Le schéma de base de donénes est basé sur le modèle spécifié dans la classe `MvcMovieContext` (dans *Data/MvcMovieContext.cs*).
 
-* `ef database update`: Mise à jour de la base de données sur la dernière migration, créée par la commande précédente. La commande exécute la méthode `Up` dans le fichier *Migrations/{horodatage}_InitialCreate.cs*, ce qui entraîne la création de la base de données.
+* `ef database update`: Met à jour la base de données avec la dernière migration, créée par la commande précédente. La commande exécute la méthode `Up` dans le fichier *Migrations/{horodatage}_InitialCreate.cs*, ce qui entraîne la création de la base de données.
 
 [!INCLUDE [more information on the CLI for EF Core](~/includes/ef-cli.md)]
 
@@ -326,7 +332,7 @@ Le constructeur utilise une [injection de dépendance](xref:fundamentals/depende
 
 ### <a name="use-sqlite-for-development-sql-server-for-production"></a>Utiliser SQLite pour le développement, SQL Server pour la production
 
-Lorsque SQLite est sélectionné, le code généré par le modèle est prêt pour le développement. Le code suivant montre <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> comment injecter dans Startup. `IWebHostEnvironment`est injecté `ConfigureServices` ainsi peut utiliser SQLite dans le développement et SQL Server en production.
+Lorsque SQLite est sélectionné, le code généré par le modèle est prêt pour le développement. Le code suivant montre comment injecter <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> au démarrage. `IWebHostEnvironment`est injecté afin `ConfigureServices` de pouvoir utiliser SQLite dans le développement et SQL Server en production.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/StartupDevProd.cs?name=snippet_StartupClass&highlight=5,10,16-28)]
 
@@ -356,7 +362,7 @@ Vous pouvez aussi passer `id` avec une requête de chaîne, comme suit :
 
 `https://localhost:5001/movies/details?id=1`
 
-Le `id` paramètre est défini comme`int?`un type [nul](/dotnet/csharp/programming-guide/nullable-types/index) () au cas où une valeur d’identification n’est pas fournie.
+Le `id` paramètre est défini en tant que [type Nullable](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) au cas où une valeur d’ID n’est pas fournie.
 
 Une [expression lambda](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions) est passée à `FirstOrDefaultAsync` pour sélectionner les entités de film qui correspondent aux données de routage ou à la valeur de la chaîne de requête.
 
@@ -405,8 +411,8 @@ Comme l’objet `Model` est fortement typé (en tant qu’objet `IEnumerable<Mov
 * [Globalisation et localisation](xref:fundamentals/localization)
 
 > [!div class="step-by-step"]
-> [Ajout précédent d’une vue](adding-view.md)
-> [suivant en collaboration avec SQL](working-with-sql.md)
+> [Précédente ajout d’une vue](adding-view.md)
+> [à la suite de l’utilisation de SQL](working-with-sql.md)
 
 ::: moniker-end
 
@@ -452,7 +458,7 @@ Renseignez la boîte de dialogue **Ajouter un contrôleur** :
 
 * **Affichages :** conservez la valeur par défaut de chaque option activée.
 * **Nom du contrôleur :** conservez la valeur par défaut *MoviesController*.
-* Sélectionnez **Ajouter**
+* Sélectionnez **Ajouter** .
 
 ![Boîte de dialogue Ajouter un contrôleur](adding-model/_static/add_controller2.png)
 
@@ -565,7 +571,7 @@ Dans cette section, vous devez effectuer les tâches suivantes :
 
    Le schéma de base de données est basé sur le modèle spécifié dans la classe `MvcMovieContext`. L’argument `Initial` est le nom de la migration. Vous pouvez utiliser n’importe quel nom, mais par convention, un nom décrivant la migration est utilisé. Pour plus d’informations, consultez <xref:data/ef-mvc/migrations>.
 
-   La `Update-Database` commande `Up` exécute la méthode dans le fichier *Migrations/time-stamp_InitialCreate.cs,* qui crée la base de données.
+   La `Update-Database` commande exécute la `Up` méthode dans le fichier *migrations/{Time-horodatage} _InitialCreate. cs* , qui crée la base de données.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio pour Mac](#tab/visual-studio-code+visual-studio-mac)
 
@@ -665,7 +671,7 @@ Vous pouvez aussi passer `id` avec une requête de chaîne, comme suit :
 
 `https://localhost:5001/movies/details?id=1`
 
-Le `id` paramètre est défini comme`int?`un type [nul](/dotnet/csharp/programming-guide/nullable-types/index) () au cas où une valeur d’identification n’est pas fournie.
+Le `id` paramètre est défini en tant que [type Nullable](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) au cas où une valeur d’ID n’est pas fournie.
 
 Une [expression lambda](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions) est passée à `FirstOrDefaultAsync` pour sélectionner les entités de film qui correspondent aux données de routage ou à la valeur de la chaîne de requête.
 
@@ -714,7 +720,7 @@ Comme l’objet `Model` est fortement typé (en tant qu’objet `IEnumerable<Mov
 * [Globalisation et localisation](xref:fundamentals/localization)
 
 > [!div class="step-by-step"]
-> [Ajout précédent d’une vue](adding-view.md)
-> [suivant avec une base de données](working-with-sql.md)
+> [Précédente ajout d’une vue](adding-view.md)
+> [à la suite de l’utilisation d’une base de données](working-with-sql.md)
 
 ::: moniker-end

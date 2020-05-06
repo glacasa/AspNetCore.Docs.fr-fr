@@ -1,23 +1,29 @@
 ---
 title: Fournisseurs de stockage de clés dans ASP.NET Core
 author: rick-anderson
-description: En savoir plus sur les fournisseurs de stockage de clés dans ASP.NET Core et comment configurer les emplacements de stockage de clés.
+description: En savoir plus sur les fournisseurs de stockage de clés dans ASP.NET Core et sur la configuration des emplacements de stockage de clés.
 ms.author: riande
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: 19f64e816d88d2fc156915e31dc147645c5a630a
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: a8d38f17b066a0aa9a38b1bdfea3491f733cf1bc
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78662959"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776875"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>Fournisseurs de stockage de clés dans ASP.NET Core
 
 Le système de protection [des données utilise par défaut un mécanisme de découverte](xref:security/data-protection/configuration/default-settings) pour déterminer où les clés de chiffrement doivent être conservées. Le développeur peut remplacer le mécanisme de découverte par défaut et spécifier manuellement l’emplacement.
 
 > [!WARNING]
-> Si vous spécifiez un emplacement de persistance des clés explicites, le système de protection des données annule l’inscription du chiffrement à clé par défaut au mécanisme de rest, donc les clés ne sont plus chiffrés au repos. Il est recommandé de [spécifier un mécanisme de chiffrement à clé explicite](xref:security/data-protection/implementation/key-encryption-at-rest) pour les déploiements de production.
+> Si vous spécifiez un emplacement de persistance de clé explicite, le système de protection des données annule l’inscription du mécanisme de chiffrement à clé par défaut au repos, de sorte que les clés ne sont plus chiffrées au repos. Il est recommandé de [spécifier un mécanisme de chiffrement à clé explicite](xref:security/data-protection/implementation/key-encryption-at-rest) pour les déploiements de production.
 
 ## <a name="file-system"></a>Système de fichiers
 
@@ -35,7 +41,7 @@ Le `DirectoryInfo` peut pointer vers un répertoire sur l’ordinateur local, ou
 
 ## <a name="azure-storage"></a>Stockage Azure
 
-Le package [Microsoft. AspNetCore. dataprotection. AzureStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) permet de stocker les clés de protection des données dans le stockage d’objets BLOB Azure. Les clés peuvent être partagées entre plusieurs instances d’une application web. Applications peuvent partager des cookies d’authentification ou de protection de CSRF sur plusieurs serveurs.
+Le package [Microsoft. AspNetCore. dataprotection. AzureStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) permet de stocker les clés de protection des données dans le stockage d’objets BLOB Azure. Les clés peuvent être partagées entre plusieurs instances d’une application Web. Les applications peuvent partager des cookies d’authentification ou la protection CSRF sur plusieurs serveurs.
 
 Pour configurer le fournisseur de stockage d’objets BLOB Azure, appelez l’une des surcharges [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) .
 
@@ -70,13 +76,13 @@ services.AddDataProtection()
 
 ::: moniker range=">= aspnetcore-2.2"
 
-Le package [Microsoft. AspNetCore. dataprotection. StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) permet de stocker les clés de protection des données dans un cache ReDim. Les clés peuvent être partagées entre plusieurs instances d’une application web. Applications peuvent partager des cookies d’authentification ou de protection de CSRF sur plusieurs serveurs.
+Le package [Microsoft. AspNetCore. dataprotection. StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) permet de stocker les clés de protection des données dans un cache ReDim. Les clés peuvent être partagées entre plusieurs instances d’une application Web. Les applications peuvent partager des cookies d’authentification ou la protection CSRF sur plusieurs serveurs.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-Le package [Microsoft. AspNetCore. dataprotection. redims](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) permet de stocker les clés de protection des données dans un cache ReDim. Les clés peuvent être partagées entre plusieurs instances d’une application web. Applications peuvent partager des cookies d’authentification ou de protection de CSRF sur plusieurs serveurs.
+Le package [Microsoft. AspNetCore. dataprotection. redims](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) permet de stocker les clés de protection des données dans un cache ReDim. Les clés peuvent être partagées entre plusieurs instances d’une application Web. Les applications peuvent partager des cookies d’authentification ou la protection CSRF sur plusieurs serveurs.
 
 ::: moniker-end
 
@@ -113,14 +119,14 @@ public void ConfigureServices(IServiceCollection services)
 Pour plus d'informations, voir les rubriques suivantes :
 
 * [StackExchange. Redims ConnectionMultiplexer](https://github.com/StackExchange/StackExchange.Redis/blob/master/docs/Basics.md)
-* [Cache Redis Azure](/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache#connect-to-the-cache)
+* [Cache Redims Azure](/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache#connect-to-the-cache)
 * [Exemples de DataProtection ASP.NET Core](https://github.com/dotnet/AspNetCore/tree/2.2.0/src/DataProtection/samples)
 
 ## <a name="registry"></a>Registre
 
 **S’applique uniquement aux déploiements Windows.**
 
-Parfois l’application ne peut pas avoir accès en écriture au système de fichiers. Imaginez un scénario dans lequel une application s’exécute en tant que compte de service virtuel (par exemple, l’identité du pool d’applications *w3wp. exe*). Dans ce cas, l’administrateur peut configurer une clé de Registre qui est accessible par l’identité de compte de service. Appelez la méthode d’extension [PersistKeysToRegistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry) comme indiqué ci-dessous. Fournissez un [RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) pointant vers l’emplacement où les clés de chiffrement doivent être stockées :
+Il arrive parfois que l’application ne dispose pas d’un accès en écriture au système de fichiers. Imaginez un scénario dans lequel une application s’exécute en tant que compte de service virtuel (par exemple, l’identité du pool d’applications *w3wp. exe*). Dans ce cas, l’administrateur peut configurer une clé de Registre accessible par l’identité du compte de service. Appelez la méthode d’extension [PersistKeysToRegistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry) comme indiqué ci-dessous. Fournissez un [RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) pointant vers l’emplacement où les clés de chiffrement doivent être stockées :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -137,11 +143,11 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="entity-framework-core"></a>Entity Framework Core
 
-Le package [Microsoft. AspNetCore. dataprotection. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.EntityFrameworkCore/) fournit un mécanisme permettant de stocker les clés de protection des données dans une base de données à l’aide d’Entity Framework Core. Le package NuGet `Microsoft.AspNetCore.DataProtection.EntityFrameworkCore` doit être ajouté au fichier projet, car il ne fait pas partie du [logiciel Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app).
+Le package [Microsoft. AspNetCore. dataprotection. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.EntityFrameworkCore/) fournit un mécanisme permettant de stocker les clés de protection des données dans une base de données à l’aide d’Entity Framework Core. Le `Microsoft.AspNetCore.DataProtection.EntityFrameworkCore` package NuGet doit être ajouté au fichier projet, car il ne fait pas partie du [AspNetCore](xref:fundamentals/metapackage-app).
 
-Avec ce package, les clés peuvent être partagées entre plusieurs instances d’une application web.
+Avec ce package, les clés peuvent être partagées entre plusieurs instances d’une application Web.
 
-Pour configurer le fournisseur de EF Core, appelez la méthode [PersistKeysToDbContext\<TContext >](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcoredataprotectionextensions.persistkeystodbcontext) :
+Pour configurer le fournisseur de EF Core, appelez la méthode [\<PersistKeysToDbContext TContext>](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcoredataprotectionextensions.persistkeystodbcontext) :
 
 [!code-csharp[Main](key-storage-providers/sample/Startup.cs?name=snippet&highlight=13-20)]
 
@@ -173,9 +179,9 @@ dotnet ef database update --context MyKeysContext
 
 ---
 
-`MyKeysContext` est le `DbContext` défini dans l’exemple de code précédent. Si vous utilisez un `DbContext` avec un nom différent, remplacez le nom de votre `DbContext` par `MyKeysContext`.
+`MyKeysContext`est le `DbContext` défini dans l’exemple de code précédent. Si vous utilisez un `DbContext` avec un nom différent, remplacez par `DbContext` `MyKeysContext`votre nom.
 
-La classe/entité `DataProtectionKeys` adopte la structure indiquée dans le tableau suivant.
+La `DataProtectionKeys` classe/entité adopte la structure indiquée dans le tableau suivant.
 
 | Propriété/champ | Type CLR | Type SQL              |
 | -------------- | -------- | --------------------- |
@@ -185,6 +191,6 @@ La classe/entité `DataProtectionKeys` adopte la structure indiquée dans le tab
 
 ::: moniker-end
 
-## <a name="custom-key-repository"></a>Dépôt de clé personnalisé
+## <a name="custom-key-repository"></a>Référentiel de clés personnalisé
 
 Si les mécanismes intégrés ne sont pas appropriés, le développeur peut spécifier son propre mécanisme de persistance de clé en fournissant un [IXmlRepository](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.ixmlrepository)personnalisé.

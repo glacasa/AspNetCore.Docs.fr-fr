@@ -1,88 +1,94 @@
 ---
 title: Contrôle de version des services gRPC
 author: jamesnk
-description: Apprenez à la version des services gRPC.
+description: Découvrez comment effectuer la version des services gRPC.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 01/09/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: grpc/versioning
-ms.openlocfilehash: 9bd76009ba28a1abef25a98686afea6753d4a8f4
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: dcf089f1e5f27639d048e91ee3aa42c7da6d8398
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78664114"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775360"
 ---
 # <a name="versioning-grpc-services"></a>Contrôle de version des services gRPC
 
 Par [James Newton-King](https://twitter.com/jamesnk)
 
-Les nouvelles fonctionnalités ajoutées à une application peuvent nécessiter des services gRPC fournis aux clients pour changer, parfois de manière inattendue et révolutionnaire. Lorsque les services gRPC changent :
+Les nouvelles fonctionnalités ajoutées à une application peuvent nécessiter la modification des services gRPC fournis aux clients, parfois de façon inattendue et avec rupture. Quand les services gRPC changent :
 
-* Il faut tenir compte de l’impact des changements sur les clients.
-* Une stratégie de version pour appuyer les changements devrait être mise en œuvre.
+* Il convient de tenir compte de l’impact des modifications sur les clients.
+* Une stratégie de contrôle de version pour prendre en charge les modifications doit être implémentée.
 
 ## <a name="backwards-compatibility"></a>Compatibilité descendante
 
-Le protocole gRPC est conçu pour soutenir les services qui changent au fil du temps. En général, les ajouts aux services et aux méthodes de gRPC ne sont pas révolutionnaires. Les modifications non-ruptures permettent aux clients existants de continuer à travailler sans modification. La modification ou la suppression des services gRPC brisent les changements. Lorsque les services gRPC ont des changements de rupture, les clients utilisant ce service doivent être mis à jour et redéployés.
+Le protocole gRPC est conçu pour prendre en charge les services qui changent au fil du temps. En règle générale, les ajouts aux services et méthodes gRPC sont sans rupture. Les modifications sans rupture permettent aux clients existants de continuer à fonctionner sans modification. La modification ou la suppression des services gRPC est une modification avec rupture. Lorsque les services gRPC comportent des modifications avec rupture, les clients qui utilisent ce service doivent être mis à jour et redéployés.
 
-L’apport de modifications non-révolutionnaires à un service présente un certain nombre d’avantages :
+Apporter des modifications sans rupture à un service présente un certain nombre d’avantages :
 
-* Les clients existants continuent de fonctionner.
-* Évite le travail consistant à informer les clients de briser les changements et à les mettre à jour.
-* Une seule version du service doit être documentée et maintenue.
+* Les clients existants continuent à s’exécuter.
+* Évite les tâches liées à la notification des clients des modifications avec rupture et à leur mise à jour.
+* Une seule version du service doit être documentée et gérée.
 
 ### <a name="non-breaking-changes"></a>Changements non cassants
 
-Ces modifications ne sont pas cassants à un niveau de protocole gRPC et .NET niveau binaire.
+Ces modifications sont sans rupture au niveau du protocole gRPC et au niveau binaire .NET.
 
 * **Ajout d’un nouveau service**
 * **Ajout d’une nouvelle méthode à un service**
-* **Ajout d’un champ à un message de demande** - Champs ajoutés à un message de demande sont déséialisés avec la valeur par [défaut](https://developers.google.com/protocol-buffers/docs/proto3#default) sur le serveur lorsqu’il n’est pas défini. Pour être un changement non-rupture, le service doit réussir lorsque le nouveau domaine n’est pas défini par des clients plus âgés.
-* **Ajout d’un champ à un message de réponse** - Champs ajoutés à un message de réponse sont déséialisés dans la collection de champs [inconnus](https://developers.google.com/protocol-buffers/docs/proto3#unknowns) du message sur le client.
-* **Ajout d’une valeur à un enum** - Enums sont sérialisés comme une valeur numérique. De nouvelles valeurs enum sont déséialisées sur le client à la valeur enum sans nom enum. Pour être un changement non-rupture, les clients plus âgés doivent fonctionner correctement lors de la réception de la nouvelle valeur enum.
+* **Ajout d’un champ à un message de demande** : les champs ajoutés à un message de demande sont désérialisés avec la [valeur par défaut](https://developers.google.com/protocol-buffers/docs/proto3#default) sur le serveur lorsqu’ils ne sont pas définis. Pour qu’il s’agit d’une modification sans rupture, le service doit être correctement exécuté lorsque le nouveau champ n’est pas défini par des clients plus anciens.
+* **Ajout d’un champ à un message de réponse** : les champs ajoutés à un message de réponse sont désérialisés dans la collection de [champs inconnue](https://developers.google.com/protocol-buffers/docs/proto3#unknowns) du message sur le client.
+* **L’ajout d’une valeur à un enum** -enums est sérialisé en tant que valeur numérique. Les nouvelles valeurs enum sont désérialisées sur le client vers la valeur enum sans nom Enum. Pour qu’il s’agit d’une modification sans rupture, les anciens clients doivent s’exécuter correctement lors de la réception de la nouvelle valeur enum.
 
-### <a name="binary-breaking-changes"></a>Changements de rupture binaires
+### <a name="binary-breaking-changes"></a>Modifications avec rupture binaire
 
-Les modifications suivantes ne sont pas rupture à un niveau de protocole gRPC, mais le client doit être mis à jour si elle se met à niveau vers le dernier contrat *.proto* ou client .NET assemblage. La compatibilité binaire est importante si vous prévoyez de publier une bibliothèque gRPC à NuGet.
+Les modifications suivantes sont sans rupture au niveau du protocole gRPC, mais le client doit être mis à jour s’il est mis à niveau vers la *dernière version* du contrat ou de l’assembly .net du client. La compatibilité binaire est importante si vous envisagez de publier une bibliothèque gRPC dans NuGet.
 
-* **Retrait d’un champ** - Les valeurs d’un champ supprimé sont déséialisées dans [les champs inconnus](https://developers.google.com/protocol-buffers/docs/proto3#unknowns)d’un message. Il ne s’agit pas d’un protocole gRPC brisant le changement, mais le client doit être mis à jour si elle met à niveau vers le dernier contrat. Il est important qu’un numéro de champ supprimé ne soit pas accidentellement réutilisé à l’avenir. Pour s’assurer que cela ne se produise pas, spécifiez les numéros de champ supprimés et les noms sur le message à l’aide du mot clé [réservé](https://developers.google.com/protocol-buffers/docs/proto3#reserved) de Protobuf.
-* **Renommer un message** - Les noms de messages ne sont généralement pas envoyés sur le réseau, donc ce n’est pas un protocole gRPC briser le changement. Le client devra être mis à jour s’il passe à niveau vers le dernier contrat. Une situation où les noms de messages **sont** envoyés sur le réseau est avec [tous](https://developers.google.com/protocol-buffers/docs/proto3#any) les champs, lorsque le nom du message est utilisé pour identifier le type de message.
-* **Changer csharp_namespace** - Changer `csharp_namespace` l’espace de nom des types générés .NET. Il ne s’agit pas d’un protocole gRPC brisant le changement, mais le client doit être mis à jour si elle met à niveau vers le dernier contrat.
+* La **Suppression d’une** valeur de champ d’un champ supprimé est désérialisée dans les [champs inconnus](https://developers.google.com/protocol-buffers/docs/proto3#unknowns)d’un message. Il ne s’agit pas d’une modification avec rupture de protocole gRPC, mais le client doit être mis à jour s’il est mis à niveau vers le dernier contrat. Il est important qu’un numéro de champ supprimé ne soit pas réutilisé par la suite. Pour vous assurer que cela ne se produit pas, spécifiez les numéros de champ et les noms supprimés dans le message à l’aide du mot clé [réservé](https://developers.google.com/protocol-buffers/docs/proto3#reserved) de Protobuf.
+* Si vous **renommez un message** , les noms de message ne sont généralement pas envoyés sur le réseau. il ne s’agit donc pas d’une modification avec rupture de protocole gRPC. Le client devra être mis à jour s’il est mis à niveau vers le dernier contrat. Dans les cas où le nom du message est utilisé pour identifier le type de message, il peut [arriver que les](https://developers.google.com/protocol-buffers/docs/proto3#any) noms des messages **soient** envoyés sur le réseau.
+* La modification **csharp_namespace** `csharp_namespace` modification de l’espace de noms des types .NET générés. Il ne s’agit pas d’une modification avec rupture de protocole gRPC, mais le client doit être mis à jour s’il est mis à niveau vers le dernier contrat.
 
-### <a name="protocol-breaking-changes"></a>Modifications de rupture du protocole
+### <a name="protocol-breaking-changes"></a>Modifications avec rupture de protocole
 
-Les éléments suivants sont des changements de protocole et de rupture binaire :
+Les éléments suivants sont des modifications de protocole et de rupture binaire :
 
-* **Renommer un champ** - Avec le contenu Protobuf, les noms de champ ne sont utilisés que dans le code généré. Le numéro de champ est utilisé pour identifier les champs sur le réseau. Le changement de nom d’un champ n’est pas un changement de protocole pour Protobuf. Toutefois, si un serveur utilise du contenu JSON, le changement de champ est un changement de rupture.
-* **Modification d’un type** de données sur le terrain - Changer le type de données d’un champ en un [type incompatible](https://developers.google.com/protocol-buffers/docs/proto3#updating) entraînera des erreurs lors du désétérialisation du message. Même si le nouveau type de données est compatible, il est probable que le client doit être mis à jour pour prendre en charge le nouveau type s’il passe à la dernière période.
-* **Modification d’un numéro de champ** - Avec les charges utiles Protobuf, le numéro de champ est utilisé pour identifier les champs sur le réseau.
-* **Renommer un paquet, un service ou une méthode** - gRPC utilise le nom du paquet, le nom de service et le nom de la méthode pour construire l’URL. Le client obtient un statut *UNIMPLEMENTED* du serveur.
-* **Suppression d’un service ou d’une méthode** - Le client obtient un statut *UNIMPLEMENTED* du serveur lors de l’appel de la méthode supprimée.
+* Si vous **renommez un champ** avec du contenu Protobuf, les noms de champs sont utilisés uniquement dans le code généré. Le numéro de champ est utilisé pour identifier les champs sur le réseau. Le changement de nom d’un champ n’est pas une modification avec rupture de protocole pour Protobuf. Toutefois, si un serveur utilise du contenu JSON, le changement de nom d’un champ est une modification avec rupture.
+* La **modification d’un** type de données de champ-la modification du type de données d’un champ en un [type incompatible](https://developers.google.com/protocol-buffers/docs/proto3#updating) provoquera des erreurs lors de la désérialisation du message. Même si le nouveau type de données est compatible, il est probable que le client doit être mis à jour pour prendre en charge le nouveau type s’il est mis à niveau vers le dernier contrat.
+* La **modification d’un numéro de champ** avec des charges utiles Protobuf, le numéro de champ est utilisé pour identifier les champs sur le réseau.
+* **Renommer un package, un service ou une méthode** -gRPC utilise le nom du package, le nom du service et le nom de la méthode pour générer l’URL. Le client obtient un État non *implémenté* à partir du serveur.
+* **Suppression d’un service ou d’une méthode** : le client obtient un État non *implémenté* à partir du serveur lors de l’appel de la méthode supprimée.
 
-### <a name="behavior-breaking-changes"></a>Changements de rupture de comportement
+### <a name="behavior-breaking-changes"></a>Modifications avec rupture de comportement
 
-Lorsque vous modifiez les changements non-breaking, vous devez également vous demander si les clients plus âgés peuvent continuer à travailler avec le nouveau comportement de service. Par exemple, ajouter un nouveau champ à un message de demande :
+Lorsque vous apportez des modifications sans rupture, vous devez également déterminer si les clients plus anciens peuvent continuer à utiliser le nouveau comportement de service. Par exemple, l’ajout d’un nouveau champ à un message de demande :
 
-* Le protocole ne brise-t-il pas le changement.
-* Le retour d’un statut d’erreur sur le serveur si le nouveau champ n’est pas défini en fait un changement de rupture pour les anciens clients.
+* N’est pas une modification avec rupture de protocole.
+* En retournant un état d’erreur sur le serveur si le nouveau champ n’est pas défini, il s’agit d’une modification avec rupture pour les anciens clients.
 
-La compatibilité comportementale est déterminée par votre code spécifique à l’application.
+La compatibilité des comportements est déterminée par le code spécifique à votre application.
 
-## <a name="version-number-services"></a>Services de numéro de version
+## <a name="version-number-services"></a>Services numéro de version
 
-Les services doivent s’efforcer de rester compatibles avec les anciens clients. Éventuellement, les modifications apportées à votre application peuvent nécessiter des modifications de rupture. Briser les anciens clients et les forcer à être mis à jour avec votre service n’est pas une bonne expérience utilisateur. Une façon de maintenir la compatibilité à l’envers tout en effectuant des modifications de rupture est de publier plusieurs versions d’un service.
+Les services doivent s’efforcer de conserver une compatibilité descendante avec les anciens clients. Enfin, les modifications apportées à votre application peuvent nécessiter des modifications avec rupture. Le fait de rompre les anciens clients et de les forcer à les mettre à jour en même temps que votre service n’est pas une bonne expérience utilisateur. Un moyen de maintenir la compatibilité descendante tout en effectuant des modifications avec rupture consiste à publier plusieurs versions d’un service.
 
-gRPC prend en charge un spécificateur [de paquet](https://developers.google.com/protocol-buffers/docs/proto3#packages) optionnel, qui fonctionne un peu comme un espace de nom .NET. En fait, `package` le sera utilisé comme l’espace de `option csharp_namespace` nom .NET généré pour les types générés .NET si n’est pas défini dans le fichier *.proto.* Le paquet peut être utilisé pour spécifier un numéro de version pour votre service et ses messages :
+gRPC prend en charge un spécificateur de [package](https://developers.google.com/protocol-buffers/docs/proto3#packages) facultatif, qui fonctionne très bien comme un espace de noms .net. En fait, le `package` sera utilisé comme espace de noms .net pour les types .NET générés si `option csharp_namespace` n’est pas défini dans le fichier *. proto* . Le package peut être utilisé pour spécifier un numéro de version pour votre service et ses messages :
 
 [!code-protobuf[](versioning/sample/greet.v1.proto?highlight=3)]
 
-Le nom du forfait est combiné avec le nom de service pour identifier une adresse de service. Une adresse de service permet d’héberger plusieurs versions d’un service côte à côte :
+Le nom du package est combiné avec le nom du service pour identifier une adresse de service. Une adresse de service autorise l’hébergement de plusieurs versions d’un service côte à côte :
 
 * `greet.v1.Greeter`
 * `greet.v2.Greeter`
 
-Les implémentations du service versionné sont enregistrées en *Startup.cs*:
+Les implémentations du service avec version sont inscrites dans *Startup.cs*:
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -95,14 +101,14 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-L’inclusion d’un numéro de version dans le nom du paquet vous donne la possibilité de publier une version *v2* de votre service avec des modifications de rupture, tout en continuant à soutenir les clients plus âgés qui appellent la version *v1.* Une fois que les clients ont mis à jour pour utiliser le service *v2,* vous pouvez choisir de supprimer l’ancienne version. Lors de la planification de la publication de plusieurs versions d’un service:
+Le fait d’inclure un numéro de version dans le nom du package vous donne la possibilité de publier une version *v2* de votre service avec des modifications avec rupture, tout en continuant à prendre en charge les clients plus anciens qui appellent la version *v1* . Une fois que les clients ont été mis à jour pour utiliser le service *v2* , vous pouvez choisir de supprimer l’ancienne version. Lors de la planification de la publication de plusieurs versions d’un service :
 
-* Évitez de briser les changements si cela est raisonnable.
-* Ne mettez pas à jour le numéro de version à moins d’apporter des modifications de rupture.
-* Mettez à jour le numéro de version lorsque vous effectuez des modifications de rupture.
+* Évitez les modifications avec rupture si cela est raisonnable.
+* Ne mettez pas à jour le numéro de version sauf si vous effectuez des modifications avec rupture.
+* Mettez à jour le numéro de version lorsque vous apportez des modifications avec rupture.
 
-La publication de plusieurs versions d’un service le double. Pour réduire les chevauchements, envisagez de déplacer la logique commerciale des implémentations de services vers un emplacement centralisé qui peut être réutilisé par les anciennes et nouvelles implémentations :
+La publication de plusieurs versions d’un service le duplique. Pour réduire la duplication, envisagez de déplacer la logique métier des implémentations de service vers un emplacement centralisé qui peut être réutilisé par les anciennes et nouvelles implémentations :
 
 [!code-csharp[](versioning/sample/GreeterServiceV1.cs?highlight=10,19)]
 
-Les services et les messages générés avec différents noms de paquets sont **différents types .NET**. Le déplacement de la logique d’entreprise vers un emplacement centralisé nécessite la cartographie des messages vers des types communs.
+Les services et les messages générés avec des noms de packages différents sont des **types .net différents**. Le déplacement d’une logique métier vers un emplacement centralisé requiert le mappage de messages à des types communs.

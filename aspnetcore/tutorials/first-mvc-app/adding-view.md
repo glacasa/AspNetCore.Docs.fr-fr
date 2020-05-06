@@ -4,13 +4,19 @@ author: rick-anderson
 description: Ajout d’une vue dans une application ASP.NET Core MVC simple
 ms.author: riande
 ms.date: 8/04/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 5510fb6844452571ca764e21640f0bd16444c782
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: c89e0f0428fa7556fcd6b75cdfc1dd19109ec1c8
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78660208"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774598"
 ---
 # <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>Ajouter une vue à une application ASP.NET Core MVC
 
@@ -44,7 +50,7 @@ Le code précédent appelle la méthode <xref:Microsoft.AspNetCore.Mvc.Controlle
 
   * Conservez la valeur de la zone **Nom**, *Index.cshtml*.
 
-  * Sélectionnez **Ajouter**
+  * Sélectionnez **Ajouter** .
 
 ![Boîte de dialogue Ajouter un nouvel élément](adding-view/_static/add_view.png)
 
@@ -61,9 +67,9 @@ Ajoutez une vue `Index` pour `HelloWorldController`.
 * Cliquez avec le bouton droit sur le dossier *Vues/HelloWorld*, puis cliquez sur **Ajouter > Nouveau fichier**.
 * Dans la boîte de dialogue **Nouveau fichier** :
 
-  * Sélectionnez **ASP .NET Core** dans la vitre gauche.
-  * Sélectionnez **la page D’aperçu de MVC** dans le volet central.
-  * *Indice de* type dans la boîte **de nom.**
+  * Sélectionnez **ASP .net Core** dans le volet gauche.
+  * Sélectionnez la **page vue MVC** dans le volet central.
+  * Dans la zone **nom** , tapez *index* .
   * Sélectionnez **Nouveau**.
 
 ![Boîte de dialogue Ajouter un nouvel élément](adding-view/_static/add_view_mac.png)
@@ -86,7 +92,7 @@ Les modèles de [disposition](xref:mvc/views/layout) vous permettent de spécifi
 
 ## <a name="change-the-title-footer-and-menu-link-in-the-layout-file"></a>Changer le lien de titre, de pied de page et de menu dans le fichier de disposition
 
-Remplacez le contenu du fichier *Vues/Partagé/_Layout.cshtml* par la balisage suivante. Les modifications apparaissent en surbrillance :
+Remplacez le contenu du fichier *Views/Shared/_Layout. cshtml* par le balisage suivant. Les modifications apparaissent en surbrillance :
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Views/Shared/_Layout.cshtml?highlight=6,14,40)]
 
@@ -97,7 +103,7 @@ Le balisage précédent apporte les modifications suivantes :
 
 Dans le balisage précédent, l’ [attribut Tag Helper d’ancrage `asp-area=""`](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) et la valeur d’attribut ont été omis, car cette application n’utilise pas de [zones](xref:mvc/controllers/areas).
 
-**Remarque**: `Movies` Le contrôleur n’a pas été implémenté. À ce stade, le lien `Movie App` ne fonctionne pas.
+**Remarque**: le `Movies` contrôleur n’a pas été implémenté. À ce stade, le lien `Movie App` ne fonctionne pas.
 
 Enregistrer vos modifications et sélectionnez le lien **Confidentialité**. Notez comment le titre sur l’onglet du navigateur affiche **Stratégie de confidentialité - Movie App** au lieu de **Stratégie de confidentialité - Mvc Movie** :
 
@@ -127,7 +133,7 @@ Dans le code ci-dessus, `ViewData["Title"] = "Movie List";` définit la proprié
 <title>@ViewData["Title"] - Movie App</title>
 ```
 
-Enregistrez la modification et accédez à `https://localhost:{PORT}/HelloWorld`. Notez que le titre du navigateur, l’en-tête principal et les en-têtes secondaires ont changé. (Si vous ne voyez pas les changements dans le navigateur, vous voyez peut-être le contenu mis en cache. Appuyez sur Ctrl-F5 dans votre navigateur pour forcer la réponse du serveur à être chargée.) Le titre du `ViewData["Title"]` navigateur est créé avec nous avons mis dans le modèle de vue *Index.cshtml* et l’application supplémentaire "- Movie" ajouté dans le fichier de mise en page.
+Enregistrez la modification et accédez à `https://localhost:{PORT}/HelloWorld`. Notez que le titre du navigateur, l’en-tête principal et les en-têtes secondaires ont changé. (Si vous ne voyez pas les changements dans le navigateur, vous voyez peut-être le contenu mis en cache. Appuyez sur CTRL + F5 dans votre navigateur pour forcer le chargement de la réponse du serveur.) Le titre du navigateur est créé `ViewData["Title"]` avec la valeur définie dans le modèle d’affichage *index. cshtml* et l’application « -Movie » supplémentaire ajoutée au fichier de disposition.
 
 Le contenu du modèle de vue *Index.cshtml* est fusionné avec le modèle de vue *Views/Shared/_Layout.cshtml*. Une réponse HTML unique est envoyée au navigateur. Les modèles de disposition permettent d’apporter facilement des modifications qui s’appliquent à toutes les pages d’une application. Pour en savoir plus, consultez [Disposition](xref:mvc/views/layout).
 
@@ -168,8 +174,8 @@ Dans l’exemple ci-dessus, le dictionnaire `ViewData` a été utilisé pour pas
 Dans le didacticiel suivant, une base de données de films est créée.
 
 > [!div class="step-by-step"]
-> [Suivant précédent](adding-controller.md)
-> [Next](adding-model.md)
+> [Précédent](adding-controller.md)
+> [suivant](adding-model.md)
 
 ::: moniker-end
 
@@ -201,7 +207,7 @@ Le code précédent appelle la méthode <xref:Microsoft.AspNetCore.Mvc.Controlle
 
   * Conservez la valeur de la zone **Nom**, *Index.cshtml*.
 
-  * Sélectionnez **Ajouter**
+  * Sélectionnez **Ajouter** .
 
 ![Boîte de dialogue Ajouter un nouvel élément](adding-view/_static/add_view.png)
 
@@ -227,7 +233,7 @@ Ajoutez une vue `Index` pour `HelloWorldController`.
 
 ---
 
-Remplacez le contenu du fichier vue Razor *Views/HelloWorld/Index.cshtml* par le code suivant :
+Remplacez le contenu du fichier de vue *views/HelloWorld/index. cshtml* Razor par ce qui suit :
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
@@ -257,7 +263,7 @@ Dans le balisage précédent, l’ [attribut Tag Helper Ancre](xref:mvc/views/ta
 > We haven't implemented the `Movies` controller yet, so if you click the `Movie App` link, you get a 404 (Not found) error.
 -->
 
-**Remarque**: `Movies` Le contrôleur n’a pas été implémenté. À ce stade, le lien `Movie App` ne fonctionne pas.
+**Remarque**: le `Movies` contrôleur n’a pas été implémenté. À ce stade, le lien `Movie App` ne fonctionne pas.
 
 Enregistrer vos modifications et sélectionnez le lien **Confidentialité**. Notez comment le titre sur l’onglet du navigateur affiche **Stratégie de confidentialité - Movie App** au lieu de **Stratégie de confidentialité - Mvc Movie** :
 
@@ -287,9 +293,9 @@ Dans le code ci-dessus, `ViewData["Title"] = "Movie List";` définit la proprié
 <title>@ViewData["Title"] - Movie App</title>
 ```
 
-Enregistrez la modification et accédez à `https://localhost:{PORT}/HelloWorld`. Notez que le titre du navigateur, l’en-tête principal et les en-têtes secondaires ont changé. (Si vous ne voyez pas les changements dans le navigateur, vous voyez peut-être le contenu mis en cache. Appuyez sur Ctrl-F5 dans votre navigateur pour forcer la réponse du serveur à être chargée.) Le titre du `ViewData["Title"]` navigateur est créé avec nous avons mis dans le modèle de vue *Index.cshtml* et l’application supplémentaire "- Movie" ajouté dans le fichier de mise en page.
+Enregistrez la modification et accédez à `https://localhost:{PORT}/HelloWorld`. Notez que le titre du navigateur, l’en-tête principal et les en-têtes secondaires ont changé. (Si vous ne voyez pas les changements dans le navigateur, vous voyez peut-être le contenu mis en cache. Appuyez sur CTRL + F5 dans votre navigateur pour forcer le chargement de la réponse du serveur.) Le titre du navigateur est créé `ViewData["Title"]` avec la valeur définie dans le modèle d’affichage *index. cshtml* et l’application « -Movie » supplémentaire ajoutée au fichier de disposition.
 
-Notez également comment le contenu du modèle de vue *Index.cshtml* a été fusionné avec le modèle de vue *Views/Shared/_Layout.cshtml* et qu’une seule réponse HTML a été envoyée au navigateur. Les modèles de disposition permettent d’apporter facilement des modifications qui s’appliquent à toutes les pages de votre application. Pour en savoir plus voir [Layout](xref:mvc/views/layout).
+Notez également comment le contenu du modèle de vue *Index.cshtml* a été fusionné avec le modèle de vue *Views/Shared/_Layout.cshtml* et qu’une seule réponse HTML a été envoyée au navigateur. Les modèles de disposition permettent d’apporter facilement des modifications qui s’appliquent à toutes les pages de votre application. Pour en savoir plus, consultez [disposition](xref:mvc/views/layout).
 
 ![Vue Movie List](~/tutorials/first-mvc-app/adding-view/_static/hell3.png)
 
@@ -328,7 +334,7 @@ Dans l’exemple ci-dessus, le dictionnaire `ViewData` a été utilisé pour pas
 Dans le didacticiel suivant, une base de données de films est créée.
 
 > [!div class="step-by-step"]
-> [Suivant précédent](adding-controller.md)
-> [Next](adding-model.md)
+> [Précédent](adding-controller.md)
+> [suivant](adding-model.md)
 
 ::: moniker-end

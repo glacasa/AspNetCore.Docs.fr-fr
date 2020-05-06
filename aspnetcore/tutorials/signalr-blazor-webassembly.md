@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/30/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: e86047c9a830cd3ea906d0798f61d90eaee5a18c
-ms.sourcegitcommit: 6318d2bdd63116e178c34492a904be85ec9ac108
+ms.openlocfilehash: 1579b92dbc9db08bfdc5572e5d4245bd18d50590
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82604829"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773786"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Utiliser ASP.NET Core Signalr avec le webassembly éblouissant
 
@@ -72,13 +75,13 @@ Suivez les instructions de votre choix d’outils :
 
 1. Sélectionnez l' **application éblouissant** , puis sélectionnez **suivant**.
 
-1. Tapez « BlazorSignalRApp » dans le champ **nom du projet** . Confirmez que l’entrée d' **emplacement** est correcte ou indiquez un emplacement pour le projet. Sélectionnez **Create** (Créer).
+1. Tapez « BlazorSignalRApp » dans le champ **nom du projet** . Confirmez que l’entrée d' **emplacement** est correcte ou indiquez un emplacement pour le projet. Sélectionnez **Créer**.
 
 1. Choisissez le modèle **application éblouissant Webassembly** .
 
 1. Sous **avancé**, activez la case à cocher **ASP.net Core hébergé** .
 
-1. Sélectionnez **Create** (Créer).
+1. Sélectionnez **Créer**.
 
 > [!NOTE]
 > Si vous avez mis à niveau ou installé une nouvelle version de Visual Studio et que le modèle éblouissant webassembly n’apparaît pas dans l’interface utilisateur VS, réinstallez le modèle à l’aide de la `dotnet new` commande indiquée précédemment.
@@ -268,7 +271,7 @@ Dans ce didacticiel, vous avez appris à :
 > * Ajouter la SignalR bibliothèque cliente
 > * Ajouter un SignalR Hub
 > * Ajouter SignalR des services et un point de SignalR terminaison pour le Hub
-> * Ajouter du code de composant Razor pour la conversation
+> * Ajouter Razor du code de composant pour la conversation
 
 Pour en savoir plus sur Blazor la création d’applications Blazor , consultez la documentation :
 

@@ -6,14 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/06/2020
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: 706468d44ddabbd3a695dbb60aaf1be15fe166e2
-ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
+ms.openlocfilehash: c29b58eb14a7962f53f2c8c48067de2f5872fded
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82558906"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774806"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>Gestion de session et d’État dans ASP.NET Core
 
@@ -37,7 +41,7 @@ L’état peut être stocké à l’aide de plusieurs approches. Chacune d’ell
 | [Chaînes de requête](#query-strings) | Chaînes de requête HTTP |
 | [Champs masqués](#hidden-fields) | Champs de formulaires HTTP |
 | [HttpContext.Items](#httpcontextitems) | Code d’application côté serveur |
-| [d'instance/de clé](#cache) | Code d’application côté serveur |
+| [Cache](#cache) | Code d’application côté serveur |
 
 ## <a name="cookies"></a>Cookies
 
@@ -255,7 +259,7 @@ Tout autre code peut accéder à la valeur stockée dans `HttpContext.Items` à 
 
 Cette approche a également l’avantage d’éliminer l’utilisation des chaînes de clés dans le code.
 
-## <a name="cache"></a>d'instance/de clé
+## <a name="cache"></a>Cache
 
 La mise en cache est un moyen efficace de stocker et récupérer des données. L’application peut contrôler la durée de vie des éléments mis en cache. Pour plus d’informations, consultez <xref:performance/caching/response>.
 
@@ -307,7 +311,7 @@ L’état peut être stocké à l’aide de plusieurs approches. Chacune d’ell
 | [Chaînes de requête](#query-strings) | Chaînes de requête HTTP |
 | [Champs masqués](#hidden-fields) | Champs de formulaires HTTP |
 | [HttpContext.Items](#httpcontextitems) | Code d’application côté serveur |
-| [d'instance/de clé](#cache) | Code d’application côté serveur |
+| [Cache](#cache) | Code d’application côté serveur |
 | [Injection de dépendances](#dependency-injection) | Code d’application côté serveur |
 
 ## <a name="cookies"></a>Cookies
@@ -396,7 +400,7 @@ L’état de session est *sans verrouillage*. Si deux requêtes tentent simultan
 
 ### <a name="set-and-get-session-values"></a>Définir et obtenir des valeurs Session
 
-L’état de session est accessible à partir d’une classe Razor Pages [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) ou d’une classe MVC [Controller](/dotnet/api/microsoft.aspnetcore.mvc.controller) avec [HttpContext.Session](/dotnet/api/microsoft.aspnetcore.http.httpcontext.session). Cette propriété est une implémentation [ISession](/dotnet/api/microsoft.aspnetcore.http.isession).
+L’état de session est accessible Razor à partir d’une classe [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) de pages ou d’une classe de [contrôleur](/dotnet/api/microsoft.aspnetcore.mvc.controller) MVC avec [HttpContext. session](/dotnet/api/microsoft.aspnetcore.http.httpcontext.session). Cette propriété est une implémentation [ISession](/dotnet/api/microsoft.aspnetcore.http.isession).
 
 L’implémentation de `ISession` fournit plusieurs méthodes d’extension pour définir et récupérer des valeurs de chaîne et d’entier. Les méthodes d’extension se trouvent dans l’espace de noms [Microsoft.AspNetCore.Http](/dotnet/api/microsoft.aspnetcore.http) (ajoutez une instruction `using Microsoft.AspNetCore.Http;` pour accéder aux méthodes d’extension) quand le package [Microsoft.AspNetCore.Http.Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.Http.Extensions/) est référencé par le projet. Les deux packages sont inclus dans le [métapackage Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app).
 
@@ -408,7 +412,7 @@ Méthodes d’extension `ISession` :
 * [SetInt32(ISession, String, Int32)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.setint32)
 * [SetString(ISession, String, String)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.setstring)
 
-L’exemple suivant récupère la valeur de session pour la clé `IndexModel.SessionKeyName` (`_Name` dans l’exemple d’application) dans une page Razor Pages :
+L’exemple suivant récupère la valeur de session de la `IndexModel.SessionKeyName` clé (`_Name` dans l’exemple d’application) dans Razor une page pages :
 
 ```csharp
 @page
@@ -436,7 +440,7 @@ L’exemple suivant montre comment définir et obtenir un objet sérialisable av
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core expose le Razor Pages [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) ou le <xref:Microsoft.AspNetCore.Mvc.Controller.TempData>contrôleur. Cette propriété stocke les données jusqu’à ce qu’elles soient lues dans une autre requête. Les méthodes [Keep (String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) et [Peek (String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) peuvent être utilisées pour examiner les données sans suppression à la fin de la requête. [Keep ()](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) marque tous les éléments du dictionnaire pour la rétention. `TempData`est particulièrement utile pour la redirection quand des données sont requises pour plus d’une requête unique. `TempData`est implémenté par `TempData` les fournisseurs à l’aide de cookies ou de l’état de session.
+ASP.NET Core expose les Razor pages [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) ou Controller <xref:Microsoft.AspNetCore.Mvc.Controller.TempData>. Cette propriété stocke les données jusqu’à ce qu’elles soient lues dans une autre requête. Les méthodes [Keep (String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) et [Peek (String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) peuvent être utilisées pour examiner les données sans suppression à la fin de la requête. [Keep ()](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) marque tous les éléments du dictionnaire pour la rétention. `TempData`est particulièrement utile pour la redirection quand des données sont requises pour plus d’une requête unique. `TempData`est implémenté par `TempData` les fournisseurs à l’aide de cookies ou de l’état de session.
 
 ## <a name="tempdata-samples"></a>Exemples TempData
 
@@ -534,7 +538,7 @@ Tout autre code peut accéder à la valeur stockée dans `HttpContext.Items` à 
 
 Cette approche a également l’avantage d’éliminer l’utilisation des chaînes de clés dans le code.
 
-## <a name="cache"></a>d'instance/de clé
+## <a name="cache"></a>Cache
 
 La mise en cache est un moyen efficace de stocker et récupérer des données. L’application peut contrôler la durée de vie des éléments mis en cache.
 

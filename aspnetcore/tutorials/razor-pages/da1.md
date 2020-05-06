@@ -4,13 +4,19 @@ author: rick-anderson
 description: Découvrez comment mettre à jour les pages générées dans une application ASP.NET Core.
 ms.author: riande
 ms.date: 12/20/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: 0f6535462fe2d308825bf7289c10d2b0690cebd4
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: d9ab20b7ed4b394c154141efe3a94481efaf063c
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78666214"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774546"
 ---
 # <a name="update-the-generated-pages-in-an-aspnet-core-app"></a>Mettre à jour les pages générées dans une application ASP.NET Core
 
@@ -40,7 +46,7 @@ Les liens **Edit**, **Details**, et **Delete** sont générés par le [Tag Helpe
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
-Les [Tag Helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les fichiers Razor. Dans le code précédent, `AnchorTagHelper` génère dynamiquement la valeur d’attribut HTML `href` dans la page Razor (l’itinéraire est relatif), `asp-page` et l’ID de l’itinéraire (`asp-route-id`). Pour plus d’informations, consultez [Génération d’URL pour les pages](xref:razor-pages/index#url-generation-for-pages).
+Les [tag helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu Razor des éléments HTML dans les fichiers. Dans le code précédent, le `AnchorTagHelper` génère dynamiquement la valeur `href` de l’attribut HTML Razor à partir de la page (l’itinéraire est `asp-page`relatif), le et l'`asp-route-id`ID de l’itinéraire (). Pour plus d’informations, consultez [Génération d’URL pour les pages](xref:razor-pages/index#url-generation-for-pages).
 
 Utilisez **Afficher la Source** dans votre navigateur favori pour examiner le balisage généré. Une partie du code HTML généré est affichée ci-dessous :
 
@@ -54,9 +60,9 @@ Utilisez **Afficher la Source** dans votre navigateur favori pour examiner le ba
 
 Les liens générés dynamiquement passent l’ID de film avec une chaîne de requête (par exemple `?id=1` dans `https://localhost:5001/Movies/Details?id=1`).
 
-### <a name="add-route-template"></a>Ajouter le modèle d’itinéraire
+### <a name="add-route-template"></a>Ajouter un modèle de route
 
-Mettez à jour les pages Razor Edit, Details et Delete pour utiliser le modèle d’itinéraire « {id:int} ». Remplacez la directive de chacune de ces pages (`@page "{id:int}"`) par `@page`. Exécuter l’application, puis affichez le code source. Le code HTML généré ajoute l’ID à la partie de chemin de l’URL :
+Mettez à jour les pages de modification, Razor de détails et de suppression pour utiliser le modèle de routage « {ID : int} ». Remplacez la directive de chacune de ces pages (`@page "{id:int}"`) par `@page`. Exécuter l’application, puis affichez le code source. Le code HTML généré ajoute l’ID à la partie de chemin de l’URL :
 
 ```html
 <td>
@@ -106,7 +112,7 @@ Examinez le fichier *Pages/Movies/Edit.cshtml.cs* :
 Quand une requête HTTP GET est effectuée sur la page Movies/Edit (par exemple, `http://localhost:5000/Movies/Edit/2`) :
 
 * La méthode `OnGetAsync` extrait le film de la base de données et retourne la méthode `Page`.
-* La méthode `Page` restitue la page Razor *Pages/Movies/Edit.cshtml*. Le fichier *Pages/Movies/Edit.cshtml* contient la directive de modèle (`@model RazorPagesMovie.Pages.Movies.EditModel`), ce qui rend le modèle Movie disponible sur la page.
+* La `Page` méthode restitue la page *pages/movies/Edit. cshtml* Razor . Le fichier *Pages/Movies/Edit.cshtml* contient la directive de modèle (`@model RazorPagesMovie.Pages.Movies.EditModel`), ce qui rend le modèle Movie disponible sur la page.
 * Le formulaire d’édition s’affiche avec les valeurs relatives au film.
 
 Quand la page Movies/Edit est postée :
@@ -121,13 +127,13 @@ Quand la page Movies/Edit est postée :
 * S’il y a des erreurs dans l’état du modèle (par exemple, si `ReleaseDate` ne peut pas être converti en date), le formulaire est à nouveau affiché avec les valeurs soumises.
 * S’il n’y a aucune erreur de modèle, le film est enregistré.
 
-Les méthodes HTTP GET dans les pages Razor Index, Create et Delete suivent un modèle similaire. La méthode HTTP POST `OnPostAsync` dans la page Razor Create suit un modèle semblable à la méthode `OnPostAsync` dans la page Razor Edit.
+Les méthodes HTTP d’extraction des pages index, Create et Razor Delete suivent un modèle similaire. La méthode HTTP `OnPostAsync` après dans la page Razor créer suit un modèle similaire à la `OnPostAsync` méthode dans la page Razor modifier.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 > [!div class="step-by-step"]
-> [Précédent: Travailler avec une base de données](xref:tutorials/razor-pages/sql)
-> [Suivant: Ajouter la recherche](xref:tutorials/razor-pages/search)
+> [Précédent : utilisation d’une base de données](xref:tutorials/razor-pages/sql)
+> [suivante : ajouter une recherche](xref:tutorials/razor-pages/search)
 
 ::: moniker-end
 
@@ -155,7 +161,7 @@ Les liens **Edit**, **Details**, et **Delete** sont générés par le [Tag Helpe
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
-Les [Tag Helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les fichiers Razor. Dans le code précédent, `AnchorTagHelper` génère dynamiquement la valeur d’attribut HTML `href` dans la page Razor (l’itinéraire est relatif), `asp-page` et l’ID de l’itinéraire (`asp-route-id`). Pour plus d’informations, consultez [Génération d’URL pour les pages](xref:razor-pages/index#url-generation-for-pages).
+Les [tag helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu Razor des éléments HTML dans les fichiers. Dans le code précédent, le `AnchorTagHelper` génère dynamiquement la valeur `href` de l’attribut HTML Razor à partir de la page (l’itinéraire est `asp-page`relatif), le et l'`asp-route-id`ID de l’itinéraire (). Pour plus d’informations, consultez [Génération d’URL pour les pages](xref:razor-pages/index#url-generation-for-pages).
 
 Utilisez **Afficher la Source** dans votre navigateur favori pour examiner le balisage généré. Une partie du code HTML généré est affichée ci-dessous :
 
@@ -169,7 +175,7 @@ Utilisez **Afficher la Source** dans votre navigateur favori pour examiner le ba
 
 Les liens générés dynamiquement passent l’ID de film avec une chaîne de requête (par exemple `?id=1` dans `https://localhost:5001/Movies/Details?id=1`).
 
-Mettez à jour les pages Razor Edit, Details et Delete pour utiliser le modèle d’itinéraire « {id:int} ». Remplacez la directive de chacune de ces pages (`@page "{id:int}"`) par `@page`. Exécuter l’application, puis affichez le code source. Le code HTML généré ajoute l’ID à la partie de chemin de l’URL :
+Mettez à jour les pages de modification, Razor de détails et de suppression pour utiliser le modèle de routage « {ID : int} ». Remplacez la directive de chacune de ces pages (`@page "{id:int}"`) par `@page`. Exécuter l’application, puis affichez le code source. Le code HTML généré ajoute l’ID à la partie de chemin de l’URL :
 
 ```html
 <td>
@@ -219,7 +225,7 @@ Examinez le fichier *Pages/Movies/Edit.cshtml.cs* :
 Quand une requête HTTP GET est effectuée sur la page Movies/Edit (par exemple, `http://localhost:5000/Movies/Edit/2`) :
 
 * La méthode `OnGetAsync` extrait le film de la base de données et retourne la méthode `Page`. 
-* La méthode `Page` restitue la page Razor *Pages/Movies/Edit.cshtml*. Le fichier *Pages/Movies/Edit.cshtml* contient la directive de modèle (`@model RazorPagesMovie.Pages.Movies.EditModel`), ce qui rend le modèle Movie disponible sur la page.
+* La `Page` méthode restitue la page *pages/movies/Edit. cshtml* Razor . Le fichier *Pages/Movies/Edit.cshtml* contient la directive de modèle (`@model RazorPagesMovie.Pages.Movies.EditModel`), ce qui rend le modèle Movie disponible sur la page.
 * Le formulaire d’édition s’affiche avec les valeurs relatives au film.
 
 Quand la page Movies/Edit est postée :
@@ -234,7 +240,7 @@ Quand la page Movies/Edit est postée :
 * S’il existe des erreurs dans l’état du modèle (par exemple, si `ReleaseDate` ne peut pas être converti en date), le formulaire est affiché avec les valeurs soumises.
 * S’il n’y a aucune erreur de modèle, le film est enregistré.
 
-Les méthodes HTTP GET dans les pages Razor Index, Create et Delete suivent un modèle similaire. La méthode HTTP POST `OnPostAsync` dans la page Razor Create suit un modèle semblable à la méthode `OnPostAsync` dans la page Razor Edit.
+Les méthodes HTTP d’extraction des pages index, Create et Razor Delete suivent un modèle similaire. La méthode HTTP `OnPostAsync` après dans la page Razor créer suit un modèle similaire à la `OnPostAsync` méthode dans la page Razor modifier.
 
 La fonction de recherche est ajoutée dans le prochain didacticiel.
 
@@ -243,7 +249,7 @@ La fonction de recherche est ajoutée dans le prochain didacticiel.
 * [Version YouTube de ce tutoriel](https://youtu.be/yLnnleREMtQ)
 
 > [!div class="step-by-step"]
-> [Précédent: Travailler avec une base de données](xref:tutorials/razor-pages/sql)
-> [Suivant: Ajouter la recherche](xref:tutorials/razor-pages/search)
+> [Précédent : utilisation d’une base de données](xref:tutorials/razor-pages/sql)
+> [suivante : ajouter une recherche](xref:tutorials/razor-pages/search)
 
 ::: moniker-end

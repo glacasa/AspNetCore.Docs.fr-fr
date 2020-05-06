@@ -5,13 +5,19 @@ description: Découvrez comment utiliser la fonctionnalité Migrations Code Firs
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/13/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: a5ea9b75cf8bb1f31cb07a2b32f361bdbfd4efa3
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 0cc708734726e5779951d63ac10d1b750b1cc2ac
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78662903"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777070"
 ---
 # <a name="add-a-new-field-to-an-aspnet-core-mvc-app"></a>Ajouter un nouveau champ à une application ASP.NET Core MVC
 
@@ -77,7 +83,7 @@ Vous pouvez copier/coller le « groupe de formulaire » précédent et laisser I
 
 ---
 
-Mettre à jour les modèles restants.
+Mettez à jour les modèles restants.
 
 Mettez à jour la classe `SeedData` pour qu’elle fournisse une valeur pour la nouvelle colonne. Vous pouvez voir un exemple de modification ci-dessous, mais elle doit être appliquée à chaque `new Movie`.
 
@@ -131,11 +137,11 @@ dotnet ef database update
 ---
 <!-- End of VS tabs -->
 
-Exécutez l’application et vérifiez que vous pouvez `Rating` créer, modifier et afficher des films avec un champ. Mettre à jour l’application:
+Exécutez l’application et vérifiez que vous pouvez créer, modifier et afficher des films avec `Rating` un champ. Mettez à jour l’application :
 
-* Ajouter `Rating` le champ `Edit` `Details`à `Delete` la , , et afficher les modèles.
-* Mettre à jour la liaison `MoviesController`dans la méthode d’action de modification de la .
+* Ajoutez le `Rating` champ aux modèles `Edit`de `Details`vue, `Delete` et.
+* Mettez à jour la liaison dans la méthode d’action `MoviesController`de modification de.
 
 > [!div class="step-by-step"]
-> [Suivant précédent](search.md)
-> [Next](validation.md)
+> [Précédent](search.md)
+> [suivant](validation.md)

@@ -5,13 +5,19 @@ description: Découvrez comment utiliser les images Docker .NET Core publiées �
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/15/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: ced0cb7cbeed1b8811813a70035c2e0b42c3e35a
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: bce04caf20dcf23ab7160066d55a279b29dca1ae
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440777"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774104"
 ---
 # <a name="docker-images-for-aspnet-core"></a>Images Docker pour ASP.NET Core
 
@@ -59,7 +65,7 @@ L’exemple de fichier Dockerfile utilise la [fonctionnalité de build en plusie
     * [Debian](https://docs.docker.com/install/linux/docker-ce/debian/)
     * [Fedora](https://docs.docker.com/install/linux/docker-ce/fedora/)
     * [Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
-  * [macOS](https://docs.docker.com/docker-for-mac/install/)
+  * [MacOS](https://docs.docker.com/docker-for-mac/install/)
   * [Windows](https://docs.docker.com/docker-for-windows/install/)
 
 * [Git](https://git-scm.com/download)
@@ -187,7 +193,7 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 
 ### <a name="the-dockerfile"></a>Le fichier Dockerfile
 
-Voici le *Dockerfile* utilisé `docker build` par la commande que vous avez courue plus tôt.  Il utilise `dotnet publish` comme nous l’avons fait dans cette section pour le build et le déploiement.  
+Voici le *fichier dockerfile* utilisé par la `docker build` commande que vous avez exécutée précédemment.  Il utilise `dotnet publish` comme nous l’avons fait dans cette section pour le build et le déploiement.  
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
@@ -223,7 +229,7 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 
 ### <a name="the-dockerfile"></a>Le fichier Dockerfile
 
-Voici le *Dockerfile* utilisé `docker build` par la commande que vous avez courue plus tôt.  Il utilise `dotnet publish` comme nous l’avons fait dans cette section pour le build et le déploiement.  
+Voici le *fichier dockerfile* utilisé par la `docker build` commande que vous avez exécutée précédemment.  Il utilise `dotnet publish` comme nous l’avons fait dans cette section pour le build et le déploiement.  
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
@@ -263,7 +269,7 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 * [Configurer ASP.NET Core pour l’utilisation de serveurs proxy et d’équilibreurs de charge](/aspnet/core/host-and-deploy/proxy-load-balancer)
 * [Utilisation des outils Docker dans Visual Studio](https://docs.microsoft.com/aspnet/core/publishing/visual-studio-tools-for-docker)
 * [Débogage avec Visual Studio Code](https://code.visualstudio.com/docs/nodejs/debugging-recipes#_debug-nodejs-in-docker-containers)
-* [GC à l’aide de Docker et de petits conteneurs](xref:performance/memory#sc)
+* [GC avec l’ancrage et les petits conteneurs](xref:performance/memory#sc)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

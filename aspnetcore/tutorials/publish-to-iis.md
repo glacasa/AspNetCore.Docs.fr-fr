@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/03/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/publish-to-iis
-ms.openlocfilehash: 47f78ba78741a8e0175ce801c0c0e51f091273a8
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: aa79ce604539b4f09d6f17d4f43da28a6b615f53
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79511390"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774572"
 ---
 # <a name="publish-an-aspnet-core-app-to-iis"></a>Publier une application ASP.NET Core sur IIS
 
@@ -41,7 +47,7 @@ Ce tutoriel couvre les étapes suivantes :
 
 ## <a name="install-the-net-core-hosting-bundle"></a>Installer le bundle d’hébergement .NET Core
 
-Installez le *bundle d’hébergement .NET Core* sur le serveur IIS. Le paquet installe le .NET Core Runtime, .NET Core Library, et le [module de base ASP.NET](xref:host-and-deploy/aspnet-core-module). Le module permet aux applications ASP.NET Core de s’exécuter derrière IIS.
+Installez le *bundle d’hébergement .NET Core* sur le serveur IIS. L’offre groupée installe le Runtime .NET Core, la bibliothèque .NET Core et le [Module ASP.net Core](xref:host-and-deploy/aspnet-core-module). Le module permet aux applications ASP.NET Core de s’exécuter derrière IIS.
 
 Téléchargez le programme d’installation à l’aide du lien suivant :
 
@@ -55,7 +61,7 @@ Téléchargez le programme d’installation à l’aide du lien suivant :
 
 1. Sur le serveur IIS, créez un dossier pour contenir les fichiers et dossiers publiés de l’application. À l’étape suivante, le chemin du dossier est fourni à IIS en tant que chemin d’accès physique à l’application.
 
-1. Dans IIS Manager, ouvrez le nœud du serveur dans le panneau **Connexions.** Cliquez avec le bouton de droite sur le dossier **Sites**. Sélectionnez **Ajouter un site Web** dans le menu contextuel.
+1. Dans le gestionnaire des services Internet, ouvrez le nœud du serveur dans le panneau **connexions** . Cliquez avec le bouton de droite sur le dossier **Sites**. Sélectionnez **Ajouter un site Web** dans le menu contextuel.
 
 1. Spécifiez le **Nom du site** et définissez le **Chemin physique** sur le dossier de déploiement de l’application que vous avez créé. Spécifiez la configuration **Liaison** et créez le site web en sélectionnant **OK**.
 
