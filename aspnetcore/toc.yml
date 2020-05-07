@@ -665,6 +665,8 @@
       uid: test/razor-pages-tests
     - name: Contrôleurs de test
       uid: mvc/controllers/testing
+    - name: Tester des middlewares
+      uid: test/middleware
     - name: Débogage distant
       href: /visualstudio/debugger/remote-debugging-azure
     - name: Débogage d’instantané
