@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: 05068853615a63611188175d95c27f1442973a86
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b451df023bdea3e76725d5d1301f3c3f44ea5d99
+ms.sourcegitcommit: 30fcf69556b6b6ec54a3879e280d5f61f018b48f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768206"
+ms.lasthandoff: 05/07/2020
+ms.locfileid: "82876203"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Sécuriser une Blazor application hébergée par l’ASP.net Core webassembly avec Azure Active Directory B2C
 
@@ -52,7 +52,7 @@ Suivez les instructions du [Didacticiel : inscrire une application dans Azure A
 
 Dans **exposer une API**:
 
-1. Sélectionnez **Ajouter une étendue**.
+1. sélectionner **Ajouter une étendue**.
 1. Sélectionnez **Enregistrer et continuer**.
 1. Spécifiez un **nom d’étendue** (par `API.Access`exemple,).
 1. Spécifiez un **nom d’affichage du consentement administrateur** ( `Access API`par exemple,).
@@ -94,7 +94,7 @@ Dans **autorisations d’API**:
 1. Ouvrez la liste des **API** .
 1. Activez l’accès à l’API (par exemple `API.Access`,).
 1. Sélectionnez **Ajouter des autorisations**.
-1. Sélectionnez le bouton **Grant admin content for {locataire Name}** . Sélectionnez **Oui** pour confirmer.
+1. Sélectionnez le bouton **Grant admin content for {locataire Name}** . Cliquez sur **Oui** pour confirmer la suppression.
 
 Dans la **page** > d'**Azure ad B2C** > des**flux utilisateur**:
 
@@ -172,7 +172,7 @@ Le fichier *appSettings. JSON* contient les options permettant de configurer le 
 
 ```json
 {
-  "AzureAd": {
+  "AzureAdB2C": {
     "Instance": "https://{ORGANIZATION}.b2clogin.com/",
     "ClientId": "{SERVER API APP CLIENT ID}",
     "Domain": "{DOMAIN}",
@@ -181,11 +181,11 @@ Le fichier *appSettings. JSON* contient les options permettant de configurer le 
 }
 ```
 
-Exemple :
+Exemple :
 
 ```json
 {
-  "AzureAd": {
+  "AzureAdB2C": {
     "Instance": "https://contoso.b2clogin.com/",
     "ClientId": "41451fa7-82d9-4673-8fa5-69eff5a761fd",
     "Domain": "contoso.onmicrosoft.com",
@@ -275,7 +275,7 @@ La configuration est fournie par le fichier *wwwroot/appSettings. JSON* :
 }
 ```
 
-Exemple :
+Exemple :
 
 ```json
 {
