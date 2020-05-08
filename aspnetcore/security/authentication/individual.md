@@ -74,7 +74,7 @@ Le tableau suivant présente les options d’authentification disponibles pour l
 | IndividualB2C   |  Authentification individuelle hébergée dans le Cloud avec Azure AD B2C | [Azure AD B2C](/azure/active-directory-b2c/) |
 | SingleOrg       |  Authentification d’organisation pour un seul locataire | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
 | MultiOrg        |  Authentification d’organisation pour plusieurs locataires | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
-|  Windows         |  Authentification Windows | [Authentification Windows](xref:security/authentication/windowsauth)
+| Windows         |  Authentification Windows | [Authentification Windows](xref:security/authentication/windowsauth)
 
 ## <a name="visual-studio-new-webapp-authentication-options"></a>Nouvelles options d’authentification webapp de Visual Studio
 
@@ -87,7 +87,7 @@ Le tableau suivant présente les options d’authentification disponibles lors d
 | Comptes d’utilisateur individuels/se connecter à un magasin d’utilisateurs existant dans le Cloud |  Authentification individuelle hébergée dans le Cloud avec Azure AD B2C | [Azure AD B2C](/azure/active-directory-b2c/) |
 | Cloud professionnel ou scolaire/organisation unique  |  Authentification d’organisation pour un seul locataire | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
 | Cloud professionnel ou scolaire/organisation multiple |  Authentification d’organisation pour plusieurs locataires | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
-|  Windows         |  Authentification Windows | [Authentification Windows](xref:security/authentication/windowsauth)
+| Windows         |  Authentification Windows | [Authentification Windows](xref:security/authentication/windowsauth)
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

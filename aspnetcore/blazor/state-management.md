@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/state-management
-ms.openlocfilehash: 75d9a66eb25201c2993b8f922754b8aa7ab84615
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 5e14a0697fbc98575970b93dfa12c68e9f561c56
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771166"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967413"
 ---
 # <a name="aspnet-core-blazor-state-management"></a>Gestion Blazor de l’état des ASP.net Core
 
@@ -175,30 +175,30 @@ Le choix dépend du magasin de stockage que vous souhaitez utiliser. Dans l’ex
 
 L' `@using` instruction peut être placée dans un fichier *_Imports. Razor* plutôt que dans le composant. L’utilisation du fichier *_Imports. Razor* rend l’espace de noms disponible pour les plus grands segments de l’application ou de l’application entière.
 
-Pour rendre la `_currentCount` valeur persistante `Counter` dans le composant du modèle de projet, `IncrementCount` modifiez la méthode `ProtectedSessionStore.SetAsync`pour utiliser :
+Pour rendre la `currentCount` valeur persistante `Counter` dans le composant du modèle de projet, `IncrementCount` modifiez la méthode `ProtectedSessionStore.SetAsync`pour utiliser :
 
 ```csharp
 private async Task IncrementCount()
 {
-    _currentCount++;
-    await ProtectedSessionStore.SetAsync("count", _currentCount);
+    currentCount++;
+    await ProtectedSessionStore.SetAsync("count", currentCount);
 }
 ```
 
 Dans les applications plus volumineuses et plus réalistes, le stockage de champs individuels est un scénario peu probable. Les applications sont plus susceptibles de stocker des objets de modèle entiers qui incluent un État complexe. `ProtectedSessionStore`sérialise et désérialise automatiquement les données JSON.
 
-Dans l’exemple de code précédent, `_currentCount` les données sont stockées `sessionStorage['count']` sous la forme dans le navigateur de l’utilisateur. Les données ne sont pas stockées en texte clair mais sont protégées à l’aide de la [protection des données](xref:security/data-protection/introduction)de ASP.net core. Les données chiffrées peuvent être consultées `sessionStorage['count']` si est évalué dans la console de développement du navigateur.
+Dans l’exemple de code précédent, `currentCount` les données sont stockées `sessionStorage['count']` sous la forme dans le navigateur de l’utilisateur. Les données ne sont pas stockées en texte clair mais sont protégées à l’aide de la [protection des données](xref:security/data-protection/introduction)de ASP.net core. Les données chiffrées peuvent être consultées `sessionStorage['count']` si est évalué dans la console de développement du navigateur.
 
-Pour récupérer les `_currentCount` données si l’utilisateur retourne au `Counter` composant ultérieurement (y compris s’il s’agit d’un circuit entièrement nouveau), `ProtectedSessionStore.GetAsync`utilisez :
+Pour récupérer les `currentCount` données si l’utilisateur retourne au `Counter` composant ultérieurement (y compris s’il s’agit d’un circuit entièrement nouveau), `ProtectedSessionStore.GetAsync`utilisez :
 
 ```csharp
 protected override async Task OnInitializedAsync()
 {
-    _currentCount = await ProtectedSessionStore.GetAsync<int>("count");
+    currentCount = await ProtectedSessionStore.GetAsync<int>("count");
 }
 ```
 
-Si les paramètres du composant incluent l’état de navigation `ProtectedSessionStore.GetAsync` , appelez et assignez le résultat dans `OnParametersSetAsync`, et non `OnInitializedAsync`. `OnInitializedAsync`n’est appelé qu’une seule fois lors de la première instanciation du composant. `OnInitializedAsync`n’est pas rappelée ultérieurement si l’utilisateur accède à une autre URL tout en restant sur la même page. Pour plus d’informations, consultez <xref:blazor/lifecycle>.
+Si les paramètres du composant incluent l’état de navigation `ProtectedSessionStore.GetAsync` , appelez et assignez le résultat dans `OnParametersSetAsync`, et non `OnInitializedAsync`. `OnInitializedAsync`n’est appelé qu’une seule fois lors de la première instanciation du composant. `OnInitializedAsync`n’est pas rappelée ultérieurement si l’utilisateur accède à une autre URL tout en restant sur la même page. Pour plus d'informations, consultez <xref:blazor/lifecycle>.
 
 > [!WARNING]
 > Les exemples de cette section ne fonctionnent que si le prérendu n’est pas activé sur le serveur. Quand le prérendu est activé, une erreur est générée de la façon suivante :
@@ -211,18 +211,18 @@ Si les paramètres du composant incluent l’état de navigation `ProtectedSessi
 
 Étant donné que le stockage du navigateur est asynchrone (accessible via une connexion réseau), il y a toujours un certain temps avant que les données soient chargées et disponibles pour une utilisation par un composant. Pour obtenir les meilleurs résultats, affichez un message d’état de chargement pendant le chargement en cours au lieu d’afficher les données vides ou par défaut.
 
-Une approche consiste à déterminer si les données sont `null` (toujours en cours de chargement) ou non. Dans le composant `Counter` par défaut, le nombre est conservé dans `int`un. Rendez `_currentCount` la valeur null en ajoutant un`?`point d’interrogation (`int`) au type () :
+Une approche consiste à déterminer si les données sont `null` (toujours en cours de chargement) ou non. Dans le composant `Counter` par défaut, le nombre est conservé dans `int`un. Rendez `currentCount` la valeur null en ajoutant un`?`point d’interrogation (`int`) au type () :
 
 ```csharp
-private int? _currentCount;
+private int? currentCount;
 ```
 
 Au lieu d’afficher sans condition le bouton nombre et **incrément** , choisissez d’afficher ces éléments uniquement si les données sont chargées :
 
 ```razor
-@if (_currentCount.HasValue)
+@if (currentCount.HasValue)
 {
-    <p>Current count: <strong>@_currentCount</strong></p>
+    <p>Current count: <strong>@currentCount</strong></p>
 
     <button @onclick="IncrementCount">Increment</button>
 }
@@ -256,8 +256,8 @@ Le prérendu peut être utile pour d’autres pages qui n' `localStorage` utilis
 ... rendering code goes here ...
 
 @code {
-    private int? _currentCount;
-    private bool _isConnected = false;
+    private int? currentCount;
+    private bool isConnected = false;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -265,7 +265,7 @@ Le prérendu peut être utile pour d’autres pages qui n' `localStorage` utilis
         {
             // When execution reaches this point, the first *interactive* render
             // is complete. The component has an active connection to the browser.
-            _isConnected = true;
+            isConnected = true;
             await LoadStateAsync();
             StateHasChanged();
         }
@@ -273,13 +273,13 @@ Le prérendu peut être utile pour d’autres pages qui n' `localStorage` utilis
 
     private async Task LoadStateAsync()
     {
-        _currentCount = await ProtectedLocalStore.GetAsync<int>("prerenderedCount");
+        currentCount = await ProtectedLocalStore.GetAsync<int>("prerenderedCount");
     }
 
     private async Task IncrementCount()
     {
-        _currentCount++;
-        await ProtectedSessionStore.SetAsync("count", _currentCount);
+        currentCount++;
+        await ProtectedSessionStore.SetAsync("count", currentCount);
     }
 }
 ```
@@ -294,7 +294,7 @@ Dans l’exemple suivant d’un `CounterStateProvider` composant, les données d
 @using Microsoft.AspNetCore.ProtectedBrowserStorage
 @inject ProtectedSessionStorage ProtectedSessionStore
 
-@if (_hasLoaded)
+@if (hasLoaded)
 {
     <CascadingValue Value="@this">
         @ChildContent
@@ -306,7 +306,7 @@ else
 }
 
 @code {
-    private bool _hasLoaded;
+    private bool hasLoaded;
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
@@ -316,7 +316,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         CurrentCount = await ProtectedSessionStore.GetAsync<int>("count");
-        _hasLoaded = true;
+        hasLoaded = true;
     }
 
     public async Task SaveChangesAsync()

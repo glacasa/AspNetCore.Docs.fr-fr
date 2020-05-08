@@ -36,7 +36,7 @@ Le code précédent appelle la méthode <xref:Microsoft.AspNetCore.Mvc.Controlle
 
 ## <a name="add-a-view"></a>Ajouter une vue
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Cliquez avec le bouton droit sur le dossier *Vues*, cliquez sur **Ajouter > Nouveau dossier**, puis nommez le dossier *HelloWorld*.
 
@@ -193,7 +193,7 @@ Le code précédent appelle la méthode <xref:Microsoft.AspNetCore.Mvc.Controlle
 
 ## <a name="add-a-view"></a>Ajouter une vue
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Cliquez avec le bouton droit sur le dossier *Vues*, cliquez sur **Ajouter > Nouveau dossier**, puis nommez le dossier *HelloWorld*.
 

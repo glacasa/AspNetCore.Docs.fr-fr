@@ -28,7 +28,7 @@ Par [Daniel Roth](https://github.com/danroth27) et [Luke Latham](https://github.
 
 Pour vous familiariser avec éblouissant, suivez les instructions de votre choix d’outils :
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Pour créer des applications de serveur éblouissantes, installez la dernière version de [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) avec la charge de travail **développement Web et ASP.net** .
 
@@ -46,9 +46,9 @@ Pour vous familiariser avec éblouissant, suivez les instructions de votre choix
 
 1. Sélectionnez l' **application éblouissant**. Sélectionnez **Suivant**.
 
-1. Indiquez un nom de projet dans le champ **Nom du projet**, ou acceptez le nom de projet par défaut. Confirmez que l’entrée d' **emplacement** est correcte ou indiquez un emplacement pour le projet. Sélectionnez **Créer**.
+1. Indiquez un nom de projet dans le champ **Nom du projet**, ou acceptez le nom de projet par défaut. Confirmez que l’entrée d' **emplacement** est correcte ou indiquez un emplacement pour le projet. Sélectionnez **Create** (Créer).
 
-1. Pour une expérience webassembly éblouissant (Visual Studio 16,6 Preview 2 ou version ultérieure), choisissez le modèle **application éblouissant Webassembly** . Pour une expérience de serveur éblouissant (Visual Studio 16,4 ou version ultérieure), choisissez le modèle **application de serveur éblouissant** . Sélectionnez **Créer**.
+1. Pour une expérience webassembly éblouissant (Visual Studio 16,6 Preview 2 ou version ultérieure), choisissez le modèle **application éblouissant Webassembly** . Pour une expérience de serveur éblouissant (Visual Studio 16,4 ou version ultérieure), choisissez le modèle **application de serveur éblouissant** . Sélectionnez **Create** (Créer).
 
 1. Appuyez sur <kbd>CTRL</kbd>+<kbd>F5</kbd> pour exécuter l’application.
 
@@ -89,7 +89,7 @@ Pour vous familiariser avec éblouissant, suivez les instructions de votre choix
 
 1. Avec le serveur éblouissant, exécutez l’application à l’aide du débogueur Visual Studio Code.
 
-   Avec éblouissant webassembly, démarrez l’application à l’aide de la configuration de lancement de **.net Core (éblouissant)** , puis démarrez le navigateur à l’aide de l' **Assembly Web de débogage .net Core éblouissant dans** la configuration de lancement chrome (nécessite chrome). Pour plus d’informations, consultez <xref:blazor/debug#visual-studio-code>.
+   Avec éblouissant webassembly, démarrez l’application à l’aide de la configuration de lancement de **.net Core (éblouissant)** , puis démarrez le navigateur à l’aide de l' **Assembly Web de débogage .net Core éblouissant dans** la configuration de lancement chrome (nécessite chrome). Pour plus d'informations, consultez <xref:blazor/debug#visual-studio-code>.
 
 1. Dans un navigateur, accédez à `https://localhost:5001`.
 
@@ -112,7 +112,7 @@ Le serveur éblouissant est pris en charge dans Visual Studio pour Mac. Le webas
    
    Sélectionnez **Suivant**.
 
-1. Dans le champ **nom du projet** , nommez `WebApplication1`l’application. Sélectionnez **Créer**.
+1. Dans le champ **nom du projet** , nommez `WebApplication1`l’application. Sélectionnez **Create** (Créer).
 
 1. Sélectionnez **exécuter** > **Démarrer sans débogage** pour exécuter l’application *sans le débogueur*. Le débogage n’est pas pris en charge pour l’instant.
 

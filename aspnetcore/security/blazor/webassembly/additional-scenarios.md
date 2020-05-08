@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: e69b598431027aa540227b87dedfd091057a1af4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: e804c43ebea8f6a79443e24047a7be47587cbd8a
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768167"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967544"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>Scénarios de sécurité supplémentaires ASP.NET Core éblouissant webassembly
 
@@ -35,6 +35,11 @@ Le `AuthorizationMessageHandler` service peut être utilisé avec `HttpClient` p
 Dans l’exemple suivant, `AuthorizationMessageHandler` configure un `HttpClient` en `Program.Main` (*Program.cs*) :
 
 ```csharp
+using System.Net.Http;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+...
+
 builder.Services.AddTransient(sp =>
 {
     return new HttpClient(sp.GetRequiredService<AuthorizationMessageHandler>()
@@ -47,9 +52,14 @@ builder.Services.AddTransient(sp =>
 });
 ```
 
-Pour plus de commodité `BaseAddressAuthorizationMessageHandler` , une est incluse et préconfigurée avec l’adresse de base de l’application en tant qu’URL autorisée. Les modèles de webassembly éblouissants compatibles avec l’authentification utilisent désormais [IHttpClientFactory](https://docs.microsoft.com/aspnet/core/fundamentals/http-requests) pour `HttpClient` configurer un `BaseAddressAuthorizationMessageHandler`avec les éléments suivants :
+Pour plus de commodité `BaseAddressAuthorizationMessageHandler` , une est incluse et préconfigurée avec l’adresse de base de l’application en tant qu’URL autorisée. Les modèles de webassembly éblouissants compatibles avec l' <xref:System.Net.Http.IHttpClientFactory> authentification utilisent désormais dans le projet d’API serveur <xref:System.Net.Http.HttpClient> pour configurer `BaseAddressAuthorizationMessageHandler`un avec les éléments suivants :
 
 ```csharp
+using System.Net.Http;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+...
+
 builder.Services.AddHttpClient("BlazorWithIdentityApp1.ServerAPI", 
     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
         .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
@@ -58,11 +68,16 @@ builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("BlazorWithIdentityApp1.ServerAPI"));
 ```
 
-Dans le cas où le client `CreateClient` est créé avec dans l’exemple `HttpClient` précédent, est fourni les instances qui incluent des jetons d’accès lors de l’exécution de demandes au projet serveur.
+Dans le cas où le client `CreateClient` est créé avec dans l’exemple <xref:System.Net.Http.HttpClient> précédent, est fourni les instances qui incluent des jetons d’accès lors de l’exécution de demandes au projet serveur.
 
-Le configuré `HttpClient` est ensuite utilisé pour effectuer des demandes autorisées à l' `try-catch` aide d’un modèle simple. Le composant `FetchData` suivant demande des données de prévisions météorologiques :
+Le configuré <xref:System.Net.Http.HttpClient> est ensuite utilisé pour effectuer des demandes autorisées à l' `try-catch` aide d’un modèle simple. Le composant `FetchData` suivant demande des données de prévisions météorologiques :
 
 ```csharp
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject HttpClient Http
+
+...
+
 protected override async Task OnInitializedAsync()
 {
     try
@@ -82,6 +97,13 @@ Vous pouvez également définir un client typé qui gère tous les problèmes d�
 *WeatherClient.cs*:
 
 ```csharp
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using static {APP ASSEMBLY}.Data;
+
 public class WeatherClient
 {
     private readonly HttpClient httpClient;
@@ -99,6 +121,8 @@ public class WeatherClient
         {
             forecasts = await httpClient.GetFromJsonAsync<WeatherForecast[]>(
                 "WeatherForecast");
+
+            ...
         }
         catch (AccessTokenNotAvailableException exception)
         {
@@ -113,6 +137,11 @@ public class WeatherClient
 *Program.cs*:
 
 ```csharp
+using System.Net.Http;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+...
+
 builder.Services.AddHttpClient<WeatherClient>(
     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
@@ -669,7 +698,7 @@ Dans l’application serveur, créez un dossier *pages* s’il n’existe pas. C
 
 Lors de l’authentification et de l' Blazor autorisation d’une application webassembly hébergée auprès d’un fournisseur tiers, plusieurs options sont disponibles pour l’authentification de l’utilisateur. Celui que vous choisissez dépend de votre scénario.
 
-Pour plus d’informations, consultez <xref:security/authentication/social/additional-claims>.
+Pour plus d'informations, consultez <xref:security/authentication/social/additional-claims>.
 
 ### <a name="authenticate-users-to-only-call-protected-third-party-apis"></a>Authentifier les utilisateurs pour appeler uniquement des API tierces protégées
 

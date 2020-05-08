@@ -42,7 +42,7 @@ L’application gère une base de données de titres de films. Vous allez appren
 
 ## <a name="prerequisites"></a>Prérequis
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
@@ -58,7 +58,7 @@ L’application gère une base de données de titres de films. Vous allez appren
 
 ## <a name="create-a-web-app"></a>Créer une application web
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Dans Visual Studio, sélectionnez **Créer un projet**.
 
@@ -114,7 +114,7 @@ Il part du principe que vous connaissez déjà VS Code. Pour plus d’informatio
 
 ### <a name="run-the-app"></a>Exécuter l’application
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Sélectionnez **Ctrl-F5** pour exécuter l'application en mode non-débogage.
 
@@ -190,7 +190,7 @@ L’application gère une base de données de titres de films. Vous allez appren
 
 ## <a name="prerequisites"></a>Prérequis
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -205,7 +205,7 @@ L’application gère une base de données de titres de films. Vous allez appren
 ---
 ## <a name="create-a-web-app"></a>Créer une application web
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Dans Visual Studio, sélectionnez **Créer un projet**.
 
@@ -262,7 +262,7 @@ Il part du principe que vous connaissez déjà VS Code. Pour plus d’informatio
 
 ### <a name="run-the-app"></a>Exécuter l’application
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Sélectionnez **Ctrl-F5** pour exécuter l'application en mode non-débogage.
 

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/dependency-injection
-ms.openlocfilehash: 742f3c5ea26fab5e168f162a0e133da05fd74a74
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: e96698bd0bd8f3f3b290ba24bc8169efb16f1d03
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767112"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967530"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core l’injection de dépendances éblouissantes
 
@@ -39,8 +39,8 @@ Les services par défaut sont automatiquement ajoutés à la collection de servi
 
 | Service | Durée de vie | Description |
 | ------- | -------- | ----------- |
-| <xref:System.Net.Http.HttpClient> | Temporaire | Fournit des méthodes pour envoyer des requêtes HTTP et recevoir des réponses HTTP d’une ressource identifiée par un URI.<br><br>L’instance de `HttpClient` dans une application de webassembly éblouissant utilise le navigateur pour gérer le trafic HTTP en arrière-plan.<br><br>Les applications serveur éblouissantes n’incluent `HttpClient` pas une configuration en tant que service par défaut. Fournissez `HttpClient` un à une application de serveur éblouissante.<br><br>Pour plus d’informations, consultez <xref:blazor/call-web-api>. |
-| `IJSRuntime` | Singleton (webassembly éblouissant)<br>Étendu (serveur éblouissant) | Représente une instance d’un Runtime JavaScript dans laquelle les appels JavaScript sont distribués. Pour plus d’informations, consultez <xref:blazor/call-javascript-from-dotnet>. |
+| <xref:System.Net.Http.HttpClient> | Temporaire | Fournit des méthodes pour envoyer des requêtes HTTP et recevoir des réponses HTTP d’une ressource identifiée par un URI.<br><br>L’instance de `HttpClient` dans une application de webassembly éblouissant utilise le navigateur pour gérer le trafic HTTP en arrière-plan.<br><br>Les applications serveur éblouissantes n’incluent `HttpClient` pas une configuration en tant que service par défaut. Fournissez `HttpClient` un à une application de serveur éblouissante.<br><br>Pour plus d'informations, consultez <xref:blazor/call-web-api>. |
+| `IJSRuntime` | Singleton (webassembly éblouissant)<br>Étendu (serveur éblouissant) | Représente une instance d’un Runtime JavaScript dans laquelle les appels JavaScript sont distribués. Pour plus d'informations, consultez <xref:blazor/call-javascript-from-dotnet>. |
 | `NavigationManager` | Singleton (webassembly éblouissant)<br>Étendu (serveur éblouissant) | Contient des assistances pour l’utilisation des URI et de l’état de navigation. Pour plus d’informations, consultez [URI et assistance de l’état de navigation](xref:blazor/routing#uri-and-navigation-state-helpers). |
 
 Un fournisseur de services personnalisé ne fournit pas automatiquement les services par défaut indiqués dans le tableau. Si vous utilisez un fournisseur de services personnalisé et que vous avez besoin de l’un des services répertoriés dans le tableau, ajoutez les services requis au nouveau fournisseur de services.
@@ -134,11 +134,11 @@ Les services peuvent être configurés avec les durées de vie indiquées dans l
 
 | Durée de vie | Description |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped*> | BlazorLes applications webassembly n’ont pas actuellement de concept d’étendues DI. `Scoped`-les services inscrits se `Singleton` comportent comme des services. Toutefois, le Blazor modèle d’hébergement de serveur `Scoped` prend en charge la durée de vie. Dans Blazor les applications serveur, l’inscription d’un service étendu est limitée à la *connexion*. Pour cette raison, il est préférable d’utiliser les services délimités pour les services qui doivent être étendus à l’utilisateur actuel, même si l’objectif actuel est d’exécuter côté client dans le navigateur. |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton*> | DI crée une *seule instance* du service. Tous les composants qui `Singleton` requièrent un service reçoivent une instance du même service. |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient*> | Chaque fois qu’un composant obtient une instance d' `Transient` un service à partir du conteneur de service, il reçoit une *nouvelle instance* du service. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | BlazorLes applications webassembly n’ont pas actuellement de concept d’étendues DI. `Scoped`-les services inscrits se `Singleton` comportent comme des services. Toutefois, le Blazor modèle d’hébergement de serveur `Scoped` prend en charge la durée de vie. Dans Blazor les applications serveur, l’inscription d’un service étendu est limitée à la *connexion*. Pour cette raison, il est préférable d’utiliser les services délimités pour les services qui doivent être étendus à l’utilisateur actuel, même si l’objectif actuel est d’exécuter côté client dans le navigateur. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI crée une *seule instance* du service. Tous les composants qui `Singleton` requièrent un service reçoivent une instance du même service. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | Chaque fois qu’un composant obtient une instance d' `Transient` un service à partir du conteneur de service, il reçoit une *nouvelle instance* du service. |
 
-Le système DI est basé sur le système DI dans ASP.NET Core. Pour plus d’informations, consultez <xref:fundamentals/dependency-injection>.
+Le système DI est basé sur le système DI dans ASP.NET Core. Pour plus d'informations, consultez <xref:fundamentals/dependency-injection>.
 
 ## <a name="request-a-service-in-a-component"></a>Demander un service dans un composant
 
@@ -147,7 +147,7 @@ Une fois les services ajoutés à la collection de services, injectez les servic
 * Tapez &ndash; le type du service à injecter.
 * Propriété &ndash; nom de la propriété qui reçoit le service d’application injecté. La propriété ne nécessite pas de création manuelle. Le compilateur crée la propriété.
 
-Pour plus d’informations, consultez <xref:mvc/views/dependency-injection>.
+Pour plus d'informations, consultez <xref:mvc/views/dependency-injection>.
 
 Utilisez plusieurs `@inject` instructions pour injecter différents services.
 
@@ -274,7 +274,7 @@ Si un seul composant peut utiliser un `DbContext` en même temps (par exemple, c
     @inject DbContextOptions<AppDbContext> DbContextOptions
 
     <ul>
-        @foreach (var item in _data)
+        @foreach (var item in data)
         {
             <li>@item</li>
         }
@@ -283,11 +283,11 @@ Si un seul composant peut utiliser un `DbContext` en même temps (par exemple, c
     <button @onclick="LoadData">Load Data</button>
 
     @code {
-        private List<string> _data = new List<string>();
+        private List<string> data = new List<string>();
 
         private async Task LoadData()
         {
-            _data = await GetAsync();
+            data = await GetAsync();
             StateHasChanged();
         }
 
@@ -318,7 +318,7 @@ Si un seul composant peut utiliser un `DbContext` en même temps (par exemple, c
     @inject IServiceProvider ServiceProvider
 
     <ul>
-        @foreach (var item in _data)
+        @foreach (var item in data)
         {
             <li>@item</li>
         }
@@ -327,11 +327,11 @@ Si un seul composant peut utiliser un `DbContext` en même temps (par exemple, c
     <button @onclick="LoadData">Load Data</button>
 
     @code {
-        private List<string> _data = new List<string>();
+        private List<string> data = new List<string>();
 
         private async Task LoadData()
         {
-            _data = await GetAsync();
+            data = await GetAsync();
             StateHasChanged();
         }
 

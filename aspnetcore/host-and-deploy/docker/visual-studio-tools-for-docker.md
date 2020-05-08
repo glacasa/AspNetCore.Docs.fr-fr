@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: b73903eae2b289fd410599748c1f48bdb4601543
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 8b62e27033bf0b7c05a70050807970fe0c74e2f8
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776127"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967569"
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>Outils de conteneur Visual Studio avec ASP.NET Core
 
@@ -90,7 +90,11 @@ Le fichier *Dockerfile* précédent est basé sur l’image [microsoft/aspnetcor
 
 Visual Studio 2017 version 15.7 ou antérieure prend en charge [Docker Compose](https://docs.docker.com/compose/overview/) en tant que solution d’orchestration de conteneurs unique. Les artefacts docker compose sont ajoutés via **Ajouter** > la**prise en charge**de l’ancrage.
 
-Visual Studio 2017 version 15.8 ou ultérieure ajoute une solution d’orchestration seulement si cela lui est demandé. Cliquez avec le bouton droit sur le projet dans l’**Explorateur de solutions**, puis sélectionnez **Ajouter** > **Prise en charge de l’orchestrateur de conteneurs**. Deux choix différents sont proposés : [Docker Compose](#docker-compose) et [Service Fabric](#service-fabric).
+Visual Studio 2017 version 15.8 ou ultérieure ajoute une solution d’orchestration seulement si cela lui est demandé. Cliquez avec le bouton droit sur le projet dans l’**Explorateur de solutions**, puis sélectionnez **Ajouter** > **Prise en charge de l’orchestrateur de conteneurs**. Les choix suivants sont disponibles : 
+
+* [Docker Compose](#docker-compose)
+* [Service Fabric](#service-fabric)
+* [Kubernetes/Helm](https://helm.sh/)
 
 ### <a name="docker-compose"></a>Docker Compose
 

@@ -44,7 +44,7 @@ Cette page inclut les informations suivantes sur l’exception et la demande :
 * Arborescence des appels de procédure
 * Paramètres de la chaîne de requête (le cas échéant)
 * Cookies (le cas échéant)
-* headers
+* En-têtes
 
 Pour afficher la Page d’exceptions du développeur dans [l’exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples), utilisez la directive de préprocesseur `DevEnvironment` et sélectionnez **Déclencher une exception** sur la page d’accueil.
 
@@ -212,7 +212,7 @@ La couche d’hébergement ne peut afficher la page d’une erreur de démarrage
 * Le processus dotnet tombe en panne.
 * Aucune page d’erreur ne s’affiche si le serveur HTTP est [Kestrel](xref:fundamentals/servers/kestrel).
 
-En cas d’exécution sur [IIS](/iis) (ou Azure App Service) ou [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview), une réponse *502.5 - Échec du processus* est retournée par le [module ASP.NET Core](xref:host-and-deploy/aspnet-core-module) si le processus ne peut pas démarrer. Pour plus d’informations, consultez <xref:test/troubleshoot-azure-iis>.
+En cas d’exécution sur [IIS](/iis) (ou Azure App Service) ou [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview), une réponse *502.5 - Échec du processus* est retournée par le [module ASP.NET Core](xref:host-and-deploy/aspnet-core-module) si le processus ne peut pas démarrer. Pour plus d'informations, consultez <xref:test/troubleshoot-azure-iis>.
 
 ## <a name="database-error-page"></a>Page d’erreur de base de données
 
@@ -229,7 +229,7 @@ if (env.IsDevelopment())
 
 ## <a name="exception-filters"></a>Filtres d’exceptions
 
-Dans les applications MVC, vous pouvez configurer les filtres d’exception globalement, contrôleur par contrôleur ou action par action. Dans Razor les applications pages, elles peuvent être configurées globalement ou par modèle de page. Ces filtres gèrent les exceptions non prises en charge qui se produisent pendant l’exécution d’une action de contrôleur ou d’un autre filtre. Pour plus d’informations, consultez <xref:mvc/controllers/filters#exception-filters>.
+Dans les applications MVC, vous pouvez configurer les filtres d’exception globalement, contrôleur par contrôleur ou action par action. Dans Razor les applications pages, elles peuvent être configurées globalement ou par modèle de page. Ces filtres gèrent les exceptions non prises en charge qui se produisent pendant l’exécution d’une action de contrôleur ou d’un autre filtre. Pour plus d'informations, consultez <xref:mvc/controllers/filters#exception-filters>.
 
 > [!TIP]
 > Les filtres d’exceptions sont utiles pour intercepter les exceptions qui se produisent dans les actions MVC, mais n’offrent pas la même souplesse que le middleware de gestion des exceptions. Nous vous recommandons d’utiliser le middleware. N’utilisez des filtres que si vous devez gérer les erreurs différemment en fonction de l’action MVC choisie.

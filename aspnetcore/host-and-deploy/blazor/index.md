@@ -30,7 +30,7 @@ Par [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.tim
 
 Les applications sont publiées pour le déploiement dans la configuration Release.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Sélectionnez **générer** > **publier {application}** dans la barre de navigation.
 1. Sélectionnez l’onglet *Cible de publication*. Pour publier localement, sélectionnez **Dossier**.

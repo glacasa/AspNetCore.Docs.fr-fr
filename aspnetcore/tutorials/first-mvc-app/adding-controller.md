@@ -38,7 +38,7 @@ Nous présentons ces concepts dans cette série de didacticiels et nous vous mon
 
 ## <a name="add-a-controller"></a>Ajouter un contrôleur
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Dans **Explorateur de solutions**, cliquez avec le bouton droit sur **contrôleurs >**
   ![menu contextuel ajouter un contrôleur de >](adding-controller/_static/add_controller.png)
@@ -152,7 +152,7 @@ Nous présentons ces concepts dans cette série de didacticiels et nous vous mon
 
 ## <a name="add-a-controller"></a>Ajouter un contrôleur
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Dans **Explorateur de solutions**, cliquez avec le bouton droit sur **contrôleurs >**
   ![menu contextuel ajouter un contrôleur de >](adding-controller/_static/add_controller.png)

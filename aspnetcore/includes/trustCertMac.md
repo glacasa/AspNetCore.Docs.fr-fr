@@ -1,6 +1,6 @@
-Visual Studio pour Mac affiche le popup suivant:
+Visual Studio pour Mac affiche le message suivant :
 
-![CERTIFICAT de développement HTTPS non trouvé. Voulez-vous installer et faire confiance au certificat?](~/getting-started/_static/trustCertMac.png)
+![Certificat de développement HTTPs introuvable. Voulez-vous installer et approuver le certificat ?](~/getting-started/_static/trustCertMac.png)
 
 Sélectionnez **Oui** si vous faites confiance au certificat de développement.
 
@@ -12,4 +12,4 @@ Entrez votre mot de passe et sélectionnez **OK**
 
 Sélectionnez **Oui** si vous acceptez d’approuver le certificat de développement.
 
-Voir [Trust the ASP.NET Core HTTPS development certificate](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos) pour plus d’informations
+Pour plus d’informations, consultez [approuver le certificat de développement https ASP.net Core](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos)

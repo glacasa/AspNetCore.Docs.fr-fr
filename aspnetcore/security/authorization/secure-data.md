@@ -316,7 +316,7 @@ Un moyen simple de tester l’application terminée consiste à lancer trois nav
 
 | Utilisateur                | Amorcé par l’application | Options                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | Non                | Modifiez/supprimez les données.                |
+| test@example.com    | Non                 | Modifiez/supprimez les données.                |
 | manager@contoso.com | Oui               | Approuver/refuser et modifier/supprimer des données. |
 | admin@contoso.com   | Oui               | Approuver/refuser et modifier/supprimer toutes les données. |
 
@@ -643,7 +643,7 @@ Un moyen simple de tester l’application terminée consiste à lancer trois nav
 
 | Utilisateur                | Amorcé par l’application | Options                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | Non                | Modifiez/supprimez les données.                |
+| test@example.com    | Non                 | Modifiez/supprimez les données.                |
 | manager@contoso.com | Oui               | Approuver/refuser et modifier/supprimer des données. |
 | admin@contoso.com   | Oui               | Approuver/refuser et modifier/supprimer toutes les données. |
 

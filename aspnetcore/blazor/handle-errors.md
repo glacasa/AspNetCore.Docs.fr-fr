@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: 7eefc988da275c0efccd97958d04e76f04e7cad4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 7601e448a52be5e1064326929281e72ad28a0e65
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772111"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967153"
 ---
 # <a name="handle-errors-in-aspnet-core-blazor-apps"></a>Gérer les erreurs dans Blazor les applications ASP.net Core
 
@@ -111,13 +111,13 @@ En production, ne rendez pas les messages d’exception d’infrastructure ou le
 
 ## <a name="log-errors-with-a-persistent-provider"></a>Consigner les erreurs avec un fournisseur persistant
 
-Si une exception non gérée se produit, l’exception est consignée dans les <xref:Microsoft.Extensions.Logging.ILogger> instances configurées dans le conteneur de service. Par défaut, Blazor les applications se connectent à la sortie de la console avec le fournisseur d’informations de journalisation de la console. Envisagez de vous connecter à un emplacement plus permanent avec un fournisseur qui gère la taille du journal et la rotation des journaux. Pour plus d’informations, consultez <xref:fundamentals/logging/index>.
+Si une exception non gérée se produit, l’exception est consignée dans les <xref:Microsoft.Extensions.Logging.ILogger> instances configurées dans le conteneur de service. Par défaut, Blazor les applications se connectent à la sortie de la console avec le fournisseur d’informations de journalisation de la console. Envisagez de vous connecter à un emplacement plus permanent avec un fournisseur qui gère la taille du journal et la rotation des journaux. Pour plus d'informations, consultez <xref:fundamentals/logging/index>.
 
-Pendant le développement Blazor , envoie généralement les détails complets des exceptions à la console du navigateur pour faciliter le débogage. En production, les erreurs détaillées dans la console du navigateur sont désactivées par défaut, ce qui signifie que les erreurs ne sont pas envoyées aux clients, mais que les détails complets de l’exception sont toujours consignés côté serveur. Pour plus d’informations, consultez <xref:fundamentals/error-handling>.
+Pendant le développement Blazor , envoie généralement les détails complets des exceptions à la console du navigateur pour faciliter le débogage. En production, les erreurs détaillées dans la console du navigateur sont désactivées par défaut, ce qui signifie que les erreurs ne sont pas envoyées aux clients, mais que les détails complets de l’exception sont toujours consignés côté serveur. Pour plus d'informations, consultez <xref:fundamentals/error-handling>.
 
 Vous devez choisir les incidents à enregistrer et le niveau de gravité des incidents journalisés. Les utilisateurs hostiles peuvent être en mesure de déclencher délibérément des erreurs. Par exemple, ne consignez pas un incident à partir d' `ProductId` une erreur où un inconnu est fourni dans l’URL d’un composant qui affiche les détails du produit. Toutes les erreurs ne doivent pas être traitées comme des incidents de gravité élevée pour la journalisation.
 
-Pour plus d’informations, consultez <xref:fundamentals/logging/index#create-logs-in-blazor>.
+Pour plus d'informations, consultez <xref:fundamentals/logging/index#create-logs-in-blazor>.
 
 ## <a name="places-where-errors-may-occur"></a>Emplacements où des erreurs peuvent se produire
 
@@ -191,7 +191,7 @@ Si le code utilisateur n’intercepte pas et ne gère pas l’exception, le Fram
 
 ### <a name="component-disposal"></a>Suppression de composants
 
-Un composant peut être supprimé de l’interface utilisateur, par exemple, parce que l’utilisateur a accédé à une autre page. Quand un composant qui implémente <xref:System.IDisposable?displayProperty=fullName> est supprimé de l’interface utilisateur, le Framework appelle la méthode <xref:System.IDisposable.Dispose*> du composant.
+Un composant peut être supprimé de l’interface utilisateur, par exemple, parce que l’utilisateur a accédé à une autre page. Quand un composant qui implémente <xref:System.IDisposable?displayProperty=fullName> est supprimé de l’interface utilisateur, le Framework appelle la méthode <xref:System.IDisposable.Dispose%2A> du composant.
 
 Si la méthode du `Dispose` composant lève une exception non gérée, l’exception est irrécupérable pour un Blazor circuit serveur. Si la logique de suppression peut lever des exceptions, l’application doit intercepter les exceptions à l’aide d’une instruction [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) avec la gestion des erreurs et la journalisation.
 
@@ -262,7 +262,7 @@ Pour éviter les modèles de récurrence infinis, assurez-vous que le code de re
 
 ### <a name="custom-render-tree-logic"></a>Logique d’arborescence de rendu personnalisé
 
-La Blazor plupart des composants sont implémentés en tant que fichiers *. Razor* et sont compilés pour `RenderTreeBuilder` produire une logique qui opère sur un pour afficher leur sortie. Un développeur peut implémenter `RenderTreeBuilder` la logique manuellement à l’aide du code C# procédural. Pour plus d’informations, consultez <xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic>.
+La Blazor plupart des composants sont implémentés en tant que fichiers *. Razor* et sont compilés pour `RenderTreeBuilder` produire une logique qui opère sur un pour afficher leur sortie. Un développeur peut implémenter `RenderTreeBuilder` la logique manuellement à l’aide du code C# procédural. Pour plus d'informations, consultez <xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic>.
 
 > [!WARNING]
 > L’utilisation de la logique du générateur d’arborescence de rendu manuel est considérée comme un scénario avancé et risqué, non recommandé pour le développement de composants généraux.

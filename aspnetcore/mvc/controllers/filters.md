@@ -184,12 +184,12 @@ Voici un exemple qui illustre l’ordre dans lequel les méthodes de filtre sont
 
 | Séquence | Étendue de filtre | Méthode de filtre |
 |:--------:|:------------:|:-------------:|
-| 1 | Global | `OnActionExecuting` |
+| 1 | Globale | `OnActionExecuting` |
 | 2 | Page de contrôleur ou Razor| `OnActionExecuting` |
 | 3 | Méthode | `OnActionExecuting` |
 | 4 | Méthode | `OnActionExecuted` |
 | 5 | Page de contrôleur ou Razor | `OnActionExecuted` |
-| 6 | Global | `OnActionExecuted` |
+| 6 | Globale | `OnActionExecuted` |
 
 ### <a name="controller-level-filters"></a>Filtres au niveau du contrôleur
 
@@ -725,12 +725,12 @@ Voici un exemple qui illustre l’ordre dans lequel les méthodes de filtre sont
 
 | Séquence | Étendue de filtre | Méthode de filtre |
 |:--------:|:------------:|:-------------:|
-| 1 | Global | `OnActionExecuting` |
+| 1 | Globale | `OnActionExecuting` |
 | 2 | Contrôleur | `OnActionExecuting` |
 | 3 | Méthode | `OnActionExecuting` |
 | 4 | Méthode | `OnActionExecuted` |
 | 5 | Contrôleur | `OnActionExecuted` |
-| 6 | Global | `OnActionExecuted` |
+| 6 | Globale | `OnActionExecuted` |
 
 Cette séquence montre que :
 
@@ -787,8 +787,8 @@ Prenez en compte les mêmes 3 filtres d’actions indiqués dans l’exemple pr�
 |:--------:|:------------:|:-----------------:|:-------------:|
 | 1 | Méthode | 0 | `OnActionExecuting` |
 | 2 | Contrôleur | 1  | `OnActionExecuting` |
-| 3 | Global | 2  | `OnActionExecuting` |
-| 4 | Global | 2  | `OnActionExecuted` |
+| 3 | Globale | 2  | `OnActionExecuting` |
+| 4 | Globale | 2  | `OnActionExecuted` |
 | 5 | Contrôleur | 1  | `OnActionExecuted` |
 | 6 | Méthode | 0  | `OnActionExecuted` |
 

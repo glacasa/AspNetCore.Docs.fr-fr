@@ -5,7 +5,7 @@ description: Découvrez comment appeler une API Web à partir d' Blazor une appl
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/04/2020
+ms.date: 05/07/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: d823db3688e05f6befefacc9f390e0dcdbf329a7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 7476e9dce3fa26948d2091235747f893d805d7be
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767146"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967270"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>Appeler une API Web à partir de ASP.NET CoreBlazor
 
@@ -37,7 +37,7 @@ Consultez les composants suivants dans l’exemple d’application *BlazorWebAss
 * Appeler l’API Web (*pages/CallWebAPI. Razor*)
 * Testeur de requêtes HTTP (*composants/HTTPRequestTester. Razor*)
 
-## <a name="packages"></a>.
+## <a name="packages"></a>Packages
 
 Référencez le package NuGet [System .net. http. JSON](https://www.nuget.org/packages/System.Net.Http.Json/) dans le fichier projet.
 
@@ -87,37 +87,37 @@ Les méthodes d’assistance JSON envoient des demandes à un URI (une API Web d
 
 * `GetFromJsonAsync`&ndash; Envoie une requête http obtenir et analyse le corps de la réponse JSON pour créer un objet.
 
-  Dans le code suivant, les `_todoItems` sont affichés par le composant. La `GetTodoItems` méthode est déclenchée lorsque le rendu du composant est terminé ([OnInitializedAsync](xref:blazor/lifecycle#component-initialization-methods)). Pour obtenir un exemple complet, consultez l’exemple d’application.
+  Dans le code suivant, les `todoItems` sont affichés par le composant. La `GetTodoItems` méthode est déclenchée lorsque le rendu du composant est terminé ([OnInitializedAsync](xref:blazor/lifecycle#component-initialization-methods)). Pour obtenir un exemple complet, consultez l’exemple d’application.
 
   ```razor
   @using System.Net.Http
   @inject HttpClient Http
 
   @code {
-      private TodoItem[] _todoItems;
+      private TodoItem[] todoItems;
 
       protected override async Task OnInitializedAsync() => 
-          _todoItems = await Http.GetFromJsonAsync<TodoItem[]>("api/TodoItems");
+          todoItems = await Http.GetFromJsonAsync<TodoItem[]>("api/TodoItems");
   }
   ```
 
 * `PostAsJsonAsync`&ndash; Envoie une requête http postérieure, y compris du contenu encodé JSON, et analyse le corps de la réponse JSON pour créer un objet.
 
-  Dans le code suivant, `_newItemName` est fourni par un élément lié du composant. La `AddItem` méthode est déclenchée par la sélection `<button>` d’un élément. Pour obtenir un exemple complet, consultez l’exemple d’application.
+  Dans le code suivant, `newItemName` est fourni par un élément lié du composant. La `AddItem` méthode est déclenchée par la sélection `<button>` d’un élément. Pour obtenir un exemple complet, consultez l’exemple d’application.
 
   ```razor
   @using System.Net.Http
   @inject HttpClient Http
 
-  <input @bind="_newItemName" placeholder="New Todo Item" />
+  <input @bind="newItemName" placeholder="New Todo Item" />
   <button @onclick="@AddItem">Add</button>
 
   @code {
-      private string _newItemName;
+      private string newItemName;
 
       private async Task AddItem()
       {
-          var addItem = new TodoItem { Name = _newItemName, IsComplete = false };
+          var addItem = new TodoItem { Name = newItemName, IsComplete = false };
           await Http.PostAsJsonAsync("api/TodoItems", addItem);
       }
   }
@@ -131,28 +131,28 @@ Les méthodes d’assistance JSON envoient des demandes à un URI (une API Web d
 
 * `PutAsJsonAsync`&ndash; Envoie une requête HTTP PUT, y compris du contenu encodé JSON.
 
-  Dans le code suivant, `_editItem` les valeurs `Name` pour `IsCompleted` et sont fournies par les éléments dépendants du composant. L’élément `Id` est défini lorsque l’élément est sélectionné dans une autre partie de l’interface utilisateur `EditItem` et est appelé. La `SaveItem` méthode est déclenchée par la sélection de `<button>` l’élément Save. Pour obtenir un exemple complet, consultez l’exemple d’application.
+  Dans le code suivant, `editItem` les valeurs `Name` pour `IsCompleted` et sont fournies par les éléments dépendants du composant. L’élément `Id` est défini lorsque l’élément est sélectionné dans une autre partie de l’interface utilisateur `EditItem` et est appelé. La `SaveItem` méthode est déclenchée par la sélection de `<button>` l’élément Save. Pour obtenir un exemple complet, consultez l’exemple d’application.
 
   ```razor
   @using System.Net.Http
   @inject HttpClient Http
 
-  <input type="checkbox" @bind="_editItem.IsComplete" />
-  <input @bind="_editItem.Name" />
+  <input type="checkbox" @bind="editItem.IsComplete" />
+  <input @bind="editItem.Name" />
   <button @onclick="@SaveItem">Save</button>
 
   @code {
-      private TodoItem _editItem = new TodoItem();
+      private TodoItem editItem = new TodoItem();
 
       private void EditItem(long id)
       {
-          var editItem = _todoItems.Single(i => i.Id == id);
-          _editItem = new TodoItem { Id = editItem.Id, Name = editItem.Name, 
+          var editItem = todoItems.Single(i => i.Id == id);
+          editItem = new TodoItem { Id = editItem.Id, Name = editItem.Name, 
               IsComplete = editItem.IsComplete };
       }
 
       private async Task SaveItem() =>
-          await Http.PutAsJsonAsync($"api/TodoItems/{_editItem.Id}, _editItem);
+          await Http.PutAsJsonAsync($"api/TodoItems/{editItem.Id}, editItem);
   }
   ```
   
@@ -170,16 +170,46 @@ Dans le code suivant, l’élément `<button>` delete appelle la `DeleteItem` m�
 @using System.Net.Http
 @inject HttpClient Http
 
-<input @bind="_id" />
+<input @bind="id" />
 <button @onclick="@DeleteItem">Delete</button>
 
 @code {
-    private long _id;
+    private long id;
 
     private async Task DeleteItem() =>
-        await Http.DeleteAsync($"api/TodoItems/{_id}");
+        await Http.DeleteAsync($"api/TodoItems/{id}");
 }
 ```
+
+## <a name="handle-errors"></a>Gérer les erreurs
+
+Lorsque des erreurs se produisent lors de l’interaction avec une API Web, elles peuvent être gérées par le code du développeur. Par exemple, `GetFromJsonAsync` attend une réponse JSON de l’API du serveur avec un `Content-Type` de `application/json`. Si la réponse n’est pas au format JSON, la validation du <xref:System.NotSupportedException>contenu lève une exception.
+
+Dans l’exemple suivant, le point de terminaison d’URI pour la demande de données de prévision météo est mal orthographié. L’URI doit être à `WeatherForecast` , mais apparaît dans l’appel `WeatherForcast` en tant que (« e » manquant).
+
+L' `GetFromJsonAsync` appel attend que JSON soit retourné, mais le serveur retourne du code HTML pour une exception non gérée sur le serveur avec `Content-Type` un `text/html`de. L’exception non gérée se produit sur le serveur, car le chemin d’accès est introuvable et l’intergiciel ne peut pas traiter une page ou une vue pour la demande.
+
+Dans `OnInitializedAsync` sur le client, <xref:System.NotSupportedException> est levée lorsque le contenu de la réponse est validé en tant que non-JSON. L’exception est interceptée dans `catch` le bloc, où la logique personnalisée peut consigner l’erreur ou présenter un message d’erreur convivial à l’utilisateur :
+
+```csharp
+protected override async Task OnInitializedAsync()
+{
+    try
+    {
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>(
+            "WeatherForcast");
+    }
+    catch (NotSupportedException exception)
+    {
+        ...
+    }
+}
+```
+
+> [!NOTE]
+> L’exemple précédent est fourni à des fins de démonstration. Une application serveur d’API Web peut être configurée pour retourner JSON même lorsqu’un point de terminaison n’existe pas ou qu’un exception non géré est présent sur le serveur.
+
+Pour plus d'informations, consultez <xref:blazor/handle-errors>.
 
 ## <a name="cross-origin-resource-sharing-cors"></a>Partage des ressources cross-origin (CORS)
 
