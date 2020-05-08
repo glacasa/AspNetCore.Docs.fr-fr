@@ -44,7 +44,7 @@ Dans les exemples suivants :
 
 Quand vous utilisez IdentityASP.net Core :
 
-* Les clés de protection des données et le nom de l’application doivent être partagés entre les applications. Un emplacement de stockage de clés commun est fourni <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.PersistKeysToFileSystem*> à la méthode dans les exemples suivants. Utilisez <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*> pour configurer un nom d’application partagée commun`SharedCookieApp` (dans les exemples suivants). Pour plus d’informations, consultez <xref:security/data-protection/configuration/overview>.
+* Les clés de protection des données et le nom de l’application doivent être partagés entre les applications. Un emplacement de stockage de clés commun est fourni <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.PersistKeysToFileSystem*> à la méthode dans les exemples suivants. Utilisez <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*> pour configurer un nom d’application partagée commun`SharedCookieApp` (dans les exemples suivants). Pour plus d'informations, consultez <xref:security/data-protection/configuration/overview>.
 * Utilisez la <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.ConfigureApplicationCookie*> méthode d’extension pour configurer le service de protection des données pour les cookies.
 * Le type d’authentification par `Identity.Application`défaut est.
 
@@ -101,7 +101,7 @@ options.Cookie.Domain = ".contoso.com";
 
 ## <a name="encrypt-data-protection-keys-at-rest"></a>Chiffrer les clés de protection des données au repos
 
-Pour les déploiements de production, `DataProtectionProvider` configurez pour chiffrer les clés au repos avec DPAPI ou un certificat X509Certificate. Pour plus d’informations, consultez <xref:security/data-protection/implementation/key-encryption-at-rest>. Dans l’exemple suivant, une empreinte numérique de certificat est <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.ProtectKeysWithCertificate*>fournie à :
+Pour les déploiements de production, `DataProtectionProvider` configurez pour chiffrer les clés au repos avec DPAPI ou un certificat X509Certificate. Pour plus d'informations, consultez <xref:security/data-protection/implementation/key-encryption-at-rest>. Dans l’exemple suivant, une empreinte numérique de certificat est <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.ProtectKeysWithCertificate*>fournie à :
 
 ```csharp
 services.AddDataProtection()

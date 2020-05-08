@@ -5,7 +5,7 @@ description: Découvrez comment héberger et déployer une Blazor application à
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/04/2020
+ms.date: 05/07/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: 9bc1e3aaadb7310f6ea338eea2726bdc592aa06a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: e136a401beffe9cc7e29906b3631ab3f068b30fd
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776407"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967595"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>Héberger et déployer ASP.NET Core éblouissant webassembly
 
@@ -79,6 +79,12 @@ Pour plus d’informations concernant le déploiement sur Azure App Service, con
 Un *Déploiement autonome* sert l’application de webassembly éblouissant sous la forme d’un ensemble de fichiers statiques demandés directement par les clients. N’importe quel serveur de fichiers statiques est capable de servir l’application Blazor.
 
 Les ressources de déploiement autonomes sont publiées dans le dossier */bin/Release/{Target Framework}/Publish/wwwroot* .
+
+### <a name="azure-app-service"></a>Azure App Service
+
+Les applications webassembly éblouissantes peuvent être déployées sur Azure App services sur Windows, qui héberge l’application sur [IIS](#iis).
+
+Le déploiement d’une application webassembly éblouissante autonome sur Azure App Service pour Linux n’est pas pris en charge actuellement. Une image de serveur Linux pour héberger l’application n’est pas disponible pour l’instant. Le travail est en cours pour activer ce scénario.
 
 ### <a name="iis"></a>IIS
 
@@ -335,7 +341,7 @@ L’argument `--urls` définit les adresses IP ou les adresses d’hôtes avec 
 
 ## <a name="configure-the-linker"></a>Configurer l'éditeur de liens
 
-Éblouissant effectue une liaison IL (Intermediate Language) sur chaque version de mise en production pour supprimer l’IL inutile des assemblys de sortie. Pour plus d’informations, consultez <xref:host-and-deploy/blazor/configure-linker>.
+Éblouissant effectue une liaison IL (Intermediate Language) sur chaque version de mise en production pour supprimer l’IL inutile des assemblys de sortie. Pour plus d'informations, consultez <xref:host-and-deploy/blazor/configure-linker>.
 
 ## <a name="custom-boot-resource-loading"></a>Chargement des ressources de démarrage personnalisé
 

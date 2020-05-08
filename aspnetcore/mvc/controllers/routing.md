@@ -1003,7 +1003,7 @@ Les routes de la collection de routes sont ordonnées et elles sont traitées da
 > [!NOTE]
 > Les *itinéraires conventionnels dédiés* utilisent souvent des paramètres de `{*article}` routage de type **« catch-all »** comme pour capturer la partie restante du chemin d’URL. Ceci peut rendre une route « trop globale », ce qui signifie qu’elle correspond à des URL qui devaient être mises en correspondance par d’autres routes. Pour résoudre ce problème, placez les routes « globales » plus loin dans la table de routage.
 
-### <a name="fallback"></a>Processus de repli
+### <a name="fallback"></a>Secours
 
 Dans le cadre du traitement des requêtes, MVC vérifie que les valeurs de route peuvent être utilisées pour rechercher un contrôleur et une action dans votre application. Si les valeurs de route ne correspondent pas à une action, la route n’est pas considérée comme une correspondance, et la route suivante est essayée. Ceci est appelé *processus de repli* et est conçu pour simplifier les cas où des routes conventionnelles se chevauchent.
 

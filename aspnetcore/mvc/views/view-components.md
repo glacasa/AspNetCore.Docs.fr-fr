@@ -48,7 +48,7 @@ Les composants de vue sont conçus pour être utilisés là où vous avez une lo
 
 Un composant de vue a deux éléments : sa classe (généralement dérivée de [ViewComponent](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponent)) et le résultat qu’il retourne (en général, une vue). Comme les contrôleurs, un composant de vue peut être un OCT, mais la plupart des développeurs préfèrent utiliser les méthodes et propriétés dérivées de `ViewComponent`.
 
-Si vous envisagez que les composants de vue répondent aux spécifications Razor d’une application, envisagez plutôt d’utiliser des composants. RazorLes composants combinent également le balisage avec du code C# pour produire des unités d’interface utilisateur réutilisables. RazorLes composants sont conçus pour la productivité des développeurs lorsqu’ils fournissent la logique de l’interface utilisateur côté client et la composition. Pour plus d’informations, consultez <xref:blazor/components>.
+Si vous envisagez que les composants de vue répondent aux spécifications Razor d’une application, envisagez plutôt d’utiliser des composants. RazorLes composants combinent également le balisage avec du code C# pour produire des unités d’interface utilisateur réutilisables. RazorLes composants sont conçus pour la productivité des développeurs lorsqu’ils fournissent la logique de l’interface utilisateur côté client et la composition. Pour plus d'informations, consultez <xref:blazor/components>.
 
 ## <a name="creating-a-view-component"></a>Création d’un composant de vue
 

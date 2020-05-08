@@ -5,7 +5,7 @@ description: Découvrez comment héberger des applications ASP.NET Core sur Wind
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/17/2020
+ms.date: 05/07/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 72f433ffdc7d08e23fb68fc6ed9903a39959363b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 157cfc4c42d5e057e9b2ebd04c93d80db55419c9
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775984"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967491"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>Héberger ASP.NET Core sur Windows avec IIS
 
@@ -59,6 +59,8 @@ Les applications publiées pour les déploiements 32 bits (x86) ou 64 bits (x64)
 * Nécessite l’espace d’adressage de mémoire virtuelle le plus grand disponible pour une application 64 bits.
 * Nécessite la taille de pile IIS la plus grande disponible.
 * A des dépendances natives 64 bits.
+
+Les applications publiées pour 32 bits (x86) doivent avoir 32 bits activés pour leurs pools d’applications IIS. Pour plus d’informations, consultez la section [créer le site IIS](#create-the-iis-site) .
 
 Utilisez un kit SDK .NET Core 64 bits (x64) pour publier une application 64 bits. Un runtime 64 bits doit être présent sur le système hôte.
 
@@ -137,7 +139,7 @@ services.Configure<IISServerOptions>(options =>
 });
 ```
 
-| Option                         | Default | Paramètre |
+| Option                         | Valeur par défaut | Paramètre |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | Si `true`, IIS Server définit le `HttpContext.User` authentifié par [Authentification Windows](xref:security/authentication/windowsauth). Si `false`, le serveur fournit uniquement une identité pour `HttpContext.User` et répond aux questions explicitement posées par `AuthenticationScheme`. L’authentification Windows doit être activée dans IIS pour que `AutomaticAuthentication` fonctionne. Pour plus d’informations, consultez [Authentification Windows](xref:security/authentication/windowsauth). |
 | `AuthenticationDisplayName`    | `null`  | Définit le nom d’affichage montré aux utilisateurs sur les pages de connexion. |
@@ -155,7 +157,7 @@ services.Configure<IISOptions>(options =>
 });
 ```
 
-| Option                         | Default | Paramètre |
+| Option                         | Valeur par défaut | Paramètre |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | Si la valeur est `true`, le [middleware d’intégration IIS](#enable-the-iisintegration-components) définit l’élément `HttpContext.User` authentifié par [Windows Authentication](xref:security/authentication/windowsauth). Si `false`, l’intergiciel (middleware) fournit uniquement une identité pour `HttpContext.User` et répond aux questions explicitement posées par `AuthenticationScheme`. L’authentification Windows doit être activée dans IIS pour que `AutomaticAuthentication` fonctionne. Pour plus d'informations, consultez la rubrique [Authentification Windows](xref:security/authentication/windowsauth). |
 | `AuthenticationDisplayName`    | `null`  | Définit le nom d’affichage montré aux utilisateurs sur les pages de connexion. |
@@ -187,7 +189,7 @@ Pour empêcher le Kit de développement logiciel (SDK) Web de transformer le fic
 </PropertyGroup>
 ```
 
-Lorsque vous désactivez le Kit de développement logiciel (SDK) Web en transformant le fichier, le *processPath* et les *arguments* doivent être définis manuellement par le développeur. Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module>.
+Lorsque vous désactivez le Kit de développement logiciel (SDK) Web en transformant le fichier, le *processPath* et les *arguments* doivent être définis manuellement par le développeur. Pour plus d'informations, consultez <xref:host-and-deploy/aspnet-core-module>.
 
 ### <a name="webconfig-file-location"></a>emplacement du fichier web.config
 
@@ -282,7 +284,7 @@ Pour obtenir une version antérieure du programme d’installation :
    * `OPT_NO_RUNTIME=1`&ndash; Ignorez l’installation du Runtime .net core. Utilisé lorsque le serveur héberge uniquement [des déploiements autonomes (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_SHAREDFX=1`&ndash; Ignorez l’installation de l’infrastructure partagée ASP.net (runtime ASP.net). Utilisé lorsque le serveur héberge uniquement [des déploiements autonomes (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_X86=1`&ndash; Ignorez l’installation des runtimes x86. Utilisez ce paramètre lorsque vous savez que vous n’hébergerez pas d’applications 32 bits. Si vous n’excluez pas d’avoir à héberger des applications 32 bits et 64 bits dans le futur, n'utilisez pas ce paramètre et installez les deux runtimes.
-   * `OPT_NO_SHARED_CONFIG_CHECK=1` &ndash; Désactivez la vérification d’utilisation d’une Configuration partagée IIS lorsque la configuration partagée (*applicationHost.config*) se trouve sur le même ordinateur que l’installation d’IIS. *Disponible uniquement pour les programmes d’installation du pack d’hébergement ASP.NET Core 2.2 ou version ultérieure.* Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
+   * `OPT_NO_SHARED_CONFIG_CHECK=1` &ndash; Désactivez la vérification d’utilisation d’une Configuration partagée IIS lorsque la configuration partagée (*applicationHost.config*) se trouve sur le même ordinateur que l’installation d’IIS. *Disponible uniquement pour les programmes d’installation du pack d’hébergement ASP.NET Core 2.2 ou version ultérieure.* Pour plus d'informations, consultez <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
 1. Redémarrez le système ou exécutez les commandes suivantes dans une interface de commande :
 
    ```console
@@ -326,11 +328,13 @@ Quand vous déployez des applications sur un serveur avec [Web Deploy](/iis/inst
 
    ![Définissez Aucun code managé pour la version CLR .NET.](index/_static/edit-apppool-ws2016.png)
 
-    ASP.NET Core s’exécute dans un processus séparé et gère l’exécution. ASP.NET Core ne repose pas sur le chargement de Desktop CLR (CLR .NET)&mdash;la prise en charge du Common Language Runtime Core (CoreCLR) pour .NET Core est démarrée pour héberger l’application dans le processus Worker. La configuration de la **version CLR .NET** sur **Aucun code managé** est facultative, mais recommandée.
+    ASP.NET Core s’exécute dans un processus séparé et gère l’exécution. ASP.NET Core ne s’appuie pas sur le chargement du CLR de bureau (.NET CLR). Le Common Language Runtime (CoreCLR) principal pour .NET Core est amorcé pour héberger l’application dans le processus de travail. La configuration de la **version CLR .NET** sur **Aucun code managé** est facultative, mais recommandée.
 
-1. *ASP.NET Core 2.2 ou version ultérieure* : pour un [déploiement autonome](/dotnet/core/deploying/#self-contained-deployments-scd) 64 bits (x64) qui utilise le [modèle d’hébergement In-process](#in-process-hosting-model), désactivez le pool d’applications pour les processus 32 bits (x86).
+1. *ASP.NET Core 2.2 ou version ultérieure* :
 
-   Dans la barre latérale **Actions** du gestionnaire IIS > **Pools d’applications**, sélectionnez **Définir les valeurs par défaut du pool d’applications** ou **Paramètres avancés**. Recherchez **Activer les applications 32 bits** et définissez la valeur sur `False`. Ce paramètre n’affecte pas les applications déployées pour l’[hébergement Out-of-process](xref:host-and-deploy/aspnet-core-module#out-of-process-hosting-model).
+   * Pour un [Déploiement autonome](/dotnet/core/deploying/#self-contained-deployments-scd) 32 bits (x86) publié avec un kit de développement logiciel (SDK) 32 bits qui utilise le [modèle d’hébergement in-process](#in-process-hosting-model), activez le Pool d’applications pour 32 bits. Dans le gestionnaire des services Internet, accédez à **pools d’applications** dans la barre latérale **connexions** . Sélectionnez le pool d’applications de l’application. Dans l’encadré **actions** , sélectionnez **Paramètres avancés**. Définissez **activer les Applications 32 bits** sur `True`. 
+
+   * Pour un [déploiement autonome](/dotnet/core/deploying/#self-contained-deployments-scd) 64 bits (x64) qui utilise le [modèle d’hébergement In-process](#in-process-hosting-model), désactivez le pool d’applications pour les processus 32 bits (x86). Dans le gestionnaire des services Internet, accédez à **pools d’applications** dans la barre latérale **connexions** . Sélectionnez le pool d’applications de l’application. Dans l’encadré **actions** , sélectionnez **Paramètres avancés**. Définissez **activer les Applications 32 bits** sur `False`. 
 
 1. Vérifiez que l’identité de modèle de processus dispose des autorisations appropriées.
 
@@ -388,7 +392,7 @@ Les fichiers dans le dossier de déploiement sont verrouillés quand l’applica
 
   ```
 
-## <a name="data-protection"></a>Protection des données
+## <a name="data-protection"></a>Protection de données
 
 La [pile de protection des données ASP.NET Core](xref:security/data-protection/introduction) est utilisée par plusieurs [intergiciels (middlewares)](xref:fundamentals/middleware/index) ASP.NET Core, y compris l’intergiciel utilisé dans l’authentification. Même si les API de protection des données ne sont pas appelées par le code de l’utilisateur, la protection des données doit être configurée avec un script de déploiement ou dans un code utilisateur pour créer un [magasin de clés](xref:security/data-protection/implementation/key-management) de chiffrement persistantes. Si la protection des données n’est pas configurée, les clés sont conservées en mémoire et ignorées au redémarrage de l’application.
 
@@ -430,7 +434,7 @@ Pour configurer la protection des données sous IIS afin de rendre persistante l
 
 * **Définir une stratégie au niveau de l’ordinateur pour la protection des données**
 
-  Le système de protection des données offre une prise en charge limitée de la définition d’une [stratégie au niveau de l’ordinateur](xref:security/data-protection/configuration/machine-wide-policy) par défaut pour toutes les applications qui utilisent les API de protection des données. Pour plus d’informations, consultez <xref:security/data-protection/introduction>.
+  Le système de protection des données offre une prise en charge limitée de la définition d’une [stratégie au niveau de l’ordinateur](xref:security/data-protection/configuration/machine-wide-policy) par défaut pour toutes les applications qui utilisent les API de protection des données. Pour plus d'informations, consultez <xref:security/data-protection/introduction>.
 
 ## <a name="virtual-directories"></a>Répertoires virtuels
 
@@ -746,7 +750,7 @@ services.Configure<IISServerOptions>(options =>
 });
 ```
 
-| Option                         | Default | Paramètre |
+| Option                         | Valeur par défaut | Paramètre |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | Si `true`, IIS Server définit le `HttpContext.User` authentifié par [Authentification Windows](xref:security/authentication/windowsauth). Si `false`, le serveur fournit uniquement une identité pour `HttpContext.User` et répond aux questions explicitement posées par `AuthenticationScheme`. L’authentification Windows doit être activée dans IIS pour que `AutomaticAuthentication` fonctionne. Pour plus d’informations, consultez [Authentification Windows](xref:security/authentication/windowsauth). |
 | `AuthenticationDisplayName`    | `null`  | Définit le nom d’affichage montré aux utilisateurs sur les pages de connexion. |
@@ -762,7 +766,7 @@ services.Configure<IISOptions>(options =>
 });
 ```
 
-| Option                         | Default | Paramètre |
+| Option                         | Valeur par défaut | Paramètre |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | Si la valeur est `true`, le [middleware d’intégration IIS](#enable-the-iisintegration-components) définit l’élément `HttpContext.User` authentifié par [Windows Authentication](xref:security/authentication/windowsauth). Si `false`, l’intergiciel (middleware) fournit uniquement une identité pour `HttpContext.User` et répond aux questions explicitement posées par `AuthenticationScheme`. L’authentification Windows doit être activée dans IIS pour que `AutomaticAuthentication` fonctionne. Pour plus d'informations, consultez la rubrique [Authentification Windows](xref:security/authentication/windowsauth). |
 | `AuthenticationDisplayName`    | `null`  | Définit le nom d’affichage montré aux utilisateurs sur les pages de connexion. |
@@ -794,7 +798,7 @@ Pour empêcher le Kit de développement logiciel (SDK) Web de transformer le fic
 </PropertyGroup>
 ```
 
-Lorsque vous désactivez le Kit de développement logiciel (SDK) Web en transformant le fichier, le *processPath* et les *arguments* doivent être définis manuellement par le développeur. Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module>.
+Lorsque vous désactivez le Kit de développement logiciel (SDK) Web en transformant le fichier, le *processPath* et les *arguments* doivent être définis manuellement par le développeur. Pour plus d'informations, consultez <xref:host-and-deploy/aspnet-core-module>.
 
 ### <a name="webconfig-file-location"></a>emplacement du fichier web.config
 
@@ -881,7 +885,7 @@ Installez le *bundle d’hébergement .NET Core* sur le système hôte. L’offr
    * `OPT_NO_RUNTIME=1`&ndash; Ignorez l’installation du Runtime .net core. Utilisé lorsque le serveur héberge uniquement [des déploiements autonomes (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_SHAREDFX=1`&ndash; Ignorez l’installation de l’infrastructure partagée ASP.net (runtime ASP.net). Utilisé lorsque le serveur héberge uniquement [des déploiements autonomes (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_X86=1`&ndash; Ignorez l’installation des runtimes x86. Utilisez ce paramètre lorsque vous savez que vous n’hébergerez pas d’applications 32 bits. Si vous n’excluez pas d’avoir à héberger des applications 32 bits et 64 bits dans le futur, n'utilisez pas ce paramètre et installez les deux runtimes.
-   * `OPT_NO_SHARED_CONFIG_CHECK=1` &ndash; Désactivez la vérification d’utilisation d’une Configuration partagée IIS lorsque la configuration partagée (*applicationHost.config*) se trouve sur le même ordinateur que l’installation d’IIS. *Disponible uniquement pour les programmes d’installation du pack d’hébergement ASP.NET Core 2.2 ou version ultérieure.* Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
+   * `OPT_NO_SHARED_CONFIG_CHECK=1` &ndash; Désactivez la vérification d’utilisation d’une Configuration partagée IIS lorsque la configuration partagée (*applicationHost.config*) se trouve sur le même ordinateur que l’installation d’IIS. *Disponible uniquement pour les programmes d’installation du pack d’hébergement ASP.NET Core 2.2 ou version ultérieure.* Pour plus d'informations, consultez <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
 1. Redémarrez le système ou exécutez les commandes suivantes dans une interface de commande :
 
    ```console
@@ -984,7 +988,7 @@ Les fichiers dans le dossier de déploiement sont verrouillés quand l’applica
 
   ```
 
-## <a name="data-protection"></a>Protection des données
+## <a name="data-protection"></a>Protection de données
 
 La [pile de protection des données ASP.NET Core](xref:security/data-protection/introduction) est utilisée par plusieurs [intergiciels (middlewares)](xref:fundamentals/middleware/index) ASP.NET Core, y compris l’intergiciel utilisé dans l’authentification. Même si les API de protection des données ne sont pas appelées par le code de l’utilisateur, la protection des données doit être configurée avec un script de déploiement ou dans un code utilisateur pour créer un [magasin de clés](xref:security/data-protection/implementation/key-management) de chiffrement persistantes. Si la protection des données n’est pas configurée, les clés sont conservées en mémoire et ignorées au redémarrage de l’application.
 
@@ -1026,7 +1030,7 @@ Pour configurer la protection des données sous IIS afin de rendre persistante l
 
 * **Définir une stratégie au niveau de l’ordinateur pour la protection des données**
 
-  Le système de protection des données offre une prise en charge limitée de la définition d’une [stratégie au niveau de l’ordinateur](xref:security/data-protection/configuration/machine-wide-policy) par défaut pour toutes les applications qui utilisent les API de protection des données. Pour plus d’informations, consultez <xref:security/data-protection/introduction>.
+  Le système de protection des données offre une prise en charge limitée de la définition d’une [stratégie au niveau de l’ordinateur](xref:security/data-protection/configuration/machine-wide-policy) par défaut pour toutes les applications qui utilisent les API de protection des données. Pour plus d'informations, consultez <xref:security/data-protection/introduction>.
 
 ## <a name="virtual-directories"></a>Répertoires virtuels
 
@@ -1316,7 +1320,7 @@ Pour plus d'informations sur le `CreateDefaultBuilder`, consultez <xref:fundamen
 
 ### <a name="iis-options"></a>Options IIS
 
-| Option                         | Default | Paramètre |
+| Option                         | Valeur par défaut | Paramètre |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | Si `true`, IIS Server définit le `HttpContext.User` authentifié par [Authentification Windows](xref:security/authentication/windowsauth). Si `false`, le serveur fournit uniquement une identité pour `HttpContext.User` et répond aux questions explicitement posées par `AuthenticationScheme`. L’authentification Windows doit être activée dans IIS pour que `AutomaticAuthentication` fonctionne. Pour plus d’informations, consultez [Authentification Windows](xref:security/authentication/windowsauth). |
 | `AuthenticationDisplayName`    | `null`  | Définit le nom d’affichage montré aux utilisateurs sur les pages de connexion. |
@@ -1330,7 +1334,7 @@ services.Configure<IISOptions>(options =>
 });
 ```
 
-| Option                         | Default | Paramètre |
+| Option                         | Valeur par défaut | Paramètre |
 | ------------------------------ | :-----: | ------- |
 | `AutomaticAuthentication`      | `true`  | Si la valeur est `true`, le [middleware d’intégration IIS](#enable-the-iisintegration-components) définit l’élément `HttpContext.User` authentifié par [Windows Authentication](xref:security/authentication/windowsauth). Si `false`, l’intergiciel (middleware) fournit uniquement une identité pour `HttpContext.User` et répond aux questions explicitement posées par `AuthenticationScheme`. L’authentification Windows doit être activée dans IIS pour que `AutomaticAuthentication` fonctionne. Pour plus d'informations, consultez la rubrique [Authentification Windows](xref:security/authentication/windowsauth). |
 | `AuthenticationDisplayName`    | `null`  | Définit le nom d’affichage montré aux utilisateurs sur les pages de connexion. |
@@ -1362,7 +1366,7 @@ Pour empêcher le Kit de développement logiciel (SDK) Web de transformer le fic
 </PropertyGroup>
 ```
 
-Lorsque vous désactivez le Kit de développement logiciel (SDK) Web en transformant le fichier, le *processPath* et les *arguments* doivent être définis manuellement par le développeur. Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module>.
+Lorsque vous désactivez le Kit de développement logiciel (SDK) Web en transformant le fichier, le *processPath* et les *arguments* doivent être définis manuellement par le développeur. Pour plus d'informations, consultez <xref:host-and-deploy/aspnet-core-module>.
 
 ### <a name="webconfig-file-location"></a>emplacement du fichier web.config
 
@@ -1449,7 +1453,7 @@ Installez le *bundle d’hébergement .NET Core* sur le système hôte. L’offr
    * `OPT_NO_RUNTIME=1`&ndash; Ignorez l’installation du Runtime .net core. Utilisé lorsque le serveur héberge uniquement [des déploiements autonomes (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_SHAREDFX=1`&ndash; Ignorez l’installation de l’infrastructure partagée ASP.net (runtime ASP.net). Utilisé lorsque le serveur héberge uniquement [des déploiements autonomes (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_X86=1`&ndash; Ignorez l’installation des runtimes x86. Utilisez ce paramètre lorsque vous savez que vous n’hébergerez pas d’applications 32 bits. Si vous n’excluez pas d’avoir à héberger des applications 32 bits et 64 bits dans le futur, n'utilisez pas ce paramètre et installez les deux runtimes.
-   * `OPT_NO_SHARED_CONFIG_CHECK=1` &ndash; Désactivez la vérification d’utilisation d’une Configuration partagée IIS lorsque la configuration partagée (*applicationHost.config*) se trouve sur le même ordinateur que l’installation d’IIS. *Disponible uniquement pour les programmes d’installation du pack d’hébergement ASP.NET Core 2.2 ou version ultérieure.* Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
+   * `OPT_NO_SHARED_CONFIG_CHECK=1` &ndash; Désactivez la vérification d’utilisation d’une Configuration partagée IIS lorsque la configuration partagée (*applicationHost.config*) se trouve sur le même ordinateur que l’installation d’IIS. *Disponible uniquement pour les programmes d’installation du pack d’hébergement ASP.NET Core 2.2 ou version ultérieure.* Pour plus d'informations, consultez <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
 1. Redémarrez le système ou exécutez les commandes suivantes dans une interface de commande :
 
    ```console
@@ -1552,7 +1556,7 @@ Les fichiers dans le dossier de déploiement sont verrouillés quand l’applica
 
   ```
 
-## <a name="data-protection"></a>Protection des données
+## <a name="data-protection"></a>Protection de données
 
 La [pile de protection des données ASP.NET Core](xref:security/data-protection/introduction) est utilisée par plusieurs [intergiciels (middlewares)](xref:fundamentals/middleware/index) ASP.NET Core, y compris l’intergiciel utilisé dans l’authentification. Même si les API de protection des données ne sont pas appelées par le code de l’utilisateur, la protection des données doit être configurée avec un script de déploiement ou dans un code utilisateur pour créer un [magasin de clés](xref:security/data-protection/implementation/key-management) de chiffrement persistantes. Si la protection des données n’est pas configurée, les clés sont conservées en mémoire et ignorées au redémarrage de l’application.
 
@@ -1594,7 +1598,7 @@ Pour configurer la protection des données sous IIS afin de rendre persistante l
 
 * **Définir une stratégie au niveau de l’ordinateur pour la protection des données**
 
-  Le système de protection des données offre une prise en charge limitée de la définition d’une [stratégie au niveau de l’ordinateur](xref:security/data-protection/configuration/machine-wide-policy) par défaut pour toutes les applications qui utilisent les API de protection des données. Pour plus d’informations, consultez <xref:security/data-protection/introduction>.
+  Le système de protection des données offre une prise en charge limitée de la définition d’une [stratégie au niveau de l’ordinateur](xref:security/data-protection/configuration/machine-wide-policy) par défaut pour toutes les applications qui utilisent les API de protection des données. Pour plus d'informations, consultez <xref:security/data-protection/introduction>.
 
 ## <a name="virtual-directories"></a>Répertoires virtuels
 

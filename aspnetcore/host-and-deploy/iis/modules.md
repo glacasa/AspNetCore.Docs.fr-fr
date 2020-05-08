@@ -33,17 +33,17 @@ Le tableau indique les modules IIS natifs qui fonctionnent avec les application
 | **Authentification anonyme**<br>`AnonymousAuthenticationModule`                                  | Oui | |
 | **Authentification de base**<br>`BasicAuthenticationModule`                                          | Oui | |
 | **Authentification par mappage de certification cliente**<br>`CertificateMappingAuthenticationModule`      | Oui | |
-| **CGI**<br>`CgiModule`                                                                           | Non  | |
+| **CGI**<br>`CgiModule`                                                                           | Non   | |
 | **Validation de la configuration**<br>`ConfigurationValidationModule`                                  | Oui | |
-| **Erreurs HTTP**<br>`CustomErrorModule`                                                           | Non  | [Middleware (intergiciel) de pages de codes d’état](xref:fundamentals/error-handling#usestatuscodepages) |
+| **Erreurs HTTP**<br>`CustomErrorModule`                                                           | Non   | [Middleware (intergiciel) de pages de codes d’état](xref:fundamentals/error-handling#usestatuscodepages) |
 | **Journalisation personnalisée**<br>`CustomLoggingModule`                                                      | Oui | |
-| **Document par défaut**<br>`DefaultDocumentModule`                                                  | Non  | [Middleware de fichiers par défaut](xref:fundamentals/static-files#serve-a-default-document) |
+| **Document par défaut**<br>`DefaultDocumentModule`                                                  | Non   | [Middleware de fichiers par défaut](xref:fundamentals/static-files#serve-a-default-document) |
 | **Authentification Digest**<br>`DigestAuthenticationModule`                                        | Oui | |
-| **Exploration des répertoires**<br>`DirectoryListingModule`                                               | Non  | [Middleware d’exploration des répertoires](xref:fundamentals/static-files#enable-directory-browsing) |
+| **Exploration des répertoires**<br>`DirectoryListingModule`                                               | Non   | [Middleware d’exploration des répertoires](xref:fundamentals/static-files#enable-directory-browsing) |
 | **Compression dynamique**<br>`DynamicCompressionModule`                                            | Oui | [Middleware de compression des réponses](xref:performance/response-compression) |
 | **Suivi des demandes ayant échoué**<br>`FailedRequestsTracingModule`                                     | Oui | [Journalisation ASP.NET Core](xref:fundamentals/logging/index#tracesource-provider) |
-| **Mise en cache des fichiers**<br>`FileCacheModule`                                                            | Non  | [Intergiciel (middleware) de mise en cache des réponses](xref:performance/caching/middleware) |
-| **Mise en cache HTTP**<br>`HttpCacheModule`                                                            | Non  | [Intergiciel (middleware) de mise en cache des réponses](xref:performance/caching/middleware) |
+| **Mise en cache des fichiers**<br>`FileCacheModule`                                                            | Non   | [Intergiciel (middleware) de mise en cache des réponses](xref:performance/caching/middleware) |
+| **Mise en cache HTTP**<br>`HttpCacheModule`                                                            | Non   | [Intergiciel (middleware) de mise en cache des réponses](xref:performance/caching/middleware) |
 | **Journalisation HTTP**<br>`HttpLoggingModule`                                                          | Oui | [Journalisation ASP.NET Core](xref:fundamentals/logging/index) |
 | **Redirection HTTP**<br>`HttpRedirectionModule`                                                  | Oui | [Intergiciel (middleware) de réécriture d’URL](xref:fundamentals/url-rewriting) |
 | **Suivi HTTP**<br>`TracingModule`                                                              | Oui | |
@@ -55,9 +55,9 @@ Le tableau indique les modules IIS natifs qui fonctionnent avec les application
 | **Filtrage des demandes**<br>`RequestFilteringModule`                                                | Oui | [Middleware de réécriture d’URL`IRule`](xref:fundamentals/url-rewriting#irule-based-rule) |
 | **Observateur de demandes**<br>`RequestMonitorModule`                                                    | Oui | |
 | **Réécriture d’URL**&#8224;<br>`RewriteModule`                                                      | Oui | [Intergiciel (middleware) de réécriture d’URL](xref:fundamentals/url-rewriting) |
-| **Inclusions côté serveur**<br>`ServerSideIncludeModule`                                            | Non  | |
-| **Compression statique**<br>`StaticCompressionModule`                                              | Non  | [Middleware de compression des réponses](xref:performance/response-compression) |
-| **Contenu statique**<br>`StaticFileModule`                                                         | Non  | [Middleware de fichiers statiques](xref:fundamentals/static-files) |
+| **Inclusions côté serveur**<br>`ServerSideIncludeModule`                                            | Non   | |
+| **Compression statique**<br>`StaticCompressionModule`                                              | Non   | [Middleware de compression des réponses](xref:performance/response-compression) |
+| **Contenu statique**<br>`StaticFileModule`                                                         | Non   | [Middleware de fichiers statiques](xref:fundamentals/static-files) |
 | **Mise en cache des jetons**<br>`TokenCacheModule`                                                          | Oui | |
 | **Mise en cache d’URI**<br>`UriCacheModule`                                                              | Oui | |
 | **Autorisation d’URL**<br>`UrlAuthorizationModule`                                                | Oui | [Identité ASP.NET Core](xref:security/authentication/identity) |

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/lifecycle
-ms.openlocfilehash: 87c65776684f9cc91b868b8e88926e46b25592ff
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 571f14247efe08ac6abbd6d1e2720656f94c213c
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771518"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967452"
 ---
 # <a name="aspnet-core-blazor-lifecycle"></a>Cycle Blazor de vie ASP.net Core
 
@@ -30,7 +30,7 @@ L' Blazor infrastructure comprend des méthodes de cycle de vie synchrones et as
 
 ### <a name="component-initialization-methods"></a>Méthodes d’initialisation de composant
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync*>et <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized*> sont appelés lorsque le composant est initialisé après avoir reçu ses paramètres initiaux de son composant parent. Utilisez `OnInitializedAsync` lorsque le composant exécute une opération asynchrone et doit être actualisé lorsque l’opération est terminée.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>et <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A> sont appelés lorsque le composant est initialisé après avoir reçu ses paramètres initiaux de son composant parent. Utilisez `OnInitializedAsync` lorsque le composant exécute une opération asynchrone et doit être actualisé lorsque l’opération est terminée.
 
 Pour une opération synchrone, remplacez `OnInitialized`:
 
@@ -63,7 +63,7 @@ Si des gestionnaires d’événements sont configurés, décrochez-les lors de l
 
 ### <a name="before-parameters-are-set"></a>Les paramètres Before sont définis
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync*>définit les paramètres fournis par le parent du composant dans l’arborescence de rendu :
+<xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A>définit les paramètres fournis par le parent du composant dans l’arborescence de rendu :
 
 ```csharp
 public override async Task SetParametersAsync(ParameterView parameters)
@@ -84,7 +84,7 @@ Si des gestionnaires d’événements sont configurés, décrochez-les lors de l
 
 ### <a name="after-parameters-are-set"></a>Une fois les paramètres définis
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync*>et <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet*> sont appelées :
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A>et <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet%2A> sont appelées :
 
 * Lorsque le composant est initialisé et a reçu son premier jeu de paramètres de son composant parent.
 * Lorsque le composant parent est à nouveau rendu et fournit :
@@ -112,7 +112,7 @@ Si des gestionnaires d’événements sont configurés, décrochez-les lors de l
 
 ### <a name="after-component-render"></a>Après le rendu du composant
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync*>et <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender*> sont appelées après la fin d’un rendu d’un composant. Les références d’élément et de composant sont remplies à ce stade. Utilisez cette étape pour effectuer des étapes d’initialisation supplémentaires à l’aide du contenu rendu, par exemple l’activation de bibliothèques JavaScript tierces qui opèrent sur les éléments DOM rendus.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A>et <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> sont appelées après la fin d’un rendu d’un composant. Les références d’élément et de composant sont remplies à ce stade. Utilisez cette étape pour effectuer des étapes d’initialisation supplémentaires à l’aide du contenu rendu, par exemple l’activation de bibliothèques JavaScript tierces qui opèrent sur les éléments DOM rendus.
 
 Le `firstRender` paramètre pour `OnAfterRenderAsync` et `OnAfterRender`:
 
@@ -150,7 +150,7 @@ Si des gestionnaires d’événements sont configurés, décrochez-les lors de l
 
 ### <a name="suppress-ui-refreshing"></a>Supprimer l’actualisation de l’interface utilisateur
 
-Substituez <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender*> pour supprimer l’actualisation de l’interface utilisateur. Si l’implémentation retourne `true`, l’interface utilisateur est actualisée :
+Substituez <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> pour supprimer l’actualisation de l’interface utilisateur. Si l’implémentation retourne `true`, l’interface utilisateur est actualisée :
 
 ```csharp
 protected override bool ShouldRender()
@@ -167,7 +167,7 @@ Même si `ShouldRender` est substitué, le composant est toujours restitué init
 
 ## <a name="state-changes"></a>Changements d'état
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged*>notifie le composant que son état a changé. Le cas échéant, `StateHasChanged` l’appel de entraîne le rerendu du composant.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>notifie le composant que son état a changé. Le cas échéant, `StateHasChanged` l’appel de entraîne le rerendu du composant.
 
 ## <a name="handle-incomplete-async-actions-at-render"></a>Gérer les actions asynchrones incomplètes au rendu
 
@@ -198,7 +198,7 @@ Si un composant implémente <xref:System.IDisposable>, la [méthode dispose](/do
 ```
 
 > [!NOTE]
-> L' <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged*> appel `Dispose` de dans n’est pas pris en charge. `StateHasChanged`peut être appelé dans le cadre du détachement du convertisseur, donc demander des mises à jour de l’interface utilisateur à ce stade n’est pas pris en charge.
+> L' <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> appel `Dispose` de dans n’est pas pris en charge. `StateHasChanged`peut être appelé dans le cadre du détachement du convertisseur, donc demander des mises à jour de l’interface utilisateur à ce stade n’est pas pris en charge.
 
 Annule l’abonnement des gestionnaires d’événements des événements .NET. Les exemples de [ Blazor formulaires](xref:blazor/forms-validation) suivants montrent comment décrocher un gestionnaire d’événements dans `Dispose` la méthode :
 
@@ -234,7 +234,7 @@ Le code suivant illustre une mise `WeatherForecastService` à jour dans une appl
 ```csharp
 public class WeatherForecastService
 {
-    private static readonly string[] _summaries = new[]
+    private static readonly string[] summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild",
         "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -265,7 +265,7 @@ public class WeatherForecastService
             {
                 Date = startDate.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = _summaries[rng.Next(_summaries.Length)]
+                Summary = summaries[rng.Next(summaries.Length)]
             }).ToArray();
         });
     }
