@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 0da9e124b884337c63dd91b06df60ef7ca89cf3e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b613ccd8df65e41b86793466a0ed5dc7bf7e8772
+ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774130"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82976751"
 ---
 # <a name="upload-files-in-aspnet-core"></a>Charger des fichiers dans ASP.NET Core
 
@@ -1478,7 +1478,7 @@ Les exemples de cette rubrique reposent sur <xref:System.IO.MemoryStream> pour s
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* [Vidange des demandes de connexion HTTP](xref:fundamentals/servers/kestrel#http-connection-request-draining)
+* [Vidange des demandes de connexion HTTP](xref:fundamentals/servers/kestrel#http11-request-draining)
 * [Unrestricted File Upload](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload) (Chargement de fichiers illimité)
 * [Sécurité Azure : frame de sécurité : validation des entrées | Atténuations](/azure/security/azure-security-threat-modeling-tool-input-validation)
 * [Modèles de conception de Cloud Azure : modèle de clé valet](/azure/architecture/patterns/valet-key)

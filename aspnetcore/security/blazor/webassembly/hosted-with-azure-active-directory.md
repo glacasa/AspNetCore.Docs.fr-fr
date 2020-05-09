@@ -5,7 +5,7 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/24/2020
+ms.date: 05/06/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 3a2f3bdd194b9153c5d59af7adfad3a3c8c56b23
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: aaae2b755d6d6e74db0cb7676820d01964c2add4
+ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776036"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82976803"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory"></a>Sécuriser une Blazor application hébergée par l’ASP.net Core webassembly avec Azure Active Directory
 
@@ -51,7 +51,7 @@ Dans **autorisations d’API**, supprimez l’autorisation **Microsoft Graph** >
 
 Dans **exposer une API**:
 
-1. Sélectionnez **Ajouter une étendue**.
+1. sélectionner **Ajouter une étendue**.
 1. Sélectionnez **Enregistrer et continuer**.
 1. Spécifiez un **nom d’étendue** (par `API.Access`exemple,).
 1. Spécifiez un **nom d’affichage du consentement administrateur** ( `Access API`par exemple,).
@@ -93,7 +93,7 @@ Dans **autorisations d’API**:
 1. Ouvrez la liste des **API** .
 1. Activez l’accès à l’API (par exemple `API.Access`,).
 1. Sélectionnez **Ajouter des autorisations**.
-1. Sélectionnez le bouton **Grant admin content for {locataire Name}** . Sélectionnez **Oui** pour confirmer.
+1. Sélectionnez le bouton **Grant admin content for {locataire Name}** . Cliquez sur **Oui** pour confirmer la suppression.
 
 Enregistrez l’ID de l’application *cliente* (ID client) (par `33333333-3333-3333-3333-333333333333`exemple,).
 
@@ -156,7 +156,7 @@ services.Configure<JwtBearerOptions>(
     });
 ```
 
-### <a name="app-settings"></a>Paramètres de l’application
+### <a name="app-settings"></a>Paramètres d’application
 
 Le fichier *appSettings. JSON* contient les options permettant de configurer le gestionnaire du porteur JWT utilisé pour valider les jetons d’accès.
 
@@ -171,7 +171,7 @@ Le fichier *appSettings. JSON* contient les options permettant de configurer le 
 }
 ```
 
-Exemple :
+Exemple :
 
 ```json
 {
@@ -265,7 +265,7 @@ La configuration est fournie par le fichier *wwwroot/appSettings. JSON* :
 }
 ```
 
-Exemple :
+Exemple :
 
 ```json
 {
@@ -354,5 +354,6 @@ Exécutez l’application à partir du projet serveur. Quand vous utilisez Visua
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:security/blazor/webassembly/additional-scenarios>
+* <xref:security/blazor/webassembly/aad-groups-roles>
 * <xref:security/authentication/azure-active-directory/index>
 * [Documentation sur la plateforme d’identités Microsoft](/azure/active-directory/develop/)

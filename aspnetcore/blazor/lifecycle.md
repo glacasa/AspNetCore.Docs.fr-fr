@@ -5,7 +5,7 @@ description: Découvrez comment utiliser Razor les méthodes de cycle de vie Bla
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/16/2020
+ms.date: 05/07/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/lifecycle
-ms.openlocfilehash: 571f14247efe08ac6abbd6d1e2720656f94c213c
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
+ms.openlocfilehash: 81699158a161d0e9c9621235840979ebcd634a7e
+ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967452"
+ms.locfileid: "82976699"
 ---
 # <a name="aspnet-core-blazor-lifecycle"></a>Cycle Blazor de vie ASP.net Core
 
@@ -277,3 +277,73 @@ Pour plus d’informations sur `RenderMode`le, <xref:blazor/hosting-model-config
 ## <a name="detect-when-the-app-is-prerendering"></a>Détecter quand l’application est prérendu
 
 [!INCLUDE[](~/includes/blazor-prerendering.md)]
+
+## <a name="cancelable-background-work"></a>Travail en arrière-plan annulable
+
+Les composants effectuent souvent des tâches en arrière-plan de longue durée,<xref:System.Net.Http.HttpClient>telles que la création d’appels réseau () et l’interaction avec les bases de données. Il est souhaitable d’arrêter le travail en arrière-plan pour économiser les ressources système dans plusieurs situations. Par exemple, les opérations asynchrones en arrière-plan ne s’arrêtent pas automatiquement lorsqu’un utilisateur quitte un composant.
+
+Les autres raisons pour lesquelles les éléments de travail en arrière-plan peuvent nécessiter l’annulation sont les suivantes :
+
+* Une tâche en arrière-plan en cours d’exécution a été démarrée avec des données d’entrée ou des paramètres de traitement défectueux.
+* Le jeu actuel d’éléments de travail en arrière-plan doit être remplacé par un nouvel ensemble d’éléments de travail.
+* La priorité des tâches en cours d’exécution doit être modifiée.
+* L’application doit être arrêtée pour pouvoir être redéployée sur le serveur.
+* Les ressources du serveur sont limitées, ce qui nécessite la replanification des éléments de travail backgound.
+
+Pour implémenter un modèle de travail d’arrière-plan annulable dans un composant :
+
+* Utilisez un <xref:System.Threading.CancellationTokenSource> et <xref:System.Threading.CancellationToken>un.
+* Lors de [la suppression du composant](#component-disposal-with-idisposable) et à tout moment, l’annulation est souhaitée en annulant manuellement le jeton, appelez [CancellationTokenSource. Cancel](xref:System.Threading.CancellationTokenSource.Cancel%2A) pour signaler que le travail en arrière-plan doit être annulé.
+* Une fois l’appel asynchrone retourné, <xref:System.Threading.CancellationToken.ThrowIfCancellationRequested%2A> appelez sur le jeton.
+
+Dans l’exemple suivant :
+
+* `await Task.Delay(5000, cts.Token);`représente le travail en arrière-plan asynchrone de longue durée.
+* `BackgroundResourceMethod`représente une méthode d’arrière-plan de longue durée qui ne `Resource` doit pas démarrer si le est supprimé avant l’appel de la méthode.
+
+```razor
+@implements IDisposable
+@using System.Threading
+
+<button @onclick="LongRunningWork">Trigger long running work</button>
+
+@code {
+    private Resource resource = new Resource();
+    private CancellationTokenSource cts = new CancellationTokenSource();
+
+    protected async Task LongRunningWork()
+    {
+        await Task.Delay(5000, cts.Token);
+
+        cts.Token.ThrowIfCancellationRequested();
+        resource.BackgroundResourceMethod();
+    }
+
+    public void Dispose()
+    {
+        cts.Cancel();
+        cts.Dispose();
+        resource.Dispose();
+    }
+
+    private class Resource : IDisposable
+    {
+        private bool disposed;
+
+        public void BackgroundResourceMethod()
+        {
+            if (disposed)
+            {
+                throw new ObjectDisposedException(nameof(Resource));
+            }
+            
+            ...
+        }
+        
+        public void Dispose()
+        {
+            disposed = true;
+        }
+    }
+}
+```
