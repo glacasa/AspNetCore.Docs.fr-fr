@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/google-logins
-ms.openlocfilehash: 06a5cf77e47d9fc618fddf3a096001a4f31688be
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 8b1eee7ff088fb1229ec1d2dd538ea4f01e094c3
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776992"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003107"
 ---
 # <a name="google-external-login-setup-in-aspnet-core"></a>Configuration de la connexion à Google External dans ASP.NET Core
 
@@ -28,7 +28,7 @@ Ce didacticiel vous montre comment permettre aux utilisateurs de se connecter av
 ## <a name="create-a-google-api-console-project-and-client-id"></a>Créer un projet de console d’API Google et un ID client
 
 * Installez [Microsoft. AspNetCore. Authentication. Google](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Google).
-* Accédez à [l’intégration de la connexion Google à votre application Web](https://developers.google.com/identity/sign-in/web/devconsole-project) , puis sélectionnez **configurer un projet**.
+* Accédez à [l’intégration de la connexion Google à votre application Web](https://developers.google.com/identity/sign-in/web/sign-in) , puis sélectionnez **configurer un projet**.
 * Dans la boîte de dialogue **configurer votre client OAuth** , sélectionnez **serveur Web**.
 * Dans la zone d’entrée de texte **URI de redirection autorisés** , définissez l’URI de redirection. Par exemple : `https://localhost:44312/signin-google`
 * Enregistrez l' **ID client** et la **clé secrète client**.

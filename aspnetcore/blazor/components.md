@@ -1,5 +1,5 @@
 ---
-title: Créer et utiliser des composants ASP.NET Core Razor
+title: Créer et utiliser des Razor composants ASP.net Core
 author: guardrex
 description: Découvrez comment créer et utiliser Razor des composants, notamment comment lier des données, gérer des événements et gérer des cycles de vie de composant.
 monikerRange: '>= aspnetcore-3.1'
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: 9e36a3239e703e1279feafc65288a1f9ec82c277
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
+ms.openlocfilehash: de8696488292dfc409c5ed83ea0b88a54a001696
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967179"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003070"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Créer et utiliser des Razor composants ASP.net Core
 

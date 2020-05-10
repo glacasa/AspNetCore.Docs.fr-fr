@@ -1,20 +1,26 @@
 ---
-title: Informations de référence sur la syntaxe Razor pour ASP.NET Core
+title: informations de référence sur la syntaxe Razor pour ASP.NET Core
 author: rick-anderson
-description: Apprenez à utiliser la syntaxe de balisage Razor pour incorporer du code serveur dans des pages web.
+description: En savoir Razor plus sur la syntaxe de balisage pour incorporer du code serveur dans des pages Web.
 ms.author: riande
 ms.date: 02/12/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: dd5c73be56ed0dafb759df2f5ff2eac1a3b5b09e
-ms.sourcegitcommit: d03905aadf5ceac39fff17706481af7f6c130411
+ms.openlocfilehash: 3e77b25e2660688d0040d47840e47dab8f260197
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/29/2020
-ms.locfileid: "80381762"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003192"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>Informations de référence sur la syntaxe Razor pour ASP.NET Core
 
-Par [Rick Anderson](https://twitter.com/RickAndMSFT), Taylor [Mullen](https://twitter.com/ntaylormullen), et [Dan Vicarel](https://github.com/Rabadash8820)
+Par [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen)et [Dan Vicarel](https://github.com/Rabadash8820)
 
 Razor est une syntaxe de balisage qui permet d’incorporer du code serveur dans des pages web. La syntaxe Razor est constituée de balises Razor, ainsi que de code C# et HTML. Les fichiers contenant de la syntaxe Razor ont généralement l’extension de fichier *.cshtml*. Razor est également disponible dans les fichiers de [Composants Razor](xref:blazor/components) (*.razor*).
 
@@ -229,7 +235,7 @@ La balise `<text>` est utile pour contrôler les espaces blancs dans le contenu 
 
 ### <a name="explicit-line-transition"></a>Transition de ligne explicite
 
-Pour rendre le reste d’une ligne entière `@:` sous forme de HTML à l’intérieur d’un bloc de code, utilisez la syntaxe :
+Pour afficher le reste d’une ligne entière au format HTML à l’intérieur d’un `@:` bloc de code, utilisez la syntaxe suivante :
 
 ```cshtml
 @for (var i = 0; i < people.Length; i++)
@@ -467,7 +473,7 @@ Le blob `@code` permet à un [composant Razor](xref:blazor/components) d’ajout
 }
 ```
 
-Pour les composants `@code` Razor, [`@functions`](#functions) est un `@functions`alias de et recommandé plus . Plus d’un bloc `@code` est autorisé.
+Pour les composants Razor `@code` , est un alias [`@functions`](#functions) de et est `@functions`recommandé sur. Plus d’un bloc `@code` est autorisé.
 
 ::: moniker-end
 
@@ -601,7 +607,7 @@ La directive `@inject` permet à la page Razor d’injecter un service dans une 
 
 *Ce scénario s’applique uniquement aux composants Razor (.razor).*
 
-La directive `@layout` spécifie une disposition pour un composant Razor. Les composants de disposition sont utilisés pour éviter la duplication et l’incohérence de code. Pour plus d’informations, consultez <xref:blazor/layouts>.
+La directive `@layout` spécifie une disposition pour un composant Razor. Les composants de disposition sont utilisés pour éviter la duplication et l’incohérence de code. Pour plus d'informations, consultez <xref:blazor/layouts>.
 
 ::: moniker-end
 
@@ -633,7 +639,7 @@ Razor expose une propriété `Model` pour accéder au modèle passé à la vue :
 <div>The Login Email: @Model.Email</div>
 ```
 
-La directive `@model` spécifie le type de la propriété `Model`. La directive spécifie le type `T` dans `RazorPage<T>` pour la classe générée dont dérive la vue. Si la directive `@model` n’est pas spécifiée, la propriété `Model` est de type `dynamic`. Pour plus d’informations, voir [les modèles fortement typés et le @model mot clé](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword).
+La directive `@model` spécifie le type de la propriété `Model`. La directive spécifie le type `T` dans `RazorPage<T>` pour la classe générée dont dérive la vue. Si la directive `@model` n’est pas spécifiée, la propriété `Model` est de type `dynamic`. Pour plus d’informations, consultez [modèles fortement typés @model et le mot clé](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword).
 
 ### <a name="namespace"></a>\@namespace
 
@@ -676,14 +682,14 @@ Si le dossier *EvenMorePages* dans l’exemple précédent comprend un fichier d
 
 La directive `@page` a des effets différents selon le type du fichier dans lequel elle apparaît. La directive :
 
-* Dans un fichier *.cshtml*, indique que le fichier est une page Razor. Pour plus d’informations, <xref:razor-pages/index>voir [itinéraires personnalisés](xref:razor-pages/index#custom-routes) et .
-* Spécifie qu’un composant Razor doit gérer les requêtes directement. Pour plus d’informations, consultez <xref:blazor/routing>.
+* Dans un fichier *.cshtml*, indique que le fichier est une page Razor. Pour plus d’informations, consultez [itinéraires personnalisés](xref:razor-pages/index#custom-routes) et <xref:razor-pages/index>.
+* Spécifie qu’un composant Razor doit gérer les requêtes directement. Pour plus d'informations, consultez <xref:blazor/routing>.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-La directive `@page` sur la première ligne d’un fichier *.cshtml* indique que le fichier est une page Razor. Pour plus d’informations, consultez <xref:razor-pages/index>.
+La directive `@page` sur la première ligne d’un fichier *.cshtml* indique que le fichier est une page Razor. Pour plus d'informations, consultez <xref:razor-pages/index>.
 
 ::: moniker-end
 
@@ -691,7 +697,7 @@ La directive `@page` sur la première ligne d’un fichier *.cshtml* indique que
 
 *Ce scénario s’applique uniquement aux vues MVC et à Razor Pages (.cshtml).*
 
-La directive `@section` est utilisée conjointement avec des [dispositions MVC et Razor Pages](xref:mvc/views/layout) pour permettre aux vues et aux pages d’afficher le contenu dans différentes parties de la page HTML. Pour plus d’informations, consultez <xref:mvc/views/layout>.
+La directive `@section` est utilisée conjointement avec des [dispositions MVC et Razor Pages](xref:mvc/views/layout) pour permettre aux vues et aux pages d’afficher le contenu dans différentes parties de la page HTML. Pour plus d'informations, consultez <xref:mvc/views/layout>.
 
 ### <a name="using"></a>\@using
 
@@ -701,7 +707,7 @@ La directive `@using` ajoute la directive `using` C# à la vue générée :
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Dans les composants `@using` [Razor](xref:blazor/components), contrôle également les composants qui sont de portée.
+Dans les [composants Razor](xref:blazor/components), `@using` contrôle également les composants qui sont dans la portée.
 
 ::: moniker-end
 
@@ -713,35 +719,35 @@ Dans les composants `@using` [Razor](xref:blazor/components), contrôle égaleme
 
 *Ce scénario s’applique uniquement aux composants Razor (.razor).*
 
-`@attributes` permet à un composant de restituer des attributs non déclarés. Pour plus d’informations, consultez <xref:blazor/components#attribute-splatting-and-arbitrary-parameters>.
+`@attributes` permet à un composant de restituer des attributs non déclarés. Pour plus d'informations, consultez <xref:blazor/components#attribute-splatting-and-arbitrary-parameters>.
 
 ### <a name="bind"></a>\@bind
 
 *Ce scénario s’applique uniquement aux composants Razor (.razor).*
 
-La liaison de données dans des composants s’effectue avec l’attribut `@bind`. Pour plus d’informations, consultez <xref:blazor/data-binding>.
+La liaison de données dans des composants s’effectue avec l’attribut `@bind`. Pour plus d'informations, consultez <xref:blazor/data-binding>.
 
-### <a name="onevent"></a>\@sur 'EVENT'
+### <a name="onevent"></a>\@sur {EVENT}
 
 *Ce scénario s’applique uniquement aux composants Razor (.razor).*
 
-Razor fournit des fonctionnalités de gestion des événements pour les composants. Pour plus d’informations, consultez <xref:blazor/event-handling>.
+Razor fournit des fonctionnalités de gestion des événements pour les composants. Pour plus d'informations, consultez <xref:blazor/event-handling>.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.1"
 
-### <a name="oneventpreventdefault"></a>\@sur-EVENT-:preventDefault
+### <a name="oneventpreventdefault"></a>\@sur {EVENT} :p reventDefault
 
 *Ce scénario s’applique uniquement aux composants Razor (.razor).*
 
 Empêche l’action par défaut pour l’événement.
 
-### <a name="oneventstoppropagation"></a>\@sur’EVENT:stopPropagation
+### <a name="oneventstoppropagation"></a>\@sur {EVENT} : stopPropagation
 
 *Ce scénario s’applique uniquement aux composants Razor (.razor).*
 
-Arrête la propagation de l’événement pour l’événement.
+Arrête la propagation d’événements pour l’événement.
 
 ::: moniker-end
 
@@ -751,19 +757,19 @@ Arrête la propagation de l’événement pour l’événement.
 
 *Ce scénario s’applique uniquement aux composants Razor (.razor).*
 
-L’attribut de directive `@key` amène les composants à comparer l’algorithme afin de garantir la préservation des éléments ou des composants en fonction de la valeur de la clé. Pour plus d’informations, consultez <xref:blazor/components#use-key-to-control-the-preservation-of-elements-and-components>.
+L’attribut de directive `@key` amène les composants à comparer l’algorithme afin de garantir la préservation des éléments ou des composants en fonction de la valeur de la clé. Pour plus d'informations, consultez <xref:blazor/components#use-key-to-control-the-preservation-of-elements-and-components>.
 
 ### <a name="ref"></a>\@ref
 
 *Ce scénario s’applique uniquement aux composants Razor (.razor).*
 
-Les références de composants (`@ref`) permettent de référencer une instance de composant afin que vous puissiez émettre des commandes vers cette instance. Pour plus d’informations, consultez <xref:blazor/components#capture-references-to-components>.
+Les références de composants (`@ref`) permettent de référencer une instance de composant afin que vous puissiez émettre des commandes vers cette instance. Pour plus d'informations, consultez <xref:blazor/components#capture-references-to-components>.
 
 ### <a name="typeparam"></a>\@typeparam
 
 *Ce scénario s’applique uniquement aux composants Razor (.razor).*
 
-La `@typeparam` directive déclare un paramètre de type générique pour la classe des composants générés. Pour plus d’informations, consultez <xref:blazor/templated-components#generic-typed-components>.
+La `@typeparam` directive déclare un paramètre de type générique pour la classe de composant générée. Pour plus d'informations, consultez <xref:blazor/templated-components#generic-typed-components>.
 
 ::: moniker-end
 
@@ -878,9 +884,9 @@ Il existe trois directives spécifiques aux [Tag Helpers](xref:mvc/views/tag-hel
 | [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | Supprime les Tag Helpers précédemment ajoutés à une vue. |
 | [`@tagHelperPrefix`](xref:mvc/views/tag-helpers/intro#prefix-razor-directives-label) | Spécifie un préfixe de balise pour activer la prise en charge des Tag Helpers et rendre leur usage explicite. |
 
-## <a name="razor-reserved-keywords"></a>Mots clés réservés Razor
+## <a name="razor-reserved-keywords"></a>RazorMots clés réservés
 
-### <a name="razor-keywords"></a>Mots clés Razor
+### <a name="razor-keywords"></a>Razormot
 
 * page (nécessite ASP.NET Core 2.1 ou ultérieur)
 * espace de noms
@@ -890,11 +896,11 @@ Il existe trois directives spécifiques aux [Tag Helpers](xref:mvc/views/tag-hel
 * section
 * helper (non pris en charge par ASP.NET Core)
 
-Les mots clés Razor sont précédés d’une séquence d’échappement `@(Razor Keyword)` (par exemple, `@(functions)`).
+Razorles mots clés sont placés `@(Razor Keyword)` dans une séquence d' `@(functions)`échappement (par exemple,).
 
-### <a name="c-razor-keywords"></a>Mots clés Razor C#
+### <a name="c-razor-keywords"></a>Mots Razor clés C#
 
-* cas
+* casse
 * do
 * default
 * for
@@ -909,28 +915,28 @@ Les mots clés Razor sont précédés d’une séquence d’échappement `@(Razo
 * using
 * while
 
-Les mots clés Razor C# doivent être précédés d’une double séquence d’échappement `@(@C# Razor Keyword)` (par exemple, `@(@case)`). La première séquence d’échappement `@` est pour l’analyseur Razor. La seconde séquence d’échappement `@` est pour l’analyseur C#.
+Les Razor Mots clés C# doivent être double-échappés par `@(@C# Razor Keyword)` (par `@(@case)`exemple,). Le premier `@` échappe l' Razor analyseur. La seconde séquence d’échappement `@` est pour l’analyseur C#.
 
-### <a name="reserved-keywords-not-used-by-razor"></a>Mots clés réservés non utilisés par Razor
+### <a name="reserved-keywords-not-used-by-razor"></a>Mots clés réservés non utilisés parRazor
 
 * class
 
-## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>Inspecter la classe C# Razor générée pour une vue
+## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>Inspecter Razor la classe C# générée pour une vue
 
 ::: moniker range=">= aspnetcore-2.1"
 
-Avec le SDK .NET Core 2.1 ou ultérieur, le [SDK Razor](xref:razor-pages/sdk) gère la compilation des fichiers Razor. Quand vous créez un projet, le SDK Razor génère un répertoire *obj/<configuration_build>/<moniker_framework_cible>/Razor* dans la racine du projet. La structure de répertoires dans le répertoire *Razor* reflète la structure de répertoires du projet.
+Avec kit SDK .net Core 2,1 ou version ultérieure, le [ Razor Kit de développement logiciel (SDK)](xref:razor-pages/sdk) gère la compilation des Razor fichiers. Lors de la génération d’un Razor projet, le kit de développement logiciel (SDK) génère un répertoire *obj/<build_configuration>/<target_framework_moniker>/Razor * dans la racine du projet. La structure de répertoires *Razor* dans le répertoire reflète la structure de répertoire du projet.
 
-Considérez la structure de répertoires suivante dans un projet Razor Pages ASP.NET Core 2.1 ciblant .NET Core 2.1 :
+Considérez la structure de répertoires suivante dans Razor un projet ASP.net Core 2,1 pages ciblant .net Core 2,1 :
 
-* **Zones/**
-  * **Admin/**
-    * **Pages/**
+* **Régions**
+  * **Administrateur/**
+    * **Pages**
       * *Index.cshtml*
       * *Index.cshtml.cs*
-* **Pages/**
-  * **Partagé/**
-    * *_Layout.cshtml*
+* **Pages**
+  * **Partagé**
+    * *_Layout. cshtml*
   * *_ViewImports.cshtml*
   * *_ViewStart.cshtml*
   * *Index.cshtml*
@@ -938,22 +944,22 @@ Considérez la structure de répertoires suivante dans un projet Razor Pages ASP
 
 La création du projet dans la configuration *Debug* génère le répertoire *obj* suivant :
 
-* **obj/**
-  * **Debug/**
+* **obj**
+  * **Debug**
     * **netcoreapp2.1/**
-      * **Rasoir/**
-        * **Zones/**
-          * **Admin/**
-            * **Pages/**
+      * **Razor/**
+        * **Régions**
+          * **Administrateur/**
+            * **Pages**
               * *Index.g.cshtml.cs*
-        * **Pages/**
-          * **Partagé/**
+        * **Pages**
+          * **Partagé**
             * *_Layout.g.cshtml.cs*
           * *_ViewImports.g.cshtml.cs*
           * *_ViewStart.g.cshtml.cs*
           * *Index.g.cshtml.cs*
 
-Pour afficher la classe générée pour *Pages/Index.cshtml*, ouvrez *obj/Debug/netcoreapp2.1/Razor/Pages/Index.g.cshtml.cs*.
+Pour afficher la classe générée pour *pages/index. cshtml*, ouvrez *obj/Debug/netcoreapp 2.1/Razor/pages/index.g.cshtml.cs*.
 
 ::: moniker-end
 
@@ -975,7 +981,7 @@ Définissez un point d’arrêt sur l’instruction `return csharpDocument;` de 
 
 ## <a name="view-lookups-and-case-sensitivity"></a>Recherches de vues et respect de la casse
 
-Le moteur de vue Razor effectue des recherches de vues en respectant la casse. Toutefois, la recherche réellement effectuée est déterminée par le système de fichiers sous-jacent :
+Le Razor moteur d’affichage effectue des recherches respectant la casse pour les vues. Toutefois, la recherche réellement effectuée est déterminée par le système de fichiers sous-jacent :
 
 * Source basé sur un fichier :
   * Sur les systèmes d’exploitation avec des systèmes de fichiers qui ne respectent pas la casse (par exemple, Windows), les recherches de fournisseurs de fichiers physiques ne respectent pas la casse. Par exemple, `return View("Test")` trouve les correspondances */Views/Home/Test.cshtml*, */Views/home/test.cshtml* et toutes les autres variantes de casse.
@@ -985,10 +991,10 @@ Le moteur de vue Razor effectue des recherches de vues en respectant la casse. T
 Les développeurs doivent s’efforcer d’utiliser la même casse pour les noms de fichiers et de répertoires que pour les noms des éléments suivants :
 
 * Zone, contrôleur et action
-* Pages Razor
+* RazorPages.
 
 L’utilisation d’une casse identique garantit que les déploiements trouvent toujours les vues associées, indépendamment du système de fichiers sous-jacent.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-[Introduction à ASP.NET programmation Web à l’aide de la syntaxe Razor](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) fournit de nombreux échantillons de programmation avec la syntaxe Razor.
+[Introduction à la programmation Web ASP.NET à Razor l’aide de la syntaxe](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) fournit de Razor nombreux exemples de programmation à l’aide de la syntaxe.

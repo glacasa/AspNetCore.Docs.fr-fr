@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: a0f7c070514de26ae007526a5587c13d26d1eb1b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 56c8d799b98cc09b8cfff12744c6eeb46af4f8e6
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777174"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003164"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>Validation de modèle dans ASP.NET Core MVC Razor et les pages
 
@@ -55,7 +55,7 @@ Les attributs de validation vous permettent de spécifier des règles de validat
 
 Voici certains des attributs de validation prédéfinis :
 
-* `[CreditCard]`: Vérifie que la propriété a un format de carte de crédit.
+* `[CreditCard]`: Vérifie que la propriété a un format de carte de crédit. Requiert [des méthodes supplémentaires de validation jQuery](https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.min.js).
 * `[Compare]`: Valide que deux propriétés d’un modèle correspondent.
 * `[EmailAddress]`: Vérifie que la propriété a un format d’e-mail.
 * `[Phone]`: Vérifie que la propriété a un format de numéro de téléphone.
@@ -122,7 +122,7 @@ L’attribut `[Remote]` implémente la validation côté client qui nécessite l
 
 Pour implémenter la validation à distance
 
-1. Créez une méthode d’action devant être appelée par JavaScript.  La méthode [remote](https://jqueryvalidation.org/remote-method/) jQuery Validate attend une réponse JSON :
+1. Créez une méthode d’action devant être appelée par JavaScript.  La méthode [distante](https://jqueryvalidation.org/remote-method/) de validation jQuery attend une réponse JSON :
 
    * `true` signifie que les données d’entrée sont valides.
    * `false`, `undefined` ou `null` signifie que l’entrée n’est pas valide. Affichez le message d’erreur par défaut.
@@ -248,7 +248,7 @@ La validation côté client permet d’éviter un aller-retour inutile vers le s
 
 [!code-cshtml[](validation/samples/3.x/ValidationSample/Views/Shared/_ValidationScriptsPartial.cshtml?name=snippet_Scripts)]
 
-Le script [jQuery Unobtrusive Validation](https://github.com/aspnet/jquery-validation-unobtrusive) est une bibliothèque frontale personnalisée de Microsoft qui s’appuie sur le plug-in bien connu [jQuery Validate](https://jqueryvalidation.org/). Sans jQuery Unobtrusive Validation, vous devriez coder la même logique de validation à deux endroits : une fois dans les attributs de validation côté serveur sur les propriétés du modèle, puis à nouveau dans les scripts côté client. Au lieu de cela, les [Tag Helpers](xref:mvc/views/tag-helpers/intro) et les [helpers HTML](xref:mvc/views/overview) utilisent les attributs de validation et les métadonnées de type des propriétés du modèle afin de restituer les attributs `data-` HTML 5 pour les éléments de formulaire nécessitant une validation. jQuery Unobtrusive Validation analyse les attributs `data-` et passe la logique à jQuery Validate, en « copiant » la logique de validation côté serveur vers le client. Vous pouvez afficher les erreurs de validation sur le client en utilisant des Tag Helpers, comme indiqué ici :
+Le script de [validation jQuery discrète](https://github.com/aspnet/jquery-validation-unobtrusive) est une bibliothèque Microsoft frontale personnalisée qui s’appuie sur le plug-in de [validation jQuery](https://jqueryvalidation.org/) populaire. Sans jQuery Unobtrusive Validation, vous devriez coder la même logique de validation à deux endroits : une fois dans les attributs de validation côté serveur sur les propriétés du modèle, puis à nouveau dans les scripts côté client. Au lieu de cela, les [Tag Helpers](xref:mvc/views/tag-helpers/intro) et les [helpers HTML](xref:mvc/views/overview) utilisent les attributs de validation et les métadonnées de type des propriétés du modèle afin de restituer les attributs `data-` HTML 5 pour les éléments de formulaire nécessitant une validation. la validation jQuery discrète analyse les `data-` attributs et passe la logique à la validation jQuery, en « copiant » en fait la logique de validation côté serveur vers le client. Vous pouvez afficher les erreurs de validation sur le client en utilisant des Tag Helpers, comme indiqué ici :
 
 [!code-cshtml[](validation/samples/3.x/ValidationSample/Pages/Movies/Create.cshtml?name=snippet_ReleaseDate&highlight=3-4)]
 
@@ -265,7 +265,7 @@ Les balises d’assistance précédentes affichent le code HTML suivant :
 </div>
 ```
 
-Notez que les attributs `data-` dans la sortie HTML correspondent aux attributs de validation pour la propriété `Movie.ReleaseDate`. L’attribut `data-val-required` contient un message d’erreur à afficher si l’utilisateur ne renseigne pas le champ correspondant à la date de sortie. la validation jQuery discrète passe cette valeur à la méthode jQuery Validate [Required ()](https://jqueryvalidation.org/required-method/) , qui affiche ensuite ce message dans l’élément ** \<span>** associé.
+Notez que les attributs `data-` dans la sortie HTML correspondent aux attributs de validation pour la propriété `Movie.ReleaseDate`. L’attribut `data-val-required` contient un message d’erreur à afficher si l’utilisateur ne renseigne pas le champ correspondant à la date de sortie. la validation jQuery discrète passe cette valeur à la méthode jQuery validation [Required ()](https://jqueryvalidation.org/required-method/) , qui affiche ensuite ce message dans l’élément ** \<span>** associé.
 
 La validation du type de données est basée sur le type .NET d’une propriété, sauf en cas de substitution par un attribut `[DataType]`. Les navigateurs ont leurs propres messages d’erreur par défaut, mais le package jQuery Validation Unobtrusive Validation peut remplacer ces messages. Les attributs `[DataType]` et les sous-classes comme `[EmailAddress]` vous permettent de spécifier le message d’erreur.
 
@@ -275,7 +275,7 @@ Pour plus d’informations sur la validation discrète, consultez [ce problème 
 
 ### <a name="add-validation-to-dynamic-forms"></a>Ajouter une validation à des formulaires dynamiques
 
-jQuery Unobtrusive Validation passe la logique et les paramètres de validation à jQuery Validate lors du premier chargement de la page. Par conséquent, la validation ne fonctionne pas automatiquement sur les formulaires générés de manière dynamique. Pour activer la validation, vous devez faire en sorte que jQuery Validate analyse le formulaire dynamique immédiatement après l’avoir créé. Par exemple, le code suivant définit la validation côté client sur un formulaire ajouté par le biais d’AJAX.
+la validation jQuery discrète passe la logique de validation et les paramètres à la validation jQuery lors du premier chargement de la page. Par conséquent, la validation ne fonctionne pas automatiquement sur les formulaires générés de manière dynamique. Pour activer la validation, vous devez faire en sorte que jQuery Validate analyse le formulaire dynamique immédiatement après l’avoir créé. Par exemple, le code suivant définit la validation côté client sur un formulaire ajouté par le biais d’AJAX.
 
 ```javascript
 $.get({
@@ -294,7 +294,7 @@ $.get({
 })
 ```
 
-La méthode `$.validator.unobtrusive.parse()` accepte un sélecteur jQuery comme argument. Cette méthode indique à jQuery Unobtrusive Validation d’analyser les attributs `data-` des formulaires dans ce sélecteur. Les valeurs de ces attributs sont ensuite passées au plug-in jQuery Validate.
+La méthode `$.validator.unobtrusive.parse()` accepte un sélecteur jQuery comme argument. Cette méthode indique à jQuery Unobtrusive Validation d’analyser les attributs `data-` des formulaires dans ce sélecteur. Les valeurs de ces attributs sont ensuite transmises au plug-in de validation jQuery.
 
 ### <a name="add-validation-to-dynamic-controls"></a>Ajouter une validation à des contrôles dynamiques
 
@@ -310,7 +310,7 @@ $.get({
     success: function(newInputHTML) {
         var form = document.getElementById("my-form");
         form.insertAdjacentHTML("beforeend", newInputHTML);
-        $(form).removeData("validator")    // Added by jQuery Validate
+        $(form).removeData("validator")    // Added by jQuery Validation
                .removeData("unobtrusiveValidation");   // Added by jQuery Unobtrusive Validation
         $.validator.unobtrusive.parse(form);
     }
@@ -319,11 +319,11 @@ $.get({
 
 ## <a name="custom-client-side-validation"></a>Validation personnalisée côté client
 
-La validation personnalisée côté client s’effectue en générant des attributs HTML `data-` qui fonctionnent avec un adaptateur jQuery Validate personnalisé. L’exemple de code d’adaptateur suivant a été écrit pour les attributs `[ClassicMovie]` et `[ClassicMovieWithClientValidator]` qui ont été introduits plus haut dans cet article :
+La validation côté client personnalisée s’effectue en générant `data-` des attributs HTML qui fonctionnent avec un adaptateur de validation jQuery personnalisé. L’exemple de code d’adaptateur suivant a été écrit pour les attributs `[ClassicMovie]` et `[ClassicMovieWithClientValidator]` qui ont été introduits plus haut dans cet article :
 
 [!code-javascript[](validation/samples/3.x/ValidationSample/wwwroot/js/classicMovieValidator.js)]
 
-Pour plus d’informations sur la façon d’écrire des adaptateurs, consultez la [documentation de jQuery Validate](https://jqueryvalidation.org/documentation/).
+Pour plus d’informations sur l’écriture des adaptateurs, consultez la documentation sur la [validation jQuery](https://jqueryvalidation.org/documentation/).
 
 L’utilisation d’un adaptateur pour un champ donné est déclenchée par des attributs `data-` qui :
 
@@ -382,7 +382,7 @@ Autres options pour désactiver la validation côté client :
 * Commentez la référence à `_ValidationScriptsPartial` dans tous les fichiers *. cshtml* .
 * Supprimez le contenu du *fichier\_Pages\Shared ValidationScriptsPartial. cshtml* .
 
-L’approche précédente n’empêchera pas la validation côté client Identity Razor de ASP.net Core bibliothèque de classes. Pour plus d’informations, consultez <xref:security/authentication/scaffold-identity>.
+L’approche précédente n’empêchera pas la validation côté client Identity Razor de ASP.net Core bibliothèque de classes. Pour plus d'informations, consultez <xref:security/authentication/scaffold-identity>.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
