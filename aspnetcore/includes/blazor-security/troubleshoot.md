@@ -20,7 +20,7 @@ L’une des méthodes permettant d’empêcher les cookies en attente et les don
   * Dans le champ **arguments** , fournissez l’option de ligne de commande utilisée par le navigateur pour ouvrir en mode Incognito ou privé et l’URL de l’application. Par exemple :
     * Google Chrome &ndash;`--incognito --new-window https://localhost:5001`
     * Mozilla Firefox &ndash;`-private -url https://localhost:5001`
-  * Entrez un nom dans le champ **nom convivial** . Par exemple, `Firefox Auth Testing`.
+  * Entrez un nom dans le champ **nom convivial** . Par exemple : `Firefox Auth Testing`.
   * Sélectionnez le bouton **OK** .
   * Pour éviter d’avoir à sélectionner le profil de navigateur pour chaque itération de test avec une application, définissez le profil par défaut avec le bouton **définir comme valeur par défaut** .
   * Assurez-vous que le navigateur est fermé par l’IDE entre toute modification apportée à l’application, à l’utilisateur de test ou à la configuration du fournisseur.

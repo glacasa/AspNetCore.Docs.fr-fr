@@ -1,4 +1,4 @@
-Le composant `LoginDisplay` (*Shared/LoginDisplay. Razor*) est rendu dans le composant `MainLayout` (*Shared/MainLayout. Razor*) et gère les comportements suivants :
+Le `LoginDisplay` composant (*Shared/LoginDisplay. Razor*) est affiché dans `MainLayout` le composant (*Shared/MainLayout. Razor*) et gère les comportements suivants :
 
 * Pour les utilisateurs authentifiés :
   * Affiche le nom d’utilisateur actuel.
