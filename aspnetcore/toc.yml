@@ -339,14 +339,16 @@
                   uid: security/blazor/webassembly/standalone-with-azure-active-directory
                 - name: Autonome avec AAD B2C
                   uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
-                - name: Hébergé avec le serveur d’identité
-                  uid: security/blazor/webassembly/hosted-with-identity-server
                 - name: Hébergé avec AAD
                   uid: security/blazor/webassembly/hosted-with-azure-active-directory
                 - name: Hébergé avec AAD B2C
                   uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
+                - name: Hébergé avec le serveur d’identité
+                  uid: security/blazor/webassembly/hosted-with-identity-server
                 - name: Autres cas de figure
                   uid: security/blazor/webassembly/additional-scenarios
+                - name: Ajouter des groupes et des rôles
+                  uid: security/blazor/webassembly/aad-groups-roles
             - name: Serveur Blazor
               items:
                 - name: Vue d'ensemble
@@ -1134,14 +1136,16 @@
               uid: security/blazor/webassembly/standalone-with-azure-active-directory
             - name: Autonome avec AAD B2C
               uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
-            - name: Hébergé avec le serveur d’identité
-              uid: security/blazor/webassembly/hosted-with-identity-server
             - name: Hébergé avec AAD
               uid: security/blazor/webassembly/hosted-with-azure-active-directory
             - name: Hébergé avec AAD B2C
               uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
+            - name: Hébergé avec le serveur d’identité
+              uid: security/blazor/webassembly/hosted-with-identity-server
             - name: Autres cas de figure
               uid: security/blazor/webassembly/additional-scenarios
+            - name: Ajouter des groupes et des rôles
+              uid: security/blazor/webassembly/aad-groups-roles
         - name: Serveur Blazor
           items:
             - name: Vue d'ensemble
