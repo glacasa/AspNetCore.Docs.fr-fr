@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: a8d38f17b066a0aa9a38b1bdfea3491f733cf1bc
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: cdf10cd26f3eb9af386f782475eeabbda50f0df9
+ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776875"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83153345"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>Fournisseurs de stockage de clés dans ASP.NET Core
 
@@ -39,7 +39,7 @@ public void ConfigureServices(IServiceCollection services)
 
 Le `DirectoryInfo` peut pointer vers un répertoire sur l’ordinateur local, ou il peut pointer vers un dossier sur un partage réseau. Si vous pointez vers un répertoire sur l’ordinateur local (et que seules les applications sur l’ordinateur local requièrent l’accès pour utiliser ce référentiel), envisagez d’utiliser [Windows DPAPI](xref:security/data-protection/implementation/key-encryption-at-rest) (sur Windows) pour chiffrer les clés au repos. Sinon, envisagez d’utiliser un [certificat X. 509](xref:security/data-protection/implementation/key-encryption-at-rest) pour chiffrer les clés au repos.
 
-## <a name="azure-storage"></a>Stockage Azure
+## <a name="azure-storage"></a>Azure Storage
 
 Le package [Microsoft. AspNetCore. dataprotection. AzureStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) permet de stocker les clés de protection des données dans le stockage d’objets BLOB Azure. Les clés peuvent être partagées entre plusieurs instances d’une application Web. Les applications peuvent partager des cookies d’authentification ou la protection CSRF sur plusieurs serveurs.
 
@@ -147,19 +147,19 @@ Le package [Microsoft. AspNetCore. dataprotection. EntityFrameworkCore](https://
 
 Avec ce package, les clés peuvent être partagées entre plusieurs instances d’une application Web.
 
-Pour configurer le fournisseur de EF Core, appelez la méthode [\<PersistKeysToDbContext TContext>](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcoredataprotectionextensions.persistkeystodbcontext) :
+Pour configurer le fournisseur de EF Core, appelez la méthode [PersistKeysToDbContext \< TContext>](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcoredataprotectionextensions.persistkeystodbcontext) :
 
 [!code-csharp[Main](key-storage-providers/sample/Startup.cs?name=snippet&highlight=13-20)]
 
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
-Le paramètre générique, `TContext`, doit hériter de [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) et implémenter [IDataProtectionKeyContext](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcore.idataprotectionkeycontext):
+Le paramètre générique, `TContext` , doit hériter de [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) et implémenter [IDataProtectionKeyContext](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcore.idataprotectionkeycontext):
 
 [!code-csharp[Main](key-storage-providers/sample/MyKeysContext.cs)]
 
 Créez la table `DataProtectionKeys`.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Exécutez les commandes suivantes dans la fenêtre **console du gestionnaire de package** (PMC) :
 
@@ -179,13 +179,13 @@ dotnet ef database update --context MyKeysContext
 
 ---
 
-`MyKeysContext`est le `DbContext` défini dans l’exemple de code précédent. Si vous utilisez un `DbContext` avec un nom différent, remplacez par `DbContext` `MyKeysContext`votre nom.
+`MyKeysContext`est le `DbContext` défini dans l’exemple de code précédent. Si vous utilisez un `DbContext` avec un nom différent, remplacez par votre `DbContext` nom `MyKeysContext` .
 
 La `DataProtectionKeys` classe/entité adopte la structure indiquée dans le tableau suivant.
 
 | Propriété/champ | Type CLR | Type SQL              |
 | -------------- | -------- | --------------------- |
-| `Id`           | `int`    | `int`, PK, non null   |
+| `Id`           | `int`    | `int`, PK, `IDENTITY(1,1)` , non null   |
 | `FriendlyName` | `string` | `nvarchar(MAX)`, null |
 | `Xml`          | `string` | `nvarchar(MAX)`, null |
 
