@@ -1,24 +1,12 @@
 ---
-title: Créer et utiliser des Razor composants ASP.net Core
-author: guardrex
-description: Découvrez comment créer et utiliser des Razor composants, notamment comment lier des données, gérer des événements et gérer des cycles de vie de composant.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/11/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/components
-ms.openlocfilehash: a7009bf1cf99a15f3617b47a904d52f5787b9ce1
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153516"
+titre : « créer et utiliser des Razor composants ASP.net Core » auteur : Description : « Découvrez comment créer et utiliser des Razor composants, y compris comment lier des données, gérer des événements et gérer des cycles de vie de composant. »
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Créer et utiliser des Razor composants ASP.net Core
 
@@ -34,9 +22,9 @@ Les composants sont implémentés dans les [Razor](xref:mvc/views/razor) fichier
 
 Le nom d’un composant doit commencer par un caractère majuscule. Par exemple, *MyCoolComponent. Razor* est valide et *MyCoolComponent. Razor* n’est pas valide.
 
-L’interface utilisateur d’un composant est définie à l’aide de HTML. La logique de rendu dynamique (par exemple, les boucles, les instructions conditionnelles, les expressions) est ajoutée à l’aide d’une syntaxe C# incorporée appelée [Razor](xref:mvc/views/razor) . Quand une application est compilée, le balisage HTML et la logique de rendu C# sont convertis en une classe de composant. Le nom de la classe générée correspond au nom du fichier.
+L’interface utilisateur d’un composant est définie à l’aide de HTML. La logique de rendu dynamique (par exemple, les boucles, les instructions conditionnelles, les expressions) est ajoutée à l’aide d’une syntaxe C# incorporée appelée *Razor* . Quand une application est compilée, le balisage HTML et la logique de rendu C# sont convertis en une classe de composant. Le nom de la classe générée correspond au nom du fichier.
 
-Les membres de la classe de composants sont définis dans un bloc `@code`. Dans le `@code` bloc, l’état du composant (propriétés, champs) est spécifié avec des méthodes pour la gestion des événements ou pour la définition d’une autre logique de composant. Plus d’un bloc `@code` est autorisé.
+Les membres de la classe Component sont définis dans un [`@code`][1] bloc. Dans le [`@code`][1] bloc, l’état du composant (propriétés, champs) est spécifié avec des méthodes pour la gestion des événements ou pour la définition d’une autre logique de composant. Plus d’un [`@code`][1] bloc est autorisé.
 
 Les membres de composant peuvent être utilisés dans le cadre de la logique de rendu du composant à l’aide d’expressions C# qui commencent par `@` . Par exemple, un champ C# est rendu en préfixant `@` le nom du champ. L’exemple suivant évalue et affiche :
 
@@ -75,6 +63,15 @@ Un composant peut également être référencé directement :
 
 Pour plus d’informations, consultez la section [importer des composants](#import-components) .
 
+## <a name="razor-syntax"></a>Syntaxe de Razor
+
+Razorles composants dans les Blazor applications utilisent largement la Razor syntaxe. Si vous n’êtes pas familiarisé avec le Razor langage de balisage, nous vous recommandons de lire <xref:mvc/views/razor> avant de continuer.
+
+Lorsque vous accédez au contenu sur la Razor syntaxe, portez une attention particulière aux sections suivantes :
+
+* [Directives](xref:mvc/views/razor#directives) &ndash; `@`-préfixe des mots clés réservés qui modifient généralement la manière dont le balisage du composant est analysé ou fonction.
+* [Attributs](xref:mvc/views/razor#directive-attributes) &ndash; de directive `@`-préfixe des mots clés réservés qui modifient généralement le mode d’analyse ou de fonction des éléments composant.
+
 ## <a name="static-assets"></a>Les ressources statiques
 
 Blazorsuit la Convention de ASP.NET Core les applications qui placent des ressources statiques dans le [dossier racine Web (Wwwroot)](xref:fundamentals/index#web-root)du projet.
@@ -107,13 +104,13 @@ Le balisage suivant dans *index. Razor* rend une `HeadingComponent` instance de�
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/HeadingComponent.razor)]
 
-Si un composant contient un élément HTML avec une première lettre majuscule qui ne correspond pas à un nom de composant, un avertissement est émis pour indiquer que l’élément a un nom inattendu. L’ajout d’une `@using` directive pour l’espace de noms du composant rend le composant disponible, ce qui résout l’avertissement.
+Si un composant contient un élément HTML avec une première lettre majuscule qui ne correspond pas à un nom de composant, un avertissement est émis pour indiquer que l’élément a un nom inattendu. L’ajout d’une [`@using`][2] directive pour l’espace de noms du composant rend le composant disponible, ce qui résout l’avertissement.
 
 ## <a name="routing"></a>Routage
 
 Le routage dans Blazor est effectué en fournissant un modèle de routage à chaque composant accessible dans l’application.
 
-Lorsqu’un Razor fichier avec une `@page` directive est compilé, la classe générée reçoit un <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> qui spécifie le modèle de routage. Lors de l’exécution, le routeur recherche les classes de composant avec un `RouteAttribute` et rend le composant qui a un modèle de routage correspondant à l’URL demandée.
+Lorsqu’un Razor fichier avec une [`@page`][9] directive est compilé, la classe générée reçoit un <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> qui spécifie le modèle de routage. Lors de l’exécution, le routeur recherche les classes de composant avec un `RouteAttribute` et rend le composant qui a un modèle de routage correspondant à l’URL demandée.
 
 ```razor
 @page "/ParentComponent"
@@ -127,13 +124,13 @@ Pour plus d'informations, consultez <xref:blazor/routing>.
 
 ### <a name="route-parameters"></a>Paramètres d’itinéraire
 
-Les composants peuvent recevoir des paramètres de routage du modèle de routage fourni dans la `@page` directive. Le routeur utilise des paramètres de routage pour remplir les paramètres de composant correspondants.
+Les composants peuvent recevoir des paramètres de routage du modèle de routage fourni dans la [`@page`][9] directive. Le routeur utilise des paramètres de routage pour remplir les paramètres de composant correspondants.
 
 *Pages/RouteParameter. Razor*:
 
 [!code-razor[](components/samples_snapshot/RouteParameter.razor?highlight=2,7-8)]
 
-Les paramètres facultatifs ne sont pas pris en charge `@page` . deux directives sont donc appliquées dans l’exemple précédent. La première permet de naviguer jusqu’au composant sans paramètre. La deuxième `@page` directive reçoit le `{text}` paramètre d’itinéraire et assigne la valeur à la `Text` propriété.
+Les paramètres facultatifs ne sont pas pris en charge [`@page`][9] . deux directives sont donc appliquées dans l’exemple précédent. La première permet de naviguer jusqu’au composant sans paramètre. La deuxième [`@page`][9] directive reçoit le `{text}` paramètre d’itinéraire et assigne la valeur à la `Text` propriété.
 
 La syntaxe de paramètre *catch-all* ( `*` / `**` ), qui capture le chemin d’accès dans plusieurs limites de dossiers, n’est **pas** prise en charge dans les Razor composants (*. Razor*).
 
@@ -175,7 +172,7 @@ Dans l’exemple suivant, `ChildComponent` a une `ChildContent` propriété qui 
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a>Réprojection d’attribut et paramètres arbitraires
 
-Les composants peuvent capturer et restituer des attributs supplémentaires en plus des paramètres déclarés du composant. Des attributs supplémentaires peuvent être capturés dans un dictionnaire *, puis* réintégrés à un élément lorsque le composant est rendu à l’aide de la [`@attributes`](xref:mvc/views/razor#attributes) Razor directive. Ce scénario est utile lors de la définition d’un composant qui produit un élément de balisage qui prend en charge diverses personnalisations. Par exemple, il peut être fastidieux de définir des attributs séparément pour un `<input>` qui prend en charge de nombreux paramètres.
+Les composants peuvent capturer et restituer des attributs supplémentaires en plus des paramètres déclarés du composant. Des attributs supplémentaires peuvent être capturés dans un dictionnaire *, puis* réintégrés à un élément lorsque le composant est rendu à l’aide de la [`@attributes`][3] Razor directive. Ce scénario est utile lors de la définition d’un composant qui produit un élément de balisage qui prend en charge diverses personnalisations. Par exemple, il peut être fastidieux de définir des attributs séparément pour un `<input>` qui prend en charge de nombreux paramètres.
 
 Dans l’exemple suivant, le premier `<input>` élément ( `id="useIndividualParams"` ) utilise des paramètres de composant individuels, tandis que le deuxième `<input>` élément ( `id="useAttributesDict"` ) utilise la projection d’attributs :
 
@@ -243,7 +240,7 @@ Pour accepter des attributs arbitraires, définissez un paramètre de composant 
 
 La `CaptureUnmatchedValues` propriété sur `[Parameter]` permet au paramètre de correspondre à tous les attributs qui ne correspondent à aucun autre paramètre. Un composant ne peut définir qu’un seul paramètre avec `CaptureUnmatchedValues` . Le type de propriété utilisé avec `CaptureUnmatchedValues` doit pouvoir être assigné à partir de `Dictionary<string, object>` avec des clés de chaîne. `IEnumerable<KeyValuePair<string, object>>`ou `IReadOnlyDictionary<string, object>` sont également des options dans ce scénario.
 
-La position `@attributes` relative à la position des attributs d’élément est importante. Quand sont représentées `@attributes` sur l’élément, les attributs sont traités de droite à gauche (dernier à premier). Prenons l’exemple suivant d’un composant qui consomme un `Child` composant :
+La position [`@attributes`][3] relative à la position des attributs d’élément est importante. Quand sont représentées [`@attributes`][3] sur l’élément, les attributs sont traités de droite à gauche (dernier à premier). Prenons l’exemple suivant d’un composant qui consomme un `Child` composant :
 
 *ParentComponent. Razor*:
 
@@ -260,13 +257,13 @@ La position `@attributes` relative à la position des attributs d’élément es
 public IDictionary<string, object> AdditionalAttributes { get; set; }
 ```
 
-L' `Child` attribut du composant `extra` est défini à droite de `@attributes` . Le `Parent` rendu du composant `<div>` contient `extra="5"` lorsqu’il est transmis via l’attribut supplémentaire, car les attributs sont traités de droite à gauche (dernier à premier) :
+L' `Child` attribut du composant `extra` est défini à droite de [`@attributes`][3] . Le `Parent` rendu du composant `<div>` contient `extra="5"` lorsqu’il est transmis via l’attribut supplémentaire, car les attributs sont traités de droite à gauche (dernier à premier) :
 
 ```html
 <div extra="5" />
 ```
 
-Dans l’exemple suivant, l’ordre de `extra` et `@attributes` est inversé dans le d' `Child` un composant `<div>` :
+Dans l’exemple suivant, l’ordre de `extra` et [`@attributes`][3] est inversé dans le d' `Child` un composant `<div>` :
 
 *ParentComponent. Razor*:
 
@@ -293,7 +290,7 @@ Le rendu `<div>` dans le `Parent` composant contient `extra="10"` lorsqu’il es
 
 Les références de composant offrent un moyen de référencer une instance de composant afin que vous puissiez émettre des commandes vers cette instance, telles que `Show` ou `Reset` . Pour capturer une référence de composant :
 
-* Ajoutez un [`@ref`](xref:mvc/views/razor#ref) attribut au composant enfant.
+* Ajoutez un [`@ref`][4] attribut au composant enfant.
 * Définissez un champ avec le même type que le composant enfant.
 
 ```razor
@@ -316,7 +313,7 @@ Lors du rendu du composant, le `loginDialog` champ est rempli avec l' `MyLoginDi
 
 Pour référencer des composants dans une boucle, consultez [capturer des références à plusieurs composants enfants similaires (dotnet/aspnetcore #13358)](https://github.com/dotnet/aspnetcore/issues/13358).
 
-Bien que la capture de références de composant utilise une syntaxe similaire pour [capturer des références d’élément](xref:blazor/call-javascript-from-dotnet#capture-references-to-elements), il ne s’agit pas d’une fonctionnalité JavaScript Interop. Les références de composant ne sont pas transmises au code JavaScript et ne sont &mdash; utilisées que dans le code .net.
+Bien que la capture de références de composant utilise une syntaxe similaire pour [capturer des références d’élément](xref:blazor/call-javascript-from-dotnet#capture-references-to-elements), il ne s’agit pas d’une fonctionnalité JavaScript Interop. Les références de composant ne sont pas passées au code JavaScript. Les références de composants sont uniquement utilisées dans le code .NET.
 
 > [!NOTE]
 > N’utilisez **pas** de références de composant pour muter l’état des composants enfants. Utilisez plutôt des paramètres déclaratifs normaux pour passer des données aux composants enfants. L’utilisation de paramètres déclaratifs normaux entraîne le rerendu automatique des composants enfants.
@@ -414,7 +411,7 @@ Prenons l’exemple suivant :
 
 Le contenu de la `People` collection peut changer avec des entrées insérées, supprimées ou réorganisées. Lors du rerendu du composant, le `<DetailsEditor>` composant peut changer pour recevoir des `Details` valeurs de paramètre différentes. Cela peut entraîner un rerendu plus complexe que prévu. Dans certains cas, le rerendu peut entraîner des différences de comportement visibles, telles que le focus de l’élément perdu.
 
-Le processus de mappage peut être contrôlé à l’aide de l' [`@key`](xref:mvc/views/razor#key) attribut directive. `@key`force l’algorithme de comparaison à garantir la préservation des éléments ou des composants en fonction de la valeur de la clé :
+Le processus de mappage peut être contrôlé à l’aide de l' [`@key`][5] attribut directive. [`@key`][5]force l’algorithme de comparaison à garantir la préservation des éléments ou des composants en fonction de la valeur de la clé :
 
 ```csharp
 @foreach (var person in People)
@@ -434,16 +431,16 @@ Lorsque la `People` collection est modifiée, l’algorithme de comparaison cons
 * Si un `Person` est inséré à une position dans la liste, une nouvelle `<DetailsEditor>` instance est insérée à cette position correspondante. Les autres instances restent inchangées.
 * Si `Person` les entrées sont réordonnées, les `<DetailsEditor>` instances correspondantes sont conservées et réordonnées dans l’interface utilisateur.
 
-Dans certains scénarios, l’utilisation de `@key` réduit la complexité du rerendu et évite les problèmes potentiels liés aux parties avec état de la modification du modèle DOM, telles que la position du focus.
+Dans certains scénarios, l’utilisation de [`@key`][5] réduit la complexité du rerendu et évite les problèmes potentiels liés aux parties avec état de la modification du modèle DOM, telles que la position du focus.
 
 > [!IMPORTANT]
 > Les clés sont locales pour chaque élément ou composant conteneur. Les clés ne sont pas comparées globalement dans le document.
 
 ### <a name="when-to-use-key"></a>Quand utiliser la \@ clé
 
-En règle générale, il est judicieux d’utiliser `@key` chaque fois qu’une liste est rendue (par exemple, dans un `@foreach` bloc) et qu’une valeur appropriée existe pour définir `@key` .
+En règle générale, il est judicieux d’utiliser [`@key`][5] chaque fois qu’une liste est rendue (par exemple, dans un `@foreach` bloc) et qu’une valeur appropriée existe pour définir [`@key`][5] .
 
-Vous pouvez également utiliser `@key` pour empêcher Blazor de conserver un élément ou une sous-arborescence de composants lorsqu’un objet change :
+Vous pouvez également utiliser [`@key`][5] pour empêcher Blazor de conserver un élément ou une sous-arborescence de composants lorsqu’un objet change :
 
 ```razor
 <div @key="currentPerson">
@@ -451,22 +448,22 @@ Vous pouvez également utiliser `@key` pour empêcher Blazor de conserver un él
 </div>
 ```
 
-En cas `@currentPerson` de modification, la `@key` directive Blazor d’attribut force à ignorer la totalité `<div>` et ses descendants, et à reconstruire la sous-arborescence de l’interface utilisateur avec de nouveaux éléments et composants. Cela peut être utile si vous devez garantir qu’aucun État d’interface utilisateur n’est préservé lorsque des `@currentPerson` modifications sont apportées.
+En cas `@currentPerson` de modification, la [`@key`][5] directive Blazor d’attribut force à ignorer la totalité `<div>` et ses descendants, et à reconstruire la sous-arborescence de l’interface utilisateur avec de nouveaux éléments et composants. Cela peut être utile si vous devez garantir qu’aucun État d’interface utilisateur n’est préservé lorsque des `@currentPerson` modifications sont apportées.
 
 ### <a name="when-not-to-use-key"></a>Quand ne pas utiliser la \@ clé
 
-Il y a un coût en matière de performances lors de la comparaison avec `@key` . Le coût des performances n’est pas important, mais spécifiez uniquement `@key` si les règles de conservation des éléments ou des composants bénéficient de l’application.
+Il y a un coût en matière de performances lors de la comparaison avec [`@key`][5] . Le coût des performances n’est pas important, mais spécifiez uniquement [`@key`][5] si les règles de conservation des éléments ou des composants bénéficient de l’application.
 
-Même si `@key` n’est pas utilisé, Blazor conserve autant que possible les instances d’élément et de composant enfants. Le seul avantage de l’utilisation de `@key` est de contrôler la *façon dont* les instances de modèle sont mappées aux instances de composant conservées, au lieu de l’algorithme de comparaison qui sélectionne le mappage.
+Même si [`@key`][5] n’est pas utilisé, Blazor conserve autant que possible les instances d’élément et de composant enfants. Le seul avantage de l’utilisation de [`@key`][5] est de contrôler la *façon dont* les instances de modèle sont mappées aux instances de composant conservées, au lieu de l’algorithme de comparaison qui sélectionne le mappage.
 
 ### <a name="what-values-to-use-for-key"></a>Valeurs à utiliser pour la \@ clé
 
-En règle générale, il est logique de fournir l’un des types de valeur suivants pour `@key` :
+En règle générale, il est logique de fournir l’un des types de valeur suivants pour [`@key`][5] :
 
 * Instances d’objet de modèle (par exemple, une `Person` instance comme dans l’exemple précédent). Cela garantit la préservation en fonction de l’égalité des références d’objet.
 * Identificateurs uniques (par exemple, les valeurs de clé primaire de type `int` , `string` ou `Guid` ).
 
-Vérifiez que les valeurs utilisées pour `@key` ne sont pas en conflit. Si les valeurs en conflit sont détectées dans le même élément parent, Blazor lève une exception, car il ne peut pas mapper de manière déterministe les anciens éléments ou composants aux nouveaux éléments ou composants. Utilisez uniquement des valeurs distinctes, telles que des instances d’objets ou des valeurs de clé primaire.
+Vérifiez que les valeurs utilisées pour [`@key`][5] ne sont pas en conflit. Si les valeurs en conflit sont détectées dans le même élément parent, Blazor lève une exception, car il ne peut pas mapper de manière déterministe les anciens éléments ou composants aux nouveaux éléments ou composants. Utilisez uniquement des valeurs distinctes, telles que des instances d’objets ou des valeurs de clé primaire.
 
 ## <a name="dont-create-components-that-write-to-their-own-parameter-properties"></a>Ne créez pas de composants qui écrivent dans leurs propres propriétés de paramètre
 
@@ -565,10 +562,10 @@ Le `Expander` composant suivant :
 
 Razorles composants sont générés en tant que classes partielles. Razorles composants sont créés à l’aide de l’une des approches suivantes :
 
-* Le code C# est défini dans un [`@code`](xref:mvc/views/razor#code) bloc avec le balisage HTML et Razor le code dans un fichier unique. Blazorles modèles définissent leurs Razor composants à l’aide de cette approche.
+* Le code C# est défini dans un [`@code`][1] bloc avec le balisage HTML et Razor le code dans un fichier unique. Blazorles modèles définissent leurs Razor composants à l’aide de cette approche.
 * Le code C# est placé dans un fichier code-behind défini en tant que classe partielle.
 
-L’exemple suivant montre le composant par défaut `Counter` avec un `@code` bloc dans une application générée à partir d’un Blazor modèle. Le balisage HTML, le Razor code et le code C# se trouvent dans le même fichier :
+L’exemple suivant montre le composant par défaut `Counter` avec un [`@code`][1] bloc dans une application générée à partir d’un Blazor modèle. Le balisage HTML, le Razor code et le code C# se trouvent dans le même fichier :
 
 *Counter. Razor*:
 
@@ -635,7 +632,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 ## <a name="specify-a-base-class"></a>Spécifier une classe de base
 
-La [`@inherits`](xref:mvc/views/razor#inherits) directive peut être utilisée pour spécifier une classe de base pour un composant. L’exemple suivant montre comment un composant peut hériter d’une classe de base, `BlazorRocksBase` , pour fournir les propriétés et les méthodes du composant. La classe de base doit dériver de `ComponentBase` .
+La [`@inherits`][6] directive peut être utilisée pour spécifier une classe de base pour un composant. L’exemple suivant montre comment un composant peut hériter d’une classe de base, `BlazorRocksBase` , pour fournir les propriétés et les méthodes du composant. La classe de base doit dériver de `ComponentBase` .
 
 *Pages/BlazorRocks. Razor*:
 
@@ -663,7 +660,7 @@ namespace BlazorSample
 
 ## <a name="specify-an-attribute"></a>Spécifier un attribut
 
-Les attributs peuvent être spécifiés dans Razor les composants à l’aide de la [`@attribute`](xref:mvc/views/razor#attribute) directive. L’exemple suivant applique l' `[Authorize]` attribut à la classe de composant :
+Les attributs peuvent être spécifiés dans Razor les composants à l’aide de la [`@attribute`][7] directive. L’exemple suivant applique l' `[Authorize]` attribut à la classe de composant :
 
 ```razor
 @page "/"
@@ -674,15 +671,15 @@ Les attributs peuvent être spécifiés dans Razor les composants à l’aide de
 
 L’espace de noms d’un composant créé avec Razor est basé sur (par ordre de priorité) :
 
-* [`@namespace`](xref:mvc/views/razor#namespace)désignation dans le Razor balisage de fichier (*. Razor*) ( `@namespace BlazorSample.MyNamespace` ).
+* [`@namespace`][8]désignation dans le Razor balisage de fichier (*. Razor*) ( `@namespace BlazorSample.MyNamespace` ).
 * Du projet `RootNamespace` dans le fichier projet ( `<RootNamespace>BlazorSample</RootNamespace>` ).
 * Nom du projet, pris à partir du nom de fichier du fichier projet (*. csproj*), et chemin d’accès de la racine du projet au composant. Par exemple, le Framework résout *{Project root}/pages/index.Razor* (*BlazorSample. csproj*) en espace de noms `BlazorSample.Pages` . Les composants suivent les règles de liaison de noms C#. Pour le `Index` composant dans cet exemple, les composants de l’étendue sont tous les composants :
   * Dans le même dossier, *pages*.
   * Composants de la racine du projet qui ne spécifient pas explicitement un espace de noms différent.
 
-Les composants définis dans un espace de noms différent sont placés dans la portée à l’aide Razor de [`@using`](xref:mvc/views/razor#using) la directive de.
+Les composants définis dans un espace de noms différent sont placés dans la portée à l’aide Razor de [`@using`][2] la directive de.
 
-Si un autre composant, `NavMenu.razor` , existe dans le dossier *BlazorSample/Shared/* , le composant peut être utilisé dans `Index.razor` avec l' `@using` instruction suivante :
+Si un autre composant, `NavMenu.razor` , existe dans le dossier *BlazorSample/Shared/* , le composant peut être utilisé dans `Index.razor` avec l' [`@using`][2] instruction suivante :
 
 ```razor
 @using BlazorSample.Shared
@@ -692,7 +689,7 @@ This is the Index page.
 <NavMenu></NavMenu>
 ```
 
-Les composants peuvent également être référencés à l’aide de leurs noms complets, ce qui ne requiert pas la [`@using`](xref:mvc/views/razor#using) directive :
+Les composants peuvent également être référencés à l’aide de leurs noms complets, ce qui ne requiert pas la [`@using`][2] directive :
 
 ```razor
 This is the Index page.
@@ -973,8 +970,20 @@ De même, les images SVG sont prises en charge dans les règles CSS d’un fichi
 }
 ```
 
-Toutefois, le balisage SVG en ligne n’est pas pris en charge dans tous les scénarios. Si vous placez une `<svg>` balise directement dans un fichier de composant (*. Razor*), le rendu d’image de base est pris en charge, mais de nombreux scénarios avancés ne sont pas encore pris en charge. Par exemple, les `<use>` balises ne sont pas actuellement respectées et `@bind` ne peuvent pas être utilisées avec certaines balises SVG. Nous prévoyons de traiter ces limitations dans une version ultérieure.
+Toutefois, le balisage SVG en ligne n’est pas pris en charge dans tous les scénarios. Si vous placez une `<svg>` balise directement dans un fichier de composant (*. Razor*), le rendu d’image de base est pris en charge, mais de nombreux scénarios avancés ne sont pas encore pris en charge. Par exemple, les `<use>` balises ne sont pas actuellement respectées et `@bind` ne peuvent pas être utilisées avec certaines balises SVG. Pour plus d’informations, consultez [prise en charge SVG dans Blazor (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:security/blazor/server/threat-mitigation>&ndash;Contient des conseils sur la création Blazor Applications serveur qui doivent rivaliser avec l’épuisement des ressources.
+
+<!--Reference links in article-->
+[1]: <xref:mvc/views/razor#code>
+[2]: <xref:mvc/views/razor#using>
+[3]: <xref:mvc/views/razor#attributes>
+[4]: <xref:mvc/views/razor#ref>
+[5]: <xref:mvc/views/razor#key>
+[6]: <xref:mvc/views/razor#inherits>
+[7]: <xref:mvc/views/razor#attribute>
+[8]: <xref:mvc/views/razor#namespace>
+[9]: <xref:mvc/views/razor#page>
+[10]: <xref:mvc/views/razor#bind>

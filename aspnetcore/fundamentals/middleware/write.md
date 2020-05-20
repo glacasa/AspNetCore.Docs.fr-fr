@@ -1,30 +1,20 @@
 ---
-title: Écrire un intergiciel (middleware) ASP.NET Core personnalisé
-author: rick-anderson
-description: Découvrez comment écrire un intergiciel (middleware) ASP.NET Core personnalisé.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 5/6/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/middleware/write
-ms.openlocfilehash: 6852c1831d1f71af7f4fad3288fd6f897dfaa65f
-ms.sourcegitcommit: 30fcf69556b6b6ec54a3879e280d5f61f018b48f
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82876190"
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="write-custom-aspnet-core-middleware"></a>Écrire un intergiciel (middleware) ASP.NET Core personnalisé
 
 De [Rick Anderson](https://twitter.com/RickAndMSFT) et [Steve Smith](https://ardalis.com/)
 
 Un middleware est un logiciel qui est assemblé dans un pipeline d’application pour gérer les requêtes et les réponses. Même si ASP.NET Core propose une large palette de composants d’intergiciel (middleware) intégrés, dans certains scénarios, vous voudrez certainement écrire un intergiciel personnalisé.
+
+> [!NOTE]
+> Cette rubrique explique comment écrire *un intergiciel (middleware) basé sur des conventions* . Pour une approche qui utilise le typage fort et l’activation par demande, consultez <xref:fundamentals/middleware/extensibility> .
 
 ## <a name="middleware-class"></a>Classe d’intergiciel (middleware)
 

@@ -8,18 +8,18 @@ products:
 - aspnet-core
 - vs
 urlFragment: aspnetcore-webapi-mongodb
-ms.openlocfilehash: 09d73e25667822b8748a00cc76ad6d4f0e5fe290
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 6f6022bee678af92066f45032b43b6b87e5f901e
+ms.sourcegitcommit: 7a42bc1e594de36c854fd4363c11821548a9efa7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79511403"
+ms.lasthandoff: 05/19/2020
+ms.locfileid: "83608666"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>Créer une API web avec ASP.NET Core et MongoDB
 
 Ce didacticiel crée une API web qui effectue des opérations de création, lecture, mise à jour et suppression (CRUD) sur une base de données NoSQL [MongoDB](https://www.mongodb.com/what-is-mongodb).
 
-Dans ce tutoriel, vous allez apprendre à :
+Dans ce tutoriel, vous allez découvrir comment :
 
 * Configurer MongoDB
 * Créer une base de données MongoDB
@@ -35,7 +35,7 @@ Dans ce tutoriel, vous allez apprendre à :
 
 ## <a name="configure-mongodb"></a>Configurer MongoDB
 
-Si vous utilisez Windows, MongoDB est installé par défaut dans *C:\\Program Files\\MongoDB*. Ajouter *C\\:\\Fichiers\\de\\\<programme MongoDB Server \\version_number* `Path`>bac à la variable de l’environnement. Cette modification permet d’accéder à MongoDB depuis n’importe quel emplacement sur votre ordinateur de développement.
+Si vous utilisez Windows, MongoDB est installé par défaut dans *C:\\Program Files\\MongoDB*. Ajoutez *C : \\ Program Files \\ MongoDB \\ Server \\ \< version_number>\\ bin* à la `Path` variable d’environnement. Cette modification permet d’accéder à MongoDB depuis n’importe quel emplacement sur votre ordinateur de développement.
 
 Utilisez l’interpréteur de commandes mongo dans les étapes suivantes pour créer une base de données, des collections, et stocker des documents. Pour plus d’informations sur les commandes de l’interpréteur mongo, consultez [Utilisation de l’interpréteur de commandes mongo](https://docs.mongodb.com/manual/mongo/#working-with-the-mongo-shell).
 
@@ -124,11 +124,11 @@ La base de données est en lecture seule. Vous pouvez commencer à créer l’AP
 
 ## <a name="create-the-aspnet-core-web-api-project"></a>Créer le projet d’API web ASP.NET Core
 
-1. Allez **déposer un** > **nouveau** > **projet**.
+1. Accédez à **fichier**  >  **nouveau**  >  **projet**.
 1. Sélectionnez le type de projet **Application web ASP.NET Core**, puis sélectionnez **Suivant**.
 1. Nommez le projet *BooksApi*, puis sélectionnez **Créer**.
 1. Sélectionnez le framework cible **.NET Core** et **ASP.NET Core 3.0**. Sélectionnez le modèle de projet **API**, puis sélectionnez **Créer**.
-1. Visitez la [Galerie NuGet: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/) pour déterminer la dernière version stable du pilote .NET pour MongoDB. Dans la fenêtre **Console du Gestionnaire de Package**, accédez à la racine du projet. Exécutez la commande suivante afin d’installer le pilote .NET pour MongoDB :
+1. Visitez la [galerie NuGet : MongoDB. Driver](https://www.nuget.org/packages/MongoDB.Driver/) pour déterminer la dernière version stable du pilote .net pour MongoDB. Dans la fenêtre **Console du Gestionnaire de Package**, accédez à la racine du projet. Exécutez la commande suivante afin d’installer le pilote .NET pour MongoDB :
 
     ```powershell
     Install-Package MongoDB.Driver -Version {VERSION}
@@ -166,10 +166,10 @@ La base de données est en lecture seule. Vous pouvez commencer à créer l’AP
     Dans la classe précédente, la propriété `Id` :
 
     * Est requise pour mapper l’objet Common Language Runtime (CLR) à la collection MongoDB.
-    * Est annoté [`[BsonId]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonIdAttribute.htm) avec pour désigner cette propriété comme la clé principale du document.
-    * Est annoté [`[BsonRepresentation(BsonType.ObjectId)]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonRepresentationAttribute.htm) avec pour permettre `string` de passer le paramètre comme type au lieu d’une structure [ObjectId.](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_ObjectId.htm) Mongo gère la conversion de `string` en `ObjectId`.
+    * Est annoté avec [`[BsonId]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonIdAttribute.htm) pour désigner cette propriété comme clé primaire du document.
+    * Est annoté avec [`[BsonRepresentation(BsonType.ObjectId)]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonRepresentationAttribute.htm) pour permettre la transmission du paramètre en tant que type `string` au lieu d’une structure [ObjectID](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_ObjectId.htm) . Mongo gère la conversion de `string` en `ObjectId`.
 
-    La `BookName` propriété est annotée avec l’attribut. [`[BsonElement]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonElementAttribute.htm) La valeur de l’attribut de `Name` représente le nom de propriété dans la collection MongoDB.
+    La `BookName` propriété est annotée avec l' [`[BsonElement]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonElementAttribute.htm) attribut. La valeur de l’attribut de `Name` représente le nom de propriété dans la collection MongoDB.
 
 ## <a name="add-a-configuration-model"></a>Ajouter un modèle de configuration
 
@@ -302,7 +302,7 @@ La base de données est en lecture seule. Vous pouvez commencer à créer l’AP
     }
     ```
 
-    Dans le code précédent, la classe `BookService` est inscrite auprès de l’injection de dépendances pour permettre la prise en charge de l’injection de constructeur dans les classes consommatrices. La durée de vie de service de singleton est la plus appropriée, car `BookService` a une dépendance directe sur `MongoClient`. Selon les directives officielles de `MongoClient` [réutilisation du client Mongo](https://mongodb.github.io/mongo-csharp-driver/2.8/reference/driver/connecting/#re-use), devrait être enregistré en DI avec une durée de vie de service singleton.
+    Dans le code précédent, la classe `BookService` est inscrite auprès de l’injection de dépendances pour permettre la prise en charge de l’injection de constructeur dans les classes consommatrices. La durée de vie de service de singleton est la plus appropriée, car `BookService` a une dépendance directe sur `MongoClient`. Selon les [instructions de réutilisation du client Mongo](https://mongodb.github.io/mongo-csharp-driver/2.8/reference/driver/connecting/#re-use)officielles, `MongoClient` doit être inscrit dans di avec une durée de vie de service Singleton.
 
 1. Ajoutez le code suivant en haut de *Startup.cs* pour résoudre la référence à `BookService` :
 
@@ -336,7 +336,7 @@ La classe `BookService` utilise les membres `MongoDB.Driver` suivants pour effec
 * [InsertOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm) &ndash; Insère l’objet fourni en tant que nouveau document dans la collection.
 * [ReplaceOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm) &ndash; Remplace le seul document correspondant aux critères de recherche fournis par l’objet indiqué.
 
-## <a name="add-a-controller"></a>Ajout d'un contrôleur
+## <a name="add-a-controller"></a>Ajouter un contrôleur
 
 Ajoutez une classe `BooksController` au répertoire *Controllers* avec le code suivant :
 
@@ -469,7 +469,7 @@ Vous devez changer deux détails concernant les réponses JSON retournées dans 
 
 Pour satisfaire les exigences précédentes, apportez les changements suivants :
 
-1. JSON.NET a été supprimé du framework partagé ASP.NET. Ajoutez une référence de package à [Microsoft.AspNetCore.Mvc.NewtonsoftJson](https://nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson).
+1. JSON.NET a été supprimé du framework partagé ASP.NET. Ajoutez une référence de package à [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson) .
 
 1. Dans `Startup.ConfigureServices`, ajoutez le code en surbrillance suivant à l’appel de méthode `AddMvc` :
 
@@ -491,7 +491,7 @@ Pour satisfaire les exigences précédentes, apportez les changements suivants 
 
     À la suite du changement effectué, les noms de propriétés de la réponse JSON sérialisée de l’API web correspondent aux noms de propriétés équivalents du type d’objet CLR. Par exemple, la propriété `Author` de la classe `Book` est sérialisée en tant que `Author`.
 
-1. Dans *Models/Book.cs*, annoter `BookName` la [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) propriété avec l’attribut suivant:
+1. Dans *Models/Book. cs*, annotez la `BookName` propriété avec l' [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) attribut suivant :
 
     ```csharp
     [BsonElement("Name")]

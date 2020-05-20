@@ -1,7 +1,7 @@
 ---
-title: Présentation des Razor Pages dans ASP.net Core
+title: Présentation Razor des pages dans ASP.net Core
 author: Rick-Anderson
-description: Découvrez comment Razor les Pages de ASP.net Core rendent le codage des scénarios orientés page plus facile et plus productif que l’utilisation de MVC.
+description: Découvrez comment Razor les pages de ASP.net Core rendent le codage des scénarios orientés page plus facile et plus productif que l’utilisation de MVC.
 monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 02/12/2020
@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: 827a0df4c914fd012c55e6612a987713bfbaa5c2
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 6939d285838a6dd971f530c1d65d73273b5b14e7
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777213"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424563"
 ---
 # <a name="introduction-to-razor-pages-in-aspnet-core"></a>Présentation des pages Razor dans ASP.NET Core
 
@@ -33,7 +33,7 @@ Ce document fournit une introduction aux pages Razor. Il ne s’agit pas d’un 
 
 ## <a name="prerequisites"></a>Prérequis
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.0.md)]
 
@@ -51,7 +51,7 @@ Ce document fournit une introduction aux pages Razor. Il ne s’agit pas d’un 
 
 ## <a name="create-a-razor-pages-project"></a>Créer un projet Razor Pages
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Pour obtenir des instructions sur la création d’un projet Razor Pages, consultez [Bien démarrer avec Razor Pages](xref:tutorials/razor-pages/razor-pages-start).
 
@@ -61,9 +61,7 @@ Exécutez `dotnet new webapp` à partir de la ligne de commande.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-Exécutez `dotnet new webapp` à partir de la ligne de commande.
-
-Ouvrez le fichier *.csproj* généré à partir de Visual Studio pour Mac.
+Pour obtenir des instructions sur la création d’un projet Razor Pages, consultez [Bien démarrer avec Razor Pages](xref:tutorials/razor-pages/razor-pages-start).
 
 ---
 
@@ -77,7 +75,7 @@ Considérez une page de base : <a name="OnGet"></a>
 
 [!code-cshtml[](index/3.0sample/RazorPagesIntro/Pages/Index.cshtml?highlight=1)]
 
-Le code précédent ressemble beaucoup à un [fichier vue Razor](xref:tutorials/first-mvc-app/adding-view) utilisé dans une application ASP.NET Core avec des contrôleurs et des vues. Ce qui le rend différent est [`@page`](xref:mvc/views/razor#page) la directive. `@page` fait du fichier une action MVC, ce qui signifie qu’il gère les demandes directement, sans passer par un contrôleur. `@page` doit être la première directive Razor sur une page. `@page`affecte le comportement d’autres constructions [Razor](xref:mvc/views/razor) . Razor Pages noms de fichiers ont un suffixe *. cshtml* .
+Le code précédent ressemble beaucoup à un [fichier vue Razor](xref:tutorials/first-mvc-app/adding-view) utilisé dans une application ASP.NET Core avec des contrôleurs et des vues. Ce qui le rend différent est la [`@page`](xref:mvc/views/razor#page) directive. `@page` fait du fichier une action MVC, ce qui signifie qu’il gère les demandes directement, sans passer par un contrôleur. `@page` doit être la première directive Razor sur une page. `@page`affecte le comportement d’autres constructions [Razor](xref:mvc/views/razor) . Razor Pages noms de fichiers ont un suffixe *. cshtml* .
 
 Une page similaire, utilisant une classe `PageModel`, est illustrée dans les deux fichiers suivants. Le fichier *Pages/Index2.cshtml* :
 
@@ -132,7 +130,7 @@ Par convention, la classe `PageModel` se nomme `<PageName>Model` et se trouve da
 La classe `PageModel` permet de séparer la logique d’une page de sa présentation. Elle définit des gestionnaires de page pour les demandes envoyées à la page et les données utilisées pour l’afficher. Cette séparation permet :
 
 * Gestion des dépendances de page via l' [injection de dépendances](xref:fundamentals/dependency-injection).
-* [Test unitaire](xref:test/razor-pages-tests)
+* [Tests unitaires](xref:test/razor-pages-tests)
 
 La page a une  *méthode de gestionnaire*`OnPostAsync`, qui s’exécute sur les requêtes `POST` (quand un utilisateur poste le formulaire). Les méthodes de gestionnaire pour tout verbe HTTP peuvent être ajoutées. Les gestionnaires les plus courants sont :
 
@@ -143,7 +141,7 @@ Le suffixe de nommage `Async` est facultatif, mais souvent utilisé par conventi
 
 Si vous êtes familiarisé avec les applications ASP.NET à l’aide de contrôleurs et de vues :
 
-* Le `OnPostAsync` code de l’exemple précédent ressemble au code de contrôleur classique.
+* Le `OnPostAsync` Code de l’exemple précédent ressemble au code de contrôleur classique.
 * La plupart des primitives MVC, telles que la [liaison de modèle](xref:mvc/models/model-binding), la [validation](xref:mvc/models/validation)et les résultats d’action, fonctionnent de la même manière avec les contrôleurs et les Razor pages. 
 
 La méthode `OnPostAsync` précédente :
@@ -169,7 +167,7 @@ Dans le code précédent, la publication du formulaire :
 
 * Avec des données valides :
 
-  * La `OnPostAsync` méthode de gestionnaire appelle <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.RedirectToPage*> la méthode d’assistance. `RedirectToPage` retourne une instance de <xref:Microsoft.AspNetCore.Mvc.RedirectToPageResult>. `RedirectToPage`:
+  * La `OnPostAsync` méthode de gestionnaire appelle la <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.RedirectToPage*> méthode d’assistance. `RedirectToPage` retourne une instance de <xref:Microsoft.AspNetCore.Mvc.RedirectToPageResult>. `RedirectToPage`:
 
     * Est un résultat d’action.
     * Est semblable à `RedirectToAction` ou `RedirectToRoute` (utilisé dans les contrôleurs et les vues).
@@ -177,7 +175,7 @@ Dans le code précédent, la publication du formulaire :
 
 * Avec les erreurs de validation qui sont transmises au serveur :
 
-  * La `OnPostAsync` méthode de gestionnaire appelle <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageBase.Page*> la méthode d’assistance. `Page` retourne une instance de <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageResult>. Le retour de `Page` est similaire à la façon dont les actions dans les contrôleurs retournent `View`. `PageResult`est le type de retour par défaut pour une méthode de gestionnaire. Une méthode de gestionnaire qui retourne `void` restitue la page.
+  * La `OnPostAsync` méthode de gestionnaire appelle la <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageBase.Page*> méthode d’assistance. `Page` retourne une instance de <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageResult>. Le retour de `Page` est similaire à la façon dont les actions dans les contrôleurs retournent `View`. `PageResult`est le type de retour par défaut pour une méthode de gestionnaire. Une méthode de gestionnaire qui retourne `void` restitue la page.
   * Dans l’exemple précédent, la publication du formulaire sans valeur entraîne le renvoi de la valeur false à [ModelState. IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) . Dans cet exemple, aucune erreur de validation n’est affichée sur le client. La gestion des erreurs de validation est traitée plus loin dans ce document.
 
   [!code-cs[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=3-6)]
@@ -187,7 +185,7 @@ Dans le code précédent, la publication du formulaire :
   * Les données ne sont **pas** publiées sur le serveur.
   * La validation côté client est expliquée plus loin dans ce document.
 
-La `Customer` propriété utilise [`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) l’attribut pour s’abonner à la liaison de modèle :
+La `Customer` propriété utilise l' [`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) attribut pour s’abonner à la liaison de modèle :
 
 [!code-cs[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_PageModel&highlight=15-16)]
 
@@ -269,7 +267,7 @@ Règles de validation :
 * Sont spécifiés de façon déclarative dans la classe de modèle.
 * Sont appliquées partout dans l’application.
 
-L' <xref:System.ComponentModel.DataAnnotations> espace de noms fournit un jeu d’attributs de validation intégrés qui sont appliqués de façon déclarative à une classe ou une propriété. DataAnnotations contient également des attributs de mise [`[DataType]`](xref:System.ComponentModel.DataAnnotations.DataTypeAttribute) en forme tels que l’aide à la mise en forme et ne fournissent aucune validation.
+L' <xref:System.ComponentModel.DataAnnotations> espace de noms fournit un jeu d’attributs de validation intégrés qui sont appliqués de façon déclarative à une classe ou une propriété. DataAnnotations contient également des attributs de mise en forme tels [`[DataType]`](xref:System.ComponentModel.DataAnnotations.DataTypeAttribute) que l’aide à la mise en forme et ne fournissent aucune validation.
 
 Prenons le `Customer` modèle :
 
@@ -282,7 +280,7 @@ Prenons le `Customer` modèle :
 Le code précédent :
 
 * Comprend des scripts de validation jQuery et jQuery.
-* Utilise le `<div />` et `<span />` les aide pour les [balises](xref:mvc/views/tag-helpers/intro) pour activer :
+* Utilise le `<div />` et les `<span />` [aide pour les balises](xref:mvc/views/tag-helpers/intro) pour activer :
 
   * Validation côté client.
   * Rendu des erreurs de validation.
@@ -298,13 +296,13 @@ L' `[StringLength(10)]` attribut génère `data-val-length-max="10"` sur le rend
 * Avec le nom plus long que 10.
 * Le message d’erreur « le nom du champ doit être une chaîne d’une longueur maximale de 10 ». » est renvoyé.
 
-Prenons le modèle `Movie` suivant :
+Prenons le `Movie` modèle suivant :
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDA.cs?name=snippet1)]
 
 Les attributs de validation spécifient le comportement à appliquer sur les propriétés de modèle auxquelles ils sont appliqués :
 
-* Les `Required` attributs `MinimumLength` et indiquent qu’une propriété doit avoir une valeur, mais rien n’empêche un utilisateur d’entrer un espace blanc pour satisfaire cette validation.
+* Les `Required` `MinimumLength` attributs et indiquent qu’une propriété doit avoir une valeur, mais rien n’empêche un utilisateur d’entrer un espace blanc pour satisfaire cette validation.
 * L’attribut `RegularExpression` sert à limiter les caractères pouvant être entrés. Dans le code précédent, « Genre » :
 
   * Doit utiliser seulement des lettres.
@@ -319,7 +317,7 @@ Les attributs de validation spécifient le comportement à appliquer sur les pro
 * L' `StringLength` attribut définit la longueur maximale d’une propriété de type chaîne et, éventuellement, sa longueur minimale.
 * Les types valeur (tels que `decimal`, `int`, `float` et `DateTime`) sont obligatoires par nature et n’ont pas besoin de l’attribut `[Required]`.
 
-La page créer du `Movie` modèle affiche des erreurs avec des valeurs non valides :
+La page créer du modèle affiche des `Movie` Erreurs avec des valeurs non valides :
 
 ![Formulaire de vue Movie avec plusieurs erreurs de validation jQuery côté client](~/tutorials/razor-pages/validation/_static/val.png)
 
@@ -336,7 +334,7 @@ En règle générale, un gestionnaire `OnHead` est créé et appelé pour les re
 
 [!code-cs[](index/3.0sample/RazorPagesContacts/Pages/Privacy.cshtml.cs?name=snippet)]
 
-Razor Pages revient à appeler le `OnGet` gestionnaire si aucun `OnHead` gestionnaire n’est défini.
+Razor Pages revient à appeler le `OnGet` Gestionnaire si aucun `OnHead` gestionnaire n’est défini.
 
 <a name="xsrf"></a>
 
@@ -444,7 +442,7 @@ Les pages *pages/Customers/Create. cshtml* et *pages/Customers/Edit. cshtml* red
 * `<a asp-page="./Index">Customers Index Page</a>`
 * `RedirectToPage("./Index")`
 
-Le nom `/Index` de page absolu est utilisé pour générer des URL dans la page *pages/index. cshtml* . Par exemple :
+Le nom de page absolu `/Index` est utilisé pour générer des URL dans la page *pages/index. cshtml* . Par exemple :
 
 * `Url.Page("/Index", ...)`
 * `<a asp-page="/Index">Home Index Page</a>`
@@ -452,7 +450,7 @@ Le nom `/Index` de page absolu est utilisé pour générer des URL dans la page 
 
 Le nom de la page est le chemin de la page à partir du dossier racine */Pages* avec un `/` devant (par exemple, `/Index`). Les exemples de génération d’URL précédents offrent des options améliorées et des fonctionnalités fonctionnelles par rapport au codage en dur d’une URL. La génération d’URL utilise le [routage](xref:mvc/controllers/routing) et peut générer et encoder des paramètres en fonction de la façon dont l’itinéraire est défini dans le chemin de destination.
 
-La génération d’URL pour les pages prend en charge les noms relatifs. Le tableau suivant indique quelle page d’index est sélectionnée à `RedirectToPage` l’aide de différents paramètres dans *pages/Customers/Create. cshtml*.
+La génération d’URL pour les pages prend en charge les noms relatifs. Le tableau suivant indique quelle page d’index est sélectionnée à l’aide `RedirectToPage` de différents paramètres dans *pages/Customers/Create. cshtml*.
 
 | RedirectToPage(x)| Page |
 | ----------------- | ------------ |
@@ -463,7 +461,7 @@ La génération d’URL pour les pages prend en charge les noms relatifs. Le tab
 
 <!-- Test via ~/razor-pages/index/3.0sample/RazorPagesContacts/Pages/Customers/Details.cshtml.cs -->
 
-`RedirectToPage("Index")`, `RedirectToPage("./Index")`et `RedirectToPage("../Index")` sont des *noms relatifs*. Le paramètre `RedirectToPage` est *combiné* avec le chemin de la page active pour calculer le nom de la page de destination.
+`RedirectToPage("Index")`, `RedirectToPage("./Index")` et `RedirectToPage("../Index")` sont des *noms relatifs*. Le paramètre `RedirectToPage` est *combiné* avec le chemin de la page active pour calculer le nom de la page de destination.
 
 La liaison de nom relatif est utile lors de la création de sites avec une structure complexe. Lorsque des noms relatifs sont utilisés pour établir une liaison entre les pages d’un dossier :
 
@@ -480,7 +478,7 @@ Pour plus d’informations, consultez <xref:mvc/controllers/areas> et <xref:razo
 
 ## <a name="viewdata-attribute"></a>Attribut ViewData
 
-Les données peuvent être passées à une page <xref:Microsoft.AspNetCore.Mvc.ViewDataAttribute>avec. Les valeurs des `[ViewData]` propriétés avec l’attribut sont stockées et chargées <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary>à partir de.
+Les données peuvent être passées à une page avec <xref:Microsoft.AspNetCore.Mvc.ViewDataAttribute> . Les valeurs des propriétés avec l' `[ViewData]` attribut sont stockées et chargées à partir de <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary> .
 
 Dans l’exemple suivant, le `AboutModel` applique l' `[ViewData]` attribut à la `Title` propriété :
 
@@ -514,7 +512,7 @@ Dans la disposition, le titre est lu à partir du dictionnaire ViewData :
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core expose <xref:Microsoft.AspNetCore.Mvc.Controller.TempData>. Cette propriété stocke les données jusqu’à ce qu’elles soient lues. Vous pouvez utiliser les méthodes <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Keep*> et <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Peek*> pour examiner les données sans suppression. `TempData`est utile pour la redirection, quand des données sont nécessaires pour plusieurs requêtes.
+ASP.NET Core expose <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> . Cette propriété stocke les données jusqu’à ce qu’elles soient lues. Vous pouvez utiliser les méthodes <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Keep*> et <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Peek*> pour examiner les données sans suppression. `TempData`est utile pour la redirection, quand des données sont nécessaires pour plusieurs requêtes.
 
 Le code suivant définit la valeur de `Message` à l’aide de `TempData` :
 
@@ -565,7 +563,7 @@ Utilisez la directive `@page` pour :
 
 Un chemin relatif racine désigné par un tilde (`~`) au début du chemin est pris en charge. Par exemple, `@page "~/Some/Other/Path"` est identique à `@page "/Some/Other/Path"`.
 
-Si vous n’aimez pas la chaîne `?handler=JoinList` de requête dans l’URL, modifiez l’itinéraire pour placer le nom du gestionnaire dans la partie chemin d’accès de l’URL. L’itinéraire peut être personnalisé en ajoutant un modèle de routage entre guillemets doubles après `@page` la directive.
+Si vous n’aimez pas la chaîne `?handler=JoinList` de requête dans l’URL, modifiez l’itinéraire pour placer le nom du gestionnaire dans la partie chemin d’accès de l’URL. L’itinéraire peut être personnalisé en ajoutant un modèle de routage entre guillemets doubles après la `@page` directive.
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/CreateRoute.cshtml?highlight=1)]
 
@@ -577,7 +575,7 @@ Le `?` suivant `handler` signifie que le paramètre d’itinéraire est facultat
 
 La configuration et les paramètres des sections suivantes ne sont pas requis par la plupart des applications.
 
-Pour configurer des options avancées, utilisez la méthode <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*>d’extension :
+Pour configurer des options avancées, utilisez la méthode d’extension <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> :
 
 [!code-cs[](index/3.0sample/RazorPagesContacts/StartupRPoptions.cs?name=snippet)]
 
@@ -587,7 +585,7 @@ Pour précompiler des vues, consultez [compilation de vue Razor](xref:mvc/views/
 
 ### <a name="specify-that-razor-pages-are-at-the-content-root"></a>Spécifier que les pages Razor se trouvent à la racine du contenu
 
-Par défaut, les pages Razor sont associées à la racine */Pages*. Ajouter <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.WithRazorPagesAtContentRoot*> pour spécifier que vos Razor pages se trouvent à la [racine](xref:fundamentals/index#content-root) du<xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath>contenu () de l’application :
+Par défaut, les pages Razor sont associées à la racine */Pages*. Ajouter <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.WithRazorPagesAtContentRoot*> pour spécifier que vos Razor pages se trouvent à la [racine du contenu](xref:fundamentals/index#content-root) ( <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath> ) de l’application :
 
 [!code-cs[](index/3.0sample/RazorPagesContacts/StartupWithRazorPagesAtContentRoot.cs?name=snippet)]
 
@@ -625,7 +623,7 @@ Ce document fournit une introduction aux pages Razor. Il ne s’agit pas d’un 
 
 ## <a name="prerequisites"></a>Prérequis
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -643,7 +641,7 @@ Ce document fournit une introduction aux pages Razor. Il ne s’agit pas d’un 
 
 ## <a name="create-a-razor-pages-project"></a>Créer un projet Razor Pages
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Pour obtenir des instructions sur la création d’un projet Razor Pages, consultez [Bien démarrer avec Razor Pages](xref:tutorials/razor-pages/razor-pages-start).
 
@@ -735,7 +733,7 @@ Le suffixe de nommage `Async` est facultatif, mais souvent utilisé par conventi
 
 Si vous êtes familiarisé avec les applications ASP.NET à l’aide de contrôleurs et de vues :
 
-* Le `OnPostAsync` code de l’exemple précédent ressemble au code de contrôleur classique.
+* Le `OnPostAsync` Code de l’exemple précédent ressemble au code de contrôleur classique.
 * La plupart des primitives MVC, telles que la [liaison de modèle](xref:mvc/models/model-binding), la [validation](xref:mvc/models/validation), la [validation](xref:mvc/models/validation)et les résultats d’action, sont partagées.
 
 La méthode `OnPostAsync` précédente :
@@ -806,20 +804,20 @@ Voici un exemple de bouton Supprimer rendu avec un ID de contact client de `1`:
 
 Quand le bouton est sélectionné, une demande `POST` de forumaire est envoyée au serveur. Par convention, le nom de la méthode de gestionnaire est sélectionné en fonction de la valeur du paramètre `handler` conformément au schéma `OnPost[handler]Async`.
 
-Étant donné que le `handler` est `delete` dans cet exemple, la méthode de gestionnaire `OnPostDeleteAsync` est utilisée pour traiter la demande `POST`. Si `asp-page-handler` est défini sur une autre valeur, comme `remove`, une méthode de gestionnaire avec le nom `OnPostRemoveAsync` est sélectionnée. Le code suivant illustre le `OnPostDeleteAsync` gestionnaire :
+Étant donné que le `handler` est `delete` dans cet exemple, la méthode de gestionnaire `OnPostDeleteAsync` est utilisée pour traiter la demande `POST`. Si `asp-page-handler` est défini sur une autre valeur, comme `remove`, une méthode de gestionnaire avec le nom `OnPostRemoveAsync` est sélectionnée. Le code suivant illustre le `OnPostDeleteAsync` Gestionnaire :
 
 [!code-cs[](index/sample/RazorPagesContacts/Pages/Index.cshtml.cs?range=26-37)]
 
 La méthode `OnPostDeleteAsync` :
 
-* Accepte l’`id` de la chaîne de requête. Si la directive de la page *index. cshtml* contenait la contrainte `"{id:int?}"`de routage, `id` provient des données d’itinéraire. Les données d’itinéraire `id` pour sont spécifiées dans l’URI `https://localhost:5001/Customers/2`, par exemple.
+* Accepte l’`id` de la chaîne de requête. Si la directive de la page *index. cshtml* contenait la contrainte `"{id:int?}"` de routage, `id` provient des données d’itinéraire. Les données d’itinéraire pour `id` sont spécifiées dans l’URI, par exemple `https://localhost:5001/Customers/2` .
 * Interroge la base de données pour le contact client avec `FindAsync`.
 * Si le contact client est trouvé, il est supprimé de la liste des contacts client. La base de données est mise à jour.
 * Appelle `RedirectToPage` pour rediriger vers la page Index racine (`/Index`).
 
 ## <a name="mark-page-properties-as-required"></a>Marquer les propriétés de page comme Required
 
-Les propriétés d' `PageModel` un peuvent être marquées avec l’attribut [Required](/dotnet/api/system.componentmodel.dataannotations.requiredattribute) :
+Les propriétés d’un `PageModel` peuvent être marquées avec l’attribut [Required](/dotnet/api/system.componentmodel.dataannotations.requiredattribute) :
 
 [!code-cs[](index/sample/Create.cshtml.cs?highlight=3,15-16)]
 
@@ -970,7 +968,7 @@ La génération d’URL pour les pages prend en charge les noms relatifs. Le tab
 | RedirectToPage("../Index") | *Pages/Index* |
 | RedirectToPage("Index")  | *Pages/Customers/Index* |
 
-`RedirectToPage("Index")`, `RedirectToPage("./Index")`et `RedirectToPage("../Index")` sont des *noms relatifs*. Le paramètre `RedirectToPage` est *combiné* avec le chemin de la page active pour calculer le nom de la page de destination.  <!-- Review: Original had The provided string is combined with the page name of the current page to compute the name of the destination page.  page name, not page path -->
+`RedirectToPage("Index")`, `RedirectToPage("./Index")` et `RedirectToPage("../Index")` sont des *noms relatifs*. Le paramètre `RedirectToPage` est *combiné* avec le chemin de la page active pour calculer le nom de la page de destination.  <!-- Review: Original had The provided string is combined with the page name of the current page to compute the name of the destination page.  page name, not page path -->
 
 La liaison de nom relatif est utile lors de la création de sites avec une structure complexe. Si vous utilisez des noms relatifs pour établir une liaison entre les pages d’un dossier, vous pouvez renommer ce dossier. Tous les liens fonctionneront encore (car ils n’incluent pas le nom du dossier).
 
@@ -980,13 +978,13 @@ Pour rediriger vers une page située dans une autre [Zone](xref:mvc/controllers/
 RedirectToPage("/Index", new { area = "Services" });
 ```
 
-Pour plus d’informations, consultez <xref:mvc/controllers/areas>.
+Pour plus d'informations, consultez <xref:mvc/controllers/areas>.
 
 ## <a name="viewdata-attribute"></a>Attribut ViewData
 
-Les données peuvent être passées à une page avec [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute). Les propriétés sur les Razor contrôleurs ou les `[ViewData]` modèles de page avec l’attribut ont leurs valeurs stockées et chargées à partir du [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary).
+Les données peuvent être passées à une page avec [ViewDataAttribute](/dotnet/api/microsoft.aspnetcore.mvc.viewdataattribute). Les propriétés sur les contrôleurs ou Razor les modèles de page avec l' `[ViewData]` attribut ont leurs valeurs stockées et chargées à partir du [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary).
 
-Dans l’exemple suivant, le `AboutModel` contient une `Title` propriété marquée avec `[ViewData]`. La propriété `Title` a pour valeur le titre de la page À propos de :
+Dans l’exemple suivant, le `AboutModel` contient une `Title` propriété marquée avec `[ViewData]` . La propriété `Title` a pour valeur le titre de la page À propos de :
 
 ```csharp
 public class AboutModel : PageModel
@@ -1071,7 +1069,7 @@ Utilisez la directive `@page` pour :
 
 Un chemin relatif racine désigné par un tilde (`~`) au début du chemin est pris en charge. Par exemple, `@page "~/Some/Other/Path"` est identique à `@page "/Some/Other/Path"`.
 
-Si vous n’aimez pas la chaîne `?handler=JoinList` de requête dans l’URL, modifiez l’itinéraire pour placer le nom du gestionnaire dans la partie chemin d’accès de l’URL. L’itinéraire peut être personnalisé en ajoutant un modèle de routage entre guillemets doubles après `@page` la directive.
+Si vous n’aimez pas la chaîne `?handler=JoinList` de requête dans l’URL, modifiez l’itinéraire pour placer le nom du gestionnaire dans la partie chemin d’accès de l’URL. L’itinéraire peut être personnalisé en ajoutant un modèle de routage entre guillemets doubles après la `@page` directive.
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/CreateRoute.cshtml?highlight=1)]
 
@@ -1091,7 +1089,7 @@ Pour précompiler des vues, consultez [ Razor afficher la compilation](xref:mvc/
 
 [Téléchargez ou affichez des exemples de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/index/sample).
 
-Consultez [prise en main Razor des pages](xref:tutorials/razor-pages/razor-pages-start), qui s’appuie sur cette introduction.
+Consultez [prise en main des Razor pages](xref:tutorials/razor-pages/razor-pages-start), qui s’appuie sur cette introduction.
 
 ### <a name="specify-that-razor-pages-are-at-the-content-root"></a>Spécifier que Razor les pages se trouvent à la racine du contenu
 

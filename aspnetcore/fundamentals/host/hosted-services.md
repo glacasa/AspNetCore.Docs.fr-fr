@@ -1,24 +1,11 @@
 ---
-title: Tâches d’arrière-plan avec des services hébergés dans ASP.NET Core
-author: rick-anderson
-description: Découvrez comment implémenter des tâches d’arrière-plan avec des services hébergés dans ASP.NET Core.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/10/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/host/hosted-services
-ms.openlocfilehash: 9ffb91226368643d1e1526847ed32f5c93e31080
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775568"
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>Tâches d’arrière-plan avec des services hébergés dans ASP.NET Core
 
@@ -46,11 +33,11 @@ Pour utiliser le modèle en tant que base d’une application de services héber
 
 [!INCLUDE[](~/includes/worker-template-instructions.md)]
 
-## <a name="package"></a>Package
+## <a name="package"></a>Paquet
 
-Une application basée sur le modèle de service Worker `Microsoft.NET.Sdk.Worker` utilise le kit de développement logiciel (SDK) et possède une référence de package explicite au package [Microsoft. extensions. Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) . Par exemple, consultez le fichier projet de l’exemple d’application (*BackgroundTasksSample. csproj*).
+Une application basée sur le modèle de service worker utilise le `Microsoft.NET.Sdk.Worker` Kit de développement logiciel (SDK) et possède une référence de package explicite au package [Microsoft. extensions. Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) . Par exemple, consultez le fichier projet de l’exemple d’application (*BackgroundTasksSample. csproj*).
 
-Pour les applications Web qui utilisent `Microsoft.NET.Sdk.Web` le kit de développement logiciel (SDK), le package [Microsoft. extensions. Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) est référencé implicitement à partir de l’infrastructure partagée. Une référence de package explicite dans le fichier projet de l’application n’est pas obligatoire.
+Pour les applications Web qui utilisent le `Microsoft.NET.Sdk.Web` Kit de développement logiciel (SDK), le package [Microsoft. extensions. Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) est référencé implicitement à partir de l’infrastructure partagée. Une référence de package explicite dans le fichier projet de l’application n’est pas obligatoire.
 
 ## <a name="ihostedservice-interface"></a>Interface IHostedService
 
@@ -58,10 +45,10 @@ L' <xref:Microsoft.Extensions.Hosting.IHostedService> interface définit deux m�
 
 * [StartAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*) &ndash; `StartAsync` contient la logique pour démarrer la tâche d’arrière-plan. `StartAsync`est appelé *avant*:
 
-  * Le pipeline de traitement des demandes de l'`Startup.Configure`application est configuré ().
+  * Le pipeline de traitement des demandes de l’application est configuré ( `Startup.Configure` ).
   * Le serveur est démarré et [IApplicationLifetime. ApplicationStarted](xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime.ApplicationStarted*) est déclenché.
 
-  Le comportement par défaut peut être modifié de `StartAsync` sorte que le service hébergé s’exécute après que le pipeline de l' `ApplicationStarted` application a été configuré et qu’il est appelé. Pour modifier le comportement par défaut, ajoutez le service hébergé`VideosWatcher` (dans l’exemple suivant) après `ConfigureWebHostDefaults`l’appel de :
+  Le comportement par défaut peut être modifié de sorte que le service hébergé `StartAsync` s’exécute après que le pipeline de l’application a été configuré et qu’il `ApplicationStarted` est appelé. Pour modifier le comportement par défaut, ajoutez le service hébergé ( `VideosWatcher` dans l’exemple suivant) après l’appel de `ConfigureWebHostDefaults` :
 
   ```csharp
   using Microsoft.AspNetCore.Hosting;
@@ -101,16 +88,16 @@ L' <xref:Microsoft.Extensions.Hosting.IHostedService> interface définit deux m�
 
   Pour prolonger le délai d’expiration par défaut de cinq secondes, définissez :
 
-  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> quand vous utilisez l’hôte générique. Pour plus d’informations, consultez <xref:fundamentals/host/generic-host#shutdown-timeout>.
-  * Le paramètre de configuration du délai d’expiration de l’hôte quand vous utilisez l’hôte web. Pour plus d’informations, consultez <xref:fundamentals/host/web-host#shutdown-timeout>.
+  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> quand vous utilisez l’hôte générique. Pour plus d'informations, consultez <xref:fundamentals/host/generic-host#shutdown-timeout>.
+  * Le paramètre de configuration du délai d’expiration de l’hôte quand vous utilisez l’hôte web. Pour plus d'informations, consultez <xref:fundamentals/host/web-host#shutdown-timeout>.
 
 Le service hébergé est activé une seule fois au démarrage de l’application et s’arrête normalement à l’arrêt de l’application. Si une erreur est levée pendant l’exécution des tâches d’arrière-plan, `Dispose` doit être appelée même si `StopAsync` n’est pas appelée.
 
 ## <a name="backgroundservice-base-class"></a>Classe de base BackgroundService
 
-<xref:Microsoft.Extensions.Hosting.BackgroundService>est une classe de base pour l’implémentation d' <xref:Microsoft.Extensions.Hosting.IHostedService>une exécution longue.
+<xref:Microsoft.Extensions.Hosting.BackgroundService>est une classe de base pour l’implémentation d’une exécution longue <xref:Microsoft.Extensions.Hosting.IHostedService> .
 
-[ExecuteAsync (CancellationToken)](xref:Microsoft.Extensions.Hosting.BackgroundService.ExecuteAsync*) est appelé pour exécuter le service d’arrière-plan. L’implémentation retourne un <xref:System.Threading.Tasks.Task> qui représente la durée de vie totale du service d’arrière-plan. Aucun autre service n’est démarré tant que [ExecuteAsync n’est pas asynchrone](https://github.com/dotnet/extensions/issues/2149), `await`par exemple en appelant. Évitez d’effectuer des opérations d’initialisation de blocage `ExecuteAsync`longues dans. L’hôte bloque dans [StopAsync (CancellationToken)](xref:Microsoft.Extensions.Hosting.BackgroundService.StopAsync*) en `ExecuteAsync` attente de la fin de l’exécution.
+[ExecuteAsync (CancellationToken)](xref:Microsoft.Extensions.Hosting.BackgroundService.ExecuteAsync*) est appelé pour exécuter le service d’arrière-plan. L’implémentation retourne un <xref:System.Threading.Tasks.Task> qui représente la durée de vie totale du service d’arrière-plan. Aucun autre service n’est démarré tant que [ExecuteAsync n’est pas asynchrone](https://github.com/dotnet/extensions/issues/2149), par exemple en appelant `await` . Évitez d’effectuer des opérations d’initialisation de blocage longues dans `ExecuteAsync` . L’hôte bloque dans [StopAsync (CancellationToken)](xref:Microsoft.Extensions.Hosting.BackgroundService.StopAsync*) en attente de la fin de l' `ExecuteAsync` exécution.
 
 Le jeton d’annulation est déclenché lors de l’appel de [IHostedService. StopAsync](xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*) . Votre implémentation de `ExecuteAsync` doit se terminer rapidement lorsque le jeton d’annulation est déclenché afin d’arrêter correctement le service. Dans le cas contraire, le service s’arrête de manière inappropriée au délai d’attente de l’arrêt. Pour plus d’informations, consultez la section de l' [interface IHostedService](#ihostedservice-interface) .
 
@@ -120,7 +107,7 @@ Une tâche d’arrière-plan avec minuteur utilise la classe [System.Threading.T
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/TimedHostedService.cs?name=snippet1&highlight=16-17,34,41)]
 
-Le <xref:System.Threading.Timer> n’attend pas que les exécutions `DoWork` précédentes se terminent. l’approche illustrée peut donc ne pas convenir à chaque scénario. Avec [verrouillage. l’incrément](xref:System.Threading.Interlocked.Increment*) est utilisé pour incrémenter le compteur d’exécution comme une opération atomique, ce qui garantit que plusieurs `executionCount` threads ne sont pas mis à jour simultanément.
+Le <xref:System.Threading.Timer> n’attend pas que les exécutions précédentes se `DoWork` terminent. l’approche illustrée peut donc ne pas convenir à chaque scénario. Avec [verrouillage. l’incrément](xref:System.Threading.Interlocked.Increment*) est utilisé pour incrémenter le compteur d’exécution comme une opération atomique, ce qui garantit que plusieurs threads ne sont pas mis à jour `executionCount` simultanément.
 
 Le service est inscrit dans `IHostBuilder.ConfigureServices` (*Program.cs*) avec la `AddHostedService` méthode d’extension :
 
@@ -132,12 +119,12 @@ Pour utiliser les [services délimités](xref:fundamentals/dependency-injection#
 
 Le service des tâches d’arrière-plan délimitées contient la logique de la tâche d’arrière-plan. Dans l’exemple suivant :
 
-* Le service est asynchrone. La méthode `DoWork` retourne un `Task`. À des fins de démonstration, un délai de dix secondes est attendu dans `DoWork` la méthode.
+* Le service est asynchrone. La méthode `DoWork` retourne un `Task`. À des fins de démonstration, un délai de dix secondes est attendu dans la `DoWork` méthode.
 * Un <xref:Microsoft.Extensions.Logging.ILogger> est injecté dans le service.
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/ScopedProcessingService.cs?name=snippet1)]
 
-Le service hébergé crée une étendue pour résoudre le service de tâche d’arrière-plan étendu `DoWork` afin d’appeler sa méthode. `DoWork`retourne un `Task`, qui est attendu dans `ExecuteAsync`:
+Le service hébergé crée une étendue pour résoudre le service de tâche d’arrière-plan étendu afin d’appeler sa `DoWork` méthode. `DoWork`retourne un `Task` , qui est attendu dans `ExecuteAsync` :
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/ConsumeScopedServiceHostedService.cs?name=snippet1&highlight=19,22-35)]
 
@@ -147,24 +134,24 @@ Les services sont inscrits dans `IHostBuilder.ConfigureServices` (*Program.cs*).
 
 ## <a name="queued-background-tasks"></a>Tâches d’arrière-plan en file d’attente
 
-Une file d’attente de tâches en arrière-plan est basée <xref:System.Web.Hosting.HostingEnvironment.QueueBackgroundWorkItem*> sur le .net 4. x ([prévu provisoirement pour être intégré pour ASP.net Core](https://github.com/aspnet/Hosting/issues/1280)) :
+Une file d’attente de tâches en arrière-plan est basée sur le .NET 4. x <xref:System.Web.Hosting.HostingEnvironment.QueueBackgroundWorkItem*> ([prévu provisoirement pour être intégré pour ASP.net Core](https://github.com/aspnet/Hosting/issues/1280)) :
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/BackgroundTaskQueue.cs?name=snippet1)]
 
-Dans l’exemple `QueueHostedService` suivant :
+Dans l' `QueueHostedService` exemple suivant :
 
-* La `BackgroundProcessing` méthode retourne un `Task`, qui est attendu dans `ExecuteAsync`.
-* Les tâches en arrière-plan de la file d’attente sont `BackgroundProcessing`déplacées en file d’attente et exécutées dans.
-* Les éléments de travail sont attendus avant l’arrêt `StopAsync`du service dans.
+* La `BackgroundProcessing` méthode retourne un `Task` , qui est attendu dans `ExecuteAsync` .
+* Les tâches en arrière-plan de la file d’attente sont déplacées en file d’attente et exécutées dans `BackgroundProcessing` .
+* Les éléments de travail sont attendus avant l’arrêt du service dans `StopAsync` .
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/QueuedHostedService.cs?name=snippet1&highlight=28-29,33)]
 
-Un `MonitorLoop` service gère les tâches de mise en file d’attente pour le `w` service hébergé chaque fois que la clé est sélectionnée sur un appareil d’entrée :
+Un `MonitorLoop` service gère les tâches de mise en file d’attente pour le service hébergé chaque fois que la `w` clé est sélectionnée sur un appareil d’entrée :
 
-* `IBackgroundTaskQueue` Est injecté dans le `MonitorLoop` service.
+* `IBackgroundTaskQueue`Est injecté dans le `MonitorLoop` service.
 * `IBackgroundTaskQueue.QueueBackgroundWorkItem`est appelé pour empiler un élément de travail.
 * L’élément de travail simule une tâche en arrière-plan de longue durée :
-  * Trois retards de 5 secondes sont`Task.Delay`exécutés ().
+  * Trois retards de 5 secondes sont exécutés ( `Task.Delay` ).
   * Une `try-catch` instruction intercepte <xref:System.OperationCanceledException> si la tâche est annulée.
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/MonitorLoop.cs?name=snippet_Monitor&highlight=7,33)]
@@ -173,7 +160,7 @@ Les services sont inscrits dans `IHostBuilder.ConfigureServices` (*Program.cs*).
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet3)]
 
-`MontiorLoop`est démarré dans `Program.Main`:
+`MonitorLoop`est démarré dans `Program.Main` :
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet4)]
 
@@ -189,7 +176,7 @@ Dans ASP.NET Core, les tâches d’arrière-plan peuvent être implémentées en
 
 [Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/hosted-services/samples/) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
-## <a name="package"></a>Package
+## <a name="package"></a>Paquet
 
 Référencer le [métapackage Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app) ou ajouter une référence de package au package [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting).
 
@@ -197,7 +184,7 @@ Référencer le [métapackage Microsoft.AspNetCore.App](xref:fundamentals/metapa
 
 Les services hébergés implémentent l’interface <xref:Microsoft.Extensions.Hosting.IHostedService>. L’interface définit deux méthodes pour les objets qui sont gérés par l’hôte :
 
-* [StartAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*) &ndash; `StartAsync` contient la logique pour démarrer la tâche d’arrière-plan. Lorsque vous utilisez l' [hôte Web](xref:fundamentals/host/web-host), `StartAsync` est appelé après que le serveur a démarré et [IApplicationLifetime. ApplicationStarted](xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime.ApplicationStarted*) est déclenché. Lors de l’utilisation de l' `StartAsync` [hôte générique](xref:fundamentals/host/generic-host), `ApplicationStarted` est appelé avant que ne soit déclenché.
+* [StartAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*) &ndash; `StartAsync` contient la logique pour démarrer la tâche d’arrière-plan. Lorsque vous utilisez l' [hôte Web](xref:fundamentals/host/web-host), `StartAsync` est appelé après que le serveur a démarré et [IApplicationLifetime. ApplicationStarted](xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime.ApplicationStarted*) est déclenché. Lors de l’utilisation de l' [hôte générique](xref:fundamentals/host/generic-host), `StartAsync` est appelé avant que `ApplicationStarted` ne soit déclenché.
 
 * [StopAsync(CancellationToken)](xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*) &ndash;, déclenchée quand l’hôte effectue un arrêt normal. `StopAsync` contient la logique pour terminer la tâche d’arrière-plan. Implémentez <xref:System.IDisposable> et les [finaliseurs (destructeurs)](/dotnet/csharp/programming-guide/classes-and-structs/destructors) pour supprimer toutes les ressources non managées.
 
@@ -212,8 +199,8 @@ Les services hébergés implémentent l’interface <xref:Microsoft.Extensions.H
 
   Pour prolonger le délai d’expiration par défaut de cinq secondes, définissez :
 
-  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> quand vous utilisez l’hôte générique. Pour plus d’informations, consultez <xref:fundamentals/host/generic-host#shutdown-timeout>.
-  * Le paramètre de configuration du délai d’expiration de l’hôte quand vous utilisez l’hôte web. Pour plus d’informations, consultez <xref:fundamentals/host/web-host#shutdown-timeout>.
+  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> quand vous utilisez l’hôte générique. Pour plus d'informations, consultez <xref:fundamentals/host/generic-host#shutdown-timeout>.
+  * Le paramètre de configuration du délai d’expiration de l’hôte quand vous utilisez l’hôte web. Pour plus d'informations, consultez <xref:fundamentals/host/web-host#shutdown-timeout>.
 
 Le service hébergé est activé une seule fois au démarrage de l’application et s’arrête normalement à l’arrêt de l’application. Si une erreur est levée pendant l’exécution des tâches d’arrière-plan, `Dispose` doit être appelée même si `StopAsync` n’est pas appelée.
 
@@ -223,7 +210,7 @@ Une tâche d’arrière-plan avec minuteur utilise la classe [System.Threading.T
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Services/TimedHostedService.cs?name=snippet1&highlight=15-16,30,37)]
 
-Le <xref:System.Threading.Timer> n’attend pas que les exécutions `DoWork` précédentes se terminent. l’approche illustrée peut donc ne pas convenir à chaque scénario.
+Le <xref:System.Threading.Timer> n’attend pas que les exécutions précédentes se `DoWork` terminent. l’approche illustrée peut donc ne pas convenir à chaque scénario.
 
 Le service est inscrit dans `Startup.ConfigureServices` avec la méthode d’extension `AddHostedService` :
 
@@ -231,7 +218,7 @@ Le service est inscrit dans `Startup.ConfigureServices` avec la méthode d’ext
 
 ## <a name="consuming-a-scoped-service-in-a-background-task"></a>Utilisation d’un service délimité dans une tâche d’arrière-plan
 
-Pour utiliser les [services délimités](xref:fundamentals/dependency-injection#service-lifetimes) dans un `IHostedService`objet, créez une étendue. Par défaut, aucune étendue n’est créée pour un service hébergé.
+Pour utiliser les [services délimités](xref:fundamentals/dependency-injection#service-lifetimes) dans un `IHostedService` objet, créez une étendue. Par défaut, aucune étendue n’est créée pour un service hébergé.
 
 Le service des tâches d’arrière-plan délimitées contient la logique de la tâche d’arrière-plan. Dans l’exemple suivant, un <xref:Microsoft.Extensions.Logging.ILogger> est injecté dans le service :
 
@@ -247,7 +234,7 @@ Les services sont inscrits dans `Startup.ConfigureServices`. L’implémentation
 
 ## <a name="queued-background-tasks"></a>Tâches d’arrière-plan en file d’attente
 
-Une file d’attente de tâches en arrière-plan est basée <xref:System.Web.Hosting.HostingEnvironment.QueueBackgroundWorkItem*> sur le .NET Framework 4. x ([prévu provisoirement pour être intégré pour ASP.net Core](https://github.com/aspnet/Hosting/issues/1280)) :
+Une file d’attente de tâches en arrière-plan est basée sur le .NET Framework 4. x <xref:System.Web.Hosting.HostingEnvironment.QueueBackgroundWorkItem*> ([prévu provisoirement pour être intégré pour ASP.net Core](https://github.com/aspnet/Hosting/issues/1280)) :
 
 [!code-csharp[](hosted-services/samples/2.x/BackgroundTasksSample/Services/BackgroundTaskQueue.cs?name=snippet1)]
 

@@ -1,30 +1,16 @@
 ---
-title: Appeler une API Web à partir de ASP.NET Core Blazor Webassembly
-author: guardrex
-description: Découvrez comment appeler une API Web à partir d’une Blazor application Webassembly à l’aide des applications auxiliaires JSON, y compris la création de demandes de partage des ressources Cross-Origin (cors).
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/11/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/call-web-api
-ms.openlocfilehash: 7ed2d51c0d41a50a2e139d739a0a06cd9f392a83
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153503"
+titre : « appeler une API Web à partir de ASP.NET Core Blazor Webassembly » auteur : Description : « Découvrez comment appeler une API Web à partir d’une Blazor application webassembly à l’aide des applications auxiliaires JSON, y compris la création de requêtes de partage des ressources Cross-Origin (cors). »
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>Appeler une API Web à partir de ASP.NET CoreBlazor
 
 Par [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27)et [Juan de la Cruz](https://github.com/juandelacruz23)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 Les applications [ Blazor webassembly](xref:blazor/hosting-models#blazor-webassembly) appellent des API Web à l’aide d’un `HttpClient` service préconfiguré. Composez des requêtes, qui peuvent inclure des options de l' [API d’extraction](https://developer.mozilla.org/docs/Web/API/Fetch_API) JavaScript, à l’aide Blazor des applications auxiliaires JSON ou de <xref:System.Net.Http.HttpRequestMessage> . `HttpClient`Dans les Blazor applications webassembly, le service est axé sur l’exécution de requêtes sur le serveur d’origine. Les instructions de cette rubrique concernent uniquement les Blazor applications Webassembly.
 
@@ -37,7 +23,7 @@ Consultez les composants suivants dans l’exemple d’application *BlazorWebAss
 * Appeler l’API Web (*pages/CallWebAPI. Razor*)
 * Testeur de requêtes HTTP (*composants/HTTPRequestTester. Razor*)
 
-## <a name="packages"></a>.
+## <a name="packages"></a>Paquets
 
 Référencez le package NuGet [System .net. http. JSON](https://www.nuget.org/packages/System.Net.Http.Json/) dans le fichier projet.
 

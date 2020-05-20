@@ -1,41 +1,63 @@
 ---
-title: Fonctionnalités du client SignalR
+title: SignalRClients ASP.net Core
 author: bradygaster
-description: Découvrez les fonctionnalités prises en charge par les différents clients ASP.NET Core Signalr.
+description: Découvrez les fonctionnalités prises en charge par les différents SignalR clients ASP.net core.
 ms.author: bradyg
 ms.custom: mvc
-ms.date: 09/18/2019
+ms.date: 11/12/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: signalr/client-features
-ms.openlocfilehash: 6718722cdbcfae500026fcd429ca6b9de8f0f103
-ms.sourcegitcommit: 73e255e846e414821b8cc20ffa3aec946735cd4e
+ms.openlocfilehash: a759e473ff7ffaebd0eb9309f37a959d0e06a466
+ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/03/2019
-ms.locfileid: "71925358"
+ms.lasthandoff: 05/16/2020
+ms.locfileid: "83438957"
 ---
-# <a name="aspnet-core-signalr-client-features"></a>Fonctionnalités du client ASP.NET Core Signalr
+# <a name="aspnet-core-signalr-clients"></a>Clients Signalr ASP.NET Core
+
+## <a name="versioning-support-and-compatibility"></a>Contrôle de version, prise en charge et compatibilité
+
+Les clients Signalr sont livrés avec les composants serveur et les versions sont mises en correspondance. Tout client pris en charge peut se connecter en toute sécurité à n’importe quel serveur pris en charge, et les problèmes de compatibilité seraient considérés comme des bogues à résoudre. Les clients signalr sont pris en charge dans le même cycle de vie du support que le reste de .NET Core. Pour plus d’informations, consultez [la stratégie de prise en charge de .net Core](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) .
+
+De nombreuses fonctionnalités requièrent un client **et** un serveur compatibles. Reportez-vous à la section ci-dessous pour un tableau présentant les versions minimales de différentes fonctionnalités.
+
+Les versions 1. x de Signalr correspondent aux versions 2,1 et 2,2 .NET Core et ont la même durée de vie. Pour la version 3. x et les versions ultérieures, la version de Signalr correspond exactement au reste de .NET et a le même cycle de vie de support.
+
+| Version de signalr | Version .NET Core | Niveau de support | Fin de la prise en charge |
+| - | - | - | - |
+| 1.0. x | 2.1.x | Support à long terme | 21 août, 2021 |
+| 1.1. x | 2.2.x | Fin de vie | 23 décembre 2019 |
+| 3. x ou supérieur | *identique à la version de Signalr* | Consultez la [stratégie de prise en charge de .net Core](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) |
+
+**Remarque :** Dans ASP.NET Core 3,0, le client JavaScript a *été déplacé* vers le `@microsoft/signalr` package NPM.
 
 ## <a name="feature-distribution"></a>Distribution des fonctionnalités
 
 Le tableau ci-dessous présente les fonctionnalités et la prise en charge des clients qui offrent une prise en charge en temps réel. Pour chaque fonctionnalité, la version *minimale* qui prend en charge cette fonctionnalité est indiquée. Si aucune version n’est indiquée, la fonctionnalité n’est pas prise en charge.
 
-| Fonctionnalité | .NET | JavaScript | Java |
-| ---- | :-: | :-: | :-: |
-| Prise en charge du service Azure Signalr |1.0.0|1.0.0|1.0.0|
-| [Streaming de serveur à client](xref:signalr/streaming)          |1.0.0|1.0.0|1.0.0|
-| [Streaming client à serveur](xref:signalr/streaming)          |3.0.0|3.0.0|3.0.0|
-| Reconnexion automatique ([.net](/aspnet/core/signalr/dotnet-client?view=aspnetcore-3.0&tabs=visual-studio#handle-lost-connection), [JavaScript](/aspnet/core/signalr/javascript-client?view=aspnetcore-3.0#reconnect-clients))          |3.0.0|3.0.0|❌|
-| Transport WebSockets |1.0.0|1.0.0|1.0.0|
-| Transport des événements envoyés par le serveur |1.0.0|1.0.0|❌|
-| Transport d’interrogation longue |1.0.0|1.0.0|3.0.0|
-| Protocole JSON Hub |1.0.0|1.0.0|1.0.0|
-| Protocole MessagePack Hub |1.0.0|1.0.0|❌|
+| Fonctionnalité | Serveur | Client .NET | Client JavaScript | Client Java |
+| ---- | :-: | :-: | :-: | :-: |
+| SignalRSupport du service Azure |2.1.0|1.0.0|1.0.0|1.0.0|
+| [Streaming de serveur à client](xref:signalr/streaming)          |2.1.0|1.0.0|1.0.0|1.0.0|
+| [Streaming client à serveur](xref:signalr/streaming)          |3.0.0|3.0.0|3.0.0|3.0.0|
+| Reconnexion automatique ([.net](/aspnet/core/signalr/dotnet-client?view=aspnetcore-3.0&tabs=visual-studio#handle-lost-connection), [JavaScript](/aspnet/core/signalr/javascript-client?view=aspnetcore-3.0#reconnect-clients))          |3.0.0|3.0.0|3.0.0|❌|
+| Transport WebSockets |2.1.0|1.0.0|1.0.0|1.0.0|
+| Transport des événements envoyés par le serveur |2.1.0|1.0.0|1.0.0|❌|
+| Transport d’interrogation longue |2.1.0|1.0.0|1.0.0|3.0.0|
+| Protocole JSON Hub |2.1.0|1.0.0|1.0.0|1.0.0|
+| Protocole MessagePack Hub |2.1.0|1.0.0|1.0.0|❌|
 
-La prise en charge de la reconnexion automatique dans le client Java est suivie dans notre suivi des [problèmes](https://github.com/aspnet/AspNetCore/issues/8711).
+La prise en charge de l’activation de fonctionnalités supplémentaires du client est suivie dans [notre suivi des problèmes](https://github.com/dotnet/AspNetCore/issues).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* [Prise en main de Signalr pour ASP.NET Core](xref:tutorials/signalr)
+* [Prise en main SignalR de pour ASP.net Core](xref:tutorials/signalr)
 * [Plateformes prises en charge](xref:signalr/supported-platforms)
 * [Hubs](xref:signalr/hubs)
 * [Client JavaScript](xref:signalr/javascript-client)

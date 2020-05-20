@@ -4,7 +4,7 @@ author: tratcher
 description: Découvrez comment tester ASP.NET Core intergiciel avec TestServer.
 ms.author: riande
 ms.custom: mvc
-ms.date: 5/6/2019
+ms.date: 5/12/2020
 no-loc:
 - Blazor
 - Identity
@@ -12,18 +12,18 @@ no-loc:
 - Razor
 - SignalR
 uid: test/middleware
-ms.openlocfilehash: 06ff7167e32fbd613c18709e31ecd078b3dfc926
-ms.sourcegitcommit: 30fcf69556b6b6ec54a3879e280d5f61f018b48f
+ms.openlocfilehash: ea7fc0e889ab32cbaf23257b3e866519af0727aa
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82876436"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424535"
 ---
 # <a name="test-aspnet-core-middleware"></a>Tester l’intergiciel (middleware) ASP.NET Core
 
 Par [Chris Ross](https://github.com/Tratcher)
 
-L’intergiciel peut être testé en isolation avec <xref:Microsoft.AspNetCore.TestHost.TestServer>. Vous pouvez ainsi :
+L’intergiciel peut être testé en isolation avec <xref:Microsoft.AspNetCore.TestHost.TestServer> . Vous pouvez ainsi :
 
 * Instanciez un pipeline d’application contenant uniquement les composants que vous devez tester.
 * Envoyer des demandes personnalisées pour vérifier le comportement de l’intergiciel (middleware).
@@ -33,36 +33,36 @@ Avantages :
 * Les demandes sont envoyées en mémoire au lieu d’être sérialisées sur le réseau.
 * Cela évite des préoccupations supplémentaires, telles que la gestion des ports et les certificats HTTPs.
 * Les exceptions dans l’intergiciel (middleware) peuvent être directement transmises au test appelant.
-* Il est possible de personnaliser les structures de données du serveur <xref:Microsoft.AspNetCore.Http.HttpContext>, telles que, directement dans le test.
+* Il est possible de personnaliser les structures de données du serveur, telles que <xref:Microsoft.AspNetCore.Http.HttpContext> , directement dans le test.
 
 ## <a name="set-up-the-testserver"></a>Configurer TestServer
 
 Dans le projet de test, créez un test :
 
-* Créez et démarrez un hôte qui utilise <xref:Microsoft.AspNetCore.TestHost.TestServer>.
+* Créez et démarrez un hôte qui utilise <xref:Microsoft.AspNetCore.TestHost.TestServer> .
 * Ajoutez les services requis que l’intergiciel utilise.
 * Configurez le pipeline de traitement pour utiliser l’intergiciel (middleware) pour le test.
 
 [!code-csharp[](middleware/samples_snapshot/3.x/setup.cs?highlight=4-18)]
 
 ## <a name="send-requests-with-httpclient"></a>Envoyer des demandes avec HttpClient
-Envoyer une demande à <xref:System.Net.Http.HttpClient>l’aide de :
+Envoyer une demande à l’aide de <xref:System.Net.Http.HttpClient> :
 
 [!code-csharp[](middleware/samples_snapshot/3.x/request.cs?highlight=20)]
 
 Déclarez le résultat. Tout d’abord, faites d’une assertion l’inverse du résultat attendu. Une exécution initiale avec une assertion false positive confirme que le test échoue quand l’intergiciel s’exécute correctement. Exécutez le test et vérifiez que le test échoue.
 
-Dans l’exemple suivant, l’intergiciel (middleware) doit retourner un code d’État 404 (*introuvable*) quand le point de terminaison racine est demandé. Effectuez la première série de tests `Assert.NotEqual( ... );`avec, qui doit échouer :
+Dans l’exemple suivant, l’intergiciel (middleware) doit retourner un code d’État 404 (*introuvable*) quand le point de terminaison racine est demandé. Effectuez la première série de tests avec `Assert.NotEqual( ... );` , qui doit échouer :
 
 [!code-csharp[](middleware/samples_snapshot/3.x/false-failure-check.cs?highlight=22)]
 
-Modifiez l’assertion pour tester l’intergiciel dans des conditions de fonctionnement normales. Le test final utilise `Assert.Equal( ... );`. Exécutez à nouveau le test pour confirmer qu’il réussit.
+Modifiez l’assertion pour tester l’intergiciel dans des conditions de fonctionnement normales. Le test final utilise `Assert.Equal( ... );` . Exécutez à nouveau le test pour confirmer qu’il réussit.
 
 [!code-csharp[](middleware/samples_snapshot/3.x/final-test.cs?highlight=22)]
 
 ## <a name="send-requests-with-httpcontext"></a>Envoyer des demandes avec HttpContext
 
-Une application de test peut également envoyer une demande à l’aide de [SendAsync (action\<HttpContext>, CancellationToken)](xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A). Dans l’exemple suivant, plusieurs vérifications sont effectuées lorsque `https://example.com/A/Path/?and=query` est traité par l’intergiciel (middleware) :
+Une application de test peut également envoyer une demande à l’aide de [SendAsync (action \< HttpContext>, CancellationToken)](xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A). Dans l’exemple suivant, plusieurs vérifications sont effectuées lorsque `https://example.com/A/Path/?and=query` est traité par l’intergiciel (middleware) :
 
 ```csharp
 [Fact]
@@ -111,6 +111,23 @@ public async Task TestMiddleware_ExpectedResponse()
 }
 ```
 
-<xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A>autorise la <xref:System.Net.Http.HttpClient> configuration directe d' <xref:Microsoft.AspNetCore.Http.HttpContext> un objet plutôt que l’utilisation des abstractions. Utilisez <xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A> pour manipuler des structures uniquement disponibles sur le serveur, telles que [HttpContext. Items](xref:Microsoft.AspNetCore.Http.HttpContext.Items) ou [HttpContext. Features](xref:Microsoft.AspNetCore.Http.HttpContext.Features).
+<xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A>autorise la configuration directe d’un <xref:Microsoft.AspNetCore.Http.HttpContext> objet plutôt que l’utilisation des <xref:System.Net.Http.HttpClient> abstractions. Utilisez <xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A> pour manipuler des structures uniquement disponibles sur le serveur, telles que [HttpContext. Items](xref:Microsoft.AspNetCore.Http.HttpContext.Items) ou [HttpContext. Features](xref:Microsoft.AspNetCore.Http.HttpContext.Features).
 
-Comme dans l’exemple précédent qui a testé une réponse *404-introuvable* , vérifiez l’inverse pour `Assert` chaque instruction du test précédent. La vérification confirme que le test échoue correctement lorsque l’intergiciel fonctionne normalement. Une fois que vous avez confirmé que le test de faux positif fonctionne, `Assert` définissez les instructions finales pour les conditions et les valeurs attendues du test. Exécutez-le à nouveau pour confirmer que le test réussit.
+Comme dans l’exemple précédent qui a testé une réponse *404-introuvable* , vérifiez l’inverse pour chaque `Assert` instruction du test précédent. La vérification confirme que le test échoue correctement lorsque l’intergiciel fonctionne normalement. Une fois que vous avez confirmé que le test de faux positif fonctionne, définissez les `Assert` instructions finales pour les conditions et les valeurs attendues du test. Exécutez-le à nouveau pour confirmer que le test réussit.
+
+## <a name="testserver-limitations"></a>Limitations de TestServer
+
+TestServer
+
+* A été créé pour répliquer des comportements de serveur pour tester l’intergiciel (middleware).
+* N’essaie ***pas*** de répliquer tous les <xref:System.Net.Http.HttpClient> comportements.
+* Tente d’accorder au client un accès au plus grand contrôle du serveur que possible et avec autant de visibilité sur ce qui se passe sur le serveur que possible. Par exemple, il peut lever des exceptions qui ne sont normalement pas levées par afin `HttpClient` de communiquer directement l’état du serveur.
+* Ne définit pas certains en-têtes de transport par défaut, car ceux-ci ne sont généralement pas pertinents pour l’intergiciel (middleware). Pour plus d'informations, consultez la section suivante.
+
+### <a name="content-length-and-transfer-encoding-headers"></a>En-têtes Content-Length et Transfer-Encoding
+
+TestServer ne définit ***pas*** les en-têtes de demande ou de réponse de transport tels que [Content-Length](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Length) ou [Transfer-Encoding](https://developer.mozilla.org/docs/Web/HTTP/Headers/Transfer-Encoding). Les applications doivent éviter en fonction de ces en-têtes, car leur utilisation varie selon le client, le scénario et le protocole. Si `Content-Length` et `Transfer-Encoding` sont nécessaires pour tester un scénario spécifique, ils peuvent être spécifiés dans le test lors de la composition de <xref:System.Net.Http.HttpRequestMessage> ou de <xref:Microsoft.AspNetCore.Http.HttpContext> . Pour plus d’informations, consultez les problèmes GitHub suivants :
+
+* [dotnet/aspnetcore # 21677](https://github.com/dotnet/aspnetcore/issues/21677)
+* [dotnet/aspnetcore # 18463](https://github.com/dotnet/aspnetcore/issues/18463)
+* [dotnet/aspnetcore # 13273](https://github.com/dotnet/aspnetcore/issues/13273)
