@@ -1,24 +1,12 @@
 ---
-title: Dispositions de ASP.NET Core Blazor
-author: guardrex
-description: Découvrez comment créer des composants de disposition réutilisables pour les Blazor applications.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/12/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/layouts
-ms.openlocfilehash: 09cca9c4af23c35fdbc2ee92169913c960b0a68d
-ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83424332"
+titre : 'ASP.NET Core Blazor dispositions’auteur : Description : 'Apprenez à créer des composants de disposition réutilisables pour les Blazor applications. '
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="aspnet-core-blazor-layouts"></a>Dispositions de ASP.NET Core Blazor
 
@@ -30,10 +18,10 @@ Techniquement, une disposition est simplement un autre composant. Une dispositio
 
 Pour transformer un *composant* en une *disposition*, le composant :
 
-* Hérite de `LayoutComponentBase` , qui définit une `Body` propriété pour le contenu rendu à l’intérieur de la disposition.
+* Hérite de <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> , qui définit une <xref:Microsoft.AspNetCore.Components.LayoutComponentBase.Body> propriété pour le contenu rendu à l’intérieur de la disposition.
 * Utilise la Razor syntaxe `@Body` pour spécifier l’emplacement dans la balise de mise en page où le contenu est restitué.
 
-L’exemple de code suivant montre le Razor modèle d’un composant de disposition, *MainLayout. Razor*. La disposition hérite `LayoutComponentBase` de et définit la `@Body` entre la barre de navigation et le pied de page :
+L’exemple de code suivant montre le Razor modèle d’un composant de disposition, *MainLayout. Razor*. La disposition hérite <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> de et définit la `@Body` entre la barre de navigation et le pied de page :
 
 [!code-razor[](layouts/sample_snapshot/3.x/MainLayout.razor?highlight=1,13)]
 
@@ -41,21 +29,21 @@ Dans une application basée sur l’un des Blazor modèles d’application, le `
 
 ## <a name="default-layout"></a>Disposition par défaut
 
-Spécifiez la disposition de l’application par défaut dans le `Router` composant dans le fichier *app. Razor* de l’application. Le `Router` composant suivant, qui est fourni par les modèles par défaut Blazor , définit la disposition par défaut sur le `MainLayout` composant :
+Spécifiez la disposition de l’application par défaut dans le <xref:Microsoft.AspNetCore.Components.Routing.Router> composant dans le fichier *app. Razor* de l’application. Le <xref:Microsoft.AspNetCore.Components.Routing.Router> composant suivant, qui est fourni par les modèles par défaut Blazor , définit la disposition par défaut sur le `MainLayout` composant :
 
 [!code-razor[](layouts/sample_snapshot/3.x/App1.razor?highlight=3)]
 
-Pour fournir une disposition par défaut pour le `NotFound` contenu, spécifiez un `LayoutView` pour le `NotFound` contenu :
+Pour fournir une disposition par défaut pour le <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> contenu, spécifiez un <xref:Microsoft.AspNetCore.Components.LayoutView> pour le <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> contenu :
 
 [!code-razor[](layouts/sample_snapshot/3.x/App2.razor?highlight=6-9)]
 
-Pour plus d’informations sur le `Router` composant, consultez <xref:blazor/routing> .
+Pour plus d’informations sur le <xref:Microsoft.AspNetCore.Components.Routing.Router> composant, consultez <xref:blazor/routing> .
 
 La spécification de la disposition comme disposition par défaut dans le routeur est une pratique utile, car elle peut être remplacée par composant ou par dossier. Préférez utiliser le routeur pour définir la disposition par défaut de l’application, car il s’agit de la technique la plus générale.
 
 ## <a name="specify-a-layout-in-a-component"></a>Spécifier une disposition dans un composant
 
-Utilisez la Razor directive `@layout` pour appliquer une disposition à un composant. Le compilateur convertit `@layout` en `LayoutAttribute` , qui est appliqué à la classe de composant.
+Utilisez la Razor directive `@layout` pour appliquer une disposition à un composant. Le compilateur convertit `@layout` en <xref:Microsoft.AspNetCore.Components.LayoutAttribute> , qui est appliqué à la classe de composant.
 
 Le contenu du composant suivant `MasterList` est inséré dans le `MasterLayout` à la position de `@Body` :
 

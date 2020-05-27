@@ -1,26 +1,14 @@
 ---
-title: Globalisation et localisation ASP.NET Core Blazor
-author: guardrex
-description: Découvrez comment rendre Razor des composants accessibles aux utilisateurs dans plusieurs cultures et langages.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/14/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/globalization-localization
-ms.openlocfilehash: b39695f8b506744b4af27a1d7e09bfac9594d7ca
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772489"
+titre : « ASP.NET Core Blazor globalisation et localisation » auteur : Description : « Découvrez comment rendre des Razor composants accessibles aux utilisateurs dans plusieurs cultures et langues. »
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
-# <a name="aspnet-core-blazor-globalization-and-localization"></a>Globalisation et localisation ASP.NET Core Blazor
+# <a name="aspnet-core-blazor-globalization-and-localization"></a>BlazorGlobalisation et localisation ASP.net Core
 
 Par [Luke Latham](https://github.com/guardrex) et [Daniel Roth](https://github.com/danroth27)
 
@@ -31,18 +19,18 @@ Razorles composants peuvent être rendus accessibles aux utilisateurs dans plusi
 
 Un ensemble limité de scénarios de localisation de ASP.NET Core est actuellement pris en charge :
 
-* `IStringLocalizer<>`*est pris en charge* dans Blazor les applications.
-* `IHtmlLocalizer<>`la `IViewLocalizer<>`localisation des annotations de données, et est ASP.net Core les scénarios MVC Blazor et **non pris en charge** dans les applications.
+* <xref:Microsoft.Extensions.Localization.IStringLocalizer>et <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> *sont pris en charge* dans les Blazor applications.
+* <xref:Microsoft.AspNetCore.Mvc.Localization.IHtmlLocalizer>la <xref:Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer> localisation des annotations de données, et est ASP.net Core les scénarios MVC et **non pris en charge** dans les Blazor applications.
 
-Pour plus d’informations, consultez <xref:fundamentals/localization>.
+Pour plus d'informations, consultez <xref:fundamentals/localization>.
 
 ## <a name="globalization"></a>Globalisation
 
-Blazorla `@bind` fonctionnalité de effectue des mises en forme et analyse les valeurs pour l’affichage en fonction de la culture actuelle de l’utilisateur.
+Blazor[`@bind`](xref:mvc/views/razor#bind)la fonctionnalité de effectue des mises en forme et analyse les valeurs pour l’affichage en fonction de la culture actuelle de l’utilisateur.
 
-La culture actuelle est accessible à partir de <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=fullName> la propriété.
+La culture actuelle est accessible à partir de la <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=fullName> propriété.
 
-[CultureInfo. InvariantCulture](xref:System.Globalization.CultureInfo.InvariantCulture) est utilisé pour les types de champ suivants`<input type="{TYPE}" />`() :
+<xref:System.Globalization.CultureInfo.InvariantCulture?displayProperty=nameWithType>est utilisé pour les types de champ suivants ( `<input type="{TYPE}" />` ) :
 
 * `date`
 * `number`
@@ -53,13 +41,13 @@ Les types de champ précédents :
 * Ne peut pas contenir de texte de forme libre.
 * Fournir des caractéristiques d’interaction de l’utilisateur en fonction de l’implémentation du navigateur.
 
-Les types de champs suivants ont des exigences de mise en forme spécifiques et Blazor ne sont pas actuellement pris en charge par, car ils ne sont pas pris en charge par tous les principaux navigateurs :
+Les types de champs suivants ont des exigences de mise en forme spécifiques et ne sont pas actuellement pris en charge par Blazor , car ils ne sont pas pris en charge par tous les principaux navigateurs :
 
 * `datetime-local`
 * `month`
 * `week`
 
-`@bind`prend en `@bind:culture` charge le paramètre pour <xref:System.Globalization.CultureInfo?displayProperty=fullName> fournir un pour l’analyse et la mise en forme d’une valeur. La `date` spécification d’une culture n’est pas recommandée `number` lors de l’utilisation des types de champ et. `date`et `number` disposent d' Blazor une prise en charge intégrée qui fournit la culture requise.
+[`@bind`](xref:mvc/views/razor#bind)prend en charge le `@bind:culture` paramètre pour fournir un <xref:System.Globalization.CultureInfo?displayProperty=fullName> pour l’analyse et la mise en forme d’une valeur. La spécification d’une culture n’est pas recommandée lors de l’utilisation des `date` `number` types de champ et. `date`et `number` disposent d’une Blazor prise en charge intégrée qui fournit la culture requise.
 
 ## <a name="localization"></a>Localisation
 
@@ -67,11 +55,11 @@ Les types de champs suivants ont des exigences de mise en forme spécifiques et 
 
 BlazorLes applications webassembly définissent la culture à l’aide de la [préférence de langue](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)de l’utilisateur.
 
-Pour configurer explicitement la culture, définissez `CultureInfo.DefaultThreadCurrentCulture` et `CultureInfo.DefaultThreadCurrentUICulture` dans `Program.Main`.
+Pour configurer explicitement la culture, définissez <xref:System.Globalization.CultureInfo.DefaultThreadCurrentCulture?displayProperty=nameWithType> et <xref:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture?displayProperty=nameWithType> dans `Program.Main` .
 
-Par défaut, Blazorla configuration de l’éditeur Blazor de liens pour les applications webassembly supprime les informations d’internationalisation, à l’exception des paramètres régionaux demandés explicitement. Pour plus d’informations et de conseils sur le contrôle du comportement de l' <xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization>éditeur de liens, consultez.
+Par défaut, Blazor la configuration de l’éditeur de liens pour les Blazor applications webassembly supprime les informations d’internationalisation, à l’exception des paramètres régionaux demandés explicitement. Pour plus d’informations et de conseils sur le contrôle du comportement de l’éditeur de liens, consultez <xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization> .
 
-Alors que la culture Blazor qui sélectionne par défaut peut être suffisante pour la plupart des utilisateurs, envisagez d’offrir aux utilisateurs un moyen de spécifier leurs paramètres régionaux préférés. Pour obtenir Blazor un exemple d’application webassembly avec un sélecteur de culture, consultez l’exemple d’application de localisation [LocSample](https://github.com/pranavkm/LocSample) .
+Alors que la culture qui Blazor sélectionne par défaut peut être suffisante pour la plupart des utilisateurs, envisagez d’offrir aux utilisateurs un moyen de spécifier leurs paramètres régionaux préférés. Pour obtenir un Blazor exemple d’application Webassembly avec un sélecteur de culture, consultez l’exemple d’application de localisation [LocSample](https://github.com/pranavkm/LocSample) .
 
 ### <a name="blazor-server"></a>BlazorServeurs
 
@@ -114,7 +102,7 @@ La localisation est gérée par l’application dans la séquence d’événemen
 1. Le navigateur envoie une requête HTTP initiale à l’application.
 1. La culture est affectée par l’intergiciel (middleware) de localisation.
 1. La `OnGet` méthode dans *_Host. cshtml. cs* rend persistante la culture dans un cookie dans le cadre de la réponse.
-1. Le navigateur ouvre une connexion WebSocket pour créer une session Blazor de serveur interactive.
+1. Le navigateur ouvre une connexion WebSocket pour créer une Blazor session de serveur interactive.
 1. L’intergiciel de localisation lit le cookie et assigne la culture.
 1. La Blazor session serveur commence par la culture correcte.
 
@@ -146,7 +134,7 @@ public class CultureController : Controller
 ```
 
 > [!WARNING]
-> Utilisez le `LocalRedirect` résultat de l’action pour empêcher les attaques de redirection ouvertes. Pour plus d’informations, consultez <xref:security/preventing-open-redirects>.
+> Utilisez le <xref:Microsoft.AspNetCore.Mvc.ControllerBase.LocalRedirect%2A> résultat de l’action pour empêcher les attaques de redirection ouvertes. Pour plus d'informations, consultez <xref:security/preventing-open-redirects>.
 
 Le composant suivant montre un exemple d’exécution de la redirection initiale lorsque l’utilisateur sélectionne une culture :
 

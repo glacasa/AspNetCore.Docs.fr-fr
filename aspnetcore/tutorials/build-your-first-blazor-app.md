@@ -69,11 +69,11 @@ Incluez un composant dans un autre composant utilisant une syntaxe HTML.
 
 ## <a name="component-parameters"></a>Paramètres de composant
 
-Les composants peuvent également avoir des paramètres. Les paramètres de composant sont définis à l’aide de propriétés publiques sur la classe de composant avec l' `[Parameter]` attribut. Utilisez des attributs pour spécifier des arguments pour un composant dans le balisage.
+Les composants peuvent également avoir des paramètres. Les paramètres de composant sont définis à l’aide de propriétés publiques sur la classe de composant avec l' [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) attribut. Utilisez des attributs pour spécifier des arguments pour un composant dans le balisage.
 
 1. Mettez à jour le `@code` code C# du composant comme suit :
 
-   * Ajoutez une `IncrementAmount` propriété publique avec l' `[Parameter]` attribut.
+   * Ajoutez une `IncrementAmount` propriété publique avec l' [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) attribut.
    * Modifiez la `IncrementCount` méthode pour utiliser la `IncrementAmount` propriété lors de l’incrémentation de la valeur de `currentCount` .
 
    *Pages/Counter.razor* :
@@ -105,7 +105,7 @@ Si vous utilisez une Blazor application serveur, le `WeatherForecastService` ser
 
 [!code-csharp[](build-your-first-blazor-app/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-La `@inject` directive est utilisée pour injecter l’instance du `WeatherForecastService` service dans le `FetchData` composant.
+La [`@inject`](xref:mvc/views/razor#inject) directive est utilisée pour injecter l’instance du `WeatherForecastService` service dans le `FetchData` composant.
 
 *Pages/FetchData.razor* :
 
@@ -117,7 +117,7 @@ Le composant `FetchData` utilise le service injecté, comme `ForecastService`, p
 
 ### <a name="blazor-webassembly-experience"></a>BlazorExpérience webassembly
 
-Si vous utilisez une Blazor application Webassembly, `HttpClient` est injecté pour obtenir des données de prévision météorologiques à partir du fichier *Weather. JSON* dans le dossier *wwwroot/Sample-Data* .
+Si vous utilisez une Blazor application Webassembly, <xref:System.Net.Http.HttpClient> est injecté pour obtenir des données de prévision météorologiques à partir du fichier *Weather. JSON* dans le dossier *wwwroot/Sample-Data* .
 
 *Pages/FetchData.razor* :
 

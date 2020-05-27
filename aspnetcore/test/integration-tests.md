@@ -101,7 +101,7 @@ Le projet de test doit :
 
 Ces conditions préalables peuvent être consultées dans l' [exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/). Inspectez le fichier *tests/RazorPagesProject. tests/RazorPagesProject. tests. csproj* . L’exemple d’application utilise l’infrastructure de test [xUnit](https://xunit.github.io/) et la bibliothèque de l’analyseur [AngleSharp](https://anglesharp.github.io/) , de sorte que l’exemple d’application référence également :
 
-* [xunit](https://www.nuget.org/packages/xunit)
+* [xUnit](https://www.nuget.org/packages/xunit)
 * [xUnit. Runner. VisualStudio](https://www.nuget.org/packages/xunit.runner.visualstudio)
 * [AngleSharp](https://www.nuget.org/packages/AngleSharp)
 
@@ -143,7 +143,7 @@ La configuration d’hôte Web peut être créée indépendamment des classes de
 
    Le contexte de base de données de St est inscrit dans sa `Startup.ConfigureServices` méthode. Le rappel de l’application de test `builder.ConfigureServices` est exécuté *après* l’exécution du code de l’application `Startup.ConfigureServices` . L’ordre d’exécution est une modification avec rupture pour l' [hôte générique](xref:fundamentals/host/generic-host) avec la version de ASP.net Core 3,0. Pour utiliser une base de données différente pour les tests que la base de données de l’application, le contexte de base de données de l’application doit être remplacé dans `builder.ConfigureServices` .
 
-   Dans le cas de SUTs qui utilisent toujours l’hôte [Web Host} (XREF : notions de base/hôte/Web-Host), le rappel de l’application de test `builder.ConfigureServices` est exécuté *avant* le code du St `Startup.ConfigureServices` . Le rappel de l’application de test `builder.ConfigureTestServices` est exécuté *après*.
+   Pour les SUTs qui utilisent toujours l' [hôte Web](xref:fundamentals/host/web-host), le rappel de l’application de test `builder.ConfigureServices` est exécuté *avant* le code du St `Startup.ConfigureServices` . Le rappel de l’application de test `builder.ConfigureTestServices` est exécuté *après*.
 
    L’exemple d’application recherche le descripteur de service pour le contexte de base de données et utilise le descripteur pour supprimer l’inscription du service. Ensuite, la fabrique ajoute un nouveau `ApplicationDbContext` qui utilise une base de données en mémoire pour les tests.
 
@@ -573,7 +573,7 @@ L’exemple d’application amorce la base de données avec trois messages dans 
 
 Le contexte de base de données de St est inscrit dans sa `Startup.ConfigureServices` méthode. Le rappel de l’application de test `builder.ConfigureServices` est exécuté *après* l’exécution du code de l’application `Startup.ConfigureServices` . Pour utiliser une base de données différente pour les tests, le contexte de base de données de l’application doit être remplacé dans `builder.ConfigureServices` . Pour plus d’informations, consultez la section [personnaliser WebApplicationFactory](#customize-webapplicationfactory) .
 
-Dans le cas de SUTs qui utilisent toujours l’hôte [Web Host} (XREF : notions de base/hôte/Web-Host), le rappel de l’application de test `builder.ConfigureServices` est exécuté *avant* le code du St `Startup.ConfigureServices` . Le rappel de l’application de test `builder.ConfigureTestServices` est exécuté *après*.
+Pour les SUTs qui utilisent toujours l' [hôte Web](xref:fundamentals/host/web-host), le rappel de l’application de test `builder.ConfigureServices` est exécuté *avant* le code du St `Startup.ConfigureServices` . Le rappel de l’application de test `builder.ConfigureTestServices` est exécuté *après*.
 
 ::: moniker-end
 
@@ -669,7 +669,7 @@ Le projet de test doit :
 
 Ces conditions préalables peuvent être consultées dans l' [exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/). Inspectez le fichier *tests/RazorPagesProject. tests/RazorPagesProject. tests. csproj* . L’exemple d’application utilise l’infrastructure de test [xUnit](https://xunit.github.io/) et la bibliothèque de l’analyseur [AngleSharp](https://anglesharp.github.io/) , de sorte que l’exemple d’application référence également :
 
-* [xunit](https://www.nuget.org/packages/xunit/)
+* [xUnit](https://www.nuget.org/packages/xunit/)
 * [xUnit. Runner. VisualStudio](https://www.nuget.org/packages/xunit.runner.visualstudio/)
 * [AngleSharp](https://www.nuget.org/packages/AngleSharp/)
 

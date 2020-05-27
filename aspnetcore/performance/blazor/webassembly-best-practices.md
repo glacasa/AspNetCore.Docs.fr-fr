@@ -1,24 +1,12 @@
 ---
-title: BlazorMeilleures pratiques relatives aux performances de ASP.net Core Webassembly
-author: pranavkm
-description: Conseils pour améliorer les performances dans ASP.NET Core Blazor les applications Webassembly et éviter les problèmes de performances courants.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/13/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: performance/blazor/webassembly-best-practices
-ms.openlocfilehash: 9e9b166cb9ce9870a8ff275b72bb12f04b84751b
-ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/16/2020
-ms.locfileid: "83439436"
+titre : « ASP.NET Core Blazor les meilleures pratiques en matière de performances de Webassembly » auteur : Description : « conseils pour améliorer les performances dans ASP.net Core Blazor applications webassembly et éviter les problèmes de performances courants ».
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>BlazorMeilleures pratiques relatives aux performances de ASP.net Core Webassembly
 
@@ -28,9 +16,9 @@ Cet article fournit des instructions pour ASP.NET Core Blazor meilleures pratiqu
 
 ## <a name="avoid-unnecessary-component-renders"></a>Éviter les rendus de composants inutiles
 
-Blazorl’algorithme de différenciation de l’algorithme évite le rerendu d’un composant lorsque l’algorithme constate que le composant n’a pas changé. Remplacez [ComponentBase. ShouldRender](xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A) pour un contrôle affiné sur le rendu des composants.
+Blazorl’algorithme de différenciation de l’algorithme évite le rerendu d’un composant lorsque l’algorithme constate que le composant n’a pas changé. Remplacement <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A?displayProperty=nameWithType> pour un contrôle affiné sur le rendu des composants.
 
-Si vous créez un composant d’interface utilisateur qui n’est jamais modifié après le rendu initial, configurez `ShouldRender` pour retourner `false` :
+Si vous créez un composant d’interface utilisateur qui n’est jamais modifié après le rendu initial, configurez <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> pour retourner `false` :
 
 ```razor
 @code {
@@ -42,9 +30,9 @@ La plupart des applications n’ont pas besoin d’un contrôle affiné, mais el
 
 Dans l’exemple suivant :
 
-* <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>est substitué et défini sur la valeur du `shouldRender` champ, qui est initialement le `false` moment où le composant est chargé.
-* Lorsque le bouton est sélectionné, `shouldRender` a la valeur `true` , ce qui force le rendu du composant avec le mis à jour `currentCount` .
-* Immédiatement après le rerendu, <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> affecte à la valeur de retour la valeur `shouldRender` `false` pour empêcher un nouveau rendu jusqu’à la prochaine sélection du bouton.
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>est substitué et défini sur la valeur du <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> champ, qui est initialement le `false` moment où le composant est chargé.
+* Lorsque le bouton est sélectionné, <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> a la valeur `true` , ce qui force le rendu du composant avec le mis à jour `currentCount` .
+* Immédiatement après le rerendu, <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> affecte à la valeur de retour la valeur <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> `false` pour empêcher un nouveau rendu jusqu’à la prochaine sélection du bouton.
 
 ```razor
 <p>Current count: @currentCount</p>

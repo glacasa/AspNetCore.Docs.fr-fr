@@ -147,7 +147,7 @@ Pour installer le `Microsoft.AspNetCore.ProtectedBrowserStorage` Package :
 
 ### <a name="save-and-load-data-within-a-component"></a>Enregistrer et charger des données dans un composant
 
-Dans tout composant nécessitant le chargement ou l’enregistrement de données dans le stockage du navigateur, utilisez [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) pour injecter une instance de l’un des éléments suivants :
+Dans tout composant nécessitant le chargement ou l’enregistrement de données dans le stockage du navigateur, utilisez [`@inject`](xref:mvc/views/razor#inject) pour injecter une instance de l’un des éléments suivants :
 
 * `ProtectedLocalStorage`
 * `ProtectedSessionStorage`
@@ -184,7 +184,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-Si les paramètres du composant incluent l’état de navigation, appelez `ProtectedSessionStore.GetAsync` et assignez le résultat dans `OnParametersSetAsync` , et non `OnInitializedAsync` . `OnInitializedAsync`n’est appelé qu’une seule fois lors de la première instanciation du composant. `OnInitializedAsync`n’est pas rappelée ultérieurement si l’utilisateur accède à une autre URL tout en restant sur la même page. Pour plus d'informations, consultez <xref:blazor/lifecycle>.
+Si les paramètres du composant incluent l’état de navigation, appelez `ProtectedSessionStore.GetAsync` et assignez le résultat dans <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> , et non <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> . <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>n’est appelé qu’une seule fois lors de la première instanciation du composant. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>n’est pas rappelée ultérieurement si l’utilisateur accède à une autre URL tout en restant sur la même page. Pour plus d'informations, consultez <xref:blazor/lifecycle>.
 
 > [!WARNING]
 > Les exemples de cette section ne fonctionnent que si le prérendu n’est pas activé sur le serveur. Quand le prérendu est activé, une erreur est générée de la façon suivante :
@@ -314,7 +314,7 @@ else
 
 Le `CounterStateProvider` composant gère la phase de chargement en n’affichant pas son contenu enfant tant que le chargement n’est pas terminé.
 
-Pour utiliser le `CounterStateProvider` composant, encapsulez une instance du composant autour de tout autre composant qui requiert l’accès à l’état du compteur. Pour rendre l’état accessible à tous les composants d’une application, encapsulez le `CounterStateProvider` composant autour du `Router` dans le `App` composant (*app. Razor*) :
+Pour utiliser le `CounterStateProvider` composant, encapsulez une instance du composant autour de tout autre composant qui requiert l’accès à l’état du compteur. Pour rendre l’état accessible à tous les composants d’une application, encapsulez le `CounterStateProvider` composant autour du <xref:Microsoft.AspNetCore.Components.Routing.Router> dans le `App` composant (*app. Razor*) :
 
 ```razor
 <CounterStateProvider>

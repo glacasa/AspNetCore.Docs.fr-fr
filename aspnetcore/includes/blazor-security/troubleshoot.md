@@ -30,5 +30,9 @@ L’une des méthodes permettant d’empêcher les cookies en attente et les don
 Lors du test et du dépannage d’une application éblouissante hébergée, assurez-vous que vous exécutez l’application à partir du projet **serveur** . Par exemple, dans Visual Studio, vérifiez que le projet serveur est mis en surbrillance dans **Explorateur de solutions** avant de démarrer l’application avec l’une des approches suivantes :
 
 * Sélectionnez le bouton **Exécuter**.
-*  > Utilisez **débogage****Démarrer le débogage** à partir du menu.
+* Utilisez **débogage**  >  **Démarrer le débogage** à partir du menu.
 * Appuyez sur <kbd>F5</kbd>.
+
+### <a name="inspect-the-content-of-a-json-web-token-jwt"></a>Inspecter le contenu d’un JSON Web Token (JWT)
+
+Pour décoder un JSON Web Token (JWT), utilisez l’outil [JWT.ms](https://jwt.ms/) de Microsoft. Les valeurs de l’interface utilisateur ne laissent jamais votre navigateur.

@@ -13,7 +13,7 @@ Par [Javier Calvarro Nelson](https://github.com/javiercn) et [Luke Latham](https
 
 *Pour Azure Active Directory (AAD) et Azure Active Directory B2C (AAD B2C), ne suivez pas les instructions de cette rubrique. Consultez les rubriques AAD et AAD B2C dans ce nœud de table des matières.*
 
-Pour créer une Blazor application Webassembly autonome qui utilise une `Microsoft.AspNetCore.Components.WebAssembly.Authentication` bibliothèque, exécutez la commande suivante dans une interface de commande :
+Pour créer une Blazor application Webassembly autonome qui utilise la bibliothèque [Microsoft. AspNetCore. Components. webassembly. Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) , exécutez la commande suivante dans une interface de commande :
 
 ```dotnetcli
 dotnet new blazorwasm -au Individual
@@ -25,7 +25,7 @@ Dans Visual Studio, [créez une Blazor application webassembly](xref:blazor/get-
 
 ## <a name="authentication-package"></a>Package d’authentification
 
-Quand une application est créée pour utiliser des comptes d’utilisateur individuels, l’application reçoit automatiquement une référence de package pour le `Microsoft.AspNetCore.Components.WebAssembly.Authentication` package dans le fichier projet de l’application. Le package fournit un ensemble de primitives qui aident l’application à authentifier les utilisateurs et à obtenir des jetons pour appeler des API protégées.
+Quand une application est créée pour utiliser des comptes d’utilisateur individuels, l’application reçoit automatiquement une référence de package pour le package [Microsoft. AspNetCore. Components. Webassembly. Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) dans le fichier projet de l’application. Le package fournit un ensemble de primitives qui aident l’application à authentifier les utilisateurs et à obtenir des jetons pour appeler des API protégées.
 
 Si vous ajoutez l’authentification à une application, ajoutez manuellement le package au fichier projet de l’application :
 
@@ -37,7 +37,7 @@ Si vous ajoutez l’authentification à une application, ajoutez manuellement le
 
 ## <a name="authentication-service-support"></a>Prise en charge du service d’authentification
 
-La prise en charge de l’authentification des utilisateurs est inscrite dans le conteneur de service avec la `AddOidcAuthentication` méthode d’extension fournie par le `Microsoft.AspNetCore.Components.WebAssembly.Authentication` Package. Cette méthode permet de configurer les services requis pour que l’application interagisse avec le Identity fournisseur (IP).
+La prise en charge de l’authentification des utilisateurs est inscrite dans le conteneur de service avec la <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A> méthode d’extension fournie par le package [Microsoft. AspNetCore. Components. webassembly. Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) . Cette méthode permet de configurer les services requis pour que l’application interagisse avec le Identity fournisseur (IP).
 
 *Program.cs*:
 
@@ -59,11 +59,11 @@ La configuration est fournie par le fichier *wwwroot/appSettings. JSON* :
 }
 ```
 
-La prise en charge de l’authentification pour les applications autonomes est proposée à l’aide d’Open ID Connect (OIDC). La `AddOidcAuthentication` méthode accepte un rappel pour configurer les paramètres requis pour authentifier une application à l’aide de OIDC. Les valeurs requises pour la configuration de l’application peuvent être obtenues à partir de l’adresse IP conforme à OIDC. Obtenez les valeurs lors de l’inscription de l’application, qui se produit généralement dans son portail en ligne.
+La prise en charge de l’authentification pour les applications autonomes est proposée à l’aide d’Open ID Connect (OIDC). La <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A> méthode accepte un rappel pour configurer les paramètres requis pour authentifier une application à l’aide de OIDC. Les valeurs requises pour la configuration de l’application peuvent être obtenues à partir de l’adresse IP conforme à OIDC. Obtenez les valeurs lors de l’inscription de l’application, qui se produit généralement dans son portail en ligne.
 
 ## <a name="access-token-scopes"></a>Étendues de jeton d’accès
 
-Le Blazor modèle Webassembly ne configure pas automatiquement l’application pour demander un jeton d’accès pour une API sécurisée. Pour approvisionner un jeton d’accès dans le cadre du processus de connexion, ajoutez l’étendue aux étendues de jetons par défaut du `OidcProviderOptions` :
+Le Blazor modèle Webassembly ne configure pas automatiquement l’application pour demander un jeton d’accès pour une API sécurisée. Pour approvisionner un jeton d’accès dans le cadre du processus de connexion, ajoutez l’étendue aux étendues de jetons par défaut du <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions> :
 
 ```csharp
 builder.Services.AddOidcAuthentication(options =>

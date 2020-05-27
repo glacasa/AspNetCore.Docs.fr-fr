@@ -25,13 +25,8 @@ Les scénarios disponibles sont les suivants :
 
 Pour le moment, vous *ne pouvez pas*:
 
-* Inspectez les tableaux.
-* Pointez sur inspecter les membres.
-* Déboguez l’étape dans ou hors du code managé.
-* Bénéficiez d’une prise en charge complète pour l’inspection des types valeur.
 * Arrêt sur les exceptions non gérées.
 * Atteindre les points d’arrêt pendant le démarrage de l’application.
-* Déboguez une application avec un service Worker.
 
 Nous continuerons à améliorer l’expérience de débogage dans les versions à venir.
 
@@ -78,7 +73,7 @@ Pour déboguer une Blazor application Webassembly dans Visual Studio :
 
 Lors du débogage de votre Blazor application Webassembly, vous pouvez également déboguer votre code serveur :
 
-1. Définissez un point d’arrêt dans la page *fetchData. Razor* dans `OnInitializedAsync` .
+1. Définissez un point d’arrêt dans la page *fetchData. Razor* dans <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> .
 1. Définissez un point d’arrêt dans la `WeatherForecastController` `Get` méthode d’action.
 1. Accédez à l’onglet **extraire les données** pour atteindre le premier point d’arrêt dans le `FetchData` composant juste avant qu’il envoie une requête HTTP au serveur :
 
@@ -138,7 +133,7 @@ Blazorfournit un proxy de débogage qui implémente le [protocole chrome devtool
 
 Les mappages de source de navigateur permettent au navigateur de mapper les fichiers compilés à leurs fichiers sources d’origine et sont couramment utilisés pour le débogage côté client. Toutefois, Blazor ne mappe actuellement pas C# directement à JavaScript/WASM. Au lieu de cela, Blazor fait l’interprétation du langage intermédiaire dans le navigateur, les mappages de source ne sont donc pas pertinents.
 
-## <a name="troubleshoot"></a>Dépannage
+## <a name="troubleshoot"></a>Dépanner
 
 Si vous rencontrez des erreurs, le Conseil suivant peut vous aider :
 

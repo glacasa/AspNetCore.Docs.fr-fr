@@ -1,7 +1,7 @@
 Le `App` composant (*app. Razor*) est semblable au `App` composant des applications serveur éblouissantes :
 
-* Le `CascadingAuthenticationState` composant gère l' `AuthenticationState` exposition de au reste de l’application.
-* Le `AuthorizeRouteView` composant permet de s’assurer que l’utilisateur actuel est autorisé à accéder à une page donnée ou à `RedirectToLogin` effectuer un rendu du composant.
+* Le <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> composant gère l’exposition de au <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> reste de l’application.
+* Le <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> composant permet de s’assurer que l’utilisateur actuel est autorisé à accéder à une page donnée ou à effectuer un rendu du `RedirectToLogin` composant.
 * Le `RedirectToLogin` composant gère la redirection des utilisateurs non autorisés vers la page de connexion.
 
 ```razor

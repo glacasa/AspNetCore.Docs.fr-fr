@@ -1,24 +1,11 @@
 ---
-title: Charger des fichiers dans ASP.NET Core
-author: rick-anderson
-description: Comment utiliser la liaison de modèle et le streaming pour charger des fichiers dans ASP.NET Core MVC.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/03/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: mvc/models/file-uploads
-ms.openlocfilehash: b613ccd8df65e41b86793466a0ed5dc7bf7e8772
-ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82976751"
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="upload-files-in-aspnet-core"></a>Charger des fichiers dans ASP.NET Core
 
@@ -42,7 +29,7 @@ Les étapes de sécurité qui réduisent la probabilité d’une attaque réussi
 
 * Chargez les fichiers dans une zone de chargement de fichier dédiée, de préférence sur un lecteur non-système. Un emplacement dédié permet d’imposer des restrictions de sécurité plus faciles sur les fichiers téléchargés. Désactivez les autorisations d’exécution sur l’emplacement de chargement du fichier.&dagger;
 * Ne conservez **pas** les fichiers téléchargés dans la même arborescence de répertoires que l’application.&dagger;
-* Utilisez un nom de fichier sécurisé déterminé par l’application. N’utilisez pas un nom de fichier fourni par l’utilisateur ou le nom de fichier non approuvé du fichier téléchargé. &dagger; Code html encode le nom de fichier non fiable lors de son affichage. Par exemple, la journalisation du nom de fichier ou l'Razor affichage dans l’interface utilisateur (génère automatiquement le code html).
+* Utilisez un nom de fichier sécurisé déterminé par l’application. N’utilisez pas un nom de fichier fourni par l’utilisateur ou le nom de fichier non approuvé du fichier téléchargé. &dagger; Code HTML encode le nom de fichier non fiable lors de son affichage. Par exemple, la journalisation du nom de fichier ou l’affichage dans l’interface utilisateur ( Razor génère automatiquement le code html).
 * Autorisez uniquement les extensions de fichier approuvées pour la spécification de conception de l’application.&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
 * Vérifiez que les vérifications côté client sont effectuées sur le serveur. &dagger; Les contrôles côté client sont faciles à contourner.
 * Vérifiez la taille d’un fichier téléchargé. Définissez une limite de taille maximale pour empêcher les chargements volumineux.&dagger;
@@ -97,7 +84,7 @@ La mise en mémoire tampon et la diffusion en continu sont deux approches géné
 
 **des réponses**
 
-La totalité du fichier est lue dans <xref:Microsoft.AspNetCore.Http.IFormFile>un, qui est une représentation C# du fichier utilisé pour traiter ou enregistrer le fichier.
+La totalité du fichier est lue dans un <xref:Microsoft.AspNetCore.Http.IFormFile> , qui est une représentation C# du fichier utilisé pour traiter ou enregistrer le fichier.
 
 Les ressources (disque, mémoire) utilisées par les chargements de fichiers dépendent du nombre et de la taille des chargements de fichiers simultanés. Si une application tente de mettre en mémoire tampon un trop grand nombre de chargements, le site se bloque lorsqu’il manque de mémoire ou d’espace disque. Si la taille ou la fréquence des chargements de fichiers épuisent les ressources d’application, utilisez la diffusion en continu.
 
@@ -207,15 +194,15 @@ Pour exécuter la publication de formulaire dans JavaScript pour les clients qui
   </script>
   ```
 
-Afin de prendre en charge les chargements de fichiers, les formulaires HTML doivent spécifier un`enctype`type d' `multipart/form-data`encodage () de.
+Afin de prendre en charge les chargements de fichiers, les formulaires HTML doivent spécifier un type d’encodage ( `enctype` ) de `multipart/form-data` .
 
-Pour qu' `files` un élément INPUT prenne en charge le téléchargement de plusieurs `multiple` fichiers, fournissez l’attribut sur l' `<input>` élément :
+Pour `files` qu’un élément INPUT prenne en charge le téléchargement de plusieurs fichiers, fournissez l' `multiple` attribut sur l' `<input>` élément :
 
 ```cshtml
 <input asp-for="FileUpload.FormFiles" type="file" multiple>
 ```
 
-Les fichiers individuels téléchargés sur le serveur sont accessibles via la [liaison de modèle](xref:mvc/models/model-binding) à <xref:Microsoft.AspNetCore.Http.IFormFile>l’aide de. L’exemple d’application illustre plusieurs chargements de fichiers mis en mémoire tampon pour les scénarios de base de données et de stockage physique.
+Les fichiers individuels téléchargés sur le serveur sont accessibles via la [liaison de modèle](xref:mvc/models/model-binding) à l’aide de <xref:Microsoft.AspNetCore.Http.IFormFile> . L’exemple d’application illustre plusieurs chargements de fichiers mis en mémoire tampon pour les scénarios de base de données et de stockage physique.
 
 <a name="filename"></a>
 
@@ -237,16 +224,16 @@ Les fichiers individuels téléchargés sur le serveur sont accessibles via la [
 > * [Considérations relatives à la sécurité](#security-considerations)
 > * [Validation](#validation)
 
-Lors du chargement de fichiers à l’aide d' <xref:Microsoft.AspNetCore.Http.IFormFile>une liaison de modèle et, la méthode d’action peut accepter les éléments suivants :
+Lors du chargement de fichiers à l’aide d’une liaison de modèle et <xref:Microsoft.AspNetCore.Http.IFormFile> , la méthode d’action peut accepter les éléments suivants :
 
-* Une seule <xref:Microsoft.AspNetCore.Http.IFormFile>.
+* Une seule <xref:Microsoft.AspNetCore.Http.IFormFile> .
 * L’un des regroupements suivants qui représentent plusieurs fichiers :
   * <xref:Microsoft.AspNetCore.Http.IFormFileCollection>
   * <xref:System.Collections.IEnumerable>\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
   * [Tarifs](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
 
 > [!NOTE]
-> La liaison correspond aux fichiers de formulaire par nom. Par exemple, la valeur `name` html dans `<input type="file" name="formFile">` doit correspondre au paramètre C#/lié à la`FormFile`propriété (). Pour plus d’informations, consultez la section valeur de l' [attribut de nom de correspondance pour le nom de paramètre de la méthode de publication](#match-name-attribute-value-to-parameter-name-of-post-method) .
+> La liaison correspond aux fichiers de formulaire par nom. Par exemple, la `name` valeur html dans `<input type="file" name="formFile">` doit correspondre au paramètre C#/lié à la propriété ( `FormFile` ). Pour plus d’informations, consultez la section valeur de l' [attribut de nom de correspondance pour le nom de paramètre de la méthode de publication](#match-name-attribute-value-to-parameter-name-of-post-method) .
 
 L’exemple suivant :
 
@@ -298,21 +285,21 @@ foreach (var formFile in files)
 }
 ```
 
-Le chemin d’accès passé <xref:System.IO.FileStream> à *doit* inclure le nom de fichier. Si le nom de fichier n’est pas <xref:System.UnauthorizedAccessException> fourni, une exception est levée au moment de l’exécution.
+Le chemin d’accès passé à <xref:System.IO.FileStream> *doit* inclure le nom de fichier. Si le nom de fichier n’est pas fourni, une <xref:System.UnauthorizedAccessException> exception est levée au moment de l’exécution.
 
-Les fichiers chargés à l’aide <xref:Microsoft.AspNetCore.Http.IFormFile> de la technique sont mis en mémoire tampon ou sur disque sur le serveur avant le traitement. À l’intérieur de la méthode <xref:Microsoft.AspNetCore.Http.IFormFile> d' <xref:System.IO.Stream>action, le contenu est accessible en tant que. Outre le système de fichiers local, les fichiers peuvent être enregistrés sur un partage réseau ou un service de stockage de fichiers, tel que le [stockage d’objets BLOB Azure](/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs).
+Les fichiers chargés à l’aide de la <xref:Microsoft.AspNetCore.Http.IFormFile> technique sont mis en mémoire tampon ou sur disque sur le serveur avant le traitement. À l’intérieur de la méthode d’action, le <xref:Microsoft.AspNetCore.Http.IFormFile> contenu est accessible en tant que <xref:System.IO.Stream> . Outre le système de fichiers local, les fichiers peuvent être enregistrés sur un partage réseau ou un service de stockage de fichiers, tel que le [stockage d’objets BLOB Azure](/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs).
 
 Pour obtenir un autre exemple qui effectue une boucle sur plusieurs fichiers pour le téléchargement et utilise des noms de fichiers sécurisés, consultez *pages/BufferedMultipleFileUploadPhysical. cshtml. cs* dans l’exemple d’application.
 
 > [!WARNING]
-> [Path. GetTempFileName](xref:System.IO.Path.GetTempFileName*) lève une <xref:System.IO.IOException> exception si plus de 65 535 fichiers sont créés sans supprimer les fichiers temporaires précédents. La limite de 65 535 fichiers est une limite par serveur. Pour plus d’informations sur cette limite sur le système d’exploitation Windows, consultez les notes dans les rubriques suivantes :
+> [Path. GetTempFileName](xref:System.IO.Path.GetTempFileName*) lève une exception <xref:System.IO.IOException> si plus de 65 535 fichiers sont créés sans supprimer les fichiers temporaires précédents. La limite de 65 535 fichiers est une limite par serveur. Pour plus d’informations sur cette limite sur le système d’exploitation Windows, consultez les notes dans les rubriques suivantes :
 >
 > * [GetTempFileNameA fonction)](/windows/desktop/api/fileapi/nf-fileapi-gettempfilenamea#remarks)
 > * <xref:System.IO.Path.GetTempFileName*>
 
 ### <a name="upload-small-files-with-buffered-model-binding-to-a-database"></a>Charger des fichiers de petite taille avec une liaison de modèle mise en mémoire tampon vers une base de données
 
-Pour stocker des données de fichier binaires dans [Entity Framework](/ef/core/index)une base de données <xref:System.Byte> à l’aide de Entity Framework, définissez une propriété de tableau sur l’entité :
+Pour stocker des données de fichier binaires dans une base de données à l’aide de [Entity Framework](/ef/core/index), définissez une <xref:System.Byte> propriété de tableau sur l’entité :
 
 ```csharp
 public class AppFile
@@ -322,7 +309,7 @@ public class AppFile
 }
 ```
 
-Spécifiez une propriété de modèle de page pour la classe <xref:Microsoft.AspNetCore.Http.IFormFile>qui comprend :
+Spécifiez une propriété de modèle de page pour la classe qui comprend <xref:Microsoft.AspNetCore.Http.IFormFile> :
 
 ```csharp
 public class BufferedSingleFileUploadDbModel : PageModel
@@ -401,7 +388,7 @@ L’exemple précédent est semblable à un scénario illustré dans l’exemple
 > [!WARNING]
 > Soyez prudent quand vous stockez des données binaires dans des bases de données relationnelles, car cela peut avoir un impact négatif sur les performances.
 >
-> Ne vous fiez pas à la `FileName` propriété de <xref:Microsoft.AspNetCore.Http.IFormFile> sans validation ni à approuver celle-ci. La `FileName` propriété doit uniquement être utilisée à des fins d’affichage et uniquement après l’encodage HTML.
+> Ne vous fiez pas à la `FileName` propriété de sans validation ni à approuver celle-ci <xref:Microsoft.AspNetCore.Http.IFormFile> . La `FileName` propriété doit uniquement être utilisée à des fins d’affichage et uniquement après l’encodage HTML.
 >
 > Les exemples fournis ne prennent pas en compte les considérations de sécurité. Des informations supplémentaires sont fournies par les sections suivantes et l' [exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
@@ -412,21 +399,21 @@ L’exemple précédent est semblable à un scénario illustré dans l’exemple
 
 L’exemple suivant montre comment utiliser JavaScript pour diffuser un fichier vers une action de contrôleur. Le jeton anti-contrefaçon du fichier est généré à l’aide d’un attribut de filtre personnalisé et transmis aux en-têtes HTTP du client plutôt que dans le corps de la demande. Étant donné que la méthode d’action traite directement les données chargées, la liaison de modèle de formulaire est désactivée par un autre filtre personnalisé. Dans l’action, le contenu du formulaire est lu en avec `MultipartReader`, qui lit chaque `MultipartSection` individuelle, traitant le fichier ou enregistrant le contenu selon ce qui est approprié. Une fois les sections en plusieurs parties lues, l’action effectue sa propre liaison de modèle.
 
-La réponse de page initiale charge le formulaire et enregistre un jeton anti-contrefaçon dans un cookie (via `GenerateAntiforgeryTokenCookieAttribute` l’attribut). L’attribut utilise la [prise en charge de l’anticontrefaçon](xref:security/anti-request-forgery) intégrée de ASP.net Core pour définir un cookie avec un jeton de demande :
+La réponse de page initiale charge le formulaire et enregistre un jeton anti-contrefaçon dans un cookie (via l' `GenerateAntiforgeryTokenCookieAttribute` attribut). L’attribut utilise la [prise en charge de l’anticontrefaçon](xref:security/anti-request-forgery) intégrée de ASP.net Core pour définir un cookie avec un jeton de demande :
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryTokenCookieAttribute)]
 
-Est `DisableFormValueModelBindingAttribute` utilisé pour désactiver la liaison de modèle :
+`DisableFormValueModelBindingAttribute`Est utilisé pour désactiver la liaison de modèle :
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/ModelBinding.cs?name=snippet_DisableFormValueModelBindingAttribute)]
 
-Dans l’exemple d’application `GenerateAntiforgeryTokenCookieAttribute` , `DisableFormValueModelBindingAttribute` et sont appliqués en tant que filtres aux modèles d' `/StreamedSingleFileUploadDb` application `/StreamedSingleFileUploadPhysical` de `Startup.ConfigureServices` page de et à l’aide [ Razor des conventions de pages](xref:razor-pages/razor-pages-conventions):
+Dans l’exemple d’application, `GenerateAntiforgeryTokenCookieAttribute` et `DisableFormValueModelBindingAttribute` sont appliqués en tant que filtres aux modèles d’application de page de et à l' `/StreamedSingleFileUploadDb` aide des conventions de `/StreamedSingleFileUploadPhysical` `Startup.ConfigureServices` [ Razor pages](xref:razor-pages/razor-pages-conventions):
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_AddRazorPages&highlight=8-11,17-20)]
 
-Étant donné que la liaison de modèle ne lit pas le formulaire, les paramètres qui sont liés depuis le formulaire ne sont pas liés (la requête, l’itinéraire et l’en-tête continuent de fonctionner). La méthode d’action fonctionne directement avec `Request` la propriété. Un `MultipartReader` est utilisé pour lire chaque section. Les données de clé/valeur sont stockées `KeyValueAccumulator`dans un. Une fois les sections en plusieurs parties lues, le contenu `KeyValueAccumulator` du est utilisé pour lier les données de formulaire à un type de modèle.
+Étant donné que la liaison de modèle ne lit pas le formulaire, les paramètres qui sont liés depuis le formulaire ne sont pas liés (la requête, l’itinéraire et l’en-tête continuent de fonctionner). La méthode d’action fonctionne directement avec la `Request` propriété. Un `MultipartReader` est utilisé pour lire chaque section. Les données de clé/valeur sont stockées dans un `KeyValueAccumulator` . Une fois les sections en plusieurs parties lues, le contenu du `KeyValueAccumulator` est utilisé pour lier les données de formulaire à un type de modèle.
 
-La méthode `StreamingController.UploadDatabase` complète pour la diffusion en continu vers une base de données avec EF Core :
+La `StreamingController.UploadDatabase` méthode complète pour la diffusion en continu vers une base de données avec EF Core :
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
@@ -438,16 +425,16 @@ Méthode complète `StreamingController.UploadPhysical` pour la diffusion en con
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadPhysical)]
 
-Dans l’exemple d’application, les contrôles de validation `FileHelpers.ProcessStreamedFile`sont gérés par.
+Dans l’exemple d’application, les contrôles de validation sont gérés par `FileHelpers.ProcessStreamedFile` .
 
 ## <a name="validation"></a>Validation
 
-La classe de l' `FileHelpers` exemple d’application illustre plusieurs vérifications des chargements de fichiers mis en mémoire tampon <xref:Microsoft.AspNetCore.Http.IFormFile> et diffusés en continu. Pour traiter <xref:Microsoft.AspNetCore.Http.IFormFile> les chargements de fichiers mis en mémoire tampon dans l’exemple d' `ProcessFormFile` application, consultez la méthode dans le fichier *Utilities/FileHelpers. cs* . Pour le traitement de fichiers en continu, `ProcessStreamedFile` consultez la méthode dans le même fichier.
+La classe de l’exemple d’application `FileHelpers` illustre plusieurs vérifications des chargements de fichiers mis en mémoire tampon <xref:Microsoft.AspNetCore.Http.IFormFile> et diffusés en continu. Pour traiter les <xref:Microsoft.AspNetCore.Http.IFormFile> chargements de fichiers mis en mémoire tampon dans l’exemple d’application, consultez la `ProcessFormFile` méthode dans le fichier *Utilities/FileHelpers. cs* . Pour le traitement de fichiers en continu, consultez la `ProcessStreamedFile` méthode dans le même fichier.
 
 > [!WARNING]
 > Les méthodes de traitement de validation présentées dans l’exemple d’application n’analysent pas le contenu des fichiers téléchargés. Dans la plupart des scénarios de production, une API de détection de virus et de logiciels malveillants est utilisée sur le fichier avant que le fichier soit mis à la disposition des utilisateurs ou d’autres systèmes.
 >
-> Bien que l’exemple de rubrique fournit un exemple fonctionnel de techniques de validation, `FileHelpers` n’implémentez pas la classe dans une application de production, sauf si vous :
+> Bien que l’exemple de rubrique fournit un exemple fonctionnel de techniques de validation, n’implémentez pas la `FileHelpers` classe dans une application de production, sauf si vous :
 >
 > * Comprenez pleinement l’implémentation.
 > * Modifiez l’implémentation en fonction de l’environnement et des spécifications de l’application.
@@ -520,7 +507,7 @@ Razorencode automatiquement les valeurs des propriétés pour l’affichage. Le 
 }
 ```
 
-En dehors Razorde, <xref:System.Net.WebUtility.HtmlEncode*> toujours le contenu du nom de fichier à partir de la demande d’un utilisateur.
+En dehors de Razor , toujours <xref:System.Net.WebUtility.HtmlEncode*> le contenu du nom de fichier à partir de la demande d’un utilisateur.
 
 De nombreuses implémentations doivent inclure une vérification de l’existence du fichier ; dans le cas contraire, le fichier est remplacé par un fichier du même nom. Fournissez une logique supplémentaire pour répondre aux spécifications de votre application.
 
@@ -536,7 +523,7 @@ Dans l’exemple d’application, la taille du fichier est limitée à 2 Mo (ind
 }
 ```
 
-Est `FileSizeLimit` injecté dans `PageModel` des classes :
+`FileSizeLimit`Est injecté dans des `PageModel` classes :
 
 ```csharp
 public class BufferedSingleFileUploadPhysicalModel : PageModel
@@ -563,17 +550,17 @@ if (formFile.Length > _fileSizeLimit)
 
 ### <a name="match-name-attribute-value-to-parameter-name-of-post-method"></a>Valeur de l’attribut de nom de correspondance avec le nom de paramètre de la méthode de publication
 
-Dans les nonRazor -formulaires qui publient des données de formulaire `FormData` ou utilisent directement JavaScript, le nom spécifié dans l’élément `FormData` du formulaire ou doit correspondre au nom du paramètre dans l’action du contrôleur.
+Dans les non- Razor formulaires qui publient des données de formulaire ou utilisent `FormData` directement JavaScript, le nom spécifié dans l’élément du formulaire ou `FormData` doit correspondre au nom du paramètre dans l’action du contrôleur.
 
 Dans l’exemple suivant :
 
-* Lorsque vous utilisez `<input>` un élément, `name` l’attribut est défini sur la `battlePlans`valeur :
+* Lorsque vous utilisez un `<input>` élément, l' `name` attribut est défini sur la valeur `battlePlans` :
 
   ```html
   <input type="file" name="battlePlans" multiple>
   ```
 
-* Lors de `FormData` l’utilisation de dans JavaScript, le nom est défini `battlePlans`sur la valeur :
+* Lors de l’utilisation `FormData` de dans JavaScript, le nom est défini sur la valeur `battlePlans` :
 
   ```javascript
   var formData = new FormData();
@@ -583,9 +570,9 @@ Dans l’exemple suivant :
   }
   ```
 
-Utilisez un nom correspondant pour le paramètre de la méthode C# (`battlePlans`) :
+Utilisez un nom correspondant pour le paramètre de la méthode C# ( `battlePlans` ) :
 
-* Pour une Razor méthode de gestionnaire de page `Upload`pages nommée :
+* Pour une Razor méthode de gestionnaire de page pages nommée `Upload` :
 
   ```csharp
   public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> battlePlans)
@@ -601,7 +588,7 @@ Utilisez un nom correspondant pour le paramètre de la méthode C# (`battlePlans
 
 ### <a name="multipart-body-length-limit"></a>Longueur limite du corps en plusieurs parties
 
-<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>définit la limite de la longueur de chaque corps en plusieurs parties. Les sections de formulaire qui dépassent <xref:System.IO.InvalidDataException> cette limite lèvent une lorsqu’elles sont analysées. La valeur par défaut est 134 217 728 (128 Mo). Personnaliser la limite à l' <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> aide du `Startup.ConfigureServices`paramètre dans :
+<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>définit la limite de la longueur de chaque corps en plusieurs parties. Les sections de formulaire qui dépassent cette limite lèvent une lorsqu’elles sont <xref:System.IO.InvalidDataException> analysées. La valeur par défaut est 134 217 728 (128 Mo). Personnaliser la limite à l’aide du <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> paramètre dans `Startup.ConfigureServices` :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -616,7 +603,7 @@ public void ConfigureServices(IServiceCollection services)
 
 <xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute>est utilisé pour définir le <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> pour une seule page ou action.
 
-Dans une Razor application pages, appliquez le filtre avec une [Convention](xref:razor-pages/razor-pages-conventions) dans `Startup.ConfigureServices`:
+Dans une Razor application pages, appliquez le filtre avec une [Convention](xref:razor-pages/razor-pages-conventions) dans `Startup.ConfigureServices` :
 
 ```csharp
 services.AddRazorPages()
@@ -651,20 +638,20 @@ Pour les applications hébergées par Kestrel, la taille de corps de requête ma
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder(args)
-        .ConfigureKestrel((context, options) =>
-        {
-            // Handle requests up to 50 MB
-            options.Limits.MaxRequestBodySize = 52428800;
-        })
         .ConfigureWebHostDefaults(webBuilder =>
         {
-            webBuilder.UseStartup<Startup>();
+            webBuilder.ConfigureKestrel((context, options) =>
+            {
+                // Handle requests up to 50 MB
+                options.Limits.MaxRequestBodySize = 52428800;
+            })
+            .UseStartup<Startup>();
         });
 ```
 
 <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute>est utilisé pour définir le [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) pour une seule page ou action.
 
-Dans une Razor application pages, appliquez le filtre avec une [Convention](xref:razor-pages/razor-pages-conventions) dans `Startup.ConfigureServices`:
+Dans une Razor application pages, appliquez le filtre avec une [Convention](xref:razor-pages/razor-pages-conventions) dans `Startup.ConfigureServices` :
 
 ```csharp
 services.AddRazorPages()
@@ -692,7 +679,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 }
 ```
 
-`RequestSizeLimitAttribute` Peut également être appliqué à l’aide [`@attribute`](xref:mvc/views/razor#attribute) Razor de la directive :
+`RequestSizeLimitAttribute`Peut également être appliqué à l’aide de la [`@attribute`](xref:mvc/views/razor#attribute) Razor directive :
 
 ```cshtml
 @attribute [RequestSizeLimitAttribute(52428800)]
@@ -707,7 +694,7 @@ D’autres limites Kestrel peuvent s’appliquer aux applications hébergées pa
 
 ### <a name="iis-content-length-limit"></a>Limite de longueur du contenu IIS
 
-La limite de demandes par`maxAllowedContentLength`défaut () est de 30 millions octets, soit environ 28,6 Mo. Personnaliser la limite dans le fichier *Web. config* :
+La limite de demandes par défaut ( `maxAllowedContentLength` ) est de 30 millions octets, soit environ 28,6 Mo. Personnaliser la limite dans le fichier *Web. config* :
 
 ```xml
 <system.webServer>
@@ -720,7 +707,7 @@ La limite de demandes par`maxAllowedContentLength`défaut () est de 30 millions 
 </system.webServer>
 ```
 
-Ce paramètre s’applique seulement à IIS. Par défaut, ce comportement ne se produit pas dans le cas d’un hébergement sur Kestrel. Pour plus d’informations, consultez [limites \<de demande RequestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/).
+Ce paramètre s’applique seulement à IIS. Par défaut, ce comportement ne se produit pas dans le cas d’un hébergement sur Kestrel. Pour plus d’informations, consultez [limites de demande \< RequestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/).
 
 Les limitations du module ASP.NET Core ou la présence du module de filtrage des demandes IIS peuvent limiter les chargements à 2 ou 4 Go. Pour plus d’informations, consultez [Impossible de télécharger un fichier d’une taille supérieure à 2 Go (dotnet/AspNetCore #2711)](https://github.com/dotnet/AspNetCore/issues/2711).
 
@@ -745,11 +732,11 @@ Une erreur de connexion et une connexion du serveur de réinitialisation indique
 
 ### <a name="null-reference-exception-with-iformfile"></a>Exception de référence null avec IFormFile
 
-Si le contrôleur accepte les fichiers téléchargés à l' <xref:Microsoft.AspNetCore.Http.IFormFile> aide de mais que `null`la valeur est, vérifiez que le formulaire HTML `enctype` spécifie `multipart/form-data`la valeur. Si cet attribut n’est pas défini `<form>` sur l’élément, le chargement du fichier ne se <xref:Microsoft.AspNetCore.Http.IFormFile> produit pas `null`et tous les arguments liés sont. Vérifiez également que l' [appellation de chargement dans les données de formulaire correspond à celle de l’application](#match-name-attribute-value-to-parameter-name-of-post-method).
+Si le contrôleur accepte les fichiers téléchargés à l’aide <xref:Microsoft.AspNetCore.Http.IFormFile> de mais que la valeur est `null` , vérifiez que le formulaire HTML spécifie la `enctype` valeur `multipart/form-data` . Si cet attribut n’est pas défini sur l' `<form>` élément, le chargement du fichier ne se produit pas et tous les <xref:Microsoft.AspNetCore.Http.IFormFile> arguments liés sont `null` . Vérifiez également que l' [appellation de chargement dans les données de formulaire correspond à celle de l’application](#match-name-attribute-value-to-parameter-name-of-post-method).
 
 ### <a name="stream-was-too-long"></a>Le flux est trop long
 
-Les exemples de cette rubrique reposent sur <xref:System.IO.MemoryStream> pour stocker le contenu du fichier chargé. La limite de taille d' `MemoryStream` un `int.MaxValue`est. Si le scénario de chargement de fichiers de l’application nécessite la conservation d’un contenu de fichier d’une taille supérieure à 50 Mo, `MemoryStream` utilisez une autre approche qui ne repose pas sur un seul pour conserver le contenu d’un fichier chargé.
+Les exemples de cette rubrique reposent sur <xref:System.IO.MemoryStream> pour stocker le contenu du fichier chargé. La limite de taille d’un `MemoryStream` est `int.MaxValue` . Si le scénario de chargement de fichiers de l’application nécessite la conservation d’un contenu de fichier d’une taille supérieure à 50 Mo, utilisez une autre approche qui ne repose pas sur un seul `MemoryStream` pour conserver le contenu d’un fichier chargé.
 
 ::: moniker-end
 
@@ -771,7 +758,7 @@ Les étapes de sécurité qui réduisent la probabilité d’une attaque réussi
 
 * Chargez les fichiers dans une zone de chargement de fichier dédiée, de préférence sur un lecteur non-système. Un emplacement dédié permet d’imposer des restrictions de sécurité plus faciles sur les fichiers téléchargés. Désactivez les autorisations d’exécution sur l’emplacement de chargement du fichier.&dagger;
 * Ne conservez **pas** les fichiers téléchargés dans la même arborescence de répertoires que l’application.&dagger;
-* Utilisez un nom de fichier sécurisé déterminé par l’application. N’utilisez pas un nom de fichier fourni par l’utilisateur ou le nom de fichier non approuvé du fichier téléchargé. &dagger; Code html encode le nom de fichier non fiable lors de son affichage. Par exemple, la journalisation du nom de fichier ou l'Razor affichage dans l’interface utilisateur (génère automatiquement le code html).
+* Utilisez un nom de fichier sécurisé déterminé par l’application. N’utilisez pas un nom de fichier fourni par l’utilisateur ou le nom de fichier non approuvé du fichier téléchargé. &dagger; Code HTML encode le nom de fichier non fiable lors de son affichage. Par exemple, la journalisation du nom de fichier ou l’affichage dans l’interface utilisateur ( Razor génère automatiquement le code html).
 * Autorisez uniquement les extensions de fichier approuvées pour la spécification de conception de l’application.&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
 * Vérifiez que les vérifications côté client sont effectuées sur le serveur. &dagger; Les contrôles côté client sont faciles à contourner.
 * Vérifiez la taille d’un fichier téléchargé. Définissez une limite de taille maximale pour empêcher les chargements volumineux.&dagger;
@@ -818,7 +805,7 @@ Les options de stockage courantes pour les fichiers sont les suivantes :
   * Les services offrent généralement une évolutivité et une résilience améliorées par rapport aux solutions locales qui sont généralement sujettes à des points de défaillance uniques.
   * Les services sont potentiellement moins coûteux dans les scénarios d’infrastructure de stockage volumineux.
 
-  Pour plus d’informations, consultez [démarrage rapide : utiliser .net pour créer un objet BLOB dans le stockage d’objets](/azure/storage/blobs/storage-quickstart-blobs-dotnet). La rubrique montre <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*>, mais <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*> peut être utilisée pour enregistrer un <xref:System.IO.FileStream> dans le stockage d’objets BLOB quand <xref:System.IO.Stream>vous utilisez un.
+  Pour plus d’informations, consultez [démarrage rapide : utiliser .net pour créer un objet BLOB dans le stockage d’objets](/azure/storage/blobs/storage-quickstart-blobs-dotnet). La rubrique montre <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*> , mais <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*> peut être utilisée pour enregistrer un <xref:System.IO.FileStream> dans le stockage d’objets BLOB quand vous utilisez un <xref:System.IO.Stream> .
 
 ## <a name="file-upload-scenarios"></a>Scénarios de chargement de fichiers
 
@@ -826,7 +813,7 @@ La mise en mémoire tampon et la diffusion en continu sont deux approches géné
 
 **des réponses**
 
-La totalité du fichier est lue dans <xref:Microsoft.AspNetCore.Http.IFormFile>un, qui est une représentation C# du fichier utilisé pour traiter ou enregistrer le fichier.
+La totalité du fichier est lue dans un <xref:Microsoft.AspNetCore.Http.IFormFile> , qui est une représentation C# du fichier utilisé pour traiter ou enregistrer le fichier.
 
 Les ressources (disque, mémoire) utilisées par les chargements de fichiers dépendent du nombre et de la taille des chargements de fichiers simultanés. Si une application tente de mettre en mémoire tampon un trop grand nombre de chargements, le site se bloque lorsqu’il manque de mémoire ou d’espace disque. Si la taille ou la fréquence des chargements de fichiers épuisent les ressources d’application, utilisez la diffusion en continu.
 
@@ -936,15 +923,15 @@ Pour exécuter la publication de formulaire dans JavaScript pour les clients qui
   </script>
   ```
 
-Afin de prendre en charge les chargements de fichiers, les formulaires HTML doivent spécifier un`enctype`type d' `multipart/form-data`encodage () de.
+Afin de prendre en charge les chargements de fichiers, les formulaires HTML doivent spécifier un type d’encodage ( `enctype` ) de `multipart/form-data` .
 
-Pour qu' `files` un élément INPUT prenne en charge le téléchargement de plusieurs `multiple` fichiers, fournissez l’attribut sur l' `<input>` élément :
+Pour `files` qu’un élément INPUT prenne en charge le téléchargement de plusieurs fichiers, fournissez l' `multiple` attribut sur l' `<input>` élément :
 
 ```cshtml
 <input asp-for="FileUpload.FormFiles" type="file" multiple>
 ```
 
-Les fichiers individuels téléchargés sur le serveur sont accessibles via la [liaison de modèle](xref:mvc/models/model-binding) à <xref:Microsoft.AspNetCore.Http.IFormFile>l’aide de. L’exemple d’application illustre plusieurs chargements de fichiers mis en mémoire tampon pour les scénarios de base de données et de stockage physique.
+Les fichiers individuels téléchargés sur le serveur sont accessibles via la [liaison de modèle](xref:mvc/models/model-binding) à l’aide de <xref:Microsoft.AspNetCore.Http.IFormFile> . L’exemple d’application illustre plusieurs chargements de fichiers mis en mémoire tampon pour les scénarios de base de données et de stockage physique.
 
 <a name="filename2"></a>
 
@@ -966,16 +953,16 @@ Les fichiers individuels téléchargés sur le serveur sont accessibles via la [
 > * [Considérations relatives à la sécurité](#security-considerations)
 > * [Validation](#validation)
 
-Lors du chargement de fichiers à l’aide d' <xref:Microsoft.AspNetCore.Http.IFormFile>une liaison de modèle et, la méthode d’action peut accepter les éléments suivants :
+Lors du chargement de fichiers à l’aide d’une liaison de modèle et <xref:Microsoft.AspNetCore.Http.IFormFile> , la méthode d’action peut accepter les éléments suivants :
 
-* Une seule <xref:Microsoft.AspNetCore.Http.IFormFile>.
+* Une seule <xref:Microsoft.AspNetCore.Http.IFormFile> .
 * L’un des regroupements suivants qui représentent plusieurs fichiers :
   * <xref:Microsoft.AspNetCore.Http.IFormFileCollection>
   * <xref:System.Collections.IEnumerable>\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
   * [Tarifs](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
 
 > [!NOTE]
-> La liaison correspond aux fichiers de formulaire par nom. Par exemple, la valeur `name` html dans `<input type="file" name="formFile">` doit correspondre au paramètre C#/lié à la`FormFile`propriété (). Pour plus d’informations, consultez la section valeur de l' [attribut de nom de correspondance pour le nom de paramètre de la méthode de publication](#match-name-attribute-value-to-parameter-name-of-post-method) .
+> La liaison correspond aux fichiers de formulaire par nom. Par exemple, la `name` valeur html dans `<input type="file" name="formFile">` doit correspondre au paramètre C#/lié à la propriété ( `FormFile` ). Pour plus d’informations, consultez la section valeur de l' [attribut de nom de correspondance pour le nom de paramètre de la méthode de publication](#match-name-attribute-value-to-parameter-name-of-post-method) .
 
 L’exemple suivant :
 
@@ -1027,21 +1014,21 @@ foreach (var formFile in files)
 }
 ```
 
-Le chemin d’accès passé <xref:System.IO.FileStream> à *doit* inclure le nom de fichier. Si le nom de fichier n’est pas <xref:System.UnauthorizedAccessException> fourni, une exception est levée au moment de l’exécution.
+Le chemin d’accès passé à <xref:System.IO.FileStream> *doit* inclure le nom de fichier. Si le nom de fichier n’est pas fourni, une <xref:System.UnauthorizedAccessException> exception est levée au moment de l’exécution.
 
-Les fichiers chargés à l’aide <xref:Microsoft.AspNetCore.Http.IFormFile> de la technique sont mis en mémoire tampon ou sur disque sur le serveur avant le traitement. À l’intérieur de la méthode <xref:Microsoft.AspNetCore.Http.IFormFile> d' <xref:System.IO.Stream>action, le contenu est accessible en tant que. Outre le système de fichiers local, les fichiers peuvent être enregistrés sur un partage réseau ou un service de stockage de fichiers, tel que le [stockage d’objets BLOB Azure](/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs).
+Les fichiers chargés à l’aide de la <xref:Microsoft.AspNetCore.Http.IFormFile> technique sont mis en mémoire tampon ou sur disque sur le serveur avant le traitement. À l’intérieur de la méthode d’action, le <xref:Microsoft.AspNetCore.Http.IFormFile> contenu est accessible en tant que <xref:System.IO.Stream> . Outre le système de fichiers local, les fichiers peuvent être enregistrés sur un partage réseau ou un service de stockage de fichiers, tel que le [stockage d’objets BLOB Azure](/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs).
 
 Pour obtenir un autre exemple qui effectue une boucle sur plusieurs fichiers pour le téléchargement et utilise des noms de fichiers sécurisés, consultez *pages/BufferedMultipleFileUploadPhysical. cshtml. cs* dans l’exemple d’application.
 
 > [!WARNING]
-> [Path. GetTempFileName](xref:System.IO.Path.GetTempFileName*) lève une <xref:System.IO.IOException> exception si plus de 65 535 fichiers sont créés sans supprimer les fichiers temporaires précédents. La limite de 65 535 fichiers est une limite par serveur. Pour plus d’informations sur cette limite sur le système d’exploitation Windows, consultez les notes dans les rubriques suivantes :
+> [Path. GetTempFileName](xref:System.IO.Path.GetTempFileName*) lève une exception <xref:System.IO.IOException> si plus de 65 535 fichiers sont créés sans supprimer les fichiers temporaires précédents. La limite de 65 535 fichiers est une limite par serveur. Pour plus d’informations sur cette limite sur le système d’exploitation Windows, consultez les notes dans les rubriques suivantes :
 >
 > * [GetTempFileNameA fonction)](/windows/desktop/api/fileapi/nf-fileapi-gettempfilenamea#remarks)
 > * <xref:System.IO.Path.GetTempFileName*>
 
 ### <a name="upload-small-files-with-buffered-model-binding-to-a-database"></a>Charger des fichiers de petite taille avec une liaison de modèle mise en mémoire tampon vers une base de données
 
-Pour stocker des données de fichier binaires dans [Entity Framework](/ef/core/index)une base de données <xref:System.Byte> à l’aide de Entity Framework, définissez une propriété de tableau sur l’entité :
+Pour stocker des données de fichier binaires dans une base de données à l’aide de [Entity Framework](/ef/core/index), définissez une <xref:System.Byte> propriété de tableau sur l’entité :
 
 ```csharp
 public class AppFile
@@ -1051,7 +1038,7 @@ public class AppFile
 }
 ```
 
-Spécifiez une propriété de modèle de page pour la classe <xref:Microsoft.AspNetCore.Http.IFormFile>qui comprend :
+Spécifiez une propriété de modèle de page pour la classe qui comprend <xref:Microsoft.AspNetCore.Http.IFormFile> :
 
 ```csharp
 public class BufferedSingleFileUploadDbModel : PageModel
@@ -1130,7 +1117,7 @@ L’exemple précédent est semblable à un scénario illustré dans l’exemple
 > [!WARNING]
 > Soyez prudent quand vous stockez des données binaires dans des bases de données relationnelles, car cela peut avoir un impact négatif sur les performances.
 >
-> Ne vous fiez pas à la `FileName` propriété de <xref:Microsoft.AspNetCore.Http.IFormFile> sans validation ni à approuver celle-ci. La `FileName` propriété doit uniquement être utilisée à des fins d’affichage et uniquement après l’encodage HTML.
+> Ne vous fiez pas à la `FileName` propriété de sans validation ni à approuver celle-ci <xref:Microsoft.AspNetCore.Http.IFormFile> . La `FileName` propriété doit uniquement être utilisée à des fins d’affichage et uniquement après l’encodage HTML.
 >
 > Les exemples fournis ne prennent pas en compte les considérations de sécurité. Des informations supplémentaires sont fournies par les sections suivantes et l' [exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/):
 >
@@ -1141,21 +1128,21 @@ L’exemple précédent est semblable à un scénario illustré dans l’exemple
 
 L’exemple suivant montre comment utiliser JavaScript pour diffuser un fichier vers une action de contrôleur. Le jeton anti-contrefaçon du fichier est généré à l’aide d’un attribut de filtre personnalisé et transmis aux en-têtes HTTP du client plutôt que dans le corps de la demande. Étant donné que la méthode d’action traite directement les données chargées, la liaison de modèle de formulaire est désactivée par un autre filtre personnalisé. Dans l’action, le contenu du formulaire est lu en avec `MultipartReader`, qui lit chaque `MultipartSection` individuelle, traitant le fichier ou enregistrant le contenu selon ce qui est approprié. Une fois les sections en plusieurs parties lues, l’action effectue sa propre liaison de modèle.
 
-La réponse de page initiale charge le formulaire et enregistre un jeton anti-contrefaçon dans un cookie (via `GenerateAntiforgeryTokenCookieAttribute` l’attribut). L’attribut utilise la [prise en charge de l’anticontrefaçon](xref:security/anti-request-forgery) intégrée de ASP.net Core pour définir un cookie avec un jeton de demande :
+La réponse de page initiale charge le formulaire et enregistre un jeton anti-contrefaçon dans un cookie (via l' `GenerateAntiforgeryTokenCookieAttribute` attribut). L’attribut utilise la [prise en charge de l’anticontrefaçon](xref:security/anti-request-forgery) intégrée de ASP.net Core pour définir un cookie avec un jeton de demande :
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryTokenCookieAttribute)]
 
-Est `DisableFormValueModelBindingAttribute` utilisé pour désactiver la liaison de modèle :
+`DisableFormValueModelBindingAttribute`Est utilisé pour désactiver la liaison de modèle :
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Filters/ModelBinding.cs?name=snippet_DisableFormValueModelBindingAttribute)]
 
-Dans l’exemple d’application `GenerateAntiforgeryTokenCookieAttribute` , `DisableFormValueModelBindingAttribute` et sont appliqués en tant que filtres aux modèles d' `/StreamedSingleFileUploadDb` application `/StreamedSingleFileUploadPhysical` de `Startup.ConfigureServices` page de et à l’aide [ Razor des conventions de pages](xref:razor-pages/razor-pages-conventions):
+Dans l’exemple d’application, `GenerateAntiforgeryTokenCookieAttribute` et `DisableFormValueModelBindingAttribute` sont appliqués en tant que filtres aux modèles d’application de page de et à l' `/StreamedSingleFileUploadDb` aide des conventions de `/StreamedSingleFileUploadPhysical` `Startup.ConfigureServices` [ Razor pages](xref:razor-pages/razor-pages-conventions):
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Startup.cs?name=snippet_AddMvc&highlight=8-11,17-20)]
 
-Étant donné que la liaison de modèle ne lit pas le formulaire, les paramètres qui sont liés depuis le formulaire ne sont pas liés (la requête, l’itinéraire et l’en-tête continuent de fonctionner). La méthode d’action fonctionne directement avec `Request` la propriété. Un `MultipartReader` est utilisé pour lire chaque section. Les données de clé/valeur sont stockées `KeyValueAccumulator`dans un. Une fois les sections en plusieurs parties lues, le contenu `KeyValueAccumulator` du est utilisé pour lier les données de formulaire à un type de modèle.
+Étant donné que la liaison de modèle ne lit pas le formulaire, les paramètres qui sont liés depuis le formulaire ne sont pas liés (la requête, l’itinéraire et l’en-tête continuent de fonctionner). La méthode d’action fonctionne directement avec la `Request` propriété. Un `MultipartReader` est utilisé pour lire chaque section. Les données de clé/valeur sont stockées dans un `KeyValueAccumulator` . Une fois les sections en plusieurs parties lues, le contenu du `KeyValueAccumulator` est utilisé pour lier les données de formulaire à un type de modèle.
 
-La méthode `StreamingController.UploadDatabase` complète pour la diffusion en continu vers une base de données avec EF Core :
+La `StreamingController.UploadDatabase` méthode complète pour la diffusion en continu vers une base de données avec EF Core :
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
@@ -1167,16 +1154,16 @@ Méthode complète `StreamingController.UploadPhysical` pour la diffusion en con
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadPhysical)]
 
-Dans l’exemple d’application, les contrôles de validation `FileHelpers.ProcessStreamedFile`sont gérés par.
+Dans l’exemple d’application, les contrôles de validation sont gérés par `FileHelpers.ProcessStreamedFile` .
 
 ## <a name="validation"></a>Validation
 
-La classe de l' `FileHelpers` exemple d’application illustre plusieurs vérifications des chargements de fichiers mis en mémoire tampon <xref:Microsoft.AspNetCore.Http.IFormFile> et diffusés en continu. Pour traiter <xref:Microsoft.AspNetCore.Http.IFormFile> les chargements de fichiers mis en mémoire tampon dans l’exemple d' `ProcessFormFile` application, consultez la méthode dans le fichier *Utilities/FileHelpers. cs* . Pour le traitement de fichiers en continu, `ProcessStreamedFile` consultez la méthode dans le même fichier.
+La classe de l’exemple d’application `FileHelpers` illustre plusieurs vérifications des chargements de fichiers mis en mémoire tampon <xref:Microsoft.AspNetCore.Http.IFormFile> et diffusés en continu. Pour traiter les <xref:Microsoft.AspNetCore.Http.IFormFile> chargements de fichiers mis en mémoire tampon dans l’exemple d’application, consultez la `ProcessFormFile` méthode dans le fichier *Utilities/FileHelpers. cs* . Pour le traitement de fichiers en continu, consultez la `ProcessStreamedFile` méthode dans le même fichier.
 
 > [!WARNING]
 > Les méthodes de traitement de validation présentées dans l’exemple d’application n’analysent pas le contenu des fichiers téléchargés. Dans la plupart des scénarios de production, une API de détection de virus et de logiciels malveillants est utilisée sur le fichier avant que le fichier soit mis à la disposition des utilisateurs ou d’autres systèmes.
 >
-> Bien que l’exemple de rubrique fournit un exemple fonctionnel de techniques de validation, `FileHelpers` n’implémentez pas la classe dans une application de production, sauf si vous :
+> Bien que l’exemple de rubrique fournit un exemple fonctionnel de techniques de validation, n’implémentez pas la `FileHelpers` classe dans une application de production, sauf si vous :
 >
 > * Comprenez pleinement l’implémentation.
 > * Modifiez l’implémentation en fonction de l’environnement et des spécifications de l’application.
@@ -1249,7 +1236,7 @@ Razorencode automatiquement les valeurs des propriétés pour l’affichage. Le 
 }
 ```
 
-En dehors Razorde, <xref:System.Net.WebUtility.HtmlEncode*> toujours le contenu du nom de fichier à partir de la demande d’un utilisateur.
+En dehors de Razor , toujours <xref:System.Net.WebUtility.HtmlEncode*> le contenu du nom de fichier à partir de la demande d’un utilisateur.
 
 De nombreuses implémentations doivent inclure une vérification de l’existence du fichier ; dans le cas contraire, le fichier est remplacé par un fichier du même nom. Fournissez une logique supplémentaire pour répondre aux spécifications de votre application.
 
@@ -1265,7 +1252,7 @@ Dans l’exemple d’application, la taille du fichier est limitée à 2 Mo (ind
 }
 ```
 
-Est `FileSizeLimit` injecté dans `PageModel` des classes :
+`FileSizeLimit`Est injecté dans des `PageModel` classes :
 
 ```csharp
 public class BufferedSingleFileUploadPhysicalModel : PageModel
@@ -1292,17 +1279,17 @@ if (formFile.Length > _fileSizeLimit)
 
 ### <a name="match-name-attribute-value-to-parameter-name-of-post-method"></a>Valeur de l’attribut de nom de correspondance avec le nom de paramètre de la méthode de publication
 
-Dans les nonRazor -formulaires qui publient des données de formulaire `FormData` ou utilisent directement JavaScript, le nom spécifié dans l’élément `FormData` du formulaire ou doit correspondre au nom du paramètre dans l’action du contrôleur.
+Dans les non- Razor formulaires qui publient des données de formulaire ou utilisent `FormData` directement JavaScript, le nom spécifié dans l’élément du formulaire ou `FormData` doit correspondre au nom du paramètre dans l’action du contrôleur.
 
 Dans l’exemple suivant :
 
-* Lorsque vous utilisez `<input>` un élément, `name` l’attribut est défini sur la `battlePlans`valeur :
+* Lorsque vous utilisez un `<input>` élément, l' `name` attribut est défini sur la valeur `battlePlans` :
 
   ```html
   <input type="file" name="battlePlans" multiple>
   ```
 
-* Lors de `FormData` l’utilisation de dans JavaScript, le nom est défini `battlePlans`sur la valeur :
+* Lors de l’utilisation `FormData` de dans JavaScript, le nom est défini sur la valeur `battlePlans` :
 
   ```javascript
   var formData = new FormData();
@@ -1312,9 +1299,9 @@ Dans l’exemple suivant :
   }
   ```
 
-Utilisez un nom correspondant pour le paramètre de la méthode C# (`battlePlans`) :
+Utilisez un nom correspondant pour le paramètre de la méthode C# ( `battlePlans` ) :
 
-* Pour une Razor méthode de gestionnaire de page `Upload`pages nommée :
+* Pour une Razor méthode de gestionnaire de page pages nommée `Upload` :
 
   ```csharp
   public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> battlePlans)
@@ -1330,7 +1317,7 @@ Utilisez un nom correspondant pour le paramètre de la méthode C# (`battlePlans
 
 ### <a name="multipart-body-length-limit"></a>Longueur limite du corps en plusieurs parties
 
-<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>définit la limite de la longueur de chaque corps en plusieurs parties. Les sections de formulaire qui dépassent <xref:System.IO.InvalidDataException> cette limite lèvent une lorsqu’elles sont analysées. La valeur par défaut est 134 217 728 (128 Mo). Personnaliser la limite à l' <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> aide du `Startup.ConfigureServices`paramètre dans :
+<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>définit la limite de la longueur de chaque corps en plusieurs parties. Les sections de formulaire qui dépassent cette limite lèvent une lorsqu’elles sont <xref:System.IO.InvalidDataException> analysées. La valeur par défaut est 134 217 728 (128 Mo). Personnaliser la limite à l’aide du <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> paramètre dans `Startup.ConfigureServices` :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -1345,7 +1332,7 @@ public void ConfigureServices(IServiceCollection services)
 
 <xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute>est utilisé pour définir le <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> pour une seule page ou action.
 
-Dans une Razor application pages, appliquez le filtre avec une [Convention](xref:razor-pages/razor-pages-conventions) dans `Startup.ConfigureServices`:
+Dans une Razor application pages, appliquez le filtre avec une [Convention](xref:razor-pages/razor-pages-conventions) dans `Startup.ConfigureServices` :
 
 ```csharp
 services.AddMvc()
@@ -1391,7 +1378,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 
 <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute>est utilisé pour définir le [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) pour une seule page ou action.
 
-Dans une Razor application pages, appliquez le filtre avec une [Convention](xref:razor-pages/razor-pages-conventions) dans `Startup.ConfigureServices`:
+Dans une Razor application pages, appliquez le filtre avec une [Convention](xref:razor-pages/razor-pages-conventions) dans `Startup.ConfigureServices` :
 
 ```csharp
 services.AddMvc()
@@ -1429,7 +1416,7 @@ D’autres limites Kestrel peuvent s’appliquer aux applications hébergées pa
 
 ### <a name="iis-content-length-limit"></a>Limite de longueur du contenu IIS
 
-La limite de demandes par`maxAllowedContentLength`défaut () est de 30 millions octets, soit environ 28,6 Mo. Personnaliser la limite dans le fichier *Web. config* :
+La limite de demandes par défaut ( `maxAllowedContentLength` ) est de 30 millions octets, soit environ 28,6 Mo. Personnaliser la limite dans le fichier *Web. config* :
 
 ```xml
 <system.webServer>
@@ -1442,7 +1429,7 @@ La limite de demandes par`maxAllowedContentLength`défaut () est de 30 millions 
 </system.webServer>
 ```
 
-Ce paramètre s’applique seulement à IIS. Par défaut, ce comportement ne se produit pas dans le cas d’un hébergement sur Kestrel. Pour plus d’informations, consultez [limites \<de demande RequestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/).
+Ce paramètre s’applique seulement à IIS. Par défaut, ce comportement ne se produit pas dans le cas d’un hébergement sur Kestrel. Pour plus d’informations, consultez [limites de demande \< RequestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/).
 
 Les limitations du module ASP.NET Core ou la présence du module de filtrage des demandes IIS peuvent limiter les chargements à 2 ou 4 Go. Pour plus d’informations, consultez [Impossible de télécharger un fichier d’une taille supérieure à 2 Go (dotnet/AspNetCore #2711)](https://github.com/dotnet/AspNetCore/issues/2711).
 
@@ -1467,11 +1454,11 @@ Une erreur de connexion et une connexion du serveur de réinitialisation indique
 
 ### <a name="null-reference-exception-with-iformfile"></a>Exception de référence null avec IFormFile
 
-Si le contrôleur accepte les fichiers téléchargés à l' <xref:Microsoft.AspNetCore.Http.IFormFile> aide de mais que `null`la valeur est, vérifiez que le formulaire HTML `enctype` spécifie `multipart/form-data`la valeur. Si cet attribut n’est pas défini `<form>` sur l’élément, le chargement du fichier ne se <xref:Microsoft.AspNetCore.Http.IFormFile> produit pas `null`et tous les arguments liés sont. Vérifiez également que l' [appellation de chargement dans les données de formulaire correspond à celle de l’application](#match-name-attribute-value-to-parameter-name-of-post-method).
+Si le contrôleur accepte les fichiers téléchargés à l’aide <xref:Microsoft.AspNetCore.Http.IFormFile> de mais que la valeur est `null` , vérifiez que le formulaire HTML spécifie la `enctype` valeur `multipart/form-data` . Si cet attribut n’est pas défini sur l' `<form>` élément, le chargement du fichier ne se produit pas et tous les <xref:Microsoft.AspNetCore.Http.IFormFile> arguments liés sont `null` . Vérifiez également que l' [appellation de chargement dans les données de formulaire correspond à celle de l’application](#match-name-attribute-value-to-parameter-name-of-post-method).
 
 ### <a name="stream-was-too-long"></a>Le flux est trop long
 
-Les exemples de cette rubrique reposent sur <xref:System.IO.MemoryStream> pour stocker le contenu du fichier chargé. La limite de taille d' `MemoryStream` un `int.MaxValue`est. Si le scénario de chargement de fichiers de l’application nécessite la conservation d’un contenu de fichier d’une taille supérieure à 50 Mo, `MemoryStream` utilisez une autre approche qui ne repose pas sur un seul pour conserver le contenu d’un fichier chargé.
+Les exemples de cette rubrique reposent sur <xref:System.IO.MemoryStream> pour stocker le contenu du fichier chargé. La limite de taille d’un `MemoryStream` est `int.MaxValue` . Si le scénario de chargement de fichiers de l’application nécessite la conservation d’un contenu de fichier d’une taille supérieure à 50 Mo, utilisez une autre approche qui ne repose pas sur un seul `MemoryStream` pour conserver le contenu d’un fichier chargé.
 
 ::: moniker-end
 

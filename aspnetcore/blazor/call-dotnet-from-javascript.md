@@ -20,9 +20,9 @@ Cet article traite de l’appel de méthodes .NET à partir de JavaScript. Pour 
 
 ## <a name="static-net-method-call"></a>Appel de méthode .NET statique
 
-Pour appeler une méthode .NET statique à partir de JavaScript, utilisez les `DotNet.invokeMethod` `DotNet.invokeMethodAsync` fonctions ou. Transmettez l’identificateur de la méthode statique que vous souhaitez appeler, le nom de l’assembly contenant la fonction et les arguments éventuels. La version asynchrone est recommandée pour prendre en charge les Blazor scénarios de serveur. La méthode .NET doit être publique, statique et avoir l' `[JSInvokable]` attribut. L’appel de méthodes génériques ouvertes n’est pas pris en charge actuellement.
+Pour appeler une méthode .NET statique à partir de JavaScript, utilisez les `DotNet.invokeMethod` `DotNet.invokeMethodAsync` fonctions ou. Transmettez l’identificateur de la méthode statique que vous souhaitez appeler, le nom de l’assembly contenant la fonction et les arguments éventuels. La version asynchrone est recommandée pour prendre en charge les Blazor scénarios de serveur. La méthode .NET doit être publique, statique et avoir l' [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) attribut. L’appel de méthodes génériques ouvertes n’est pas pris en charge actuellement.
 
-L’exemple d’application comprend une méthode C# pour retourner un `int` tableau. L' `JSInvokable` attribut est appliqué à la méthode.
+L’exemple d’application comprend une méthode C# pour retourner un `int` tableau. L' [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) attribut est appliqué à la méthode.
 
 *Pages/JsInterop. Razor*:
 
@@ -57,7 +57,7 @@ Array(4) [ 1, 2, 3, 4 ]
 
 La quatrième valeur de tableau fait l’objet d’un push dans le tableau ( `data.push(4);` ) retourné par `ReturnArrayAsync` .
 
-Par défaut, l’identificateur de méthode est le nom de la méthode, mais vous pouvez spécifier un identificateur différent à l’aide du `JSInvokableAttribute` constructeur :
+Par défaut, l’identificateur de méthode est le nom de la méthode, mais vous pouvez spécifier un identificateur différent à l’aide du [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) constructeur d’attribut :
 
 ```csharp
 @code {
@@ -86,8 +86,8 @@ returnArrayAsyncJs: function () {
 Vous pouvez également appeler des méthodes d’instance .NET à partir de JavaScript. Pour appeler une méthode d’instance .NET à partir de JavaScript :
 
 * Passer l’instance .NET par référence à JavaScript :
-  * Effectuez un appel statique à `DotNetObjectReference.Create` .
-  * Encapsulez l’instance dans une `DotNetObjectReference` instance et appelez `Create` sur l' `DotNetObjectReference` instance. Supprimez des `DotNetObjectReference` objets (un exemple apparaît plus loin dans cette section).
+  * Effectuez un appel statique à <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A?displayProperty=nameWithType> .
+  * Encapsulez l’instance dans une <xref:Microsoft.JSInterop.DotNetObjectReference> instance et appelez <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A> sur l' <xref:Microsoft.JSInterop.DotNetObjectReference> instance. Supprimez des <xref:Microsoft.JSInterop.DotNetObjectReference> objets (un exemple apparaît plus loin dans cette section).
 * Appeler des méthodes d’instance .NET sur l’instance à l’aide des `invokeMethod` `invokeMethodAsync` fonctions ou. L’instance .NET peut également être passée comme argument lors de l’appel d’autres méthodes .NET à partir de JavaScript.
 
 > [!NOTE]
@@ -133,9 +133,9 @@ Sortie de la console dans les outils de développement Web du navigateur :
 Hello, Blazor!
 ```
 
-Pour éviter une fuite de mémoire et autoriser garbage collection sur un composant qui crée un `DotNetObjectReference` , adoptez l’une des approches suivantes :
+Pour éviter une fuite de mémoire et autoriser garbage collection sur un composant qui crée un <xref:Microsoft.JSInterop.DotNetObjectReference> , adoptez l’une des approches suivantes :
 
-* Supprimez l’objet dans la classe qui a créé l' `DotNetObjectReference` instance :
+* Supprimez l’objet dans la classe qui a créé l' <xref:Microsoft.JSInterop.DotNetObjectReference> instance :
 
   ```csharp
   public class ExampleJsInterop : IDisposable
@@ -197,7 +197,7 @@ Pour éviter une fuite de mémoire et autoriser garbage collection sur un compos
   }
   ```
 
-* Lorsque le composant ou la classe ne supprime pas le `DotNetObjectReference` , supprimez l’objet sur le client en appelant `.dispose()` :
+* Lorsque le composant ou la classe ne supprime pas le <xref:Microsoft.JSInterop.DotNetObjectReference> , supprimez l’objet sur le client en appelant `.dispose()` :
 
   ```javascript
   window.myFunction = (dotnetHelper) => {
@@ -211,7 +211,7 @@ Pour éviter une fuite de mémoire et autoriser garbage collection sur un compos
 Pour appeler les méthodes .NET d’un composant :
 
 * Utilisez la `invokeMethod` `invokeMethodAsync` fonction ou pour effectuer un appel de méthode statique au composant.
-* La méthode statique du composant encapsule l’appel à sa méthode d’instance en tant que appelé `Action` .
+* La méthode statique du composant encapsule l’appel à sa méthode d’instance en tant que appelé <xref:System.Action> .
 
 Dans le code JavaScript côté client :
 
@@ -257,11 +257,11 @@ function updateMessageCallerJS() {
 }
 ```
 
-Lorsqu’il existe plusieurs composants, chacun avec des méthodes d’instance à appeler, utilisez une classe d’assistance pour appeler les méthodes d’instance (en tant que `Action` s) de chaque composant.
+Lorsqu’il existe plusieurs composants, chacun avec des méthodes d’instance à appeler, utilisez une classe d’assistance pour appeler les méthodes d’instance (en tant que <xref:System.Action> s) de chaque composant.
 
 Dans l’exemple suivant :
 
-* Le `JSInterop` composant contient plusieurs `ListItem` composants.
+* Le `JSInteropExample` composant contient plusieurs `ListItem` composants.
 * Chaque `ListItem` composant se compose d’un message et d’un bouton.
 * Quand un `ListItem` bouton de composant est sélectionné, `ListItem` la `UpdateMessage` méthode modifie le texte de l’élément de liste et masque le bouton.
 
@@ -332,10 +332,10 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 }
 ```
 
-*Pages/JSInterop. Razor*:
+*Pages/JSInteropExample. Razor*:
 
 ```razor
-@page "/JSInterop"
+@page "/JSInteropExample"
 
 <h1>List of components</h1>
 

@@ -1,30 +1,18 @@
 ---
-title: BlazorGestion des événements ASP.net Core
-author: guardrex
-description: Découvrez Blazor les fonctionnalités de gestion des événements de, notamment les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 03/16/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/event-handling
-ms.openlocfilehash: 610cb9124f59ed07f1fe6193f92052b4513450c8
-ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83424249"
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
-# <a name="aspnet-core-blazor-event-handling"></a>ASP.NET Core la gestion des événements éblouissants
+# <a name="aspnet-core-blazor-event-handling"></a>BlazorGestion des événements ASP.net Core
 
 Par [Luke Latham](https://github.com/guardrex) et [Daniel Roth](https://github.com/danroth27)
 
-Les composants Razor fournissent des fonctionnalités de gestion des événements. Pour un attribut d’élément HTML nommé [`@on{EVENT}`](xref:mvc/views/razor#onevent) (par exemple, `@onclick` ) avec une valeur de type délégué, un composant Razor traite la valeur de l’attribut en tant que gestionnaire d’événements.
+Razorles composants fournissent des fonctionnalités de gestion des événements. Pour un attribut d’élément HTML nommé [`@on{EVENT}`](xref:mvc/views/razor#onevent) (par exemple, `@onclick` ) avec une valeur de type délégué, un Razor composant traite la valeur de l’attribut en tant que gestionnaire d’événements.
 
 Le code suivant appelle la `UpdateHeading` méthode lorsque le bouton est sélectionné dans l’interface utilisateur :
 
@@ -75,22 +63,206 @@ Dans l’exemple suivant, `UpdateHeading` est appelé de façon asynchrone quand
 
 Pour certains événements, les types d’arguments d’événement sont autorisés. La spécification d’un type d’événement dans l’appel de méthode n’est nécessaire que si le type d’événement est utilisé dans la méthode.
 
-Les informations prises en charge `EventArgs` sont indiquées dans le tableau suivant.
+Les informations prises en charge <xref:System.EventArgs> sont indiquées dans le tableau suivant.
 
 | Événement            | Classe                | Remarques et événements DOM |
-| ---------------- | -------------------- | -------------------- |
-| Presse-papiers        | `ClipboardEventArgs` | `oncut`, `oncopy`, `onpaste` |
-| Glissement             | `DragEventArgs`      | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br>`DataTransfer`et `DataTransferItem` contiennent des données d’élément glissées. |
-| Erreur            | `ErrorEventArgs`     | `onerror` |
-| Événement            | `EventArgs`          | *Général*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*Presse-papiers*<br>`onbeforecut`, `onbeforecopy`, `onbeforepaste`<br><br>*Input*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, `onsubmit`<br><br>*Média*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting` |
-| Focus            | `FocusEventArgs`     | `onfocus`, `onblur`, `onfocusin`, `onfocusout`<br><br>N’inclut pas la prise en charge de `relatedTarget` . |
-| Entrée            | `ChangeEventArgs`    | `onchange`, `oninput` |
-| Clavier         | `KeyboardEventArgs`  | `onkeydown`, `onkeypress`, `onkeyup` |
-| Souris            | `MouseEventArgs`     | `onclick`, `oncontextmenu`, `ondblclick`, `onmousedown`, `onmouseup`, `onmouseover`, `onmousemove`, `onmouseout` |
-| Pointeur de souris    | `PointerEventArgs`   | `onpointerdown`, `onpointerup`, `onpointercancel`, `onpointermove`, `onpointerover`, `onpointerout`, `onpointerenter`, `onpointerleave`, `ongotpointercapture`, `onlostpointercapture` |
-| Roulette de la souris      | `WheelEventArgs`     | `onwheel`, `onmousewheel` |
-| Avancement         | `ProgressEventArgs`  | `onabort`, `onload`, `onloadend`, `onloadstart`, `onprogress`, `ontimeout` |
-| Entrées tactiles            | `TouchEventArgs`     | `ontouchstart`, `ontouchend`, `ontouchmove`, `ontouchenter`, `ontouchleave`, `ontouchcancel`<br><br>`TouchPoint`représente un point de contact unique sur un appareil tactile. |
+| ---
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-------- | titre de la--- : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+---------- | titre de la--- : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+title : 'ASP.NET Core Blazor gestion des événements’auteur : Description : 'en savoir plus sur Blazor les fonctionnalités de gestion des événements de, y compris les types d’arguments d’événement, les rappels d’événements et la gestion des événements de navigateur par défaut.
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+---------- | | Presse-papiers | <xref:Microsoft.AspNetCore.Components.Web.ClipboardEventArgs> | `oncut`, `oncopy`, `onpaste` | | Faire glisser | <xref:Microsoft.AspNetCore.Components.Web.DragEventArgs> | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`,`ondragend`<br><br><xref:Microsoft.AspNetCore.Components.Web.DataTransfer>et <xref:Microsoft.AspNetCore.Components.Web.DataTransferItem> contiennent des données d’élément glissées. | | Erreur | <xref:Microsoft.AspNetCore.Components.Web.ErrorEventArgs> | `onerror` | | Événement | <xref:System.EventArgs>  |  *Général*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*Presse-papiers*<br>`onbeforecut`, `onbeforecopy`, `onbeforepaste`<br><br>*Input*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, <xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnSubmit><br><br>*Média*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting`<br><br><xref:Microsoft.AspNetCore.Components.Web.EventHandlers>contient des attributs permettant de configurer les mappages entre les noms d’événements et les types d’arguments d’événement. | | Focus | <xref:Microsoft.AspNetCore.Components.Web.FocusEventArgs> | `onfocus`, `onblur`, `onfocusin`,`onfocusout`<br><br>N’inclut pas la prise en charge de `relatedTarget` . | | Entrée | <xref:Microsoft.AspNetCore.Components.ChangeEventArgs> | `onchange`, `oninput` | | Clavier | <xref:Microsoft.AspNetCore.Components.Web.KeyboardEventArgs> | `onkeydown`, `onkeypress`, `onkeyup` | | Souris | <xref:Microsoft.AspNetCore.Components.Web.MouseEventArgs> | `onclick`, `oncontextmenu`, `ondblclick`, `onmousedown`, `onmouseup`, `onmouseover`, `onmousemove`, `onmouseout` | | Pointeur de la souris | <xref:Microsoft.AspNetCore.Components.Web.PointerEventArgs> | `onpointerdown`, `onpointerup`, `onpointercancel`, `onpointermove`, `onpointerover`, `onpointerout`, `onpointerenter`, `onpointerleave`, `ongotpointercapture`, `onlostpointercapture` | | Roulette de la souris | <xref:Microsoft.AspNetCore.Components.Web.WheelEventArgs> | `onwheel`, `onmousewheel` | | Progression | <xref:Microsoft.AspNetCore.Components.Web.ProgressEventArgs> | `onabort`, `onload`, `onloadend`, `onloadstart`, `onprogress`, `ontimeout` | | Toucher | <xref:Microsoft.AspNetCore.Components.Web.TouchEventArgs> | `ontouchstart`, `ontouchend`, `ontouchmove`, `ontouchenter`, `ontouchleave`,`ontouchcancel`<br><br><xref:Microsoft.AspNetCore.Components.Web.TouchPoint>représente un point de contact unique sur un appareil tactile. |
 
 Pour plus d’informations, consultez les ressources suivantes :
 
@@ -105,7 +277,7 @@ Les [expressions lambda](/dotnet/csharp/programming-guide/statements-expressions
 <button @onclick="@(e => Console.WriteLine("Hello, world!"))">Say hello</button>
 ```
 
-Il est souvent pratique de se rapprocher de valeurs supplémentaires, par exemple lors de l’itération sur un ensemble d’éléments. L’exemple suivant crée trois boutons, chacun d’entre eux qui `UpdateHeading` passe un argument d’événement ( `MouseEventArgs` ) et son numéro de bouton ( `buttonNumber` ) lorsqu’ils sont sélectionnés dans l’interface utilisateur :
+Il est souvent pratique de se rapprocher de valeurs supplémentaires, par exemple lors de l’itération sur un ensemble d’éléments. L’exemple suivant crée trois boutons, chacun d’entre eux qui `UpdateHeading` passe un argument d’événement ( <xref:Microsoft.AspNetCore.Components.Web.MouseEventArgs> ) et son numéro de bouton ( `buttonNumber` ) lorsqu’ils sont sélectionnés dans l’interface utilisateur :
 
 ```razor
 <h2>@message</h2>
@@ -136,13 +308,13 @@ Il est souvent pratique de se rapprocher de valeurs supplémentaires, par exempl
 
 ## <a name="eventcallback"></a>EventCallback suivante
 
-Un scénario courant avec des composants imbriqués est le désir d’exécuter la méthode d’un composant parent lorsqu’un événement de composant enfant se produit. Un `onclick` événement qui se produit dans le composant enfant est un cas d’usage courant. Pour exposer des événements entre les composants, utilisez un `EventCallback` . Un composant parent peut affecter une méthode de rappel à un composant enfant `EventCallback` .
+Un scénario courant avec des composants imbriqués est le désir d’exécuter la méthode d’un composant parent lorsqu’un événement de composant enfant se produit. Un `onclick` événement qui se produit dans le composant enfant est un cas d’usage courant. Pour exposer des événements entre les composants, utilisez un <xref:Microsoft.AspNetCore.Components.EventCallback> . Un composant parent peut affecter une méthode de rappel à un composant enfant <xref:Microsoft.AspNetCore.Components.EventCallback> .
 
-`ChildComponent`Dans l’exemple d’application (*Components/ChildComponent. Razor*), vous montre comment un gestionnaire de bouton `onclick` est configuré pour recevoir un `EventCallback` délégué de l’exemple de `ParentComponent` . Le `EventCallback` est typé avec `MouseEventArgs` , ce qui est approprié pour un `onclick` événement à partir d’un périphérique :
+`ChildComponent`Dans l’exemple d’application (*Components/ChildComponent. Razor*), vous montre comment un gestionnaire de bouton `onclick` est configuré pour recevoir un <xref:Microsoft.AspNetCore.Components.EventCallback> délégué de l’exemple de `ParentComponent` . Le <xref:Microsoft.AspNetCore.Components.EventCallback> est typé avec `MouseEventArgs` , ce qui est approprié pour un `onclick` événement à partir d’un périphérique :
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=5-7,17-18)]
 
-`ParentComponent`Définit le () de l’enfant `EventCallback<T>` `OnClickCallback` sur sa `ShowMessage` méthode.
+`ParentComponent`Définit le () de l’enfant <xref:Microsoft.AspNetCore.Components.EventCallback%601> `OnClickCallback` sur sa `ShowMessage` méthode.
 
 *Pages/ParentComponent. Razor*:
 
@@ -172,24 +344,24 @@ Un scénario courant avec des composants imbriqués est le désir d’exécuter 
 Lorsque le bouton est sélectionné dans le `ChildComponent` :
 
 * La `ParentComponent` `ShowMessage` méthode de est appelée. `messageText`est mis à jour et affiché dans le `ParentComponent` .
-* Un appel à [StateHasChanged](xref:blazor/lifecycle#state-changes) n’est pas requis dans la méthode du rappel ( `ShowMessage` ). `StateHasChanged`est appelé automatiquement pour rerestituer le `ParentComponent` , tout comme les événements enfants déclenchent le rerendu des composants dans les gestionnaires d’événements qui s’exécutent dans l’enfant.
+* Un appel à [StateHasChanged](xref:blazor/lifecycle#state-changes) n’est pas requis dans la méthode du rappel ( `ShowMessage` ). <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>est appelé automatiquement pour rerestituer le `ParentComponent` , tout comme les événements enfants déclenchent le rerendu des composants dans les gestionnaires d’événements qui s’exécutent dans l’enfant.
 
-`EventCallback`et `EventCallback<T>` autorisent les délégués asynchrones. `EventCallback<T>`est fortement typé et requiert un type d’argument spécifique. `EventCallback`est faiblement typé et autorise tout type d’argument.
+<xref:Microsoft.AspNetCore.Components.EventCallback>et <xref:Microsoft.AspNetCore.Components.EventCallback%601> autorisent les délégués asynchrones. <xref:Microsoft.AspNetCore.Components.EventCallback%601>est fortement typé et requiert un type d’argument spécifique. <xref:Microsoft.AspNetCore.Components.EventCallback>est faiblement typé et autorise tout type d’argument.
 
 ```razor
 <ChildComponent 
     OnClickCallback="@(async () => { await Task.Yield(); messageText = "Blaze It!"; })" />
 ```
 
-Appelez `EventCallback` ou `EventCallback<T>` avec `InvokeAsync` et en attente de <xref:System.Threading.Tasks.Task> :
+Appelez <xref:Microsoft.AspNetCore.Components.EventCallback> ou <xref:Microsoft.AspNetCore.Components.EventCallback%601> avec <xref:Microsoft.AspNetCore.Components.EventCallback.InvokeAsync%2A> et en attente de <xref:System.Threading.Tasks.Task> :
 
 ```csharp
 await callback.InvokeAsync(arg);
 ```
 
-Utilisez `EventCallback` et `EventCallback<T>` pour la gestion des événements et les paramètres de composant de liaison.
+Utilisez <xref:Microsoft.AspNetCore.Components.EventCallback> et <xref:Microsoft.AspNetCore.Components.EventCallback%601> pour la gestion des événements et les paramètres de composant de liaison.
 
-Préférez le fortement typé `EventCallback<T>` `EventCallback` . `EventCallback<T>`fournit un meilleur retour d’erreur aux utilisateurs du composant. Comme pour d’autres gestionnaires d’événements d’interface utilisateur, la spécification du paramètre d’événement est facultative. Utilisez `EventCallback` quand aucune valeur n’est passée au rappel.
+Préférez le fortement typé <xref:Microsoft.AspNetCore.Components.EventCallback%601> <xref:Microsoft.AspNetCore.Components.EventCallback> . <xref:Microsoft.AspNetCore.Components.EventCallback%601>fournit un meilleur retour d’erreur aux utilisateurs du composant. Comme pour d’autres gestionnaires d’événements d’interface utilisateur, la spécification du paramètre d’événement est facultative. Utilisez <xref:Microsoft.AspNetCore.Components.EventCallback> quand aucune valeur n’est passée au rappel.
 
 ## <a name="prevent-default-actions"></a>Empêcher les actions par défaut
 

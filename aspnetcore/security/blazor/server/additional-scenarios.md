@@ -1,24 +1,12 @@
 ---
-title: BlazorScénarios de sécurité supplémentaires du serveur ASP.net Core
-author: guardrex
-description: Découvrez comment configurer le Blazor serveur pour d’autres scénarios de sécurité.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/19/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/server/additional-scenarios
-ms.openlocfilehash: 9d26cde4d8964a8285241bb0158d8e6f8d5f8dbc
-ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/17/2020
-ms.locfileid: "83444072"
+titre : « ASP.NET Core Blazor Server scénarios de sécurité supplémentaires » auteur : Description : « Découvrez comment configurer le Blazor serveur pour des scénarios de sécurité supplémentaires ».
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>BlazorScénarios de sécurité supplémentaires du serveur ASP.net Core
 
@@ -171,7 +159,7 @@ Le paramètre peut également être défini dans le fichier de paramètres de l�
 }
 ```
 
-Si l’ajout d’un segment à l’autorité n’est pas approprié pour le fournisseur OIDC de l’application, par exemple avec les fournisseurs non AAD, définissez la `Authority` propriété directement. Définissez la propriété dans <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> ou dans le fichier de paramètres de l’application avec la `Authority` clé.
+Si l’ajout d’un segment à l’autorité n’est pas approprié pour le fournisseur OIDC de l’application, par exemple avec les fournisseurs non AAD, définissez la <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> propriété directement. Définissez la propriété dans <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> ou dans le fichier de paramètres de l’application avec la <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> clé.
 
 ### <a name="code-changes"></a>Modifications du code
 

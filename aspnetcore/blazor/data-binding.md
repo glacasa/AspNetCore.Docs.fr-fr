@@ -1,30 +1,18 @@
 ---
-title: Liaison Blazor de données ASP.net Core
-author: guardrex
-description: En savoir plus sur les fonctionnalités de liaison de données pour Blazor les composants et les éléments DOM dans les applications.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 03/26/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/data-binding
-ms.openlocfilehash: b4951c5eb712b15db3a7c1ccd57ae01c530a23ef
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967166"
+titre : 'ASP.NET Core Blazor liaison de données’auteur : Description : 'en savoir plus sur les fonctionnalités de liaison de données pour les composants et les éléments DOM dans les Blazor applications. '
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
-# <a name="aspnet-core-blazor-data-binding"></a>Liaison Blazor de données ASP.net Core
+# <a name="aspnet-core-blazor-data-binding"></a>BlazorLiaison de données ASP.net Core
 
 Par [Luke Latham](https://github.com/guardrex) et [Daniel Roth](https://github.com/danroth27)
 
-Razorles composants fournissent des fonctionnalités de liaison de données via un [`@bind`](xref:mvc/views/razor#bind) attribut d’élément HTML nommé avec une Razor valeur de champ, de propriété ou d’expression.
+Razorles composants fournissent des fonctionnalités de liaison de données via un attribut d’élément HTML nommé [`@bind`](xref:mvc/views/razor#bind) avec une valeur de champ, de propriété ou d' Razor expression.
 
 L’exemple suivant lie la `CurrentValue` propriété à la valeur de la zone de texte :
 
@@ -40,7 +28,7 @@ Lorsque la zone de texte perd le focus, la valeur de la propriété est mise à 
 
 La zone de texte est mise à jour dans l’interface utilisateur uniquement lorsque le composant est rendu, et non en réponse à la modification de la valeur de la propriété. Étant donné que les composants s’affichent après l’exécution du code du gestionnaire d’événements, les mises à jour de propriétés sont *généralement* reflétées dans l’interface utilisateur immédiatement après le déclenchement d’un gestionnaire d’événements.
 
-L' `@bind` utilisation de `CurrentValue` avec la`<input @bind="CurrentValue" />`propriété () équivaut essentiellement à ce qui suit :
+L’utilisation [`@bind`](xref:mvc/views/razor#bind) de avec la `CurrentValue` propriété ( `<input @bind="CurrentValue" />` ) équivaut essentiellement à ce qui suit :
 
 ```razor
 <input value="@CurrentValue"
@@ -52,9 +40,9 @@ L' `@bind` utilisation de `CurrentValue` avec la`<input @bind="CurrentValue" />`
 }
 ```
 
-Lors du rendu du composant, le `value` de l’élément d’entrée provient de `CurrentValue` la propriété. Lorsque l’utilisateur tape dans la zone de texte et modifie le focus de `onchange` l’élément, l’événement `CurrentValue` est déclenché et la propriété est définie sur la valeur modifiée. En réalité, la génération de code est plus complexe `@bind` , car gère les cas où les conversions de types sont effectuées. En principe, `@bind` associe la valeur actuelle d’une expression à `value` un attribut et gère les modifications à l’aide du gestionnaire inscrit.
+Lors du rendu du composant, le `value` de l’élément d’entrée provient de la `CurrentValue` propriété. Lorsque l’utilisateur tape dans la zone de texte et modifie le focus de l’élément, l' `onchange` événement est déclenché et la `CurrentValue` propriété est définie sur la valeur modifiée. En réalité, la génération de code est plus complexe, car [`@bind`](xref:mvc/views/razor#bind) gère les cas où les conversions de types sont effectuées. En principe, [`@bind`](xref:mvc/views/razor#bind) associe la valeur actuelle d’une expression à un `value` attribut et gère les modifications à l’aide du gestionnaire inscrit.
 
-Liez une propriété ou un champ à d’autres événements en incluant `@bind:event` également un attribut `event` avec un paramètre. L’exemple suivant lie la `CurrentValue` propriété à l' `oninput` événement :
+Liez une propriété ou un champ à d’autres événements en incluant également un `@bind:event` attribut avec un `event` paramètre. L’exemple suivant lie la `CurrentValue` propriété à l' `oninput` événement :
 
 ```razor
 <input @bind="CurrentValue" @bind:event="oninput" />
@@ -64,9 +52,9 @@ Liez une propriété ou un champ à d’autres événements en incluant `@bind:e
 }
 ```
 
-Contrairement `onchange`à, qui se déclenche lorsque l’élément perd `oninput` le focus, se déclenche lorsque la valeur de la zone de texte change.
+Contrairement à `onchange` , qui se déclenche lorsque l’élément perd le focus, `oninput` se déclenche lorsque la valeur de la zone de texte change.
 
-Utilisez `@bind-{ATTRIBUTE}` avec `@bind-{ATTRIBUTE}:event` la syntaxe pour lier des attributs d' `value`élément autres que. Dans l’exemple suivant, le style du paragraphe est mis à jour `paragraphStyle` lorsque la valeur change :
+Utilisez `@bind-{ATTRIBUTE}` avec la `@bind-{ATTRIBUTE}:event` syntaxe pour lier des attributs d’élément autres que `value` . Dans l’exemple suivant, le style du paragraphe est mis à jour lorsque la `paragraphStyle` valeur change :
 
 ```razor
 @page "/binding-example"
@@ -84,7 +72,7 @@ Utilisez `@bind-{ATTRIBUTE}` avec `@bind-{ATTRIBUTE}:event` la syntaxe pour lier
 }
 ```
 
-La liaison d’attribut respecte la casse. Par exemple, `@bind` est valide et `@Bind` n’est pas valide.
+La liaison d’attribut respecte la casse. Par exemple, [`@bind`](xref:mvc/views/razor#bind) est valide et [`@bind`](xref:mvc/views/razor#bind) n’est pas valide.
 
 ## <a name="unparsable-values"></a>Valeurs inanalysables
 
@@ -92,7 +80,7 @@ Quand un utilisateur fournit une valeur non analysable à un élément DataBound
 
 Examinez le cas suivant :
 
-* Un `<input>` élément est lié à un `int` type dont la valeur initiale est `123`:
+* Un `<input>` élément est lié à un `int` type dont la valeur initiale est `123` :
 
   ```razor
   <input @bind="MyProperty" />
@@ -104,19 +92,19 @@ Examinez le cas suivant :
   ```
 * L’utilisateur met à jour la valeur de l’élément à `123.45` dans la page et modifie le focus de l’élément.
 
-Dans le scénario précédent, la valeur de l’élément est rétablie `123`à. Lorsque la valeur `123.45` est rejetée en faveur de la valeur d' `123`origine de, l’utilisateur sait que sa valeur n’a pas été acceptée.
+Dans le scénario précédent, la valeur de l’élément est rétablie à `123` . Lorsque la valeur `123.45` est rejetée en faveur de la valeur d’origine de `123` , l’utilisateur sait que sa valeur n’a pas été acceptée.
 
-Par défaut, la liaison s’applique à l' `onchange` événement de`@bind="{PROPERTY OR FIELD}"`l’élément (). Utilisez `@bind="{PROPERTY OR FIELD}" @bind:event={EVENT}` pour déclencher la liaison sur un événement différent. Pour l' `oninput` événement (`@bind:event="oninput"`), la réversion se produit après toute séquence de touches qui introduit une valeur non analysable. Lorsque vous ciblez l' `oninput` événement `int`avec un type lié, un utilisateur ne peut pas taper `.` un caractère. Un `.` caractère est immédiatement supprimé, de sorte que l’utilisateur reçoit des commentaires immédiats que seuls des nombres entiers sont autorisés. Il existe des scénarios dans lesquels le rétablissement de la valeur `oninput` de l’événement n’est pas idéal, par exemple lorsque l’utilisateur doit être autorisé à effacer `<input>` une valeur non analysable. Les alternatives sont les suivantes :
+Par défaut, la liaison s’applique à l’événement de l’élément `onchange` ( `@bind="{PROPERTY OR FIELD}"` ). Utilisez `@bind="{PROPERTY OR FIELD}" @bind:event={EVENT}` pour déclencher la liaison sur un événement différent. Pour l' `oninput` événement ( `@bind:event="oninput"` ), la réversion se produit après toute séquence de touches qui introduit une valeur non analysable. Lorsque vous ciblez l' `oninput` événement avec un `int` type lié, un utilisateur ne peut pas taper un `.` caractère. Un `.` caractère est immédiatement supprimé, de sorte que l’utilisateur reçoit des commentaires immédiats que seuls des nombres entiers sont autorisés. Il existe des scénarios dans lesquels le rétablissement de la valeur de l' `oninput` événement n’est pas idéal, par exemple lorsque l’utilisateur doit être autorisé à effacer une valeur non analysable `<input>` . Les alternatives sont les suivantes :
 
-* N’utilisez pas `oninput` l’événement. Utilisez l’événement `onchange` par défaut (spécifiez `@bind="{PROPERTY OR FIELD}"`uniquement), où une valeur non valide n’est pas rétablie tant que l’élément n’a pas perdu le focus.
-* Effectuer une liaison à un type Nullable, `int?` tel `string`que ou, et fournir une logique personnalisée pour gérer les entrées non valides.
-* Utilisez un [composant de validation de formulaire](xref:blazor/forms-validation), `InputNumber` tel `InputDate`que ou. Les composants de validation de formulaire offrent une prise en charge intégrée pour gérer les entrées non valides. Composants de validation de formulaire :
-  * Permet à l’utilisateur de fournir une entrée non valide et de recevoir des `EditContext`erreurs de validation sur le associé.
+* N’utilisez pas l' `oninput` événement. Utilisez l’événement par défaut `onchange` (spécifiez uniquement `@bind="{PROPERTY OR FIELD}"` ), où une valeur non valide n’est pas rétablie tant que l’élément n’a pas perdu le focus.
+* Effectuer une liaison à un type Nullable, tel que `int?` ou `string` , et fournir une logique personnalisée pour gérer les entrées non valides.
+* Utilisez un [composant de validation de formulaire](xref:blazor/forms-validation), tel que <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> ou <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> . Les composants de validation de formulaire offrent une prise en charge intégrée pour gérer les entrées non valides. Composants de validation de formulaire :
+  * Permet à l’utilisateur de fournir une entrée non valide et de recevoir des erreurs de validation sur le associé <xref:Microsoft.AspNetCore.Components.Forms.EditContext> .
   * Affichez les erreurs de validation dans l’interface utilisateur sans interférer avec l’utilisateur qui saisit des données Webform supplémentaires.
 
 ## <a name="format-strings"></a>Chaînes de format
 
-La liaison de données <xref:System.DateTime> fonctionne avec les [`@bind:format`](xref:mvc/views/razor#bind)chaînes de format à l’aide de. D’autres expressions de mise en forme, telles que les formats de devise ou de nombre, ne sont pas disponibles pour l’instant.
+La liaison de données fonctionne avec les <xref:System.DateTime> chaînes de format à l’aide de `@bind:format` . D’autres expressions de mise en forme, telles que les formats de devise ou de nombre, ne sont pas disponibles pour l’instant.
 
 ```razor
 <input @bind="StartDate" @bind:format="yyyy-MM-dd" />
@@ -127,16 +115,16 @@ La liaison de données <xref:System.DateTime> fonctionne avec les [`@bind:format
 }
 ```
 
-Dans le code précédent, le `<input>` type de champ de l'`type`élément () est `text`défini par défaut sur. `@bind:format`est pris en charge pour la liaison des types .NET suivants :
+Dans le code précédent, le `<input>` type de champ de l’élément ( `type` ) est défini par défaut sur `text` . `@bind:format`est pris en charge pour la liaison des types .NET suivants :
 
 * <xref:System.DateTime?displayProperty=fullName>
 * <xref:System.DateTime?displayProperty=fullName>?
 * <xref:System.DateTimeOffset?displayProperty=fullName>
 * <xref:System.DateTimeOffset?displayProperty=fullName>?
 
-L' `@bind:format` attribut spécifie le format de date à appliquer `value` au de `<input>` l’élément. Le format est également utilisé pour analyser la valeur lorsqu’un `onchange` événement se produit.
+L' `@bind:format` attribut spécifie le format de date à appliquer au `value` de l' `<input>` élément. Le format est également utilisé pour analyser la valeur lorsqu’un `onchange` événement se produit.
 
-La spécification d’un format `date` pour le type de champ Blazor n’est pas recommandée, car dispose d’une prise en charge intégrée pour mettre en forme les dates. Malgré la recommandation, utilisez uniquement le `yyyy-MM-dd` format de date pour que la liaison fonctionne correctement si un format est fourni avec le `date` type de champ :
+La spécification d’un format pour le `date` type de champ n’est pas recommandée, car Blazor dispose d’une prise en charge intégrée pour mettre en forme les dates. Malgré la recommandation, utilisez uniquement le `yyyy-MM-dd` format de date pour que la liaison fonctionne correctement si un format est fourni avec le `date` type de champ :
 
 ```razor
 <input type="date" @bind="StartDate" @bind:format="yyyy-MM-dd">
@@ -144,9 +132,9 @@ La spécification d’un format `date` pour le type de champ Blazor n’est pas 
 
 ## <a name="parent-to-child-binding-with-component-parameters"></a>Liaison parent-enfant avec les paramètres de composant
 
-La liaison reconnaît les paramètres du `@bind-{PROPERTY}` composant, où peut lier une valeur de propriété d’un composant parent à un composant enfant. La liaison d’un enfant à un parent est couverte dans la [liaison enfant-parent avec la section de liaison chaînée](#child-to-parent-binding-with-chained-bind) .
+La liaison reconnaît les paramètres du composant, où `@bind-{PROPERTY}` peut lier une valeur de propriété d’un composant parent à un composant enfant. La liaison d’un enfant à un parent est couverte dans la [liaison enfant-parent avec la section de liaison chaînée](#child-to-parent-binding-with-chained-bind) .
 
-Le composant enfant suivant (`ChildComponent`) a un `Year` paramètre de composant `YearChanged` et un rappel :
+Le composant enfant suivant ( `ChildComponent` ) a un `Year` paramètre de composant et un `YearChanged` Rappel :
 
 ```razor
 <h2>Child Component</h2>
@@ -162,7 +150,7 @@ Le composant enfant suivant (`ChildComponent`) a un `Year` paramètre de composa
 }
 ```
 
-`EventCallback<T>`est expliqué dans <xref:blazor/event-handling#eventcallback>.
+<xref:Microsoft.AspNetCore.Components.EventCallback%601>est expliqué dans <xref:blazor/event-handling#eventcallback> .
 
 Le composant parent suivant utilise :
 
@@ -193,7 +181,7 @@ Le composant parent suivant utilise :
 }
 ```
 
-Le chargement `ParentComponent` de génère le balisage suivant :
+Le chargement de `ParentComponent` génère le balisage suivant :
 
 ```html
 <h1>Parent Component</h1>
@@ -205,7 +193,7 @@ Le chargement `ParentComponent` de génère le balisage suivant :
 <p>Year: 1978</p>
 ```
 
-Si la valeur de la `ParentYear` propriété est modifiée en sélectionnant le bouton dans `ParentComponent`le, `Year` la propriété de `ChildComponent` est mise à jour. La nouvelle valeur de `Year` est rendue dans l’interface utilisateur lorsque `ParentComponent` le est restitué à nouveau :
+Si la valeur de la `ParentYear` propriété est modifiée en sélectionnant le bouton dans le `ParentComponent` , la `Year` propriété de `ChildComponent` est mise à jour. La nouvelle valeur de `Year` est rendue dans l’interface utilisateur lorsque le est restitué à nouveau `ParentComponent` :
 
 ```html
 <h1>Parent Component</h1>
@@ -225,7 +213,7 @@ Par Convention, `<ChildComponent @bind-Year="ParentYear" />` est essentiellement
 <ChildComponent @bind-Year="ParentYear" @bind-Year:event="YearChanged" />
 ```
 
-En général, une propriété peut être liée à un gestionnaire d’événements correspondant en incluant `@bind-{PROPRETY}:event` un attribut. Par exemple, la propriété `MyProp` peut être liée à `MyEventHandler` à l’aide des deux attributs suivants :
+En général, une propriété peut être liée à un gestionnaire d’événements correspondant en incluant un `@bind-{PROPRETY}:event` attribut. Par exemple, la propriété `MyProp` peut être liée à à `MyEventHandler` l’aide des deux attributs suivants :
 
 ```razor
 <MyComponent @bind-MyProp="MyValue" @bind-MyProp:event="MyEventHandler" />
@@ -235,12 +223,12 @@ En général, une propriété peut être liée à un gestionnaire d’événemen
 
 Un scénario courant consiste à chaîner un paramètre lié aux données à un élément de page dans la sortie du composant. Ce scénario est appelé *liaison chaînée* car plusieurs niveaux de liaison se produisent simultanément.
 
-Une liaison chaînée ne peut pas être `@bind` implémentée avec la syntaxe dans l’élément de la page. Le gestionnaire d’événements et la valeur doivent être spécifiés séparément. Toutefois, un composant parent peut utiliser `@bind` la syntaxe avec le paramètre du composant.
+Une liaison chaînée ne peut pas être implémentée avec [`@bind`](xref:mvc/views/razor#bind) la syntaxe dans l’élément de la page. Le gestionnaire d’événements et la valeur doivent être spécifiés séparément. Toutefois, un composant parent peut utiliser [`@bind`](xref:mvc/views/razor#bind) la syntaxe avec le paramètre du composant.
 
-Le composant `PasswordField` suivant (*passwordField. Razor*) :
+Le `PasswordField` composant suivant (*passwordField. Razor*) :
 
-* Définit la `<input>` valeur d’un élément sur `Password` une propriété.
-* Expose les modifications de `Password` la propriété à un composant parent avec un [EventCallback suivante](xref:blazor/event-handling#eventcallback).
+* Définit `<input>` la valeur d’un élément sur `Password` une propriété.
+* Expose les modifications de la `Password` propriété à un composant parent avec un [EventCallback suivante](xref:blazor/event-handling#eventcallback).
 * Utilise l' `onclick` événement pour déclencher la `ToggleShowPassword` méthode. Pour plus d'informations, consultez <xref:blazor/event-handling>.
 
 ```razor
@@ -296,8 +284,8 @@ Le `PasswordField` composant est utilisé dans un autre composant :
 
 Pour effectuer des vérifications ou des erreurs d’interruption sur le mot de passe dans l’exemple précédent :
 
-* Créez un champ de stockage pour `Password` (`password` dans l’exemple de code suivant).
-* Effectuez les vérifications ou les erreurs d’interruption `Password` dans la méthode setter.
+* Créez un champ de stockage pour `Password` ( `password` dans l’exemple de code suivant).
+* Effectuez les vérifications ou les erreurs d’interruption dans la méthode `Password` Setter.
 
 L’exemple suivant fournit un retour immédiat à l’utilisateur si un espace est utilisé dans la valeur du mot de passe :
 
@@ -362,4 +350,4 @@ Password:
 
 ## <a name="radio-buttons"></a>Cases d’option
 
-Pour plus d’informations sur la liaison à des cases d’option <xref:blazor/forms-validation#work-with-radio-buttons>dans un formulaire, consultez.
+Pour plus d’informations sur la liaison à des cases d’option dans un formulaire, consultez <xref:blazor/forms-validation#work-with-radio-buttons> .

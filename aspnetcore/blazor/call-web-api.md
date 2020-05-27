@@ -12,24 +12,24 @@ monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
 
 Par [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27)et [Juan de la Cruz](https://github.com/juandelacruz23)
 
-Les applications [ Blazor webassembly](xref:blazor/hosting-models#blazor-webassembly) appellent des API Web à l’aide d’un `HttpClient` service préconfiguré. Composez des requêtes, qui peuvent inclure des options de l' [API d’extraction](https://developer.mozilla.org/docs/Web/API/Fetch_API) JavaScript, à l’aide Blazor des applications auxiliaires JSON ou de <xref:System.Net.Http.HttpRequestMessage> . `HttpClient`Dans les Blazor applications webassembly, le service est axé sur l’exécution de requêtes sur le serveur d’origine. Les instructions de cette rubrique concernent uniquement les Blazor applications Webassembly.
+Les applications [ Blazor webassembly](xref:blazor/hosting-models#blazor-webassembly) appellent des API Web à l’aide d’un <xref:System.Net.Http.HttpClient> service préconfiguré. Composez des requêtes, qui peuvent inclure des options de l' [API d’extraction](https://developer.mozilla.org/docs/Web/API/Fetch_API) JavaScript, à l’aide Blazor des applications auxiliaires JSON ou de <xref:System.Net.Http.HttpRequestMessage> . <xref:System.Net.Http.HttpClient>Dans les Blazor applications webassembly, le service est axé sur l’exécution de requêtes sur le serveur d’origine. Les instructions de cette rubrique concernent uniquement les Blazor applications Webassembly.
 
 Les applications [ Blazor serveur](xref:blazor/hosting-models#blazor-server) appellent des API Web à l’aide d' <xref:System.Net.Http.HttpClient> instances, généralement créées à l’aide de <xref:System.Net.Http.IHttpClientFactory> . Les instructions de cette rubrique ne concernent pas les Blazor applications serveur. Lors Blazor du développement d’applications serveur, suivez les instructions fournies dans <xref:fundamentals/http-requests> .
 
-[Affichez ou téléchargez l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([procédure de téléchargement](xref:index#how-to-download-a-sample)) &ndash; Sélectionnez l’application *BlazorWebAssemblySample* .
+[Affichez ou téléchargez l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([procédure de téléchargement](xref:index#how-to-download-a-sample)) : sélectionnez l’application *BlazorWebAssemblySample* .
 
 Consultez les composants suivants dans l’exemple d’application *BlazorWebAssemblySample* :
 
 * Appeler l’API Web (*pages/CallWebAPI. Razor*)
 * Testeur de requêtes HTTP (*composants/HTTPRequestTester. Razor*)
 
-## <a name="packages"></a>Paquets
+## <a name="packages"></a>Packages
 
 Référencez le package NuGet [System .net. http. JSON](https://www.nuget.org/packages/System.Net.Http.Json/) dans le fichier projet.
 
 ## <a name="add-the-httpclient-service"></a>Ajouter le service HttpClient
 
-Dans `Program.Main` , ajoutez un `HttpClient` service s’il n’existe pas déjà :
+Dans `Program.Main` , ajoutez un <xref:System.Net.Http.HttpClient> service s’il n’existe pas déjà :
 
 ```csharp
 builder.Services.AddTransient(sp => 
@@ -43,11 +43,11 @@ builder.Services.AddTransient(sp =>
 
 Dans une Blazor application Webassembly, [httpclient](xref:fundamentals/http-requests) est disponible en tant que service préconfiguré pour effectuer des demandes auprès du serveur d’origine.
 
-Une Blazor application serveur n’inclut pas `HttpClient` de service par défaut. Fournissez un `HttpClient` à l’application à l’aide de l' [infrastructure de fabrique httpclient](xref:fundamentals/http-requests).
+Une Blazor application serveur n’inclut pas <xref:System.Net.Http.HttpClient> de service par défaut. Fournissez un <xref:System.Net.Http.HttpClient> à l’application à l’aide de l' [infrastructure de fabrique httpclient](xref:fundamentals/http-requests).
 
-`HttpClient`et les auxiliaires JSON sont également utilisés pour appeler des points de terminaison d’API Web tiers. `HttpClient`est implémenté à l’aide de l' [API FETCH](https://developer.mozilla.org/docs/Web/API/Fetch_API) du navigateur et est soumis à ses limitations, y compris l’application de la même stratégie d’origine.
+<xref:System.Net.Http.HttpClient>et les auxiliaires JSON sont également utilisés pour appeler des points de terminaison d’API Web tiers. <xref:System.Net.Http.HttpClient>est implémenté à l’aide de l' [API FETCH](https://developer.mozilla.org/docs/Web/API/Fetch_API) du navigateur et est soumis à ses limitations, y compris l’application de la même stratégie d’origine.
 
-L’adresse de base du client est définie sur l’adresse du serveur d’origine. Injecter une `HttpClient` instance à l’aide de la `@inject` directive :
+L’adresse de base du client est définie sur l’adresse du serveur d’origine. Injecter une <xref:System.Net.Http.HttpClient> instance à l’aide de la [`@inject`](xref:mvc/views/razor#inject) directive :
 
 ```razor
 @using System.Net.Http
@@ -71,7 +71,7 @@ private class TodoItem
 
 Les méthodes d’assistance JSON envoient des demandes à un URI (une API Web dans les exemples suivants) et traitent la réponse :
 
-* `GetFromJsonAsync`&ndash;Envoie une requête http obtenir et analyse le corps de la réponse JSON pour créer un objet.
+* <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>&ndash;Envoie une requête http obtenir et analyse le corps de la réponse JSON pour créer un objet.
 
   Dans le code suivant, les `todoItems` sont affichés par le composant. La `GetTodoItems` méthode est déclenchée lorsque le rendu du composant est terminé ([OnInitializedAsync](xref:blazor/lifecycle#component-initialization-methods)). Pour obtenir un exemple complet, consultez l’exemple d’application.
 
@@ -87,7 +87,7 @@ Les méthodes d’assistance JSON envoient des demandes à un URI (une API Web d
   }
   ```
 
-* `PostAsJsonAsync`&ndash;Envoie une requête http postérieure, y compris du contenu encodé JSON, et analyse le corps de la réponse JSON pour créer un objet.
+* <xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A>&ndash;Envoie une requête http postérieure, y compris du contenu encodé JSON, et analyse le corps de la réponse JSON pour créer un objet.
 
   Dans le code suivant, `newItemName` est fourni par un élément lié du composant. La `AddItem` méthode est déclenchée par la sélection d’un `<button>` élément. Pour obtenir un exemple complet, consultez l’exemple d’application.
 
@@ -109,13 +109,13 @@ Les méthodes d’assistance JSON envoient des demandes à un URI (une API Web d
   }
   ```
   
-  Appelle pour `PostAsJsonAsync` retourner un <xref:System.Net.Http.HttpResponseMessage> . Pour désérialiser le contenu JSON du message de réponse, utilisez la `ReadFromJsonAsync<T>` méthode d’extension :
+  Appelle pour <xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A> retourner un <xref:System.Net.Http.HttpResponseMessage> . Pour désérialiser le contenu JSON du message de réponse, utilisez la `ReadFromJsonAsync<T>` méthode d’extension :
   
   ```csharp
-  var content = response.content.ReadFromJsonAsync<WeatherForecast>();
+  var content = response.Content.ReadFromJsonAsync<WeatherForecast>();
   ```
 
-* `PutAsJsonAsync`&ndash;Envoie une requête HTTP PUT, y compris du contenu encodé JSON.
+* <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A>&ndash;Envoie une requête HTTP PUT, y compris du contenu encodé JSON.
 
   Dans le code suivant, les `editItem` valeurs pour `Name` et `IsCompleted` sont fournies par les éléments dépendants du composant. L’élément `Id` est défini lorsque l’élément est sélectionné dans une autre partie de l’interface utilisateur et `EditItem` est appelé. La `SaveItem` méthode est déclenchée par la sélection de l' `<button>` élément Save. Pour obtenir un exemple complet, consultez l’exemple d’application.
 
@@ -132,9 +132,7 @@ Les méthodes d’assistance JSON envoient des demandes à un URI (une API Web d
 
       private void EditItem(long id)
       {
-          var editItem = todoItems.Single(i => i.Id == id);
-          editItem = new TodoItem { Id = editItem.Id, Name = editItem.Name, 
-              IsComplete = editItem.IsComplete };
+          editItem = todoItems.Single(i => i.Id == id);
       }
 
       private async Task SaveItem() =>
@@ -142,13 +140,13 @@ Les méthodes d’assistance JSON envoient des demandes à un URI (une API Web d
   }
   ```
   
-  Appelle pour `PutAsJsonAsync` retourner un <xref:System.Net.Http.HttpResponseMessage> . Pour désérialiser le contenu JSON du message de réponse, utilisez la `ReadFromJsonAsync<T>` méthode d’extension :
+  Appelle pour <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A> retourner un <xref:System.Net.Http.HttpResponseMessage> . Pour désérialiser le contenu JSON du message de réponse, utilisez la <xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> méthode d’extension :
   
   ```csharp
   var content = response.content.ReadFromJsonAsync<WeatherForecast>();
   ```
 
-<xref:System.Net.Http>contient des méthodes d’extension supplémentaires pour envoyer des requêtes HTTP et recevoir des réponses HTTP. [Httpclient. DeleteAsync](xref:System.Net.Http.HttpClient.DeleteAsync*) est utilisé pour envoyer une requête HTTP DELETE à une API Web.
+<xref:System.Net.Http>contient des méthodes d’extension supplémentaires pour envoyer des requêtes HTTP et recevoir des réponses HTTP. <xref:System.Net.Http.HttpClient.DeleteAsync%2A?displayProperty=nameWithType>est utilisé pour envoyer une requête HTTP DELETE à une API Web.
 
 Dans le code suivant, l' `<button>` élément delete appelle la `DeleteItem` méthode. L' `<input>` élément lié fournit le `id` de l’élément à supprimer. Pour obtenir un exemple complet, consultez l’exemple d’application.
 
@@ -244,7 +242,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client =>
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 ```
 
-Les composants injectent le typé `HttpClient` pour appeler l’API Web.
+Les composants injectent le typé <xref:System.Net.Http.HttpClient> pour appeler l’API Web.
 
 `FetchData`composant (*pages/fetchData. Razor*) :
 
@@ -265,13 +263,13 @@ Les composants injectent le typé `HttpClient` pour appeler l’API Web.
 
 ## <a name="handle-errors"></a>Gérer les erreurs
 
-Lorsque des erreurs se produisent lors de l’interaction avec une API Web, elles peuvent être gérées par le code du développeur. Par exemple, `GetFromJsonAsync` attend une réponse JSON de l’API du serveur avec un `Content-Type` de `application/json` . Si la réponse n’est pas au format JSON, la validation du contenu lève une exception <xref:System.NotSupportedException> .
+Lorsque des erreurs se produisent lors de l’interaction avec une API Web, elles peuvent être gérées par le code du développeur. Par exemple, <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A> attend une réponse JSON de l’API du serveur avec un `Content-Type` de `application/json` . Si la réponse n’est pas au format JSON, la validation du contenu lève une exception <xref:System.NotSupportedException> .
 
 Dans l’exemple suivant, le point de terminaison d’URI pour la demande de données de prévision météo est mal orthographié. L’URI doit être à, `WeatherForecast` mais apparaît dans l’appel en tant que `WeatherForcast` (« e » manquant).
 
-L' `GetFromJsonAsync` appel attend que JSON soit retourné, mais le serveur retourne du code HTML pour une exception non gérée sur le serveur avec un `Content-Type` de `text/html` . L’exception non gérée se produit sur le serveur, car le chemin d’accès est introuvable et l’intergiciel ne peut pas traiter une page ou une vue pour la demande.
+L' <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A> appel attend que JSON soit retourné, mais le serveur retourne du code HTML pour une exception non gérée sur le serveur avec un `Content-Type` de `text/html` . L’exception non gérée se produit sur le serveur, car le chemin d’accès est introuvable et l’intergiciel ne peut pas traiter une page ou une vue pour la demande.
 
-Dans `OnInitializedAsync` sur le client, <xref:System.NotSupportedException> est levée lorsque le contenu de la réponse est validé en tant que non-JSON. L’exception est interceptée dans le `catch` bloc, où la logique personnalisée peut consigner l’erreur ou présenter un message d’erreur convivial à l’utilisateur :
+Dans <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> sur le client, <xref:System.NotSupportedException> est levée lorsque le contenu de la réponse est validé en tant que non-JSON. L’exception est interceptée dans le `catch` bloc, où la logique personnalisée peut consigner l’erreur ou présenter un message d’erreur convivial à l’utilisateur :
 
 ```csharp
 protected override async Task OnInitializedAsync()
@@ -303,7 +301,7 @@ Pour permettre à d’autres sites d’effectuer des demandes de partage de ress
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* <xref:security/blazor/webassembly/additional-scenarios>&ndash;Comprend la couverture de l’utilisation `HttpClient` de pour créer des demandes d’API Web sécurisées.
+* <xref:security/blazor/webassembly/additional-scenarios>&ndash;Comprend la couverture de l’utilisation <xref:System.Net.Http.HttpClient> de pour créer des demandes d’API Web sécurisées.
 * <xref:fundamentals/http-requests>
 * <xref:security/enforcing-ssl>
 * [Configuration du point de terminaison HTTPs Kestrel](xref:fundamentals/servers/kestrel#endpoint-configuration)

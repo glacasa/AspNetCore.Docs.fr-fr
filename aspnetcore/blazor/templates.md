@@ -54,7 +54,7 @@ Les fichiers et dossiers suivants composent une Blazor application générée à
     * Télécharge le Runtime .NET, l’application et les dépendances de l’application.
     * Initialise le runtime pour exécuter l’application.
 
-* *App. Razor* &ndash; le composant racine de l’application qui configure le routage côté client à l’aide du <xref:Microsoft.AspNetCore.Components.Routing.Router> composant. Le `Router` composant intercepte la navigation dans le navigateur et affiche la page qui correspond à l’adresse demandée.
+* *App. Razor* &ndash; le composant racine de l’application qui configure le routage côté client à l’aide du <xref:Microsoft.AspNetCore.Components.Routing.Router> composant. Le <xref:Microsoft.AspNetCore.Components.Routing.Router> composant intercepte la navigation dans le navigateur et affiche la page qui correspond à l’adresse demandée.
 
 * Le dossier *pages* &ndash; contient les composants/pages routables (*. Razor*) qui composent l' Blazor application et la Razor page racine d’une Blazor application serveur. L’itinéraire de chaque page est spécifié à l’aide de la [`@page`](xref:mvc/views/razor#page) directive. Le modèle comprend les éléments suivants :
   * *_Host. cshtml* ( Blazor Server) &ndash; la page racine de l’application est implémentée en tant que Razor page :
@@ -68,7 +68,7 @@ Les fichiers et dossiers suivants composent une Blazor application générée à
 
 * Le dossier *partagé* &ndash; contient d’autres composants d’interface utilisateur (*. Razor*) utilisés par l’application :
   * `MainLayout`(*MainLayout. Razor*) &ndash; composant de disposition de l’application.
-  * `NavMenu`(*NavMenu. Razor*) &ndash; implémente la navigation dans l’encadré. Comprend le [composant NavLink](xref:blazor/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), qui affiche des liens de navigation vers d’autres Razor composants. Le `NavLink` composant indique automatiquement un état sélectionné quand son composant est chargé, ce qui aide l’utilisateur à comprendre quel composant est actuellement affiché.
+  * `NavMenu`(*NavMenu. Razor*) &ndash; implémente la navigation dans l’encadré. Comprend le [composant NavLink](xref:blazor/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), qui affiche des liens de navigation vers d’autres Razor composants. Le <xref:Microsoft.AspNetCore.Components.Routing.NavLink> composant indique automatiquement un état sélectionné quand son composant est chargé, ce qui aide l’utilisateur à comprendre quel composant est actuellement affiché.
 
 * *_Imports. Razor* &ndash; Inclut des Razor directives communes à inclure dans les composants de l’application (*. Razor*), tels que les [`@using`](xref:mvc/views/razor#using) directives pour les espaces de noms.
 

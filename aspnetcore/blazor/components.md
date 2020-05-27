@@ -110,7 +110,7 @@ Si un composant contient un élément HTML avec une première lettre majuscule q
 
 Le routage dans Blazor est effectué en fournissant un modèle de routage à chaque composant accessible dans l’application.
 
-Lorsqu’un Razor fichier avec une [`@page`][9] directive est compilé, la classe générée reçoit un <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> qui spécifie le modèle de routage. Lors de l’exécution, le routeur recherche les classes de composant avec un `RouteAttribute` et rend le composant qui a un modèle de routage correspondant à l’URL demandée.
+Lorsqu’un Razor fichier avec une [`@page`][9] directive est compilé, la classe générée reçoit un <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> qui spécifie le modèle de routage. Lors de l’exécution, le routeur recherche les classes de composant avec un <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> et rend le composant qui a un modèle de routage correspondant à l’URL demandée.
 
 ```razor
 @page "/ParentComponent"
@@ -136,7 +136,7 @@ La syntaxe de paramètre *catch-all* ( `*` / `**` ), qui capture le chemin d’a
 
 ### <a name="component-parameters"></a>Paramètres de composant
 
-Les composants peuvent avoir des *paramètres de composant*, qui sont définis à l’aide de propriétés publiques sur la classe de composant avec l' `[Parameter]` attribut. Utilisez des attributs pour spécifier des arguments pour un composant dans le balisage.
+Les composants peuvent avoir des *paramètres de composant*, qui sont définis à l’aide de propriétés publiques sur la classe de composant avec l' [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) attribut] (XREF : Microsoft. AspNetCore. Components. ParameterAttribute). Utilisez des attributs pour spécifier des arguments pour un composant dans le balisage.
 
 *Composants/ChildComponent. Razor*:
 
@@ -155,14 +155,14 @@ Dans l’exemple suivant tiré de l’exemple d’application, le `ParentCompone
 
 Les composants peuvent définir le contenu d’un autre composant. Le composant d’affectation fournit le contenu entre les balises qui spécifient le composant récepteur.
 
-Dans l’exemple suivant, `ChildComponent` a une `ChildContent` propriété qui représente un `RenderFragment` , qui représente un segment de l’interface utilisateur à restituer. La valeur de `ChildContent` est positionnée dans le balisage du composant où le contenu doit être rendu. La valeur de `ChildContent` est reçue du composant parent et rendue à l’intérieur du panneau de démarrage `panel-body` .
+Dans l’exemple suivant, `ChildComponent` a une `ChildContent` propriété qui représente un <xref:Microsoft.AspNetCore.Components.RenderFragment> , qui représente un segment de l’interface utilisateur à restituer. La valeur de `ChildContent` est positionnée dans le balisage du composant où le contenu doit être rendu. La valeur de `ChildContent` est reçue du composant parent et rendue à l’intérieur du panneau de démarrage `panel-body` .
 
 *Composants/ChildComponent. Razor*:
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=3,14-15)]
 
 > [!NOTE]
-> La propriété qui reçoit le `RenderFragment` contenu doit être nommée `ChildContent` par Convention.
+> La propriété qui reçoit le <xref:Microsoft.AspNetCore.Components.RenderFragment> contenu doit être nommée `ChildContent` par Convention.
 
 `ParentComponent`Dans l’exemple d’application, vous pouvez fournir du contenu pour le rendu de `ChildComponent` en plaçant le contenu à l’intérieur des `<ChildComponent>` balises.
 
@@ -229,7 +229,7 @@ Les éléments rendus `<input>` à l’aide des deux approches sont identiques 
        size="50">
 ```
 
-Pour accepter des attributs arbitraires, définissez un paramètre de composant à l’aide de l' `[Parameter]` attribut avec la `CaptureUnmatchedValues` propriété définie sur `true` :
+Pour accepter des attributs arbitraires, définissez un paramètre de composant à l’aide de l' [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) attribut avec la <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> propriété définie sur `true` :
 
 ```razor
 @code {
@@ -238,7 +238,7 @@ Pour accepter des attributs arbitraires, définissez un paramètre de composant 
 }
 ```
 
-La `CaptureUnmatchedValues` propriété sur `[Parameter]` permet au paramètre de correspondre à tous les attributs qui ne correspondent à aucun autre paramètre. Un composant ne peut définir qu’un seul paramètre avec `CaptureUnmatchedValues` . Le type de propriété utilisé avec `CaptureUnmatchedValues` doit pouvoir être assigné à partir de `Dictionary<string, object>` avec des clés de chaîne. `IEnumerable<KeyValuePair<string, object>>`ou `IReadOnlyDictionary<string, object>` sont également des options dans ce scénario.
+La <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> propriété sur [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) permet au paramètre de correspondre à tous les attributs qui ne correspondent à aucun autre paramètre. Un composant ne peut définir qu’un seul paramètre avec <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> . Le type de propriété utilisé avec <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValues> doit pouvoir être assigné à partir de `Dictionary<string, object>` avec des clés de chaîne. `IEnumerable<KeyValuePair<string, object>>`ou `IReadOnlyDictionary<string, object>` sont également des options dans ce scénario.
 
 La position [`@attributes`][3] relative à la position des attributs d’élément est importante. Quand sont représentées [`@attributes`][3] sur l’élément, les attributs sont traités de droite à gauche (dernier à premier). Prenons l’exemple suivant d’un composant qui consomme un `Child` composant :
 
@@ -320,11 +320,11 @@ Bien que la capture de références de composant utilise une syntaxe similaire p
 
 ## <a name="invoke-component-methods-externally-to-update-state"></a>Appeler des méthodes de composant en externe pour mettre à jour l’État
 
-Blazorutilise un contexte de synchronisation ( `SynchronizationContext` ) pour appliquer un seul thread logique d’exécution. Les méthodes de [cycle de vie](xref:blazor/lifecycle) d’un composant et les rappels d’événements déclenchés par Blazor sont exécutés sur le contexte de synchronisation.
+Blazorutilise un contexte de synchronisation ( <xref:System.Threading.SynchronizationContext> ) pour appliquer un seul thread logique d’exécution. Les méthodes de [cycle de vie](xref:blazor/lifecycle) d’un composant et les rappels d’événements déclenchés par Blazor sont exécutés sur le contexte de synchronisation.
 
 BlazorLe contexte de synchronisation du serveur tente d’émuler un environnement monothread afin qu’il corresponde étroitement au modèle webassembly dans le navigateur, qui est mono-thread. À un moment donné, le travail est effectué sur un seul thread, ce qui donne l’impression d’un seul thread logique. Deux opérations ne sont pas exécutées simultanément.
 
-Dans le cas où un composant doit être mis à jour en fonction d’un événement externe, tel qu’un minuteur ou d’autres notifications, utilisez la `InvokeAsync` méthode, qui effectue le dispatch dans le Blazor contexte de synchronisation de. Par exemple, considérez un *service de notification* qui peut notifier n’importe quel composant d’écoute de l’État mis à jour :
+Dans le cas où un composant doit être mis à jour en fonction d’un événement externe, tel qu’un minuteur ou d’autres notifications, utilisez la `InvokeAsync` méthode, qui est distribuée au Blazor contexte de synchronisation de. Par exemple, considérez un *service de notification* qui peut notifier n’importe quel composant d’écoute de l’État mis à jour :
 
 ```csharp
 public class NotifierService
@@ -438,7 +438,7 @@ Dans certains scénarios, l’utilisation de [`@key`][5] réduit la complexité 
 
 ### <a name="when-to-use-key"></a>Quand utiliser la \@ clé
 
-En règle générale, il est judicieux d’utiliser [`@key`][5] chaque fois qu’une liste est rendue (par exemple, dans un `@foreach` bloc) et qu’une valeur appropriée existe pour définir [`@key`][5] .
+En règle générale, il est judicieux d’utiliser [`@key`][5] chaque fois qu’une liste est affichée (par exemple, dans un bloc [foreach](/dotnet/csharp/language-reference/keywords/foreach-in) ) et qu’une valeur appropriée existe pour définir [`@key`][5] .
 
 Vous pouvez également utiliser [`@key`][5] pour empêcher Blazor de conserver un élément ou une sous-arborescence de composants lorsqu’un objet change :
 
@@ -469,7 +469,7 @@ Vérifiez que les valeurs utilisées pour [`@key`][5] ne sont pas en conflit. Si
 
 Les paramètres sont remplacés dans les conditions suivantes :
 
-* Le contenu d’un composant enfant est rendu avec un `RenderFragment` .
+* Le contenu d’un composant enfant est rendu avec un <xref:Microsoft.AspNetCore.Components.RenderFragment> .
 * <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>est appelé dans le composant parent.
 
 Les paramètres sont réinitialisés, car le composant parent <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> est restitué à nouveau lorsque est appelé et de nouvelles valeurs de paramètres sont fournies au composant enfant.
@@ -503,7 +503,7 @@ Prenons le `Expander` composant suivant :
 }
 ```
 
-Le `Expander` composant est ajouté à un composant parent qui peut appeler `StateHasChanged` :
+Le `Expander` composant est ajouté à un composant parent qui peut appeler <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> :
 
 ```razor
 <Expander Expanded="true">
@@ -517,7 +517,7 @@ Le `Expander` composant est ajouté à un composant parent qui peut appeler `Sta
 </button>
 ```
 
-Au départ, les `Expander` composants se comportent indépendamment lorsque leurs `Expanded` propriétés sont basculées. Les composants enfants maintiennent leurs États comme prévu. Lorsque `StateHasChanged` est appelé dans le parent, le `Expanded` paramètre du premier composant enfant est réinitialisé à sa valeur initiale ( `true` ). La `Expander` valeur du deuxième composant `Expanded` n’est pas réinitialisée, car aucun contenu enfant n’est restitué dans le deuxième composant.
+Au départ, les `Expander` composants se comportent indépendamment lorsque leurs `Expanded` propriétés sont basculées. Les composants enfants maintiennent leurs États comme prévu. Lorsque <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> est appelé dans le parent, le `Expanded` paramètre du premier composant enfant est réinitialisé à sa valeur initiale ( `true` ). La `Expander` valeur du deuxième composant `Expanded` n’est pas réinitialisée, car aucun contenu enfant n’est restitué dans le deuxième composant.
 
 Pour maintenir l’État dans le scénario précédent, utilisez un *champ privé* dans le `Expander` composant pour maintenir son état bascule.
 
@@ -632,7 +632,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 ## <a name="specify-a-base-class"></a>Spécifier une classe de base
 
-La [`@inherits`][6] directive peut être utilisée pour spécifier une classe de base pour un composant. L’exemple suivant montre comment un composant peut hériter d’une classe de base, `BlazorRocksBase` , pour fournir les propriétés et les méthodes du composant. La classe de base doit dériver de `ComponentBase` .
+La [`@inherits`][6] directive peut être utilisée pour spécifier une classe de base pour un composant. L’exemple suivant montre comment un composant peut hériter d’une classe de base, `BlazorRocksBase` , pour fournir les propriétés et les méthodes du composant. La classe de base doit dériver de <xref:Microsoft.AspNetCore.Components.ComponentBase> .
 
 *Pages/BlazorRocks. Razor*:
 
@@ -660,7 +660,7 @@ namespace BlazorSample
 
 ## <a name="specify-an-attribute"></a>Spécifier un attribut
 
-Les attributs peuvent être spécifiés dans Razor les composants à l’aide de la [`@attribute`][7] directive. L’exemple suivant applique l' `[Authorize]` attribut à la classe de composant :
+Les attributs peuvent être spécifiés dans Razor les composants à l’aide de la [`@attribute`][7] directive. L’exemple suivant applique l' [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribut à la classe de composant :
 
 ```razor
 @page "/"
@@ -700,9 +700,9 @@ This is the Index page.
 > [!NOTE]
 > La `global::` qualification n’est pas prise en charge.
 >
-> L’importation de composants avec des instructions avec alias `using` (par exemple, `@using Foo = Bar` ) n’est pas prise en charge.
+> L’importation de composants avec des instructions [using](/dotnet/csharp/language-reference/keywords/using-statement) avec alias (par exemple, `@using Foo = Bar` ) n’est pas prise en charge.
 >
-> Les noms partiellement qualifiés ne sont pas pris en charge. Par exemple, l’ajout `@using BlazorSample` et la référencement `NavMenu.razor` avec `<Shared.NavMenu></Shared.NavMenu>` ne sont pas pris en charge.
+> Les noms partiellement qualifiés ne sont pas pris en charge. Par exemple, `@using BlazorSample` l’ajout et la référencement du `NavMenu` composant ( `NavMenu.razor` ) avec `<Shared.NavMenu></Shared.NavMenu>` ne sont pas pris en charge.
 
 ## <a name="conditional-html-element-attributes"></a>Attributs d’éléments HTML conditionnels
 
@@ -771,7 +771,7 @@ public class ThemeInfo
 }
 ```
 
-Un composant ancêtre peut fournir une valeur en cascade à l’aide du composant de valeur en cascade. Le `CascadingValue` composant encapsule une sous-arborescence de la hiérarchie des composants et fournit une valeur unique à tous les composants de cette sous-arborescence.
+Un composant ancêtre peut fournir une valeur en cascade à l’aide du composant de valeur en cascade. Le <xref:Microsoft.AspNetCore.Components.CascadingValue%601> composant encapsule une sous-arborescence de la hiérarchie des composants et fournit une valeur unique à tous les composants de cette sous-arborescence.
 
 Par exemple, l’exemple d’application spécifie les informations de thème ( `ThemeInfo` ) dans l’une des dispositions de l’application en tant que paramètre en cascade pour tous les composants qui composent le corps de la disposition de la `@Body` propriété. `ButtonClass`la valeur est affectée `btn-success` à dans le composant Layout. Tout composant descendant peut consommer cette propriété par le biais de l' `ThemeInfo` objet en cascade.
 
@@ -801,7 +801,7 @@ Par exemple, l’exemple d’application spécifie les informations de thème ( 
 }
 ```
 
-Pour utiliser des valeurs en cascade, les composants déclarent des paramètres en cascade à l’aide de l' `[CascadingParameter]` attribut. Les valeurs en cascade sont liées aux paramètres en cascade par type.
+Pour utiliser des valeurs en cascade, les composants déclarent des paramètres en cascade à l’aide de l' [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) attribut. Les valeurs en cascade sont liées aux paramètres en cascade par type.
 
 Dans l’exemple d’application, le `CascadingValuesParametersTheme` composant lie la `ThemeInfo` valeur en cascade à un paramètre en cascade. Le paramètre est utilisé pour définir la classe CSS pour l’un des boutons affichés par le composant.
 
@@ -841,7 +841,7 @@ Dans l’exemple d’application, le `CascadingValuesParametersTheme` composant 
 }
 ```
 
-Pour mettre en cascade plusieurs valeurs du même type dans la même sous-arborescence, fournissez une `Name` chaîne unique à chaque `CascadingValue` composant et à son correspondant `CascadingParameter` . Dans l’exemple suivant, deux `CascadingValue` composants montent en cascade différentes instances de `MyCascadingType` par nom :
+Pour mettre en cascade plusieurs valeurs du même type dans la même sous-arborescence, fournissez une <xref:Microsoft.AspNetCore.Components.CascadingValue%601.Name%2A> chaîne unique à chaque <xref:Microsoft.AspNetCore.Components.CascadingValue%601> composant et à son [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) attribut correspondant. Dans l’exemple suivant, deux <xref:Microsoft.AspNetCore.Components.CascadingValue%601> composants montent en cascade différentes instances de `MyCascadingType` par nom :
 
 ```razor
 <CascadingValue Value=@parentCascadeParameter1 Name="CascadeParam1">
@@ -928,7 +928,7 @@ Les fragments de rendu peuvent être définis à l’aide de la Razor syntaxe de
 @<{HTML tag}>...</{HTML tag}>
 ```
 
-L’exemple suivant montre comment spécifier `RenderFragment` des valeurs et `RenderFragment<T>` et restituer des modèles directement dans un composant. Les fragments de rendu peuvent également être passés comme arguments à des [composants basés](xref:blazor/templated-components)sur un modèle.
+L’exemple suivant montre comment spécifier <xref:Microsoft.AspNetCore.Components.RenderFragment> des valeurs et <xref:Microsoft.AspNetCore.Components.RenderFragment%601> et restituer des modèles directement dans un composant. Les fragments de rendu peuvent également être passés comme arguments à des [composants basés](xref:blazor/templated-components)sur un modèle.
 
 ```razor
 @timeTemplate
@@ -970,7 +970,7 @@ De même, les images SVG sont prises en charge dans les règles CSS d’un fichi
 }
 ```
 
-Toutefois, le balisage SVG en ligne n’est pas pris en charge dans tous les scénarios. Si vous placez une `<svg>` balise directement dans un fichier de composant (*. Razor*), le rendu d’image de base est pris en charge, mais de nombreux scénarios avancés ne sont pas encore pris en charge. Par exemple, les `<use>` balises ne sont pas actuellement respectées et `@bind` ne peuvent pas être utilisées avec certaines balises SVG. Pour plus d’informations, consultez [prise en charge SVG dans Blazor (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271).
+Toutefois, le balisage SVG en ligne n’est pas pris en charge dans tous les scénarios. Si vous placez une `<svg>` balise directement dans un fichier de composant (*. Razor*), le rendu d’image de base est pris en charge, mais de nombreux scénarios avancés ne sont pas encore pris en charge. Par exemple, les `<use>` balises ne sont pas actuellement respectées et [`@bind`][10] ne peuvent pas être utilisées avec certaines balises SVG. Pour plus d’informations, consultez [prise en charge SVG dans Blazor (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
