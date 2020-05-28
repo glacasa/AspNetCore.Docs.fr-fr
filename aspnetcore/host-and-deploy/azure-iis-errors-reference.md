@@ -1,24 +1,11 @@
 ---
-title: Informations de référence sur les erreurs courantes pour Azure App Service et IIS avec ASP.NET Core
-author: rick-anderson
-description: Obtenez des conseils de résolution de problèmes pour les erreurs courantes liées à l’hébergement d’applications ASP.NET Core sur Azure Apps Service et IIS.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/07/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/azure-iis-errors-reference
-ms.openlocfilehash: 7b3454fbd891ca26d44125810a10eb3b3c2c3933
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775204"
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="common-errors-reference-for-azure-app-service-and-iis-with-aspnet-core"></a>Informations de référence sur les erreurs courantes pour Azure App Service et IIS avec ASP.NET Core
 
@@ -26,19 +13,19 @@ ms.locfileid: "82775204"
 
 Cette rubrique décrit les erreurs courantes et fournit des conseils de dépannage pour les erreurs spécifiques lors de l’hébergement d’applications ASP.NET Core sur Azure Apps service et IIS.
 
-Pour obtenir des instructions générales sur <xref:test/troubleshoot-azure-iis>la résolution des problèmes, consultez.
+Pour obtenir des instructions générales sur la résolution des problèmes, consultez <xref:test/troubleshoot-azure-iis> .
 
 Collectez les informations suivantes :
 
 * Comportement du navigateur (code d’état et message d’erreur)
 * Entrées du journal des événements de l’application
-  * Azure App Service &ndash; Consultez <xref:test/troubleshoot-azure-iis>.
+  * Azure App Service : consultez <xref:test/troubleshoot-azure-iis> .
   * IIS
     1. Sélectionnez **Démarrer** dans le menu **Windows**, tapez *Observateur d’événements*, puis appuyez sur **Entrée**.
     1. Une fois l’**Observateur d’événements** ouvert, développez **Journaux Windows** > **Application** dans la barre latérale.
 * Entrées de journal stdout et de débogage du module ASP.NET Core
-  * Azure App Service &ndash; Consultez <xref:test/troubleshoot-azure-iis>.
-  * IIS &ndash; Suivez les instructions données dans les sections [Création et redirection de journal](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection) et [Journaux de diagnostic améliorés](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) de la rubrique Module ASP.NET Core.
+  * Azure App Service : consultez <xref:test/troubleshoot-azure-iis> .
+  * IIS : suivez les instructions des sections [création de journal et redirection](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection) et [journaux de diagnostic améliorés](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) de la rubrique du module ASP.net core.
 
 Comparez les informations d’erreur aux erreurs courantes suivantes. Si vous trouvez une correspondance, suivez les conseils de dépannage.
 
@@ -81,7 +68,7 @@ Résolution des problèmes :
 
 * Vérifiez que la **plateforme** de l’application dans **Paramètres de l’application** correspond au nombre de bits de l’application.
 
-Pour plus d’informations, consultez <xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension>.
+Pour plus d'informations, consultez <xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension>.
 
 ## <a name="an-x86-app-is-deployed-but-the-app-pool-isnt-enabled-for-32-bit-apps"></a>Une application x86 est déployée mais le pool d’applications n’est pas activé pour les applications 32 bits
 
@@ -103,13 +90,13 @@ Pour un déploiement dépendant du framework x86 (`<PlatformTarget>x86</Platfor
 
 * **Navigateur :** Erreur HTTP 502.5 - Échec du processus
 
-* **Journal des applications :** L’application’MACHINE/WEBROOT/APPHOST/{ASSEMBLy} 'avec la racine physique\{'C\' : Path} n’a pas pu démarrer le processus\{avec la ligne de commande' "c : Path} {assembly}. {exe | dll} "', ErrorCode = ' 0x80004005 : FF.
+* **Journal des applications :** L’application’MACHINE/WEBROOT/APPHOST/{ASSEMBLy} 'avec la racine physique’C : \{ path} \' n’a pas pu démarrer le processus avec la ligne de commande' "c : \{ path} {assembly}. { exe | dll} "', ErrorCode = ' 0x80004005 : FF.
 
 * **Journal stdout du Module ASP.net Core :** Exception non gérée : System. BadImageFormatException : impossible de charger le fichier ou l’assembly' {ASSEMBLy}. dll'. Tentative de chargement d’un programme au format incorrect.
 
 Résolution des problèmes :
 
-* Vérifiez que l’application s’exécute localement sur Kestrel. Un échec de processus peut être dû à un problème au niveau de l’application. Pour plus d’informations, consultez <xref:test/troubleshoot-azure-iis>.
+* Vérifiez que l’application s’exécute localement sur Kestrel. Un échec de processus peut être dû à un problème au niveau de l’application. Pour plus d'informations, consultez <xref:test/troubleshoot-azure-iis>.
 
 * Si cette exception se produit pour un déploiement d’applications Azure pendant la mise à niveau d’une application et le déploiement de nouveaux assemblys, supprimez manuellement tous les fichiers du déploiement précédent. Le fait de laisser des assemblys incompatibles peut provoquer une exception `System.BadImageFormatException` lors du déploiement d’une application mise à niveau.
 
@@ -171,7 +158,7 @@ Résolution des problèmes :
 
   Pour plus d’informations, consultez [Installer le bundle d’hébergement .NET Core](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle).
 
-* Assurez-vous que le **modèle** > **Identity** de processus du **pool** > d’applications est défini sur **ApplicationPoolIdentity** ou que l’identité personnalisée dispose des autorisations appropriées pour accéder au dossier de déploiement de l’application.
+* Assurez-vous **Application Pool** que le > **modèle de processus** du pool > **Identity** d’applications est défini sur **ApplicationPoolIdentity** ou que l’identité personnalisée dispose des autorisations appropriées pour accéder au dossier de déploiement de l’application.
 
 * Si vous avez désinstallé le bundle d’hébergement ASP.NET Core et installé une version antérieure du bundle d’hébergement, le fichier *applicationHost.config* ne contient pas de section pour le module ASP.NET Core. Ouvrez *applicationHost.config* sur *%windir%/System32/inetsrv/config* et recherchez le groupe de sections `<configuration><configSections><sectionGroup name="system.webServer">`. Si la section pour le module ASP.NET Core ne se trouve pas dans le groupe de sections, ajoutez l’élément de section :
 
@@ -185,7 +172,7 @@ Résolution des problèmes :
 
 * **Navigateur :** Erreur HTTP 500,0-échec du chargement du gestionnaire in-process ANCM
 
-* **Journal des applications :** L’application’MACHINE/WEBROOT/APPHOST/{ASSEMBLy} 'avec la racine physique\{'C\' : Path} n’a pas pu démarrer le processus avec la ligne de commande' "{...}" ', ErrorCode = ' 0x80070002:0. L’application « {PATH} » n’a pas pu démarrer. L’exécutable est introuvable sur « {PATH} ». Échec du démarrage de l’application « /LM/W3SVC/2/ROOT ». Code d’erreur : 0x8007023e.
+* **Journal des applications :** L’application’MACHINE/WEBROOT/APPHOST/{ASSEMBLy} 'avec la racine physique’C : \{ path} \' n’a pas pu démarrer le processus avec la ligne de commande' "{...}" ', ErrorCode = ' 0x80070002:0. L’application « {PATH} » n’a pas pu démarrer. L’exécutable est introuvable sur « {PATH} ». Échec du démarrage de l’application « /LM/W3SVC/2/ROOT ». Code d’erreur : 0x8007023e.
 
 * **Journal stdout du Module ASP.net Core :** Le fichier journal n’est pas créé.
 
@@ -193,7 +180,7 @@ Résolution des problèmes :
 
 Résolution des problèmes :
 
-* Vérifiez que l’application s’exécute localement sur Kestrel. Un échec de processus peut être dû à un problème au niveau de l’application. Pour plus d’informations, consultez <xref:test/troubleshoot-azure-iis>.
+* Vérifiez que l’application s’exécute localement sur Kestrel. Un échec de processus peut être dû à un problème au niveau de l’application. Pour plus d'informations, consultez <xref:test/troubleshoot-azure-iis>.
 
 * Examinez l’attribut *processPath* de l’élément `<aspNetCore>` dans *web.config* afin de vérifier qu’il s’agit de `dotnet` pour un déploiement dépendant du framework ou de `.\{ASSEMBLY}.exe` pour un [déploiement autonome](/dotnet/core/deploying/#self-contained-deployments-scd).
 
@@ -211,19 +198,19 @@ Résolution des problèmes :
 
   Si un runtime spécifique est nécessaire, téléchargez-le à partir des [archives de téléchargement .NET](https://dotnet.microsoft.com/download/archives), puis installez-le sur le système. Terminez l’installation en redémarrant le système ou IIS en exécutant **net stop was /y** suivi de **net start w3svc** à partir d’une invite de commandes.
 
-## <a name="incorrect-arguments-of-aspnetcore-element"></a>Arguments incorrects de l’élément \<aspNetCore>
+## <a name="incorrect-arguments-of-aspnetcore-element"></a>Arguments incorrects de l' \<aspNetCore> élément
 
 * **Navigateur :** Erreur HTTP 500,0-échec du chargement du gestionnaire in-process ANCM
 
-* **Journal des applications :** Échec de l’appel de hostfxr pour rechercher le gestionnaire de demandes InProcess sans rechercher de dépendances natives. Cela signifie très probablement que l’application est mal configurée. Vérifiez les versions de Microsoft.NetCore.App et Microsoft.AspNetCore.App ciblées par l’application et installées sur la machine. Le gestionnaire de requêtes in-process est introuvable. Sortie capturée de l’appel de hostfxr : souhaitiez-vous exécuter des commandes du kit de développement logiciel (SDK) dotnet ? Installez le kit de développement logiciel https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 (SDK) dotnet à partir de : échec du démarrage de l’application « /LM/W3SVC/3/root », ErrorCode « 0x8000FFFF ».
+* **Journal des applications :** Échec de l’appel de hostfxr pour rechercher le gestionnaire de demandes InProcess sans rechercher de dépendances natives. Cela signifie très probablement que l’application est mal configurée. Vérifiez les versions de Microsoft.NetCore.App et Microsoft.AspNetCore.App ciblées par l’application et installées sur la machine. Le gestionnaire de requêtes in-process est introuvable. Sortie capturée de l’appel de hostfxr : souhaitiez-vous exécuter des commandes du kit de développement logiciel (SDK) dotnet ? Installez le kit de développement logiciel (SDK) dotnet à partir de : https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 échec du démarrage de l’application « /LM/W3SVC/3/root », ErrorCode « 0x8000FFFF ».
 
 * **Journal stdout du Module ASP.net Core :** Souhaitiez-vous exécuter des commandes du kit de développement logiciel (SDK) dotnet ? Installez le kit SDK dotnet à partir de : https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409
 
-* **Journal de débogage du Module ASP.net Core :** Échec de l’appel de hostfxr pour rechercher le gestionnaire de demandes InProcess sans rechercher de dépendances natives. Cela signifie très probablement que l’application est mal configurée. Vérifiez les versions de Microsoft.NetCore.App et Microsoft.AspNetCore.App ciblées par l’application et installées sur la machine. Échec de HRESULT retourné : 0x8000FFFF n’a pas pu trouver le gestionnaire de demandes InProcess. Sortie capturée de l’appel de hostfxr : souhaitiez-vous exécuter des commandes du kit de développement logiciel (SDK) dotnet ? Installez le kit de développement logiciel https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 (SDK) dotnet à partir de : échec de HRESULT retourné : 0x8000FFFF
+* **Journal de débogage du Module ASP.net Core :** Échec de l’appel de hostfxr pour rechercher le gestionnaire de demandes InProcess sans rechercher de dépendances natives. Cela signifie très probablement que l’application est mal configurée. Vérifiez les versions de Microsoft.NetCore.App et Microsoft.AspNetCore.App ciblées par l’application et installées sur la machine. Échec de HRESULT retourné : 0x8000FFFF n’a pas pu trouver le gestionnaire de demandes InProcess. Sortie capturée de l’appel de hostfxr : souhaitiez-vous exécuter des commandes du kit de développement logiciel (SDK) dotnet ? Installez le kit de développement logiciel (SDK) dotnet à partir de : https://go.microsoft.com/fwlink/?LinkID=798306&clcid=0x409 échec de HRESULT retourné : 0x8000FFFF
 
 Résolution des problèmes :
 
-* Vérifiez que l’application s’exécute localement sur Kestrel. Un échec de processus peut être dû à un problème au niveau de l’application. Pour plus d’informations, consultez <xref:test/troubleshoot-azure-iis>.
+* Vérifiez que l’application s’exécute localement sur Kestrel. Un échec de processus peut être dû à un problème au niveau de l’application. Pour plus d'informations, consultez <xref:test/troubleshoot-azure-iis>.
 
 * Examinez l’attribut *arguments* de l’élément `<aspNetCore>` dans *web.config* afin de vérifier (a) qu’il s’agit de `.\{ASSEMBLY}.dll` pour un déploiement dépendant du framework, ou (b) qu’il est absent ou qu’il s’agit d’une chaîne vide (`arguments=""`) ou d’une liste d’arguments de l’application (`arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"`) pour un déploiement autonome.
 
@@ -257,7 +244,7 @@ Résolution des problèmes :
 
 Vérifiez que le pool d’applications n’est pas à l’état *Arrêté*.
 
-## <a name="sub-application-includes-a-handlers-section"></a>La sous-application inclut une section \<handlers>
+## <a name="sub-application-includes-a-handlers-section"></a>La sous-application contient une \<handlers> section
 
 * **Navigateur :** Erreur HTTP 500.19 : Erreur interne du serveur
 
@@ -271,7 +258,7 @@ Résolution des problèmes :
 
 Vérifiez que le fichier *web.config* de la sous-application n’inclut pas de section `<handlers>` ou que la sous-application n’hérite pas des gestionnaires de l’application parente.
 
-La section `<system.webServer>` de l’application parente de *web.config* est placée à l’intérieur d’un élément `<location>`. La <xref:System.Configuration.SectionInformation.InheritInChildApplications*> propriété a la valeur `false` pour indiquer que les paramètres spécifiés dans l' [ \<emplacement>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) élément ne sont pas hérités par les applications qui résident dans un sous-répertoire de l’application parente. Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module>.
+La section `<system.webServer>` de l’application parente de *web.config* est placée à l’intérieur d’un élément `<location>`. La <xref:System.Configuration.SectionInformation.InheritInChildApplications*> propriété a la valeur `false` pour indiquer que les paramètres spécifiés dans l' [\<location>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) élément ne sont pas hérités par les applications qui résident dans un sous-répertoire de l’application parente. Pour plus d'informations, consultez <xref:host-and-deploy/aspnet-core-module>.
 
 ## <a name="stdout-log-path-incorrect"></a>Chemin du journal stdout incorrect
 
@@ -303,7 +290,7 @@ Résolution des problèmes :
 
 Le processus n’a pas pu démarrer, probablement en raison d’un problème de configuration ou de programmation d’application.
 
-Pour plus d'informations, voir les rubriques suivantes :
+Pour plus d'informations, voir les rubriques suivantes :
 
 * <xref:test/troubleshoot-azure-iis>
 * <xref:test/troubleshoot>
@@ -314,19 +301,19 @@ Pour plus d'informations, voir les rubriques suivantes :
 
 Cette rubrique décrit les erreurs courantes et fournit des conseils de dépannage pour les erreurs spécifiques lors de l’hébergement d’applications ASP.NET Core sur Azure Apps service et IIS.
 
-Pour obtenir des instructions générales sur <xref:test/troubleshoot-azure-iis>la résolution des problèmes, consultez.
+Pour obtenir des instructions générales sur la résolution des problèmes, consultez <xref:test/troubleshoot-azure-iis> .
 
 Collectez les informations suivantes :
 
 * Comportement du navigateur (code d’état et message d’erreur)
 * Entrées du journal des événements de l’application
-  * Azure App Service &ndash; Consultez <xref:test/troubleshoot-azure-iis>.
+  * Azure App Service : consultez <xref:test/troubleshoot-azure-iis> .
   * IIS
     1. Sélectionnez **Démarrer** dans le menu **Windows**, tapez *Observateur d’événements*, puis appuyez sur **Entrée**.
     1. Une fois l’**Observateur d’événements** ouvert, développez **Journaux Windows** > **Application** dans la barre latérale.
 * Entrées de journal stdout et de débogage du module ASP.NET Core
-  * Azure App Service &ndash; Consultez <xref:test/troubleshoot-azure-iis>.
-  * IIS &ndash; Suivez les instructions données dans les sections [Création et redirection de journal](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection) et [Journaux de diagnostic améliorés](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) de la rubrique Module ASP.NET Core.
+  * Azure App Service : consultez <xref:test/troubleshoot-azure-iis> .
+  * IIS : suivez les instructions des sections [création de journal et redirection](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection) et [journaux de diagnostic améliorés](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) de la rubrique du module ASP.net core.
 
 Comparez les informations d’erreur aux erreurs courantes suivantes. Si vous trouvez une correspondance, suivez les conseils de dépannage.
 
@@ -367,7 +354,7 @@ Résolution des problèmes :
 
 * Vérifiez que la **plateforme** de l’application dans **Paramètres de l’application** correspond au nombre de bits de l’application.
 
-Pour plus d’informations, consultez <xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension>.
+Pour plus d'informations, consultez <xref:host-and-deploy/azure-apps/index#install-the-preview-site-extension>.
 
 ## <a name="an-x86-app-is-deployed-but-the-app-pool-isnt-enabled-for-32-bit-apps"></a>Une application x86 est déployée mais le pool d’applications n’est pas activé pour les applications 32 bits
 
@@ -387,13 +374,13 @@ Pour un déploiement dépendant du framework x86 (`<PlatformTarget>x86</Platfor
 
 * **Navigateur :** Erreur HTTP 502.5 - Échec du processus
 
-* **Journal des applications :** L’application’MACHINE/WEBROOT/APPHOST/{ASSEMBLy} 'avec la racine physique\{'C\' : Path} n’a pas pu démarrer le processus\{avec la ligne de commande' "c : Path} {assembly}. {exe | dll} "', ErrorCode = ' 0x80004005 : FF.
+* **Journal des applications :** L’application’MACHINE/WEBROOT/APPHOST/{ASSEMBLy} 'avec la racine physique’C : \{ path} \' n’a pas pu démarrer le processus avec la ligne de commande' "c : \{ path} {assembly}. { exe | dll} "', ErrorCode = ' 0x80004005 : FF.
 
 * **Journal stdout du Module ASP.net Core :** Exception non gérée : System. BadImageFormatException : impossible de charger le fichier ou l’assembly' {ASSEMBLy}. dll'. Tentative de chargement d’un programme au format incorrect.
 
 Résolution des problèmes :
 
-* Vérifiez que l’application s’exécute localement sur Kestrel. Un échec de processus peut être dû à un problème au niveau de l’application. Pour plus d’informations, consultez <xref:test/troubleshoot-azure-iis>.
+* Vérifiez que l’application s’exécute localement sur Kestrel. Un échec de processus peut être dû à un problème au niveau de l’application. Pour plus d'informations, consultez <xref:test/troubleshoot-azure-iis>.
 
 * Si cette exception se produit pour un déploiement d’applications Azure pendant la mise à niveau d’une application et le déploiement de nouveaux assemblys, supprimez manuellement tous les fichiers du déploiement précédent. Le fait de laisser des assemblys incompatibles peut provoquer une exception `System.BadImageFormatException` lors du déploiement d’une application mise à niveau.
 
@@ -449,7 +436,7 @@ Résolution des problèmes :
 
   Pour plus d’informations, consultez [Installer le bundle d’hébergement .NET Core](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle).
 
-* Assurez-vous que le **modèle** > **Identity** de processus du **pool** > d’applications est défini sur **ApplicationPoolIdentity** ou que l’identité personnalisée dispose des autorisations appropriées pour accéder au dossier de déploiement de l’application.
+* Assurez-vous **Application Pool** que le > **modèle de processus** du pool > **Identity** d’applications est défini sur **ApplicationPoolIdentity** ou que l’identité personnalisée dispose des autorisations appropriées pour accéder au dossier de déploiement de l’application.
 
 * Si vous avez désinstallé le bundle d’hébergement ASP.NET Core et installé une version antérieure du bundle d’hébergement, le fichier *applicationHost.config* ne contient pas de section pour le module ASP.NET Core. Ouvrez *applicationHost.config* sur *%windir%/System32/inetsrv/config* et recherchez le groupe de sections `<configuration><configSections><sectionGroup name="system.webServer">`. Si la section pour le module ASP.NET Core ne se trouve pas dans le groupe de sections, ajoutez l’élément de section :
 
@@ -463,13 +450,13 @@ Résolution des problèmes :
 
 * **Navigateur :** Erreur HTTP 502.5 - Échec du processus
 
-* **Journal des applications :** L’application’MACHINE/WEBROOT/APPHOST/{ASSEMBLy} 'avec la racine physique\{'C\' : Path} n’a pas pu démarrer le processus avec la ligne de commande' "{...}" ', ErrorCode = ' 0x80070002:0.
+* **Journal des applications :** L’application’MACHINE/WEBROOT/APPHOST/{ASSEMBLy} 'avec la racine physique’C : \{ path} \' n’a pas pu démarrer le processus avec la ligne de commande' "{...}" ', ErrorCode = ' 0x80070002:0.
 
 * **Journal stdout du Module ASP.net Core :** Le fichier journal est créé, mais vide.
 
 Résolution des problèmes :
 
-* Vérifiez que l’application s’exécute localement sur Kestrel. Un échec de processus peut être dû à un problème au niveau de l’application. Pour plus d’informations, consultez <xref:test/troubleshoot-azure-iis>.
+* Vérifiez que l’application s’exécute localement sur Kestrel. Un échec de processus peut être dû à un problème au niveau de l’application. Pour plus d'informations, consultez <xref:test/troubleshoot-azure-iis>.
 
 * Examinez l’attribut *processPath* de l’élément `<aspNetCore>` dans *web.config* afin de vérifier qu’il s’agit de `dotnet` pour un déploiement dépendant du framework ou de `.\{ASSEMBLY}.exe` pour un [déploiement autonome](/dotnet/core/deploying/#self-contained-deployments-scd).
 
@@ -487,17 +474,17 @@ Résolution des problèmes :
 
   Si un runtime spécifique est nécessaire, téléchargez-le à partir des [archives de téléchargement .NET](https://dotnet.microsoft.com/download/archives), puis installez-le sur le système. Terminez l’installation en redémarrant le système ou IIS en exécutant **net stop was /y** suivi de **net start w3svc** à partir d’une invite de commandes.
 
-## <a name="incorrect-arguments-of-aspnetcore-element"></a>Arguments incorrects de l’élément \<aspNetCore>
+## <a name="incorrect-arguments-of-aspnetcore-element"></a>Arguments incorrects de l' \<aspNetCore> élément
 
 * **Navigateur :** Erreur HTTP 502.5 - Échec du processus
 
-* **Journal des applications :** L’application’MACHINE/WEBROOT/APPHOST/{ASSEMBLy} 'avec la racine physique\{'C\' : Path} n’a pas pu démarrer le processus avec la ligne de commande' « dotnet ». \{Assembly}. dll', ErrorCode = ' 0x80004005:80008081.
+* **Journal des applications :** L’application’MACHINE/WEBROOT/APPHOST/{ASSEMBLy} 'avec la racine physique’C : \{ path} \' n’a pas pu démarrer le processus avec la ligne de commande' « dotnet ». \{ ASSEMBLy}. dll', ErrorCode = ' 0x80004005:80008081.
 
-* **Journal stdout du Module ASP.net Core :** L’application à exécuter n’existe pas : 'PATH\{assembly}. dll'
+* **Journal stdout du Module ASP.net Core :** L’application à exécuter n’existe pas : 'PATH \{ assembly}. dll'
 
 Résolution des problèmes :
 
-* Vérifiez que l’application s’exécute localement sur Kestrel. Un échec de processus peut être dû à un problème au niveau de l’application. Pour plus d’informations, consultez <xref:test/troubleshoot-azure-iis>.
+* Vérifiez que l’application s’exécute localement sur Kestrel. Un échec de processus peut être dû à un problème au niveau de l’application. Pour plus d'informations, consultez <xref:test/troubleshoot-azure-iis>.
 
 * Examinez l’attribut *arguments* de l’élément `<aspNetCore>` dans *web.config* afin de vérifier (a) qu’il s’agit de `.\{ASSEMBLY}.dll` pour un déploiement dépendant du framework, ou (b) qu’il est absent ou qu’il s’agit d’une chaîne vide (`arguments=""`) ou d’une liste d’arguments de l’application (`arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"`) pour un déploiement autonome.
 
@@ -517,7 +504,7 @@ Résolution des problèmes :
 
 Vérifiez que le pool d’applications n’est pas à l’état *Arrêté*.
 
-## <a name="sub-application-includes-a-handlers-section"></a>La sous-application inclut une section \<handlers>
+## <a name="sub-application-includes-a-handlers-section"></a>La sous-application contient une \<handlers> section
 
 * **Navigateur :** Erreur HTTP 500.19 : Erreur interne du serveur
 
@@ -533,7 +520,7 @@ Vérifiez que le fichier *web.config* de la sous-application n’inclut pas de s
 
 * **Navigateur :** l’application répond normalement.
 
-* **Journal des applications :** AVERTISSEMENT : impossible de créer stdoutLogFile \\? \{Path} \ path_doesnt_exist \ STDOUT_ {ID de processus} _ {timestamp}. log, ErrorCode =-2147024893.
+* **Journal des applications :** AVERTISSEMENT : impossible de créer stdoutLogFile \\ ? \{ PATH} \ path_doesnt_exist \ stdout_ {ID de processus} _ {TIMESTAMP}. log, ErrorCode =-2147024893.
 
 * **Journal stdout du Module ASP.net Core :** Le fichier journal n’est pas créé.
 
@@ -547,7 +534,7 @@ Résolution des problèmes :
 
 * **Navigateur :** Erreur HTTP 502.5 - Échec du processus
 
-* **Journal des applications :** L’application’MACHINE/WEBROOT/APPHOST/{ASSEMBLy} 'avec la racine physique\{'C\' : Path} a créé le processus avec\{la ligne\{de commande' "c : Path} assembly}. {exe | dll} "', mais l’incident est bloqué ou n’a pas répondu ou n’a pas écouté le port donné' {PORT} ', ErrorCode = ' {CODE d’erreur} '
+* **Journal des applications :** L’application’MACHINE/WEBROOT/APPHOST/{ASSEMBLy} 'avec la racine physique’C : \{ chemin} a \' créé le processus avec la ligne de commande' "c : \{ chemin} \{ assembly}. { exe | dll} « », mais s’est bloqué ou n’a pas répondu ou n’a pas écouté le port donné «{PORT} », ErrorCode = « {CODE d’erreur} »
 
 * **Journal stdout du Module ASP.net Core :** Le fichier journal est créé, mais vide.
 
@@ -555,7 +542,7 @@ Résolution des problèmes :
 
 Le processus n’a pas pu démarrer, probablement en raison d’un problème de configuration ou de programmation d’application.
 
-Pour plus d'informations, voir les rubriques suivantes :
+Pour plus d'informations, voir les rubriques suivantes :
 
 * <xref:test/troubleshoot-azure-iis>
 * <xref:test/troubleshoot>

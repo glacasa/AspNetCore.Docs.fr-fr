@@ -69,8 +69,8 @@ Razorles composants dans les Blazor applications utilisent largement la Razor sy
 
 Lorsque vous accédez au contenu sur la Razor syntaxe, portez une attention particulière aux sections suivantes :
 
-* [Directives](xref:mvc/views/razor#directives) &ndash; `@`-préfixe des mots clés réservés qui modifient généralement la manière dont le balisage du composant est analysé ou fonction.
-* [Attributs](xref:mvc/views/razor#directive-attributes) &ndash; de directive `@`-préfixe des mots clés réservés qui modifient généralement le mode d’analyse ou de fonction des éléments composant.
+* [Directives](xref:mvc/views/razor#directives): `@` -préfixe des mots clés réservés qui modifient généralement la manière dont le balisage du composant est analysé ou fonction.
+* [Attributs de directive](xref:mvc/views/razor#directive-attributes): `@` Mots clés réservés préfixés qui modifient généralement le mode d’analyse ou de fonction des éléments de composant.
 
 ## <a name="static-assets"></a>Les ressources statiques
 
@@ -136,7 +136,7 @@ La syntaxe de paramètre *catch-all* ( `*` / `**` ), qui capture le chemin d’a
 
 ### <a name="component-parameters"></a>Paramètres de composant
 
-Les composants peuvent avoir des *paramètres de composant*, qui sont définis à l’aide de propriétés publiques sur la classe de composant avec l' [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) attribut] (XREF : Microsoft. AspNetCore. Components. ParameterAttribute). Utilisez des attributs pour spécifier des arguments pour un composant dans le balisage.
+Les composants peuvent avoir des *paramètres de composant*, qui sont définis à l’aide de propriétés publiques sur la classe de composant avec l' [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) attribut. Utilisez des attributs pour spécifier des arguments pour un composant dans le balisage.
 
 *Composants/ChildComponent. Razor*:
 
@@ -974,7 +974,7 @@ Toutefois, le balisage SVG en ligne n’est pas pris en charge dans tous les sc�
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* <xref:security/blazor/server/threat-mitigation>&ndash;Contient des conseils sur la création Blazor Applications serveur qui doivent rivaliser avec l’épuisement des ressources.
+* <xref:security/blazor/server/threat-mitigation>: Fournit des conseils sur la création d' Blazor applications serveur qui doivent être en concurrence avec l’épuisement des ressources.
 
 <!--Reference links in article-->
 [1]: <xref:mvc/views/razor#code>

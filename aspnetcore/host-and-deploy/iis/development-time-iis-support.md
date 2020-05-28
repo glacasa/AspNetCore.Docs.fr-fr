@@ -1,24 +1,11 @@
 ---
-title: Prise en charge d’IIS pendant le développement dans Visual Studio pour ASP.NET Core
-author: rick-anderson
-description: Découvrez la prise en charge du débogage des applications ASP.NET Core en cas d’exécution avec IIS sur Windows Server.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/07/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: a6719b4f84b1bc60c7c2aea2aa3a97ef79f43e2e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777018"
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>Prise en charge d’IIS pendant le développement dans Visual Studio pour ASP.NET Core
 
@@ -46,7 +33,7 @@ L’installation d’IIS peut nécessiter un redémarrage du système.
 
 IIS doit avoir un site web configuré avec les éléments suivants :
 
-* **Nom d’hôte** &ndash; C’est en règle générale le **Site web par défaut** qui est utilisé avec le **Nom d’hôte**`localhost`. Toutefois, n’importe quel site web IIS valide avec un nom d’hôte unique fonctionnera.
+* **Nom d’hôte**: en général, le **site Web par défaut** est utilisé avec un **nom d’hôte** `localhost` . Toutefois, n’importe quel site web IIS valide avec un nom d’hôte unique fonctionnera.
 * **Liaison de site**
   * Pour les applications qui exigent le protocole HTTPS, créez une liaison au port 443 avec un certificat. On utilise en général le **certificat de développement IIS Express**, mais tous les certificats valides conviennent.
   * Pour les applications qui utilisent le protocole HTTP, vérifiez l’existence d’une liaison au port 80 ou créez-en une pour un nouveau site.
@@ -66,7 +53,7 @@ IIS doit avoir un site web configuré avec les éléments suivants :
 
 Pour un nouveau projet qui exige le protocole HTTPS, cochez la case **Configurer pour HTTPS** dans la fenêtre **Créer une application web ASP.NET Core** afin d’ajouter [Redirection HTTPS et middleware HSTS](xref:security/enforcing-ssl) à l’application lors de sa création.
 
-Pour un projet existant qui exige le protocole HTTPS, utilisez Redirection HTTPS et middleware HSTS dans `Startup.Configure`. Pour plus d’informations, consultez <xref:security/enforcing-ssl>.
+Pour un projet existant qui exige le protocole HTTPS, utilisez Redirection HTTPS et middleware HSTS dans `Startup.Configure`. Pour plus d'informations, consultez <xref:security/enforcing-ssl>.
 
 Pour un projet qui utilise le protocole HTTP, [Redirection HTTPS et middleware HSTS](xref:security/enforcing-ssl) ne sont pas ajoutés à l’application. Aucune configuration de l’application n’est nécessaire.
 
@@ -161,7 +148,7 @@ L’installation d’IIS peut nécessiter un redémarrage du système.
 
 IIS doit avoir un site web configuré avec les éléments suivants :
 
-* **Nom d’hôte** &ndash; C’est en règle générale le **Site web par défaut** qui est utilisé avec le **Nom d’hôte**`localhost`. Toutefois, n’importe quel site web IIS valide avec un nom d’hôte unique fonctionnera.
+* **Nom d’hôte**: en général, le **site Web par défaut** est utilisé avec un **nom d’hôte** `localhost` . Toutefois, n’importe quel site web IIS valide avec un nom d’hôte unique fonctionnera.
 * **Liaison de site**
   * Pour les applications qui exigent le protocole HTTPS, créez une liaison au port 443 avec un certificat. On utilise en général le **certificat de développement IIS Express**, mais tous les certificats valides conviennent.
   * Pour les applications qui utilisent le protocole HTTP, vérifiez l’existence d’une liaison au port 80 ou créez-en une pour un nouveau site.
@@ -181,7 +168,7 @@ IIS doit avoir un site web configuré avec les éléments suivants :
 
 Pour un nouveau projet qui exige le protocole HTTPS, cochez la case **Configurer pour HTTPS** dans la fenêtre **Créer une application web ASP.NET Core** afin d’ajouter [Redirection HTTPS et middleware HSTS](xref:security/enforcing-ssl) à l’application lors de sa création.
 
-Pour un projet existant qui exige le protocole HTTPS, utilisez Redirection HTTPS et middleware HSTS dans `Startup.Configure`. Pour plus d’informations, consultez <xref:security/enforcing-ssl>.
+Pour un projet existant qui exige le protocole HTTPS, utilisez Redirection HTTPS et middleware HSTS dans `Startup.Configure`. Pour plus d'informations, consultez <xref:security/enforcing-ssl>.
 
 Pour un projet qui utilise le protocole HTTP, [Redirection HTTPS et middleware HSTS](xref:security/enforcing-ssl) ne sont pas ajoutés à l’application. Aucune configuration de l’application n’est nécessaire.
 

@@ -1,24 +1,11 @@
 ---
-title: Héberger ASP.NET Core dans une batterie de serveurs web
-author: rick-anderson
-description: Découvrez comment héberger plusieurs instances d’une application ASP.NET Core avec des ressources partagées dans un environnement de batterie de serveurs web.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 01/13/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/web-farm
-ms.openlocfilehash: 3474b6b1d85774a15a912efcb37ec8f206695eaf
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776355"
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>Héberger ASP.NET Core dans une batterie de serveurs web
 
@@ -26,10 +13,10 @@ Par [Chris Ross](https://github.com/Tratcher)
 
 Une *batterie de serveurs Web* est un groupe d’au moins deux serveurs web (ou *nœuds*) qui héberge plusieurs instances d’une application. Lorsque les requêtes des utilisateurs arrivent à une batterie de serveurs web, un *équilibreur de charge* les répartit sur les nœuds de la batterie de serveurs web. Les batteries de serveurs web apportent les améliorations suivantes :
 
-* **Fiabilité/disponibilité** &ndash; Lorsqu’un ou plusieurs nœuds échouent, l’équilibreur de charge peut acheminer les requêtes vers d’autres nœuds qui fonctionnent pour continuer le traitement des requêtes.
-* **Capacité/niveau de performances** &ndash; Plusieurs nœuds peuvent traiter plus de requêtes qu’un serveur unique. L’équilibreur de charge équilibre la charge de travail en répartissant les requêtes sur les nœuds.
-* **Évolutivité** &ndash; Lorsqu’une capacité supérieure ou inférieure est requise, le nombre de nœuds actifs peut être augmenté ou réduit pour l’adapter à la charge de travail. Les technologies de plateformes de batterie de serveurs web, telles qu’[Azure App Service](https://azure.microsoft.com/services/app-service/), peuvent automatiquement ajouter ou supprimer des nœuds, à la demande de l’administrateur système ou automatiquement, sans intervention humaine.
-* **Facilité de maintenance** &ndash; Les nœuds d’une batterie de serveurs web peuvent s’appuyer sur un ensemble de services partagés, ce qui facilite la gestion système. Par exemple, les nœuds d’une batterie de serveurs web peuvent reposer sur un serveur de base de données unique et un emplacement réseau commun pour les ressources statiques, telles que les images et les fichiers téléchargeables.
+* **Fiabilité/disponibilité**: en cas d’échec d’un ou de plusieurs nœuds, l’équilibreur de charge peut acheminer les demandes vers d’autres nœuds opérationnels pour poursuivre le traitement des demandes.
+* **Capacité/performances**: plusieurs nœuds peuvent traiter plus de demandes qu’un seul serveur. L’équilibreur de charge équilibre la charge de travail en répartissant les requêtes sur les nœuds.
+* **Évolutivité**: lorsque la capacité est plus ou moins importante, le nombre de nœuds actifs peut être augmenté ou réduit pour correspondre à la charge de travail. Les technologies de plateformes de batterie de serveurs web, telles qu’[Azure App Service](https://azure.microsoft.com/services/app-service/), peuvent automatiquement ajouter ou supprimer des nœuds, à la demande de l’administrateur système ou automatiquement, sans intervention humaine.
+* **Maintenabilité**: les nœuds d’une batterie de serveurs Web peuvent reposer sur un ensemble de services partagés, ce qui facilite la gestion du système. Par exemple, les nœuds d’une batterie de serveurs web peuvent reposer sur un serveur de base de données unique et un emplacement réseau commun pour les ressources statiques, telles que les images et les fichiers téléchargeables.
 
 Cette rubrique décrit la configuration et les dépendances des applications ASP.NET Core hébergées dans une batterie de serveurs web qui s’appuie sur des ressources partagées.
 
@@ -58,19 +45,85 @@ Le [système de Protection des données ASP.NET Core](xref:security/data-protect
 
 ### <a name="caching"></a>Mise en cache
 
-Dans un environnement de batterie de serveurs web, le mécanisme de mise en cache doit partager des éléments mis en cache sur les nœuds de la batterie de serveurs web. La mise en cache doit reposer sur un cache Redis commun, sur une base de données SQL Server partagée, ou sur une implémentation de mise en cache personnalisée qui partage les éléments mis en cache sur la batterie de serveurs web. Pour plus d’informations, consultez <xref:performance/caching/distributed>.
+Dans un environnement de batterie de serveurs web, le mécanisme de mise en cache doit partager des éléments mis en cache sur les nœuds de la batterie de serveurs web. La mise en cache doit reposer sur un cache Redis commun, sur une base de données SQL Server partagée, ou sur une implémentation de mise en cache personnalisée qui partage les éléments mis en cache sur la batterie de serveurs web. Pour plus d'informations, consultez <xref:performance/caching/distributed>.
 
 ## <a name="dependent-components"></a>Composants dépendants
 
 Les scénarios suivants ne nécessitent pas une configuration supplémentaire, mais dépendent de technologies qui nécessitent une configuration pour les batteries de serveurs web.
 
 | Scénario | Dépend de &hellip; |
-| -------- | ------------------- |
-| Authentification | Protection des données (voir <xref:security/data-protection/configuration/overview>).<br><br>Pour plus d’informations, consultez <xref:security/authentication/cookie> et <xref:security/cookie-sharing>. |
-| Identity | Authentification et configuration de la base de données.<br><br>Pour plus d’informations, consultez <xref:security/authentication/identity>. |
-| session | Protection des données (cookies chiffrés) (voir <xref:security/data-protection/configuration/overview>) et Mise en cache (voir <xref:performance/caching/distributed>).<br><br>Pour plus d’informations, consultez [session and State Management : état de session](xref:fundamentals/app-state#session-state). |
-| TempData | Protection des données (cookies chiffrés) ( <xref:security/data-protection/configuration/overview>consultez) ou session (voir la rubrique [gestion de session et d’État : état de session](xref:fundamentals/app-state#session-state)).<br><br>Pour plus d’informations, consultez [session and State Management : TempData](xref:fundamentals/app-state#tempdata). |
-| Anti-contrefaçon | Protection des données (voir <xref:security/data-protection/configuration/overview>).<br><br>Pour plus d’informations, consultez <xref:security/anti-request-forgery>. |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+---- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+---------- | | Authentification | Protection des données (voir <xref:security/data-protection/configuration/overview> ).<br><br>Pour plus d’informations, consultez <xref:security/authentication/cookie> et <xref:security/cookie-sharing>. | | Identity | Configuration de l’authentification et de la base de données.<br><br>Pour plus d'informations, consultez <xref:security/authentication/identity>. | | Session | Protection des données (cookies chiffrés) (voir <xref:security/data-protection/configuration/overview> ) et mise en cache (consultez <xref:performance/caching/distributed> ).<br><br>Pour plus d’informations, consultez [session and State Management : état de session](xref:fundamentals/app-state#session-state). | | TempData | Protection des données (cookies chiffrés) (consultez <xref:security/data-protection/configuration/overview> ) ou session (voir la rubrique [gestion de session et d’État : état de session](xref:fundamentals/app-state#session-state)).<br><br>Pour plus d’informations, consultez [session and State Management : TempData](xref:fundamentals/app-state#tempdata). | | Anti-contrefaçon | Protection des données (voir <xref:security/data-protection/configuration/overview> ).<br><br>Pour plus d'informations, consultez <xref:security/anti-request-forgery>. |
 
 ## <a name="troubleshoot"></a>Dépanner
 
@@ -82,12 +135,12 @@ Prenons l’exemple d’un utilisateur qui se connecte à l’application à l�
 
 Lorsque l’un des symptômes suivants se produit par **intermittence**, le problème est généralement lié à une configuration de protection des données ou de mise en cache incorrecte pour un environnement de batterie de serveurs Web :
 
-* Interruptions d’authentification &ndash; Le cookie d’authentification est mal configuré ou ne peut pas être déchiffré. OAuth (Facebook, Microsoft, Twitter) ou les connexions OpenIdConnect échouent avec l’erreur « Échec de la corrélation ».
-* Les interruptions &ndash; Identity d’autorisation sont perdues.
+* Arrêts d’authentification : le cookie d’authentification est mal configuré ou ne peut pas être déchiffré. OAuth (Facebook, Microsoft, Twitter) ou les connexions OpenIdConnect échouent avec l’erreur « Échec de la corrélation ».
+* Interruptions d’autorisation : Identity est perdu.
 * L’état de session perd des données.
 * Des éléments mis en cache disparaissent.
 * TempData échoue.
-* Échec des messages &ndash; la vérification anti-contrefaçon échoue.
+* Échec des publications : la vérification anti-contrefaçon échoue.
 
 Pour plus d’informations sur la configuration de la protection des données pour les déploiements sur des batteries de serveurs web, consultez <xref:security/data-protection/configuration/overview>. Pour plus d’informations sur la configuration de la mise en cache pour les déploiements sur des batteries de serveurs web, consultez <xref:performance/caching/distributed>.
 
@@ -97,6 +150,6 @@ Si les applications de la batterie de serveurs web sont capables de répondre au
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* L' [extension de script personnalisé pour Windows](/azure/virtual-machines/extensions/custom-script-windows) &ndash; télécharge et exécute des scripts sur des machines virtuelles Azure, ce qui est utile pour la configuration et l’installation de logiciels après le déploiement.
+* [Extension de script personnalisé pour Windows](/azure/virtual-machines/extensions/custom-script-windows): télécharge et exécute des scripts sur des machines virtuelles Azure, ce qui est utile pour la configuration et l’installation de logiciels après le déploiement.
 * <xref:host-and-deploy/proxy-load-balancer>
  

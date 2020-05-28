@@ -46,8 +46,8 @@ Pour conserver l’État au-delà d’un seul circuit, *ne stockez pas simplemen
 
 La persistance des données est généralement requise uniquement pour l’état de valeur élevée que les utilisateurs ont consacrés à la création. Dans les exemples suivants, l’état persistant fait gagner du temps ou contribue à des activités commerciales :
 
-* WebForm à &ndash; plusieurs étapes il prend beaucoup de temps pour qu’un utilisateur saisit à nouveau les données pour plusieurs étapes terminées d’un processus à plusieurs étapes si leur état est perdu. Un utilisateur perd l’État dans ce scénario s’il quitte le formulaire à étapes et retourne au formulaire par la suite.
-* Panier &ndash; tout composant commercial important d’une application qui représente un chiffre d’affaires potentiel peut être maintenu. Un utilisateur qui perd son état et, par conséquent, son panier, peut acheter moins de produits ou de services lorsqu’ils reviennent sur le site ultérieurement.
+* WebForm à plusieurs étapes : il est fastidieux pour un utilisateur de saisir à nouveau des données pour plusieurs étapes terminées d’un processus à plusieurs étapes si leur état est perdu. Un utilisateur perd l’État dans ce scénario s’il quitte le formulaire à étapes et retourne au formulaire par la suite.
+* Panier d’achat : tout composant commercialement important d’une application qui représente un chiffre d’affaires potentiel peut être maintenu. Un utilisateur qui perd son état et, par conséquent, son panier, peut acheter moins de produits ou de services lorsqu’ils reviennent sur le site ultérieurement.
 
 En règle générale, il n’est pas nécessaire de conserver un État facile à recréer, tel que le nom d’utilisateur entré dans une boîte de dialogue de connexion qui n’a pas été envoyée.
 

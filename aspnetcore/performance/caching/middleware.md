@@ -1,24 +1,11 @@
 ---
-title: Intergiciel de mise en cache des réponses dans ASP.NET Core
-author: rick-anderson
-description: Découvrez comment configurer et utiliser le middleware de mise en cache des réponses dans ASP.NET Core.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/07/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: performance/caching/middleware
-ms.openlocfilehash: 10359f25223d5c8e89f983633d24fbcac8a22deb
-ms.sourcegitcommit: 688b6f448d87b6f7f4440182d72388eaa68d2935
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/14/2020
-ms.locfileid: "83393833"
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>Intergiciel de mise en cache des réponses dans ASP.NET Core
 
@@ -44,12 +31,12 @@ Configurez l’application pour utiliser l’intergiciel avec la <xref:Microsoft
 
 L’exemple d’application ajoute des en-têtes pour contrôler la mise en cache lors des requêtes suivantes :
 
-* [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2) &ndash; Met en cache les réponses pouvant être mises en cache pendant 10 secondes.
-* [Faire varier](https://tools.ietf.org/html/rfc7231#section-7.1.4) &ndash; Configure l’intergiciel (middleware) pour traiter une réponse mise en cache uniquement si l’en-tête [accepter-encodage](https://tools.ietf.org/html/rfc7231#section-5.3.4) des demandes suivantes correspond à celui de la demande d’origine.
+* [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2): met en cache les réponses pouvant être mises en cache pendant 10 secondes.
+* [Variation](https://tools.ietf.org/html/rfc7231#section-7.1.4): configure l’intergiciel (middleware) pour traiter une réponse mise en cache uniquement si l’en-tête [accepter-encodage](https://tools.ietf.org/html/rfc7231#section-5.3.4) des demandes suivantes correspond à celui de la demande d’origine.
 
 [!code-csharp[](middleware/samples_snippets/3.x/AddHeaders.cs)]
 
-Les en-têtes précédents ne sont pas écrits dans la réponse et sont remplacés lorsqu’un contrôleur, une action ou une page Razor :
+Les en-têtes précédents ne sont pas écrits dans la réponse et sont remplacés lorsqu’un contrôleur, une action ou une Razor page :
 
 * A un attribut [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) . Cela s’applique même si une propriété n’est pas définie. Par exemple, si vous omettez la propriété [VaryByHeader](/aspnet/core/performance/caching/response#vary) , l’en-tête correspondant sera supprimé de la réponse.
 
@@ -63,10 +50,38 @@ L’intergiciel (middleware) de mise en cache des réponses met uniquement en ca
 Les options de mise en cache des réponses sont indiquées dans le tableau suivant.
 
 | Option | Description |
-| ------ | ----------- |
-| <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.MaximumBodySize> | Plus grande taille pouvant être mise en cache pour le corps de la réponse en octets. La valeur par défaut est `64 * 1024 * 1024` (64 Mo). |
-| <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.SizeLimit> | Taille limite de l’intergiciel (middleware) du cache de réponse en octets. La valeur par défaut est `100 * 1024 * 1024` (100 Mo). |
-| <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.UseCaseSensitivePaths> | Détermine si les réponses sont mises en cache sur les chemins d’accès sensibles à la casse. La valeur par défaut est `false`. |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+--- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------ | | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.MaximumBodySize> | Plus grande taille pouvant être mise en cache pour le corps de la réponse en octets. La valeur par défaut est `64 * 1024 * 1024` (64 Mo). | | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.SizeLimit> | Taille limite de l’intergiciel (middleware) du cache de réponse en octets. La valeur par défaut est `100 * 1024 * 1024` (100 Mo). | | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.UseCaseSensitivePaths> | Détermine si les réponses sont mises en cache sur les chemins d’accès sensibles à la casse. La valeur par défaut est `false`. |
 
 L’exemple suivant configure l’intergiciel (middleware) sur :
 
@@ -83,7 +98,7 @@ services.AddResponseCaching(options =>
 
 ## <a name="varybyquerykeys"></a>VaryByQueryKeys
 
-Lorsque vous utilisez des contrôleurs d’API Web ou MVC/Razor Pages des modèles de page, l' [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) attribut spécifie les paramètres nécessaires à la définition des en-têtes appropriés pour la mise en cache des réponses. Le seul paramètre de l' `[ResponseCache]` attribut qui requiert strictement l’intergiciel est <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute.VaryByQueryKeys> , qui ne correspond pas à un en-tête HTTP réel. Pour plus d'informations, consultez <xref:performance/caching/response#responsecache-attribute>.
+Lors de l’utilisation de contrôleurs d’API Web ou de modèles d’API MVC/Web Razor , l' [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) attribut spécifie les paramètres nécessaires à la définition des en-têtes appropriés pour la mise en cache des réponses. Le seul paramètre de l' `[ResponseCache]` attribut qui requiert strictement l’intergiciel est <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute.VaryByQueryKeys> , qui ne correspond pas à un en-tête HTTP réel. Pour plus d'informations, consultez <xref:performance/caching/response#responsecache-attribute>.
 
 Quand vous n’utilisez pas l' `[ResponseCache]` attribut, la mise en cache des réponses peut être modifiée avec `VaryByQueryKeys` . Utilisez le <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingFeature> directement à partir du [HttpContext. Features](xref:Microsoft.AspNetCore.Http.HttpContext.Features):
 
@@ -103,18 +118,22 @@ L’utilisation d’une valeur unique égale à `*` dans fait `VaryByQueryKeys` 
 Le tableau suivant fournit des informations sur les en-têtes HTTP qui affectent la mise en cache des réponses.
 
 | Header | Détails |
-| ------ | ------- |
-| `Authorization` | La réponse n’est pas mise en cache si l’en-tête existe. |
-| `Cache-Control` | L’intergiciel (middleware) prend uniquement en compte les réponses de mise en cache marquées avec la `public` directive de cache. Contrôlez la mise en cache avec les paramètres suivants :<ul><li>âge maximal</li><li>Max-&#8224; obsolète</li><li>min-frais</li><li>must-revalidate</li><li>no-cache</li><li>non-Store</li><li>uniquement-en cas de mise en cache</li><li>private</li><li>public</li><li>s-maxage</li><li>proxy-revalider&#8225;</li></ul>&#8224;si aucune limite n’est spécifiée à `max-stale` , l’intergiciel n’entreprend aucune action.<br>&#8225;`proxy-revalidate` a le même effet que `must-revalidate` .<br><br>Pour plus d’informations, consultez [RFC 7231 : Request Cache-Control directives](https://tools.ietf.org/html/rfc7234#section-5.2.1). |
-| `Pragma` | Un `Pragma: no-cache` en-tête dans la demande produit le même effet que `Cache-Control: no-cache` . Cet en-tête est substitué par les directives pertinentes dans l' `Cache-Control` en-tête, le cas échéant. Pris en compte pour la compatibilité descendante avec HTTP/1.0. |
-| `Set-Cookie` | La réponse n’est pas mise en cache si l’en-tête existe. Tout intergiciel dans le pipeline de traitement des demandes qui définit un ou plusieurs cookies empêche l’intergiciel (middleware) de mise en cache des réponses de mettre en cache la réponse (par exemple, le [fournisseur TempData basé sur les cookies](xref:fundamentals/app-state#tempdata)).  |
-| `Vary` | L' `Vary` en-tête est utilisé pour faire varier la réponse mise en cache par un autre en-tête. Par exemple, mettez en cache les réponses par encodage en incluant l' `Vary: Accept-Encoding` en-tête, qui met en cache les réponses pour les demandes avec en-têtes `Accept-Encoding: gzip` et `Accept-Encoding: text/plain` séparément. Une réponse avec une valeur d’en-tête de `*` n’est jamais stockée. |
-| `Expires` | Une réponse considérée comme périmée par cet en-tête n’est pas stockée ou récupérée, sauf si elle est remplacée par d’autres `Cache-Control` en-têtes. |
-| `If-None-Match` | La réponse complète est traitée à partir du cache si la valeur n’est pas `*` et que la `ETag` de la réponse ne correspond à aucune des valeurs fournies. Dans le cas contraire, une réponse 304 (non modifiée) est traitée. |
-| `If-Modified-Since` | Si l' `If-None-Match` en-tête n’est pas présent, une réponse complète est traitée à partir du cache si la date de réponse mise en cache est plus récente que la valeur fournie. Dans le cas contraire, une réponse *304-non modifiée* est traitée. |
-| `Date` | En cas de service à partir du cache, l' `Date` en-tête est défini par l’intergiciel (middleware) s’il n’a pas été fourni dans la réponse d’origine. |
-| `Content-Length` | En cas de service à partir du cache, l' `Content-Length` en-tête est défini par l’intergiciel (middleware) s’il n’a pas été fourni dans la réponse d’origine. |
-| `Age` | L' `Age` en-tête envoyé dans la réponse d’origine est ignoré. L’intergiciel (middleware) calcule une nouvelle valeur lors de la fourniture d’une réponse mise en cache. |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+--- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+---- | | `Authorization` | La réponse n’est pas mise en cache si l’en-tête existe. | | `Cache-Control` | L’intergiciel (middleware) prend uniquement en compte les réponses de mise en cache marquées avec la `public` directive de cache. Contrôlez la mise en cache avec les paramètres suivants :<ul><li>âge maximal</li><li>Max-&#8224; obsolète</li><li>min-frais</li><li>must-revalidate</li><li>no-cache</li><li>non-Store</li><li>uniquement-en cas de mise en cache</li><li>private</li><li>public</li><li>s-maxage</li><li>proxy-revalider&#8225;</li></ul>&#8224;si aucune limite n’est spécifiée à `max-stale` , l’intergiciel n’entreprend aucune action.<br>&#8225;`proxy-revalidate` a le même effet que `must-revalidate` .<br><br>Pour plus d’informations, consultez [RFC 7231 : Request Cache-Control directives](https://tools.ietf.org/html/rfc7234#section-5.2.1). | | `Pragma` | Un `Pragma: no-cache` en-tête dans la demande produit le même effet que `Cache-Control: no-cache` . Cet en-tête est substitué par les directives pertinentes dans l' `Cache-Control` en-tête, le cas échéant. Pris en compte pour la compatibilité descendante avec HTTP/1.0. | | `Set-Cookie` | La réponse n’est pas mise en cache si l’en-tête existe. Tout intergiciel dans le pipeline de traitement des demandes qui définit un ou plusieurs cookies empêche l’intergiciel (middleware) de mise en cache des réponses de mettre en cache la réponse (par exemple, le [fournisseur TempData basé sur les cookies](xref:fundamentals/app-state#tempdata)).  | | `Vary` | L' `Vary` en-tête est utilisé pour faire varier la réponse mise en cache par un autre en-tête. Par exemple, mettez en cache les réponses par encodage en incluant l' `Vary: Accept-Encoding` en-tête, qui met en cache les réponses pour les demandes avec en-têtes `Accept-Encoding: gzip` et `Accept-Encoding: text/plain` séparément. Une réponse avec une valeur d’en-tête de `*` n’est jamais stockée. | | `Expires` | Une réponse considérée comme périmée par cet en-tête n’est pas stockée ou récupérée, sauf si elle est remplacée par d’autres `Cache-Control` en-têtes. | | `If-None-Match` | La réponse complète est traitée à partir du cache si la valeur n’est pas `*` et que la `ETag` de la réponse ne correspond à aucune des valeurs fournies. Dans le cas contraire, une réponse 304 (non modifiée) est traitée. | | `If-Modified-Since` | Si l' `If-None-Match` en-tête n’est pas présent, une réponse complète est traitée à partir du cache si la date de réponse mise en cache est plus récente que la valeur fournie. Dans le cas contraire, une réponse *304-non modifiée* est traitée. | | `Date` | En cas de service à partir du cache, l' `Date` en-tête est défini par l’intergiciel (middleware) s’il n’a pas été fourni dans la réponse d’origine. | | `Content-Length` | En cas de service à partir du cache, l' `Content-Length` en-tête est défini par l’intergiciel (middleware) s’il n’a pas été fourni dans la réponse d’origine. | | `Age` | L' `Age` en-tête envoyé dans la réponse d’origine est ignoré. L’intergiciel (middleware) calcule une nouvelle valeur lors de la fourniture d’une réponse mise en cache. |
 
 ## <a name="caching-respects-request-cache-control-directives"></a>Mise en cache respecte les directives de contrôle de cache de demande
 
@@ -188,12 +207,12 @@ Configurez l’application pour utiliser l’intergiciel avec la <xref:Microsoft
 
 L’exemple d’application ajoute des en-têtes pour contrôler la mise en cache lors des requêtes suivantes :
 
-* [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2) &ndash; Met en cache les réponses pouvant être mises en cache pendant 10 secondes.
-* [Faire varier](https://tools.ietf.org/html/rfc7231#section-7.1.4) &ndash; Configure l’intergiciel (middleware) pour traiter une réponse mise en cache uniquement si l’en-tête [accepter-encodage](https://tools.ietf.org/html/rfc7231#section-5.3.4) des demandes suivantes correspond à celui de la demande d’origine.
+* [Cache-Control](https://tools.ietf.org/html/rfc7234#section-5.2): met en cache les réponses pouvant être mises en cache pendant 10 secondes.
+* [Variation](https://tools.ietf.org/html/rfc7231#section-7.1.4): configure l’intergiciel (middleware) pour traiter une réponse mise en cache uniquement si l’en-tête [accepter-encodage](https://tools.ietf.org/html/rfc7231#section-5.3.4) des demandes suivantes correspond à celui de la demande d’origine.
 
 [!code-csharp[](middleware/samples_snippets/2.x/AddHeaders.cs)]
 
-Les en-têtes précédents ne sont pas écrits dans la réponse et sont remplacés lorsqu’un contrôleur, une action ou une page Razor :
+Les en-têtes précédents ne sont pas écrits dans la réponse et sont remplacés lorsqu’un contrôleur, une action ou une Razor page :
 
 * A un attribut [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) . Cela s’applique même si une propriété n’est pas définie. Par exemple, si vous omettez la propriété [VaryByHeader](/aspnet/core/performance/caching/response#vary) , l’en-tête correspondant sera supprimé de la réponse.
 
@@ -207,10 +226,38 @@ L’intergiciel (middleware) de mise en cache des réponses met uniquement en ca
 Les options de mise en cache des réponses sont indiquées dans le tableau suivant.
 
 | Option | Description |
-| ------ | ----------- |
-| <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.MaximumBodySize> | Plus grande taille pouvant être mise en cache pour le corps de la réponse en octets. La valeur par défaut est `64 * 1024 * 1024` (64 Mo). |
-| <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.SizeLimit> | Taille limite de l’intergiciel (middleware) du cache de réponse en octets. La valeur par défaut est `100 * 1024 * 1024` (100 Mo). |
-| <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.UseCaseSensitivePaths> | Détermine si les réponses sont mises en cache sur les chemins d’accès sensibles à la casse. La valeur par défaut est `false`. |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+--- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------ | | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.MaximumBodySize> | Plus grande taille pouvant être mise en cache pour le corps de la réponse en octets. La valeur par défaut est `64 * 1024 * 1024` (64 Mo). | | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.SizeLimit> | Taille limite de l’intergiciel (middleware) du cache de réponse en octets. La valeur par défaut est `100 * 1024 * 1024` (100 Mo). | | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.UseCaseSensitivePaths> | Détermine si les réponses sont mises en cache sur les chemins d’accès sensibles à la casse. La valeur par défaut est `false`. |
 
 L’exemple suivant configure l’intergiciel (middleware) sur :
 
@@ -227,7 +274,7 @@ services.AddResponseCaching(options =>
 
 ## <a name="varybyquerykeys"></a>VaryByQueryKeys
 
-Lorsque vous utilisez des contrôleurs d’API Web ou MVC/Razor Pages des modèles de page, l' [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) attribut spécifie les paramètres nécessaires à la définition des en-têtes appropriés pour la mise en cache des réponses. Le seul paramètre de l' `[ResponseCache]` attribut qui requiert strictement l’intergiciel est <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute.VaryByQueryKeys> , qui ne correspond pas à un en-tête HTTP réel. Pour plus d'informations, consultez <xref:performance/caching/response#responsecache-attribute>.
+Lors de l’utilisation de contrôleurs d’API Web ou de modèles d’API MVC/Web Razor , l' [`[ResponseCache]`](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) attribut spécifie les paramètres nécessaires à la définition des en-têtes appropriés pour la mise en cache des réponses. Le seul paramètre de l' `[ResponseCache]` attribut qui requiert strictement l’intergiciel est <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute.VaryByQueryKeys> , qui ne correspond pas à un en-tête HTTP réel. Pour plus d'informations, consultez <xref:performance/caching/response#responsecache-attribute>.
 
 Quand vous n’utilisez pas l' `[ResponseCache]` attribut, la mise en cache des réponses peut être modifiée avec `VaryByQueryKeys` . Utilisez le <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingFeature> directement à partir du [HttpContext. Features](xref:Microsoft.AspNetCore.Http.HttpContext.Features):
 
@@ -247,18 +294,22 @@ L’utilisation d’une valeur unique égale à `*` dans fait `VaryByQueryKeys` 
 Le tableau suivant fournit des informations sur les en-têtes HTTP qui affectent la mise en cache des réponses.
 
 | Header | Détails |
-| ------ | ------- |
-| `Authorization` | La réponse n’est pas mise en cache si l’en-tête existe. |
-| `Cache-Control` | L’intergiciel (middleware) prend uniquement en compte les réponses de mise en cache marquées avec la `public` directive de cache. Contrôlez la mise en cache avec les paramètres suivants :<ul><li>âge maximal</li><li>Max-&#8224; obsolète</li><li>min-frais</li><li>must-revalidate</li><li>no-cache</li><li>non-Store</li><li>uniquement-en cas de mise en cache</li><li>private</li><li>public</li><li>s-maxage</li><li>proxy-revalider&#8225;</li></ul>&#8224;si aucune limite n’est spécifiée à `max-stale` , l’intergiciel n’entreprend aucune action.<br>&#8225;`proxy-revalidate` a le même effet que `must-revalidate` .<br><br>Pour plus d’informations, consultez [RFC 7231 : Request Cache-Control directives](https://tools.ietf.org/html/rfc7234#section-5.2.1). |
-| `Pragma` | Un `Pragma: no-cache` en-tête dans la demande produit le même effet que `Cache-Control: no-cache` . Cet en-tête est substitué par les directives pertinentes dans l' `Cache-Control` en-tête, le cas échéant. Pris en compte pour la compatibilité descendante avec HTTP/1.0. |
-| `Set-Cookie` | La réponse n’est pas mise en cache si l’en-tête existe. Tout intergiciel dans le pipeline de traitement des demandes qui définit un ou plusieurs cookies empêche l’intergiciel (middleware) de mise en cache des réponses de mettre en cache la réponse (par exemple, le [fournisseur TempData basé sur les cookies](xref:fundamentals/app-state#tempdata)).  |
-| `Vary` | L' `Vary` en-tête est utilisé pour faire varier la réponse mise en cache par un autre en-tête. Par exemple, mettez en cache les réponses par encodage en incluant l' `Vary: Accept-Encoding` en-tête, qui met en cache les réponses pour les demandes avec en-têtes `Accept-Encoding: gzip` et `Accept-Encoding: text/plain` séparément. Une réponse avec une valeur d’en-tête de `*` n’est jamais stockée. |
-| `Expires` | Une réponse considérée comme périmée par cet en-tête n’est pas stockée ou récupérée, sauf si elle est remplacée par d’autres `Cache-Control` en-têtes. |
-| `If-None-Match` | La réponse complète est traitée à partir du cache si la valeur n’est pas `*` et que la `ETag` de la réponse ne correspond à aucune des valeurs fournies. Dans le cas contraire, une réponse 304 (non modifiée) est traitée. |
-| `If-Modified-Since` | Si l' `If-None-Match` en-tête n’est pas présent, une réponse complète est traitée à partir du cache si la date de réponse mise en cache est plus récente que la valeur fournie. Dans le cas contraire, une réponse *304-non modifiée* est traitée. |
-| `Date` | En cas de service à partir du cache, l' `Date` en-tête est défini par l’intergiciel (middleware) s’il n’a pas été fourni dans la réponse d’origine. |
-| `Content-Length` | En cas de service à partir du cache, l' `Content-Length` en-tête est défini par l’intergiciel (middleware) s’il n’a pas été fourni dans la réponse d’origine. |
-| `Age` | L' `Age` en-tête envoyé dans la réponse d’origine est ignoré. L’intergiciel (middleware) calcule une nouvelle valeur lors de la fourniture d’une réponse mise en cache. |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+--- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+---- | | `Authorization` | La réponse n’est pas mise en cache si l’en-tête existe. | | `Cache-Control` | L’intergiciel (middleware) prend uniquement en compte les réponses de mise en cache marquées avec la `public` directive de cache. Contrôlez la mise en cache avec les paramètres suivants :<ul><li>âge maximal</li><li>Max-&#8224; obsolète</li><li>min-frais</li><li>must-revalidate</li><li>no-cache</li><li>non-Store</li><li>uniquement-en cas de mise en cache</li><li>private</li><li>public</li><li>s-maxage</li><li>proxy-revalider&#8225;</li></ul>&#8224;si aucune limite n’est spécifiée à `max-stale` , l’intergiciel n’entreprend aucune action.<br>&#8225;`proxy-revalidate` a le même effet que `must-revalidate` .<br><br>Pour plus d’informations, consultez [RFC 7231 : Request Cache-Control directives](https://tools.ietf.org/html/rfc7234#section-5.2.1). | | `Pragma` | Un `Pragma: no-cache` en-tête dans la demande produit le même effet que `Cache-Control: no-cache` . Cet en-tête est substitué par les directives pertinentes dans l' `Cache-Control` en-tête, le cas échéant. Pris en compte pour la compatibilité descendante avec HTTP/1.0. | | `Set-Cookie` | La réponse n’est pas mise en cache si l’en-tête existe. Tout intergiciel dans le pipeline de traitement des demandes qui définit un ou plusieurs cookies empêche l’intergiciel (middleware) de mise en cache des réponses de mettre en cache la réponse (par exemple, le [fournisseur TempData basé sur les cookies](xref:fundamentals/app-state#tempdata)).  | | `Vary` | L' `Vary` en-tête est utilisé pour faire varier la réponse mise en cache par un autre en-tête. Par exemple, mettez en cache les réponses par encodage en incluant l' `Vary: Accept-Encoding` en-tête, qui met en cache les réponses pour les demandes avec en-têtes `Accept-Encoding: gzip` et `Accept-Encoding: text/plain` séparément. Une réponse avec une valeur d’en-tête de `*` n’est jamais stockée. | | `Expires` | Une réponse considérée comme périmée par cet en-tête n’est pas stockée ou récupérée, sauf si elle est remplacée par d’autres `Cache-Control` en-têtes. | | `If-None-Match` | La réponse complète est traitée à partir du cache si la valeur n’est pas `*` et que la `ETag` de la réponse ne correspond à aucune des valeurs fournies. Dans le cas contraire, une réponse 304 (non modifiée) est traitée. | | `If-Modified-Since` | Si l' `If-None-Match` en-tête n’est pas présent, une réponse complète est traitée à partir du cache si la date de réponse mise en cache est plus récente que la valeur fournie. Dans le cas contraire, une réponse *304-non modifiée* est traitée. | | `Date` | En cas de service à partir du cache, l' `Date` en-tête est défini par l’intergiciel (middleware) s’il n’a pas été fourni dans la réponse d’origine. | | `Content-Length` | En cas de service à partir du cache, l' `Content-Length` en-tête est défini par l’intergiciel (middleware) s’il n’a pas été fourni dans la réponse d’origine. | | `Age` | L' `Age` en-tête envoyé dans la réponse d’origine est ignoré. L’intergiciel (middleware) calcule une nouvelle valeur lors de la fourniture d’une réponse mise en cache. |
 
 ## <a name="caching-respects-request-cache-control-directives"></a>Mise en cache respecte les directives de contrôle de cache de demande
 

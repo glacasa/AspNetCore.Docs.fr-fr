@@ -1,24 +1,11 @@
 ---
-title: Implémentation du serveur web HTTP.sys dans ASP.NET Core
-author: rick-anderson
-description: Découvrez HTTP.sys, un serveur web pour ASP.NET Core sous Windows. Basé sur le pilote en mode noyau HTTP.sys, HTTP.sys est une solution qui permet d’établir une connexion directe à Internet sans IIS ni Kestrel.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/07/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 5ff5eed1c8ad6f8863fe16e0c76ab104658ddc0c
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82769869"
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>Implémentation du serveur web HTTP.sys dans ASP.NET Core
 
@@ -91,20 +78,46 @@ Le reste de la configuration de HTTP.sys est géré par le biais des [paramètre
 **Options HTTP.sys**
 
 | Propriété | Description | Default |
-| -------- | ----------- | :-----: |
-| [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Contrôle si l’entrée/sortie synchrone est autorisée pour le `HttpContext.Request.Body` et le `HttpContext.Response.Body`. | `false` |
-| [Authentication.AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Autorise les requêtes anonymes. | `true` |
-| [Authentication.Schemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.Schemes) | Spécifie les schémas d’authentification autorisés. Peut être modifié à tout moment avant la suppression de l’écouteur. Les valeurs sont fournies par l' [énumération AuthenticationSchemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes): `Basic`, `None` `NTLM` `Kerberos`, `Negotiate`, et. | `None` |
-| [EnableResponseCaching](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.EnableResponseCaching) | Tente la mise en cache [en mode noyau](/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) pour les réponses comportant un en-tête compatible. La réponse peut ne pas inclure d’en-tête `Set-Cookie`, `Vary` ou `Pragma`. Elle doit comporter un en-tête `Cache-Control``public` et soit une valeur `shared-max-age` ou `max-age`, soit un en-tête `Expires`. | `true` |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxAccepts> | Nombre maximal d'acceptations simultanées. | 5 &times; [Environment.<br>ProcessorCount](xref:System.Environment.ProcessorCount) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxConnections> | Nombre maximum de connexions simultanées à accepter. Utilisez `-1` pour signifier l’infini, et `null` pour utiliser le paramètre du Registre qui s’applique à l’ordinateur dans son ensemble. | `null`<br>(au niveau de l’ordinateur<br>défini |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | Consultez la section <a href="#maxrequestbodysize">MaxRequestBodySize</a>. | 30 000 000 octets<br>(env. 28,6 Mo) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.RequestQueueLimit> | Nombre maximal de demandes pouvant être placées en file d'attente. | 1 000 |
-| `RequestQueueMode` | Cela indique si le serveur est responsable de la création et de la configuration de la file d’attente des demandes, ou s’il doit être attaché à une file d’attente existante.<br>La plupart des options de configuration existantes ne s’appliquent pas lors de l’attachement à une file d’attente existante. | `RequestQueueMode.Create` |
-| `RequestQueueName` | Nom de la file d’attente de demandes HTTP. sys. | `null`(File d’attente anonyme) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | Indique si les écritures dans le corps de la réponse qui échouent en raison d’une déconnexion du client doivent lever des exceptions ou se terminer normalement. | `false`<br>(se terminer normalement) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | Expose la configuration <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> de HTTP.sys, également paramétrable dans le Registre. Suivez les liens de l’API pour en savoir plus sur chaque paramètre, y compris les valeurs par défaut :<ul><li>[TimeoutManager.DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody) &ndash; Temps alloué à l’API de serveur HTTP pour décharger le corps de l’entité sur une connexion persistante.</li><li>[TimeoutManager.EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody) &ndash; Temps alloué pour que le corps de l'entité de la requête arrive.</li><li>[TimeoutManager.HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait) &ndash; Temps alloué à l’API de serveur HTTP pour analyser l’en-tête de la requête.</li><li>[TimeoutManager.IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection) &ndash; Temps alloué pour une connexion inactive.</li><li>[TimeoutManager.MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond) &ndash; Taux d’envoi minimal de la réponse.</li><li>[TimeoutManager.RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue) &ndash; Temps alloué à la demande pour rester dans la file d’attente des requêtes avant que l’application ne la récupère.</li></ul> |  |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | Spécifiez <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection> à inscrire auprès de HTTP.sys. La plus utile est [UrlPrefixCollection.Add](xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add*), qui permet d’ajouter un préfixe à la collection. Ces choix peuvent être modifiés à tout moment avant la suppression de l’écouteur. |  |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+---- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------ | :-----: | | [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Contrôler si les entrées/sorties synchrones sont autorisées pour `HttpContext.Request.Body` et `HttpContext.Response.Body` . | `false`| | [Authentication. AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Autoriser les demandes anonymes. | `true`| | [Authentication. schemas](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.Schemes) | Spécifiez les schémas d’authentification autorisés. Peut être modifié à tout moment avant la suppression de l’écouteur. Les valeurs sont fournies par l' [énumération AuthenticationSchemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes): `Basic` , `Kerberos` ,, `Negotiate` `None` et `NTLM` . | `None`| | [EnableResponseCaching](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.EnableResponseCaching) | Tentez une mise en cache [en mode noyau](/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) pour les réponses avec des en-têtes éligibles. La réponse peut ne pas inclure d’en-tête `Set-Cookie`, `Vary` ou `Pragma`. Elle doit comporter un en-tête `Cache-Control``public` et soit une valeur `shared-max-age` ou `max-age`, soit un en-tête `Expires`. | `true`| | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxAccepts> | Nombre maximal d’acceptations simultanées. | 5 &times; [environnement. <br> ProcessorCount](xref:System.Environment.ProcessorCount) | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxConnections> | Nombre maximal de connexions simultanées à accepter. Utilisez `-1` pour signifier l’infini, et `null` pour utiliser le paramètre du Registre qui s’applique à l’ordinateur dans son ensemble. | `null`<br>(au niveau de l’ordinateur<br>paramètre) | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | Consultez la section <a href="#maxrequestbodysize">MaxRequestBodySize</a> . | 30 millions octets<br>(~ 28,6 MO) | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.RequestQueueLimit> | Nombre maximal de demandes qui peuvent être mises en file d’attente. | 1000 | | `RequestQueueMode` | Cela indique si le serveur est responsable de la création et de la configuration de la file d’attente des demandes, ou s’il doit être attaché à une file d’attente existante.<br>La plupart des options de configuration existantes ne s’appliquent pas lors de l’attachement à une file d’attente existante. | `RequestQueueMode.Create`| | `RequestQueueName` | Nom de la file d’attente de demandes HTTP. sys. | `null`(File d’attente anonyme) | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | Indiquez si les écritures du corps de la réponse qui échouent en raison des déconnexions du client doivent lever des exceptions ou se terminer normalement. | `false`<br>(effectuer normalement) | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | Exposez la configuration HTTP. sys <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> , qui peut également être configurée dans le registre. Suivez les liens de l’API pour en savoir plus sur chaque paramètre, y compris les valeurs par défaut :<ul><li>[TimeoutManager. DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody): temps accordé à l’API du serveur http pour vider le corps d’entité sur une connexion persistante.</li><li>[TimeoutManager. EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody): temps autorisé pour l’arrivée du corps d’entité de la requête.</li><li>[TimeoutManager. HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait): temps accordé à l’API du serveur http pour analyser l’en-tête de la demande.</li><li>[TimeoutManager. IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection): temps autorisé pour une connexion inactive.</li><li>[TimeoutManager. MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond): taux d’envoi minimal pour la réponse.</li><li>[TimeoutManager. RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue): temps pendant lequel la demande doit rester dans la file d’attente des demandes avant que l’application la récupère.</li></ul> |  | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | Spécifiez le <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection> à inscrire auprès de http. sys. La plus utile est [UrlPrefixCollection.Add](xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add*), qui permet d’ajouter un préfixe à la collection. Ces choix peuvent être modifiés à tout moment avant la suppression de l’écouteur. |  |
 
 <a name="maxrequestbodysize"></a>
 
@@ -145,8 +158,8 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
 1. Si l’application est un [déploiement dépendant de .NET Framework](/dotnet/core/deploying/#framework-dependent-deployments-fdd), installez .NET Core, .NET Framework ou les deux (si l’application est une application .NET Core ciblant .NET Framework).
 
-   * **.NET Core** &ndash; Si l’application nécessite .NET Core, procurez-vous et exécutez le programme d’installation de **.NET Core Runtime** à partir de [Téléchargements .NET Core](https://dotnet.microsoft.com/download). N’installez pas le Kit SDK complet sur le serveur.
-   * **.NET framework** &ndash; Si l’application nécessite .NET Framework, consultez le [Guide d’installation de .NET Framework](/dotnet/framework/install/). Installez la version requise de .NET Framework. Le programme d’installation du .NET Framework le plus récent est disponible depuis la page [Téléchargements .NET Core](https://dotnet.microsoft.com/download).
+   * **.Net Core**: si l’application requiert .net Core, obtenez et exécutez le programme d’installation du **Runtime .net Core** à partir des [téléchargements .net Core](https://dotnet.microsoft.com/download). N’installez pas le Kit SDK complet sur le serveur.
+   * **.NET Framework**: si l’application requiert des .NET Framework, consultez le [Guide d’installation de .NET Framework](/dotnet/framework/install/). Installez la version requise de .NET Framework. Le programme d’installation du .NET Framework le plus récent est disponible depuis la page [Téléchargements .NET Core](https://dotnet.microsoft.com/download).
 
    Si l’application est un [déploiement autonome](/dotnet/core/deploying/#self-contained-deployments-scd), elle inclut le runtime dans son déploiement. Aucune installation de framework n’est requise sur le serveur.
 
@@ -182,8 +195,8 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`&ndash; Uniform Resource Locator qualifié complet (URL). N’utilisez pas une liaison de caractère générique. Utilisez un nom d’hôte ou une adresse IP locale valide. *L’URL doit inclure une barre oblique de fin.*
-   * `<USER>`&ndash; Spécifie le nom de l’utilisateur ou du groupe d’utilisateurs.
+   * `<URL>`: Le Uniform Resource Locator qualifié complet (URL). N’utilisez pas une liaison de caractère générique. Utilisez un nom d’hôte ou une adresse IP locale valide. *L’URL doit inclure une barre oblique de fin.*
+   * `<USER>`: Spécifie le nom d’utilisateur ou de groupe d’utilisateurs.
 
    Dans l’exemple suivant, l’adresse IP locale du serveur est `10.0.0.4` :
 
@@ -207,14 +220,14 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    netsh http add sslcert ipport=<IP>:<PORT> certhash=<THUMBPRINT> appid="{<GUID>}"
    ```
 
-   * `<IP>`&ndash; Spécifie l’adresse IP locale pour la liaison. N’utilisez pas une liaison de caractère générique. Utilisez une adresse IP valide.
-   * `<PORT>`&ndash; Spécifie le port pour la liaison.
-   * `<THUMBPRINT>`&ndash; Empreinte numérique du certificat X. 509.
-   * `<GUID>`&ndash; GUID généré par le développeur pour représenter l’application à des fins d’information.
+   * `<IP>`: Spécifie l’adresse IP locale pour la liaison. N’utilisez pas une liaison de caractère générique. Utilisez une adresse IP valide.
+   * `<PORT>`: Spécifie le port pour la liaison.
+   * `<THUMBPRINT>`: Empreinte numérique du certificat X. 509.
+   * `<GUID>`: GUID généré par le développeur pour représenter l’application à des fins d’information.
 
    À titre de référence, stockez le GUID dans l’application en tant que balise de package :
 
-   * Dans Visual Studio :
+   * Dans Visual Studio :
      * Ouvrez les propriétés du projet de l’application en cliquant avec le bouton droit sur l’application dans **l’Explorateur de solutions** et en sélectionnant **Propriétés**.
      * Sélectionnez l’onglet **Package**.
      * Entrez le GUID que vous avez créé dans le champ **Balises**.
@@ -344,18 +357,46 @@ Le reste de la configuration de HTTP.sys est géré par le biais des [paramètre
 **Options HTTP.sys**
 
 | Propriété | Description | Default |
-| -------- | ----------- | :-----: |
-| [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Contrôle si l’entrée/sortie synchrone est autorisée pour le `HttpContext.Request.Body` et le `HttpContext.Response.Body`. | `false` |
-| [Authentication.AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Autorise les requêtes anonymes. | `true` |
-| [Authentication.Schemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.Schemes) | Spécifie les schémas d’authentification autorisés. Peut être modifié à tout moment avant la suppression de l’écouteur. Les valeurs sont fournies par l' [énumération AuthenticationSchemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes): `Basic`, `None` `NTLM` `Kerberos`, `Negotiate`, et. | `None` |
-| [EnableResponseCaching](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.EnableResponseCaching) | Tente la mise en cache [en mode noyau](/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) pour les réponses comportant un en-tête compatible. La réponse peut ne pas inclure d’en-tête `Set-Cookie`, `Vary` ou `Pragma`. Elle doit comporter un en-tête `Cache-Control``public` et soit une valeur `shared-max-age` ou `max-age`, soit un en-tête `Expires`. | `true` |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxAccepts> | Nombre maximal d'acceptations simultanées. | 5 &times; [Environment.<br>ProcessorCount](xref:System.Environment.ProcessorCount) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxConnections> | Nombre maximum de connexions simultanées à accepter. Utilisez `-1` pour signifier l’infini, et `null` pour utiliser le paramètre du Registre qui s’applique à l’ordinateur dans son ensemble. | `null`<br>(au niveau de l’ordinateur<br>défini |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | Consultez la section <a href="#maxrequestbodysize">MaxRequestBodySize</a>. | 30 000 000 octets<br>(env. 28,6 Mo) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.RequestQueueLimit> | Nombre maximal de demandes pouvant être placées en file d'attente. | 1 000 |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | Indique si les écritures dans le corps de la réponse qui échouent en raison d’une déconnexion du client doivent lever des exceptions ou se terminer normalement. | `false`<br>(se terminer normalement) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | Expose la configuration <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> de HTTP.sys, également paramétrable dans le Registre. Suivez les liens de l’API pour en savoir plus sur chaque paramètre, y compris les valeurs par défaut :<ul><li>[TimeoutManager.DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody) &ndash; Temps alloué à l’API de serveur HTTP pour décharger le corps de l’entité sur une connexion persistante.</li><li>[TimeoutManager.EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody) &ndash; Temps alloué pour que le corps de l'entité de la requête arrive.</li><li>[TimeoutManager.HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait) &ndash; Temps alloué à l’API de serveur HTTP pour analyser l’en-tête de la requête.</li><li>[TimeoutManager.IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection) &ndash; Temps alloué pour une connexion inactive.</li><li>[TimeoutManager.MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond) &ndash; Taux d’envoi minimal de la réponse.</li><li>[TimeoutManager.RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue) &ndash; Temps alloué à la demande pour rester dans la file d’attente des requêtes avant que l’application ne la récupère.</li></ul> |  |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | Spécifiez <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection> à inscrire auprès de HTTP.sys. La plus utile est [UrlPrefixCollection.Add](xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add*), qui permet d’ajouter un préfixe à la collection. Ces choix peuvent être modifiés à tout moment avant la suppression de l’écouteur. |  |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+---- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------ | :-----: | | [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Contrôler si les entrées/sorties synchrones sont autorisées pour `HttpContext.Request.Body` et `HttpContext.Response.Body` . | `false`| | [Authentication. AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Autoriser les demandes anonymes. | `true`| | [Authentication. schemas](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.Schemes) | Spécifiez les schémas d’authentification autorisés. Peut être modifié à tout moment avant la suppression de l’écouteur. Les valeurs sont fournies par l' [énumération AuthenticationSchemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes): `Basic` , `Kerberos` ,, `Negotiate` `None` et `NTLM` . | `None`| | [EnableResponseCaching](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.EnableResponseCaching) | Tentez une mise en cache [en mode noyau](/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) pour les réponses avec des en-têtes éligibles. La réponse peut ne pas inclure d’en-tête `Set-Cookie`, `Vary` ou `Pragma`. Elle doit comporter un en-tête `Cache-Control``public` et soit une valeur `shared-max-age` ou `max-age`, soit un en-tête `Expires`. | `true`| | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxAccepts> | Nombre maximal d’acceptations simultanées. | 5 &times; [environnement. <br> ProcessorCount](xref:System.Environment.ProcessorCount) | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxConnections> | Nombre maximal de connexions simultanées à accepter. Utilisez `-1` pour signifier l’infini, et `null` pour utiliser le paramètre du Registre qui s’applique à l’ordinateur dans son ensemble. | `null`<br>(au niveau de l’ordinateur<br>paramètre) | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | Consultez la section <a href="#maxrequestbodysize">MaxRequestBodySize</a> . | 30 millions octets<br>(~ 28,6 MO) | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.RequestQueueLimit> | Nombre maximal de demandes qui peuvent être mises en file d’attente. | 1000 | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | Indiquez si les écritures du corps de la réponse qui échouent en raison des déconnexions du client doivent lever des exceptions ou se terminer normalement. | `false`<br>(effectuer normalement) | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | Exposez la configuration HTTP. sys <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> , qui peut également être configurée dans le registre. Suivez les liens de l’API pour en savoir plus sur chaque paramètre, y compris les valeurs par défaut :<ul><li>[TimeoutManager. DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody): temps accordé à l’API du serveur http pour vider le corps d’entité sur une connexion persistante.</li><li>[TimeoutManager. EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody): temps autorisé pour l’arrivée du corps d’entité de la requête.</li><li>[TimeoutManager. HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait): temps accordé à l’API du serveur http pour analyser l’en-tête de la demande.</li><li>[TimeoutManager. IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection): temps autorisé pour une connexion inactive.</li><li>[TimeoutManager. MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond): taux d’envoi minimal pour la réponse.</li><li>[TimeoutManager. RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue): temps pendant lequel la demande doit rester dans la file d’attente des demandes avant que l’application la récupère.</li></ul> |  | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | Spécifiez le <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection> à inscrire auprès de http. sys. La plus utile est [UrlPrefixCollection.Add](xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add*), qui permet d’ajouter un préfixe à la collection. Ces choix peuvent être modifiés à tout moment avant la suppression de l’écouteur. |  |
 
 <a name="maxrequestbodysize"></a>
 
@@ -396,8 +437,8 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
 1. Si l’application est un [déploiement dépendant de .NET Framework](/dotnet/core/deploying/#framework-dependent-deployments-fdd), installez .NET Core, .NET Framework ou les deux (si l’application est une application .NET Core ciblant .NET Framework).
 
-   * **.NET Core** &ndash; Si l’application nécessite .NET Core, procurez-vous et exécutez le programme d’installation de **.NET Core Runtime** à partir de [Téléchargements .NET Core](https://dotnet.microsoft.com/download). N’installez pas le Kit SDK complet sur le serveur.
-   * **.NET framework** &ndash; Si l’application nécessite .NET Framework, consultez le [Guide d’installation de .NET Framework](/dotnet/framework/install/). Installez la version requise de .NET Framework. Le programme d’installation du .NET Framework le plus récent est disponible depuis la page [Téléchargements .NET Core](https://dotnet.microsoft.com/download).
+   * **.Net Core**: si l’application requiert .net Core, obtenez et exécutez le programme d’installation du **Runtime .net Core** à partir des [téléchargements .net Core](https://dotnet.microsoft.com/download). N’installez pas le Kit SDK complet sur le serveur.
+   * **.NET Framework**: si l’application requiert des .NET Framework, consultez le [Guide d’installation de .NET Framework](/dotnet/framework/install/). Installez la version requise de .NET Framework. Le programme d’installation du .NET Framework le plus récent est disponible depuis la page [Téléchargements .NET Core](https://dotnet.microsoft.com/download).
 
    Si l’application est un [déploiement autonome](/dotnet/core/deploying/#self-contained-deployments-scd), elle inclut le runtime dans son déploiement. Aucune installation de framework n’est requise sur le serveur.
 
@@ -433,8 +474,8 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`&ndash; Uniform Resource Locator qualifié complet (URL). N’utilisez pas une liaison de caractère générique. Utilisez un nom d’hôte ou une adresse IP locale valide. *L’URL doit inclure une barre oblique de fin.*
-   * `<USER>`&ndash; Spécifie le nom de l’utilisateur ou du groupe d’utilisateurs.
+   * `<URL>`: Le Uniform Resource Locator qualifié complet (URL). N’utilisez pas une liaison de caractère générique. Utilisez un nom d’hôte ou une adresse IP locale valide. *L’URL doit inclure une barre oblique de fin.*
+   * `<USER>`: Spécifie le nom d’utilisateur ou de groupe d’utilisateurs.
 
    Dans l’exemple suivant, l’adresse IP locale du serveur est `10.0.0.4` :
 
@@ -458,14 +499,14 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    netsh http add sslcert ipport=<IP>:<PORT> certhash=<THUMBPRINT> appid="{<GUID>}"
    ```
 
-   * `<IP>`&ndash; Spécifie l’adresse IP locale pour la liaison. N’utilisez pas une liaison de caractère générique. Utilisez une adresse IP valide.
-   * `<PORT>`&ndash; Spécifie le port pour la liaison.
-   * `<THUMBPRINT>`&ndash; Empreinte numérique du certificat X. 509.
-   * `<GUID>`&ndash; GUID généré par le développeur pour représenter l’application à des fins d’information.
+   * `<IP>`: Spécifie l’adresse IP locale pour la liaison. N’utilisez pas une liaison de caractère générique. Utilisez une adresse IP valide.
+   * `<PORT>`: Spécifie le port pour la liaison.
+   * `<THUMBPRINT>`: Empreinte numérique du certificat X. 509.
+   * `<GUID>`: GUID généré par le développeur pour représenter l’application à des fins d’information.
 
    À titre de référence, stockez le GUID dans l’application en tant que balise de package :
 
-   * Dans Visual Studio :
+   * Dans Visual Studio :
      * Ouvrez les propriétés du projet de l’application en cliquant avec le bouton droit sur l’application dans **l’Explorateur de solutions** et en sélectionnant **Propriétés**.
      * Sélectionnez l’onglet **Package**.
      * Entrez le GUID que vous avez créé dans le champ **Balises**.
@@ -597,18 +638,46 @@ Le reste de la configuration de HTTP.sys est géré par le biais des [paramètre
 **Options HTTP.sys**
 
 | Propriété | Description | Default |
-| -------- | ----------- | :-----: |
-| [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Contrôle si l’entrée/sortie synchrone est autorisée pour le `HttpContext.Request.Body` et le `HttpContext.Response.Body`. | `true` |
-| [Authentication.AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Autorise les requêtes anonymes. | `true` |
-| [Authentication.Schemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.Schemes) | Spécifie les schémas d’authentification autorisés. Peut être modifié à tout moment avant la suppression de l’écouteur. Les valeurs sont fournies par l' [énumération AuthenticationSchemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes): `Basic`, `None` `NTLM` `Kerberos`, `Negotiate`, et. | `None` |
-| [EnableResponseCaching](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.EnableResponseCaching) | Tente la mise en cache [en mode noyau](/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) pour les réponses comportant un en-tête compatible. La réponse peut ne pas inclure d’en-tête `Set-Cookie`, `Vary` ou `Pragma`. Elle doit comporter un en-tête `Cache-Control``public` et soit une valeur `shared-max-age` ou `max-age`, soit un en-tête `Expires`. | `true` |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxAccepts> | Nombre maximal d'acceptations simultanées. | 5 &times; [Environment.<br>ProcessorCount](xref:System.Environment.ProcessorCount) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxConnections> | Nombre maximum de connexions simultanées à accepter. Utilisez `-1` pour signifier l’infini, et `null` pour utiliser le paramètre du Registre qui s’applique à l’ordinateur dans son ensemble. | `null`<br>(au niveau de l’ordinateur<br>défini |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | Consultez la section <a href="#maxrequestbodysize">MaxRequestBodySize</a>. | 30 000 000 octets<br>(env. 28,6 Mo) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.RequestQueueLimit> | Nombre maximal de demandes pouvant être placées en file d'attente. | 1 000 |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | Indique si les écritures dans le corps de la réponse qui échouent en raison d’une déconnexion du client doivent lever des exceptions ou se terminer normalement. | `false`<br>(se terminer normalement) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | Expose la configuration <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> de HTTP.sys, également paramétrable dans le Registre. Suivez les liens de l’API pour en savoir plus sur chaque paramètre, y compris les valeurs par défaut :<ul><li>[TimeoutManager.DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody) &ndash; Temps alloué à l’API de serveur HTTP pour décharger le corps de l’entité sur une connexion persistante.</li><li>[TimeoutManager.EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody) &ndash; Temps alloué pour que le corps de l'entité de la requête arrive.</li><li>[TimeoutManager.HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait) &ndash; Temps alloué à l’API de serveur HTTP pour analyser l’en-tête de la requête.</li><li>[TimeoutManager.IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection) &ndash; Temps alloué pour une connexion inactive.</li><li>[TimeoutManager.MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond) &ndash; Taux d’envoi minimal de la réponse.</li><li>[TimeoutManager.RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue) &ndash; Temps alloué à la demande pour rester dans la file d’attente des requêtes avant que l’application ne la récupère.</li></ul> |  |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | Spécifiez <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection> à inscrire auprès de HTTP.sys. La plus utile est [UrlPrefixCollection.Add](xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add*), qui permet d’ajouter un préfixe à la collection. Ces choix peuvent être modifiés à tout moment avant la suppression de l’écouteur. |  |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+---- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------ | :-----: | | [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Contrôler si les entrées/sorties synchrones sont autorisées pour `HttpContext.Request.Body` et `HttpContext.Response.Body` . | `true`| | [Authentication. AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Autoriser les demandes anonymes. | `true`| | [Authentication. schemas](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.Schemes) | Spécifiez les schémas d’authentification autorisés. Peut être modifié à tout moment avant la suppression de l’écouteur. Les valeurs sont fournies par l' [énumération AuthenticationSchemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes): `Basic` , `Kerberos` ,, `Negotiate` `None` et `NTLM` . | `None`| | [EnableResponseCaching](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.EnableResponseCaching) | Tentez une mise en cache [en mode noyau](/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) pour les réponses avec des en-têtes éligibles. La réponse peut ne pas inclure d’en-tête `Set-Cookie`, `Vary` ou `Pragma`. Elle doit comporter un en-tête `Cache-Control``public` et soit une valeur `shared-max-age` ou `max-age`, soit un en-tête `Expires`. | `true`| | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxAccepts> | Nombre maximal d’acceptations simultanées. | 5 &times; [environnement. <br> ProcessorCount](xref:System.Environment.ProcessorCount) | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxConnections> | Nombre maximal de connexions simultanées à accepter. Utilisez `-1` pour signifier l’infini, et `null` pour utiliser le paramètre du Registre qui s’applique à l’ordinateur dans son ensemble. | `null`<br>(au niveau de l’ordinateur<br>paramètre) | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | Consultez la section <a href="#maxrequestbodysize">MaxRequestBodySize</a> . | 30 millions octets<br>(~ 28,6 MO) | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.RequestQueueLimit> | Nombre maximal de demandes qui peuvent être mises en file d’attente. | 1000 | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | Indiquez si les écritures du corps de la réponse qui échouent en raison des déconnexions du client doivent lever des exceptions ou se terminer normalement. | `false`<br>(effectuer normalement) | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | Exposez la configuration HTTP. sys <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> , qui peut également être configurée dans le registre. Suivez les liens de l’API pour en savoir plus sur chaque paramètre, y compris les valeurs par défaut :<ul><li>[TimeoutManager. DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody): temps accordé à l’API du serveur http pour vider le corps d’entité sur une connexion persistante.</li><li>[TimeoutManager. EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody): temps autorisé pour l’arrivée du corps d’entité de la requête.</li><li>[TimeoutManager. HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait): temps accordé à l’API du serveur http pour analyser l’en-tête de la demande.</li><li>[TimeoutManager. IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection): temps autorisé pour une connexion inactive.</li><li>[TimeoutManager. MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond): taux d’envoi minimal pour la réponse.</li><li>[TimeoutManager. RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue): temps pendant lequel la demande doit rester dans la file d’attente des demandes avant que l’application la récupère.</li></ul> |  | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | Spécifiez le <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection> à inscrire auprès de http. sys. La plus utile est [UrlPrefixCollection.Add](xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add*), qui permet d’ajouter un préfixe à la collection. Ces choix peuvent être modifiés à tout moment avant la suppression de l’écouteur. |  |
 
 <a name="maxrequestbodysize"></a>
 
@@ -649,8 +718,8 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
 1. Si l’application est un [déploiement dépendant de .NET Framework](/dotnet/core/deploying/#framework-dependent-deployments-fdd), installez .NET Core, .NET Framework ou les deux (si l’application est une application .NET Core ciblant .NET Framework).
 
-   * **.NET Core** &ndash; Si l’application nécessite .NET Core, procurez-vous et exécutez le programme d’installation de **.NET Core Runtime** à partir de [Téléchargements .NET Core](https://dotnet.microsoft.com/download). N’installez pas le Kit SDK complet sur le serveur.
-   * **.NET framework** &ndash; Si l’application nécessite .NET Framework, consultez le [Guide d’installation de .NET Framework](/dotnet/framework/install/). Installez la version requise de .NET Framework. Le programme d’installation du .NET Framework le plus récent est disponible depuis la page [Téléchargements .NET Core](https://dotnet.microsoft.com/download).
+   * **.Net Core**: si l’application requiert .net Core, obtenez et exécutez le programme d’installation du **Runtime .net Core** à partir des [téléchargements .net Core](https://dotnet.microsoft.com/download). N’installez pas le Kit SDK complet sur le serveur.
+   * **.NET Framework**: si l’application requiert des .NET Framework, consultez le [Guide d’installation de .NET Framework](/dotnet/framework/install/). Installez la version requise de .NET Framework. Le programme d’installation du .NET Framework le plus récent est disponible depuis la page [Téléchargements .NET Core](https://dotnet.microsoft.com/download).
 
    Si l’application est un [déploiement autonome](/dotnet/core/deploying/#self-contained-deployments-scd), elle inclut le runtime dans son déploiement. Aucune installation de framework n’est requise sur le serveur.
 
@@ -686,8 +755,8 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`&ndash; Uniform Resource Locator qualifié complet (URL). N’utilisez pas une liaison de caractère générique. Utilisez un nom d’hôte ou une adresse IP locale valide. *L’URL doit inclure une barre oblique de fin.*
-   * `<USER>`&ndash; Spécifie le nom de l’utilisateur ou du groupe d’utilisateurs.
+   * `<URL>`: Le Uniform Resource Locator qualifié complet (URL). N’utilisez pas une liaison de caractère générique. Utilisez un nom d’hôte ou une adresse IP locale valide. *L’URL doit inclure une barre oblique de fin.*
+   * `<USER>`: Spécifie le nom d’utilisateur ou de groupe d’utilisateurs.
 
    Dans l’exemple suivant, l’adresse IP locale du serveur est `10.0.0.4` :
 
@@ -711,14 +780,14 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    netsh http add sslcert ipport=<IP>:<PORT> certhash=<THUMBPRINT> appid="{<GUID>}"
    ```
 
-   * `<IP>`&ndash; Spécifie l’adresse IP locale pour la liaison. N’utilisez pas une liaison de caractère générique. Utilisez une adresse IP valide.
-   * `<PORT>`&ndash; Spécifie le port pour la liaison.
-   * `<THUMBPRINT>`&ndash; Empreinte numérique du certificat X. 509.
-   * `<GUID>`&ndash; GUID généré par le développeur pour représenter l’application à des fins d’information.
+   * `<IP>`: Spécifie l’adresse IP locale pour la liaison. N’utilisez pas une liaison de caractère générique. Utilisez une adresse IP valide.
+   * `<PORT>`: Spécifie le port pour la liaison.
+   * `<THUMBPRINT>`: Empreinte numérique du certificat X. 509.
+   * `<GUID>`: GUID généré par le développeur pour représenter l’application à des fins d’information.
 
    À titre de référence, stockez le GUID dans l’application en tant que balise de package :
 
-   * Dans Visual Studio :
+   * Dans Visual Studio :
      * Ouvrez les propriétés du projet de l’application en cliquant avec le bouton droit sur l’application dans **l’Explorateur de solutions** et en sélectionnant **Propriétés**.
      * Sélectionnez l’onglet **Package**.
      * Entrez le GUID que vous avez créé dans le champ **Balises**.
@@ -850,18 +919,46 @@ Le reste de la configuration de HTTP.sys est géré par le biais des [paramètre
 **Options HTTP.sys**
 
 | Propriété | Description | Default |
-| -------- | ----------- | :-----: |
-| [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Contrôle si l’entrée/sortie synchrone est autorisée pour le `HttpContext.Request.Body` et le `HttpContext.Response.Body`. | `true` |
-| [Authentication.AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Autorise les requêtes anonymes. | `true` |
-| [Authentication.Schemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.Schemes) | Spécifie les schémas d’authentification autorisés. Peut être modifié à tout moment avant la suppression de l’écouteur. Les valeurs sont fournies par l' [énumération AuthenticationSchemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes): `Basic`, `None` `NTLM` `Kerberos`, `Negotiate`, et. | `None` |
-| [EnableResponseCaching](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.EnableResponseCaching) | Tente la mise en cache [en mode noyau](/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) pour les réponses comportant un en-tête compatible. La réponse peut ne pas inclure d’en-tête `Set-Cookie`, `Vary` ou `Pragma`. Elle doit comporter un en-tête `Cache-Control``public` et soit une valeur `shared-max-age` ou `max-age`, soit un en-tête `Expires`. | `true` |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxAccepts> | Nombre maximal d'acceptations simultanées. | 5 &times; [Environment.<br>ProcessorCount](xref:System.Environment.ProcessorCount) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxConnections> | Nombre maximum de connexions simultanées à accepter. Utilisez `-1` pour signifier l’infini, et `null` pour utiliser le paramètre du Registre qui s’applique à l’ordinateur dans son ensemble. | `null`<br>(au niveau de l’ordinateur<br>défini |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | Consultez la section <a href="#maxrequestbodysize">MaxRequestBodySize</a>. | 30 000 000 octets<br>(env. 28,6 Mo) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.RequestQueueLimit> | Nombre maximal de demandes pouvant être placées en file d'attente. | 1 000 |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | Indique si les écritures dans le corps de la réponse qui échouent en raison d’une déconnexion du client doivent lever des exceptions ou se terminer normalement. | `false`<br>(se terminer normalement) |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | Expose la configuration <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> de HTTP.sys, également paramétrable dans le Registre. Suivez les liens de l’API pour en savoir plus sur chaque paramètre, y compris les valeurs par défaut :<ul><li>[TimeoutManager.DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody) &ndash; Temps alloué à l’API de serveur HTTP pour décharger le corps de l’entité sur une connexion persistante.</li><li>[TimeoutManager.EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody) &ndash; Temps alloué pour que le corps de l'entité de la requête arrive.</li><li>[TimeoutManager.HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait) &ndash; Temps alloué à l’API de serveur HTTP pour analyser l’en-tête de la requête.</li><li>[TimeoutManager.IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection) &ndash; Temps alloué pour une connexion inactive.</li><li>[TimeoutManager.MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond) &ndash; Taux d’envoi minimal de la réponse.</li><li>[TimeoutManager.RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue) &ndash; Temps alloué à la demande pour rester dans la file d’attente des requêtes avant que l’application ne la récupère.</li></ul> |  |
-| <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | Spécifiez <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection> à inscrire auprès de HTTP.sys. La plus utile est [UrlPrefixCollection.Add](xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add*), qui permet d’ajouter un préfixe à la collection. Ces choix peuvent être modifiés à tout moment avant la suppression de l’écouteur. |  |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+---- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------ | :-----: | | [AllowSynchronousIO](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.AllowSynchronousIO) | Contrôler si les entrées/sorties synchrones sont autorisées pour `HttpContext.Request.Body` et `HttpContext.Response.Body` . | `true`| | [Authentication. AllowAnonymous](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.AllowAnonymous) | Autoriser les demandes anonymes. | `true`| | [Authentication. schemas](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationManager.Schemes) | Spécifiez les schémas d’authentification autorisés. Peut être modifié à tout moment avant la suppression de l’écouteur. Les valeurs sont fournies par l' [énumération AuthenticationSchemes](xref:Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes): `Basic` , `Kerberos` ,, `Negotiate` `None` et `NTLM` . | `None`| | [EnableResponseCaching](xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.EnableResponseCaching) | Tentez une mise en cache [en mode noyau](/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) pour les réponses avec des en-têtes éligibles. La réponse peut ne pas inclure d’en-tête `Set-Cookie`, `Vary` ou `Pragma`. Elle doit comporter un en-tête `Cache-Control``public` et soit une valeur `shared-max-age` ou `max-age`, soit un en-tête `Expires`. | `true`| | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxAccepts> | Nombre maximal d’acceptations simultanées. | 5 &times; [environnement. <br> ProcessorCount](xref:System.Environment.ProcessorCount) | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxConnections> | Nombre maximal de connexions simultanées à accepter. Utilisez `-1` pour signifier l’infini, et `null` pour utiliser le paramètre du Registre qui s’applique à l’ordinateur dans son ensemble. | `null`<br>(au niveau de l’ordinateur<br>paramètre) | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | Consultez la section <a href="#maxrequestbodysize">MaxRequestBodySize</a> . | 30 millions octets<br>(~ 28,6 MO) | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.RequestQueueLimit> | Nombre maximal de demandes qui peuvent être mises en file d’attente. | 1000 | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | Indiquez si les écritures du corps de la réponse qui échouent en raison des déconnexions du client doivent lever des exceptions ou se terminer normalement. | `false`<br>(effectuer normalement) | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | Exposez la configuration HTTP. sys <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> , qui peut également être configurée dans le registre. Suivez les liens de l’API pour en savoir plus sur chaque paramètre, y compris les valeurs par défaut :<ul><li>[TimeoutManager. DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody): temps accordé à l’API du serveur http pour vider le corps d’entité sur une connexion persistante.</li><li>[TimeoutManager. EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody): temps autorisé pour l’arrivée du corps d’entité de la requête.</li><li>[TimeoutManager. HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait): temps accordé à l’API du serveur http pour analyser l’en-tête de la demande.</li><li>[TimeoutManager. IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection): temps autorisé pour une connexion inactive.</li><li>[TimeoutManager. MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond): taux d’envoi minimal pour la réponse.</li><li>[TimeoutManager. RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue): temps pendant lequel la demande doit rester dans la file d’attente des demandes avant que l’application la récupère.</li></ul> |  | | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | Spécifiez le <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection> à inscrire auprès de http. sys. La plus utile est [UrlPrefixCollection.Add](xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add*), qui permet d’ajouter un préfixe à la collection. Ces choix peuvent être modifiés à tout moment avant la suppression de l’écouteur. |  |
 
 <a name="maxrequestbodysize"></a>
 
@@ -902,8 +999,8 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
 1. Si l’application est un [déploiement dépendant de .NET Framework](/dotnet/core/deploying/#framework-dependent-deployments-fdd), installez .NET Core, .NET Framework ou les deux (si l’application est une application .NET Core ciblant .NET Framework).
 
-   * **.NET Core** &ndash; Si l’application nécessite .NET Core, procurez-vous et exécutez le programme d’installation de **.NET Core Runtime** à partir de [Téléchargements .NET Core](https://dotnet.microsoft.com/download). N’installez pas le Kit SDK complet sur le serveur.
-   * **.NET framework** &ndash; Si l’application nécessite .NET Framework, consultez le [Guide d’installation de .NET Framework](/dotnet/framework/install/). Installez la version requise de .NET Framework. Le programme d’installation du .NET Framework le plus récent est disponible depuis la page [Téléchargements .NET Core](https://dotnet.microsoft.com/download).
+   * **.Net Core**: si l’application requiert .net Core, obtenez et exécutez le programme d’installation du **Runtime .net Core** à partir des [téléchargements .net Core](https://dotnet.microsoft.com/download). N’installez pas le Kit SDK complet sur le serveur.
+   * **.NET Framework**: si l’application requiert des .NET Framework, consultez le [Guide d’installation de .NET Framework](/dotnet/framework/install/). Installez la version requise de .NET Framework. Le programme d’installation du .NET Framework le plus récent est disponible depuis la page [Téléchargements .NET Core](https://dotnet.microsoft.com/download).
 
    Si l’application est un [déploiement autonome](/dotnet/core/deploying/#self-contained-deployments-scd), elle inclut le runtime dans son déploiement. Aucune installation de framework n’est requise sur le serveur.
 
@@ -939,8 +1036,8 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    netsh http add urlacl url=<URL> user=<USER>
    ```
 
-   * `<URL>`&ndash; Uniform Resource Locator qualifié complet (URL). N’utilisez pas une liaison de caractère générique. Utilisez un nom d’hôte ou une adresse IP locale valide. *L’URL doit inclure une barre oblique de fin.*
-   * `<USER>`&ndash; Spécifie le nom de l’utilisateur ou du groupe d’utilisateurs.
+   * `<URL>`: Le Uniform Resource Locator qualifié complet (URL). N’utilisez pas une liaison de caractère générique. Utilisez un nom d’hôte ou une adresse IP locale valide. *L’URL doit inclure une barre oblique de fin.*
+   * `<USER>`: Spécifie le nom d’utilisateur ou de groupe d’utilisateurs.
 
    Dans l’exemple suivant, l’adresse IP locale du serveur est `10.0.0.4` :
 
@@ -964,14 +1061,14 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    netsh http add sslcert ipport=<IP>:<PORT> certhash=<THUMBPRINT> appid="{<GUID>}"
    ```
 
-   * `<IP>`&ndash; Spécifie l’adresse IP locale pour la liaison. N’utilisez pas une liaison de caractère générique. Utilisez une adresse IP valide.
-   * `<PORT>`&ndash; Spécifie le port pour la liaison.
-   * `<THUMBPRINT>`&ndash; Empreinte numérique du certificat X. 509.
-   * `<GUID>`&ndash; GUID généré par le développeur pour représenter l’application à des fins d’information.
+   * `<IP>`: Spécifie l’adresse IP locale pour la liaison. N’utilisez pas une liaison de caractère générique. Utilisez une adresse IP valide.
+   * `<PORT>`: Spécifie le port pour la liaison.
+   * `<THUMBPRINT>`: Empreinte numérique du certificat X. 509.
+   * `<GUID>`: GUID généré par le développeur pour représenter l’application à des fins d’information.
 
    À titre de référence, stockez le GUID dans l’application en tant que balise de package :
 
-   * Dans Visual Studio :
+   * Dans Visual Studio :
      * Ouvrez les propriétés du projet de l’application en cliquant avec le bouton droit sur l’application dans **l’Explorateur de solutions** et en sélectionnant **Propriétés**.
      * Sélectionnez l’onglet **Package**.
      * Entrez le GUID que vous avez créé dans le champ **Balises**.

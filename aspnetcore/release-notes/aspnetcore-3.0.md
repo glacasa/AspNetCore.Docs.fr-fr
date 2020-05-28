@@ -1,23 +1,11 @@
 ---
-title: Nouveautés de ASP.NET Core 3,0
-author: rick-anderson
-description: Découvrez les nouvelles fonctionnalités de ASP.NET Core 3,0.
-ms.author: riande
-ms.custom: mvc
-ms.date: 12/05/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: aspnetcore-3.0
-ms.openlocfilehash: aa0b2b51632cff729449018f9823c38cc26ce612
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774091"
+titre : Auteur : Description : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>Nouveautés de ASP.NET Core 3,0
 
@@ -33,19 +21,19 @@ Blazorest une nouvelle infrastructure dans ASP.NET Core pour la création d’un
 
 Blazorscénarios pris en charge par l’infrastructure :
 
-* Composants de l’interface utilisateurRazor réutilisables (composants)
+* Composants de l’interface utilisateur réutilisables ( Razor composants)
 * Routage côté client
 * Dispositions des composants
 * Prise en charge de l’injection de dépendances
 * Formulaires et validation
-* Créer des bibliothèques de Razor composants avec des bibliothèques de classes
+* Créer des bibliothèques de composants avec des Razor bibliothèques de classes
 * Interopérabilité JavaScript
 
-Pour plus d’informations, consultez <xref:blazor/index>.
+Pour plus d'informations, consultez <xref:blazor/index>.
 
 ### <a name="blazor-server"></a>BlazorServeurs
 
-Blazordissocie la logique de rendu des composants de l’application des mises à jour de l’interface utilisateur. BlazorLe serveur prend en charge Razor l’hébergement de composants sur le serveur dans une application ASP.net core. Les mises à jour de l’interface utilisateur SignalR sont gérées via une connexion. BlazorLe serveur est pris en charge dans ASP.NET Core 3,0.
+Blazordissocie la logique de rendu des composants de l’application des mises à jour de l’interface utilisateur. BlazorLe serveur prend en charge Razor l’hébergement de composants sur le serveur dans une application ASP.net core. Les mises à jour de l’interface utilisateur sont gérées via une SignalR connexion. BlazorLe serveur est pris en charge dans ASP.NET Core 3,0.
 
 ### <a name="blazor-webassembly-preview"></a>BlazorWebassembly (version préliminaire)
 
@@ -55,7 +43,7 @@ Blazorles applications peuvent également être exécutées directement dans le 
 
 Blazorles applications sont générées à partir de composants. Les composants sont des blocs autonomes de l’interface utilisateur (IU), tels qu’une page, une boîte de dialogue ou un formulaire. Les composants sont des classes .NET normales qui définissent la logique de rendu de l’interface utilisateur et les gestionnaires d’événements côté client. Vous pouvez créer des applications Web riches et interactives sans JavaScript.
 
-Les composants Blazor dans sont généralement créés à Razor l’aide de la syntaxe, un mélange naturel de code HTML et C#. Razorles composants sont similaires Razor aux vues pages et MVC dans le sens où Razorils utilisent tous les deux. Contrairement aux pages et aux vues, qui sont basées sur un modèle de requête-réponse, les composants sont utilisés spécifiquement pour gérer la composition de l’interface utilisateur.
+Les composants dans Blazor sont généralement créés à l’aide de Razor la syntaxe, un mélange naturel de code HTML et C#. Razorles composants sont similaires aux Razor vues pages et MVC dans le sens où ils utilisent tous les deux Razor . Contrairement aux pages et aux vues, qui sont basées sur un modèle de requête-réponse, les composants sont utilisés spécifiquement pour gérer la composition de l’interface utilisateur.
 
 ## <a name="grpc"></a>gRPC
 
@@ -76,17 +64,17 @@ Les composants Blazor dans sont généralement créés à Razor l’aide de la s
 
 la fonctionnalité gRPC dans ASP.NET Core 3,0 comprend les éléments suivants :
 
-* [GRPC. AspNetCore](https://www.nuget.org/packages/Grpc.AspNetCore) &ndash; un framework ASP.net Core pour l’hébergement des services GRPC. gRPC sur ASP.NET Core s’intègre aux fonctionnalités de ASP.NET Core standard, telles que la journalisation, l’injection de dépendances, l’authentification et l’autorisation.
-* [GRPC .net. client](https://www.nuget.org/packages/Grpc.Net.Client) &ndash; , client GRPC pour .net Core, qui s’appuie sur `HttpClient`ce qui vous est familier.
-* [GRPC .net. ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory) &ndash; GRPC intégration du client `HttpClientFactory`avec.
+* [GRPC. AspNetCore](https://www.nuget.org/packages/Grpc.AspNetCore): infrastructure ASP.net Core pour l’hébergement des services GRPC. gRPC sur ASP.NET Core s’intègre aux fonctionnalités de ASP.NET Core standard, telles que la journalisation, l’injection de dépendances, l’authentification et l’autorisation.
+* [GRPC .net. client](https://www.nuget.org/packages/Grpc.Net.Client): client GRPC pour .net core qui s’appuie sur ce qui vous est familier `HttpClient` .
+* [GRPC .net. ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory): intégration du client GRPC à `HttpClientFactory` .
 
-Pour plus d’informations, consultez <xref:grpc/index>.
+Pour plus d'informations, consultez <xref:grpc/index>.
 
 ## SignalR
 
-Consultez [mise SignalR à jour du code](xref:migration/22-to-30#signalr) pour obtenir des instructions de migration. SignalRutilise `System.Text.Json` à présent pour sérialiser/désérialiser les messages JSON. Consultez [basculer vers Newtonsoft. JSON](xref:migration/22-to-30#switch-to-newtonsoftjson) pour obtenir des instructions `Newtonsoft.Json`sur la restauration du sérialiseur.
+Consultez [mise à jour du SignalR code](xref:migration/22-to-30#signalr) pour obtenir des instructions de migration. SignalRutilise `System.Text.Json` à présent pour sérialiser/désérialiser les messages JSON. Consultez [basculer vers Newtonsoft. JSON](xref:migration/22-to-30#switch-to-newtonsoftjson) pour obtenir des instructions sur la restauration du `Newtonsoft.Json` sérialiseur.
 
-Dans les clients JavaScript et .NET pour SignalR, la prise en charge a été ajoutée pour la reconnexion automatique. Par défaut, le client tente de se reconnecter immédiatement, puis de réessayer au bout de 2, 10 et 30 secondes si nécessaire. Si le client se reconnecte avec succès, il reçoit un nouvel ID de connexion. La reconnexion automatique est opt-in :
+Dans les clients JavaScript et .NET pour SignalR , la prise en charge a été ajoutée pour la reconnexion automatique. Par défaut, le client tente de se reconnecter immédiatement, puis de réessayer au bout de 2, 10 et 30 secondes si nécessaire. Si le client se reconnecte avec succès, il reçoit un nouvel ID de connexion. La reconnexion automatique est opt-in :
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
@@ -111,7 +99,7 @@ Si la reconnexion échoue après le dernier intervalle de reconnexion :
 
 Lors des tentatives de reconnexion, mettez à jour l’interface utilisateur de l’application pour notifier l’utilisateur que la reconnexion est tentée.
 
-Pour fournir des commentaires sur l’interface utilisateur lorsque la connexion SignalR est interrompue, l’API cliente a été développée pour inclure les gestionnaires d’événements suivants :
+Pour fournir des commentaires sur l’interface utilisateur lorsque la connexion est interrompue, l' SignalR API cliente a été développée pour inclure les gestionnaires d’événements suivants :
 
 * `onreconnecting`: Donne aux développeurs la possibilité de désactiver l’interface utilisateur ou de laisser les utilisateurs savoir que l’application est hors connexion.
 * `onreconnected`: Donne aux développeurs la possibilité de mettre à jour l’interface utilisateur une fois la connexion rétablie.
@@ -138,7 +126,7 @@ connection.onreconnected((connectionId) => {
 });
 ```
 
-SignalR3,0 et versions ultérieures fournissent une ressource personnalisée pour les gestionnaires d’autorisations lorsqu’une méthode de concentrateur requiert une autorisation. La ressource est une instance de `HubInvocationContext`. Le `HubInvocationContext` comprend les éléments suivants :
+SignalR3,0 et versions ultérieures fournissent une ressource personnalisée pour les gestionnaires d’autorisations lorsqu’une méthode de concentrateur requiert une autorisation. La ressource est une instance de `HubInvocationContext` . Le `HubInvocationContext` comprend les éléments suivants :
 
 * `HubCallerContext`
 * Nom de la méthode de concentrateur appelée.
@@ -180,15 +168,15 @@ public class DomainRestrictedRequirement :
 }
 ```
 
-Dans le code précédent, `DomainRestrictedRequirement` sert de personnalisé `IAuthorizationRequirement`. Étant donné `HubInvocationContext` que le paramètre de ressource est passé, la logique interne peut :
+Dans le code précédent, `DomainRestrictedRequirement` sert de personnalisé `IAuthorizationRequirement` . Étant donné que le `HubInvocationContext` paramètre de ressource est passé, la logique interne peut :
 
 * Inspectez le contexte dans lequel le Hub est appelé.
 * Prendre des décisions pour permettre à l’utilisateur d’exécuter des méthodes de concentrateur individuelles.
 
-Les méthodes de concentrateur individuelles peuvent être marquées avec le nom de la stratégie vérifiée par le code au moment de l’exécution. À mesure que les clients tentent d’appeler des méthodes `DomainRestrictedRequirement` de concentrateur individuelles, le gestionnaire exécute et contrôle l’accès aux méthodes. En fonction de la façon `DomainRestrictedRequirement` dont les contrôles accèdent à :
+Les méthodes de concentrateur individuelles peuvent être marquées avec le nom de la stratégie vérifiée par le code au moment de l’exécution. À mesure que les clients tentent d’appeler des méthodes de concentrateur individuelles, le `DomainRestrictedRequirement` Gestionnaire exécute et contrôle l’accès aux méthodes. En fonction de la façon dont les `DomainRestrictedRequirement` contrôles accèdent à :
 
 * Tous les utilisateurs connectés peuvent appeler la `SendMessage` méthode.
-* Seuls les utilisateurs qui se sont connectés avec `@jabbr.net` une adresse de messagerie peuvent afficher les historiques des utilisateurs.
+* Seuls les utilisateurs qui se sont connectés avec une `@jabbr.net` adresse de messagerie peuvent afficher les historiques des utilisateurs.
 * Seuls `bob42@jabbr.net` les utilisateurs peuvent être interdits dans la salle de conversation.
 
 ```csharp
@@ -211,7 +199,7 @@ public class ChatHub : Hub
 }
 ```
 
-La création `DomainRestricted` de la stratégie peut impliquer :
+La création de la `DomainRestricted` stratégie peut impliquer :
 
 * Dans *Startup.cs*, ajout de la nouvelle stratégie.
 * Fournissez la `DomainRestrictedRequirement` spécification personnalisée sous la forme d’un paramètre.
@@ -237,7 +225,7 @@ app.UseSignalR(routes =>
 });
 ```
 
-Dans la version précédente, les développeurs devaient relier des contrôleurs Razor , des pages et des concentrateurs à différents emplacements. La connexion explicite produit une série de segments de routage quasiment identiques :
+Dans la version précédente, les développeurs devaient relier des contrôleurs, des Razor pages et des concentrateurs à différents emplacements. La connexion explicite produit une série de segments de routage quasiment identiques :
 
 ```csharp
 app.UseSignalR(routes =>
@@ -251,7 +239,7 @@ app.UseRouting(routes =>
 });
 ```
 
-SignalR3,0 hubs peuvent être routés via le routage de point de terminaison. Avec le routage de point de terminaison, tous les routages peuvent généralement être configurés dans `UseRouting`:
+SignalR3,0 hubs peuvent être routés via le routage de point de terminaison. Avec le routage de point de terminaison, tous les routages peuvent généralement être configurés dans `UseRouting` :
 
 ```csharp
 app.UseRouting(routes =>
@@ -263,7 +251,7 @@ app.UseRouting(routes =>
 
 ASP.NET Core 3,0 SignalR ajouté :
 
-Diffusion en continu entre le client et le serveur. Avec la diffusion en continu client à serveur, les méthodes côté serveur peuvent prendre des instances d' `IAsyncEnumerable<T>` un `ChannelReader<T>`ou d’un. Dans l’exemple C# suivant, la `UploadStream` méthode sur le Hub reçoit un flux de chaînes du client :
+Diffusion en continu entre le client et le serveur. Avec la diffusion en continu client à serveur, les méthodes côté serveur peuvent prendre des instances d’un ou d’un `IAsyncEnumerable<T>` `ChannelReader<T>` . Dans l’exemple C# suivant, la `UploadStream` méthode sur le Hub reçoit un flux de chaînes du client :
 
 ```csharp
 public async Task UploadStream(IAsyncEnumerable<string> stream)
@@ -275,9 +263,9 @@ public async Task UploadStream(IAsyncEnumerable<string> stream)
 }
 ```
 
-Les applications clientes .NET peuvent passer `IAsyncEnumerable<T>` une `ChannelReader<T>` instance ou en `stream` tant qu’argument `UploadStream` de la méthode de concentrateur ci-dessus.
+Les applications clientes .NET peuvent passer `IAsyncEnumerable<T>` une `ChannelReader<T>` instance ou en tant qu' `stream` argument de la `UploadStream` méthode de concentrateur ci-dessus.
 
-Une fois `for` que la boucle est terminée et que la fonction locale se termine, l’exécution du flux est envoyée :
+Une fois que la `for` boucle est terminée et que la fonction locale se termine, l’exécution du flux est envoyée :
 
 ```csharp
 async IAsyncEnumerable<string> clientStreamData()
@@ -292,7 +280,7 @@ async IAsyncEnumerable<string> clientStreamData()
 await connection.SendAsync("UploadStream", clientStreamData());
 ```
 
-Les applications clientes JavaScript SignalR `Subject` utilisent le (ou un [objet RxJS](https://rxjs.dev/api/index/class/Subject)) `stream` pour l’argument `UploadStream` de la méthode de concentrateur ci-dessus.
+Les applications clientes JavaScript utilisent le SignalR `Subject` (ou un [objet RxJS](https://rxjs.dev/api/index/class/Subject)) pour l' `stream` argument de la `UploadStream` méthode de concentrateur ci-dessus.
 
 ```javascript
 let subject = new signalR.Subject();
@@ -310,20 +298,20 @@ subject.complete();
 
 ## <a name="new-json-serialization"></a>Nouvelle sérialisation JSON
 
-ASP.NET Core 3,0 utilise <xref:System.Text.Json> désormais par défaut pour la sérialisation JSON :
+ASP.NET Core 3,0 utilise désormais par <xref:System.Text.Json> défaut pour la SÉRIALISATION JSON :
 
 * Lit et écrit JSON de manière asynchrone.
 * Est optimisé pour le texte UTF-8.
-* En général, performances `Newtonsoft.Json`supérieures à.
+* En général, performances supérieures à `Newtonsoft.Json` .
 
 Pour ajouter Json.NET à ASP.NET Core 3,0, consultez [Ajouter la prise en charge du format JSON basé sur Newtonsoft. JSON](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support).
 
 ## <a name="new-razor-directives"></a>Nouvelles Razor directives
 
-La liste suivante contient de Razor nouvelles directives :
+La liste suivante contient de nouvelles Razor directives :
 
-* [`@attribute`](xref:mvc/views/razor#attribute)&ndash; La `@attribute` directive applique l’attribut donné à la classe de la page ou de la vue générée. Par exemple : `@attribute [Authorize]`.
-* [`@implements`](xref:mvc/views/razor#implements)&ndash; La `@implements` directive implémente une interface pour la classe générée. Par exemple : `@implements IDisposable`.
+* [`@attribute`](xref:mvc/views/razor#attribute): La `@attribute` directive applique l’attribut donné à la classe de la page ou de la vue générée. Par exemple : `@attribute [Authorize]`.
+* [`@implements`](xref:mvc/views/razor#implements): La `@implements` directive implémente une interface pour la classe générée. Par exemple : `@implements IDisposable`.
 
 ## <a name="identityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4 prend en charge l’authentification et l’autorisation pour les API Web et SPAs
 
@@ -343,8 +331,8 @@ Pour plus d’informations, consultez [la documentation de IdentityServer4](http
 L’authentification par certificat requiert :
 
 * Configuration du serveur pour accepter les certificats.
-* Ajout de l’intergiciel (middleware `Startup.Configure`) d’authentification dans.
-* Ajout du service d’authentification par `Startup.ConfigureServices`certificat dans.
+* Ajout de l’intergiciel (middleware) d’authentification dans `Startup.Configure` .
+* Ajout du service d’authentification par certificat dans `Startup.ConfigureServices` .
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -368,7 +356,7 @@ Les options d’authentification par certificat incluent la possibilité d’eff
 * Vérifiez la révocation des certificats.
 * Vérifiez que le certificat offerts contient les indicateurs d’utilisation appropriés.
 
-Un principal d’utilisateur par défaut est construit à partir des propriétés du certificat. Le principal d’utilisateur contient un événement qui permet d’ajouter ou de remplacer le principal. Pour plus d’informations, consultez <xref:security/authentication/certauth>.
+Un principal d’utilisateur par défaut est construit à partir des propriétés du certificat. Le principal d’utilisateur contient un événement qui permet d’ajouter ou de remplacer le principal. Pour plus d'informations, consultez <xref:security/authentication/certauth>.
 
 [L’authentification Windows](/windows-server/security/windows-authentication/windows-authentication-overview) a été étendue sur Linux et MacOS. Dans les versions précédentes, l’authentification Windows était limitée à [IIS](xref:host-and-deploy/iis/index) et [HttpSys](xref:fundamentals/servers/httpsys). Dans ASP.NET Core 3,0, [Kestrel](xref:fundamentals/servers/kestrel) a la possibilité d’utiliser Negotiate, [Kerberos](/windows-server/security/kerberos/kerberos-authentication-overview)et [NTLM sur Windows](/windows-server/security/kerberos/ntlm-overview), Linux et MacOS pour les hôtes joints à un domaine Windows. La prise en charge Kestrel de ces schémas d’authentification est assurée par le package [NuGet Microsoft. AspNetCore. Authentication. Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) . Comme pour les autres services d’authentification, configurez l’authentification pour l’ensemble de l’application, puis configurez le service :
 
@@ -394,46 +382,46 @@ Configuration requise pour l’ordinateur hôte :
   * Les noms de principal du service doivent être créés pour le processus Web.
   * Les [fichiers keytab](https://blogs.technet.microsoft.com/pie/2018/01/03/all-you-need-to-know-about-keytab-files/) doivent être générés et configurés sur l’ordinateur hôte.
 
-Pour plus d’informations, consultez <xref:security/authentication/windowsauth>.
+Pour plus d'informations, consultez <xref:security/authentication/windowsauth>.
 
 ## <a name="template-changes"></a>Modifications du modèle
 
-Les modèles d’interface utilisateurRazor Web (pages, MVC avec contrôleur et vues) ont les éléments suivants supprimés :
+Les modèles d’interface utilisateur Web ( Razor pages, MVC avec contrôleur et vues) ont les éléments suivants supprimés :
 
-* L’interface utilisateur de consentement du cookie n’est plus incluse. Pour activer la fonctionnalité de consentement de cookie dans une application ASP.NET Core 3,0 générée par un <xref:security/gdpr>modèle, consultez.
+* L’interface utilisateur de consentement du cookie n’est plus incluse. Pour activer la fonctionnalité de consentement de cookie dans une application ASP.NET Core 3,0 générée par un modèle, consultez <xref:security/gdpr> .
 * Les scripts et les ressources statiques associées sont désormais référencés en tant que fichiers locaux au lieu d’utiliser CDN. Pour plus d’informations, consultez [les scripts et les ressources statiques associées sont désormais référencés en tant que fichiers locaux au lieu d’utiliser CDN en fonction de l’environnement actuel (ASPNET/AspNetCore. Docs #14350)](https://github.com/dotnet/AspNetCore.Docs/issues/14350).
 
 Modèle angulaire mis à jour pour utiliser le 8 angulaire.
 
-Par Razor défaut, le modèle de bibliothèque de classes ( Razor RCL) est développement de composant par défaut. Une nouvelle option de modèle dans Visual Studio fournit la prise en charge des modèles pour les pages et les vues. Lorsque vous créez un RCL à partir du modèle dans une interface de commande `--support-pages-and-views` , transmettez l’option (`dotnet new razorclasslib --support-pages-and-views`).
+Par défaut, le Razor modèle de bibliothèque de classes (RCL) est Razor développement de composant par défaut. Une nouvelle option de modèle dans Visual Studio fournit la prise en charge des modèles pour les pages et les vues. Lorsque vous créez un RCL à partir du modèle dans une interface de commande, transmettez l' `--support-pages-and-views` option ( `dotnet new razorclasslib --support-pages-and-views` ).
 
 ## <a name="generic-host"></a>Hôte générique
 
-Les modèles ASP.NET Core 3,0 utilisent <xref:fundamentals/host/generic-host>. Versions précédentes utilisées <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder>. L’utilisation de l’hôte générique .NET<xref:Microsoft.Extensions.Hosting.HostBuilder>Core () permet une meilleure intégration des applications ASP.net core avec d’autres scénarios de serveur qui ne sont pas spécifiques au Web. Pour plus d’informations, consultez [HostBuilder remplace WebHostBuilder](xref:migration/22-to-30?view=aspnetcore-2.2#hostbuilder-replaces-webhostbuilder).
+Les modèles ASP.NET Core 3,0 utilisent <xref:fundamentals/host/generic-host> . Versions précédentes utilisées <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder> . L’utilisation de l’hôte générique .NET Core ( <xref:Microsoft.Extensions.Hosting.HostBuilder> ) permet une meilleure intégration des applications ASP.net core avec d’autres scénarios de serveur qui ne sont pas spécifiques au Web. Pour plus d’informations, consultez [HostBuilder remplace WebHostBuilder](xref:migration/22-to-30?view=aspnetcore-2.2#hostbuilder-replaces-webhostbuilder).
 
 ### <a name="host-configuration"></a>Configuration de l’hôte
 
-Avant la sortie de ASP.NET Core 3,0, les variables d’environnement précédées de `ASPNETCORE_` ont été chargées pour la configuration d’hôte de l’hôte Web. Dans 3,0, `AddEnvironmentVariables` est utilisé pour charger les variables d’environnement précédées `DOTNET_` de pour `CreateDefaultBuilder`la configuration de l’hôte avec.
+Avant la sortie de ASP.NET Core 3,0, les variables d’environnement précédées de `ASPNETCORE_` ont été chargées pour la configuration d’hôte de l’hôte Web. Dans 3,0, `AddEnvironmentVariables` est utilisé pour charger les variables d’environnement précédées `DOTNET_` de pour la configuration de l’hôte avec `CreateDefaultBuilder` .
 
 ### <a name="changes-to-startup-constructor-injection"></a>Modifications apportées à l’injection du constructeur de démarrage
 
-L’hôte générique prend en charge uniquement les types `Startup` suivants pour l’injection de constructeur :
+L’hôte générique prend en charge uniquement les types suivants pour l' `Startup` injection de constructeur :
 
 * <xref:Microsoft.Extensions.Hosting.IHostEnvironment>
 * `IWebHostEnvironment`
 * <xref:Microsoft.Extensions.Configuration.IConfiguration>
 
-Tous les services peuvent toujours être injectés directement comme arguments de `Startup.Configure` la méthode. Pour plus d’informations, consultez l' [hôte générique limite l’injection de constructeur de démarrage (ASPNET/announcements #353)](https://github.com/aspnet/Announcements/issues/353).
+Tous les services peuvent toujours être injectés directement comme arguments de la `Startup.Configure` méthode. Pour plus d’informations, consultez l' [hôte générique limite l’injection de constructeur de démarrage (ASPNET/announcements #353)](https://github.com/aspnet/Announcements/issues/353).
 
 ## <a name="kestrel"></a>Kestrel
 
-* La configuration Kestrel a été mise à jour pour la migration vers l’hôte générique. Dans 3,0, Kestrel est configuré sur le générateur d’hôte Web fourni `ConfigureWebHostDefaults`par.
+* La configuration Kestrel a été mise à jour pour la migration vers l’hôte générique. Dans 3,0, Kestrel est configuré sur le générateur d’hôte Web fourni par `ConfigureWebHostDefaults` .
 * Les adaptateurs de connexion ont été supprimés de Kestrel et remplacés par un intergiciel de connexion, qui est similaire à l’intergiciel HTTP dans le pipeline ASP.NET Core, mais pour les connexions de niveau inférieur.
-* La couche de transport Kestrel a été exposée en tant qu' `Connections.Abstractions`interface publique dans.
+* La couche de transport Kestrel a été exposée en tant qu’interface publique dans `Connections.Abstractions` .
 * L’ambiguïté entre les en-têtes et les codes de fin a été résolue en déplaçant les en-têtes de fin vers une nouvelle collection.
-* Les API d’e/s synchrones `HttpRequest.Body.Read`, telles que, sont une source commune de privation de thread conduisant à des blocages d’application. Dans 3,0, `AllowSynchronousIO` est désactivé par défaut.
+* Les API d’e/s synchrones, telles que `HttpRequest.Body.Read` , sont une source commune de privation de thread conduisant à des blocages d’application. Dans 3,0, `AllowSynchronousIO` est désactivé par défaut.
 
-Pour plus d’informations, consultez <xref:migration/22-to-30#kestrel>.
+Pour plus d'informations, consultez <xref:migration/22-to-30#kestrel>.
 
 ## <a name="http2-enabled-by-default"></a>HTTP/2 activé par défaut
 
@@ -441,7 +429,7 @@ HTTP/2 est activé par défaut dans Kestrel pour les points de terminaison HTTPs
 
 ## <a name="eventcounters-on-request"></a>EventCounters à la demande
 
-L’EventSource d’hébergement `Microsoft.AspNetCore.Hosting`,, émet les nouveaux <xref:System.Diagnostics.Tracing.EventCounter> types suivants en rapport avec les demandes entrantes :
+L’EventSource d’hébergement, `Microsoft.AspNetCore.Hosting` , émet les nouveaux <xref:System.Diagnostics.Tracing.EventCounter> types suivants en rapport avec les demandes entrantes :
 
 * `requests-per-second`
 * `total-requests`
@@ -452,16 +440,16 @@ L’EventSource d’hébergement `Microsoft.AspNetCore.Hosting`,, émet les nouv
 
 Le routage des points de terminaison, qui permet aux frameworks (par exemple, MVC) de fonctionner correctement avec l’intergiciel, est amélioré :
 
-* L’ordre des intergiciels et des points de terminaison est configurable dans le pipeline de traitement `Startup.Configure`des requêtes de.
+* L’ordre des intergiciels et des points de terminaison est configurable dans le pipeline de traitement des requêtes de `Startup.Configure` .
 * Les points de terminaison et l’intergiciel (middleware) sont bien adaptés à d’autres technologies basées sur les ASP.NET Core, telles que les contrôles d’intégrité.
 * Les points de terminaison peuvent implémenter une stratégie, telle que CORS ou Authorization, dans l’intergiciel et le MVC.
 * Les filtres et les attributs peuvent être placés sur les méthodes dans les contrôleurs.
 
-Pour plus d’informations, consultez <xref:fundamentals/routing#routing-basics>.
+Pour plus d'informations, consultez <xref:fundamentals/routing#routing-basics>.
 
 ## <a name="health-checks"></a>Contrôles d'intégrité
 
-Les contrôles d’intégrité utilisent le routage de point de terminaison avec l’hôte générique. Dans `Startup.Configure`, appelez `MapHealthChecks` sur le générateur de points de terminaison avec l’URL de point de terminaison ou le chemin d’accès relatif :
+Les contrôles d’intégrité utilisent le routage de point de terminaison avec l’hôte générique. Dans `Startup.Configure` , appelez `MapHealthChecks` sur le générateur de points de terminaison avec l’URL de point de terminaison ou le chemin d’accès relatif :
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -483,7 +471,7 @@ Pour plus d’informations, consultez les articles suivants :
 
 ## <a name="pipes-on-httpcontext"></a>Canaux sur HttpContext
 
-Il est maintenant possible de lire le corps de la demande et d’écrire le corps <xref:System.IO.Pipelines> de la réponse à l’aide de l’API. Les <!-- <xref:Microsoft.AspNetCore.Http.HttpRequest.BodyReader> --> `HttpRequest.BodyReader`la propriété fournit <xref:System.IO.Pipelines.PipeReader> un qui peut être utilisé pour lire le corps de la requête. Les <!-- <xref:Microsoft.AspNetCore.Http.> --> `HttpResponse.BodyWriter`la propriété fournit <xref:System.IO.Pipelines.PipeWriter> un qui peut être utilisé pour écrire le corps de la réponse. `HttpRequest.BodyReader`est un analogue du `HttpRequest.Body` flux. `HttpResponse.BodyWriter`est un analogue du `HttpResponse.Body` flux.
+Il est maintenant possible de lire le corps de la demande et d’écrire le corps de la réponse à l’aide de l' <xref:System.IO.Pipelines> API. Les <!-- <xref:Microsoft.AspNetCore.Http.HttpRequest.BodyReader> --> `HttpRequest.BodyReader`la propriété fournit un <xref:System.IO.Pipelines.PipeReader> qui peut être utilisé pour lire le corps de la requête. Les <!-- <xref:Microsoft.AspNetCore.Http.> --> `HttpResponse.BodyWriter`la propriété fournit un <xref:System.IO.Pipelines.PipeWriter> qui peut être utilisé pour écrire le corps de la réponse. `HttpRequest.BodyReader`est un analogue du `HttpRequest.Body` flux. `HttpResponse.BodyWriter`est un analogue du `HttpResponse.Body` flux.
 
 <!-- indirectly related, https://github.com/dotnet/docs/pull/14414 won't be published by 9/23  -->
 
@@ -503,9 +491,9 @@ Pour plus d'informations, consultez les pages suivantes :
 
 ## <a name="forwarded-headers-middleware-improvements"></a>Améliorations des intergiciels-en-têtes transférés
 
-Dans les versions précédentes de ASP.NET Core, <xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts*> l' <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*> appel de et était problématique lors du déploiement sur un serveur Linux Azure ou derrière un proxy inverse autre qu’IIS. Le correctif pour les versions précédentes est documenté dans [transférer le schéma pour les proxys inversés Linux et non-IIS](xref:host-and-deploy/proxy-load-balancer#forward-the-scheme-for-linux-and-non-iis-reverse-proxies).
+Dans les versions précédentes de ASP.NET Core, l’appel de <xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts*> et <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*> était problématique lors du déploiement sur un serveur Linux Azure ou derrière un proxy inverse autre qu’IIS. Le correctif pour les versions précédentes est documenté dans [transférer le schéma pour les proxys inversés Linux et non-IIS](xref:host-and-deploy/proxy-load-balancer#forward-the-scheme-for-linux-and-non-iis-reverse-proxies).
 
-Ce scénario est résolu dans ASP.NET Core 3,0. L’hôte active l' [intergiciel d’en-tête transféré](xref:host-and-deploy/proxy-load-balancer#forwarded-headers-middleware-options) lorsque `ASPNETCORE_FORWARDEDHEADERS_ENABLED` la variable d' `true`environnement a la valeur. `ASPNETCORE_FORWARDEDHEADERS_ENABLED`a la valeur `true` dans nos images de conteneur.
+Ce scénario est résolu dans ASP.NET Core 3,0. L’hôte active l' [intergiciel d’en-tête transféré](xref:host-and-deploy/proxy-load-balancer#forwarded-headers-middleware-options) lorsque la `ASPNETCORE_FORWARDEDHEADERS_ENABLED` variable d’environnement a la valeur `true` . `ASPNETCORE_FORWARDEDHEADERS_ENABLED`a la valeur `true` dans nos images de conteneur.
 
 ## <a name="performance-improvements"></a>Optimisation des performances
 
@@ -526,7 +514,7 @@ Pour plus d’informations sur la migration, consultez [porter votre code d' .NE
 
 ## <a name="use-the-aspnet-core-shared-framework"></a>Utiliser le ASP.NET Core Framework partagé
 
-L’infrastructure partagée ASP.NET Core 3,0, contenue dans le [AspNetCore de Microsoft.. app](xref:fundamentals/metapackage-app), ne nécessite plus un `<PackageReference />` élément explicite dans le fichier projet. Le Framework partagé est automatiquement référencé lors de l’utilisation `Microsoft.NET.Sdk.Web` du kit de développement logiciel (SDK) dans le fichier projet :
+L’infrastructure partagée ASP.NET Core 3,0, contenue dans le [AspNetCore de Microsoft.. app](xref:fundamentals/metapackage-app), ne nécessite plus un `<PackageReference />` élément explicite dans le fichier projet. Le Framework partagé est automatiquement référencé lors de l’utilisation du `Microsoft.NET.Sdk.Web` Kit de développement logiciel (SDK) dans le fichier projet :
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">

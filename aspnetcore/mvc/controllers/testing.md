@@ -1,24 +1,11 @@
 ---
-title: Tester la logique des contrôleurs dans ASP.NET Core
-author: ardalis
-description: Découvrez plus d’informations sur le test de la logique des contrôleurs dans ASP.NET Core avec Moq et xUnit.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 11/07/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: mvc/controllers/testing
-ms.openlocfilehash: 4deae7f7511e3ce94450bc06d5fc8dc77a94f212
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767081"
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="unit-test-controller-logic-in-aspnet-core"></a>Logique du contrôleur de test unitaire dans ASP.NET Core
 
@@ -63,7 +50,7 @@ La méthode `HTTP GET Index` n’a pas de boucle ni de branchement, et elle appe
 
 Le test de la méthode `HTTP POST Index` du contrôleur Home vérifie que :
 
-* Quand [ModelState. IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*) a `false`la valeur, la méthode d’action retourne une <xref:Microsoft.AspNetCore.Mvc.ViewResult> *demande 400 erronée* avec les données appropriées.
+* Quand [ModelState. IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*) a la valeur `false` , la méthode d’action retourne une *demande 400 erronée* <xref:Microsoft.AspNetCore.Mvc.ViewResult> avec les données appropriées.
 * Lorsque `ModelState.IsValid` est `true` :
   * La méthode `Add` sur le dépôt est appelée.
   * Un <xref:Microsoft.AspNetCore.Mvc.RedirectToActionResult> est retourné avec les arguments corrects.
@@ -131,9 +118,9 @@ Le troisième test `Create`, `Create_ReturnsNewlyCreatedIdeaForSession`, vérifi
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests3&highlight=20-22,28-33)]
 
-## <a name="test-actionresultt"></a>Tester le\<> T ActionResult
+## <a name="test-actionresultt"></a>ActionResult de test\<T>
 
-Dans ASP.net Core 2,1 ou version ultérieure [,\<ActionResult T>](xref:web-api/action-return-types#actionresultt-type) (<xref:Microsoft.AspNetCore.Mvc.ActionResult%601>) vous permet de retourner un type dérivant de `ActionResult` ou qui retourne un type spécifique.
+Dans ASP.net Core 2,1 ou version ultérieure [, \<T> ActionResult](xref:web-api/action-return-types#actionresultt-type) ( <xref:Microsoft.AspNetCore.Mvc.ActionResult%601> ) vous permet de retourner un type dérivant de `ActionResult` ou qui retourne un type spécifique.
 
 L’exemple d’application comprend une méthode qui retourne un `List<IdeaDTO>` pour un `id` de session donné. Si l’`id` de session n’existe pas, le contrôleur retourne <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*> :
 
@@ -151,7 +138,7 @@ Le premier test confirme que le contrôleur retourne un `ActionResult`, et non u
 Pour un `id` de session valide, le deuxième test confirme que la méthode retourne :
 
 * Un `ActionResult` avec un type `List<IdeaDTO>`.
-* [ActionResult\<T>. La valeur](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) est `List<IdeaDTO>` un type.
+* [ActionResult \<T> . La valeur](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) est un `List<IdeaDTO>` type.
 * Le premier élément dans la liste est une idée valide correspondant à l’idée stockée dans la session fictive (obtenu en appelant `GetTestSession`).
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ForSessionActionResult_ReturnsIdeasForSession&highlight=7-8,15-18)]
@@ -177,8 +164,8 @@ Le deuxième test vérifie qu’un <xref:Microsoft.AspNetCore.Mvc.ControllerBase
 Pour un `id` de session valide, le dernier test confirme que :
 
 * La méthode retourne un `ActionResult` avec un type `BrainstormSession`.
-* [ActionResult\<T>. ](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*)Le <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult>résultat est. `CreatedAtActionResult` est analogue à une réponse *Créée 201* avec un en-tête `Location`.
-* [ActionResult\<T>. La valeur](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) est `BrainstormSession` un type.
+* [ActionResult \<T> . Le résultat](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*) est <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> . `CreatedAtActionResult` est analogue à une réponse *Créée 201* avec un en-tête `Location`.
+* [ActionResult \<T> . La valeur](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) est un `BrainstormSession` type.
 * L’appel fictif pour mettre à jour la session, `UpdateAsync(testSession)`, a été appelé. L’appel de la méthode `Verifiable` est contrôlé en exécutant `mockRepo.Verify()` dans les assertions.
 * Deux objets `Idea` sont retournés pour la session.
 * Le dernier élément (`Idea` ajouté par l’appel fictif à `UpdateAsync`) correspond à `newIdea` ajouté à la session dans le test.
@@ -226,7 +213,7 @@ La méthode `HTTP GET Index` n’a pas de boucle ni de branchement, et elle appe
 
 Le test de la méthode `HTTP POST Index` du contrôleur Home vérifie que :
 
-* Quand [ModelState. IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*) a `false`la valeur, la méthode d’action retourne une <xref:Microsoft.AspNetCore.Mvc.ViewResult> *demande 400 erronée* avec les données appropriées.
+* Quand [ModelState. IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid*) a la valeur `false` , la méthode d’action retourne une *demande 400 erronée* <xref:Microsoft.AspNetCore.Mvc.ViewResult> avec les données appropriées.
 * Lorsque `ModelState.IsValid` est `true` :
   * La méthode `Add` sur le dépôt est appelée.
   * Un <xref:Microsoft.AspNetCore.Mvc.RedirectToActionResult> est retourné avec les arguments corrects.
@@ -294,9 +281,9 @@ Le troisième test `Create`, `Create_ReturnsNewlyCreatedIdeaForSession`, vérifi
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ApiIdeasControllerTests3&highlight=20-22,28-33)]
 
-## <a name="test-actionresultt"></a>Tester le\<> T ActionResult
+## <a name="test-actionresultt"></a>ActionResult de test\<T>
 
-Dans ASP.net Core 2,1 ou version ultérieure [,\<ActionResult T>](xref:web-api/action-return-types#actionresultt-type) (<xref:Microsoft.AspNetCore.Mvc.ActionResult%601>) vous permet de retourner un type dérivant de `ActionResult` ou qui retourne un type spécifique.
+Dans ASP.net Core 2,1 ou version ultérieure [, \<T> ActionResult](xref:web-api/action-return-types#actionresultt-type) ( <xref:Microsoft.AspNetCore.Mvc.ActionResult%601> ) vous permet de retourner un type dérivant de `ActionResult` ou qui retourne un type spécifique.
 
 L’exemple d’application comprend une méthode qui retourne un `List<IdeaDTO>` pour un `id` de session donné. Si l’`id` de session n’existe pas, le contrôleur retourne <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*> :
 
@@ -314,7 +301,7 @@ Le premier test confirme que le contrôleur retourne un `ActionResult`, et non u
 Pour un `id` de session valide, le deuxième test confirme que la méthode retourne :
 
 * Un `ActionResult` avec un type `List<IdeaDTO>`.
-* [ActionResult\<T>. La valeur](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) est `List<IdeaDTO>` un type.
+* [ActionResult \<T> . La valeur](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) est un `List<IdeaDTO>` type.
 * Le premier élément dans la liste est une idée valide correspondant à l’idée stockée dans la session fictive (obtenu en appelant `GetTestSession`).
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/tests/TestingControllersSample.Tests/UnitTests/ApiIdeasControllerTests.cs?name=snippet_ForSessionActionResult_ReturnsIdeasForSession&highlight=7-8,15-18)]
@@ -340,8 +327,8 @@ Le deuxième test vérifie qu’un <xref:Microsoft.AspNetCore.Mvc.ControllerBase
 Pour un `id` de session valide, le dernier test confirme que :
 
 * La méthode retourne un `ActionResult` avec un type `BrainstormSession`.
-* [ActionResult\<T>. ](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*)Le <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult>résultat est. `CreatedAtActionResult` est analogue à une réponse *Créée 201* avec un en-tête `Location`.
-* [ActionResult\<T>. La valeur](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) est `BrainstormSession` un type.
+* [ActionResult \<T> . Le résultat](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*) est <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> . `CreatedAtActionResult` est analogue à une réponse *Créée 201* avec un en-tête `Location`.
+* [ActionResult \<T> . La valeur](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) est un `BrainstormSession` type.
 * L’appel fictif pour mettre à jour la session, `UpdateAsync(testSession)`, a été appelé. L’appel de la méthode `Verifiable` est contrôlé en exécutant `mockRepo.Verify()` dans les assertions.
 * Deux objets `Idea` sont retournés pour la session.
 * Le dernier élément (`Idea` ajouté par l’appel fictif à `UpdateAsync`) correspond à `newIdea` ajouté à la session dans le test.
@@ -354,5 +341,5 @@ Pour un `id` de session valide, le dernier test confirme que :
 
 * <xref:test/integration-tests>
 * [Créer et exécuter des tests unitaires avec Visual Studio](/visualstudio/test/unit-test-your-code)
-* [Bibliothèque de tests MyTested. AspNetCore. Mvc-Fluent pour ASP.net Core bibliothèque de](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) &ndash; tests unitaires fortement typés MVC, fournissant une interface Fluent pour tester les applications MVC et API Web. (*Non géré ou pris en charge par Microsoft.*)
+* [Bibliothèque de tests MyTested. AspNetCore. Mvc-Fluent pour ASP.net Core MVC](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): bibliothèque de tests unitaires fortement typés, fournissant une interface Fluent pour tester les applications MVC et API Web. (*Non géré ou pris en charge par Microsoft.*)
 

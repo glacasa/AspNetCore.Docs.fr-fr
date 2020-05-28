@@ -1,22 +1,11 @@
 ---
-title: Vue d’ensemble du modèle MVC d’ASP.NET Core
-author: ardalis
-description: Découvrez ASP.NET Core MVC, un puissant framework qui vous permet de générer des applications web et des API à l’aide du modèle de conception Model-View-Controller.
-ms.author: riande
-ms.date: 02/12/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: mvc/overview
-ms.openlocfilehash: c6c7fd1d0cb7a462b3a13d5e31a50c704a00c0ef
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775464"
+titre : Auteur : Description : ms. Author : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>Vue d’ensemble du modèle MVC d’ASP.NET Core
 
@@ -204,7 +193,7 @@ Le framework utilise les interfaces et l’injection de dépendances, ce qui le 
 </ul>
 ```
 
-À l' Razor aide du moteur d’affichage, vous pouvez définir des [dispositions](views/layout.md), des [vues partielles](views/partial.md) et des sections remplaçables.
+À l’aide du Razor moteur d’affichage, vous pouvez définir des [dispositions](views/layout.md), des [vues partielles](views/partial.md) et des sections remplaçables.
 
 ### <a name="strongly-typed-views"></a>Vues fortement typées
 
@@ -224,7 +213,7 @@ Par exemple, la vue suivante affiche un modèle de type `IEnumerable<Product>` 
 
 ### <a name="tag-helpers"></a>Tag Helpers
 
-Les [tag helpers](views/tag-helpers/intro.md) permettent au code côté serveur de participer à la création et au Razor rendu des éléments HTML dans les fichiers. Vous pouvez utiliser des Tag helpers pour définir des balises personnalisées (par exemple, `<environment>`) ou pour modifier le comportement de balises existantes (par exemple, `<label>`). Les Tag helpers associent des éléments spécifiques en fonction du nom de l’élément et des ses attributs. Ils fournissent les avantages de rendu côté serveur tout en conservant la possibilité d'éditer le HTML.
+Les [tag helpers](views/tag-helpers/intro.md) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les Razor fichiers. Vous pouvez utiliser des Tag helpers pour définir des balises personnalisées (par exemple, `<environment>`) ou pour modifier le comportement de balises existantes (par exemple, `<label>`). Les Tag helpers associent des éléments spécifiques en fonction du nom de l’élément et des ses attributs. Ils fournissent les avantages de rendu côté serveur tout en conservant la possibilité d'éditer le HTML.
 
 Il existe de nombreux Tag Helpers pour les tâches courantes (par exemple la création de formulaires ou de liens, le chargement de ressources, etc.) et bien d’autres encore, dans les dépôts GitHub publics et sous forme de packages NuGet. Les Tag helpers sont créés en c#, et ils ciblent des éléments HTML en fonction de la balise parente, du nom d’attribut ou du nom de l’élément. Par exemple, le Tag Helper Link intégré permet de créer un lien vers l’action `Login` de `AccountsController` :
 
@@ -249,7 +238,7 @@ Le `EnvironmentTagHelper` permet d’inclure différents scripts dans vos vues (
 </environment>
 ```
 
-Tag helpers offre une expérience de développement HTML et un environnement IntelliSense élaboré pour la création de code Razor html et de balises. La plupart des Tag Helpers intégrés ciblent les éléments HTML existants et fournissent des attributs côté serveur pour l’élément.
+Tag helpers offre une expérience de développement HTML et un environnement IntelliSense élaboré pour la création de code HTML et de Razor balises. La plupart des Tag Helpers intégrés ciblent les éléments HTML existants et fournissent des attributs côté serveur pour l’élément.
 
 ### <a name="view-components"></a>Composants de vues
 
@@ -259,9 +248,9 @@ Les [composants de vues](views/view-components.md) vous permettent de compresser
 
 La méthode <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> permet à une application d’accepter ou de refuser les changements de comportement potentiellement cassants introduits dans ASP.NET Core MVC 2.1 ou version ultérieure.
 
-Pour plus d’informations, consultez <xref:mvc/compatibility-version>.
+Pour plus d'informations, consultez <xref:mvc/compatibility-version>.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* [Bibliothèque de tests MyTested. AspNetCore. Mvc-Fluent pour ASP.net Core bibliothèque de](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc) &ndash; tests unitaires fortement typés MVC, fournissant une interface Fluent pour tester les applications MVC et API Web. (*Non géré ou pris en charge par Microsoft.*)
+* [Bibliothèque de tests MyTested. AspNetCore. Mvc-Fluent pour ASP.net Core MVC](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): bibliothèque de tests unitaires fortement typés, fournissant une interface Fluent pour tester les applications MVC et API Web. (*Non géré ou pris en charge par Microsoft.*)
 * <xref:blazor/integrate-components>

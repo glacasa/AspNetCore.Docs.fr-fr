@@ -141,10 +141,10 @@ Chaînez une `catch` méthode à la fin de la `start` méthode pour gérer les e
 
 Configurez le suivi des journaux côté client en passant un enregistreur d’événements et un type d’événement à consigner lorsque la connexion est établie. Les messages sont enregistrés avec le niveau de journalisation spécifié et supérieur. Les niveaux de journalisation disponibles sont les suivants :
 
-* `signalR.LogLevel.Error`&ndash;Messages d’erreur. Journalise `Error` uniquement les messages.
-* `signalR.LogLevel.Warning`&ndash;Messages d’avertissement relatifs aux erreurs potentielles. Journaux `Warning` et `Error` messages.
-* `signalR.LogLevel.Information`&ndash;Messages d’État sans erreurs. Journalise `Information` `Warning` `Error` les messages, et.
-* `signalR.LogLevel.Trace`&ndash;Messages de trace. Journalise tout, y compris les données transférées entre le Hub et le client.
+* `signalR.LogLevel.Error`: Messages d’erreur. Journalise `Error` uniquement les messages.
+* `signalR.LogLevel.Warning`: Messages d’avertissement concernant les erreurs potentielles. Journaux `Warning` et `Error` messages.
+* `signalR.LogLevel.Information`: Messages d’État sans erreurs. Journalise `Information` `Warning` `Error` les messages, et.
+* `signalR.LogLevel.Trace`: Messages de trace. Journalise tout, y compris les données transférées entre le Hub et le client.
 
 Utilisez la méthode [configureLogging](/javascript/api/%40aspnet/signalr/hubconnectionbuilder#configurelogging) sur [HubConnectionBuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder) pour configurer le niveau de journalisation. Les messages sont enregistrés dans la console du navigateur.
 

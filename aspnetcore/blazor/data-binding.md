@@ -72,7 +72,10 @@ Utilisez `@bind-{ATTRIBUTE}` avec la `@bind-{ATTRIBUTE}:event` syntaxe pour lier
 }
 ```
 
-La liaison d’attribut respecte la casse. Par exemple, [`@bind`](xref:mvc/views/razor#bind) est valide et [`@bind`](xref:mvc/views/razor#bind) n’est pas valide.
+La liaison d’attribut respecte la casse :
+
+* `@bind`est valide.
+* `@Bind`et `@BIND` ne sont pas valides.
 
 ## <a name="unparsable-values"></a>Valeurs inanalysables
 

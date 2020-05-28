@@ -1,24 +1,11 @@
 ---
-title: Routage dans ASP.NET Core
-author: rick-anderson
-description: Découvrez comment ASP.NET Core routage est responsable de la mise en correspondance des requêtes HTTP et de la distribution aux points de terminaison exécutables.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 4/1/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/routing
-ms.openlocfilehash: 2dd44a561debddac13250174a8e74dd912302d60
-ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82850511"
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="routing-in-aspnet-core"></a>Routage dans ASP.NET Core
 
@@ -30,8 +17,8 @@ Le routage est responsable de la mise en correspondance des demandes HTTP entran
 
 Les applications peuvent configurer le routage à l’aide de :
 
-- Controllers
-- Pages Razor
+- Contrôleurs
+- RazorPages
 - SignalR
 - Services gRPC
 - [Intergiciel (middleware](xref:fundamentals/middleware/index) ) prenant en charge les points de terminaison, tels que les [contrôles d’intégrité](xref:host-and-deploy/health-checks).
@@ -39,37 +26,37 @@ Les applications peuvent configurer le routage à l’aide de :
 
 Ce document traite des détails de bas niveau du routage de ASP.NET Core. Pour plus d’informations sur la configuration du routage :
 
-* Pour les contrôleurs <xref:mvc/controllers/routing>, consultez.
-* Pour Razor Pages conventions, consultez <xref:razor-pages/razor-pages-conventions>.
+* Pour les contrôleurs, consultez <xref:mvc/controllers/routing> .
+* Pour les Razor conventions de pages, consultez <xref:razor-pages/razor-pages-conventions> .
 
-Le système de routage des points de terminaison décrit dans ce document s’applique à ASP.NET Core 3,0 et versions ultérieures. Pour plus d’informations sur le système de routage <xref:Microsoft.AspNetCore.Routing.IRouter>précédent basé sur, sélectionnez la version ASP.net Core 2,1 à l’aide de l’une des approches suivantes :
+Le système de routage des points de terminaison décrit dans ce document s’applique à ASP.NET Core 3,0 et versions ultérieures. Pour plus d’informations sur le système de routage précédent basé sur <xref:Microsoft.AspNetCore.Routing.IRouter> , sélectionnez la version ASP.NET Core 2,1 à l’aide de l’une des approches suivantes :
 
 * Sélecteur de version d’une version précédente.
 * Sélectionnez [ASP.net Core routage 2,1](https://docs.microsoft.com/aspnet/core/fundamentals/routing?view=aspnetcore-2.1).
 
 [Afficher ou télécharger l’exemple de code](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples/3.x) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
-Les exemples de téléchargement de ce document sont activés par `Startup` une classe spécifique. Pour exécuter un exemple spécifique, modifiez *Program.cs* pour appeler la classe `Startup` souhaitée.
+Les exemples de téléchargement de ce document sont activés par une `Startup` classe spécifique. Pour exécuter un exemple spécifique, modifiez *Program.cs* pour appeler la `Startup` classe souhaitée.
 
 ## <a name="routing-basics"></a>Concepts de base du routage
 
-Tous les modèles de ASP.NET Core incluent le routage dans le code généré. Le routage est inscrit dans le pipeline de `Startup.Configure`l’intergiciel ( [middleware](xref:fundamentals/middleware/index) ) dans.
+Tous les modèles de ASP.NET Core incluent le routage dans le code généré. Le routage est inscrit dans le pipeline de l' [intergiciel (middleware](xref:fundamentals/middleware/index) ) dans `Startup.Configure` .
 
 Le code suivant illustre un exemple de routage de base :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Startup.cs?name=snippet&highlight=8,10)]
 
-Le routage utilise une paire d’intergiciels (middleware) <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> , <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*>inscrite par et :
+Le routage utilise une paire d’intergiciels (middleware), inscrite par <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> et <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> :
 
 * `UseRouting`Ajoute la correspondance d’itinéraire au pipeline de l’intergiciel (middleware). Cet intergiciel (middleware) examine l’ensemble des points de terminaison définis dans l’application et sélectionne la [meilleure correspondance](#urlm) en fonction de la demande.
 * `UseEndpoints`Ajoute l’exécution du point de terminaison au pipeline d’intergiciel (middleware). Il exécute le délégué associé au point de terminaison sélectionné.
 
 L’exemple précédent comprend un seul *itinéraire vers le point de terminaison de code* à l’aide de la méthode [MapGet](xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*) :
 
-* Quand une requête `GET` http est envoyée à l’URL `/`racine :
+* Quand une `GET` requête HTTP est envoyée à l’URL racine `/` :
   * Le délégué de requête indiqué s’exécute.
-  * `Hello World!`est écrit dans la réponse HTTP. Par défaut, l’URL `/` racine est `https://localhost:5001/`.
-* Si la méthode de demande n' `GET` est pas ou si l’URL `/`racine n’est pas, aucun itinéraire ne correspond et un http 404 est retourné.
+  * `Hello World!`est écrit dans la réponse HTTP. Par défaut, l’URL racine `/` est `https://localhost:5001/` .
+* Si la méthode de demande n’est pas `GET` ou si l’URL racine n’est pas `/` , aucun itinéraire ne correspond et un http 404 est retourné.
 
 ### <a name="endpoint"></a>Point de terminaison
 
@@ -80,12 +67,12 @@ La `MapGet` méthode est utilisée pour définir un **point de terminaison**. Un
 * Sélectionné en faisant correspondre l’URL et la méthode HTTP.
 * Exécuté, en exécutant le délégué.
 
-Les points de terminaison qui peuvent être mis en correspondance et exécutés par l' `UseEndpoints`application sont configurés dans. Par exemple, <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*> <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapPost*>, et les [méthodes similaires](xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions) connectent les délégués de demande au système de routage.
+Les points de terminaison qui peuvent être mis en correspondance et exécutés par l’application sont configurés dans `UseEndpoints` . Par exemple, <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*> , <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapPost*> et les [méthodes similaires](xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions) connectent les délégués de demande au système de routage.
 Des méthodes supplémentaires peuvent être utilisées pour connecter les fonctionnalités de ASP.NET Core Framework au système de routage :
-- [MapRazorPages pour Razor Pages](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*)
+- [MapRazorPages pour les Razor pages](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*)
 - [MapControllers pour les contrôleurs](xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*)
-- [>\<THub MapHub pour signalr](xref:Microsoft.AspNetCore.SignalR.HubRouteBuilder.MapHub*) 
-- [>\<TService MapGrpcService pour gRPC](xref:grpc/aspnetcore)
+- [MapHub \<THub> pourSignalR](xref:Microsoft.AspNetCore.SignalR.HubRouteBuilder.MapHub*) 
+- [MapGrpcService \<TService> pour gRPC](xref:grpc/aspnetcore)
 
 L’exemple suivant illustre le routage avec un modèle d’itinéraire plus sophistiqué :
 
@@ -94,9 +81,9 @@ L’exemple suivant illustre le routage avec un modèle d’itinéraire plus sop
 La chaîne `/hello/{name:alpha}` est un **modèle de routage**. Il permet de configurer la mise en correspondance du point de terminaison. Dans ce cas, le modèle correspond à :
 
 * Une URL telle que`/hello/Ryan`
-* Tout chemin d’accès d’URL `/hello/` qui commence par, suivi d’une séquence de caractères alphabétiques.  `:alpha`applique une contrainte d’itinéraire qui correspond uniquement aux caractères alphabétiques. Les [contraintes de routage](#route-constraint-reference) sont expliquées plus loin dans ce document.
+* Tout chemin d’accès d’URL qui commence par `/hello/` , suivi d’une séquence de caractères alphabétiques.  `:alpha`applique une contrainte d’itinéraire qui correspond uniquement aux caractères alphabétiques. Les [contraintes de routage](#route-constraint-reference) sont expliquées plus loin dans ce document.
 
-Le deuxième segment du chemin d’URL `{name:alpha}`:
+Le deuxième segment du chemin d’URL `{name:alpha}` :
 
 * Est lié au `name` paramètre.
 * Est capturé et stocké dans [HttpRequest. RouteValues](xref:Microsoft.AspNetCore.Http.HttpRequest.RouteValues*).
@@ -116,16 +103,16 @@ L’exemple précédent montre comment :
 
 L' <xref:Microsoft.AspNetCore.Builder.HealthCheckEndpointRouteBuilderExtensions.MapHealthChecks*> appel ajoute un point de terminaison de contrôle d’intégrité. Le chaînage <xref:Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions.RequireAuthorization*> sur cet appel joint une stratégie d’autorisation au point de terminaison.
 
-L' <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> appel <xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization*> de et ajoute l’intergiciel (middleware) d’authentification et d’autorisation. Ces intergiciels sont placés entre <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> et `UseEndpoints` afin de pouvoir :
+<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*>L’appel de et <xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization*> ajoute l’intergiciel (middleware) d’authentification et d’autorisation. Ces intergiciels sont placés entre <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> et `UseEndpoints` afin de pouvoir :
 
-* Consultez le point de terminaison sélectionné `UseRouting`par.
-* Appliquez une stratégie d’autorisation <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> avant les distributions au point de terminaison.
+* Consultez le point de terminaison sélectionné par `UseRouting` .
+* Appliquez une stratégie d’autorisation avant <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> les distributions au point de terminaison.
 
 <a name="metadata"></a>
 
 ### <a name="endpoint-metadata"></a>Métadonnées de point de terminaison
 
-Dans l’exemple précédent, il existe deux points de terminaison, mais seul le point de terminaison de contrôle d’intégrité a une stratégie d’autorisation attachée. Si la demande correspond au point de terminaison de `/healthz`contrôle d’intégrité, une vérification d’autorisation est effectuée. Cela démontre que des données supplémentaires peuvent être attachées aux points de terminaison. Ces données supplémentaires sont appelées **métadonnées**de point de terminaison :
+Dans l’exemple précédent, il existe deux points de terminaison, mais seul le point de terminaison de contrôle d’intégrité a une stratégie d’autorisation attachée. Si la demande correspond au point de terminaison de contrôle d’intégrité, `/healthz` une vérification d’autorisation est effectuée. Cela démontre que des données supplémentaires peuvent être attachées aux points de terminaison. Ces données supplémentaires sont appelées **métadonnées**de point de terminaison :
 
 * Les métadonnées peuvent être traitées par un intergiciel (middleware) qui prend en charge le routage.
 * Les métadonnées peuvent être de n’importe quel type .NET.
@@ -140,28 +127,28 @@ Le système de routage s’appuie sur le pipeline de l’intergiciel (middleware
 
 Un point de terminaison de ASP.NET Core est :
 
-* Exécutable : a <xref:Microsoft.AspNetCore.Http.Endpoint.RequestDelegate>.
+* Exécutable : a <xref:Microsoft.AspNetCore.Http.Endpoint.RequestDelegate> .
 * Extensible : a une collection de [métadonnées](xref:Microsoft.AspNetCore.Http.Endpoint.Metadata*) .
 * Sélectionnable : le cas échéant, contient des [informations de routage](xref:Microsoft.AspNetCore.Routing.RouteEndpoint.RoutePattern*).
-* Énumérable : la collection de points de terminaison peut être listée en <xref:Microsoft.AspNetCore.Routing.EndpointDataSource> extrayant le de [di](xref:fundamentals/dependency-injection).
+* Énumérable : la collection de points de terminaison peut être listée en extrayant le <xref:Microsoft.AspNetCore.Routing.EndpointDataSource> de [di](xref:fundamentals/dependency-injection).
 
 Le code suivant montre comment récupérer et inspecter le point de terminaison correspondant à la requête actuelle :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/EndpointInspectorStartup.cs?name=snippet)]
 
-Le point de terminaison, s’il est sélectionné, peut `HttpContext`être récupéré à partir du. Ses propriétés peuvent être inspectées. Les objets de point de terminaison sont immuables et ne peuvent pas être modifiés après la création. Le type de point de terminaison le plus <xref:Microsoft.AspNetCore.Routing.RouteEndpoint>courant est. `RouteEndpoint`contient des informations qui peuvent être sélectionnées par le système de routage.
+Le point de terminaison, s’il est sélectionné, peut être récupéré à partir du `HttpContext` . Ses propriétés peuvent être inspectées. Les objets de point de terminaison sont immuables et ne peuvent pas être modifiés après la création. Le type de point de terminaison le plus courant est <xref:Microsoft.AspNetCore.Routing.RouteEndpoint> . `RouteEndpoint`contient des informations qui peuvent être sélectionnées par le système de routage.
 
 Dans le code précédent, [application. Utiliser](xref:Microsoft.AspNetCore.Builder.UseExtensions.Use*) configure un [intergiciel (middleware](xref:fundamentals/middleware/index)) en ligne.
 
 <a name="mt"></a>
 
-Le code suivant montre que, en fonction de l' `app.Use` endroit où est appelé dans le pipeline, il se peut qu’il n’y ait pas de point de terminaison :
+Le code suivant montre que, en fonction de l’endroit où `app.Use` est appelé dans le pipeline, il se peut qu’il n’y ait pas de point de terminaison :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/MiddlewareFlowStartup.cs?name=snippet)]
 
-Cet exemple précédent ajoute `Console.WriteLine` des instructions qui indiquent si un point de terminaison a été sélectionné ou non. Par souci de clarté, l’exemple assigne un nom complet au `/` point de terminaison fourni.
+Cet exemple précédent ajoute des `Console.WriteLine` instructions qui indiquent si un point de terminaison a été sélectionné ou non. Par souci de clarté, l’exemple assigne un nom complet au `/` point de terminaison fourni.
 
-L’exécution de ce code avec une `/` URL de affiche :
+L’exécution de ce code avec une URL de `/` affiche :
 
 ```txt
 1. Endpoint: (null)
@@ -179,14 +166,14 @@ L’exécution de ce code avec d’autres URL affiche :
 
 Cette sortie illustre ce qui suit :
 
-* Le point de terminaison est toujours `UseRouting` null avant que ne soit appelé.
-* Si une correspondance est trouvée, le point de terminaison n’a pas `UseRouting` la <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*>valeur null entre et.
+* Le point de terminaison est toujours null avant que `UseRouting` ne soit appelé.
+* Si une correspondance est trouvée, le point de terminaison n’a pas la valeur null entre `UseRouting` et <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> .
 * L' `UseEndpoints` intergiciel est **Terminal** quand une correspondance est trouvée. L' [intergiciel (middleware) Terminal](#tm) est défini plus loin dans ce document.
-* L’intergiciel (middleware `UseEndpoints` ) après l’exécution uniquement quand aucune correspondance n’est trouvée.
+* L’intergiciel (middleware) après l' `UseEndpoints` exécution uniquement quand aucune correspondance n’est trouvée.
 
-L' `UseRouting` intergiciel utilise la méthode [SetEndpoint](xref:Microsoft.AspNetCore.Http.EndpointHttpContextExtensions.SetEndpoint*) pour attacher le point de terminaison au contexte actuel. Il est possible de remplacer l' `UseRouting` intergiciel par une logique personnalisée tout en bénéficiant des avantages de l’utilisation des points de terminaison. Les points de terminaison sont une primitive de bas niveau, comme l’intergiciel (middleware), et ne sont pas couplés à l’implémentation du routage. La plupart des applications n’ont `UseRouting` pas besoin d’être remplacées par une logique personnalisée.
+L' `UseRouting` intergiciel utilise la méthode [SetEndpoint](xref:Microsoft.AspNetCore.Http.EndpointHttpContextExtensions.SetEndpoint*) pour attacher le point de terminaison au contexte actuel. Il est possible de remplacer l' `UseRouting` intergiciel par une logique personnalisée tout en bénéficiant des avantages de l’utilisation des points de terminaison. Les points de terminaison sont une primitive de bas niveau, comme l’intergiciel (middleware), et ne sont pas couplés à l’implémentation du routage. La plupart des applications n’ont pas besoin d’être remplacées `UseRouting` par une logique personnalisée.
 
-L' `UseEndpoints` intergiciel (middleware) est conçu pour être utilisé en tandem `UseRouting` avec l’intergiciel (middleware). La logique de base pour exécuter un point de terminaison n’est pas compliquée. Utilisez <xref:Microsoft.AspNetCore.Http.EndpointHttpContextExtensions.GetEndpoint*> pour récupérer le point de terminaison, puis appelez <xref:Microsoft.AspNetCore.Http.Endpoint.RequestDelegate> sa propriété.
+L' `UseEndpoints` intergiciel (middleware) est conçu pour être utilisé en tandem avec l' `UseRouting` intergiciel (middleware). La logique de base pour exécuter un point de terminaison n’est pas compliquée. Utilisez <xref:Microsoft.AspNetCore.Http.EndpointHttpContextExtensions.GetEndpoint*> pour récupérer le point de terminaison, puis appelez sa <xref:Microsoft.AspNetCore.Http.Endpoint.RequestDelegate> propriété.
 
 Le code suivant montre comment l’intergiciel (middleware) peut influencer ou réagir au routage :
 
@@ -194,22 +181,22 @@ Le code suivant montre comment l’intergiciel (middleware) peut influencer ou r
 
 L’exemple précédent illustre deux concepts importants :
 
-* L’intergiciel peut s’exécuter `UseRouting` avant de modifier les données sur lesquelles le routage fonctionne.
-    * En général, l’intergiciel s’affiche avant que le routage ne modifie une propriété de la <xref:Microsoft.AspNetCore.Builder.RewriteBuilderExtensions.UseRewriter*>requête <xref:Microsoft.AspNetCore.Builder.HttpMethodOverrideExtensions.UseHttpMethodOverride*>, telle <xref:Microsoft.AspNetCore.Builder.UsePathBaseExtensions.UsePathBase*>que, ou.
-* L’intergiciel peut s’exécuter `UseRouting` entre <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> et pour traiter les résultats du routage avant l’exécution du point de terminaison.
-    * Intergiciel qui s’exécute entre `UseRouting` et `UseEndpoints`:
+* L’intergiciel peut s’exécuter avant `UseRouting` de modifier les données sur lesquelles le routage fonctionne.
+    * En général, l’intergiciel s’affiche avant que le routage ne modifie une propriété de la requête, telle que <xref:Microsoft.AspNetCore.Builder.RewriteBuilderExtensions.UseRewriter*> , <xref:Microsoft.AspNetCore.Builder.HttpMethodOverrideExtensions.UseHttpMethodOverride*> ou <xref:Microsoft.AspNetCore.Builder.UsePathBaseExtensions.UsePathBase*> .
+* L’intergiciel peut s’exécuter entre `UseRouting` et <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> pour traiter les résultats du routage avant l’exécution du point de terminaison.
+    * Intergiciel qui s’exécute entre `UseRouting` et `UseEndpoints` :
       * Inspecte généralement les métadonnées pour comprendre les points de terminaison.
-      * Prend souvent des décisions de sécurité, comme `UseAuthorization` c' `UseCors`est le cas par et.
+      * Prend souvent des décisions de sécurité, comme c’est le cas par `UseAuthorization` et `UseCors` .
     * La combinaison d’intergiciels (middleware) et de métadonnées permet de configurer des stratégies par point de terminaison.
 
-Le code précédent montre un exemple d’un intergiciel (middleware) personnalisé qui prend en charge les stratégies par point de terminaison. L’intergiciel écrit un *Journal d’audit* de l’accès aux données sensibles sur la console. L’intergiciel peut être configuré pour *auditer* un point de terminaison `AuditPolicyAttribute` avec les métadonnées. Cet exemple illustre un modèle d' *abonnement* dans lequel seuls les points de terminaison marqués comme sensibles sont audités. Il est possible de définir cette logique en sens inverse, en auditant tout ce qui n’est pas marqué comme sécurisé, par exemple. Le système de métadonnées du point de terminaison est flexible. Cette logique peut être conçue de la manière qui convient le mieux au cas d’usage.
+Le code précédent montre un exemple d’un intergiciel (middleware) personnalisé qui prend en charge les stratégies par point de terminaison. L’intergiciel écrit un *Journal d’audit* de l’accès aux données sensibles sur la console. L’intergiciel peut être configuré pour *auditer* un point de terminaison avec les `AuditPolicyAttribute` métadonnées. Cet exemple illustre un modèle d' *abonnement* dans lequel seuls les points de terminaison marqués comme sensibles sont audités. Il est possible de définir cette logique en sens inverse, en auditant tout ce qui n’est pas marqué comme sécurisé, par exemple. Le système de métadonnées du point de terminaison est flexible. Cette logique peut être conçue de la manière qui convient le mieux au cas d’usage.
 
 L’exemple de code précédent est destiné à illustrer les concepts de base des points de terminaison. **L’exemple n’est pas destiné à une utilisation en production**. Une version plus complète d’un intergiciel (middleware) de *journaux d’audit* :
 
 * Connectez-vous à un fichier ou à une base de données.
 * Incluez des détails tels que l’utilisateur, l’adresse IP, le nom du point de terminaison sensible, et bien plus encore.
 
-Les métadonnées `AuditPolicyAttribute` de la stratégie d’audit `Attribute` sont définies en tant que pour une utilisation plus facile avec les infrastructures basées sur des classes telles que les contrôleurs et signalr. Lors de l’utilisation *de l’itinéraire vers le code*:
+Les métadonnées de la stratégie d’audit `AuditPolicyAttribute` sont définies en tant que `Attribute` pour une utilisation plus facile avec les infrastructures basées sur des classes telles que les contrôleurs et SignalR . Lors de l’utilisation *de l’itinéraire vers le code*:
 
 * Les métadonnées sont jointes à une API de générateur.
 * Les infrastructures basées sur des classes incluent tous les attributs de la méthode et de la classe correspondantes lors de la création de points de terminaison.
@@ -224,24 +211,24 @@ L’exemple de code suivant compare l’utilisation de l’intergiciel avec le r
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/TerminalMiddlewareStartup.cs?name=snippet)]
 
-Le style d’intergiciel (middleware) `Approach 1:` présenté avec est l' **intergiciel (middleware**) de terminal. Il s’agit de l’intergiciel (middleware) Terminal Server, car il effectue une opération de correspondance :
+Le style d’intergiciel (middleware) présenté avec est l’intergiciel (middleware) de `Approach 1:` **Terminal**. Il s’agit de l’intergiciel (middleware) Terminal Server, car il effectue une opération de correspondance :
 
-* L’opération de correspondance dans l’exemple précédent `Path == "/"` concerne l’intergiciel et `Path == "/Movie"` le routage.
+* L’opération de correspondance dans l’exemple précédent concerne `Path == "/"` l’intergiciel et le `Path == "/Movie"` routage.
 * Lorsqu’une correspondance est réussie, elle exécute certaines fonctionnalités et retourne, plutôt que d’appeler l' `next` intergiciel (middleware).
 
 Il s’agit de l’intergiciel (middleware) Terminal Server, car il met fin à la recherche, exécute certaines fonctionnalités, puis retourne.
 
 Comparaison entre un intergiciel et un routage de terminaux :
 * Les deux approches permettent d’arrêter le pipeline de traitement :
-    * L’intergiciel termine le pipeline en retournant plutôt qu' `next`en appelant.
+    * L’intergiciel termine le pipeline en retournant plutôt qu’en appelant `next` .
     * Les points de terminaison sont toujours des terminaux.
 * L’intergiciel (middleware) Terminal permet de positionner l’intergiciel (middleware) à un emplacement arbitraire dans le pipeline :
-    * Les points de terminaison s’exécutent <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*>à la position de.
+    * Les points de terminaison s’exécutent à la position de <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> .
 * L’intergiciel (middleware) Terminal permet au code arbitraire de déterminer quand l’intergiciel correspond à :
     * Le code de correspondance d’itinéraire personnalisé peut être détaillé et difficile à écrire correctement.
     * Le routage fournit des solutions simples pour les applications classiques. La plupart des applications n’ont pas besoin de code de correspondance d’itinéraire personnalisé.
-* Interface des points de terminaison avec un intergiciel `UseAuthorization` ( `UseCors`middleware) tel que et.
-    * L’utilisation d’un intergiciel ( `UseAuthorization` middleware `UseCors` ) terminal avec ou nécessite une interface manuelle avec le système d’autorisation.
+* Interface des points de terminaison avec un intergiciel (middleware) tel que `UseAuthorization` et `UseCors` .
+    * L’utilisation d’un intergiciel (middleware) terminal avec `UseAuthorization` ou `UseCors` nécessite une interface manuelle avec le système d’autorisation.
 
 Un [point de terminaison](#endpoint) définit les deux :
 
@@ -255,11 +242,11 @@ L’intergiciel (middleware) terminal peut être un outil efficace, mais peut n�
 
 Envisagez l’intégration avec le routage avant d’écrire un intergiciel (middleware) Terminal.
 
-Un intergiciel (middleware) terminal existant qui [Map](xref:fundamentals/middleware/index#branch-the-middleware-pipeline) s’intègre <xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen*> à Map ou peut généralement être converti en point de terminaison prenant en charge le routage. [MapHealthChecks](https://github.com/aspnet/AspNetCore/blob/master/src/Middleware/HealthChecks/src/Builder/HealthCheckEndpointRouteBuilderExtensions.cs#L16) illustre le modèle de routeur-Ware :
-* Écrire une méthode d’extension <xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder>sur.
-* Créez un pipeline d’intergiciel (middleware <xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder.CreateApplicationBuilder*>) imbriqué à l’aide de.
+Un intergiciel (middleware) terminal existant qui s’intègre à [Map](xref:fundamentals/middleware/index#branch-the-middleware-pipeline) ou <xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen*> peut généralement être converti en point de terminaison prenant en charge le routage. [MapHealthChecks](https://github.com/aspnet/AspNetCore/blob/master/src/Middleware/HealthChecks/src/Builder/HealthCheckEndpointRouteBuilderExtensions.cs#L16) illustre le modèle de routeur-Ware :
+* Écrire une méthode d’extension sur <xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder> .
+* Créez un pipeline d’intergiciel (middleware) imbriqué à l’aide de <xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder.CreateApplicationBuilder*> .
 * Attachez l’intergiciel au nouveau pipeline. Dans ce cas, <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks*>.
-* <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.Build*>pipeline d’intergiciel (middleware <xref:Microsoft.AspNetCore.Http.RequestDelegate>) dans un.
+* <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.Build*>pipeline d’intergiciel (middleware) dans un <xref:Microsoft.AspNetCore.Http.RequestDelegate> .
 * Appelez `Map` et fournissez le nouveau pipeline d’intergiciel (middleware).
 * Retourne l’objet générateur fourni par `Map` à partir de la méthode d’extension.
 
@@ -279,7 +266,7 @@ Le système de métadonnées a été créé en réponse aux problèmes rencontr�
 * Est basé sur les données du chemin d’URL et des en-têtes.
 * Peut être étendu pour prendre en compte toutes les données de la requête.
 
-Lors de l’exécution d’un intergiciel (middleware) de `Endpoint` routage, il définit un et des valeurs de <xref:Microsoft.AspNetCore.Http.HttpContext> route à une fonctionnalité de [demande](xref:fundamentals/request-features) sur le à partir de la requête actuelle :
+Lors de l’exécution d’un intergiciel (middleware) de routage, il définit un `Endpoint` et des valeurs de route à une [fonctionnalité de demande](xref:fundamentals/request-features) sur le <xref:Microsoft.AspNetCore.Http.HttpContext> à partir de la requête actuelle :
 
 * L’appel de [HttpContext. GetEndpoint](<xref:Microsoft.AspNetCore.Http.EndpointHttpContextExtensions.GetEndpoint*>) obtient le point de terminaison.
 * `HttpRequest.RouteValues` récupère la collection de valeurs d’itinéraire.
@@ -291,11 +278,11 @@ Le système de routage dans le routage de point de terminaison est responsable d
 * Toute décision qui peut affecter la distribution ou l’application de stratégies de sécurité est effectuée à l’intérieur du système de routage.
 
 > [!WARNING]
-> À des fins de compatibilité descendante, lors de l’exécution d’un contrôleur ou d’un délégué de point de terminaison Razor Pages, les propriétés de [RouteContext. RouteData](xref:Microsoft.AspNetCore.Routing.RouteContext.RouteData) sont définies sur les valeurs appropriées en fonction du traitement de la demande effectué jusqu’à présent.
+> Pour la compatibilité descendante, lors de l’exécution d’un délégué de point de terminaison de contrôleur ou Razor de pages, les propriétés de [RouteContext. RouteData](xref:Microsoft.AspNetCore.Routing.RouteContext.RouteData) sont définies sur les valeurs appropriées en fonction du traitement de la demande effectué jusqu’à présent.
 >
 > Le `RouteContext` type sera marqué comme obsolète dans une version ultérieure :
 >
-> * `RouteData.Values` Migrez `HttpRequest.RouteValues`vers.
+> * Migrez `RouteData.Values` vers `HttpRequest.RouteValues` .
 > * Migrez `RouteData.DataTokens` pour récupérer [IDataTokensMetadata](xref:Microsoft.AspNetCore.Routing.IDataTokensMetadata) à partir des métadonnées de point de terminaison.
 
 La correspondance d’URL fonctionne dans un ensemble configurable de phases. Dans chaque phase, la sortie est un ensemble de correspondances. L’ensemble des correspondances peut être réduit davantage à la phase suivante. L’implémentation du routage ne garantit pas un ordre de traitement pour les points de terminaison correspondants. **Toutes les** correspondances possibles sont traitées en même temps. Les phases de correspondance d’URL se produisent dans l’ordre suivant. ASP.NET Core :
@@ -310,16 +297,16 @@ La liste des points de terminaison est hiérarchisée en fonction des éléments
 * [RouteEndpoint. Order](xref:Microsoft.AspNetCore.Routing.RouteEndpoint.Order*)
 * [Priorité du modèle de routage](#rtp)
 
-Tous les points de terminaison correspondants sont traités dans chaque phase <xref:Microsoft.AspNetCore.Routing.Matching.EndpointSelector> jusqu’à ce que le soit atteint. `EndpointSelector` Est la phase finale. Il choisit le point de terminaison dont la priorité est la plus élevée parmi les correspondances comme meilleure correspondance. S’il existe d’autres correspondances avec la même priorité que la meilleure correspondance, une exception de correspondance ambiguë est levée.
+Tous les points de terminaison correspondants sont traités dans chaque phase jusqu’à ce que le <xref:Microsoft.AspNetCore.Routing.Matching.EndpointSelector> soit atteint. `EndpointSelector`Est la phase finale. Il choisit le point de terminaison dont la priorité est la plus élevée parmi les correspondances comme meilleure correspondance. S’il existe d’autres correspondances avec la même priorité que la meilleure correspondance, une exception de correspondance ambiguë est levée.
 
-La priorité d’itinéraire est calculée sur la base d’un modèle d’itinéraire **plus spécifique** qui reçoit une priorité plus élevée. Par exemple, considérez les `/hello` modèles `/{message}`et :
+La priorité d’itinéraire est calculée sur la base d’un modèle d’itinéraire **plus spécifique** qui reçoit une priorité plus élevée. Par exemple, considérez les modèles `/hello` et `/{message}` :
 
-* Les deux correspondent au chemin `/hello`de l’URL.
+* Les deux correspondent au chemin de l’URL `/hello` .
 * `/hello`est plus spécifique et par conséquent une priorité plus élevée.
 
-En général, la priorité des itinéraires est un bon choix pour choisir la meilleure correspondance pour les types de schémas d’URL utilisés dans la pratique. À <xref:Microsoft.AspNetCore.Routing.RouteEndpoint.Order> utiliser uniquement lorsque cela est nécessaire pour éviter une ambiguïté.
+En général, la priorité des itinéraires est un bon choix pour choisir la meilleure correspondance pour les types de schémas d’URL utilisés dans la pratique. <xref:Microsoft.AspNetCore.Routing.RouteEndpoint.Order>À utiliser uniquement lorsque cela est nécessaire pour éviter une ambiguïté.
 
-En raison des types d’extensibilité fournis par le routage, il n’est pas possible pour le système de routage de calculer à l’avance les itinéraires ambigus. Prenons l’exemple des modèles `/{message:alpha}` de routage et : `/{message:int}`
+En raison des types d’extensibilité fournis par le routage, il n’est pas possible pour le système de routage de calculer à l’avance les itinéraires ambigus. Prenons l’exemple des modèles de routage `/{message:alpha}` et `/{message:int}` :
 
 * La `alpha` contrainte correspond uniquement aux caractères alphabétiques.
 * La `int` contrainte correspond uniquement aux nombres.
@@ -328,7 +315,7 @@ En raison des types d’extensibilité fournis par le routage, il n’est pas po
 
 > [!WARNING]
 >
-> L’ordre des opérations à <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> l’intérieur n’influe pas sur le comportement du routage, à une exception près. <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>et <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute*> attribuent automatiquement une valeur de commande à leurs points de terminaison en fonction de l’ordre dans lequel ils sont appelés. Cela simule le comportement à long terme des contrôleurs sans le système de routage fournissant les mêmes garanties que les implémentations de routage plus anciennes.
+> L’ordre des opérations à l’intérieur <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> n’influe pas sur le comportement du routage, à une exception près. <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>et <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute*> attribuent automatiquement une valeur de commande à leurs points de terminaison en fonction de l’ordre dans lequel ils sont appelés. Cela simule le comportement à long terme des contrôleurs sans le système de routage fournissant les mêmes garanties que les implémentations de routage plus anciennes.
 >
 > Dans l’implémentation héritée du routage, il est possible d’implémenter l’extensibilité du routage qui dépend de l’ordre dans lequel les itinéraires sont traités. Routage des points de terminaison dans ASP.NET Core 3,0 et versions ultérieures :
 > 
@@ -346,7 +333,7 @@ La [priorité des modèles de routage](https://github.com/dotnet/aspnetcore/blob
 * Évite d’avoir à ajuster l’ordre des points de terminaison dans les cas courants.
 * Tente de faire correspondre les attentes de sens commun du comportement de routage.
 
-Par exemple, considérez `/Products/List` les `/Products/{id}`modèles et. Il serait raisonnable de supposer que `/Products/List` est une meilleure correspondance que `/Products/{id}` pour le chemin d’accès `/Products/List`de l’URL. Le fonctionne car le segment `/List` littéral est considéré comme ayant une meilleure priorité que le segment `/{id}`de paramètres.
+Par exemple, considérez les modèles `/Products/List` et `/Products/{id}` . Il serait raisonnable de supposer que `/Products/List` est une meilleure correspondance que `/Products/{id}` pour le chemin d’accès de l’URL `/Products/List` . Le fonctionne car le segment littéral `/List` est considéré comme ayant une meilleure priorité que le segment de paramètres `/{id}` .
 
 Les détails du fonctionnement de la précédence sont associés à la façon dont les modèles de routage sont définis :
 
@@ -367,20 +354,20 @@ Génération d’URL :
 * Est le processus par lequel le routage peut créer un chemin d’URL basé sur un ensemble de valeurs d’itinéraire.
 * Permet une séparation logique entre les points de terminaison et les URL qui y accèdent.
 
-Le routage des points <xref:Microsoft.AspNetCore.Routing.LinkGenerator> de terminaison comprend l’API. `LinkGenerator`est un service Singleton disponible à partir de [di](xref:fundamentals/dependency-injection). L' `LinkGenerator` API peut être utilisée en dehors du contexte d’une demande en cours d’exécution. [Mvc. IUrlHelper](xref:Microsoft.AspNetCore.Mvc.IUrlHelper) et les scénarios <xref:Microsoft.AspNetCore.Mvc.IUrlHelper>qui reposent sur, tels que les [balises d’assistance](xref:mvc/views/tag-helpers/intro), les applications auxiliaires html et les résultats d' [action](xref:mvc/controllers/actions), utilisent l' `LinkGenerator` API en interne pour fournir des fonctionnalités de génération de liens.
+Le routage des points de terminaison comprend l' <xref:Microsoft.AspNetCore.Routing.LinkGenerator> API. `LinkGenerator`est un service Singleton disponible à partir de [di](xref:fundamentals/dependency-injection). L' `LinkGenerator` API peut être utilisée en dehors du contexte d’une demande en cours d’exécution. [Mvc. IUrlHelper](xref:Microsoft.AspNetCore.Mvc.IUrlHelper) et les scénarios qui reposent sur <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> , tels que les [balises d’assistance](xref:mvc/views/tag-helpers/intro), les applications auxiliaires html et les [résultats d’action](xref:mvc/controllers/actions), utilisent l' `LinkGenerator` API en interne pour fournir des fonctionnalités de génération de liens.
 
-Le générateur de liens est basé sur le concept d’une **adresse** et de **schémas d’adresse**. Un schéma d’adresse est un moyen de déterminer les points de terminaison à prendre en compte pour la génération de liens. Par exemple, les scénarios nom de l’itinéraire et valeurs de routage de nombreux utilisateurs sont familiarisés avec les contrôleurs et les Razor Pages sont implémentés en tant que schéma d’adresse.
+Le générateur de liens est basé sur le concept d’une **adresse** et de **schémas d’adresse**. Un schéma d’adresse est un moyen de déterminer les points de terminaison à prendre en compte pour la génération de liens. Par exemple, les scénarios nom de l’itinéraire et valeurs de routage de nombreux utilisateurs sont familiarisés avec les contrôleurs et les Razor pages sont implémentées en tant que schéma d’adresse.
 
-Le générateur de liens peut établir une liaison avec les contrôleurs et les Razor Pages via les méthodes d’extension suivantes :
+Le générateur de liens peut établir une liaison avec les contrôleurs et les Razor pages à l’aide des méthodes d’extension suivantes :
 
 * <xref:Microsoft.AspNetCore.Routing.ControllerLinkGeneratorExtensions.GetPathByAction*>
 * <xref:Microsoft.AspNetCore.Routing.ControllerLinkGeneratorExtensions.GetUriByAction*>
 * <xref:Microsoft.AspNetCore.Routing.PageLinkGeneratorExtensions.GetPathByPage*>
 * <xref:Microsoft.AspNetCore.Routing.PageLinkGeneratorExtensions.GetUriByPage*>
 
-Les surcharges de ces méthodes acceptent les arguments qui `HttpContext`incluent le. Ces méthodes sont fonctionnellement équivalentes à [URL. action](xref:System.Web.Mvc.UrlHelper.Action*) et [URL. page](xref:Microsoft.AspNetCore.Mvc.UrlHelperExtensions.Page*), mais offrent une flexibilité et des options supplémentaires.
+Les surcharges de ces méthodes acceptent les arguments qui incluent le `HttpContext` . Ces méthodes sont fonctionnellement équivalentes à [URL. action](xref:System.Web.Mvc.UrlHelper.Action*) et [URL. page](xref:Microsoft.AspNetCore.Mvc.UrlHelperExtensions.Page*), mais offrent une flexibilité et des options supplémentaires.
 
-Les `GetPath*` méthodes sont très similaires à `Url.Action` et `Url.Page`, car elles génèrent un URI contenant un chemin d’accès absolu. Les méthodes `GetUri*` génèrent toujours un URI absolu contenant un schéma et un hôte. Les méthodes qui acceptent un `HttpContext` génèrent un URI dans le contexte de la requête en cours d’exécution. Les valeurs de route [ambiante](#ambient) , le chemin d’accès de base de l’URL, le schéma et l’hôte de la demande en cours d’exécution sont utilisés, sauf s’ils sont substitués.
+Les `GetPath*` méthodes sont très similaires à `Url.Action` et `Url.Page` , car elles génèrent un URI contenant un chemin d’accès absolu. Les méthodes `GetUri*` génèrent toujours un URI absolu contenant un schéma et un hôte. Les méthodes qui acceptent un `HttpContext` génèrent un URI dans le contexte de la requête en cours d’exécution. Les valeurs de route [ambiante](#ambient) , le chemin d’accès de base de l’URL, le schéma et l’hôte de la demande en cours d’exécution sont utilisés, sauf s’ils sont substitués.
 
 <xref:Microsoft.AspNetCore.Routing.LinkGenerator> est appelé avec une adresse. La génération d’un URI se fait en deux étapes :
 
@@ -390,20 +377,89 @@ Les `GetPath*` méthodes sont très similaires à `Url.Action` et `Url.Page`, ca
 Les méthodes fournies par <xref:Microsoft.AspNetCore.Routing.LinkGenerator> prennent en charge des fonctionnalités de génération de liens standard pour n’importe quel type d’adresse. La méthode la plus pratique pour utiliser le générateur de liens est d’utiliser des méthodes d’extension qui effectuent des opérations pour un type d’adresse spécifique :
 
 | Méthode d'extension | Description |
-| ---------------- | ----------- |
-| <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Génère un URI avec un chemin absolu basé sur les valeurs fournies. |
-| <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Génère un URI absolu basé sur les valeurs fournies.             |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-------- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------ | | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Génère un URI avec un chemin d’accès absolu basé sur les valeurs fournies. | | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Génère un URI absolu basé sur les valeurs fournies.             |
 
 > [!WARNING]
 > Faites attention aux implications suivantes de l’appel de méthodes <xref:Microsoft.AspNetCore.Routing.LinkGenerator> :
 >
 > * Utilisez les méthodes d’extension `GetUri*` avec précaution dans une configuration d’application qui ne valide pas l’en-tête `Host` des requêtes entrantes. Si l' `Host` en-tête des demandes entrantes n’est pas validé, une entrée de demande non approuvée peut être renvoyée au client dans les URI d’une vue ou d’une page. Nous recommandons que toutes les applications de production configurent leur serveur pour qu’il valide l’en-tête `Host` par rapport à des valeurs valides connues.
 >
-> * Utilisez <xref:Microsoft.AspNetCore.Routing.LinkGenerator> avec précaution dans le middleware en combinaison avec `Map` ou `MapWhen`. `Map*` modifie le chemin de base de la requête en cours d’exécution, ce qui affecte la sortie de la génération de liens. Toutes les API <xref:Microsoft.AspNetCore.Routing.LinkGenerator> permettent la spécification d’un chemin de base. Spécifiez un chemin d’accès de base `Map*` vide pour annuler l’impact sur la génération de liens.
+> * Utilisez <xref:Microsoft.AspNetCore.Routing.LinkGenerator> avec précaution dans le middleware en combinaison avec `Map` ou `MapWhen`. `Map*` modifie le chemin de base de la requête en cours d’exécution, ce qui affecte la sortie de la génération de liens. Toutes les API <xref:Microsoft.AspNetCore.Routing.LinkGenerator> permettent la spécification d’un chemin de base. Spécifiez un chemin d’accès de base vide pour annuler l' `Map*` impact sur la génération de liens.
 
 ### <a name="middleware-example"></a>Exemple de middleware
 
-Dans l’exemple suivant, un intergiciel (middleware) <xref:Microsoft.AspNetCore.Routing.LinkGenerator> utilise l’API pour créer un lien vers une méthode d’action qui répertorie les produits du magasin. En utilisant le générateur de liens en l’injectant dans une classe `GenerateLink` et en appelant est disponible pour n’importe quelle classe dans une application :
+Dans l’exemple suivant, un intergiciel (middleware) utilise l' <xref:Microsoft.AspNetCore.Routing.LinkGenerator> API pour créer un lien vers une méthode d’action qui répertorie les produits du magasin. En utilisant le générateur de liens en l’injectant dans une classe et en appelant `GenerateLink` est disponible pour n’importe quelle classe dans une application :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Middleware/ProductsLinkMiddleware.cs?name=snippet)]
 
@@ -413,27 +469,27 @@ Dans l’exemple suivant, un intergiciel (middleware) <xref:Microsoft.AspNetCore
 
 Les jetons dans `{}` définissent les paramètres de routage qui sont liés si l’itinéraire est mis en correspondance. Plusieurs paramètres de routage peuvent être définis dans un segment de routage, mais les paramètres de routage doivent être séparés par une valeur littérale. Par exemple `{controller=Home}{action=Index}` n’est pas une route valide, car il n’y a aucune valeur littérale entre `{controller}` et `{action}`.  Les paramètres d’itinéraire doivent avoir un nom et des attributs supplémentaires peuvent être spécifiés.
 
-Un texte littéral autre que les paramètres de routage (par exemple, `{id}`) et le séparateur de chemin `/` doit correspondre au texte présent dans l’URL. La correspondance de texte ne respecte pas la casse et est basée sur la représentation décodée du chemin d’accès de l’URL. Pour correspondre à un délimiteur `{` de `}`paramètre d’itinéraire littéral ou, échappez le délimiteur en répétant le caractère. Par exemple `{{` , `}}`ou.
+Un texte littéral autre que les paramètres de routage (par exemple, `{id}`) et le séparateur de chemin `/` doit correspondre au texte présent dans l’URL. La correspondance de texte ne respecte pas la casse et est basée sur la représentation décodée du chemin d’accès de l’URL. Pour correspondre à un délimiteur de paramètre d’itinéraire littéral `{` ou `}` , échappez le délimiteur en répétant le caractère. Par exemple `{{` `}}` , ou.
 
-Astérisque `*` ou double astérisque `**`:
+Astérisque `*` ou double astérisque `**` :
 
 * Peut être utilisé comme préfixe d’un paramètre d’itinéraire pour effectuer une liaison au reste de l’URI.
 * Sont appelés paramètres **catch-all** . Par exemple, `blog/{**slug}`:
-  * Correspond à n’importe quel URI `/blog` commençant par et dont la valeur est après.
+  * Correspond à n’importe quel URI commençant par `/blog` et dont la valeur est après.
   * La valeur suivante `/blog` est assignée à la valeur de route [Slug](https://developer.mozilla.org/docs/Glossary/Slug) .
 
 [!INCLUDE[](~/includes/catchall.md)]
 
 Les paramètres fourre-tout peuvent également établir une correspondance avec la chaîne vide.
 
-Le paramètre Catch-All échappe les caractères appropriés lorsque l’itinéraire est utilisé pour générer une URL, y compris les `/` caractères de séparation de chemin. Par exemple, la route `foo/{*path}` avec les valeurs de route `{ path = "my/path" }` génère `foo/my%2Fpath`. Notez la barre oblique d’échappement. Pour les séparateurs de chemin aller-retour, utilisez le préfixe de paramètre de routage `**`. La route `foo/{**path}` avec `{ path = "my/path" }` génère `foo/my/path`.
+Le paramètre Catch-All échappe les caractères appropriés lorsque l’itinéraire est utilisé pour générer une URL, y compris les caractères de séparation de chemin `/` . Par exemple, la route `foo/{*path}` avec les valeurs de route `{ path = "my/path" }` génère `foo/my%2Fpath`. Notez la barre oblique d’échappement. Pour les séparateurs de chemin aller-retour, utilisez le préfixe de paramètre de routage `**`. La route `foo/{**path}` avec `{ path = "my/path" }` génère `foo/my/path`.
 
 Les modèles d’URL qui tentent de capturer un nom de fichier avec une extension de fichier facultative doivent faire l’objet de considérations supplémentaires. Prenez par exemple le modèle `files/{filename}.{ext?}`. Quand des valeurs existent à la fois pour `filename` et pour `ext`, les deux valeurs sont renseignées. Si seule une valeur `filename` existe dans l’URL, l’itinéraire correspond, car la fin `.` est facultative. Les URL suivantes correspondent à cette route :
 
 * `/files/myFile.txt`
 * `/files/myFile`
 
-Les paramètres de route peuvent avoir des **valeurs par défaut**, désignées en spécifiant la valeur par défaut après le nom du paramètre, séparée par un signe égal (`=`). Par exemple, `{controller=Home}` définit `Home` comme valeur par défaut de `controller`. La valeur par défaut est utilisée si aucune valeur n’est présente dans l’URL pour le paramètre. Les paramètres de routage sont rendus facultatifs en ajoutant un`?`point d’interrogation () à la fin du nom du paramètre. Par exemple : `id?`. La différence entre les valeurs facultatives et les paramètres d’itinéraire par défaut est la suivante :
+Les paramètres de route peuvent avoir des **valeurs par défaut**, désignées en spécifiant la valeur par défaut après le nom du paramètre, séparée par un signe égal (`=`). Par exemple, `{controller=Home}` définit `Home` comme valeur par défaut de `controller`. La valeur par défaut est utilisée si aucune valeur n’est présente dans l’URL pour le paramètre. Les paramètres de routage sont rendus facultatifs en ajoutant un point d’interrogation ( `?` ) à la fin du nom du paramètre. Par exemple : `id?`. La différence entre les valeurs facultatives et les paramètres d’itinéraire par défaut est la suivante :
 
 * Un paramètre d’itinéraire avec une valeur par défaut produit toujours une valeur.
 * Un paramètre facultatif a une valeur uniquement lorsqu’une valeur est fournie par l’URL de la requête.
@@ -442,19 +498,506 @@ Les paramètres de route peuvent avoir des contraintes, qui doivent correspondre
 
 Le nom de la contrainte et les arguments sont passés au service <xref:Microsoft.AspNetCore.Routing.IInlineConstraintResolver> pour créer une instance de <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> à utiliser dans le traitement des URL. Par exemple, le modèle de routage `blog/{article:minlength(10)}` spécifie une contrainte `minlength` avec l’argument `10`. Pour plus d’informations sur les contraintes de route et pour obtenir la liste des contraintes fournies par le framework, consultez la section [Informations de référence sur les contraintes de route](#route-constraint-reference).
 
-Les paramètres de routage peuvent également avoir des transformateurs de paramètre. Les transformateurs de paramètres transforment la valeur d’un paramètre lors de la génération de liens et d’actions et de pages correspondantes en URL. Comme pour les contraintes, les transformateurs de paramètres peuvent être ajoutés Inline à `:` un paramètre d’itinéraire en ajoutant un nom de transformateur et après le nom du paramètre d’itinéraire. Par exemple, le modèle de routage `blog/{article:slugify}` spécifie un transformateur `slugify`. Pour plus d’informations sur les transformateurs de paramètre, consultez la section [Informations de référence sur les transformateurs de paramètre](#parameter-transformer-reference).
+Les paramètres de routage peuvent également avoir des transformateurs de paramètre. Les transformateurs de paramètres transforment la valeur d’un paramètre lors de la génération de liens et d’actions et de pages correspondantes en URL. Comme pour les contraintes, les transformateurs de paramètres peuvent être ajoutés Inline à un paramètre d’itinéraire en ajoutant un `:` nom de transformateur et après le nom du paramètre d’itinéraire. Par exemple, le modèle de routage `blog/{article:slugify}` spécifie un transformateur `slugify`. Pour plus d’informations sur les transformateurs de paramètre, consultez la section [Informations de référence sur les transformateurs de paramètre](#parameter-transformer-reference).
 
 Le tableau suivant montre des exemples de modèles de routage et leur comportement :
 
 | Modèle de routage                           | Exemple d’URI en correspondance    | URI de la requête&hellip;                                                    |
-| ---------------------------------------- | ----------------------- | -------------------------------------------------------------------------- |
-| `hello`                                  | `/hello`                | Correspond seulement au chemin unique `/hello`.                                     |
-| `{Page=Home}`                            | `/`                     | Correspond à `Page` et le définit sur `Home`.                                         |
-| `{Page=Home}`                            | `/Contact`              | Correspond à `Page` et le définit sur `Contact`.                                      |
-| `{controller}/{action}/{id?}`            | `/Products/List`        | Mappe au contrôleur `Products` et à l’action `List`.                       |
-| `{controller}/{action}/{id?}`            | `/Products/Details/123` | Correspond au contrôleur `Products` et `Details` à l’action`id` avec la valeur 123. |
-| `{controller=Home}/{action=Index}/{id?}` | `/`                     | Correspond au contrôleur `Home` et `Index` à la méthode. `id` est ignoré.        |
-| `{controller=Home}/{action=Index}/{id?}` | `/Products`         | Correspond au contrôleur `Products` et `Index` à la méthode. `id` est ignoré.        |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-------------------- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------------ | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------------------------------------- | | `hello`                                  | `/hello`                | Correspond uniquement au chemin d’accès unique `/hello` .                                     | | `{Page=Home}`                            | `/`                     | Correspond à et affecte `Page` à la valeur `Home` .                                         | | `{Page=Home}`                            | `/Contact`              | Correspond à et affecte `Page` à la valeur `Contact` .                                      | | `{controller}/{action}/{id?}`            | `/Products/List`        | Correspond au `Products` contrôleur et à l' `List` action.                       | | `{controller}/{action}/{id?}`            | `/Products/Details/123` | Correspond au `Products` contrôleur et à l' `Details` action avec la `id` valeur 123. | | `{controller=Home}/{action=Index}/{id?}` | `/`                     | Correspond au `Home` contrôleur et à la `Index` méthode. `id` est ignoré.        | | `{controller=Home}/{action=Index}/{id?}` | `/Products`         | Correspond au `Products` contrôleur et à la `Index` méthode. `id` est ignoré.        |
 
 L’utilisation d’un modèle est généralement l’approche la plus simple pour le routage. Il est également possible de spécifier des contraintes et des valeurs par défaut hors du modèle de routage.
 
@@ -465,20 +1008,20 @@ Les segments complexes fonctionnent d’une manière particulière qui doit êtr
 
 [!INCLUDE[](~/includes/regex.md)]
 
-Il s’agit d’un résumé des étapes que le routage effectue avec `/a{b}c{d}` le modèle et le `/abcd`chemin d’URL. `|` Est utilisé pour aider à visualiser le fonctionnement de l’algorithme :
+Il s’agit d’un résumé des étapes que le routage effectue avec le modèle `/a{b}c{d}` et le chemin d’URL `/abcd` . `|`Est utilisé pour aider à visualiser le fonctionnement de l’algorithme :
 
-* Le premier littéral, de droite à gauche, `c`est. Par `/abcd` conséquent, la recherche s’effectue `/ab|c|d`à partir de Right et trouve.
-* Tout ce qui se trouve`d`à droite () est maintenant mis en correspondance `{d}`avec le paramètre d’itinéraire.
-* Le littéral suivant, de droite à gauche, `a`est. Dans `/ab|c|d` ce cas, la recherche commence là où nous `a` l’avons `/|a|b|c|d`laissée, puis est trouvé.
-* La valeur à droite (`b`) est désormais mise en correspondance avec le paramètre `{b}`d’itinéraire.
+* Le premier littéral, de droite à gauche, est `c` . Par conséquent, la `/abcd` recherche s’effectue à partir de Right et trouve `/ab|c|d` .
+* Tout ce qui se trouve à droite ( `d` ) est maintenant mis en correspondance avec le paramètre d’itinéraire `{d}` .
+* Le littéral suivant, de droite à gauche, est `a` . Dans ce cas `/ab|c|d` , la recherche commence là où nous l’avons laissée, puis `a` est trouvé `/|a|b|c|d` .
+* La valeur à droite ( `b` ) est désormais mise en correspondance avec le paramètre d’itinéraire `{b}` .
 * Il n’y a pas de texte restant et aucun modèle de route restant, donc il s’agit d’une correspondance.
 
-Voici un exemple de cas négatif utilisant le même modèle `/a{b}c{d}` et le chemin d' `/aabcd`URL. Le `|` est utilisé pour aider à visualiser le fonctionnement de l’algorithme. Ce cas n’est pas une correspondance, qui est expliquée par le même algorithme :
-* Le premier littéral, de droite à gauche, `c`est. Par `/aabcd` conséquent, la recherche s’effectue `/aab|c|d`à partir de Right et trouve.
-* Tout ce qui se trouve`d`à droite () est maintenant mis en correspondance `{d}`avec le paramètre d’itinéraire.
-* Le littéral suivant, de droite à gauche, `a`est. Dans `/aab|c|d` ce cas, la recherche commence là où nous `a` l’avons `/a|a|b|c|d`laissée, puis est trouvé.
-* La valeur à droite (`b`) est désormais mise en correspondance avec le paramètre `{b}`d’itinéraire.
-* À ce stade, il reste du `a`texte, mais l’algorithme n’a plus de modèle de routage à analyser, donc ce n’est pas une correspondance.
+Voici un exemple de cas négatif utilisant le même modèle `/a{b}c{d}` et le chemin d’URL `/aabcd` . Le `|` est utilisé pour aider à visualiser le fonctionnement de l’algorithme. Ce cas n’est pas une correspondance, qui est expliquée par le même algorithme :
+* Le premier littéral, de droite à gauche, est `c` . Par conséquent, la `/aabcd` recherche s’effectue à partir de Right et trouve `/aab|c|d` .
+* Tout ce qui se trouve à droite ( `d` ) est maintenant mis en correspondance avec le paramètre d’itinéraire `{d}` .
+* Le littéral suivant, de droite à gauche, est `a` . Dans ce cas `/aab|c|d` , la recherche commence là où nous l’avons laissée, puis `a` est trouvé `/a|a|b|c|d` .
+* La valeur à droite ( `b` ) est désormais mise en correspondance avec le paramètre d’itinéraire `{b}` .
+* À ce stade, il reste du texte `a` , mais l’algorithme n’a plus de modèle de routage à analyser, donc ce n’est pas une correspondance.
 
 Étant donné que l’algorithme de correspondance n’est [pas gourmand](#greedy):
 
@@ -496,30 +1039,82 @@ La correspondance gourmande, également connue comme [correspondance tardive](ht
 Les contraintes de route s’exécutent quand une correspondance s’est produite pour l’URL entrante, et le chemin de l’URL est tokenisé en valeurs de route. En général, les contraintes de routage inspectent la valeur de routage associée via le modèle de routage et font une décision true ou false indiquant si la valeur est acceptable ou non. Certaines contraintes de routage utilisent des données hors de la valeur de route pour déterminer si la requête peut être routée. Par exemple, <xref:Microsoft.AspNetCore.Routing.Constraints.HttpMethodRouteConstraint> peut accepter ou rejeter une requête en fonction de son verbe HTTP. Les contraintes sont utilisées dans le routage des requêtes et la génération des liens.
 
 > [!WARNING]
-> N’utilisez pas de contraintes pour la validation des entrées. Si des contraintes sont utilisées pour la validation d’entrée, une entrée `404` non valide entraîne une réponse introuvable. Une entrée non valide doit `400` générer une demande incorrecte avec un message d’erreur approprié. Les contraintes de route sont utilisées pour lever l’ambiguïté entre des routes similaires, et non pas pour valider les entrées d’une route particulière.
+> N’utilisez pas de contraintes pour la validation des entrées. Si des contraintes sont utilisées pour la validation d’entrée, une entrée non valide entraîne une `404` réponse introuvable. Une entrée non valide doit générer une `400` Demande incorrecte avec un message d’erreur approprié. Les contraintes de route sont utilisées pour lever l’ambiguïté entre des routes similaires, et non pas pour valider les entrées d’une route particulière.
 
 Le tableau suivant montre des exemples de contraintes de routage et leur comportement attendu :
 
-| contrainte |  Exemple | Exemples de correspondances | Notes |
-| ---------- | ------- | --------------- | ----- |
-| `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier |
-| `bool` | `{active:bool}` | `true`, `FALSE` | Correspond `true` à `false`ou. Non-respect de la casse |
-| `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | Correspond à une `DateTime` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent. |
-| `decimal` | `{price:decimal}` | `49.99`, `-1,000.01` | Correspond à une `decimal` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent.|
-| `double` | `{weight:double}` | `1.234`, `-1,001.01e8` | Correspond à une `double` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent.|
-| `float` | `{weight:float}` | `1.234`, `-1,001.01e8` | Correspond à une `float` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent.|
-| `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638` | Correspond à une valeur `Guid` valide |
-| `long` | `{ticks:long}` | `123456789`, `-123456789` | Correspond à une valeur `long` valide |
-| `minlength(value)` | `{username:minlength(4)}` | `Rick` | La chaîne doit comporter au moins 4 caractères |
-| `maxlength(value)` | `{filename:maxlength(8)}` | `MyFile` | La chaîne ne doit pas comporter plus de 8 caractères |
-| `length(length)` | `{filename:length(12)}` | `somefile.txt` | La chaîne doit comporter exactement 12 caractères |
-| `length(min,max)` | `{filename:length(8,16)}` | `somefile.txt` | La chaîne doit comporter au moins 8 caractères et pas plus de 16 caractères |
-| `min(value)` | `{age:min(18)}` | `19` | La valeur entière doit être au moins égale à 18 |
-| `max(value)` | `{age:max(120)}` | `91` | La valeur entière ne doit pas être supérieure à 120 |
-| `range(min,max)` | `{age:range(18,120)}` | `91` | La valeur entière doit être au moins égale à 18 mais ne doit pas être supérieure à 120 |
-| `alpha` | `{name:alpha}` | `Rick` | La chaîne doit comporter un ou plusieurs caractères `a` - `z` alphabétiques et ne respecte pas la casse. |
-| `regex(expression)` | `{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}` | `123-45-6789` | La chaîne doit correspondre à l’expression régulière. Consultez les conseils relatifs à la définition d’une expression régulière. |
-| `required` | `{name:required}` | `Rick` | Utilisé pour garantir qu’une valeur autre qu’un paramètre est présente pendant la génération de l’URL |
+| contrainte | Exemple | Exemples de correspondances | Remarques |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+----- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+---- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-------- | ----- | | `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier | | `bool` | `{active:bool}` | `true`, `FALSE` | Correspond à `true` ou `false` . Non-respect de la casse | | `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | Correspond à une `DateTime` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent. | | `decimal` | `{price:decimal}` | `49.99`, `-1,000.01` | Correspond à une `decimal` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent. | | `double` | `{weight:double}` | `1.234`, `-1,001.01e8` | Correspond à une `double` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent. | | `float` | `{weight:float}` | `1.234`, `-1,001.01e8` | Correspond à une `float` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent. | | `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638` | Correspond à une `Guid` valeur valide | | `long`  |  `{ticks:long}`  |  `123456789` , `-123456789` | Correspond à une `long` valeur valide | | `minlength(value)`  |  `{username:minlength(4)}`  |  `Rick` | La chaîne doit comporter au moins 4 caractères | | `maxlength(value)` | `{filename:maxlength(8)}` | `MyFile` | La chaîne ne doit pas comporter plus de 8 caractères | | `length(length)` | `{filename:length(12)}` | `somefile.txt` | La chaîne doit contenir exactement 12 caractères | | `length(min,max)` | `{filename:length(8,16)}` | `somefile.txt` | La chaîne doit comporter au moins 8 caractères et ne pas comporter plus de 16 caractères | | `min(value)` | `{age:min(18)}` | `19` | La valeur entière doit être au moins égale à 18 | | `max(value)` | `{age:max(120)}` | `91` | La valeur entière ne doit pas être supérieure à 120 | | `range(min,max)` | `{age:range(18,120)}` | `91` | La valeur entière doit être au moins égale à 18, mais pas plus de 120 | | `alpha` | `{name:alpha}` | `Rick` | La chaîne doit comporter un ou plusieurs caractères alphabétiques et ne respecte pas la `a` - `z` casse. | | `regex(expression)` | `{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}` | `123-45-6789` | La chaîne doit correspondre à l’expression régulière. Consultez les conseils relatifs à la définition d’une expression régulière. | | `required` | `{name:required}` | `Rick` | Permet d’appliquer qu’une valeur sans paramètre est présente pendant la génération de l’URL |
 
 [!INCLUDE[](~/includes/regex.md)]
 
@@ -531,13 +1126,13 @@ public User GetUserById(int id) { }
 ```
 
 > [!WARNING]
-> Les contraintes de routage qui vérifient l’URL et sont converties en un type CLR utilisent toujours la culture dite indifférente. Par exemple, la conversion vers le type `int` CLR `DateTime`ou. Ces contraintes supposent que l’URL n’est pas localisable. Les contraintes de routage fournies par le framework ne modifient pas les valeurs stockées dans les valeurs de route. Toutes les valeurs de route analysées à partir de l’URL sont stockées sous forme de chaînes. Par exemple, la contrainte `float` tente de convertir la valeur de route en valeur float, mais la valeur convertie est utilisée uniquement pour vérifier qu’elle peut être convertie en valeur float.
+> Les contraintes de routage qui vérifient l’URL et sont converties en un type CLR utilisent toujours la culture dite indifférente. Par exemple, la conversion vers le type CLR `int` ou `DateTime` . Ces contraintes supposent que l’URL n’est pas localisable. Les contraintes de routage fournies par le framework ne modifient pas les valeurs stockées dans les valeurs de route. Toutes les valeurs de route analysées à partir de l’URL sont stockées sous forme de chaînes. Par exemple, la contrainte `float` tente de convertir la valeur de route en valeur float, mais la valeur convertie est utilisée uniquement pour vérifier qu’elle peut être convertie en valeur float.
 
 ### <a name="regular-expressions-in-constraints"></a>Expressions régulières dans les contraintes
 
 [!INCLUDE[](~/includes/regex.md)]
 
-Les expressions régulières peuvent être spécifiées en tant que `regex(...)` contraintes Inline à l’aide de la contrainte d’itinéraire. Les méthodes de <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> la famille acceptent également un littéral d’objet de contraintes. Si ce formulaire est utilisé, les valeurs de chaîne sont interprétées comme des expressions régulières.
+Les expressions régulières peuvent être spécifiées en tant que contraintes Inline à l’aide de la `regex(...)` contrainte d’itinéraire. Les méthodes de la <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> famille acceptent également un littéral d’objet de contraintes. Si ce formulaire est utilisé, les valeurs de chaîne sont interprétées comme des expressions régulières.
 
 Le code suivant utilise une contrainte Regex inline :
 
@@ -549,28 +1144,298 @@ Le code suivant utilise un littéral d’objet pour spécifier une contrainte Re
 
 Le framework ASP.NET Core ajoute `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.CultureInvariant` au constructeur d’expression régulière. Pour obtenir une description de ces membres, consultez <xref:System.Text.RegularExpressions.RegexOptions>.
 
-Les expressions régulières utilisent des délimiteurs et des jetons similaires à ceux utilisés par le routage et le langage C#. Les jetons d’expression régulière doivent être placés dans une séquence d’échappement. Pour utiliser l’expression `^\d{3}-\d{2}-\d{4}$` régulière dans une contrainte incluse, utilisez l’une des méthodes suivantes :
+Les expressions régulières utilisent des délimiteurs et des jetons similaires à ceux utilisés par le routage et le langage C#. Les jetons d’expression régulière doivent être placés dans une séquence d’échappement. Pour utiliser l’expression régulière `^\d{3}-\d{2}-\d{4}$` dans une contrainte incluse, utilisez l’une des méthodes suivantes :
 
-* Remplacez `\` les caractères fournis dans la chaîne `\\` en tant que caractères dans le fichier source C# pour échapper `\` le caractère d’échappement de la chaîne.
+* Remplacez les `\` caractères fournis dans la chaîne en tant que `\\` caractères dans le fichier source C# pour échapper le caractère d’échappement de la `\` chaîne.
 * [Littéraux de chaîne Verbatim](/dotnet/csharp/language-reference/keywords/string).
 
-Pour `{`échapper les caractères de délimiteur de paramètre de routage, `}`, `[` `]`,, doublez les caractères `{{`dans `}}`l' `[[`expression `]]`, par exemple,,,,. Le tableau suivant montre une expression régulière et sa version échappée :
+Pour échapper les caractères de délimiteur de paramètre de routage `{` ,,,, `}` `[` `]` doublez les caractères dans l’expression, par exemple,,, `{{` `}}` `[[` , `]]` . Le tableau suivant montre une expression régulière et sa version échappée :
 
 | Expression régulière    | Expression régulière placée dans une séquence d’échappement     |
-| --------------------- | ------------------------------ |
-| `^\d{3}-\d{2}-\d{4}$` | `^\\d{{3}}-\\d{{2}}-\\d{{4}}$` |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+----------- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+--------------- | | `^\d{3}-\d{2}-\d{4}$` | `^\\d{{3}}-\\d{{2}}-\\d{{4}}$` |
 | `^[a-z]{2}$`          | `^[[a-z]]{{2}}$`               |
 
-Les expressions régulières utilisées dans le routage commencent `^` souvent par le caractère et correspondent à la position de départ de la chaîne. Les expressions se terminent souvent `$` par le caractère et correspondent à la fin de la chaîne. Les `^` caractères `$` et garantissent que l’expression régulière correspond à l’intégralité de la valeur du paramètre d’itinéraire. Sans les `^` caractères `$` et, l’expression régulière correspond à toute sous-chaîne de la chaîne, ce qui est souvent indésirable. Le tableau suivant fournit des exemples et explique pourquoi ils correspondent ou ne parviennent pas à faire correspondre :
+Les expressions régulières utilisées dans le routage commencent souvent par le `^` caractère et correspondent à la position de départ de la chaîne. Les expressions se terminent souvent par le `$` caractère et correspondent à la fin de la chaîne. Les `^` `$` caractères et garantissent que l’expression régulière correspond à l’intégralité de la valeur du paramètre d’itinéraire. Sans les `^` `$` caractères et, l’expression régulière correspond à toute sous-chaîne de la chaîne, ce qui est souvent indésirable. Le tableau suivant fournit des exemples et explique pourquoi ils correspondent ou ne parviennent pas à faire correspondre :
 
-| Expression   | String    | Correspond | Commentaire               |
-| ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | mz        | Oui   | Correspondance avec l’expression    |
-| `[a-z]{2}`   | MZ        | Oui   | Non-respect de la casse    |
-| `^[a-z]{2}$` | hello     | Non     | Voir `^` et `$` ci-dessus |
-| `^[a-z]{2}$` | 123abc456 | Non     | Voir `^` et `$` ci-dessus |
+| Expression   | Chaîne    | Correspond | Commentaire               |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------ | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+----- | :---: |  titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+---------- | | `[a-z]{2}`   | Bonjour | Oui | Correspondances de sous-chaînes | | `[a-z]{2}`   | 123abc456 | Oui | Correspondances de sous-chaînes | | `[a-z]{2}`   | MZ | Oui | Expression matches | | `[a-z]{2}`   | MZ | Oui | Ne respecte pas la casse | | `^[a-z]{2}$` | Bonjour | Non | Voir `^` et `$` versions ultérieures | | `^[a-z]{2}$` | 123abc456 | Non | Voir `^` et `$` versions ultérieures |
 
 Pour plus d’informations sur la syntaxe des expressions régulières, consultez [Expressions régulières du .NET Framework](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -578,13 +1443,13 @@ Pour contraindre un paramètre à un ensemble connu de valeurs possibles, utilis
 
 ### <a name="custom-route-constraints"></a>Contraintes d’itinéraire personnalisées
 
-Vous pouvez créer des contraintes de routage personnalisées <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> en implémentant l’interface. L' `IRouteConstraint` interface contient <xref:System.Web.Routing.IRouteConstraint.Match*>, qui retourne `true` si la contrainte est satisfaite `false` et dans le cas contraire.
+Vous pouvez créer des contraintes de routage personnalisées en implémentant l' <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> interface. L' `IRouteConstraint` interface contient <xref:System.Web.Routing.IRouteConstraint.Match*> , qui retourne `true` si la contrainte est satisfaite et dans le `false` cas contraire.
 
 Les contraintes de routage personnalisées sont rarement nécessaires. Avant d’implémenter une contrainte d’itinéraire personnalisée, envisagez d’autres méthodes, telles que la liaison de modèle.
 
 Le dossier ASP.NET Core [Constraints](https://github.com/dotnet/aspnetcore/tree/master/src/Http/Routing/src/Constraints) fournit de bons exemples de création de contraintes. Par exemple, [GuidRouteConstraint](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Constraints/GuidRouteConstraint.cs#L18).
 
-Pour utiliser un personnalisé `IRouteConstraint`, le type de contrainte d’itinéraire doit être enregistré avec l' <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> application dans le conteneur de service. Un `ConstraintMap` est un dictionnaire qui mappe les clés de contrainte d’itinéraire aux implémentations `IRouteConstraint` qui valident ces contraintes. Le `ConstraintMap` d’une application peut être mis à jour dans `Startup.ConfigureServices` dans le cadre d’un appel [services.AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) ou en configurant <xref:Microsoft.AspNetCore.Routing.RouteOptions> directement avec `services.Configure<RouteOptions>`. Par exemple :
+Pour utiliser un personnalisé `IRouteConstraint` , le type de contrainte d’itinéraire doit être enregistré avec l’application <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> dans le conteneur de service. Un `ConstraintMap` est un dictionnaire qui mappe les clés de contrainte d’itinéraire aux implémentations `IRouteConstraint` qui valident ces contraintes. Le `ConstraintMap` d’une application peut être mis à jour dans `Startup.ConfigureServices` dans le cadre d’un appel [services.AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) ou en configurant <xref:Microsoft.AspNetCore.Routing.RouteOptions> directement avec `services.Configure<RouteOptions>`. Par exemple :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/StartupConstraint.cs?name=snippet)]
 
@@ -594,7 +1459,7 @@ La contrainte précédente est appliquée dans le code suivant :
 
 [!INCLUDE[](~/includes/MyDisplayRouteInfo.md)]
 
-L’implémentation de `MyCustomConstraint` empêche `0` d’être appliquée à un paramètre d’itinéraire :
+L’implémentation de `MyCustomConstraint` empêche d' `0` être appliquée à un paramètre d’itinéraire :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/StartupConstraint.cs?name=snippet2)]
 
@@ -605,20 +1470,20 @@ Le code précédent :
 * Empêche `0` dans le `{id}` segment de l’itinéraire.
 * Est présenté pour fournir un exemple de base de l’implémentation d’une contrainte personnalisée. Il ne doit pas être utilisé dans une application de production.
 
-Le code suivant est une meilleure approche pour empêcher un `id` contenant un `0` qui est traité :
+Le code suivant est une meilleure approche pour empêcher un `id` contenant un qui est `0` traité :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Controllers/TestController.cs?name=snippet2)]
 
-Le code précédent présente les avantages suivants par rapport `MyCustomConstraint` à l’approche :
+Le code précédent présente les avantages suivants par rapport à l' `MyCustomConstraint` approche :
 
 * Elle ne nécessite pas de contrainte personnalisée.
-* Elle retourne une erreur plus descriptive lorsque le paramètre d’itinéraire `0`contient.
+* Elle retourne une erreur plus descriptive lorsque le paramètre d’itinéraire contient `0` .
 
 ## <a name="parameter-transformer-reference"></a>Informations de référence sur le transformateur de paramètre
 
 Transformateurs de paramètre :
 
-* Exécuter lors de la génération d' <xref:Microsoft.AspNetCore.Routing.LinkGenerator>un lien à l’aide de.
+* Exécuter lors de la génération d’un lien à l’aide de <xref:Microsoft.AspNetCore.Routing.LinkGenerator> .
 * Implémentez <xref:Microsoft.AspNetCore.Routing.IOutboundParameterTransformer?displayProperty=fullName>.
 * Sont configurés à l’aide de <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>.
 * Prennent la valeur de routage du paramètre et la convertissent en une nouvelle valeur de chaîne.
@@ -626,15 +1491,15 @@ Transformateurs de paramètre :
 
 Par exemple, un transformateur de paramètre `slugify` personnalisé dans le modèle d’itinéraire `blog\{article:slugify}` avec `Url.Action(new { article = "MyTestArticle" })` génère `blog\my-test-article`.
 
-Tenez compte de `IOutboundParameterTransformer` l’implémentation suivante :
+Tenez compte de l' `IOutboundParameterTransformer` implémentation suivante :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/StartupConstraint2.cs?name=snippet2)]
 
-Pour utiliser un transformateur de paramètre dans un modèle d’itinéraire, configurez-le à l’aide <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> de dans : `Startup.ConfigureServices`
+Pour utiliser un transformateur de paramètre dans un modèle d’itinéraire, configurez-le à l’aide <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> de dans `Startup.ConfigureServices` :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/StartupConstraint2.cs?name=snippet)]
 
-L’infrastructure de ASP.NET Core utilise des transformateurs de paramètre pour transformer l’URI dans lequel un point de terminaison est résolu. Par exemple, les transformateurs de paramètres transforment les `area`valeurs `controller`d' `action`itinéraire utilisées `page`pour faire correspondre un,, et.
+L’infrastructure de ASP.NET Core utilise des transformateurs de paramètre pour transformer l’URI dans lequel un point de terminaison est résolu. Par exemple, les transformateurs de paramètres transforment les valeurs d’itinéraire utilisées pour faire correspondre un `area` ,, `controller` `action` et `page` .
 
 ```csharp
 routes.MapControllerRoute(
@@ -642,28 +1507,28 @@ routes.MapControllerRoute(
     template: "{controller:slugify=Home}/{action:slugify=Index}/{id?}");
 ```
 
-Avec le modèle de route précédent, l' `SubscriptionManagementController.GetAll` action est mise en correspondance avec `/subscription-management/get-all`l’URI. Un transformateur de paramètre ne modifie pas les valeurs de routage utilisées pour générer un lien. Par exemple, `Url.Action("GetAll", "SubscriptionManagement")` produit `/subscription-management/get-all`.
+Avec le modèle de route précédent, l’action `SubscriptionManagementController.GetAll` est mise en correspondance avec l’URI `/subscription-management/get-all` . Un transformateur de paramètre ne modifie pas les valeurs de routage utilisées pour générer un lien. Par exemple, `Url.Action("GetAll", "SubscriptionManagement")` produit `/subscription-management/get-all`.
 
 ASP.NET Core fournit des conventions d’API pour l’utilisation de transformateurs de paramètres avec des itinéraires générés :
 
 * La <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.RouteTokenTransformerConvention?displayProperty=fullName> convention MVC applique un transformateur de paramètre spécifié à tous les itinéraires d’attribut dans l’application. Le transformateur de paramètre transforme les jetons de routage d’attribut quand ils sont remplacés. Pour plus d’informations, consultez [Utiliser un transformateur de paramètre pour personnaliser le remplacement des jetons](xref:mvc/controllers/routing#use-a-parameter-transformer-to-customize-token-replacement).
-* Razor Pages utilise la <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageRouteTransformerConvention> Convention d’API. Cette convention applique un transformateur de paramètre spécifié à toutes les pages Razor découvertes automatiquement. Le transformateur de paramètre transforme les segments du nom de dossier et du nom de fichier des routes Razor Pages. Pour plus d’informations, consultez [Utiliser un transformateur de paramètre pour personnaliser les routages de pages](xref:razor-pages/razor-pages-conventions#use-a-parameter-transformer-to-customize-page-routes).
+* RazorPages utilise la <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageRouteTransformerConvention> Convention d’API. Cette Convention applique un transformateur de paramètre spécifié à toutes les Razor pages découvertes automatiquement. Le transformateur de paramètres transforme les segments de nom de fichier et de dossier des Razor itinéraires de pages. Pour plus d’informations, consultez [Utiliser un transformateur de paramètre pour personnaliser les routages de pages](xref:razor-pages/razor-pages-conventions#use-a-parameter-transformer-to-customize-page-routes).
 
 <a name="ugr"></a>
 
 ## <a name="url-generation-reference"></a>Informations de référence sur la génération d’URL
 
-Cette section contient une référence pour l’algorithme implémenté par la génération d’URL. Dans la pratique, la plupart des exemples complexes de génération d’URL utilisent des contrôleurs ou des Razor Pages. Pour plus d’informations, consultez [routage dans les contrôleurs](xref:mvc/controllers/routing) .
+Cette section contient une référence pour l’algorithme implémenté par la génération d’URL. Dans la pratique, la plupart des exemples complexes de génération d’URL utilisent des contrôleurs ou des Razor pages. Pour plus d’informations, consultez [routage dans les contrôleurs](xref:mvc/controllers/routing) .
 
-Le processus de génération d’URL commence par un appel à [LinkGenerator. GetPathByAddress](xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*) ou à une méthode similaire. La méthode est fournie avec une adresse, un ensemble de valeurs d’itinéraire et éventuellement des informations sur la requête actuelle à `HttpContext`partir de.
+Le processus de génération d’URL commence par un appel à [LinkGenerator. GetPathByAddress](xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*) ou à une méthode similaire. La méthode est fournie avec une adresse, un ensemble de valeurs d’itinéraire et éventuellement des informations sur la requête actuelle à partir de `HttpContext` .
 
-La première étape consiste à utiliser l’adresse pour résoudre un jeu de points de terminaison candidats à [`IEndpointAddressScheme<TAddress>`](xref:Microsoft.AspNetCore.Routing.IEndpointAddressScheme`1) l’aide d’un qui correspond au type de l’adresse.
+La première étape consiste à utiliser l’adresse pour résoudre un jeu de points de terminaison candidats à l’aide d’un [`IEndpointAddressScheme<TAddress>`](xref:Microsoft.AspNetCore.Routing.IEndpointAddressScheme`1) qui correspond au type de l’adresse.
 
 Une fois l’ensemble de candidats trouvé par le schéma d’adresse, les points de terminaison sont triés et traités de manière itérative jusqu’à ce qu’une opération de génération d’URL aboutisse. La génération d’URL ne vérifie **pas** les ambiguïtés, le premier résultat retourné est le résultat final.
 
 ### <a name="troubleshooting-url-generation-with-logging"></a>Résolution des problèmes de génération d’URL avec journalisation
 
-La première étape de la résolution des problèmes liés à la génération d' `Microsoft.AspNetCore.Routing` URL `TRACE`consiste à définir le niveau de journalisation sur. `LinkGenerator`journalise de nombreux détails sur son traitement, ce qui peut être utile pour résoudre les problèmes.
+La première étape de la résolution des problèmes liés à la génération d’URL consiste à définir le niveau de journalisation `Microsoft.AspNetCore.Routing` sur `TRACE` . `LinkGenerator`journalise de nombreux détails sur son traitement, ce qui peut être utile pour résoudre les problèmes.
 
 Pour plus d’informations sur la génération d’URL, consultez [référence de génération d’URL](#ugr) .
 
@@ -673,16 +1538,16 @@ Les adresses sont le concept dans la génération d’URL utilisé pour lier un 
 
 Les adresses sont un concept extensible qui est fourni avec deux implémentations par défaut :
 
-* Utilisation du nom de`string`point de *terminaison* () comme adresse :
+* Utilisation du *nom de point de terminaison* ( `string` ) comme adresse :
     * Fournit des fonctionnalités similaires au nom d’itinéraire de MVC.
     * Utilise le <xref:Microsoft.AspNetCore.Routing.IEndpointNameMetadata> type de métadonnées.
     * Résout la chaîne fournie par rapport aux métadonnées de tous les points de terminaison inscrits.
     * Lève une exception au démarrage si plusieurs points de terminaison utilisent le même nom.
-    * Recommandé pour une utilisation à usage général en dehors des contrôleurs et des Razor Pages.
-* Utilisation des *valeurs* de<xref:Microsoft.AspNetCore.Routing.RouteValuesAddress>route () comme adresse :
-    * Fournit des fonctionnalités similaires aux contrôleurs et Razor Pages la génération d’URL héritée.
+    * Recommandé pour une utilisation à usage général en dehors des contrôleurs et des Razor pages.
+* Utilisation des *valeurs de route* ( <xref:Microsoft.AspNetCore.Routing.RouteValuesAddress> ) comme adresse :
+    * Fournit des fonctionnalités similaires aux contrôleurs et aux Razor pages génération d’URL héritées.
     * Très complexe à étendre et à déboguer.
-    * Fournit l’implémentation utilisée par `IUrlHelper`, les tag helpers, les applications auxiliaires html, les résultats d’action, etc.
+    * Fournit l’implémentation utilisée par `IUrlHelper` , les tag helpers, les applications auxiliaires html, les résultats d’action, etc.
 
 Le rôle du schéma d’adresse consiste à effectuer l’association entre l’adresse et les points de terminaison correspondants à l’aide de critères arbitraires :
 
@@ -693,9 +1558,9 @@ Le rôle du schéma d’adresse consiste à effectuer l’association entre l’
 
 ### <a name="ambient-values-and-explicit-values"></a>Valeurs ambiantes et valeurs explicites
 
-À partir de la requête actuelle, le routage accède aux valeurs d’itinéraire de `HttpContext.Request.RouteValues`la requête actuelle. Les valeurs associées à la requête actuelle sont appelées **valeurs ambiantes**. Pour des raisons de clarté, la documentation fait référence aux valeurs de route transmises aux méthodes en tant que **valeurs explicites**.
+À partir de la requête actuelle, le routage accède aux valeurs d’itinéraire de la requête actuelle `HttpContext.Request.RouteValues` . Les valeurs associées à la requête actuelle sont appelées **valeurs ambiantes**. Pour des raisons de clarté, la documentation fait référence aux valeurs de route transmises aux méthodes en tant que **valeurs explicites**.
 
-L’exemple suivant montre des valeurs ambiantes et des valeurs explicites. Il fournit des valeurs ambiantes de la demande actuelle et des `{ id = 17, }`valeurs explicites ::
+L’exemple suivant montre des valeurs ambiantes et des valeurs explicites. Il fournit des valeurs ambiantes de la demande actuelle et des valeurs explicites : `{ id = 17, }` :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Controllers/WidgetController.cs?name=snippet)]
 
@@ -704,47 +1569,47 @@ Le code précédent :
 * Retourne `/Widget/Index/17`.
 * Obtient <xref:Microsoft.AspNetCore.Routing.LinkGenerator> via [di](xref:fundamentals/dependency-injection).
 
-Le code suivant ne fournit aucune valeur ambiante ni valeur explicite `{ controller = "Home", action = "Subscribe", id = 17, }`::
+Le code suivant ne fournit aucune valeur ambiante ni valeur explicite : `{ controller = "Home", action = "Subscribe", id = 17, }` :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Controllers/WidgetController.cs?name=snippet2)]
 
 La méthode précédente retourne`/Home/Subscribe/17`
 
-Le code suivant dans le `WidgetController` retourne `/Widget/Subscribe/17`:
+Le code suivant dans le `WidgetController` retourne `/Widget/Subscribe/17` :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Controllers/WidgetController.cs?name=snippet3)]
 
-Le code suivant fournit le contrôleur à partir des valeurs ambiantes dans la requête actuelle et `{ action = "Edit", id = 17, }`les valeurs explicites ::
+Le code suivant fournit le contrôleur à partir des valeurs ambiantes dans la requête actuelle et les valeurs explicites : `{ action = "Edit", id = 17, }` :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Controllers/GadgetController.cs?name=snippet)]
 
 Dans le code précédent :
 
 * `/Gadget/Edit/17`est retourné.
-* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Url>Obtient <xref:Microsoft.AspNetCore.Mvc.IUrlHelper>.
+* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Url>Obtient <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> .
 * <xref:Microsoft.AspNetCore.Mvc.UrlHelperExtensions.Action*>   
-génère une URL avec un chemin d’accès absolu pour une méthode d’action. L’URL contient le nom `action` et `route` les valeurs spécifiés.
+génère une URL avec un chemin d’accès absolu pour une méthode d’action. L’URL contient le `action` nom et les `route` valeurs spécifiés.
 
-Le code suivant fournit des valeurs ambiantes de la demande actuelle et des `{ page = "./Edit, id = 17, }`valeurs explicites ::
+Le code suivant fournit des valeurs ambiantes de la demande actuelle et des valeurs explicites : `{ page = "./Edit, id = 17, }` :
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Pages/Index.cshtml.cs?name=snippet)]
 
-Le code précédent affecte `url` la `/Edit/17` valeur lorsque la page de modification Razor contient la directive de page suivante :
+Le code précédent affecte la `url` valeur `/Edit/17` lorsque la Razor page Modifier contient la directive de page suivante :
 
  `@page "{id:int}"`
 
-Si la page de modification ne contient `"{id:int}"` pas le modèle `url` de `/Edit?id=17`routage, est.
+Si la page de modification ne contient pas le `"{id:int}"` modèle de routage, `url` est `/Edit?id=17` .
 
 Le comportement de MVC <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> ajoute une couche de complexité en plus des règles décrites ici :
 
 * `IUrlHelper`fournit toujours les valeurs d’itinéraire de la requête actuelle comme valeurs ambiantes.
-* [IUrlHelper. action](xref:Microsoft.AspNetCore.Mvc.UrlHelperExtensions.Action*) copie toujours les valeurs `action` actuelles `controller` et de routage en tant que valeurs explicites, sauf si elles sont remplacées par le développeur.
-* [IUrlHelper. page](xref:Microsoft.AspNetCore.Mvc.UrlHelperExtensions.Page*) copie toujours la valeur `page` de route actuelle en tant que valeur explicite, sauf si elle est substituée. <!--by the user-->
-* `IUrlHelper.Page`remplace toujours la valeur de route `handler` actuelle par `null` comme valeur explicite, sauf si elle est substituée.
+* [IUrlHelper. action](xref:Microsoft.AspNetCore.Mvc.UrlHelperExtensions.Action*) copie toujours les `action` valeurs actuelles et de `controller` routage en tant que valeurs explicites, sauf si elles sont remplacées par le développeur.
+* [IUrlHelper. page](xref:Microsoft.AspNetCore.Mvc.UrlHelperExtensions.Page*) copie toujours la `page` valeur de route actuelle en tant que valeur explicite, sauf si elle est substituée. <!--by the user-->
+* `IUrlHelper.Page`remplace toujours la `handler` valeur de route actuelle par `null` comme valeur explicite, sauf si elle est substituée.
 
-Les utilisateurs sont souvent surpris par les détails de comportement des valeurs ambiantes, car MVC ne semble pas suivre ses propres règles. Pour des raisons d’historique et de compatibilité, certaines valeurs `action`de `controller`route `page`, telles `handler` que,, et ont leur propre comportement spécial.
+Les utilisateurs sont souvent surpris par les détails de comportement des valeurs ambiantes, car MVC ne semble pas suivre ses propres règles. Pour des raisons d’historique et de compatibilité, certaines valeurs de route, telles que `action` ,, `controller` `page` et `handler` ont leur propre comportement spécial.
 
-Les fonctionnalités équivalentes fournies `LinkGenerator.GetPathByAction` par `LinkGenerator.GetPathByPage` et dupliquent ces anomalies `IUrlHelper` de pour la compatibilité.
+Les fonctionnalités équivalentes fournies par `LinkGenerator.GetPathByAction` et `LinkGenerator.GetPathByPage` dupliquent ces anomalies de `IUrlHelper` pour la compatibilité.
 
 ### <a name="url-generation-process"></a>Processus de génération d’URL
 
@@ -762,24 +1627,24 @@ La meilleure façon de réfléchir au rôle des valeurs ambiantes est qu’elles
 * Lors de la liaison à la même méthode d’action, il n’est pas nécessaire de spécifier des valeurs de route.
 * Lors de la liaison à une autre partie de l’application, vous ne souhaitez pas transférer les valeurs de route qui n’ont aucune signification dans cette partie de l’application.
 
-Les appels `LinkGenerator` à `IUrlHelper` ou à `null` ce retour sont généralement provoqués par la non-compréhension de l’invalidation de la valeur de l’itinéraire. Résolvez les problèmes d’invalidation de valeur de routage en spécifiant explicitement plus de valeurs d’itinéraire pour voir si cela résout le problème.
+Les appels à `LinkGenerator` ou à `IUrlHelper` ce retour `null` sont généralement provoqués par la non-compréhension de l’invalidation de la valeur de l’itinéraire. Résolvez les problèmes d’invalidation de valeur de routage en spécifiant explicitement plus de valeurs d’itinéraire pour voir si cela résout le problème.
 
-L’invalidation de la valeur de routage fonctionne en partant du principe que le schéma d’URL de l’application est hiérarchique, avec une hiérarchie formée de gauche à droite. Examinez le modèle `{controller}/{action}/{id?}` de routage de contrôleur de base pour avoir une idée intuitive de son fonctionnement dans la pratique. Une **modification apportée** à une valeur **invalide** toutes les valeurs d’itinéraire qui s’affichent à droite. Cela reflète l’hypothèse sur la hiérarchie. Si l’application a une valeur ambiante pour `id`, et que l’opération spécifie une autre valeur `controller`pour le :
+L’invalidation de la valeur de routage fonctionne en partant du principe que le schéma d’URL de l’application est hiérarchique, avec une hiérarchie formée de gauche à droite. Examinez le modèle de routage de contrôleur de base `{controller}/{action}/{id?}` pour avoir une idée intuitive de son fonctionnement dans la pratique. Une **modification apportée** à une valeur **invalide** toutes les valeurs d’itinéraire qui s’affichent à droite. Cela reflète l’hypothèse sur la hiérarchie. Si l’application a une valeur ambiante pour `id` , et que l’opération spécifie une autre valeur pour le `controller` :
 
-* `id`ne sera pas réutilisé `{controller}` car est à gauche de `{id?}`.
+* `id`ne sera pas réutilisé car `{controller}` est à gauche de `{id?}` .
 
 Voici quelques exemples qui illustrent ce principe :
 
-* Si les valeurs explicites contiennent une valeur `id`pour, la valeur ambiante `id` de est ignorée. Les valeurs ambiantes `controller` pour `action` et peuvent être utilisées.
-* Si les valeurs explicites contiennent une valeur `action`pour, toute valeur ambiante `action` pour est ignorée. Les valeurs ambiantes `controller` pour peuvent être utilisées. Si la valeur explicite de `action` est différente de la valeur ambiante pour `action`, la `id` valeur n’est pas utilisée.  Si la valeur explicite de `action` est identique à la valeur ambiante pour `action`, la `id` valeur peut être utilisée.
-* Si les valeurs explicites contiennent une valeur `controller`pour, toute valeur ambiante `controller` pour est ignorée. Si la valeur explicite de `controller` est différente de la valeur ambiante pour `controller`, les `action` valeurs `id` et ne sont pas utilisées. Si la valeur explicite de `controller` est identique à la valeur ambiante pour `controller`, les `action` valeurs et `id` peuvent être utilisées.
+* Si les valeurs explicites contiennent une valeur pour `id` , la valeur ambiante de `id` est ignorée. Les valeurs ambiantes pour `controller` et `action` peuvent être utilisées.
+* Si les valeurs explicites contiennent une valeur pour `action` , toute valeur ambiante pour `action` est ignorée. Les valeurs ambiantes pour `controller` peuvent être utilisées. Si la valeur explicite de `action` est différente de la valeur ambiante pour `action` , la `id` valeur n’est pas utilisée.  Si la valeur explicite de `action` est identique à la valeur ambiante pour `action` , la `id` valeur peut être utilisée.
+* Si les valeurs explicites contiennent une valeur pour `controller` , toute valeur ambiante pour `controller` est ignorée. Si la valeur explicite de `controller` est différente de la valeur ambiante pour `controller` , les `action` `id` valeurs et ne sont pas utilisées. Si la valeur explicite de `controller` est identique à la valeur ambiante pour `controller` , les `action` valeurs et `id` peuvent être utilisées.
 
-Ce processus est encore plus compliqué par l’existence d’itinéraires d’attribut et d’itinéraires conventionnels dédiés. Les itinéraires conventionnels du `{controller}/{action}/{id?}` contrôleur, comme spécifier une hiérarchie à l’aide de paramètres de routage. Pour les [itinéraires conventionnels](xref:mvc/controllers/routing#dcr) et les [itinéraires d’attribut](xref:mvc/controllers/routing#ar) dédiés aux contrôleurs et Razor pages :
+Ce processus est encore plus compliqué par l’existence d’itinéraires d’attribut et d’itinéraires conventionnels dédiés. Les itinéraires conventionnels du contrôleur, comme `{controller}/{action}/{id?}` spécifier une hiérarchie à l’aide de paramètres de routage. Pour les [itinéraires conventionnels dédiés](xref:mvc/controllers/routing#dcr) et les [itinéraires d’attributs](xref:mvc/controllers/routing#ar) vers les contrôleurs et les Razor pages :
 
 * Il existe une hiérarchie de valeurs de route.
 * Ils n’apparaissent pas dans le modèle.
 
-Dans ce cas, la génération d’URL définit le concept de **valeurs requis** . Les points de terminaison créés par les contrôleurs et les Razor Pages ont des valeurs requises spécifiées qui autorisent le fonctionnement de l’invalidation de la valeur de routage.
+Dans ce cas, la génération d’URL définit le concept de **valeurs requis** . Les points de terminaison créés par les contrôleurs et les Razor pages ont des valeurs requises spécifiées qui autorisent le fonctionnement de l’invalidation de la valeur de routage.
 
 L’algorithme d’invalidation de la valeur de routage est en détail :
 
@@ -804,12 +1669,337 @@ Ensuite, les **valeurs acceptées** peuvent être utilisées pour développer le
 
 Les valeurs fournies explicitement qui ne correspondent pas à un segment de l’itinéraire sont ajoutées à la chaîne de requête. Le tableau suivant présente le résultat en cas d’utilisation du modèle de routage `{controller}/{action}/{id?}`.
 
-| Valeurs ambiantes                     | Valeurs explicites                        | Résultats                  |
-| ---------------------------------- | -------------------------------------- | ----------------------- |
-| controller = "Home"                | action = "About"                       | `/Home/About`           |
-| controller = "Home"                | controller = "Order", action = "About" | `/Order/About`          |
-| controller = "Home", color = "Red" | action = "About"                       | `/Home/About`           |
-| controller = "Home"                | action = "About", color = "Red"        | `/Home/About?color=Red` |
+| Valeurs ambiantes                     | Valeurs explicites                        | Résultat                  |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+----------------- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------------------- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------------ | | Controller = "démarrage" | action = "about" | `/Home/About`|
+| Controller = "démarrage" | Controller = « Order », action = « about » | `/Order/About`|
+| Controller = "orig", Color = "Red" | action = "about" | `/Home/About`|
+| Controller = "démarrage" | action = « about », Color = « Red » | `/Home/About?color=Red`                                |
 
 ### <a name="problems-with-route-value-invalidation"></a>Problèmes liés à l’invalidation de la valeur de routage
 
@@ -819,17 +2009,17 @@ Le code suivant montre un exemple de schéma de génération d’URL qui n’est
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/StartupUnsupported.cs?name=snippet)]
 
-Dans le code précédent, le `culture` paramètre route est utilisé pour la localisation. Le souhait est de faire en `culture` sorte que le paramètre soit toujours accepté comme valeur ambiante. Toutefois, le `culture` paramètre n’est pas accepté comme valeur ambiante en raison de la façon dont les valeurs requises fonctionnent :
+Dans le code précédent, le `culture` paramètre route est utilisé pour la localisation. Le souhait est de faire en sorte que le `culture` paramètre soit toujours accepté comme valeur ambiante. Toutefois, le `culture` paramètre n’est pas accepté comme valeur ambiante en raison de la façon dont les valeurs requises fonctionnent :
 
-* Dans le `"default"` modèle de routage, `culture` le paramètre route est à gauche de `controller`, donc les modifications `controller` apportées à `culture`ne sont pas invalidées.
-* Dans le `"blog"` modèle de routage, `culture` le paramètre d’itinéraire est considéré comme à droite de `controller`, qui apparaît dans les valeurs requises.
+* Dans le `"default"` modèle de routage, le `culture` paramètre route est à gauche de `controller` , donc les modifications apportées à `controller` ne sont pas invalidées `culture` .
+* Dans le `"blog"` modèle de routage, le `culture` paramètre d’itinéraire est considéré comme à droite de `controller` , qui apparaît dans les valeurs requises.
 
 ## <a name="configuring-endpoint-metadata"></a>Configuration des métadonnées de point de terminaison
 
 Les liens suivants fournissent des informations sur la configuration des métadonnées de point de terminaison :
 
 * [Activer cors avec routage du point de terminaison](xref:security/cors#enable-cors-with-endpoint-routing)
-* [Exemple IAuthorizationPolicyProvider](https://github.com/dotnet/AspNetCore/tree/release/3.0/src/Security/samples/CustomPolicyProvider) utilisant un attribut `[MinimumAgeAuthorize]` personnalisé
+* [Exemple IAuthorizationPolicyProvider](https://github.com/dotnet/AspNetCore/tree/release/3.0/src/Security/samples/CustomPolicyProvider) utilisant un `[MinimumAgeAuthorize]` attribut personnalisé
 * [Tester l’authentification avec l’attribut [Authorize]](xref:security/authentication/identity#test-identity)
 * <xref:Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions.RequireAuthorization*>
 * [Sélection du schéma avec l’attribut [Authorize]](xref:security/authorization/limitingidentitybyscheme#selecting-the-scheme-with-the-authorize-attribute)
@@ -842,12 +2032,12 @@ Les liens suivants fournissent des informations sur la configuration des métado
 
 <xref:Microsoft.AspNetCore.Builder.RoutingEndpointConventionBuilderExtensions.RequireHost*>applique une contrainte à l’itinéraire qui requiert l’hôte spécifié. Le `RequireHost` paramètre ou [[Host]](xref:Microsoft.AspNetCore.Routing.HostAttribute) peut être :
 
-* Host : `www.domain.com`, correspond `www.domain.com` à n’importe quel port.
-* Hôte avec caractère générique `*.domain.com`:, `www.domain.com`correspond `subdomain.domain.com`à, `www.subdomain.domain.com` ou sur n’importe quel port.
-* Port : `*:5000`, correspond au port 5000 avec n’importe quel hôte.
-* Hôte et port : `www.domain.com:5000` ou `*.domain.com:5000`, correspond à l’hôte et au port.
+* Host : `www.domain.com` , correspond `www.domain.com` à n’importe quel port.
+* Hôte avec caractère générique : `*.domain.com` , correspond à, `www.domain.com` `subdomain.domain.com` ou `www.subdomain.domain.com` sur n’importe quel port.
+* Port : `*:5000` , correspond au port 5000 avec n’importe quel hôte.
+* Hôte et port : `www.domain.com:5000` ou `*.domain.com:5000` , correspond à l’hôte et au port.
 
-Plusieurs paramètres peuvent être spécifiés `RequireHost` à `[Host]`l’aide de ou de. La contrainte correspond aux hôtes valides pour l’un des paramètres. Par exemple, `[Host("domain.com", "*.domain.com")]` correspond `domain.com`à `www.domain.com`, et `subdomain.domain.com`.
+Plusieurs paramètres peuvent être spécifiés à l’aide `RequireHost` de ou de `[Host]` . La contrainte correspond aux hôtes valides pour l’un des paramètres. Par exemple, `[Host("domain.com", "*.domain.com")]` correspond à `domain.com` , `www.domain.com` et `subdomain.domain.com` .
 
 Le code suivant utilise `RequireHost` pour exiger l’hôte spécifié sur l’itinéraire :
 
@@ -866,7 +2056,7 @@ Lorsque l' `[Host]` attribut est appliqué à la fois au contrôleur et à la m�
 
 La plupart des routages ont été mis à jour dans ASP.NET Core 3,0 pour améliorer les performances.
 
-Quand une application présente des problèmes de performances, le routage est souvent soupçonné de le résoudre. La raison pour laquelle le routage est suspecté est que les infrastructures comme les contrôleurs et les Razor Pages rapportent le temps passé dans l’infrastructure dans leurs messages de journalisation. Lorsqu’il y a une différence importante entre l’heure indiquée par les contrôleurs et la durée totale de la demande :
+Quand une application présente des problèmes de performances, le routage est souvent soupçonné de le résoudre. La raison pour laquelle le routage est suspecté est que les infrastructures comme les contrôleurs et Razor les pages indiquent le temps passé dans l’infrastructure dans leurs messages de journalisation. Lorsqu’il y a une différence importante entre l’heure indiquée par les contrôleurs et la durée totale de la demande :
 
 * Les développeurs éliminent leur code d’application comme source du problème.
 * Il est courant de supposer que le routage est la cause.
@@ -882,7 +2072,7 @@ Pour le routage temporel :
 * Entrelacer chaque intergiciel à l’aide d’une copie de l’intergiciel (middleware) de minuterie indiquée dans le code précédent.
 * Ajoutez un identificateur unique pour corréler les données de temporisation avec le code.
 
-Il s’agit d’une méthode de base pour réduire le délai lorsqu’il est significatif, par exemple, `10ms`plus que.  La `Time 2` soustraction `Time 1` de signale le temps passé `UseRouting` dans l’intergiciel (middleware).
+Il s’agit d’une méthode de base pour réduire le délai lorsqu’il est significatif, par exemple, plus que `10ms` .  La soustraction `Time 2` de `Time 1` signale le temps passé dans l' `UseRouting` intergiciel (middleware).
 
 Le code suivant utilise une approche plus compacte pour le code de minutage précédent :
 
@@ -896,12 +2086,12 @@ La liste suivante fournit des informations sur les fonctionnalités de routage r
 
 * Expressions régulières : il est possible d’écrire des expressions régulières complexes ou ayant une durée d’exécution longue avec une petite quantité d’entrée.
 
-* Segments complexes (`{x}-{y}-{z}`) : 
+* Segments complexes ( `{x}-{y}-{z}` ) : 
   * Sont beaucoup plus coûteuses que l’analyse d’un segment de chemin d’accès d’URL normal.
   * Entraîne l’allocation de beaucoup plus de sous-chaînes.
   * La logique de segment complexe n’a pas été mise à jour dans ASP.NET Core mise à jour des performances de routage 3,0.
 
-* Accès synchrone aux données : de nombreuses applications complexes ont accès aux bases de données dans le cadre de leur routage. ASP.NET Core 2,2 et le routage antérieur peuvent ne pas fournir les points d’extensibilité appropriés pour prendre en charge le routage de l’accès aux bases de données. Par exemple, <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>, et <xref:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint> sont synchrones. Les points d’extensibilité <xref:Microsoft.AspNetCore.Routing.MatcherPolicy> tels <xref:Microsoft.AspNetCore.Routing.EndpointSelectorContext> que et sont asynchrones.
+* Accès synchrone aux données : de nombreuses applications complexes ont accès aux bases de données dans le cadre de leur routage. ASP.NET Core 2,2 et le routage antérieur peuvent ne pas fournir les points d’extensibilité appropriés pour prendre en charge le routage de l’accès aux bases de données. Par exemple, <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> , et <xref:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint> sont synchrones. Les points d’extensibilité tels que <xref:Microsoft.AspNetCore.Routing.MatcherPolicy> et <xref:Microsoft.AspNetCore.Routing.EndpointSelectorContext> sont asynchrones.
 
 ## <a name="guidance-for-library-authors"></a>Conseils pour les auteurs de bibliothèque
 
@@ -909,9 +2099,9 @@ Cette section contient des conseils pour les auteurs de bibliothèque qui créen
 
 ### <a name="define-endpoints"></a>Définir des points de terminaison
 
-Pour créer une infrastructure qui utilise le routage pour la correspondance d’URL, commencez par définir une expérience utilisateur qui s' <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*>appuie sur.
+Pour créer une infrastructure qui utilise le routage pour la correspondance d’URL, commencez par définir une expérience utilisateur qui s’appuie sur <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> .
 
-**Effectuez** une génération par <xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder>-dessus. Cela permet aux utilisateurs de composer votre infrastructure avec d’autres fonctionnalités de ASP.NET Core sans confusion. Chaque modèle de ASP.NET Core comprend le routage. Supposons que le routage est présent et familier pour les utilisateurs.
+**Effectuez** une génération par-dessus <xref:Microsoft.AspNetCore.Routing.IEndpointRouteBuilder> . Cela permet aux utilisateurs de composer votre infrastructure avec d’autres fonctionnalités de ASP.NET Core sans confusion. Chaque modèle de ASP.NET Core comprend le routage. Supposons que le routage est présent et familier pour les utilisateurs.
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -923,7 +2113,7 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-**Retournez un** type concret sealed à partir d’un `MapMyFramework(...)` appel à qui <xref:Microsoft.AspNetCore.Builder.IEndpointConventionBuilder>implémente. La plupart `Map...` des méthodes d’infrastructure suivent ce modèle. L' `IEndpointConventionBuilder` interface :
+**Retournez un** type concret sealed à partir d’un appel à `MapMyFramework(...)` qui implémente <xref:Microsoft.AspNetCore.Builder.IEndpointConventionBuilder> . La plupart des méthodes d’infrastructure `Map...` suivent ce modèle. L' `IEndpointConventionBuilder` interface :
 
 * Permet la composition des métadonnées.
 * Est ciblé par une variété de méthodes d’extension.
@@ -941,11 +2131,11 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-**Envisagez** d' <xref:Microsoft.AspNetCore.Routing.EndpointDataSource>écrire votre propre. `EndpointDataSource`est la primitive de bas niveau pour déclarer et mettre à jour une collection de points de terminaison. `EndpointDataSource`est une API puissante utilisée par les contrôleurs et les Razor Pages.
+**Envisagez** d’écrire votre propre <xref:Microsoft.AspNetCore.Routing.EndpointDataSource> . `EndpointDataSource`est la primitive de bas niveau pour déclarer et mettre à jour une collection de points de terminaison. `EndpointDataSource`est une API puissante utilisée par les contrôleurs et les Razor pages.
 
 Les tests de routage ont un [exemple de base](https://github.com/aspnet/AspNetCore/blob/master/src/Http/Routing/test/testassets/RoutingSandbox/Framework/FrameworkEndpointDataSource.cs#L17) d’une source de données qui ne met pas à jour.
 
-**N’essayez pas** d’inscrire un `EndpointDataSource` par défaut. Obligez les utilisateurs à inscrire votre <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*>infrastructure dans. La philosophie du routage est que rien n’est inclus par défaut et qu' `UseEndpoints` il s’agit de l’emplacement où inscrire des points de terminaison.
+**N’essayez pas** d’inscrire un `EndpointDataSource` par défaut. Obligez les utilisateurs à inscrire votre infrastructure dans <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> . La philosophie du routage est que rien n’est inclus par défaut et qu’il `UseEndpoints` s’agit de l’emplacement où inscrire des points de terminaison.
 
 ### <a name="creating-routing-integrated-middleware"></a>Création d’un intergiciel (middleware) intégré au routage
 
@@ -955,7 +2145,7 @@ Les tests de routage ont un [exemple de base](https://github.com/aspnet/AspNetCo
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/ICoolMetadata.cs?name=snippet2)]
 
-Les infrastructures comme les contrôleurs et les Razor Pages prennent en charge l’application des attributs de métadonnées aux types et aux méthodes. Si vous déclarez des types de métadonnées :
+Les infrastructures comme les contrôleurs et les Razor pages prennent en charge l’application des attributs de métadonnées aux types et aux méthodes. Si vous déclarez des types de métadonnées :
 
 * Rendez-les accessibles en tant qu' [attributs](/dotnet/csharp/programming-guide/concepts/attributes/).
 * La plupart des utilisateurs sont habitués à appliquer des attributs.
@@ -1023,7 +2213,7 @@ services.AddMvc(options => options.EnableEndpointRouting = false)
 Pour plus d’informations sur le routage basé sur <xref:Microsoft.AspNetCore.Routing.IRouter>, consultez la [version ASP.NET Core 2.1 de cette rubrique](/aspnet/core/fundamentals/routing?view=aspnetcore-2.1).
 
 > [!IMPORTANT]
-> Ce document traite du routage ASP.NET Core de bas niveau. Pour plus d’informations sur le routage ASP.NET Core MVC, consultez <xref:mvc/controllers/routing>. Pour plus d’informations sur les conventions de routage dans Razor Pages, consultez <xref:razor-pages/razor-pages-conventions>.
+> Ce document traite du routage ASP.NET Core de bas niveau. Pour plus d’informations sur le routage ASP.NET Core MVC, consultez <xref:mvc/controllers/routing>. Pour plus d’informations sur les conventions de routage dans les Razor pages, consultez <xref:razor-pages/razor-pages-conventions> .
 
 [Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
@@ -1038,11 +2228,11 @@ Les développeurs ajoutent généralement des itinéraires succincts supplément
 
 Les API web doivent utiliser le routage d’attributs pour modéliser les fonctionnalités de l’application sous la forme d’un ensemble de ressources dans lequel les opérations sont représentées par des verbes HTTP. Cela signifie que de nombreuses opérations, par exemple, obtenir et poster, sur la même ressource logique utilisent la même URL. Le routage d’attributs fournit le niveau de contrôle nécessaire pour concevoir avec soin la disposition des points de terminaison publics d’une API.
 
-Les applications Razor Pages utilisent le routage conventionnel par défaut pour délivrer des ressources nommées dans le dossier *Pages* d’une application. Des conventions supplémentaires sont disponibles : elles vous permettent de personnaliser le comportement de routage de Razor Pages. Pour plus d’informations, consultez <xref:razor-pages/index> et <xref:razor-pages/razor-pages-conventions>.
+RazorPages les applications utilisent le routage conventionnel par défaut pour servir des ressources nommées dans le dossier *pages* d’une application. Des conventions supplémentaires vous permettent de personnaliser le Razor comportement de routage des pages. Pour plus d’informations, consultez <xref:razor-pages/index> et <xref:razor-pages/razor-pages-conventions>.
 
 La prise en charge de la génération d’URL permet de développer l’application sans coder en dur les URL pour lier l’application. Cette prise en charge permet de commencer avec une configuration de routage de base, puis de modifier les routes une fois que la disposition des ressources de l’application est déterminée.
 
-Le routage utilise des points`Endpoint`de *terminaison* () pour représenter des points de terminaison logiques dans une application.
+Le routage utilise des *points de terminaison* ( `Endpoint` ) pour représenter des points de terminaison logiques dans une application.
 
 Un point de terminaison définit un délégué pour traiter les requêtes et une collection de métadonnées arbitraires. Les métadonnées sont utilisées pour implémenter des problèmes transversaux basés sur des stratégies et une configuration attachées à chaque point de terminaison.
 
@@ -1051,7 +2241,7 @@ Le système de routage a les caractéristiques suivantes :
 * Une syntaxe des modèles de route est utilisée pour définir des routes avec des paramètres de route tokenisés.
 * La configuration de points de terminaison de style conventionnel et de style « attribut » est autorisée.
 * <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> est utilisé pour déterminer si un paramètre d’URL contient une valeur valide pour une contrainte de point de terminaison donné.
-* Les modèles d’application, comme MVC/Razor Pages, inscrivent tous leurs points de terminaison, qui ont une implémentation prévisible de scénarios de routage.
+* Les modèles d’application, tels que MVC/ Razor pages, inscrivent tous leurs points de terminaison, qui ont une implémentation prévisible des scénarios de routage.
 * L’implémentation du routage prend des décisions de routage partout où vous le souhaitez dans le pipeline de middleware (intergiciel).
 * Le middleware qui apparaît après un middleware de routage peut inspecter le résultat de la décision du middleware de routage quant au point de terminaison d’un URI de requête donné.
 * Il est possible d’énumérer tous les points de terminaison dans l’application n’importe où dans le pipeline de middleware.
@@ -1062,9 +2252,9 @@ Le système de routage a les caractéristiques suivantes :
   * Quand l’API du générateur de liens n’est pas disponible via l’injection de dépendances, <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> offre des méthodes pour générer des URL.
 
 > [!NOTE]
-> Avec la publication du routage des points de terminaison dans ASP.NET Core 2.2, la liaison de point de terminaison est limitée aux actions et aux pages MVC/Razor Pages. Les expansions des fonctionnalités de liaison de point de terminaison sont prévues pour les versions futures.
+> Avec la publication du routage de point de terminaison dans ASP.NET Core 2,2, la liaison de point de terminaison est limitée aux Razor actions et pages MVC/pages. Les expansions des fonctionnalités de liaison de point de terminaison sont prévues pour les versions futures.
 
-Le routage est connecté au pipeline de [l’intergiciel (middleware)](xref:fundamentals/middleware/index) par la classe <xref:Microsoft.AspNetCore.Builder.RouterMiddleware>. [ASP.NET Core MVC](xref:mvc/overview) ajoute le routage au pipeline de middleware dans le cadre de sa configuration, et gère le routage dans les applications MVC et Razor Pages. Pour découvrir comment utiliser le routage en tant que composant autonome, consultez la section [Utiliser le middleware de routage](#use-routing-middleware).
+Le routage est connecté au pipeline de [l’intergiciel (middleware)](xref:fundamentals/middleware/index) par la classe <xref:Microsoft.AspNetCore.Builder.RouterMiddleware>. [ASP.net Core MVC](xref:mvc/overview) ajoute le routage au pipeline de l’intergiciel (middleware) dans le cadre de sa configuration et gère le routage dans les applications MVC et Razor pages. Pour découvrir comment utiliser le routage en tant que composant autonome, consultez la section [Utiliser le middleware de routage](#use-routing-middleware).
 
 ### <a name="url-matching"></a>Correspondance d’URL
 
@@ -1088,9 +2278,9 @@ La génération d’URL est le processus par lequel le routage peut créer un ch
 
 Le routage des points de terminaison inclut l’API de générateur de liens (<xref:Microsoft.AspNetCore.Routing.LinkGenerator>). <xref:Microsoft.AspNetCore.Routing.LinkGenerator>est un service singleton qui peut être récupéré à partir de [di](xref:fundamentals/dependency-injection). L’API peut être utilisée en dehors du contexte d’une requête en cours d’exécution. Le <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> de MVC et les scénarios qui s’appuient sur <xref:Microsoft.AspNetCore.Mvc.IUrlHelper>, comme les [Tag Helpers](xref:mvc/views/tag-helpers/intro), les helpers HTML et les [résultats d’action](xref:mvc/controllers/actions), utilisent le générateur de liens pour fournir les fonctionnalités de création de liens.
 
-Le générateur de liens est basé sur le concept d’une *adresse* et de *schémas d’adresse*. Un schéma d’adresse est un moyen de déterminer les points de terminaison à prendre en compte pour la génération de liens. Par exemple, les scénarios de nom de route et de valeurs de route que connaissent bien nombre d’utilisateurs dans les MVC/Razor Pages sont implémentés en tant que schémas d’adresse.
+Le générateur de liens est basé sur le concept d’une *adresse* et de *schémas d’adresse*. Un schéma d’adresse est un moyen de déterminer les points de terminaison à prendre en compte pour la génération de liens. Par exemple, les scénarios nom de l’itinéraire et valeurs de routage de nombreux utilisateurs sont familiarisés avec MVC/les Razor pages sont implémentés en tant que schéma d’adresse.
 
-Le générateur de liens peut lier à des actions et à des pages MVC/Razor Pages via les méthodes d’extension suivantes :
+Le générateur de liens peut lier des Razor actions et des pages MVC/pages à l’aide des méthodes d’extension suivantes :
 
 * <xref:Microsoft.AspNetCore.Routing.ControllerLinkGeneratorExtensions.GetPathByAction*>
 * <xref:Microsoft.AspNetCore.Routing.ControllerLinkGeneratorExtensions.GetUriByAction*>
@@ -1109,9 +2299,310 @@ Les méthodes `GetPath*` sont les plus proches de `Url.Action` et de `Url.Page` 
 Les méthodes fournies par <xref:Microsoft.AspNetCore.Routing.LinkGenerator> prennent en charge des fonctionnalités de génération de liens standard pour n’importe quel type d’adresse. La façon la plus pratique d’utiliser le générateur de liens est de le faire via des méthodes d’extension qui effectuent des opérations pour un type d’adresse spécifique.
 
 | Méthode d'extension   | Description                                                         |
-| ------------------ | ------------------------------------------------------------------- |
-| <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Génère un URI avec un chemin absolu basé sur les valeurs fournies. |
-| <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Génère un URI absolu basé sur les valeurs fournies.             |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+--------- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+---------------------------------- | | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Génère un URI avec un chemin d’accès absolu basé sur les valeurs fournies. | | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Génère un URI absolu basé sur les valeurs fournies.             |
 
 > [!WARNING]
 > Faites attention aux implications suivantes de l’appel de méthodes <xref:Microsoft.AspNetCore.Routing.LinkGenerator> :
@@ -1126,7 +2617,7 @@ Il existe quelques différences entre le routage de points de terminaison d’AS
 
 * Le système de routage de points de terminaison ne prend pas en charge l’extensibilité basée sur <xref:Microsoft.AspNetCore.Routing.IRouter>, notamment l’héritage de <xref:Microsoft.AspNetCore.Routing.Route>.
 
-* Le routage de points de terminaison ne prend pas en charge [WebApiCompatShim](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.WebApiCompatShim). Utilisez la [version de compatibilité](xref:mvc/compatibility-version) 2,1`.SetCompatibilityVersion(CompatibilityVersion.Version_2_1)`() pour continuer à utiliser le shim de compatibilité.
+* Le routage de points de terminaison ne prend pas en charge [WebApiCompatShim](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.WebApiCompatShim). Utilisez la [version de compatibilité](xref:mvc/compatibility-version) 2,1 ( `.SetCompatibilityVersion(CompatibilityVersion.Version_2_1)` ) pour continuer à utiliser le shim de compatibilité.
 
 * Le routage de points de terminaison a un comportement différent pour la casse des URI générés lors de l’utilisation de routes conventionnelles.
 
@@ -1149,7 +2640,7 @@ Il existe quelques différences entre le routage de points de terminaison d’AS
 
   Pour plus d’informations, consultez la section [Informations de référence sur les transformateurs de paramètre](#parameter-transformer-reference).
 
-* La génération de liens utilisée par MVC/Razor Pages avec des routes conventionnelles se comporte différemment quand vous tentez de lier à un contrôleur/action ou à une page qui n’existe pas.
+* La génération de liens utilisée par MVC/ Razor pages avec des itinéraires conventionnels se comporte différemment lors de la tentative de liaison à un contrôleur, une action ou une page qui n’existe pas.
 
   Considérez le modèle de route par défaut suivant :
 
@@ -1198,9 +2689,318 @@ Il existe quelques différences entre le routage de points de terminaison d’AS
   La syntaxe de paramètre passe-partout avec un seul astérisque dans les versions antérieures d’ASP.NET Core (`{*myparametername}`) reste prise en charge, et les barres obliques sont encodées.
 
   | Routage              | Lien généré avec<br>`Url.Action(new { category = "admin/products" })`&hellip; |
-  | ------------------ | --------------------------------------------------------------------- |
-  | `/search/{*page}`  | `/search/admin%2Fproducts` (la barre oblique est encodée)             |
-  | `/search/{**page}` | `/search/admin/products`                                              |
+  | ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+--------- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+----------------------------------- |   | `/search/{*page}`| `/search/admin%2Fproducts`(la barre oblique est encodée) |   | `/search/{**page}` |  `/search/admin/products`                                              |
 
 ### <a name="middleware-example"></a>Exemple de middleware
 
@@ -1342,7 +3142,7 @@ Ajoutez le routage au conteneur de service dans `Startup.ConfigureServices` :
 Les routes doivent être configurées dans la méthode `Startup.Configure`. L’exemple d’application utilise les API suivantes :
 
 * <xref:Microsoft.AspNetCore.Routing.RouteBuilder>
-* <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*>&ndash; Correspond uniquement aux requêtes http d’extraction.
+* <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*>: Correspond uniquement aux requêtes HTTP.
 * <xref:Microsoft.AspNetCore.Builder.RoutingBuilderExtensions.UseRouter*>
 
 [!code-csharp[](routing/samples/2.x/RoutingSample/Startup.cs?name=snippet_RouteHandler)]
@@ -1350,14 +3150,254 @@ Les routes doivent être configurées dans la méthode `Startup.Configure`. L’
 Le tableau suivant montre les réponses avec les URI donnés.
 
 | URI                    | response                                          |
-| ---------------------- | ------------------------------------------------- |
-| `/package/create/3`    | Hello! Valeurs de route : [operation, create], [id, 3] |
-| `/package/track/-3`    | Hello! Valeurs de route : [operation, track], [id, -3] |
-| `/package/track/-3/`   | Hello! Valeurs de route : [operation, track], [id, -3] |
-| `/package/track/`      | La requête passe à travers ceci, aucune correspondance.              |
-| `GET /hello/Joe`       | Hi, Joe!                                          |
-| `POST /hello/Joe`      | La requête passe à travers ceci, correspondance seulement avec HTTP GET. |
-| `GET /hello/Joe/Smith` | La requête passe à travers ceci, aucune correspondance.              |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+----------- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------------------------- | | `/package/create/3`    | Salut! Valeurs de route : [opération, créer], [ID, 3] | | `/package/track/-3`    | Salut! Valeurs de route : [opération, suivi], [ID,-3] | | `/package/track/-3/`   | Salut! Valeurs de route : [opération, suivi], [ID,-3] | | `/package/track/`      | La requête passe à, aucune correspondance.              | | `GET /hello/Joe`       | Bonjour, Joe !                                          | | `POST /hello/Joe`      | La requête passe à, correspond à HTTP to only. | | `GET /hello/Joe/Smith` | La requête passe à, aucune correspondance.              |
 
 Le framework fournit un ensemble de méthodes d’extension pour la création de routes (<xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions>) :
 
@@ -1402,13 +3442,501 @@ Les paramètres de route peuvent également contenir des transformateurs de para
 Le tableau suivant montre des exemples de modèles de route et leur comportement.
 
 | Modèle de routage                           | Exemple d’URI en correspondance    | URI de la requête&hellip;                                                    |
-| ---------------------------------------- | ----------------------- | -------------------------------------------------------------------------- |
-| `hello`                                  | `/hello`                | Correspond seulement au chemin unique `/hello`.                                     |
-| `{Page=Home}`                            | `/`                     | Correspond à `Page` et le définit sur `Home`.                                         |
-| `{Page=Home}`                            | `/Contact`              | Correspond à `Page` et le définit sur `Contact`.                                      |
-| `{controller}/{action}/{id?}`            | `/Products/List`        | Mappe au contrôleur `Products` et à l’action `List`.                       |
-| `{controller}/{action}/{id?}`            | `/Products/Details/123` | Mappe au contrôleur `Products` et à l’action `Details` (`id` défini sur 123). |
-| `{controller=Home}/{action=Index}/{id?}` | `/`                     | Mappe au contrôleur `Home` et à la méthode `Index` (`id` est ignoré).        |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-------------------- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------------ | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------------------------------------- | | `hello`                                  | `/hello`                | Correspond uniquement au chemin d’accès unique `/hello` .                                     | | `{Page=Home}`                            | `/`                     | Correspond à et affecte `Page` à la valeur `Home` .                                         | | `{Page=Home}`                            | `/Contact`              | Correspond à et affecte `Page` à la valeur `Contact` .                                      | | `{controller}/{action}/{id?}`            | `/Products/List`        | Correspond au `Products` contrôleur et à l' `List` action.                       | | `{controller}/{action}/{id?}`            | `/Products/Details/123` | Correspond au `Products` contrôleur et à l' `Details` action ( `id` défini sur 123). | | `{controller=Home}/{action=Index}/{id?}` | `/`                     | Correspond au `Home` contrôleur et à la `Index` méthode ( `id` est ignoré).        |
 
 L’utilisation d’un modèle est généralement l’approche la plus simple pour le routage. Il est également possible de spécifier des contraintes et des valeurs par défaut hors du modèle de routage.
 
@@ -1434,26 +3962,94 @@ Les contraintes de route s’exécutent quand une correspondance s’est produit
 
 Le tableau suivant montre des exemples de contrainte de route et leur comportement attendu.
 
-| contrainte |  Exemple | Exemples de correspondances | Notes |
-| ---------- | ------- | --------------- | ----- |
-| `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier. |
-| `bool` | `{active:bool}` | `true`, `FALSE` | Correspond `true` à ou à’false. Non-respect de la casse. |
-| `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | Correspond à une `DateTime` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent.|
-| `decimal` | `{price:decimal}` | `49.99`, `-1,000.01` | Correspond à une `decimal` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent.|
-| `double` | `{weight:double}` | `1.234`, `-1,001.01e8` | Correspond à une `double` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent.|
-| `float` | `{weight:float}` | `1.234`, `-1,001.01e8` | Correspond à une `float` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent.|
-| `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Correspond à une `Guid` valeur valide. |
-| `long` | `{ticks:long}` | `123456789`, `-123456789` | Correspond à une `long` valeur valide. |
-| `minlength(value)` | `{username:minlength(4)}` | `Rick` | La chaîne doit comporter au moins 4 caractères. |
-| `maxlength(value)` | `{filename:maxlength(8)}` | `MyFile` | La chaîne ne doit pas comporter plus de 8 caractères. |
-| `length(length)` | `{filename:length(12)}` | `somefile.txt` | La chaîne doit contenir exactement 12 caractères. |
-| `length(min,max)` | `{filename:length(8,16)}` | `somefile.txt` | La chaîne doit être au moins égale à 8 et comporter jusqu’à 16 caractères. |
-| `min(value)` | `{age:min(18)}` | `19` | La valeur entière doit être au moins égale à 18. |
-| `max(value)` | `{age:max(120)}` | `91` | Valeur entière maximale de 120. |
-| `range(min,max)` | `{age:range(18,120)}` | `91` | La valeur entière doit être au moins égale à 18 et 120. |
-| `alpha` | `{name:alpha}` | `Rick` | La chaîne doit comporter un ou plusieurs caractères `a` - `z`alphabétiques.  Non-respect de la casse. |
-| `regex(expression)` | `{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}` | `123-45-6789` | La chaîne doit correspondre à l’expression régulière. Consultez les conseils relatifs à la définition d’une expression régulière. |
-| `required` | `{name:required}` | `Rick` | Permet d’appliquer qu’une valeur sans paramètre est présente pendant la génération de l’URL. |
+| contrainte | Exemple | Exemples de correspondances | Remarques |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+----- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+---- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-------- | ----- | | `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier. | | `bool` | `{active:bool}` | `true`, `FALSE` | Matches `true` ou `false. Case-insensitive. |
+| ` DateTime ` | ` {DOB : DateTime} ` | ` 2016-12-31 `, ` 2016-12-31 7:32pm ` | Matches a valid ` DateTime ` value in the invariant culture. See  preceding warning.|
+| ` Decimal ` | ` {Price : Decimal} ` | ` 49,99 `, ` -1 000,01 ` | Matches a valid ` Decimal ` value in the invariant culture. See  preceding warning.|
+| ` double ` | ` {Poids : double} ` | ` 1,234 `, ` -1, 001.01 E8 ` | Matches a valid ` double ` value in the invariant culture. See  preceding warning.|
+| ` float ` | ` {Weight : float} ` | ` 1,234 `, ` -1, 001.01 E8 ` | Matches a valid ` float ` value in the invariant culture. See  preceding warning.|
+| ` GUID ` | ` {ID : GUID} ` | ` CD2C1638-1638-72D5-1638-DEADBEEF1638 `, ` {CD2C1638-1638-72D5-1638-DEADBEEF1638} ` | Matches a valid ` GUID ` value. |
+| ` long ` | ` {ticks : long} ` | ` 123456789 `, ` -123456789 ` | Matches a valid ` long ` value. |
+| ` minLength (valeur) ` | ` {username : minLength (4)} ` | ` Rick ` | String must be at least 4 characters. |
+| ` MaxLength (valeur) ` | ` {filename : MaxLength (8)} ` | ` MyFile ` | String has maximum of 8 characters. |
+| ` length (longueur) ` | ` {filename : length (12)} ` | ` somefile. txt ` | String must be exactly 12 characters long. |
+| ` length (min, max) ` | ` {filename : longueur (8, 16)} ` | ` somefile. txt ` | String must be at least 8 and has maximum of 16 characters. |
+| ` min (valeur) {Age : ` | ` min (18)} ` | ` 19 ` | Integer value must be at least 18. |
+| ` Max (valeur) ` | ` {Age : Max (120)} ` | ` 91 ` | Integer value maximum of 120. |
+| ` plage (min, max) ` | ` {Age : Range (18120)} ` | ` 91 ` | Integer value must be at least 18 and maximum of 120. |
+| ` alpha ` | ` {Name : alpha} ` | ` Rick ` | String must consist of one or more alphabetical characters ` a `-` z `.  Case-insensitive. |
+| ` Regex (expression) ` | ` {SSN : Regex (^ \\ d { {3} }- \\ d { {2} }- \\ d { {4} } $)} ` | ` 123-45-6789 ` | String must match the regular expression. See tips about defining a regular expression. |
+| ` Required ` | ` {Name : required} ` | ` Rick' | Permet d’appliquer qu’une valeur sans paramètre est présente pendant la génération de l’URL. |
 
 Il est possible d’appliquer plusieurs contraintes séparées par un point-virgule à un même paramètre. Par exemple, la contrainte suivante limite un paramètre à une valeur entière supérieure ou égale à 1 :
 
@@ -1469,29 +4065,299 @@ public User GetUserById(int id) { }
 
 Le framework ASP.NET Core ajoute `RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.CultureInvariant` au constructeur d’expression régulière. Pour obtenir une description de ces membres, consultez <xref:System.Text.RegularExpressions.RegexOptions>.
 
-Les expressions régulières utilisent des délimiteurs et des jetons similaires à ceux utilisés par le routage et le langage C#. Les jetons d’expression régulière doivent être placés dans une séquence d’échappement. Pour utiliser l’expression `^\d{3}-\d{2}-\d{4}$` régulière dans le routage :
+Les expressions régulières utilisent des délimiteurs et des jetons similaires à ceux utilisés par le routage et le langage C#. Les jetons d’expression régulière doivent être placés dans une séquence d’échappement. Pour utiliser l’expression régulière `^\d{3}-\d{2}-\d{4}$` dans le routage :
 
-* L’expression doit avoir les caractères de `\` barre oblique inverse uniques fournis dans la chaîne `\\` sous la forme de caractères barre oblique inverse doubles dans le code source.
-* L’expression régulière doit nous `\\` permettre d’échapper le caractère `\` d’échappement de la chaîne.
-* L’expression régulière n’est `\\` pas nécessaire lors de l’utilisation de [littéraux de chaîne Verbatim](/dotnet/csharp/language-reference/keywords/string).
+* L’expression doit avoir les caractères de barre oblique inverse uniques `\` fournis dans la chaîne sous la forme de caractères barre oblique inverse doubles `\\` dans le code source.
+* L’expression régulière doit nous permettre d' `\\` échapper le caractère d’échappement de la `\` chaîne.
+* L’expression régulière n’est pas nécessaire `\\` lors de l’utilisation de [littéraux de chaîne Verbatim](/dotnet/csharp/language-reference/keywords/string).
 
-Pour `{`échapper les caractères de délimiteur de paramètre de routage, `}`, `[`, `]`, `{{`doublez les caractères dans l’expression, `}` `[[`,,. `]]` Le tableau suivant montre une expression régulière et la version échappée :
+Pour échapper les caractères de délimiteur de paramètre de routage `{` , `}` ,, `[` `]` , doublez les caractères dans l’expression `{{` , `}` `[[` `]]` ,,. Le tableau suivant montre une expression régulière et la version échappée :
 
 | Expression régulière    | Expression régulière en échappement     |
-| --------------------- | ------------------------------ |
-| `^\d{3}-\d{2}-\d{4}$` | `^\\d{{3}}-\\d{{2}}-\\d{{4}}$` |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+----------- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+--------------- | | `^\d{3}-\d{2}-\d{4}$` | `^\\d{{3}}-\\d{{2}}-\\d{{4}}$` |
 | `^[a-z]{2}$`          | `^[[a-z]]{{2}}$`               |
 
-Les expressions régulières utilisées dans le routage commencent souvent par `^` le caractère de signe insertion et correspondent à la position de départ de la chaîne. Les expressions se terminent souvent par le `$` caractère de signe dollar et la fin de la chaîne. Les caractères `^` et `$` garantissent que l’expression régulière établit une correspondance avec la totalité de la valeur du paramètre de route. Sans les caractères `^` et `$`, l’expression régulière peut correspondre à n’importe quelle sous-chaîne dans la chaîne, ce qui est souvent indésirable. Le tableau suivant contient des exemples et explique pourquoi ils établissent ou non une correspondance.
+Les expressions régulières utilisées dans le routage commencent souvent par le `^` caractère de signe insertion et correspondent à la position de départ de la chaîne. Les expressions se terminent souvent par le `$` caractère de signe dollar et la fin de la chaîne. Les caractères `^` et `$` garantissent que l’expression régulière établit une correspondance avec la totalité de la valeur du paramètre de route. Sans les caractères `^` et `$`, l’expression régulière peut correspondre à n’importe quelle sous-chaîne dans la chaîne, ce qui est souvent indésirable. Le tableau suivant contient des exemples et explique pourquoi ils établissent ou non une correspondance.
 
-| Expression   | String    | Correspond | Commentaire               |
-| ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | mz        | Oui   | Correspondance avec l’expression    |
-| `[a-z]{2}`   | MZ        | Oui   | Non-respect de la casse    |
-| `^[a-z]{2}$` | hello     | Non     | Voir `^` et `$` ci-dessus |
-| `^[a-z]{2}$` | 123abc456 | Non     | Voir `^` et `$` ci-dessus |
+| Expression   | Chaîne    | Correspond | Commentaire               |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------ | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+----- | :---: |  titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+---------- | | `[a-z]{2}`   | Bonjour | Oui | Correspondances de sous-chaînes | | `[a-z]{2}`   | 123abc456 | Oui | Correspondances de sous-chaînes | | `[a-z]{2}`   | MZ | Oui | Expression matches | | `[a-z]{2}`   | MZ | Oui | Ne respecte pas la casse | | `^[a-z]{2}$` | Bonjour | Non | Voir `^` et `$` versions ultérieures | | `^[a-z]{2}$` | 123abc456 | Non | Voir `^` et `$` versions ultérieures |
 
 Pour plus d’informations sur la syntaxe des expressions régulières, consultez [Expressions régulières du .NET Framework](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1553,7 +4419,7 @@ Avec la route précédente, l’action `SubscriptionManagementController.GetAll`
 ASP.NET Core fournit des conventions d’API pour l’utilisation des transformateurs de paramètre avec des routages générés :
 
 * La convention de l’API `Microsoft.AspNetCore.Mvc.ApplicationModels.RouteTokenTransformerConvention` est fournie avec ASP.NET Core MVC. Cette convention applique un transformateur de paramètre spécifié à tous les routages d’attributs dans l’application. Le transformateur de paramètre transforme les jetons de routage d’attribut quand ils sont remplacés. Pour plus d’informations, consultez [Utiliser un transformateur de paramètre pour personnaliser le remplacement des jetons](/aspnet/core/mvc/controllers/routing#use-a-parameter-transformer-to-customize-token-replacement).
-* Razor Pages a la convention d’API `Microsoft.AspNetCore.Mvc.ApplicationModels.PageRouteTransformerConvention`. Cette convention applique un transformateur de paramètre spécifié à toutes les pages Razor découvertes automatiquement. Le transformateur de paramètre transforme les segments du nom de dossier et du nom de fichier des routes Razor Pages. Pour plus d’informations, consultez [Utiliser un transformateur de paramètre pour personnaliser les routages de pages](/aspnet/core/razor-pages/razor-pages-conventions#use-a-parameter-transformer-to-customize-page-routes).
+* RazorLes pages possèdent la `Microsoft.AspNetCore.Mvc.ApplicationModels.PageRouteTransformerConvention` Convention d’API. Cette Convention applique un transformateur de paramètre spécifié à toutes les Razor pages découvertes automatiquement. Le transformateur de paramètres transforme les segments de nom de fichier et de dossier des Razor itinéraires de pages. Pour plus d’informations, consultez [Utiliser un transformateur de paramètre pour personnaliser les routages de pages](/aspnet/core/razor-pages/razor-pages-conventions#use-a-parameter-transformer-to-customize-page-routes).
 
 ## <a name="url-generation-reference"></a>Informations de référence sur la génération d’URL
 
@@ -1569,12 +4435,337 @@ Les valeurs ambiantes qui ne correspondent pas à un paramètre sont ignorées. 
 
 Les valeurs fournies explicitement mais qui n’ont pas de correspondance avec un segment de la route sont ajoutées à la chaîne de requête. Le tableau suivant présente le résultat en cas d’utilisation du modèle de routage `{controller}/{action}/{id?}`.
 
-| Valeurs ambiantes                     | Valeurs explicites                        | Résultats                  |
-| ---------------------------------- | -------------------------------------- | ----------------------- |
-| controller = "Home"                | action = "About"                       | `/Home/About`           |
-| controller = "Home"                | controller = "Order", action = "About" | `/Order/About`          |
-| controller = "Home", color = "Red" | action = "About"                       | `/Home/About`           |
-| controller = "Home"                | action = "About", color = "Red"        | `/Home/About?color=Red` |
+| Valeurs ambiantes                     | Valeurs explicites                        | Résultat                  |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+----------------- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------------------- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------------ | | Controller = "démarrage" | action = "about" | `/Home/About`|
+| Controller = "démarrage" | Controller = « Order », action = « about » | `/Order/About`|
+| Controller = "orig", Color = "Red" | action = "about" | `/Home/About`|
+| Controller = "démarrage" | action = « about », Color = « Red » | `/Home/About?color=Red`                                |
 
 Si une route a une valeur par défaut qui ne correspond pas à un paramètre et que cette valeur est explicitement fournie, elle doit correspondre à la valeur par défaut :
 
@@ -1605,7 +4796,7 @@ services.AddMvc()
 ```
 
 > [!IMPORTANT]
-> Ce document traite du routage ASP.NET Core de bas niveau. Pour plus d’informations sur le routage ASP.NET Core MVC, consultez <xref:mvc/controllers/routing>. Pour plus d’informations sur les conventions de routage dans Razor Pages, consultez <xref:razor-pages/razor-pages-conventions>.
+> Ce document traite du routage ASP.NET Core de bas niveau. Pour plus d’informations sur le routage ASP.NET Core MVC, consultez <xref:mvc/controllers/routing>. Pour plus d’informations sur les conventions de routage dans les Razor pages, consultez <xref:razor-pages/razor-pages-conventions> .
 
 [Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
@@ -1620,11 +4811,11 @@ Les développeurs ajoutent fréquemment des routes laconiques supplémentaires a
 
 Les API web doivent utiliser le routage d’attributs pour modéliser les fonctionnalités de l’application sous la forme d’un ensemble de ressources dans lequel les opérations sont représentées par des verbes HTTP. Cela signifie que plusieurs opérations (comme GET et POST) sur la même ressource logique utilisent la même URL. Le routage d’attributs fournit le niveau de contrôle nécessaire pour concevoir avec soin la disposition des points de terminaison publics d’une API.
 
-Les applications Razor Pages utilisent le routage conventionnel par défaut pour délivrer des ressources nommées dans le dossier *Pages* d’une application. Des conventions supplémentaires sont disponibles : elles vous permettent de personnaliser le comportement de routage de Razor Pages. Pour plus d’informations, consultez <xref:razor-pages/index> et <xref:razor-pages/razor-pages-conventions>.
+RazorPages les applications utilisent le routage conventionnel par défaut pour servir des ressources nommées dans le dossier *pages* d’une application. Des conventions supplémentaires vous permettent de personnaliser le Razor comportement de routage des pages. Pour plus d’informations, consultez <xref:razor-pages/index> et <xref:razor-pages/razor-pages-conventions>.
 
 La prise en charge de la génération d’URL permet de développer l’application sans coder en dur les URL pour lier l’application. Cette prise en charge permet de commencer avec une configuration de routage de base, puis de modifier les routes une fois que la disposition des ressources de l’application est déterminée.
 
-Le routage utilise des implémentations <xref:Microsoft.AspNetCore.Routing.IRouter> d’itinéraires de à :
+Le routage utilise des implémentations d’itinéraires de <xref:Microsoft.AspNetCore.Routing.IRouter> à :
 
 * Mapper les requêtes entrantes à des *gestionnaires de routage*.
 * Générer les URL utilisées dans les réponses.
@@ -1636,11 +4827,11 @@ Le système de routage a les caractéristiques suivantes :
 * Une syntaxe des modèles de route est utilisée pour définir des routes avec des paramètres de route tokenisés.
 * La configuration de points de terminaison de style conventionnel et de style « attribut » est autorisée.
 * <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> est utilisé pour déterminer si un paramètre d’URL contient une valeur valide pour une contrainte de point de terminaison donné.
-* Les modèles d’application, comme MVC/Razor Pages, inscrivent toutes leurs routes, qui ont une implémentation prévisible de scénarios de routage.
+* Les modèles d’application, tels que MVC/ Razor pages, inscrivent tous leurs itinéraires, qui ont une implémentation prévisible des scénarios de routage.
 * Une réponse peut utiliser le routage pour générer des URL (par exemple pour la redirection ou pour des liens) en fonction des informations des routes et éviter ainsi les URL codées en dur, ce qui facilite la maintenance.
 * La génération d’URL est basée sur des routes, qui prennent en charge l’extensibilité arbitraire. <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> offre des méthodes pour générer des URL.
 <!-- fix [middleware](xref:fundamentals/middleware/index) -->
-Le routage est connecté au pipeline de [l’intergiciel (middleware)](xref:fundamentals/middleware/index) par la classe <xref:Microsoft.AspNetCore.Builder.RouterMiddleware>. [ASP.NET Core MVC](xref:mvc/overview) ajoute le routage au pipeline de middleware dans le cadre de sa configuration, et gère le routage dans les applications MVC et Razor Pages. Pour découvrir comment utiliser le routage en tant que composant autonome, consultez la section [Utiliser le middleware de routage](#use-routing-middleware).
+Le routage est connecté au pipeline de [l’intergiciel (middleware)](xref:fundamentals/middleware/index) par la classe <xref:Microsoft.AspNetCore.Builder.RouterMiddleware>. [ASP.net Core MVC](xref:mvc/overview) ajoute le routage au pipeline de l’intergiciel (middleware) dans le cadre de sa configuration et gère le routage dans les applications MVC et Razor pages. Pour découvrir comment utiliser le routage en tant que composant autonome, consultez la section [Utiliser le middleware de routage](#use-routing-middleware).
 
 ### <a name="url-matching"></a>Correspondance d’URL
 
@@ -1800,7 +4991,7 @@ Ajoutez le routage au conteneur de service dans `Startup.ConfigureServices` :
 Les routes doivent être configurées dans la méthode `Startup.Configure`. L’exemple d’application utilise les API suivantes :
 
 * <xref:Microsoft.AspNetCore.Routing.RouteBuilder>
-* <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*>&ndash; Correspond uniquement aux requêtes http d’extraction.
+* <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*>: Correspond uniquement aux requêtes HTTP.
 * <xref:Microsoft.AspNetCore.Builder.RoutingBuilderExtensions.UseRouter*>
 
 [!code-csharp[](routing/samples/2.x/RoutingSample/Startup.cs?name=snippet_RouteHandler)]
@@ -1808,14 +4999,254 @@ Les routes doivent être configurées dans la méthode `Startup.Configure`. L’
 Le tableau suivant montre les réponses avec les URI donnés.
 
 | URI                    | response                                          |
-| ---------------------- | ------------------------------------------------- |
-| `/package/create/3`    | Hello! Valeurs de route : [operation, create], [id, 3] |
-| `/package/track/-3`    | Hello! Valeurs de route : [operation, track], [id, -3] |
-| `/package/track/-3/`   | Hello! Valeurs de route : [operation, track], [id, -3] |
-| `/package/track/`      | La requête passe à travers ceci, aucune correspondance.              |
-| `GET /hello/Joe`       | Hi, Joe!                                          |
-| `POST /hello/Joe`      | La requête passe à travers ceci, correspondance seulement avec HTTP GET. |
-| `GET /hello/Joe/Smith` | La requête passe à travers ceci, aucune correspondance.              |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+----------- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------------------------- | | `/package/create/3`    | Salut! Valeurs de route : [opération, créer], [ID, 3] | | `/package/track/-3`    | Salut! Valeurs de route : [opération, suivi], [ID,-3] | | `/package/track/-3/`   | Salut! Valeurs de route : [opération, suivi], [ID,-3] | | `/package/track/`      | La requête passe à, aucune correspondance.              | | `GET /hello/Joe`       | Bonjour, Joe !                                          | | `POST /hello/Joe`      | La requête passe à, correspond à HTTP to only. | | `GET /hello/Joe/Smith` | La requête passe à, aucune correspondance.              |
 
 Si vous configurez une seule route, appelez <xref:Microsoft.AspNetCore.Builder.RoutingBuilderExtensions.UseRouter*> en passant une instance `IRouter`. Vous n’avez pas besoin d’utiliser <xref:Microsoft.AspNetCore.Routing.RouteBuilder>.
 
@@ -1862,13 +5293,501 @@ Le nom de la contrainte et les arguments sont passés au service <xref:Microsoft
 Le tableau suivant montre des exemples de modèles de route et leur comportement.
 
 | Modèle de routage                           | Exemple d’URI en correspondance    | URI de la requête&hellip;                                                    |
-| ---------------------------------------- | ----------------------- | -------------------------------------------------------------------------- |
-| `hello`                                  | `/hello`                | Correspond seulement au chemin unique `/hello`.                                     |
-| `{Page=Home}`                            | `/`                     | Correspond à `Page` et le définit sur `Home`.                                         |
-| `{Page=Home}`                            | `/Contact`              | Correspond à `Page` et le définit sur `Contact`.                                      |
-| `{controller}/{action}/{id?}`            | `/Products/List`        | Mappe au contrôleur `Products` et à l’action `List`.                       |
-| `{controller}/{action}/{id?}`            | `/Products/Details/123` | Mappe au contrôleur `Products` et à l’action `Details` (`id` défini sur 123). |
-| `{controller=Home}/{action=Index}/{id?}` | `/`                     | Mappe au contrôleur `Home` et à la méthode `Index` (`id` est ignoré).        |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-------------------- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------------ | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------------------------------------- | | `hello`                                  | `/hello`                | Correspond uniquement au chemin d’accès unique `/hello` .                                     | | `{Page=Home}`                            | `/`                     | Correspond à et affecte `Page` à la valeur `Home` .                                         | | `{Page=Home}`                            | `/Contact`              | Correspond à et affecte `Page` à la valeur `Contact` .                                      | | `{controller}/{action}/{id?}`            | `/Products/List`        | Correspond au `Products` contrôleur et à l' `List` action.                       | | `{controller}/{action}/{id?}`            | `/Products/Details/123` | Correspond au `Products` contrôleur et à l' `Details` action ( `id` défini sur 123). | | `{controller=Home}/{action=Index}/{id?}` | `/`                     | Correspond au `Home` contrôleur et à la `Index` méthode ( `id` est ignoré).        |
 
 L’utilisation d’un modèle est généralement l’approche la plus simple pour le routage. Il est également possible de spécifier des contraintes et des valeurs par défaut hors du modèle de routage.
 
@@ -1884,26 +5803,78 @@ Les contraintes de route s’exécutent quand une correspondance s’est produit
 
 Le tableau suivant montre des exemples de contrainte de route et leur comportement attendu.
 
-| contrainte |  Exemple | Exemples de correspondances | Notes |
-| ---------- | ------- | --------------- | ----- |
-| `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier |
-| `bool` | `{active:bool}` | `true`, `FALSE` | Correspond à `true` ou à `false` (non-respect de la casse) |
-| `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | Correspond à une `DateTime` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent.|
-| `decimal` | `{price:decimal}` | `49.99`, `-1,000.01` | Correspond à une `decimal` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent.|
-| `double` | `{weight:double}` | `1.234`, `-1,001.01e8` | Correspond à une `double` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent.|
-| `float` | `{weight:float}` | `1.234`, `-1,001.01e8` | Correspond à une `float` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent.|
-| `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Correspond à une valeur `Guid` valide |
-| `long` | `{ticks:long}` | `123456789`, `-123456789` | Correspond à une valeur `long` valide |
-| `minlength(value)` | `{username:minlength(4)}` | `Rick` | La chaîne doit comporter au moins 4 caractères |
-| `maxlength(value)` | `{filename:maxlength(8)}` | `Richard` | La chaîne ne doit pas comporter plus de 8 caractères |
-| `length(length)` | `{filename:length(12)}` | `somefile.txt` | La chaîne doit comporter exactement 12 caractères |
-| `length(min,max)` | `{filename:length(8,16)}` | `somefile.txt` | La chaîne doit comporter au moins 8 caractères et pas plus de 16 caractères |
-| `min(value)` | `{age:min(18)}` | `19` | La valeur entière doit être au moins égale à 18 |
-| `max(value)` | `{age:max(120)}` | `91` | La valeur entière ne doit pas être supérieure à 120 |
-| `range(min,max)` | `{age:range(18,120)}` | `91` | La valeur entière doit être au moins égale à 18 mais ne doit pas être supérieure à 120 |
-| `alpha` | `{name:alpha}` | `Rick` | La chaîne doit se composer d’un ou de plusieurs caractères alphabétiques (`a`-`z`, non-respect de la casse) |
-| `regex(expression)` | `{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}` | `123-45-6789` | La chaîne doit correspondre à l’expression régulière (voir les conseils relatifs à la définition d’une expression régulière) |
-| `required` | `{name:required}` | `Rick` | Utilisé pour garantir qu’une valeur autre qu’un paramètre est présente pendant la génération de l’URL |
+| contrainte | Exemple | Exemples de correspondances | Remarques |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+----- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+---- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-------- | ----- | | `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier | | `bool` | `{active:bool}` | `true`, `FALSE` | Correspond à `true` ou `false` (non-respect de la casse) | | `datetime`  |  `{dob:datetime}`  |  `2016-12-31` , `2016-12-31 7:32pm` | Correspond à une `DateTime` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent. | | `decimal` | `{price:decimal}` | `49.99`, `-1,000.01` | Correspond à une `decimal` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent. | | `double` | `{weight:double}` | `1.234`, `-1,001.01e8` | Correspond à une `double` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent. | | `float` | `{weight:float}` | `1.234`, `-1,001.01e8` | Correspond à une `float` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent. | | `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Correspond à une `Guid` valeur valide | | `long`  |  `{ticks:long}`  |  `123456789` , `-123456789` | Correspond à une `long` valeur valide | | `minlength(value)`  |  `{username:minlength(4)}`  |  `Rick` | La chaîne doit comporter au moins 4 caractères | | `maxlength(value)` | `{filename:maxlength(8)}` | `Richard` | La chaîne ne doit pas comporter plus de 8 caractères | | `length(length)` | `{filename:length(12)}` | `somefile.txt` | La chaîne doit contenir exactement 12 caractères | | `length(min,max)` | `{filename:length(8,16)}` | `somefile.txt` | La chaîne doit comporter au moins 8 caractères et ne pas comporter plus de 16 caractères | | `min(value)` | `{age:min(18)}` | `19` | La valeur entière doit être au moins égale à 18 | | `max(value)` | `{age:max(120)}` | `91` | La valeur entière ne doit pas être supérieure à 120 | | `range(min,max)` | `{age:range(18,120)}` | `91` | La valeur entière doit être au moins égale à 18, mais pas plus de 120 | | `alpha` | `{name:alpha}` | `Rick` | La chaîne doit comporter un ou plusieurs caractères alphabétiques ( `a` - `z` , non-respect de la casse) | | `regex(expression)`  |  `{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}`  |  `123-45-6789` | La chaîne doit correspondre à l’expression régulière (consultez les conseils relatifs à la définition d’une expression régulière) | | `required` | `{name:required}` | `Rick` | Permet d’appliquer qu’une valeur sans paramètre est présente pendant la génération de l’URL |
 
 Il est possible d’appliquer plusieurs contraintes séparées par un point-virgule à un même paramètre. Par exemple, la contrainte suivante limite un paramètre à une valeur entière supérieure ou égale à 1 :
 
@@ -1922,20 +5893,290 @@ Le framework ASP.NET Core ajoute `RegexOptions.IgnoreCase | RegexOptions.Compile
 Les expressions régulières utilisent les délimiteurs et des jetons semblables à ceux utilisés par le service de routage et le langage C#. Les jetons d’expression régulière doivent être placés dans une séquence d’échappement. Pour que l’expression régulière `^\d{3}-\d{2}-\d{4}$` puisse être utilisée dans le routage, il faut que les caractères `\` (une seule barre oblique inverse) soit fournis dans la chaîne sous la forme `\\` (double barre oblique inverse) dans le fichier source C#, pour placer en échappement le caractère d’échappement de chaîne `\` (sauf en cas d’utilisation de [littéraux de chaîne textuelle](/dotnet/csharp/language-reference/keywords/string)). Pour placer en échappement les caractères de délimiteur de paramètre de route (`{`, `}`, `[`, `]`), doublez les caractères dans l’expression (`{{`, `}`, `[[`, `]]`). Le tableau suivant montre une expression régulière et la version placée en échappement.
 
 | Expression régulière    | Expression régulière en échappement     |
-| --------------------- | ------------------------------ |
-| `^\d{3}-\d{2}-\d{4}$` | `^\\d{{3}}-\\d{{2}}-\\d{{4}}$` |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+----------- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+--------------- | | `^\d{3}-\d{2}-\d{4}$` | `^\\d{{3}}-\\d{{2}}-\\d{{4}}$` |
 | `^[a-z]{2}$`          | `^[[a-z]]{{2}}$`               |
 
 Les expressions régulières utilisées dans le routage commencent souvent par un caret (`^`) et correspondent à la position de début de la chaîne. Les expressions se terminent souvent par le signe dollar (`$`) de caractère et correspondent à la fin de la chaîne. Les caractères `^` et `$` garantissent que l’expression régulière établit une correspondance avec la totalité de la valeur du paramètre de route. Sans les caractères `^` et `$`, l’expression régulière peut correspondre à n’importe quelle sous-chaîne dans la chaîne, ce qui est souvent indésirable. Le tableau suivant contient des exemples et explique pourquoi ils établissent ou non une correspondance.
 
-| Expression   | String    | Correspond | Commentaire               |
-| ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | mz        | Oui   | Correspondance avec l’expression    |
-| `[a-z]{2}`   | MZ        | Oui   | Non-respect de la casse    |
-| `^[a-z]{2}$` | hello     | Non     | Voir `^` et `$` ci-dessus |
-| `^[a-z]{2}$` | 123abc456 | Non     | Voir `^` et `$` ci-dessus |
+| Expression   | Chaîne    | Correspond | Commentaire               |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------ | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+----- | :---: |  titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+---------- | | `[a-z]{2}`   | Bonjour | Oui | Correspondances de sous-chaînes | | `[a-z]{2}`   | 123abc456 | Oui | Correspondances de sous-chaînes | | `[a-z]{2}`   | MZ | Oui | Expression matches | | `[a-z]{2}`   | MZ | Oui | Ne respecte pas la casse | | `^[a-z]{2}$` | Bonjour | Non | Voir `^` et `$` versions ultérieures | | `^[a-z]{2}$` | 123abc456 | Non | Voir `^` et `$` versions ultérieures |
 
 Pour plus d’informations sur la syntaxe des expressions régulières, consultez [Expressions régulières du .NET Framework](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1975,12 +6216,337 @@ Les valeurs ambiantes qui ne correspondent pas à un paramètre sont ignorées. 
 
 Les valeurs fournies explicitement mais qui n’ont pas de correspondance avec un segment de la route sont ajoutées à la chaîne de requête. Le tableau suivant présente le résultat en cas d’utilisation du modèle de routage `{controller}/{action}/{id?}`.
 
-| Valeurs ambiantes                     | Valeurs explicites                        | Résultats                  |
-| ---------------------------------- | -------------------------------------- | ----------------------- |
-| controller = "Home"                | action = "About"                       | `/Home/About`           |
-| controller = "Home"                | controller = "Order", action = "About" | `/Order/About`          |
-| controller = "Home", color = "Red" | action = "About"                       | `/Home/About`           |
-| controller = "Home"                | action = "About", color = "Red"        | `/Home/About?color=Red` |
+| Valeurs ambiantes                     | Valeurs explicites                        | Résultat                  |
+| ---
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+----------------- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------------------- | titre de--- : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------------ | | Controller = "démarrage" | action = "about" | `/Home/About`|
+| Controller = "démarrage" | Controller = « Order », action = « about » | `/Order/About`|
+| Controller = "orig", Color = "Red" | action = "about" | `/Home/About`|
+| Controller = "démarrage" | action = « about », Color = « Red » | `/Home/About?color=Red`                                |
 
 Si une route a une valeur par défaut qui ne correspond pas à un paramètre et que cette valeur est explicitement fournie, elle doit correspondre à la valeur par défaut :
 

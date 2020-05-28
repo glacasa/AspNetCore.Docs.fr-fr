@@ -1,23 +1,11 @@
 ---
-title: Empêcher les attaques de falsification de requête intersites (XSRF/CSRF) dans ASP.NET Core
-author: steve-smith
-description: Découvrez comment empêcher les attaques contre les applications Web où un site Web malveillant peut influencer l’interaction entre un navigateur client et l’application.
-ms.author: riande
-ms.custom: mvc
-ms.date: 12/05/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/anti-request-forgery
-ms.openlocfilehash: 4e7e7a89daaee533f648efdb2c621399225f57be
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774002"
+titre : Auteur : Description : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="prevent-cross-site-request-forgery-xsrfcsrf-attacks-in-aspnet-core"></a>Empêcher les attaques de falsification de requête intersites (XSRF/CSRF) dans ASP.NET Core
 
@@ -28,9 +16,9 @@ La falsification de requête intersite (également appelée XSRF ou CSRF) est un
 Exemple d’attaque CSRF :
 
 1. Un utilisateur se connecte `www.good-banking-site.com` à à l’aide de l’authentification par formulaire. Le serveur authentifie l’utilisateur et émet une réponse qui comprend un cookie d’authentification. Le site est vulnérable aux attaques, car il approuve les demandes qu’il reçoit avec un cookie d’authentification valide.
-1. L’utilisateur visite un site malveillant, `www.bad-crook-site.com`.
+1. L’utilisateur visite un site malveillant, `www.bad-crook-site.com` .
 
-   Le site malveillant, `www.bad-crook-site.com`, contient un formulaire HTML semblable au suivant :
+   Le site malveillant, `www.bad-crook-site.com` , contient un formulaire HTML semblable au suivant :
 
    ```html
    <h1>Congratulations! You're a Winner!</h1>
@@ -43,8 +31,8 @@ Exemple d’attaque CSRF :
 
    Notez que le formulaire est `action` publié sur le site vulnérable, et non sur le site malveillant. Il s’agit de la partie « inter-sites » de CSRF.
 
-1. L’utilisateur sélectionne le bouton Envoyer. Le navigateur effectue la demande et intègre automatiquement le cookie d’authentification pour le domaine demandé `www.good-banking-site.com`,.
-1. La demande s’exécute sur `www.good-banking-site.com` le serveur avec le contexte d’authentification de l’utilisateur et peut effectuer toute action qu’un utilisateur authentifié est autorisé à effectuer.
+1. L’utilisateur sélectionne le bouton Envoyer. Le navigateur effectue la demande et intègre automatiquement le cookie d’authentification pour le domaine demandé, `www.good-banking-site.com` .
+1. La demande s’exécute sur le `www.good-banking-site.com` serveur avec le contexte d’authentification de l’utilisateur et peut effectuer toute action qu’un utilisateur authentifié est autorisé à effectuer.
 
 En plus du scénario dans lequel l’utilisateur sélectionne le bouton pour envoyer le formulaire, le site malveillant peut :
 
@@ -64,7 +52,7 @@ Les attaques CSRF sont possibles pour les applications Web qui utilisent des coo
 * Les cookies stockés incluent des cookies de session pour les utilisateurs authentifiés.
 * Les navigateurs envoient tous les cookies associés à un domaine à l’application Web à chaque demande, quelle que soit la façon dont la demande à l’application a été générée dans le navigateur.
 
-Toutefois, les attaques CSRF ne sont pas limitées à l’exploitation des cookies. Par exemple, l’authentification de base et Digest est également vulnérable. Une fois qu’un utilisateur se connecte avec l’authentification de base ou Digest, le navigateur envoie automatiquement les&dagger; informations d’identification jusqu’à la fin de la session.
+Toutefois, les attaques CSRF ne sont pas limitées à l’exploitation des cookies. Par exemple, l’authentification de base et Digest est également vulnérable. Une fois qu’un utilisateur se connecte avec l’authentification de base ou Digest, le navigateur envoie automatiquement les informations d’identification jusqu’à la fin de la session &dagger; .
 
 &dagger;Dans ce contexte, la *session* fait référence à la session côté client au cours de laquelle l’utilisateur est authentifié. Elle n’est pas liée aux sessions côté serveur ou aux intergiciels (middleware) de [Session ASP.net Core](xref:fundamentals/app-state).
 
@@ -91,7 +79,7 @@ Lorsqu’un utilisateur est authentifié, il reçoit un jeton (et non un jeton a
 
 Les environnements d’hébergement partagés sont vulnérables au détournement de session, à la CSRF de connexion et à d’autres attaques.
 
-Bien `example1.contoso.net` que `example2.contoso.net` et soient des hôtes différents, il existe une relation d’approbation implicite `*.contoso.net` entre les hôtes sous le domaine. Cette relation d’approbation implicite permet aux hôtes potentiellement non fiables d’affecter les cookies de l’autre (les stratégies de même origine qui régissent les demandes AJAX ne s’appliquent pas nécessairement aux cookies HTTP).
+Bien que `example1.contoso.net` et `example2.contoso.net` soient des hôtes différents, il existe une relation d’approbation implicite entre les hôtes sous le `*.contoso.net` domaine. Cette relation d’approbation implicite permet aux hôtes potentiellement non fiables d’affecter les cookies de l’autre (les stratégies de même origine qui régissent les demandes AJAX ne s’appliquent pas nécessairement aux cookies HTTP).
 
 Les attaques qui exploitent des cookies approuvés entre des applications hébergées sur le même domaine peuvent être évitées en ne partageant pas de domaines. Lorsque chaque application est hébergée sur son propre domaine, il n’existe aucune relation d’approbation de cookie implicite à exploiter.
 
@@ -102,7 +90,7 @@ Les attaques qui exploitent des cookies approuvés entre des applications héber
 
 ::: moniker range=">= aspnetcore-3.0"
 
-L’intergiciel anti-contrefaçon est ajouté au conteneur d' [injection de dépendances](xref:fundamentals/dependency-injection) lorsque l’une des API suivantes est `Startup.ConfigureServices`appelée dans :
+L’intergiciel anti-contrefaçon est ajouté au conteneur d' [injection de dépendances](xref:fundamentals/dependency-injection) lorsque l’une des API suivantes est appelée dans `Startup.ConfigureServices` :
 
 * <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc*>
 * <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*>
@@ -117,7 +105,7 @@ Un intergiciel anti-contrefaçon est ajouté au conteneur d' [injection de dépe
 
 ::: moniker-end
 
-Dans ASP.NET Core 2,0 ou version ultérieure, [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) injecte des jetons anti-contrefaçon dans des éléments de formulaire HTML. Le balisage suivant dans un fichier Razor génère automatiquement des jetons anti-contrefaçon :
+Dans ASP.NET Core 2,0 ou version ultérieure, [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) injecte des jetons anti-contrefaçon dans des éléments de formulaire HTML. Le balisage suivant dans un Razor fichier génère automatiquement des jetons anti-contrefaçon :
 
 ```cshtml
 <form method="post">
@@ -127,14 +115,14 @@ Dans ASP.NET Core 2,0 ou version ultérieure, [FormTagHelper](xref:mvc/views/wor
 
 De même, [IHtmlHelper. BeginForm](/dotnet/api/microsoft.aspnetcore.mvc.rendering.ihtmlhelper.beginform) génère des jetons anti-contrefaçon par défaut si la méthode du formulaire n’est pas obtenue.
 
-La génération automatique de jetons anti-contrefaçon pour les éléments de formulaire HTML se produit `<form>` lorsque la balise contient l' `method="post"` attribut et que l’une des conditions suivantes est vraie :
+La génération automatique de jetons anti-contrefaçon pour les éléments de formulaire HTML se produit lorsque la `<form>` balise contient l' `method="post"` attribut et que l’une des conditions suivantes est vraie :
 
-* L’attribut action est vide (`action=""`).
-* L’attribut action n’est pas`<form method="post">`fourni ().
+* L’attribut action est vide ( `action=""` ).
+* L’attribut action n’est pas fourni ( `<form method="post">` ).
 
 La génération automatique de jetons anti-contrefaçon pour les éléments de formulaire HTML peut être désactivée :
 
-* Désactivez explicitement les jetons anti-contrefaçon `asp-antiforgery` avec l’attribut :
+* Désactivez explicitement les jetons anti-contrefaçon avec l' `asp-antiforgery` attribut :
 
   ```cshtml
   <form method="post" asp-antiforgery="false">
@@ -150,14 +138,14 @@ La génération automatique de jetons anti-contrefaçon pour les éléments de f
   </!form>
   ```
 
-* Supprimez `FormTagHelper` de la vue. `FormTagHelper` Peut être supprimé d’une vue en ajoutant la directive suivante à la vue Razor :
+* Supprimez `FormTagHelper` de la vue. Le `FormTagHelper` peut être supprimé d’une vue en ajoutant la directive suivante à la Razor vue :
 
   ```cshtml
   @removeTagHelper Microsoft.AspNetCore.Mvc.TagHelpers.FormTagHelper, Microsoft.AspNetCore.Mvc.TagHelpers
   ```
 
 > [!NOTE]
-> Les [Razor pages](xref:razor-pages/index) sont automatiquement protégées à partir de XSRF/CSRF. Pour plus d’informations, consultez [XSRF/CSRF et Razor pages](xref:razor-pages/index#xsrf).
+> Les [ Razor pages](xref:razor-pages/index) sont automatiquement protégées à partir de XSRF/CSRF. Pour plus d’informations, consultez [XSRF/CSRF et Razor pages](xref:razor-pages/index#xsrf).
 
 L’approche la plus courante pour la protection contre les attaques CSRF consiste à utiliser le *modèle de jeton du synchronisateur* (STP). Le protocole STP est utilisé lorsque l’utilisateur demande une page avec des données de formulaire :
 
@@ -165,7 +153,7 @@ L’approche la plus courante pour la protection contre les attaques CSRF consis
 1. Le client renvoie le jeton au serveur pour vérification.
 1. Si le serveur reçoit un jeton qui ne correspond pas à l’identité de l’utilisateur authentifié, la demande est rejetée.
 
-Le jeton est unique et imprévisible. Le jeton peut également être utilisé pour garantir le séquencement correct d’une série de requêtes (par exemple, en vérifiant la séquence de demande &ndash; de : &ndash; page 1 page 2 page 3). Toutes les formes dans ASP.NET Core modèles MVC et Razor Pages génèrent des jetons anti-contrefaçon. Les deux exemples de vue suivants génèrent des jetons anti-contrefaçon :
+Le jeton est unique et imprévisible. Le jeton peut également être utilisé pour garantir le séquencement correct d’une série de requêtes (par exemple, en vérifiant la séquence de demande de : page 1 > page 2 > page 3). Tous les formulaires dans ASP.NET Core modèles MVC et Razor pages génèrent des jetons anti-contrefaçon. Les deux exemples de vue suivants génèrent des jetons anti-contrefaçon :
 
 ```cshtml
 <form asp-controller="Manage" asp-action="ChangePassword" method="post">
@@ -178,7 +166,7 @@ Le jeton est unique et imprévisible. Le jeton peut également être utilisé po
 }
 ```
 
-Ajoutez explicitement un jeton anti-contrefaçon à un `<form>` élément sans utiliser de balise tag avec le programme d' [`@Html.AntiForgeryToken`](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.htmlhelper.antiforgerytoken)assistance HTML :
+Ajoutez explicitement un jeton anti-contrefaçon à un `<form>` élément sans utiliser de balise tag avec le programme d’assistance HTML [`@Html.AntiForgeryToken`](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.htmlhelper.antiforgerytoken) :
 
 ```cshtml
 <form action="/" method="post">
@@ -200,7 +188,7 @@ ASP.NET Core comprend trois [filtres](xref:mvc/controllers/filters) pour l’uti
 
 ## <a name="antiforgery-options"></a>Options anti-contrefaçon
 
-Personnaliser les [options](/dotnet/api/Microsoft.AspNetCore.Antiforgery.AntiforgeryOptions) anti-contrefaçon `Startup.ConfigureServices`dans :
+Personnaliser les options anti- [contrefaçon](/dotnet/api/Microsoft.AspNetCore.Antiforgery.AntiforgeryOptions) dans `Startup.ConfigureServices` :
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -214,14 +202,41 @@ services.AddAntiforgery(options =>
 });
 ```
 
-&dagger;Définissez les `Cookie` propriétés anti-contrefaçon à l’aide des propriétés de la classe [CookieBuilder](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder) .
+&dagger;Définissez les propriétés anti-contrefaçon `Cookie` à l’aide des propriétés de la classe [CookieBuilder](/dotnet/api/microsoft.aspnetcore.http.cookiebuilder) .
 
 | Option | Description |
-| ------ | ----------- |
-| [Cookie](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookie) | Détermine les paramètres utilisés pour créer les cookies anti-contrefaçon. |
-| [FormFieldName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.formfieldname) | Nom du champ de formulaire masqué utilisé par le système anti-contrefaçon pour le rendu des jetons anti-contrefaçon dans les vues. |
-| [HeaderName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) | Nom de l’en-tête utilisé par le système anti-contrefaçon. Si `null`la condition est, le système considère uniquement les données de formulaire. |
-| [SuppressXFrameOptionsHeader](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.suppressxframeoptionsheader) | Spécifie s’il faut supprimer la `X-Frame-Options` génération de l’en-tête. Par défaut, l’en-tête est généré avec la valeur « SAMEORIGIN ». La valeur par défaut est `false`. |
+| ---
+titre : Auteur : Description : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+--- | titre de--- : Auteur : Description : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------ | | [Cookie](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookie) | Détermine les paramètres utilisés pour créer les cookies anti-contrefaçon. | | [FormFieldName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.formfieldname) | Nom du champ de formulaire masqué utilisé par le système anti-contrefaçon pour le rendu des jetons anti-contrefaçon dans les vues. | | [HeaderName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) | Nom de l’en-tête utilisé par le système anti-contrefaçon. Si `null` la condition est, le système considère uniquement les données de formulaire. | | [SuppressXFrameOptionsHeader](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.suppressxframeoptionsheader) | Spécifie s’il faut supprimer la génération de l' `X-Frame-Options` en-tête. Par défaut, l’en-tête est généré avec la valeur « SAMEORIGIN ». La valeur par défaut est `false`. |
 
 ::: moniker-end
 
@@ -241,15 +256,38 @@ services.AddAntiforgery(options =>
 ```
 
 | Option | Description |
-| ------ | ----------- |
-| [Cookie](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookie) | Détermine les paramètres utilisés pour créer les cookies anti-contrefaçon. |
-| [CookieDomain](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiedomain) | Le domaine du cookie. La valeur par défaut est `null`. Cette propriété est obsolète et sera supprimée dans une version ultérieure. L’alternative recommandée est cookie. domain. |
-| [CookieName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiename) | Nom du cookie. Si la valeur n’est pas définie, le système génère un nom unique à partir de [DefaultCookiePrefix](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.defaultcookieprefix) (». AspNetCore. anti-contrefaçon.»). Cette propriété est obsolète et sera supprimée dans une version ultérieure. L’alternative recommandée est Cookie.Name. |
-| [CookiePath](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiepath) | Chemin d’accès défini sur le cookie. Cette propriété est obsolète et sera supprimée dans une version ultérieure. L’alternative recommandée est cookie. Path. |
-| [FormFieldName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.formfieldname) | Nom du champ de formulaire masqué utilisé par le système anti-contrefaçon pour le rendu des jetons anti-contrefaçon dans les vues. |
-| [HeaderName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) | Nom de l’en-tête utilisé par le système anti-contrefaçon. Si `null`la condition est, le système considère uniquement les données de formulaire. |
-| [RequireSsl](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.requiressl) | Spécifie si le système anti-contrefaçon exige le protocole HTTPs. Si `true`la, les demandes non-HTTPS échouent. La valeur par défaut est `false`. Cette propriété est obsolète et sera supprimée dans une version ultérieure. L’alternative recommandée consiste à définir cookie. SecurePolicy. |
-| [SuppressXFrameOptionsHeader](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.suppressxframeoptionsheader) | Spécifie s’il faut supprimer la `X-Frame-Options` génération de l’en-tête. Par défaut, l’en-tête est généré avec la valeur « SAMEORIGIN ». La valeur par défaut est `false`. |
+| ---
+titre : Auteur : Description : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+--- | titre de--- : Auteur : Description : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : Auteur : Description : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------ | | [Cookie](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookie) | Détermine les paramètres utilisés pour créer les cookies anti-contrefaçon. | | [CookieDomain](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiedomain) | Domaine du cookie. La valeur par défaut est `null`. Cette propriété est obsolète et sera supprimée dans une version ultérieure. L’alternative recommandée est cookie. domain. | | [CookieName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiename) | Nom du cookie. Si la valeur n’est pas définie, le système génère un nom unique à partir de [DefaultCookiePrefix](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.defaultcookieprefix) (». AspNetCore. anti-contrefaçon.»). Cette propriété est obsolète et sera supprimée dans une version ultérieure. L’alternative recommandée est Cookie.Name. | | [CookiePath](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.cookiepath) | Chemin d’accès défini sur le cookie. Cette propriété est obsolète et sera supprimée dans une version ultérieure. L’alternative recommandée est cookie. Path. | | [FormFieldName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.formfieldname) | Nom du champ de formulaire masqué utilisé par le système anti-contrefaçon pour le rendu des jetons anti-contrefaçon dans les vues. | | [HeaderName](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.headername) | Nom de l’en-tête utilisé par le système anti-contrefaçon. Si `null` la condition est, le système considère uniquement les données de formulaire. | | [RequireSSL](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.requiressl) | Spécifie si le système anti-contrefaçon exige le protocole HTTPs. Si la `true` , les demandes non-HTTPS échouent. La valeur par défaut est `false`. Cette propriété est obsolète et sera supprimée dans une version ultérieure. L’alternative recommandée consiste à définir cookie. SecurePolicy. | | [SuppressXFrameOptionsHeader](/dotnet/api/microsoft.aspnetcore.antiforgery.antiforgeryoptions.suppressxframeoptionsheader) | Spécifie s’il faut supprimer la génération de l' `X-Frame-Options` en-tête. Par défaut, l’en-tête est généré avec la valeur « SAMEORIGIN ». La valeur par défaut est `false`. |
 
 ::: moniker-end
 
@@ -318,14 +356,14 @@ L' `ValidateAntiForgeryToken` attribut requiert un jeton pour les demandes aux m
 
 ### <a name="automatically-validate-antiforgery-tokens-for-unsafe-http-methods-only"></a>Valider automatiquement les jetons anti-contrefaçon pour les méthodes HTTP non sécurisées uniquement
 
-ASP.NET Core applications ne génèrent pas de jetons anti-contrefaçon pour les méthodes HTTP sécurisées (obtenir, tête, OPTIONS et TRACE). Au lieu d’appliquer globalement l' `ValidateAntiForgeryToken` attribut, puis de le remplacer par `IgnoreAntiforgeryToken` des attributs, l’attribut [AutoValidateAntiforgeryToken](/dotnet/api/microsoft.aspnetcore.mvc.autovalidateantiforgerytokenattribute) peut être utilisé. Cet attribut fonctionne de la même façon `ValidateAntiForgeryToken` que l’attribut, sauf qu’il ne requiert pas de jetons pour les demandes effectuées à l’aide des méthodes http suivantes :
+ASP.NET Core applications ne génèrent pas de jetons anti-contrefaçon pour les méthodes HTTP sécurisées (obtenir, tête, OPTIONS et TRACE). Au lieu d’appliquer globalement l' `ValidateAntiForgeryToken` attribut, puis de le remplacer par des `IgnoreAntiforgeryToken` attributs, l’attribut [AutoValidateAntiforgeryToken](/dotnet/api/microsoft.aspnetcore.mvc.autovalidateantiforgerytokenattribute) peut être utilisé. Cet attribut fonctionne de la même façon `ValidateAntiForgeryToken` que l’attribut, sauf qu’il ne requiert pas de jetons pour les demandes effectuées à l’aide des méthodes http suivantes :
 
 * GET
 * HEAD
 * OPTIONS
 * TRACE
 
-Nous vous recommandons d' `AutoValidateAntiforgeryToken` utiliser large pour les scénarios non-API. Cela garantit que les actions de publication sont protégées par défaut. L’alternative consiste à ignorer les jetons anti-contrefaçon par défaut, sauf `ValidateAntiForgeryToken` si est appliqué à des méthodes d’action individuelles. Dans ce scénario, il est plus probable qu’une méthode d’action de publication reste non protégée par erreur, laissant l’application vulnérable aux attaques CSRF. Toutes les publications doivent envoyer le jeton anti-contrefaçon.
+Nous vous recommandons d’utiliser `AutoValidateAntiforgeryToken` large pour les scénarios non-API. Cela garantit que les actions de publication sont protégées par défaut. L’alternative consiste à ignorer les jetons anti-contrefaçon par défaut, sauf si `ValidateAntiForgeryToken` est appliqué à des méthodes d’action individuelles. Dans ce scénario, il est plus probable qu’une méthode d’action de publication reste non protégée par erreur, laissant l’application vulnérable aux attaques CSRF. Toutes les publications doivent envoyer le jeton anti-contrefaçon.
 
 Les API ne disposent pas d’un mécanisme automatique pour l’envoi de la partie non-cookie du jeton. L’implémentation dépend probablement de l’implémentation du code client. Voici quelques exemples :
 
@@ -375,7 +413,7 @@ public class ManageController : Controller
 
 ## <a name="refresh-tokens-after-authentication"></a>Actualiser les jetons après l’authentification
 
-Les jetons doivent être actualisés une fois l’utilisateur authentifié, en redirigeant l’utilisateur vers une page d’affichage Razor ou de pages.
+Les jetons doivent être actualisés une fois l’utilisateur authentifié, en redirigeant l’utilisateur vers une page d’affichage ou de Razor pages.
 
 ## <a name="javascript-ajax-and-spas"></a>JavaScript, AJAX et SPAs
 
@@ -400,7 +438,7 @@ context.Response.Cookies.Append("CSRF-TOKEN", tokens.RequestToken,
     new Microsoft.AspNetCore.Http.CookieOptions { HttpOnly = false });
 ```
 
-En supposant que le script demande à envoyer le jeton dans un `X-CSRF-TOKEN`en-tête appelé, configurez le service anti `X-CSRF-TOKEN` -contrefaçon pour Rechercher l’en-tête :
+En supposant que le script demande à envoyer le jeton dans un en-tête appelé `X-CSRF-TOKEN` , configurez le service anti-contrefaçon pour Rechercher l' `X-CSRF-TOKEN` en-tête :
 
 ```csharp
 services.AddAntiforgery(options => options.HeaderName = "X-CSRF-TOKEN");
@@ -445,12 +483,12 @@ xhttp.send(JSON.stringify({ "newPassword": "ReallySecurePassword999$$$" }));
 
 ### <a name="angularjs"></a>AngularJS
 
-AngularJS utilise une convention pour traiter CSRF. Si le serveur envoie un cookie avec le nom `XSRF-TOKEN`, le service `$http` AngularJS ajoute la valeur de cookie à un en-tête lorsqu’il envoie une demande au serveur. Ce processus est automatique. L’en-tête n’a pas besoin d’être défini explicitement dans le client. Le nom d’en `X-XSRF-TOKEN`-tête est. Le serveur doit détecter cet en-tête et valider son contenu.
+AngularJS utilise une convention pour traiter CSRF. Si le serveur envoie un cookie avec le nom `XSRF-TOKEN` , le `$http` service AngularJS ajoute la valeur de cookie à un en-tête lorsqu’il envoie une demande au serveur. Ce processus est automatique. L’en-tête n’a pas besoin d’être défini explicitement dans le client. Le nom d’en-tête est `X-XSRF-TOKEN` . Le serveur doit détecter cet en-tête et valider son contenu.
 
 Pour que ASP.NET Core API fonctionne avec cette Convention au démarrage de votre application :
 
-* Configurez votre application pour fournir un jeton dans un `XSRF-TOKEN`cookie appelé.
-* Configurez le service anti-contrefaçon pour rechercher un en `X-XSRF-TOKEN`-tête nommé.
+* Configurez votre application pour fournir un jeton dans un cookie appelé `XSRF-TOKEN` .
+* Configurez le service anti-contrefaçon pour rechercher un en-tête nommé `X-XSRF-TOKEN` .
 
 ```csharp
 public void Configure(IApplicationBuilder app, IAntiforgery antiforgery)
@@ -485,7 +523,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="extend-antiforgery"></a>Étendre l’anti-contrefaçon
 
-Le type [IAntiForgeryAdditionalDataProvider](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgeryadditionaldataprovider) permet aux développeurs d’étendre le comportement du système anti-CSRF en arrondissant les données supplémentaires dans chaque jeton. La méthode [GetAdditionalData](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgeryadditionaldataprovider.getadditionaldata) est appelée chaque fois qu’un jeton de champ est généré, et la valeur de retour est incorporée dans le jeton généré. Un responsable de l’implémentation peut retourner un horodateur, une valeur à usage unique ou toute autre valeur, puis appeler [ValidateAdditionalData](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgeryadditionaldataprovider.validateadditionaldata) pour valider ces données lors de la validation du jeton. Le nom d’utilisateur du client étant déjà incorporé dans les jetons générés, il n’est pas nécessaire d’inclure ces informations. Si un jeton contient des données supplémentaires, mais `IAntiForgeryAdditionalDataProvider` qu’aucun n’est configuré, les données supplémentaires ne sont pas validées.
+Le type [IAntiForgeryAdditionalDataProvider](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgeryadditionaldataprovider) permet aux développeurs d’étendre le comportement du système anti-CSRF en arrondissant les données supplémentaires dans chaque jeton. La méthode [GetAdditionalData](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgeryadditionaldataprovider.getadditionaldata) est appelée chaque fois qu’un jeton de champ est généré, et la valeur de retour est incorporée dans le jeton généré. Un responsable de l’implémentation peut retourner un horodateur, une valeur à usage unique ou toute autre valeur, puis appeler [ValidateAdditionalData](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgeryadditionaldataprovider.validateadditionaldata) pour valider ces données lors de la validation du jeton. Le nom d’utilisateur du client étant déjà incorporé dans les jetons générés, il n’est pas nécessaire d’inclure ces informations. Si un jeton contient des données supplémentaires, mais qu’aucun `IAntiForgeryAdditionalDataProvider` n’est configuré, les données supplémentaires ne sont pas validées.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

@@ -1,27 +1,15 @@
 ---
-title: Configurer l’authentification par certificat dans ASP.NET Core
-author: blowdart
-description: Découvrez comment configurer l’authentification par certificat dans ASP.NET Core pour IIS et HTTP. sys.
-monikerRange: '>= aspnetcore-3.0'
-ms.author: bdorrans
-ms.date: 01/02/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/authentication/certauth
-ms.openlocfilehash: 2cee719014d57fa01b5e8b14edd703c192cfbe18
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776641"
+titre : Auteur : Description : monikerRange : ms. Author : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Configurer l’authentification par certificat dans ASP.NET Core
 
-`Microsoft.AspNetCore.Authentication.Certificate`contient une implémentation similaire à [l’authentification par certificat](https://tools.ietf.org/html/rfc5246#section-7.4.4) pour ASP.net core. L’authentification par certificat se produit au niveau du TLS, à long terme avant qu’il ne soit ASP.NET Core. Plus précisément, il s’agit d’un gestionnaire d’authentification qui valide le certificat et vous donne un événement dans lequel vous pouvez résoudre ce certificat en `ClaimsPrincipal`. 
+`Microsoft.AspNetCore.Authentication.Certificate`contient une implémentation similaire à [l’authentification par certificat](https://tools.ietf.org/html/rfc5246#section-7.4.4) pour ASP.net core. L’authentification par certificat se produit au niveau du TLS, à long terme avant qu’il ne soit ASP.NET Core. Plus précisément, il s’agit d’un gestionnaire d’authentification qui valide le certificat et vous donne un événement dans lequel vous pouvez résoudre ce certificat en `ClaimsPrincipal` . 
 
 [Configurez votre hôte](#configure-your-host-to-require-certificates) pour l’authentification par certificat, qu’il soit IIS, Kestrel, Azure Web Apps ou tout autre que vous utilisez.
 
@@ -34,15 +22,15 @@ L’authentification par certificat est un scénario avec état principalement u
 
 Une alternative à l’authentification par certificat dans les environnements où les proxies et les équilibreurs de charge sont utilisés est Active Directory Services fédérés (ADFS) avec OpenID Connect (OIDC).
 
-## <a name="get-started"></a>Bien démarrer
+## <a name="get-started"></a>Prise en main
 
 Obtenez un certificat HTTPs, appliquez-le et [configurez votre hôte](#configure-your-host-to-require-certificates) pour exiger des certificats.
 
-Dans votre application Web, ajoutez une référence au `Microsoft.AspNetCore.Authentication.Certificate` package. Ensuite, dans `Startup.ConfigureServices` la méthode, `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` appelez avec vos options, en fournissant un `OnCertificateValidated` délégué à pour effectuer une validation supplémentaire sur le certificat client envoyé avec les demandes. Transformez ces informations `ClaimsPrincipal` en un et définissez- `context.Principal` les sur la propriété.
+Dans votre application Web, ajoutez une référence au `Microsoft.AspNetCore.Authentication.Certificate` Package. Ensuite, dans la `Startup.ConfigureServices` méthode, appelez `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` avec vos options, en fournissant un délégué à pour `OnCertificateValidated` effectuer une validation supplémentaire sur le certificat client envoyé avec les demandes. Transformez ces informations en un `ClaimsPrincipal` et définissez-les sur la `context.Principal` propriété.
 
-Si l’authentification échoue, ce gestionnaire renvoie `403 (Forbidden)` une réponse plutôt `401 (Unauthorized)`qu’un, comme vous pouvez l’imaginer. Le raisonnement est que l’authentification doit se produire pendant la connexion TLS initiale. Au moment où il atteint le gestionnaire, il est trop tard. Il n’existe aucun moyen de mettre à niveau la connexion d’une connexion anonyme à une avec un certificat.
+Si l’authentification échoue, ce gestionnaire renvoie une `403 (Forbidden)` réponse plutôt `401 (Unauthorized)` qu’un, comme vous pouvez l’imaginer. Le raisonnement est que l’authentification doit se produire pendant la connexion TLS initiale. Au moment où il atteint le gestionnaire, il est trop tard. Il n’existe aucun moyen de mettre à niveau la connexion d’une connexion anonyme à une avec un certificat.
 
-Ajoutez `app.UseAuthentication();` également dans la `Startup.Configure` méthode. Dans le cas `HttpContext.User` contraire, le n’est `ClaimsPrincipal` pas défini à créé à partir du certificat. Par exemple :
+Ajoutez également `app.UseAuthentication();` dans la `Startup.Configure` méthode. Dans le cas contraire, le `HttpContext.User` n’est pas défini à `ClaimsPrincipal` créé à partir du certificat. Par exemple :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -71,7 +59,7 @@ Le `CertificateAuthenticationOptions` gestionnaire a des validations intégrées
 
 Valeur par défaut : `CertificateTypes.Chained`
 
-Cette vérification valide que seul le type de certificat approprié est autorisé. Si l’application utilise des certificats auto-signés, cette option doit être définie sur `CertificateTypes.All` ou `CertificateTypes.SelfSigned`.
+Cette vérification valide que seul le type de certificat approprié est autorisé. Si l’application utilise des certificats auto-signés, cette option doit être définie sur `CertificateTypes.All` ou `CertificateTypes.SelfSigned` .
 
 ### <a name="validatecertificateuse"></a>ValidateCertificateUse
 
@@ -111,8 +99,8 @@ Cela n’est pas possible. Rappelez-vous que l’échange de certificats est eff
 
 Le gestionnaire a deux événements :
 
-* `OnAuthenticationFailed`&ndash; Appelé si une exception se produit pendant l’authentification et vous permet de réagir.
-* `OnCertificateValidated`&ndash; Appelée une fois que le certificat a été validé, la validation a réussi et un principal par défaut a été créé. Cet événement vous permet d’effectuer votre propre validation et d’augmenter ou de remplacer le principal. Voici quelques exemples :
+* `OnAuthenticationFailed`: Appelé si une exception se produit pendant l’authentification et vous permet de réagir.
+* `OnCertificateValidated`: Appelée une fois que le certificat a été validé, la validation a réussi et un principal par défaut a été créé. Cet événement vous permet d’effectuer votre propre validation et d’augmenter ou de remplacer le principal. Voici quelques exemples :
   * Déterminer si le certificat est connu de vos services.
   * Construction de votre propre principal. Prenons l’exemple suivant dans `Startup.ConfigureServices` :
 
@@ -148,7 +136,7 @@ services.AddAuthentication(
     });
 ```
 
-Si vous trouvez que le certificat entrant ne répond pas à votre validation supplémentaire `context.Fail("failure reason")` , appelez en raison d’une erreur.
+Si vous trouvez que le certificat entrant ne répond pas à votre validation supplémentaire, appelez `context.Fail("failure reason")` en raison d’une erreur.
 
 Pour les fonctionnalités réelles, vous souhaiterez probablement appeler un service enregistré dans une injection de dépendances qui se connecte à une base de données ou à un autre type de magasin d’utilisateurs. Accédez à votre service à l’aide du contexte passé dans votre délégué. Prenons l’exemple suivant dans `Startup.ConfigureServices` :
 
@@ -193,7 +181,7 @@ services.AddAuthentication(
     });
 ```
 
-D’un plan conceptuel, la validation du certificat est un problème d’autorisation. L’ajout d’un contrôle, par exemple, à un émetteur ou une empreinte numérique dans une stratégie d’autorisation `OnCertificateValidated`, plutôt qu’à l’intérieur de, est parfaitement acceptable.
+D’un plan conceptuel, la validation du certificat est un problème d’autorisation. L’ajout d’un contrôle, par exemple, à un émetteur ou une empreinte numérique dans une stratégie d’autorisation, plutôt qu’à l’intérieur de `OnCertificateValidated` , est parfaitement acceptable.
 
 ## <a name="configure-your-host-to-require-certificates"></a>Configuration de votre hôte pour exiger des certificats
 
@@ -224,7 +212,7 @@ public static IHostBuilder CreateHostBuilder(string[] args)
 ```
 
 > [!NOTE]
-> Les valeurs par défaut sont <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> appliquées aux <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> points de terminaison créés en appelant **avant** d’appeler.
+> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> Les valeurs par défaut sont appliquées aux points de terminaison créés en appelant avant d’appeler.
 
 ### <a name="iis"></a>IIS
 
@@ -252,9 +240,9 @@ Aucune configuration de transfert n’est requise pour Azure. Ce programme est d
 La `AddCertificateForwarding` méthode est utilisée pour spécifier :
 
 * Nom de l’en-tête du client.
-* Comment le certificat doit être chargé (à l’aide `HeaderConverter` de la propriété).
+* Comment le certificat doit être chargé (à l’aide de la `HeaderConverter` propriété).
 
-Dans les proxys Web personnalisés, le certificat est transmis en tant qu’en-tête de `X-SSL-CERT`demande personnalisée, par exemple. Pour l’utiliser, configurez le transfert `Startup.ConfigureServices`de certificats dans :
+Dans les proxys Web personnalisés, le certificat est transmis en tant qu’en-tête de demande personnalisée, par exemple `X-SSL-CERT` . Pour l’utiliser, configurez le transfert de certificats dans `Startup.ConfigureServices` :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -291,7 +279,7 @@ private static byte[] StringToByteArray(string hex)
 }
 ```
 
-La `Startup.Configure` méthode ajoute ensuite l’intergiciel (middleware). `UseCertificateForwarding`est appelé avant les appels à `UseAuthentication` et `UseAuthorization`:
+La `Startup.Configure` méthode ajoute ensuite l’intergiciel (middleware). `UseCertificateForwarding`est appelé avant les appels à `UseAuthentication` et `UseAuthorization` :
 
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -420,7 +408,7 @@ Si le bon certificat est envoyé au serveur, les données sont retournées. Si a
 
 ### <a name="create-certificates-in-powershell"></a>Créer des certificats dans PowerShell
 
-La création de certificats est la partie la plus difficile dans la configuration de ce fluide. Un certificat racine peut être créé à l' `New-SelfSignedCertificate` aide de l’applet de commande PowerShell. Lors de la création du certificat, utilisez un mot de passe fort. Il est important d’ajouter le `KeyUsageProperty` paramètre et le `KeyUsage` paramètre comme indiqué.
+La création de certificats est la partie la plus difficile dans la configuration de ce fluide. Un certificat racine peut être créé à l’aide de l’applet de commande `New-SelfSignedCertificate` PowerShell. Lors de la création du certificat, utilisez un mot de passe fort. Il est important d’ajouter le `KeyUsageProperty` paramètre et le `KeyUsage` paramètre comme indiqué.
 
 #### <a name="create-root-ca"></a>Créer une autorité de certification racine
 

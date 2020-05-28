@@ -95,7 +95,7 @@ Une Blazor application est composée d’éléments réutilisables de l’interf
 * Converti en texte HTML (lors du prérendu &dagger; ).
 * Utilisé pour mettre à jour efficacement le balisage pendant le rendu normal.
 
-&dagger;*Prérendu* &ndash; Le Razor composant demandé est compilé sur le serveur en HTML statique et envoyé au client, où il est rendu à l’utilisateur. Une fois la connexion établie entre le client et le serveur, les éléments statiques prérendus du composant sont remplacés par des éléments interactifs. Le prérendu rend l’application plus réactive pour l’utilisateur.
+&dagger;*Prérendu*: le composant demandé Razor est compilé sur le serveur en HTML statique et envoyé au client, où il est rendu à l’utilisateur. Une fois la connexion établie entre le client et le serveur, les éléments statiques prérendus du composant sont remplacés par des éléments interactifs. Le prérendu rend l’application plus réactive pour l’utilisateur.
 
 Une mise à jour de l’interface utilisateur dans Blazor est déclenchée par :
 

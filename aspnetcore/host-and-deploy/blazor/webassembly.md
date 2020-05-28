@@ -32,8 +32,8 @@ Pour la configuration de la compression IIS *Web. config* , consultez la section
 
 Les requêtes de routage pour les composants de page dans une Blazor application Webassembly ne sont pas aussi simples que les demandes de routage dans un Blazor serveur, une application hébergée. Prenons l’exemple d’une Blazor application Webassembly avec deux composants :
 
-* *Main.razor* &ndash; Se charge à la racine de l’application et contient un lien vers le composant `About` (`href="About"`).
-* Composant *About.Razor* &ndash; `About`.
+* *Main. Razor*: charge à la racine de l’application et contient un lien vers le `About` composant ( `href="About"` ).
+* *À propos de. Razor*: `About` Component.
 
 Quand le document par défaut de l’application est demandé à l’aide de la barre d’adresses du navigateur (par exemple, `https://www.contoso.com/`) :
 
@@ -83,11 +83,11 @@ Les ressources publiées sont créées dans le dossier */bin/Release/{FRAMEWORK 
 Lorsqu’un Blazor projet est publié, un fichier *Web. config* est créé avec la configuration IIS suivante :
 
 * Les types MIME sont définis pour les extensions de fichiers suivantes :
-  * *. dll* &ndash;`application/octet-stream`
-  * *. JSON* &ndash;`application/json`
-  * *. WASM* &ndash;`application/wasm`
-  * *. WOFF* &ndash;`application/font-woff`
-  * *. woff2* &ndash;`application/font-woff`
+  * *. dll*:`application/octet-stream`
+  * *. JSON*:`application/json`
+  * *.wasm* : `application/wasm`
+  * *.woff* : `application/font-woff`
+  * *.woff2* : `application/font-woff`
 * La compression HTTP est activée pour les types MIME suivants :
   * `application/octet-stream`
   * `application/wasm`
@@ -149,7 +149,7 @@ La suppression du gestionnaire ou la désactivation de l’héritage est effectu
 
 IIS peut être configuré par le biais de *Web. config* pour servir les ressources compressées Brotli ou gzip Blazor . Pour obtenir un exemple de configuration, consultez [Web. config](webassembly/_samples/web.config?raw=true).
 
-#### <a name="troubleshooting"></a>Dépannage
+#### <a name="troubleshooting"></a>Résolution des problèmes
 
 Si vous recevez un message *500 – Erreur interne du serveur* et que le Gestionnaire IIS lève des erreurs quand vous tentez d’accéder à la configuration du site web, vérifiez que le module de réécriture d’URL est installé. Quand le module n’est pas installé, le fichier *web.config* ne peut pas être analysé par IIS. Cela empêche le gestionnaire des services Internet de charger la configuration du site Web et le site Web à partir des Blazor fichiers statiques de service.
 

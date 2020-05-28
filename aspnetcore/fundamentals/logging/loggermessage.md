@@ -1,24 +1,11 @@
 ---
-title: Journalisation avancée avec LoggerMessage dans ASP.NET Core
-author: rick-anderson
-description: Découvrez comment utiliser LoggerMessage pour créer des délégués pouvant être mis en cache et nécessitant moins d’allocations d’objets pour les scénarios de journalisation à hautes performances.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 08/26/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/logging/loggermessage
-ms.openlocfilehash: 67281b99f1ed8955ee29eb68b446d71a0c5c7838
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768362"
+titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="high-performance-logging-with-loggermessage-in-aspnet-core"></a>Journalisation avancée avec LoggerMessage dans ASP.NET Core
 
@@ -102,7 +89,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
           consequences of avoiding reality. - Ayn Rand')
 ```
 
-L’exemple d’application implémente un modèle [try&ndash;catch](/dotnet/csharp/language-reference/keywords/try-catch) pour la suppression de citations. Un message d’information est journalisé chaque fois qu’une opération de suppression réussit. Un message d’erreur est journalisé chaque fois qu’une opération de suppression donne lieu à la levée d’une exception. Le message de journal lié à l’échec d’une opération de suppression inclut la trace des exceptions (*Internal/LoggerExtensions.cs*) :
+L’exemple d’application implémente un modèle [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) pour la suppression de guillemets. Un message d’information est journalisé chaque fois qu’une opération de suppression réussit. Un message d’erreur est journalisé chaque fois qu’une opération de suppression donne lieu à la levée d’une exception. Le message de journal lié à l’échec d’une opération de suppression inclut la trace des exceptions (*Internal/LoggerExtensions.cs*) :
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet3)]
 
@@ -112,7 +99,7 @@ Notez la manière dont l’exception est passée au délégué dans `QuoteDelete
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet11)]
 
-Dans le modèle de page pour la page Index, la réussite de la suppression d’une citation se traduit par l’appel de la méthode `QuoteDeleted` sur le journaliseur. Quand une citation à supprimer n’est pas trouvée, une <xref:System.ArgumentNullException> est levée. L’exception est interceptée par l’instruction [try&ndash;catch](/dotnet/csharp/language-reference/keywords/try-catch) et journalisée par le biais de l’appel de la méthode `QuoteDeleteFailed` sur le journaliseur dans le bloc [catch](/dotnet/csharp/language-reference/keywords/try-catch) (*Pages/Index.cshtml.cs*) :
+Dans le modèle de page pour la page Index, la réussite de la suppression d’une citation se traduit par l’appel de la méthode `QuoteDeleted` sur le journaliseur. Quand une citation à supprimer n’est pas trouvée, une <xref:System.ArgumentNullException> est levée. L’exception est interceptée par l’instruction [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) et enregistrée en appelant la `QuoteDeleteFailed` méthode sur le journal dans le bloc [catch](/dotnet/csharp/language-reference/keywords/try-catch) (*pages/index. cshtml. cs*) :
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet5&highlight=9,13)]
 
@@ -268,7 +255,7 @@ info: LoggerMessageSample.Pages.IndexModel[2]
           consequences of avoiding reality. - Ayn Rand')
 ```
 
-L’exemple d’application implémente un modèle [try&ndash;catch](/dotnet/csharp/language-reference/keywords/try-catch) pour la suppression de citations. Un message d’information est journalisé chaque fois qu’une opération de suppression réussit. Un message d’erreur est journalisé chaque fois qu’une opération de suppression donne lieu à la levée d’une exception. Le message de journal lié à l’échec d’une opération de suppression inclut la trace des exceptions (*Internal/LoggerExtensions.cs*) :
+L’exemple d’application implémente un modèle [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) pour la suppression de guillemets. Un message d’information est journalisé chaque fois qu’une opération de suppression réussit. Un message d’erreur est journalisé chaque fois qu’une opération de suppression donne lieu à la levée d’une exception. Le message de journal lié à l’échec d’une opération de suppression inclut la trace des exceptions (*Internal/LoggerExtensions.cs*) :
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet3)]
 
@@ -278,7 +265,7 @@ Notez la manière dont l’exception est passée au délégué dans `QuoteDelete
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Internal/LoggerExtensions.cs?name=snippet11)]
 
-Dans le modèle de page pour la page Index, la réussite de la suppression d’une citation se traduit par l’appel de la méthode `QuoteDeleted` sur le journaliseur. Quand une citation à supprimer n’est pas trouvée, une <xref:System.ArgumentNullException> est levée. L’exception est interceptée par l’instruction [try&ndash;catch](/dotnet/csharp/language-reference/keywords/try-catch) et journalisée par le biais de l’appel de la méthode `QuoteDeleteFailed` sur le journaliseur dans le bloc [catch](/dotnet/csharp/language-reference/keywords/try-catch) (*Pages/Index.cshtml.cs*) :
+Dans le modèle de page pour la page Index, la réussite de la suppression d’une citation se traduit par l’appel de la méthode `QuoteDeleted` sur le journaliseur. Quand une citation à supprimer n’est pas trouvée, une <xref:System.ArgumentNullException> est levée. L’exception est interceptée par l’instruction [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) et enregistrée en appelant la `QuoteDeleteFailed` méthode sur le journal dans le bloc [catch](/dotnet/csharp/language-reference/keywords/try-catch) (*pages/index. cshtml. cs*) :
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/Pages/Index.cshtml.cs?name=snippet5&highlight=14,18)]
 
@@ -358,4 +345,4 @@ info: LoggerMessageSample.Pages.IndexModel[4]
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* [Journalisation](xref:fundamentals/logging/index)
+* [Logging](xref:fundamentals/logging/index)

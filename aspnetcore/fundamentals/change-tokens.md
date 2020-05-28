@@ -1,23 +1,11 @@
 ---
-title: Détecter les modifications avec des jetons de modification dans ASP.NET Core
-author: rick-anderson
-description: Découvrez comment utiliser des jetons de modification pour effectuer le suivi des modifications.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.date: 10/07/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/change-tokens
-ms.openlocfilehash: 40868c57507989e1d3040df2cbe2feb4871d4394
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774793"
+titre : Auteur : Description : monikerRange : ms. Author : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="detect-changes-with-change-tokens-in-aspnet-core"></a>Détecter les modifications avec des jetons de modification dans ASP.NET Core
 
@@ -36,18 +24,18 @@ Un *jeton de modification* est un module à usage général de bas niveau, utili
 * <xref:Microsoft.Extensions.Primitives.IChangeToken.ActiveChangeCallbacks> indique si le jeton déclenche des rappels de façon proactive. Si `ActiveChangedCallbacks` est défini sur `false`, un rappel n’est jamais appelé, et l’application doit interroger `HasChanged` pour connaître les modifications. Il est également possible qu’un jeton ne soit jamais annulé si aucune modification ne se produit, ou si l’écouteur de modifications sous-jacent est supprimé ou désactivé.
 * <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged> obtient une valeur qui indique si une modification a eu lieu.
 
-L’interface `IChangeToken` inclut la méthode [RegisterChangeCallback(Action\<Objet>, Objet)](xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*), qui inscrit un rappel qui est appelé quand le jeton a été modifié. `HasChanged` doit être défini avant que le rappel soit appelé.
+L' `IChangeToken` interface inclut la méthode [RegisterChangeCallback (action \<Object> , Object)](xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*) , qui inscrit un rappel appelé lorsque le jeton a changé. `HasChanged` doit être défini avant que le rappel soit appelé.
 
 ## <a name="changetoken-class"></a>Classe ChangeToken
 
 <xref:Microsoft.Extensions.Primitives.ChangeToken> est une classe statique utilisée pour propager des notifications indiquant qu’une modification s’est produite. `ChangeToken` réside dans l’espace de noms <xref:Microsoft.Extensions.Primitives?displayProperty=fullName>. Le package NuGet [Microsoft. extensions. Primitives](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/) est fourni implicitement aux applications ASP.net core.
 
-La méthode [ChangeToken.OnChange(Func\<IChangeToken>, Action)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) inscrit une `Action` à appeler chaque fois que le jeton change :
+La méthode [ChangeToken. OnChange (Func \<IChangeToken> , action)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) inscrit un `Action` à appeler chaque fois que le jeton change :
 
 * `Func<IChangeToken>` produit le jeton.
 * `Action` est appelée quand le jeton change.
 
-La surcharge [ChangeToken.OnChange\<TState>(Func\<IChangeToken>, Action\<TState>, TState)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) prend un paramètre `TState` supplémentaire qui est passé dans le consommateur du jeton `Action`.
+La surcharge [ChangeToken. OnChange \<TState> (Func \<IChangeToken> , action \<TState> , TState)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) prend un paramètre supplémentaire `TState` passé dans le consommateur de jetons `Action` .
 
 `OnChange`Retourne un <xref:System.IDisposable>. L’appel de <xref:System.IDisposable.Dispose*> fait que le jeton cesse d’être à l’écoute des modifications suivantes et libère les ressources du jeton.
 
@@ -119,8 +107,8 @@ Le constructeur de la classe implémentée, `ConfigurationMonitor`, inscrit un r
 
 `config.GetReloadToken()` fournit le jeton. `InvokeChanged` est la méthode de rappel. Le `state` dans cette instance est une référence à l’instance `IConfigurationMonitor` qui est utilisée pour accéder à l’état du monitoring. Deux propriétés sont utilisées :
 
-* `MonitoringEnabled`&ndash; Indique si le rappel doit exécuter son code personnalisé.
-* `CurrentState`&ndash; Décrit l’état d’analyse actuel pour une utilisation dans l’interface utilisateur.
+* `MonitoringEnabled`: Indique si le rappel doit exécuter son code personnalisé.
+* `CurrentState`: Décrit l’état d’analyse actuel pour une utilisation dans l’interface utilisateur.
 
 La méthode `InvokeChanged` est similaire à l’approche précédente, excepté que :
 
@@ -176,7 +164,7 @@ Si le contenu en cache n’est pas trouvé avec la clé du cache, les actions su
 1. Un jeton de modification est obtenu auprès du fournisseur du fichier avec [IFileProviders.Watch](xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*). Le rappel du jeton est déclenché quand le fichier est modifié.
 1. Le contenu du fichier est mis en cache avec une période [d’expiration décalée](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.SlidingExpiration). Le jeton de modification est attaché avec [MemoryCacheEntryExtensions.AddExpirationToken](xref:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken*) pour supprimer l’entrée du cache si le fichier change alors qu’il est mis en cache.
 
-Dans l’exemple suivant, les fichiers sont stockés dans la [racine de contenu](xref:fundamentals/index#content-root)de l’application. `IWebHostEnvironment.ContentRootFileProvider`est utilisé pour obtenir un <xref:Microsoft.Extensions.FileProviders.IFileProvider> pointage au niveau de `IWebHostEnvironment.ContentRootPath`l’application. `filePath` est obtenue avec [IFileInfo.PhysicalPath](xref:Microsoft.Extensions.FileProviders.IFileInfo.PhysicalPath).
+Dans l’exemple suivant, les fichiers sont stockés dans la [racine de contenu](xref:fundamentals/index#content-root)de l’application. `IWebHostEnvironment.ContentRootFileProvider`est utilisé pour obtenir un <xref:Microsoft.Extensions.FileProviders.IFileProvider> pointage au niveau de l’application `IWebHostEnvironment.ContentRootPath` . `filePath` est obtenue avec [IFileInfo.PhysicalPath](xref:Microsoft.Extensions.FileProviders.IFileInfo.PhysicalPath).
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Services/FileService.cs?name=snippet1)]
 
@@ -234,18 +222,18 @@ Un *jeton de modification* est un module à usage général de bas niveau, utili
 * <xref:Microsoft.Extensions.Primitives.IChangeToken.ActiveChangeCallbacks> indique si le jeton déclenche des rappels de façon proactive. Si `ActiveChangedCallbacks` est défini sur `false`, un rappel n’est jamais appelé, et l’application doit interroger `HasChanged` pour connaître les modifications. Il est également possible qu’un jeton ne soit jamais annulé si aucune modification ne se produit, ou si l’écouteur de modifications sous-jacent est supprimé ou désactivé.
 * <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged> obtient une valeur qui indique si une modification a eu lieu.
 
-L’interface `IChangeToken` inclut la méthode [RegisterChangeCallback(Action\<Objet>, Objet)](xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*), qui inscrit un rappel qui est appelé quand le jeton a été modifié. `HasChanged` doit être défini avant que le rappel soit appelé.
+L' `IChangeToken` interface inclut la méthode [RegisterChangeCallback (action \<Object> , Object)](xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*) , qui inscrit un rappel appelé lorsque le jeton a changé. `HasChanged` doit être défini avant que le rappel soit appelé.
 
 ## <a name="changetoken-class"></a>Classe ChangeToken
 
 <xref:Microsoft.Extensions.Primitives.ChangeToken> est une classe statique utilisée pour propager des notifications indiquant qu’une modification s’est produite. `ChangeToken` réside dans l’espace de noms <xref:Microsoft.Extensions.Primitives?displayProperty=fullName>. Pour les applications qui n’utilisent pas le [métapaquet Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app), créez une référence au package NuGet [Microsoft.Extensions.Primitives](https://www.nuget.org/packages/Microsoft.Extensions.Primitives/).
 
-La méthode [ChangeToken.OnChange(Func\<IChangeToken>, Action)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) inscrit une `Action` à appeler chaque fois que le jeton change :
+La méthode [ChangeToken. OnChange (Func \<IChangeToken> , action)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) inscrit un `Action` à appeler chaque fois que le jeton change :
 
 * `Func<IChangeToken>` produit le jeton.
 * `Action` est appelée quand le jeton change.
 
-La surcharge [ChangeToken.OnChange\<TState>(Func\<IChangeToken>, Action\<TState>, TState)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) prend un paramètre `TState` supplémentaire qui est passé dans le consommateur du jeton `Action`.
+La surcharge [ChangeToken. OnChange \<TState> (Func \<IChangeToken> , action \<TState> , TState)](xref:Microsoft.Extensions.Primitives.ChangeToken.OnChange*) prend un paramètre supplémentaire `TState` passé dans le consommateur de jetons `Action` .
 
 `OnChange`Retourne un <xref:System.IDisposable>. L’appel de <xref:System.IDisposable.Dispose*> fait que le jeton cesse d’être à l’écoute des modifications suivantes et libère les ressources du jeton.
 
@@ -317,8 +305,8 @@ Le constructeur de la classe implémentée, `ConfigurationMonitor`, inscrit un r
 
 `config.GetReloadToken()` fournit le jeton. `InvokeChanged` est la méthode de rappel. Le `state` dans cette instance est une référence à l’instance `IConfigurationMonitor` qui est utilisée pour accéder à l’état du monitoring. Deux propriétés sont utilisées :
 
-* `MonitoringEnabled`&ndash; Indique si le rappel doit exécuter son code personnalisé.
-* `CurrentState`&ndash; Décrit l’état d’analyse actuel pour une utilisation dans l’interface utilisateur.
+* `MonitoringEnabled`: Indique si le rappel doit exécuter son code personnalisé.
+* `CurrentState`: Décrit l’état d’analyse actuel pour une utilisation dans l’interface utilisateur.
 
 La méthode `InvokeChanged` est similaire à l’approche précédente, excepté que :
 

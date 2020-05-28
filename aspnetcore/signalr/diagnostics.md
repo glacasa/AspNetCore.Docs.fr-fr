@@ -1,44 +1,32 @@
 ---
-title: Journalisation et diagnostics dans ASP.NET CoreSignalR
-author: anurse
-description: Découvrez Comment collecter des diagnostics à partir de votre SignalR application ASP.net core.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: anurse
-ms.custom: signalr
-ms.date: 11/12/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: signalr/diagnostics
-ms.openlocfilehash: 0dda4fb55b1e2275d9cdb2af0b55824b12121dee
-ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/17/2020
-ms.locfileid: "83444215"
+titre : « journalisation et diagnostics dans ASP.NET Core SignalR » Auteur : Description : « Découvrez Comment collecter des diagnostics à partir de votre SignalR application ASP.net core. »
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>Journalisation et diagnostics dans ASP.NET Core Signalr
+# <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>Journalisation et diagnostics dans ASP.NET CoreSignalR
 
 Par [Andrew Stanton-infirmière](https://twitter.com/anurse)
 
-Cet article fournit des conseils sur la collecte de diagnostics à partir de votre application ASP.NET Core Signalr pour vous aider à résoudre les problèmes.
+Cet article fournit des conseils pour la collecte de diagnostics à partir de votre SignalR application ASP.net Core pour aider à résoudre les problèmes.
 
 ## <a name="server-side-logging"></a>Journalisation côté serveur
 
 > [!WARNING]
 > Les journaux côté serveur peuvent contenir des informations sensibles de votre application. **Ne jamais** poster des journaux bruts à partir d’applications de production vers des forums publics tels que github.
 
-Étant donné que Signalr fait partie de ASP.NET Core, il utilise le système de journalisation ASP.NET Core. Dans la configuration par défaut, Signalr enregistre très peu d’informations, mais cela peut être configuré. Pour plus d’informations sur la configuration de la journalisation des ASP.NET Core, consultez la documentation sur [ASP.net Core Logging](xref:fundamentals/logging/index#configuration) .
+Étant donné que SignalR fait partie de ASP.net Core, il utilise le système de journalisation ASP.net core. Dans la configuration par défaut, SignalR enregistre très peu d’informations, mais cela peut être configuré. Pour plus d’informations sur la configuration de la journalisation des ASP.NET Core, consultez la documentation sur [ASP.net Core Logging](xref:fundamentals/logging/index#configuration) .
 
-Signalr utilise deux catégories d’enregistreur d’événements :
+SignalRutilise deux catégories d’enregistreur d’événements :
 
-* `Microsoft.AspNetCore.SignalR`&ndash;pour les journaux liés aux protocoles de concentrateur, l’activation de hubs, l’appel de méthodes et d’autres activités liées au Hub.
-* `Microsoft.AspNetCore.Http.Connections`&ndash;pour les journaux liés à des transports tels que WebSockets, l’interrogation longue et les événements envoyés par le serveur et l’infrastructure signalr de bas niveau.
+* `Microsoft.AspNetCore.SignalR`: Pour les journaux liés aux protocoles de concentrateur, l’activation de hubs, l’appel de méthodes et d’autres activités liées au Hub.
+* `Microsoft.AspNetCore.Http.Connections`: Pour les journaux liés aux transports, tels que les WebSockets, l’interrogation longue, les événements envoyés par le serveur et l’infrastructure de bas niveau SignalR .
 
-Pour activer les journaux détaillés à partir de Signalr, configurez les deux préfixes précédents au `Debug` niveau de votre fichier *appSettings. JSON* en ajoutant les éléments suivants à la `LogLevel` sous-section dans `Logging` :
+Pour activer les journaux détaillés à partir de SignalR , configurez les deux préfixes précédents au `Debug` niveau de votre fichier *appSettings. JSON* en ajoutant les éléments suivants à la `LogLevel` sous-section dans `Logging` :
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
@@ -61,7 +49,7 @@ La façon dont vous accédez aux journaux côté serveur dépend de l’environn
 
 ### <a name="as-a-console-app-outside-iis"></a>En tant qu’application console en dehors d’IIS
 
-Si vous exécutez dans une application console, l’enregistreur d’événements de [console](xref:fundamentals/logging/index#console) doit être activé par défaut. Les journaux signalr s’affichent dans la console.
+Si vous exécutez dans une application console, l’enregistreur d’événements de [console](xref:fundamentals/logging/index#console) doit être activé par défaut. SignalRles journaux s’affichent dans la console.
 
 ### <a name="within-iis-express-from-visual-studio"></a>Dans IIS Express à partir de Visual Studio
 
@@ -89,14 +77,34 @@ Pour désactiver entièrement la journalisation, spécifiez `signalR.LogLevel.No
 Le tableau suivant montre les niveaux de journal disponibles pour le client JavaScript. La définition du niveau de journal sur l’une de ces valeurs active la journalisation à ce niveau et tous les niveaux au-dessus de celui-ci dans la table.
 
 | Level | Description |
-| ----- | ----------- |
-| `None` | Aucun message n’est enregistré. |
-| `Critical` | Messages indiquant un échec dans l’ensemble de l’application. |
-| `Error` | Messages indiquant un échec dans l’opération en cours. |
-| `Warning` | Messages indiquant un problème non fatal. |
-| `Information` | Messages d’information. |
-| `Debug` | Messages de diagnostic utiles pour le débogage. |
-| `Trace` | Messages de diagnostic très détaillés conçus pour diagnostiquer des problèmes spécifiques. |
+| ----- | ---
+titre : « journalisation et diagnostics dans ASP.NET Core SignalR » Auteur : Description : « Découvrez Comment collecter des diagnostics à partir de votre SignalR application ASP.net core. »
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : « journalisation et diagnostics dans ASP.NET Core SignalR » Auteur : Description : « Découvrez Comment collecter des diagnostics à partir de votre SignalR application ASP.net core. »
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+-
+titre : « journalisation et diagnostics dans ASP.NET Core SignalR » Auteur : Description : « Découvrez Comment collecter des diagnostics à partir de votre SignalR application ASP.net core. »
+monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
+------ | | `None` | Aucun message n’est enregistré. | | `Critical` | Messages indiquant un échec dans l’ensemble de l’application. | | `Error` | Messages indiquant un échec dans l’opération en cours. | | `Warning` | Messages indiquant un problème non fatal. | | `Information` | Messages d’information. | | `Debug` | Messages de diagnostic utiles pour le débogage. | | `Trace` | Messages de diagnostic très détaillés conçus pour diagnostiquer des problèmes spécifiques. |
 
 Une fois que vous avez configuré le niveau de détail, les journaux sont écrits dans la console du navigateur (ou la sortie standard dans une application NodeJS).
 

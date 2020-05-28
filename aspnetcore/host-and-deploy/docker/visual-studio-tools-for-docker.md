@@ -1,23 +1,11 @@
 ---
-title: Outils de conteneur Visual Studio avec ASP.NET Core
-author: spboyer
-description: Découvrez comment utiliser les outils Visual Studio et Docker pour Windows pour mettre une application ASP.NET Core dans un conteneur.
-ms.author: scaddie
-ms.custom: mvc
-ms.date: 09/12/2018
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: 8b62e27033bf0b7c05a70050807970fe0c74e2f8
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967569"
+titre : Auteur : Description : ms. Author : ms. Custom : ms. Date : No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- SignalRUID : 
+
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>Outils de conteneur Visual Studio avec ASP.NET Core
 
@@ -60,7 +48,7 @@ Si la version cible du .NET Framework est .NET Core, la liste déroulante **OS**
 Pour les projets ASP.NET Core ciblant .NET Core, il existe deux options pour ajouter la prise en charge de Docker via les outils. Ouvrez le projet dans Visual Studio et choisissez l’une des options suivantes :
 
 * Sélectionnez **Prise en charge de Docker** dans le menu **Projet**.
-* Dans **Explorateur de solutions** , cliquez avec le bouton droit sur le projet, puis sélectionnez **Ajouter** > la**prise en charge**de l’ancrage.
+* Dans **Explorateur de solutions** , cliquez avec le bouton droit sur le projet, puis sélectionnez **Ajouter**la  >  **prise en charge**de l’ancrage.
 
 Les outils de conteneur Visual Studio ne prennent pas en charge l’ajout de Docker à un projet ASP.NET Core existant ciblant le .NET Framework.
 
@@ -88,7 +76,7 @@ Le fichier *Dockerfile* précédent est basé sur l’image [microsoft/aspnetcor
 
 ## <a name="add-container-orchestrator-support-to-an-app"></a>Ajouter la prise en charge des orchestrateurs de conteneurs à une application
 
-Visual Studio 2017 version 15.7 ou antérieure prend en charge [Docker Compose](https://docs.docker.com/compose/overview/) en tant que solution d’orchestration de conteneurs unique. Les artefacts docker compose sont ajoutés via **Ajouter** > la**prise en charge**de l’ancrage.
+Visual Studio 2017 version 15.7 ou antérieure prend en charge [Docker Compose](https://docs.docker.com/compose/overview/) en tant que solution d’orchestration de conteneurs unique. Les artefacts docker compose sont ajoutés via **Ajouter**la  >  **prise en charge**de l’ancrage.
 
 Visual Studio 2017 version 15.8 ou ultérieure ajoute une solution d’orchestration seulement si cela lui est demandé. Cliquez avec le bouton droit sur le projet dans l’**Explorateur de solutions**, puis sélectionnez **Ajouter** > **Prise en charge de l’orchestrateur de conteneurs**. Les choix suivants sont disponibles : 
 
@@ -100,10 +88,10 @@ Visual Studio 2017 version 15.8 ou ultérieure ajoute une solution d’orchest
 
 Les outils de conteneur Visual Studio ajoutent un projet *docker-compose* à la solution avec les fichiers suivants :
 
-* *docker-.dcproj* &ndash; Fichier représentant le projet. Comprend un élément `<DockerTargetOS>` spécifiant le système d’exploitation à utiliser.
-* *.dockerignore* &ndash; Répertorie les modèles de fichiers et de répertoires à exclure pendant la génération d’un contexte de build.
-* *docker-compose.yml* &ndash; Fichier [Docker Compose](https://docs.docker.com/compose/overview/) de base utilisé pour définir la collection d’images générées et exécutées avec `docker-compose build` et `docker-compose run`, respectivement.
-* *docker-compose.override.yml* &ndash; Fichier facultatif, lu par Docker Compose, avec les remplacements de configuration pour les services. Visual Studio exécute `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"` pour fusionner ces fichiers.
+* *dockr-compose. dcproj*: fichier représentant le projet. Comprend un élément `<DockerTargetOS>` spécifiant le système d’exploitation à utiliser.
+* *. dockerignore*: répertorie les modèles de fichiers et de répertoires à exclure lors de la génération d’un contexte de génération.
+* *docker-compose. yml*: fichier [docker compose](https://docs.docker.com/compose/overview/) de base utilisé pour définir la collection d’images générées et exécutées avec `docker-compose build` et `docker-compose run` , respectivement.
+* *docker-compose. override. yml*: fichier facultatif, lu par docker compose, avec substitutions de configuration pour les services. Visual Studio exécute `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"` pour fusionner ces fichiers.
 
 Le fichier *docker-compose.yml* référence le nom de l’image créée pendant l’exécution du projet :
 
@@ -130,7 +118,7 @@ Service Fabric ne prend pas en charge les conteneurs Linux s’exécutant dans l
 
 Les outils de conteneur Visual Studio effectuent les tâches suivantes :
 
-* Ajoute un * &lt;projet&gt;PROJECT_NAME application* **service Fabric application** à la solution.
+* Ajoute un projet * &lt; project_name &gt; application* **service Fabric application** à la solution.
 * Ajoute un fichier *Dockerfile* et un fichier *.dockerignore* au projet ASP.NET Core. S’il existe déjà un fichier *Dockerfile* dans le projet ASP.NET Core, il est renommé *Dockerfile.original*. Un nouveau fichier *Dockerfile*, semblable au suivant, est créé :
 
     [!code-dockerfile[](visual-studio-tools-for-docker/samples/2.1/HelloDockerTools/Dockerfile)]
@@ -195,7 +183,7 @@ baf9a678c88d        hellodockertools:dev   "C:\\remote_debugge..."   21 seconds 
 
 ## <a name="edit-and-continue"></a>Modifier & Continuer
 
-Les modifications apportées Razor aux fichiers et aux vues statiques sont automatiquement mises à jour sans qu’une étape de compilation soit nécessaire. Apportez la modification, enregistrez et actualisez le navigateur pour afficher la mise à jour.
+Les modifications apportées aux fichiers et aux vues statiques Razor sont automatiquement mises à jour sans qu’une étape de compilation soit nécessaire. Apportez la modification, enregistrez et actualisez le navigateur pour afficher la mise à jour.
 
 Les modifications de fichiers de code nécessitent une compilation et un redémarrage de Kestrel au sein du conteneur. Après avoir effectué la modification, utilisez `CTRL+F5` pour exécuter le processus et démarrer l’application au sein du conteneur. Le conteneur Docker n’est pas regénéré ni arrêté. Exécutez la commande `docker ps` dans la console du Gestionnaire de package. Notez que le conteneur d’origine est toujours en cours d’exécution comme 10 minutes auparavant :
 
@@ -237,7 +225,7 @@ Les images `microsoft/aspnetcore-build` et `microsoft/aspnetcore` répertoriées
 ::: moniker-end
 
 > [!NOTE]
-> La `docker images` commande renvoie des images intermédiaires avec des noms de référentiel et des balises identifiés comme étant * \<aucun>* (non répertoriés ci-dessus). Ces images sans nom sont produites par la [build en plusieurs étapes](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) *Dockerfile*. Elles améliorent l’efficacité de la création de l’image finale ; seules les couches nécessaires sont regénérées en cas de modifications. Quand les images intermédiaires ne sont plus nécessaires, supprimez-les à l’aide de la commande [docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/).
+> La `docker images` commande retourne des images intermédiaires avec des noms et des balises de référentiel identifiés comme *\<none>* (non répertoriés ci-dessus). Ces images sans nom sont produites par la [build en plusieurs étapes](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) *Dockerfile*. Elles améliorent l’efficacité de la création de l’image finale ; seules les couches nécessaires sont regénérées en cas de modifications. Quand les images intermédiaires ne sont plus nécessaires, supprimez-les à l’aide de la commande [docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/).
 
 Vous pourriez vous attendre à ce que l’image de production ou de publication ait une taille inférieure à l’image de *développement*. En raison de l’utilisation du mappage de volume, le débogueur et l’application étaient exécutés à partir de l’ordinateur local et non dans le conteneur. L’image *latest* a empaqueté le code de l’application nécessaire pour l’exécuter sur un ordinateur hôte. Le delta correspond donc à la taille du code de l’application.
 

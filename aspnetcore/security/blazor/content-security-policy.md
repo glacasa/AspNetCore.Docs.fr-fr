@@ -28,14 +28,14 @@ CSP est pris en charge dans la plupart des navigateurs mobiles et de bureau mode
 
 Au minimum, spécifiez les directives et les sources suivantes pour les Blazor applications. Ajoutez des directives et des sources supplémentaires selon vos besoins. Les directives suivantes sont utilisées dans la section [appliquer la stratégie](#apply-the-policy) de cet article, où des exemples de stratégies de sécurité pour Blazor webassembly et Blazor Server sont fournis :
 
-* [URI](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri) &ndash; de base Restreint les URL de la balise d’une page `<base>` . Spécifiez `self` pour indiquer que l’origine de l’application, y compris le schéma et le numéro de port, est une source valide.
-* [bloc-tout-contenu mixte](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content) &ndash; Empêche le chargement de contenu HTTP et HTTPs mixte.
-* [par défaut-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/default-src) &ndash; Indique une solution de secours pour les directives sources qui ne sont pas explicitement spécifiées par la stratégie. Spécifiez `self` pour indiquer que l’origine de l’application, y compris le schéma et le numéro de port, est une source valide.
-* [img-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/img-src) &ndash; Indique des sources valides pour les images.
+* [base-URI](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri): restreint les URL pour la balise d’une page `<base>` . Spécifiez `self` pour indiquer que l’origine de l’application, y compris le schéma et le numéro de port, est une source valide.
+* [bloc-tout-contenu mixte](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content): empêche le chargement de contenu HTTP et HTTPS mixte.
+* [default-SRC](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/default-src): indique une solution de secours pour les directives source qui ne sont pas explicitement spécifiées par la stratégie. Spécifiez `self` pour indiquer que l’origine de l’application, y compris le schéma et le numéro de port, est une source valide.
+* [img-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/img-src): indique des sources valides pour les images.
   * Spécifiez `data:` pour autoriser le chargement d’images à partir d' `data:` URL.
   * Spécifiez `https:` pour autoriser le chargement d’images à partir de points de terminaison HTTPS.
-* [objet-SRC](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/object-src) &ndash; Indique des sources valides pour les `<object>` `<embed>` `<applet>` balises, et. Spécifiez `none` pour empêcher toutes les sources d’URL.
-* [script-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) &ndash; Indique des sources valides pour les scripts.
+* [Object-SRC](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/object-src): indique des sources valides pour les `<object>` `<embed>` `<applet>` balises, et. Spécifiez `none` pour empêcher toutes les sources d’URL.
+* [script-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src): indique des sources valides pour les scripts.
   * Spécifiez la `https://stackpath.bootstrapcdn.com/` source de l’hôte pour les scripts de démarrage.
   * Spécifiez `self` pour indiquer que l’origine de l’application, y compris le schéma et le numéro de port, est une source valide.
   * Dans une Blazor application Webassembly :
@@ -45,11 +45,11 @@ Au minimum, spécifiez les directives et les sources suivantes pour les Blazor a
       * `sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=`
     * Spécifiez `unsafe-eval` pour utiliser `eval()` les méthodes et afin de créer du code à partir de chaînes.
   * Dans une Blazor application serveur, spécifiez le `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` hachage du script inline qui effectue une détection de secours pour les feuilles de style.
-* [style-SRC](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src) &ndash; Indique des sources valides pour les feuilles de style.
+* [style-SRC](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src): indique des sources valides pour les feuilles de style.
   * Spécifiez la `https://stackpath.bootstrapcdn.com/` source de l’hôte pour les feuilles de style de démarrage.
   * Spécifiez `self` pour indiquer que l’origine de l’application, y compris le schéma et le numéro de port, est une source valide.
   * Spécifiez `unsafe-inline` pour autoriser l’utilisation de styles intralignes. La déclaration inline est requise pour l’interface utilisateur dans les Blazor applications serveur pour la reconnexion du client et du serveur après la demande initiale. Dans une version ultérieure, le style intraligne peut être supprimé afin qu' `unsafe-inline` il ne soit plus nécessaire.
-* [mise à niveau-non sécurisé-demandes](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests) &ndash; Indique que les URL de contenu provenant de sources non sécurisées (HTTP) doivent être acquises en toute sécurité via HTTPs.
+* [Upgrade-insecure-requests](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests): indique que les URL de contenu provenant de sources non sécurisées (http) doivent être acquises en toute sécurité via HTTPS.
 
 Les directives précédentes sont prises en charge par tous les navigateurs, à l’exception de Microsoft Internet Explorer.
 
@@ -140,7 +140,7 @@ Bien que ne `report-uri` soit plus recommandé pour une utilisation, les deux di
 
 Testez et mettez à jour la stratégie d’une application chaque version.
 
-## <a name="troubleshoot"></a>Dépannage
+## <a name="troubleshoot"></a>Dépanner
 
 * Les erreurs s’affichent dans la console outils de développement du navigateur. Les navigateurs fournissent des informations sur les éléments suivants :
   * Éléments qui ne sont pas conformes à la stratégie.
