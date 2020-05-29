@@ -451,8 +451,8 @@ Au cours d’une opération d’authentification, il existe des cas où vous sou
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
 <RemoteAuthenticatorViewCore Action="@Action" 
-    AuthenticationState="AuthenticationState" OnLoginSucceded="RestoreState" 
-    OnLogoutSucceded="RestoreState" />
+    AuthenticationState="AuthenticationState" OnLogInSucceeded="RestoreState" 
+    OnLogOutSucceeded="RestoreState" />
 
 @code {
     [Parameter]

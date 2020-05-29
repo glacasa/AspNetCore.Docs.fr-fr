@@ -164,6 +164,16 @@ Lorsque le service blob est activé pour l’hébergement de site Web statique s
 * Définissez le **nom du document d’index** sur `index.html`.
 * Définissez le **chemin d’accès au document d’erreur** sur `index.html`. Razorles composants et autres points de terminaison non-fichier ne résident pas sur des chemins d’accès physiques dans le contenu statique stocké par le service BLOB. Lorsqu’une demande pour l’une de ces ressources est reçue que le Blazor routeur doit gérer, l’erreur *404-introuvable* générée par le service BLOB achemine la requête vers le **chemin du document d’erreur**. L’objet BLOB *index. html* est retourné et le Blazor routeur charge et traite le chemin d’accès.
 
+Si les fichiers ne sont pas chargés au moment de l’exécution en raison de types MIME inappropriés dans les `Content-Type` en-têtes des fichiers, effectuez l’une des actions suivantes :
+
+* Configurez vos outils pour définir les types MIME corrects ( `Content-Type` en-têtes) lors du déploiement des fichiers.
+* Modifiez les types MIME ( `Content-Type` en-têtes) des fichiers après le déploiement de l’application.
+
+  En Explorateur Stockage (Portail Azure) pour chaque fichier :
+  
+  1. Cliquez avec le bouton droit sur le fichier et sélectionnez **Propriétés**.
+  1. Définissez le **ContentType** et sélectionnez le bouton **Enregistrer** .
+
 Pour plus d’informations, consultez [Hébergement de sites web statiques dans le service Stockage Azure](/azure/storage/blobs/storage-blob-static-website).
 
 ### <a name="nginx"></a>Nginx
