@@ -621,3 +621,15 @@ L’un des effets secondaires de l’approche précédente est qu’un <xref:Mic
     }
 }
 ```
+
+## <a name="troubleshoot"></a>Dépanner
+
+> InvalidOperationException : EditForm requiert un paramètre de modèle, ou un paramètre EditContext, mais pas les deux.
+
+Vérifiez que <xref:Microsoft.AspNetCore.Components.Forms.EditForm> a un <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model> ou <xref:Microsoft.AspNetCore.Components.Forms.EditContext> .
+
+Quand vous assignez un <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model> au formulaire, vérifiez que le type de modèle est instancié, comme le montre l’exemple suivant :
+
+```csharp
+private ExampleModel exampleModel = new ExampleModel();
+```
