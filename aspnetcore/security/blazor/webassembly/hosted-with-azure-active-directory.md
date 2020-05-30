@@ -1,10 +1,10 @@
 ---
-titre : « sécuriser une Blazor application hébergée par ASP.net Core Webassembly avec Azure Active Directory » auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+titre : « sécuriser une Blazor application hébergée par ASP.net Core Webassembly avec Azure Active Directory » auteur : guardrex Description : monikerRange : « >= aspnetcore-3,1 » ms. Author : Riande ms. Custom : MVC ms. Date : 05/19/2020 No-Loc :
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRUID : 
+- « SignalR UID : Security/éblouissant/webassembly/Hosted-with-Azure-Active-Directory
 
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory"></a>Sécuriser une Blazor application hébergée par l’ASP.net Core Webassembly avec Azure Active Directory
@@ -21,7 +21,7 @@ Suivez les instructions de [démarrage rapide : configurer un locataire](/azure
 
 ### <a name="register-a-server-api-app"></a>Inscrire une application API serveur
 
-Suivez les instructions de [démarrage rapide : inscrire une application auprès de la plateforme Microsoft Identity](/azure/active-directory/develop/quickstart-register-app) et des rubriques Azure AAD suivantes pour inscrire une application AAD pour l' *application API serveur*:
+Suivez les instructions de [démarrage rapide : inscrire une application auprès de la plateforme Microsoft Identity](/azure/active-directory/develop/quickstart-register-app) et des rubriques Azure AAD suivantes pour inscrire une application AAD pour l' *application API serveur* , puis procédez comme suit :
 
 1. Dans **Azure Active Directory**  >  **inscriptions d’applications**, sélectionnez **nouvelle inscription**.
 1. Fournissez un **nom** pour l’application (par exemple, ** Blazor Server AAD**).
@@ -55,7 +55,7 @@ Notez les informations suivantes :
 
 ### <a name="register-a-client-app"></a>Inscrire une application cliente
 
-Suivez les instructions de [démarrage rapide : inscrire une application auprès de la plateforme Microsoft Identity](/azure/active-directory/develop/quickstart-register-app) et des rubriques Azure AAD suivantes pour inscrire une application AAD pour l' *application cliente*:
+Suivez les instructions de [démarrage rapide : inscrire une application auprès de la plateforme Microsoft Identity](/azure/active-directory/develop/quickstart-register-app) et des rubriques Azure AAD suivantes pour inscrire une application AAD pour l' *application cliente* , puis procédez comme suit :
 
 1. Dans **Azure Active Directory**  >  **inscriptions d’applications**, sélectionnez **nouvelle inscription**.
 1. Fournissez un **nom** pour l’application (par exemple, ** Blazor client AAD**).

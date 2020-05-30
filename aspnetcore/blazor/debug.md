@@ -1,18 +1,18 @@
 ---
-titre : 'Debug ASP.NET Core Blazor Webassembly’Author : Description : 'Découvrez comment déboguer des Blazor applications. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+titre : « Debug ASP.NET Core Blazor Webassembly » auteur : guardrex Description : « Découvrez comment déboguer des Blazor applications. »
+monikerRange : ' >= aspnetcore-3,1 'ms. Author : Riande ms. Custom : MVC ms. Date : 05/29/2020 No-Loc :
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRUID : 
+- ' SignalR 'UID : éblouissant/débogage
 
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Déboguer ASP.NET Core Blazor Webassembly
 
 [Daniel Roth](https://github.com/danroth27)
 
-BlazorLes applications webassembly peuvent être déboguées à l’aide des outils de développement de navigateur dans les navigateurs basés sur le chrome (Edge/chrome).  Vous pouvez également déboguer votre application à l’aide de Visual Studio ou Visual Studio Code.
+BlazorLes applications webassembly peuvent être déboguées à l’aide des outils de développement de navigateur dans les navigateurs basés sur le chrome (Edge/chrome). Vous pouvez également déboguer votre application à l’aide de Visual Studio ou Visual Studio Code.
 
 Les scénarios disponibles sont les suivants :
 
@@ -53,6 +53,8 @@ La `inspectUri` propriété :
 
 * Permet à l’IDE de détecter que l’application est une Blazor application Webassembly.
 * Indique à l’infrastructure de débogage de script de se connecter au navigateur via le Blazor proxy de débogage de.
+
+Les valeurs d’espace réservé pour le protocole WebSockets ( `wsProtocol` ), l’hôte ( `url.hostname` ), le port ( `url.port` ) et l’URI de l’inspecteur sur le navigateur lancé ( `browserInspectUri` ) sont fournies par l’infrastructure.
 
 ## <a name="visual-studio"></a>Visual Studio
 
@@ -135,6 +137,7 @@ Les mappages de source de navigateur permettent au navigateur de mapper les fich
 
 ## <a name="troubleshoot"></a>Dépanner
 
-Si vous rencontrez des erreurs, le Conseil suivant peut vous aider :
+Si vous rencontrez des erreurs, les conseils suivants peuvent vous aider :
 
-Dans l’onglet **débogueur** , ouvrez les outils de développement de votre navigateur. Dans la console, exécutez `localStorage.clear()` pour supprimer tous les points d’arrêt.
+* Dans l’onglet **débogueur** , ouvrez les outils de développement de votre navigateur. Dans la console, exécutez `localStorage.clear()` pour supprimer tous les points d’arrêt.
+* Confirmez que vous avez installé et approuvé le certificat de développement ASP.NET Core HTTPs. Pour plus d'informations, consultez <xref:security/enforcing-ssl#troubleshoot-certificate-problems>.

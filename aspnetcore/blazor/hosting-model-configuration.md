@@ -1,11 +1,11 @@
 ---
-titre : « ASP.NET Core Blazor Hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+titre : « ASP.NET Core Blazor Hébergement de la configuration de modèle » auteur : guardrex Description : « en savoir plus sur Blazor l’hébergement de la configuration de modèle, notamment comment intégrer Razor des composants dans Razor des pages et des applications MVC. »
+monikerRange : ' >= aspnetcore-3,1 'ms. Author : Riande ms. Custom : MVC ms. Date : 05/28/2020 No-Loc :
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRUID : 
+- ' SignalR 'UID : éblouissant/Hosting-Model-Configuration
 
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>BlazorConfiguration du modèle d’hébergement ASP.net Core
@@ -228,6 +228,12 @@ builder.Services.AddOidcAuthentication(options =>
 
 #### <a name="logging-configuration"></a>Configuration de la journalisation
 
+Ajoutez une référence de package pour [Microsoft. extensions. Logging. Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration/):
+
+```xml
+<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="{VERSION}" />
+```
+
 *wwwroot/appSettings. JSON*:
 
 ```json
@@ -245,6 +251,10 @@ builder.Services.AddOidcAuthentication(options =>
 `Program.Main`:
 
 ```csharp
+using Microsoft.Extensions.Logging;
+
+...
+
 builder.Logging.AddConfiguration(
     builder.Configuration.GetSection("Logging"));
 ```
@@ -287,177 +297,11 @@ Pour personnaliser l’interface utilisateur, définissez un élément avec un `
 Le tableau suivant décrit les classes CSS appliquées à l' `components-reconnect-modal` élément.
 
 | Classe CSS                       | Détermine&hellip; |
-| ---
-titre : « ASP.NET Core Blazor Hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor Hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor Hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor Hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor Hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor Hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor Hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor Hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor Hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor Hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor Hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor Hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor Hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
----------------- | titre de la--- : « ASP.NET Core Blazor de l’hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor Hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor Hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor Hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor Hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor Hébergement de la configuration du modèle » auteur : Description : « en savoir plus sur Blazor l’hébergement de la configuration du modèle, y compris l’intégration Razor des composants dans Razor les pages et les applications MVC. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
---------- | | `components-reconnect-show`     | Connexion perdue. Le client tente de se reconnecter. Affichez le modal. | | `components-reconnect-hide`     | Une connexion active est rétablie sur le serveur. Masquez le modal. | | `components-reconnect-failed`   | Échec de la reconnexion, probablement en raison d’une défaillance du réseau. Pour tenter une reconnexion, appelez `window.Blazor.reconnect()` . | | `components-reconnect-rejected` | Reconnexion refusée. Le serveur a été atteint mais a refusé la connexion, et l’état de l’utilisateur sur le serveur est perdu. Pour recharger l’application, appelez `location.reload()` . Cet état de connexion peut se produire dans les cas suivants :<ul><li>Un blocage dans le circuit côté serveur se produit.</li><li>Le client est déconnecté suffisamment longtemps pour que le serveur supprime l’état de l’utilisateur. Les instances des composants avec lesquels l’utilisateur interagit sont supprimées.</li><li>Le serveur est redémarré ou le processus de travail de l’application est recyclé.</li></ul> |
+| ------------------------------- | ----------------- |
+| `components-reconnect-show`     | Connexion perdue. Le client tente de se reconnecter. Affichez le modal. |
+| `components-reconnect-hide`     | Une connexion active est rétablie sur le serveur. Masquez le modal. |
+| `components-reconnect-failed`   | Échec de la reconnexion, probablement en raison d’une défaillance du réseau. Pour tenter une reconnexion, appelez `window.Blazor.reconnect()` . |
+| `components-reconnect-rejected` | Reconnexion refusée. Le serveur a été atteint mais a refusé la connexion, et l’état de l’utilisateur sur le serveur est perdu. Pour recharger l’application, appelez `location.reload()` . Cet état de connexion peut se produire dans les cas suivants :<ul><li>Un blocage dans le circuit côté serveur se produit.</li><li>Le client est déconnecté suffisamment longtemps pour que le serveur supprime l’état de l’utilisateur. Les instances des composants avec lesquels l’utilisateur interagit sont supprimées.</li><li>Le serveur est redémarré ou le processus de travail de l’application est recyclé.</li></ul> |
 
 ### <a name="render-mode"></a>Mode d’affichage
 

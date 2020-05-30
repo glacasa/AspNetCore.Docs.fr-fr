@@ -1,11 +1,11 @@
 ---
-titre : « héberger et déployer ASP.NET Core Blazor Webassembly » auteur : Description : « Découvrez comment héberger et déployer une Blazor application à l’aide de ASP.net Core, de réseaux de distribution de contenu (CDN), de serveurs de fichiers et de pages github. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+titre : « héberger et déployer ASP.NET Core Blazor Webassembly » auteur : guardrex Description : « Découvrez comment héberger et déployer une Blazor application à l’aide de ASP.net Core, de réseaux de distribution de contenu (CDN), de serveurs de fichiers et de pages github. »
+monikerRange : ' >= aspnetcore-3,1 'ms. Author : Riande ms. Custom : MVC ms. Date : 05/28/2020 No-Loc :
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRUID : 
+- ' SignalR 'UID : Host-and-Deploy/éblouissant/webassembly
 
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>Héberger et déployer ASP.NET Core Blazor Webassembly
@@ -22,9 +22,20 @@ Les stratégies de déploiement suivantes sont prises en charge :
 * L' Blazor application est traitée par une application ASP.net core. Cette stratégie est abordée dans la section [Déploiement hébergé avec ASP.NET Core](#hosted-deployment-with-aspnet-core).
 * L' Blazor application est placée sur un service ou un serveur Web d’hébergement statique, où .net n’est pas utilisé pour traiter l' Blazor application. Cette stratégie est traitée dans la section [Déploiement autonome](#standalone-deployment) , qui comprend des informations sur l’hébergement d’une Blazor application webassembly en tant que sous-application IIS.
 
-## <a name="brotli-precompression"></a>Précompression Brotli
+## <a name="precompression"></a>Précompression
 
-Lors de la publication d’une Blazor application Webassembly, la sortie est précompressée à l’aide de l' [algorithme de compression Brotli](https://tools.ietf.org/html/rfc7932) au niveau le plus élevé afin de réduire la taille de l’application et de la nécessité de compresser le Runtime.
+Lors de Blazor la publication d’une application Webassembly, la sortie est précompressée pour réduire la taille de l’application et supprimer la nécessité d’une compression du Runtime. Les algorithmes de compression suivants sont utilisés :
+
+* [Brotli](https://tools.ietf.org/html/rfc7932) (niveau le plus élevé)
+* [Gzip](https://tools.ietf.org/html/rfc1952))
+
+Pour désactiver la compression, ajoutez la `BlazorEnableCompression` propriété MSBuild au fichier projet de l’application et définissez la valeur sur `false` :
+
+```xml
+<PropertyGroup>
+  <BlazorEnableCompression>false</BlazorEnableCompression>
+</PropertyGroup>
+```
 
 Pour la configuration de la compression IIS *Web. config* , consultez la section [IIS : Brotli et compression gzip](#brotli-and-gzip-compression) .
 
@@ -155,7 +166,7 @@ Si vous recevez un message *500 – Erreur interne du serveur* et que le Gestion
 
 Pour plus d’informations sur le dépannage des déploiements sur IIS, consultez <xref:test/troubleshoot-azure-iis>.
 
-### <a name="azure-storage"></a>Stockage Azure
+### <a name="azure-storage"></a>Azure Storage
 
 L’hébergement de fichiers statiques [Azure Storage](/azure/storage/) permet l’hébergement d’applications sans serveur Blazor . Les noms de domaine personnalisé, le réseau de distribution de contenu Azure (CDN) et HTTPS sont pris en charge.
 
@@ -350,69 +361,11 @@ Une Blazor application Webassembly peut être initialisée avec la `loadBootReso
 `loadBootResource`les paramètres s’affichent dans le tableau suivant.
 
 | Paramètre    | Description |
-| ---
-titre : « héberger et déployer ASP.NET Core Blazor Webassembly » auteur : Description : « Découvrez comment héberger et déployer une Blazor application à l’aide de ASP.net Core, de réseaux de distribution de contenu (CDN), de serveurs de fichiers et de pages github. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « héberger et déployer ASP.NET Core Blazor Webassembly » auteur : Description : « Découvrez comment héberger et déployer une Blazor application à l’aide de ASP.net Core, de réseaux de distribution de contenu (CDN), de serveurs de fichiers et de pages github. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « héberger et déployer ASP.NET Core Blazor Webassembly » auteur : Description : « Découvrez comment héberger et déployer une Blazor application à l’aide de ASP.net Core, de réseaux de distribution de contenu (CDN), de serveurs de fichiers et de pages github. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « héberger et déployer ASP.NET Core Blazor Webassembly » auteur : Description : « Découvrez comment héberger et déployer une Blazor application à l’aide de ASP.net Core, de réseaux de distribution de contenu (CDN), de serveurs de fichiers et de pages github. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
------- | ---titre : « héberger et déployer ASP.NET Core Blazor Webassembly » auteur : Description : « Découvrez comment héberger et déployer une Blazor application à l’aide de ASP.net Core, de réseaux de distribution de contenu (CDN), de serveurs de fichiers et de pages github. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « héberger et déployer ASP.NET Core Blazor Webassembly » auteur : Description : « Découvrez comment héberger et déployer une Blazor application à l’aide de ASP.net Core, de réseaux de distribution de contenu (CDN), de serveurs de fichiers et de pages github. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « héberger et déployer ASP.NET Core Blazor Webassembly » auteur : Description : « Découvrez comment héberger et déployer une Blazor application à l’aide de ASP.net Core, de réseaux de distribution de contenu (CDN), de serveurs de fichiers et de pages github. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
------- | | `type`       | Type de la ressource. Types permissables : `assembly` , `pdb` , `dotnetjs` , `dotnetwasm` , `timezonedata` | | `name`       | Nom de la ressource. | | `defaultUri` | URI relatif ou absolu de la ressource. | | `integrity`  | Chaîne d’intégrité représentant le contenu attendu dans la réponse. |
+| ------------ | ----------- |
+| `type`       | Type de la ressource. Types permissables : `assembly` , `pdb` , `dotnetjs` , `dotnetwasm` ,`timezonedata` |
+| `name`       | Nom de la ressource. |
+| `defaultUri` | URI relatif ou absolu de la ressource. |
+| `integrity`  | Chaîne d’intégrité représentant le contenu attendu dans la réponse. |
 
 `loadBootResource`retourne l’un des éléments suivants pour remplacer le processus de chargement :
 
