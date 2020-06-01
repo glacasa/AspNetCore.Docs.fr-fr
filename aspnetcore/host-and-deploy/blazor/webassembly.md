@@ -27,7 +27,7 @@ Les stratégies de déploiement suivantes sont prises en charge :
 Lors de Blazor la publication d’une application Webassembly, la sortie est précompressée pour réduire la taille de l’application et supprimer la nécessité d’une compression du Runtime. Les algorithmes de compression suivants sont utilisés :
 
 * [Brotli](https://tools.ietf.org/html/rfc7932) (niveau le plus élevé)
-* [Gzip](https://tools.ietf.org/html/rfc1952))
+* [Gzip](https://tools.ietf.org/html/rfc1952)
 
 Pour désactiver la compression, ajoutez la `BlazorEnableCompression` propriété MSBuild au fichier projet de l’application et définissez la valeur sur `false` :
 
@@ -166,7 +166,7 @@ Si vous recevez un message *500 – Erreur interne du serveur* et que le Gestion
 
 Pour plus d’informations sur le dépannage des déploiements sur IIS, consultez <xref:test/troubleshoot-azure-iis>.
 
-### <a name="azure-storage"></a>Azure Storage
+### <a name="azure-storage"></a>Stockage Azure
 
 L’hébergement de fichiers statiques [Azure Storage](/azure/storage/) permet l’hébergement d’applications sans serveur Blazor . Les noms de domaine personnalisé, le réseau de distribution de contenu Azure (CDN) et HTTPS sont pris en charge.
 

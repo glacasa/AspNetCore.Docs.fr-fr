@@ -1,6 +1,6 @@
 ---
 titre : « Debug ASP.NET Core Blazor Webassembly » auteur : guardrex Description : « Découvrez comment déboguer des Blazor applications. »
-monikerRange : ' >= aspnetcore-3,1 'ms. Author : Riande ms. Custom : MVC ms. Date : 05/29/2020 No-Loc :
+monikerRange : ' >= aspnetcore-3,1 'ms. Author : Riande ms. Custom : MVC ms. Date : 05/31/2020 No-Loc :
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
@@ -93,31 +93,114 @@ Lors du débogage de votre Blazor application Webassembly, vous pouvez égalemen
 
 Pour déboguer une Blazor application Webassembly dans Visual Studio code :
  
-1. Installez l' [extension C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) et l’extension de [débogueur JavaScript (nocturne)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) avec la `debug.javascript.usePreview` valeur `true` .
+Installez l' [extension C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) et l’extension de [débogueur JavaScript (nocturne)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) avec la `debug.javascript.usePreview` valeur `true` .
 
-   ![Extensions](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-extensions.png)
+![Extensions](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-extensions.png)
 
-   ![Débogueur JS preview](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-js-use-preview.png)
+![Débogueur JS preview](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-js-use-preview.png)
 
-1. Ouvrez une Blazor application Webassembly existante avec le débogage activé.
+### <a name="debug-standalone-blazor-webassembly"></a>Déboguer le Blazor Webassembly autonome
 
-   * Si vous recevez la notification suivante indiquant qu’une configuration supplémentaire est requise pour activer le débogage, vérifiez que les extensions appropriées sont installées et que le débogage de l’aperçu JavaScript est activé, puis rechargez la fenêtre :
+1. Ouvrez l' Blazor application Webassembly autonome dans vs code.
 
-     ![Configuration supplémentaire requise](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-additional-setup.png)
+   Si vous recevez la notification suivante indiquant qu’une configuration supplémentaire est requise pour activer le débogage :
+   
+   * Vérifiez que vous avez installé les extensions appropriées.
+   * Confirmez que le débogage de l’aperçu JavaScript est activé.
+   * Rechargez la fenêtre.
 
-   * Une notification propose d’ajouter les ressources requises à l’application pour la génération et le débogage. Sélectionnez **Oui**:
+   ![Configuration supplémentaire requise](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-additional-setup.png)
 
-     ![Ajouter les ressources requises](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-required-assets.png)
+1. Démarrez le débogage à l’aide du raccourci clavier <kbd>F5</kbd> ou de l’élément de menu.
 
-1. Le démarrage de l’application dans le débogueur est un processus en deux étapes :
+1. Quand vous y êtes invité, sélectionnez l’option de ** Blazor débogage webassembly** pour démarrer le débogage.
 
-   1 \. **Tout d’abord**, démarrez l’application à l’aide de la configuration de lancement **de .net Core Launch ( Blazor autonome)** .
+   ![Liste des options de débogage disponibles](index/_static/blazor-vscode-debugtypes.png)
 
-   2 \. **Une fois l’application démarrée**, démarrez le navigateur à l’aide de l' ** Blazor Assembly Web de débogage .net core dans** la configuration de lancement chrome (nécessite chrome). Pour utiliser Edge au lieu de chrome, remplacez l' `type` de la configuration de lancement dans *. vscode/Launch. JSON* par `pwa-chrome` `pwa-msedge` .
+1. L’application autonome est lancée et un navigateur de débogage est ouvert.
 
 1. Définissez un point d’arrêt dans la `IncrementCount` méthode du `Counter` composant, puis sélectionnez le bouton pour atteindre le point d’arrêt :
 
    ![Déboguer le compteur dans VS Code](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-debug-counter.png)
+
+### <a name="debug-hosted-blazor-webassembly"></a>Déboguer le Blazor Webassembly hébergé
+
+1. Ouvrez l' Blazor application Webassembly hébergée dans vs code.
+
+1. Si aucune configuration de lancement n’est définie pour le projet, la notification suivante s’affiche. Sélectionnez **Oui**.
+
+   ![Ajouter les ressources requises](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-required-assets.png)
+
+1. Dans la fenêtre de sélection, sélectionnez le projet *serveur* dans la solution hébergée.
+
+Un fichier *Launch. JSON* est généré avec la configuration de lancement pour le lancement du débogueur.
+
+### <a name="attach-to-an-existing-debugging-session"></a>Attacher à une session de débogage existante
+
+Pour attacher une application en cours d’exécution Blazor , créez un fichier *Launch. JSON* avec la configuration suivante :
+
+```json
+{
+  "type": "blazorwasm",
+  "request": "attach",
+  "name": "Attach to Existing Blazor WebAssembly Application"
+}
+```
+
+> [!NOTE]
+> L’attachement à une session de débogage est pris en charge uniquement pour les applications autonomes. Pour utiliser le débogage de pile complète, vous devez lancer l’application à partir de VS Code.
+
+### <a name="launch-configuration-options"></a>Lancer les options de configuration
+
+Les options de configuration de lancement suivantes sont prises en charge pour le `blazorwasm` type de débogage.
+
+| Option    | Description |
+| --------- | ----------- |
+| `request` | Utilisez `launch` pour lancer et attacher une session de débogage à une Blazor application webassembly ou `attach` pour attacher une session de débogage à une application déjà en cours d’exécution. |
+| `url`     | URL à ouvrir dans le navigateur lors du débogage. La valeur par défaut est `https://localhost:5001`. |
+| `browser` | Navigateur à lancer pour la session de débogage. A la valeur `edge` ou `chrome`. La valeur par défaut est `chrome`. |
+| `trace`   | Utilisé pour générer des journaux à partir du débogueur JS. Définissez sur `true` pour générer des journaux. |
+| `hosted`  | Doit avoir la valeur `true` si vous lancez et déboguez une Blazor application webassembly hébergée. |
+| `webRoot` | Spécifie le chemin d’accès absolu du serveur Web. Doit être défini si une application est servie à partir d’un sous-itinéraire. |
+| `timeout` | Nombre de millisecondes d’attente de l’attachement de la session de débogage. La valeur par défaut est 30 000 millisecondes (30 secondes). |
+| `program` | Référence au fichier exécutable pour exécuter le serveur de l’application hébergée. Doit être défini si `hosted` a la valeur `true` . |
+| `cwd`     | Répertoire de travail dans lequel l’application doit être lancée. Doit être défini si `hosted` a la valeur `true` . |
+| `env`     | Variables d’environnement à fournir au processus lancé. Applicable uniquement si `hosted` a la valeur `true` . |
+
+### <a name="example-launch-configurations"></a>Exemples de configurations de lancement
+
+#### <a name="launch-and-debug-a-standalone-blazor-webassembly-app"></a>Lancer et déboguer une Blazor application Webassembly autonome
+
+```json
+{
+  "type": "blazorwasm",
+  "request": "launch",
+  "name": "Launch and Debug"
+}
+```
+
+#### <a name="attach-to-a-running-app-at-a-specified-url"></a>Attacher à une application en cours d’exécution à une URL spécifiée
+
+```json
+{
+  "type": "blazorwasm",
+  "request": "attach",
+  "name": "Attach and Debug",
+  "url": "http://localhost:5000"
+}
+```
+
+#### <a name="launch-and-debug-a-hosted-blazor-webassembly-app"></a>Lancer et déboguer une Blazor application Webassembly hébergée
+
+```json
+{
+  "type": "blazorwasm",
+  "request": "launch",
+  "name": "Launch and Debug Hosted App",
+  "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/MyHostedApp.Server.dll",
+  "cwd": "${workspaceFolder}"
+}
+```
 
 ## <a name="debug-in-the-browser"></a>Déboguer dans le navigateur
 
