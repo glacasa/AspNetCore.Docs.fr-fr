@@ -113,7 +113,7 @@ Les options suivantes sont disponibles pour la commande `libman init` :
 
 * `-d|--default-destination <PATH>`
 
-  Chemin d’accès relatif au dossier actif. Les fichiers de bibliothèque sont installés à cet emplacement `destination` si aucune propriété n’est définie pour une bibliothèque dans *Libman. JSON*. La `<PATH>` valeur est écrite dans la `defaultDestination` propriété de *Libman. JSON*.
+  Chemin d’accès relatif au dossier actif. Les fichiers de bibliothèque sont installés à cet emplacement si aucune `destination` propriété n’est définie pour une bibliothèque dans *Libman. JSON*. La `<PATH>` valeur est écrite dans la `defaultDestination` propriété de *Libman. JSON*.
 
 * `-p|--default-provider <PROVIDER>`
 
@@ -134,7 +134,7 @@ Pour créer un fichier *Libman. JSON* dans un projet ASP.net Core :
   libman init
   ```
 
-* Tapez le nom du fournisseur par défaut ou appuyez `Enter` sur pour utiliser le fournisseur CDNJS par défaut. Les valeurs valides sont les suivantes :
+* Tapez le nom du fournisseur par défaut ou appuyez sur `Enter` pour utiliser le fournisseur CDNJS par défaut. Les valeurs valides sont les suivantes :
 
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
@@ -165,7 +165,7 @@ libman install [-h|--help]
 
 `LIBRARY`
 
-Nom de la bibliothèque à installer. Ce nom peut inclure la notation du numéro de version ( `@1.2.0`par exemple,).
+Nom de la bibliothèque à installer. Ce nom peut inclure la notation du numéro de version (par exemple, `@1.2.0` ).
 
 ### <a name="options"></a>Options
 
@@ -177,7 +177,7 @@ Les options suivantes sont disponibles pour la commande `libman install` :
 
 * `--files <FILE>`
 
-  Spécifiez le nom du fichier à installer à partir de la bibliothèque. S’il n’est pas spécifié, tous les fichiers de la bibliothèque sont installés. Fournissez `--files` une option par fichier à installer. Les chemins d’accès relatifs sont également pris en charge. Par exemple : `--files dist/browser/signalr.js`.
+  Spécifiez le nom du fichier à installer à partir de la bibliothèque. S’il n’est pas spécifié, tous les fichiers de la bibliothèque sont installés. Fournissez une `--files` option par fichier à installer. Les chemins d’accès relatifs sont également pris en charge. Par exemple : `--files dist/browser/signalr.js`.
 
 * `-p|--provider <PROVIDER>`
 
@@ -185,7 +185,7 @@ Les options suivantes sont disponibles pour la commande `libman install` :
   
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-  S’il n’est pas `defaultProvider` spécifié, la propriété dans *Libman. JSON* est utilisée. Si aucune `defaultProvider` propriété n’est spécifiée dans *Libman. JSON*, cette option est requise.
+  S’il n’est pas spécifié, la `defaultProvider` propriété dans *Libman. JSON* est utilisée. Si aucune `defaultProvider` propriété n’est spécifiée dans *Libman. JSON*, cette option est requise.
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
@@ -225,7 +225,7 @@ Le fichier *Libman. JSON* ressemble à ce qui suit :
 }
 ```
 
-Pour installer les fichiers *Calendar. js* et *Calendar. CSS* à partir de *C\\:\\ \\Temp contosoCalendar* à l’aide du fournisseur de système de fichiers :
+Pour installer les fichiers *Calendar. js* et *Calendar. CSS* à partir de *C : \\ temp \\ contosoCalendar \\ * à l’aide du fournisseur de système de fichiers :
 
   ```console
   libman install C:\temp\contosoCalendar\ --provider filesystem --files calendar.js --files calendar.css
@@ -233,8 +233,8 @@ Pour installer les fichiers *Calendar. js* et *Calendar. CSS* à partir de *C\\:
 
 L’invite suivante s’affiche pour deux raisons :
 
-* Le fichier *Libman. JSON* ne contient pas `defaultDestination` de propriété.
-* La `libman install` commande ne contient pas `-d|--destination` l’option.
+* Le fichier *Libman. JSON* ne contient pas de `defaultDestination` propriété.
+* La `libman install` commande ne contient pas l' `-d|--destination` option.
 
 ![commande d’installation de Libman-destination](_static/libman-install-destination.png)
 
@@ -270,8 +270,8 @@ Après avoir accepté la destination par défaut, le fichier *Libman. JSON* ress
 La `libman restore` commande installe les fichiers de bibliothèque définis dans *Libman. JSON*. Les règles suivantes s’appliquent :
 
 * S’il n’existe aucun fichier *Libman. JSON* dans la racine du projet, une erreur est retournée.
-* Si une bibliothèque spécifie un fournisseur, `defaultProvider` la propriété dans *Libman. JSON* est ignorée.
-* Si une bibliothèque spécifie une destination, `defaultDestination` la propriété dans *Libman. JSON* est ignorée.
+* Si une bibliothèque spécifie un fournisseur, la `defaultProvider` propriété dans *Libman. JSON* est ignorée.
+* Si une bibliothèque spécifie une destination, la `defaultDestination` propriété dans *Libman. JSON* est ignorée.
 
 ### <a name="synopsis"></a>Synopsis
 
@@ -321,7 +321,7 @@ libman clean
 
 ## <a name="uninstall-library-files"></a>Désinstaller les fichiers de bibliothèque
 
-`libman uninstall` Commande :
+`libman uninstall`Commande :
 
 * Supprime tous les fichiers associés à la bibliothèque spécifiée à partir de la destination dans *Libman. JSON*.
 * Supprime la configuration de bibliothèque associée de *Libman. JSON*.
@@ -344,7 +344,7 @@ libman uninstall [-h|--help]
 
 `LIBRARY`
 
-Nom de la bibliothèque à désinstaller. Ce nom peut inclure la notation du numéro de version ( `@1.2.0`par exemple,).
+Nom de la bibliothèque à désinstaller. Ce nom peut inclure la notation du numéro de version (par exemple, `@1.2.0` ).
 
 ### <a name="options"></a>Options
 
@@ -368,7 +368,7 @@ Prenons le fichier *Libman. JSON* suivant :
   libman uninstall jquery@3.3.1
   ```
 
-* Pour désinstaller les fichiers Lodash installés via `filesystem` le fournisseur :
+* Pour désinstaller les fichiers Lodash installés via le `filesystem` fournisseur :
 
   ```console
   libman uninstall C:\temp\lodash\
@@ -552,7 +552,7 @@ Les options suivantes sont disponibles pour la commande `libman cache` :
   libman cache clean cdnjs
   ```
 
-  Une fois le cache du fournisseur CDNJS vidé, `libman cache list` la commande affiche ce qui suit :
+  Une fois le cache du fournisseur CDNJS vidé, la `libman cache list` commande affiche ce qui suit :
 
   ```console
   Cache contents:
@@ -571,7 +571,7 @@ Les options suivantes sont disponibles pour la commande `libman cache` :
   libman cache clean
   ```
 
-  Après avoir vidé tous les caches de fournisseur `libman cache list` , la commande affiche ce qui suit :
+  Après avoir vidé tous les caches de fournisseur, la `libman cache list` commande affiche ce qui suit :
 
   ```console
   Cache contents:

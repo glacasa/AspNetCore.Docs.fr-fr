@@ -29,13 +29,13 @@ Par [Glenn Condron](https://github.com/glennc), [Ryan Nowak](https://github.com/
 Une <xref:System.Net.Http.IHttpClientFactory> peut être inscrite et utilisée pour configurer et créer des instances de <xref:System.Net.Http.HttpClient> dans une application. `IHttpClientFactory`offre les avantages suivants :
 
 * Fournit un emplacement central pour le nommage et la configuration d’instance de `HttpClient` logiques. Par exemple, un client nommé *GitHub* peut être inscrit et configuré pour accéder à [GitHub](https://github.com/). Un client par défaut peut être inscrit pour un accès général.
-* Codifie le concept d’intergiciel (middleware) sortant via la délégation de gestionnaires `HttpClient`dans. Fournit des extensions pour l’intergiciel (middleware) basé sur Polly pour tirer parti des gestionnaires de `HttpClient`délégation dans.
-* Gère le regroupement et la durée de vie `HttpClientMessageHandler` des instances sous-jacentes. La gestion automatique évite les problèmes courants liés au DNS (Domain Name System) qui se `HttpClient` produisent lors de la gestion manuelle des durées de vie.
+* Codifie le concept d’intergiciel (middleware) sortant via la délégation de gestionnaires dans `HttpClient` . Fournit des extensions pour l’intergiciel (middleware) basé sur Polly pour tirer parti des gestionnaires de délégation dans `HttpClient` .
+* Gère le regroupement et la durée de vie des instances sous-jacentes `HttpClientMessageHandler` . La gestion automatique évite les problèmes courants liés au DNS (Domain Name System) qui se produisent lors de la gestion manuelle des `HttpClient` durées de vie.
 * Ajoute une expérience de journalisation configurable (via `ILogger`) pour toutes les requêtes envoyées via des clients créés par la fabrique.
 
 [Affichez ou téléchargez un exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample)).
 
-L’exemple de code de cette rubrique utilise <xref:System.Text.Json> pour désérialiser le contenu JSON renvoyé dans les réponses http. Pour obtenir des exemples `Json.NET` qui `ReadAsAsync<T>`utilisent et, utilisez le sélecteur de version pour sélectionner une version 2. x de cette rubrique.
+L’exemple de code de cette rubrique utilise <xref:System.Text.Json> pour désérialiser le contenu JSON renvoyé dans les réponses http. Pour obtenir des exemples qui utilisent `Json.NET` et `ReadAsAsync<T>` , utilisez le sélecteur de version pour sélectionner une version 2. x de cette rubrique.
 
 ## <a name="consumption-patterns"></a>Modèles de consommation
 
@@ -50,7 +50,7 @@ La meilleure approche dépend des exigences de l’application.
 
 ### <a name="basic-usage"></a>Utilisation de base
 
-`IHttpClientFactory`peut être inscrit en appelant `AddHttpClient`:
+`IHttpClientFactory`peut être inscrit en appelant `AddHttpClient` :
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet1)]
 
@@ -58,32 +58,32 @@ Un `IHttpClientFactory` peut être demandé à l’aide [de l’injection de dé
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Pages/BasicUsage.cshtml.cs?name=snippet1&highlight=9-12,21)]
 
-L' `IHttpClientFactory` utilisation de like dans l’exemple précédent est un bon moyen de refactoriser une application existante. Elle n’a aucun impact sur `HttpClient` la façon dont est utilisé. Dans les emplacements `HttpClient` où les instances sont créées dans une application existante, remplacez-les par des <xref:System.Net.Http.IHttpClientFactory.CreateClient*>appels à.
+L’utilisation `IHttpClientFactory` de like dans l’exemple précédent est un bon moyen de refactoriser une application existante. Elle n’a aucun impact sur la façon dont `HttpClient` est utilisé. Dans les emplacements où les `HttpClient` instances sont créées dans une application existante, remplacez-les par des appels à <xref:System.Net.Http.IHttpClientFactory.CreateClient*> .
 
 ### <a name="named-clients"></a>Clients nommés
 
 Les clients nommés sont un bon choix lorsque :
 
-* L’application requiert de nombreuses utilisations distinctes `HttpClient`de.
-* De `HttpClient`nombreux s ont une configuration différente.
+* L’application requiert de nombreuses utilisations distinctes de `HttpClient` .
+* De nombreux `HttpClient` s ont une configuration différente.
 
-La configuration d’un `HttpClient` nom peut être spécifiée lors de `Startup.ConfigureServices`l’inscription dans :
+La configuration d’un nom `HttpClient` peut être spécifiée lors de l’inscription dans `Startup.ConfigureServices` :
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet2)]
 
 Dans le code précédent, le client est configuré avec :
 
-* Adresse `https://api.github.com/`de base.
+* Adresse de base `https://api.github.com/` .
 * Deux en-têtes nécessaires à l’utilisation de l’API GitHub.
 
 #### <a name="createclient"></a>CreateClient
 
-Chaque fois <xref:System.Net.Http.IHttpClientFactory.CreateClient*> que est appelé :
+Chaque fois que <xref:System.Net.Http.IHttpClientFactory.CreateClient*> est appelé :
 
 * Une nouvelle instance de `HttpClient` est créée.
 * L’action de configuration est appelée.
 
-Pour créer un client nommé, transmettez son nom `CreateClient`à :
+Pour créer un client nommé, transmettez son nom à `CreateClient` :
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Pages/NamedClient.cshtml.cs?name=snippet1&highlight=21)]
 
@@ -110,7 +110,7 @@ Dans le code précédent :
 * La configuration est déplacée vers le client typé.
 * L’objet `HttpClient` est exposé en tant que propriété publique.
 
-Vous pouvez créer des méthodes spécifiques à l’API `HttpClient` qui exposent les fonctionnalités. Par exemple, la `GetAspNetDocsIssues` méthode encapsule du code pour récupérer des problèmes ouverts.
+Vous pouvez créer des méthodes spécifiques à l’API qui exposent les `HttpClient` fonctionnalités. Par exemple, la `GetAspNetDocsIssues` méthode encapsule du code pour récupérer des problèmes ouverts.
 
 Le code suivant appelle <xref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient*> dans `Startup.ConfigureServices` pour inscrire une classe de client typée :
 
@@ -119,21 +119,21 @@ Le code suivant appelle <xref:Microsoft.Extensions.DependencyInjection.HttpClien
 Le client typé est inscrit comme étant transitoire avec injection de dépendances. Dans le code précédent, `AddHttpClient` s’inscrit `GitHubService` en tant que service temporaire. Cette inscription utilise une méthode de fabrique pour :
 
 1. Créez une instance de `HttpClient`.
-1. Crée une instance de `GitHubService`, en passant l’instance de `HttpClient` à son constructeur.
+1. Crée une instance de `GitHubService` , en passant l’instance de `HttpClient` à son constructeur.
 
 Le client typé peut être injecté et utilisé directement :
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Pages/TypedClient.cshtml.cs?name=snippet1&highlight=11-14,20)]
 
-La configuration d’un client typé peut être spécifiée lors de l' `Startup.ConfigureServices`inscription dans, plutôt que dans le constructeur du client typé :
+La configuration d’un client typé peut être spécifiée lors de l’inscription dans `Startup.ConfigureServices` , plutôt que dans le constructeur du client typé :
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet4)]
 
-`HttpClient` Peut être encapsulé dans un client typé. Au lieu de l’exposer en tant que propriété, définissez une méthode qui appelle `HttpClient` l’instance en interne :
+`HttpClient`Peut être encapsulé dans un client typé. Au lieu de l’exposer en tant que propriété, définissez une méthode qui appelle l' `HttpClient` instance en interne :
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/GitHub/RepoService.cs?name=snippet1&highlight=4)]
 
-Dans le code précédent, le `HttpClient` est stocké dans un champ privé. L’accès à `HttpClient` est par la méthode `GetRepos` publique.
+Dans le code précédent, le `HttpClient` est stocké dans un champ privé. L’accès à `HttpClient` est par la `GetRepos` méthode publique.
 
 ### <a name="generated-clients"></a>Clients générés
 
@@ -207,14 +207,14 @@ public class ValuesController : ControllerBase
 
 Pour créer un gestionnaire de délégation :
 
-* Dériver <xref:System.Net.Http.DelegatingHandler>de.
+* Dériver de <xref:System.Net.Http.DelegatingHandler> .
 * Substituez <xref:System.Net.Http.DelegatingHandler.SendAsync*> Exécutez le code avant de passer la requête au gestionnaire suivant dans le pipeline :
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Handlers/ValidateHeaderHandler.cs?name=snippet1)]
 
 Le code précédent vérifie si l' `X-API-KEY` en-tête est dans la demande. Si `X-API-KEY` est manquant, <xref:System.Net.HttpStatusCode.BadRequest> est retourné.
 
-Plusieurs gestionnaires peuvent être ajoutés à la configuration d’un `HttpClient` avec : <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*?displayProperty=fullName>
+Plusieurs gestionnaires peuvent être ajoutés à la configuration d’un `HttpClient` avec <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*?displayProperty=fullName> :
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup2.cs?name=snippet1)]
 
@@ -246,7 +246,7 @@ Les erreurs se produisent généralement lorsque les appels HTTP externes sont t
 * HTTP 5xx
 * HTTP 408
 
-`AddTransientHttpErrorPolicy`fournit l’accès à `PolicyBuilder` un objet configuré pour gérer les erreurs qui représentent une erreur temporaire possible :
+`AddTransientHttpErrorPolicy`fournit l’accès à un `PolicyBuilder` objet configuré pour gérer les erreurs qui représentent une erreur temporaire possible :
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup3.cs?name=snippet1)]
 
@@ -254,7 +254,7 @@ Dans le code précédent, une stratégie `WaitAndRetryAsync` est définie. Les r
 
 ### <a name="dynamically-select-policies"></a>Sélectionner dynamiquement des stratégies
 
-Les méthodes d’extension sont fournies pour ajouter des gestionnaires basés sur Polly, par <xref:Microsoft.Extensions.DependencyInjection.PollyHttpClientBuilderExtensions.AddPolicyHandler*>exemple,. La surcharge `AddPolicyHandler` suivante inspecte la demande pour décider de la stratégie à appliquer :
+Les méthodes d’extension sont fournies pour ajouter des gestionnaires basés sur Polly, par exemple, <xref:Microsoft.Extensions.DependencyInjection.PollyHttpClientBuilderExtensions.AddPolicyHandler*> . La `AddPolicyHandler` surcharge suivante inspecte la demande pour décider de la stratégie à appliquer :
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet8)]
 
@@ -283,7 +283,7 @@ Dans le code suivant :
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup4.cs?name=snippet1)]
 
-Pour plus d’informations `IHttpClientFactory` sur les intégrations de et de Polly, consultez le [wiki Polly](https://github.com/App-vNext/Polly/wiki/Polly-and-HttpClientFactory).
+Pour plus d’informations sur `IHttpClientFactory` les intégrations de et de Polly, consultez le [wiki Polly](https://github.com/App-vNext/Polly/wiki/Polly-and-HttpClientFactory).
 
 ## <a name="httpclient-and-lifetime-management"></a>HttpClient et gestion de la durée de vie
 
@@ -303,25 +303,25 @@ Le fait de conserver une seule instance `HttpClient` active pendant une longue d
 
 ### <a name="alternatives-to-ihttpclientfactory"></a>Alternatives à IHttpClientFactory
 
-L' `IHttpClientFactory` utilisation de dans une application di-Enabled évite les opérations suivantes :
+L’utilisation `IHttpClientFactory` de dans une application di-Enabled évite les opérations suivantes :
 
-* Problèmes d’épuisement des ressources par `HttpMessageHandler` les instances de regroupement.
-* Problèmes DNS périmés par `HttpMessageHandler` les instances cycliques à intervalles réguliers.
+* Problèmes d’épuisement des ressources par les instances de regroupement `HttpMessageHandler` .
+* Problèmes DNS périmés par les instances cycliques `HttpMessageHandler` à intervalles réguliers.
 
-Il existe d’autres façons de résoudre les problèmes précédents à l’aide d' <xref:System.Net.Http.SocketsHttpHandler> une instance de longue durée.
+Il existe d’autres façons de résoudre les problèmes précédents à l’aide d’une instance de longue durée <xref:System.Net.Http.SocketsHttpHandler> .
 
 - Créez une instance de `SocketsHttpHandler` lorsque l’application démarre et utilisez-la pendant toute la durée de vie de l’application.
 - Configurez <xref:System.Net.Http.SocketsHttpHandler.PooledConnectionLifetime> avec une valeur appropriée en fonction des temps d’actualisation DNS.
-- Créez `HttpClient` des instances `new HttpClient(handler, disposeHandler: false)` en utilisant si nécessaire.
+- Créez des `HttpClient` instances en utilisant `new HttpClient(handler, disposeHandler: false)` si nécessaire.
 
-Les approches précédentes résolvent les problèmes de gestion `IHttpClientFactory` des ressources qui sont résolus de la même façon.
+Les approches précédentes résolvent les problèmes de gestion des ressources qui sont `IHttpClientFactory` résolus de la même façon.
 
-- Le `SocketsHttpHandler` partage les connexions `HttpClient` entre les instances. Ce partage empêche l’épuisement des sockets.
-- Le `SocketsHttpHandler` cycle des connexions en `PooledConnectionLifetime` fonction de pour éviter les problèmes DNS périmés.
+- Le `SocketsHttpHandler` partage les connexions entre les `HttpClient` instances. Ce partage empêche l’épuisement des sockets.
+- Le `SocketsHttpHandler` cycle des connexions en fonction de `PooledConnectionLifetime` pour éviter les problèmes DNS périmés.
 
 ### <a name="cookies"></a>Cookies
 
-Les `HttpMessageHandler` instances regroupées entraînent le partage des `CookieContainer` objets. Le partage `CookieContainer` d’objets imprévus aboutit souvent à un code incorrect. Pour les applications qui nécessitent des cookies, utilisez l’une des deux opérations suivantes :
+Les instances regroupées `HttpMessageHandler` entraînent le `CookieContainer` partage des objets. Le `CookieContainer` partage d’objets imprévus aboutit souvent à un code incorrect. Pour les applications qui nécessitent des cookies, utilisez l’une des deux opérations suivantes :
 
  - Désactivation de la gestion automatique des cookies
  - Éviter`IHttpClientFactory`
@@ -370,7 +370,7 @@ Dans l’exemple suivant :
 La propagation d’en-tête est un intergiciel (middleware) ASP.NET Core pour propager les en-têtes HTTP de la requête entrante vers les demandes du client HTTP sortantes. Pour utiliser la propagation d’en-tête :
 
 * Référencez le package [Microsoft. AspNetCore. HeaderPropagation](https://www.nuget.org/packages/Microsoft.AspNetCore.HeaderPropagation) .
-* Configurer l’intergiciel et `HttpClient` dans : `Startup`
+* Configurer l’intergiciel et `HttpClient` dans `Startup` :
 
   [!code-csharp[](http-requests/samples/3.x/Startup.cs?highlight=5-9,21&name=snippet)]
 
@@ -540,7 +540,7 @@ Pour créer un gestionnaire, définissez une classe dérivant de <xref:System.Ne
 
 Le code précédent définit un gestionnaire de base. Il vérifie si un en-tête `X-API-KEY` a été inclus dans la requête. Si l’en-tête est manquant, il peut éviter l’appel HTTP et retourner une réponse appropriée.
 
-Au cours de l’inscription, un ou plusieurs gestionnaires peuvent être ajoutés à la configuration `HttpClient`d’un. Cette tâche est accomplie via des méthodes d’extension sur le <xref:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder>.
+Au cours de l’inscription, un ou plusieurs gestionnaires peuvent être ajoutés à la configuration d’un `HttpClient` . Cette tâche est accomplie via des méthodes d’extension sur le <xref:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder>.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet5)]
 
@@ -621,25 +621,25 @@ Le fait de conserver une seule instance `HttpClient` active pendant une longue d
 
 ### <a name="alternatives-to-ihttpclientfactory"></a>Alternatives à IHttpClientFactory
 
-L' `IHttpClientFactory` utilisation de dans une application di-Enabled évite les opérations suivantes :
+L’utilisation `IHttpClientFactory` de dans une application di-Enabled évite les opérations suivantes :
 
-* Problèmes d’épuisement des ressources par `HttpMessageHandler` les instances de regroupement.
-* Problèmes DNS périmés par `HttpMessageHandler` les instances cycliques à intervalles réguliers.
+* Problèmes d’épuisement des ressources par les instances de regroupement `HttpMessageHandler` .
+* Problèmes DNS périmés par les instances cycliques `HttpMessageHandler` à intervalles réguliers.
 
-Il existe d’autres façons de résoudre les problèmes précédents à l’aide d' <xref:System.Net.Http.SocketsHttpHandler> une instance de longue durée.
+Il existe d’autres façons de résoudre les problèmes précédents à l’aide d’une instance de longue durée <xref:System.Net.Http.SocketsHttpHandler> .
 
 - Créez une instance de `SocketsHttpHandler` lorsque l’application démarre et utilisez-la pendant toute la durée de vie de l’application.
 - Configurez <xref:System.Net.Http.SocketsHttpHandler.PooledConnectionLifetime> avec une valeur appropriée en fonction des temps d’actualisation DNS.
-- Créez `HttpClient` des instances `new HttpClient(handler, disposeHandler: false)` en utilisant si nécessaire.
+- Créez des `HttpClient` instances en utilisant `new HttpClient(handler, disposeHandler: false)` si nécessaire.
 
-Les approches précédentes résolvent les problèmes de gestion `IHttpClientFactory` des ressources qui sont résolus de la même façon.
+Les approches précédentes résolvent les problèmes de gestion des ressources qui sont `IHttpClientFactory` résolus de la même façon.
 
-- Le `SocketsHttpHandler` partage les connexions `HttpClient` entre les instances. Ce partage empêche l’épuisement des sockets.
-- Le `SocketsHttpHandler` cycle des connexions en `PooledConnectionLifetime` fonction de pour éviter les problèmes DNS périmés.
+- Le `SocketsHttpHandler` partage les connexions entre les `HttpClient` instances. Ce partage empêche l’épuisement des sockets.
+- Le `SocketsHttpHandler` cycle des connexions en fonction de `PooledConnectionLifetime` pour éviter les problèmes DNS périmés.
 
 ### <a name="cookies"></a>Cookies
 
-Les `HttpMessageHandler` instances regroupées entraînent le partage des `CookieContainer` objets. Le partage `CookieContainer` d’objets imprévus aboutit souvent à un code incorrect. Pour les applications qui nécessitent des cookies, utilisez l’une des deux opérations suivantes :
+Les instances regroupées `HttpMessageHandler` entraînent le `CookieContainer` partage des objets. Le `CookieContainer` partage d’objets imprévus aboutit souvent à un code incorrect. Pour les applications qui nécessitent des cookies, utilisez l’une des deux opérations suivantes :
 
  - Désactivation de la gestion automatique des cookies
  - Éviter`IHttpClientFactory`
@@ -845,7 +845,7 @@ Pour créer un gestionnaire, définissez une classe dérivant de <xref:System.Ne
 
 Le code précédent définit un gestionnaire de base. Il vérifie si un en-tête `X-API-KEY` a été inclus dans la requête. Si l’en-tête est manquant, il peut éviter l’appel HTTP et retourner une réponse appropriée.
 
-Au cours de l’inscription, un ou plusieurs gestionnaires peuvent être ajoutés à la configuration `HttpClient`d’un. Cette tâche est accomplie via des méthodes d’extension sur le <xref:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder>.
+Au cours de l’inscription, un ou plusieurs gestionnaires peuvent être ajoutés à la configuration d’un `HttpClient` . Cette tâche est accomplie via des méthodes d’extension sur le <xref:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder>.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet5)]
 
@@ -929,25 +929,25 @@ Le fait de conserver une seule instance `HttpClient` active pendant une longue d
 
 ### <a name="alternatives-to-ihttpclientfactory"></a>Alternatives à IHttpClientFactory
 
-L' `IHttpClientFactory` utilisation de dans une application di-Enabled évite les opérations suivantes :
+L’utilisation `IHttpClientFactory` de dans une application di-Enabled évite les opérations suivantes :
 
-* Problèmes d’épuisement des ressources par `HttpMessageHandler` les instances de regroupement.
-* Problèmes DNS périmés par `HttpMessageHandler` les instances cycliques à intervalles réguliers.
+* Problèmes d’épuisement des ressources par les instances de regroupement `HttpMessageHandler` .
+* Problèmes DNS périmés par les instances cycliques `HttpMessageHandler` à intervalles réguliers.
 
-Il existe d’autres façons de résoudre les problèmes précédents à l’aide d' <xref:System.Net.Http.SocketsHttpHandler> une instance de longue durée.
+Il existe d’autres façons de résoudre les problèmes précédents à l’aide d’une instance de longue durée <xref:System.Net.Http.SocketsHttpHandler> .
 
 - Créez une instance de `SocketsHttpHandler` lorsque l’application démarre et utilisez-la pendant toute la durée de vie de l’application.
 - Configurez <xref:System.Net.Http.SocketsHttpHandler.PooledConnectionLifetime> avec une valeur appropriée en fonction des temps d’actualisation DNS.
-- Créez `HttpClient` des instances `new HttpClient(handler, disposeHandler: false)` en utilisant si nécessaire.
+- Créez des `HttpClient` instances en utilisant `new HttpClient(handler, disposeHandler: false)` si nécessaire.
 
-Les approches précédentes résolvent les problèmes de gestion `IHttpClientFactory` des ressources qui sont résolus de la même façon.
+Les approches précédentes résolvent les problèmes de gestion des ressources qui sont `IHttpClientFactory` résolus de la même façon.
 
-- Le `SocketsHttpHandler` partage les connexions `HttpClient` entre les instances. Ce partage empêche l’épuisement des sockets.
-- Le `SocketsHttpHandler` cycle des connexions en `PooledConnectionLifetime` fonction de pour éviter les problèmes DNS périmés.
+- Le `SocketsHttpHandler` partage les connexions entre les `HttpClient` instances. Ce partage empêche l’épuisement des sockets.
+- Le `SocketsHttpHandler` cycle des connexions en fonction de `PooledConnectionLifetime` pour éviter les problèmes DNS périmés.
 
 ### <a name="cookies"></a>Cookies
 
-Les `HttpMessageHandler` instances regroupées entraînent le partage des `CookieContainer` objets. Le partage `CookieContainer` d’objets imprévus aboutit souvent à un code incorrect. Pour les applications qui nécessitent des cookies, utilisez l’une des deux opérations suivantes :
+Les instances regroupées `HttpMessageHandler` entraînent le `CookieContainer` partage des objets. Le `CookieContainer` partage d’objets imprévus aboutit souvent à un code incorrect. Pour les applications qui nécessitent des cookies, utilisez l’une des deux opérations suivantes :
 
  - Désactivation de la gestion automatique des cookies
  - Éviter`IHttpClientFactory`
@@ -997,7 +997,7 @@ La propagation d’en-tête est un intergiciel (middleware) pris en charge par l
 
 * Référencez le port de la communauté pris en charge du package [HeaderPropagation](https://www.nuget.org/packages/HeaderPropagation). ASP.NET Core 3,1 et versions ultérieures prennent en charge [Microsoft. AspNetCore. HeaderPropagation](https://www.nuget.org/packages/Microsoft.AspNetCore.HeaderPropagation).
 
-* Configurer l’intergiciel et `HttpClient` dans : `Startup`
+* Configurer l’intergiciel et `HttpClient` dans `Startup` :
 
   [!code-csharp[](http-requests/samples/2.x/Startup21.cs?highlight=5-9,25&name=snippet)]
 

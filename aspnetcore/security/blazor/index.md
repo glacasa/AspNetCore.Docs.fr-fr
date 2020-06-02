@@ -1,11 +1,11 @@
 ---
-titre : « ASP.NET Core Blazor l’authentification et l’autorisation » auteur : Description : « en savoir plus sur Blazor les scénarios d’authentification et d’autorisation ».
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+titre : « ASP.NET Core Blazor l’authentification et l’autorisation » auteur : guardrex Description : « en savoir plus sur Blazor les scénarios d’authentification et d’autorisation ».
+monikerRange : ' >= aspnetcore-3,1 'ms. Author : Riande ms. Custom : MVC ms. Date : 05/19/2020 No-Loc :
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRUID : 
+- ' SignalR 'UID : Security/éblouissant/index
 
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>BlazorAuthentification et autorisation ASP.net Core
@@ -454,14 +454,6 @@ Si l’application est requise pour vérifier les règles d’autorisation dans 
 > ```
 >
 > Ces espaces de noms peuvent être fournis globalement en les ajoutant au fichier *_Imports. Razor* de l’application.
-
-## <a name="authorization-in-blazor-webassembly-apps"></a>Autorisation dans les Blazor applications Webassembly
-
-Dans Blazor les applications Webassembly, les vérifications d’autorisation peuvent être ignorées, car tout le code côté client peut être modifié par les utilisateurs. Cela vaut également pour toutes les technologies d’application côté client, y compris les infrastructures d’application JavaScript SPA ou les applications natives pour n’importe quel système d’exploitation.
-
-**Effectuez toujours les vérifications d’autorisation sur le serveur au sein des points de terminaison de l’API auxquels votre application côté client accède.**
-
-Pour plus d’informations, consultez les articles sous <xref:security/blazor/webassembly/index> .
 
 ## <a name="troubleshoot-errors"></a>Résoudre les erreurs
 

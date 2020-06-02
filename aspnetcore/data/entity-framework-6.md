@@ -73,10 +73,10 @@ Vous pouvez créer cet exemple à partir de zéro dans Visual Studio en effectua
 
 * Créez une solution.
 
-* **Ajouter** > **une nouvelle** > application Web Project > **ASP.net Core** **Web**
+* **Ajouter**  >  **Nouveau projet**  >  **Web**  >  **Application Web ASP.net Core**
   * Dans la boîte de dialogue de sélection du modèle de projet, sélectionnez API et .NET Framework dans la liste déroulante
 
-* **Ajouter** > **un nouveau projet** > bibliothèque de classes du**Bureau** > Windows **(.NET Framework)**
+* **Ajouter**  >  **Nouveau projet**  >  **Bureau Windows**  >  **Bibliothèque de classes (.NET Framework)**
 
 * Dans la **Console du Gestionnaire de package** pour les deux projets, exécutez la commande `Install-Package Entityframework`.
 

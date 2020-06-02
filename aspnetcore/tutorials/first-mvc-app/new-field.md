@@ -41,7 +41,7 @@ Ajouter une propriété `Rating` à *Models/Movie.cs* :
 
 Générer l’application
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
  Ctrl+Maj+B
 
@@ -105,7 +105,7 @@ Plusieurs approches sont possibles pour résoudre l’erreur :
 
 Pour ce didacticiel, les migrations Code First sont utilisées.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Dans le menu **Outils**, sélectionnez **Gestionnaire de package NuGet > Console du gestionnaire de package**.
 
@@ -137,11 +137,11 @@ dotnet ef database update
 ---
 <!-- End of VS tabs -->
 
-Exécutez l’application et vérifiez que vous pouvez créer, modifier et afficher des films avec `Rating` un champ. Mettez à jour l’application :
+Exécutez l’application et vérifiez que vous pouvez créer, modifier et afficher des films avec un `Rating` champ. Mettez à jour l’application :
 
-* Ajoutez le `Rating` champ aux modèles `Edit`de `Details`vue, `Delete` et.
-* Mettez à jour la liaison dans la méthode d’action `MoviesController`de modification de.
+* Ajoutez le `Rating` champ aux `Edit` modèles de `Details` vue, et `Delete` .
+* Mettez à jour la liaison dans la méthode d’action de modification de `MoviesController` .
 
 > [!div class="step-by-step"]
-> [Précédent](search.md)
-> [suivant](validation.md)
+> [Précédent](search.md) 
+>  [Suivant](validation.md)

@@ -1,20 +1,88 @@
 ---
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : guardrex Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
+monikerRange : ' >= aspnetcore-3,1 'ms. Author : Riande ms. Custom : MVC ms. Date : 06/01/2020 No-Loc :
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRUID : 
+- « SignalR UID : Security/éblouissant/webassembly/supplémentaire-scénarios
 
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>Scénarios de sécurité supplémentaires pour l’ASP.NET Core Blazor Webassembly
 
-Par [Javier Calvarro Nelson](https://github.com/javiercn)
+Par [Javier Calvarro Nelson](https://github.com/javiercn) et [Luke Latham](https://github.com/guardrex)
 
 ## <a name="attach-tokens-to-outgoing-requests"></a>Attacher des jetons aux demandes sortantes
 
 Le <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> service peut être utilisé avec <xref:System.Net.Http.HttpClient> pour joindre des jetons d’accès aux demandes sortantes. Les jetons sont acquis à l’aide du <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> service existant. Si un jeton ne peut pas être acquis, une <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> exception est levée. <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException>dispose d’une <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> méthode qui peut être utilisée pour accéder au fournisseur d’identité de l’utilisateur afin d’acquérir un nouveau jeton. <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>Peut être configuré avec les URL, les portées et l’URL de retour autorisées à l’aide de la <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> méthode.
+
+Utilisez l’une des approches suivantes pour configurer un gestionnaire de messages pour les demandes sortantes :
+
+* [Classe AuthorizationMessageHandler personnalisée](#custom-authorizationmessagehandler-class) (*recommandée*)
+* [Configurer AuthorizationMessageHandler](#configure-authorizationmessagehandler)
+
+### <a name="custom-authorizationmessagehandler-class"></a>Classe AuthorizationMessageHandler personnalisée
+
+Dans l’exemple suivant, une classe personnalisée étend <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> qui peut être utilisée pour configurer un <xref:System.Net.Http.HttpClient> :
+
+```csharp
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+public class CustomAuthorizationMessageHandler : AuthorizationMessageHandler
+{
+    public CustomAuthorizationMessageHandler(IAccessTokenProvider provider, 
+        NavigationManager navigationManager)
+        : base(provider, navigationManager)
+    {
+        ConfigureHandler(
+            authorizedUrls: new[] { "https://www.example.com/base" },
+            scopes: new[] { "example.read", "example.write" });
+    }
+}
+```
+
+Dans `Program.Main` (*Program.cs*), un <xref:System.Net.Http.HttpClient> est configuré avec le gestionnaire de messages d’autorisation personnalisé :
+
+```csharp
+builder.Services.AddTransient<CustomAuthorizationMessageHandler>();
+
+builder.Services.AddHttpClient("ServerAPI",
+    client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+        .AddHttpMessageHandler<CustomAuthorizationMessageHandler>();
+```
+
+Le configuré <xref:System.Net.Http.HttpClient> est utilisé pour effectuer des demandes autorisées à l’aide du modèle [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) . Lorsque le client est créé avec <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> (package[Microsoft. extensions. http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) ), le <xref:System.Net.Http.HttpClient> est fourni par des instances qui incluent des jetons d’accès lors de l’exécution de requêtes à l’API serveur :
+
+```razor
+@inject IHttpClientFactory ClientFactory
+
+...
+
+@code {
+    private ExampleType[] examples;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var client = ClientFactory.CreateClient("ServerAPI");
+
+            examples = 
+                await client.GetFromJsonAsync<ExampleType[]>("{API METHOD}");
+
+            ...
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+        
+    }
+}
+```
+
+### <a name="configure-authorizationmessagehandler"></a>Configurer AuthorizationMessageHandler
 
 Dans l’exemple suivant, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> configure un <xref:System.Net.Http.HttpClient> en `Program.Main` (*Program.cs*) :
 
@@ -28,7 +96,7 @@ builder.Services.AddTransient(sp =>
 {
     return new HttpClient(sp.GetRequiredService<AuthorizationMessageHandler>()
         .ConfigureHandler(
-            new [] { "https://www.example.com/base" },
+            authorizedUrls: new [] { "https://www.example.com/base" },
             scopes: new[] { "example.read", "example.write" }))
         {
             BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
@@ -36,7 +104,7 @@ builder.Services.AddTransient(sp =>
 });
 ```
 
-Pour plus de commodité, une <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> est incluse et préconfigurée avec l’adresse de base de l’application en tant qu’URL autorisée. Les Blazor modèles Webassembly compatibles avec l’authentification utilisent désormais <xref:System.Net.Http.IHttpClientFactory> dans le projet d’API serveur pour configurer un <xref:System.Net.Http.HttpClient> avec les <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> éléments suivants :
+Pour plus de commodité, une <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> est incluse et préconfigurée avec l’adresse de base de l’application en tant qu’URL autorisée. Les Blazor modèles Webassembly compatibles avec l’authentification utilisent désormais <xref:System.Net.Http.IHttpClientFactory> (package[Microsoft. extensions. http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) ) dans le projet d’API serveur pour configurer un <xref:System.Net.Http.HttpClient> avec les <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> éléments suivants :
 
 ```csharp
 using System.Net.Http;
@@ -44,21 +112,19 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 ...
 
-builder.Services.AddHttpClient("BlazorWithIdentity.ServerAPI", 
+builder.Services.AddHttpClient("ServerAPI", 
     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
         .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
 builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
-    .CreateClient("BlazorWithIdentity.ServerAPI"));
+    .CreateClient("ServerAPI"));
 ```
 
 Dans le cas où le client est créé avec <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> dans l’exemple précédent, <xref:System.Net.Http.HttpClient> est fourni les instances qui incluent des jetons d’accès lors de l’exécution de demandes au projet serveur.
 
-Le configuré <xref:System.Net.Http.HttpClient> est ensuite utilisé pour effectuer des demandes autorisées à l’aide d’un modèle [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) simple.
+Le configuré <xref:System.Net.Http.HttpClient> est utilisé pour effectuer des demandes autorisées à l’aide du modèle [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) :
 
-`FetchData`composant (*pages/fetchData. Razor*) :
-
-```csharp
+```razor
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @inject HttpClient Client
 
@@ -66,10 +132,14 @@ Le configuré <xref:System.Net.Http.HttpClient> est ensuite utilisé pour effect
 
 protected override async Task OnInitializedAsync()
 {
+    private ExampleType[] examples;
+
     try
     {
-        forecasts = 
-            await Client.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+        examples = 
+            await Client.GetFromJsonAsync<ExampleType[]>("{API METHOD}");
+
+        ...
     }
     catch (AccessTokenNotAvailableException exception)
     {
@@ -171,7 +241,7 @@ builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient",
 
 L’inscription précédente s’ajoute à l’inscription par défaut sécurisée existante <xref:System.Net.Http.HttpClient> .
 
-Un composant crée le à <xref:System.Net.Http.HttpClient> partir du <xref:System.Net.Http.IHttpClientFactory> pour effectuer des demandes non authentifiées ou non autorisées :
+Un composant crée le <xref:System.Net.Http.HttpClient> à partir du <xref:System.Net.Http.IHttpClientFactory> package ([Microsoft. extensions. http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) ) pour effectuer des demandes non authentifiées ou non autorisées :
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -491,141 +561,16 @@ Au cours d’une opération d’authentification, il existe des cas où vous sou
 Par défaut, la bibliothèque [Microsoft. AspNetCore. Components. Webassembly. Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) utilise les itinéraires indiqués dans le tableau suivant pour représenter des États d’authentification différents.
 
 | Routage                            | Objectif |
-| ---
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
----------------- | titre de la--- : 'ASP.NET Core Blazor les scénarios de sécurité supplémentaires du Webassembly’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
----- | | `authentication/login`           | Déclenche une opération de connexion. | | `authentication/login-callback`  | Gère le résultat de toute opération de connexion. | | `authentication/login-failed`    | Affiche des messages d’erreur lorsque l’opération de connexion échoue pour une raison quelconque. | | `authentication/logout`          | Déclenche une opération de déconnexion. | | `authentication/logout-callback` | Gère le résultat d’une opération de déconnexion. | | `authentication/logout-failed`   | Affiche des messages d’erreur lorsque l’opération de déconnexion échoue pour une raison quelconque. | | `authentication/logged-out`      | Indique que l’utilisateur a réussi à se déconnecter. | | `authentication/profile`         | Déclenche une opération de modification du profil utilisateur. | | `authentication/register`        | Déclenche une opération pour inscrire un nouvel utilisateur. |
+| -------------------------------- | ------- |
+| `authentication/login`           | Déclenche une opération de connexion. |
+| `authentication/login-callback`  | Gère le résultat de toute opération de connexion. |
+| `authentication/login-failed`    | Affiche des messages d’erreur lorsque l’opération de connexion échoue pour une raison quelconque. |
+| `authentication/logout`          | Déclenche une opération de déconnexion. |
+| `authentication/logout-callback` | Gère le résultat d’une opération de déconnexion. |
+| `authentication/logout-failed`   | Affiche des messages d’erreur lorsque l’opération de déconnexion échoue pour une raison quelconque. |
+| `authentication/logged-out`      | Indique que l’utilisateur a réussi à se déconnecter. |
+| `authentication/profile`         | Déclenche une opération de modification du profil utilisateur. |
+| `authentication/register`        | Déclenche une opération pour inscrire un nouvel utilisateur. |
 
 Les itinéraires indiqués dans le tableau précédent sont configurables via <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions%601.AuthenticationPaths%2A?displayProperty=nameWithType> . Quand vous définissez des options pour fournir des itinéraires personnalisés, vérifiez que l’application a un itinéraire qui gère chaque chemin d’accès.
 
@@ -696,213 +641,16 @@ Si vous le souhaitez, vous avez la possibilité de scinder l’interface utilisa
 Le <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> a un fragment qui peut être utilisé par itinéraire d’authentification, comme indiqué dans le tableau suivant.
 
 | Routage                            | Fragment                |
-| ---
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
----------------- | titre de la--- : 'ASP.NET Core Blazor les scénarios de sécurité supplémentaires du Webassembly’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
------------- | | `authentication/login`           | `<LoggingIn>`           | | `authentication/login-callback`  | `<CompletingLoggingIn>` | | `authentication/login-failed`    | `<LogInFailed>`         | | `authentication/logout`          | `<LogOut>`              | | `authentication/logout-callback` | `<CompletingLogOut>`    | | `authentication/logout-failed`   | `<LogOutFailed>`        | | `authentication/logged-out`      | `<LogOutSucceeded>`     | | `authentication/profile`         | `<UserProfile>`         | | `authentication/register`        | `<Registering>`         |
+| -------------------------------- | ----------------------- |
+| `authentication/login`           | `<LoggingIn>`           |
+| `authentication/login-callback`  | `<CompletingLoggingIn>` |
+| `authentication/login-failed`    | `<LogInFailed>`         |
+| `authentication/logout`          | `<LogOut>`              |
+| `authentication/logout-callback` | `<CompletingLogOut>`    |
+| `authentication/logout-failed`   | `<LogOutFailed>`        |
+| `authentication/logged-out`      | `<LogOutSucceeded>`     |
+| `authentication/profile`         | `<UserProfile>`         |
+| `authentication/register`        | `<Registering>`         |
 
 ## <a name="customize-the-user"></a>Personnaliser l’utilisateur
 

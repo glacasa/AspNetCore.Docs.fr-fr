@@ -28,7 +28,7 @@ Les transformations du fichier *web.config* peuvent être appliquées automatiqu
 
 * [Configuration de build](#build-configuration)
 * [Profil](#profile)
-* [Environnement](#environment)
+* [Environment](#environment)
 * [Personnalisée](#custom)
 
 Ces transformations se produisent pour l’un des scénarios de génération *web.config* suivants :

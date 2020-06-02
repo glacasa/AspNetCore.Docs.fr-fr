@@ -1,11 +1,11 @@
 ---
-titre : « Secure ASP.NET Core Blazor Webassembly » auteur : Description : « Apprenez à sécuriser Blazor les applications WebAssemlby en tant qu’applications à page unique (spas). »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+titre : « Secure ASP.NET Core Blazor Webassembly » auteur : guardrex Description : « Découvrez comment sécuriser des applications Blazor WebAssemlby en tant qu’applications à page unique (spas). »
+monikerRange : ' >= aspnetcore-3,1 'ms. Author : Riande ms. Custom : MVC ms. Date : 06/01/2020 No-Loc :
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRUID : 
+- « SignalR UID : Security/éblouissant/webassembly/index
 
 ---
 # <a name="secure-aspnet-core-blazor-webassembly"></a>Sécuriser ASP.NET Core Blazor Webassembly
@@ -41,7 +41,19 @@ La bibliothèque [Microsoft. AspNetCore. Components. Webassembly. Authentication
 * Lorsque l' Blazor application Webassembly charge le point de terminaison de rappel de connexion ( `/authentication/login-callback` ), la réponse d’authentification est traitée.
   * Si le processus d’authentification se termine correctement, l’utilisateur est authentifié et éventuellement renvoyé à l’URL protégée d’origine que l’utilisateur a demandée.
   * Si le processus d’authentification échoue pour une raison quelconque, l’utilisateur est envoyé à la page Échec de la connexion ( `/authentication/login-failed` ) et une erreur s’affiche.
-  
+
+## <a name="authorization"></a>Autorisation
+
+Dans Blazor les applications Webassembly, les vérifications d’autorisation peuvent être ignorées, car tout le code côté client peut être modifié par les utilisateurs. Cela vaut également pour toutes les technologies d’application côté client, y compris les infrastructures d’application JavaScript SPA ou les applications natives pour n’importe quel système d’exploitation.
+
+**Effectuez toujours les vérifications d’autorisation sur le serveur au sein des points de terminaison de l’API auxquels votre application côté client accède.**
+
+## <a name="refresh-tokens"></a>Jetons d’actualisation
+
+Les jetons d’actualisation ne peuvent pas être sécurisés côté client dans les Blazor applications Webassembly. Par conséquent, les jetons d’actualisation ne doivent pas être envoyés à l’application pour une utilisation directe.
+
+Les jetons d’actualisation peuvent être conservés et utilisés par l’application côté serveur dans une Blazor solution Webassembly hébergée pour accéder aux API tierces. Pour plus d'informations, consultez <xref:security/blazor/webassembly/additional-scenarios#authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party>.
+
 ## <a name="implementation-guidance"></a>Conseils d’implémentation
 
 Les Articles de cette *vue d’ensemble* fournissent des informations sur l’authentification des utilisateurs dans les Blazor applications webassembly sur des fournisseurs spécifiques.

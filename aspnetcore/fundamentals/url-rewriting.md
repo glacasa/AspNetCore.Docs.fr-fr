@@ -179,7 +179,7 @@ Le caret (`^`) au début de l’expression signifie que la correspondance commen
 
 Dans l’exemple précédent avec la règle de redirection, `redirect-rule/(.*)`, il n’existe pas de caret (`^`) au début de l’expression régulière. Ainsi, n’importe quel caractère peut précéder `redirect-rule/` dans le chemin pour qu’une correspondance soit établie.
 
-| Path                               | Correspond |
+| Chemin d’accès                               | Correspond |
 | ---
 titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
 - 'Blazor'
@@ -304,7 +304,7 @@ titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms
 
 La règle de réécriture, `^rewrite-rule/(\d+)/(\d+)`, établit une correspondance uniquement avec des chemins d’accès s’ils commencent par `rewrite-rule/`. Dans le tableau suivant, notez la différence de correspondance.
 
-| Path                              | Correspond |
+| Chemin d’accès                              | Correspond |
 | ---
 titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
 - 'Blazor'
@@ -1356,7 +1356,7 @@ Le caret (`^`) au début de l’expression signifie que la correspondance commen
 
 Dans l’exemple précédent avec la règle de redirection, `redirect-rule/(.*)`, il n’existe pas de caret (`^`) au début de l’expression régulière. Ainsi, n’importe quel caractère peut précéder `redirect-rule/` dans le chemin pour qu’une correspondance soit établie.
 
-| Path                               | Correspond |
+| Chemin d’accès                               | Correspond |
 | ---
 titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
 - 'Blazor'
@@ -1481,7 +1481,7 @@ titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms
 
 La règle de réécriture, `^rewrite-rule/(\d+)/(\d+)`, établit une correspondance uniquement avec des chemins d’accès s’ils commencent par `rewrite-rule/`. Dans le tableau suivant, notez la différence de correspondance.
 
-| Path                              | Correspond |
+| Chemin d’accès                              | Correspond |
 | ---
 titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
 - 'Blazor'

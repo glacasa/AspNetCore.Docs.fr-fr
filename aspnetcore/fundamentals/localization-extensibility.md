@@ -24,7 +24,7 @@ ms.locfileid: "82774338"
 
 Par [Hisham Bin Ateya](https://github.com/hishamco)
 
-Cet article :
+Cet article :
 
 * Répertorie les points d’extensibilité sur les API de localisation.
 * Fournit des instructions sur la façon d’étendre la localisation des applications ASP.NET Core.

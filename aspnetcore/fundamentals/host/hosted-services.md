@@ -1,10 +1,11 @@
 ---
-titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+title : tâches en arrière-plan avec les services hébergés dans ASP.NET Core auteur : Rick-Anderson Description : Apprenez à implémenter des tâches en arrière-plan avec les services hébergés dans ASP.NET Core.
+monikerRange : ' >= aspnetcore-2,1 'ms. Author : Riande ms. Custom : MVC ms. Date : 02/10/2020 No-Loc :
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRUID : 
+- ' SignalR 'UID : notions de base/hôte/hébergé-services
 
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>Tâches d’arrière-plan avec des services hébergés dans ASP.NET Core
@@ -134,7 +135,7 @@ Les services sont inscrits dans `IHostBuilder.ConfigureServices` (*Program.cs*).
 
 ## <a name="queued-background-tasks"></a>Tâches d’arrière-plan en file d’attente
 
-Une file d’attente de tâches en arrière-plan est basée sur le .NET 4. x <xref:System.Web.Hosting.HostingEnvironment.QueueBackgroundWorkItem*> ([prévu provisoirement pour être intégré pour ASP.net Core](https://github.com/aspnet/Hosting/issues/1280)) :
+Une file d’attente de tâches en arrière-plan est basée sur .NET 4. x <xref:System.Web.Hosting.HostingEnvironment.QueueBackgroundWorkItem*> :
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/BackgroundTaskQueue.cs?name=snippet1)]
 

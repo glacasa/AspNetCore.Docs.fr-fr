@@ -243,7 +243,7 @@ OWIN dépend d’un objet `IDictionary<string,object>` pour communiquer des info
 
 ### <a name="request-data-owin-v100"></a>Données de requête (OWIN v1.0.0)
 
-| Clé               | Valeur (type) | Description |
+| Clé :               | Valeur (type) | Description |
 | ----------------- | ------------ | ----------- |
 | owin.RequestScheme | `String` |  |
 | owin.RequestMethod  | `String` | |    
@@ -256,13 +256,13 @@ OWIN dépend d’un objet `IDictionary<string,object>` pour communiquer des info
 
 ### <a name="request-data-owin-v110"></a>Données de requête (OWIN v1.1.0)
 
-| Clé               | Valeur (type) | Description |
+| Clé :               | Valeur (type) | Description |
 | ----------------- | ------------ | ----------- |
 | owin.RequestId | `String` | Facultatif |
 
 ### <a name="response-data-owin-v100"></a>Données de réponse (OWIN v1.0.0)
 
-| Clé               | Valeur (type) | Description |
+| Clé :               | Valeur (type) | Description |
 | ----------------- | ------------ | ----------- |
 | owin.ResponseStatusCode | `int` | Facultatif |
 | owin.ResponseReasonPhrase | `String` | Facultatif |
@@ -271,14 +271,14 @@ OWIN dépend d’un objet `IDictionary<string,object>` pour communiquer des info
 
 ### <a name="other-data-owin-v100"></a>Autres données (OWIN v1.0.0)
 
-| Clé               | Valeur (type) | Description |
+| Clé :               | Valeur (type) | Description |
 | ----------------- | ------------ | ----------- |
 | owin.CallCancelled | `CancellationToken` |  |
 | owin.Version  | `String` | |   
 
 ### <a name="common-keys"></a>Clés communes
 
-| Clé               | Valeur (type) | Description |
+| Clé :               | Valeur (type) | Description |
 | ----------------- | ------------ | ----------- |
 | ssl.ClientCertificate | `X509Certificate` |  |
 | ssl.LoadClientCertAsync  | `Func<Task>` | |    
@@ -291,13 +291,13 @@ OWIN dépend d’un objet `IDictionary<string,object>` pour communiquer des info
 
 ### <a name="sendfiles-v030"></a>SendFiles v0.3.0
 
-| Clé               | Valeur (type) | Description |
+| Clé :               | Valeur (type) | Description |
 | ----------------- | ------------ | ----------- |
 | sendfile.SendAsync | Voir [Signature du délégué](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) | Par requête |
 
 ### <a name="opaque-v030"></a>Opaque v0.3.0
 
-| Clé               | Valeur (type) | Description |
+| Clé :               | Valeur (type) | Description |
 | ----------------- | ------------ | ----------- |
 | opaque.Version | `String` |  |
 | opaque.Upgrade | `OpaqueUpgrade` | Voir [Signature du délégué](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) |
@@ -306,7 +306,7 @@ OWIN dépend d’un objet `IDictionary<string,object>` pour communiquer des info
 
 ### <a name="websocket-v030"></a>WebSocket v0.3.0
 
-| Clé               | Valeur (type) | Description |
+| Clé :               | Valeur (type) | Description |
 | ----------------- | ------------ | ----------- |
 | websocket.Version | `String` |  |
 | websocket.Accept | `WebSocketAccept` | Voir [Signature du délégué](https://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) |

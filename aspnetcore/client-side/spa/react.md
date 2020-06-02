@@ -41,7 +41,7 @@ cd my-new-app
 
 Exécutez l’application à partir de Visual Studio ou de CLI .NET Core :
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Ouvrez le fichier *.csproj* généré, puis exécutez l’application normalement à partir de là.
 
@@ -86,7 +86,7 @@ Vous pouvez utiliser des [méthodes d’hébergement et de déploiement ASP.NET 
 
 Le projet est configuré pour démarrer sa propre instance du serveur de développement CRA en arrière-plan quand l’application ASP.NET Core démarre en mode de développement. Ainsi, vous n’êtes pas obligé d’exécuter un serveur distinct manuellement.
 
-Cette configuration par défaut présente un inconvénient. Chaque fois que vous modifiez votre code C# et que votre application ASP.NET Core doit redémarrer, le serveur CRA redémarre. Quelques secondes sont nécessaires avant de démarrer la sauvegarde. Si vous apportez des modifications fréquentes au code C# et que vous ne souhaitez pas attendre que le serveur CRA redémarre, exécutez ce dernier en externe, indépendamment du processus ASP.NET Core. Pour ce faire :
+Cette configuration par défaut présente un inconvénient. Chaque fois que vous modifiez votre code C# et que votre application ASP.NET Core doit redémarrer, le serveur CRA redémarre. Quelques secondes sont nécessaires avant de démarrer la sauvegarde. Si vous apportez des modifications fréquentes au code C# et que vous ne souhaitez pas attendre que le serveur CRA redémarre, exécutez ce dernier en externe, indépendamment du processus ASP.NET Core. Pour cela :
 
 1. Ajoutez un fichier *. env* au sous-répertoire *ClientApp* avec le paramètre suivant :
 
