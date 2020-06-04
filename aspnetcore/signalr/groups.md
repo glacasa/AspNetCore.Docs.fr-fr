@@ -1,11 +1,11 @@
 ---
-titre : « gérer les utilisateurs et les groupes dans SignalR «Auteur : Description : » vue d’ensemble de la gestion des utilisateurs et des groupes ASP.net Core SignalR ».
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+titre : « gérer les utilisateurs et les groupes dans SignalR «Auteur : bradygaster Description : » vue d’ensemble de la gestion des utilisateurs et des groupes ASP.net Core SignalR ».
+monikerRange : ' >= aspnetcore-2,1 'ms. Author : bradyg ms. Custom : MVC ms. Date : 05/17/2020 No-Loc :
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRUID : 
+- ' SignalR 'UID : signalr/Groups
 
 ---
 
@@ -43,8 +43,8 @@ Pour protéger l’accès aux ressources lors de l’utilisation de groupes, uti
 > [!NOTE]
 > Les noms de groupes respectent la casse.
 
-## <a name="related-resources"></a>Ressources connexes
+## <a name="related-resources"></a>Ressources associées
 
 * [Prise en main](xref:tutorials/signalr)
-* [Hubs](xref:signalr/hubs)
+* [Concentr](xref:signalr/hubs)
 * [Publication dans Azure](xref:signalr/publish-to-azure-web-app)

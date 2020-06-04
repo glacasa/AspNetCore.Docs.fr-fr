@@ -1,22 +1,12 @@
 ---
-title: Configurer la localisation d’objets portables dans ASP.NET Core
-author: sebastienros
-description: Cet article présente les fichiers d’objets portables et décrit les étapes à suivre pour les utiliser dans une application ASP.NET Core avec le framework Orchard Core.
-ms.author: scaddie
-ms.date: 09/26/2017
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/portable-object-localization
-ms.openlocfilehash: 1e544b0f504c2776c678c51bff598cf011b52610
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776049"
+titre : configurer la localisation d’objets portables dans ASP.NET Core auteur : sebastienros Description : cet article présente les fichiers d’objets portables et décrit les étapes permettant de les utiliser dans une application ASP.NET Core avec l’infrastructure principale du verger.
+ms. Author : scaddie ms. Date : 09/26/2017 No-Loc :
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- « SignalR UID : Fundamentals/portable-Object-localization
+
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>Configurer la localisation d’objets portables dans ASP.NET Core
 
@@ -77,29 +67,29 @@ Ajoutez une référence au package NuGet `OrchardCore.Localization.Core`. Il est
 
 Le fichier *.csproj* contient maintenant une ligne semblable à la suivante (le numéro de version peut varier) :
 
-[!code-xml[](localization/sample/POLocalization/POLocalization.csproj?range=9)]
+[!code-xml[](localization/sample/2.x/POLocalization/POLocalization.csproj?range=9)]
 
 ### <a name="registering-the-service"></a>Inscription du service
 
 Ajoutez les services nécessaires à la méthode `ConfigureServices` de *Startup.cs* :
 
-[!code-csharp[](localization/sample/POLocalization/Startup.cs?name=snippet_ConfigureServices&highlight=4-21)]
+[!code-csharp[](localization/sample/2.x/POLocalization/Startup.cs?name=snippet_ConfigureServices&highlight=4-21)]
 
 Ajoutez l’intergiciel (middleware) nécessaire à la méthode `Configure` de *Startup.cs* :
 
-[!code-csharp[](localization/sample/POLocalization/Startup.cs?name=snippet_Configure&highlight=15)]
+[!code-csharp[](localization/sample/2.x/POLocalization/Startup.cs?name=snippet_Configure&highlight=15)]
 
 Ajoutez le code suivant à votre Razor vue de votre choix. *About.cshtml* est utilisé dans cet exemple.
 
-[!code-cshtml[](localization/sample/POLocalization/Views/Home/About.cshtml)]
+[!code-cshtml[](localization/sample/2.x/POLocalization/Views/Home/About.cshtml)]
 
 Une instance `IViewLocalizer` est injectée et utilisée pour traduire le texte « Hello world! ».
 
 ### <a name="creating-a-po-file"></a>Création d’un fichier PO
 
-Créez un fichier nommé * \<culture code>. po* dans le dossier racine de votre application. Dans cet exemple, le nom de fichier est *fr.po*, car le français est utilisé :
+Créez un fichier nommé * \<culture code> . po* dans le dossier racine de votre application. Dans cet exemple, le nom de fichier est *fr.po*, car le français est utilisé :
 
-[!code-text[](localization/sample/POLocalization/fr.po)]
+[!code-text[](localization/sample/2.x/POLocalization/fr.po)]
 
 Ce fichier stocke à la fois la chaîne à traduire et la chaîne traduite en français. La culture parente des traductions peut être rétablie, si nécessaire. Dans cet exemple, le fichier *fr.po* est utilisé si la culture demandée est `fr-FR` ou `fr-CA`.
 
@@ -136,7 +126,7 @@ Toutes les langues ne partagent pas les mêmes règles. À titre d’exemple, il
 
 Créez le fichier `cs.po` comme suit, puis notez comment la pluralisation a besoin de trois traductions différentes :
 
-[!code-text[](localization/sample/POLocalization/cs.po)]
+[!code-text[](localization/sample/2.x/POLocalization/cs.po)]
 
 Pour accepter les localisations tchèques, ajoutez `"cs"` à la liste des cultures prises en charge dans la méthode `ConfigureServices` :
 
@@ -193,7 +183,7 @@ Notez que pour la culture tchèque, les trois traductions sont différentes. Les
 
 ### <a name="contextualizing-strings"></a>Contextualisation de chaînes
 
-Les applications contiennent souvent les chaînes à traduire dans plusieurs emplacements. La même chaîne peut avoir une traduction différente dans certains emplacements d’une application (Razor vues ou fichiers de classe). Un fichier PO prend en charge la notion d’un contexte de fichier, qui peut être utilisé pour catégoriser la chaîne représentée. L’utilisation d’un contexte de fichier permet de traduire une chaîne différemment en fonction du contexte du fichier (ou de l’absence de contexte de fichier).
+Les applications contiennent souvent les chaînes à traduire dans plusieurs emplacements. La même chaîne peut avoir une traduction différente dans certains emplacements d’une application ( Razor vues ou fichiers de classe). Un fichier PO prend en charge la notion d’un contexte de fichier, qui peut être utilisé pour catégoriser la chaîne représentée. L’utilisation d’un contexte de fichier permet de traduire une chaîne différemment en fonction du contexte du fichier (ou de l’absence de contexte de fichier).
 
 Les services de localisation de PO utilisent le nom de la classe complète ou de la vue utilisée lors de la traduction d’une chaîne. Pour ce faire, il vous suffit de définir la valeur sur l’entrée `msgctxt`.
 
@@ -209,7 +199,7 @@ Avec `msgctxt` ainsi définie, la traduction de texte se produit lors de la navi
 
 Quand aucune entrée spécifique ne correspond à un contexte de fichier donné, le mécanisme de secours d’Orchard Core recherche un fichier PO approprié sans contexte. En supposant qu’aucun contexte de fichier spécifique n’est défini pour *Views/Home/Contact.cshtml*, la navigation vers `/Home/Contact?culture=fr-FR` charge un fichier PO tel que le suivant :
 
-[!code-text[](localization/sample/POLocalization/fr.po)]
+[!code-text[](localization/sample/2.x/POLocalization/fr.po)]
 
 ### <a name="changing-the-location-of-po-files"></a>Changement de l’emplacement des fichiers PO
 

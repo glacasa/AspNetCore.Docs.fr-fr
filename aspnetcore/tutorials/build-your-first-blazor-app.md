@@ -1,11 +1,11 @@
 ---
-titre : « créer votre première Blazor application » auteur : Description : « créer une Blazor application pas à pas ».
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
+titre : « créer votre première Blazor application » auteur : guardrex Description : « créer une Blazor application pas à pas ».
+monikerRange : ' >= aspnetcore-3,0 'ms. Author : Riande ms. Custom : MVC ms. Date : 05/19/2020 No-Loc :
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- SignalRUID : 
+- ' SignalR 'UID : Tutorials/First-éblouissant-App
 
 ---
 # <a name="build-your-first-blazor-app"></a>Créer votre première Blazor application
@@ -131,7 +131,7 @@ Une [`@foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) boucle e
 
 Ajoutez un nouveau composant à l’application qui implémente une liste de tâches simple.
 
-1. Ajoutez un nouveau `Todo` Razor composant à l’application dans le dossier *pages* . Dans Visual Studio, cliquez avec le bouton droit sur le dossier **pages** , puis sélectionnez **Ajouter**  >  **un nouvel élément**  >  ** Razor composant**. Nommez le fichier *TODO. Razor*du composant. Dans d’autres environnements de développement, ajoutez un fichier vide au dossier **pages** nommé *TODO. Razor*.
+1. Ajoutez un nouveau `Todo` Razor composant à l’application dans le dossier *pages* . Si vous utilisez Visual Studio, cliquez avec le bouton droit sur le dossier **pages** , puis sélectionnez **Ajouter**  >  **un nouvel élément**  >  ** Razor composant**. Nommez le fichier *TODO. Razor*du composant. Dans d’autres environnements de développement, ajoutez un fichier vide au dossier **pages** nommé *TODO. Razor*.
 
 1. Fournissez le balisage initial pour le composant :
 
