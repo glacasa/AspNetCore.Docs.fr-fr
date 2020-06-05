@@ -1168,7 +1168,7 @@
       uid: performance/performance-best-practices
     - name: Mémoire et GC
       uid: performance/memory
-    - name: Mise en cache des réponses
+    - name: Mise en cache
       items:
         - name: Vue d'ensemble
           uid: performance/caching/response
