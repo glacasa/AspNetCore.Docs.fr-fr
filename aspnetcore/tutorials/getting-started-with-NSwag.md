@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-nswag
-ms.openlocfilehash: 50096ae6a77d5f8b07e6be795d9401fcbfd421e3
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: cd4cc6778de7d2156243dc91fba64b2bdb79cf08
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776706"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452120"
 ---
 # <a name="get-started-with-nswag-and-aspnet-core"></a>Bien démarrer avec NSwag et ASP.NET Core
 
@@ -56,7 +56,7 @@ Vous pouvez installer le package NuGet NSwag avec l’une des méthodes suivante
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * À partir de la fenêtre **Console du Gestionnaire de package** :
-  * Accéder à **la** > console du**Gestionnaire de package** **Windows** > 
+  * Accéder à **la**  >  console du gestionnaire de**Other Windows**  >  **package** Windows
   * Accédez au répertoire où se trouve le fichier *TodoApi.csproj*.
   * Exécutez la commande suivante :
 
@@ -65,7 +65,7 @@ Vous pouvez installer le package NuGet NSwag avec l’une des méthodes suivante
     ```
 
 * À partir de la boîte de dialogue **Gérer les packages NuGet** :
-  * Cliquez avec le bouton droit sur le projet dans **Explorateur de solutions** > **gérer les packages NuGet**
+  * Cliquez avec le bouton droit sur le projet dans **Explorateur de solutions**  >  **gérer les packages NuGet**
   * Affectez la valeur « nuget.org » à **Source du package**.
   * Entrez « NSwag.AspNetCore » dans la zone de recherche.
   * Sélectionnez le package « NSwag.AspNetCore » sous l’onglet **Parcourir** et cliquez sur **Installer**.
@@ -107,11 +107,11 @@ Ajoutez et configurez Swagger dans votre application ASP.NET Core en exécutant 
 
 Vous pouvez tirer parti des fonctionnalités de génération de code de NSwag en choisissant l’une des options suivantes :
 
-* [NSwagStudio](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio) &ndash; une application de bureau Windows pour générer du code client en C# ou TypeScript pour une API.
+* [NSwagStudio](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio): application de bureau Windows permettant de générer du code client d’API en C# ou à la machine à écrire.
 * Les packages NuGet [NSwag.CodeGeneration.CSharp](https://www.nuget.org/packages/NSwag.CodeGeneration.CSharp/) ou [NSwag.CodeGeneration.TypeScript](https://www.nuget.org/packages/NSwag.CodeGeneration.TypeScript/) pour générer du code dans votre projet.
 * NSwag à partir de la [ligne de commande](https://github.com/RicoSuter/NSwag/wiki/CommandLine).
 * Le package NuGet [NSwag.MSBuild](https://github.com/RicoSuter/NSwag/wiki/NSwag.MSBuild).
-* [Unchase OpenAPI (Swagger) Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseopenapiconnectedservice) &ndash; est un service connecté Visual Studio qui permet de générer du code client d’API en C# ou TypeScript. Génère également des contrôleurs C# pour les services OpenAPI avec NSwag.
+* [Service connecté unchase openapi (Swagger)](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseopenapiconnectedservice): service connecté à Visual Studio pour générer le code client de l’API en C# ou à la machine à écrire. Génère également des contrôleurs C# pour les services OpenAPI avec NSwag.
 
 ### <a name="generate-code-with-nswagstudio"></a>Générer du code avec NSwagStudio
 
@@ -221,7 +221,7 @@ Pour activer les commentaires XML, procédez comme suit :
 
 ::: moniker range=">= aspnetcore-2.0"
 
-* Dans le *Panneau Solutions*, appuyez sur **contrôle** et cliquez sur le nom du projet. Accédez à **Outils** > **modifier le fichier**.
+* Dans le *Panneau Solutions*, appuyez sur **contrôle** et cliquez sur le nom du projet. Accédez à **Outils**  >  **modifier le fichier**.
 * Ajoutez manuellement les lignes en surbrillance au fichier *.csproj* :
 
 [!code-xml[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.NSwag/TodoApi.csproj?name=snippet_DocumentationFileElement&highlight=1-2,4)]
@@ -271,13 +271,13 @@ L’action précédente retourne `IActionResult`, mais à l’intérieur de l’
 
 ::: moniker range=">= aspnetcore-2.1"
 
-Étant donné que NSwag utilise la [réflexion](/dotnet/csharp/programming-guide/concepts/reflection), et que le type de retour recommandé pour les actions d’API web est [ActionResult\<T>](xref:Microsoft.AspNetCore.Mvc.ActionResult%601), il ne peut que déduire le type de retour défini par `T`. Vous ne pouvez pas déduire automatiquement d’autres types de retour possibles.
+Comme NSwag utilise la [réflexion](/dotnet/csharp/programming-guide/concepts/reflection)et que le type de retour recommandé pour les actions de l’API Web est [ActionResult \<T> ](xref:Microsoft.AspNetCore.Mvc.ActionResult%601), il peut uniquement déduire le type de retour défini par `T` . Vous ne pouvez pas déduire automatiquement d’autres types de retour possibles.
 
 Prenons l’exemple suivant :
 
 [!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.NSwag/Controllers/TodoController.cs?name=snippet_CreateAction)]
 
-L’action précédente retourne `ActionResult<T>`. À l’intérieur de l’action, il retourne [CreatedAtRoute](xref:System.Web.Http.ApiController.CreatedAtRoute*). Étant donné que le contrôleur [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) a l’attribut, une réponse [BadRequest](xref:System.Web.Http.ApiController.BadRequest*) est également possible. Pour plus d’informations, consultez [Réponses HTTP 400 automatiques](xref:web-api/index#automatic-http-400-responses). Utilisez les annotations de données pour indiquer aux clients les codes d’état HTTP que cette action est susceptible de retourner. Marquez l’action avec les attributs suivants :
+L’action précédente retourne `ActionResult<T>`. À l’intérieur de l’action, il retourne [CreatedAtRoute](xref:System.Web.Http.ApiController.CreatedAtRoute*). Étant donné que le contrôleur a l' [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) attribut, une réponse [BadRequest](xref:System.Web.Http.ApiController.BadRequest*) est également possible. Pour plus d’informations, consultez [Réponses HTTP 400 automatiques](xref:web-api/index#automatic-http-400-responses). Utilisez les annotations de données pour indiquer aux clients les codes d’état HTTP que cette action est susceptible de retourner. Marquez l’action avec les attributs suivants :
 
 [!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.NSwag/Controllers/TodoController.cs?name=snippet_CreateActionAttributes)]
 

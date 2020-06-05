@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/index
-ms.openlocfilehash: 74affbb7d18d80e2e55714df100d820aed2ce427
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 9d57fcd5883a869c5421b88321d4a279f3f938c9
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776179"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452146"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>Implémentations de serveurs web dans ASP.NET Core
 
@@ -40,7 +40,7 @@ Utilisez Kestrel :
 
   ![Kestrel communique indirectement avec Internet via un serveur proxy inverse, par exemple IIS, Nginx ou Apache](kestrel/_static/kestrel-to-internet.png)
 
-L’hébergement de&mdash;la configuration avec ou sans serveur&mdash;proxy inverse est pris en charge.
+L’hébergement &mdash; de la configuration avec ou sans serveur proxy inverse &mdash; est pris en charge.
 
 Pour des conseils de configuration de Kestrel et des informations sur le moment d’utiliser Kestrel dans une configuration de proxy inverse, consultez <xref:fundamentals/servers/kestrel>.
 
@@ -72,7 +72,7 @@ Pour plus d’informations et pour obtenir de l’aide sur la configuration, con
 * <xref:host-and-deploy/iis/index>
 * <xref:host-and-deploy/aspnet-core-module>
 
-# <a name="macos"></a>[MacOS](#tab/macos)
+# <a name="macos"></a>[macOS](#tab/macos)
 
 ASP.NET Core est fourni avec le [serveur Kestrel](xref:fundamentals/servers/kestrel) qui est le serveur HTTP multiplateforme par défaut.
 
@@ -103,7 +103,7 @@ Le schéma suivant illustre la relation entre IIS, le module ASP.NET Core et une
 
 Les requêtes arrivent du web au pilote HTTP.sys en mode noyau. Le pilote route les requêtes vers IIS sur le port configuré du site web, généralement 80 (HTTP) ou 443 (HTTPS). Le module transfère les requêtes à Kestrel sur un port aléatoire pour l’application, qui n’est ni le port 80 ni le port 443.
 
-Le module spécifie le port via une variable d’environnement au démarrage, et l' [intergiciel (middleware) d’intégration IIS](xref:host-and-deploy/iis/index#enable-the-iisintegration-components) configure le `http://localhost:{port}`serveur pour l’écoute. Des vérifications supplémentaires sont effectuées, et les requêtes qui ne proviennent pas du module sont rejetées. Le module ne prend pas en charge le transfert HTTPS : les requêtes sont donc transférées via HTTP, même si IIS les reçoit via HTTPS.
+Le module spécifie le port via une variable d’environnement au démarrage, et l' [intergiciel (middleware) d’intégration IIS](xref:host-and-deploy/iis/index#enable-the-iisintegration-components) configure le serveur pour l’écoute `http://localhost:{port}` . Des vérifications supplémentaires sont effectuées, et les requêtes qui ne proviennent pas du module sont rejetées. Le module ne prend pas en charge le transfert HTTPS : les requêtes sont donc transférées via HTTP, même si IIS les reçoit via HTTPS.
 
 Dès que Kestrel sélectionne la requête dans le module, celle-ci est envoyée (push) dans le pipeline de middlewares d’ASP.NET Core. Le pipeline de middlewares traite la requête et la passe en tant qu’instance de `HttpContext` à la logique de l’application. L’intergiciel (middleware) ajouté par l’intégration d’IIS met à jour le schéma, l’adresse IP distante et la base du chemin pour prendre en compte le transfert de la requête à Kestrel. La réponse de l’application est ensuite repassée à IIS, qui la renvoie au client HTTP à l’origine de la requête.
 
@@ -112,7 +112,7 @@ Pour des conseils de configuration d’IIS et du module ASP.NET Core, consultez 
 * <xref:host-and-deploy/iis/index>
 * <xref:host-and-deploy/aspnet-core-module>
 
-# <a name="macos"></a>[MacOS](#tab/macos)
+# <a name="macos"></a>[macOS](#tab/macos)
 
 ASP.NET Core est fourni avec le [serveur Kestrel](xref:fundamentals/servers/kestrel) qui est le serveur HTTP multiplateforme par défaut.
 
@@ -158,13 +158,13 @@ Si les serveurs intégrés ne répondent pas aux spécifications de l’applicat
 
 Le serveur est lancé lorsque l’environnement de développement intégré (IDE) ou l’éditeur démarre l’application :
 
-* Les profils de lancement de [Visual Studio](https://visualstudio.microsoft.com) &ndash; peuvent être utilisés pour démarrer l’application et le serveur à l’aide de [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)/[module ASP.net Core](xref:host-and-deploy/aspnet-core-module) ou de la console.
-* [Visual Studio Code](https://code.visualstudio.com/) &ndash;L’application et le serveur sont démarrés par [Omnisharp](https://github.com/OmniSharp/omnisharp-vscode), qui active le débogueur CoreCLR.
-* [Visual Studio pour Mac](https://visualstudio.microsoft.com/vs/mac/) &ndash; L’application et le serveur sont démarrés par le [débogueur Mono Soft-Mode](https://www.mono-project.com/docs/advanced/runtime/docs/soft-debugger/).
+* [Visual Studio](https://visualstudio.microsoft.com): les profils de lancement peuvent être utilisés pour démarrer l’application et le serveur avec [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) / [module ASP.net Core](xref:host-and-deploy/aspnet-core-module) ou la console.
+* [Visual Studio code](https://code.visualstudio.com/): l’application et le serveur sont démarrés par [Omnisharp](https://github.com/OmniSharp/omnisharp-vscode), ce qui active le débogueur CoreCLR.
+* [Visual Studio pour Mac](https://visualstudio.microsoft.com/vs/mac/): l’application et le serveur sont démarrés par le [débogueur mono en mode soft](https://www.mono-project.com/docs/advanced/runtime/docs/soft-debugger/).
 
 Lors du lancement de l’application à partir d’une invite de commandes dans le dossier du projet, [dotnet run](/dotnet/core/tools/dotnet-run) lance l’application et le serveur (Kestrel et HTTP.sys uniquement). La configuration est spécifiée par l’option `-c|--configuration`, qui est définie sur `Debug` (par défaut) ou sur `Release`.
 
-Un fichier *launchSettings. JSON* fournit une configuration lors du lancement d' `dotnet run` une application avec ou avec un débogueur intégré à des outils, tels que Visual Studio. Si des profils de lancement sont présents dans un fichier *launchSettings. JSON* , `--launch-profile {PROFILE NAME}` utilisez l’option `dotnet run` avec la commande ou sélectionnez le profil dans Visual Studio. Pour plus d’informations, consultez les rubriques [dotnet run](/dotnet/core/tools/dotnet-run) et [Package de distribution de .NET Core](/dotnet/core/build/distribution-packaging).
+Un fichier *launchSettings. JSON* fournit une configuration lors du lancement d’une application avec `dotnet run` ou avec un débogueur intégré à des outils, tels que Visual Studio. Si des profils de lancement sont présents dans un fichier *launchSettings. JSON* , utilisez l' `--launch-profile {PROFILE NAME}` option avec la `dotnet run` commande ou sélectionnez le profil dans Visual Studio. Pour plus d’informations, consultez les rubriques [dotnet run](/dotnet/core/tools/dotnet-run) et [Package de distribution de .NET Core](/dotnet/core/build/distribution-packaging).
 
 ## <a name="http2-support"></a>Assistance HTTP/2
 

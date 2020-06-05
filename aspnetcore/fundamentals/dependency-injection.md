@@ -1,12 +1,24 @@
 ---
-titre : injection de dépendances dans ASP.NET Core auteur : description de Rick-Anderson : Découvrez comment ASP.NET Core implémente l’injection de dépendances et comment l’utiliser.
-monikerRange : ' >= aspnetcore-2,1 'ms. Author : Riande ms. Custom : MVC ms. Date : 05/14/2020 No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR 'UID : notions de base/dépendance-injection
-
+title: Injection de dépendances dans ASP.NET Core
+author: rick-anderson
+description: Découvrez comment ASP.NET Core implémente l’injection de dépendances et comment l’utiliser.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/14/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: fundamentals/dependency-injection
+ms.openlocfilehash: db0a23e2db34de60308ea9be021a190278dee4aa
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84271902"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>Injection de dépendances dans ASP.NET Core
 
@@ -132,7 +144,7 @@ public void Configure(IApplicationBuilder app, IOptions<MyOptions> options)
 }
 ```
 
-Pour plus d'informations, consultez <xref:fundamentals/startup>.
+Pour plus d’informations, consultez <xref:fundamentals/startup>.
 
 ## <a name="framework-provided-services"></a>Services fournis par le framework
 
@@ -190,7 +202,7 @@ Des services à durée de vie temporaire (<xref:Microsoft.Extensions.DependencyI
 Les services à durée de vie délimitée (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped*>) sont créés une seule fois par requête de client (connexion).
 
 > [!WARNING]
-> Si vous utilisez un service Scoped dans un middleware, injectez le service dans la méthode `Invoke` ou `InvokeAsync`. N’injectez pas via l' [injection de constructeur](xref:mvc/controllers/dependency-injection#constructor-injection) , car cela force le service à se comporter comme un singleton. Pour plus d'informations, consultez <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
+> Si vous utilisez un service Scoped dans un middleware, injectez le service dans la méthode `Invoke` ou `InvokeAsync`. N’injectez pas via l' [injection de constructeur](xref:mvc/controllers/dependency-injection#constructor-injection) , car cela force le service à se comporter comme un singleton. Pour plus d’informations, consultez <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
 
 ### <a name="singleton"></a>Singleton
 
@@ -203,12 +215,12 @@ Les services avec une durée de vie singleton (<xref:Microsoft.Extensions.Depend
 
 Les méthodes d’extension d’inscription de service offrent des surcharges qui sont utiles dans des scénarios spécifiques.
 
-| Méthode | Automatique<br>object<br>suppression | Plusieurs<br>implémentations | Passage d’args |
+| Méthode | Automatique<br>object<br>suppression | Multiple<br>implémentations | Passage d’args |
 | ------ | :-----------------------------: | :-------------------------: | :-------: |
-| `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>Exemple :<br>`services.AddSingleton<IMyDep, MyDep>();` | Oui | Oui | Non |
-| `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>Exemples :<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep("A string!"));` | Oui | Oui | Oui |
+| `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>Exemple :<br>`services.AddSingleton<IMyDep, MyDep>();` | Yes | Oui | No |
+| `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>Exemples :<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep("A string!"));` | Yes | Yes | Yes |
 | `Add{LIFETIME}<{IMPLEMENTATION}>()`<br>Exemple :<br>`services.AddSingleton<MyDep>();` | Oui | Non | Non |
-| `AddSingleton<{SERVICE}>(new {IMPLEMENTATION})`<br>Exemples :<br>`services.AddSingleton<IMyDep>(new MyDep());`<br>`services.AddSingleton<IMyDep>(new MyDep("A string!"));` | Non | Oui | Oui |
+| `AddSingleton<{SERVICE}>(new {IMPLEMENTATION})`<br>Exemples :<br>`services.AddSingleton<IMyDep>(new MyDep());`<br>`services.AddSingleton<IMyDep>(new MyDep("A string!"));` | Non | Oui | Yes |
 | `AddSingleton(new {IMPLEMENTATION})`<br>Exemples :<br>`services.AddSingleton(new MyDep());`<br>`services.AddSingleton(new MyDep("A string!"));` | Non | Non | Oui |
 
 Pour plus d’informations sur la suppression de type, consultez la section [Suppression des services](#disposal-of-services). Un scénario courant d’implémentations multiples est la [simulation de types à des fins de test](xref:test/integration-tests#inject-mock-services).
@@ -223,7 +235,7 @@ services.AddSingleton<IMyDependency, MyDependency>();
 services.TryAddSingleton<IMyDependency, DifferentDependency>();
 ```
 
-Pour plus d'informations, consultez les pages suivantes :
+Pour plus d'informations, voir :
 
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAdd*>
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddTransient*>
@@ -387,7 +399,7 @@ Le fournisseur de services racine est créé quand <xref:Microsoft.Extensions.De
 
 Les services Scoped sont supprimés par le conteneur qui les a créés. Si un service Scoped est créé dans le conteneur racine, la durée de vie du service est promue en singleton, car elle est supprimée par le conteneur racine seulement quand l’application/le serveur est arrêté. La validation des étendues du service permet de traiter ces situations quand `BuildServiceProvider` est appelé.
 
-Pour plus d'informations, consultez <xref:fundamentals/host/web-host#scope-validation>.
+Pour plus d’informations, consultez <xref:fundamentals/host/web-host#scope-validation>.
 
 ## <a name="request-services"></a>Services de requête
 
@@ -709,7 +721,7 @@ public void Configure(IApplicationBuilder app, IOptions<MyOptions> options)
 }
 ```
 
-Pour plus d'informations, consultez <xref:fundamentals/startup>.
+Pour plus d’informations, consultez <xref:fundamentals/startup>.
 
 ## <a name="framework-provided-services"></a>Services fournis par le framework
 
@@ -767,7 +779,7 @@ Des services à durée de vie temporaire (<xref:Microsoft.Extensions.DependencyI
 Les services à durée de vie délimitée (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped*>) sont créés une seule fois par requête de client (connexion).
 
 > [!WARNING]
-> Si vous utilisez un service Scoped dans un middleware, injectez le service dans la méthode `Invoke` ou `InvokeAsync`. N’injectez pas via l' [injection de constructeur](xref:mvc/controllers/dependency-injection#constructor-injection) , car cela force le service à se comporter comme un singleton. Pour plus d'informations, consultez <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
+> Si vous utilisez un service Scoped dans un middleware, injectez le service dans la méthode `Invoke` ou `InvokeAsync`. N’injectez pas via l' [injection de constructeur](xref:mvc/controllers/dependency-injection#constructor-injection) , car cela force le service à se comporter comme un singleton. Pour plus d’informations, consultez <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
 
 ### <a name="singleton"></a>Singleton
 
@@ -780,12 +792,12 @@ Les services avec une durée de vie singleton (<xref:Microsoft.Extensions.Depend
 
 Les méthodes d’extension d’inscription de service offrent des surcharges qui sont utiles dans des scénarios spécifiques.
 
-| Méthode | Automatique<br>object<br>suppression | Plusieurs<br>implémentations | Passage d’args |
+| Méthode | Automatique<br>object<br>suppression | Multiple<br>implémentations | Passage d’args |
 | ------ | :-----------------------------: | :-------------------------: | :-------: |
-| `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>Exemple :<br>`services.AddSingleton<IMyDep, MyDep>();` | Oui | Oui | Non |
-| `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>Exemples :<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep("A string!"));` | Oui | Oui | Oui |
+| `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>Exemple :<br>`services.AddSingleton<IMyDep, MyDep>();` | Yes | Oui | No |
+| `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>Exemples :<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep("A string!"));` | Yes | Yes | Yes |
 | `Add{LIFETIME}<{IMPLEMENTATION}>()`<br>Exemple :<br>`services.AddSingleton<MyDep>();` | Oui | Non | Non |
-| `AddSingleton<{SERVICE}>(new {IMPLEMENTATION})`<br>Exemples :<br>`services.AddSingleton<IMyDep>(new MyDep());`<br>`services.AddSingleton<IMyDep>(new MyDep("A string!"));` | Non | Oui | Oui |
+| `AddSingleton<{SERVICE}>(new {IMPLEMENTATION})`<br>Exemples :<br>`services.AddSingleton<IMyDep>(new MyDep());`<br>`services.AddSingleton<IMyDep>(new MyDep("A string!"));` | Non | Oui | Yes |
 | `AddSingleton(new {IMPLEMENTATION})`<br>Exemples :<br>`services.AddSingleton(new MyDep());`<br>`services.AddSingleton(new MyDep("A string!"));` | Non | Non | Oui |
 
 Pour plus d’informations sur la suppression de type, consultez la section [Suppression des services](#disposal-of-services). Un scénario courant d’implémentations multiples est la [simulation de types à des fins de test](xref:test/integration-tests#inject-mock-services).
@@ -800,7 +812,7 @@ services.AddSingleton<IMyDependency, MyDependency>();
 services.TryAddSingleton<IMyDependency, DifferentDependency>();
 ```
 
-Pour plus d'informations, consultez les pages suivantes :
+Pour plus d'informations, voir :
 
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAdd*>
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddTransient*>
@@ -962,7 +974,7 @@ Le fournisseur de services racine est créé quand <xref:Microsoft.Extensions.De
 
 Les services Scoped sont supprimés par le conteneur qui les a créés. Si un service Scoped est créé dans le conteneur racine, la durée de vie du service est promue en singleton, car elle est supprimée par le conteneur racine seulement quand l’application/le serveur est arrêté. La validation des étendues du service permet de traiter ces situations quand `BuildServiceProvider` est appelé.
 
-Pour plus d'informations, consultez <xref:fundamentals/host/web-host#scope-validation>.
+Pour plus d’informations, consultez <xref:fundamentals/host/web-host#scope-validation>.
 
 ## <a name="request-services"></a>Services de requête
 

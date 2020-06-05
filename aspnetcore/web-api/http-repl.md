@@ -5,7 +5,7 @@ description: Découvrez comment utiliser l’outil global REPL HTTP de .NET Core
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 12/11/2019
+ms.date: 05/20/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: 4d0200cd412cce6eda473a64d132d74d8641db34
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 4c42ad56bbdb7b66824b290cd118903cbe4311e8
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777096"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452211"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>Tester des API web avec la boucle REPL HTTP
 
@@ -56,7 +56,7 @@ dotnet tool install -g Microsoft.dotnet-httprepl
 
 Un [outil global .NET Core](/dotnet/core/tools/global-tools#install-a-global-tool) est installé à partir du package NuGet [Microsoft.dotnet-httprepl](https://www.nuget.org/packages/Microsoft.dotnet-httprepl).
 
-## <a name="usage"></a>Usage
+## <a name="usage"></a>Utilisation
 
 Une fois l’installation de l’outil réussie, exécutez la commande suivante pour démarrer la boucle REPL HTTP :
 
@@ -235,7 +235,7 @@ Les [couleurs](#set-color-preferences) de la boucle REPL HTTP peuvent être pers
 
 *%HOME%/.httpreplprefs*
 
-# <a name="macos"></a>[MacOS](#tab/macos)
+# <a name="macos"></a>[macOS](#tab/macos)
 
 *%HOME%/.httpreplprefs*
 
@@ -347,7 +347,7 @@ Dans la commande précédente, `<EXECUTABLE>` est le chemin complet du fichier e
 pref set editor.command.default "/usr/bin/code"
 ```
 
-# <a name="macos"></a>[MacOS](#tab/macos)
+# <a name="macos"></a>[macOS](#tab/macos)
 
 ```console
 pref set editor.command.default "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
@@ -622,7 +622,7 @@ Pour émettre une requête HTTP PUT :
     Server: Kestrel
     ```
 
-1. *Facultatif*: émettez `get` une commande pour voir les modifications. Par exemple, si vous avez tapé « Cherry » dans l’éditeur de texte, une commande `get` retourne ce qui suit :
+1. *Facultatif*: émettez une `get` commande pour voir les modifications. Par exemple, si vous avez tapé « Cherry » dans l’éditeur de texte, une commande `get` retourne ce qui suit :
 
     ```console
     https://localhost:5001/fruits~ get
@@ -713,7 +713,7 @@ Pour émettre une requête HTTP DELETE :
     Server: Kestrel
     ```
 
-1. *Facultatif*: émettez `get` une commande pour voir les modifications. Dans cet exemple, une commande `get` retourne ce qui suit :
+1. *Facultatif*: émettez une `get` commande pour voir les modifications. Dans cet exemple, une commande `get` retourne ce qui suit :
 
     ```console
     https://localhost:5001/fruits~ get
@@ -820,7 +820,23 @@ Pour définir un en-tête de requête HTTP, utilisez une des approches suivantes
 
 ## <a name="test-secured-endpoints"></a>Tester les points de terminaison sécurisés
 
-La réplication HTTP prend en charge le test des points de terminaison sécurisés via l’utilisation d’en-têtes de requête HTTP. L’authentification de base, les jetons de porteur JWT et l’authentification Digest sont des exemples de modèles d’authentification et d’autorisation pris en charge. Par exemple, vous pouvez envoyer un jeton de porteur à un point de terminaison à l’aide de la commande suivante :
+La réplication HTTP prend en charge le test des points de terminaison sécurisés de deux façons : via les informations d’identification par défaut de l’utilisateur connecté ou via l’utilisation d’en-têtes de requête HTTP. 
+
+### <a name="default-credentials"></a>Informations d’identification par défaut
+
+Imaginez un scénario dans lequel l’API Web que vous testez est hébergée dans IIS et est sécurisée avec l’authentification Windows. Vous souhaitez que les informations d’identification de l’utilisateur qui exécute l’outil soient transmises aux points de terminaison HTTP en cours de test. Pour transmettre les informations d’identification par défaut de l’utilisateur connecté :
+
+1. Définissez la `httpClient.useDefaultCredentials` préférence sur `true` :
+
+    ```console
+    pref set httpClient.useDefaultCredentials true
+    ```
+
+1. Quittez et redémarrez l’outil avant d’envoyer une autre demande à l’API Web.
+
+### <a name="http-request-headers"></a>En-têtes de requête HTTP
+
+L’authentification de base, les jetons de porteur JWT et l’authentification Digest sont des exemples de modèles d’authentification et d’autorisation pris en charge. Par exemple, vous pouvez envoyer un jeton de porteur à un point de terminaison à l’aide de la commande suivante :
 
 ```console
 set header Authorization "bearer <TOKEN VALUE>"
@@ -830,25 +846,25 @@ Pour accéder à un point de terminaison hébergé par Azure ou pour utiliser l'
 
 1. Connexion à Azure :
 
-    ```azcli
+    ```azurecli
     az login
     ```
 
 1. Récupérez votre ID d’abonnement à l’aide de la commande suivante :
 
-    ```azcli
+    ```azurecli
     az account show --query id
     ```
 
 1. Copiez votre ID d’abonnement et exécutez la commande suivante :
 
-    ```azcli
+    ```azurecli
     az account set --subscription "<SUBSCRIPTION ID>"
     ```
 
 1. Récupérez votre jeton de porteur avec la commande suivante :
 
-    ```azcli
+    ```azurecli
     az account get-access-token --query accessToken
     ```
 

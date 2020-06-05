@@ -1,12 +1,24 @@
 ---
-titre : « ASP.NET Core Blazor injection de dépendances » auteur : guardrex Description : « Découvrez comment les Blazor applications peuvent injecter des services dans des composants. »
-monikerRange : ' >= aspnetcore-3,1 'ms. Author : Riande ms. Custom : MVC ms. Date : 05/19/2020 No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR 'UID : éblouissant/dependency-injection
-
+title: ASP.NET Core l' Blazor injection de dépendances
+author: guardrex
+description: Découvrez comment les Blazor applications peuvent injecter des services dans des composants.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/dependency-injection
+ms.openlocfilehash: d5b0747fb0505499197d1751511600bd91fed41d
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84271781"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core l' Blazor injection de dépendances
 
@@ -25,8 +37,8 @@ Les services par défaut sont automatiquement ajoutés à la collection de servi
 
 | Service | Durée de vie | Description |
 | ------- | -------- | ----------- |
-| <xref:System.Net.Http.HttpClient> | Temporaire | Fournit des méthodes pour envoyer des requêtes HTTP et recevoir des réponses HTTP d’une ressource identifiée par un URI.<br><br>L’instance de <xref:System.Net.Http.HttpClient> dans une Blazor application webassembly utilise le navigateur pour gérer le trafic HTTP en arrière-plan.<br><br>BlazorLes applications serveur n’incluent pas une <xref:System.Net.Http.HttpClient> configuration en tant que service par défaut. Fournissez un <xref:System.Net.Http.HttpClient> à une Blazor application serveur.<br><br>Pour plus d'informations, consultez <xref:blazor/call-web-api>. |
-| <xref:Microsoft.JSInterop.IJSRuntime> | Singleton ( Blazor Webassembly)<br>Étendue ( Blazor serveur) | Représente une instance d’un Runtime JavaScript dans laquelle les appels JavaScript sont distribués. Pour plus d'informations, consultez <xref:blazor/call-javascript-from-dotnet>. |
+| <xref:System.Net.Http.HttpClient> | Temporaire | Fournit des méthodes pour envoyer des requêtes HTTP et recevoir des réponses HTTP d’une ressource identifiée par un URI.<br><br>L’instance de <xref:System.Net.Http.HttpClient> dans une Blazor application webassembly utilise le navigateur pour gérer le trafic HTTP en arrière-plan.<br><br>BlazorLes applications serveur n’incluent pas une <xref:System.Net.Http.HttpClient> configuration en tant que service par défaut. Fournissez un <xref:System.Net.Http.HttpClient> à une Blazor application serveur.<br><br>Pour plus d’informations, consultez <xref:blazor/call-web-api>. |
+| <xref:Microsoft.JSInterop.IJSRuntime> | Singleton ( Blazor Webassembly)<br>Étendue ( Blazor serveur) | Représente une instance d’un Runtime JavaScript dans laquelle les appels JavaScript sont distribués. Pour plus d’informations, consultez <xref:blazor/call-javascript-from-dotnet>. |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager> | Singleton ( Blazor Webassembly)<br>Étendue ( Blazor serveur) | Contient des assistances pour l’utilisation des URI et de l’état de navigation. Pour plus d’informations, consultez [URI et assistance de l’état de navigation](xref:blazor/routing#uri-and-navigation-state-helpers). |
 
 Un fournisseur de services personnalisé ne fournit pas automatiquement les services par défaut indiqués dans le tableau. Si vous utilisez un fournisseur de services personnalisé et que vous avez besoin de l’un des services répertoriés dans le tableau, ajoutez les services requis au nouveau fournisseur de services.
@@ -124,7 +136,7 @@ Les services peuvent être configurés avec les durées de vie indiquées dans l
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | DI crée une *seule instance* du service. Tous les composants qui requièrent un `Singleton` service reçoivent une instance du même service. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | Chaque fois qu’un composant obtient une instance d’un `Transient` service à partir du conteneur de service, il reçoit une *nouvelle instance* du service. |
 
-Le système DI est basé sur le système DI dans ASP.NET Core. Pour plus d'informations, consultez <xref:fundamentals/dependency-injection>.
+Le système DI est basé sur le système DI dans ASP.NET Core. Pour plus d’informations, consultez <xref:fundamentals/dependency-injection>.
 
 ## <a name="request-a-service-in-a-component"></a>Demander un service dans un composant
 
@@ -133,7 +145,7 @@ Une fois les services ajoutés à la collection de services, injectez les servic
 * Type : type du service à injecter.
 * Propriété : nom de la propriété qui reçoit le service d’application injecté. La propriété ne nécessite pas de création manuelle. Le compilateur crée la propriété.
 
-Pour plus d'informations, consultez <xref:mvc/views/dependency-injection>.
+Pour plus d’informations, consultez <xref:mvc/views/dependency-injection>.
 
 Utilisez plusieurs [`@inject`](xref:mvc/views/razor#inject) instructions pour injecter différents services.
 

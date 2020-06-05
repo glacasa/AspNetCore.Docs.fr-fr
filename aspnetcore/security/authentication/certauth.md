@@ -1,17 +1,29 @@
 ---
-titre : Auteur : Description : monikerRange : ms. Author : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: Configurer l’authentification par certificat dans ASP.NET Core
+author: blowdart
+description: Découvrez comment configurer l’authentification par certificat dans ASP.NET Core pour IIS et HTTP. sys.
+monikerRange: '>= aspnetcore-3.0'
+ms.author: bdorrans
+ms.date: 01/02/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/authentication/certauth
+ms.openlocfilehash: 4511e253ea9487c5739162b9b0180e39eb3a1b9c
+ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84454608"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Configurer l’authentification par certificat dans ASP.NET Core
 
 `Microsoft.AspNetCore.Authentication.Certificate`contient une implémentation similaire à [l’authentification par certificat](https://tools.ietf.org/html/rfc5246#section-7.4.4) pour ASP.net core. L’authentification par certificat se produit au niveau du TLS, à long terme avant qu’il ne soit ASP.NET Core. Plus précisément, il s’agit d’un gestionnaire d’authentification qui valide le certificat et vous donne un événement dans lequel vous pouvez résoudre ce certificat en `ClaimsPrincipal` . 
 
-[Configurez votre hôte](#configure-your-host-to-require-certificates) pour l’authentification par certificat, qu’il soit IIS, Kestrel, Azure Web Apps ou tout autre que vous utilisez.
+[Configurez votre serveur](#configure-your-server-to-require-certificates) pour l’authentification par certificat, qu’il soit IIS, Kestrel, Azure Web Apps ou tout autre que vous utilisez.
 
 ## <a name="proxy-and-load-balancer-scenarios"></a>Scénarios de proxy et d’équilibrage de charge
 
@@ -22,9 +34,9 @@ L’authentification par certificat est un scénario avec état principalement u
 
 Une alternative à l’authentification par certificat dans les environnements où les proxies et les équilibreurs de charge sont utilisés est Active Directory Services fédérés (ADFS) avec OpenID Connect (OIDC).
 
-## <a name="get-started"></a>Prise en main
+## <a name="get-started"></a>Bien démarrer
 
-Obtenez un certificat HTTPs, appliquez-le et [configurez votre hôte](#configure-your-host-to-require-certificates) pour exiger des certificats.
+Obtenez un certificat HTTPs, appliquez-le et [configurez votre serveur](#configure-your-server-to-require-certificates) pour exiger des certificats.
 
 Dans votre application Web, ajoutez une référence au `Microsoft.AspNetCore.Authentication.Certificate` Package. Ensuite, dans la `Startup.ConfigureServices` méthode, appelez `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` avec vos options, en fournissant un délégué à pour `OnCertificateValidated` effectuer une validation supplémentaire sur le certificat client envoyé avec les demandes. Transformez ces informations en un `ClaimsPrincipal` et définissez-les sur la `context.Principal` propriété.
 
@@ -183,7 +195,7 @@ services.AddAuthentication(
 
 D’un plan conceptuel, la validation du certificat est un problème d’autorisation. L’ajout d’un contrôle, par exemple, à un émetteur ou une empreinte numérique dans une stratégie d’autorisation, plutôt qu’à l’intérieur de `OnCertificateValidated` , est parfaitement acceptable.
 
-## <a name="configure-your-host-to-require-certificates"></a>Configuration de votre hôte pour exiger des certificats
+## <a name="configure-your-server-to-require-certificates"></a>Configurer votre serveur pour exiger des certificats
 
 ### <a name="kestrel"></a>Kestrel
 

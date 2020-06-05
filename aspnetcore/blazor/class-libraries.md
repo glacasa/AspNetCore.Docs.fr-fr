@@ -1,7 +1,7 @@
 ---
-title: Bibliothèques Razor de classes des composants ASP.net Core
+title: RazorBibliothèques de classes des composants ASP.net Core
 author: guardrex
-description: Découvrez comment les composants peuvent être inclus Blazor dans des applications à partir d’une bibliothèque de composants externes.
+description: Découvrez comment les composants peuvent être inclus dans des Blazor applications à partir d’une bibliothèque de composants externes.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -13,18 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/class-libraries
-ms.openlocfilehash: 57f3494fd825b6549c40f56962da2c8076e8fd51
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b7819404066267003a340629979f2339c66724b0
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767094"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452016"
 ---
-# <a name="aspnet-core-razor-components-class-libraries"></a>Bibliothèques de classes des composants Razor ASP.NET Core
+# <a name="aspnet-core-razor-components-class-libraries"></a>RazorBibliothèques de classes des composants ASP.net Core
 
 Par [Simon Timms](https://github.com/stimms)
 
-Les composants peuvent être partagés dans une [bibliothèque de classes Razor (RCL)](xref:razor-pages/ui-class) entre les projets. Une *bibliothèque de classes de composants Razor* peut être incluse à partir de :
+Les composants peuvent être partagés dans une [ Razor bibliothèque de classes (RCL)](xref:razor-pages/ui-class) d’un projet à l’autre. Vous pouvez inclure une * Razor bibliothèque de classes de composants* à partir de :
 
 * Un autre projet dans la solution.
 * Package NuGet.
@@ -34,24 +34,24 @@ Tout comme les composants sont des types .NET standard, les composants fournis p
 
 ## <a name="create-an-rcl"></a>Créer un RCL
 
-Suivez les instructions de l' <xref:blazor/get-started> article pour configurer votre environnement pour éblouissant.
+Suivez les instructions de l' <xref:blazor/get-started> article pour configurer votre environnement pour Blazor .
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Créez un projet.
-1. Sélectionnez **bibliothèque de classes Razor**. Sélectionnez **Suivant**.
-1. Dans la boîte de dialogue **créer une nouvelle bibliothèque de classes Razor** , sélectionnez **créer**.
-1. Indiquez un nom de projet dans le champ **Nom du projet**, ou acceptez le nom de projet par défaut. Les exemples de cette rubrique utilisent le nom `MyComponentLib1`du projet. Sélectionnez **Créer**.
+1. Sélectionnez ** Razor bibliothèque de classes**. Sélectionnez **Suivant**.
+1. Dans la boîte de dialogue **créer une nouvelle Razor bibliothèque de classes** , sélectionnez **créer**.
+1. Indiquez un nom de projet dans le champ **Nom du projet**, ou acceptez le nom de projet par défaut. Les exemples de cette rubrique utilisent le nom du projet `MyComponentLib1` . Sélectionnez **Create** (Créer).
 1. Ajouter RCL à une solution :
-   1. Cliquez avec le bouton droit sur la solution. Sélectionnez **Ajouter** > un**projet existant**.
+   1. Cliquez avec le bouton droit sur la solution. Sélectionnez **Ajouter**un  >  **projet existant**.
    1. Accédez au fichier projet de RCL.
    1. Sélectionnez le fichier projet de RCL (*. csproj*).
 1. Ajoutez une référence à l’RCL à partir de l’application :
-   1. Cliquez avec le bouton droit sur le projet d’application. Sélectionnez **Ajouter** > une**référence**.
+   1. Cliquez avec le bouton droit sur le projet d’application. Sélectionnez **Ajouter**une  >  **référence**.
    1. Sélectionnez le projet RCL. Sélectionnez **OK**.
 
 > [!NOTE]
-> Si la case à cocher **pages de prise en charge et vues** est activée lors de la génération du RCL à partir du modèle, ajoutez également un fichier *_Imports. Razor* à la racine du projet généré avec le contenu suivant pour activer la création de composants Razor :
+> Si la case à cocher **pages et vues de support** est activée lors de la génération du RCL à partir du modèle, ajoutez également un fichier *_Imports. Razor* à la racine du projet généré avec le contenu suivant pour activer la Razor création de composants :
 >
 > ```razor
 > @using Microsoft.AspNetCore.Components.Web
@@ -61,14 +61,14 @@ Suivez les instructions de l' <xref:blazor/get-started> article pour configurer 
 
 # <a name="net-core-cli"></a>[CLI .NET Core](#tab/netcore-cli)
 
-1. Utilisez le modèle de **bibliothèque de classes Razor** (`razorclasslib`) avec la commande [dotnet New](/dotnet/core/tools/dotnet-new) dans un interpréteur de commandes. Dans l’exemple suivant, un RCL est créé nommé `MyComponentLib1`. Le dossier qui contient `MyComponentLib1` est créé automatiquement lors de l’exécution de la commande :
+1. Utilisez le modèle de ** Razor bibliothèque de classes** ( `razorclasslib` ) avec la commande [dotnet New](/dotnet/core/tools/dotnet-new) dans un interpréteur de commandes. Dans l’exemple suivant, un RCL est créé nommé `MyComponentLib1` . Le dossier qui contient `MyComponentLib1` est créé automatiquement lors de l’exécution de la commande :
 
    ```dotnetcli
    dotnet new razorclasslib -o MyComponentLib1
    ```
 
    > [!NOTE]
-   > Si le `-s|--support-pages-and-views` commutateur est utilisé lors de la génération du RCL à partir du modèle, ajoutez également un fichier *_Imports. Razor* à la racine du projet généré avec le contenu suivant pour activer la création de composants Razor :
+   > Si le `-s|--support-pages-and-views` commutateur est utilisé lors de la génération du RCL à partir du modèle, ajoutez également un fichier *_Imports. Razor* à la racine du projet généré avec le contenu suivant pour activer la Razor création de composants :
    >
    > ```razor
    > @using Microsoft.AspNetCore.Components.Web
@@ -89,9 +89,9 @@ Suivez les instructions de l' <xref:blazor/get-started> article pour configurer 
 Pour utiliser des composants définis dans une bibliothèque dans un autre projet, utilisez l’une des approches suivantes :
 
 * Utilisez le nom de type complet avec l’espace de noms.
-* Utilisez Razorla directive [ \@using](xref:mvc/views/razor#using) de. Des composants individuels peuvent être ajoutés par nom.
+* Utilisez Razor [`@using`](xref:mvc/views/razor#using) la directive de. Des composants individuels peuvent être ajoutés par nom.
 
-Dans les exemples suivants, `MyComponentLib1` est une bibliothèque de composants contenant `SalesReport` un composant.
+Dans les exemples suivants, `MyComponentLib1` est une bibliothèque de composants contenant un `SalesReport` composant.
 
 Le `SalesReport` composant peut être référencé à l’aide de son nom de type complet avec l’espace de noms :
 
@@ -115,7 +115,7 @@ Welcome to your new app.
 <SalesReport />
 ```
 
-Incluez `@using MyComponentLib1` la directive dans le fichier *_Import. Razor* de niveau supérieur pour mettre les composants de la bibliothèque à la disposition d’un projet entier. Ajoutez la directive à un fichier *_Import. Razor* à tout niveau pour appliquer l’espace de noms à une seule page ou à un ensemble de pages dans un dossier.
+Incluez la `@using MyComponentLib1` directive dans le fichier *_Import. Razor* de niveau supérieur pour mettre les composants de la bibliothèque à la disposition d’un projet entier. Ajoutez la directive à un fichier *_Import. Razor* à tout niveau pour appliquer l’espace de noms à une seule page ou à un ensemble de pages dans un dossier.
 
 ## <a name="create-a-razor-components-class-library-with-static-assets"></a>Créer une Razor bibliothèque de classes de composants avec des ressources statiques
 

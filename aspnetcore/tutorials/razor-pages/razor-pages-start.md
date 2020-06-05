@@ -1,7 +1,7 @@
 ---
-title: 'Didacticiel : prise en main Razor des Pages dans ASP.net Core'
+title: '« Didacticiel : prise en main des Razor pages dans ASP.net Core »'
 author: rick-anderson
-description: Cette série de didacticiels montre comment utiliser Razor des Pages dans ASP.net core. Découvrez comment créer un modèle, générer du code pour Razor les pages, utiliser des Entity Framework Core et des SQL Server pour l’accès aux données, ajouter des fonctionnalités de recherche, ajouter une validation d’entrée et utiliser des migrations pour mettre à jour le modèle.
+description: Cette série de didacticiels montre comment utiliser Razor des pages dans ASP.net core. Découvrez comment créer un modèle, générer du code pour les Razor pages, utiliser des Entity Framework Core et des SQL Server pour l’accès aux données, ajouter des fonctionnalités de recherche, ajouter une validation d’entrée et utiliser des migrations pour mettre à jour le modèle.
 ms.author: riande
 ms.date: 11/12/2019
 no-loc:
@@ -11,19 +11,19 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 8ed12b1778673962fe0b174e005bd6d8a7f54168
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 3b8ccf639bb91234f81c67750fffa170e52d636f
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774871"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452338"
 ---
-# <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>Tutoriel : Bien démarrer avec Razor Pages dans ASP.NET Core
+# <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>Didacticiel : prise en main des Razor pages dans ASP.net Core
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
-C’est le premier d’une série de tutoriels, qui décrit les principes fondamentaux liés à la génération d’une application web de Razor Pages dans ASP.NET Core.
+Il s’agit du premier didacticiel d’une série qui enseigne les bases de la création d’une Razor application web ASP.net Core pages.
 
 [!INCLUDE[](~/includes/advancedRP.md)]
 
@@ -34,11 +34,11 @@ C’est le premier d’une série de tutoriels, qui décrit les principes fondam
 Dans ce tutoriel, vous allez :
 
 > [!div class="checklist"]
-> * Créer une application web Razor Pages.
+> * Créer une Razor application Web pages.
 > * Exécutez l'application.
 > * Examiner les fichiers projet.
 
-À la fin de ce didacticiel, vous disposez d’une application web Razor Pages fonctionnelle et générée dans les didacticiels suivants.
+À la fin de ce didacticiel, vous disposerez d’une Razor application Web pages de travail sur laquelle vous allez vous appuyer dans des didacticiels ultérieurs.
 
 ![Page d’accueil ou d’index](razor-pages-start/_static/home2.2.png)
 
@@ -58,7 +58,7 @@ Dans ce tutoriel, vous allez :
 
 ---
 
-## <a name="create-a-razor-pages-web-app"></a>Créer une application web Pages Razor
+## <a name="create-a-razor-pages-web-app"></a>Créer une Razor application Web pages
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -89,7 +89,7 @@ Dans ce tutoriel, vous allez :
   code -r RazorPagesMovie
   ```
 
-  * La commande `dotnet new` crée un nouveau projet Razor Pages dans le dossier *RazorPagesMovie*.
+  * La `dotnet new` commande crée un Razor projet de pages dans le dossier *RazorPagesMovie* .
   * La commande `code` ouvre le dossier *RazorPagesMovie* dans l’instance actuelle de Visual Studio Code.
 
 * Une fois que l’icône de flamme OmniSharp de la barre d’État devient verte, une boîte de dialogue demande les **ressources requises à générer et à déboguer manquantes dans « RazorPagesMovie ». Ajoutez-les ?** Sélectionnez **Oui**.
@@ -100,19 +100,24 @@ Dans ce tutoriel, vous allez :
 
 * Sélectionnez **Fichier** > **Nouvelle solution**.
 
-![macOS - Nouvelle solution](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
+  ![macOS - Nouvelle solution](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-* Sélectionnez **.NET Core** > **Application** > **Application web** > **Suivant**.
+* Dans Visual Studio pour Mac antérieure à la version 8,6, sélectionnez application Web de l’application **.net Core**  >  **App**  >  **Web Application**  >  **suivant**. Dans la version 8,6 ou une version ultérieure, sélectionnez application Web **et**  >  **App**  >  **application Web application**console  >  **suivant**.
 
-  ![macOS - Boîte de dialogue Nouveau projet](razor-pages-start/_static/webapp.png)
+  ![sélection du modèle d’application Web macOS](razor-pages-start/_static/web_app_template_vsmac.png)
 
-* Dans la boîte de dialogue **configurer votre nouvelle application Web** , définissez **Framework cible** sur **.net Core 3,1**.
+* Vérifiez les configurations suivantes :
+
+  * **Framework cible** défini sur **.net Core 3,1**.
+  * **L’authentification** est définie sur **aucune authentification**.
+   
+  Sélectionnez **Suivant**.
 
   ![sélection de macOS .NET Core 3,1](razor-pages-start/_static/targetframework3.png)
 
 * Nommez le projet **RazorPagesMovie**, puis sélectionnez **Créer**.
 
-  ![nameproj](razor-pages-start/_static/RazorPagesMovie.png)
+  ![macOS nom du projet](razor-pages-start/_static/RazorPagesMovie.png)
 
 <!-- End of VS tabs -->
 
@@ -128,9 +133,9 @@ Voici une vue d’ensemble des principaux dossiers et fichiers projet que vous a
 
 ### <a name="pages-folder"></a>Dossier Pages
 
-Contient les pages Razor et les fichiers de prise en charge. Chaque page Razor est une paire de fichiers :
+Contient Razor des pages et des fichiers de prise en charge. Chaque Razor page est une paire de fichiers :
 
-* Un fichier *.cshtml* qui contient le balisage HTML avec du code C# en utilisant la syntaxe Razor.
+* Un fichier *. cshtml* qui contient le balisage HTML avec du code C# à l’aide de la Razor syntaxe.
 * Un fichier *. cshtml.cs* qui contient du code C# gérant les événements de page.
 
 Les fichiers de prise en charge ont des noms commençant par un trait de soulignement. Par exemple, le fichier *_Layout. cshtml* configure les éléments d’interface utilisateur communs à toutes les pages. Ce fichier définit le menu de navigation en haut de la page et la mention de copyright au bas de la page. Pour plus d’informations, consultez <xref:mvc/views/layout>.
@@ -164,7 +169,7 @@ Passez au tutoriel suivant dans la série :
 
 ::: moniker range="< aspnetcore-3.0"
 
-Ceci est le premier didacticiel d’une série. [Cette série](xref:tutorials/razor-pages/index) décrit les principes fondamentaux liés à la génération d’une application web de pages Razor dans ASP.NET Core.
+Ceci est le premier didacticiel d’une série. [La série](xref:tutorials/razor-pages/index) enseigne les bases de la création d’une Razor application Web ASP.net Core pages.
 
 [!INCLUDE[](~/includes/advancedRP.md)]
 
@@ -175,11 +180,11 @@ Ceci est le premier didacticiel d’une série. [Cette série](xref:tutorials/ra
 Dans ce tutoriel, vous allez :
 
 > [!div class="checklist"]
-> * Créer une application web Razor Pages.
+> * Créer une Razor application Web pages.
 > * Exécutez l'application.
 > * Examiner les fichiers projet.
 
-À la fin de ce didacticiel, vous disposez d’une application web Razor Pages fonctionnelle et générée dans les didacticiels suivants.
+À la fin de ce didacticiel, vous disposerez d’une Razor application Web pages de travail sur laquelle vous allez vous appuyer dans des didacticiels ultérieurs.
 
 ![Page d’accueil ou d’index](razor-pages-start/_static/home2.2.png)
 
@@ -199,7 +204,7 @@ Dans ce tutoriel, vous allez :
 
 ---
 
-## <a name="create-a-razor-pages-web-app"></a>Créer une application web Pages Razor
+## <a name="create-a-razor-pages-web-app"></a>Créer une Razor application Web pages
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -234,7 +239,7 @@ Dans ce tutoriel, vous allez :
   code -r RazorPagesMovie
   ```
 
-  * La commande `dotnet new` crée un nouveau projet Razor Pages dans le dossier *RazorPagesMovie*.
+  * La `dotnet new` commande crée un Razor projet de pages dans le dossier *RazorPagesMovie* .
   * La commande `code` ouvre le dossier *RazorPagesMovie* dans l’instance actuelle de Visual Studio Code.
 
 * Une fois que l’icône de flamme OmniSharp de la barre d’État devient verte, une boîte de dialogue demande les **ressources requises à générer et à déboguer manquantes dans « RazorPagesMovie ». Ajoutez-les ?** Sélectionnez **Oui**.
@@ -247,9 +252,7 @@ Dans ce tutoriel, vous allez :
 
 ![macOS - Nouvelle solution](../first-mvc-app/start-mvc/_static/new_project_vsmac.png)
 
-* Sélectionnez **.NET Core** > **Application** > **Application web** > **Suivant**.
-
-  ![macOS - Boîte de dialogue Nouveau projet](razor-pages-start/_static/webapp.png)
+* Dans Visual Studio pour Mac antérieure à la version 8,6, sélectionnez application Web de l’application **.net Core**  >  **App**  >  **Web Application**  >  **suivant**. Dans la version 8,6 ou une version ultérieure, sélectionnez application Web **et**  >  **App**  >  **application Web application**console  >  **suivant**.
 
 * Dans la boîte de dialogue **configurer votre nouvelle API Web ASP.net Core** , définissez **Framework cible** sur **.net Core 3,1**.
 
@@ -331,7 +334,7 @@ Voici une vue d’ensemble des principaux dossiers et fichiers projet que vous a
 
 Contient Razor des pages et des fichiers de prise en charge. Chaque Razor page est une paire de fichiers :
 
-* Un fichier *. cshtml* qui contient le balisage HTML avec du Razor code C# à l’aide de la syntaxe.
+* Un fichier *. cshtml* qui contient le balisage HTML avec du code C# à l’aide de la Razor syntaxe.
 * Un fichier *. cshtml.cs* qui contient du code C# gérant les événements de page.
 
 Les fichiers de prise en charge ont des noms commençant par un trait de soulignement. Par exemple, le fichier *_Layout. cshtml* configure les éléments d’interface utilisateur communs à toutes les pages. Ce fichier définit le menu de navigation en haut de la page et la mention de copyright au bas de la page. Pour plus d’informations, consultez <xref:mvc/views/layout>.

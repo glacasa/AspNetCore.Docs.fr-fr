@@ -1,7 +1,7 @@
 ---
-title: Ajouter la validation à une Razor page ASP.net Core
+title: Ajouter la validation à une Razor Page ASP.net Core
 author: rick-anderson
-description: Découvrez comment ajouter la validation à une Razor Page dans ASP.net core.
+description: Découvrez comment ajouter la validation à une Razor page dans ASP.net core.
 ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
@@ -12,14 +12,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: 91f0ac5fcd607f2423f9fc4647413b2bbb2336fc
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 7aeb77e836ce0546766d88f2c52f37aaf75c12c4
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773773"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452042"
 ---
-# <a name="add-validation-to-an-aspnet-core-razor-page"></a>Ajouter une validation à une page Razor ASP.NET Core
+# <a name="add-validation-to-an-aspnet-core-razor-page"></a>Ajouter la validation à une Razor Page ASP.net Core
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -27,12 +27,12 @@ Dans cette section, une logique de validation est ajoutée au modèle `Movie`. L
 
 ## <a name="validation"></a>Validation
 
-[DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself) (« **D**on't **R**epeat **Y**ourself », Ne vous répétez pas) constitue un principe clé du développement de logiciel. Les pages Razor favorisent le développement dans lequel une fonctionnalité est spécifiée une seule fois et sont répercutées dans toute l’application. DRY peut aider à :
+[DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself) (« **D**on't **R**epeat **Y**ourself », Ne vous répétez pas) constitue un principe clé du développement de logiciel. RazorLes pages encouragent le développement dans lequel la fonctionnalité est spécifiée une seule fois, et elle est reflétée dans l’application. DRY peut aider à :
 
 * Réduire la quantité de code dans une application.
 * Rendre le code moins sujet aux erreurs, et plus facile à tester et à maintenir.
 
-La prise en charge de la validation fournie par les pages Razor et Entity Framework est un bon exemple du principe DRY. Des règles de validation sont spécifiées de façon déclarative à un seul emplacement (dans la classe de modèle), et sont appliquées partout dans l’application.
+La prise en charge de la validation fournie par les Razor pages et les Entity Framework est un bon exemple du principe Dry. Des règles de validation sont spécifiées de façon déclarative à un seul emplacement (dans la classe de modèle), et sont appliquées partout dans l’application.
 
 ## <a name="add-validation-rules-to-the-movie-model"></a>Ajouter des règles de validation au modèle de film
 
@@ -61,7 +61,7 @@ Les attributs de validation spécifient le comportement que vous souhaitez appli
 
 L’application automatique des règles de validation par ASP.NET Core permet d’accroître la fiabilité de votre application. Cela garantit également que vous n’oublierez pas de valider un élément et que vous n’autoriserez pas par inadvertance l’insertion de données incorrectes dans la base de données.
 
-### <a name="validation-error-ui-in-razor-pages"></a>Interface utilisateur d’erreur de validation dans les pages Razor
+### <a name="validation-error-ui-in-razor-pages"></a>Interface utilisateur d’erreur de validation dans les Razor pages
 
 Exécutez l’application, puis accédez à Pages/Movies.
 
@@ -73,7 +73,7 @@ Sélectionnez le lien **Créer nouveau**. Complétez le formulaire avec des vale
 
 Notez que le formulaire a affiché automatiquement un message d’erreur de validation dans chaque champ contenant une valeur non valide. Les erreurs sont appliquées à la fois côté client (à l’aide de JavaScript et de jQuery) et côté serveur (quand JavaScript est désactivé pour un utilisateur).
 
-L’un des principaux avantages est qu’**aucun** changement de code n’a été nécessaire dans les pages Créer ou Modifier. Une fois les attributs DataAnnotations appliqués au modèle, l’interface utilisateur de validation a été activée. Les pages Razor créées dans ce didacticiel ont prélevé les règles de validation (à l’aide des attributs de validation définis sur les propriétés de la classe de modèle `Movie`). Testez la validation à l’aide de la page de modification. La même validation est appliquée.
+L’un des principaux avantages est qu’**aucun** changement de code n’a été nécessaire dans les pages Créer ou Modifier. Une fois les attributs DataAnnotations appliqués au modèle, l’interface utilisateur de validation a été activée. Les Razor pages créées dans ce didacticiel ont automatiquement récupéré les règles de validation (à l’aide des attributs de validation sur les propriétés de la `Movie` classe de modèle). Testez la validation à l’aide de la page de modification. La même validation est appliquée.
 
 Les données de formulaire ne sont pas publiées sur le serveur tant qu’il y a des erreurs de validation côté client. Vérifiez que les données du formulaire ne sont pas publiées à l’aide d’une ou de plusieurs des approches suivantes :
 
@@ -107,7 +107,7 @@ Le code suivant affiche la partie de la page *Create.cshtml* générée automati
 
 Le [Tag Helper d’entrée](xref:mvc/views/working-with-forms) utilise les attributs [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) et produit les attributs HTML nécessaires à la validation jQuery côté client. Le [Tag Helper Validation](xref:mvc/views/working-with-forms#the-validation-tag-helpers) affiche les erreurs de validation. Pour plus d’informations, consultez [Validation](xref:mvc/models/validation).
 
-Les pages Créer et Modifier ne contiennent pas de règles de validation. Les règles de validation et les chaînes d’erreur sont spécifiées uniquement dans la classe `Movie`. Ces règles de validation sont automatiquement appliquées aux pages Razor qui modifient le modèle `Movie`.
+Les pages Créer et Modifier ne contiennent pas de règles de validation. Les règles de validation et les chaînes d’erreur sont spécifiées uniquement dans la classe `Movie`. Ces règles de validation sont appliquées automatiquement aux Razor pages qui modifient le `Movie` modèle.
 
 Quand la logique de validation doit être modifiée, cela s’effectue uniquement dans le modèle. La validation est appliquée de manière cohérente dans l’ensemble de l’application (la logique de validation est définie dans un emplacement unique). La validation dans un emplacement unique permet de maintenir votre code clair, et d’en faciliter la maintenance et la mise à jour.
 
@@ -152,11 +152,11 @@ Le code suivant illustre la combinaison d’attributs sur une seule ligne :
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDAmult.cs?name=snippet1)]
 
-La rubrique [Bien démarrer avec Razor Pages et Entity Framework Core](xref:data/ef-rp/intro) présente des opérations EF Core avancées avec Razor Pages.
+[Prise en main de Razor Pages et EF Core](xref:data/ef-rp/intro) affiche des opérations de EF Core avancées avec des Razor pages.
 
 ### <a name="apply-migrations"></a>Appliquer des migrations
 
-L’application de DataAnnotations à la classe modifie le schéma. Par exemple, DataAnnotations appliqué au champ `Title` :
+Le DataAnnotations appliqué à la classe modifie le schéma. Par exemple, DataAnnotations appliqué au champ `Title` :
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDA.cs?name=snippet11)]
 
@@ -217,7 +217,7 @@ Des migrations ne sont pas requises pour SQLite.
 
 Pour plus d’informations sur le déploiement sur Azure, consultez [Didacticiel : créer une application ASP.net core dans Azure avec SQL Database](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb).
 
-Merci d’avoir effectué cette introduction Razor aux pages. La [prise en Razor main des Pages et des EF Core](xref:data/ef-rp/intro) est un excellent suivi de ce didacticiel.
+Merci d’avoir effectué cette introduction aux Razor pages. [Prise en main de Razor Pages et EF Core](xref:data/ef-rp/intro) est un excellent suivi de ce didacticiel.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

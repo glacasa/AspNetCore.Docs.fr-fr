@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 0b28e99d9c56d92e157e9010880e58ec5165196a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: c2b76b59ae775b9268fa77019bf8420e5e4108b6
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774983"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452278"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>Bien démarrer avec ASP.NET Core MVC
 
@@ -42,7 +42,7 @@ L’application gère une base de données de titres de films. Vous allez appren
 
 ## <a name="prerequisites"></a>Prérequis
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
@@ -58,7 +58,7 @@ L’application gère une base de données de titres de films. Vous allez appren
 
 ## <a name="create-a-web-app"></a>Créer une application web
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Dans Visual Studio, sélectionnez **Créer un projet**.
 
@@ -98,23 +98,30 @@ Il part du principe que vous connaissez déjà VS Code. Pour plus d’informatio
 
 * Sélectionnez **Fichier** > **Nouvelle solution**.
 
-  ![macOS - Nouvelle solution](./start-mvc/_static/new_project_vsmac.png)
+  ![macOS - Nouvelle solution](start-mvc/_static/new_project_vsmac.png)
 
-* Sélectionnez **.NET Core** > **Application** > **Application web (modèle-vue-contrôleur)** > **Suivant**.
+* Dans Visual Studio pour Mac antérieure à la version 8,6, sélectionnez application Web de l’application **.net Core**  >  **App**  >  **(Model-View-Controller)**  >  **suivant**. Dans la version 8,6 ou une version ultérieure, sélectionnez application Web **et**  >  **App**  >  **application console (Model-View-Controller)**  >  **suivant**.
 
-  ![macOS - Boîte de dialogue Nouveau projet](./start-mvc/_static/new_project_mvc_vsmac.png)
+  ![sélection du modèle d’application Web macOS](start-mvc/_static/web_app_template_vsmac.png)
 
-* Dans la boîte de dialogue **configurer votre nouvelle API Web ASP.net Core** , définissez le **Framework cible** de **.net Core 3,1**.
+* Vérifiez les configurations suivantes :
 
-  ![sélection de macOS .NET Core 3,1](./start-mvc/_static/new_project_31_vsmac.png)
+  * **Framework cible** défini sur **.net Core 3,1**.
+  * **L’authentification** est définie sur **aucune authentification**.
+   
+  Sélectionnez **Suivant**.
+
+  ![sélection de macOS .NET Core 3,1](start-mvc/_static/new_project_31_vsmac.png)
 
 * Nommez le projet **MvcMovie**, puis sélectionnez **Créer**.
+
+  ![macOS nom du projet](start-mvc/_static/MvcMovie.png)
 
 ---
 
 ### <a name="run-the-app"></a>Exécuter l’application
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Sélectionnez **Ctrl-F5** pour exécuter l'application en mode non-débogage.
 
@@ -148,7 +155,7 @@ Appuyez sur Ctrl+F5 pour exécuter sans le débogueur.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-Sélectionnez **exécuter** > **Démarrer sans débogage** pour lancer l’application. Visual Studio pour Mac démarre le serveur [Kestrel](xref:fundamentals/servers/index#kestrel), lance un navigateur et accède à `http://localhost:port`, où *port* est un numéro de port choisi de façon aléatoire.
+Sélectionnez **exécuter**  >  **Démarrer sans débogage** pour lancer l’application. Visual Studio pour Mac démarre le serveur [Kestrel](xref:fundamentals/servers/index#kestrel), lance un navigateur et accède à `http://localhost:port`, où *port* est un numéro de port choisi de façon aléatoire.
 
 [!INCLUDE[](~/includes/trustCertMac.md)]
 
@@ -190,7 +197,7 @@ L’application gère une base de données de titres de films. Vous allez appren
 
 ## <a name="prerequisites"></a>Prérequis
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -205,7 +212,7 @@ L’application gère une base de données de titres de films. Vous allez appren
 ---
 ## <a name="create-a-web-app"></a>Créer une application web
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Dans Visual Studio, sélectionnez **Créer un projet**.
 
@@ -248,9 +255,7 @@ Il part du principe que vous connaissez déjà VS Code. Pour plus d’informatio
 
   ![macOS - Nouvelle solution](./start-mvc/_static/new_project_vsmac.png)
 
-* Sélectionnez **.NET Core** > **Application** > **Application web (modèle-vue-contrôleur)** > **Suivant**.
-
-  ![macOS - Boîte de dialogue Nouveau projet](./start-mvc/_static/new_project_mvc_vsmac.png)
+* Dans Visual Studio pour Mac antérieure à la version 8,6, sélectionnez application Web de l’application **.net Core**  >  **App**  >  **(Model-View-Controller)**  >  **suivant**. Dans la version 8,6 ou une version ultérieure, sélectionnez application Web **et**  >  **App**  >  **application console (Model-View-Controller)**  >  **suivant**.
 
 * Dans la boîte de dialogue **configurer votre nouvelle API Web ASP.net Core** , acceptez le **Framework cible** par défaut de **.net Core 2,2**.
 
@@ -262,7 +267,7 @@ Il part du principe que vous connaissez déjà VS Code. Pour plus d’informatio
 
 ### <a name="run-the-app"></a>Exécuter l’application
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Sélectionnez **Ctrl-F5** pour exécuter l'application en mode non-débogage.
 
@@ -306,7 +311,7 @@ Appuyez sur Ctrl+F5 pour exécuter sans le débogueur.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-Sélectionnez **exécuter** > **Démarrer sans débogage** pour lancer l’application. Visual Studio pour Mac démarre le serveur [Kestrel](xref:fundamentals/servers/index#kestrel), lance un navigateur et accède à `http://localhost:port`, où *port* est un numéro de port choisi de façon aléatoire.
+Sélectionnez **exécuter**  >  **Démarrer sans débogage** pour lancer l’application. Visual Studio pour Mac démarre le serveur [Kestrel](xref:fundamentals/servers/index#kestrel), lance un navigateur et accède à `http://localhost:port`, où *port* est un numéro de port choisi de façon aléatoire.
 
 [!INCLUDE[](~/includes/trustCertMac.md)]
 
