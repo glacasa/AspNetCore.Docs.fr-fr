@@ -1,11 +1,23 @@
 ---
-titre : Auteur : Description : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: Migrer de API Web ASP.NET vers ASP.NET Core
+author: ardalis
+description: Découvrez comment migrer une implémentation d’API Web à partir de l’API Web ASP.NET 4. x vers ASP.NET Core MVC.
+ms.author: scaddie
+ms.custom: mvc
+ms.date: 05/26/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: migration/webapi
+ms.openlocfilehash: 3c8bf27a97de92a42817d4af625976a4920001aa
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84145549"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>Migrer de API Web ASP.NET vers ASP.NET Core
 
@@ -47,7 +59,7 @@ Créez une nouvelle solution vide dans Visual Studio et ajoutez le projet d’AP
 
 1. Dans le menu **Fichier**, sélectionnez **Nouveau** > **Projet**.
 1. Sélectionnez le modèle de **solution vide** , puis cliquez sur **suivant**.
-1. Nommez la solution *WebAPIMigration*. Sélectionnez **Créer**.
+1. Nommez la solution *WebAPIMigration*. Sélectionnez **Create** (Créer).
 1. Ajoutez le projet *ProductsApp* existant à la solution.
 
 Ajoutez un nouveau projet d’API à migrer vers :
@@ -68,7 +80,7 @@ Classe `Startup` :
 * Remplace *global. asax*.
 * Gère toutes les tâches de démarrage de l’application.
 
-Pour plus d'informations, consultez <xref:fundamentals/startup>.
+Pour plus d’informations, consultez <xref:fundamentals/startup>.
 
 ## <a name="migrate-models-and-controllers"></a>Migrer les modèles et les contrôleurs
 
@@ -181,7 +193,7 @@ Classe `Startup` :
 * Remplace *global. asax*.
 * Gère toutes les tâches de démarrage de l’application.
 
-Pour plus d'informations, consultez <xref:fundamentals/startup>.
+Pour plus d’informations, consultez <xref:fundamentals/startup>.
 
 Dans ASP.NET Core MVC, le routage des attributs est inclus par défaut quand <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc*> est appelé dans `Startup.Configure` . L' `UseMvc` appel suivant remplace le fichier *App_Start/webapiconfig.cs* du projet *ProductsApp* :
 

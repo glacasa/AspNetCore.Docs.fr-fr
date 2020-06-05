@@ -1,11 +1,11 @@
 ---
-title: Créez des applications Web progressifs avec ASP.NET Core Blazor webassembly
+title: Créez des applications Web progressifs avec ASP.NET Core Blazor Webassembly
 author: guardrex
-description: Découvrez comment créer une Blazorapplication Web progressive (PWA) qui utilise des fonctionnalités de navigateur modernes pour se comporter comme une application de bureau.
+description: Découvrez comment créer une Blazor application Web progressive (PWA) qui utilise des fonctionnalités de navigateur modernes pour se comporter comme une application de bureau.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/23/2020
+ms.date: 05/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,22 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: cf31c91ddc073498d882b111b597c546e788cc98
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 274516014c027972166402abc70d22fa801898de
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771557"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84451847"
 ---
-# <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>Créez des applications Web progressifs avec ASP.NET Core webassembly éblouissant
+# <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>Créez des applications Web progressifs avec ASP.NET Core Blazor Webassembly
 
 Par [Steve Sanderson](https://github.com/SteveSandersonMS)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-Une application Web progressive (PWA) est une application à page unique (SPA) qui utilise des API et des fonctionnalités de navigateur modernes pour se comporter comme une application de bureau. Le webassembly éblouissant est une plate-forme d’application Web côté client basée sur des normes. il peut donc utiliser n’importe quelle API de navigateur, y compris les API PWA requises pour les fonctionnalités suivantes :
+Une application Web progressive (PWA) est une application à page unique (SPA) qui utilise des API et des fonctionnalités de navigateur modernes pour se comporter comme une application de bureau. BlazorWebassembly est une plate-forme d’application Web cliente basée sur des normes, de sorte qu’elle peut utiliser n’importe quelle API de navigateur, y compris les API PWA requises pour les fonctionnalités suivantes :
 
 * Travailler en mode hors connexion et se charger instantanément, indépendamment de la vitesse du réseau.
 * S’exécutant dans sa propre fenêtre d’application, et pas seulement dans une fenêtre de navigateur.
@@ -45,7 +41,7 @@ Le mot *progressif* est utilisé pour décrire de telles applications, car :
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Quand vous créez une **application de Webassembly éblouissante** dans la boîte de dialogue **créer un nouveau projet** , activez la case à cocher progression de l' **application Web** :
+Lorsque vous créez une ** Blazor application webassembly** dans la boîte de dialogue **créer un nouveau projet** , activez la case à cocher **application Web progressive** :
 
 ![La case à cocher « application Web progressive » est activée dans la boîte de dialogue Nouveau projet de Visual Studio.](progressive-web-app/_static/image1.png)
 
@@ -57,7 +53,7 @@ Quand vous créez une **application de Webassembly éblouissante** dans la boît
 
 # <a name="visual-studio-code--net-core-cli"></a>[Visual Studio Code/.NET Core CLI](#tab/visual-studio-code+netcore-cli)
 
-Créez un projet PWA dans une interface de commande avec `--pwa` le commutateur :
+Créez un projet PWA dans une interface de commande avec le `--pwa` commutateur :
 
 ```dotnetcli
 dotnet new blazorwasm -o MyNewProject --pwa
@@ -89,7 +85,7 @@ Par défaut, les applications créées à l’aide de l’option de modèle PWA 
 > Le support de développement interfère avec le cycle de développement habituel qui consiste à apporter des modifications et à les tester. Par conséquent, la prise en charge hors connexion est activée uniquement pour les applications *publiées* . 
 
 > [!WARNING]
-> Si vous envisagez de distribuer un PWA avec accès hors connexion, il y a [plusieurs avertissements et avertissements importants](#caveats-for-offline-pwas). Ces scénarios sont inhérents aux PWA hors connexion et ne Blazorsont pas spécifiques à. Veillez à lire et à comprendre ces avertissements avant de faire des hypothèses sur le fonctionnement de votre application en mode hors connexion.
+> Si vous envisagez de distribuer un PWA avec accès hors connexion, il y a [plusieurs avertissements et avertissements importants](#caveats-for-offline-pwas). Ces scénarios sont inhérents aux PWA hors connexion et ne sont pas spécifiques à Blazor . Veillez à lire et à comprendre ces avertissements avant de faire des hypothèses sur le fonctionnement de votre application en mode hors connexion.
 
 Pour voir comment fonctionne la prise en charge hors connexion :
 
@@ -110,7 +106,7 @@ Pour voir comment fonctionne la prise en charge hors connexion :
 
    ![L’onglet « Réseau » des outils de développement Google Chrome avec la liste déroulante mode navigateur passe de « en ligne » à « hors connexion ».](progressive-web-app/_static/image6.png)
 
-La prise en charge hors connexion à l’aide d’un Worker service Blazorest une norme Web, non spécifique à. Pour plus d’informations sur les Workers de service, consultez [MDN Web docs : Service Worker API](https://developer.mozilla.org/docs/Web/API/Service_Worker_API). Pour en savoir plus sur les modèles d’utilisation courants pour les Workers de service, consultez [Google Web : the Service Worker Lifecycle](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle).
+La prise en charge hors connexion à l’aide d’un Worker service est une norme Web, non spécifique à Blazor . Pour plus d’informations sur les Workers de service, consultez [MDN Web docs : Service Worker API](https://developer.mozilla.org/docs/Web/API/Service_Worker_API). Pour en savoir plus sur les modèles d’utilisation courants pour les Workers de service, consultez [Google Web : the Service Worker Lifecycle](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle).
 
 Blazorle modèle PWA de génère deux fichiers de travail de service :
 
@@ -128,14 +124,14 @@ Le service Worker *Service-Worker. published. js* intégré résout les demandes
 
 La stratégie du cache en premier est utile pour les raisons suivantes :
 
-* **Cela garantit la fiabilité.** &ndash;L’accès réseau n’est pas un état booléen. Un utilisateur n’est pas simplement en ligne ou hors connexion :
+* **Cela garantit la fiabilité.** L’accès réseau n’est pas un état booléen. Un utilisateur n’est pas simplement en ligne ou hors connexion :
 
   * L’appareil de l’utilisateur peut supposer qu’il est en ligne, mais il est possible que le réseau soit si lent, car il est difficile à attendre.
   * Le réseau peut retourner des résultats non valides pour certaines URL, par exemple lorsqu’il existe un portail WIFI captif qui bloque ou redirige actuellement certaines requêtes.
   
-  C’est la raison pour laquelle `navigator.onLine` l’API du navigateur n’est pas fiable et ne doit pas être dépendante.
+  C’est la raison pour laquelle l’API du navigateur `navigator.onLine` n’est pas fiable et ne doit pas être dépendante.
 
-* **Cela garantit l’exactitude.** &ndash;Lors de la création d’un cache de ressources hors connexion, le service worker utilise le hachage de contenu pour garantir qu’il a extrait un instantané complet et cohérent des ressources en un seul instant. Ce cache est ensuite utilisé comme une unité atomique. Il n’y a aucun point à demander au réseau des ressources plus récentes, puisque les seules versions requises sont celles déjà mises en cache. Tout autre risque d’incohérence et d’incompatibilité (par exemple, essayer d’utiliser des versions d’assemblys .NET qui n’ont pas été compilées ensemble).
+* **Cela garantit l’exactitude.** Lors de la création d’un cache de ressources hors connexion, le service worker utilise le hachage de contenu pour garantir qu’il a extrait un instantané complet et cohérent des ressources en un seul instant. Ce cache est ensuite utilisé comme une unité atomique. Il n’y a aucun point à demander au réseau des ressources plus récentes, puisque les seules versions requises sont celles déjà mises en cache. Tout autre risque d’incohérence et d’incompatibilité (par exemple, essayer d’utiliser des versions d’assemblys .NET qui n’ont pas été compilées ensemble).
 
 ### <a name="background-updates"></a>Mises à jour en arrière-plan
 
@@ -145,7 +141,7 @@ Le Blazor modèle PWA produit des applications qui essaient automatiquement de s
 
 * Au cours de la compilation, le projet génère un *manifeste des ressources de traitement de service*. Par défaut, il s’agit de *Service-Worker-Assets. js*. Le manifeste répertorie toutes les ressources statiques dont l’application a besoin pour fonctionner hors connexion, telles que les assemblys .NET, les fichiers JavaScript et CSS, y compris leurs hachages de contenu. La liste des ressources est chargée par le processus de travail du service afin qu’il sache quelles ressources mettre en cache.
 * Chaque fois que l’utilisateur visite l’application, le navigateur redemande *Service-Worker. js* et *Service-Worker-Assets. js* en arrière-plan. Les fichiers sont comparés octet par octet avec le processus de travail de service installé existant. Si le serveur retourne le contenu modifié de l’un de ces fichiers, le processus de travail de service tente d’installer une nouvelle version de lui-même.
-* Lors de l’installation d’une nouvelle version de lui-même, le processus de travail crée un cache distinct pour les ressources hors connexion et démarre le remplissage du cache avec les ressources listées dans *Service-Worker-Assets. js*. Cette logique est implémentée dans `onInstall` la fonction à l’intérieur de *Service-Worker. published. js*.
+* Lors de l’installation d’une nouvelle version de lui-même, le processus de travail crée un cache distinct pour les ressources hors connexion et démarre le remplissage du cache avec les ressources listées dans *Service-Worker-Assets. js*. Cette logique est implémentée dans la `onInstall` fonction à l’intérieur de *Service-Worker. published. js*.
 * Le processus se termine correctement lorsque toutes les ressources sont chargées sans erreur et que tous les hachages de contenu correspondent. En cas de réussite, le nouveau service Worker entre dans un état *d’activation en attente* . Dès que l’utilisateur ferme l’application (pas d’onglets ou de fenêtres d’application restants), le nouveau Worker service devient *actif* et est utilisé pour les visites de l’application suivante. L’ancien service Worker et son cache sont supprimés.
 * Si le processus ne se termine pas correctement, la nouvelle instance de service worker est ignorée. Le processus de mise à jour est tenté à nouveau à la prochaine visite de l’utilisateur, lorsque j’espère que le client dispose d’une meilleure connexion réseau capable d’effectuer les requêtes.
 
@@ -153,20 +149,20 @@ Personnalisez ce processus en modifiant la logique du service Worker. Aucun des 
 
 ### <a name="how-requests-are-resolved"></a>Résolution des demandes
 
-Comme décrit dans la section [stratégie de récupération du cache en premier](#cache-first-fetch-strategy) , le Worker de service par défaut utilise une stratégie de cache en *premier* , ce qui signifie qu’il tente de traiter le contenu mis en cache quand il est disponible. S’il n’existe aucun contenu mis en cache pour une certaine URL, par exemple lors de la demande de données à partir d’une API de serveur principal, le processus de travail de service revient sur une demande réseau normale. La demande réseau a abouti si le serveur est accessible. Cette logique est implémentée `onFetch` dans la fonction dans *Service-Worker. published. js*.
+Comme décrit dans la section [stratégie de récupération du cache en premier](#cache-first-fetch-strategy) , le Worker de service par défaut utilise une stratégie de cache en *premier* , ce qui signifie qu’il tente de traiter le contenu mis en cache quand il est disponible. S’il n’existe aucun contenu mis en cache pour une certaine URL, par exemple lors de la demande de données à partir d’une API de serveur principal, le processus de travail de service revient sur une demande réseau normale. La demande réseau a abouti si le serveur est accessible. Cette logique est implémentée dans la `onFetch` fonction dans *Service-Worker. published. js*.
 
-Si les composants de Razor l’application s’appuient sur la demande de données à partir des API principales et que vous souhaitez fournir une expérience utilisateur conviviale pour les demandes ayant échoué en raison d’une indisponibilité du réseau, implémentez la logique dans les composants de l’application. Par exemple, utilisez `try/catch` autour `HttpClient` des demandes.
+Si les composants de l’application s' Razor appuient sur la demande de données à partir des API principales et que vous souhaitez fournir une expérience utilisateur conviviale pour les demandes ayant échoué en raison d’une indisponibilité du réseau, implémentez la logique dans les composants de l’application. Par exemple, utilisez `try/catch` autour des <xref:System.Net.Http.HttpClient> demandes.
 
 ### <a name="support-server-rendered-pages"></a>Prendre en charge les pages rendues par le serveur
 
-Réfléchissez à ce qui se passe quand l’utilisateur accède pour la première `/counter` fois à une URL telle que ou à tout autre lien profond dans l’application. Dans ce cas, vous ne souhaitez pas renvoyer le contenu mis en `/counter`cache en tant que, mais vous avez besoin du navigateur pour charger `/index.html` le contenu mis en Blazor cache en tant que pour démarrer votre application webassembly. Ces demandes initiales sont appelées demandes de *navigation* , par opposition à :
+Réfléchissez à ce qui se passe quand l’utilisateur accède pour la première fois à une URL telle que `/counter` ou à tout autre lien profond dans l’application. Dans ce cas, vous ne souhaitez pas renvoyer le contenu mis en cache en tant que `/counter` , mais vous avez besoin du navigateur pour charger le contenu mis en cache en tant que `/index.html` pour démarrer votre Blazor application webassembly. Ces demandes initiales sont appelées demandes de *navigation* , par opposition à :
 
 * demandes de sous- *ressources* pour les images, les feuilles de style ou d’autres fichiers.
 * requêtes *Fetch/XHR* pour les données d’API.
 
-Le service Worker par défaut contient une logique de cas spéciale pour les demandes de navigation. Le Worker de service résout les demandes en retournant le contenu mis `/index.html`en cache pour, quelle que soit l’URL demandée. Cette logique est implémentée dans `onFetch` la fonction à l’intérieur de *Service-Worker. published. js*.
+Le service Worker par défaut contient une logique de cas spéciale pour les demandes de navigation. Le Worker de service résout les demandes en retournant le contenu mis en cache pour `/index.html` , quelle que soit l’URL demandée. Cette logique est implémentée dans la `onFetch` fonction à l’intérieur de *Service-Worker. published. js*.
 
-Si votre application comporte certaines URL qui doivent retourner le HTML rendu serveur et ne servent `/index.html` pas à partir du cache, vous devez modifier la logique de votre service Worker. Si toutes les URL `/Identity/` contenant doivent être gérées comme des requêtes en ligne régulières uniquement sur le serveur, modifiez la logique *Service-Worker. published. js* `onFetch` . Recherchez le code suivant :
+Si votre application comporte certaines URL qui doivent retourner le HTML rendu serveur et ne servent pas `/index.html` à partir du cache, vous devez modifier la logique de votre service Worker. Si toutes les URL contenant `/Identity/` doivent être gérées comme des requêtes en ligne régulières uniquement sur le serveur, modifiez la logique *Service-Worker. published. js* `onFetch` . Recherchez le code suivant :
 
 ```javascript
 const shouldServeIndexHtml = event.request.mode === 'navigate';
@@ -179,26 +175,26 @@ const shouldServeIndexHtml = event.request.mode === 'navigate'
     && !event.request.url.includes('/Identity/');
 ```
 
-Si vous n’effectuez pas cette opération, quelle que soit la connectivité réseau, le service Worker intercepte les demandes de ces URL et `/index.html`les résout à l’aide de.
+Si vous n’effectuez pas cette opération, quelle que soit la connectivité réseau, le service Worker intercepte les demandes de ces URL et les résout à l’aide de `/index.html` .
 
 ### <a name="control-asset-caching"></a>Contrôler la mise en cache des ressources
 
-Si votre projet définit la `ServiceWorkerAssetsManifest` propriété MSBuild, Blazorles outils de génération de génèrent un manifeste des ressources de travail de service avec le nom spécifié. Le modèle PWA par défaut produit un fichier projet contenant la propriété suivante :
+Si votre projet définit la `ServiceWorkerAssetsManifest` propriété MSBuild, les Blazor outils de génération de génèrent un manifeste des ressources de travail de service avec le nom spécifié. Le modèle PWA par défaut produit un fichier projet contenant la propriété suivante :
 
 ```xml
 <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
 ```
 
-Le fichier est placé dans le répertoire de sortie *wwwroot* , de sorte que le navigateur peut récupérer ce `/service-worker-assets.js`fichier en demandant. Pour afficher le contenu de ce fichier, ouvrez */bin/debug/{Target Framework}/wwwroot/Service-Worker-Assets.js* dans un éditeur de texte. Toutefois, ne modifiez pas le fichier, car il est régénéré à chaque Build.
+Le fichier est placé dans le répertoire de sortie *wwwroot* , de sorte que le navigateur peut récupérer ce fichier en demandant `/service-worker-assets.js` . Pour afficher le contenu de ce fichier, ouvrez */bin/debug/{Target Framework}/wwwroot/Service-Worker-Assets.js* dans un éditeur de texte. Toutefois, ne modifiez pas le fichier, car il est régénéré à chaque Build.
 
 Par défaut, ce manifeste répertorie les éléments suivants :
 
-* Toutes Blazorles ressources managées, telles que les assemblys .net et les fichiers d’exécution webassembly .net nécessaires pour fonctionner hors connexion.
+* Toutes les Blazor ressources managées, telles que les assemblys .net et les fichiers d’exécution Webassembly .net nécessaires pour fonctionner hors connexion.
 * Toutes les ressources pour la publication dans le répertoire *wwwroot* de l’application, telles que les images, les feuilles de style et les fichiers JavaScript, y compris les ressources Web statiques fournies par les projets externes et les packages NuGet.
 
-Vous pouvez contrôler les ressources qui sont extraites et mises en cache par le service Worker en modifiant la logique `onInstall` dans dans *Service-Worker. published. js*. Par défaut, le service Worker récupère et met en cache les fichiers correspondant aux extensions de noms de fichiers Web typiques telles que *. html*, *. CSS*, *. js*et *. WASM*, Blazor ainsi que les types de fichiers spécifiques à webassembly (*. dll*, *. pdb*).
+Vous pouvez contrôler les ressources qui sont extraites et mises en cache par le service Worker en modifiant la logique dans `onInstall` dans *Service-Worker. published. js*. Par défaut, le service Worker récupère et met en cache les fichiers correspondant aux extensions de noms de fichiers Web typiques telles que *. html*, *. CSS*, *. js*et *. WASM*, ainsi que les types de fichiers spécifiques à Blazor webassembly (*. dll*, *. pdb*).
 
-Pour inclure des ressources supplémentaires qui ne sont pas présentes dans le répertoire *wwwroot* de l’application `ItemGroup` , définissez des entrées MSBuild supplémentaires, comme indiqué dans l’exemple suivant :
+Pour inclure des ressources supplémentaires qui ne sont pas présentes dans le répertoire *wwwroot* de l’application, définissez des entrées MSBuild supplémentaires `ItemGroup` , comme indiqué dans l’exemple suivant :
 
 ```xml
 <ItemGroup>
@@ -210,15 +206,15 @@ Pour inclure des ressources supplémentaires qui ne sont pas présentes dans le 
 Les `AssetUrl` métadonnées spécifient l’URL relative de base que le navigateur doit utiliser lors de la récupération de la ressource à mettre en cache. Cela peut être indépendant du nom du fichier source d’origine sur le disque.
 
 > [!IMPORTANT]
-> L’ajout `ServiceWorkerAssetsManifestItem` de n’entraîne pas la publication du fichier dans le répertoire *wwwroot* de l’application. La sortie de publication doit être contrôlée séparément. Le `ServiceWorkerAssetsManifestItem` seul fait apparaître une entrée supplémentaire dans le manifeste des ressources du Worker.
+> L’ajout de `ServiceWorkerAssetsManifestItem` n’entraîne pas la publication du fichier dans le répertoire *wwwroot* de l’application. La sortie de publication doit être contrôlée séparément. Le `ServiceWorkerAssetsManifestItem` seul fait apparaître une entrée supplémentaire dans le manifeste des ressources du Worker.
 
 ## <a name="push-notifications"></a>Notifications push
 
-Comme tout autre PWA, un Blazor webassembly PWA peut recevoir des notifications push à partir d’un serveur principal. Le serveur peut envoyer des notifications push à tout moment, même lorsque l’utilisateur n’utilise pas activement l’application. Par exemple, les notifications push peuvent être envoyées lorsqu’un autre utilisateur effectue une action appropriée.
+Comme tout autre PWA, un Blazor Webassembly PWA peut recevoir des notifications push à partir d’un serveur principal. Le serveur peut envoyer des notifications push à tout moment, même lorsque l’utilisateur n’utilise pas activement l’application. Par exemple, les notifications push peuvent être envoyées lorsqu’un autre utilisateur effectue une action appropriée.
 
-Le mécanisme d’envoi d’une notification push est entièrement indépendant Blazor de webassembly, car il est implémenté par le serveur principal qui peut utiliser n’importe quelle technologie. Si vous souhaitez envoyer des notifications push à partir d’un serveur de ASP.NET Core, envisagez d' [utiliser une technique similaire à l’approche adoptée dans l’atelier de pizzas éblouissant](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#sending-push-notifications).
+Le mécanisme d’envoi d’une notification push est entièrement indépendant de Blazor Webassembly, car il est implémenté par le serveur principal qui peut utiliser n’importe quelle technologie. Si vous souhaitez envoyer des notifications push à partir d’un serveur de ASP.NET Core, envisagez d' [utiliser une technique similaire à l’approche adoptée dans l’atelier de pizzas éblouissant](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#sending-push-notifications).
 
-Le mécanisme de réception et d’affichage d’une notification push sur le client est également Blazor indépendant de webassembly, puisqu’il est implémenté dans le fichier JavaScript Service Worker. Pour obtenir un exemple, consultez [l’approche utilisée dans l’atelier de pizzas éblouissant](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#displaying-notifications).
+Le mécanisme de réception et d’affichage d’une notification push sur le client est également indépendant de Blazor Webassembly, puisqu’il est implémenté dans le fichier JavaScript Service Worker. Pour obtenir un exemple, consultez [l’approche utilisée dans l’atelier de pizzas éblouissant](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#displaying-notifications).
 
 ## <a name="caveats-for-offline-pwas"></a>Avertissements pour les PWA hors connexion
 
@@ -226,7 +222,7 @@ Toutes les applications ne doivent pas essayer de prendre en charge l’utilisat
 
 La prise en charge hors connexion est généralement pertinente uniquement :
 
-* Si la Banque de données principale est locale pour le navigateur. Par exemple, l’approche est pertinente dans une application avec une interface utilisateur pour un appareil [IOT](https://en.wikipedia.org/wiki/Internet_of_things) qui stocke `localStorage` des données dans ou [IndexedDB](https://developer.mozilla.org/docs/Web/API/IndexedDB_API).
+* Si la Banque de données principale est locale pour le navigateur. Par exemple, l’approche est pertinente dans une application avec une interface utilisateur pour un appareil [IOT](https://en.wikipedia.org/wiki/Internet_of_things) qui stocke des données dans `localStorage` ou [IndexedDB](https://developer.mozilla.org/docs/Web/API/IndexedDB_API).
 * Si l’application effectue une quantité importante de travail pour extraire et mettre en cache les données de l’API backend pertinentes pour chaque utilisateur afin qu’elles puissent parcourir les données hors connexion. Si l’application doit prendre en charge la modification, un système de suivi des modifications et de synchronisation des données avec le serveur principal doit être généré.
 * Si l’objectif est de garantir que l’application se charge immédiatement, indépendamment des conditions du réseau. Implémentez une expérience utilisateur appropriée autour des demandes d’API backend pour montrer la progression des requêtes et se comporter correctement lorsque les requêtes échouent en raison d’une indisponibilité du réseau.
 
@@ -234,7 +230,7 @@ En outre, les PWAS en mode hors connexion doivent gérer un éventail de complic
 
 ### <a name="offline-support-only-when-published"></a>Prise en charge hors connexion uniquement lors de la publication
 
-Pendant le développement, vous souhaitez généralement voir chaque modification reflétée immédiatement dans le navigateur sans passer par un processus de mise à jour en arrière-plan. Par conséquent Blazor, le modèle PWA de n’autorise la prise en charge hors connexion que lorsqu’il est publié.
+Pendant le développement, vous souhaitez généralement voir chaque modification reflétée immédiatement dans le navigateur sans passer par un processus de mise à jour en arrière-plan. Par conséquent, le Blazor modèle PWA de n’autorise la prise en charge hors connexion que lorsqu’il est publié.
 
 Lors de la création d’une application de compatibilité hors connexion, il n’est pas suffisant de tester l’application dans l’environnement de développement. Vous devez tester l’application dans son état publié pour comprendre comment elle répond à différentes conditions réseau.
 
@@ -242,7 +238,7 @@ Lors de la création d’une application de compatibilité hors connexion, il n�
 
 Les mises à jour ne se terminent pas tant que l’utilisateur n’a pas quitté l’application dans tous les onglets. Comme expliqué dans la section [mises à jour en arrière-plan](#background-updates) , après le déploiement d’une mise à jour de l’application, le navigateur récupère les fichiers de travail de service mis à jour pour commencer le processus de mise à jour.
 
-Ce que de nombreux développeurs peuvent faire, même lorsque cette mise à jour est terminée, elle n’entre pas en vigueur tant que l’utilisateur n’a **pas** quitté tous les onglets. Il n’est **pas** suffisant d’actualiser l’onglet qui affiche l’application, même s’il s’agit du seul onglet qui affiche l’application. Tant que votre application n’est pas complètement fermée, le nouveau service Worker reste dans l’État en *attente d’activation* . **Cela n’est pas spécifique Blazorà, mais plutôt à un comportement de plateforme Web standard.**
+Ce que de nombreux développeurs peuvent faire, même lorsque cette mise à jour est terminée, elle n’entre pas en vigueur tant que l’utilisateur n’a **pas** quitté tous les onglets. Il n’est **pas** suffisant d’actualiser l’onglet qui affiche l’application, même s’il s’agit du seul onglet qui affiche l’application. Tant que votre application n’est pas complètement fermée, le nouveau service Worker reste dans l’État en *attente d’activation* . **Cela n’est pas spécifique à Blazor , mais plutôt à un comportement de plateforme Web standard.**
 
 Cela ne pose généralement pas de ennuis aux développeurs qui essaient de tester les mises à jour de leur service Worker ou des ressources mises en cache hors connexion. Si vous archivez dans les outils de développement du navigateur, vous pouvez voir un résultat semblable à ce qui suit :
 
@@ -264,7 +260,7 @@ Si possible, ne déployez pas les modifications importantes apportées à vos AP
 
 ### <a name="interference-with-server-rendered-pages"></a>Interférence avec les pages rendues par le serveur
 
-Comme décrit dans la section [prise en charge des pages rendues](#support-server-rendered-pages) par le serveur, si vous souhaitez contourner le comportement `/index.html` du processus de travail de retour de contenu pour toutes les demandes de navigation, modifiez la logique de votre service Worker.
+Comme décrit dans la section [prise en charge des pages rendues](#support-server-rendered-pages) par le serveur, si vous souhaitez contourner le comportement du processus de travail de retour de `/index.html` contenu pour toutes les demandes de navigation, modifiez la logique de votre service Worker.
 
 ### <a name="all-service-worker-asset-manifest-contents-are-cached-by-default"></a>Tous les contenus du manifeste de la ressource Service Worker sont mis en cache par défaut
 
@@ -272,7 +268,7 @@ Comme décrit dans la section [mise en cache des ressources de contrôle](#contr
 
 Étant donné que cette liste inclut par défaut tout ce qui est émis vers *wwwroot*, y compris le contenu fourni par des packages et des projets externes, vous devez veiller à ne pas y placer trop de contenu. Si le répertoire *wwwroot* contient des millions d’images, le processus de travail de service tente de les extraire et de les mettre en cache, ce qui consomme une bande passante excessive et risque de ne pas se terminer correctement.
 
-Implémentez une logique arbitraire pour contrôler le sous-ensemble du contenu du manifeste qui doit être extrait et mis en `onInstall` cache en modifiant la fonction dans *Service-Worker. published. js*.
+Implémentez une logique arbitraire pour contrôler le sous-ensemble du contenu du manifeste qui doit être extrait et mis en cache en modifiant la `onInstall` fonction dans *Service-Worker. published. js*.
 
 ### <a name="interaction-with-authentication"></a>Interaction avec l’authentification
 

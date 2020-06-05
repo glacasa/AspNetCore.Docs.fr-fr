@@ -1,14 +1,25 @@
 ---
-titre : « gérer les utilisateurs et les groupes dans SignalR «Auteur : bradygaster Description : » vue d’ensemble de la gestion des utilisateurs et des groupes ASP.net Core SignalR ».
-monikerRange : ' >= aspnetcore-2,1 'ms. Author : bradyg ms. Custom : MVC ms. Date : 05/17/2020 No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR 'UID : signalr/Groups
-
+title: Gérer les utilisateurs et les groupes dansSignalR
+author: bradygaster
+description: Vue d’ensemble de la SignalR gestion des utilisateurs et des groupes ASP.net core.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: bradyg
+ms.custom: mvc
+ms.date: 05/17/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: signalr/groups
+ms.openlocfilehash: dfa989654069bc85f0a936751dbabe384c63e917
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "83549996"
 ---
-
 # <a name="manage-users-and-groups-in-signalr"></a>Gérer les utilisateurs et les groupes dansSignalR
 
 Par [Brennan Conroy](https://github.com/BrennanConroy)
@@ -46,5 +57,5 @@ Pour protéger l’accès aux ressources lors de l’utilisation de groupes, uti
 ## <a name="related-resources"></a>Ressources associées
 
 * [Prise en main](xref:tutorials/signalr)
-* [Concentr](xref:signalr/hubs)
+* [Hubs](xref:signalr/hubs)
 * [Publication dans Azure](xref:signalr/publish-to-azure-web-app)

@@ -1,11 +1,11 @@
 ---
-title: ASP.NET Core Blazor webassembly avec des groupes et des rôles Azure Active Directory
+title: ASP.NET Core Blazor Webassembly avec des groupes et des rôles Azure Active Directory
 author: guardrex
-description: Découvrez comment configurer Blazor webassembly pour utiliser des groupes et des rôles Azure Active Directory.
+description: Découvrez comment configurer Blazor Webassembly pour utiliser des groupes et des rôles Azure Active Directory.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/08/2020
+ms.date: 05/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,22 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/aad-groups-roles
-ms.openlocfilehash: afdb5ddc4d4ed08d0f1ecaf7158af283dda6b302
-ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
+ms.openlocfilehash: 3ed06cca7e20da381b870e642a6c616b2578cd0a
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82976896"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84451873"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Groupes de Azure AD, rôles administratifs et rôles définis par l’utilisateur
 
 Par [Luke Latham](https://github.com/guardrex) et [Javier Calvarro Nelson](https://github.com/javiercn)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-Azure Active Directory (AAD) fournit plusieurs approches d’autorisation qui peuvent être combinées avec ASP.NET Core identité :
+Azure Active Directory (AAD) fournit plusieurs approches d’autorisation qui peuvent être combinées avec ASP.NET Core Identity :
 
 * Groupes définis par l’utilisateur
   * Sécurité
@@ -38,7 +34,7 @@ Azure Active Directory (AAD) fournit plusieurs approches d’autorisation qui pe
   * Rôles d’administration intégrés
   * Rôles définis par l’utilisateur
 
-Les instructions de cet article s’appliquent aux scénarios de déploiement Azure webassembly AAD décrits dans les rubriques suivantes :
+Les instructions de cet article s’appliquent aux Blazor scénarios de déploiement de Webassembly AAD décrits dans les rubriques suivantes :
 
 * [Autonome avec des comptes Microsoft](xref:security/blazor/webassembly/standalone-with-microsoft-accounts)
 * [Autonome avec AAD](xref:security/blazor/webassembly/standalone-with-azure-active-directory)
@@ -53,9 +49,9 @@ Pour configurer l’application dans le Portail Azure pour fournir une `groups` 
 
 Les exemples suivants partent du principe qu’un utilisateur est affecté au rôle d' *administrateur de facturation* intégré AAD.
 
-La revendication `groups` unique envoyée par AAD présente les groupes et les rôles de l’utilisateur en tant qu’ID d’objet (Guid) dans un tableau JSON. L’application doit convertir le tableau JSON de groupes et de rôles en `group` revendications individuelles pour lesquelles l’application peut créer des [stratégies](xref:security/authorization/policies) .
+La `groups` revendication unique envoyée par AAD présente les groupes et les rôles de l’utilisateur en tant qu’ID d’objet (Guid) dans un tableau JSON. L’application doit convertir le tableau JSON de groupes et de rôles en `group` revendications individuelles pour lesquelles l’application peut créer des [stratégies](xref:security/authorization/policies) .
 
-Étendez `RemoteUserAccount` pour inclure les propriétés de tableau pour les groupes et les rôles.
+Étendez <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> pour inclure les propriétés de tableau pour les groupes et les rôles.
 
 *CustomUserAccount.cs*:
 
@@ -73,7 +69,7 @@ public class CustomUserAccount : RemoteUserAccount
 }
 ```
 
-Créez une fabrique d’utilisateur personnalisée dans l’application autonome ou l’application cliente d’une solution hébergée. La fabrique suivante est également configurée pour `roles` gérer les tableaux de revendications, qui sont traités dans la section [rôles définis par l’utilisateur](#user-defined-roles) :
+Créez une fabrique d’utilisateur personnalisée dans l’application autonome ou l’application cliente d’une solution hébergée. La fabrique suivante est également configurée pour gérer les `roles` tableaux de revendications, qui sont traités dans la section [rôles définis par l’utilisateur](#user-defined-roles) :
 
 ```csharp
 using System.Security.Claims;
@@ -117,7 +113,7 @@ public class CustomUserFactory
 }
 ```
 
-Il n’est pas nécessaire de fournir du code pour supprimer `groups` la revendication d’origine, car elle est automatiquement supprimée par l’infrastructure.
+Il n’est pas nécessaire de fournir du code pour supprimer la revendication d’origine `groups` , car elle est automatiquement supprimée par l’infrastructure.
 
 Inscrire la fabrique dans `Program.Main` (*Program.cs*) de l’application autonome ou de l’application cliente d’une solution hébergée :
 
@@ -135,7 +131,7 @@ builder.Services.AddMsalAuthentication<RemoteAuthenticationState,
     CustomUserFactory>();
 ```
 
-Créez une [stratégie](xref:security/authorization/policies) pour chaque groupe ou rôle dans `Program.Main`. L’exemple suivant crée une stratégie pour le rôle d’administrateur de *facturation* intégré AAD :
+Créez une [stratégie](xref:security/authorization/policies) pour chaque groupe ou rôle dans `Program.Main` . L’exemple suivant crée une stratégie pour le rôle d’administrateur de *facturation* intégré AAD :
 
 ```csharp
 builder.Services.AddAuthorizationCore(options =>
@@ -168,7 +164,7 @@ Le [composant AuthorizeView](xref:security/blazor/index#authorizeview-component)
 </AuthorizeView>
 ```
 
-L’accès à un composant entier peut être basé sur la stratégie à l’aide de la directive de [ `[Authorize]` directive d’attribut](xref:security/blazor/index#authorize-attribute) :
+L’accès à un composant entier peut être basé sur la stratégie à l’aide de la `[Authorize]` directive d’attribut [] (XREF : Security/éblouissant/index # Authorize-Attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) :
 
 ```razor
 @page "/"
@@ -228,15 +224,15 @@ L’exemple suivant suppose qu’une application est configurée avec deux rôle
 * `developer`
 
 > [!NOTE]
-> Bien que vous ne puissiez pas attribuer des rôles à des groupes de sécurité sans compte Azure AD Premium, vous pouvez affecter des `roles` utilisateurs à des rôles et recevoir une revendication pour les utilisateurs disposant d’un compte Azure standard. Les instructions de cette section ne nécessitent pas de compte Azure AD Premium.
+> Bien que vous ne puissiez pas attribuer des rôles à des groupes de sécurité sans compte Azure AD Premium, vous pouvez affecter des utilisateurs à des rôles et recevoir une `roles` revendication pour les utilisateurs disposant d’un compte Azure standard. Les instructions de cette section ne nécessitent pas de compte Azure AD Premium.
 >
 > Plusieurs rôles sont affectés dans le Portail Azure en **_rajoutant un utilisateur_** pour chaque attribution de rôle supplémentaire.
 
-La revendication `roles` unique envoyée par AAD présente les rôles définis par l’utilisateur en `appRoles`tant `value`que s dans un tableau JSON. L’application doit convertir le tableau JSON de rôles en revendications `role` individuelles.
+La `roles` revendication unique envoyée par AAD présente les rôles définis par l’utilisateur en tant que `appRoles` `value` s dans un tableau JSON. L’application doit convertir le tableau JSON de rôles en `role` revendications individuelles.
 
-La `CustomUserFactory` section des [groupes définis par l’utilisateur et des rôles administratifs intégrés AAD](#user-defined-groups-and-built-in-administrative-roles) est configurée pour agir sur une `roles` revendication avec une valeur de tableau JSON. Ajoutez et inscrivez l `CustomUserFactory` 'dans l’application autonome ou l’application cliente d’une solution hébergée, comme indiqué dans la section [groupes définis par l’utilisateur et rôles d’administration intégrés à AAD](#user-defined-groups-and-built-in-administrative-roles) . Il n’est pas nécessaire de fournir du code pour supprimer `roles` la revendication d’origine, car elle est automatiquement supprimée par l’infrastructure.
+La `CustomUserFactory` section des [groupes définis par l’utilisateur et des rôles administratifs intégrés AAD](#user-defined-groups-and-built-in-administrative-roles) est configurée pour agir sur une `roles` revendication avec une valeur de tableau JSON. Ajoutez et inscrivez l' `CustomUserFactory` dans l’application autonome ou l’application cliente d’une solution hébergée, comme indiqué dans la section [groupes définis par l’utilisateur et rôles d’administration intégrés à AAD](#user-defined-groups-and-built-in-administrative-roles) . Il n’est pas nécessaire de fournir du code pour supprimer la revendication d’origine `roles` , car elle est automatiquement supprimée par l’infrastructure.
 
-Dans `Program.Main` l’application autonome ou l’application cliente d’une solution hébergée, spécifiez la`role`revendication nommée «» comme revendication de rôle :
+Dans `Program.Main` l’application autonome ou l’application cliente d’une solution hébergée, spécifiez la revendication nommée « `role` » comme revendication de rôle :
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -247,11 +243,11 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-Les approches d’autorisation des composants sont fonctionnelles à ce stade. L’un des mécanismes d’autorisation des composants peut utiliser `admin` le rôle pour autoriser l’utilisateur :
+Les approches d’autorisation des composants sont fonctionnelles à ce stade. L’un des mécanismes d’autorisation des composants peut utiliser le `admin` rôle pour autoriser l’utilisateur :
 
-* [Composant AuthorizeView](xref:security/blazor/index#authorizeview-component) (exemple : `<AuthorizeView Roles="admin">`)
-* directive d’attribut (exemple `@attribute [Authorize(Roles = "admin")]`:) [ `[Authorize]` ](xref:security/blazor/index#authorize-attribute)
-* [Logique procédurale](xref:security/blazor/index#procedural-logic) (exemple `if (user.IsInRole("admin")) { ... }`:)
+* [Composant AuthorizeView](xref:security/blazor/index#authorizeview-component) (exemple : `<AuthorizeView Roles="admin">` )
+* [ `[Authorize]` ] directive d’attribut] (XREF : Security/éblouissant/index # Authorize-Attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) (Exemple : `@attribute [Authorize(Roles = "admin")]` )
+* [Logique procédurale](xref:security/blazor/index#procedural-logic) (exemple : `if (user.IsInRole("admin")) { ... }` )
 
   Plusieurs tests de rôle sont pris en charge :
 
@@ -264,7 +260,7 @@ Les approches d’autorisation des composants sont fonctionnelles à ce stade. L
 
 ## <a name="aad-adminstrative-role-group-ids"></a>ID de groupe de rôles d’administration AAD
 
-Les ID d’objet présentés dans le tableau suivant sont utilisés pour [policies](xref:security/authorization/policies) créer des `group` stratégies pour les revendications. Les stratégies permettent à une application d’autoriser les utilisateurs à effectuer différentes activités dans une application. Pour plus d’informations, consultez la section [groupes définis par l’utilisateur et rôles d’administration intégrés à AAD](#user-defined-groups-and-built-in-administrative-roles) .
+Les ID d’objet présentés dans le tableau suivant sont utilisés pour créer des [stratégies](xref:security/authorization/policies) pour les `group` revendications. Les stratégies permettent à une application d’autoriser les utilisateurs à effectuer différentes activités dans une application. Pour plus d’informations, consultez la section [groupes définis par l’utilisateur et rôles d’administration intégrés à AAD](#user-defined-groups-and-built-in-administrative-roles) .
 
 Rôle d’administration AAD | ID de l'objet
 --- | ---
@@ -288,7 +284,7 @@ Administrateur Desktop Analytics | c62c4ac5-e4c6-4096-8a2f-1ee3cbaaae15
 Lecteurs d’annuaires | e1fc84a6-7762-4b9b-8e29-518b4adbc23b
 Administrateur Dynamics 365 | f20a9cfa-9fdf-49a8-a977-1afe446a1d6e
 Administrateur Exchange | b2ec2cc0-d5c9-4864-ad9b-38dd9dba2652
-Administrateur Identity du fournisseur externe | febfaeb4-e478-407a-b4b3-f4d9716618a2
+IdentityAdministrateur du fournisseur externe | febfaeb4-e478-407a-b4b3-f4d9716618a2
 Administrateur général | a45ba61b-44db-462c-924b-3b2719152588
 Lecteur général | f6903b21-6aba-4124-B44C-76671796b9d5
 Administrateur de groupes | 158b3e5a-d89d-460b-92b5-3b34985f0197

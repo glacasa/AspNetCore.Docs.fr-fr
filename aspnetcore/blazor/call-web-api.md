@@ -1,12 +1,24 @@
 ---
-titre : « appeler une API Web à partir de ASP.NET Core Blazor Webassembly » auteur : guardrex Description : « Découvrez comment appeler une API Web à partir d’une Blazor application webassembly à l’aide des applications auxiliaires JSON, y compris la création de requêtes de partage des ressources Cross-Origin (cors). »
-monikerRange : ' >= aspnetcore-3,1 'ms. Author : Riande ms. Custom : MVC ms. Date : 05/28/2020 No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR 'UID : éblouissant/Call-Web-API
-
+title: Appeler une API Web à partir de ASP.NET Core Blazor Webassembly
+author: guardrex
+description: Découvrez comment appeler une API Web à partir d’une Blazor application Webassembly à l’aide des applications auxiliaires JSON, y compris la création de demandes de partage des ressources Cross-Origin (cors).
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/28/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/call-web-api
+ms.openlocfilehash: 4f3fd1fca075098a94756757474b2cad3cc99775
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84214776"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>Appeler une API Web à partir de ASP.NET CoreBlazor
 
@@ -291,7 +303,7 @@ protected override async Task OnInitializedAsync()
 > [!NOTE]
 > L’exemple précédent est fourni à des fins de démonstration. Une application serveur d’API Web peut être configurée pour retourner JSON même lorsqu’un point de terminaison n’existe pas ou qu’un exception non géré est présent sur le serveur.
 
-Pour plus d'informations, consultez <xref:blazor/handle-errors>.
+Pour plus d’informations, consultez <xref:blazor/handle-errors>.
 
 ## <a name="cross-origin-resource-sharing-cors"></a>Partage des ressources cross-origin (CORS)
 

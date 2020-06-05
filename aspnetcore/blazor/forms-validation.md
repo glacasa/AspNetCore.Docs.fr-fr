@@ -1,12 +1,24 @@
 ---
-titre : 'ASP.NET Core Blazor les formulaires et la validation’auteur : Description : 'Découvrez comment utiliser les formulaires et les scénarios de validation de champ dans Blazor .
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: ASP.NET Core Blazor les formulaires et la validation
+author: guardrex
+description: Découvrez comment utiliser des formulaires et des scénarios de validation de champ dans Blazor .
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/27/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/forms-validation
+ms.openlocfilehash: 557ccf45fb88a743158d18046789ed6776efb28c
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84145354"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor les formulaires et la validation
 
@@ -62,114 +74,13 @@ Dans l'exemple précédent :
 Un ensemble de composants d’entrée intégrés est disponible pour recevoir et valider les entrées utilisateur. Les entrées sont validées lorsqu’elles sont modifiées et lorsqu’un formulaire est envoyé. Les composants d’entrée disponibles sont répertoriés dans le tableau suivant.
 
 | Composant d’entrée | Rendu comme&hellip; |
-| ---
-titre : 'ASP.NET Core Blazor les formulaires et la validation’auteur : Description : 'Découvrez comment utiliser les formulaires et les scénarios de validation de champ dans Blazor .
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor les formulaires et la validation’auteur : Description : 'Découvrez comment utiliser les formulaires et les scénarios de validation de champ dans Blazor .
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor les formulaires et la validation’auteur : Description : 'Découvrez comment utiliser les formulaires et les scénarios de validation de champ dans Blazor .
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor les formulaires et la validation’auteur : Description : 'Découvrez comment utiliser les formulaires et les scénarios de validation de champ dans Blazor .
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor les formulaires et la validation’auteur : Description : 'Découvrez comment utiliser les formulaires et les scénarios de validation de champ dans Blazor .
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--------- | titre de la--- : 'ASP.NET Core Blazor Forms and validation’Author : Description : 'Découvrez comment utiliser les formulaires et les scénarios de validation de champ dans Blazor .
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor les formulaires et la validation’auteur : Description : 'Découvrez comment utiliser les formulaires et les scénarios de validation de champ dans Blazor .
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor les formulaires et la validation’auteur : Description : 'Découvrez comment utiliser les formulaires et les scénarios de validation de champ dans Blazor .
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor les formulaires et la validation’auteur : Description : 'Découvrez comment utiliser les formulaires et les scénarios de validation de champ dans Blazor .
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor les formulaires et la validation’auteur : Description : 'Découvrez comment utiliser les formulaires et les scénarios de validation de champ dans Blazor .
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor les formulaires et la validation’auteur : Description : 'Découvrez comment utiliser les formulaires et les scénarios de validation de champ dans Blazor .
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : 'ASP.NET Core Blazor les formulaires et la validation’auteur : Description : 'Découvrez comment utiliser les formulaires et les scénarios de validation de champ dans Blazor .
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
----------- | | <xref:Microsoft.AspNetCore.Components.Forms.InputText> | `<input>` | | <xref:Microsoft.AspNetCore.Components.Forms.InputTextArea> | `<textarea>` | | <xref:Microsoft.AspNetCore.Components.Forms.InputSelect%601> | `<select>` | | <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> | `<input type="number">` | | <xref:Microsoft.AspNetCore.Components.Forms.InputCheckbox> | `<input type="checkbox">` | | <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> | `<input type="date">` |
+| --------------- | ------------------- |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputText> | `<input>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputTextArea> | `<textarea>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputSelect%601> | `<select>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> | `<input type="number">` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputCheckbox> | `<input type="checkbox">` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> | `<input type="date">` |
 
 Tous les composants d’entrée, y compris <xref:Microsoft.AspNetCore.Components.Forms.EditForm> , prennent en charge les attributs arbitraires. Tout attribut qui ne correspond pas à un paramètre de composant est ajouté à l’élément HTML rendu.
 
@@ -552,7 +463,7 @@ Pour activer et désactiver le bouton Envoyer en fonction de la validation de fo
 
 * Utilisez le du formulaire <xref:Microsoft.AspNetCore.Components.Forms.EditContext> pour assigner le modèle lorsque le composant est initialisé.
 * Validez le formulaire dans le rappel du contexte <xref:Microsoft.AspNetCore.Components.Forms.EditContext.OnFieldChanged> pour activer et désactiver le bouton Envoyer.
-* Décrochez le gestionnaire d’événements dans la `Dispose` méthode. Pour plus d'informations, consultez <xref:blazor/lifecycle#component-disposal-with-idisposable>.
+* Décrochez le gestionnaire d’événements dans la `Dispose` méthode. Pour plus d’informations, consultez <xref:blazor/lifecycle#component-disposal-with-idisposable>.
 
 ```razor
 @implements IDisposable

@@ -1,7 +1,7 @@
 ---
 title: Génération Identity de modèles automatique dans les projets ASP.net Core
 author: rick-anderson
-description: Découvrez comment générer une Identity structure dans un projet ASP.net core.
+description: Découvrez comment générer Identity une structure dans un projet ASP.net core.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: 6f1ff69863e14c73e90496ea61188387f5267b19
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 116e5d27e7585e9168db433480c3a5e9d08379f3
+ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768388"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84454662"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>Génération Identity de modèles automatique dans les projets ASP.net Core
 
@@ -26,19 +26,19 @@ Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.net Core fournit [ASP.net Core Identity ](xref:security/authentication/identity) sous forme de [ Razor bibliothèque de classes](xref:razor-pages/ui-class). Les applications qui Identity incluent peuvent appliquer l’échafaudage pour ajouter de manière sélective le code source contenu Identity Razor dans la bibliothèque de classes (RCL). Vous pouvez souhaiter générer le code source afin de pouvoir modifier le code et changer le comportement. Par exemple, vous pouvez demander au générateur de modèles automatique de générer le code utilisé dans l’inscription. Le code généré est prioritaire sur le même code dans Identity le RCL. Pour obtenir le contrôle total de l’interface utilisateur et ne pas utiliser le RCL par défaut, consultez la section [créer une source d’interface utilisateur d’identité complète](#full).
+ASP.NET Core fournit [ASP.net Core Identity ](xref:security/authentication/identity) sous forme de [ Razor bibliothèque de classes](xref:razor-pages/ui-class). Les applications qui incluent Identity peuvent appliquer l’échafaudage pour ajouter de manière sélective le code source contenu dans la Identity Razor bibliothèque de classes (RCL). Vous pouvez souhaiter générer le code source afin de pouvoir modifier le code et changer le comportement. Par exemple, vous pouvez demander au générateur de modèles automatique de générer le code utilisé dans l’inscription. Le code généré est prioritaire sur le même code dans le Identity RCL. Pour obtenir le contrôle total de l’interface utilisateur et ne pas utiliser le RCL par défaut, consultez la section [créer une Identity source d’interface utilisateur complète](#full).
 
-Les applications qui n’incluent **pas** l’authentification peuvent appliquer l’échafaudage pour ajouter Identity le package RCL. Vous avez la possibilité de sélectionner Identity du code à générer.
+Les applications qui n’incluent **pas** l’authentification peuvent appliquer l’échafaudage pour ajouter le Identity package RCL. Vous avez la possibilité de sélectionner du Identity code à générer.
 
-Bien que le générateur de modèles génère la majeure partie du code nécessaire, vous devez mettre à jour votre projet pour terminer le processus. Ce document explique les étapes nécessaires à la réalisation Identity d’une mise à jour de génération de modèles automatique.
+Bien que le générateur de modèles génère la majeure partie du code nécessaire, vous devez mettre à jour votre projet pour terminer le processus. Ce document explique les étapes nécessaires à la réalisation d’une Identity mise à jour de génération de modèles automatique.
 
-Nous vous recommandons d’utiliser un système de contrôle de code source qui affiche les différences entre les fichiers et vous permet d’annuler les modifications. Inspectez les modifications après avoir Identity exécuté le générateur de modèles.
+Nous vous recommandons d’utiliser un système de contrôle de code source qui affiche les différences entre les fichiers et vous permet d’annuler les modifications. Inspectez les modifications après avoir exécuté le générateur de Identity modèles.
 
-Les services sont requis lorsque vous utilisez l' [authentification à deux facteurs](xref:security/authentication/identity-enable-qrcodes), la [confirmation de compte et la récupération de mot de passe](xref:security/authentication/accconfirm), ainsi que d’autres fonctionnalités de sécurité avec Identity. Les services ou stubs de service ne sont Identitypas générés lors de la génération de modèles automatique. Les services pour activer ces fonctionnalités doivent être ajoutés manuellement. Par exemple, consultez [exiger une confirmation par courrier électronique](xref:security/authentication/accconfirm#require-email-confirmation).
+Les services sont requis lorsque vous utilisez l' [authentification à deux facteurs](xref:security/authentication/identity-enable-qrcodes), la [confirmation de compte et la récupération de mot de passe](xref:security/authentication/accconfirm), ainsi que d’autres fonctionnalités de sécurité avec Identity . Les services ou stubs de service ne sont pas générés lors de la génération de modèles automatique Identity . Les services pour activer ces fonctionnalités doivent être ajoutés manuellement. Par exemple, consultez [exiger une confirmation par courrier électronique](xref:security/authentication/accconfirm#require-email-confirmation).
 
-Lors de la Identity génération de modèles automatique avec un nouveau contexte de données dans un projet avec des comptes individuels existants :
+Lors de la génération de modèles automatique Identity avec un nouveau contexte de données dans un projet avec des comptes individuels existants :
 
-* Dans `Startup.ConfigureServices`, supprimez les appels à :
+* Dans `Startup.ConfigureServices` , supprimez les appels à :
   * `AddDbContext`
   * `AddDefaultIdentity`
 
@@ -46,15 +46,15 @@ Par exemple, `AddDbContext` et `AddDefaultIdentity` sont commentés dans le code
 
 [!code-csharp[](scaffold-identity/3.1sample/StartupRemove.cs?name=snippet)]
 
-Le code précédent fait un commentaire sur le code qui est dupliqué dans *AreasIdentity//IdentityHostingStartup.cs*
+Le code précédent fait un commentaire sur le code qui est dupliqué dans *Areas/ Identity /IdentityHostingStartup.cs*
 
 En règle générale, les applications créées avec des comptes individuels ne doivent ***pas*** créer de contexte de données.
 
-## <a name="scaffold-identity-into-an-empty-project"></a>Identité de l’échafaudage dans un projet vide
+## <a name="scaffold-identity-into-an-empty-project"></a>Génération de modèles automatique Identity dans un projet vide
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Mettez à `Startup` jour la classe avec un code similaire à ce qui suit :
+Mettez à jour la `Startup` classe avec un code similaire à ce qui suit :
 
 [!code-csharp[](scaffold-identity/3.1sample/StartupMVC.cs?name=snippet)]
 
@@ -62,7 +62,7 @@ Mettez à `Startup` jour la classe avec un code similaire à ce qui suit :
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>Identité de l’échafaudage dans un Razor projet sans autorisation existante
+## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>Générer Identity une structure dans un Razor projet sans autorisation existante
 
 <!--  Updated for 3.0
 set projNam=RPnoAuth
@@ -91,7 +91,7 @@ before dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Identityest configuré dans *AreasIdentity//IdentityHostingStartup.cs*. Pour plus d’informations, consultez [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration).
+Identityest configuré dans *Areas/ Identity /IdentityHostingStartup.cs*. Pour plus d’informations, consultez [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration).
 
 <a name="efm"></a>
 
@@ -103,7 +103,7 @@ Identityest configuré dans *AreasIdentity//IdentityHostingStartup.cs*. Pour plu
 
 ### <a name="enable-authentication"></a>Activer l’authentification
 
-Mettez à `Startup` jour la classe avec un code similaire à ce qui suit :
+Mettez à jour la `Startup` classe avec un code similaire à ce qui suit :
 
 [!code-csharp[](scaffold-identity/3.1sample/StartupRP.cs?name=snippet)]
 
@@ -111,11 +111,11 @@ Mettez à `Startup` jour la classe avec un code similaire à ce qui suit :
 
 ### <a name="layout-changes"></a>Modifications de la disposition
 
-Facultatif : ajoutez la connexion partielle (`_LoginPartial`) au fichier de disposition :
+Facultatif : ajoutez la connexion partielle ( `_LoginPartial` ) au fichier de disposition :
 
-[!code-html[Main](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
+[!code-html[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
 
-## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Identité de l’échafaudage dans un Razor projet avec autorisation
+## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Génération de modèles automatique Identity dans un Razor projet avec autorisation
 
 <!--
 Use >=2.1: dotnet new webapp -au Individual -o RPauth
@@ -129,9 +129,10 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 -->
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
-Certaines Identity options sont configurées dans *zonesIdentity//IdentityHostingStartup.cs*. Pour plus d’informations, consultez [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration).
 
-## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Identité de l’échafaudage dans un projet MVC sans autorisation existante
+Certaines Identity options sont configurées dans *zones/ Identity /IdentityHostingStartup.cs*. Pour plus d’informations, consultez [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration).
+
+## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Génération de modèles automatique Identity dans un projet MVC sans autorisation existante
 
 <!--
 set projNam=MvcNoAuth
@@ -149,23 +150,23 @@ dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Facultatif : ajoutez la connexion partielle (`_LoginPartial`) au fichier *views/shared/_Layout. cshtml* :
+Facultatif : ajoutez la connexion partielle ( `_LoginPartial` ) au fichier *Views/Shared/_Layout. cshtml* :
 
-[!code-html[Main](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
+[!code-html[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
 
 * Déplacez le fichier *pages/Shared/_LoginPartial. cshtml* vers *views/shared/_LoginPartial. cshtml*
 
-Identityest configuré dans *AreasIdentity//IdentityHostingStartup.cs*. Pour plus d’informations, consultez IHostingStartup.
+Identityest configuré dans *Areas/ Identity /IdentityHostingStartup.cs*. Pour plus d’informations, consultez IHostingStartup.
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-Mettez à `Startup` jour la classe avec un code similaire à ce qui suit :
+Mettez à jour la `Startup` classe avec un code similaire à ce qui suit :
 
 [!code-csharp[](scaffold-identity/3.1sample/StartupMVC.cs?name=snippet)]
 
 [!INCLUDE[](~/includes/scaffold-identity/hsts.md)]
 
-## <a name="scaffold-identity-into-an-mvc-project-with-authorization"></a>Identité de l’échafaudage dans un projet MVC avec autorisation
+## <a name="scaffold-identity-into-an-mvc-project-with-authorization"></a>Génération Identity de modèles automatique dans un projet MVC avec autorisation
 
 <!--
 dotnet new mvc -au Individual -o MvcAuth
@@ -177,17 +178,205 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
+## <a name="scaffold-identity-into-a-blazor-server-project-without-existing-authorization"></a>Génération Identity de modèles automatique dans un Blazor projet serveur sans autorisation existante
+
+[!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
+
+Identityest configuré dans *Areas/ Identity /IdentityHostingStartup.cs*. Pour plus d’informations, consultez [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration).
+
+### <a name="migrations"></a>Migrations
+
+[!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
+
+### <a name="pass-an-xsrf-token-to-the-app"></a>Passer un jeton XSRF à l’application
+
+Les jetons peuvent être passés à des composants :
+
+* Lorsque les jetons d’authentification sont approvisionnés et enregistrés dans le cookie d’authentification, ils peuvent être passés à des composants.
+* Razorles composants ne peuvent pas être utilisés `HttpContext` directement. il n’existe donc aucun moyen d’obtenir un [jeton XSRF (contrefaçon anti-request)](xref:security/anti-request-forgery) pour effectuer une publication sur le Identity point de terminaison de déconnexion de `/Identity/Account/Logout` . Un jeton XSRF peut être passé à des composants.
+
+Pour plus d’informations, consultez <xref:security/blazor/server/index#pass-tokens-to-a-blazor-server-app>.
+
+Dans le fichier *pages/_Host. cshtml* , établissez le jeton après l’avoir ajouté `InitialApplicationState` aux `TokenProvider` classes et :
+
+```csharp
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+
+...
+
+var tokens = new InitialApplicationState
+{
+    ...
+
+    XsrfToken = Xsrf.GetAndStoreTokens(HttpContext).RequestToken
+};
+```
+
+Mettez à jour le `App` composant (*app. Razor*) pour affecter le `InitialState.XsrfToken` :
+
+```csharp
+@inject TokenProvider TokenProvider
+
+...
+
+TokenProvider.XsrfToken = InitialState.XsrfToken;
+```
+
+Le `TokenProvider` service présenté dans la rubrique est utilisé dans le `LoginDisplay` composant dans la section [mise en page et changements de workflow d’authentification](#layout-and-authentication-flow-changes) suivants.
+
+### <a name="enable-authentication"></a>Activer l’authentification
+
+Dans la `Startup` classe :
+
+* Confirmez que Razor les services de pages sont ajoutés dans `Startup.ConfigureServices` .
+* Si vous utilisez [TokenProvider](xref:security/blazor/server/index#pass-tokens-to-a-blazor-server-app), inscrivez le service.
+* Appelez `UseDatabaseErrorPage` sur le générateur d’applications dans `Startup.Configure` pour l’environnement de développement.
+* Appelez `UseAuthentication` et `UseAuthorization` after `UseRouting` .
+* Ajoutez un point de terminaison pour les Razor pages.
+
+[!code-csharp[](scaffold-identity/3.1sample/StartupBlazor.cs?highlight=3,6,14,27-28,32)]
+
+[!INCLUDE[](~/includes/scaffold-identity/hsts.md)]
+
+### <a name="layout-and-authentication-flow-changes"></a>Modifications de la disposition et du workflow d’authentification
+
+Ajoutez un `RedirectToLogin` composant (*RedirectToLogin. Razor*) au dossier *partagé* de l’application dans la racine du projet :
+
+```razor
+@inject NavigationManager Navigation
+@code {
+    protected override void OnInitialized()
+    {
+        Navigation.NavigateTo("Identity/Account/Login?returnUrl=" +
+            Uri.EscapeDataString(Navigation.Uri), true);
+    }
+}
+```
+
+Ajoutez un `LoginDisplay` composant (*LoginDisplay. Razor*) au dossier *partagé* de l’application. Le [service TokenProvider](xref:security/blazor/server/index#pass-tokens-to-a-blazor-server-app) fournit le jeton XSRF pour le formulaire HTML qui publie sur le Identity point de terminaison logout de déconnexion :
+
+```razor
+@using Microsoft.AspNetCore.Components.Authorization
+@inject NavigationManager Navigation
+@inject TokenProvider TokenProvider
+
+<AuthorizeView>
+    <Authorized>
+        <a href="Identity/Account/Manage/Index">
+            Hello, @context.User.Identity.Name!
+        </a>
+        <form action="/Identity/Account/Logout?returnUrl=%2F" method="post">
+            <button class="nav-link btn btn-link" type="submit">Logout</button>
+            <input name="__RequestVerificationToken" type="hidden" 
+                value="@TokenProvider.XsrfToken">
+        </form>
+    </Authorized>
+    <NotAuthorized>
+        <a href="Identity/Account/Register">Register</a>
+        <a href="Identity/Account/Login">Login</a>
+    </NotAuthorized>
+</AuthorizeView>
+```
+
+Dans le `MainLayout` composant (*Shared/MainLayout. Razor*), ajoutez le `LoginDisplay` composant au contenu de l’élément de ligne de plus haut niveau `<div>` :
+
+```razor
+<div class="top-row px-4 auth">
+    <LoginDisplay />
+    <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+</div>
+```
+
+### <a name="style-authentication-endpoints"></a>Points de terminaison d’authentification de style
+
+Étant donné que Blazor le serveur utilise Razor Identity des pages de pages, le style de l’interface utilisateur change lorsqu’un visiteur navigue entre Identity les pages et les composants. Vous avez deux options pour traiter les styles Incongruous :
+
+#### <a name="build-identity-components"></a>Composants de build Identity
+
+Une approche de l’utilisation de composants Identity au lieu de pages consiste à créer des Identity composants. Étant donné que `SignInManager` et `UserManager` ne sont pas pris en charge dans Razor les composants, utilisez les points de terminaison d’API dans l' Blazor application serveur pour traiter les actions de compte d’utilisateur.
+
+#### <a name="use-a-custom-layout-with-blazor-app-styles"></a>Utiliser une disposition personnalisée avec les Blazor styles d’application
+
+La Identity disposition et les styles des pages peuvent être modifiés pour produire des pages qui utilisent le thème par défaut Blazor .
+
+> [!NOTE]
+> L’exemple de cette section est simplement un point de départ pour la personnalisation. Un travail supplémentaire est probablement requis pour une expérience utilisateur optimale.
+
+Créez un nouveau `NavMenu_IdentityLayout` composant (*Shared/NavMenu_IdentityLayout. Razor*). Pour le balisage et le code du composant, utilisez le même contenu du composant de l’application `NavMenu` (*Shared/NavMenu. Razor*). Supprimez les `NavLink` composants de tous les composants qui ne sont pas accessibles de façon anonyme, car les redirections automatiques du `RedirectToLogin` composant échouent pour les composants nécessitant une authentification ou une autorisation.
+
+Dans le fichier *pages/Shared/Layout. cshtml* , apportez les modifications suivantes :
+
+* Ajoutez Razor des directives en haut du fichier pour utiliser tag Helper et les composants de l’application dans le dossier *partagé* :
+
+  ```cshtml
+  @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+  @using {APPLICATION ASSEMBLY}.Shared
+  ```
+
+  Remplacez `{APPLICATION ASSEMBLY}` par le nom de l’assembly de l’application.
+
+* Ajoutez une `<base>` balise et une Blazor feuille `<link>` de style au `<head>` contenu :
+
+  ```cshtml
+  <base href="~/" />
+  <link rel="stylesheet" href="~/css/site.css" />
+  ```
+
+* Remplacez le contenu de la `<body>` balise par ce qui suit :
+
+  ```cshtml
+  <div class="sidebar" style="float:left">
+      <component type="typeof(NavMenu_IdentityLayout)" 
+          render-mode="ServerPrerendered" />
+  </div>
+
+  <div class="main" style="padding-left:250px">
+      <div class="top-row px-4">
+          @{
+              var result = Engine.FindView(ViewContext, "_LoginPartial", 
+                  isMainPage: false);
+          }
+          @if (result.Success)
+          {
+              await Html.RenderPartialAsync("_LoginPartial");
+          }
+          else
+          {
+              throw new InvalidOperationException("The default Identity UI " +
+                  "layout requires a partial view '_LoginPartial'.");
+          }
+          <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+      </div>
+
+      <div class="content px-4">
+          @RenderBody()
+      </div>
+  </div>
+
+  <script src="~/Identity/lib/jquery/dist/jquery.min.js"></script>
+  <script src="~/Identity/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="~/Identity/js/site.js" asp-append-version="true"></script>
+  @RenderSection("Scripts", required: false)
+  <script src="_framework/blazor.server.js"></script>
+  ```
+
+## <a name="scaffold-identity-into-a-blazor-server-project-with-authorization"></a>Génération Identity de modèles automatique dans un Blazor projet serveur avec autorisation
+
+[!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
+
+Certaines Identity options sont configurées dans *zones/ Identity /IdentityHostingStartup.cs*. Pour plus d’informations, consultez [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration).
+
 <a name="full"></a>
 
-## <a name="create-full-identity-ui-source"></a>Créer une source d’interface utilisateur d’identité complète
+## <a name="create-full-identity-ui-source"></a>Créer une Identity source d’interface utilisateur complète
 
-Pour conserver le contrôle total de Identity l’interface utilisateur, Identity exécutez le générateur de modèles automatique et sélectionnez **remplacer tous les fichiers**.
+Pour conserver le contrôle total de l' Identity interface utilisateur, exécutez le générateur de Identity modèles automatique et sélectionnez **remplacer tous les fichiers**.
 
-Le code en surbrillance suivant montre les modifications pour Identity remplacer l' Identity interface utilisateur par défaut par dans une application Web ASP.net Core 2,1. Vous pouvez le faire pour avoir le contrôle total de l' Identity interface utilisateur.
+Le code en surbrillance suivant montre les modifications pour remplacer l’interface utilisateur par défaut par Identity Identity dans une application web ASP.net Core 2,1. Vous pouvez le faire pour avoir le contrôle total de l' Identity interface utilisateur.
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet1&highlight=13-14,17-999)]
 
-La valeur Identity par défaut est remplacée dans le code suivant :
+La valeur par défaut Identity est remplacée dans le code suivant :
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet2)]
 
@@ -213,21 +402,21 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 Pour désactiver l’inscription des utilisateurs :
 
-* Génération Identityde modèles automatique. Incluez Account. Register, Account. Login et Account. RegisterConfirmation. Par exemple :
+* Génération de modèles automatique Identity . Incluez Account. Register, Account. Login et Account. RegisterConfirmation. Par exemple :
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
   ```
 
-* Mettre à jour les *zones/Identity/pages/Account/Register.cshtml.cs* afin que les utilisateurs ne puissent pas s’inscrire depuis ce point de terminaison :
+* Mettre à jour les *zones/ Identity /pages/Account/Register.cshtml.cs* afin que les utilisateurs ne puissent pas s’inscrire depuis ce point de terminaison :
 
   [!code-csharp[](scaffold-identity/sample/Register.cshtml.cs?name=snippet)]
 
-* Mettez à jour les *zones/Identity/pages/Account/Register.cshtml* pour qu’ils soient cohérents avec les modifications précédentes :
+* Mettez à jour les *zones/ Identity /pages/Account/Register.cshtml* pour qu’ils soient cohérents avec les modifications précédentes :
 
   [!code-cshtml[](scaffold-identity/sample/Register.cshtml)]
 
-* Commentez ou supprimez le lien d’inscription de *Areas/Identity/pages/Account/login.cshtml*
+* Commentez ou supprimez le lien d’inscription de *Areas/ Identity /pages/Account/login.cshtml*
 
 ```cshtml
 @*
@@ -237,10 +426,10 @@ Pour désactiver l’inscription des utilisateurs :
 *@
 ```
 
-* Mettez à jour la page *zones/Identity/pages/Account/RegisterConfirmation* .
+* Mettez à jour la page *zones/ Identity /pages/Account/RegisterConfirmation* .
 
   * Supprimez le code et les liens du fichier cshtml.
-  * Supprimez le code de confirmation `PageModel`du :
+  * Supprimez le code de confirmation du `PageModel` :
 
   ```csharp
    [AllowAnonymous]
@@ -277,7 +466,7 @@ Une approche similaire peut être suivie pour les scénarios de production.
 
 ## <a name="prevent-publish-of-static-identity-assets"></a>Empêcher la publication d' Identity actifs statiques
 
-Pour empêcher la publication Identity des ressources statiques sur la racine <xref:security/authentication/identity#prevent-publish-of-static-identity-assets>Web, consultez.
+Pour empêcher la publication Identity des ressources statiques sur la racine Web, consultez <xref:security/authentication/identity#prevent-publish-of-static-identity-assets> .
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
@@ -287,24 +476,24 @@ Pour empêcher la publication Identity des ressources statiques sur la racine <x
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.net Core 2,1 et versions ultérieures fournissent [ Identity ASP.net Core](xref:security/authentication/identity) sous forme de [ Razor bibliothèque de classes](xref:razor-pages/ui-class). Les applications qui Identity incluent peuvent appliquer l’échafaudage pour ajouter de manière sélective le code source contenu Identity Razor dans la bibliothèque de classes (RCL). Vous pouvez souhaiter générer le code source afin de pouvoir modifier le code et changer le comportement. Par exemple, vous pouvez demander au générateur de modèles automatique de générer le code utilisé dans l’inscription. Le code généré est prioritaire sur le même code dans Identity le RCL. Pour obtenir le contrôle total de l’interface utilisateur et ne pas utiliser le RCL par défaut, consultez la section [créer une source d’interface utilisateur d’identité complète](#full).
+ASP.NET Core 2,1 et versions ultérieures fournissent [ Identity ASP.net Core](xref:security/authentication/identity) sous forme de [ Razor bibliothèque de classes](xref:razor-pages/ui-class). Les applications qui incluent Identity peuvent appliquer l’échafaudage pour ajouter de manière sélective le code source contenu dans la Identity Razor bibliothèque de classes (RCL). Vous pouvez souhaiter générer le code source afin de pouvoir modifier le code et changer le comportement. Par exemple, vous pouvez demander au générateur de modèles automatique de générer le code utilisé dans l’inscription. Le code généré est prioritaire sur le même code dans le Identity RCL. Pour obtenir le contrôle total de l’interface utilisateur et ne pas utiliser le RCL par défaut, consultez la section [créer une source d’interface utilisateur d’identité complète](#full).
 
-Les applications qui n’incluent **pas** l’authentification peuvent appliquer l’échafaudage pour ajouter Identity le package RCL. Vous avez la possibilité de sélectionner Identity du code à générer.
+Les applications qui n’incluent **pas** l’authentification peuvent appliquer l’échafaudage pour ajouter le Identity package RCL. Vous avez la possibilité de sélectionner du Identity code à générer.
 
-Bien que le générateur de modèles génère la plus grande partie du code nécessaire, vous devez mettre à jour votre projet pour terminer le processus. Ce document explique les étapes nécessaires à la réalisation Identity d’une mise à jour de génération de modèles automatique.
+Bien que le générateur de modèles génère la plus grande partie du code nécessaire, vous devez mettre à jour votre projet pour terminer le processus. Ce document explique les étapes nécessaires à la réalisation d’une Identity mise à jour de génération de modèles automatique.
 
-Lorsque l' Identity échafaudage est exécuté, un fichier *ScaffoldingReadme. txt* est créé dans le répertoire du projet. Le fichier *ScaffoldingReadme. txt* contient des instructions générales sur ce qui est nécessaire pour Identity effectuer la mise à jour de la génération de modèles automatique. Ce document contient des instructions plus complètes que le fichier *ScaffoldingReadme. txt* .
+Lorsque l' Identity échafaudage est exécuté, un fichier *ScaffoldingReadme. txt* est créé dans le répertoire du projet. Le fichier *ScaffoldingReadme. txt* contient des instructions générales sur ce qui est nécessaire pour effectuer la Identity mise à jour de la génération de modèles automatique. Ce document contient des instructions plus complètes que le fichier *ScaffoldingReadme. txt* .
 
-Nous vous recommandons d’utiliser un système de contrôle de code source qui affiche les différences entre les fichiers et vous permet d’annuler les modifications. Inspectez les modifications après avoir Identity exécuté le générateur de modèles.
+Nous vous recommandons d’utiliser un système de contrôle de code source qui affiche les différences entre les fichiers et vous permet d’annuler les modifications. Inspectez les modifications après avoir exécuté le générateur de Identity modèles.
 
 > [!NOTE]
-> Les services sont requis lorsque vous utilisez l' [authentification à deux facteurs](xref:security/authentication/identity-enable-qrcodes), la [confirmation de compte et la récupération de mot de passe](xref:security/authentication/accconfirm), ainsi que d’autres fonctionnalités de sécurité avec Identity. Les services ou stubs de service ne sont Identitypas générés lors de la génération de modèles automatique. Les services pour activer ces fonctionnalités doivent être ajoutés manuellement. Par exemple, consultez [exiger une confirmation par courrier électronique](xref:security/authentication/accconfirm#require-email-confirmation).
+> Les services sont requis lorsque vous utilisez l' [authentification à deux facteurs](xref:security/authentication/identity-enable-qrcodes), la [confirmation de compte et la récupération de mot de passe](xref:security/authentication/accconfirm), ainsi que d’autres fonctionnalités de sécurité avec Identity . Les services ou stubs de service ne sont pas générés lors de la génération de modèles automatique Identity . Les services pour activer ces fonctionnalités doivent être ajoutés manuellement. Par exemple, consultez [exiger une confirmation par courrier électronique](xref:security/authentication/accconfirm#require-email-confirmation).
 
-## <a name="scaffold-identity-into-an-empty-project"></a>Identité de l’échafaudage dans un projet vide
+## <a name="scaffold-identity-into-an-empty-project"></a>Génération de modèles automatique Identity dans un projet vide
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Ajoutez les appels en surbrillance `Startup` suivants à la classe :
+Ajoutez les appels en surbrillance suivants à la `Startup` classe :
 
 [!code-csharp[](scaffold-identity/sample/StartupEmpty.cs?name=snippet1&highlight=5,20-23)]
 
@@ -312,7 +501,7 @@ Ajoutez les appels en surbrillance `Startup` suivants à la classe :
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>Identité de l’échafaudage dans un Razor projet sans autorisation existante
+## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>Générer Identity une structure dans un Razor projet sans autorisation existante
 
 <!--  Updated for 3.0
 set projNam=RPnoAuth
@@ -333,7 +522,7 @@ dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Identityest configuré dans *AreasIdentity//IdentityHostingStartup.cs*. Pour plus d’informations, consultez [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration).
+Identityest configuré dans *Areas/ Identity /IdentityHostingStartup.cs*. Pour plus d’informations, consultez [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration).
 
 <a name="efm"></a>
 
@@ -345,7 +534,7 @@ Identityest configuré dans *AreasIdentity//IdentityHostingStartup.cs*. Pour plu
 
 ### <a name="enable-authentication"></a>Activer l’authentification
 
-Dans la `Configure` méthode de la `Startup` classe, appelez [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) après `UseStaticFiles`:
+Dans la `Configure` méthode de la `Startup` classe, appelez [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) après `UseStaticFiles` :
 
 [!code-csharp[](scaffold-identity/sample/StartupRPnoAuth.cs?name=snippet1&highlight=29)]
 
@@ -353,11 +542,11 @@ Dans la `Configure` méthode de la `Startup` classe, appelez [UseAuthentication]
 
 ### <a name="layout-changes"></a>Modifications de la disposition
 
-Facultatif : ajoutez la connexion partielle (`_LoginPartial`) au fichier de disposition :
+Facultatif : ajoutez la connexion partielle ( `_LoginPartial` ) au fichier de disposition :
 
-[!code-html[Main](scaffold-identity/sample/_Layout.cshtml?highlight=37)]
+[!code-html[](scaffold-identity/sample/_Layout.cshtml?highlight=37)]
 
-## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Identité de l’échafaudage dans un Razor projet avec autorisation
+## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Génération de modèles automatique Identity dans un Razor projet avec autorisation
 
 <!--
 Use >=2.1: dotnet new webapp -au Individual -o RPauth
@@ -371,9 +560,10 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 -->
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
-Certaines Identity options sont configurées dans *zonesIdentity//IdentityHostingStartup.cs*. Pour plus d’informations, consultez [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration).
 
-## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Identité de l’échafaudage dans un projet MVC sans autorisation existante
+Certaines Identity options sont configurées dans *zones/ Identity /IdentityHostingStartup.cs*. Pour plus d’informations, consultez [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration).
+
+## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Génération de modèles automatique Identity dans un projet MVC sans autorisation existante
 
 <!--
 set projNam=MvcNoAuth
@@ -391,23 +581,23 @@ dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Facultatif : ajoutez la connexion partielle (`_LoginPartial`) au fichier *views/shared/_Layout. cshtml* :
+Facultatif : ajoutez la connexion partielle ( `_LoginPartial` ) au fichier *Views/Shared/_Layout. cshtml* :
 
 [!code-html[](scaffold-identity/sample/_LayoutMvc.cshtml?highlight=37)]
 
 * Déplacez le fichier *pages/Shared/_LoginPartial. cshtml* vers *views/shared/_LoginPartial. cshtml*
 
-Identityest configuré dans *AreasIdentity//IdentityHostingStartup.cs*. Pour plus d’informations, consultez IHostingStartup.
+Identityest configuré dans *Areas/ Identity /IdentityHostingStartup.cs*. Pour plus d’informations, consultez IHostingStartup.
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-Appeler [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) après `UseStaticFiles`:
+Appeler [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) après `UseStaticFiles` :
 
 [!code-csharp[](scaffold-identity/sample/StartupMvcNoAuth.cs?name=snippet1&highlight=23)]
 
 [!INCLUDE[](~/includes/scaffold-identity/hsts.md)]
 
-## <a name="scaffold-identity-into-an-mvc-project-with-authorization"></a>Identité de l’échafaudage dans un projet MVC avec autorisation
+## <a name="scaffold-identity-into-an-mvc-project-with-authorization"></a>Génération Identity de modèles automatique dans un projet MVC avec autorisation
 
 <!--
 dotnet new mvc -au Individual -o MvcAuth
@@ -423,15 +613,15 @@ Supprimez le dossier *pages/Shared* et les fichiers de ce dossier.
 
 <a name="full"></a>
 
-## <a name="create-full-identity-ui-source"></a>Créer une source d’interface utilisateur d’identité complète
+## <a name="create-full-identity-ui-source"></a>Créer une Identity source d’interface utilisateur complète
 
-Pour conserver le contrôle total de Identity l’interface utilisateur, Identity exécutez le générateur de modèles automatique et sélectionnez **remplacer tous les fichiers**.
+Pour conserver le contrôle total de l' Identity interface utilisateur, exécutez le générateur de Identity modèles automatique et sélectionnez **remplacer tous les fichiers**.
 
-Le code en surbrillance suivant montre les modifications pour Identity remplacer l' Identity interface utilisateur par défaut par dans une application Web ASP.net Core 2,1. Vous pouvez le faire pour avoir le contrôle total de l' Identity interface utilisateur.
+Le code en surbrillance suivant montre les modifications pour remplacer l’interface utilisateur par défaut par Identity Identity dans une application web ASP.net Core 2,1. Vous pouvez le faire pour avoir le contrôle total de l' Identity interface utilisateur.
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet1&highlight=13-14,17-999)]
 
-La valeur Identity par défaut est remplacée dans le code suivant :
+La valeur par défaut Identity est remplacée dans le code suivant :
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet2)]
 
@@ -457,21 +647,21 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 Pour désactiver l’inscription des utilisateurs :
 
-* Génération Identityde modèles automatique. Incluez Account. Register, Account. Login et Account. RegisterConfirmation. Par exemple :
+* Génération de modèles automatique Identity . Incluez Account. Register, Account. Login et Account. RegisterConfirmation. Par exemple :
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
   ```
 
-* Mettre à jour les *zones/Identity/pages/Account/Register.cshtml.cs* afin que les utilisateurs ne puissent pas s’inscrire depuis ce point de terminaison :
+* Mettre à jour les *zones/ Identity /pages/Account/Register.cshtml.cs* afin que les utilisateurs ne puissent pas s’inscrire depuis ce point de terminaison :
 
   [!code-csharp[](scaffold-identity/sample/Register.cshtml.cs?name=snippet)]
 
-* Mettez à jour les *zones/Identity/pages/Account/Register.cshtml* pour qu’ils soient cohérents avec les modifications précédentes :
+* Mettez à jour les *zones/ Identity /pages/Account/Register.cshtml* pour qu’ils soient cohérents avec les modifications précédentes :
 
   [!code-cshtml[](scaffold-identity/sample/Register.cshtml)]
 
-* Commentez ou supprimez le lien d’inscription de *Areas/Identity/pages/Account/login.cshtml*
+* Commentez ou supprimez le lien d’inscription de *Areas/ Identity /pages/Account/login.cshtml*
 
 ```cshtml
 @*
@@ -481,10 +671,10 @@ Pour désactiver l’inscription des utilisateurs :
 *@
 ```
 
-* Mettez à jour la page *zones/Identity/pages/Account/RegisterConfirmation* .
+* Mettez à jour la page *zones/ Identity /pages/Account/RegisterConfirmation* .
 
   * Supprimez le code et les liens du fichier cshtml.
-  * Supprimez le code de confirmation `PageModel`du :
+  * Supprimez le code de confirmation du `PageModel` :
 
   ```csharp
    [AllowAnonymous]

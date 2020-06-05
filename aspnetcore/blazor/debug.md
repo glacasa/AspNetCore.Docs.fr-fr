@@ -1,12 +1,24 @@
 ---
-titre : « Debug ASP.NET Core Blazor Webassembly » auteur : guardrex Description : « Découvrez comment déboguer des Blazor applications. »
-monikerRange : ' >= aspnetcore-3,1 'ms. Author : Riande ms. Custom : MVC ms. Date : 05/31/2020 No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR 'UID : éblouissant/débogage
-
+title: Déboguer ASP.NET Core Blazor Webassembly
+author: guardrex
+description: Découvrez comment déboguer des Blazor applications.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/31/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/debug
+ms.openlocfilehash: 193dc656c2ee0154f0ae534bc00f8dc29bab3258
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84239208"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Déboguer ASP.NET Core Blazor Webassembly
 
@@ -223,4 +235,4 @@ Les mappages de source de navigateur permettent au navigateur de mapper les fich
 Si vous rencontrez des erreurs, les conseils suivants peuvent vous aider :
 
 * Dans l’onglet **débogueur** , ouvrez les outils de développement de votre navigateur. Dans la console, exécutez `localStorage.clear()` pour supprimer tous les points d’arrêt.
-* Confirmez que vous avez installé et approuvé le certificat de développement ASP.NET Core HTTPs. Pour plus d'informations, consultez <xref:security/enforcing-ssl#troubleshoot-certificate-problems>.
+* Confirmez que vous avez installé et approuvé le certificat de développement ASP.NET Core HTTPs. Pour plus d’informations, consultez <xref:security/enforcing-ssl#troubleshoot-certificate-problems>.

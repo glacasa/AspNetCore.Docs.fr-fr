@@ -1,12 +1,24 @@
 ---
-titre : « ASP.NET Core Blazor globalisation et localisation » auteur : Description : « Découvrez comment rendre des Razor composants accessibles aux utilisateurs dans plusieurs cultures et langues. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: BlazorGlobalisation et localisation ASP.net Core
+author: guardrex
+description: Découvrez comment rendre Razor des composants accessibles aux utilisateurs dans plusieurs cultures et langages.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/04/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/globalization-localization
+ms.openlocfilehash: 94faaa57cc6dd3df9e4a7c3c090fe01527399658
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84419734"
 ---
 # <a name="aspnet-core-blazor-globalization-and-localization"></a>BlazorGlobalisation et localisation ASP.net Core
 
@@ -22,7 +34,7 @@ Un ensemble limité de scénarios de localisation de ASP.NET Core est actuelleme
 * <xref:Microsoft.Extensions.Localization.IStringLocalizer>et <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> *sont pris en charge* dans les Blazor applications.
 * <xref:Microsoft.AspNetCore.Mvc.Localization.IHtmlLocalizer>la <xref:Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer> localisation des annotations de données, et est ASP.net Core les scénarios MVC et **non pris en charge** dans les Blazor applications.
 
-Pour plus d'informations, consultez <xref:fundamentals/localization>.
+Pour plus d’informations, consultez <xref:fundamentals/localization>.
 
 ## <a name="globalization"></a>Globalisation
 
@@ -67,41 +79,46 @@ BlazorLes applications serveur sont localisées à l’aide de l' [intergiciel (
 
 La culture peut être définie à l’aide de l’une des approches suivantes :
 
-* [Cookies](#cookies)
+* [Internes](#cookies)
 * [Fournir l’interface utilisateur pour choisir la culture](#provide-ui-to-choose-the-culture)
 
 Pour plus d’informations et d’exemples, consultez <xref:fundamentals/localization>.
 
 #### <a name="cookies"></a>Cookies
 
-Un cookie de culture de localisation peut conserver la culture de l’utilisateur. Le cookie est créé par la `OnGet` méthode de la page hôte de l’application (*pages/Host. cshtml. cs*). L’intergiciel (middleware) de localisation lit le cookie sur les demandes suivantes pour définir la culture de l’utilisateur. 
+Un cookie de culture de localisation peut conserver la culture de l’utilisateur. L’intergiciel (middleware) de localisation lit le cookie sur les demandes suivantes pour définir la culture de l’utilisateur. 
 
 L’utilisation d’un cookie garantit que la connexion WebSocket peut propager correctement la culture. Si les schémas de localisation sont basés sur le chemin d’URL ou la chaîne de requête, il est possible que le schéma ne soit pas en mesure de fonctionner avec les WebSockets, et donc de ne pas conserver la culture. Par conséquent, l’utilisation d’un cookie de culture de localisation est l’approche recommandée.
 
 Toute technique peut être utilisée pour assigner une culture si la culture est rendue persistante dans un cookie de localisation. Si l’application a déjà un schéma de localisation établi pour les ASP.NET Core côté serveur, continuez à utiliser l’infrastructure de localisation existante de l’application et à définir le cookie de la culture de localisation dans le schéma de l’application.
 
-L’exemple suivant montre comment définir la culture actuelle dans un cookie qui peut être lu par l’intergiciel (middleware) de localisation. Créez un fichier *pages/_Host. cshtml. cs* avec le contenu suivant dans l' Blazor application serveur :
+L’exemple suivant montre comment définir la culture actuelle dans un cookie qui peut être lu par l’intergiciel (middleware) de localisation. Créez une Razor expression dans le fichier *Pages/_Host. cshtml* immédiatement à l’intérieur de la `<body>` balise d’ouverture :
 
-```csharp
-public class HostModel : PageModel
-{
-    public void OnGet()
-    {
-        HttpContext.Response.Cookies.Append(
+```cshtml
+@using System.Globalization
+@using Microsoft.AspNetCore.Localization
+
+...
+
+<body>
+    @{
+        this.HttpContext.Response.Cookies.Append(
             CookieRequestCultureProvider.DefaultCookieName,
             CookieRequestCultureProvider.MakeCookieValue(
                 new RequestCulture(
                     CultureInfo.CurrentCulture,
                     CultureInfo.CurrentUICulture)));
     }
-}
+
+    ...
+</body>
 ```
 
 La localisation est gérée par l’application dans la séquence d’événements suivante :
 
 1. Le navigateur envoie une requête HTTP initiale à l’application.
 1. La culture est affectée par l’intergiciel (middleware) de localisation.
-1. La `OnGet` méthode dans *_Host. cshtml. cs* rend persistante la culture dans un cookie dans le cadre de la réponse.
+1. L' Razor expression dans la `_Host` page (*_Host. cshtml*) conserve la culture dans un cookie dans le cadre de la réponse.
 1. Le navigateur ouvre une connexion WebSocket pour créer une Blazor session de serveur interactive.
 1. L’intergiciel de localisation lit le cookie et assigne la culture.
 1. La Blazor session serveur commence par la culture correcte.
@@ -134,7 +151,26 @@ public class CultureController : Controller
 ```
 
 > [!WARNING]
-> Utilisez le <xref:Microsoft.AspNetCore.Mvc.ControllerBase.LocalRedirect%2A> résultat de l’action pour empêcher les attaques de redirection ouvertes. Pour plus d'informations, consultez <xref:security/preventing-open-redirects>.
+> Utilisez le <xref:Microsoft.AspNetCore.Mvc.ControllerBase.LocalRedirect%2A> résultat de l’action pour empêcher les attaques de redirection ouvertes. Pour plus d’informations, consultez <xref:security/preventing-open-redirects>.
+
+Si l’application n’est pas configurée pour traiter les actions du contrôleur :
+
+* Ajoutez des services MVC à la collection de services dans `Startup.ConfigureServices` :
+
+  ```csharp
+  services.AddControllers();
+  ```
+
+* Ajouter un routage de point de terminaison de contrôleur dans `Startup.Configure` :
+
+  ```csharp
+  app.UseEndpoints(endpoints =>
+  {
+      endpoints.MapControllers();
+      endpoints.MapBlazorHub();
+      endpoints.MapFallbackToPage("/_Host");
+  });
+  ```
 
 Le composant suivant montre un exemple d’exécution de la redirection initiale lorsque l’utilisateur sélectionne une culture :
 

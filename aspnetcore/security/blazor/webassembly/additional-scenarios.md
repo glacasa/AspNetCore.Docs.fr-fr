@@ -1,12 +1,24 @@
 ---
-titre : 'ASP.NET Core Blazor Webassembly autres scénarios de sécurité supplémentaires’auteur : guardrex Description : 'Découvrez comment configurer Blazor webassembly pour des scénarios de sécurité supplémentaires. '
-monikerRange : ' >= aspnetcore-3,1 'ms. Author : Riande ms. Custom : MVC ms. Date : 06/01/2020 No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- « SignalR UID : Security/éblouissant/webassembly/supplémentaire-scénarios
-
+title: Scénarios de sécurité supplémentaires pour l’ASP.NET Core Blazor Webassembly
+author: guardrex
+description: Découvrez comment configurer Blazor Webassembly pour des scénarios de sécurité supplémentaires.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/01/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/webassembly/additional-scenarios
+ms.openlocfilehash: de752eb180767bbb269107ebc478a4422448f968
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84272032"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>Scénarios de sécurité supplémentaires pour l’ASP.NET Core Blazor Webassembly
 
@@ -382,7 +394,7 @@ Les options de requête HTTP FETCH peuvent être configurées avec <xref:System.
 
 | Méthode d’extension | Propriété de requête Fetch |
 | --- | --- |
-| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> | [informations d’identification](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> | [credentials](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
 | <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCache%2A> | [en](https://developer.mozilla.org/docs/Web/API/Request/cache) |
 | <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestMode%2A> | [mode](https://developer.mozilla.org/docs/Web/API/Request/mode) |
 | <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestIntegrity%2A> | [garantis](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
@@ -844,7 +856,7 @@ Dans l’application serveur, créez un dossier *pages* s’il n’existe pas. C
 
 Lors de l’authentification et de l’autorisation d’une Blazor application Webassembly hébergée auprès d’un fournisseur tiers, plusieurs options sont disponibles pour l’authentification de l’utilisateur. Celui que vous choisissez dépend de votre scénario.
 
-Pour plus d'informations, consultez <xref:security/authentication/social/additional-claims>.
+Pour plus d’informations, consultez <xref:security/authentication/social/additional-claims>.
 
 ### <a name="authenticate-users-to-only-call-protected-third-party-apis"></a>Authentifier les utilisateurs pour appeler uniquement des API tierces protégées
 

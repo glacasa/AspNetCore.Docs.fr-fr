@@ -1,12 +1,24 @@
 ---
-titre : « ASP.NET Core Blazor Hébergement de la configuration de modèle » auteur : guardrex Description : « en savoir plus sur Blazor l’hébergement de la configuration de modèle, notamment comment intégrer Razor des composants dans Razor des pages et des applications MVC. »
-monikerRange : ' >= aspnetcore-3,1 'ms. Author : Riande ms. Custom : MVC ms. Date : 05/28/2020 No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR 'UID : éblouissant/Hosting-Model-Configuration
-
+title: BlazorConfiguration du modèle d’hébergement ASP.net Core
+author: guardrex
+description: En savoir plus sur Blazor l’hébergement de la configuration de modèle, y compris l’intégration de Razor composants dans Razor les pages et les applications MVC.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/28/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/hosting-model-configuration
+ms.openlocfilehash: e3b8b91a570210e77f307c49f7be21eeab714daa
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84355108"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>BlazorConfiguration du modèle d’hébergement ASP.net Core
 

@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: b7856a3004cfc76acfb485ff8f1fadf87f5aa904
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d5e0e3865702fe4e5cbe49e7f452f367a8a53de9
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777109"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84451743"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>Account confirmation and password recovery in ASP.NET Core (Confirmation de compte et récupération de mot de passe dans ASP.NET Core)
 
@@ -52,7 +52,7 @@ cd WebPWrecover
 dotnet run
 ```
 
-Exécutez l’application, sélectionnez le lien **Register** et inscrivez un utilisateur. Une fois inscrit, vous êtes redirigé vers la page `/Identity/Account/RegisterConfirmation` vers qui contient un lien pour simuler la confirmation de l’e-mail :
+Exécutez l’application, sélectionnez le lien **Register** et inscrivez un utilisateur. Une fois inscrit, vous êtes redirigé vers la `/Identity/Account/RegisterConfirmation` page vers qui contient un lien pour simuler la confirmation de l’e-mail :
 
 * Sélectionnez le `Click here to confirm your account` lien.
 * Sélectionnez le lien de **connexion** et connectez-vous avec les mêmes informations d’identification.
@@ -62,6 +62,8 @@ Exécutez l’application, sélectionnez le lien **Register** et inscrivez un ut
 ### <a name="configure-an-email-provider"></a>Configurer un fournisseur de messagerie
 
 Dans ce didacticiel, [SendGrid](https://sendgrid.com) est utilisé pour envoyer des messages électroniques. Vous avez besoin d’un compte et d’une clé SendGrid pour envoyer des messages électroniques. Vous pouvez utiliser d’autres fournisseurs de courrier électronique. Nous vous recommandons d’utiliser SendGrid ou un autre service de messagerie pour envoyer des courriers électroniques. SMTP est difficile à sécuriser et à configurer correctement.
+
+Le compte SendGrid My nécessite l' [Ajout d’un expéditeur](https://sendgrid.com/docs/ui/sending-email/senders/).
 
 Créez une classe pour extraire la clé de messagerie sécurisée. Pour cet exemple, créez *services/AuthMessageSenderOptions. cs*:
 
@@ -119,7 +121,7 @@ Pour vous inscrire à un compte SendGrid gratuit, consultez [prise en main de Se
 
 ### <a name="implement-iemailsender"></a>Implémenter IEmailSender
 
-Pour implémenter `IEmailSender`, créez *services/EMailSender. cs* avec du code similaire à ce qui suit :
+Pour implémenter `IEmailSender` , créez *services/EMailSender. cs* avec du code similaire à ce qui suit :
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/Services/EmailSender.cs)]
 
@@ -161,13 +163,13 @@ Le code suivant modifie le délai d’expiration de tous les jetons de protectio
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/StartupAllTokens.cs?name=snippet1&highlight=11-12)]
 
-Les jetons utilisateur d’identité intégrés (consultez [AspNetCore/SRC/Identity/extensions. Core/SRC/TokenOptions. cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ) ont un [délai d’expiration d’un jour](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs).
+Les Identity jetons utilisateur intégrés (voir [AspNetCore/SRC/ Identity /Extensions.Core/SRC/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ) ont un [délai d’expiration d’un jour](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs).
 
 ### <a name="change-the-email-token-lifespan"></a>Modifier la durée de vie du jeton d’e-mail
 
-La durée de vie des jetons par défaut des [jetons d’utilisateur d’identité](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) est d' [un jour](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs). Cette section montre comment modifier la durée de vie des jetons de courrier électronique.
+La durée de vie des jetons par défaut des [ Identity jetons utilisateur](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) est d' [un jour](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs). Cette section montre comment modifier la durée de vie des jetons de courrier électronique.
 
-Ajoutez un [>TUser\<DataProtectorTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1) personnalisé et <xref:Microsoft.AspNetCore.Identity.DataProtectionTokenProviderOptions>:
+Ajoutez un [DataProtectorTokenProvider \<TUser> ](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1) personnalisé et <xref:Microsoft.AspNetCore.Identity.DataProtectionTokenProviderOptions> :
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/TokenProviders/CustomTokenProvider.cs?name=snippet1)]
 
@@ -185,8 +187,8 @@ Consultez [ce problème GitHub](https://github.com/dotnet/AspNetCore/issues/5410
 
 Si vous ne parvenez pas à utiliser le courrier électronique :
 
-* Définissez un point d' `EmailSender.Execute` arrêt dans `SendGridClient.SendEmailAsync` pour vérifier que est appelé.
-* Créez une [application console pour envoyer du courrier électronique](https://sendgrid.com/docs/Integrate/Code_Examples/v2_Mail/csharp.html) à l' `EmailSender.Execute`aide d’un code similaire à.
+* Définissez un point d’arrêt dans `EmailSender.Execute` pour vérifier que `SendGridClient.SendEmailAsync` est appelé.
+* Créez une [application console pour envoyer du courrier électronique](https://sendgrid.com/docs/Integrate/Code_Examples/v2_Mail/csharp.html) à l’aide d’un code similaire à `EmailSender.Execute` .
 * Passez en revue la page [activité de messagerie](https://sendgrid.com/docs/User_Guide/email_activity.html) .
 * Vérifiez votre dossier de courrier indésirable.
 * Essayez un autre alias de messagerie sur un autre fournisseur de messagerie (Microsoft, Yahoo, Gmail, etc.)
@@ -198,7 +200,7 @@ Si vous ne parvenez pas à utiliser le courrier électronique :
 
 Pour compléter cette section, vous devez d’abord activer un fournisseur d’authentification externe. Consultez [l’authentification Facebook, Google et fournisseur externe](xref:security/authentication/social/index).
 
-Vous pouvez combiner des comptes locaux et sociaux en cliquant sur le lien de votre adresse de messagerie. Dans l’ordre suivant, «RickAndMSFT@gmail.com» est d’abord créé comme connexion locale ; Toutefois, vous pouvez d’abord créer le compte en tant que connexion sociale, puis ajouter une connexion locale.
+Vous pouvez combiner des comptes locaux et sociaux en cliquant sur le lien de votre adresse de messagerie. Dans l’ordre suivant, « RickAndMSFT@gmail.com » est d’abord créé comme connexion locale ; Toutefois, vous pouvez d’abord créer le compte en tant que connexion sociale, puis ajouter une connexion locale.
 
 ![Application Web : RickAndMSFT@gmail.com utilisateur authentifié](accconfirm/_static/rick.png)
 
@@ -227,7 +229,7 @@ L’activation de la confirmation de compte sur un site avec des utilisateurs ve
 
 [.NET Core 2,2 SDK ou version ultérieure](https://dotnet.microsoft.com/download/dotnet-core)
 
-## <a name="create-a-web--app-and-scaffold-identity"></a>Créer une application Web et une identité de structure
+## <a name="create-a-web--app-and-scaffold-identity"></a>Créer une application Web et une structureIdentity
 
 Exécutez les commandes suivantes pour créer une application Web avec l’authentification.
 
@@ -249,7 +251,7 @@ Exécutez l’application, sélectionnez le lien **Register** et inscrivez un ut
 
 [!INCLUDE[](~/includes/view-identity-db.md)]
 
-Notez que le champ `EmailConfirmed` de la `False`table est.
+Notez que le champ de la table `EmailConfirmed` est `False` .
 
 Vous souhaiterez peut-être réutiliser cet e-mail à l’étape suivante lorsque l’application envoie un e-mail de confirmation. Cliquez avec le bouton droit sur la ligne et sélectionnez **supprimer**. La suppression de l’alias de messagerie le rend plus facile dans les étapes suivantes.
 
@@ -257,11 +259,11 @@ Vous souhaiterez peut-être réutiliser cet e-mail à l’étape suivante lorsqu
 
 ## <a name="require-email-confirmation"></a>Demander une confirmation par courrier électronique
 
-Il est recommandé de confirmer l’e-mail d’une nouvelle inscription d’utilisateur. La confirmation par courrier électronique vous permet de vérifier qu’ils n’empruntent pas l’identité d’une autre personne (c’est-à-dire qu’ils ne sont pas inscrits auprès de l’e-mail de quelqu’un d’autre). Supposons que vous disposiez d’un forum de discussion et queyli@example.comvous souhaitiez empêcher «nolivetto@contoso.com» de s’inscrire en tant que «». Sans confirmation par courrier électroniquenolivetto@contoso.com, «» pourrait recevoir un courrier indésirable de votre application. Supposons que l’utilisateur a accidentellementylo@example.comété inscrit comme « » et n’avait pas remarqué la mauvaise orthographe de «Yli ». Ils ne peuvent pas utiliser la récupération de mot de passe car l’application n’a pas leur adresse de messagerie correcte. La confirmation par e-mail fournit une protection limitée des robots. La confirmation par e-mail ne fournit pas de protection contre les utilisateurs malveillants disposant de nombreux comptes de messagerie.
+Il est recommandé de confirmer l’e-mail d’une nouvelle inscription d’utilisateur. La confirmation par courrier électronique vous permet de vérifier qu’ils n’empruntent pas l’identité d’une autre personne (c’est-à-dire qu’ils ne sont pas inscrits auprès de l’e-mail de quelqu’un d’autre). Supposons que vous disposiez d’un forum de discussion et que vous souhaitiez empêcher « yli@example.com » de s’inscrire en tant que «» nolivetto@contoso.com . Sans confirmation par courrier électronique, « nolivetto@contoso.com » pourrait recevoir un courrier indésirable de votre application. Supposons que l’utilisateur a accidentellement été inscrit comme « ylo@example.com » et n’avait pas remarqué la mauvaise orthographe de « Yli ». Ils ne peuvent pas utiliser la récupération de mot de passe car l’application n’a pas leur adresse de messagerie correcte. La confirmation par e-mail fournit une protection limitée des robots. La confirmation par e-mail ne fournit pas de protection contre les utilisateurs malveillants disposant de nombreux comptes de messagerie.
 
 En général, vous souhaitez empêcher les nouveaux utilisateurs de publier des données sur votre site Web avant qu’ils n’aient un e-mail confirmé.
 
-Mise `Startup.ConfigureServices` à jour pour exiger un e-mail confirmé :
+Mise à jour `Startup.ConfigureServices` pour exiger un e-mail confirmé :
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/Startup.cs?name=snippet1&highlight=8-11)]
 
@@ -269,7 +271,7 @@ Mise `Startup.ConfigureServices` à jour pour exiger un e-mail confirmé :
 
 ### <a name="configure-email-provider"></a>Configurer le fournisseur de messagerie
 
-Dans ce didacticiel, [SendGrid](https://sendgrid.com) est utilisé pour envoyer des messages électroniques. Vous avez besoin d’un compte et d’une clé SendGrid pour envoyer des messages électroniques. Vous pouvez utiliser d’autres fournisseurs de courrier électronique. ASP.NET Core 2. x comprend `System.Net.Mail`, qui vous permet d’envoyer des e-mails à partir de votre application. Nous vous recommandons d’utiliser SendGrid ou un autre service de messagerie pour envoyer des courriers électroniques. SMTP est difficile à sécuriser et à configurer correctement.
+Dans ce didacticiel, [SendGrid](https://sendgrid.com) est utilisé pour envoyer des messages électroniques. Vous avez besoin d’un compte et d’une clé SendGrid pour envoyer des messages électroniques. Vous pouvez utiliser d’autres fournisseurs de courrier électronique. ASP.NET Core 2. x comprend `System.Net.Mail` , qui vous permet d’envoyer des e-mails à partir de votre application. Nous vous recommandons d’utiliser SendGrid ou un autre service de messagerie pour envoyer des courriers électroniques. SMTP est difficile à sécuriser et à configurer correctement.
 
 Créez une classe pour extraire la clé de messagerie sécurisée. Pour cet exemple, créez *services/AuthMessageSenderOptions. cs*:
 
@@ -325,7 +327,7 @@ Pour vous inscrire à un compte SendGrid gratuit, consultez [prise en main de Se
 
 ### <a name="implement-iemailsender"></a>Implémenter IEmailSender
 
-Pour implémenter `IEmailSender`, créez *services/EMailSender. cs* avec du code similaire à ce qui suit :
+Pour implémenter `IEmailSender` , créez *services/EMailSender. cs* avec du code similaire à ce qui suit :
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/Services/EmailSender.cs)]
 
@@ -340,7 +342,7 @@ Ajoutez le code suivant à la `ConfigureServices` méthode dans le fichier *Star
 
 ## <a name="enable-account-confirmation-and-password-recovery"></a>Activer la récupération du mot de passe et la confirmation du compte
 
-Le modèle dispose du code pour la confirmation du compte et la récupération du mot de passe. Recherchez la `OnPostAsync` méthode dans *AreasIdentity//pages/Account/Register.cshtml.cs*.
+Le modèle dispose du code pour la confirmation du compte et la récupération du mot de passe. Recherchez la `OnPostAsync` méthode dans *Areas/ Identity /pages/Account/Register.cshtml.cs*.
 
 Empêchez les utilisateurs nouvellement inscrits d’être automatiquement connectés en commentant la ligne suivante :
 
@@ -364,7 +366,7 @@ Exécutez l’application Web et testez le processus de confirmation et de récu
 
 ### <a name="view-the-manage-page"></a>Afficher la page gérer
 
-Sélectionnez votre nom d’utilisateur dans la fenêtre ![navigateur : navigateur avec le nom d’utilisateur](accconfirm/_static/un.png)
+Sélectionnez votre nom d’utilisateur dans la fenêtre navigateur : ![ navigateur avec le nom d’utilisateur](accconfirm/_static/un.png)
 
 La page gérer s’affiche avec l’onglet **Profil** sélectionné. L' **e-mail** affiche une case à cocher indiquant que le message électronique a été confirmé.
 
@@ -387,13 +389,13 @@ Le code suivant modifie le délai d’expiration de tous les jetons de protectio
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/StartupAllTokens.cs?name=snippet1&highlight=15-16)]
 
-Les jetons Identity utilisateur intégrés (voir [AspNetCore/SRC/Identity/extensions.Core/SRC/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ) ont un [délai d’expiration d’un jour](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs).
+Les Identity jetons utilisateur intégrés (voir [AspNetCore/SRC/ Identity /Extensions.Core/SRC/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ) ont un [délai d’expiration d’un jour](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs).
 
 ### <a name="change-the-email-token-lifespan"></a>Modifier la durée de vie du jeton d’e-mail
 
-La durée de vie des jetons par défaut des [jetons Identity utilisateur](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) est d' [un jour](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs). Cette section montre comment modifier la durée de vie des jetons de courrier électronique.
+La durée de vie des jetons par défaut des [ Identity jetons utilisateur](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) est d' [un jour](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs). Cette section montre comment modifier la durée de vie des jetons de courrier électronique.
 
-Ajoutez un [>TUser\<DataProtectorTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1) personnalisé et <xref:Microsoft.AspNetCore.Identity.DataProtectionTokenProviderOptions>:
+Ajoutez un [DataProtectorTokenProvider \<TUser> ](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1) personnalisé et <xref:Microsoft.AspNetCore.Identity.DataProtectionTokenProviderOptions> :
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/TokenProviders/CustomTokenProvider.cs?name=snippet1)]
 
@@ -411,8 +413,8 @@ Consultez [ce problème GitHub](https://github.com/dotnet/AspNetCore/issues/5410
 
 Si vous ne parvenez pas à utiliser le courrier électronique :
 
-* Définissez un point d' `EmailSender.Execute` arrêt dans `SendGridClient.SendEmailAsync` pour vérifier que est appelé.
-* Créez une [application console pour envoyer du courrier électronique](https://sendgrid.com/docs/Integrate/Code_Examples/v2_Mail/csharp.html) à l' `EmailSender.Execute`aide d’un code similaire à.
+* Définissez un point d’arrêt dans `EmailSender.Execute` pour vérifier que `SendGridClient.SendEmailAsync` est appelé.
+* Créez une [application console pour envoyer du courrier électronique](https://sendgrid.com/docs/Integrate/Code_Examples/v2_Mail/csharp.html) à l’aide d’un code similaire à `EmailSender.Execute` .
 * Passez en revue la page [activité de messagerie](https://sendgrid.com/docs/User_Guide/email_activity.html) .
 * Vérifiez votre dossier de courrier indésirable.
 * Essayez un autre alias de messagerie sur un autre fournisseur de messagerie (Microsoft, Yahoo, Gmail, etc.)
@@ -424,7 +426,7 @@ Si vous ne parvenez pas à utiliser le courrier électronique :
 
 Pour compléter cette section, vous devez d’abord activer un fournisseur d’authentification externe. Consultez [l’authentification Facebook, Google et fournisseur externe](xref:security/authentication/social/index).
 
-Vous pouvez combiner des comptes locaux et sociaux en cliquant sur le lien de votre adresse de messagerie. Dans l’ordre suivant, «RickAndMSFT@gmail.com» est d’abord créé comme connexion locale ; Toutefois, vous pouvez d’abord créer le compte en tant que connexion sociale, puis ajouter une connexion locale.
+Vous pouvez combiner des comptes locaux et sociaux en cliquant sur le lien de votre adresse de messagerie. Dans l’ordre suivant, « RickAndMSFT@gmail.com » est d’abord créé comme connexion locale ; Toutefois, vous pouvez d’abord créer le compte en tant que connexion sociale, puis ajouter une connexion locale.
 
 ![Application Web : RickAndMSFT@gmail.com utilisateur authentifié](accconfirm/_static/rick.png)
 

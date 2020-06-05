@@ -1,12 +1,22 @@
 ---
-title : autorisation simple dans ASP.NET Core auteur : description de Rick-Anderson : Découvrez comment utiliser l’attribut Authorize pour restreindre l’accès aux contrôleurs et aux actions ASP.NET Core.
-ms. Author : Riande ms. Date : 10/14/2016 No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR 'UID : Security/Authorization/simple
-
+title: Autorisation simple dans ASP.NET Core
+author: rick-anderson
+description: Découvrez comment utiliser l’attribut Authorize pour restreindre l’accès aux contrôleurs et aux actions de ASP.NET Core.
+ms.author: riande
+ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/authorization/simple
+ms.openlocfilehash: 4ec31354d7fe11af75fd3a0045b4045f83721cb5
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84272123"
 ---
 # <a name="simple-authorization-in-aspnet-core"></a>Autorisation simple dans ASP.NET Core
 

@@ -1,12 +1,22 @@
 ---
-titre : globalisation et localisation dans ASP.NET Core auteur : description de Rick-Anderson : Découvrez comment ASP.NET Core fournit des services et des intergiciels (middleware) pour la localisation de contenu dans différents langages et cultures.
-ms. Author : Riande ms. Date : 11/30/2019 No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- « SignalR UID : notions de base/localisation
-
+title: Globalisation et localisation dans ASP.NET Core
+author: rick-anderson
+description: Découvrez les services et intergiciels (middleware) fournis par ASP.NET Core pour localiser du contenu dans différentes langues et cultures.
+ms.author: riande
+ms.date: 11/30/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: fundamentals/localization
+ms.openlocfilehash: e3b73a7a559d2f4a0803dc26dd42257c60fab884
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84356958"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalisation et localisation dans ASP.NET Core
 
@@ -26,7 +36,7 @@ La localisation d’une application implique les étapes suivantes :
 1. Fournir des ressources localisées aux langues et cultures prises en charge
 1. Implémenter une stratégie de sélection de la langue/culture pour chaque requête
 
-[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/Localization) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
+[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/3.x/Localization) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
 ## <a name="make-the-apps-content-localizable"></a>Rendre le contenu de l’application localisable
 
@@ -147,7 +157,7 @@ Dans l’exemple de projet, la méthode `ConfigureServices` affecte à `Resource
 | Nom de la ressource | Affectation de noms avec des points ou un chemin |
 | ------------   | ------------- |
 | Resources/Controllers.HomeController.fr.resx | Points  |
-| Resources/Controllers/HomeController.fr.resx  | Path |
+| Resources/Controllers/HomeController.fr.resx  | Chemin d’accès |
 |    |     |
 
 Les fichiers de ressources utilisant `@inject IViewLocalizer` dans les Razor vues suivent un modèle similaire. Le fichier de ressources d’une vue peut être nommé selon la convention avec des points ou un chemin. Razorles fichiers de ressources d’affichage imitent le chemin d’accès de leur fichier de vue associé. Si nous affectons à `ResourcesPath` la valeur « Resources », le fichier de ressources en français associé à l’affichage *Views/Home/About.cshtml* peut porter l’un des noms suivants :
@@ -495,7 +505,7 @@ Dans l’exemple de projet, la méthode `ConfigureServices` affecte à `Resource
 | Nom de la ressource | Affectation de noms avec des points ou un chemin |
 | ------------   | ------------- |
 | Resources/Controllers.HomeController.fr.resx | Points  |
-| Resources/Controllers/HomeController.fr.resx  | Path |
+| Resources/Controllers/HomeController.fr.resx  | Chemin d’accès |
 |    |     |
 
 Les fichiers de ressources utilisant `@inject IViewLocalizer` dans les Razor vues suivent un modèle similaire. Le fichier de ressources d’une vue peut être nommé selon la convention avec des points ou un chemin. Razorles fichiers de ressources d’affichage imitent le chemin d’accès de leur fichier de vue associé. Si nous affectons à `ResourcesPath` la valeur « Resources », le fichier de ressources en français associé à l’affichage *Views/Home/About.cshtml* peut porter l’un des noms suivants :
@@ -721,7 +731,7 @@ La localisation d’une application implique les étapes suivantes :
 1. Fournir des ressources localisées aux langues et cultures prises en charge
 1. Implémenter une stratégie de sélection de la langue/culture pour chaque requête
 
-[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/Localization) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
+[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/2.x/) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
 ## <a name="make-the-apps-content-localizable"></a>Rendre le contenu de l’application localisable
 
@@ -842,7 +852,7 @@ Dans l’exemple de projet, la méthode `ConfigureServices` affecte à `Resource
 | Nom de la ressource | Affectation de noms avec des points ou un chemin |
 | ------------   | ------------- |
 | Resources/Controllers.HomeController.fr.resx | Points  |
-| Resources/Controllers/HomeController.fr.resx  | Path |
+| Resources/Controllers/HomeController.fr.resx  | Chemin d’accès |
 |    |     |
 
 Les fichiers de ressources utilisant `@inject IViewLocalizer` dans les Razor vues suivent un modèle similaire. Le fichier de ressources d’une vue peut être nommé selon la convention avec des points ou un chemin. Razorles fichiers de ressources d’affichage imitent le chemin d’accès de leur fichier de vue associé. Si nous affectons à `ResourcesPath` la valeur « Resources », le fichier de ressources en français associé à l’affichage *Views/Home/About.cshtml* peut porter l’un des noms suivants :

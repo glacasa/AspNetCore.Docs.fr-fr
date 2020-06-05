@@ -1,11 +1,24 @@
 ---
-titre : sécuriser une Blazor application autonome Webassembly ASP.net core avec Azure Active Directory B2C auteur : guardrex Description : monikerRange : ' >= aspnetcore-3,1 'ms. Author : Riande ms. Custom : MVC ms. Date : 05/19/2020 No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- « SignalR UID : Security/éblouissant/webassembly/standalone-with-Azure-Active-Directory-B2C
-
+title: Sécuriser une Blazor application autonome Webassembly ASP.net core avec Azure Active Directory B2C
+author: guardrex
+description: ''
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
+ms.openlocfilehash: 911eeffbe632d8f285d54ae78b62f17851205e83
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84214955"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>Sécuriser une Blazor application autonome Webassembly ASP.net core avec Azure Active Directory B2C
 
@@ -66,7 +79,7 @@ Pour spécifier l’emplacement de sortie, qui crée un dossier de projet s’il
 Après avoir créé l’application, vous devez être en mesure d’effectuer les opérations suivantes :
 
 * Connectez-vous à l’application à l’aide d’un compte d’utilisateur AAD.
-* Demander des jetons d’accès pour les API Microsoft. Pour plus d'informations, consultez les pages suivantes :
+* Demander des jetons d’accès pour les API Microsoft. Pour plus d'informations, voir :
   * [Étendues de jeton d’accès](#access-token-scopes)
   * [Démarrage rapide : configurer une application pour exposer des API Web](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis).
 

@@ -1,12 +1,24 @@
 ---
-titre : « héberger et déployer ASP.NET Core Blazor Webassembly » auteur : guardrex Description : « Découvrez comment héberger et déployer une Blazor application à l’aide de ASP.net Core, de réseaux de distribution de contenu (CDN), de serveurs de fichiers et de pages github. »
-monikerRange : ' >= aspnetcore-3,1 'ms. Author : Riande ms. Custom : MVC ms. Date : 05/28/2020 No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR 'UID : Host-and-Deploy/éblouissant/webassembly
-
+title: Héberger et déployer ASP.NET Core Blazor Webassembly
+author: guardrex
+description: Découvrez comment héberger et déployer une Blazor application à l’aide de ASP.net Core, de réseaux de distribution de contenu (CDN), de serveurs de fichiers et de pages github.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/28/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: host-and-deploy/blazor/webassembly
+ms.openlocfilehash: 09f74edaa3d1cb0d51e0ce8d0209383885b81f5f
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84239393"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>Héberger et déployer ASP.NET Core Blazor Webassembly
 
@@ -160,13 +172,13 @@ La suppression du gestionnaire ou la désactivation de l’héritage est effectu
 
 IIS peut être configuré par le biais de *Web. config* pour servir les ressources compressées Brotli ou gzip Blazor . Pour obtenir un exemple de configuration, consultez [Web. config](webassembly/_samples/web.config?raw=true).
 
-#### <a name="troubleshooting"></a>Résolution des problèmes
+#### <a name="troubleshooting"></a>Dépannage
 
 Si vous recevez un message *500 – Erreur interne du serveur* et que le Gestionnaire IIS lève des erreurs quand vous tentez d’accéder à la configuration du site web, vérifiez que le module de réécriture d’URL est installé. Quand le module n’est pas installé, le fichier *web.config* ne peut pas être analysé par IIS. Cela empêche le gestionnaire des services Internet de charger la configuration du site Web et le site Web à partir des Blazor fichiers statiques de service.
 
 Pour plus d’informations sur le dépannage des déploiements sur IIS, consultez <xref:test/troubleshoot-azure-iis>.
 
-### <a name="azure-storage"></a>Stockage Azure
+### <a name="azure-storage"></a>Azure Storage
 
 L’hébergement de fichiers statiques [Azure Storage](/azure/storage/) permet l’hébergement d’applications sans serveur Blazor . Les noms de domaine personnalisé, le réseau de distribution de contenu Azure (CDN) et HTTPS sont pris en charge.
 
@@ -348,7 +360,7 @@ L’argument `--urls` définit les adresses IP ou les adresses d’hôtes avec 
 
 ## <a name="configure-the-linker"></a>Configurer l'éditeur de liens
 
-Blazoreffectue une liaison IL (Intermediate Language) sur chaque version de mise en production pour supprimer l’IL inutile des assemblys de sortie. Pour plus d'informations, consultez <xref:host-and-deploy/blazor/configure-linker>.
+Blazoreffectue une liaison IL (Intermediate Language) sur chaque version de mise en production pour supprimer l’IL inutile des assemblys de sortie. Pour plus d’informations, consultez <xref:host-and-deploy/blazor/configure-linker>.
 
 ## <a name="custom-boot-resource-loading"></a>Chargement des ressources de démarrage personnalisé
 

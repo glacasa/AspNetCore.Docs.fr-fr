@@ -1,12 +1,23 @@
 ---
-title : types de retours d’action de contrôleur dans ASP.NET Core auteur de l’API Web : scottaddie Description : en savoir plus sur l’utilisation des différents types de retour de méthode d’action de contrôleur dans une API Web ASP.NET Core.
-ms. Author : scaddie ms. Custom : MVC ms. Date : 02/03/2020 No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR 'UID : Web-API/action-Return-types
-
+title: Types de retour de l’action du contrôleur dans ASP.NET Core API Web
+author: scottaddie
+description: En savoir plus sur l’utilisation des différents types de retour de méthode d’action de contrôleur dans une API Web ASP.NET Core.
+ms.author: scaddie
+ms.custom: mvc
+ms.date: 02/03/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: web-api/action-return-types
+ms.openlocfilehash: 57bc91feb9c4242dbea120ee00db1cba46784c61
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84253784"
 ---
 # <a name="controller-action-return-types-in-aspnet-core-web-api"></a>Types de retour de l’action du contrôleur dans ASP.NET Core API Web
 

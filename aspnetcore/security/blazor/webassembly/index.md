@@ -1,12 +1,24 @@
 ---
-titre : « Secure ASP.NET Core Blazor Webassembly » auteur : guardrex Description : « Découvrez comment sécuriser des applications Blazor WebAssemlby en tant qu’applications à page unique (spas). »
-monikerRange : ' >= aspnetcore-3,1 'ms. Author : Riande ms. Custom : MVC ms. Date : 06/01/2020 No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- « SignalR UID : Security/éblouissant/webassembly/index
-
+title: Sécuriser ASP.NET Core Blazor Webassembly
+author: guardrex
+description: Découvrez comment sécuriser des applications Blazor WebAssemlby en tant qu’applications à page unique (spas).
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/01/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/webassembly/index
+ms.openlocfilehash: ce780afe3e69d2526698cf3694fe70394fc17847
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84253472"
 ---
 # <a name="secure-aspnet-core-blazor-webassembly"></a>Sécuriser ASP.NET Core Blazor Webassembly
 
@@ -52,7 +64,7 @@ Dans Blazor les applications Webassembly, les vérifications d’autorisation pe
 
 Les jetons d’actualisation ne peuvent pas être sécurisés côté client dans les Blazor applications Webassembly. Par conséquent, les jetons d’actualisation ne doivent pas être envoyés à l’application pour une utilisation directe.
 
-Les jetons d’actualisation peuvent être conservés et utilisés par l’application côté serveur dans une Blazor solution Webassembly hébergée pour accéder aux API tierces. Pour plus d'informations, consultez <xref:security/blazor/webassembly/additional-scenarios#authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party>.
+Les jetons d’actualisation peuvent être conservés et utilisés par l’application côté serveur dans une Blazor solution Webassembly hébergée pour accéder aux API tierces. Pour plus d’informations, consultez <xref:security/blazor/webassembly/additional-scenarios#authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party>.
 
 ## <a name="implementation-guidance"></a>Conseils d’implémentation
 

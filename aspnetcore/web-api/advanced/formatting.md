@@ -1,12 +1,23 @@
 ---
-title : mettre en forme les données de réponse dans ASP.NET Core auteur de l’API Web : ardalis Description : Découvrez comment mettre en forme les données de réponse dans ASP.NET Core API Web.
-ms. Author : Riande ms. Custom : H1Hack27Feb2017 ms. Date : 04/17/2020 No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR 'UID : Web-API/avancé/mise en forme
-
+title: Mettre en forme les données des réponses dans l’API web ASP.NET Core
+author: ardalis
+description: Découvrez comment mettre en forme les données des réponses dans l’API web ASP.NET Core.
+ms.author: riande
+ms.custom: H1Hack27Feb2017
+ms.date: 04/17/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: web-api/advanced/formatting
+ms.openlocfilehash: 865b2e58b38c16a54815ce0923a78ac98f2247f1
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84355368"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>Mettre en forme les données des réponses dans l’API web ASP.NET Core
 

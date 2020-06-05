@@ -1,12 +1,24 @@
 ---
-title : tâches en arrière-plan avec les services hébergés dans ASP.NET Core auteur : Rick-Anderson Description : Apprenez à implémenter des tâches en arrière-plan avec les services hébergés dans ASP.NET Core.
-monikerRange : ' >= aspnetcore-2,1 'ms. Author : Riande ms. Custom : MVC ms. Date : 02/10/2020 No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR 'UID : notions de base/hôte/hébergé-services
-
+title: Tâches d’arrière-plan avec des services hébergés dans ASP.NET Core
+author: rick-anderson
+description: Découvrez comment implémenter des tâches d’arrière-plan avec des services hébergés dans ASP.NET Core.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 02/10/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: fundamentals/host/hosted-services
+ms.openlocfilehash: 47d0bdda7249232af22ec1c97e7baa710310caed
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84253680"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>Tâches d’arrière-plan avec des services hébergés dans ASP.NET Core
 
@@ -89,8 +101,8 @@ L' <xref:Microsoft.Extensions.Hosting.IHostedService> interface définit deux m�
 
   Pour prolonger le délai d’expiration par défaut de cinq secondes, définissez :
 
-  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> quand vous utilisez l’hôte générique. Pour plus d'informations, consultez <xref:fundamentals/host/generic-host#shutdown-timeout>.
-  * Le paramètre de configuration du délai d’expiration de l’hôte quand vous utilisez l’hôte web. Pour plus d'informations, consultez <xref:fundamentals/host/web-host#shutdown-timeout>.
+  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> quand vous utilisez l’hôte générique. Pour plus d’informations, consultez <xref:fundamentals/host/generic-host#shutdown-timeout>.
+  * Le paramètre de configuration du délai d’expiration de l’hôte quand vous utilisez l’hôte web. Pour plus d’informations, consultez <xref:fundamentals/host/web-host#shutdown-timeout>.
 
 Le service hébergé est activé une seule fois au démarrage de l’application et s’arrête normalement à l’arrêt de l’application. Si une erreur est levée pendant l’exécution des tâches d’arrière-plan, `Dispose` doit être appelée même si `StopAsync` n’est pas appelée.
 
@@ -200,8 +212,8 @@ Les services hébergés implémentent l’interface <xref:Microsoft.Extensions.H
 
   Pour prolonger le délai d’expiration par défaut de cinq secondes, définissez :
 
-  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> quand vous utilisez l’hôte générique. Pour plus d'informations, consultez <xref:fundamentals/host/generic-host#shutdown-timeout>.
-  * Le paramètre de configuration du délai d’expiration de l’hôte quand vous utilisez l’hôte web. Pour plus d'informations, consultez <xref:fundamentals/host/web-host#shutdown-timeout>.
+  * <xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*> quand vous utilisez l’hôte générique. Pour plus d’informations, consultez <xref:fundamentals/host/generic-host#shutdown-timeout>.
+  * Le paramètre de configuration du délai d’expiration de l’hôte quand vous utilisez l’hôte web. Pour plus d’informations, consultez <xref:fundamentals/host/web-host#shutdown-timeout>.
 
 Le service hébergé est activé une seule fois au démarrage de l’application et s’arrête normalement à l’arrêt de l’application. Si une erreur est levée pendant l’exécution des tâches d’arrière-plan, `Dispose` doit être appelée même si `StopAsync` n’est pas appelée.
 

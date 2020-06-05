@@ -1,11 +1,24 @@
 ---
-titre : « sécuriser une Blazor application hébergée par ASP.net Core Webassembly avec Azure Active Directory » auteur : guardrex Description : monikerRange : « >= aspnetcore-3,1 » ms. Author : Riande ms. Custom : MVC ms. Date : 05/19/2020 No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- « SignalR UID : Security/éblouissant/webassembly/Hosted-with-Azure-Active-Directory
-
+title: Sécuriser une Blazor application hébergée par l’ASP.net Core Webassembly avec Azure Active Directory
+author: guardrex
+description: ''
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/webassembly/hosted-with-azure-active-directory
+ms.openlocfilehash: 9e76b300c159a2a1432aa4b1c6e47b3d91084a85
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84215100"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory"></a>Sécuriser une Blazor application hébergée par l’ASP.net Core Webassembly avec Azure Active Directory
 
@@ -81,7 +94,7 @@ Dans **autorisations d’API**:
 1. Ouvrez la liste des **API** .
 1. Activez l’accès à l’API (par exemple, `API.Access` ).
 1. Sélectionnez **Ajouter des autorisations**.
-1. Sélectionnez le bouton **Grant admin content for {locataire Name}** . Cliquez sur **Oui** pour confirmer la suppression.
+1. Sélectionnez le bouton **Grant admin content for {locataire Name}** . Sélectionnez **Oui** pour confirmer.
 
 ### <a name="create-the-app"></a>Créer l’application
 
