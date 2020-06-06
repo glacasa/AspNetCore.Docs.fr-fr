@@ -16,8 +16,12 @@ L’une des méthodes permettant d’empêcher les cookies en attente et les don
 * Utilisez une commande personnalisée pour ouvrir un navigateur en mode Incognito ou privé dans Visual Studio :
   * Ouvrez la boîte de dialogue **naviguer avec** à partir du bouton **exécuter** de Visual Studio.
   * Sélectionnez le bouton **Ajouter**.
-  * Indiquez le chemin d’accès à votre navigateur dans le champ **programme** .
-  * Dans le champ **arguments** , fournissez l’option de ligne de commande utilisée par le navigateur pour ouvrir en mode Incognito ou privé et l’URL de l’application. Par exemple :
+  * Indiquez le chemin d’accès à votre navigateur dans le champ **programme** . Les chemins d’accès exécutables suivants sont des emplacements d’installation typiques pour Windows 10. Si votre navigateur est installé à un autre emplacement ou si vous n’utilisez pas Windows 10, indiquez le chemin d’accès à l’exécutable du navigateur.
+    * Microsoft Edge :`C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`
+    * Google Chrome :`C:\Program Files (x86)\Google\Chrome\Application\chrome.exe`
+    * Mozilla Firefox :`C:\Program Files\Mozilla Firefox\firefox.exe`
+  * Dans le champ **arguments** , indiquez l’option de ligne de commande utilisée par le navigateur pour ouvrir en mode Incognito ou privé. Certains navigateurs requièrent l’URL de l’application.
+    * Microsoft Edge :`-inprivate`
     * Google Chrome :`--incognito --new-window https://localhost:5001`
     * Mozilla Firefox :`-private -url https://localhost:5001`
   * Entrez un nom dans le champ **nom convivial** . Par exemple : `Firefox Auth Testing`.
