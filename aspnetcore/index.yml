@@ -1,21 +1,21 @@
 ### YamlMime:Hub
-title: Documentation ASP.NET Core
+title: Documentation d’ASP.NET
 summary: Apprenez à utiliser ASP.NET Core pour créer des applications et des services web rapides, sécurisés, interplateformes et basés sur le cloud. Parcourez des tutoriels, des exemples de code, des bases, des informations de référence sur les API et plus encore.
 brand: aspnet
 metadata:
-  title: Documentation ASP.NET Core
+  title: Documentation d’ASP.NET
   description: Apprenez à utiliser ASP.NET Core pour créer des applications et des services web rapides, sécurisés, interplateformes et basés sur le cloud. Parcourez des tutoriels, des exemples de code, des bases, des informations de référence sur les API et plus encore.
   ms.product: aspnet
   ms.topic: hub-page
   author: WadePickett
   ms.author: wpickett
-  ms.date: 06/03/2020
-  ms.openlocfilehash: fb4b31258683c5928708e7a2a479f353972c010b
-  ms.sourcegitcommit: 829dca1d5a7dcccbfe90644101c6be1d1c94ac62
+  ms.date: 06/05/2020
+  ms.openlocfilehash: 25b5387c8956ea7931751525ea954f6f702c0cde
+  ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 06/04/2020
-  ms.locfileid: "84355406"
+  ms.lasthandoff: 06/08/2020
+  ms.locfileid: "84507280"
 highlightedContent:
   items:
   - title: Créer une application ASP.NET Core sur n’importe quelle plateforme en 5 minutes
@@ -44,7 +44,7 @@ highlightedContent:
     url: https://docs.microsoft.com/aspnet/overview
 conceptualContent:
   title: Développer des applications ASP.NET Core
-  summary: Choisissez des applications web interactives, des API web, des applications basées sur un modèle MVC, des applications en temps réel et plus encore. Pour la documentation ASP.NET 4.x, consultez [ASP.NET](https://docs.microsoft.com/aspnet/overview).
+  summary: Choisir des applications web interactives, des API web, des applications basées sur un modèle MVC, des applications en temps réel, etc.
   items:
   - title: Applications Blazor côté client interactives
     summary: Développer avec des composants d’interface utilisateur réutilisables pouvant tirer parti de WebAssembly pour des performances quasi-natives
