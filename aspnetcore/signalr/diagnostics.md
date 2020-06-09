@@ -1,12 +1,24 @@
 ---
-titre : « journalisation et diagnostics dans ASP.NET Core SignalR » Auteur : Description : « Découvrez Comment collecter des diagnostics à partir de votre SignalR application ASP.net core. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: Journalisation et diagnostics dans ASP.NET CoreSignalR
+author: anurse
+description: Découvrez Comment collecter des diagnostics à partir de votre SignalR application ASP.net core.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: anurse
+ms.custom: signalr
+ms.date: 06/08/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: signalr/diagnostics
+ms.openlocfilehash: 22e1d24bc9fed5fd8588c852e07f5ca935946596
+ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84507314"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>Journalisation et diagnostics dans ASP.NET CoreSignalR
 
@@ -77,34 +89,14 @@ Pour désactiver entièrement la journalisation, spécifiez `signalR.LogLevel.No
 Le tableau suivant montre les niveaux de journal disponibles pour le client JavaScript. La définition du niveau de journal sur l’une de ces valeurs active la journalisation à ce niveau et tous les niveaux au-dessus de celui-ci dans la table.
 
 | Level | Description |
-| ----- | ---
-titre : « journalisation et diagnostics dans ASP.NET Core SignalR » Auteur : Description : « Découvrez Comment collecter des diagnostics à partir de votre SignalR application ASP.net core. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « journalisation et diagnostics dans ASP.NET Core SignalR » Auteur : Description : « Découvrez Comment collecter des diagnostics à partir de votre SignalR application ASP.net core. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « journalisation et diagnostics dans ASP.NET Core SignalR » Auteur : Description : « Découvrez Comment collecter des diagnostics à partir de votre SignalR application ASP.net core. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
------- | | `None` | Aucun message n’est enregistré. | | `Critical` | Messages indiquant un échec dans l’ensemble de l’application. | | `Error` | Messages indiquant un échec dans l’opération en cours. | | `Warning` | Messages indiquant un problème non fatal. | | `Information` | Messages d’information. | | `Debug` | Messages de diagnostic utiles pour le débogage. | | `Trace` | Messages de diagnostic très détaillés conçus pour diagnostiquer des problèmes spécifiques. |
+| ----- | ----------- |
+| `None` | Aucun message n’est enregistré. |
+| `Critical` | Messages indiquant un échec dans l’ensemble de l’application. |
+| `Error` | Messages indiquant un échec dans l’opération en cours. |
+| `Warning` | Messages indiquant un problème non fatal. |
+| `Information` | Messages d’information. |
+| `Debug` | Messages de diagnostic utiles pour le débogage. |
+| `Trace` | Messages de diagnostic très détaillés conçus pour diagnostiquer des problèmes spécifiques. |
 
 Une fois que vous avez configuré le niveau de détail, les journaux sont écrits dans la console du navigateur (ou la sortie standard dans une application NodeJS).
 
@@ -217,6 +209,39 @@ Vous pouvez joindre des fichiers de diagnostic à des problèmes de GitHub en le
 > Ne collez pas le contenu des fichiers journaux ou des traces réseau dans un problème GitHub. Ces journaux et suivis peuvent être assez volumineux, et GitHub les tronque généralement.
 
 ![Glissement des fichiers journaux sur un problème GitHub](diagnostics/attaching-diagnostics-files.png)
+
+## <a name="metrics"></a>Mesures
+
+Les métriques sont une représentation de mesures de données sur des intervalles de temps. Par exemple, les demandes par seconde. Les données de métriques permettent l’observation de l’état d’une application à un niveau élevé. Les métriques .NET gRPC sont émises à l’aide de <xref:System.Diagnostics.Tracing.EventCounter> .
+
+### <a name="signalr-server-metrics"></a>SignalRmétriques du serveur
+
+SignalRles métriques du serveur sont signalées sur la source de l' <xref:Microsoft.AspNetCore.Http.Connections> événement.
+
+| Nom                    | Description                 |
+|-------------------------|-----------------------------|
+| `connections-started`   | Nombre total de connexions démarrées   |
+| `connections-stopped`   | Nombre total de connexions arrêtées   |
+| `connections-timed-out` | Nombre total de connexions expirées |
+| `current-connections`   | Connexions en cours         |
+| `connections-duration`  | Durée moyenne de la connexion |
+
+### <a name="observe-metrics"></a>Observer les métriques
+
+[dotnet-Counters](/dotnet/core/diagnostics/dotnet-counters) est un outil d’analyse des performances pour la surveillance de l’intégrité ad hoc et l’enquête sur les performances de premier niveau. Surveiller une application .NET avec `Microsoft.AspNetCore.Http.Connections` comme nom de fournisseur. Par exemple :
+
+```console
+> dotnet-counters monitor --process-id 37016 Microsoft.AspNetCore.Http.Connections
+
+Press p to pause, r to resume, q to quit.
+    Status: Running
+[Microsoft.AspNetCore.Http.Connections]
+    Average Connection Duration (ms)       16,040.56
+    Current Connections                         1
+    Total Connections Started                   8
+    Total Connections Stopped                   7
+    Total Connections Timed Out                 0
+```
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
