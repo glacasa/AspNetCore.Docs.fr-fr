@@ -1,11 +1,24 @@
 ---
-titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: Prise en charge d’IIS pendant le développement dans Visual Studio pour ASP.NET Core
+author: rick-anderson
+description: Découvrez la prise en charge du débogage des applications ASP.NET Core en cas d’exécution avec IIS sur Windows Server.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 02/07/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: host-and-deploy/iis/development-time-iis-support
+ms.openlocfilehash: 06c215156cdfa9bc1ae6ac2eb21a3f739a309bed
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106778"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>Prise en charge d’IIS pendant le développement dans Visual Studio pour ASP.NET Core
 
@@ -53,7 +66,7 @@ IIS doit avoir un site web configuré avec les éléments suivants :
 
 Pour un nouveau projet qui exige le protocole HTTPS, cochez la case **Configurer pour HTTPS** dans la fenêtre **Créer une application web ASP.NET Core** afin d’ajouter [Redirection HTTPS et middleware HSTS](xref:security/enforcing-ssl) à l’application lors de sa création.
 
-Pour un projet existant qui exige le protocole HTTPS, utilisez Redirection HTTPS et middleware HSTS dans `Startup.Configure`. Pour plus d'informations, consultez <xref:security/enforcing-ssl>.
+Pour un projet existant qui exige le protocole HTTPS, utilisez Redirection HTTPS et middleware HSTS dans `Startup.Configure`. Pour plus d’informations, consultez <xref:security/enforcing-ssl>.
 
 Pour un projet qui utilise le protocole HTTP, [Redirection HTTPS et middleware HSTS](xref:security/enforcing-ssl) ne sont pas ajoutés à l’application. Aucune configuration de l’application n’est nécessaire.
 
@@ -168,7 +181,7 @@ IIS doit avoir un site web configuré avec les éléments suivants :
 
 Pour un nouveau projet qui exige le protocole HTTPS, cochez la case **Configurer pour HTTPS** dans la fenêtre **Créer une application web ASP.NET Core** afin d’ajouter [Redirection HTTPS et middleware HSTS](xref:security/enforcing-ssl) à l’application lors de sa création.
 
-Pour un projet existant qui exige le protocole HTTPS, utilisez Redirection HTTPS et middleware HSTS dans `Startup.Configure`. Pour plus d'informations, consultez <xref:security/enforcing-ssl>.
+Pour un projet existant qui exige le protocole HTTPS, utilisez Redirection HTTPS et middleware HSTS dans `Startup.Configure`. Pour plus d’informations, consultez <xref:security/enforcing-ssl>.
 
 Pour un projet qui utilise le protocole HTTP, [Redirection HTTPS et middleware HSTS](xref:security/enforcing-ssl) ne sont pas ajoutés à l’application. Aucune configuration de l’application n’est nécessaire.
 

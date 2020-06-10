@@ -1,11 +1,24 @@
 ---
-titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: Contrôles d’intégrité dans ASP.NET Core
+author: rick-anderson
+description: Découvrez comment configurer des contrôles d’intégrité pour l’infrastructure ASP.NET Core, comme des applications ou des bases de données.
+monikerRange: '>= aspnetcore-2.2'
+ms.author: riande
+ms.custom: mvc
+ms.date: 12/15/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: host-and-deploy/health-checks
+ms.openlocfilehash: cb3ee4f3bf9061d212c1fee85f3f4a22946be097
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105777"
 ---
 # <a name="health-checks-in-aspnet-core"></a>Contrôles d’intégrité dans ASP.NET Core
 
@@ -214,7 +227,7 @@ app.UseEndpoints(endpoints =>
 
 ### <a name="enable-cross-origin-requests-cors"></a>Activer les requêtes d’origines différentes
 
-Bien que l’exécution manuelle de contrôles d’intégrité à partir d’un navigateur ne soit pas un scénario d’utilisation courant, l’intergiciel (middleware) CORS peut être activé en appelant `RequireCors` sur des points de terminaison de contrôle d’intégrité. Une `RequireCors` surcharge accepte un délégué de générateur de stratégie cors ( `CorsPolicyBuilder` ) ou un nom de stratégie. Si aucune stratégie n’est fournie, la stratégie CORS par défaut est utilisée. Pour plus d'informations, consultez <xref:security/cors>.
+Bien que l’exécution manuelle de contrôles d’intégrité à partir d’un navigateur ne soit pas un scénario d’utilisation courant, l’intergiciel (middleware) CORS peut être activé en appelant `RequireCors` sur des points de terminaison de contrôle d’intégrité. Une `RequireCors` surcharge accepte un délégué de générateur de stratégie cors ( `CorsPolicyBuilder` ) ou un nom de stratégie. Si aucune stratégie n’est fournie, la stratégie CORS par défaut est utilisée. Pour plus d’informations, consultez <xref:security/cors>.
 
 ## <a name="health-check-options"></a>Options de contrôle d’intégrité
 
@@ -776,7 +789,7 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-Pour plus d'informations, consultez <xref:fundamentals/middleware/index#use-run-and-map>.
+Pour plus d’informations, consultez <xref:fundamentals/middleware/index#use-run-and-map>.
 
 ::: moniker-end
 
@@ -1464,6 +1477,6 @@ app.MapWhen(
 app.UseMvc();
 ```
 
-Pour plus d'informations, consultez <xref:fundamentals/middleware/index#use-run-and-map>.
+Pour plus d’informations, consultez <xref:fundamentals/middleware/index#use-run-and-map>.
 
 ::: moniker-end

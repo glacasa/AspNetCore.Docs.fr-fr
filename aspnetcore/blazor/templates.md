@@ -1,12 +1,24 @@
 ---
-titre : « ASP.NET Core Blazor Templates » auteur : Description : « en savoir plus sur Blazor les modèles d’application ASP.net Core et la Blazor structure de projet ».
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: Modèles de ASP.NET Core Blazor
+author: guardrex
+description: En savoir plus sur Blazor les modèles d’application ASP.net Core et la Blazor structure de projet.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/templates
+ms.openlocfilehash: f582e8201a3393b848cf3f2c21ce3a7df5554100
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105530"
 ---
 # <a name="aspnet-core-blazor-templates"></a>Modèles de ASP.NET Core Blazor
 

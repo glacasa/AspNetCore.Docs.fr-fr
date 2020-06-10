@@ -1,11 +1,24 @@
 ---
-titre : « ASP.NET Core Blazor composants basés sur un modèle » auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: Composants ASP.NET Core basés sur un Blazor modèle
+author: guardrex
+description: Découvrez comment les composants basés sur des modèles peuvent accepter un ou plusieurs modèles d’interface utilisateur en tant que paramètres, qui peuvent ensuite être utilisés dans le cadre de la logique de rendu du composant.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 03/18/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/templated-components
+ms.openlocfilehash: 8c970387fa79b02127c8a2375195373148749679
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83851887"
 ---
 # <a name="aspnet-core-blazor-templated-components"></a>Composants ASP.NET Core basés sur un Blazor modèle
 

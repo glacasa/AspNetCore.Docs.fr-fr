@@ -1,12 +1,24 @@
 ---
-titre : « créer et utiliser des Razor composants ASP.net Core » auteur : Description : « Découvrez comment créer et utiliser des Razor composants, y compris comment lier des données, gérer des événements et gérer des cycles de vie de composant. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: Créer et utiliser des Razor composants ASP.net Core
+author: guardrex
+description: Découvrez comment créer et utiliser des Razor composants, notamment comment lier des données, gérer des événements et gérer des cycles de vie de composant.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/14/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/components
+ms.openlocfilehash: 59b0c51e0006db0eb748b14b82a114a8bad986e8
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105145"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Créer et utiliser des Razor composants ASP.net Core
 
@@ -118,7 +130,7 @@ Lorsqu’un Razor fichier avec une [`@page`][9] directive est compilé, la class
 ...
 ```
 
-Pour plus d'informations, consultez <xref:blazor/routing>.
+Pour plus d’informations, consultez <xref:blazor/routing>.
 
 ## <a name="parameters"></a>Paramètres
 
@@ -731,7 +743,7 @@ Si `IsCompleted` est `false` , la case à cocher s’affiche comme suit :
 <input type="checkbox" />
 ```
 
-Pour plus d'informations, consultez <xref:mvc/views/razor>.
+Pour plus d’informations, consultez <xref:mvc/views/razor>.
 
 > [!WARNING]
 > Certains attributs HTML, tels que [Aria](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons), ne fonctionnent pas correctement quand le type .net est `bool` . Dans ce cas, utilisez un `string` type au lieu d’un `bool` .

@@ -1,12 +1,24 @@
 ---
-title : 'intégrer Razor les composants ASP.net core dans Razor les pages et les applications MVC’auteur : Description : 'en savoir plus sur les scénarios de liaison de données pour les composants et les éléments DOM dans les Blazor applications. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: Intégrer Razor des composants de ASP.net core dans Razor des pages et des applications MVC
+author: guardrex
+description: En savoir plus sur les scénarios de liaison de données pour les composants et les éléments DOM dans les Blazor applications.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 04/25/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/integrate-components
+ms.openlocfilehash: 97515ec519c4bedb0478f510ec9ed739b5d76e4f
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105244"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Intégrer Razor des composants de ASP.net core dans Razor des pages et des applications MVC
 
@@ -117,60 +129,10 @@ Pour prendre en charge les composants routables Razor dans les Razor application
    * Est rendu en HTML statique sur la page ou s’il contient les informations nécessaires pour démarrer une Blazor application à partir de l’agent utilisateur.
 
    | Mode de rendu | Description |
-   | ---
-title : 'intégrer Razor les composants ASP.net core dans Razor les pages et les applications MVC’auteur : Description : 'en savoir plus sur les scénarios de liaison de données pour les composants et les éléments DOM dans les Blazor applications. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'intégrer Razor les composants ASP.net core dans Razor les pages et les applications MVC’auteur : Description : 'en savoir plus sur les scénarios de liaison de données pour les composants et les éléments DOM dans les Blazor applications. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'intégrer Razor les composants ASP.net core dans Razor les pages et les applications MVC’auteur : Description : 'en savoir plus sur les scénarios de liaison de données pour les composants et les éléments DOM dans les Blazor applications. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
------- | ---titre : «intégrer Razor les composants ASP.net core dans Razor les pages et les applications MVC’auteur : Description : 'en savoir plus sur les scénarios de liaison de données pour les composants et les éléments DOM dans les Blazor applications. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'intégrer Razor les composants ASP.net core dans Razor les pages et les applications MVC’auteur : Description : 'en savoir plus sur les scénarios de liaison de données pour les composants et les éléments DOM dans les Blazor applications. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'intégrer Razor les composants ASP.net core dans Razor les pages et les applications MVC’auteur : Description : 'en savoir plus sur les scénarios de liaison de données pour les composants et les éléments DOM dans les Blazor applications. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
------- | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Génère le rendu du `App` composant en HTML statique et comprend un marqueur pour une Blazor application serveur. Au démarrage de l’agent utilisateur, ce marqueur est utilisé pour démarrer une Blazor application. | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Restitue un marqueur pour une Blazor application serveur. La sortie du `App` composant n’est pas incluse. Au démarrage de l’agent utilisateur, ce marqueur est utilisé pour démarrer une Blazor application. | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Génère le rendu du `App` composant en HTML statique. |
+   | ----------- | ----------- |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Génère le rendu du `App` composant en HTML statique et comprend un marqueur pour une Blazor application serveur. Au démarrage de l’agent utilisateur, ce marqueur est utilisé pour démarrer une Blazor application. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Restitue un marqueur pour une Blazor application serveur. La sortie du `App` composant n’est pas incluse. Au démarrage de l’agent utilisateur, ce marqueur est utilisé pour démarrer une Blazor application. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Génère le rendu du `App` composant en HTML statique. |
 
    Pour plus d’informations sur le tag Helper composant, consultez <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper> .
 
@@ -241,60 +203,10 @@ Pour prendre en charge les composants routables Razor dans les applications MVC�
    * Est rendu en HTML statique sur la page ou s’il contient les informations nécessaires pour démarrer une Blazor application à partir de l’agent utilisateur.
 
    | Mode de rendu | Description |
-   | ---
-title : 'intégrer Razor les composants ASP.net core dans Razor les pages et les applications MVC’auteur : Description : 'en savoir plus sur les scénarios de liaison de données pour les composants et les éléments DOM dans les Blazor applications. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'intégrer Razor les composants ASP.net core dans Razor les pages et les applications MVC’auteur : Description : 'en savoir plus sur les scénarios de liaison de données pour les composants et les éléments DOM dans les Blazor applications. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'intégrer Razor les composants ASP.net core dans Razor les pages et les applications MVC’auteur : Description : 'en savoir plus sur les scénarios de liaison de données pour les composants et les éléments DOM dans les Blazor applications. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
------- | ---titre : «intégrer Razor les composants ASP.net core dans Razor les pages et les applications MVC’auteur : Description : 'en savoir plus sur les scénarios de liaison de données pour les composants et les éléments DOM dans les Blazor applications. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'intégrer Razor les composants ASP.net core dans Razor les pages et les applications MVC’auteur : Description : 'en savoir plus sur les scénarios de liaison de données pour les composants et les éléments DOM dans les Blazor applications. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'intégrer Razor les composants ASP.net core dans Razor les pages et les applications MVC’auteur : Description : 'en savoir plus sur les scénarios de liaison de données pour les composants et les éléments DOM dans les Blazor applications. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
------- | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Génère le rendu du `App` composant en HTML statique et comprend un marqueur pour une Blazor application serveur. Au démarrage de l’agent utilisateur, ce marqueur est utilisé pour démarrer une Blazor application. | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Restitue un marqueur pour une Blazor application serveur. La sortie du `App` composant n’est pas incluse. Au démarrage de l’agent utilisateur, ce marqueur est utilisé pour démarrer une Blazor application. | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Génère le rendu du `App` composant en HTML statique. |
+   | ----------- | ----------- |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Génère le rendu du `App` composant en HTML statique et comprend un marqueur pour une Blazor application serveur. Au démarrage de l’agent utilisateur, ce marqueur est utilisé pour démarrer une Blazor application. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Restitue un marqueur pour une Blazor application serveur. La sortie du `App` composant n’est pas incluse. Au démarrage de l’agent utilisateur, ce marqueur est utilisé pour démarrer une Blazor application. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Génère le rendu du `App` composant en HTML statique. |
 
    Pour plus d’informations sur le tag Helper composant, consultez <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper> .
 
@@ -360,7 +272,7 @@ La Razor page suivante affiche un `Counter` composant :
 }
 ```
 
-Pour plus d'informations, consultez <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
+Pour plus d’informations, consultez <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
 
 ### <a name="render-noninteractive-components"></a>Rendre les composants non interactifs
 
@@ -383,7 +295,7 @@ Dans la Razor page suivante, le `Counter` composant est rendu statiquement avec 
 }
 ```
 
-Pour plus d'informations, consultez <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
+Pour plus d’informations, consultez <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
 
 ## <a name="component-namespaces"></a>Espaces de noms de composants
 
@@ -398,4 +310,4 @@ Lorsque vous utilisez un dossier personnalisé pour stocker les composants de l�
 
 Le fichier *_ViewImports. cshtml* se trouve dans le dossier *pages* d’une Razor application pages ou du dossier *views* d’une application MVC.
 
-Pour plus d'informations, consultez <xref:blazor/components#import-components>.
+Pour plus d’informations, consultez <xref:blazor/components#import-components>.

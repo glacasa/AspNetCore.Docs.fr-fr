@@ -1,11 +1,24 @@
 ---
-titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: Utiliser des assemblys de démarrage d’hébergement dans ASP.NET Core
+author: rick-anderson
+description: Découvrez comment améliorer une application ASP.NET Core à partir d’un assembly externe à l’aide d’une implémentation IHostingStartup.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc, seodec18
+ms.date: 09/26/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: fundamentals/configuration/platform-specific-configuration
+ms.openlocfilehash: 8cf6a4467f041fa71b75ee8d1e7a08d8f572acf3
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106349"
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>Utiliser des assemblys de démarrage d’hébergement dans ASP.NET Core
 
@@ -76,7 +89,7 @@ Si le paramètre de configuration d’hôte et la variable d’environnement son
 
 La désactivation des assemblys d’hébergement au démarrage à l’aide du paramètre d’hôte ou de la variable d’environnement désactive l’assembly globalement et peut donc désactiver plusieurs caractéristiques d’une application.
 
-## <a name="project"></a>Project
+## <a name="project"></a>Projet
 
 Créez un hébergement au démarrage avec un des types de projet suivants :
 
@@ -231,7 +244,7 @@ Les options d’activation de l’hébergement au démarrage sont les suivantes 
 
 * [Magasin du runtime](#runtime-store): l’activation ne nécessite pas de référence au moment de la compilation pour l’activation. L’exemple d’application place les fichiers de l’assembly d’hébergement au démarrage et de ses dépendances dans le dossier *deployment* pour faciliter le déploiement de l’hébergement au démarrage dans un environnement multimachine. Le dossier *deployment* inclut également un script PowerShell qui crée ou modifie des variables d’environnement sur le système de déploiement pour activer l’hébergement au démarrage.
 * Référence au moment de la compilation requise pour l’activation
-  * [Package NuGet](#nuget-package)
+  * [Package NuGet](#nuget-package)
   * [Dossier bin du projet](#project-bin-folder)
 
 ### <a name="runtime-store"></a>Magasin de runtime
@@ -474,7 +487,7 @@ Si le paramètre de configuration d’hôte et la variable d’environnement son
 
 La désactivation des assemblys d’hébergement au démarrage à l’aide du paramètre d’hôte ou de la variable d’environnement désactive l’assembly globalement et peut donc désactiver plusieurs caractéristiques d’une application.
 
-## <a name="project"></a>Project
+## <a name="project"></a>Projet
 
 Créez un hébergement au démarrage avec un des types de projet suivants :
 
@@ -617,7 +630,7 @@ Les options d’activation de l’hébergement au démarrage sont les suivantes 
 
 * [Magasin du runtime](#runtime-store): l’activation ne nécessite pas de référence au moment de la compilation pour l’activation. L’exemple d’application place les fichiers de l’assembly d’hébergement au démarrage et de ses dépendances dans le dossier *deployment* pour faciliter le déploiement de l’hébergement au démarrage dans un environnement multimachine. Le dossier *deployment* inclut également un script PowerShell qui crée ou modifie des variables d’environnement sur le système de déploiement pour activer l’hébergement au démarrage.
 * Référence au moment de la compilation requise pour l’activation
-  * [Package NuGet](#nuget-package)
+  * [Package NuGet](#nuget-package)
   * [Dossier bin du projet](#project-bin-folder)
 
 ### <a name="runtime-store"></a>Magasin de runtime

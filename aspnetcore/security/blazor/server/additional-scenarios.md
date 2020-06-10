@@ -1,12 +1,24 @@
 ---
-titre : « ASP.NET Core Blazor Server scénarios de sécurité supplémentaires » auteur : Description : « Découvrez comment configurer le Blazor serveur pour des scénarios de sécurité supplémentaires ».
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: BlazorScénarios de sécurité supplémentaires du serveur ASP.net Core
+author: guardrex
+description: Découvrez comment configurer le Blazor serveur pour d’autres scénarios de sécurité.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/server/additional-scenarios
+ms.openlocfilehash: f172df7f2333fd79ba175ec8a3a6925ec07f1113
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83851523"
 ---
 # <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>BlazorScénarios de sécurité supplémentaires du serveur ASP.net Core
 

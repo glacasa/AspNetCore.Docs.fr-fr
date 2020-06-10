@@ -1,12 +1,24 @@
 ---
-titre : « ASP.NET Core Blazor les meilleures pratiques en matière de performances de Webassembly » auteur : Description : « conseils pour améliorer les performances dans ASP.net Core Blazor applications webassembly et éviter les problèmes de performances courants ».
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: BlazorMeilleures pratiques relatives aux performances de ASP.net Core Webassembly
+author: pranavkm
+description: Conseils pour améliorer les performances dans ASP.NET Core Blazor les applications Webassembly et éviter les problèmes de performances courants.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/08/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: performance/blazor/webassembly-best-practices
+ms.openlocfilehash: 950d87a6f09e998e47e96c93c5d68bb3f19ddafb
+ms.sourcegitcommit: 74d80a36103fdbd54baba0118535a4647f511913
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84529630"
 ---
 # <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>BlazorMeilleures pratiques relatives aux performances de ASP.net Core Webassembly
 
@@ -58,7 +70,7 @@ Dans l’exemple suivant :
 }
 ```
 
-Pour plus d'informations, consultez <xref:blazor/lifecycle#after-component-render>.
+Pour plus d’informations, consultez <xref:blazor/lifecycle#after-component-render>.
 
 ## <a name="virtualize-re-usable-fragments"></a>Virtualiser les fragments réutilisables
 
@@ -131,6 +143,12 @@ BlazorWebassembly offre deux versions supplémentaires de <xref:Microsoft.JSInte
 ```dotnetcli
 dotnet publish -c Release
 ```
+
+### <a name="compression"></a>Compression
+
+Lors de Blazor la publication d’une application Webassembly, la sortie est compressée statiquement lors de la publication afin de réduire la taille de l’application et de supprimer la surcharge liée à la compression du Runtime. Blazors’appuie sur le serveur pour effectuer des negotation de contenu et traiter des fichiers compressés statiquement.
+
+Une fois qu’une application a été déployée, vérifiez que l’application dessert des fichiers compressés. Examinez l’onglet réseau dans le Outils de développement d’un navigateur et vérifiez que les fichiers sont pris en charge avec `Content-Encoding: br` ou `Content-Encoding: gz` . Si l’hôte ne dessert pas de fichiers compressés, suivez les instructions de la procédure <xref:host-and-deploy/blazor/webassembly#compression> .
 
 ### <a name="disable-unused-features"></a>Désactiver les fonctionnalités inutilisées
 

@@ -1,11 +1,23 @@
 ---
-titre : Auteur : Description : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: ASP.NET Core le test de charge/stress
+author: Jeremy-Meng
+description: Découvrez plusieurs outils et approches notables pour le test de charge et les tests de stress ASP.NET Core les applications.
+ms.author: riande
+ms.custom: mvc
+ms.date: 4/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: test/loadtests
+ms.openlocfilehash: f0c930a7689c7288a58cfc3ca630d3cd324bf2cd
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106804"
 ---
 # <a name="aspnet-core-loadstress-testing"></a>ASP.NET Core le test de charge/stress
 

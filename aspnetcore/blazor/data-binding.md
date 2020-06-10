@@ -1,12 +1,24 @@
 ---
-titre : 'ASP.NET Core Blazor liaison de données’auteur : Description : 'en savoir plus sur les fonctionnalités de liaison de données pour les composants et les éléments DOM dans les Blazor applications. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: BlazorLiaison de données ASP.net Core
+author: guardrex
+description: En savoir plus sur les fonctionnalités de liaison de données pour les composants et les éléments DOM dans les Blazor applications.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 03/26/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/data-binding
+ms.openlocfilehash: 3b419b4738bd3f434cf4a9d8ccdf3b3af86ba1d5
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83998495"
 ---
 # <a name="aspnet-core-blazor-data-binding"></a>BlazorLiaison de données ASP.net Core
 
@@ -158,7 +170,7 @@ Le composant enfant suivant ( `ChildComponent` ) a un `Year` paramètre de compo
 Le composant parent suivant utilise :
 
 * `ChildComponent`et lie le `ParentYear` paramètre du parent au `Year` paramètre sur le composant enfant.
-* L' `onclick` événement est utilisé pour déclencher la `ChangeTheYear` méthode. Pour plus d'informations, consultez <xref:blazor/event-handling>.
+* L' `onclick` événement est utilisé pour déclencher la `ChangeTheYear` méthode. Pour plus d’informations, consultez <xref:blazor/event-handling>.
 
 ```razor
 @page "/ParentComponent"
@@ -232,7 +244,7 @@ Le `PasswordField` composant suivant (*passwordField. Razor*) :
 
 * Définit `<input>` la valeur d’un élément sur `Password` une propriété.
 * Expose les modifications de la `Password` propriété à un composant parent avec un [EventCallback suivante](xref:blazor/event-handling#eventcallback).
-* Utilise l' `onclick` événement pour déclencher la `ToggleShowPassword` méthode. Pour plus d'informations, consultez <xref:blazor/event-handling>.
+* Utilise l' `onclick` événement pour déclencher la `ToggleShowPassword` méthode. Pour plus d’informations, consultez <xref:blazor/event-handling>.
 
 ```razor
 <h1>Child Component</h1>

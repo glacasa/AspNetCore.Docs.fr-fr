@@ -1,12 +1,23 @@
 ---
-titre : « fournisseurs de stockage personnalisés pour ASP.NET Core Identity » Auteur : Description : « Découvrez comment configurer des fournisseurs de stockage personnalisés pour ASP.net Core Identity ».
-ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: Fournisseurs de stockage personnalisés pour ASP.NET CoreIdentity
+author: ardalis
+description: Découvrez comment configurer des fournisseurs de stockage personnalisés pour ASP.NET Core Identity .
+ms.author: riande
+ms.custom: mvc
+ms.date: 07/23/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/authentication/identity-custom-storage-providers
+ms.openlocfilehash: 792a9e5f776e345fbee5726b676fe148ecaf1657
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106583"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>Fournisseurs de stockage personnalisés pour ASP.NET CoreIdentity
 
@@ -210,7 +221,7 @@ Une fois que vous avez implémenté un fournisseur de stockage, vous configurez 
 1. Si vous utilisez des rôles, mettez à jour `RoleManager` pour utiliser votre `RoleStore` classe.
 1. Mettez à jour la chaîne de connexion et les informations d’identification dans la configuration de votre application.
 
-Exemple :
+Exemple :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

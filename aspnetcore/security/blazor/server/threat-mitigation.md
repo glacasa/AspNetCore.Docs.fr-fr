@@ -1,12 +1,24 @@
 ---
-titre : « aide à la prévention des menaces pour ASP.NET Core Blazor Server » auteur : Description : « Découvrez comment limiter les menaces de sécurité pour les Blazor applications serveur ».
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: Guide d’atténuation des menaces pour ASP.NET Core Blazor Server
+author: guardrex
+description: Découvrez comment limiter les menaces de sécurité pour les Blazor applications serveur.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/05/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/server/threat-mitigation
+ms.openlocfilehash: 06f9cc2d70367ea90a519ddd508a156e88adcb61
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83864629"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>Guide d’atténuation des menaces pour ASP.NET Core Blazor Server
 
@@ -37,7 +49,7 @@ L’épuisement des ressources peut se produire lorsqu’un client interagit ave
 
 Les attaques par déni de service (DoS) cherchent généralement à épuiser les ressources d’une application ou d’un serveur. Toutefois, l’épuisement des ressources n’est pas nécessairement le résultat d’une attaque sur le système. Par exemple, les ressources limitées peuvent être épuisées en raison d’une demande élevée de l’utilisateur. DoS est abordé plus en détail dans la section [attaques par déni de service (dos)](#denial-of-service-dos-attacks) .
 
-Les ressources externes à l' Blazor infrastructure, telles que les bases de données et les handles de fichiers (utilisées pour lire et écrire des fichiers), peuvent également rencontrer une insuffisance des ressources. Pour plus d'informations, consultez <xref:performance/performance-best-practices>.
+Les ressources externes à l' Blazor infrastructure, telles que les bases de données et les handles de fichiers (utilisées pour lire et écrire des fichiers), peuvent également rencontrer une insuffisance des ressources. Pour plus d’informations, consultez <xref:performance/performance-best-practices>.
 
 ### <a name="cpu"></a>UC
 
@@ -122,7 +134,7 @@ Pour les appels de méthodes .NET à JavaScript :
 
 Prenez les précautions suivantes pour vous protéger contre les scénarios précédents :
 
-* Encapsulez les appels d’interopérabilité JS dans des instructions [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) pour tenir compte des erreurs qui peuvent se produire pendant les appels. Pour plus d'informations, consultez <xref:blazor/handle-errors#javascript-interop>.
+* Encapsulez les appels d’interopérabilité JS dans des instructions [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) pour tenir compte des erreurs qui peuvent se produire pendant les appels. Pour plus d’informations, consultez <xref:blazor/handle-errors#javascript-interop>.
 * Validez les données retournées par les appels d’interopérabilité JS, y compris les messages d’erreur, avant d’entreprendre une action.
 
 ### <a name="net-methods-invoked-from-the-browser"></a>Méthodes .NET appelées à partir du navigateur
@@ -344,7 +356,7 @@ Pour qu’une vulnérabilité XSS existe, l’application doit incorporer une en
 
 Dans le cadre de la protection contre les attaques XSS, envisagez d’implémenter des atténuations XSS, telles que la [stratégie de sécurité du contenu (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP).
 
-Pour plus d'informations, consultez <xref:security/cross-site-scripting>.
+Pour plus d’informations, consultez <xref:security/cross-site-scripting>.
 
 ### <a name="cross-origin-protection"></a>Protection Cross-Origin
 
@@ -353,7 +365,7 @@ Les attaques Cross-Origin impliquent un client à partir d’une origine différ
 * BlazorIl est possible d’accéder à des applications serveur dans plusieurs origines, sauf si des mesures supplémentaires sont prises pour les empêcher. Pour désactiver l’accès Cross-Origin, désactivez CORS dans le point de terminaison en ajoutant l’intergiciel (middleware) CORS au pipeline et en ajoutant le <xref:Microsoft.AspNetCore.Cors.DisableCorsAttribute> aux Blazor métadonnées du point de terminaison ou limitez le jeu d’origines autorisées en [configurant le SignalR partage des ressources Cross-Origin](xref:signalr/security#cross-origin-resource-sharing).
 * Si CORS est activé, des étapes supplémentaires peuvent être nécessaires pour protéger l’application en fonction de la configuration CORS. Si CORS est activé globalement, CORS peut être désactivé pour le Blazor Hub serveur en ajoutant les <xref:Microsoft.AspNetCore.Cors.DisableCorsAttribute> métadonnées aux métadonnées de point de terminaison après avoir appelé <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> sur le générateur d’itinéraires de point de terminaison.
 
-Pour plus d'informations, consultez <xref:security/anti-request-forgery>.
+Pour plus d’informations, consultez <xref:security/anti-request-forgery>.
 
 ### <a name="click-jacking"></a>Prise de la clic
 
@@ -381,7 +393,7 @@ Ce Conseil s’applique également lors du rendu des liens dans le cadre de l’
 * Si possible, utilisez des liens relatifs.
 * Vérifiez que les destinations des liens absolus sont valides avant de les inclure dans une page.
 
-Pour plus d'informations, consultez <xref:security/preventing-open-redirects>.
+Pour plus d’informations, consultez <xref:security/preventing-open-redirects>.
 
 ## <a name="security-checklist"></a>Liste de contrôle de sécurité
 

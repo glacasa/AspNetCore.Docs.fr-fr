@@ -1,13 +1,24 @@
 ---
-titre : Auteur : Description : monikerRange : ms. Author : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: Authentification et autorisation dans gRPC pour ASP.NET Core
+author: jamesnk
+description: Découvrez comment utiliser l’authentification et l’autorisation dans gRPC pour ASP.NET Core.
+monikerRange: '>= aspnetcore-3.0'
+ms.author: jamesnk
+ms.date: 05/26/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: grpc/authn-and-authz
+ms.openlocfilehash: f9d2e73f57d69e1eb5039019dc9e64193cf67820
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105790"
 ---
-
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>Authentification et autorisation dans gRPC pour ASP.NET Core
 
 Par [James Newton-King](https://twitter.com/jamesnk)

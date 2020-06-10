@@ -1,12 +1,24 @@
 ---
-titre : 'ASP.NET Core Blazor dispositions’auteur : Description : 'Apprenez à créer des composants de disposition réutilisables pour les Blazor applications. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: Dispositions de ASP.NET Core Blazor
+author: guardrex
+description: Découvrez comment créer des composants de disposition réutilisables pour les Blazor applications.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 02/12/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/layouts
+ms.openlocfilehash: ba172282d0cd6371ebc94b4fda1c13aee14d6fbd
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83851990"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>Dispositions de ASP.NET Core Blazor
 
@@ -85,7 +97,7 @@ Enfin, `MasterLayout` dans *MasterLayout. Razor* contient les éléments de disp
 
 ## <a name="share-a-razor-pages-layout-with-integrated-components"></a>Partager une Razor disposition de pages avec des composants intégrés
 
-Lorsque des composants routables sont intégrés à une Razor application pages, la disposition partagée de l’application peut être utilisée avec les composants. Pour plus d'informations, consultez <xref:blazor/integrate-components>.
+Lorsque des composants routables sont intégrés à une Razor application pages, la disposition partagée de l’application peut être utilisée avec les composants. Pour plus d’informations, consultez <xref:blazor/integrate-components>.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

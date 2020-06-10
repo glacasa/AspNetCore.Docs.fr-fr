@@ -1,11 +1,22 @@
 ---
-titre : Auteur : Description : ms. Author : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: Vue d’ensemble du modèle MVC d’ASP.NET Core
+author: ardalis
+description: Découvrez ASP.NET Core MVC, un puissant framework qui vous permet de générer des applications web et des API à l’aide du modèle de conception Model-View-Controller.
+ms.author: riande
+ms.date: 02/12/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: mvc/overview
+ms.openlocfilehash: ae382feb152f490e46df969887401060965d8c4e
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106531"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>Vue d’ensemble du modèle MVC d’ASP.NET Core
 
@@ -60,7 +71,7 @@ ASP.NET Core MVC inclut les éléments suivants :
 * [Injection de dépendances](../fundamentals/dependency-injection.md)
 * [Filtres](#filters)
 * [Zones (Areas)](#areas)
-* [API Web](#web-apis)
+* [API web](#web-apis)
 * [Testabilité](#testability)
 * [Razormoteur d’affichage](#razor-view-engine)
 * [Vues fortement typées](#strongly-typed-views)
@@ -248,7 +259,7 @@ Les [composants de vues](views/view-components.md) vous permettent de compresser
 
 La méthode <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> permet à une application d’accepter ou de refuser les changements de comportement potentiellement cassants introduits dans ASP.NET Core MVC 2.1 ou version ultérieure.
 
-Pour plus d'informations, consultez <xref:mvc/compatibility-version>.
+Pour plus d’informations, consultez <xref:mvc/compatibility-version>.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

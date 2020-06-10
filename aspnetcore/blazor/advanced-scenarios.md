@@ -1,12 +1,24 @@
 ---
-titre : « ASP.NET Core Blazor des scénarios avancés » auteur : Description : « en savoir plus sur les scénarios avancés dans Blazor , y compris l’intégration de la logique manuelle RenderTreeBuilder dans une application. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: ASP.NET Core des Blazor scénarios avancés
+author: guardrex
+description: En savoir plus sur les scénarios avancés dans Blazor , y compris l’intégration de la logique manuelle RenderTreeBuilder dans une application.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 02/18/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/advanced-scenarios
+ms.openlocfilehash: 3345f545e230ada78e6c66fc9eb049060d5794d6
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83851157"
 ---
 # <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core des Blazor scénarios avancés
 
@@ -150,73 +162,15 @@ builder.AddContent(1, "Second");
 Lorsque le code s’exécute pour la première fois, si `someFlag` est `true` , le générateur reçoit :
 
 | Séquence | Type      | Données   |
-| :---
-titre : « ASP.NET Core Blazor des scénarios avancés » auteur : Description : « en savoir plus sur les scénarios avancés dans Blazor , y compris l’intégration de la logique manuelle RenderTreeBuilder dans une application. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
----: | ---titre : « ASP.NET Core Blazor des scénarios avancés » auteur : Description : « en savoir plus sur les scénarios avancés dans Blazor , y compris comment incorporer la logique RenderTreeBuilder manuelle dans une application. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor des scénarios avancés » auteur : Description : « en savoir plus sur les scénarios avancés dans Blazor , y compris l’intégration de la logique manuelle RenderTreeBuilder dans une application. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
------ | :----: | | 0 | Nœud de texte | Premier | | 1 | Nœud de texte | Deuxième |
+| :------: | --------- | :----: |
+| 0        | Nœud de texte | Premier  |
+| 1        | Nœud de texte | Seconde |
 
 Imaginez que `someFlag` devient `false` et le balisage est de nouveau restitué. Cette fois-ci, le générateur reçoit :
 
 | Séquence | Type       | Données   |
-| :---
-titre : « ASP.NET Core Blazor des scénarios avancés » auteur : Description : « en savoir plus sur les scénarios avancés dans Blazor , y compris l’intégration de la logique manuelle RenderTreeBuilder dans une application. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
----: | ---titre : « ASP.NET Core Blazor des scénarios avancés » auteur : Description : « en savoir plus sur les scénarios avancés dans Blazor , y compris comment incorporer la logique RenderTreeBuilder manuelle dans une application. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor des scénarios avancés » auteur : Description : « en savoir plus sur les scénarios avancés dans Blazor , y compris l’intégration de la logique manuelle RenderTreeBuilder dans une application. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor des scénarios avancés » auteur : Description : « en savoir plus sur les scénarios avancés dans Blazor , y compris l’intégration de la logique manuelle RenderTreeBuilder dans une application. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
------ | :----: | | 1 | Nœud de texte | Deuxième |
+| :------: | ---------- | :----: |
+| 1        | Nœud de texte  | Seconde |
 
 Quand le runtime effectue une comparaison, il constate que l’élément au niveau de la séquence `0` a été supprimé. il génère donc le *script d’édition*trivial suivant :
 
@@ -240,72 +194,15 @@ builder.AddContent(seq++, "Second");
 La première sortie est désormais :
 
 | Séquence | Type      | Données   |
-| :---
-titre : « ASP.NET Core Blazor des scénarios avancés » auteur : Description : « en savoir plus sur les scénarios avancés dans Blazor , y compris l’intégration de la logique manuelle RenderTreeBuilder dans une application. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
----: | ---titre : « ASP.NET Core Blazor des scénarios avancés » auteur : Description : « en savoir plus sur les scénarios avancés dans Blazor , y compris comment incorporer la logique RenderTreeBuilder manuelle dans une application. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor des scénarios avancés » auteur : Description : « en savoir plus sur les scénarios avancés dans Blazor , y compris l’intégration de la logique manuelle RenderTreeBuilder dans une application. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
------ | :----: | | 0 | Nœud de texte | Premier | | 1 | Nœud de texte | Deuxième |
+| :------: | --------- | :----: |
+| 0        | Nœud de texte | Premier  |
+| 1        | Nœud de texte | Seconde |
 
 Ce résultat est identique au cas précédent, donc aucun problème négatif n’existe. `someFlag`se trouve `false` sur le deuxième rendu et la sortie est :
 
 | Séquence | Type      | Données   |
-| :---
-titre : « ASP.NET Core Blazor des scénarios avancés » auteur : Description : « en savoir plus sur les scénarios avancés dans Blazor , y compris l’intégration de la logique manuelle RenderTreeBuilder dans une application. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
----: | ---titre : « ASP.NET Core Blazor des scénarios avancés » auteur : Description : « en savoir plus sur les scénarios avancés dans Blazor , y compris comment incorporer la logique RenderTreeBuilder manuelle dans une application. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-titre : « ASP.NET Core Blazor des scénarios avancés » auteur : Description : « en savoir plus sur les scénarios avancés dans Blazor , y compris l’intégration de la logique manuelle RenderTreeBuilder dans une application. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
------ | ---titre : « ASP.NET Core Blazor des scénarios avancés » auteur : Description : « en savoir plus sur les scénarios avancés dans Blazor , y compris comment incorporer la logique RenderTreeBuilder manuelle dans une application. »
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
---- | | 0 | Nœud de texte | Deuxième |
+| :------: | --------- | ------ |
+| 0        | Nœud de texte | Seconde |
 
 Cette fois-ci, l’algorithme diff constate que *deux* modifications ont été apportées, et l’algorithme génère le script Edit suivant :
 

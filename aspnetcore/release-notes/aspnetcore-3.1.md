@@ -12,24 +12,24 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: 67fc972676549a02265035c129c513f11d303d51
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 5b6ae8173ca3d968e220faa4a060e1b42b14f8bb
+ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774045"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84507242"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>Nouveautés de ASP.NET Core 3,1
 
 Cet article met en évidence les modifications les plus importantes apportées à ASP.NET Core 3,1 avec des liens vers la documentation appropriée.
 
-## <a name="partial-class-support-for-razor-components"></a>Prise en charge des Razor classes partielles pour les composants
+## <a name="partial-class-support-for-razor-components"></a>Prise en charge des classes partielles pour les Razor composants
 
-Razorles composants sont maintenant générés en tant que classes partielles. Le code d' Razor un composant peut être écrit à l’aide d’un fichier code-behind défini en tant que classe partielle, plutôt que de définir tout le code du composant dans un fichier unique. Pour plus d’informations, consultez [prise en charge des classes partielles](xref:blazor/components#partial-class-support).
+Razorles composants sont maintenant générés en tant que classes partielles. Le code d’un Razor composant peut être écrit à l’aide d’un fichier code-behind défini en tant que classe partielle, plutôt que de définir tout le code du composant dans un fichier unique. Pour plus d’informations, consultez [prise en charge des classes partielles](xref:blazor/components#partial-class-support).
 
 ## <a name="blazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>BlazorTag Helper de composant et passer des paramètres à des composants de niveau supérieur
 
-Dans Blazor avec ASP.net Core 3,0, les composants étaient rendus dans des pages et des vues à l'`Html.RenderComponentAsync`aide d’un programme d’assistance HTML (). Dans ASP.NET Core 3,1, restituez un composant à partir d’une page ou d’une vue avec le nouveau tag Helper du composant :
+Dans Blazor avec ASP.NET Core 3,0, les composants étaient rendus dans des pages et des vues à l’aide d’un programme d’assistance HTML ( `Html.RenderComponentAsync` ). Dans ASP.NET Core 3,1, restituez un composant à partir d’une page ou d’une vue avec le nouveau tag Helper du composant :
 
 ```cshtml
 <component type="typeof(Counter)" render-mode="ServerPrerendered" />
@@ -37,16 +37,16 @@ Dans Blazor avec ASP.net Core 3,0, les composants étaient rendus dans des pages
 
 Le programme d’assistance HTML reste pris en charge dans ASP.NET Core 3,1, mais le tag Helper Component est recommandé.
 
-BlazorLes applications serveur peuvent désormais passer des paramètres à des composants de niveau supérieur lors du rendu initial. Auparavant, vous pouviez uniquement passer des paramètres à un composant de niveau supérieur avec [RenderMode. static](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static). Avec cette version, [RenderMode. Server](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server) et [RenderModel. ServerPrerendered](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered) sont pris en charge. Toute valeur de paramètre spécifiée est sérialisée au format JSON et incluse dans la réponse initiale.
+BlazorLes applications serveur peuvent désormais passer des paramètres à des composants de niveau supérieur lors du rendu initial. Auparavant, vous pouviez uniquement passer des paramètres à un composant de niveau supérieur avec [RenderMode. static](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static). Avec cette version, [RenderMode. Server](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server) et [RenderMode. ServerPrerendered](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered) sont pris en charge. Toute valeur de paramètre spécifiée est sérialisée au format JSON et incluse dans la réponse initiale.
 
-Par exemple, prérendez `Counter` un composant avec un volume d'`IncrementAmount`incrément () :
+Par exemple, prérendez un `Counter` composant avec un volume d’incrément ( `IncrementAmount` ) :
 
 ```cshtml
 <component type="typeof(Counter)" render-mode="ServerPrerendered" 
     param-IncrementAmount="10" />
 ```
 
-Pour plus d’informations, consultez [intégrer des Razor composants dans des pages et des applications MVC](xref:blazor/integrate-components).
+Pour plus d’informations, consultez [intégrer des composants dans Razor des pages et des applications MVC](xref:blazor/integrate-components).
 
 ## <a name="support-for-shared-queues-in-httpsys"></a>Prise en charge des files d’attente partagées dans HTTP. sys
 
@@ -58,7 +58,7 @@ Pour plus d’informations, consultez [intégrer des Razor composants dans des p
 
 Le comportement des cookies SameSite a changé pour refléter les futures modifications apportées au navigateur. Cela peut affecter les scénarios d’authentification tels que AzureAd, OpenIdConnect ou WsFederation. Pour plus d’informations, consultez <xref:security/samesite>.
 
-## <a name="prevent-default-actions-for-events-in-blazor-apps"></a>Empêcher les actions par défaut des Blazor événements dans les applications
+## <a name="prevent-default-actions-for-events-in-blazor-apps"></a>Empêcher les actions par défaut des événements dans les Blazor applications
 
 Utilisez l' `@on{EVENT}:preventDefault` attribut directive pour empêcher l’action par défaut d’un événement. Dans l’exemple suivant, l’action par défaut d’affichage du caractère de la clé dans la zone de texte est interdite :
 
@@ -68,9 +68,9 @@ Utilisez l' `@on{EVENT}:preventDefault` attribut directive pour empêcher l’ac
 
 Pour plus d’informations, consultez [empêcher les actions par défaut](xref:blazor/event-handling#prevent-default-actions).
 
-## <a name="stop-event-propagation-in-blazor-apps"></a>Arrêter la propagation des événements Blazor dans les applications
+## <a name="stop-event-propagation-in-blazor-apps"></a>Arrêter la propagation des événements dans les Blazor applications
 
-Utilisez l' `@on{EVENT}:stopPropagation` attribut directive pour arrêter la propagation des événements. Dans l’exemple suivant, la sélection de la case à cocher empêche les `<div>` événements de clic de l’enfant `<div>`de se propager vers le parent :
+Utilisez l' `@on{EVENT}:stopPropagation` attribut directive pour arrêter la propagation des événements. Dans l’exemple suivant, la sélection de la case à cocher empêche les événements de clic de l’enfant `<div>` de se propager vers le parent `<div>` :
 
 ```razor
 <input @bind="_stopPropagation" type="checkbox" />
@@ -88,9 +88,9 @@ Utilisez l' `@on{EVENT}:stopPropagation` attribut directive pour arrêter la pro
 
 Pour plus d’informations, consultez [arrêter la propagation des événements](xref:blazor/event-handling#stop-event-propagation).
 
-## <a name="detailed-errors-during-blazor-app-development"></a>Erreurs détaillées lors Blazor du développement d’applications
+## <a name="detailed-errors-during-blazor-app-development"></a>Erreurs détaillées lors du Blazor développement d’applications
 
-Quand une Blazor application ne fonctionne pas correctement pendant le développement, la réception d’informations d’erreur détaillées de l’application vous aide à résoudre les problèmes et à résoudre le problème. Lorsqu’une erreur se produit Blazor , les applications affichent une barre dorée en bas de l’écran :
+Quand une Blazor application ne fonctionne pas correctement pendant le développement, la réception d’informations d’erreur détaillées de l’application vous aide à résoudre les problèmes et à résoudre le problème. Lorsqu’une erreur se produit, les Blazor applications affichent une barre dorée en bas de l’écran :
 
 * Pendant le développement, la barre dorée vous dirige vers la console du navigateur, où vous pouvez voir l’exception.
 * En production, la barre dorée avertit l’utilisateur qu’une erreur s’est produite et recommande l’actualisation du navigateur.
