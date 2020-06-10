@@ -1,7 +1,7 @@
 ---
-title: Ajouter un modèle dans une application ASP.NET Core MVC
+title: 'Partie 4 : ajouter un modèle à une application ASP.NET Core MVC'
 author: rick-anderson
-description: Ajoutez un modèle à une application ASP.NET Core simple.
+description: Partie 4 de la série de didacticiels sur ASP.NET Core MVC.
 ms.author: riande
 ms.date: 01/13/2020
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: 1347659ee25e2b85b0a479f6bbcc5eb1a956fab2
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 29f70d6bd1d5c1223ef35b4e24e5b9c0a8465d1d
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776758"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652385"
 ---
-# <a name="add-a-model-to-an-aspnet-core-mvc-app"></a>Ajouter un modèle dans une application ASP.NET Core MVC
+# <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a>Partie 4 : ajouter un modèle à une application ASP.NET Core MVC
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT) et [Ryan Nowak](https://github.com/tdykstra)
 
@@ -44,7 +44,7 @@ Ajoutez un fichier nommé *Movie.cs* au dossier *Models*.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-Cliquez avec le bouton droit sur le dossier *Models* > **Ajouter** > **New Class** > une classe**vide**Class. Nommez le fichier *Movie.cs*.
+Cliquez avec le bouton droit sur le dossier *Models* > **Ajouter**une classe  >  **New Class**  >  **vide**Class. Nommez le fichier *Movie.cs*.
 
 ---
 
@@ -54,7 +54,7 @@ Mettez le fichier *Movie.cs* à jour avec le contenu suivant :
 
 La classe `Movie` contient un champ `Id`, qui est nécessaire à la base de données pour la clé primaire.
 
-L' <xref:System.ComponentModel.DataAnnotations.DataType> attribut sur `ReleaseDate` spécifie le type des données (`Date`). Avec cet attribut :
+L' <xref:System.ComponentModel.DataAnnotations.DataType> attribut sur `ReleaseDate` spécifie le type des données ( `Date` ). Avec cet attribut :
 
 * L’utilisateur n’est pas obligé d’entrer les informations de temps dans le champ de date.
 * Seule la date est affichée, pas les informations de temps.
@@ -85,11 +85,11 @@ La commande précédente ajoute le fournisseur EF Core SQL Server. Le package du
 
 Dans le menu **projet** , sélectionnez **gérer les packages NuGet**.
 
-Dans le champ de **recherche** en haut à droite, `Microsoft.EntityFrameworkCore.SQLite` entrez et appuyez sur la touche **retour** pour effectuer la recherche. Sélectionnez le package NuGet correspondant, puis cliquez sur le bouton **Ajouter un package** .
+Dans le champ de **recherche** en haut à droite, entrez `Microsoft.EntityFrameworkCore.SQLite` et appuyez sur la touche **retour** pour effectuer la recherche. Sélectionnez le package NuGet correspondant, puis cliquez sur le bouton **Ajouter un package** .
 
 ![Ajouter Entity Framework Core package NuGet](~/tutorials/first-mvc-app-mac/adding-model/_static/add-nuget-packages.png)
 
-La boîte de dialogue **Sélectionner les projets** s’affiche, `MvcMovie` avec le projet sélectionné. Appuyez sur le bouton **OK** .
+La boîte de dialogue **Sélectionner les projets** s’affiche, avec le `MvcMovie` projet sélectionné. Appuyez sur le bouton **OK** .
 
 Une boîte de dialogue d' **acceptation de licence** s’affiche. Passez en revue les licences comme vous le souhaitez, puis cliquez sur le bouton **accepter** .
 
@@ -113,13 +113,13 @@ Ajoutez un fichier *Data/MvcMovieContext.cs* avec le code suivant :
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/zDocOnly/MvcMovieContext.cs?name=snippet)]
 
-Le code précédent crée une propriété [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) pour le jeu d’entités. Dans la terminologie Entity Framework, un jeu d’entités correspond généralement à une table de base de données. Une entité correspond à une ligne dans la table.
+Le code précédent crée une [propriété \<Movie> DbSet](/dotnet/api/microsoft.entityframeworkcore.dbset-1) pour le jeu d’entités. Dans la terminologie Entity Framework, un jeu d’entités correspond généralement à une table de base de données. Une entité correspond à une ligne dans la table.
 
 <a name="reg"></a>
 
 ## <a name="register-the-database-context"></a>Inscrire le contexte de base de données
 
-ASP.NET Core comprend [l’injection de dépendances (DI)](xref:fundamentals/dependency-injection). Les services (tels que le contexte de base de données EF Core) doivent être inscrits auprès de l’injection de dépendances au démarrage de l’application. Ces services sont affectés aux composants qui les nécessitent (par exemple les Pages Razor) par le biais de paramètres de constructeur. Le code du constructeur qui obtient une instance de contexte de base de données est indiqué plus loin dans le tutoriel. Dans cette section, vous allez inscrire le contexte de base de données auprès du conteneur d’injection de dépendances.
+ASP.NET Core comprend [l’injection de dépendances (DI)](xref:fundamentals/dependency-injection). Les services (tels que le contexte de base de données EF Core) doivent être inscrits auprès de l’injection de dépendances au démarrage de l’application. Ces services sont fournis par les composants qui requièrent ces services (tels que les Razor pages) par le biais de paramètres de constructeur. Le code du constructeur qui obtient une instance de contexte de base de données est indiqué plus loin dans le tutoriel. Dans cette section, vous allez inscrire le contexte de base de données auprès du conteneur d’injection de dépendances.
 
 En tête du fichier *Startup.cs*, ajoutez les instructions `using` suivantes :
 
@@ -188,7 +188,7 @@ Renseignez la boîte de dialogue **Ajouter un contrôleur** :
 Visual Studio crée :
 
 * Un contrôleur de films (*Controllers/MoviesController.cs*)
-* Des fichiers de vues Razor pour les pages Create, Delete, Details, Edit et Index (*Views/Movies/\*.cshtml*)
+* Razorafficher des fichiers pour les pages Create, Delete, Details, Edit et index (*views/movies/ \* . cshtml*)
 
 La création automatique de ces fichiers est appelée *génération de modèles automatique*.
 
@@ -284,7 +284,7 @@ La méthode `Up` crée la table Movie et configure `Id` comme la clé primaire. 
 
 <a name="test"></a>
 
-## <a name="test-the-app"></a>Test de l'application
+## <a name="test-the-app"></a>Tester l'application
 
 * Exécutez l’application et cliquez sur le lien **Movie App**.
 
@@ -332,7 +332,7 @@ Le constructeur utilise une [injection de dépendance](xref:fundamentals/depende
 
 ### <a name="use-sqlite-for-development-sql-server-for-production"></a>Utiliser SQLite pour le développement, SQL Server pour la production
 
-Lorsque SQLite est sélectionné, le code généré par le modèle est prêt pour le développement. Le code suivant montre comment injecter <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> au démarrage. `IWebHostEnvironment`est injecté afin `ConfigureServices` de pouvoir utiliser SQLite dans le développement et SQL Server en production.
+Lorsque SQLite est sélectionné, le code généré par le modèle est prêt pour le développement. Le code suivant montre comment injecter au <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> démarrage. `IWebHostEnvironment`est injecté afin de `ConfigureServices` pouvoir utiliser SQLite dans le développement et SQL Server en production.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/StartupDevProd.cs?name=snippet_StartupClass&highlight=5,10,16-28)]
 
@@ -362,7 +362,7 @@ Vous pouvez aussi passer `id` avec une requête de chaîne, comme suit :
 
 `https://localhost:5001/movies/details?id=1`
 
-Le `id` paramètre est défini en tant que [type Nullable](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) au cas où une valeur d’ID n’est pas fournie.
+Le `id` paramètre est défini en tant que [type Nullable](/dotnet/csharp/programming-guide/nullable-types/index) ( `int?` ) au cas où une valeur d’ID n’est pas fournie.
 
 Une [expression lambda](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions) est passée à `FirstOrDefaultAsync` pour sélectionner les entités de film qui correspondent aux données de routage ou à la valeur de la chaîne de requête.
 
@@ -411,8 +411,8 @@ Comme l’objet `Model` est fortement typé (en tant qu’objet `IEnumerable<Mov
 * [Globalisation et localisation](xref:fundamentals/localization)
 
 > [!div class="step-by-step"]
-> [Précédente ajout d’une vue](adding-view.md)
-> [à la suite de l’utilisation de SQL](working-with-sql.md)
+> [Ajout d’une vue précédente](adding-view.md) 
+>  [Utilisation de SQL](working-with-sql.md)
 
 ::: moniker-end
 
@@ -466,7 +466,7 @@ Visual Studio crée :
 
 * Une [classe de contexte de base de données](xref:data/ef-mvc/intro#create-the-database-context) Entity Framework Core (*Data/MvcMovieContext.cs*)
 * Un contrôleur de films (*Controllers/MoviesController.cs*)
-* Des fichiers de vues Razor pour les pages Create, Delete, Details, Edit et Index (*Views/Movies/\*.cshtml*)
+* Razorafficher des fichiers pour les pages Create, Delete, Details, Edit et index (*views/movies/ \* . cshtml*)
 
 La création automatique du contexte de base de données et de méthodes d’action et de vues [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (créer, lire, mettre à jour et supprimer) porte le nom de *génération de modèles automatique*.
 
@@ -585,7 +585,7 @@ Le schéma de base de donénes est basé sur le modèle spécifié dans la class
 
 ## <a name="examine-the-context-registered-with-dependency-injection"></a>Examiner le contexte inscrit avec l’injection de dépendances
 
-ASP.NET Core comprend [l’injection de dépendances (DI)](xref:fundamentals/dependency-injection). Des services (tels que le contexte de base de données EF Core) sont inscrits avec l’injection de dépendances au démarrage de l’application. Ces services sont affectés aux composants qui les nécessitent (par exemple les Pages Razor) par le biais de paramètres de constructeur. Le code du constructeur qui obtient une instance de contexte de base de données est indiqué plus loin dans le tutoriel.
+ASP.NET Core comprend [l’injection de dépendances (DI)](xref:fundamentals/dependency-injection). Des services (tels que le contexte de base de données EF Core) sont inscrits avec l’injection de dépendances au démarrage de l’application. Ces services sont fournis par les composants qui requièrent ces services (tels que les Razor pages) par le biais de paramètres de constructeur. Le code du constructeur qui obtient une instance de contexte de base de données est indiqué plus loin dans le tutoriel.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -599,7 +599,7 @@ Examinez la méthode `Startup.ConfigureServices` suivante. La ligne en surbrilla
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Data/MvcMovieContext.cs)]
 
-Le code précédent crée une propriété [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) pour le jeu d’entités. Dans la terminologie Entity Framework, un jeu d’entités correspond généralement à une table de base de données. Une entité correspond à une ligne dans la table.
+Le code précédent crée une [propriété \<Movie> DbSet](/dotnet/api/microsoft.entityframeworkcore.dbset-1) pour le jeu d’entités. Dans la terminologie Entity Framework, un jeu d’entités correspond généralement à une table de base de données. Une entité correspond à une ligne dans la table.
 
 Le nom de la chaîne de connexion est transmis au contexte en appelant une méthode sur un objet [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions). Pour le développement local, le [système de configuration ASP.NET Core](xref:fundamentals/configuration/index) lit la chaîne de connexion à partir du fichier *appsettings.json*.
 
@@ -611,7 +611,7 @@ Vous avez créé un contexte de base de données et vous l’avez inscrit dans l
 
 <a name="test"></a>
 
-### <a name="test-the-app"></a>Test de l'application
+### <a name="test-the-app"></a>Tester l'application
 
 * Exécutez l’application et ajoutez `/Movies` à l’URL dans le navigateur (`http://localhost:port/movies`).
 
@@ -671,7 +671,7 @@ Vous pouvez aussi passer `id` avec une requête de chaîne, comme suit :
 
 `https://localhost:5001/movies/details?id=1`
 
-Le `id` paramètre est défini en tant que [type Nullable](/dotnet/csharp/programming-guide/nullable-types/index) (`int?`) au cas où une valeur d’ID n’est pas fournie.
+Le `id` paramètre est défini en tant que [type Nullable](/dotnet/csharp/programming-guide/nullable-types/index) ( `int?` ) au cas où une valeur d’ID n’est pas fournie.
 
 Une [expression lambda](/dotnet/articles/csharp/programming-guide/statements-expressions-operators/lambda-expressions) est passée à `FirstOrDefaultAsync` pour sélectionner les entités de film qui correspondent aux données de routage ou à la valeur de la chaîne de requête.
 
@@ -720,7 +720,7 @@ Comme l’objet `Model` est fortement typé (en tant qu’objet `IEnumerable<Mov
 * [Globalisation et localisation](xref:fundamentals/localization)
 
 > [!div class="step-by-step"]
-> [Précédente ajout d’une vue](adding-view.md)
-> [à la suite de l’utilisation d’une base de données](working-with-sql.md)
+> [Ajout d’une vue précédente](adding-view.md) 
+>  [Utilisation d’une base de données](working-with-sql.md)
 
 ::: moniker-end

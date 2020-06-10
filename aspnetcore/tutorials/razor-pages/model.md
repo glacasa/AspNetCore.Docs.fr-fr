@@ -1,7 +1,7 @@
 ---
-title: Ajouter un modèle à une Razor application Pages dans ASP.net Core
+title: Partie 2, ajouter un modèle à une Razor application pages dans ASP.net Core
 author: rick-anderson
-description: Découvrez comment ajouter des classes pour gérer des films dans une base de données à l’aide d’Entity Framework Core (EF Core).
+description: Partie 2 de la série de didacticiels sur les Razor pages.
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: d093d7c4dc1b355c0042f300f70a830653b168c0
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d3f7d355625ce20a0cb45c785fbab259a5655c63
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82769830"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652939"
 ---
-# <a name="add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>Ajouter un modèle à une application de pages Razor dans ASP.NET Core
+# <a name="part-2-add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>Partie 2, ajouter un modèle à une Razor application pages dans ASP.net Core
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -38,7 +38,7 @@ Les classes de modèle portent le nom de classes OCT (« Objet CLR Traditionnel 
 
 Cliquez avec le bouton droit sur le projet **RazorPagesMovie** > **Ajouter** > **Nouveau dossier**. Nommez le dossier *Models*.
 
-Cliquez avec le bouton droit sur le dossier *Models*. Sélectionnez **Ajouter** > une**classe**. Nommez la classe **Movie**.
+Cliquez avec le bouton droit sur le dossier *Models*. Sélectionnez **Ajouter**une  >  **classe**. Nommez la classe **Movie**.
 
 [!INCLUDE [model 1b](~/includes/RP/model1b.md)]
 
@@ -82,11 +82,11 @@ Cliquez avec le bouton droit sur le dossier *Pages/Movies* > **Ajouter** > **Nou
 
 ![Image illustrant les instructions précédentes.](model/_static/sca.png)
 
-Dans la boîte de dialogue **Ajouter un modèle automatique**, sélectionnez **Razor Pages avec Entity Framework (CRUD)** > **Ajouter**.
+Dans la boîte de dialogue **Ajouter une structure** , sélectionnez ** Razor pages à l’aide de Entity Framework (CRUD)** > **Ajouter**.
 
 ![Image illustrant les instructions précédentes.](model/_static/add_scaffold.png)
 
-Renseignez la boîte de dialogue **Pages Razor avec Entity Framework (CRUD)** :
+Complétez la boîte de dialogue **Ajouter des Razor pages à l’aide de Entity Framework (CRUD)** :
 
 * Dans la liste déroulante **Classe de modèle**, sélectionnez **Film (RazorPagesMovie.Models)**.
 * Dans la ligne **Classe du contexte de données**, sélectionnez le signe (plus) **+** et changez le nom généré de RazorPagesMovie.**Models**.RazorPagesMovieContext en RazorPagesMovie.**Data**.RazorPagesMovieContext. [Cette modification](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) n'est pas requise. Elle crée la classe de contexte de base de données avec l’espace de noms correct.
@@ -132,15 +132,15 @@ Créer un dossier *Pages/Movies* :
 * Cliquez avec le bouton droit sur le dossier *Pages* > **Ajouter** > **Nouveau dossier**.
 * Nommez le dossier *Movies*.
 
-Cliquez avec le bouton droit sur le dossier *pages/movies* > **Ajouter** > une **nouvelle génération de modèles automatique...**.
+Cliquez avec le bouton droit sur le dossier *pages/movies* > **Ajouter** une > **nouvelle génération de modèles automatique...**.
 
 ![Image illustrant les instructions précédentes.](model/_static/scaMac.png)
 
-Dans la boîte de dialogue **nouvelle génération de modèles** automatique, sélectionnez **Razor pages à l’aide de Entity Framework (CRUD)** > **suivant**.
+Dans la boîte de dialogue **nouvelle génération de modèles** automatique, sélectionnez ** Razor pages à l’aide de Entity Framework (CRUD)** > **suivant**.
 
 ![Image illustrant les instructions précédentes.](model/_static/add_scaffoldMac.png)
 
-Renseignez la boîte de dialogue **Pages Razor avec Entity Framework (CRUD)** :
+Complétez la boîte de dialogue **Ajouter des Razor pages à l’aide de Entity Framework (CRUD)** :
 
 * Dans la liste déroulante **classe de modèle** , sélectionnez ou tapez **Movie (RazorPagesMovie. Models)**.
 * Dans la ligne de la **classe de contexte de données** , tapez le nom de la nouvelle classe, RazorPagesMovie. **Données**. RazorPagesMovieContext. [Cette modification](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) n'est pas requise. Elle crée la classe de contexte de base de données avec l’espace de noms correct.
@@ -236,15 +236,15 @@ Les commandes précédentes génèrent l’avertissement suivant : « aucun ty
 
 Vous pouvez ignorer cet avertissement, il sera corrigé dans un prochain tutoriel.
 
-La commande migrations génère du code pour créer le schéma de base de données initial. Le schéma est basé sur le modèle spécifié dans `DbContext`. L’argument `InitialCreate` est utilisé pour nommer les migrations. Vous pouvez utiliser n’importe quel nom, mais par convention, un nom décrivant la migration est sélectionné.
+La commande migrations génère du code pour créer le schéma de base de données initial. Le schéma est basé sur le modèle spécifié dans `DbContext` . L’argument `InitialCreate` est utilisé pour nommer les migrations. Vous pouvez utiliser n’importe quel nom, mais par convention, un nom décrivant la migration est sélectionné.
 
-La `update` commande exécute la `Up` méthode dans des migrations qui n’ont pas été appliquées. Dans ce cas, `update` exécute la `Up` méthode dans les *migrations\</horodatage>_InitialCreate fichier. cs* , ce qui crée la base de données.
+La `update` commande exécute la `Up` méthode dans des migrations qui n’ont pas été appliquées. Dans ce cas, `update` exécute la `Up` méthode dans le fichier *migrations/ \<time-stamp> _InitialCreate. cs* , qui crée la base de données.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ### <a name="examine-the-context-registered-with-dependency-injection"></a>Examiner le contexte inscrit avec l’injection de dépendances
 
-ASP.NET Core comprend [l’injection de dépendances](xref:fundamentals/dependency-injection). Des services (tels que le contexte de base de données EF Core) sont inscrits avec l’injection de dépendances au démarrage de l’application. Ces services sont affectés aux composants qui les nécessitent (par exemple les Pages Razor) par le biais de paramètres de constructeur. Le code du constructeur qui obtient une instance de contexte de base de données est indiqué plus loin dans le tutoriel.
+ASP.NET Core comprend [l’injection de dépendances](xref:fundamentals/dependency-injection). Des services (tels que le contexte de base de données EF Core) sont inscrits avec l’injection de dépendances au démarrage de l’application. Ces services sont fournis par les composants qui requièrent ces services (tels que les Razor pages) par le biais de paramètres de constructeur. Le code du constructeur qui obtient une instance de contexte de base de données est indiqué plus loin dans le tutoriel.
 
 L’outil de génération de modèles automatique a créé automatiquement un contexte de base de données et l’a inscrit dans le conteneur d’injection de dépendances.
 
@@ -256,7 +256,7 @@ Examinez la méthode `Startup.ConfigureServices`. La ligne en surbrillance a ét
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Data/RazorPagesMovieContext.cs)]
 
-Le code précédent crée une propriété [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) pour le jeu d’entités. Dans la terminologie Entity Framework, un jeu d’entités correspond généralement à une table de base de données. Une entité correspond à une ligne dans la table.
+Le code précédent crée une [propriété \<Movie> DbSet](/dotnet/api/microsoft.entityframeworkcore.dbset-1) pour le jeu d’entités. Dans la terminologie Entity Framework, un jeu d’entités correspond généralement à une table de base de données. Une entité correspond à une ligne dans la table.
 
 Le nom de la chaîne de connexion est transmis au contexte en appelant une méthode sur un objet [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions). Pour le développement local, le [système de configuration ASP.NET Core](xref:fundamentals/configuration/index) lit la chaîne de connexion à partir du fichier *appsettings.json*.
 
@@ -272,7 +272,7 @@ Examinez la méthode `Up`.
 
 <a name="test"></a>
 
-### <a name="test-the-app"></a>Test de l'application
+### <a name="test-the-app"></a>Tester l'application
 
 * Exécutez l’application et ajoutez `/Movies` à l’URL dans le navigateur (`http://localhost:port/movies`).
 
@@ -299,8 +299,8 @@ Le prochain didacticiel décrit les fichiers créés par la génération de mod�
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 > [!div class="step-by-step"]
-> [Précédent : prise en main](xref:tutorials/razor-pages/razor-pages-start)
-> [suivante : génération de modèles automatique Razor pages](xref:tutorials/razor-pages/page)
+> [Précédent : prise en main](xref:tutorials/razor-pages/razor-pages-start) 
+>  [Suivant : génération de modèles Razor automatique Pages](xref:tutorials/razor-pages/page)
 
 ::: moniker-end
 
@@ -319,7 +319,7 @@ Les classes de modèle portent le nom de classes OCT (« Objet CLR Traditionnel 
 
 Cliquez avec le bouton droit sur le projet **RazorPagesMovie** > **Ajouter** > **Nouveau dossier**. Nommez le dossier *Models*.
 
-Cliquez avec le bouton droit sur le dossier *Models*. Sélectionnez **Ajouter** > une**classe**. Nommez la classe **Movie**.
+Cliquez avec le bouton droit sur le dossier *Models*. Sélectionnez **Ajouter**une  >  **classe**. Nommez la classe **Movie**.
 
 [!INCLUDE [model 1b](~/includes/RP/model1b.md)]
 
@@ -363,11 +363,11 @@ Cliquez avec le bouton droit sur le dossier *Pages/Movies* > **Ajouter** > **Nou
 
 ![Image illustrant les instructions précédentes.](model/_static/sca.png)
 
-Dans la boîte de dialogue **Ajouter un modèle automatique**, sélectionnez **Razor Pages avec Entity Framework (CRUD)** > **Ajouter**.
+Dans la boîte de dialogue **Ajouter une structure** , sélectionnez ** Razor pages à l’aide de Entity Framework (CRUD)** > **Ajouter**.
 
 ![Image illustrant les instructions précédentes.](model/_static/add_scaffold.png)
 
-Renseignez la boîte de dialogue **Pages Razor avec Entity Framework (CRUD)** :
+Complétez la boîte de dialogue **Ajouter des Razor pages à l’aide de Entity Framework (CRUD)** :
 <!-- In the next section, change 
 (plus) sign and accept the generated name 
 to use Data, it should not use models. That will make the namespace the same for the VS version and the CLI version
@@ -413,11 +413,11 @@ Cliquez avec le bouton droit sur le dossier *Pages/Movies* > **Ajouter** > **Nou
 
 ![Image illustrant les instructions précédentes.](model/_static/scaMac.png)
 
-Dans la boîte de dialogue **Ajouter une nouvelle génération de modèles** automatique, sélectionnez **Razor pages à l’aide de Entity Framework (CRUD)** > **Ajouter**.
+Dans la boîte de dialogue **Ajouter une nouvelle génération de modèles** automatique, sélectionnez ** Razor pages à l’aide de Entity Framework (CRUD)** > **Ajouter**.
 
 ![Image illustrant les instructions précédentes.](model/_static/add_scaffoldMac.png)
 
-Renseignez la boîte de dialogue **Pages Razor avec Entity Framework (CRUD)** :
+Complétez la boîte de dialogue **Ajouter des Razor pages à l’aide de Entity Framework (CRUD)** :
 
 * Dans la liste déroulante **classe de modèle** , sélectionnez ou tapez **Movie**.
 * Dans la ligne de la **classe de contexte de données** , tapez Select the **RazorPagesMovieContext** This crée une nouvelle classe de contexte de base de données avec l’espace de noms correct. Dans ce cas, il s’agit de **RazorPagesMovie. Models. RazorPagesMovieContext**.
@@ -466,7 +466,7 @@ Update-Database
 
 La commande `Add-Migration` génère du code pour créer le schéma de base de données initial. Le schéma est basé sur le modèle spécifié dans `DbContext` (dans le fichier *RazorPagesMovieContext.cs*). L' `InitialCreate` argument est utilisé pour nommer la migration. Vous pouvez utiliser n’importe quel nom, mais par convention, un nom décrivant la migration est utilisé. Pour plus d’informations, consultez <xref:data/ef-mvc/migrations>.
 
-La commande `Update-Database` exécute la méthode `Up` dans le fichier *Migrations/\<horodatage>_InitialCreate.cs*. La méthode `Up` crée la base de données.
+La `Update-Database` commande exécute la `Up` méthode dans le fichier *migrations/ \<time-stamp> _InitialCreate. cs* . La méthode `Up` crée la base de données.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -484,7 +484,7 @@ La commande `Update-Database` exécute la méthode `Up` dans le fichier *Migrati
 
 ### <a name="examine-the-context-registered-with-dependency-injection"></a>Examiner le contexte inscrit avec l’injection de dépendances
 
-ASP.NET Core comprend [l’injection de dépendances](xref:fundamentals/dependency-injection). Des services (tels que le contexte de base de données EF Core) sont inscrits avec l’injection de dépendances au démarrage de l’application. Ces services sont affectés aux composants qui les nécessitent (par exemple les Pages Razor) par le biais de paramètres de constructeur. Le code du constructeur qui obtient une instance de contexte de base de données est indiqué plus loin dans le tutoriel.
+ASP.NET Core comprend [l’injection de dépendances](xref:fundamentals/dependency-injection). Des services (tels que le contexte de base de données EF Core) sont inscrits avec l’injection de dépendances au démarrage de l’application. Ces services sont fournis par les composants qui requièrent ces services (tels que les Razor pages) par le biais de paramètres de constructeur. Le code du constructeur qui obtient une instance de contexte de base de données est indiqué plus loin dans le tutoriel.
 
 L’outil de génération de modèles automatique a créé automatiquement un contexte de base de données et l’a inscrit dans le conteneur d’injection de dépendances.
 
@@ -496,7 +496,7 @@ Examinez la méthode `Startup.ConfigureServices`. La ligne en surbrillance a ét
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Data/RazorPagesMovieContext.cs)]
 
-Le code précédent crée une propriété [DbSet\<Movie>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) pour le jeu d’entités. Dans la terminologie Entity Framework, un jeu d’entités correspond généralement à une table de base de données. Une entité correspond à une ligne dans la table.
+Le code précédent crée une [propriété \<Movie> DbSet](/dotnet/api/microsoft.entityframeworkcore.dbset-1) pour le jeu d’entités. Dans la terminologie Entity Framework, un jeu d’entités correspond généralement à une table de base de données. Une entité correspond à une ligne dans la table.
 
 Le nom de la chaîne de connexion est transmis au contexte en appelant une méthode sur un objet [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions). Pour le développement local, le [système de configuration ASP.NET Core](xref:fundamentals/configuration/index) lit la chaîne de connexion à partir du fichier *appsettings.json*.
 
@@ -512,7 +512,7 @@ Examinez la méthode `Up`.
 
 <a name="test"></a>
 
-### <a name="test-the-app"></a>Test de l'application
+### <a name="test-the-app"></a>Tester l'application
 
 * Exécutez l’application et ajoutez `/Movies` à l’URL dans le navigateur (`http://localhost:port/movies`).
 
@@ -539,7 +539,7 @@ Le prochain didacticiel décrit les fichiers créés par la génération de mod�
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 > [!div class="step-by-step"]
-> [Précédent : prise en main](xref:tutorials/razor-pages/razor-pages-start)
-> [suivante : Razor pages de génération de modèles](xref:tutorials/razor-pages/page) automatique
+> [Précédent : prise en main](xref:tutorials/razor-pages/razor-pages-start) 
+>  [Suivant : génération de modèles Razor automatique Pages](xref:tutorials/razor-pages/page)
 
 ::: moniker-end

@@ -1,18 +1,24 @@
 ---
-title: Pages Razor avec EF Core dans ASP.NET Core - CRUD - 2 sur 8
+title: Partie 2, Razor pages avec EF Core dans ASP.net Core-CRUD
 author: rick-anderson
-description: Montre comment créer, lire, mettre à jour et supprimer avec EF Core.
+description: Partie 2 de Razor pages et Entity Framework série de didacticiels.
 ms.author: riande
 ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: 05519852fab22bd3ad5b77e3494b49191448286f
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 62e35639d5e3d43bd20c9f92b75fa101d7914f82
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78665647"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652354"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---crud---2-of-8"></a>Pages Razor avec EF Core dans ASP.NET Core - CRUD - 2 sur 8
+# <a name="part-2-razor-pages-with-ef-core-in-aspnet-core---crud"></a>Partie 2, Razor pages avec EF Core dans ASP.net Core-CRUD
 
 Par [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog) et [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -24,7 +30,7 @@ Dans ce didacticiel, nous allons examiner et personnaliser le code CRUD (créer,
 
 ## <a name="no-repository"></a>Aucun référentiel
 
-Certains développeurs utilisent une couche de service ou un modèle de référentiel pour créer une couche d’abstraction entre l’interface utilisateur (Razor Pages) et la couche d’accès aux données. Ce n’est pas le cas de ce tutoriel. Pour que ce tutoriel soit moins complexe et traite exclusivement d’EF Core, le code EF Core est directement ajouté aux classes de modèle de page. 
+Certains développeurs utilisent une couche de service ou un modèle de référentiel pour créer une couche d’abstraction entre l’interface utilisateur ( Razor pages) et la couche d’accès aux données. Ce n’est pas le cas de ce tutoriel. Pour que ce tutoriel soit moins complexe et traite exclusivement d’EF Core, le code EF Core est directement ajouté aux classes de modèle de page. 
 
 ## <a name="update-the-details-page"></a>Mettre à jour la page Details
 
@@ -79,7 +85,7 @@ Le code précédent crée un objet Student, puis utilise des champs de formulair
 
 * Utilise les valeurs de formulaire publiées de la propriété [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) de [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel).
 * Met à jour uniquement les propriétés listées (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`).
-* Recherche les champs de formulaire dotés d’un préfixe « Student ». Par exemple : `Student.FirstMidName`. Il ne respecte pas la casse.
+* Recherche les champs de formulaire dotés d’un préfixe « Student ». Par exemple, `Student.FirstMidName`. Il ne respecte pas la casse.
 * Utilise le système de [liaison de modèles](xref:mvc/models/model-binding) pour convertir les valeurs de formulaire de chaînes en types dans le modèle `Student`. Par exemple, `EnrollmentDate` doit être converti en DateTime.
 
 Exécutez l’application, puis créez une entité Student pour tester la page Create.
@@ -90,7 +96,7 @@ L’utilisation de `TryUpdateModel` pour mettre à jour des champs avec des vale
 
 [!code-csharp[Main](intro/samples/cu30snapshots/2-crud/Models/StudentZsecret.cs?name=snippet_Intro&highlight=7)]
 
-Même si l’application n’a pas de champ `Secret` dans la page Razor de création ou de mise à jour, un pirate pourrait définir la valeur `Secret` par sur-publication. Un pirate pourrait utiliser un outil tel que Fiddler, ou écrire du JavaScript, pour publier une valeur de formulaire `Secret`. Le code d’origine ne limite pas les champs que le classeur de modèles utilise quand il crée une instance de Student.
+Même si l’application n’a pas de `Secret` champ dans la page de création ou de mise à jour Razor , un pirate peut définir la `Secret` valeur par survalidation. Un pirate pourrait utiliser un outil tel que Fiddler, ou écrire du JavaScript, pour publier une valeur de formulaire `Secret`. Le code d’origine ne limite pas les champs que le classeur de modèles utilise quand il crée une instance de Student.
 
 La valeur spécifiée par le pirate pour le champ de formulaire `Secret`, quelle qu’elle soit, est mise à jour dans la base de données. L’illustration suivante montre l’outil Fiddler en train d’ajouter le champ `Secret` (avec la valeur « OverPost ») aux valeurs du formulaire envoyé.
 
@@ -98,13 +104,13 @@ La valeur spécifiée par le pirate pour le champ de formulaire `Secret`, quelle
 
 La valeur « OverPost » est ajoutée avec succès à la propriété `Secret` de la ligne insérée. Cela se produit même si le concepteur de l’application n’avait jamais prévu que la propriété `Secret` serait définie avec la page Create.
 
-### <a name="view-model"></a>Modèle d’affichage
+### <a name="view-model"></a>Afficher le modèle
 
 Les modèles d’affichage fournissent une alternative pour empêcher la sur-publication.
 
 Le modèle d’application est souvent appelé modèle de domaine. En règle générale, le modèle de domaine contient toutes les propriétés requises par l’entité correspondante dans la base de données. Le modèle de vue contient uniquement les propriétés nécessaires à l’interface utilisateur pour laquelle il est utilisé (par exemple, la page Create).
 
-En plus du modèle d’affichage, certaines applications utilisent un modèle de liaison ou d’entrée pour transmettre des données entre la classe de modèles de pages de Pages Razor et le navigateur. 
+Outre le modèle de vue, certaines applications utilisent un modèle de liaison ou un modèle d’entrée pour passer des données entre la Razor classe de modèle de page pages et le navigateur. 
 
 Considérez le modèle d’affichage `Student` suivant :
 
@@ -136,7 +142,7 @@ Exécutez l’application et testez-la en créant et modifiant un étudiant.
 
 Le contexte de base de données effectue un suivi pour déterminer si les entités en mémoire sont synchronisées avec les lignes correspondantes de la base de données. Ces informations de suivi déterminent ce qui se passe quand [SaveChangesAsync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechangesasync#Microsoft_EntityFrameworkCore_DbContext_SaveChangesAsync_System_Threading_CancellationToken_) est appelé. Par exemple, quand une nouvelle entité est passée à la méthode [AddAsync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.addasync), l’état de cette entité est défini sur [Added](/dotnet/api/microsoft.entityframeworkcore.entitystate#Microsoft_EntityFrameworkCore_EntityState_Added). Quand `SaveChangesAsync` est appelé, le contexte de base de données émet une commande SQL INSERT.
 
-Une entité peut se trouver dans l’un des [états suivants](/dotnet/api/microsoft.entityframeworkcore.entitystate):
+Une entité peut être dans l’un des [États suivants](/dotnet/api/microsoft.entityframeworkcore.entitystate):
 
 * `Added`: L’entité n’existe pas encore dans la base de données. La méthode `SaveChanges` émet une instruction INSERT.
 
@@ -146,7 +152,7 @@ Une entité peut se trouver dans l’un des [états suivants](/dotnet/api/micros
 
 * `Deleted` : L’entité a été marquée pour suppression. La méthode `SaveChanges` émet une instruction DELETE.
 
-* `Detached`: L’entité n’est pas suivie par le contexte de la base de données.
+* `Detached`: L’entité n’est pas suivie par le contexte de base de données.
 
 Dans une application de bureau, les changements d’état sont généralement définis automatiquement. Une entité est lue, des modifications sont apportées et l’état d’entité passe automatiquement à `Modified`. L’appel de `SaveChanges` génère une instruction SQL UPDATE qui met à jour uniquement les propriétés modifiées.
 
@@ -167,7 +173,7 @@ La méthode `OnPostAsync` récupère l’entité sélectionnée, puis appelle la
 * L’exception de la base de données est interceptée.
 * La méthode `OnGetAsync` des pages est appelée avec `saveChangesError=true`.
 
-Ajoutez un message d’erreur à la page Razor Delete (*Pages/Students/Delete.cshtml*) :
+Ajoutez un message d’erreur à la Razor page de suppression (*pages/élèves/Delete. cshtml*) :
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
 
@@ -176,8 +182,8 @@ Exécutez l’application et supprimez un étudiant pour tester la page Delete.
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="step-by-step"]
-> [Tutoriel précédent](xref:data/ef-rp/intro)[Next tutoriel](xref:data/ef-rp/sort-filter-page) 
-> 
+> [Didacticiel précédent](xref:data/ef-rp/intro) 
+>  [Didacticiel suivant](xref:data/ef-rp/sort-filter-page)
 
 ::: moniker-end
 
@@ -185,9 +191,9 @@ Exécutez l’application et supprimez un étudiant pour tester la page Delete.
 
 Dans ce didacticiel, nous allons examiner et personnaliser le code CRUD (créer, lire, mettre à jour, supprimer) généré automatiquement.
 
-Pour que ces tutoriels soient moins complexes et traitent exclusivement d’EF Core, nous avons utilisé le code EF Core dans les modèles de page. Certains développeurs utilisent un modèle de référentiel ou de couche de service pour créer une couche d’abstraction entre l’interface utilisateur (Pages Razor) et la couche d’accès aux données.
+Pour que ces tutoriels soient moins complexes et traitent exclusivement d’EF Core, nous avons utilisé le code EF Core dans les modèles de page. Certains développeurs utilisent une couche de service ou un modèle de référentiel dans pour créer une couche d’abstraction entre l’interface utilisateur ( Razor pages) et la couche d’accès aux données.
 
-Dans ce tutoriel, nous examinons les pages Create, Edit, Delete et Details de Razor Pages, qui sont dans le dossier *Students*.
+Dans ce didacticiel, les pages créer, modifier, supprimer et Détails du Razor dossier *students* sont examinées.
 
 Le code généré automatiquement utilise le modèle suivant pour les pages Create, Edit et Delete :
 
@@ -196,7 +202,7 @@ Le code généré automatiquement utilise le modèle suivant pour les pages Crea
 
 Les pages Index et Details obtiennent et affichent les données demandées avec la méthode HTTP GET `OnGetAsync`.
 
-## <a name="singleordefaultasync-vs-firstordefaultasync"></a>SingleOrDefaultAsync vs FirstOrDefaultAsync
+## <a name="singleordefaultasync-vs-firstordefaultasync"></a>SingleOrDefaultAsync et FirstOrDefaultAsync
 
 Le code généré utilise [FirstOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_), qui est généralement préféré à [SingleOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.singleordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_SingleOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_).
 
@@ -231,7 +237,7 @@ Accédez à la page `Pages/Students`. Les liens **Edit**, **Details**, et **Dele
 
 Exécutez l’application et sélectionnez un lien **Details**. L’URL est au format `http://localhost:5000/Students/Details?id=2`. L’ID d’étudiant est transmis à l’aide d’une chaîne de requête (`?id=2`).
 
-Mettez à jour les pages Razor Edit, Details et Delete pour utiliser le modèle de route `"{id:int}"`. Remplacez la directive de chacune de ces pages (`@page "{id:int}"`) par `@page`.
+Mettez à jour les pages de modification, de détails et Razor de suppression pour utiliser le `"{id:int}"` modèle de routage. Remplacez la directive de chacune de ces pages (`@page "{id:int}"`) par `@page`.
 
 Une requête à la page avec le modèle de route « {id:int} » qui n’inclut **pas** une valeur de route entière retourne une erreur HTTP 404 (introuvable). Par exemple, `http://localhost:5000/Students/Details` retourne une erreur 404. Pour que l’ID soit facultatif, ajoutez `?` à la contrainte d’itinéraire :
 
@@ -298,7 +304,7 @@ L’utilisation de `TryUpdateModel` pour mettre à jour des champs avec des vale
 
 [!code-csharp[](intro/samples/cu21/Models/StudentZsecret.cs?name=snippet_Intro&highlight=7)]
 
-Même si l’application n’a pas de champ `Secret` dans la page Razor de création/mise à jour, un pirate pourrait définir la valeur `Secret` par sur-publication. Un pirate pourrait utiliser un outil tel que Fiddler, ou écrire du JavaScript, pour publier une valeur de formulaire `Secret`. Le code d’origine ne limite pas les champs que le classeur de modèles utilise quand il crée une instance de Student.
+Même si l’application n’a pas de `Secret` champ dans la page de création/mise à jour Razor , un pirate peut définir la `Secret` valeur par la survalidation. Un pirate pourrait utiliser un outil tel que Fiddler, ou écrire du JavaScript, pour publier une valeur de formulaire `Secret`. Le code d’origine ne limite pas les champs que le classeur de modèles utilise quand il crée une instance de Student.
 
 La valeur spécifiée par le pirate pour le champ de formulaire `Secret`, quelle qu’elle soit, est mise à jour dans la base de données. L’illustration suivante montre l’outil Fiddler en train d’ajouter le champ `Secret` (avec la valeur « OverPost ») aux valeurs du formulaire envoyé.
 
@@ -308,9 +314,9 @@ La valeur « OverPost » est ajoutée avec succès à la propriété `Secret` de
 
 <a name="vm"></a>
 
-### <a name="view-model"></a>Modèle d’affichage
+### <a name="view-model"></a>Afficher le modèle
 
-Un modèle d’affichage contient généralement un sous-ensemble des propriétés incluses dans le modèle utilisé par l’application. Le modèle d’application est souvent appelé modèle de domaine. En règle générale, le modèle de domaine contient toutes les propriétés requises par l’entité correspondante dans la base de données. Le modèle d’affichage contient uniquement les propriétés nécessaires pour la couche d’interface utilisateur (par exemple, la page Create). En plus du modèle d’affichage, certaines applications utilisent un modèle de liaison ou d’entrée pour transmettre des données entre la classe de modèles de pages de Pages Razor et le navigateur. Considérez le modèle d’affichage `Student` suivant :
+Un modèle d’affichage contient généralement un sous-ensemble des propriétés incluses dans le modèle utilisé par l’application. Le modèle d’application est souvent appelé modèle de domaine. En règle générale, le modèle de domaine contient toutes les propriétés requises par l’entité correspondante dans la base de données. Le modèle d’affichage contient uniquement les propriétés nécessaires pour la couche d’interface utilisateur (par exemple, la page Create). Outre le modèle de vue, certaines applications utilisent un modèle de liaison ou un modèle d’entrée pour passer des données entre la Razor classe de modèle de page pages et le navigateur. Considérez le modèle d’affichage `Student` suivant :
 
 [!code-csharp[](intro/samples/cu21/Models/StudentVM.cs)]
 
@@ -324,7 +330,7 @@ La méthode [SetValues](/dotnet/api/microsoft.entityframeworkcore.changetracking
 
 L’utilisation de `StudentVM` exige que [CreateVM.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml) soit mis à jour pour utiliser `StudentVM` plutôt que `Student`.
 
-Dans les pages Razor, la classe dérivée `PageModel` est le modèle d’affichage.
+Dans les Razor pages, la `PageModel` classe dérivée est le modèle de vue.
 
 ## <a name="update-the-edit-page"></a>Mettre à jour la page Edit
 
@@ -346,7 +352,7 @@ Créez et modifiez quelques entités d’étudiants.
 
 Le contexte de base de données effectue un suivi afin de savoir si les entités en mémoire sont synchronisées avec les lignes correspondantes dans la base de données. Les informations de synchronisation du contexte de base de données déterminent ce qui se produit quand [SaveChangesAsync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechangesasync#Microsoft_EntityFrameworkCore_DbContext_SaveChangesAsync_System_Threading_CancellationToken_) est appelé. Par exemple, quand une nouvelle entité est passée à la méthode [AddAsync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.addasync), l’état de cette entité est défini sur [Added](/dotnet/api/microsoft.entityframeworkcore.entitystate#Microsoft_EntityFrameworkCore_EntityState_Added). Quand `SaveChangesAsync` est appelée, le contexte de base de données émet une commande SQL INSERT.
 
-Une entité peut se trouver dans l’un des [états suivants](/dotnet/api/microsoft.entityframeworkcore.entitystate):
+Une entité peut être dans l’un des [États suivants](/dotnet/api/microsoft.entityframeworkcore.entitystate):
 
 * `Added` : L’entité n’existe pas encore dans la base de données. La méthode `SaveChanges` émet une instruction INSERT.
 
@@ -385,9 +391,9 @@ Le code précédent récupère l’entité sélectionnée, puis appelle la méth
 * L’exception de la base de données est interceptée.
 * La méthode `OnGetAsync` des pages est appelée avec `saveChangesError=true`.
 
-### <a name="update-the-delete-razor-page"></a>Mise à jour de la Page Razor Delete
+### <a name="update-the-delete-razor-page"></a>Mettre à jour la page de suppression Razor
 
-Ajoutez le message d’erreur mis en surbrillance suivant à la Page Razor Delete.
+Ajoutez le message d’erreur en surbrillance suivant à la page de suppression Razor .
 <!--
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Delete.cshtml?name=snippet&highlight=11)]
 -->
@@ -399,13 +405,13 @@ Testez la suppression.
 
 Students/Index ou d’autres liens ne fonctionnent pas :
 
-Vérifiez que la Page Razor contient la bonne directive `@page`. Par exemple, la page Student/Index Razor Page ne doit **pas** contenir de modèle d’itinéraire :
+Vérifiez que la Razor page contient la `@page` directive correcte. Par exemple, la page Students/index ne Razor doit **pas** contenir de modèle de routage :
 
 ```cshtml
 @page "{id:int}"
 ```
 
-Chaque page Razor doit inclure la directive `@page`.
+Chaque Razor page doit inclure la `@page` directive.
 
 
 
@@ -414,7 +420,7 @@ Chaque page Razor doit inclure la directive `@page`.
 * [Version YouTube de ce tutoriel](https://www.youtube.com/watch?v=K4X1MT2jt6o)
 
 > [!div class="step-by-step"]
-> [Suivant précédent](xref:data/ef-rp/intro)
-> [Next](xref:data/ef-rp/sort-filter-page)
+> [Précédent](xref:data/ef-rp/intro) 
+>  [Suivant](xref:data/ef-rp/sort-filter-page)
 
 ::: moniker-end

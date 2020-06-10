@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/simple
-ms.openlocfilehash: 4ec31354d7fe11af75fd3a0045b4045f83721cb5
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: b5f97038145ed479c315af50a35d6c64d85425a7
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84272123"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652950"
 ---
 # <a name="simple-authorization-in-aspnet-core"></a>Autorisation simple dans ASP.NET Core
 
@@ -79,3 +79,24 @@ Cela autorise uniquement les utilisateurs authentifiés à, à l' `AccountContro
 
 > [!WARNING]
 > `[AllowAnonymous]`ignore toutes les instructions d’autorisation. Si vous combinez `[AllowAnonymous]` et n’importe quel `[Authorize]` attribut, les `[Authorize]` attributs sont ignorés. Par exemple, si vous appliquez `[AllowAnonymous]` au niveau du contrôleur, tous les `[Authorize]` attributs du même contrôleur (ou de toute action qu’il contient) sont ignorés.
+
+<a name="aarp"></a>
+
+## <a name="authorize-attribute-and-razor-pages"></a>Autoriser l’attribut et les Razor pages
+
+<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>Ne peut ***pas*** être appliqué aux Razor gestionnaires de pages. Par exemple, `[Authorize]` ne peut pas être appliqué à `OnGet` , `OnPost` ou à un autre gestionnaire de page.
+
+Les deux approches suivantes peuvent être utilisées pour appliquer l’autorisation aux Razor méthodes du gestionnaire de page :
+
+* Utilisez des pages distinctes pour les gestionnaires de pages nécessitant une autorisation différente. Déplacement du contenu partagé dans une ou plusieurs [vues partielles](xref:mvc/views/partial). Dans la mesure du possible, il s’agit de l’approche recommandée.
+* Pour le contenu qui doit partager une page commune, écrivez un filtre qui effectue une autorisation dans le cadre de [IAsyncPageFilter. OnPageHandlerSelectionAsync](xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter.OnPageHandlerSelectionAsync%2A). Le projet GitHub [PageHandlerAuth](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth) illustre cette approche :
+  * [AuthorizePageHandlerFilter](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth/AuthorizePageHandlerFilter.cs) implémente le filtre d’autorisation :[!code-csharp[](~/security/authorization/simple/samples/3.1/PageHandlerAuth/Pages/Index.cshtml.cs?name=snippet)]
+
+  * L’attribut [[AuthorizePageHandler]](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth/Pages/Index.cshtml.cs#L16) est appliqué au `OnGet` Gestionnaire de page :[!code-csharp[](~/security/authorization/simple/samples/3.1/PageHandlerAuth/AuthorizeIndexPageHandlerFilter.cs?name=snippet)]
+
+> [!WARNING]
+> L’exemple d’approche [PageHandlerAuth](https://github.com/pranavkm/PageHandlerAuth) n’effectue ***pas***les opérations suivantes :
+> * Compose avec les attributs d’autorisation appliqués à la page, au modèle de page ou globalement. La composition des attributs d’autorisation entraîne l’exécution de plusieurs fois `AuthorizeAttribute` pour une ou plusieurs `AuthorizeFilter` instances sur la page.
+> * Travaillez conjointement avec le reste du système d’authentification et d’autorisation de ASP.NET Core. Vous devez vérifier que l’utilisation de cette approche fonctionne correctement pour votre application.
+
+Il n’est pas prévu de prendre en charge le `AuthorizeAttribute` sur les Razor gestionnaires de page. 

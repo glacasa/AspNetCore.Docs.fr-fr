@@ -1,18 +1,24 @@
 ---
-title: Pages Razor avec EF Core dans ASP.NET Core - Migrations - 4 sur 8
+title: 'Partie 4 : Razor pages avec EF Core dans ASP.net Core migrations'
 author: rick-anderson
-description: Dans ce didacticiel, vous allez commencer à utiliser la fonctionnalité de migrations EF Core pour gérer les modifications du modèle de données dans une application ASP.NET Core MVC.
+description: Partie 4 des Razor pages et Entity Framework de la série de didacticiels.
 ms.author: riande
 ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/migrations
-ms.openlocfilehash: 86fd83c898fce8e121e4d259aaca12c59591e606
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 74fe8771718647c3adf8288a72b11c30fb097a63
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78656533"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652633"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---migrations---4-of-8"></a>Pages Razor avec EF Core dans ASP.NET Core - Migrations - 4 sur 8
+# <a name="part-4-razor-pages-with-ef-core-migrations-in-aspnet-core"></a>Partie 4 : Razor pages avec EF Core migrations dans ASP.net Core
 
 Par [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog) et [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -42,7 +48,7 @@ Drop-Database
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* Exécutez la commande suivante à une invite de commande pour installer le CLI EF :
+* Exécutez la commande suivante à l’invite de commandes pour installer l’interface de ligne de commande EF :
 
   ```dotnetcli
   dotnet tool install --global dotnet-ef
@@ -82,7 +88,7 @@ dotnet ef database update
 
 ## <a name="up-and-down-methods"></a>Méthodes Up et Down
 
-La commande EF Core `migrations add` a généré du code pour créer la base de données. Ce code de migrations se trouve dans le fichier *Migrations\<horodatage> _InitialCreate.cs*. La méthode `Up` de la classe `InitialCreate` crée les tables de base de données qui correspondent aux jeux d’entités du modèle de données. La méthode `Down` les supprime, comme indiqué dans l’exemple suivant :
+La commande EF Core `migrations add` a généré du code pour créer la base de données. Ce code de migration se trouve dans le fichier *migrations \<timestamp> _InitialCreate. cs* . La méthode `Up` de la classe `InitialCreate` crée les tables de base de données qui correspondent aux jeux d’entités du modèle de données. La méthode `Down` les supprime, comme indiqué dans l’exemple suivant :
 
 [!code-csharp[](intro/samples/cu30/Migrations/20190731193522_InitialCreate.cs)]
 
@@ -104,7 +110,7 @@ Le paramètre de nom de migration (« InitialCreate » dans l’exemple) est uti
 
 Les migrations créent une *capture instantanée* du modèle de données actif dans *Migrations/SchoolContextModelSnapshot.cs*. Quand vous ajoutez une migration, EF détermine ce qui a changé en comparant le modèle de données actif au fichier de capture instantanée.
 
-Comme le fichier de capture instantané suit l’état du modèle de données, vous ne pouvez pas supprimer une migration en supprimant le fichier `<timestamp>_<migrationname>.cs`. Pour annuler la migration la plus récente, vous devez utiliser la commande `migrations remove`. Cette commande supprime la migration et vérifie que la capture instantanée est correctement réinitialisée. Pour plus d’informations, voir [les migrations dotnet ef supprimer](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).
+Comme le fichier de capture instantané suit l’état du modèle de données, vous ne pouvez pas supprimer une migration en supprimant le fichier `<timestamp>_<migrationname>.cs`. Pour annuler la migration la plus récente, vous devez utiliser la commande `migrations remove`. Cette commande supprime la migration et vérifie que la capture instantanée est correctement réinitialisée. Pour plus d’informations, voir [migrations dotnet EF supprimer](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).
 
 ## <a name="remove-ensurecreated"></a>Supprimer EnsureCreated
 
@@ -150,8 +156,8 @@ La solution peut consister à exécuter `dotnet ef database update` à partir d�
 Le tutoriel suivant crée le modèle de données en ajoutant des propriétés d’entité et de nouvelles entités.
 
 > [!div class="step-by-step"]
-> [Tutoriel précédent](xref:data/ef-rp/sort-filter-page)[Next tutoriel](xref:data/ef-rp/complex-data-model) 
-> 
+> [Didacticiel précédent](xref:data/ef-rp/sort-filter-page) 
+>  [Didacticiel suivant](xref:data/ef-rp/complex-data-model)
 
 ::: moniker-end
 
@@ -220,7 +226,7 @@ dotnet ef database update
 
 ### <a name="examine-the-up-and-down-methods"></a>Examiner les méthodes Up et Down
 
-La commande EF Core `migrations add` a généré du code pour créer la base de données. Ce code de migrations se trouve dans le fichier *Migrations\<horodatage> _InitialCreate.cs*. La méthode `Up` de la classe `InitialCreate` crée les tables de base de données qui correspondent aux jeux d’entités du modèle de données. La méthode `Down` les supprime, comme indiqué dans l’exemple suivant :
+La commande EF Core `migrations add` a généré du code pour créer la base de données. Ce code de migration se trouve dans le fichier *migrations \<timestamp> _InitialCreate. cs* . La méthode `Up` de la classe `InitialCreate` crée les tables de base de données qui correspondent aux jeux d’entités du modèle de données. La méthode `Down` les supprime, comme indiqué dans l’exemple suivant :
 
 [!code-csharp[](intro/samples/cu21/Migrations/20180626224812_InitialCreate.cs?range=7-24,77-88)]
 
@@ -253,7 +259,7 @@ Remove-Migration
 dotnet ef migrations remove
 ```
 
-Pour plus d’informations, voir [les migrations dotnet ef supprimer](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).
+Pour plus d’informations, voir [migrations dotnet EF supprimer](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).
 
 ---
 
@@ -311,14 +317,14 @@ Solution : Exécutez `dotnet ef database update`.
 ### <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Version YouTube de ce tutoriel](https://www.youtube.com/watch?v=OWSUuMLKTJo)
-* [.NET Core CLI](/ef/core/miscellaneous/cli/dotnet).
+* [CLI .net Core](/ef/core/miscellaneous/cli/dotnet).
 * [Console du Gestionnaire de package (Visual Studio)](/ef/core/miscellaneous/cli/powershell)
 
 
 
 > [!div class="step-by-step"]
-> [Suivant précédent](xref:data/ef-rp/sort-filter-page)
-> [Next](xref:data/ef-rp/complex-data-model)
+> [Précédent](xref:data/ef-rp/sort-filter-page) 
+>  [Suivant](xref:data/ef-rp/complex-data-model)
 
 ::: moniker-end
 

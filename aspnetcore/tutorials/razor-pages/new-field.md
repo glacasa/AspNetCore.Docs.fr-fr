@@ -1,7 +1,7 @@
 ---
-title: Ajouter un nouveau champ à une Razor Page dans ASP.net Core
+title: Partie 7, ajouter un nouveau champ à une Razor page dans ASP.net Core
 author: rick-anderson
-description: Montre comment ajouter un nouveau champ à une Razor Page avec Entity Framework Core
+description: Partie 7 de la série de didacticiels sur les Razor pages.
 ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
@@ -12,14 +12,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: 683d6718f4dcdb73c45cbcf94f6ac4f477b71bcd
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 15d4ccbe88c2147210918a3db1416983fb30132b
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82769732"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652795"
 ---
-# <a name="add-a-new-field-to-a-razor-page-in-aspnet-core"></a>Ajouter un nouveau champ à une page Razor dans ASP.NET Core
+# <a name="part-7-add-a-new-field-to-a-razor-page-in-aspnet-core"></a>Partie 7, ajouter un nouveau champ à une Razor page dans ASP.net Core
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -59,7 +59,7 @@ Mettez à jour les pages suivantes :
 * Mettez à jour [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml) avec un champ `Rating`.
 * Ajoutez le champ `Rating` à la Page Edit.
 
-L’application ne fonctionne pas tant que la base de données n’est pas mise à jour pour inclure le nouveau champ. L’exécution de l’application sans mettre à jour la base `SqlException`de données lève une exception :
+L’application ne fonctionne pas tant que la base de données n’est pas mise à jour pour inclure le nouveau champ. L’exécution de l’application sans mettre à jour la base de données lève une exception `SqlException` :
 
 `SqlException: Invalid column name 'Rating'.`
 
@@ -145,8 +145,8 @@ Exécutez l’application et vérifiez que vous pouvez créer/modifier/afficher 
 * [Version YouTube de ce tutoriel](https://youtu.be/3i7uMxiGGR8)
 
 > [!div class="step-by-step"]
-> [Précédent : ajout de la recherche](xref:tutorials/razor-pages/search)
-> [suivant : ajout](xref:tutorials/razor-pages/validation) de la validation
+> [Précédent : ajout de la recherche](xref:tutorials/razor-pages/search) 
+>  [Étape suivante : ajout](xref:tutorials/razor-pages/validation) de la validation
 
 ::: moniker-end
 
@@ -268,7 +268,7 @@ Exécutez l’application et vérifiez que vous pouvez créer/modifier/afficher 
 * [Version YouTube de ce tutoriel](https://youtu.be/3i7uMxiGGR8)
 
 > [!div class="step-by-step"]
-> [Précédent : ajout de la recherche](xref:tutorials/razor-pages/search)
-> [suivant : ajout](xref:tutorials/razor-pages/validation) de la validation
+> [Précédent : ajout de la recherche](xref:tutorials/razor-pages/search) 
+>  [Étape suivante : ajout](xref:tutorials/razor-pages/validation) de la validation
 
 ::: moniker-end

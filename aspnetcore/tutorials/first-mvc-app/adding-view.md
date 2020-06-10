@@ -1,7 +1,7 @@
 ---
-title: Ajouter une vue à une application ASP.NET Core MVC
+title: 'Partie 3 : ajouter une vue à une application ASP.NET Core MVC'
 author: rick-anderson
-description: Ajout d’une vue dans une application ASP.NET Core MVC simple
+description: Partie 3 de la série de didacticiels sur ASP.NET Core MVC.
 ms.author: riande
 ms.date: 8/04/2019
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 233d6cc060481c7b2efc9a1babc12f60f457a075
-ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
+ms.openlocfilehash: 3976ecba1a6bbf30c3147bf1cef78c5ced5bec62
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84507333"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652826"
 ---
-# <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>Ajouter une vue à une application ASP.NET Core MVC
+# <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>Partie 3 : ajouter une vue à une application ASP.NET Core MVC
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 

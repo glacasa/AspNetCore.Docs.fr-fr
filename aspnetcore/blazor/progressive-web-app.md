@@ -5,7 +5,7 @@ description: Découvrez comment créer une Blazor application Web progressive (P
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 06/09/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 274516014c027972166402abc70d22fa801898de
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: ef73cbb928fb442c73acce6f5facac33236abd67
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451847"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652404"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>Créez des applications Web progressifs avec ASP.NET Core Blazor Webassembly
 
@@ -272,8 +272,23 @@ Implémentez une logique arbitraire pour contrôler le sous-ensemble du contenu 
 
 ### <a name="interaction-with-authentication"></a>Interaction avec l’authentification
 
-Il est possible d’utiliser l’option de modèle PWA conjointement avec les options d’authentification. Un PWA compatible hors connexion peut également prendre en charge l’authentification lorsque l’utilisateur dispose d’une connectivité réseau.
+Le modèle PWA peut être utilisé conjointement avec l’authentification. Un PWA compatible hors connexion peut également prendre en charge l’authentification lorsque l’utilisateur dispose d’une connectivité réseau initiale.
 
-Lorsqu’un utilisateur n’a pas de connectivité réseau, il ne peut pas s’authentifier ou obtenir des jetons d’accès. Par défaut, si vous tentez d’accéder à la page de connexion sans accès réseau, le message « erreur réseau » s’affiche.
+Lorsqu’un utilisateur n’a pas de connectivité réseau, il ne peut pas s’authentifier ou obtenir des jetons d’accès. Par défaut, si vous tentez d’accéder à la page de connexion sans accès réseau, le message « erreur réseau » s’affiche. Vous devez concevoir un workflow d’interface utilisateur qui permet à l’utilisateur d’effectuer des tâches utiles en mode hors connexion sans tenter d’authentifier l’utilisateur ou d’obtenir des jetons d’accès. Vous pouvez également concevoir l’application pour qu’elle échoue correctement lorsque le réseau n’est pas disponible. Si l’application ne peut pas être conçue pour gérer ces scénarios, il se peut que vous ne souhaitiez pas activer la prise en charge hors connexion.
 
-Vous devez concevoir un workflow d’interface utilisateur qui permet à l’utilisateur d’effectuer des opérations utiles en mode hors connexion sans tenter de s’authentifier ou d’obtenir des jetons d’accès. Vous pouvez également concevoir l’application pour qu’elle échoue de manière appropriée lorsque le réseau n’est pas disponible. Si ce n’est pas possible dans votre application, il se peut que vous ne souhaitiez pas activer la prise en charge hors connexion.
+Quand une application conçue pour une utilisation en ligne et hors connexion est à nouveau en ligne :
+
+* L’application peut avoir besoin de configurer un nouveau jeton d’accès.
+* L’application doit détecter si un autre utilisateur est connecté au service afin de pouvoir appliquer des opérations au compte de l’utilisateur qui ont été effectuées pendant qu’il était hors connexion.
+
+Pour créer une application PWA hors connexion qui interagit avec l’authentification :
+
+* Remplacez <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory%601> par une fabrique qui stocke le dernier utilisateur connecté et qui utilise l’utilisateur stocké lorsque l’application est hors connexion.
+* Les opérations de file d’attente pendant que l’application est hors connexion et les appliquent lorsque l’application est retournée en ligne.
+* Pendant la déconnexion, effacez l’utilisateur stocké.
+
+L’exemple d’application [CarChecker](https://github.com/SteveSandersonMS/CarChecker) illustre les approches précédentes. Consultez les parties suivantes de l’application :
+
+* `OfflineAccountClaimsPrincipalFactory`(*Client/Data/OfflineAccountClaimsPrincipalFactory. cs*)
+* `LocalVehiclesStore`(*Client/Data/LocalVehiclesStore. cs*)
+* `LoginStatus`composant (*client/partagé/LoginStatus. Razor*)

@@ -1,7 +1,7 @@
 ---
-title: Mettre à jour les pages générées dans une application ASP.NET Core
+title: 'Partie 5 : mettre à jour les pages générées dans une application ASP.NET Core'
 author: rick-anderson
-description: Découvrez comment mettre à jour les pages générées dans une application ASP.NET Core.
+description: Partie 5 de la série de didacticiels sur les Razor pages.
 ms.author: riande
 ms.date: 12/20/2018
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: d9ab20b7ed4b394c154141efe3a94481efaf063c
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 144c4e7f07986c0a10089d74991fe3b44c013894
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774546"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652862"
 ---
-# <a name="update-the-generated-pages-in-an-aspnet-core-app"></a>Mettre à jour les pages générées dans une application ASP.NET Core
+# <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>Partie 5 : mettre à jour les pages générées dans une application ASP.NET Core
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -46,7 +46,7 @@ Les liens **Edit**, **Details**, et **Delete** sont générés par le [Tag Helpe
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
-Les [tag helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu Razor des éléments HTML dans les fichiers. Dans le code précédent, le `AnchorTagHelper` génère dynamiquement la valeur `href` de l’attribut HTML Razor à partir de la page (l’itinéraire est `asp-page`relatif), le et l'`asp-route-id`ID de l’itinéraire (). Pour plus d’informations, consultez [Génération d’URL pour les pages](xref:razor-pages/index#url-generation-for-pages).
+Les [tag helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les Razor fichiers. Dans le code précédent, le `AnchorTagHelper` génère dynamiquement la `href` valeur de l’attribut HTML à partir de la Razor page (l’itinéraire est relatif), le `asp-page` et l’ID de l’itinéraire ( `asp-route-id` ). Pour plus d’informations, consultez [Génération d’URL pour les pages](xref:razor-pages/index#url-generation-for-pages).
 
 Utilisez **Afficher la Source** dans votre navigateur favori pour examiner le balisage généré. Une partie du code HTML généré est affichée ci-dessous :
 
@@ -62,7 +62,7 @@ Les liens générés dynamiquement passent l’ID de film avec une chaîne de re
 
 ### <a name="add-route-template"></a>Ajouter un modèle de route
 
-Mettez à jour les pages de modification, Razor de détails et de suppression pour utiliser le modèle de routage « {ID : int} ». Remplacez la directive de chacune de ces pages (`@page "{id:int}"`) par `@page`. Exécuter l’application, puis affichez le code source. Le code HTML généré ajoute l’ID à la partie de chemin de l’URL :
+Mettez à jour les pages de modification, de détails et Razor de suppression pour utiliser le modèle de routage « {ID : int} ». Remplacez la directive de chacune de ces pages (`@page "{id:int}"`) par `@page`. Exécuter l’application, puis affichez le code source. Le code HTML généré ajoute l’ID à la partie de chemin de l’URL :
 
 ```html
 <td>
@@ -127,13 +127,13 @@ Quand la page Movies/Edit est postée :
 * S’il y a des erreurs dans l’état du modèle (par exemple, si `ReleaseDate` ne peut pas être converti en date), le formulaire est à nouveau affiché avec les valeurs soumises.
 * S’il n’y a aucune erreur de modèle, le film est enregistré.
 
-Les méthodes HTTP d’extraction des pages index, Create et Razor Delete suivent un modèle similaire. La méthode HTTP `OnPostAsync` après dans la page Razor créer suit un modèle similaire à la `OnPostAsync` méthode dans la page Razor modifier.
+Les méthodes HTTP d’extraction des pages index, Create et Delete Razor suivent un modèle similaire. La méthode HTTP après `OnPostAsync` dans la Razor page créer suit un modèle similaire à la `OnPostAsync` méthode dans la Razor page Modifier.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 > [!div class="step-by-step"]
-> [Précédent : utilisation d’une base de données](xref:tutorials/razor-pages/sql)
-> [suivante : ajouter une recherche](xref:tutorials/razor-pages/search)
+> [Précédent : utilisation d’une base de données](xref:tutorials/razor-pages/sql) 
+>  [Suivant : ajouter une recherche](xref:tutorials/razor-pages/search)
 
 ::: moniker-end
 
@@ -161,7 +161,7 @@ Les liens **Edit**, **Details**, et **Delete** sont générés par le [Tag Helpe
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
-Les [tag helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu Razor des éléments HTML dans les fichiers. Dans le code précédent, le `AnchorTagHelper` génère dynamiquement la valeur `href` de l’attribut HTML Razor à partir de la page (l’itinéraire est `asp-page`relatif), le et l'`asp-route-id`ID de l’itinéraire (). Pour plus d’informations, consultez [Génération d’URL pour les pages](xref:razor-pages/index#url-generation-for-pages).
+Les [tag helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les Razor fichiers. Dans le code précédent, le `AnchorTagHelper` génère dynamiquement la `href` valeur de l’attribut HTML à partir de la Razor page (l’itinéraire est relatif), le `asp-page` et l’ID de l’itinéraire ( `asp-route-id` ). Pour plus d’informations, consultez [Génération d’URL pour les pages](xref:razor-pages/index#url-generation-for-pages).
 
 Utilisez **Afficher la Source** dans votre navigateur favori pour examiner le balisage généré. Une partie du code HTML généré est affichée ci-dessous :
 
@@ -175,7 +175,7 @@ Utilisez **Afficher la Source** dans votre navigateur favori pour examiner le ba
 
 Les liens générés dynamiquement passent l’ID de film avec une chaîne de requête (par exemple `?id=1` dans `https://localhost:5001/Movies/Details?id=1`).
 
-Mettez à jour les pages de modification, Razor de détails et de suppression pour utiliser le modèle de routage « {ID : int} ». Remplacez la directive de chacune de ces pages (`@page "{id:int}"`) par `@page`. Exécuter l’application, puis affichez le code source. Le code HTML généré ajoute l’ID à la partie de chemin de l’URL :
+Mettez à jour les pages de modification, de détails et Razor de suppression pour utiliser le modèle de routage « {ID : int} ». Remplacez la directive de chacune de ces pages (`@page "{id:int}"`) par `@page`. Exécuter l’application, puis affichez le code source. Le code HTML généré ajoute l’ID à la partie de chemin de l’URL :
 
 ```html
 <td>
@@ -240,7 +240,7 @@ Quand la page Movies/Edit est postée :
 * S’il existe des erreurs dans l’état du modèle (par exemple, si `ReleaseDate` ne peut pas être converti en date), le formulaire est affiché avec les valeurs soumises.
 * S’il n’y a aucune erreur de modèle, le film est enregistré.
 
-Les méthodes HTTP d’extraction des pages index, Create et Razor Delete suivent un modèle similaire. La méthode HTTP `OnPostAsync` après dans la page Razor créer suit un modèle similaire à la `OnPostAsync` méthode dans la page Razor modifier.
+Les méthodes HTTP d’extraction des pages index, Create et Delete Razor suivent un modèle similaire. La méthode HTTP après `OnPostAsync` dans la Razor page créer suit un modèle similaire à la `OnPostAsync` méthode dans la Razor page Modifier.
 
 La fonction de recherche est ajoutée dans le prochain didacticiel.
 
@@ -249,7 +249,7 @@ La fonction de recherche est ajoutée dans le prochain didacticiel.
 * [Version YouTube de ce tutoriel](https://youtu.be/yLnnleREMtQ)
 
 > [!div class="step-by-step"]
-> [Précédent : utilisation d’une base de données](xref:tutorials/razor-pages/sql)
-> [suivante : ajouter une recherche](xref:tutorials/razor-pages/search)
+> [Précédent : utilisation d’une base de données](xref:tutorials/razor-pages/sql) 
+>  [Suivant : ajouter une recherche](xref:tutorials/razor-pages/search)
 
 ::: moniker-end

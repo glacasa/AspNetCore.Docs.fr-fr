@@ -1,7 +1,7 @@
 ---
-title: Utiliser une base de données et ASP.NET Core
+title: Partie 4, avec une base de données et une ASP.NET Core
 author: rick-anderson
-description: Explique l’utilisation d’une base de données et d’ASP.NET Core.
+description: Partie 4 de la série de didacticiels sur les Razor pages.
 ms.author: riande
 ms.date: 7/22/2019
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: 159588ec750f0ede534522aa9397fc2aefb58cd6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 21ae2ed4e91a0b3e52b1cdad1f4f4686c50614ba
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775607"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652977"
 ---
-# <a name="work-with-a-database-and-aspnet-core"></a>Utiliser une base de données et ASP.NET Core
+# <a name="part-4-with-a-database-and-aspnet-core"></a>Partie 4, avec une base de données et une ASP.NET Core
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT) et [Joe Audette](https://twitter.com/joeaudette)
 
@@ -113,12 +113,12 @@ Le code suivant montre le fichier *Program.cs* mis à jour.
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Program.cs)]
 
-L’exception suivante se produit `Update-Database` lorsque n’a pas été exécuté :
+L’exception suivante se produit lorsque `Update-Database` n’a pas été exécuté :
 
 > `SqlException: Cannot open database "RazorPagesMovieContext-" requested by the login. The login failed.`
 > `Login failed for user 'user name'.`
 
-### <a name="test-the-app"></a>Test de l'application
+### <a name="test-the-app"></a>Tester l'application
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -147,8 +147,8 @@ Le tutoriel suivant sert à améliorer la présentation des données.
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 > [!div class="step-by-step"]
-> [Précédent : génération de modèles automatique Razor pages](xref:tutorials/razor-pages/page)
-> [suivante : mise à jour des pages](xref:tutorials/razor-pages/da1)
+> [Précédent : génération de modèles Razor automatique Pages](xref:tutorials/razor-pages/page)suivantes 
+>  [: mise à jour des pages](xref:tutorials/razor-pages/da1)
 
 ::: moniker-end
 
@@ -262,7 +262,7 @@ Une application de production n’appelle pas `Database.Migrate`. Il est ajouté
 SqlException: impossible d’ouvrir la base de données 'RazorPagesMovieContext-21' demandée par la connexion. La connexion a échoué.
 Échec de la connexion de l’utilisateur 'nom utilisateur'.
 
-### <a name="test-the-app"></a>Test de l'application
+### <a name="test-the-app"></a>Tester l'application
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -303,7 +303,7 @@ Le didacticiel suivant nettoie la présentation des données.
 * [Version YouTube de ce tutoriel](https://youtu.be/A_5ff11sDHY)
 
 > [!div class="step-by-step"]
-> [Précédent Razor : pages](xref:tutorials/razor-pages/page)
-> [de génération de modèles automatique suivant : mise à jour des pages](xref:tutorials/razor-pages/da1)
+> [Précédent : génération de modèles Razor automatique Pages](xref:tutorials/razor-pages/page)suivantes 
+>  [: mise à jour des pages](xref:tutorials/razor-pages/da1)
 
 ::: moniker-end

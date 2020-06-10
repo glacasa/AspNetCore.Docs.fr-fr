@@ -1,19 +1,25 @@
 ---
-title: Pages Razor avec EF Core dans ASP.NET Core - Modèle de données - 5 sur 8
+title: Partie 5, Razor pages avec EF Core dans le modèle de données ASP.net Core
 author: rick-anderson
-description: Dans ce tutoriel, vous ajoutez des entités et des relations, et vous personnalisez le modèle de données en spécifiant des règles de mise en forme, de validation et de mappage.
+description: Partie 5 de Razor pages et Entity Framework série de didacticiels.
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 1d81a0444487c6396bb32381ed2cb26d44312c3a
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: f44ca9857ea127cf7e662e2712cc6d4b460450e9
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78665717"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652502"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---data-model---5-of-8"></a>Pages Razor avec EF Core dans ASP.NET Core - Modèle de données - 5 sur 8
+# <a name="part-5-razor-pages-with-ef-core-in-aspnet-core---data-model"></a>Partie 5, Razor pages avec EF Core dans le modèle de données ASP.net Core
 
 Par [Tom Dykstra](https://github.com/tdykstra) et [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -21,7 +27,7 @@ Par [Tom Dykstra](https://github.com/tdykstra) et [Rick Anderson](https://twitte
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Dans les didacticiels précédents, nous avons travaillé avec un modèle de données de base composé de trois entités. Dans ce tutoriel, vous allez :
+Dans les didacticiels précédents, nous avons travaillé avec un modèle de données de base composé de trois entités. Dans ce tutoriel :
 
 * Nous allons ajouter d’autres entités et relations
 * Nous allons personnaliser le modèle de données en spécifiant des règles de mise en forme, de validation et de mappage de base de données.
@@ -59,7 +65,7 @@ Le code précédent ajoute une propriété `FullName` et les attributs suivants 
 
 Pour les dates d’inscription des étudiants, toutes les pages affichent actuellement l’heure du jour avec la date, alors que seule la date présente un intérêt. Vous pouvez avoir recours aux attributs d’annotation de données pour apporter une modification au code, permettant de corriger le format d’affichage dans chaque page qui affiche ces données. 
 
-L’attribut [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) spécifie un type de données qui est plus spécifique que le type intrinsèque de la base de données. Ici, seule la date doit être affichée (pas la date et l’heure). [L’énumération DataType](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) fournit de nombreux types de données, tels que date, heure, PhoneNumber, Monnaie, EmailAddress, etc. L’attribut `DataType` peut également permettre à l’application de fournir automatiquement des fonctionnalités spécifiques au type. Par exemple :
+L’attribut [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) spécifie un type de données qui est plus spécifique que le type intrinsèque de la base de données. Ici, seule la date doit être affichée (pas la date et l’heure). L' [énumération DataType](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) fournit de nombreux types de données, tels que date, Time, PhoneNumber, Currency, EmailAddress, etc. L' `DataType` attribut peut également permettre à l’application de fournir automatiquement des fonctionnalités propres au type. Par exemple :
 
 * Le lien `mailto:` est créé automatiquement pour `DataType.EmailAddress`.
 * Le sélecteur de date est fourni pour `DataType.Date` dans la plupart des navigateurs.
@@ -81,7 +87,7 @@ L’attribut `DisplayFormat` peut être utilisé seul. Il est généralement pr�
 * Le navigateur peut activer des fonctionnalités HTML5 (par exemple, pour afficher un contrôle de calendrier, le symbole monétaire correspondant aux paramètres régionaux, des liens de messagerie, une validation d’entrées côté client).
 * Par défaut, le navigateur affiche les données à l’aide du format correspondant aux paramètres régionaux.
 
-Pour plus d’informations, consultez la [ \<documentation> Tag Helper](xref:mvc/views/working-with-forms#the-input-tag-helper).
+Pour plus d’informations, consultez la [ \<input> documentation tag Helper](xref:mvc/views/working-with-forms#the-input-tag-helper).
 
 ### <a name="the-stringlength-attribute"></a>Attribut StringLength
 
@@ -96,7 +102,7 @@ L’attribut `StringLength` fournit également la validation côté client et c�
 L’attribut `StringLength` n’empêche pas un utilisateur d’entrer un espace blanc comme nom. L’attribut [RegularExpression](/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute?view=netframework-4.7.1) peut être utilisé pour appliquer des restrictions à l’entrée. Par exemple, le code suivant exige que le premier caractère soit en majuscule et que les autres caractères soient alphabétiques :
 
 ```csharp
-[RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
+[RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
 ```
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
@@ -390,7 +396,7 @@ public ICollection<Course> Courses { get; set; }
 
 Par convention, EF Core autorise la suppression en cascade pour les clés étrangères non nullables et pour les relations plusieurs à plusieurs. Ce comportement par défaut peut engendrer des règles de suppression en cascade circulaires. Les règles de suppression en cascade circulaires provoquent une exception quand une migration est ajoutée.
 
-Par exemple, si la propriété `Department.InstructorID` a été définie comme n’acceptant pas les valeurs Null, EF Core configure une règle de suppression en cascade. Dans ce cas, le service est supprimé quand le formateur désigné comme étant son administrateur est supprimé. Dans ce scénario, une règle de restriction est plus logique. [L’API fluide](#fluent-api-alternative-to-attributes) suivante établirait une règle de restriction et désactiverait la suppression de cascade.
+Par exemple, si la propriété `Department.InstructorID` a été définie comme n’acceptant pas les valeurs Null, EF Core configure une règle de suppression en cascade. Dans ce cas, le service est supprimé quand le formateur désigné comme étant son administrateur est supprimé. Dans ce scénario, une règle de restriction est plus logique. L' [API Fluent](#fluent-api-alternative-to-attributes) suivante définit une règle de restriction et désactive la suppression en cascade.
 
   ```csharp
   modelBuilder.Entity<Department>()
@@ -431,7 +437,7 @@ public Student Student { get; set; }
 
 Il existe une relation plusieurs-à-plusieurs entre les entités `Student` et `Course`. L’entité `Enrollment` joue le rôle de table de jointure plusieurs-à-plusieurs *avec charge utile* dans la base de données. « Avec charge utile » signifie que la table `Enrollment` contient des données supplémentaires en plus des clés étrangères pour les tables jointes (dans le cas présent, la clé primaire et `Grade`).
 
-L’illustration suivante montre à quoi ressemblent ces relations dans un diagramme d’entité. (Ce diagramme a été généré à l’aide [d’outils électriques EF](https://marketplace.visualstudio.com/items?itemName=ErikEJ.EntityFramework6PowerToolsCommunityEdition) pour EF 6.x. Sa création ne fait pas partie de ce didacticiel.)
+L’illustration suivante montre à quoi ressemblent ces relations dans un diagramme d’entité. (Ce diagramme a été généré à l’aide [d’EF Power Tools](https://marketplace.visualstudio.com/items?itemName=ErikEJ.EntityFramework6PowerToolsCommunityEdition) pour EF 6. x. Sa création ne fait pas partie de ce didacticiel.)
 
 ![Relation plusieurs-à-plusieurs Student-Course](complex-data-model/_static/student-course.png)
 
@@ -579,7 +585,7 @@ Dans la section suivante, vous allez découvrir comment éviter cette erreur.
 Maintenant que vous disposez d’une base de données, vous devez réfléchir à la façon dont vous y apporterez des modifications. Ce tutoriel présente deux autres solutions :
 
 * [Supprimer et recréer la base de données](#drop). Choisissez cette section si vous utilisez SQLite.
-* [Appliquer la migration à la base de données existante](#applyexisting). Les instructions de cette section valent uniquement pour SQL Server, **pas pour SQLite**. 
+* [Appliquez la migration à la base de données existante](#applyexisting). Les instructions de cette section valent uniquement pour SQL Server, **pas pour SQLite**. 
 
 Les deux options fonctionnent pour SQL Server. Bien que la méthode d’application de la migration soit plus longue et complexe, il s’agit de l’approche privilégiée pour les environnements de production réels. 
 
@@ -718,14 +724,14 @@ Exécutez l'application. L’exécution de l’application entraîne l’exécut
 Les deux tutoriels suivants montrent comment lire et mettre à jour des données associées.
 
 > [!div class="step-by-step"]
-> [Tutoriel précédent](xref:data/ef-rp/migrations)[Next tutoriel](xref:data/ef-rp/read-related-data) 
-> 
+> [Didacticiel précédent](xref:data/ef-rp/migrations) 
+>  [Didacticiel suivant](xref:data/ef-rp/read-related-data)
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-Dans les didacticiels précédents, nous avons travaillé avec un modèle de données de base composé de trois entités. Dans ce tutoriel, vous allez :
+Dans les didacticiels précédents, nous avons travaillé avec un modèle de données de base composé de trois entités. Dans ce tutoriel :
 
 * Nous allons ajouter d’autres entités et relations
 * Nous allons personnaliser le modèle de données en spécifiant des règles de mise en forme, de validation et de mappage de base de données.
@@ -749,7 +755,7 @@ Mettez à jour *Models/Student.cs* avec le code en surbrillance suivant :
 
 [!code-csharp[](intro/samples/cu21/Models/Student.cs?name=snippet_DataType&highlight=3,12-13)]
 
-L’attribut [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) spécifie un type de données qui est plus spécifique que le type intrinsèque de la base de données. Ici, seule la date doit être affichée (pas la date et l’heure). [L’énumération DataType](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) fournit de nombreux types de données, tels que date, heure, PhoneNumber, Monnaie, EmailAddress, etc. L’attribut `DataType` peut également permettre à l’application de fournir automatiquement des fonctionnalités spécifiques au type. Par exemple :
+L’attribut [DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) spécifie un type de données qui est plus spécifique que le type intrinsèque de la base de données. Ici, seule la date doit être affichée (pas la date et l’heure). L' [énumération DataType](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) fournit de nombreux types de données, tels que date, Time, PhoneNumber, Currency, EmailAddress, etc. L' `DataType` attribut peut également permettre à l’application de fournir automatiquement des fonctionnalités propres au type. Par exemple :
 
 * Le lien `mailto:` est créé automatiquement pour `DataType.EmailAddress`.
 * Le sélecteur de date est fourni pour `DataType.Date` dans la plupart des navigateurs.
@@ -771,7 +777,7 @@ L’attribut `DisplayFormat` peut être utilisé seul. Il est généralement pr�
 * Le navigateur peut activer des fonctionnalités HTML5 (par exemple pour afficher un contrôle de calendrier, le symbole monétaire correspondant aux paramètres régionaux, des liens de messagerie, une validation des entrées côté client, et ainsi de suite).
 * Par défaut, le navigateur affiche les données à l’aide du format correspondant aux paramètres régionaux.
 
-Pour plus d’informations, consultez la [ \<documentation> Tag Helper](xref:mvc/views/working-with-forms#the-input-tag-helper).
+Pour plus d’informations, consultez la [ \<input> documentation tag Helper](xref:mvc/views/working-with-forms#the-input-tag-helper).
 
 Exécutez l'application. Accédez à la page d’index des étudiants. Les heures ne sont plus affichées. Tous les affichages qui utilisent le modèle `Student` affichent la date sans heure.
 
@@ -788,10 +794,10 @@ Mettez à jour le modèle `Student` avec le code suivant :
 Le code précédent limite la longueur des noms à 50 caractères. L’attribut `StringLength` n’empêche pas un utilisateur d’entrer un espace blanc comme nom. L’attribut [RegularExpression](/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute?view=netframework-4.7.1) est utilisé pour appliquer des restrictions à l’entrée. Par exemple, le code suivant exige que le premier caractère soit en majuscule et que les autres caractères soient alphabétiques :
 
 ```csharp
-[RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
+[RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
 ```
 
-Exécutez l’application :
+Exécutez l’application :
 
 * Accédez à la page Students.
 * Sélectionnez **Create New** et entrez un nom de plus de 50 caractères.
@@ -1091,7 +1097,7 @@ Par exemple, si la propriété `Department.InstructorID` ne doit pas accepter le
 
 * EF Core configure une règle de suppression en cascade pour supprimer le service lorsque l’instructeur est supprimé.
 * La suppression du service lorsque l’instructeur est supprimé n’est pas le comportement souhaité.
-* [L’API fluide](#fluent-api-alternative-to-attributes) suivante établirait une règle de restriction au lieu de cascade.
+* L' [API Fluent](#fluent-api-alternative-to-attributes) suivante définit une règle de restriction au lieu de cascade.
 
    ```csharp
    modelBuilder.Entity<Department>()
@@ -1134,7 +1140,7 @@ public Student Student { get; set; }
 
 Il existe une relation plusieurs-à-plusieurs entre les entités `Student` et `Course`. L’entité `Enrollment` joue le rôle de table de jointure plusieurs-à-plusieurs *avec charge utile* dans la base de données. « Avec charge utile » signifie que la table `Enrollment` contient des données supplémentaires en plus des clés étrangères pour les tables jointes (dans le cas présent, la clé primaire et `Grade`).
 
-L’illustration suivante montre à quoi ressemblent ces relations dans un diagramme d’entité. (Ce diagramme a été généré à l’aide [d’outils électriques EF](https://marketplace.visualstudio.com/items?itemName=ErikEJ.EntityFramework6PowerToolsCommunityEdition) pour EF 6.x. Sa création ne fait pas partie de ce didacticiel.)
+L’illustration suivante montre à quoi ressemblent ces relations dans un diagramme d’entité. (Ce diagramme a été généré à l’aide [d’EF Power Tools](https://marketplace.visualstudio.com/items?itemName=ErikEJ.EntityFramework6PowerToolsCommunityEdition) pour EF 6. x. Sa création ne fait pas partie de ce didacticiel.)
 
 ![Relation plusieurs-à-plusieurs Student-Course](complex-data-model/_static/student-course.png)
 
@@ -1277,8 +1283,8 @@ database "ContosoUniversity", table "dbo.Department", column 'DepartmentID'.
 
 Disposant à présent d’une base de données, vous devez réfléchir à la façon dont vous y apporterez des modifications. Ce tutoriel montre deux approches :
 
-* [Déposer et recréer la base de données](#drop)
-* [Appliquer la migration à la base de données existante](#applyexisting). Bien que cette méthode soit plus longue et complexe, elle constitue l’approche privilégiée pour les environnements de production réels. **Remarque** : Cette section du tutoriel est facultative. Vous pouvez effectuer les étapes de suppression et de recréation et ignorer cette section. Si vous souhaitez suivre les étapes décrites dans cette section, n’effectuez pas les étapes de suppression et de recréation. 
+* [Supprimer et recréer la base de données](#drop)
+* [Appliquez la migration à la base de données existante](#applyexisting). Bien que cette méthode soit plus longue et complexe, elle constitue l’approche privilégiée pour les environnements de production réels. **Remarque** : Cette section du tutoriel est facultative. Vous pouvez effectuer les étapes de suppression et de recréation et ignorer cette section. Si vous souhaitez suivre les étapes décrites dans cette section, n’effectuez pas les étapes de suppression et de recréation. 
 
 <a name="drop"></a>
 
@@ -1373,7 +1379,7 @@ Le didacticiel suivant traite des données associées.
 * [Version YouTube de ce tutoriel(Partie 2)](https://www.youtube.com/watch?v=Je0Z5K1TNmY)
 
 > [!div class="step-by-step"]
-> [Suivant précédent](xref:data/ef-rp/migrations)
-> [Next](xref:data/ef-rp/read-related-data)
+> [Précédent](xref:data/ef-rp/migrations) 
+>  [Suivant](xref:data/ef-rp/read-related-data)
 
 ::: moniker-end

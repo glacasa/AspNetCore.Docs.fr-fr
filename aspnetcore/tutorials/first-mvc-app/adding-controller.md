@@ -1,7 +1,7 @@
 ---
-title: Ajouter un contrôleur à une application MVC ASP.NET Core
+title: 'Partie 2 : ajouter un contrôleur à une application ASP.NET Core MVC'
 author: rick-anderson
-description: Découvrez comment ajouter un contrôleur à une application ASP.NET Core MVC simple.
+description: Partie 2 de la série de didacticiels sur ASP.NET Core MVC.
 ms.author: riande
 ms.date: 08/05/2017
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: ce6248854c738733f75c40ed8ec6100f35ab4971
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 1bb2d96d7b58bdd88ce9c2266c33f6e7de9e9209
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776309"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84653031"
 ---
-# <a name="add-a-controller-to-an-aspnet-core-mvc-app"></a>Ajouter un contrôleur à une application MVC ASP.NET Core
+# <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>Partie 2 : ajouter un contrôleur à une application ASP.NET Core MVC
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -38,10 +38,10 @@ Nous présentons ces concepts dans cette série de didacticiels et nous vous mon
 
 ## <a name="add-a-controller"></a>Ajouter un contrôleur
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Dans **Explorateur de solutions**, cliquez avec le bouton droit sur **contrôleurs >**
-  ![menu contextuel ajouter un contrôleur de >](adding-controller/_static/add_controller.png)
+* Dans **Explorateur de solutions**, cliquez avec le bouton droit sur **contrôleurs >** 
+   ![ menu contextuel ajouter un contrôleur de >](adding-controller/_static/add_controller.png)
 
 * Dans la boîte de dialogue **Ajouter un modèle automatique**, sélectionnez **Contrôleur MVC - vide**
 
@@ -98,7 +98,7 @@ Accédez à `https://localhost:{PORT}/HelloWorld/Welcome`. La méthode `Welcome`
 
 ![Fenêtre de navigateur montrant une réponse de la méthode d’action « This is the Welcome action »](~/tutorials/first-mvc-app/adding-controller/_static/welcome.png)
 
-Modifiez le code pour passer des informations sur les paramètres de l’URL au contrôleur. Par exemple : `/HelloWorld/Welcome?name=Rick&numtimes=4`. Modifiez la méthode `Welcome` en y incluant les deux paramètres, comme indiqué dans le code suivant.
+Modifiez le code pour passer des informations sur les paramètres de l’URL au contrôleur. Par exemple, `/HelloWorld/Welcome?name=Rick&numtimes=4`. Modifiez la méthode `Welcome` en y incluant les deux paramètres, comme indiqué dans le code suivant.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_2)]
 
@@ -114,9 +114,9 @@ Exécutez l’application et accédez à :
 
 (Remplacez `{PORT}` par votre numéro de port.) Vous pouvez essayer différentes valeurs pour `name` et `numtimes` dans l’URL. Le système de [liaison de données](xref:mvc/models/model-binding) du modèle MVC mappe automatiquement les paramètres nommés provenant de la chaîne de requête dans la barre d’adresse aux paramètres de votre méthode. Pour plus d’informations, consultez [Liaison de données](xref:mvc/models/model-binding).
 
-![Fenêtre de navigateur présentant une réponse de l’application Hello Rick,\: NumTimes est 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
+![Fenêtre de navigateur présentant une réponse de l’application Hello Rick, NumTimes est \: 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
 
-Dans l’image ci-dessus, le segment`Parameters`d’URL () n' `name` est `numTimes` pas utilisé, les paramètres et sont passés dans la [chaîne de requête](https://wikipedia.org/wiki/Query_string). Le `?` point d’interrogation dans l’URL ci-dessus est un séparateur, et la chaîne de requête suit. Le `&` caractère sépare les paires champ-valeur.
+Dans l’image ci-dessus, le segment d’URL ( `Parameters` ) n’est pas utilisé, les `name` `numTimes` paramètres et sont passés dans la [chaîne de requête](https://wikipedia.org/wiki/Query_string). Le `?` point d’interrogation dans l’URL ci-dessus est un séparateur, et la chaîne de requête suit. Le `&` caractère sépare les paires champ-valeur.
 
 Remplacez la méthode `Welcome` par le code suivant :
 
@@ -128,11 +128,11 @@ Cette fois, le troisième segment de l’URL correspondait au paramètre de rout
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_1&highlight=5)]
 
-Dans ces exemples, le contrôleur traite la partie « VC » du modèle MVC, autrement dit, la **v**ue et le **c**ontrôleur fonctionnent. Le contrôleur retourne directement du HTML. En règle générale, vous ne souhaitez pas que les contrôleurs retournent directement du HTML, car le codage et la maintenance deviennent dans ce cas très laborieux. Au lieu de cela, vous utilisez généralement un fichier de modèle de vue Razor distinct pour générer la réponse HTML. Vous faites cela dans le didacticiel suivant.
+Dans ces exemples, le contrôleur traite la partie « VC » du modèle MVC, autrement dit, la **v**ue et le **c**ontrôleur fonctionnent. Le contrôleur retourne directement du HTML. En règle générale, vous ne souhaitez pas que les contrôleurs retournent directement du HTML, car le codage et la maintenance deviennent dans ce cas très laborieux. Au lieu de cela, vous utilisez généralement un Razor fichier de modèle de vue distinct pour générer la réponse html. Vous faites cela dans le didacticiel suivant.
 
 > [!div class="step-by-step"]
-> [Précédent](start-mvc.md)
-> [suivant](adding-view.md)
+> [Précédent](start-mvc.md) 
+>  [Suivant](adding-view.md)
 
 ::: moniker-end
 
@@ -152,10 +152,10 @@ Nous présentons ces concepts dans cette série de didacticiels et nous vous mon
 
 ## <a name="add-a-controller"></a>Ajouter un contrôleur
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Dans **Explorateur de solutions**, cliquez avec le bouton droit sur **contrôleurs >**
-  ![menu contextuel ajouter un contrôleur de >](adding-controller/_static/add_controller.png)
+* Dans **Explorateur de solutions**, cliquez avec le bouton droit sur **contrôleurs >** 
+   ![ menu contextuel ajouter un contrôleur de >](adding-controller/_static/add_controller.png)
 
 * Dans la boîte de dialogue **Ajouter un modèle automatique**, sélectionnez **Contrôleur MVC - vide**
 
@@ -217,7 +217,7 @@ Accédez à `https://localhost:{PORT}/HelloWorld/Welcome`. La méthode `Welcome`
 
 ![Fenêtre de navigateur montrant une réponse de la méthode d’action « This is the Welcome action »](~/tutorials/first-mvc-app/adding-controller/_static/welcome.png)
 
-Modifiez le code pour passer des informations sur les paramètres de l’URL au contrôleur. Par exemple : `/HelloWorld/Welcome?name=Rick&numtimes=4`. Modifiez la méthode `Welcome` en y incluant les deux paramètres, comme indiqué dans le code suivant.
+Modifiez le code pour passer des informations sur les paramètres de l’URL au contrôleur. Par exemple, `/HelloWorld/Welcome?name=Rick&numtimes=4`. Modifiez la méthode `Welcome` en y incluant les deux paramètres, comme indiqué dans le code suivant.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_2)]
 
@@ -233,9 +233,9 @@ Exécutez l’application et accédez à :
 
 (Remplacez `{PORT}` par votre numéro de port.) Vous pouvez essayer différentes valeurs pour `name` et `numtimes` dans l’URL. Le système de [liaison de données](xref:mvc/models/model-binding) du modèle MVC mappe automatiquement les paramètres nommés provenant de la chaîne de requête dans la barre d’adresse aux paramètres de votre méthode. Pour plus d’informations, consultez [Liaison de données](xref:mvc/models/model-binding).
 
-![Fenêtre de navigateur présentant une réponse de l’application Hello Rick,\: NumTimes est 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
+![Fenêtre de navigateur présentant une réponse de l’application Hello Rick, NumTimes est \: 4](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
 
-Dans l’image ci-dessus, le segment`Parameters`d’URL () n' `name` est `numTimes` pas utilisé, les paramètres et sont passés dans la [chaîne de requête](https://wikipedia.org/wiki/Query_string). Le `?` point d’interrogation dans l’URL ci-dessus est un séparateur, et la chaîne de requête suit. Le `&` caractère sépare les paires champ-valeur.
+Dans l’image ci-dessus, le segment d’URL ( `Parameters` ) n’est pas utilisé, les `name` `numTimes` paramètres et sont passés dans la [chaîne de requête](https://wikipedia.org/wiki/Query_string). Le `?` point d’interrogation dans l’URL ci-dessus est un séparateur, et la chaîne de requête suit. Le `&` caractère sépare les paires champ-valeur.
 
 Remplacez la méthode `Welcome` par le code suivant :
 
@@ -247,10 +247,10 @@ Cette fois, le troisième segment de l’URL correspondait au paramètre de rout
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Startup.cs?name=snippet_1&highlight=5)]
 
-Dans ces exemples, le contrôleur a fait la partie « VC » du modèle MVC, autrement dit, la vue et le contrôleur fonctionnent. Le contrôleur retourne directement du HTML. En règle générale, vous ne souhaitez pas que les contrôleurs retournent directement du HTML, car le codage et la maintenance deviennent dans ce cas très laborieux. Au lieu de cela, vous Razor utilisez généralement un fichier de modèle de vue distinct pour faciliter la génération de la réponse html. Vous faites cela dans le didacticiel suivant.
+Dans ces exemples, le contrôleur a fait la partie « VC » du modèle MVC, autrement dit, la vue et le contrôleur fonctionnent. Le contrôleur retourne directement du HTML. En règle générale, vous ne souhaitez pas que les contrôleurs retournent directement du HTML, car le codage et la maintenance deviennent dans ce cas très laborieux. Au lieu de cela, vous utilisez généralement un Razor fichier de modèle de vue distinct pour faciliter la génération de la réponse html. Vous faites cela dans le didacticiel suivant.
 
 > [!div class="step-by-step"]
-> [Précédent](start-mvc.md)
-> [suivant](adding-view.md)
+> [Précédent](start-mvc.md) 
+>  [Suivant](adding-view.md)
 
 ::: moniker-end

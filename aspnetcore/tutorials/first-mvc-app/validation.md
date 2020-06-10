@@ -1,7 +1,7 @@
 ---
-title: Ajouter une validation à une application ASP.NET Core MVC
+title: Partie 9, ajouter une validation à une application ASP.NET Core MVC
 author: rick-anderson
-description: Comment ajouter une validation à une application ASP.NET Core
+description: Partie 9 de la série de didacticiels sur ASP.NET Core MVC.
 ms.author: riande
 ms.date: 04/13/2017
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/validation
-ms.openlocfilehash: 6e46a4ace7c99096f1a7d47946a21fd7a5c657e7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 70cc66955fdaee6ff93648523c2977587e6b05d6
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776192"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652446"
 ---
-# <a name="add-validation-to-an-aspnet-core-mvc-app"></a>Ajouter une validation à une application ASP.NET Core MVC
+# <a name="part-9-add-validation-to-an-aspnet-core-mvc-app"></a>Partie 9, ajouter une validation à une application ASP.NET Core MVC
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -55,7 +55,7 @@ Les données de formulaire ne sont pas envoyées au serveur tant qu’il y a des
 
 Vous vous demandez peut-être comment l’interface utilisateur de validation a été générée sans aucune mise à jour du code dans le contrôleur ou dans les vues. Le code suivant montre les deux méthodes `Create`.
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc//sample/MvcMovie/Controllers/MoviesController.cs?name=snippetCreate)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/MoviesController.cs?name=snippetCreate)]
 
 La première méthode d’action (HTTP GET) `Create` affiche le formulaire de création initial. La deuxième version (`[HttpPost]`) gère la publication de formulaire. La seconde méthode `Create` (la version `[HttpPost]`) appelle `ModelState.IsValid` pour vérifier si le film a des erreurs de validation. L’appel de cette méthode évalue tous les attributs de validation qui ont été appliqués à l’objet. Si l’objet comporte des erreurs de validation, la méthode `Create` réaffiche le formulaire. S’il n’y a pas d’erreur, la méthode enregistre le nouveau film dans la base de données. Dans notre exemple de film, le formulaire n’est pas publié sur le serveur quand des erreurs de validation sont détectées côté client ; la seconde méthode `Create` n’est jamais appelée quand il y a des erreurs de validation côté client. Si vous désactivez JavaScript dans votre navigateur, la validation client est désactivée et vous pouvez tester la méthode `Create` HTTP POST `ModelState.IsValid` pour détecter les erreurs de validation.
 
@@ -89,7 +89,7 @@ Quand vous devez changer la logique de validation, vous pouvez le faire à un se
 
 Ouvrez le fichier *Movie.cs* et examinez la classe `Movie`. L’espace de noms `System.ComponentModel.DataAnnotations` fournit des attributs de mise en forme en plus de l’ensemble intégré d’attributs de validation. Nous avons déjà appliqué une valeur d’énumération `DataType` aux champs de date de sortie et de prix. Le code suivant illustre les propriétés `ReleaseDate` et `Price` avec l’attribut `DataType` approprié.
 
-[!code-csharp[](~/tutorials/first-mvc-app/start-mvc//sample/MvcMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
+[!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
 
 Les attributs `DataType` fournissent uniquement des indices permettant au moteur de vue de mettre en forme les données (et fournissent des éléments/attributs tels que `<a>` pour les URL et `<a href="mailto:EmailAddress.com">` pour l’e-mail). Vous pouvez utiliser l’attribut `RegularExpression` pour valider le format des données. L’attribut `DataType` sert à spécifier un type de données qui est plus spécifique que le type intrinsèque de la base de données ; il ne s’agit pas d’un attribut de validation. Dans le cas présent, nous voulons uniquement effectuer le suivi de la date, et non de l’heure. L’énumération `DataType` fournit de nombreux types de données, telles que Date, Time, PhoneNumber, Currency ou EmailAddress. L’attribut `DataType` peut également permettre à l’application de fournir automatiquement des fonctionnalités propres au type. Par exemple, vous pouvez créer un lien `mailto:` pour `DataType.EmailAddress`, et vous pouvez fournir un sélecteur de date pour `DataType.Date` dans les navigateurs qui prennent en charge HTML5. Les attributs `DataType` émettent des attributs HTML 5 `data-` compréhensibles par les navigateurs HTML 5. Les attributs `DataType` ne fournissent **aucune** validation.
 
@@ -133,5 +133,5 @@ Dans la partie suivante de la série, nous examinons l’application et nous app
 * [Créer des Tag Helpers](xref:mvc/views/tag-helpers/authoring)
 
 > [!div class="step-by-step"]
-> [Précédent](new-field.md)
-> [suivant](details.md)  
+> [Précédent](new-field.md) 
+>  [Suivant](details.md)  

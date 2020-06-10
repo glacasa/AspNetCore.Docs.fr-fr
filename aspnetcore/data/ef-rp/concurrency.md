@@ -1,21 +1,27 @@
 ---
-title: Pages Razor avec EF Core dans ASP.NET Core - Accès concurrentiel - 8 sur 8
+title: Partie 8, Razor pages avec EF Core dans ASP.net Core-concurrence
 author: rick-anderson
-description: Ce didacticiel montre comment gérer les conflits quand plusieurs utilisateurs mettent à jour la même entité en même temps.
+description: Partie 8 des Razor pages et Entity Framework de la série de didacticiels.
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: c4d43f26ba80e7922c3cbd37d9a5f8e1561b11ad
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: fb6a59a11cf31dff4866d5f5294cd9f15b173add
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78656911"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652434"
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---concurrency---8-of-8"></a>Pages Razor avec EF Core dans ASP.NET Core - Accès concurrentiel - 8 sur 8
+# <a name="part-8-razor-pages-with-ef-core-in-aspnet-core---concurrency"></a>Partie 8, Razor pages avec EF Core dans ASP.net Core-concurrence
 
-Par [Rick Anderson](https://twitter.com/RickAndMSFT), Tom [Dykstra](https://github.com/tdykstra), et Jon P [Smith](https://twitter.com/thereformedprog)
+Par [Rick Anderson](https://twitter.com/RickAndMSFT), [Tom Dykstra](https://github.com/tdykstra)et [Jon P Smith](https://twitter.com/thereformedprog)
 
 [!INCLUDE [about the series](../../includes/RP-EF/intro.md)]
 
@@ -62,7 +68,7 @@ John clique sur **Save** dans une page Edit qui affiche toujours un budget de 35
 
 * Vous pouvez laisser les modifications de John remplacer les modifications de Jane.
 
-  La prochaine fois que quelqu’un consultera le département « English », il verra la date 01/09/2013 et la valeur 350 000,00 $ récupérée. Cette approche est un scénario *Priorité au client* ou *Priorité au dernier*. (Toutes les valeurs du client priment sur ce qu’il y a dans le magasin de données.) Si vous ne faites pas de codage pour la manipulation de concurrence, Client Wins se produit automatiquement.
+  La prochaine fois que quelqu’un consultera le département « English », il verra la date 01/09/2013 et la valeur 350 000,00 $ récupérée. Cette approche est un scénario *Priorité au client* ou *Priorité au dernier*. (Toutes les valeurs du client sont prioritaires par rapport à ce qui se trouve dans le magasin de données.) Si vous n’effectuez aucun codage pour la gestion de l’accès concurrentiel, le client WINS se produit automatiquement.
 
 * Vous pouvez empêcher les modifications de John de faire l’objet d’une mise à jour dans la base de données. En règle générale, l’application :
 
@@ -70,7 +76,7 @@ John clique sur **Save** dans une page Edit qui affiche toujours un budget de 35
   * indique l’état actuel des données ;
   * autorise l’utilisateur à réappliquer les modifications.
 
-  Il s’agit alors d’un scénario *Priorité au magasin*. (Les valeurs des magasins de données priment sur les valeurs soumises par le client.) Vous implémentez le scénario Store Wins dans ce tutoriel. Cette méthode garantit qu’aucune modification n’est remplacée sans qu’un utilisateur soit averti.
+  Il s’agit alors d’un scénario *Priorité au magasin*. (Les valeurs du magasin de données ont priorité sur les valeurs soumises par le client.) Vous implémentez le scénario de stockage WINS dans ce didacticiel. Cette méthode garantit qu’aucune modification n’est remplacée sans qu’un utilisateur soit averti.
 
 ## <a name="conflict-detection-in-ef-core"></a>Détection de conflits dans EF Core
 
@@ -121,7 +127,7 @@ Le code en surbrillance suivant montre le T-SQL qui vérifie qu’une seule lign
 
 [!code-sql[](intro/samples/cu30snapshots/8-concurrency/sql.txt?highlight=4-6)]
 
-[-@ROWCOUNT ](/sql/t-sql/functions/rowcount-transact-sql) renvoie le nombre de lignes touchées par la dernière déclaration. Si aucune ligne n’est mise à jour, EF Core lève une exception `DbUpdateConcurrencyException`.
+[@@ROWCOUNT](/sql/t-sql/functions/rowcount-transact-sql) retourne le nombre de lignes affectées par la dernière instruction. Si aucune ligne n’est mise à jour, EF Core lève une exception `DbUpdateConcurrencyException`.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -214,13 +220,13 @@ Cette commande :
 
 * Exécutez la commande suivante pour générer automatiquement des modèles de pages Department.
 
-  **Sur Windows:**
+  **Sur Windows :**
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Department -dc SchoolContext -udl -outDir Pages\Departments --referenceScriptLibraries
   ```
 
-  **Sur Linux ou macOS :**
+  **Sur Linux ou macOS :**
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Department -dc SchoolContext -udl -outDir Pages/Departments --referenceScriptLibraries
@@ -256,7 +262,7 @@ La valeur [OriginalValue](/dotnet/api/microsoft.entityframeworkcore.changetracki
 
 Dans le code en surbrillance précédent :
 
-* La valeur de `Department.RowVersion` est celle qui se trouvait dans l’entité au moment où elle a été initialement récupérée dans la requête Get pour la page Edit. La valeur est fournie à la méthode `OnPost` par un champ masqué de la page Razor qui affiche l’entité à modifier. La valeur du champ masqué est copiée dans `Department.RowVersion` par le classeur de modèles.
+* La valeur de `Department.RowVersion` est celle qui se trouvait dans l’entité au moment où elle a été initialement récupérée dans la requête Get pour la page Edit. La valeur est fournie à la `OnPost` méthode par un champ masqué dans la Razor page qui affiche l’entité à modifier. La valeur du champ masqué est copiée dans `Department.RowVersion` par le classeur de modèles.
 * `OriginalValue` est la valeur qu’utilisera EF Core dans la clause Where. Avant l’exécution de la ligne de code en surbrillance, `OriginalValue` a la valeur qui se trouvait dans la base de données au moment où `FirstOrDefaultAsync` été appelé dans cette méthode, laquelle risque d’être différente de celle qui figurait dans la page Edit.
 * Le code en surbrillance garantit qu’EF Core utilise la valeur `RowVersion` d’origine de l’entité `Department` affichée dans la clause Where de l’instruction SQL UPDATE.
 
@@ -272,9 +278,9 @@ Le code en surbrillance suivant affecte à `RowVersion` la nouvelle valeur récu
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_TryUpdateModel&highlight=28)]
 
-L’instruction `ModelState.Remove` est nécessaire car `ModelState` contient l’ancienne valeur `RowVersion`. Dans la page Razor, la valeur `ModelState` d’un champ est prioritaire par rapport aux valeurs de propriétés du modèle quand les deux sont présentes.
+L’instruction `ModelState.Remove` est nécessaire car `ModelState` contient l’ancienne valeur `RowVersion`. Dans la Razor page, la `ModelState` valeur d’un champ est prioritaire sur les valeurs de propriété du modèle lorsque les deux sont présentes.
 
-### <a name="update-the-razor-page"></a>Mettre à jour la page Razor
+### <a name="update-the-razor-page"></a>Mettre à jour la Razor page
 
 Mettez à jour *Pages/Departments/Edit.cshtml* avec le code suivant :
 
@@ -311,7 +317,7 @@ Cliquez sur **Enregistrer**. Des messages d’erreur s’affichent pour tous les
 
 ![Message d’erreur de page de modification de département](concurrency/_static/edit-error30.png)
 
-Cette fenêtre de navigateur n’avait pas l’intention de changer le champ Name. Copiez et collez la valeur actuelle (Languages) dans le champ Name. Tab out. La validation côté client supprime le message d’erreur.
+Cette fenêtre de navigateur n’avait pas l’intention de changer le champ Name. Copiez et collez la valeur actuelle (Languages) dans le champ Name. Tabulation. La validation côté client supprime le message d’erreur.
 
 Cliquez à nouveau sur **Enregistrer**. La valeur que vous avez entrée sous le deuxième onglet du navigateur est enregistrée. Les valeurs enregistrées sont visibles dans la page Index.
 
@@ -327,7 +333,7 @@ La page Delete détecte les conflits d’accès concurrentiel quand l’entité 
 * Une exception DbUpdateConcurrencyException est levée.
 * `OnGetAsync` est appelée avec `concurrencyError`.
 
-### <a name="update-the-delete-razor-page"></a>Mettre à jour la page Razor Delete
+### <a name="update-the-delete-razor-page"></a>Mettre à jour la page de suppression Razor
 
 Mettez à jour *Pages/Departments/Delete.cshtml* avec le code suivant :
 
@@ -357,7 +363,7 @@ Changez le budget sous le premier onglet de navigateur, puis cliquez sur **Save*
 
 Le navigateur affiche la page Index avec la valeur modifiée et un indicateur rowVersion mis à jour. Notez l’indicateur rowVersion mis à jour ; il est affiché sur la deuxième publication (postback) sous l’autre onglet.
 
-Supprimer le service de test du deuxième onglet. Une erreur de concurrence est l’affichage avec les valeurs actuelles de la base de données. Un clic sur **Delete** supprime l’entité, sauf si `RowVersion` a été mis à jour.
+Supprimez le service test du deuxième onglet. Une erreur d’accès concurrentiel s’affiche avec les valeurs actuelles de la base de données. Un clic sur **Delete** supprime l’entité, sauf si `RowVersion` a été mis à jour.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
@@ -376,7 +382,7 @@ Ce tutoriel est le dernier de la série. Des rubriques supplémentaires sont abo
 
 ::: moniker range="< aspnetcore-3.0"
 
-Ce didacticiel montre comment gérer les conflits quand plusieurs utilisateurs mettent à jour une entité en même temps. Si vous rencontrez des problèmes que vous ne pouvez pas résoudre, [téléchargez ou affichez l’application terminée](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples). [Télécharger les instructions](xref:index#how-to-download-a-sample).
+Ce didacticiel montre comment gérer les conflits quand plusieurs utilisateurs mettent à jour une entité en même temps. Si vous rencontrez des problèmes que vous ne pouvez pas résoudre, [téléchargez ou affichez l’application terminée](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples). [Instructions de téléchargement](xref:index#how-to-download-a-sample).
 
 ## <a name="concurrency-conflicts"></a>Conflits d’accès concurrentiel
 
@@ -418,7 +424,7 @@ L’accès concurrentiel optimiste comprend les options suivantes :
 
 * Vous pouvez laisser les modifications de John remplacer les modifications de Jane.
 
-  La prochaine fois que quelqu’un consultera le département « English », il verra la date 01/09/2013 et la valeur 350 000,00 $ récupérée. Cette approche est un scénario *Priorité au client* ou *Priorité au dernier*. (Toutes les valeurs du client priment sur ce qu’il y a dans le magasin de données.) Si vous ne faites pas de codage pour la manipulation de concurrence, Client Wins se produit automatiquement.
+  La prochaine fois que quelqu’un consultera le département « English », il verra la date 01/09/2013 et la valeur 350 000,00 $ récupérée. Cette approche est un scénario *Priorité au client* ou *Priorité au dernier*. (Toutes les valeurs du client sont prioritaires par rapport à ce qui se trouve dans le magasin de données.) Si vous n’effectuez aucun codage pour la gestion de l’accès concurrentiel, le client WINS se produit automatiquement.
 
 * Vous pouvez empêcher les modifications de John d’être mises à jour dans la base de données. En règle générale, l’application :
 
@@ -426,7 +432,7 @@ L’accès concurrentiel optimiste comprend les options suivantes :
   * indique l’état actuel des données ;
   * autorise l’utilisateur à réappliquer les modifications.
 
-  Il s’agit alors d’un scénario *Priorité au magasin*. (Les valeurs des magasins de données priment sur les valeurs soumises par le client.) Vous implémentez le scénario Store Wins dans ce tutoriel. Cette méthode garantit qu’aucune modification n’est remplacée sans qu’un utilisateur soit averti.
+  Il s’agit alors d’un scénario *Priorité au magasin*. (Les valeurs du magasin de données ont priorité sur les valeurs soumises par le client.) Vous implémentez le scénario de stockage WINS dans ce didacticiel. Cette méthode garantit qu’aucune modification n’est remplacée sans qu’un utilisateur soit averti.
 
 ## <a name="handling-concurrency"></a>Gestion de l’accès concurrentiel 
 
@@ -484,7 +490,7 @@ Le code en surbrillance suivant montre le T-SQL qui vérifie qu’une seule lign
 
 [!code-sql[](intro/samples/cu21snapshots/sql.txt?highlight=4-6)]
 
-[-@ROWCOUNT ](/sql/t-sql/functions/rowcount-transact-sql) renvoie le nombre de lignes touchées par la dernière déclaration. Si aucune ligne n’est mise à jour, EF Core lève une `DbUpdateConcurrencyException`.
+[@@ROWCOUNT](/sql/t-sql/functions/rowcount-transact-sql) retourne le nombre de lignes affectées par la dernière instruction. Si aucune ligne n’est mise à jour, EF Core lève une `DbUpdateConcurrencyException`.
 
 Vous pouvez voir le T-SQL généré par EF Core dans la fenêtre Sortie de Visual Studio.
 
@@ -568,7 +574,7 @@ Le code en surbrillance suivant affecte à `RowVersion` la nouvelle valeur récu
 
 [!code-csharp[](intro/samples/cu/Pages/Departments/Edit.cshtml.cs?name=snippet_try&highlight=23)]
 
-L’instruction `ModelState.Remove` est nécessaire car `ModelState` contient l’ancienne valeur `RowVersion`. Dans la page Razor, la valeur `ModelState` d’un champ est prioritaire par rapport aux valeurs de propriétés du modèle quand les deux sont présentes.
+L’instruction `ModelState.Remove` est nécessaire car `ModelState` contient l’ancienne valeur `RowVersion`. Dans la Razor page, la `ModelState` valeur d’un champ est prioritaire sur les valeurs de propriété du modèle lorsque les deux sont présentes.
 
 ## <a name="update-the-edit-page"></a>Mettre à jour la page Edit
 
@@ -607,7 +613,7 @@ Cliquez sur **Enregistrer**. Des messages d’erreur s’affichent pour tous les
 
 ![Message d’erreur de page de modification de département](concurrency/_static/edit-error.png)
 
-Cette fenêtre de navigateur n’avait pas l’intention de changer le champ Name. Copiez et collez la valeur actuelle (Languages) dans le champ Name. Tab out. La validation côté client supprime le message d’erreur.
+Cette fenêtre de navigateur n’avait pas l’intention de changer le champ Name. Copiez et collez la valeur actuelle (Languages) dans le champ Name. Tabulation. La validation côté client supprime le message d’erreur.
 
 ![Message d’erreur de page de modification de département](concurrency/_static/cv.png)
 
@@ -655,7 +661,7 @@ Changez le budget sous le premier onglet de navigateur, puis cliquez sur **Save*
 
 Le navigateur affiche la page Index avec la valeur modifiée et un indicateur rowVersion mis à jour. Notez l’indicateur rowVersion mis à jour ; il est affiché sur la deuxième publication (postback) sous l’autre onglet.
 
-Supprimer le service de test du deuxième onglet. Une erreur de concurrence est d’afficher les valeurs actuelles de la DB. Un clic sur **Delete** supprime l’entité, sauf si `RowVersion` a été mis à jour.
+Supprimez le service test du deuxième onglet. Une erreur d’accès concurrentiel s’affiche avec les valeurs actuelles de la base de données. Un clic sur **Delete** supprime l’entité, sauf si `RowVersion` a été mis à jour.
 
 Pour découvrir comment hériter d’un modèle de données, consultez [Héritage](xref:data/ef-mvc/inheritance).
 
