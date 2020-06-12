@@ -5,7 +5,7 @@ description: En savoir plus sur Blazor l’hébergement de la configuration de m
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/28/2020
+ms.date: 06/10/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: e3b8b91a570210e77f307c49f7be21eeab714daa
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 3cef67806ce0e2e045122bdc962e93795be68572
+ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84355108"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84679577"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>BlazorConfiguration du modèle d’hébergement ASP.net Core
 
@@ -36,7 +36,7 @@ Une Blazor application Webassembly hébergée récupère l’environnement à pa
 
 Pour une application autonome exécutée localement, le serveur de développement ajoute l' `blazor-environment` en-tête pour spécifier l’environnement de développement. Pour spécifier l’environnement pour d’autres environnements d’hébergement, ajoutez l' `blazor-environment` en-tête.
 
-Dans l’exemple suivant pour IIS, ajoutez l’en-tête personnalisé au fichier *Web. config* publié. Le fichier *Web. config* se trouve dans le dossier *bin/Release/{Target Framework}/Publish* :
+Dans l’exemple suivant pour IIS, ajoutez l’en-tête personnalisé au fichier *web.config* publié. Le fichier *web.config* se trouve dans le dossier *bin/Release/{Target Framework}/Publish* :
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -55,7 +55,7 @@ Dans l’exemple suivant pour IIS, ajoutez l’en-tête personnalisé au fichier
 ```
 
 > [!NOTE]
-> Pour utiliser un fichier *Web. config* personnalisé pour IIS qui n’est pas remplacé lorsque l’application est publiée dans le dossier de *publication* , consultez <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig> .
+> Pour utiliser un fichier de *web.config* personnalisé pour IIS qui n’est pas remplacé lorsque l’application est publiée dans le dossier de *publication* , consultez <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig> .
 
 Obtenez l’environnement de l’application dans un composant en injectant <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> et en lisant la <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment> propriété :
 
@@ -104,9 +104,9 @@ La <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnv
 BlazorWebassembly charge la configuration à partir de :
 
 * Fichiers de paramètres d’application par défaut :
-  * *wwwroot/appSettings. JSON*
+  * *wwwroot/appsettings.jssur*
   * *wwwroot/appSettings. {ENVIRONMENT}. JSON*
-* Autres [fournisseurs de configuration](xref:fundamentals/configuration/index) inscrits par l’application. Tous les fournisseurs ne sont pas appropriés pour les Blazor applications Webassembly. La clarification des fournisseurs pris en charge pour Blazor Webassembly est suivie par [clarifier les fournisseurs de configuration pour Blazor WASM (dotnet/AspNetCore. docs #18134)](https://github.com/dotnet/AspNetCore.Docs/issues/18134).
+* Autres [fournisseurs de configuration](xref:fundamentals/configuration/index) inscrits par l’application. Tous les fournisseurs ne sont pas appropriés pour les Blazor applications Webassembly. La clarification des fournisseurs pris en charge pour Blazor Webassembly est suivie par [clarifier les fournisseurs de configuration pour Blazor WASM (dotnet/AspNetCore.Docs #18134)](https://github.com/dotnet/AspNetCore.Docs/issues/18134).
 
 > [!WARNING]
 > La configuration dans une Blazor application Webassembly est visible pour les utilisateurs. **Ne stockez pas les secrets ou les informations d’identification de l’application dans la configuration.**
@@ -115,7 +115,7 @@ Pour plus d’informations sur les fournisseurs de configuration, consultez <xre
 
 #### <a name="app-settings-configuration"></a>Configuration des paramètres de l’application
 
-*wwwroot/appSettings. JSON*:
+*wwwroot/appsettings.jssur*:
 
 ```json
 {
@@ -190,7 +190,7 @@ Injecter une <xref:Microsoft.Extensions.Configuration.IConfiguration> instance d
 
 Pour lire d’autres fichiers de configuration du dossier *wwwroot* dans la configuration, utilisez un <xref:System.Net.Http.HttpClient> pour obtenir le contenu du fichier. Lors de l’utilisation de cette approche, l' <xref:System.Net.Http.HttpClient> inscription de service existante peut utiliser le client local créé pour lire le fichier, comme le montre l’exemple suivant :
 
-*wwwroot/cars. JSON*:
+*wwwroot/cars.jssur*:
 
 ```json
 {
@@ -220,7 +220,7 @@ builder.Configuration.AddJsonStream(stream);
 
 #### <a name="authentication-configuration"></a>Configuration de l’authentification
 
-*wwwroot/appSettings. JSON*:
+*wwwroot/appsettings.jssur*:
 
 ```json
 {
@@ -240,13 +240,13 @@ builder.Services.AddOidcAuthentication(options =>
 
 #### <a name="logging-configuration"></a>Configuration de la journalisation
 
-Ajoutez une référence de package pour [Microsoft. extensions. Logging. Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration/):
+Ajoutez une référence de package pour [Microsoft.Extensions.Logging.Configfiguration](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration/):
 
 ```xml
 <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="{VERSION}" />
 ```
 
-*wwwroot/appSettings. JSON*:
+*wwwroot/appsettings.jssur*:
 
 ```json
 {
@@ -284,13 +284,44 @@ var hostname = builder.Configuration["HostName"];
 Les fichiers de configuration sont mis en cache pour une utilisation hors connexion. Avec les [applications Web progressives (PWA)](xref:blazor/progressive-web-app), vous pouvez uniquement mettre à jour les fichiers de configuration lors de la création d’un déploiement. La modification des fichiers de configuration entre les déploiements n’a aucun effet, car :
 
 * Les utilisateurs ont des versions mises en cache des fichiers qu’ils continuent d’utiliser.
-* Les fichiers *Service-Worker. js* et *Service-Worker-Assets. js* de PWA doivent être reconstruits lors de la compilation, qui signalent à l’application à la prochaine visite en ligne de l’utilisateur que l’application a été redéployée.
+* Les fichiers *service-worker.js* et *service-worker-assets.js* de PWA doivent être reconstruits lors de la compilation, qui signalent à l’application à la prochaine visite en ligne de l’utilisateur que l’application a été redéployée.
 
 Pour plus d’informations sur la façon dont les mises à jour en arrière-plan sont gérées par PWA, consultez <xref:blazor/progressive-web-app#background-updates> .
 
 ### <a name="logging"></a>Journalisation
 
 Pour plus d’informations sur la Blazor prise en charge de la journalisation Webassembly, consultez <xref:fundamentals/logging/index#create-logs-in-blazor> .
+
+### <a name="signalr-cross-origin-negotiation-for-authentication"></a>SignalRnégociation Cross-Origin pour l’authentification
+
+Pour configurer le SignalR client sous-jacent de manière à envoyer des informations d’identification, telles que des cookies ou des en-têtes d’authentification http :
+
+* Utilisez <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> pour définir <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include> les demandes d' [extraction](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) Cross-Origin :
+
+  ```csharp
+  public class IncludeRequestCredentialsMessagHandler : DelegatingHandler
+  {
+      protected override Task<HttpResponseMessage> SendAsync(
+          HttpRequestMessage request, CancellationToken cancellationToken)
+      {
+          request.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
+          return base.SendAsync(request, cancellationToken);
+      }
+  }
+  ```
+
+* Affectez <xref:System.Net.Http.HttpMessageHandler> à l' <xref:Microsoft.AspNetCore.Http.Connections.Client.HttpConnectionOptions.HttpMessageHandlerFactory> option :
+
+  ```csharp
+  var client = new HubConnectionBuilder()
+      .WithUrl(new Uri("http://signalr.example.com"), options =>
+      {
+          options.HttpMessageHandlerFactory = innerHandler => 
+              new IncludeRequestCredentialsMessagHandler { InnerHandler = innerHandler };
+      }).Build();
+  ```
+
+Pour plus d’informations, consultez <xref:signalr/configuration#configure-additional-options>.
 
 ## <a name="blazor-server"></a>BlazorServeurs
 

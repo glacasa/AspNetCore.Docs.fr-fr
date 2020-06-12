@@ -5,7 +5,7 @@ description: Découvrez comment créer une Blazor application Web progressive (P
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/09/2020
+ms.date: 06/10/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: ef73cbb928fb442c73acce6f5facac33236abd67
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: c935f326afb77de5e083829c0bc2494efb20fec3
+ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652404"
+ms.locfileid: "84679609"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>Créez des applications Web progressifs avec ASP.NET Core Blazor Webassembly
 
@@ -75,7 +75,7 @@ Une fois installé, l’application s’affiche dans sa propre fenêtre sans bar
 
 ![L’application « MyBlazorPwa » s’exécute dans Google Chrome sans barre d’adresses.](progressive-web-app/_static/image3.png)
 
-Pour personnaliser le titre, le modèle de couleurs, l’icône ou d’autres détails de la fenêtre, consultez le fichier *Manifest. JSON* dans le répertoire *wwwroot* du projet. Le schéma de ce fichier est défini par les normes Web. Pour plus d’informations, consultez [MDN Web docs : Web App manifest](https://developer.mozilla.org/docs/Web/Manifest).
+Pour personnaliser le titre, le modèle de couleurs, l’icône ou d’autres détails de la fenêtre, consultez le *manifest.jssur* le fichier dans le répertoire *wwwroot* du projet. Le schéma de ce fichier est défini par les normes Web. Pour plus d’informations, consultez [MDN Web docs : Web App manifest](https://developer.mozilla.org/docs/Web/Manifest).
 
 ## <a name="offline-support"></a>Prise en charge hors connexion
 
@@ -110,8 +110,8 @@ La prise en charge hors connexion à l’aide d’un Worker service est une norm
 
 Blazorle modèle PWA de génère deux fichiers de travail de service :
 
-* *wwwroot/Service-Worker. js*, qui est utilisé pendant le développement.
-* *wwwroot/Service-Worker. published. js*, qui est utilisé après la publication de l’application.
+* *wwwroot/service-worker.js*, qui est utilisé lors du développement.
+* *wwwroot/service-worker.published.js*, qui est utilisé après la publication de l’application.
 
 Pour partager la logique entre les deux fichiers de travail de service, envisagez l’approche suivante :
 
@@ -120,7 +120,7 @@ Pour partager la logique entre les deux fichiers de travail de service, envisage
 
 ### <a name="cache-first-fetch-strategy"></a>Stratégie d’extraction du cache en premier
 
-Le service Worker *Service-Worker. published. js* intégré résout les demandes à l’aide d’une stratégie de *cache-première* . Cela signifie que le processus de travail préfère retourner le contenu mis en cache, que l’utilisateur dispose d’un accès réseau ou que du contenu plus récent soit disponible sur le serveur.
+Le *service-worker.published.js* Worker intégré de service résout les demandes à l’aide d’une stratégie de *cache en premier* . Cela signifie que le processus de travail préfère retourner le contenu mis en cache, que l’utilisateur dispose d’un accès réseau ou que du contenu plus récent soit disponible sur le serveur.
 
 La stratégie du cache en premier est utile pour les raisons suivantes :
 
@@ -139,9 +139,9 @@ En tant que modèle mental, vous pouvez considérer qu’un PWA en mode hors con
 
 Le Blazor modèle PWA produit des applications qui essaient automatiquement de se mettre à jour en arrière-plan chaque fois que l’utilisateur accède à une connexion réseau opérationnelle. Ce fonctionnement est le suivant :
 
-* Au cours de la compilation, le projet génère un *manifeste des ressources de traitement de service*. Par défaut, il s’agit de *Service-Worker-Assets. js*. Le manifeste répertorie toutes les ressources statiques dont l’application a besoin pour fonctionner hors connexion, telles que les assemblys .NET, les fichiers JavaScript et CSS, y compris leurs hachages de contenu. La liste des ressources est chargée par le processus de travail du service afin qu’il sache quelles ressources mettre en cache.
-* Chaque fois que l’utilisateur visite l’application, le navigateur redemande *Service-Worker. js* et *Service-Worker-Assets. js* en arrière-plan. Les fichiers sont comparés octet par octet avec le processus de travail de service installé existant. Si le serveur retourne le contenu modifié de l’un de ces fichiers, le processus de travail de service tente d’installer une nouvelle version de lui-même.
-* Lors de l’installation d’une nouvelle version de lui-même, le processus de travail crée un cache distinct pour les ressources hors connexion et démarre le remplissage du cache avec les ressources listées dans *Service-Worker-Assets. js*. Cette logique est implémentée dans la `onInstall` fonction à l’intérieur de *Service-Worker. published. js*.
+* Au cours de la compilation, le projet génère un *manifeste des ressources de traitement de service*. Par défaut, il s’agit de *service-worker-assets.js*. Le manifeste répertorie toutes les ressources statiques dont l’application a besoin pour fonctionner hors connexion, telles que les assemblys .NET, les fichiers JavaScript et CSS, y compris leurs hachages de contenu. La liste des ressources est chargée par le processus de travail du service afin qu’il sache quelles ressources mettre en cache.
+* Chaque fois que l’utilisateur visite l’application, le navigateur demande à nouveau *service-worker.js* et *service-worker-assets.js* en arrière-plan. Les fichiers sont comparés octet par octet avec le processus de travail de service installé existant. Si le serveur retourne le contenu modifié de l’un de ces fichiers, le processus de travail de service tente d’installer une nouvelle version de lui-même.
+* Lors de l’installation d’une nouvelle version de lui-même, le service Worker crée un cache distinct pour les ressources hors connexion et commence à alimenter le cache avec les ressources listées dans *service-worker-assets.js*. Cette logique est implémentée dans la `onInstall` fonction à l’intérieur de *service-worker.published.js*.
 * Le processus se termine correctement lorsque toutes les ressources sont chargées sans erreur et que tous les hachages de contenu correspondent. En cas de réussite, le nouveau service Worker entre dans un état *d’activation en attente* . Dès que l’utilisateur ferme l’application (pas d’onglets ou de fenêtres d’application restants), le nouveau Worker service devient *actif* et est utilisé pour les visites de l’application suivante. L’ancien service Worker et son cache sont supprimés.
 * Si le processus ne se termine pas correctement, la nouvelle instance de service worker est ignorée. Le processus de mise à jour est tenté à nouveau à la prochaine visite de l’utilisateur, lorsque j’espère que le client dispose d’une meilleure connexion réseau capable d’effectuer les requêtes.
 
@@ -149,7 +149,7 @@ Personnalisez ce processus en modifiant la logique du service Worker. Aucun des 
 
 ### <a name="how-requests-are-resolved"></a>Résolution des demandes
 
-Comme décrit dans la section [stratégie de récupération du cache en premier](#cache-first-fetch-strategy) , le Worker de service par défaut utilise une stratégie de cache en *premier* , ce qui signifie qu’il tente de traiter le contenu mis en cache quand il est disponible. S’il n’existe aucun contenu mis en cache pour une certaine URL, par exemple lors de la demande de données à partir d’une API de serveur principal, le processus de travail de service revient sur une demande réseau normale. La demande réseau a abouti si le serveur est accessible. Cette logique est implémentée dans la `onFetch` fonction dans *Service-Worker. published. js*.
+Comme décrit dans la section [stratégie de récupération du cache en premier](#cache-first-fetch-strategy) , le Worker de service par défaut utilise une stratégie de cache en *premier* , ce qui signifie qu’il tente de traiter le contenu mis en cache quand il est disponible. S’il n’existe aucun contenu mis en cache pour une certaine URL, par exemple lors de la demande de données à partir d’une API de serveur principal, le processus de travail de service revient sur une demande réseau normale. La demande réseau a abouti si le serveur est accessible. Cette logique est implémentée dans la `onFetch` fonction dans *service-worker.published.js*.
 
 Si les composants de l’application s' Razor appuient sur la demande de données à partir des API principales et que vous souhaitez fournir une expérience utilisateur conviviale pour les demandes ayant échoué en raison d’une indisponibilité du réseau, implémentez la logique dans les composants de l’application. Par exemple, utilisez `try/catch` autour des <xref:System.Net.Http.HttpClient> demandes.
 
@@ -160,9 +160,9 @@ Réfléchissez à ce qui se passe quand l’utilisateur accède pour la premièr
 * demandes de sous- *ressources* pour les images, les feuilles de style ou d’autres fichiers.
 * requêtes *Fetch/XHR* pour les données d’API.
 
-Le service Worker par défaut contient une logique de cas spéciale pour les demandes de navigation. Le Worker de service résout les demandes en retournant le contenu mis en cache pour `/index.html` , quelle que soit l’URL demandée. Cette logique est implémentée dans la `onFetch` fonction à l’intérieur de *Service-Worker. published. js*.
+Le service Worker par défaut contient une logique de cas spéciale pour les demandes de navigation. Le Worker de service résout les demandes en retournant le contenu mis en cache pour `/index.html` , quelle que soit l’URL demandée. Cette logique est implémentée dans la `onFetch` fonction à l’intérieur de *service-worker.published.js*.
 
-Si votre application comporte certaines URL qui doivent retourner le HTML rendu serveur et ne servent pas `/index.html` à partir du cache, vous devez modifier la logique de votre service Worker. Si toutes les URL contenant `/Identity/` doivent être gérées comme des requêtes en ligne régulières uniquement sur le serveur, modifiez la logique *Service-Worker. published. js* `onFetch` . Recherchez le code suivant :
+Si votre application comporte certaines URL qui doivent retourner le HTML rendu serveur et ne servent pas `/index.html` à partir du cache, vous devez modifier la logique de votre service Worker. Si toutes les URL contenant `/Identity/` doivent être gérées en tant que demandes standard en ligne uniquement au serveur, modifiez *service-worker.published.js* `onFetch` logique. Recherchez le code suivant :
 
 ```javascript
 const shouldServeIndexHtml = event.request.mode === 'navigate';
@@ -185,14 +185,14 @@ Si votre projet définit la `ServiceWorkerAssetsManifest` propriété MSBuild, l
 <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
 ```
 
-Le fichier est placé dans le répertoire de sortie *wwwroot* , de sorte que le navigateur peut récupérer ce fichier en demandant `/service-worker-assets.js` . Pour afficher le contenu de ce fichier, ouvrez */bin/debug/{Target Framework}/wwwroot/Service-Worker-Assets.js* dans un éditeur de texte. Toutefois, ne modifiez pas le fichier, car il est régénéré à chaque Build.
+Le fichier est placé dans le répertoire de sortie *wwwroot* , de sorte que le navigateur peut récupérer ce fichier en demandant `/service-worker-assets.js` . Pour afficher le contenu de ce fichier, ouvrez */bin/debug/{Target Framework}/wwwroot/service-worker-assets.js* dans un éditeur de texte. Toutefois, ne modifiez pas le fichier, car il est régénéré à chaque Build.
 
 Par défaut, ce manifeste répertorie les éléments suivants :
 
 * Toutes les Blazor ressources managées, telles que les assemblys .net et les fichiers d’exécution Webassembly .net nécessaires pour fonctionner hors connexion.
 * Toutes les ressources pour la publication dans le répertoire *wwwroot* de l’application, telles que les images, les feuilles de style et les fichiers JavaScript, y compris les ressources Web statiques fournies par les projets externes et les packages NuGet.
 
-Vous pouvez contrôler les ressources qui sont extraites et mises en cache par le service Worker en modifiant la logique dans `onInstall` dans *Service-Worker. published. js*. Par défaut, le service Worker récupère et met en cache les fichiers correspondant aux extensions de noms de fichiers Web typiques telles que *. html*, *. CSS*, *. js*et *. WASM*, ainsi que les types de fichiers spécifiques à Blazor webassembly (*. dll*, *. pdb*).
+Vous pouvez contrôler les ressources qui sont extraites et mises en cache par le service Worker en modifiant la logique dans `onInstall` dans *service-worker.published.js*. Par défaut, le service Worker récupère et met en cache les fichiers correspondant aux extensions de noms de fichiers Web typiques telles que *. html*, *. CSS*, *. js*et *. WASM*, ainsi que les types de fichiers spécifiques à Blazor webassembly (*. dll*, *. pdb*).
 
 Pour inclure des ressources supplémentaires qui ne sont pas présentes dans le répertoire *wwwroot* de l’application, définissez des entrées MSBuild supplémentaires `ItemGroup` , comme indiqué dans l’exemple suivant :
 
@@ -264,11 +264,11 @@ Comme décrit dans la section [prise en charge des pages rendues](#support-serve
 
 ### <a name="all-service-worker-asset-manifest-contents-are-cached-by-default"></a>Tous les contenus du manifeste de la ressource Service Worker sont mis en cache par défaut
 
-Comme décrit dans la section [mise en cache des ressources de contrôle](#control-asset-caching) , le fichier *Service-Worker-Assets. js* est généré pendant la génération et répertorie toutes les ressources que le processus de travail de service doit extraire et mettre en cache.
+Comme décrit dans la section [mise en cache des ressources de contrôle](#control-asset-caching) , le fichier *service-worker-assets.js* est généré pendant la génération et répertorie toutes les ressources que le processus de travail de service doit extraire et mettre en cache.
 
 Étant donné que cette liste inclut par défaut tout ce qui est émis vers *wwwroot*, y compris le contenu fourni par des packages et des projets externes, vous devez veiller à ne pas y placer trop de contenu. Si le répertoire *wwwroot* contient des millions d’images, le processus de travail de service tente de les extraire et de les mettre en cache, ce qui consomme une bande passante excessive et risque de ne pas se terminer correctement.
 
-Implémentez une logique arbitraire pour contrôler le sous-ensemble du contenu du manifeste qui doit être extrait et mis en cache en modifiant la `onInstall` fonction dans *Service-Worker. published. js*.
+Implémentez une logique arbitraire pour contrôler le sous-ensemble du contenu du manifeste qui doit être extrait et mis en cache en modifiant la `onInstall` fonction dans *service-worker.published.js*.
 
 ### <a name="interaction-with-authentication"></a>Interaction avec l’authentification
 
@@ -292,3 +292,7 @@ L’exemple d’application [CarChecker](https://github.com/SteveSandersonMS/Car
 * `OfflineAccountClaimsPrincipalFactory`(*Client/Data/OfflineAccountClaimsPrincipalFactory. cs*)
 * `LocalVehiclesStore`(*Client/Data/LocalVehiclesStore. cs*)
 * `LoginStatus`composant (*client/partagé/LoginStatus. Razor*)
+
+## <a name="additional-resources"></a>Ressources supplémentaires
+
+* [SignalRnégociation Cross-Origin pour l’authentification](xref:blazor/hosting-model-configuration#signalr-cross-origin-negotiation-for-authentication)

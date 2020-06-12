@@ -5,7 +5,7 @@ description: Créer une application de conversation qui utilise ASP.NET Core Sig
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 06/10/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: d3ce11606b4193d5c2938b5996d8dcd1cb99a731
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 720f534426cc0e2b32778e49050c7f7d75ecd60d
+ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451886"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84679590"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Utiliser ASP.NET Core SignalR avec Blazor webassembly
 
@@ -93,7 +93,7 @@ Suivez les instructions de votre choix d’outils :
 
 1. Dans Visual Studio Code, ouvrez le dossier du projet de l’application.
 
-1. Quand la boîte de dialogue semble ajouter des éléments multimédias pour générer et déboguer l’application, sélectionnez **Oui**. Visual Studio Code ajoute automatiquement le dossier *. vscode* avec les fichiers *Launch. JSON* et *Tasks. JSON* générés.
+1. Quand la boîte de dialogue semble ajouter des éléments multimédias pour générer et déboguer l’application, sélectionnez **Oui**. Visual Studio Code ajoute automatiquement le dossier *. vscode* avec les *launch.js* générés sur et *tasks.jssur* les fichiers.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
@@ -230,7 +230,7 @@ Dans le projet **BlazorSignalRApp. Server** , créez un dossier *hubs* (plural) 
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-1. Lorsque VS Code propose de créer un profil de lancement pour l’application serveur (*. vscode/Launch. JSON*), l' `program` entrée ressemble à ce qui suit pour pointer vers l’assembly de l’application ( `{APPLICATION NAME}.Server.dll` ) :
+1. Lorsque VS Code propose de créer un profil de lancement pour l’application serveur (*. vscode/launch.jssur*), l' `program` entrée ressemble à ce qui suit pour pointer vers l’assembly de l’application ( `{APPLICATION NAME}.Server.dll` ) :
 
    ```json
    "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/{APPLICATION NAME}.Server.dll"
@@ -296,3 +296,4 @@ Pour en savoir plus sur Blazor la création d’applications, consultez la Blazo
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:signalr/introduction>
+* [SignalRnégociation Cross-Origin pour l’authentification](xref:blazor/hosting-model-configuration#signalr-cross-origin-negotiation-for-authentication)

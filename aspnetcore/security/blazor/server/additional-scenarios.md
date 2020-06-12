@@ -5,7 +5,7 @@ description: Découvrez comment configurer le Blazor serveur pour d’autres sc�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 06/04/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/server/additional-scenarios
-ms.openlocfilehash: f172df7f2333fd79ba175ec8a3a6925ec07f1113
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 159d418a78caa3954294ad0a1067654d895147f7
+ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "83851523"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84679668"
 ---
 # <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>BlazorScénarios de sécurité supplémentaires du serveur ASP.net Core
 
@@ -148,6 +148,18 @@ public class WeatherForecastService
 }
 ```
 
+## <a name="set-the-authentication-scheme"></a>Définir le schéma d’authentification
+
+Pour une application qui utilise plusieurs intergiciels (middleware) d’authentification et qui possède donc plusieurs schémas d’authentification, le schéma qui Blazor utilise peut être défini explicitement dans la configuration de point de terminaison de `Startup.Configure` . L’exemple suivant définit le schéma de Azure Active Directory :
+
+```csharp
+endpoints.MapBlazorHub().RequireAuthorization(
+    new AuthorizeAttribute 
+    {
+        AuthenticationSchemes = AzureADDefaults.AuthenticationScheme
+    });
+```
+
 ## <a name="use-open-id-connect-oidc-v20-endpoints"></a>Utiliser des points de terminaison OIDC (Open ID Connect) v 2.0
 
 La bibliothèque d’authentification et les Blazor modèles utilisent des points de terminaison OIDC (Open ID Connect) v 1.0. Pour utiliser un point de terminaison v 2.0, configurez l' <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> option dans le <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> :
@@ -160,7 +172,7 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme,
     }
 ```
 
-Le paramètre peut également être défini dans le fichier de paramètres de l’application (*appSettings. JSON*) :
+Le paramètre peut également être défini dans le fichier de paramètres de l’application (*appsettings.jssur*) :
 
 ```json
 {
