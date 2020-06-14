@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: 116e5d27e7585e9168db433480c3a5e9d08379f3
-ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
+ms.openlocfilehash: 36afa8ece58843b434ebfba6305bffdb9eb9bca0
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84454662"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724287"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>Génération Identity de modèles automatique dans les projets ASP.net Core
 
@@ -195,7 +195,7 @@ Les jetons peuvent être passés à des composants :
 * Lorsque les jetons d’authentification sont approvisionnés et enregistrés dans le cookie d’authentification, ils peuvent être passés à des composants.
 * Razorles composants ne peuvent pas être utilisés `HttpContext` directement. il n’existe donc aucun moyen d’obtenir un [jeton XSRF (contrefaçon anti-request)](xref:security/anti-request-forgery) pour effectuer une publication sur le Identity point de terminaison de déconnexion de `/Identity/Account/Logout` . Un jeton XSRF peut être passé à des composants.
 
-Pour plus d’informations, consultez <xref:security/blazor/server/index#pass-tokens-to-a-blazor-server-app>.
+Pour plus d’informations, consultez <xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.
 
 Dans le fichier *pages/_Host. cshtml* , établissez le jeton après l’avoir ajouté `InitialApplicationState` aux `TokenProvider` classes et :
 
@@ -229,7 +229,7 @@ Le `TokenProvider` service présenté dans la rubrique est utilisé dans le `Log
 Dans la `Startup` classe :
 
 * Confirmez que Razor les services de pages sont ajoutés dans `Startup.ConfigureServices` .
-* Si vous utilisez [TokenProvider](xref:security/blazor/server/index#pass-tokens-to-a-blazor-server-app), inscrivez le service.
+* Si vous utilisez [TokenProvider](xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app), inscrivez le service.
 * Appelez `UseDatabaseErrorPage` sur le générateur d’applications dans `Startup.Configure` pour l’environnement de développement.
 * Appelez `UseAuthentication` et `UseAuthorization` after `UseRouting` .
 * Ajoutez un point de terminaison pour les Razor pages.
@@ -253,7 +253,7 @@ Ajoutez un `RedirectToLogin` composant (*RedirectToLogin. Razor*) au dossier *pa
 }
 ```
 
-Ajoutez un `LoginDisplay` composant (*LoginDisplay. Razor*) au dossier *partagé* de l’application. Le [service TokenProvider](xref:security/blazor/server/index#pass-tokens-to-a-blazor-server-app) fournit le jeton XSRF pour le formulaire HTML qui publie sur le Identity point de terminaison logout de déconnexion :
+Ajoutez un `LoginDisplay` composant (*LoginDisplay. Razor*) au dossier *partagé* de l’application. Le [service TokenProvider](xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app) fournit le jeton XSRF pour le formulaire HTML qui publie sur le Identity point de terminaison logout de déconnexion :
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization
@@ -398,7 +398,9 @@ cd RPauth
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
 -->
-## <a name="disable-register-page"></a>Désactiver la page de Registre
+## <a name="disable-a-page"></a>Désactiver une page
+
+Cette section montre comment désactiver la page de Registre, mais l’approche peut être utilisée pour désactiver n’importe quelle page.
 
 Pour désactiver l’inscription des utilisateurs :
 
@@ -418,13 +420,13 @@ Pour désactiver l’inscription des utilisateurs :
 
 * Commentez ou supprimez le lien d’inscription de *Areas/ Identity /pages/Account/login.cshtml*
 
-```cshtml
-@*
-<p>
-    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-</p>
-*@
-```
+  ```cshtml
+  @*
+  <p>
+      <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+  </p>
+  *@
+  ```
 
 * Mettez à jour la page *zones/ Identity /pages/Account/RegisterConfirmation* .
 
@@ -482,7 +484,7 @@ Les applications qui n’incluent **pas** l’authentification peuvent appliquer
 
 Bien que le générateur de modèles génère la plus grande partie du code nécessaire, vous devez mettre à jour votre projet pour terminer le processus. Ce document explique les étapes nécessaires à la réalisation d’une Identity mise à jour de génération de modèles automatique.
 
-Lorsque l' Identity échafaudage est exécuté, un fichier *ScaffoldingReadme. txt* est créé dans le répertoire du projet. Le fichier *ScaffoldingReadme. txt* contient des instructions générales sur ce qui est nécessaire pour effectuer la Identity mise à jour de la génération de modèles automatique. Ce document contient des instructions plus complètes que le fichier *ScaffoldingReadme. txt* .
+Quand vous exécutez le générateur de Identity modèles, un fichier de *ScaffoldingReadme.txt* est créé dans le répertoire du projet. Le fichier *ScaffoldingReadme.txt* contient des instructions générales sur ce qui est nécessaire pour effectuer la Identity mise à jour de la génération de modèles automatique. Ce document contient des instructions plus complètes que le fichier *ScaffoldingReadme.txt* .
 
 Nous vous recommandons d’utiliser un système de contrôle de code source qui affiche les différences entre les fichiers et vous permet d’annuler les modifications. Inspectez les modifications après avoir exécuté le générateur de Identity modèles.
 

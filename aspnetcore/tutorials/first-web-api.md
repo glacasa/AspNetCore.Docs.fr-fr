@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: 2fcfd46057935cadac76c558a78729a1c096ffc0
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 71ab0fc0a679acf540fa53fa2a9c8ba893b34edf
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451818"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724352"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Didacticiel : créer une API Web avec ASP.NET Core
 
@@ -44,10 +44,10 @@ Ce didacticiel crée l’API suivante :
 
 |API | Description | Corps de la demande | Response body |
 |--- | ---- | ---- | ---- |
-|`GET /api/TodoItems` | Obtenir toutes les tâches | Aucune | Tableau de tâches|
-|`GET /api/TodoItems/{id}` | Obtenir un élément par ID | Aucune | Tâche|
+|`GET /api/TodoItems` | Obtenir toutes les tâches | None | Tableau de tâches|
+|`GET /api/TodoItems/{id}` | Obtenir un élément par ID | None | Tâche|
 |`POST /api/TodoItems` | Ajouter un nouvel élément | Tâche | Tâche |
-|`PUT /api/TodoItems/{id}` | Mettre à jour un élément existant &nbsp; | Tâche | Aucune |
+|`PUT /api/TodoItems/{id}` | Mettre à jour un élément existant &nbsp; | Tâche | None |
 |`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Supprimer un élément &nbsp;&nbsp; | None | None|
 
 Le diagramme suivant illustre la conception de l’application.
@@ -532,10 +532,10 @@ Ce didacticiel crée l’API suivante :
 
 |API | Description | Corps de la demande | Response body |
 |--- | ---- | ---- | ---- |
-|GET /api/TodoItems | Obtenir toutes les tâches | Aucune | Tableau de tâches|
-|GET /api/TodoItems/{id} | Obtenir un élément par ID | Aucune | Tâche|
+|GET /api/TodoItems | Obtenir toutes les tâches | None | Tableau de tâches|
+|GET /api/TodoItems/{id} | Obtenir un élément par ID | None | Tâche|
 |POST /api/TodoItems | Ajouter un nouvel élément | Tâche | Tâche |
-|PUT /api/TodoItems/{id} | Mettre à jour un élément existant &nbsp; | Tâche | Aucune |
+|PUT /api/TodoItems/{id} | Mettre à jour un élément existant &nbsp; | Tâche | None |
 |SUPPRIMER/api/TodoItems/{id} &nbsp;&nbsp; | Supprimer un élément &nbsp;&nbsp; | None | None|
 
 Le diagramme suivant illustre la conception de l’application.
@@ -924,7 +924,7 @@ Ajoutez un fichier JavaScript nommé *site.js* au répertoire *wwwroot*. Remplac
 Vous devrez peut-être changer les paramètres de lancement du projet ASP.NET Core pour tester la page HTML localement :
 
 * Ouvrez *Properties\launchSettings.json*.
-* Supprimez la `launchUrl` propriété pour forcer l’ouverture de l’application à *index. html* &mdash; , le fichier par défaut du projet.
+* Supprimez la `launchUrl` propriété pour forcer l’ouverture de l’application à *index.html* &mdash; fichier par défaut du projet.
 
 Cet exemple appelle toutes les méthodes CRUD de l’API web. Les explications suivantes traitent des appels à l’API.
 

@@ -11,30 +11,30 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 2831fd2edd029043e9457cd213e32f1a82c2872e
-ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
+ms.openlocfilehash: 53ca2a650eb6a3be0ff137953df5a546e9f0b282
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83424419"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84756130"
 ---
-# <a name="razor-syntax-reference-for-aspnet-core"></a>Informations de référence sur la syntaxe Razor pour ASP.NET Core
+# <a name="razor-syntax-reference-for-aspnet-core"></a>RazorRéférence de syntaxe pour ASP.NET Core
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen)et [Dan Vicarel](https://github.com/Rabadash8820)
 
-Razor est une syntaxe de balisage qui permet d’incorporer du code serveur dans des pages web. La syntaxe Razor est constituée de balises Razor, ainsi que de code C# et HTML. Les fichiers contenant de la syntaxe Razor ont généralement l’extension de fichier *.cshtml*. Razor est également disponible dans les fichiers de [Composants Razor](xref:blazor/components) (*.razor*).
+Razorest une syntaxe de balisage pour incorporer du code basé sur le serveur dans des pages Web. La Razor syntaxe se compose du Razor balisage, de C# et du code html. Les fichiers contenant Razor ont généralement une extension de fichier *. cshtml* . Razorse trouve également dans les fichiers de [ Razor composants](xref:blazor/components) (*. Razor*).
 
 ## <a name="rendering-html"></a>Rendu HTML
 
-Razor utilise par défaut le langage HTML. Le rendu HTML d’un balisage Razor n’est pas différent du rendu HTML d’un fichier en HTML. Le balisage HTML dans les fichiers Razor *.cshtml* est affiché tel quel par le serveur.
+La langue par défaut Razor est html. Le rendu HTML à partir du Razor balisage n’est pas différent du rendu HTML d’un fichier html. Le balisage HTML dans les fichiers *. cshtml* Razor est rendu par le serveur inchangé.
 
-## <a name="razor-syntax"></a>Syntaxe Razor
+## <a name="razor-syntax"></a>Syntaxe de Razor
 
-Razor prend en charge le langage C# et utilise le symbole `@` pour convertir du code HTML en C#. Razor évalue les expressions C# et les affiche dans la sortie HTML.
+Razorprend en charge C# et utilise le `@` symbole pour passer du code HTML à c#. Razorévalue les expressions C# et les restitue dans la sortie HTML.
 
-Quand un symbole `@` est suivi d’un [mot clé réservé Razor](#razor-reserved-keywords), il est converti en balise Razor. Sinon, il est converti en code C# brut.
+Quand un `@` symbole est suivi d’un [ Razor mot clé réservé](#razor-reserved-keywords), il passe à un Razor balisage spécifique. Sinon, il est converti en code C# brut.
 
-Pour mettre un symbole `@` en échappement dans le balisage Razor, ajoutez un deuxième symbole `@` :
+Pour échapper un `@` symbole dans Razor le balisage, utilisez un deuxième `@` symbole :
 
 ```cshtml
 <p>@@Username</p>
@@ -46,15 +46,15 @@ Le code est affiché en HTML avec un seul symbole `@` :
 <p>@Username</p>
 ```
 
-Les attributs et le code HTML contenant des adresses e-mail ne traitent pas le symbole `@` comme un caractère de conversion. Dans l’exemple suivant, les adresses e-mail ne sont pas modifiées par l’analyse Razor :
+Les attributs et le code HTML contenant des adresses e-mail ne traitent pas le symbole `@` comme un caractère de conversion. Les adresses de messagerie de l’exemple suivant ne sont pas touchées par l' Razor analyse :
 
 ```cshtml
 <a href="mailto:Support@contoso.com">Support@contoso.com</a>
 ```
 
-## <a name="implicit-razor-expressions"></a>Expressions Razor implicites
+## <a name="implicit-razor-expressions"></a>Expressions implicites Razor
 
-Les expressions Razor implicites commencent par `@` suivi de code C# :
+RazorLes expressions implicites commencent par `@` suivies du code C# :
 
 ```cshtml
 <p>@DateTime.Now</p>
@@ -78,11 +78,11 @@ Le code précédent génère l’un des types d’erreur de compilateur suivants
 * L’élément « int » n’a pas été fermé. Tous les éléments doivent se fermer automatiquement ou contenir une balise de fin correspondante.
 * Impossible de convertir le groupe de méthodes 'GenericMethod' en type non-délégué 'object'. Souhaitiez-vous appeler la méthode ?
 
-Les appels de méthode générique doivent être inclus dans un wrapper dans une [expression Razor explicite](#explicit-razor-expressions) ou dans un [bloc de code Razor](#razor-code-blocks).
+Les appels de méthode génériques doivent être encapsulés dans une [ Razor expression explicite](#explicit-razor-expressions) ou un [ Razor bloc de code](#razor-code-blocks).
 
-## <a name="explicit-razor-expressions"></a>Expressions Razor explicites
+## <a name="explicit-razor-expressions"></a>Expressions explicites Razor
 
-Les expressions Razor explicites se composent d’un symbole `@` suivi d’un contenu entre parenthèses. Pour afficher l’heure de la semaine précédente, utilisez le balisage Razor suivant :
+RazorLes expressions explicites se composent d’un `@` symbole avec des parenthèses équilibrées. Pour afficher l’heure de la semaine dernière, le Razor balisage suivant est utilisé :
 
 ```cshtml
 <p>Last week this time: @(DateTime.Now - TimeSpan.FromDays(7))</p>
@@ -153,9 +153,9 @@ Le code s’affiche en HTML de la façon suivante :
 <span>Hello World</span>
 ```
 
-## <a name="razor-code-blocks"></a>Blocs de code Razor
+## <a name="razor-code-blocks"></a>Razorblocs de code
 
-Les blocs de code Razor commencent par `@` et sont délimités par deux `{}`. Contrairement aux expressions, le code C# figurant dans des blocs de code n’est pas affiché. Les blocs de code et les expressions dans une vue ont la même étendue et sont définis dans l’ordre :
+Razorles blocs de code commencent par `@` et sont encadrés par `{}` . Contrairement aux expressions, le code C# figurant dans des blocs de code n’est pas affiché. Les blocs de code et les expressions dans une vue ont la même étendue et sont définis dans l’ordre :
 
 ```cshtml
 @{
@@ -205,7 +205,7 @@ Le code s’affiche en HTML de la façon suivante :
 
 ### <a name="implicit-transitions"></a>Transitions implicites
 
-Un bloc de code utilise le langage C# par défaut, mais la page Razor peut le reconvertir en HTML :
+La langue par défaut dans un bloc de code est C#, mais la Razor page peut passer au format HTML :
 
 ```cshtml
 @{
@@ -216,7 +216,7 @@ Un bloc de code utilise le langage C# par défaut, mais la page Razor peut le re
 
 ### <a name="explicit-delimited-transition"></a>Conversion délimitée explicite
 
-Pour définir une sous-section d’un bloc de code qui doit s’afficher en HTML, placez les caractères à afficher dans la balise Razor `<text>` suivante :
+Pour définir une sous-section d’un bloc de code qui doit restituer du code HTML, entourez les caractères du rendu à l’aide de la Razor `<text>` balise :
 
 ```cshtml
 @for (var i = 0; i < people.Length; i++)
@@ -226,7 +226,7 @@ Pour définir une sous-section d’un bloc de code qui doit s’afficher en HTML
 }
 ```
 
-Utilisez cette approche pour afficher du code HTML qui n’est pas entouré d’une balise HTML. Sans la balise HTML ou Razor, une erreur d’exécution Razor se produit.
+Utilisez cette approche pour afficher du code HTML qui n’est pas entouré d’une balise HTML. Sans code HTML ou Razor balise, une Razor erreur d’exécution se produit.
 
 La balise `<text>` est utile pour contrôler les espaces blancs dans le contenu affiché :
 
@@ -245,15 +245,15 @@ Pour afficher le reste d’une ligne entière au format HTML à l’intérieur d
 }
 ```
 
-Sans la balise `@:` dans le code, une erreur d’exécution Razor se produit.
+Sans le `@:` dans le code, une Razor erreur d’exécution est générée.
 
-La présence de caractères `@` en trop dans un fichier Razor risque de provoquer des erreurs du compilateur au niveau des instructions suivantes dans le bloc. Ces erreurs du compilateur peuvent être difficiles à comprendre, car elles se produisent en réalité avant les erreurs signalées. Ce type d’erreur est courant après la combinaison de plusieurs expressions implicites ou explicites dans un même bloc de code.
+`@`Les caractères supplémentaires d’un Razor fichier peuvent provoquer des erreurs du compilateur dans des instructions plus loin dans le bloc. Ces erreurs du compilateur peuvent être difficiles à comprendre, car elles se produisent en réalité avant les erreurs signalées. Ce type d’erreur est courant après la combinaison de plusieurs expressions implicites ou explicites dans un même bloc de code.
 
 ## <a name="control-structures"></a>Structures de contrôle
 
 Les structures de contrôle sont une extension des blocs de code. Toutes les caractéristiques des blocs de code (conversion de balisage, Inline C#) valent aussi pour les structures suivantes :
 
-### <a name="conditionals-if-else-if-else-and-switch"></a>Conditions \@if, else if, else et \@switch
+### <a name="conditionals-if-else-if-else-and-switch"></a>Conditions`@if, else if, else, and @switch`
 
 `@if` contrôle l’exécution du code :
 
@@ -298,7 +298,7 @@ Le balisage suivant montre comment utiliser une instruction switch :
 }
 ```
 
-### <a name="looping-for-foreach-while-and-do-while"></a>Boucle \@for, \@foreach, \@while et \@do while
+### <a name="looping-for-foreach-while-and-do-while"></a>Bouclage`@for, @foreach, @while, and @do while`
 
 Le rendu HTML peut être réalisé à partir d'instructions de contrôle de boucle. Pour afficher une liste de personnes :
 
@@ -364,9 +364,9 @@ Les instructions de boucle suivantes sont prises en charge :
 } while (i < people.Length);
 ```
 
-### <a name="compound-using"></a>Composé \@using
+### <a name="compound-using"></a>Instruction composée `@using`
 
-En C#, une instruction `using` est utilisée pour garantir la dispose d’un objet. Dans Razor, le même mécanisme permet de créer des HTML Helpers avec du contenu supplémentaire. Dans le code suivant, les HTML Helpers affichent une balise `<form>` à l’aide de l’instruction `@using` :
+En C#, une instruction `using` est utilisée pour garantir la dispose d’un objet. Dans Razor , le même mécanisme est utilisé pour créer des applications auxiliaires HTML qui contiennent du contenu supplémentaire. Dans le code suivant, les HTML Helpers affichent une balise `<form>` à l’aide de l’instruction `@using` :
 
 ```cshtml
 @using (Html.BeginForm())
@@ -378,15 +378,15 @@ En C#, une instruction `using` est utilisée pour garantir la dispose d’un obj
 }
 ```
 
-### <a name="try-catch-finally"></a>\@try, catch, finally
+### `@try, catch, finally`
 
 La gestion des exceptions est similaire à C# :
 
 [!code-cshtml[](razor/sample/Views/Home/Contact7.cshtml)]
 
-### <a name="lock"></a>\@lock
+### `@lock`
 
-Razor permet de verrouiller les sections critiques par des instructions lock :
+Razora la possibilité de protéger des sections critiques avec des instructions Lock :
 
 ```cshtml
 @lock (SomeLock)
@@ -397,7 +397,7 @@ Razor permet de verrouiller les sections critiques par des instructions lock :
 
 ### <a name="comments"></a>Commentaires
 
-Razor prend en charge les commentaires HTML et C# :
+Razorprend en charge les commentaires HTML et C# :
 
 ```cshtml
 @{
@@ -413,7 +413,7 @@ Le code s’affiche en HTML de la façon suivante :
 <!-- HTML comment -->
 ```
 
-Le serveur supprime les commentaires Razor avant d’afficher la page web. Razor délimite les commentaires avec `@*  *@`. Le code suivant est commenté pour indiquer au serveur de ne pas afficher le balisage :
+RazorLes commentaires sont supprimés par le serveur avant le rendu de la page Web. Razorutilise `@*  *@` pour délimiter les commentaires. Le code suivant est commenté pour indiquer au serveur de ne pas afficher le balisage :
 
 ```cshtml
 @*
@@ -427,9 +427,9 @@ Le serveur supprime les commentaires Razor avant d’afficher la page web. Razor
 
 ## <a name="directives"></a>Directives
 
-Les directives Razor sont représentées par des expressions implicites constituées du symbole `@` suivi de mots clés réservés. En règle générale, une directive change la manière dont une vue est analysée ou active une fonctionnalité différente.
+Razorles directives sont représentées par des expressions implicites avec des mots clés réservés après le `@` symbole. En règle générale, une directive change la manière dont une vue est analysée ou active une fonctionnalité différente.
 
-Pour mieux comprendre le fonctionnement des directives, vous devez bien comprendre comment Razor génère le code pour une vue.
+Comprendre comment Razor génère du code pour une vue facilite la compréhension du fonctionnement des directives.
 
 [!code-cshtml[](razor/sample/Views/Home/Contact8.cshtml)]
 
@@ -449,9 +449,9 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 }
 ```
 
-Plus loin dans cet article, la section [Inspecter la classe C# Razor générée pour une vue](#inspect-the-razor-c-class-generated-for-a-view) explique comment afficher cette classe générée.
+Plus loin dans cet article, la section [inspecter la Razor classe C# générée pour une vue](#inspect-the-razor-c-class-generated-for-a-view) explique comment afficher cette classe générée.
 
-### <a name="attribute"></a>\@attribute
+### `@attribute`
 
 La directive `@attribute` permet d’ajouter l’attribut donné à la classe de la page ou de la vue générée. L’exemple suivant ajoute l’attribut `[Authorize]` :
 
@@ -461,11 +461,11 @@ La directive `@attribute` permet d’ajouter l’attribut donné à la classe de
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="code"></a>\@code
+### `@code`
 
-*Ce scénario s’applique uniquement aux composants Razor (.razor).*
+*Ce scénario s’applique uniquement aux Razor composants (. Razor).*
 
-Le blob `@code` permet à un [composant Razor](xref:blazor/components) d’ajouter des membres C# (champs, propriétés et méthodes) à un composant :
+Le `@code` bloc permet à un [ Razor composant](xref:blazor/components) d’ajouter des membres C# (champs, propriétés et méthodes) à un composant :
 
 ```razor
 @code {
@@ -473,11 +473,11 @@ Le blob `@code` permet à un [composant Razor](xref:blazor/components) d’ajout
 }
 ```
 
-Pour les composants Razor, `@code` est un alias de [`@functions`](#functions) et est recommandé sur `@functions` . Plus d’un bloc `@code` est autorisé.
+Pour les Razor composants, `@code` est un alias de [`@functions`](#functions) et est recommandé sur `@functions` . Plus d’un bloc `@code` est autorisé.
 
 ::: moniker-end
 
-### <a name="functions"></a>\@functions
+### `@functions`
 
 La directive `@functions` permet d’ajouter des membres C# (champs, propriétés et méthodes) à la classe générée :
 
@@ -489,7 +489,7 @@ La directive `@functions` permet d’ajouter des membres C# (champs, propriété
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Dans les [composants Razor](xref:blazor/components), utilisez `@code` sur `@functions` pour ajouter des membres C#.
+Dans [ Razor composants](xref:blazor/components), utilisez `@code` sur `@functions` pour ajouter des membres C#.
 
 ::: moniker-end
 
@@ -503,7 +503,7 @@ Le code génère le balisage HTML suivant :
 <div>From method: Hello</div>
 ```
 
-Le code suivant correspond à la classe C# Razor générée :
+Le code suivant est la Razor classe C# générée :
 
 [!code-csharp[](razor/sample/Classes/Views_Home_Test_cshtml.cs?range=1-19)]
 
@@ -532,7 +532,7 @@ Le code s’affiche en HTML de la façon suivante :
 <p>Name: <strong>Martin Luther King, Jr.</strong></p>
 ```
 
-### <a name="implements"></a>\@implements
+### `@implements`
 
 La directive `@implements` implémente une interface pour la classe générée.
 
@@ -554,7 +554,7 @@ L’exemple suivant implémente <xref:System.IDisposable?displayProperty=fullNam
 
 ::: moniker-end
 
-### <a name="inherits"></a>\@inherits
+### `@inherits`
 
 La directive `@inherits` fournit un contrôle complet de la classe héritée par la vue :
 
@@ -562,7 +562,7 @@ La directive `@inherits` fournit un contrôle complet de la classe héritée par
 @inherits TypeNameOfClassToInheritFrom
 ```
 
-Le code suivant est un type de page Razor personnalisé :
+Le code suivant est un Razor type de page personnalisé :
 
 [!code-csharp[](razor/sample/Classes/CustomRazorPage.cs)]
 
@@ -597,23 +597,23 @@ Si « rick@contoso.com » est passé au modèle, la vue génère le balisage HTM
 </div>
 ```
 
-### <a name="inject"></a>\@inject
+### `@inject`
 
-La directive `@inject` permet à la page Razor d’injecter un service dans une vue à partir du [conteneur de services](xref:fundamentals/dependency-injection). Pour plus d’informations, consultez [Injection de dépendances dans les vues](xref:mvc/views/dependency-injection).
+La `@inject` directive permet Razor à la page d’injecter un service à partir du [conteneur de service](xref:fundamentals/dependency-injection) dans une vue. Pour plus d’informations, consultez [Injection de dépendances dans les vues](xref:mvc/views/dependency-injection).
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="layout"></a>\@layout
+### `@layout`
 
-*Ce scénario s’applique uniquement aux composants Razor (.razor).*
+*Ce scénario s’applique uniquement aux Razor composants (. Razor).*
 
-La directive `@layout` spécifie une disposition pour un composant Razor. Les composants de disposition sont utilisés pour éviter la duplication et l’incohérence de code. Pour plus d'informations, consultez <xref:blazor/layouts>.
+La `@layout` directive spécifie une disposition pour un Razor composant. Les composants de disposition sont utilisés pour éviter la duplication et l’incohérence de code. Pour plus d’informations, consultez <xref:blazor/layouts>.
 
 ::: moniker-end
 
-### <a name="model"></a>\@model
+### `@model`
 
-*Ce scénario s’applique uniquement aux vues MVC et à Razor Pages (.cshtml).*
+*Ce scénario s’applique uniquement aux affichages et Razor pages MVC (. cshtml).*
 
 La directive `@model` spécifie le type du modèle passé à une vue ou une page :
 
@@ -621,7 +621,7 @@ La directive `@model` spécifie le type du modèle passé à une vue ou une page
 @model TypeNameOfModel
 ```
 
-Dans une application ASP.NET Core MVC ou Razor Pages créée avec des comptes d’utilisateur individuels, *Views/Account/Login.cshtml* contient la déclaration de modèle suivante :
+Dans une application ASP.NET Core MVC ou Razor pages créée avec des comptes d’utilisateur individuels, *views/Account/login. cshtml* contient la déclaration de modèle suivante :
 
 ```cshtml
 @model LoginViewModel
@@ -633,7 +633,7 @@ La classe générée hérite de `RazorPage<dynamic>` :
 public class _Views_Account_Login_cshtml : RazorPage<LoginViewModel>
 ```
 
-Razor expose une propriété `Model` pour accéder au modèle passé à la vue :
+Razorexpose une `Model` propriété pour accéder au modèle passé à la vue :
 
 ```cshtml
 <div>The Login Email: @Model.Email</div>
@@ -641,18 +641,18 @@ Razor expose une propriété `Model` pour accéder au modèle passé à la vue :
 
 La directive `@model` spécifie le type de la propriété `Model`. La directive spécifie le type `T` dans `RazorPage<T>` pour la classe générée dont dérive la vue. Si la directive `@model` n’est pas spécifiée, la propriété `Model` est de type `dynamic`. Pour plus d’informations, consultez [modèles fortement typés et le @model mot clé](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword).
 
-### <a name="namespace"></a>\@namespace
+### `@namespace`
 
 La directive `@namespace` :
 
-* Définit l’espace de noms de la classe de la page Razor, de la vue MVC ou du composant Razor généré.
-* Définit les espaces de noms dérivés racine d’une classe de pages, de vues ou de composants à partir du fichier d’importations le plus proche dans l’arborescence de répertoires, *_ViewImports.cshtml* (vues ou pages) ou *_Imports.razor* (composants Razor).
+* Définit l’espace de noms de la classe de la page générée, de la Razor vue MVC ou du Razor composant.
+* Définit les espaces de noms dérivés racine d’une classe de pages, de vues ou de composants à partir du fichier d’importations le plus proche dans l’arborescence de répertoires, *_ViewImports. cshtml* (vues ou pages) ou *_Imports. Razor* ( Razor composants).
 
 ```cshtml
 @namespace Your.Namespace.Here
 ```
 
-Pour l’exemple de Razor Pages illustré dans le tableau suivant :
+Pour l' Razor exemple de pages illustré dans le tableau suivant :
 
 * Chaque page importe *Pages/_ViewImports.cshtml*.
 * *Pages/_ViewImports.cshtml* contient `@namespace Hello.World`.
@@ -664,7 +664,7 @@ Pour l’exemple de Razor Pages illustré dans le tableau suivant :
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages`               |
 | *Pages/MorePages/EvenMorePages/Page.cshtml* | `Hello.World.MorePages.EvenMorePages` |
 
-Les relations précédentes s’appliquent aux fichiers d’importation utilisés avec les vues MVC et les composants Razor.
+Les relations précédentes s’appliquent aux fichiers d’importation utilisés avec les vues et les Razor composants Mvc.
 
 Lorsque plusieurs fichiers d’importation ont une directive `@namespace`, le fichier le plus proche de la page, de la vue ou du composant dans l’arborescence de répertoires est utilisé pour définir l’espace de noms racine.
 
@@ -676,30 +676,30 @@ Si le dossier *EvenMorePages* dans l’exemple précédent comprend un fichier d
 | *Pages/MorePages/Page.cshtml*               | `Hello.World.MorePages` |
 | *Pages/MorePages/EvenMorePages/Page.cshtml* | `Another.Planet`        |
 
-### <a name="page"></a>\@page
+### `@page`
 
 ::: moniker range=">= aspnetcore-3.0"
 
 La directive `@page` a des effets différents selon le type du fichier dans lequel elle apparaît. La directive :
 
-* Dans un fichier *.cshtml*, indique que le fichier est une page Razor. Pour plus d’informations, consultez [itinéraires personnalisés](xref:razor-pages/index#custom-routes) et <xref:razor-pages/index> .
-* Spécifie qu’un composant Razor doit gérer les requêtes directement. Pour plus d'informations, consultez <xref:blazor/routing>.
+* Dans, un fichier *. cshtml* indique que le fichier est une Razor page. Pour plus d’informations, consultez [itinéraires personnalisés](xref:razor-pages/index#custom-routes) et <xref:razor-pages/index> .
+* Spécifie qu’un Razor composant doit gérer les demandes directement. Pour plus d’informations, consultez <xref:blazor/routing>.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-La directive `@page` sur la première ligne d’un fichier *.cshtml* indique que le fichier est une page Razor. Pour plus d'informations, consultez <xref:razor-pages/index>.
+La `@page` directive sur la première ligne d’un fichier *. cshtml* indique que le fichier est une Razor page. Pour plus d’informations, consultez <xref:razor-pages/index>.
 
 ::: moniker-end
 
-### <a name="section"></a>\@section
+### `@section`
 
-*Ce scénario s’applique uniquement aux vues MVC et à Razor Pages (.cshtml).*
+*Ce scénario s’applique uniquement aux affichages et Razor pages MVC (. cshtml).*
 
-La directive `@section` est utilisée conjointement avec des [dispositions MVC et Razor Pages](xref:mvc/views/layout) pour permettre aux vues et aux pages d’afficher le contenu dans différentes parties de la page HTML. Pour plus d'informations, consultez <xref:mvc/views/layout>.
+La `@section` directive est utilisée conjointement avec [MVC et les Razor mises en page de pages](xref:mvc/views/layout) pour permettre aux vues ou aux pages de restituer le contenu dans différentes parties de la page html. Pour plus d’informations, consultez <xref:mvc/views/layout>.
 
-### <a name="using"></a>\@using
+### `@using`
 
 La directive `@using` ajoute la directive `using` C# à la vue générée :
 
@@ -707,7 +707,7 @@ La directive `@using` ajoute la directive `using` C# à la vue générée :
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Dans les [composants Razor](xref:blazor/components), `@using` contrôle également les composants qui sont dans la portée.
+Dans [ Razor composants](xref:blazor/components), `@using` contrôle également les composants qui sont dans la portée.
 
 ::: moniker-end
 
@@ -715,39 +715,39 @@ Dans les [composants Razor](xref:blazor/components), `@using` contrôle égaleme
 
 ## <a name="directive-attributes"></a>Attributs de directive
 
-Les attributs de directive Razor sont représentés par des expressions implicites avec des mots clés réservés qui suivent le `@` symbole. Un attribut de directive change généralement la manière dont un élément est analysé ou active des fonctionnalités différentes.
+Razorles attributs de directive sont représentés par des expressions implicites avec des mots clés réservés qui suivent le `@` symbole. Un attribut de directive change généralement la manière dont un élément est analysé ou active des fonctionnalités différentes.
 
-### <a name="attributes"></a>\@attributes
+### `@attributes`
 
-*Ce scénario s’applique uniquement aux composants Razor (.razor).*
+*Ce scénario s’applique uniquement aux Razor composants (. Razor).*
 
-`@attributes` permet à un composant de restituer des attributs non déclarés. Pour plus d'informations, consultez <xref:blazor/components#attribute-splatting-and-arbitrary-parameters>.
+`@attributes` permet à un composant de restituer des attributs non déclarés. Pour plus d’informations, consultez <xref:blazor/components#attribute-splatting-and-arbitrary-parameters>.
 
-### <a name="bind"></a>\@bind
+### `@bind`
 
-*Ce scénario s’applique uniquement aux composants Razor (.razor).*
+*Ce scénario s’applique uniquement aux Razor composants (. Razor).*
 
-La liaison de données dans des composants s’effectue avec l’attribut `@bind`. Pour plus d'informations, consultez <xref:blazor/data-binding>.
+La liaison de données dans des composants s’effectue avec l’attribut `@bind`. Pour plus d’informations, consultez <xref:blazor/data-binding>.
 
-### <a name="onevent"></a>\@sur {EVENT}
+### `@on{EVENT}`
 
-*Ce scénario s’applique uniquement aux composants Razor (.razor).*
+*Ce scénario s’applique uniquement aux Razor composants (. Razor).*
 
-Razor fournit des fonctionnalités de gestion des événements pour les composants. Pour plus d'informations, consultez <xref:blazor/event-handling>.
+Razorfournit des fonctionnalités de gestion des événements pour les composants. Pour plus d’informations, consultez <xref:blazor/event-handling>.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.1"
 
-### <a name="oneventpreventdefault"></a>\@sur {EVENT} :p reventDefault
+### `@on{EVENT}:preventDefault`
 
-*Ce scénario s’applique uniquement aux composants Razor (.razor).*
+*Ce scénario s’applique uniquement aux Razor composants (. Razor).*
 
 Empêche l’action par défaut pour l’événement.
 
-### <a name="oneventstoppropagation"></a>\@sur {EVENT} : stopPropagation
+### `@on{EVENT}:stopPropagation`
 
-*Ce scénario s’applique uniquement aux composants Razor (.razor).*
+*Ce scénario s’applique uniquement aux Razor composants (. Razor).*
 
 Arrête la propagation d’événements pour l’événement.
 
@@ -755,35 +755,35 @@ Arrête la propagation d’événements pour l’événement.
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="key"></a>\@key
+### `@key`
 
-*Ce scénario s’applique uniquement aux composants Razor (.razor).*
+*Ce scénario s’applique uniquement aux Razor composants (. Razor).*
 
-L’attribut de directive `@key` amène les composants à comparer l’algorithme afin de garantir la préservation des éléments ou des composants en fonction de la valeur de la clé. Pour plus d'informations, consultez <xref:blazor/components#use-key-to-control-the-preservation-of-elements-and-components>.
+L’attribut de directive `@key` amène les composants à comparer l’algorithme afin de garantir la préservation des éléments ou des composants en fonction de la valeur de la clé. Pour plus d’informations, consultez <xref:blazor/components#use-key-to-control-the-preservation-of-elements-and-components>.
 
-### <a name="ref"></a>\@ref
+### `@ref`
 
-*Ce scénario s’applique uniquement aux composants Razor (.razor).*
+*Ce scénario s’applique uniquement aux Razor composants (. Razor).*
 
-Les références de composants (`@ref`) permettent de référencer une instance de composant afin que vous puissiez émettre des commandes vers cette instance. Pour plus d'informations, consultez <xref:blazor/components#capture-references-to-components>.
+Les références de composants (`@ref`) permettent de référencer une instance de composant afin que vous puissiez émettre des commandes vers cette instance. Pour plus d’informations, consultez <xref:blazor/components#capture-references-to-components>.
 
-### <a name="typeparam"></a>\@typeparam
+### `@typeparam`
 
-*Ce scénario s’applique uniquement aux composants Razor (.razor).*
+*Ce scénario s’applique uniquement aux Razor composants (. Razor).*
 
-La `@typeparam` directive déclare un paramètre de type générique pour la classe de composant générée. Pour plus d'informations, consultez <xref:blazor/templated-components#generic-typed-components>.
+La `@typeparam` directive déclare un paramètre de type générique pour la classe de composant générée. Pour plus d’informations, consultez <xref:blazor/templated-components#generic-typed-components>.
 
 ::: moniker-end
 
-## <a name="templated-razor-delegates"></a>Délégués Razor basés sur des modèles
+## <a name="templated-razor-delegates"></a>Délégués basés sur un modèle Razor
 
-Les modèles Razor vous permettent de définir un extrait de code d’interface utilisateur avec le format suivant :
+Razorles modèles vous permettent de définir un extrait de code d’interface utilisateur au format suivant :
 
 ```cshtml
 @<tag>...</tag>
 ```
 
-L’exemple suivant montre comment spécifier un délégué Razor basé sur un modèle comme <xref:System.Func%602>. Le [type dynamique](/dotnet/csharp/programming-guide/types/using-type-dynamic) est spécifié pour le paramètre de la méthode encapsulée par le délégué. Un [type objet](/dotnet/csharp/language-reference/keywords/object) est spécifié comme valeur de retour du délégué. Le modèle est utilisé avec une <xref:System.Collections.Generic.List%601> de `Pet` qui a une propriété `Name`.
+L’exemple suivant montre comment spécifier un délégué basé sur Razor un modèle en tant que <xref:System.Func%602> . Le [type dynamique](/dotnet/csharp/programming-guide/types/using-type-dynamic) est spécifié pour le paramètre de la méthode encapsulée par le délégué. Un [type objet](/dotnet/csharp/language-reference/keywords/object) est spécifié comme valeur de retour du délégué. Le modèle est utilisé avec une <xref:System.Collections.Generic.List%601> de `Pet` qui a une propriété `Name`.
 
 ```csharp
 public class Pet
@@ -822,7 +822,7 @@ Sortie rendue :
 <p>You have a pet named <strong>K-9</strong>.</p>
 ```
 
-Vous pouvez également fournir un modèle Razor inline en tant qu’argument à une méthode. Dans l’exemple suivant, la méthode `Repeat` reçoit un modèle Razor. La méthode utilise le modèle pour produire du contenu HTML avec des répétitions d’éléments fournis à partir d’une liste :
+Vous pouvez également fournir un modèle inline Razor en tant qu’argument à une méthode. Dans l’exemple suivant, la `Repeat` méthode reçoit un Razor modèle. La méthode utilise le modèle pour produire du contenu HTML avec des répétitions d’éléments fournis à partir d’une liste :
 
 ```cshtml
 @using Microsoft.AspNetCore.Html
@@ -876,7 +876,7 @@ Sortie rendue :
 
 ## <a name="tag-helpers"></a>Tag Helpers
 
-*Ce scénario s’applique uniquement aux vues MVC et à Razor Pages (.cshtml).*
+*Ce scénario s’applique uniquement aux affichages et Razor pages MVC (. cshtml).*
 
 Il existe trois directives spécifiques aux [Tag Helpers](xref:mvc/views/tag-helpers/intro).
 
@@ -890,38 +890,38 @@ Il existe trois directives spécifiques aux [Tag Helpers](xref:mvc/views/tag-hel
 
 ### <a name="razor-keywords"></a>Razormot
 
-* page (nécessite ASP.NET Core 2.1 ou ultérieur)
-* namespace
-* functions
-* hérite
-* model
-* section
-* helper (non pris en charge par ASP.NET Core)
+* `page`(Nécessite ASP.NET Core 2,1 ou version ultérieure)
+* `namespace`
+* `functions`
+* `inherits`
+* `model`
+* `section`
+* `helper`(Actuellement pris en charge par ASP.NET Core)
 
 Razorles mots clés sont placés dans une séquence d’échappement `@(Razor Keyword)` (par exemple, `@(functions)` ).
 
 ### <a name="c-razor-keywords"></a>RazorMots clés C#
 
-* casse
-* do
-* default
-* pour
-* foreach
-* if
-* else
-* lock
-* switch
-* Essayer
-* catch
-* finally
-* using
-* while
+* `case`
+* `do`
+* `default`
+* `for`
+* `foreach`
+* `if`
+* `else`
+* `lock`
+* `switch`
+* `try`
+* `catch`
+* `finally`
+* `using`
+* `while`
 
 Les Razor Mots clés C# doivent être double-échappés par `@(@C# Razor Keyword)` (par exemple, `@(@case)` ). Le premier `@` échappe l' Razor analyseur. La seconde séquence d’échappement `@` est pour l’analyseur C#.
 
 ### <a name="reserved-keywords-not-used-by-razor"></a>Mots clés réservés non utilisés parRazor
 
-* class
+* `class`
 
 ## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>Inspecter la Razor classe C# générée pour une vue
 
@@ -931,35 +931,39 @@ Avec kit SDK .NET Core 2,1 ou version ultérieure, le [ Razor Kit de développem
 
 Considérez la structure de répertoires suivante dans un projet ASP.NET Core 2,1 Razor pages ciblant .net Core 2,1 :
 
-* **Régions**
-  * **Administrateur/**
-    * **Pages**
-      * *Index.cshtml*
-      * *Index.cshtml.cs*
-* **Pages**
-  * **Partagé**
-    * *_Layout. cshtml*
-  * *_ViewImports.cshtml*
-  * *_ViewStart.cshtml*
-  * *Index.cshtml*
-  * *Index.cshtml.cs*
+```
+ Areas/
+   Admin/
+     Pages/
+       Index.cshtml
+       Index.cshtml.cs
+ Pages/
+   Shared/
+     _Layout.cshtml
+   _ViewImports.cshtml
+   _ViewStart.cshtml
+   Index.cshtml
+   Index.cshtml.cs
+  ```
 
 La création du projet dans la configuration *Debug* génère le répertoire *obj* suivant :
 
-* **obj**
-  * **Debug**
-    * **netcoreapp2.1/**
-      * **Razor/**
-        * **Régions**
-          * **Administrateur/**
-            * **Pages**
-              * *Index.g.cshtml.cs*
-        * **Pages**
-          * **Partagé**
-            * *_Layout.g.cshtml.cs*
-          * *_ViewImports.g.cshtml.cs*
-          * *_ViewStart.g.cshtml.cs*
-          * *Index.g.cshtml.cs*
+```
+ obj/
+   Debug/
+     netcoreapp2.1/
+       Razor/
+         Areas/
+           Admin/
+             Pages/
+               Index.g.cshtml.cs
+         Pages/
+           Shared/
+             _Layout.g.cshtml.cs
+           _ViewImports.g.cshtml.cs
+           _ViewStart.g.cshtml.cs
+           Index.g.cshtml.cs
+```
 
 Pour afficher la classe générée pour *pages/index. cshtml*, ouvrez *obj/Debug/netcoreapp 2.1/ Razor /pages/index.g.cshtml.cs*.
 

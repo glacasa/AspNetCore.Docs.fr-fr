@@ -1,7 +1,7 @@
 ---
 title: Configurer l’authentification par certificat dans ASP.NET Core
 author: blowdart
-description: Découvrez comment configurer l’authentification par certificat dans ASP.NET Core pour IIS et HTTP. sys.
+description: Découvrez comment configurer l’authentification par certificat dans ASP.NET Core pour IIS et HTTP.sys.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 01/02/2020
@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 4511e253ea9487c5739162b9b0180e39eb3a1b9c
-ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
+ms.openlocfilehash: cf80f7009334f49d877d2bd296b512e23f7fded8
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84454608"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724248"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Configurer l’authentification par certificat dans ASP.NET Core
 
@@ -34,7 +34,7 @@ L’authentification par certificat est un scénario avec état principalement u
 
 Une alternative à l’authentification par certificat dans les environnements où les proxies et les équilibreurs de charge sont utilisés est Active Directory Services fédérés (ADFS) avec OpenID Connect (OIDC).
 
-## <a name="get-started"></a>Bien démarrer
+## <a name="get-started"></a>Prise en main
 
 Obtenez un certificat HTTPs, appliquez-le et [configurez votre serveur](#configure-your-server-to-require-certificates) pour exiger des certificats.
 
@@ -557,3 +557,36 @@ namespace AspNetCoreCertificateAuthApi
     }
 }
 ```
+
+<a name="occ"></a>
+
+## <a name="optional-client-certificates"></a>Certificats clients facultatifs
+
+Cette section fournit des informations pour les applications qui doivent protéger un sous-ensemble de l’application à l’aide d’un certificat. Par exemple, une Razor page ou un contrôleur dans l’application peut nécessiter des certificats clients. Cela présente des défis en tant que certificats clients :
+  
+* Sont une fonctionnalité TLS, et non une fonctionnalité HTTP.
+* Sont négociés par connexion et doivent être négociés au début de la connexion avant que toutes les données HTTP soient disponibles. Au début de la connexion, seule la Indication du nom du serveur (SNI) &dagger; est connue. Les certificats du client et du serveur sont négociés avant la première demande sur une connexion et les demandes ne sont généralement pas en mesure de renégocier. La renégociation est interdite dans HTTP/2.
+
+ASP.NET Core 5 Preview 4 et versions ultérieures ajoute une prise en charge plus pratique pour les certificats clients facultatifs. Pour plus d’informations, consultez l' [exemple de certificats facultatifs](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample).
+
+L’approche suivante prend en charge les certificats clients facultatifs :
+
+* Configuration de la liaison pour le domaine et le sous-domaine :
+  * Par exemple, configurez des liaisons sur `contoso.com` et `myClient.contoso.com` . L' `contoso.com` hôte n’a pas besoin d’un certificat client, mais ce `myClient.contoso.com` n’est pas le cas.
+  * Pour plus d'informations, consultez les pages suivantes :
+    * [Kestrel](/fundamentals/servers/kestrel):
+      * [ListenOptions.UseHttps](xref:fundamentals/servers/kestrel#listenoptionsusehttps)
+      * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
+      * Notez que Kestrel ne prend pas en charge plusieurs configurations TLS sur une seule liaison, vous aurez besoin de deux liaisons avec des adresses IP ou des ports uniques. Consultez https://github.com/dotnet/runtime/issues/31097
+    * IIS
+      * [Hébergement d’IIS](xref:host-and-deploy/iis/index#create-the-iis-site)
+      * [Configurer la sécurité sur IIS](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis#configure-ssl-settings-2)
+    * Http.Sys : [configurer Windows Server](xref:fundamentals/servers/httpsys#configure-windows-server)
+* Pour les demandes adressées à l’application Web qui requièrent un certificat client et n’en ont pas :
+  * Rediriger vers la même page à l’aide du sous-domaine protégé par certificat du client.
+  * Par exemple, redirigez vers `myClient.contoso.com/requestedPage` . Étant donné que la demande à `myClient.contoso.com/requestedPage` est un nom d’hôte différent de `contoso.com/requestedPage` , le client établit une connexion différente et le certificat client est fourni.
+  * Pour plus d’informations, consultez <xref:security/authorization/introduction>.
+
+Laissez des questions, des commentaires et d’autres commentaires sur les certificats clients facultatifs dans ce problème de [discussion GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/18720) .
+
+&dagger;Indication du nom du serveur (SNI) est une extension TLS pour inclure un domaine virtuel dans le cadre de la négociation SSL. Cela signifie que le nom de domaine virtuel, ou un nom d’hôte, peut être utilisé pour identifier le point de terminaison réseau.

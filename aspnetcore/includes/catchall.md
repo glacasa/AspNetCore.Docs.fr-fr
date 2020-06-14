@@ -7,12 +7,13 @@
 >
 > Consultez les bogues GitHub [18677](https://github.com/dotnet/aspnetcore/issues/18677) et [16579](https://github.com/dotnet/aspnetcore/issues/16579) pour obtenir des exemples de cas qui rencontrent ce bogue.
 >
-> Un correctif d’abonnement pour ce bogue est planifié. Ce document sera mis à jour lors de la publication du correctif. Lorsque le correctif est publié, le code suivant définit un commutateur interne qui corrige ce bogue :
+> Un correctif d’abonnement pour ce bogue est contenu dans [.net Core 3.1.301 SDK et versions ultérieures](https://dotnet.microsoft.com/download/dotnet-core/3.1). Le code suivant définit un commutateur interne qui corrige ce bogue :
 >
 >```
 >public static void Main(string[] args)
 >{
->    AppContext.SetSwitch("Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior", true);
+>    AppContext.SetSwitch("Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior", 
+>                          true);
 >    CreateHostBuilder(args).Build().Run();
 >}
 >// Remaining code removed for brevity.
