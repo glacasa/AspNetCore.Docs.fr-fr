@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: ead9cb8c852ac768c8fe1f9066eb73ac1203c4ce
-ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
+ms.openlocfilehash: 9b34125fdf6c6d451a11a53874944f5d8b44aa29
+ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84454699"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84776538"
 ---
 # <a name="configuration-in-aspnet-core"></a>Configuration dans ASP.NET Core
 
@@ -28,7 +28,7 @@ Par [Rick Anderson](https://twitter.com/RickAndMSFT) et [Kirk Larkin](https://tw
 
 La configuration dans ASP.NET Core est effectuée à l’aide d’un ou de plusieurs [fournisseurs de configuration](#cp). Les fournisseurs de configuration lisent les données de configuration des paires clé-valeur à l’aide d’une variété de sources de configuration :
 
-* Fichiers de paramètres, tels que *appSettings. JSON*
+* Fichiers de paramètres, tels que *appsettings.jssur*
 * Variables d'environnement
 * Azure Key Vault
 * Azure App Configuration
@@ -50,13 +50,13 @@ ASP.NET Core les applications Web créées avec [dotnet New](/dotnet/core/tools/
  <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> fournit la configuration par défaut de l’application dans l’ordre suivant :
 
 1. [ChainedConfigurationProvider](xref:Microsoft.Extensions.Configuration.ChainedConfigurationSource) : ajoute un existant `IConfiguration` en tant que source. Dans le cas de configuration par défaut, ajoute la configuration d' [hôte](#hvac) et la définit en tant que première source de la configuration de l' _application_ .
-1. [appSettings. JSON](#appsettingsjson) à l’aide du [fournisseur de configuration JSON](#file-configuration-provider).
+1. [appsettings.jssur](#appsettingsjson) l’utilisation du [fournisseur de configuration JSON](#file-configuration-provider).
 1. *appSettings.* `Environment` *. JSON* à l’aide du [fournisseur de configuration JSON](#file-configuration-provider). Par exemple, *appSettings*. ***Production***. *JSON* et *appSettings*. ***Développement***. *JSON*.
 1. [Secrets d’application](xref:security/app-secrets) lorsque l’application s’exécute dans l' `Development` environnement.
 1. Variables d’environnement à l’aide du [fournisseur de configuration des variables d’environnement](#evcp).
 1. Arguments de ligne de commande à l’aide du [fournisseur de configuration de ligne de commande](#command-line).
 
-Les fournisseurs de configuration ajoutés ultérieurement remplacent les paramètres de clé précédents. Par exemple, si `MyKey` est défini à la fois dans *appSettings. JSON* et dans l’environnement, la valeur d’environnement est utilisée. À l’aide des fournisseurs de configuration par défaut, le [fournisseur de configuration de ligne de commande](#command-line-configuration-provider) remplace tous les autres fournisseurs.
+Les fournisseurs de configuration ajoutés ultérieurement remplacent les paramètres de clé précédents. Par exemple, si `MyKey` est défini dans *appsettings.jssur* et dans l’environnement, la valeur d’environnement est utilisée. À l’aide des fournisseurs de configuration par défaut, le [fournisseur de configuration de ligne de commande](#clcp) remplace tous les autres fournisseurs.
 
 Pour plus d’informations sur `CreateDefaultBuilder` , consultez [paramètres par défaut du générateur](xref:fundamentals/host/generic-host#default-builder-settings).
 
@@ -66,7 +66,7 @@ Le code suivant affiche les fournisseurs de configuration activés dans l’ordr
 
 ### <a name="appsettingsjson"></a>appsettings.json
 
-Prenons le fichier *appSettings. JSON* suivant :
+Prenez en compte les *appsettings.jssuivantes sur* le fichier :
 
 [!code-json[](index/samples/3.x/ConfigSample/appsettings.json)]
 
@@ -79,10 +79,10 @@ La configuration par défaut <xref:Microsoft.Extensions.Configuration.Json.JsonC
 1. *appsettings.json*
 1. *appSettings.* `Environment` *. JSON* : par exemple, *appSettings*. ***Production***. *JSON* et *appSettings*. ***Développement***. fichiers *JSON* . La version de l’environnement du fichier est chargée à partir de [IHostingEnvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*). Pour plus d’informations, consultez <xref:fundamentals/environments>.
 
-*appSettings*. `Environment` . les valeurs *JSON* remplacent les clés dans *appSettings. JSON*. Par exemple, par défaut :
+*appSettings*. `Environment` . les valeurs *JSON* remplacent les clés dans *appsettings.js*. Par exemple, par défaut :
 
-* Dans le développement, *appSettings*. ***Développement***. la configuration *JSON* remplace les valeurs trouvées dans *appSettings. JSON*.
-* En production, *appSettings*. ***Production***. la configuration *JSON* remplace les valeurs trouvées dans *appSettings. JSON*. Par exemple, lors du déploiement de l’application sur Azure.
+* Dans le développement, *appSettings*. ***Développement***. la configuration *JSON* remplace les valeurs trouvées dans *appsettings.jssur*.
+* En production, *appSettings*. ***Production***. la configuration *JSON* remplace les valeurs trouvées dans *appsettings.jssur*. Par exemple, lors du déploiement de l’application sur Azure.
 
 <a name="optpat"></a>
 
@@ -90,7 +90,7 @@ La configuration par défaut <xref:Microsoft.Extensions.Configuration.Json.JsonC
 
 [!INCLUDE[](~/includes/bind.md)]
 
-À l’aide de la configuration [par défaut](#default) , *appSettings. JSON* et *appSettings.* `Environment` les fichiers *. JSON* sont activés avec [reloadOnChange : true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75). Modifications apportées aux *appSettings. JSON* et *appSettings.* `Environment` le fichier *. JSON* ***après*** le démarrage de l’application est lu par le [fournisseur de configuration JSON](#jcp).
+À l’aide de la configuration [par défaut](#default) , le *appsettings.jssur* et *appSettings.* `Environment` les fichiers *. JSON* sont activés avec [reloadOnChange : true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75). Les modifications apportées à la *appsettings.jssur* et *appSettings.* `Environment` le fichier *. JSON* ***après*** le démarrage de l’application est lu par le [fournisseur de configuration JSON](#jcp).
 
 Pour plus d’informations sur l’ajout de fichiers de configuration JSON supplémentaires, consultez [fournisseur de configuration JSON](#jcp) dans ce document.
 
@@ -104,7 +104,7 @@ Instructions relatives aux données de configuration :
 * N’utilisez aucun secret de production dans les environnements de développement ou de test.
 * Spécifiez les secrets en dehors du projet afin qu’ils ne puissent pas être validés par inadvertance dans un référentiel de code source.
 
-Par [défaut](#default), le [Gestionnaire de secret](xref:security/app-secrets) lit les paramètres de configuration après *appSettings. JSON* et *appSettings.* `Environment` *. JSON*.
+Par [défaut](#default), le [Gestionnaire de secret](xref:security/app-secrets) lit les paramètres de configuration après *appsettings.jssur* et *appSettings.* `Environment` *. JSON*.
 
 Pour plus d’informations sur le stockage des mots de passe ou d’autres données sensibles :
 
@@ -117,7 +117,7 @@ Pour plus d’informations sur le stockage des mots de passe ou d’autres donn�
 
 ## <a name="environment-variables"></a>Variables d'environnement
 
-À l’aide de la configuration [par défaut](#default) , le <xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> charge la configuration à partir des paires clé-valeur de variable d’environnement après la lecture de *appSettings. JSON*, *appSettings.* `Environment` *. JSON*et le [Gestionnaire de secret](xref:security/app-secrets). Par conséquent, les valeurs de clés lues à partir de l’environnement remplacent les valeurs lues dans *appSettings. JSON*, *appSettings.* `Environment` *. JSON*et le gestionnaire de secret.
+À l’aide de la configuration [par défaut](#default) , le <xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> charge la configuration à partir des paires clé-valeur de variable d’environnement après la lecture *appsettings.jssur*, *appSettings.* `Environment` *. JSON*et le [Gestionnaire de secret](xref:security/app-secrets). Par conséquent, les valeurs de clés lues à partir de l’environnement remplacent les valeurs lues à partir de *appsettings.jssur*, *appSettings.* `Environment` *. JSON*et le gestionnaire de secret.
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
 
@@ -146,7 +146,7 @@ setx Position__Title Setx_Environment_Editor /M
 setx Position__Name Environment_Rick /M
 ```
 
-Pour vérifier que les commandes précédentes remplacent *appSettings. JSON* et *appSettings.* `Environment` *. JSON*:
+Pour vérifier que les commandes précédentes remplacent *appsettings.jssur* et *appSettings.* `Environment` *. JSON*:
 
 * Avec Visual Studio : quittez et redémarrez Visual Studio.
 * Avec l’interface CLI : démarrez une nouvelle fenêtre de commande et entrez `dotnet run` .
@@ -188,7 +188,7 @@ Consultez [préfixes de chaîne de connexion](#constr) pour plus d’information
 
 À l’aide de la configuration [par défaut](#default) , le <xref:Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationProvider> charge la configuration à partir de paires clé-valeur d’argument de ligne de commande après les sources de configuration suivantes :
 
-* *appSettings. JSON* et *appSettings*. `Environment` . fichiers *JSON* .
+* *appsettings.jssur* et *appSettings*. `Environment` fichiers *JSON* .
 * [Secrets d’application (gestionnaire de secret)](xref:security/app-secrets) dans l’environnement de développement.
 * Variables d'environnement.
 
@@ -260,7 +260,7 @@ Pour les applications qui utilisent des mappages de commutateurs, l’appel à `
 
 L’API de configuration lit les données de configuration hiérarchiques en aplatit les données hiérarchiques à l’aide d’un délimiteur dans les clés de configuration.
 
-L' [exemple de téléchargement](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) contient le fichier *appSettings. JSON* suivant :
+L' [exemple de téléchargement](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) contient les *appsettings.jssuivantes sur* le fichier :
 
 [!code-json[](index/samples/3.x/ConfigSample/appsettings.json)]
 
@@ -367,10 +367,10 @@ Examinons le code ci-dessous.
 
 Le code précédent :
 
-* Configure le fournisseur de configuration JSON pour charger le fichier *MyConfig. JSON* avec les options suivantes :
+* Configure le fournisseur de configuration JSON pour charger le *MyConfig.jssur* le fichier avec les options suivantes :
   * `optional: true`: Le fichier est facultatif.
   * `reloadOnChange: true`: Le fichier est rechargé lorsque des modifications sont enregistrées.
-* Lit les [fournisseurs de configuration par défaut](#default) avant le fichier *MyConfig. JSON* . Paramètres dans le paramètre de remplacement de fichier *MyConfig. JSON* des fournisseurs de configuration par défaut, y compris le [fournisseur de configuration des variables d’environnement](#evcp) et le fournisseur de configuration de ligne de [commande](#clcp).
+* Lit les [fournisseurs de configuration par défaut](#default) avant l' *MyConfig.jssur* le fichier. Les paramètres dans le *MyConfig.js* paramètre de remplacement de fichier dans les fournisseurs de configuration par défaut, y compris le [fournisseur de configuration des variables d’environnement](#evcp) et le fournisseur de configuration de ligne de [commande](#clcp).
 
 En général, vous ***ne souhaitez pas*** qu’une valeur de substitution de fichier JSON personnalisée soit définie dans le fournisseur de configuration des [variables d’environnement](#evcp) et dans le fournisseur de configuration de [ligne de commande](#clcp).
 
@@ -378,12 +378,12 @@ Le code suivant efface tous les fournisseurs de configuration et ajoute plusieur
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramJSON2.cs?name=snippet)]
 
-Dans le code précédent, les paramètres des *MyConfig. JSON* et *MyConfig*. `Environment` . fichiers *JSON* :
+Dans le code précédent, les paramètres de la *MyConfig.jssur* et *MyConfig*. `Environment` . fichiers *JSON* :
 
-* Substituez les paramètres dans *appSettings. JSON* et *appSettings*. `Environment` fichiers *JSON* .
+* Substituez les paramètres dans la *appsettings.jssur* et *appSettings* `Environment` . fichiers *JSON* .
 * Sont remplacées par les paramètres dans le [fournisseur de configuration des variables d’environnement](#evcp) et le fournisseur de configuration de ligne de [commande](#clcp).
 
-L' [exemple de téléchargement](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) contient le fichier *MyConfig. JSON* suivant :
+L' [exemple de téléchargement](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) contient les *MyConfig.jssuivantes sur* le fichier :
 
 [!code-json[](index/samples/3.x/ConfigSample/MyConfig.json)]
 
@@ -409,12 +409,12 @@ Le code suivant efface tous les fournisseurs de configuration et ajoute plusieur
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramINI.cs?name=snippet&highlight=10-30)]
 
-Dans le code précédent, les paramètres des *MyIniConfig. ini* et *MyIniConfig*. `Environment` . les fichiers *ini* sont remplacés par les paramètres dans le :
+Dans le code précédent, les paramètres des *MyIniConfig.ini* et *MyIniConfig*. `Environment` les fichiers *ini* sont remplacés par les paramètres dans le :
 
 * [Fournisseur de configuration des variables d’environnement](#evcp)
 * [Fournisseur de configuration de ligne de commande](#clcp).
 
-L' [exemple de téléchargement](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) contient le fichier *MyIniConfig. ini* suivant :
+L' [exemple de téléchargement](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) contient le fichier *MyIniConfig.ini* suivant :
 
 [!code-ini[](index/samples/3.x/ConfigSample/MyIniConfig.ini)]
 
@@ -430,12 +430,12 @@ Le code suivant efface tous les fournisseurs de configuration et ajoute plusieur
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramXML.cs?name=snippet)]
 
-Dans le code précédent, les paramètres des *MyXMLFile. xml* et *MyXMLFile*. `Environment` . les fichiers *XML* sont remplacés par les paramètres dans le :
+Dans le code précédent, les paramètres des *MyXMLFile.xml* et *MyXMLFile*. `Environment` les fichiers *XML* sont remplacés par les paramètres dans le :
 
 * [Fournisseur de configuration des variables d’environnement](#evcp)
 * [Fournisseur de configuration de ligne de commande](#clcp).
 
-L' [exemple de téléchargement](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) contient le fichier *MyXMLFile. xml* suivant :
+L' [exemple de téléchargement](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) contient le fichier *MyXMLFile.xml* suivant :
 
 [!code-xml[](index/samples/3.x/ConfigSample/MyXMLFile.xml)]
 
@@ -520,11 +520,11 @@ Dans le code précédent, si est `NumberKey` introuvable dans la configuration, 
 
 ## <a name="getsection-getchildren-and-exists"></a>GetSection, GetChildren et Exists
 
-Pour les exemples qui suivent, examinez le fichier *MySubsection. JSON* suivant :
+Pour les exemples qui suivent, prenez en compte les *MySubsection.jssuivantes sur* le fichier :
 
 [!code-json[](index/samples/3.x/ConfigSample/MySubsection.json)]
 
-Le code suivant ajoute *MySubsection. JSON* aux fournisseurs de configuration :
+Le code suivant ajoute *MySubsection.js* aux fournisseurs de configuration :
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramJSONsection.cs?name=snippet)]
 
@@ -558,11 +558,11 @@ Le code précédent appelle [ConfigurationExtensions. Exists](xref:Microsoft.Ext
 
 [ConfigurationBinder. bind](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*) prend en charge les tableaux de liaison aux objets à l’aide d’index de tableau dans les clés de configuration. Tout format de tableau qui expose un segment de clé numérique est capable d’effectuer une liaison de tableau à un tableau de classes [poco](https://wikipedia.org/wiki/Plain_Old_CLR_Object) .
 
-Examinez *myArray. JSON* de l' [exemple de téléchargement](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample):
+Prenez *MyArray.js* à partir de l' [exemple de téléchargement](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample):
 
 [!code-json[](index/samples/3.x/ConfigSample/MyArray.json)]
 
-Le code suivant ajoute *myArray. JSON* aux fournisseurs de configuration :
+Le code suivant ajoute *MyArray.js* aux fournisseurs de configuration :
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramJSONarray.cs?name=snippet)]
 
@@ -580,7 +580,7 @@ Index: 3  Value: value40
 Index: 4  Value: value50
 ```
 
-Dans la sortie précédente, l’index 3 a la valeur `value40` , qui correspond à `"4": "value40",` dans *myArray. JSON*. Les index de tableau liés sont continus et non liés à l’index de clé de configuration. Le Binder de configuration n’est pas en capacité à lier des valeurs null ou à créer des entrées NULL dans des objets liés
+Dans la sortie précédente, l’index 3 a la valeur `value40` , ce qui correspond à `"4": "value40",` dans *MyArray.jssur*. Les index de tableau liés sont continus et non liés à l’index de clé de configuration. Le Binder de configuration n’est pas en capacité à lier des valeurs null ou à créer des entrées NULL dans des objets liés
 
 Le code suivant charge la `array:entries` configuration avec la <xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*> méthode d’extension :
 
@@ -602,11 +602,11 @@ Index: 4  Value: value5
 
 L’index &num;3 dans l’objet lié contient les données de configuration pour la clé de configuration `array:4` et sa valeur de `value4`. Lorsque les données de configuration contenant un tableau sont liées, les index de tableau dans les clés de configuration sont utilisés pour itérer les données de configuration lors de la création de l’objet. Une valeur null ne peut pas être conservée dans des données de configuration, et une entrée à valeur null n’est pas créée dans un objet lié quand un tableau dans des clés de configuration ignore un ou plusieurs index.
 
-L’élément de configuration manquant pour l’index &num; 3 peut être fourni avant la liaison à l' `ArrayExample` instance par n’importe quel fournisseur de configuration qui lit la &num; paire clé/valeur de l’index 3. Considérez le fichier *valeur3. JSON* suivant dans l’exemple de téléchargement :
+L’élément de configuration manquant pour l’index &num; 3 peut être fourni avant la liaison à l' `ArrayExample` instance par n’importe quel fournisseur de configuration qui lit la &num; paire clé/valeur de l’index 3. Examinez le *Value3.jssuivant sur* le fichier à partir de l’exemple de téléchargement :
 
 [!code-json[](index/samples/3.x/ConfigSample/Value3.json)]
 
-Le code suivant comprend la configuration de *valeur3. JSON* et `arrayDict` `Dictionary` :
+Le code suivant comprend la configuration de *Value3.jssur* et `arrayDict` `Dictionary` :
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramArray.cs?name=snippet2)]
 
@@ -715,7 +715,7 @@ Le code suivant affiche les valeurs des options :
 
 [!code-csharp[](options/samples/3.x/OptionsSample/Pages/Test2.cshtml.cs?name=snippet)]
 
-Dans l’exemple précédent, les valeurs de `Option1` et `Option2` sont spécifiées dans *appSettings. JSON* , puis remplacées par le délégué configuré.
+Dans l’exemple précédent, les valeurs de `Option1` et `Option2` sont spécifiées dans *appsettings.jssur* , puis remplacé par le délégué configuré.
 
 <a name="hvac"></a>
 
@@ -742,10 +742,10 @@ Pour plus de détails sur la configuration par défaut lors de l’utilisation d
 
 Cette rubrique se rapporte uniquement à la configuration de l' *application*. D’autres aspects de l’exécution et de l’hébergement des applications ASP.NET Core sont configurés à l’aide des fichiers de configuration non traités dans cette rubrique :
 
-* *Launch. JSON* / *launchSettings. JSON* sont des fichiers de configuration d’outils pour l’environnement de développement, décrits ci-après :
+* *launch.js* / *launchSettings.jssur* sont des fichiers de configuration d’outils pour l’environnement de développement, décrits ci-après :
   * Dans <xref:fundamentals/environments#development> .
   * Dans l’ensemble de la documentation dans lequel les fichiers sont utilisés pour configurer des applications ASP.NET Core pour les scénarios de développement.
-* *Web. config* est un fichier de configuration de serveur, décrit dans les rubriques suivantes :
+* *web.config* est un fichier de configuration de serveur, décrit dans les rubriques suivantes :
   * <xref:host-and-deploy/iis/index>
   * <xref:host-and-deploy/aspnet-core-module>
 
@@ -795,10 +795,10 @@ Avant que l’application ne soit configurée et démarrée, un *hôte* est conf
 
 Cette rubrique se rapporte uniquement à la configuration de l' *application*. D’autres aspects de l’exécution et de l’hébergement des applications ASP.NET Core sont configurés à l’aide des fichiers de configuration non traités dans cette rubrique :
 
-* *Launch. JSON* / *launchSettings. JSON* sont des fichiers de configuration d’outils pour l’environnement de développement, décrits ci-après :
+* *launch.js* / *launchSettings.jssur* sont des fichiers de configuration d’outils pour l’environnement de développement, décrits ci-après :
   * Dans <xref:fundamentals/environments#development> .
   * Dans l’ensemble de la documentation dans lequel les fichiers sont utilisés pour configurer des applications ASP.NET Core pour les scénarios de développement.
-* *Web. config* est un fichier de configuration de serveur, décrit dans les rubriques suivantes :
+* *web.config* est un fichier de configuration de serveur, décrit dans les rubriques suivantes :
   * <xref:host-and-deploy/iis/index>
   * <xref:host-and-deploy/aspnet-core-module>
 
@@ -1285,7 +1285,7 @@ Les surcharges permettent de spécifier :
 
 `AddJsonFile`est appelé automatiquement deux fois lors de l’initialisation d’un nouveau générateur d’hôte `CreateDefaultBuilder` . La méthode est appelée pour charger la configuration à partir de :
 
-* *appSettings. JSON*: ce fichier est lu en premier. La version de l’environnement du fichier peut remplacer les valeurs fournies par le fichier *appsettings.json*.
+* *appsettings.jsle*: ce fichier est lu en premier. La version de l’environnement du fichier peut remplacer les valeurs fournies par le fichier *appsettings.json*.
 * *appSettings. {Environment}. JSON*: la version de l’environnement du fichier est chargée à partir de [IHostingEnvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*).
 
 Pour plus d’informations, consultez la section [Configuration par défaut](#default-configuration).
@@ -1312,21 +1312,21 @@ Appelez `ConfigureAppConfiguration` lors de la création de l’hôte pour spéc
 
 L’exemple d’application tire parti de la méthode de commodité statique `CreateDefaultBuilder` pour créer l’hôte, ce qui comprend deux appels à `AddJsonFile` :
 
-* Le premier appel à `AddJsonFile` charge la configuration à partir de *appSettings. JSON*:
+* Le premier appel à `AddJsonFile` charge la configuration à partir de *appsettings.jssur*:
 
   [!code-json[](index/samples/2.x/ConfigurationSample/appsettings.json)]
 
-* Le deuxième appel à `AddJsonFile` charge la configuration à partir de *appSettings. { Environnement}. JSON*. Pour *appSettings. Development. JSON* dans l’exemple d’application, le fichier suivant est chargé :
+* Le deuxième appel à `AddJsonFile` charge la configuration à partir de *appSettings. { Environnement}. JSON*. Pour *appsettings.Development.js* dans l’exemple d’application, le fichier suivant est chargé :
 
   [!code-json[](index/samples/2.x/ConfigurationSample/appsettings.Development.json)]
 
 1. Exécutez l’exemple d’application. Ouvrez un navigateur vers l’application avec l’adresse `http://localhost:5000`.
 1. La sortie contient des paires clé-valeur pour la configuration en fonction de l’environnement de l’application. Le niveau de journalisation de la clé `Logging:LogLevel:Default` est `Debug` lors de l’exécution de l’application dans l’environnement de développement.
 1. Exécutez à nouveau l’exemple d’application dans l’environnement de production :
-   1. Ouvrez le fichier *Properties/launchSettings. JSON* .
+   1. Ouvrez le fichier *Properties/launchSettings.js* .
    1. Dans le `ConfigurationSample` profil, remplacez la valeur de la `ASPNETCORE_ENVIRONMENT` variable d’environnement par `Production` .
    1. Enregistrez le fichier et exécutez l’application avec `dotnet run` dans un interpréteur de commandes.
-1. Paramètres dans *appSettings. Development. JSON* ne remplace plus les paramètres dans *appSettings. JSON*. Le niveau de journalisation de la clé `Logging:LogLevel:Default` est `Warning` .
+1. Les paramètres de la *appsettings.Development.js* qui ne se substituent plus aux paramètres de *appsettings.js*. Le niveau de journalisation de la clé `Logging:LogLevel:Default` est `Warning` .
 
 ### <a name="xml-configuration-provider"></a>Fournisseur de configuration XML
 
@@ -1792,7 +1792,7 @@ Pour obtenir un exemple d’accès à la configuration à l’aide des méthodes
 
 ## <a name="access-configuration-in-a-razor-pages-page-or-mvc-view"></a>Configuration de l’accès dans une Razor page pages ou une vue MVC
 
-Pour accéder aux paramètres de configuration dans une Razor page pages ou une vue MVC, ajoutez une [directive using](xref:mvc/views/razor#using) ([référence C# : directive using](/dotnet/csharp/language-reference/keywords/using-directive)) pour l' [espace de noms Microsoft. extensions. Configuration](xref:Microsoft.Extensions.Configuration) et injectez <xref:Microsoft.Extensions.Configuration.IConfiguration> dans la page ou la vue.
+Pour accéder aux paramètres de configuration dans une Razor page pages ou une vue MVC, ajoutez une [directive using](xref:mvc/views/razor#using) ([référence C# : directive using](/dotnet/csharp/language-reference/keywords/using-directive)) pour l' [espace de nomsMicrosoft.Extensions.Configfiguration](xref:Microsoft.Extensions.Configuration) et injectez <xref:Microsoft.Extensions.Configuration.IConfiguration> dans la page ou la vue.
 
 Dans une Razor page pages :
 
