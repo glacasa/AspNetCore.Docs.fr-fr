@@ -14,10 +14,10 @@ no-loc:
 - SignalR
 uid: blazor/debug
 ms.openlocfilehash: 193dc656c2ee0154f0ae534bc00f8dc29bab3258
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/05/2020
+ms.lasthandoff: 06/16/2020
 ms.locfileid: "84239208"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Déboguer ASP.NET Core Blazor Webassembly
@@ -51,13 +51,13 @@ Le débogage requiert l’un des navigateurs suivants :
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Activer le débogage pour Visual Studio et Visual Studio Code
 
-Pour activer le débogage pour une Blazor application Webassembly existante, mettez à jour le fichier *launchSettings. JSON* dans le projet de démarrage pour inclure la `inspectUri` propriété suivante dans chaque profil de lancement :
+Pour activer le débogage pour une Blazor application Webassembly existante, mettez à jour le *launchSettings.jssur* le fichier dans le projet de démarrage pour inclure la `inspectUri` propriété suivante dans chaque profil de lancement :
 
 ```json
 "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
 ```
 
-Une fois mis à jour, le fichier *launchSettings. JSON* doit ressembler à l’exemple suivant :
+Une fois mis à jour, l' *launchSettings.jssur* le fichier doit ressembler à l’exemple suivant :
 
 [!code-json[](debug/launchSettings.json?highlight=14,22)]
 
@@ -145,11 +145,11 @@ Installez l' [extension C#](https://marketplace.visualstudio.com/items?itemName=
 
 1. Dans la fenêtre de sélection, sélectionnez le projet *serveur* dans la solution hébergée.
 
-Un fichier *Launch. JSON* est généré avec la configuration de lancement pour le lancement du débogueur.
+Un *launch.jssur* le fichier est généré à l’aide de la configuration de lancement pour le lancement du débogueur.
 
 ### <a name="attach-to-an-existing-debugging-session"></a>Attacher à une session de débogage existante
 
-Pour attacher une application en cours d’exécution Blazor , créez un fichier *Launch. JSON* avec la configuration suivante :
+Pour attacher une application en cours d’exécution Blazor , créez un *launch.jssur* le fichier avec la configuration suivante :
 
 ```json
 {

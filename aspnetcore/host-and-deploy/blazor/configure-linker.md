@@ -1,12 +1,24 @@
 ---
-title : 'Configure the Linker for ASP.NET Core Blazor 'Author : Description : 'Apprenez à contrôler l’éditeur de liens en langage intermédiaire (il) lors de la génération d’une Blazor application. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: Configurer l’éditeur de liens pour ASP.NET CoreBlazor
+author: guardrex
+description: Découvrez comment contrôler l’éditeur de liens en langage intermédiaire (IL) lors de la génération d’une Blazor application.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: host-and-deploy/blazor/configure-linker
+ms.openlocfilehash: fd8dc118b8ed9c9e7c0d43e67b14ef4affa09d48
+ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/16/2020
+ms.locfileid: "83608627"
 ---
 # <a name="configure-the-linker-for-aspnet-core-blazor"></a>Configurer l’éditeur de liens pour ASP.NET CoreBlazor
 
@@ -43,7 +55,7 @@ Contrôlez la liaison pour chaque assembly en fournissant un fichier de configur
 </ItemGroup>
 ```
 
-*LinkerConfig. xml*:
+*LinkerConfig.xml*:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -81,7 +93,7 @@ Pour plus d’informations et d’exemples, consultez [formats de données (réf
 
 Pour configurer l’éditeur de liens pour une bibliothèque spécifique, ajoutez un fichier de configuration de l’éditeur de liens XML dans la bibliothèque en tant que ressource incorporée. La ressource incorporée doit avoir le même nom que l’assembly.
 
-Dans l’exemple suivant, le fichier *LinkerConfig. xml* est spécifié en tant que ressource incorporée qui porte le même nom que l’assembly de la bibliothèque :
+Dans l’exemple suivant, le fichier *LinkerConfig.xml* est spécifié en tant que ressource incorporée qui porte le même nom que l’assembly de la bibliothèque :
 
 ```xml
 <ItemGroup>
@@ -104,141 +116,14 @@ Pour contrôler les assemblys I18N qui sont conservés, définissez la `<BlazorW
 ```
 
 | Valeur de la région     | Assembly de région mono    |
-| ---
-title : 'Configure the Linker for ASP.NET Core Blazor 'Author : Description : 'Apprenez à contrôler l’éditeur de liens en langage intermédiaire (il) lors de la génération d’une Blazor application. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'Configure the Linker for ASP.NET Core Blazor 'Author : Description : 'Apprenez à contrôler l’éditeur de liens en langage intermédiaire (il) lors de la génération d’une Blazor application. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'Configure the Linker for ASP.NET Core Blazor 'Author : Description : 'Apprenez à contrôler l’éditeur de liens en langage intermédiaire (il) lors de la génération d’une Blazor application. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'Configure the Linker for ASP.NET Core Blazor 'Author : Description : 'Apprenez à contrôler l’éditeur de liens en langage intermédiaire (il) lors de la génération d’une Blazor application. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'Configure the Linker for ASP.NET Core Blazor 'Author : Description : 'Apprenez à contrôler l’éditeur de liens en langage intermédiaire (il) lors de la génération d’une Blazor application. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'Configure the Linker for ASP.NET Core Blazor 'Author : Description : 'Apprenez à contrôler l’éditeur de liens en langage intermédiaire (il) lors de la génération d’une Blazor application. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--------- | ---titre : 'configurer l’éditeur de liens pour ASP.NET Core Blazor 'auteur : Description : 'Apprenez à contrôler l’éditeur de liens en langage intermédiaire (il) lors de la génération d’une Blazor application. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'Configure the Linker for ASP.NET Core Blazor 'Author : Description : 'Apprenez à contrôler l’éditeur de liens en langage intermédiaire (il) lors de la génération d’une Blazor application. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'Configure the Linker for ASP.NET Core Blazor 'Author : Description : 'Apprenez à contrôler l’éditeur de liens en langage intermédiaire (il) lors de la génération d’une Blazor application. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'Configure the Linker for ASP.NET Core Blazor 'Author : Description : 'Apprenez à contrôler l’éditeur de liens en langage intermédiaire (il) lors de la génération d’une Blazor application. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'Configure the Linker for ASP.NET Core Blazor 'Author : Description : 'Apprenez à contrôler l’éditeur de liens en langage intermédiaire (il) lors de la génération d’une Blazor application. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'Configure the Linker for ASP.NET Core Blazor 'Author : Description : 'Apprenez à contrôler l’éditeur de liens en langage intermédiaire (il) lors de la génération d’une Blazor application. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'Configure the Linker for ASP.NET Core Blazor 'Author : Description : 'Apprenez à contrôler l’éditeur de liens en langage intermédiaire (il) lors de la génération d’une Blazor application. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'Configure the Linker for ASP.NET Core Blazor 'Author : Description : 'Apprenez à contrôler l’éditeur de liens en langage intermédiaire (il) lors de la génération d’une Blazor application. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
--
-title : 'Configure the Linker for ASP.NET Core Blazor 'Author : Description : 'Apprenez à contrôler l’éditeur de liens en langage intermédiaire (il) lors de la génération d’une Blazor application. '
-monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
------------- | | `all`            | Tous les assemblys inclus | | `cjk`             |  *I18n. CJK. dll* | | `mideast`         |  *I18n. MidEast. dll* | | `none`(par défaut) | Aucun | | `other`           |  *I18n. Other. dll* | | `rare`            |  *I18n. Rare. dll* | | `west`            |  *I18n. West. dll*         |
+| ---------------- | ----------------------- |
+| `all`            | Tous les assemblys inclus |
+| `cjk`            | *I18N.CJK.dll*          |
+| `mideast`        | *I18N.MidEast.dll*      |
+| `none` (valeur par défaut) | None                    |
+| `other`          | *I18N.Other.dll*        |
+| `rare`           | *I18N.Rare.dll*         |
+| `west`           | *I18N.West.dll*         |
 
 Utilisez une virgule pour séparer plusieurs valeurs (par exemple, `mideast,west` ).
 
