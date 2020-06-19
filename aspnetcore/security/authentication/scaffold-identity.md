@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: 36afa8ece58843b434ebfba6305bffdb9eb9bca0
-ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.openlocfilehash: f3314458a504af7f44dcdc276de890fa9485a2b3
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84724287"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85103035"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>Génération Identity de modèles automatique dans les projets ASP.net Core
 
@@ -195,7 +195,7 @@ Les jetons peuvent être passés à des composants :
 * Lorsque les jetons d’authentification sont approvisionnés et enregistrés dans le cookie d’authentification, ils peuvent être passés à des composants.
 * Razorles composants ne peuvent pas être utilisés `HttpContext` directement. il n’existe donc aucun moyen d’obtenir un [jeton XSRF (contrefaçon anti-request)](xref:security/anti-request-forgery) pour effectuer une publication sur le Identity point de terminaison de déconnexion de `/Identity/Account/Logout` . Un jeton XSRF peut être passé à des composants.
 
-Pour plus d’informations, consultez <xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.
+Pour plus d’informations, consultez <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.
 
 Dans le fichier *pages/_Host. cshtml* , établissez le jeton après l’avoir ajouté `InitialApplicationState` aux `TokenProvider` classes et :
 
@@ -229,7 +229,7 @@ Le `TokenProvider` service présenté dans la rubrique est utilisé dans le `Log
 Dans la `Startup` classe :
 
 * Confirmez que Razor les services de pages sont ajoutés dans `Startup.ConfigureServices` .
-* Si vous utilisez [TokenProvider](xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app), inscrivez le service.
+* Si vous utilisez [TokenProvider](xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app), inscrivez le service.
 * Appelez `UseDatabaseErrorPage` sur le générateur d’applications dans `Startup.Configure` pour l’environnement de développement.
 * Appelez `UseAuthentication` et `UseAuthorization` after `UseRouting` .
 * Ajoutez un point de terminaison pour les Razor pages.
@@ -253,7 +253,7 @@ Ajoutez un `RedirectToLogin` composant (*RedirectToLogin. Razor*) au dossier *pa
 }
 ```
 
-Ajoutez un `LoginDisplay` composant (*LoginDisplay. Razor*) au dossier *partagé* de l’application. Le [service TokenProvider](xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app) fournit le jeton XSRF pour le formulaire HTML qui publie sur le Identity point de terminaison logout de déconnexion :
+Ajoutez un `LoginDisplay` composant (*LoginDisplay. Razor*) au dossier *partagé* de l’application. Le [service TokenProvider](xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app) fournit le jeton XSRF pour le formulaire HTML qui publie sur le Identity point de terminaison logout de déconnexion :
 
 ```razor
 @using Microsoft.AspNetCore.Components.Authorization

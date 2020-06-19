@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 26202c45e49e64117d35fe6f1e9a65c4acc170fb
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: de04992c3e3c7ce2dc73eee801484d5e3930fa3a
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105088"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102434"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>Appeler des fonctions JavaScript à partir de méthodes .NET dans ASP.NET CoreBlazor
 
@@ -85,11 +85,11 @@ Dans l’exemple d’application côté client qui accompagne cette rubrique, de
 * `showPrompt`: Génère une invite pour accepter l’entrée d’utilisateur (nom de l’utilisateur) et retourne le nom à l’appelant.
 * `displayWelcome`: Assigne un message de bienvenue de l’appelant à un objet DOM avec un `id` de `welcome` .
 
-*wwwroot/exampleJsInterop. js*:
+*wwwroot/exampleJsInterop.js*:
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=2-7)]
 
-Placez la `<script>` balise qui fait référence au fichier JavaScript dans le fichier *wwwroot/index.html* ( Blazor webassembly) ou le fichier *pages/_Host. cshtml* ( Blazor serveur).
+Placez la `<script>` balise qui référence le fichier JavaScript dans le fichier *wwwroot/index.html* ( Blazor webassembly) ou le fichier *pages/_Host. cshtml* ( Blazor serveur).
 
 *wwwroot/index.html* ( Blazor webassembly) :
 
@@ -101,7 +101,7 @@ Placez la `<script>` balise qui fait référence au fichier JavaScript dans le f
 
 Ne placez pas de `<script>` balise dans un fichier de composant parce que la `<script>` balise ne peut pas être mise à jour dynamiquement.
 
-Les méthodes .NET interagissent avec les fonctions JavaScript dans le fichier *exampleJsInterop. js* en appelant <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> .
+Les méthodes .NET interagissent avec les fonctions JavaScript dans le fichier *exampleJsInterop.js* en appelant <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> .
 
 L' <xref:Microsoft.JSInterop.IJSRuntime> abstraction est asynchrone pour permettre les Blazor scénarios de serveur. Si l’application est une Blazor application Webassembly et que vous souhaitez appeler une fonction JavaScript de manière synchrone, vous devez effectuer un cast aval vers <xref:Microsoft.JSInterop.IJSInProcessRuntime> et appeler à la <xref:Microsoft.JSInterop.IJSInProcessRuntime.Invoke%2A> place. Nous recommandons que la plupart des bibliothèques d’interopérabilité JS utilisent les API Async pour s’assurer que les bibliothèques sont disponibles dans tous les scénarios.
 
@@ -142,7 +142,7 @@ L’exemple d’application comprend un composant pour illustrer l’interopéra
 }
 ```
 
-1. Lorsque `TriggerJsPrompt` est exécuté en sélectionnant le bouton d' **invite de commandes JavaScript** du composant, la `showPrompt` fonction JavaScript fournie dans le fichier *wwwroot/exampleJsInterop. js* est appelée.
+1. Lorsque `TriggerJsPrompt` est exécuté en sélectionnant le bouton d' **invite de commandes JavaScript** du composant, la `showPrompt` fonction JavaScript fournie dans le fichier *wwwroot/exampleJsInterop.js* est appelée.
 1. La `showPrompt` fonction accepte l’entrée d’utilisateur (nom de l’utilisateur), qui est codée au format HTML et renvoyée au composant. Le composant stocke le nom de l’utilisateur dans une variable locale, `name` .
 1. La chaîne stockée dans `name` est incorporée dans un message de bienvenue, qui est transmis à une fonction JavaScript, `displayWelcome` , qui affiche le message de bienvenue dans une balise de titre.
 
@@ -193,7 +193,7 @@ En ce qui concerne le code .NET, un <xref:Microsoft.AspNetCore.Components.Elemen
 
 Par exemple, le code suivant définit une méthode d’extension .NET qui permet de définir le focus sur un élément :
 
-*exampleJsInterop. js*:
+*exampleJsInterop.js*:
 
 ```javascript
 window.exampleJsFunctions = {
@@ -222,7 +222,7 @@ La `Focus` méthode est appelée directement sur l’objet. L’exemple suivant 
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/component2.razor?highlight=1-4,12)]
 
 > [!IMPORTANT]
-> La `username` variable est remplie uniquement après le rendu du composant. Si un non rempli <xref:Microsoft.AspNetCore.Components.ElementReference> est passé à du code JavaScript, le code JavaScript reçoit la valeur `null` . Pour manipuler des références d’élément après que le composant a terminé le rendu (pour définir le focus initial sur un élément), utilisez les [méthodes de cycle de vie des composants OnAfterRenderAsync ou OnAfterRender](xref:blazor/lifecycle#after-component-render).
+> La `username` variable est remplie uniquement après le rendu du composant. Si un non rempli <xref:Microsoft.AspNetCore.Components.ElementReference> est passé à du code JavaScript, le code JavaScript reçoit la valeur `null` . Pour manipuler des références d’élément après que le composant a terminé le rendu (pour définir le focus initial sur un élément), utilisez les [méthodes de cycle de vie des composants OnAfterRenderAsync ou OnAfterRender](xref:blazor/components/lifecycle#after-component-render).
 
 Lorsque vous utilisez des types génériques et que vous retournez une valeur, utilisez <xref:System.Threading.Tasks.ValueTask%601> :
 
@@ -459,7 +459,7 @@ L’interopérabilité de JS peut échouer en raison d’erreurs réseau et doit
       TimeSpan.FromSeconds({SECONDS}), new[] { "Arg1" });
   ```
 
-Pour plus d’informations sur l’épuisement des ressources, consultez <xref:security/blazor/server/threat-mitigation> .
+Pour plus d’informations sur l’épuisement des ressources, consultez <xref:blazor/security/server/threat-mitigation> .
 
 [!INCLUDE[](~/includes/blazor-share-interop-code.md)]
 

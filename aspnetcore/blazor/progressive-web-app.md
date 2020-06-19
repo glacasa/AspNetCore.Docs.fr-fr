@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: ffdc329d813dcbfffe2216dc58bbc4150f7cf786
-ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
+ms.openlocfilehash: b55619889c294a0cd6ab98ffdf228d86ee60cd7c
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84776421"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102311"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>Créez des applications Web progressifs avec ASP.NET Core Blazor Webassembly
 
@@ -89,7 +89,7 @@ Par défaut, les applications créées à l’aide de l’option de modèle PWA 
 
 Pour voir comment fonctionne la prise en charge hors connexion :
 
-1. Publiez l’application. Pour plus d’informations, consultez <xref:host-and-deploy/blazor/index#publish-the-app>.
+1. Publiez l’application. Pour plus d’informations, consultez <xref:blazor/host-and-deploy/index#publish-the-app>.
 1. Déployez l’application sur un serveur qui prend en charge le protocole HTTPs, et accédez à l’application dans un navigateur à son adresse HTTPs sécurisée.
 1. Ouvrez les outils de développement du navigateur, puis vérifiez qu’un *Worker service* est inscrit pour l’ordinateur hôte sous l’onglet **application** :
 
@@ -295,4 +295,4 @@ L’exemple d’application [CarChecker](https://github.com/SteveSandersonMS/Car
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* [SignalRnégociation Cross-Origin pour l’authentification](xref:blazor/hosting-model-configuration#signalr-cross-origin-negotiation-for-authentication)
+* [SignalRnégociation Cross-Origin pour l’authentification](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)

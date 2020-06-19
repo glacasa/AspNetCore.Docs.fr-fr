@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 707686cdc4ceb6605d6214eeeee0f6dd2e121c90
-ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
+ms.openlocfilehash: 8244dfa4dfed8e44e9e149891d2071c48bebd5ab
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84679525"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102368"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor les formulaires et la validation
 
@@ -65,7 +65,7 @@ Dans l'exemple précédent :
 
 * Le formulaire valide l’entrée utilisateur dans le `name` champ à l’aide de la validation définie dans le `ExampleModel` type. Le modèle est créé dans le bloc du composant `@code` et conservé dans un champ privé ( `exampleModel` ). Le champ est assigné à l' `Model` attribut de l' `<EditForm>` élément.
 * <xref:Microsoft.AspNetCore.Components.Forms.InputText>Liaisons du composant `@bind-Value` :
-  * Propriété de modèle ( `exampleModel.Name` ) de la <xref:Microsoft.AspNetCore.Components.Forms.InputText> propriété du composant `Value` . Pour plus d’informations sur la liaison de propriété, consultez <xref:blazor/data-binding#parent-to-child-binding-with-component-parameters> .
+  * Propriété de modèle ( `exampleModel.Name` ) de la <xref:Microsoft.AspNetCore.Components.Forms.InputText> propriété du composant `Value` . Pour plus d’informations sur la liaison de propriété, consultez <xref:blazor/components/data-binding#parent-to-child-binding-with-component-parameters> .
   * Délégué d’événement de modification à la <xref:Microsoft.AspNetCore.Components.Forms.InputText> propriété du composant `ValueChanged` .
 * Le <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> composant attache la prise en charge de la validation à l’aide d’annotations de données.
 * Le <xref:Microsoft.AspNetCore.Components.Forms.ValidationSummary> composant résume les messages de validation.
@@ -192,7 +192,7 @@ La forme suivante valide l’entrée d’utilisateur à l’aide de la validatio
 }
 ```
 
-<xref:Microsoft.AspNetCore.Components.Forms.EditForm>Crée un <xref:Microsoft.AspNetCore.Components.Forms.EditContext> comme valeur en [cascade](xref:blazor/components#cascading-values-and-parameters) qui effectue le suivi des métadonnées relatives au processus de modification, notamment les champs qui ont été modifiés et les messages de validation actuels. Le <xref:Microsoft.AspNetCore.Components.Forms.EditForm> fournit également des événements pratiques pour les envois valides et non valides ( <xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnValidSubmit> , <xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnInvalidSubmit> ). Vous pouvez également utiliser <xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnSubmit> pour déclencher la validation et vérifier les valeurs de champ avec un code de validation personnalisé.
+<xref:Microsoft.AspNetCore.Components.Forms.EditForm>Crée un <xref:Microsoft.AspNetCore.Components.Forms.EditContext> comme valeur en [cascade](xref:blazor/components/cascading-values-and-parameters) qui effectue le suivi des métadonnées relatives au processus de modification, notamment les champs qui ont été modifiés et les messages de validation actuels. Le <xref:Microsoft.AspNetCore.Components.Forms.EditForm> fournit également des événements pratiques pour les envois valides et non valides ( <xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnValidSubmit> , <xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnInvalidSubmit> ). Vous pouvez également utiliser <xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnSubmit> pour déclencher la validation et vérifier les valeurs de champ avec un code de validation personnalisé.
 
 Dans l’exemple suivant :
 
@@ -504,7 +504,7 @@ Pour activer et désactiver le bouton Envoyer en fonction de la validation de fo
 
 * Utilisez le du formulaire <xref:Microsoft.AspNetCore.Components.Forms.EditContext> pour assigner le modèle lorsque le composant est initialisé.
 * Validez le formulaire dans le rappel du contexte <xref:Microsoft.AspNetCore.Components.Forms.EditContext.OnFieldChanged> pour activer et désactiver le bouton Envoyer.
-* Décrochez le gestionnaire d’événements dans la `Dispose` méthode. Pour plus d’informations, consultez <xref:blazor/lifecycle#component-disposal-with-idisposable>.
+* Décrochez le gestionnaire d’événements dans la `Dispose` méthode. Pour plus d’informations, consultez <xref:blazor/components/lifecycle#component-disposal-with-idisposable>.
 
 ```razor
 @implements IDisposable
@@ -574,7 +574,7 @@ L’un des effets secondaires de l’approche précédente est qu’un <xref:Mic
 }
 ```
 
-## <a name="troubleshoot"></a>Dépanner
+## <a name="troubleshoot"></a>Dépannage
 
 > InvalidOperationException : EditForm requiert un paramètre de modèle, ou un paramètre EditContext, mais pas les deux.
 

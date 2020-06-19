@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 865b2e58b38c16a54815ce0923a78ac98f2247f1
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 46a1ccbb3b5eeaf1beb3e33bca1b6c7065d6d56a
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84355368"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074223"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>Mettre en forme les données des réponses dans l’API web ASP.NET Core
 
@@ -40,7 +40,7 @@ L’exemple de téléchargement retourne la liste des auteurs. À l’aide des o
 * L’en-tête de réponse contenant **Content-type :** `application/json; charset=utf-8` est affiché.
 * Les en-têtes de demande s’affichent. Par exemple, l' `Accept` en-tête. L' `Accept` en-tête est ignoré par le code précédent.
 
-Pour retourner des données mises en forme en texte brut, utilisez <xref:Microsoft.AspNetCore.Mvc.ContentResult.Content> et le helper <xref:Microsoft.AspNetCore.Mvc.ContentResult.Content> :
+Pour retourner des données mises en forme en texte brut, utilisez <xref:Microsoft.AspNetCore.Mvc.ContentResult> et le helper <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Content%2A> :
 
 [!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_about)]
 
@@ -198,7 +198,7 @@ public IActionResult Get()
 
 ### <a name="add-xml-format-support"></a>Ajouter la prise en charge du format XML
 
-La mise en forme XML requiert le package NuGet [Microsoft. AspNetCore. Mvc. Formatters. xml](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Formatters.Xml/) .
+La mise en forme XML requiert le package NuGet [Microsoft.AspNetCore.Mvc.Formatters.Xml](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Formatters.Xml/) .
 
 Les formateurs XML implémentés à l’aide <xref:System.Xml.Serialization.XmlSerializer> de sont configurés en appelant <xref:Microsoft.Extensions.DependencyInjection.MvcXmlMvcBuilderExtensions.AddXmlSerializerFormatters*> :
 

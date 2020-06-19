@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: 70f5da1dad9b4c0b9526a7688862637291be9a68
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 52c3dc82e51cb4375954a603a1bfde60fd667b56
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652573"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85103055"
 ---
 # <a name="introduction-to-razor-pages-in-aspnet-core"></a>Présentation Razor des pages dans ASP.net Core
 
@@ -216,7 +216,7 @@ Le fichier *index. cshtml* contient le balisage suivant :
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml?range=21)]
 
-Le `<a /a>` [tag Helper ancre](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) a utilisé l' `asp-route-{value}` attribut pour générer un lien vers la page de modification. Le lien contient des données d’itinéraire avec l’ID de contact. Par exemple, `https://localhost:5001/Edit/1`. Les [tag helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les Razor fichiers.
+Le `<a /a>` [tag Helper ancre](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) a utilisé l' `asp-route-{value}` attribut pour générer un lien vers la page de modification. Le lien contient des données d’itinéraire avec l’ID de contact. Par exemple : `https://localhost:5001/Edit/1`. Les [tag helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les Razor fichiers.
 
 Le fichier *index. cshtml* contient un balisage pour créer un bouton Supprimer pour chaque contact client :
 
@@ -321,7 +321,7 @@ La page créer du modèle affiche des `Movie` Erreurs avec des valeurs non valid
 
 ![Formulaire de vue Movie avec plusieurs erreurs de validation jQuery côté client](~/tutorials/razor-pages/validation/_static/val.png)
 
-Pour plus d'informations, voir :
+Pour plus d'informations, consultez les pages suivantes :
 
 * [Ajouter la validation à l’application vidéo](xref:tutorials/razor-pages/validation)
 * [Validation de modèle dans ASP.net Core](xref:mvc/models/validation).
@@ -608,7 +608,7 @@ Ajouter <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuild
 * <xref:razor-pages/razor-pages-conventions>
 * <xref:test/razor-pages-tests>
 * <xref:mvc/views/partial>
-* <xref:blazor/integrate-components>
+* <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps>
 
 ::: moniker-end
 
@@ -772,7 +772,7 @@ Le fichier *Index.cshtml* contient le balisage suivant pour créer un lien d’�
 
 [!code-cshtml[](index/sample/RazorPagesContacts/Pages/Index.cshtml?range=21)]
 
-Le `<a asp-page="./Edit" asp-route-id="@contact.Id">Edit</a>` [tag Helper ancre](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) a utilisé l' `asp-route-{value}` attribut pour générer un lien vers la page de modification. Le lien contient des données d’itinéraire avec l’ID de contact. Par exemple, `https://localhost:5001/Edit/1`. Les [tag helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les Razor fichiers. Les Tag Helpers sont activés par `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
+Le `<a asp-page="./Edit" asp-route-id="@contact.Id">Edit</a>` [tag Helper ancre](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) a utilisé l' `asp-route-{value}` attribut pour générer un lien vers la page de modification. Le lien contient des données d’itinéraire avec l’ID de contact. Par exemple : `https://localhost:5001/Edit/1`. Les [tag helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les Razor fichiers. Les Tag Helpers sont activés par `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
 
 Le fichier *Pages/Edit.cshtml* :
 

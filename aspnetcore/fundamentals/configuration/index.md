@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 9b34125fdf6c6d451a11a53874944f5d8b44aa29
-ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
+ms.openlocfilehash: 91200a7a4396d91bec3cfe6ce4b787839f30c72f
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84776538"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102675"
 ---
 # <a name="configuration-in-aspnet-core"></a>Configuration dans ASP.NET Core
 
@@ -730,7 +730,7 @@ Avant que l’application ne soit configurée et démarrée, un *hôte* est conf
 Pour plus de détails sur la configuration par défaut lors de l’utilisation de l’[hôte Web](xref:fundamentals/host/web-host), consultez la [version ASP.NET Core 2.2. de cette rubrique](/aspnet/core/fundamentals/configuration/?view=aspnetcore-2.2).
 
 * La configuration de l’hôte est fournie à partir des éléments suivants :
-  * Les variables d’environnement précédées du préfixe `DOTNET_` (par exemple, `DOTNET_ENVIRONMENT` ) à l’aide du [fournisseur de configuration des variables d’environnement](#environment-variables-configuration-provider). Le préfixe (`DOTNET_`) est supprimé lorsque les paires clé-valeur de la configuration sont chargées.
+  * Les variables d’environnement précédées du préfixe `DOTNET_` (par exemple, `DOTNET_ENVIRONMENT` ) à l’aide du [fournisseur de configuration des variables d’environnement](#environment-variables). Le préfixe (`DOTNET_`) est supprimé lorsque les paires clé-valeur de la configuration sont chargées.
   * Arguments de ligne de commande à l’aide du [fournisseur de configuration de ligne de commande](#command-line-configuration-provider).
 * La configuration par défaut de l’hôte Web est établie (`ConfigureWebHostDefaults`) :
   * Kestrel est utilisé comme serveur web et configuré à l’aide des fournisseurs de configuration de l’application.
@@ -759,6 +759,7 @@ Une implémentation de <xref:Microsoft.AspNetCore.Hosting.IHostingStartup> perme
 
 * [Code source de configuration](https://github.com/dotnet/extensions/tree/master/src/Configuration)
 * <xref:fundamentals/configuration/options>
+* <xref:blazor/fundamentals/configuration>
 
 ::: moniker-end
 

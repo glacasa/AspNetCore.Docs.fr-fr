@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/state-management
-ms.openlocfilehash: cfc2867baa03cbc0bedc9ad4a90244ec007094d6
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 3cc75406a1680dff4727527153a62856a594c8c7
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105660"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102509"
 ---
 # <a name="aspnet-core-blazor-state-management"></a>Gestion de l’état des ASP.NET Core Blazor
 
@@ -99,7 +99,7 @@ Le contenu de la barre d’adresse du navigateur est conservé :
 * Si l’utilisateur recharge manuellement la page.
 * Si le serveur Web devient indisponible et que l’utilisateur est obligé de recharger la page pour se connecter à un autre serveur.
 
-Pour plus d’informations sur la définition de modèles d’URL avec la `@page` directive, consultez <xref:blazor/routing> .
+Pour plus d’informations sur la définition de modèles d’URL avec la `@page` directive, consultez <xref:blazor/fundamentals/routing> .
 
 ### <a name="client-side-in-the-browser"></a>Côté client dans le navigateur
 
@@ -196,7 +196,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-Si les paramètres du composant incluent l’état de navigation, appelez `ProtectedSessionStore.GetAsync` et assignez le résultat dans <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> , et non <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> . <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>n’est appelé qu’une seule fois lors de la première instanciation du composant. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>n’est pas rappelée ultérieurement si l’utilisateur accède à une autre URL tout en restant sur la même page. Pour plus d’informations, consultez <xref:blazor/lifecycle>.
+Si les paramètres du composant incluent l’état de navigation, appelez `ProtectedSessionStore.GetAsync` et assignez le résultat dans <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> , et non <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> . <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>n’est appelé qu’une seule fois lors de la première instanciation du composant. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>n’est pas rappelée ultérieurement si l’utilisateur accède à une autre URL tout en restant sur la même page. Pour plus d’informations, consultez <xref:blazor/components/lifecycle>.
 
 > [!WARNING]
 > Les exemples de cette section ne fonctionnent que si le prérendu n’est pas activé sur le serveur. Quand le prérendu est activé, une erreur est générée de la façon suivante :

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: eb8a6d2ddbd3e8f61626566878a7af5f5a2525d8
-ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.openlocfilehash: feca504a39624282961fbc6405876e970a20b5d4
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "83608185"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102286"
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>Présentation de ASP.NET CoreBlazor
 
@@ -126,7 +126,7 @@ Quand une Blazor application Webassembly est générée et exécutée dans un na
 
 La taille de l’application publiée, sa *taille de charge utile*, est un facteur de performance essentiel pour qu’une application soit facile à utiliser. Le téléchargement d’une application volumineuse dans un navigateur prend un certain temps, ce qui nuit à l’expérience utilisateur. BlazorWebassembly optimise la taille de la charge utile pour réduire les temps de téléchargement :
 
-* Du code inutilisé est extrait de l’application lorsqu’elle est publiée par l’[éditeur de liens de langage intermédiaire (IL)](xref:host-and-deploy/blazor/configure-linker).
+* Du code inutilisé est extrait de l’application lorsqu’elle est publiée par l’[éditeur de liens de langage intermédiaire (IL)](xref:blazor/host-and-deploy/configure-linker).
 * Réponses HTTP compressées.
 * Le runtime .NET et les assemblys sont mis en cache dans le navigateur.
 

@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: 5b6ae8173ca3d968e220faa4a060e1b42b14f8bb
-ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
+ms.openlocfilehash: 6a03e35495e2ae545dc0a3cdd38578b433d8df6b
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84507242"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102579"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>Nouveautés de ASP.NET Core 3,1
 
@@ -25,7 +25,7 @@ Cet article met en évidence les modifications les plus importantes apportées �
 
 ## <a name="partial-class-support-for-razor-components"></a>Prise en charge des classes partielles pour les Razor composants
 
-Razorles composants sont maintenant générés en tant que classes partielles. Le code d’un Razor composant peut être écrit à l’aide d’un fichier code-behind défini en tant que classe partielle, plutôt que de définir tout le code du composant dans un fichier unique. Pour plus d’informations, consultez [prise en charge des classes partielles](xref:blazor/components#partial-class-support).
+Razorles composants sont maintenant générés en tant que classes partielles. Le code d’un Razor composant peut être écrit à l’aide d’un fichier code-behind défini en tant que classe partielle, plutôt que de définir tout le code du composant dans un fichier unique. Pour plus d’informations, consultez [prise en charge des classes partielles](xref:blazor/components/index#partial-class-support).
 
 ## <a name="blazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>BlazorTag Helper de composant et passer des paramètres à des composants de niveau supérieur
 
@@ -46,11 +46,11 @@ Par exemple, prérendez un `Counter` composant avec un volume d’incrément ( `
     param-IncrementAmount="10" />
 ```
 
-Pour plus d’informations, consultez [intégrer des composants dans Razor des pages et des applications MVC](xref:blazor/integrate-components).
+Pour plus d’informations, consultez [intégrer des composants dans Razor des pages et des applications MVC](xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps).
 
-## <a name="support-for-shared-queues-in-httpsys"></a>Prise en charge des files d’attente partagées dans HTTP. sys
+## <a name="support-for-shared-queues-in-httpsys"></a>Prise en charge des files d’attente partagées dans HTTP.sys
 
-[Http. sys](xref:fundamentals/servers/httpsys) prend en charge la création de files d’attente de demandes anonymes. Dans ASP.NET Core 3,1, nous avons ajouté la possibilité de créer une file d’attente de requêtes HTTP. sys nommée existante ou de l’attacher à celle-ci. La création ou l’attachement à une file d’attente de requêtes HTTP. sys existante active les scénarios où le processus de contrôleur HTTP. sys qui possède la file d’attente est indépendant du processus d’écoute. Cette indépendance permet de conserver les connexions existantes et les demandes mises en file d’attente entre les redémarrages du processus de l’écouteur :
+[HTTP.sys](xref:fundamentals/servers/httpsys) prend en charge la création de files d’attente de demandes anonymes. Dans ASP.NET Core 3,1, nous avons ajouté à la possibilité de créer ou d’attacher une file d’attente de demandes nommée HTTP.sys existante. La création ou l’attachement à une file d’attente de demandes nommée HTTP.sys existante permet de faire en sorte que le processus du contrôleur HTTP.sys qui possède la file d’attente soit indépendant du processus de l’écouteur. Cette indépendance permet de conserver les connexions existantes et les demandes mises en file d’attente entre les redémarrages du processus de l’écouteur :
 
 [!code-csharp[](sample/Program.cs?name=snippet)]
 
@@ -66,7 +66,7 @@ Utilisez l' `@on{EVENT}:preventDefault` attribut directive pour empêcher l’ac
 <input value="@_count" @onkeypress="KeyHandler" @onkeypress:preventDefault />
 ```
 
-Pour plus d’informations, consultez [empêcher les actions par défaut](xref:blazor/event-handling#prevent-default-actions).
+Pour plus d’informations, consultez [empêcher les actions par défaut](xref:blazor/components/event-handling#prevent-default-actions).
 
 ## <a name="stop-event-propagation-in-blazor-apps"></a>Arrêter la propagation des événements dans les Blazor applications
 
@@ -86,7 +86,7 @@ Utilisez l' `@on{EVENT}:stopPropagation` attribut directive pour arrêter la pro
 }
 ```
 
-Pour plus d’informations, consultez [arrêter la propagation des événements](xref:blazor/event-handling#stop-event-propagation).
+Pour plus d’informations, consultez [arrêter la propagation des événements](xref:blazor/components/event-handling#stop-event-propagation).
 
 ## <a name="detailed-errors-during-blazor-app-development"></a>Erreurs détaillées lors du Blazor développement d’applications
 
@@ -95,4 +95,4 @@ Quand une Blazor application ne fonctionne pas correctement pendant le développ
 * Pendant le développement, la barre dorée vous dirige vers la console du navigateur, où vous pouvez voir l’exception.
 * En production, la barre dorée avertit l’utilisateur qu’une erreur s’est produite et recommande l’actualisation du navigateur.
 
-Pour plus d’informations, consultez [erreurs détaillées lors du développement](xref:blazor/handle-errors#detailed-errors-during-development).
+Pour plus d’informations, consultez [erreurs détaillées lors du développement](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development).

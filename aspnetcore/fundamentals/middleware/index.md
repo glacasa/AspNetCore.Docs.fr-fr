@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 745eca9788d95c9a123e51a737b34dccdc65d8d4
-ms.sourcegitcommit: 30fcf69556b6b6ec54a3879e280d5f61f018b48f
+ms.openlocfilehash: b2468220d0c059a94a085357f2be7bbb3b89adc4
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82876229"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074214"
 ---
 # <a name="aspnet-core-middleware"></a>Intergiciel (middleware) ASP.NET Core
 
@@ -63,35 +63,35 @@ Quand un délégué ne passe pas une requête au délégué suivant, on parle al
 >
 > <xref:Microsoft.AspNetCore.Http.HttpResponse.HasStarted*> est un indice utile pour indiquer si les en-têtes ont été envoyés ou si le corps a fait l’objet d’écritures.
 
-<xref:Microsoft.AspNetCore.Builder.RunExtensions.Run*>les délégués ne reçoivent `next` pas de paramètre. Le premier `Run` délégué est toujours terminal et met fin au pipeline. `Run`est une convention. Certains composants de l’intergiciel ( `Run[Middleware]` middleware) peuvent exposer des méthodes qui s’exécutent à la fin du pipeline :
+<xref:Microsoft.AspNetCore.Builder.RunExtensions.Run*>les délégués ne reçoivent pas de `next` paramètre. Le premier `Run` délégué est toujours terminal et met fin au pipeline. `Run`est une convention. Certains composants de l’intergiciel (middleware) peuvent exposer des `Run[Middleware]` méthodes qui s’exécutent à la fin du pipeline :
 
 [!code-csharp[](index/snapshot/Chain/Startup.cs?highlight=12-15)]
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
-Dans l’exemple précédent, le `Run` délégué écrit `"Hello from 2nd delegate."` dans la réponse, puis termine le pipeline. Si un `Use` autre `Run` délégué ou est ajouté après `Run` le délégué, il n’est pas appelé.
+Dans l’exemple précédent, le `Run` délégué écrit `"Hello from 2nd delegate."` dans la réponse, puis termine le pipeline. Si un `Use` autre `Run` délégué ou est ajouté après le `Run` délégué, il n’est pas appelé.
 
 <a name="order"></a>
 
 ## <a name="middleware-order"></a>Ordre des intergiciels (middleware)
 
-Le diagramme suivant illustre le pipeline de traitement des demandes complet pour les applications ASP.NET Core MVC et Razor Pages. Vous pouvez voir comment, dans une application classique, les intergiciels existants sont triés et où les intergiciels personnalisés sont ajoutés. Vous avez le contrôle total sur la manière de réorganiser les intergiciels existants ou d’injecter de nouvelles intergiciels personnalisées si nécessaire pour vos scénarios.
+Le diagramme suivant illustre le pipeline de traitement des demandes complet pour ASP.NET Core les applications MVC et Razor pages. Vous pouvez voir comment, dans une application classique, les intergiciels existants sont triés et où les intergiciels personnalisés sont ajoutés. Vous avez le contrôle total sur la manière de réorganiser les intergiciels existants ou d’injecter de nouvelles intergiciels personnalisées si nécessaire pour vos scénarios.
 
 ![Pipeline de l’intergiciel (middleware) ASP.NET Core](index/_static/middleware-pipeline.svg)
 
-L’intergiciel (middleware) du **point de terminaison** dans le diagramme précédent exécute le pipeline de&mdash;filtre pour le type d’application correspondant MVC ou Razor pages.
+L’intergiciel (middleware) du **point de terminaison** dans le diagramme précédent exécute le pipeline de filtre pour le type d’application correspondant &mdash; MVC ou les Razor pages.
 
 ![Pipeline de filtre ASP.NET Core](index/_static/mvc-endpoint.svg)
 
 L’ordre dans lequel les composants de middleware sont ajoutés dans la méthode `Startup.Configure` définit l’ordre dans lequel ils sont appelés sur les requêtes et l’ordre inverse pour la réponse. L’ordre est **essentiel** pour la sécurité, les performances et les fonctionnalités.
 
-La méthode `Startup.Configure` suivante ajoute des composants d’intergiciel (middleware) liés à la sécurité dans l’ordre recommandé :
+La `Startup.Configure` méthode suivante ajoute des composants d’intergiciel (middleware) liés à la sécurité dans l’ordre recommandé :
 
 [!code-csharp[](index/snapshot/StartupAll3.cs?name=snippet)]
 
 Dans le code précédent :
 
 * Les intergiciels (middleware) qui ne sont pas ajoutés lors de la création d’une nouvelle application Web avec des [comptes d’utilisateurs individuels](xref:security/authentication/identity) sont commentés.
-* Tous les intergiciels (middleware) ne doivent pas être placés dans cet ordre exact, mais beaucoup d’entre eux. Par exemple, `UseCors` `UseAuthentication`, et `UseAuthorization` doivent être placés dans l’ordre indiqué.
+* Tous les intergiciels (middleware) ne doivent pas être placés dans cet ordre exact, mais beaucoup d’entre eux. Par exemple, `UseCors` , `UseAuthentication` et `UseAuthorization` doivent être placés dans l’ordre indiqué.
 
 La méthode `Startup.Configure` suivante ajoute des composants middleware utiles pour les scénarios d’application courants :
 
@@ -105,11 +105,11 @@ La méthode `Startup.Configure` suivante ajoute des composants middleware utiles
 1. Le middleware Redirection HTTPS (<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*>) redirige les requêtes HTTP vers HTTPS.
 1. Le middleware Fichier statique (<xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles*>) retourne des fichiers statiques et court-circuite tout traitement supplémentaire de la requête.
 1. Le middleware Stratégie des cookies (<xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy*>) met l’application en conformité avec les réglementation du RGPD (Règlement général sur la protection des données).
-1. Intergiciel (middleware)`UseRouting`de routage () pour acheminer les demandes.
+1. Intergiciel (middleware `UseRouting` ) de routage () pour acheminer les demandes.
 1. Le middleware Authentification (<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*>) tente d’authentifier l’utilisateur avant qu’il ne soit autorisé à accéder aux ressources sécurisées.
-1. L’intergiciel (`UseAuthorization`) d’autorisation autorise un utilisateur à accéder à des ressources sécurisées.
+1. L’intergiciel () d’autorisation `UseAuthorization` autorise un utilisateur à accéder à des ressources sécurisées.
 1. Le middleware Session (<xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession*>) établit et maintient l’état de la session. Si l’application utilise l’état de session, appelez le middleware après le middleware Stratégie des cookies et avant le middleware MVC.
-1. Intergiciel (middleware) de`UseEndpoints` routage `MapRazorPages`des points de terminaison (avec) pour ajouter des points de terminaison de Razor pages au pipeline de requêtes.
+1. Intergiciel (middleware) de routage des points de terminaison ( `UseEndpoints` avec `MapRazorPages` ) pour ajouter des Razor points de terminaison de pages au pipeline de requête.
 
 <!--
 
@@ -158,9 +158,9 @@ Dans l’exemple de code précédent, chaque méthode d’extension d’intergic
 
 Le middleware Fichier statique est appelé tôt dans le pipeline pour qu’il puisse gérer les requêtes et procéder au court-circuit sans passer par les composants restants. Le middleware de fichiers statiques **ne fournit aucune** vérification d’autorisation. Tous les fichiers pris en charge par l’intergiciel (middleware) de fichiers statiques, y compris ceux qui se trouvent sous *wwwroot*, sont disponibles publiquement. Pour obtenir une approche permettant de sécuriser les fichiers statiques, consultez <xref:fundamentals/static-files>.
 
-Si la requête n’est pas gérée par le middleware Fichier statique, elle est transmise au middleware Authentification (<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*>), qui effectue l’authentification. Le middleware Authentification ne court-circuite pas les requêtes non authentifiées. Même s’il authentifie les requêtes, l’autorisation (et le refus) interviennent uniquement après que MVC a sélectionné une page Razor/un contrôleur MVC et une action spécifiques.
+Si la requête n’est pas gérée par le middleware Fichier statique, elle est transmise au middleware Authentification (<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*>), qui effectue l’authentification. Le middleware Authentification ne court-circuite pas les requêtes non authentifiées. Bien que l’intergiciel d’authentification authentifie les demandes, l’autorisation (et le rejet) se produit uniquement lorsque MVC sélectionne une Razor page ou un contrôleur MVC et une action spécifiques.
 
-L’exemple suivant montre un ordre de middlewares où les requêtes pour les fichiers statiques sont gérées par le middleware Fichier statique avant le middleware Compression de la réponse. Les fichiers statiques ne sont pas compressés avec cet ordre de middlewares. Les réponses Razor Pages peuvent être compressées.
+L’exemple suivant montre un ordre de middlewares où les requêtes pour les fichiers statiques sont gérées par le middleware Fichier statique avant le middleware Compression de la réponse. Les fichiers statiques ne sont pas compressés avec cet ordre de middlewares. Les Razor réponses de pages peuvent être compressées.
 
 ```csharp
 public void Configure(IApplicationBuilder app)
@@ -177,12 +177,16 @@ public void Configure(IApplicationBuilder app)
 }
 ```
 
-Pour les applications à page unique (SPAs), l’intergiciel <xref:Microsoft.Extensions.DependencyInjection.SpaStaticFilesExtensions.UseSpaStaticFiles*> (middleware) Spa vient généralement en dernier dans le pipeline de l’intergiciel (middleware). L’intergiciel (middleware) SPA est le dernier :
+Pour les applications à page unique (SPAs), l’intergiciel (middleware) SPA <xref:Microsoft.Extensions.DependencyInjection.SpaStaticFilesExtensions.UseSpaStaticFiles*> vient généralement en dernier dans le pipeline de l’intergiciel (middleware). L’intergiciel (middleware) SPA est le dernier :
 
 * Pour permettre à tous les autres intergiciels de répondre d’abord aux demandes correspondantes.
 * Pour autoriser l’exécution de la fonction de routage de l’application serveur pour tous les itinéraires non reconnus par l’application serveur.
 
 Pour plus d’informations sur les modèles de projet [rereact](xref:spa/react) et [angulaire](xref:spa/angular) , consultez les guides.
+
+### <a name="forwarded-headers-middleware-order"></a>Ordre intergiciel des en-têtes transférés
+
+[!INCLUDE[](~/includes/ForwardedHeaders.md)]
 
 ## <a name="branch-the-middleware-pipeline"></a>Créer une branche pour le pipeline de l’intergiciel
 
@@ -229,11 +233,11 @@ Le tableau suivant présente les requêtes et les réponses de `http://localhost
 | localhost:1234                | Hello from non-Map delegate. |
 | localhost:1234/?branch=master | Branch used = master         |
 
-<xref:Microsoft.AspNetCore.Builder.UseWhenExtensions.UseWhen*>branche également le pipeline de requêtes en fonction du résultat du prédicat donné. Contrairement à `MapWhen`, cette branche est rejointe au pipeline principal s’il n’y a pas de court-circuit ou qu’il contient un intergiciel (middleware) de terminal :
+<xref:Microsoft.AspNetCore.Builder.UseWhenExtensions.UseWhen*>branche également le pipeline de requêtes en fonction du résultat du prédicat donné. Contrairement à `MapWhen` , cette branche est rejointe au pipeline principal s’il n’y a pas de court-circuit ou qu’il contient un intergiciel (middleware) de terminal :
 
 [!code-csharp[](index/snapshot/Chain/StartupUseWhen.cs?highlight=25-26)]
 
-Dans l’exemple précédent, une réponse « hello from principal pipeline ». est écrit pour toutes les demandes. Si la requête comprend une variable `branch`de chaîne de requête, sa valeur est consignée avant que le pipeline principal soit rejoint.
+Dans l’exemple précédent, une réponse « hello from principal pipeline ». est écrit pour toutes les demandes. Si la requête comprend une variable de chaîne de requête `branch` , sa valeur est consignée avant que le pipeline principal soit rejoint.
 
 ## <a name="built-in-middleware"></a>Intergiciels (middleware) intégrés
 
@@ -252,7 +256,7 @@ ASP.NET Core est fourni avec les composants de middleware suivant. La colonne *O
 | [Remplacement de la méthode HTTP](xref:Microsoft.AspNetCore.Builder.HttpMethodOverrideExtensions) | Autorise une requête POST entrante à remplacer la méthode. | Avant les composants qui consomment la méthode mise à jour. |
 | [Redirection HTTPs](xref:security/enforcing-ssl#require-https) | Redirige toutes les requêtes HTTP vers HTTPS. | Avant les composants qui consomment l’URL. |
 | [HSTS (HTTP Strict Transport Security)](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts) | Middleware d’amélioration de la sécurité qui ajoute un en-tête de réponse spécial. | Avant l’envoi des réponses et après les composants qui modifient les requêtes. Exemples : en-têtes transférés, réécriture d’URL. |
-| [MVC](xref:mvc/overview) | Traite les requêtes avec MVC/Razor Pages. | Terminal si une requête correspond à un itinéraire. |
+| [MVC](xref:mvc/overview) | Traite les demandes avec MVC/ Razor pages. | Terminal si une requête correspond à un itinéraire. |
 | [OWIN](xref:fundamentals/owin) | Interopérabilité avec le middleware, les serveurs et les applications OWIN. | Terminal si le middleware OWIN traite entièrement la requête. |
 | [Mise en cache des réponses](xref:performance/caching/middleware) | Prend en charge la mise en cache des réponses. | Avant les composants qui nécessitent la mise en cache. |
 | [Compression de la réponse](xref:performance/response-compression) | Prend en charge la compression des réponses. | Avant les composants qui nécessitent la compression. |
@@ -261,7 +265,7 @@ ASP.NET Core est fourni avec les composants de middleware suivant. La colonne *O
 | [SPA](xref:Microsoft.AspNetCore.Builder.SpaApplicationBuilderExtensions.UseSpa*) | Gère toutes les demandes à partir de ce point dans la chaîne de l’intergiciel (middleware) en retournant la page par défaut pour l’application à page unique (SPA) | À la fin de la chaîne, les autres middlewares pour traiter les fichiers statiques, les actions MVC, etc., sont prioritaires.|
 | [Session](xref:fundamentals/app-state) | Prend en charge la gestion des sessions utilisateur. | Avant les composants qui nécessitent la session. | 
 | [Fichiers statiques](xref:fundamentals/static-files) | Prend en charge le traitement des fichiers statiques et l’exploration des répertoires. | Terminal si une requête correspond à un fichier. |
-| [Réécriture d’URL](xref:fundamentals/url-rewriting) | Prend en charge la réécriture d’URL et la redirection des requêtes. | Avant les composants qui consomment l’URL. |
+| [URL Rewrite](xref:fundamentals/url-rewriting) | Prend en charge la réécriture d’URL et la redirection des requêtes. | Avant les composants qui consomment l’URL. |
 | [WebSockets](xref:fundamentals/websockets) | Autorise le protocole WebSockets. | Avant les composants qui sont nécessaires pour accepter les requêtes WebSocket. |
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
@@ -325,7 +329,7 @@ Quand un délégué ne passe pas une requête au délégué suivant, on parle al
 
 L’ordre dans lequel les composants de middleware sont ajoutés dans la méthode `Startup.Configure` définit l’ordre dans lequel ils sont appelés sur les requêtes et l’ordre inverse pour la réponse. L’ordre est **essentiel** pour la sécurité, les performances et les fonctionnalités.
 
-La méthode `Startup.Configure` suivante ajoute les composants de l’intergiciel (middleware) associés à la sécurité dans l’ordre recommandé :
+La `Startup.Configure` méthode suivante ajoute les composants de l’intergiciel (middleware) associés à la sécurité dans l’ordre recommandé :
 
 [!code-csharp[](index/snapshot/Startup22.cs?name=snippet)]
 
@@ -379,7 +383,7 @@ Dans l’exemple de code précédent, chaque méthode d’extension d’intergic
 
 Le middleware Fichier statique est appelé tôt dans le pipeline pour qu’il puisse gérer les requêtes et procéder au court-circuit sans passer par les composants restants. Le middleware de fichiers statiques **ne fournit aucune** vérification d’autorisation. Tous les fichiers pris en charge par l’intergiciel (middleware) de fichiers statiques, y compris ceux qui se trouvent sous *wwwroot*, sont disponibles publiquement. Pour obtenir une approche permettant de sécuriser les fichiers statiques, consultez <xref:fundamentals/static-files>.
 
-Si la requête n’est pas gérée par le middleware Fichier statique, elle est transmise au middleware Authentification (<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*>), qui effectue l’authentification. Le middleware Authentification ne court-circuite pas les requêtes non authentifiées. Même s’il authentifie les requêtes, l’autorisation (et le refus) interviennent uniquement après que MVC a sélectionné une page Razor/un contrôleur MVC et une action spécifiques.
+Si la requête n’est pas gérée par le middleware Fichier statique, elle est transmise au middleware Authentification (<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*>), qui effectue l’authentification. Le middleware Authentification ne court-circuite pas les requêtes non authentifiées. Bien que l’intergiciel d’authentification authentifie les demandes, l’autorisation (et le rejet) se produit uniquement lorsque MVC sélectionne une Razor page ou un contrôleur MVC et une action spécifiques.
 
 L’exemple suivant montre un ordre de middlewares où les requêtes pour les fichiers statiques sont gérées par le middleware Fichier statique avant le middleware Compression de la réponse. Les fichiers statiques ne sont pas compressés avec cet ordre de middlewares. Les réponses MVC de <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute*> peuvent être compressées.
 
@@ -457,7 +461,7 @@ ASP.NET Core est fourni avec les composants de middleware suivant. La colonne *O
 | [Remplacement de la méthode HTTP](xref:Microsoft.AspNetCore.Builder.HttpMethodOverrideExtensions) | Autorise une requête POST entrante à remplacer la méthode. | Avant les composants qui consomment la méthode mise à jour. |
 | [Redirection HTTPs](xref:security/enforcing-ssl#require-https) | Redirige toutes les requêtes HTTP vers HTTPS. | Avant les composants qui consomment l’URL. |
 | [HSTS (HTTP Strict Transport Security)](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts) | Middleware d’amélioration de la sécurité qui ajoute un en-tête de réponse spécial. | Avant l’envoi des réponses et après les composants qui modifient les requêtes. Exemples : en-têtes transférés, réécriture d’URL. |
-| [MVC](xref:mvc/overview) | Traite les demandes avec MVCRazor /pages. | Terminal si une requête correspond à un itinéraire. |
+| [MVC](xref:mvc/overview) | Traite les demandes avec MVC/ Razor pages. | Terminal si une requête correspond à un itinéraire. |
 | [OWIN](xref:fundamentals/owin) | Interopérabilité avec le middleware, les serveurs et les applications OWIN. | Terminal si le middleware OWIN traite entièrement la requête. |
 | [Mise en cache des réponses](xref:performance/caching/middleware) | Prend en charge la mise en cache des réponses. | Avant les composants qui nécessitent la mise en cache. |
 | [Compression de la réponse](xref:performance/response-compression) | Prend en charge la compression des réponses. | Avant les composants qui nécessitent la compression. |
@@ -465,7 +469,7 @@ ASP.NET Core est fourni avec les composants de middleware suivant. La colonne *O
 | [Routage de point de terminaison](xref:fundamentals/routing) | Définit et contraint des routes de requête. | Terminal pour les routes correspondantes. |
 | [Session](xref:fundamentals/app-state) | Prend en charge la gestion des sessions utilisateur. | Avant les composants qui nécessitent la session. |
 | [Fichiers statiques](xref:fundamentals/static-files) | Prend en charge le traitement des fichiers statiques et l’exploration des répertoires. | Terminal si une requête correspond à un fichier. |
-| [Réécriture d’URL](xref:fundamentals/url-rewriting) | Prend en charge la réécriture d’URL et la redirection des requêtes. | Avant les composants qui consomment l’URL. |
+| [URL Rewrite](xref:fundamentals/url-rewriting) | Prend en charge la réécriture d’URL et la redirection des requêtes. | Avant les composants qui consomment l’URL. |
 | [WebSockets](xref:fundamentals/websockets) | Autorise le protocole WebSockets. | Avant les composants qui sont nécessaires pour accepter les requêtes WebSocket. |
 
 ## <a name="additional-resources"></a>Ressources supplémentaires

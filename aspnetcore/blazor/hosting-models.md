@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 9556fea5319956ce4ae4f4faf90cb405784c733c
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: a5323534cd76cfb60008636066ca5dcb7308d134
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105491"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102268"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>BlazorModèles d’hébergement ASP.net Core
 
@@ -28,7 +28,7 @@ Blazorest un Framework Web conçu pour s’exécuter côté client dans le navig
 
 Pour créer un projet pour les modèles d’hébergement décrits dans cet article, consultez <xref:blazor/get-started> .
 
-Pour une configuration avancée, consultez <xref:blazor/hosting-model-configuration> .
+Pour une configuration avancée, consultez <xref:blazor/fundamentals/configuration> .
 
 ## <a name="blazor-webassembly"></a>BlazorWebassembly
 
@@ -116,7 +116,7 @@ Une mise à jour de l’interface utilisateur dans Blazor est déclenchée par 
 
 Le graphique est rerendu et *une différence d’interface utilisateur* (différence) est calculée. Cette différence est le plus petit ensemble de modifications DOM requis pour mettre à jour l’interface utilisateur sur le client. Le diff est envoyé au client dans un format binaire et appliqué par le navigateur.
 
-Un composant est supprimé une fois que l’utilisateur l’a quittée sur le client. Lorsqu’un utilisateur interagit avec un composant, l’état du composant (services, ressources) doit être conservé dans la mémoire du serveur. Étant donné que l’état de nombreux composants peut être géré simultanément par le serveur, l’épuisement de la mémoire est un problème qui doit être résolu. Pour obtenir des conseils sur la façon de créer une Blazor application serveur afin de garantir la meilleure utilisation de la mémoire du serveur, consultez <xref:security/blazor/server/threat-mitigation> .
+Un composant est supprimé une fois que l’utilisateur l’a quittée sur le client. Lorsqu’un utilisateur interagit avec un composant, l’état du composant (services, ressources) doit être conservé dans la mémoire du serveur. Étant donné que l’état de nombreux composants peut être géré simultanément par le serveur, l’épuisement de la mémoire est un problème qui doit être résolu. Pour obtenir des conseils sur la façon de créer une Blazor application serveur afin de garantir la meilleure utilisation de la mémoire du serveur, consultez <xref:blazor/security/server/threat-mitigation> .
 
 ### <a name="circuits"></a>Circuits
 
@@ -136,10 +136,10 @@ Pour une application métier limitée à un réseau d’entreprise privé, l’e
 
 L’utilisation de la mémoire peut également contribuer à la latence de l’application. L’augmentation de l’utilisation de la mémoire permet de garbage collection fréquentes ou la pagination de la mémoire sur le disque, qui dégradent les performances des applications et augmentent la latence de l’interface utilisateur.
 
-BlazorLes applications serveur doivent être optimisées pour réduire la latence de l’interface utilisateur en réduisant la latence du réseau et l’utilisation de la mémoire. Pour une approche de la mesure de la latence du réseau, consultez <xref:host-and-deploy/blazor/server#measure-network-latency> . Pour plus d’informations sur SignalR et Blazor , consultez :
+BlazorLes applications serveur doivent être optimisées pour réduire la latence de l’interface utilisateur en réduisant la latence du réseau et l’utilisation de la mémoire. Pour une approche de la mesure de la latence du réseau, consultez <xref:blazor/host-and-deploy/server#measure-network-latency> . Pour plus d’informations sur SignalR et Blazor , consultez :
 
-* <xref:host-and-deploy/blazor/server>
-* <xref:security/blazor/server/threat-mitigation>
+* <xref:blazor/host-and-deploy/server>
+* <xref:blazor/security/server/threat-mitigation>
 
 ### <a name="connection-to-the-server"></a>Connexion au serveur
 
@@ -147,7 +147,7 @@ BlazorLes applications serveur nécessitent une SignalR connexion active au serv
 
 Une Blazor application serveur est prérendue en réponse à la première demande du client, qui configure l’état de l’interface utilisateur sur le serveur. Lorsque le client tente de créer une SignalR connexion, le client doit se reconnecter au même serveur. BlazorLes applications serveur qui utilisent plusieurs serveurs principaux doivent implémenter des *sessions rémanentes* pour les SignalR connexions.
 
-Nous vous recommandons d’utiliser le [ SignalR service Azure](/azure/azure-signalr) pour les Blazor applications serveur. Le service permet la mise à l’échelle d’une Blazor application serveur vers un grand nombre de connexions simultanées SignalR . Les sessions rémanentes sont activées pour le SignalR service Azure en définissant l' `ServerStickyMode` option ou la valeur de configuration du service sur `Required` . Pour plus d’informations, consultez <xref:host-and-deploy/blazor/server#signalr-configuration>.
+Nous vous recommandons d’utiliser le [ SignalR service Azure](/azure/azure-signalr) pour les Blazor applications serveur. Le service permet la mise à l’échelle d’une Blazor application serveur vers un grand nombre de connexions simultanées SignalR . Les sessions rémanentes sont activées pour le SignalR service Azure en définissant l' `ServerStickyMode` option ou la valeur de configuration du service sur `Required` . Pour plus d’informations, consultez <xref:blazor/host-and-deploy/server#signalr-configuration>.
 
 Lorsque vous utilisez IIS, les sessions rémanentes sont activées avec Application Request Routing. Pour plus d’informations, consultez [équilibrage de charge http à l’aide de application Request Routing](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing).
 
@@ -155,5 +155,5 @@ Lorsque vous utilisez IIS, les sessions rémanentes sont activées avec Applicat
 
 * <xref:blazor/get-started>
 * <xref:signalr/introduction>
-* <xref:blazor/hosting-model-configuration>
+* <xref:blazor/fundamentals/additional-scenarios>
 * <xref:tutorials/signalr-blazor-webassembly>

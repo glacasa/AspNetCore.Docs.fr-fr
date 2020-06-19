@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-apache
-ms.openlocfilehash: 9f0825f65f316ee4caf67e82fe5812e3a1ae813e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 19fdd45374ee6d5489cff38798abe27b7af3da0f
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775906"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074419"
 ---
 # <a name="host-aspnet-core-on-linux-with-apache"></a>Héberger ASP.NET Core sur Linux avec Apache
 
@@ -68,9 +68,11 @@ Un serveur proxy est un serveur qui transfère les requêtes des clients à un a
 
 Étant donné que les demandes sont transférées par le proxy inverse, utilisez l' [intergiciel d’en-têtes transmis](xref:host-and-deploy/proxy-load-balancer) à partir du package [Microsoft. AspNetCore. HttpOverrides](https://www.nuget.org/packages/Microsoft.AspNetCore.HttpOverrides/) . Le middleware met à jour le `Request.Scheme`, à l’aide de l’en-tête `X-Forwarded-Proto`, afin que les URI de redirection et d’autres stratégies de sécurité fonctionnent correctement.
 
-Tout composant qui dépend du schéma, tel que l’authentification, la génération de lien, les redirections et la géolocalisation, doit être placé après l’appel du middleware des en-têtes transférés. En règle générale, le middleware des en-têtes transférés doit être exécuté avant les autres middlewares, à l’exception des middlewares de gestion des erreurs et de diagnostic. Cet ordre permet au middleware qui repose sur les informations des en-têtes transférés d’utiliser les valeurs d’en-tête pour le traitement.
+Tout composant qui dépend du schéma, tel que l’authentification, la génération de lien, les redirections et la géolocalisation, doit être placé après l’appel du middleware des en-têtes transférés.
 
-Appelez la <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> méthode en haut de avant `Startup.Configure` d’appeler un autre intergiciel. Configurez le middleware pour transférer les en-têtes `X-Forwarded-For` et `X-Forwarded-Proto` :
+[!INCLUDE[](~/includes/ForwardedHeaders.md)]
+
+Appelez la <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> méthode en haut de `Startup.Configure` avant d’appeler un autre intergiciel. Configurez le middleware pour transférer les en-têtes `X-Forwarded-For` et `X-Forwarded-Proto` :
 
 ```csharp
 // using Microsoft.AspNetCore.HttpOverrides;
@@ -208,7 +210,7 @@ Environment=ASPNETCORE_ENVIRONMENT=Production
 WantedBy=multi-user.target
 ```
 
-Dans l’exemple précédent, l’utilisateur qui gère le service est spécifié par l' `User` option. L’utilisateur (`apache`) doit exister et avoir la propriété correcte des fichiers de l’application.
+Dans l’exemple précédent, l’utilisateur qui gère le service est spécifié par l' `User` option. L’utilisateur ( `apache` ) doit exister et avoir la propriété correcte des fichiers de l’application.
 
 Utilisez `TimeoutStopSec` pour configurer la durée d’attente de l’arrêt de l’application après la réception du signal d’interruption initial. Si l’application ne s’arrête pas pendant cette période, le signal SIGKILL est émis pour mettre fin à l’application. Indiquez la valeur en secondes sans unité (par exemple, `150`), une valeur d’intervalle de temps (par exemple, `2min 30s`) ou `infinity` pour désactiver le délai d’attente. `TimeoutStopSec` prend la valeur par défaut de `DefaultTimeoutStopSec` dans le fichier de configuration du gestionnaire (*systemd-system.conf*, *system.conf.d*, *systemd-user.conf*, * user.conf.d*). Le délai d’expiration par défaut pour la plupart des distributions est de 90 secondes.
 
@@ -223,7 +225,16 @@ Certaines valeurs (par exemple, les chaînes de connexion SQL) doivent être pla
 systemd-escape "<value-to-escape>"
 ```
 
+::: moniker range=">= aspnetcore-3.0"
+
 Les séparateurs `:` (signe deux-points) ne sont pas pris en charge dans les noms de variables d’environnement. Utilisez un double trait de soulignement (`__`) à la place d’un signe deux-points. Le [fournisseur de configuration de variables d’environnement](xref:fundamentals/configuration/index#environment-variables-configuration-provider) convertit les doubles traits de soulignement en signes deux-points quand les variables d’environnement sont lues dans la configuration. Dans l’exemple suivant, la clé de chaîne de connexion `ConnectionStrings:DefaultConnection` est définie dans le fichier de définition de service en tant que `ConnectionStrings__DefaultConnection` :
+
+::: moniker-end
+::: moniker range="< aspnetcore-3.0"
+
+Les séparateurs `:` (signe deux-points) ne sont pas pris en charge dans les noms de variables d’environnement. Utilisez un double trait de soulignement (`__`) à la place d’un signe deux-points. Le [fournisseur de configuration de variables d’environnement](xref:fundamentals/configuration/index#environment-variables) convertit les doubles traits de soulignement en signes deux-points quand les variables d’environnement sont lues dans la configuration. Dans l’exemple suivant, la clé de chaîne de connexion `ConnectionStrings:DefaultConnection` est définie dans le fichier de définition de service en tant que `ConnectionStrings__DefaultConnection` :
+
+::: moniker-end
 
 ```
 Environment=ConnectionStrings__DefaultConnection={Connection String}
@@ -274,7 +285,7 @@ Pour le filtrage du temps, spécifiez les options appropriées dans la commande.
 sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-10-18 04:00"
 ```
 
-## <a name="data-protection"></a>Protection des données
+## <a name="data-protection"></a>Protection de données
 
 La [pile de protection des données ASP.NET Core](xref:security/data-protection/introduction) est utilisée par plusieurs [intergiciels (middleware)](xref:fundamentals/middleware/index) ASP.NET Core, notamment le middleware d’authentification (par exemple, le middleware cookie) et les protections de la falsification de requête intersites (CSRF, Cross Site Request Forgery). Même si les API de protection des données ne sont pas appelées par le code de l’utilisateur, la protection des données doit être configurée pour créer un [magasin de clés](xref:security/data-protection/implementation/key-management) de chiffrement persistantes. Si la protection des données n’est pas configurée, les clés sont conservées en mémoire et ignorées au redémarrage de l’application.
 
@@ -419,7 +430,7 @@ Pour atténuer les attaques par détournement de clic :
    ```
 
    Ajoutez la ligne `Header append X-FRAME-OPTIONS "SAMEORIGIN"`.
-1. Enregistrez le fichier .
+1. Enregistrez le fichier.
 1. Redémarrez Apache.
 
 #### <a name="mime-type-sniffing"></a>Détection de type MIME
@@ -432,7 +443,7 @@ Modifiez le fichier *httpd.conf* :
 sudo nano /etc/httpd/conf/httpd.conf
 ```
 
-Ajoutez la ligne `Header set X-Content-Type-Options "nosniff"`. Enregistrez le fichier . Redémarrez Apache.
+Ajoutez la ligne `Header set X-Content-Type-Options "nosniff"`. Enregistrez le fichier. Redémarrez Apache.
 
 ### <a name="load-balancing"></a>Équilibrage de la charge.
 

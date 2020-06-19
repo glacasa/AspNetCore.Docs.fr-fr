@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: 08229283882928c4cc733de19840d25872846c97
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: c90c3bf7ccef420101c66fe04d579920209b066c
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452029"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102334"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>Prise en main de ASP.NET CoreBlazor
 
@@ -54,7 +54,7 @@ Pour commencer à utiliser Blazor , suivez les instructions de votre choix d’o
 
 1. Installez la dernière [extension C# for Visual Studio code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) et l’extension de [débogueur JavaScript (nocturne)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) avec la `debug.javascript.usePreview` valeur `true` .
 
-  Pour définir `debug.javascript.usePreview` à `true` l’aide de l’interface utilisateur vs code, ouvrez paramètres des préférences de **fichier**  >  **Preferences**  >  **Settings** et recherchez `debug javascript use preview` . Activez la case à cocher **utiliser le nouveau débogueur JavaScript en préversion pour node. js et chrome**.
+  Pour définir `debug.javascript.usePreview` à `true` l’aide de l’interface utilisateur vs code, ouvrez paramètres des préférences de **fichier**  >  **Preferences**  >  **Settings** et recherchez `debug javascript use preview` . Activez la case à cocher **utiliser le nouveau débogueur JavaScript en préversion pour Node.js et chrome**.
 
 1. Pour une Blazor expérience Webassembly, exécutez la commande suivante dans une interface de commande :
 
@@ -162,7 +162,7 @@ Ajoutez un composant à un autre composant à l’aide de la syntaxe HTML. Par e
 
 Exécutez l'application. La page d’accueil possède son propre compteur fourni par le `Counter` composant.
 
-Les paramètres de composant sont spécifiés à l’aide d’attributs ou de [contenu enfant](xref:blazor/components#child-content), ce qui vous permet de définir des propriétés sur le composant enfant. Pour ajouter un paramètre au `Counter` composant, mettez à jour le bloc du composant `@code` :
+Les paramètres de composant sont spécifiés à l’aide d’attributs ou de [contenu enfant](xref:blazor/components/index#child-content), ce qui vous permet de définir des propriétés sur le composant enfant. Pour ajouter un paramètre au `Counter` composant, mettez à jour le bloc du composant `@code` :
 
 * Ajoutez une propriété publique pour `IncrementAmount` avec un [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) attribut.
 * Modifiez la méthode `IncrementCount` pour utiliser `IncrementAmount` lorsque vous augmentez la valeur de `currentCount`.

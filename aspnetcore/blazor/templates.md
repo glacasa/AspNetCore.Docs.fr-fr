@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: f582e8201a3393b848cf3f2c21ce3a7df5554100
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 3a491e43aec8291fcf03696b53240bd33e0deda1
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105530"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102496"
 ---
 # <a name="aspnet-core-blazor-templates"></a>Modèles de ASP.NET Core Blazor
 
@@ -80,7 +80,7 @@ Les fichiers et dossiers suivants composent une Blazor application générée à
 
 * Dossier *partagé* : contient d’autres composants d’interface utilisateur (*. Razor*) utilisés par l’application :
   * `MainLayout`(*MainLayout. Razor*) : composant de disposition de l’application.
-  * `NavMenu`(*NavMenu. Razor*) : implémente la navigation dans l’encadré. Comprend le [composant NavLink](xref:blazor/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), qui affiche des liens de navigation vers d’autres Razor composants. Le <xref:Microsoft.AspNetCore.Components.Routing.NavLink> composant indique automatiquement un état sélectionné quand son composant est chargé, ce qui aide l’utilisateur à comprendre quel composant est actuellement affiché.
+  * `NavMenu`(*NavMenu. Razor*) : implémente la navigation dans l’encadré. Comprend le [composant NavLink](xref:blazor/fundamentals/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), qui affiche des liens de navigation vers d’autres Razor composants. Le <xref:Microsoft.AspNetCore.Components.Routing.NavLink> composant indique automatiquement un état sélectionné quand son composant est chargé, ce qui aide l’utilisateur à comprendre quel composant est actuellement affiché.
 
 * *_Imports. Razor*: inclut des Razor directives communes à inclure dans les composants de l’application (*. Razor*), tels que les [`@using`](xref:mvc/views/razor#using) directives pour les espaces de noms.
 
@@ -88,4 +88,4 @@ Les fichiers et dossiers suivants composent une Blazor application générée à
 
 * *wwwroot*: dossier [racine Web](xref:fundamentals/index#web-root) de l’application contenant les ressources statiques publiques de l’application.
 
-* *appSettings. JSON* ( Blazor serveur) : paramètres de configuration de l’application.
+* *appsettings.jssur* ( Blazor serveur) : paramètres de configuration de l’application.

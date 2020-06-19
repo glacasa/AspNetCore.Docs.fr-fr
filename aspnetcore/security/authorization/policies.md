@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: 3b6fcef91355bf22e5aa185652d9489a44998db0
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 533bddc9c4499dad99cfdb3089045ea10aed4548
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777499"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074160"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>Autorisation basée sur la stratégie dans ASP.NET Core
 
@@ -25,15 +25,15 @@ ms.locfileid: "82777499"
 
 En coulisses, l’autorisation basée [sur les rôles](xref:security/authorization/roles) et l' [autorisation basée sur les revendications](xref:security/authorization/claims) utilisent une spécification, un gestionnaire de spécification et une stratégie préconfigurée. Ces blocs de construction prennent en charge l’expression des évaluations d’autorisation dans le code. Le résultat est une structure d’autorisation plus riche, réutilisable et testable.
 
-Une stratégie d’autorisation se compose d’une ou de plusieurs exigences. Elle est inscrite dans le cadre de la configuration du service d' `Startup.ConfigureServices` autorisation, dans la méthode :
+Une stratégie d’autorisation se compose d’une ou de plusieurs exigences. Elle est inscrite dans le cadre de la configuration du service d’autorisation, dans la `Startup.ConfigureServices` méthode :
 
 [!code-csharp[](policies/samples/3.0PoliciesAuthApp1/Startup.cs?range=31-32,39-40,42-45, 53, 58)]
 
-Dans l’exemple précédent, une stratégie « AtLeast21 » est créée. Il a une exigence&mdash;unique qui correspond à une ancienneté minimale, qui est fournie en tant que paramètre à la spécification.
+Dans l’exemple précédent, une stratégie « AtLeast21 » est créée. Il a une exigence unique &mdash; qui correspond à une ancienneté minimale, qui est fournie en tant que paramètre à la spécification.
 
 ## <a name="iauthorizationservice"></a>IAuthorizationService 
 
-Le service principal qui détermine si l’autorisation est réussie <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService>est le suivant :
+Le service principal qui détermine si l’autorisation est réussie est le <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> suivant :
 
 [!code-csharp[](policies/samples/stubs/copy_of_IAuthorizationService.cs?highlight=24-25,48-49&name=snippet)]
 
@@ -89,7 +89,7 @@ public async Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user,
 }
 ```
 
-Le code suivant illustre un exemple `ConfigureServices`typique :
+Le code suivant illustre un exemple typique `ConfigureServices` :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -113,25 +113,25 @@ public void ConfigureServices(IServiceCollection services)
 
 Utilisez <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> ou `[Authorize(Policy = "Something")]` pour l’autorisation.
 
-## <a name="applying-policies-to-mvc-controllers"></a>Application de stratégies à des contrôleurs MVC
+## <a name="apply-policies-to-mvc-controllers"></a>Appliquer des stratégies à des contrôleurs MVC
 
-Si vous utilisez Razor des pages, consultez [application de stratégies Razor à des pages](#applying-policies-to-razor-pages) dans ce document.
+Si vous utilisez des Razor pages, consultez [appliquer des stratégies à des Razor pages](#apply-policies-to-razor-pages) de ce document.
 
-Les stratégies sont appliquées aux contrôleurs à `[Authorize]` l’aide de l’attribut avec le nom de la stratégie. Par exemple :
+Les stratégies sont appliquées aux contrôleurs à l’aide de l' `[Authorize]` attribut avec le nom de la stratégie. Par exemple :
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
-## <a name="applying-policies-to-razor-pages"></a>Application de stratégies Razor à des pages
+## <a name="apply-policies-to-razor-pages"></a>Appliquer des stratégies à des Razor pages
 
-Les stratégies sont appliquées Razor aux pages à l' `[Authorize]` aide de l’attribut avec le nom de la stratégie. Par exemple :
+Les stratégies sont appliquées aux pages à l' Razor aide de l' `[Authorize]` attribut avec le nom de la stratégie. Par exemple :
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-Les stratégies peuvent également être appliquées Razor aux pages à l’aide d’une [Convention d’autorisation](xref:security/authorization/razor-pages-authorization).
+Les stratégies peuvent également être appliquées aux Razor pages à l’aide d’une [Convention d’autorisation](xref:security/authorization/razor-pages-authorization).
 
 ## <a name="requirements"></a>Spécifications
 
-Une spécification d’autorisation est une collection de paramètres de données qu’une stratégie peut utiliser pour évaluer le principal d’utilisateur actuel. Dans notre stratégie « AtLeast21 », l’exigence est un paramètre&mdash;unique de l’âge minimal. Une spécification implémente [IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement), qui est une interface de marqueur vide. Une exigence d’ancienneté minimale paramétrable peut être implémentée comme suit :
+Une spécification d’autorisation est une collection de paramètres de données qu’une stratégie peut utiliser pour évaluer le principal d’utilisateur actuel. Dans notre stratégie « AtLeast21 », l’exigence est un paramètre unique de &mdash; l’âge minimal. Une spécification implémente [IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement), qui est une interface de marqueur vide. Une exigence d’ancienneté minimale paramétrable peut être implémentée comme suit :
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Requirements/MinimumAgeRequirement.cs?name=snippet_MinimumAgeRequirementClass)]
 
@@ -146,7 +146,7 @@ Si une stratégie d’autorisation contient plusieurs exigences d’autorisation
 
 Un gestionnaire d’autorisations est responsable de l’évaluation des propriétés d’une spécification. Le gestionnaire d’autorisations évalue les spécifications par rapport à un [AuthorizationHandlerContext](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext) fourni pour déterminer si l’accès est autorisé.
 
-Une spécification peut avoir [plusieurs gestionnaires](#security-authorization-policies-based-multiple-handlers). Un gestionnaire peut hériter de [\<AuthorizationHandler TRequirement>](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandler-1), où `TRequirement` est la spécification à gérer. Un gestionnaire peut également implémenter [IAuthorizationHandler](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationhandler) pour gérer plusieurs types d’exigences.
+Une spécification peut avoir [plusieurs gestionnaires](#security-authorization-policies-based-multiple-handlers). Un gestionnaire peut hériter de [AuthorizationHandler \<TRequirement> ](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandler-1), où `TRequirement` est la spécification à gérer. Un gestionnaire peut également implémenter [IAuthorizationHandler](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationhandler) pour gérer plusieurs types d’exigences.
 
 ### <a name="use-a-handler-for-one-requirement"></a>Utiliser un gestionnaire pour une spécification
 
@@ -156,7 +156,7 @@ Voici un exemple de relation un-à-un dans laquelle un gestionnaire d’âge min
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Handlers/MinimumAgeHandler.cs?name=snippet_MinimumAgeHandlerClass)]
 
-Le code précédent détermine si le principal de l’utilisateur actuel possède une revendication de date de naissance qui a été émise par un émetteur connu et approuvé. L’autorisation ne peut pas se produire lorsque la revendication est manquante, auquel cas une tâche terminée est retournée. Lorsqu’une revendication est présente, l’âge de l’utilisateur est calculé. Si l’utilisateur atteint l’ancienneté minimale définie par la spécification, l’autorisation est considérée comme réussie. Lorsque l’autorisation est réussie `context.Succeed` , est appelée avec la spécification satisfaite comme paramètre unique.
+Le code précédent détermine si le principal de l’utilisateur actuel possède une revendication de date de naissance qui a été émise par un émetteur connu et approuvé. L’autorisation ne peut pas se produire lorsque la revendication est manquante, auquel cas une tâche terminée est retournée. Lorsqu’une revendication est présente, l’âge de l’utilisateur est calculé. Si l’utilisateur atteint l’ancienneté minimale définie par la spécification, l’autorisation est considérée comme réussie. Lorsque l’autorisation est réussie, `context.Succeed` est appelée avec la spécification satisfaite comme paramètre unique.
 
 ### <a name="use-a-handler-for-multiple-requirements"></a>Utiliser un gestionnaire pour plusieurs spécifications
 
@@ -164,7 +164,7 @@ Voici un exemple de relation un-à-plusieurs dans laquelle un gestionnaire d’a
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Handlers/PermissionHandler.cs?name=snippet_PermissionHandlerClass)]
 
-Le code précédent parcourt [PendingRequirements](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.pendingrequirements#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_PendingRequirements)&mdash;une propriété contenant des exigences non marquées comme ayant réussi. Pour une `ReadPermission` spécification, l’utilisateur doit être un propriétaire ou un sponsor pour accéder à la ressource demandée. Dans le cas d’une `EditPermission` exigence `DeletePermission` ou, il doit être propriétaire de l’accès à la ressource demandée.
+Le code précédent parcourt [PendingRequirements](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.pendingrequirements#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_PendingRequirements) &mdash; une propriété contenant des exigences non marquées comme ayant réussi. Pour une `ReadPermission` spécification, l’utilisateur doit être un propriétaire ou un sponsor pour accéder à la ressource demandée. Dans le cas d’une `EditPermission` `DeletePermission` exigence ou, il doit être propriétaire de l’accès à la ressource demandée.
 
 <a name="security-authorization-policies-based-handler-registration"></a>
 
@@ -174,19 +174,19 @@ Les gestionnaires sont inscrits dans la collection de services pendant la config
 
 [!code-csharp[](policies/samples/3.0PoliciesAuthApp1/Startup.cs?range=31-32,39-40,42-45, 53-55, 58)]
 
-Le code précédent s’inscrit `MinimumAgeHandler` en tant que singleton en appelant `services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();`. Les gestionnaires peuvent être inscrits à l’aide de l’une des [durées de vie de service](xref:fundamentals/dependency-injection#service-lifetimes)intégrées.
+Le code précédent s’inscrit `MinimumAgeHandler` en tant que singleton en appelant `services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();` . Les gestionnaires peuvent être inscrits à l’aide de l’une des [durées de vie de service](xref:fundamentals/dependency-injection#service-lifetimes)intégrées.
 
 ## <a name="what-should-a-handler-return"></a>Que doit retourner un gestionnaire ?
 
 Notez que la `Handle` méthode dans l' [exemple de gestionnaire](#security-authorization-handler-example) ne retourne aucune valeur. Comment l’état de la réussite ou de l’échec est-il indiqué ?
 
-* Un gestionnaire indique la réussite en `context.Succeed(IAuthorizationRequirement requirement)`appelant, en passant la spécification qui a été validée avec succès.
+* Un gestionnaire indique la réussite en appelant `context.Succeed(IAuthorizationRequirement requirement)` , en passant la spécification qui a été validée avec succès.
 
 * Un gestionnaire n’A pas besoin de gérer les défaillances en général, car d’autres gestionnaires pour la même spécification peuvent être exécutés correctement.
 
-* Pour garantir la défaillance, même si d’autres gestionnaires de spécifications sont `context.Fail`correctement exécutés, appelez.
+* Pour garantir la défaillance, même si d’autres gestionnaires de spécifications sont correctement exécutés, appelez `context.Fail` .
 
-Si un gestionnaire appelle `context.Succeed` ou `context.Fail`, tous les autres gestionnaires sont toujours appelés. Cela permet aux exigences de produire des effets secondaires, tels que la journalisation, qui se produit même si un autre gestionnaire a validé ou échoué avec succès. Quand la valeur `false`est affectée à, la propriété [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) (disponible dans ASP.net Core 1,1 et versions ultérieures) réduit les courts- `context.Fail` circuits de l’exécution des gestionnaires lorsque est appelé. `InvokeHandlersAfterFailure`la valeur par `true`défaut est, auquel cas tous les gestionnaires sont appelés.
+Si un gestionnaire appelle `context.Succeed` ou `context.Fail` , tous les autres gestionnaires sont toujours appelés. Cela permet aux exigences de produire des effets secondaires, tels que la journalisation, qui se produit même si un autre gestionnaire a validé ou échoué avec succès. Quand la valeur `false` est affectée à, la propriété [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) (disponible dans ASP.net Core 1,1 et versions ultérieures) réduit les courts-circuits de l’exécution des gestionnaires lorsque `context.Fail` est appelé. `InvokeHandlersAfterFailure`la valeur par défaut `true` est, auquel cas tous les gestionnaires sont appelés.
 
 > [!NOTE]
 > Les gestionnaires d’autorisations sont appelés même si l’authentification échoue.
@@ -209,23 +209,35 @@ Dans les cas où vous souhaitez que l’évaluation soit sur une base **ou** , i
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Handlers/TemporaryStickerHandler.cs?name=snippet_TemporaryStickerHandlerClass)]
 
-Vérifiez que les deux gestionnaires sont [inscrits](xref:security/authorization/policies#security-authorization-policies-based-handler-registration). Si l’un des gestionnaires aboutit lorsqu’une stratégie évalue le `BuildingEntryRequirement`, l’évaluation de la stratégie aboutit.
+Vérifiez que les deux gestionnaires sont [inscrits](xref:security/authorization/policies#security-authorization-policies-based-handler-registration). Si l’un des gestionnaires aboutit lorsqu’une stratégie évalue le `BuildingEntryRequirement` , l’évaluation de la stratégie aboutit.
 
-## <a name="using-a-func-to-fulfill-a-policy"></a>Utilisation d’un Func pour accomplir une stratégie
+## <a name="use-a-func-to-fulfill-a-policy"></a>Utiliser un Func pour accomplir une stratégie
 
-Il peut arriver que la réalisation d’une stratégie soit simple à exprimer dans le code. Il est possible de fournir un `Func<AuthorizationHandlerContext, bool>` lors de la configuration de votre stratégie `RequireAssertion` avec le générateur de stratégie.
+Il peut arriver que la réalisation d’une stratégie soit simple à exprimer dans le code. Il est possible de fournir un `Func<AuthorizationHandlerContext, bool>` lors de la configuration de votre stratégie avec le `RequireAssertion` Générateur de stratégie.
 
 Par exemple, la précédente `BadgeEntryHandler` peut être réécrite comme suit :
 
 [!code-csharp[](policies/samples/3.0PoliciesAuthApp1/Startup.cs?range=42-43,47-53)]
 
-## <a name="accessing-mvc-request-context-in-handlers"></a>Accès au contexte de requête MVC dans les gestionnaires
+## <a name="access-mvc-request-context-in-handlers"></a>Accéder au contexte de requête MVC dans les gestionnaires
 
-La `HandleRequirementAsync` méthode que vous implémentez dans un gestionnaire d’autorisations a deux `AuthorizationHandlerContext` paramètres : `TRequirement` un et le que vous gérez. Les infrastructures telles que MVC ou Jabbr sont libres d’ajouter n’importe quel objet `Resource` à la propriété `AuthorizationHandlerContext` sur le pour passer des informations supplémentaires.
+La `HandleRequirementAsync` méthode que vous implémentez dans un gestionnaire d’autorisations a deux paramètres : un `AuthorizationHandlerContext` et le `TRequirement` que vous gérez. Les infrastructures telles que MVC ou SignalR sont libres d’ajouter n’importe quel objet à la `Resource` propriété sur le `AuthorizationHandlerContext` pour passer des informations supplémentaires.
 
-Par exemple, MVC passe une instance de [AuthorizationFilterContext](/dotnet/api/?term=AuthorizationFilterContext) dans la `Resource` propriété. Cette propriété fournit l’accès `HttpContext`à `RouteData`, et tout le reste fourni par MVC Razor et les pages.
+Lorsque vous utilisez le routage de point de terminaison, l’autorisation est généralement gérée par l’intergiciel (middleware) d’autorisation. Dans ce cas, la `Resource` propriété est une instance de <xref:Microsoft.AspNetCore.Http.Endpoint> . Le point de terminaison peut être utilisé pour sonder la ressource sous-jacente vers laquelle vous effectuez le routage. Par exemple :
 
-L’utilisation de la `Resource` propriété est spécifique à l’infrastructure. L’utilisation des informations `Resource` de la propriété limite vos stratégies d’autorisation à des infrastructures spécifiques. Vous devez effectuer un `Resource` cast de la `is` propriété à l’aide du mot clé, puis confirmer que le cast a réussi pour s' `InvalidCastException` assurer que votre code ne se bloque pas avec un lorsqu’il est exécuté sur d’autres infrastructures :
+```csharp
+if (context.Resource is Endpoint endpoint)
+{
+   var actionDescriptor = endpoint.Metadata.GetMetadata<ControllerActionDescriptor>();
+   ...
+}
+```
+
+Le point de terminaison ne fournit pas l’accès à l’objet actuel `HttpContext` . Lorsque vous utilisez le routage de point de terminaison, utilisez `IHttpContextAcessor` pour accéder à `HttpContext` l’intérieur d’un gestionnaire d’autorisations. Pour plus d’informations, consultez [utiliser HttpContext à partir de composants personnalisés](xref:fundamentals/httpcontext#use-httpcontext-from-custom-components).
+
+Avec le routage traditionnel, ou lorsque l’autorisation a lieu dans le cadre du filtre d’autorisation MVC, la valeur de `Resource` est une <xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext> instance. Cette propriété fournit l’accès à `HttpContext` , `RouteData` et tout le reste fourni par MVC et les Razor pages.
+
+L’utilisation de la `Resource` propriété est spécifique à l’infrastructure. L’utilisation des informations de la `Resource` propriété limite vos stratégies d’autorisation à des infrastructures spécifiques. Vous devez effectuer un cast de la `Resource` propriété à l’aide du `is` mot clé, puis confirmer que le cast a réussi pour s’assurer que votre code ne se bloque pas avec un lorsqu’il est `InvalidCastException` exécuté sur d’autres infrastructures :
 
 ```csharp
 // Requires the following import:
@@ -243,17 +255,19 @@ if (context.Resource is AuthorizationFilterContext mvcContext)
 
 En coulisses, l’autorisation basée [sur les rôles](xref:security/authorization/roles) et l' [autorisation basée sur les revendications](xref:security/authorization/claims) utilisent une spécification, un gestionnaire de spécification et une stratégie préconfigurée. Ces blocs de construction prennent en charge l’expression des évaluations d’autorisation dans le code. Le résultat est une structure d’autorisation plus riche, réutilisable et testable.
 
-Une stratégie d’autorisation se compose d’une ou de plusieurs exigences. Elle est inscrite dans le cadre de la configuration du service d' `Startup.ConfigureServices` autorisation, dans la méthode :
+Une stratégie d’autorisation se compose d’une ou de plusieurs exigences. Elle est inscrite dans le cadre de la configuration du service d’autorisation, dans la `Startup.ConfigureServices` méthode :
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=32-33,48-53,61,66)]
 
-Dans l’exemple précédent, une stratégie « AtLeast21 » est créée. Il a une exigence&mdash;unique qui correspond à une ancienneté minimale, qui est fournie en tant que paramètre à la spécification.
+Dans l’exemple précédent, une stratégie « AtLeast21 » est créée. Il a une exigence unique &mdash; qui correspond à une ancienneté minimale, qui est fournie en tant que paramètre à la spécification.
 
 ## <a name="iauthorizationservice"></a>IAuthorizationService 
 
-Le service principal qui détermine si l’autorisation est réussie <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService>est le suivant :
+Le service principal qui détermine si l’autorisation est réussie est le <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> suivant :
 
 [!code-csharp[](policies/samples/stubs/copy_of_IAuthorizationService.cs?highlight=24-25,48-49&name=snippet)]
+
+[!INCLUDE[request localized comments](~/includes/code-comments-loc.md)]
 
 Le code précédent met en évidence les deux méthodes de [IAuthorizationService](https://github.com/dotnet/AspNetCore/blob/v2.2.4/src/Security/Authorization/Core/src/IAuthorizationService.cs).
 
@@ -307,7 +321,7 @@ public async Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user,
 }
 ```
 
-Le code suivant illustre un exemple `ConfigureServices`typique :
+Le code suivant illustre un exemple typique `ConfigureServices` :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -330,25 +344,25 @@ public void ConfigureServices(IServiceCollection services)
 
 Utilisez <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> ou `[Authorize(Policy = "Something")]` pour l’autorisation.
 
-## <a name="applying-policies-to-mvc-controllers"></a>Application de stratégies à des contrôleurs MVC
+## <a name="apply-policies-to-mvc-controllers"></a>Appliquer des stratégies à des contrôleurs MVC
 
-Si vous utilisez Razor des pages, consultez [application de stratégies Razor à des pages](#applying-policies-to-razor-pages) dans ce document.
+Si vous utilisez des Razor pages, consultez [appliquer des stratégies à des Razor pages](#apply-policies-to-razor-pages) de ce document.
 
-Les stratégies sont appliquées aux contrôleurs à `[Authorize]` l’aide de l’attribut avec le nom de la stratégie. Par exemple :
+Les stratégies sont appliquées aux contrôleurs à l’aide de l' `[Authorize]` attribut avec le nom de la stratégie. Par exemple :
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
-## <a name="applying-policies-to-razor-pages"></a>Application de stratégies Razor à des pages
+## <a name="apply-policies-to-razor-pages"></a>Appliquer des stratégies à des Razor pages
 
-Les stratégies sont appliquées Razor aux pages à l' `[Authorize]` aide de l’attribut avec le nom de la stratégie. Par exemple :
+Les stratégies sont appliquées aux pages à l' Razor aide de l' `[Authorize]` attribut avec le nom de la stratégie. Par exemple :
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-Les stratégies peuvent également être appliquées Razor aux pages à l’aide d’une [Convention d’autorisation](xref:security/authorization/razor-pages-authorization).
+Les stratégies peuvent également être appliquées aux Razor pages à l’aide d’une [Convention d’autorisation](xref:security/authorization/razor-pages-authorization).
 
 ## <a name="requirements"></a>Spécifications
 
-Une spécification d’autorisation est une collection de paramètres de données qu’une stratégie peut utiliser pour évaluer le principal d’utilisateur actuel. Dans notre stratégie « AtLeast21 », l’exigence est un paramètre&mdash;unique de l’âge minimal. Une spécification implémente [IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement), qui est une interface de marqueur vide. Une exigence d’ancienneté minimale paramétrable peut être implémentée comme suit :
+Une spécification d’autorisation est une collection de paramètres de données qu’une stratégie peut utiliser pour évaluer le principal d’utilisateur actuel. Dans notre stratégie « AtLeast21 », l’exigence est un paramètre unique de &mdash; l’âge minimal. Une spécification implémente [IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement), qui est une interface de marqueur vide. Une exigence d’ancienneté minimale paramétrable peut être implémentée comme suit :
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Requirements/MinimumAgeRequirement.cs?name=snippet_MinimumAgeRequirementClass)]
 
@@ -363,7 +377,7 @@ Si une stratégie d’autorisation contient plusieurs exigences d’autorisation
 
 Un gestionnaire d’autorisations est responsable de l’évaluation des propriétés d’une spécification. Le gestionnaire d’autorisations évalue les spécifications par rapport à un [AuthorizationHandlerContext](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext) fourni pour déterminer si l’accès est autorisé.
 
-Une spécification peut avoir [plusieurs gestionnaires](#security-authorization-policies-based-multiple-handlers). Un gestionnaire peut hériter de [\<AuthorizationHandler TRequirement>](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandler-1), où `TRequirement` est la spécification à gérer. Un gestionnaire peut également implémenter [IAuthorizationHandler](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationhandler) pour gérer plusieurs types d’exigences.
+Une spécification peut avoir [plusieurs gestionnaires](#security-authorization-policies-based-multiple-handlers). Un gestionnaire peut hériter de [AuthorizationHandler \<TRequirement> ](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandler-1), où `TRequirement` est la spécification à gérer. Un gestionnaire peut également implémenter [IAuthorizationHandler](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationhandler) pour gérer plusieurs types d’exigences.
 
 ### <a name="use-a-handler-for-one-requirement"></a>Utiliser un gestionnaire pour une spécification
 
@@ -373,7 +387,7 @@ Voici un exemple de relation un-à-un dans laquelle un gestionnaire d’âge min
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Handlers/MinimumAgeHandler.cs?name=snippet_MinimumAgeHandlerClass)]
 
-Le code précédent détermine si le principal de l’utilisateur actuel possède une revendication de date de naissance qui a été émise par un émetteur connu et approuvé. L’autorisation ne peut pas se produire lorsque la revendication est manquante, auquel cas une tâche terminée est retournée. Lorsqu’une revendication est présente, l’âge de l’utilisateur est calculé. Si l’utilisateur atteint l’ancienneté minimale définie par la spécification, l’autorisation est considérée comme réussie. Lorsque l’autorisation est réussie `context.Succeed` , est appelée avec la spécification satisfaite comme paramètre unique.
+Le code précédent détermine si le principal de l’utilisateur actuel possède une revendication de date de naissance qui a été émise par un émetteur connu et approuvé. L’autorisation ne peut pas se produire lorsque la revendication est manquante, auquel cas une tâche terminée est retournée. Lorsqu’une revendication est présente, l’âge de l’utilisateur est calculé. Si l’utilisateur atteint l’ancienneté minimale définie par la spécification, l’autorisation est considérée comme réussie. Lorsque l’autorisation est réussie, `context.Succeed` est appelée avec la spécification satisfaite comme paramètre unique.
 
 ### <a name="use-a-handler-for-multiple-requirements"></a>Utiliser un gestionnaire pour plusieurs spécifications
 
@@ -381,7 +395,7 @@ Voici un exemple de relation un-à-plusieurs dans laquelle un gestionnaire d’a
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Handlers/PermissionHandler.cs?name=snippet_PermissionHandlerClass)]
 
-Le code précédent parcourt [PendingRequirements](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.pendingrequirements#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_PendingRequirements)&mdash;une propriété contenant des exigences non marquées comme ayant réussi. Pour une `ReadPermission` spécification, l’utilisateur doit être un propriétaire ou un sponsor pour accéder à la ressource demandée. Dans le cas d’une `EditPermission` exigence `DeletePermission` ou, il doit être propriétaire de l’accès à la ressource demandée.
+Le code précédent parcourt [PendingRequirements](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.pendingrequirements#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_PendingRequirements) &mdash; une propriété contenant des exigences non marquées comme ayant réussi. Pour une `ReadPermission` spécification, l’utilisateur doit être un propriétaire ou un sponsor pour accéder à la ressource demandée. Dans le cas d’une `EditPermission` `DeletePermission` exigence ou, il doit être propriétaire de l’accès à la ressource demandée.
 
 <a name="security-authorization-policies-based-handler-registration"></a>
 
@@ -391,19 +405,19 @@ Les gestionnaires sont inscrits dans la collection de services pendant la config
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=32-33,48-53,61,62-63,66)]
 
-Le code précédent s’inscrit `MinimumAgeHandler` en tant que singleton en appelant `services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();`. Les gestionnaires peuvent être inscrits à l’aide de l’une des [durées de vie de service](xref:fundamentals/dependency-injection#service-lifetimes)intégrées.
+Le code précédent s’inscrit `MinimumAgeHandler` en tant que singleton en appelant `services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();` . Les gestionnaires peuvent être inscrits à l’aide de l’une des [durées de vie de service](xref:fundamentals/dependency-injection#service-lifetimes)intégrées.
 
 ## <a name="what-should-a-handler-return"></a>Que doit retourner un gestionnaire ?
 
 Notez que la `Handle` méthode dans l' [exemple de gestionnaire](#security-authorization-handler-example) ne retourne aucune valeur. Comment l’état de la réussite ou de l’échec est-il indiqué ?
 
-* Un gestionnaire indique la réussite en `context.Succeed(IAuthorizationRequirement requirement)`appelant, en passant la spécification qui a été validée avec succès.
+* Un gestionnaire indique la réussite en appelant `context.Succeed(IAuthorizationRequirement requirement)` , en passant la spécification qui a été validée avec succès.
 
 * Un gestionnaire n’A pas besoin de gérer les défaillances en général, car d’autres gestionnaires pour la même spécification peuvent être exécutés correctement.
 
-* Pour garantir la défaillance, même si d’autres gestionnaires de spécifications sont `context.Fail`correctement exécutés, appelez.
+* Pour garantir la défaillance, même si d’autres gestionnaires de spécifications sont correctement exécutés, appelez `context.Fail` .
 
-Si un gestionnaire appelle `context.Succeed` ou `context.Fail`, tous les autres gestionnaires sont toujours appelés. Cela permet aux exigences de produire des effets secondaires, tels que la journalisation, qui se produit même si un autre gestionnaire a validé ou échoué avec succès. Quand la valeur `false`est affectée à, la propriété [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) (disponible dans ASP.net Core 1,1 et versions ultérieures) réduit les courts- `context.Fail` circuits de l’exécution des gestionnaires lorsque est appelé. `InvokeHandlersAfterFailure`la valeur par `true`défaut est, auquel cas tous les gestionnaires sont appelés.
+Si un gestionnaire appelle `context.Succeed` ou `context.Fail` , tous les autres gestionnaires sont toujours appelés. Cela permet aux exigences de produire des effets secondaires, tels que la journalisation, qui se produit même si un autre gestionnaire a validé ou échoué avec succès. Quand la valeur `false` est affectée à, la propriété [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) (disponible dans ASP.net Core 1,1 et versions ultérieures) réduit les courts-circuits de l’exécution des gestionnaires lorsque `context.Fail` est appelé. `InvokeHandlersAfterFailure`la valeur par défaut `true` est, auquel cas tous les gestionnaires sont appelés.
 
 > [!NOTE]
 > Les gestionnaires d’autorisations sont appelés même si l’authentification échoue.
@@ -426,33 +440,23 @@ Dans les cas où vous souhaitez que l’évaluation soit sur une base **ou** , i
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Handlers/TemporaryStickerHandler.cs?name=snippet_TemporaryStickerHandlerClass)]
 
-Vérifiez que les deux gestionnaires sont [inscrits](xref:security/authorization/policies#security-authorization-policies-based-handler-registration). Si l’un des gestionnaires aboutit lorsqu’une stratégie évalue le `BuildingEntryRequirement`, l’évaluation de la stratégie aboutit.
+Vérifiez que les deux gestionnaires sont [inscrits](xref:security/authorization/policies#security-authorization-policies-based-handler-registration). Si l’un des gestionnaires aboutit lorsqu’une stratégie évalue le `BuildingEntryRequirement` , l’évaluation de la stratégie aboutit.
 
-## <a name="using-a-func-to-fulfill-a-policy"></a>Utilisation d’un Func pour accomplir une stratégie
+## <a name="use-a-func-to-fulfill-a-policy"></a>Utiliser un Func pour accomplir une stratégie
 
-Il peut arriver que la réalisation d’une stratégie soit simple à exprimer dans le code. Il est possible de fournir un `Func<AuthorizationHandlerContext, bool>` lors de la configuration de votre stratégie `RequireAssertion` avec le générateur de stratégie.
+Il peut arriver que la réalisation d’une stratégie soit simple à exprimer dans le code. Il est possible de fournir un `Func<AuthorizationHandlerContext, bool>` lors de la configuration de votre stratégie avec le `RequireAssertion` Générateur de stratégie.
 
 Par exemple, la précédente `BadgeEntryHandler` peut être réécrite comme suit :
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=50-51,55-61)]
 
-## <a name="accessing-mvc-request-context-in-handlers"></a>Accès au contexte de requête MVC dans les gestionnaires
+## <a name="access-mvc-request-context-in-handlers"></a>Accéder au contexte de requête MVC dans les gestionnaires
 
-La `HandleRequirementAsync` méthode que vous implémentez dans un gestionnaire d’autorisations a deux `AuthorizationHandlerContext` paramètres : `TRequirement` un et le que vous gérez. Les infrastructures telles que MVC ou SignalR sont libres d’ajouter n’importe quel objet `Resource` à la propriété `AuthorizationHandlerContext` sur le pour passer des informations supplémentaires.
+La `HandleRequirementAsync` méthode que vous implémentez dans un gestionnaire d’autorisations a deux paramètres : un `AuthorizationHandlerContext` et le `TRequirement` que vous gérez. Les infrastructures telles que MVC ou SignalR sont libres d’ajouter n’importe quel objet à la `Resource` propriété sur le `AuthorizationHandlerContext` pour passer des informations supplémentaires.
 
-Lorsque vous utilisez le routage de point de terminaison, l’autorisation est généralement gérée par l’intergiciel (middleware) d’autorisation. Dans ce cas, la `Resource` propriété est une instance de <xref:Microsoft.AspNetCore.Http.Endpoint>. Le point de terminaison peut être utilisé pour sonder le sous-jacent de la ressource vers laquelle vous effectuez le routage. Par exemple :
+Par exemple, MVC passe une instance de [AuthorizationFilterContext](/dotnet/api/?term=AuthorizationFilterContext) dans la `Resource` propriété. Cette propriété fournit l’accès à `HttpContext` , `RouteData` et tout le reste fourni par MVC et les Razor pages.
 
-```csharp
-if (context.Resource is Endpoint endpoint)
-{
-   var actionDescriptor = endpoint.Metadata.GetMetadata<ControllerActionDescriptor>();
-   ...
-}
-```
-
-Avec le routage traditionnel, ou lorsque l’autorisation a lieu dans le cadre du filtre d’autorisation MVC `Resource` , la <xref:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext> valeur de est une instance. Cette propriété fournit l’accès `HttpContext`à `RouteData`, et tout le reste fourni par MVC Razor et les pages.
-
-L’utilisation de la `Resource` propriété est spécifique à l’infrastructure. L’utilisation des informations `Resource` de la propriété limite vos stratégies d’autorisation à des infrastructures spécifiques. Vous devez effectuer un `Resource` cast de la `is` propriété à l’aide du mot clé, puis confirmer que le cast a réussi pour s' `InvalidCastException` assurer que votre code ne se bloque pas avec un lorsqu’il est exécuté sur d’autres infrastructures :
+L’utilisation de la `Resource` propriété est spécifique à l’infrastructure. L’utilisation des informations de la `Resource` propriété limite vos stratégies d’autorisation à des infrastructures spécifiques. Vous devez effectuer un cast de la `Resource` propriété à l’aide du `is` mot clé, puis confirmer que le cast a réussi pour s’assurer que votre code ne se bloque pas avec un lorsqu’il est `InvalidCastException` exécuté sur d’autres infrastructures :
 
 ```csharp
 // Requires the following import:

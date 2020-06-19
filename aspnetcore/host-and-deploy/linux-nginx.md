@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: af2bea1b3a149ef8d80970031e939dc083d94a03
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: e1367fe284c4d51a341da01c6415284f6f3e7a9c
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775893"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102897"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>Héberger ASP.NET Core sur Linux avec Nginx
 
@@ -89,9 +89,10 @@ Pour les besoins de ce guide, nous utilisons une seule instance de Nginx. Elle s
 
 Étant donné que les demandes sont transférées par le proxy inverse, utilisez l' [intergiciel d’en-têtes transmis](xref:host-and-deploy/proxy-load-balancer) à partir du package [Microsoft. AspNetCore. HttpOverrides](https://www.nuget.org/packages/Microsoft.AspNetCore.HttpOverrides/) . Le middleware met à jour le `Request.Scheme`, à l’aide de l’en-tête `X-Forwarded-Proto`, afin que les URI de redirection et d’autres stratégies de sécurité fonctionnent correctement.
 
-Tout composant qui dépend du schéma, tel que l’authentification, la génération de lien, les redirections et la géolocalisation, doit être placé après l’appel du middleware des en-têtes transférés. En règle générale, le middleware des en-têtes transférés doit être exécuté avant les autres middlewares, à l’exception des middlewares de gestion des erreurs et de diagnostic. Cet ordre permet au middleware qui repose sur les informations des en-têtes transférés d’utiliser les valeurs d’en-tête pour le traitement.
 
-Appelez la <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> méthode en haut de avant `Startup.Configure` d’appeler un autre intergiciel. Configurez le middleware pour transférer les en-têtes `X-Forwarded-For` et `X-Forwarded-Proto` :
+[!INCLUDE[](~/includes/ForwardedHeaders.md)]
+
+Appelez la <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> méthode en haut de `Startup.Configure` avant d’appeler un autre intergiciel. Configurez le middleware pour transférer les en-têtes `X-Forwarded-For` et `X-Forwarded-Proto` :
 
 ```csharp
 // using Microsoft.AspNetCore.HttpOverrides;
@@ -155,7 +156,7 @@ server {
 }
 ```
 
-Si l’application est une Blazor application serveur qui s’appuie sur SignalR WebSockets, consultez <xref:host-and-deploy/blazor/server#linux-with-nginx> pour plus d’informations sur la façon `Connection` de définir l’en-tête.
+Si l’application est une Blazor application serveur qui s’appuie sur SignalR WebSockets, consultez <xref:blazor/host-and-deploy/server#linux-with-nginx> pour plus d’informations sur la façon de définir l' `Connection` en-tête.
 
 Si aucun `server_name` ne correspond, Nginx utilise le serveur par défaut. Si aucun serveur par défaut n’est défini, le premier serveur dans le fichier de configuration est le serveur par défaut. En guise de bonne pratique, ajoutez un serveur par défaut spécifique qui retourne un code d’état 444 dans votre fichier de configuration. Voici un exemple de configuration de serveur par défaut :
 
@@ -217,7 +218,7 @@ Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
 WantedBy=multi-user.target
 ```
 
-Dans l’exemple précédent, l’utilisateur qui gère le service est spécifié par l' `User` option. L’utilisateur (`www-data`) doit exister et avoir la propriété correcte des fichiers de l’application.
+Dans l’exemple précédent, l’utilisateur qui gère le service est spécifié par l' `User` option. L’utilisateur ( `www-data` ) doit exister et avoir la propriété correcte des fichiers de l’application.
 
 Utilisez `TimeoutStopSec` pour configurer la durée d’attente de l’arrêt de l’application après la réception du signal d’interruption initial. Si l’application ne s’arrête pas pendant cette période, le signal SIGKILL est émis pour mettre fin à l’application. Indiquez la valeur en secondes sans unité (par exemple, `150`), une valeur d’intervalle de temps (par exemple, `2min 30s`) ou `infinity` pour désactiver le délai d’attente. `TimeoutStopSec` prend la valeur par défaut de `DefaultTimeoutStopSec` dans le fichier de configuration du gestionnaire (*systemd-system.conf*, *system.conf.d*, *systemd-user.conf*, * user.conf.d*). Le délai d’expiration par défaut pour la plupart des distributions est de 90 secondes.
 
@@ -234,7 +235,16 @@ Certaines valeurs (par exemple, les chaînes de connexion SQL) doivent être pla
 systemd-escape "<value-to-escape>"
 ```
 
+::: moniker range=">= aspnetcore-3.0"
+
+Les séparateurs `:` (signe deux-points) ne sont pas pris en charge dans les noms de variables d’environnement. Utilisez un double trait de soulignement (`__`) à la place d’un signe deux-points. Le [fournisseur de configuration de variables d’environnement](xref:fundamentals/configuration/index#environment-variables) convertit les doubles traits de soulignement en signes deux-points quand les variables d’environnement sont lues dans la configuration. Dans l’exemple suivant, la clé de chaîne de connexion `ConnectionStrings:DefaultConnection` est définie dans le fichier de définition de service en tant que `ConnectionStrings__DefaultConnection` :
+
+::: moniker-end
+::: moniker range="< aspnetcore-3.0"
+
 Les séparateurs `:` (signe deux-points) ne sont pas pris en charge dans les noms de variables d’environnement. Utilisez un double trait de soulignement (`__`) à la place d’un signe deux-points. Le [fournisseur de configuration de variables d’environnement](xref:fundamentals/configuration/index#environment-variables-configuration-provider) convertit les doubles traits de soulignement en signes deux-points quand les variables d’environnement sont lues dans la configuration. Dans l’exemple suivant, la clé de chaîne de connexion `ConnectionStrings:DefaultConnection` est définie dans le fichier de définition de service en tant que `ConnectionStrings__DefaultConnection` :
+
+::: moniker-end
 
 ```
 Environment=ConnectionStrings__DefaultConnection={Connection String}
@@ -285,7 +295,7 @@ Si vous voulez appliquer un filtrage supplémentaire, des options chronologiques
 sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-10-18 04:00"
 ```
 
-## <a name="data-protection"></a>Protection des données
+## <a name="data-protection"></a>Protection de données
 
 La [pile de protection des données ASP.NET Core](xref:security/data-protection/introduction) est utilisée par plusieurs [intergiciels (middleware)](xref:fundamentals/middleware/index) ASP.NET Core, notamment le middleware d’authentification (par exemple, le middleware cookie) et les protections de la falsification de requête intersites (CSRF, Cross Site Request Forgery). Même si les API de protection des données ne sont pas appelées par le code de l’utilisateur, la protection des données doit être configurée pour créer un [magasin de clés](xref:security/data-protection/implementation/key-management) de chiffrement persistantes. Si la protection des données n’est pas configurée, les clés sont conservées en mémoire et ignorées au redémarrage de l’application.
 
@@ -320,7 +330,7 @@ Linux Security Modules (LSM) est un framework qui fait partie du noyau Linux dep
 
 ### <a name="configure-the-firewall"></a>Configurer le pare-feu
 
-Fermez tous les ports externes qui ne sont pas en cours d’utilisation. Le pare-feu UFW fournit une interface de `iptables` commande pour la configuration du pare-feu.
+Fermez tous les ports externes qui ne sont pas en cours d’utilisation. Le pare-feu UFW fournit une interface de commande pour `iptables` la configuration du pare-feu.
 
 > [!WARNING]
 > Un pare-feu mal configuré bloque l’accès à l’ensemble du système. Faute d’avoir spécifié le port SSH approprié, vous ne pourrez pas accéder au système si vous utilisez SSH pour vous y connecter. Le numéro de port par défaut est 22. Pour plus d’informations, consultez la [présentation d’ufw](https://help.ubuntu.com/community/UFW) et le [manuel](https://manpages.ubuntu.com/manpages/bionic/man8/ufw.8.html).
@@ -371,7 +381,10 @@ Configurez l’application pour utiliser un certificat en développement pour la
 
 * L’ajout d’un en-tête `HTTP Strict-Transport-Security` (HSTS) garantit que toutes les demandes ultérieures du client s’effectuent par le biais du protocole HTTPS.
 
-* N’ajoutez pas l’en-tête HSTS ou choisissez une valeur `max-age` appropriée si le protocole HTTPS doit être désactivé ultérieurement.
+* Si le protocole HTTPs est désactivé à l’avenir, utilisez l’une des approches suivantes :
+
+  * N’ajoutez pas l’en-tête HSTS.
+  * Choisissez une valeur abrégée `max-age` .
 
 Ajoutez le fichier de configuration */etc/nginx/proxy.conf* :
 
@@ -394,7 +407,7 @@ Pour atténuer les attaques par détournement de clic :
    ```
 
    Ajoutez la ligne `add_header X-Frame-Options "SAMEORIGIN";`.
-1. Enregistrez le fichier .
+1. Enregistrez le fichier.
 1. Redémarrez Nginx.
 
 #### <a name="mime-type-sniffing"></a>Détection de type MIME

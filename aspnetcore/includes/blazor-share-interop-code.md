@@ -1,9 +1,9 @@
-## <a name="share-interop-code-in-a-class-library"></a>Partager le code interop dans une bibliothèque de classe
+## <a name="share-interop-code-in-a-class-library"></a>Partager du code d’interopérabilité dans une bibliothèque de classes
 
-Le code interop JS peut être inclus dans une bibliothèque de classe, ce qui vous permet de partager le code dans un forfait NuGet.
+Le code d’interopérabilité JS peut être inclus dans une bibliothèque de classes, ce qui vous permet de partager le code dans un package NuGet.
 
-La bibliothèque de classe gère l’intégration des ressources JavaScript dans l’assemblage construit. Les fichiers JavaScript sont placés dans le dossier *wwwroot.* L’outillage s’occupe de l’intégration des ressources lors de la construction de la bibliothèque.
+La bibliothèque de classes gère l’incorporation des ressources JavaScript dans l’assembly généré. Les fichiers JavaScript sont placés dans le dossier *wwwroot* . Les outils s’occupent de l’incorporation des ressources lors de la génération de la bibliothèque.
 
-Le paquet NuGet intégré est référencé dans le fichier de projet de l’application de la même manière que n’importe quel paquet NuGet est référencé. Une fois le paquet restauré, le code de l’application peut appeler dans JavaScript comme s’il s’agissait de C.
+Le package NuGet créé est référencé dans le fichier projet de l’application de la même façon que n’importe quel package NuGet. Une fois le package restauré, le code d’application peut appeler JavaScript comme s’il s’agissait de C#.
 
-Pour plus d’informations, consultez <xref:blazor/class-libraries>.
+Pour plus d’informations, consultez <xref:blazor/components/class-libraries>.

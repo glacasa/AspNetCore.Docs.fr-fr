@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: b6e3890e13ef5ad20098d3907b6895046087aeca
-ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
+ms.openlocfilehash: df978d49201ba1010ddf13b1b9a63ae27116616e
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84776499"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85103086"
 ---
 # <a name="component-tag-helper-in-aspnet-core"></a>Tag Helper Component dans ASP.NET Core
 
@@ -27,7 +27,7 @@ Pour afficher un composant à partir d’une page ou d’une vue, utilisez le [t
 
 ## <a name="prerequisites"></a>Prérequis
 
-Suivez les instructions de la section *préparer l’application à utiliser les composants des pages et des vues* de l' <xref:blazor/integrate-components#prepare-the-app> article.
+Suivez les instructions de la section *préparer l’application à utiliser les composants des pages et des vues* de l' <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps#prepare-the-app> article.
 
 ## <a name="component-tag-helper"></a>Tag Helper Component
 
@@ -72,7 +72,7 @@ Le tag Helper Component peut également transmettre des paramètres à des compo
 }
 ```
 
-Les `Size` `int` paramètres du composant () et `Color` ( `string` ) peuvent être définis par le tag Helper du composant : [component parameters](xref:blazor/components#component-parameters)
+Les `Size` `int` paramètres du composant () et `Color` ( `string` ) peuvent être définis par le tag Helper du composant : [component parameters](xref:blazor/components/index#component-parameters)
 
 ```cshtml
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
@@ -172,4 +172,4 @@ Le rendu des composants serveur à partir d’une page HTML statique n’est pas
 
 * <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper>
 * <xref:mvc/views/tag-helpers/intro>
-* <xref:blazor/components>
+* <xref:blazor/components/index>

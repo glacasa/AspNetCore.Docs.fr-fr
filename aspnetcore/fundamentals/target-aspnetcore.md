@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/target-aspnetcore
-ms.openlocfilehash: 85c0d850922b7118b101126c09b208b0db420f7e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 70a445d109a1a9553178e94d79df87cd373e6b06
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776485"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85103018"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>Utiliser des API ASP.NET Core dans une bibliothèque de classes
 
@@ -36,9 +36,9 @@ ASP.NET Core adhère à la [stratégie de prise en charge de .net Core](https://
 
 ## <a name="use-the-aspnet-core-shared-framework"></a>Utiliser le ASP.NET Core Framework partagé
 
-Avec la sortie de .NET Core 3,0, de nombreux ASP.NET Core assemblys ne sont plus publiés dans NuGet en tant que packages. Au lieu de cela, les assemblys sont `Microsoft.AspNetCore.App` inclus dans le Framework partagé, qui est installé avec le kit SDK .net Core et les programmes d’installation du Runtime. Pour obtenir la liste des packages qui ne sont plus publiés, consultez [Supprimer les références de package obsolètes](xref:migration/22-to-30#remove-obsolete-package-references).
+Avec la sortie de .NET Core 3,0, de nombreux ASP.NET Core assemblys ne sont plus publiés dans NuGet en tant que packages. Au lieu de cela, les assemblys sont inclus dans le `Microsoft.AspNetCore.App` Framework partagé, qui est installé avec le kit SDK .net Core et les programmes d’installation du Runtime. Pour obtenir la liste des packages qui ne sont plus publiés, consultez [Supprimer les références de package obsolètes](xref:migration/22-to-30#remove-obsolete-package-references).
 
-À compter de .NET Core 3,0, les projets `Microsoft.NET.Sdk.Web` qui utilisent le kit de développement logiciel (SDK) MSBuild référencent implicitement le Framework partagé. Les projets qui `Microsoft.NET.Sdk` utilisent `Microsoft.NET.Sdk.Razor` le kit de développement logiciel (SDK) ou doivent référencer ASP.net Core pour utiliser des API ASP.net core dans le Framework partagé.
+À compter de .NET Core 3,0, les projets qui utilisent le `Microsoft.NET.Sdk.Web` Kit de développement logiciel (SDK) MSBuild référencent implicitement le Framework partagé. Les projets qui utilisent le `Microsoft.NET.Sdk` `Microsoft.NET.Sdk.Razor` Kit de développement logiciel (SDK) ou doivent référencer ASP.net Core pour utiliser des API ASP.net core dans le Framework partagé.
 
 Pour référencer ASP.NET Core, ajoutez l' `<FrameworkReference>` élément suivant à votre fichier projet :
 
@@ -46,17 +46,17 @@ Pour référencer ASP.NET Core, ajoutez l' `<FrameworkReference>` élément suiv
 
 Le fait de référencer ASP.NET Core de cette manière est pris en charge uniquement pour les projets ciblant .NET Core 3. x.
 
-## <a name="include-blazor-extensibility"></a>Inclure l’extensibilité éblouissant
+## <a name="include-blazor-extensibility"></a>Inclure l' Blazor extensibilité
 
-Éblouissant prend en charge webassembly (WASM) et les [modèles d’hébergement](xref:blazor/hosting-models)de serveur. À moins qu’il y ait une raison spécifique de ne pas le faire, une bibliothèque de [composants Razor](xref:blazor/components) doit prendre en charge les deux modèles d’hébergement. Une bibliothèque de composants Razor doit utiliser le [Kit de développement logiciel (SDK) Microsoft. net. Sdk. Razor](xref:razor-pages/sdk).
+Blazorprend en charge webassembly (WASM) et les [modèles d’hébergement](xref:blazor/hosting-models)de serveur. À moins qu’il y ait une raison spécifique de ne pas le faire, une bibliothèque de [ Razor composants](xref:blazor/components/index) doit prendre en charge les deux modèles d’hébergement. Une Razor bibliothèque de composants doit utiliser le [Kit de développement logiciel (SDK) Razor Microsoft. net. SDK](xref:razor-pages/sdk).
 
 ### <a name="support-both-hosting-models"></a>Prendre en charge les modèles d’hébergement
 
-Pour prendre en charge la consommation de composants Razor à la fois pour les projets de [serveur éblouissant](xref:blazor/hosting-models#blazor-server) et [WASM éblouissant](xref:blazor/hosting-models#blazor-webassembly) , utilisez les instructions suivantes pour votre éditeur.
+Pour prendre en charge la Razor consommation des composants à partir des projets [ Blazor serveur](xref:blazor/hosting-models#blazor-server) et [ Blazor WASM](xref:blazor/hosting-models#blazor-webassembly) , utilisez les instructions suivantes pour votre éditeur.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Utilisez le modèle de projet **bibliothèque de classes Razor** . La case à cocher **pages de prise en charge et vues** du modèle doit être désélectionnée.
+Utilisez le modèle de projet ** Razor bibliothèque de classes** . La case à cocher **pages de prise en charge et vues** du modèle doit être désélectionnée.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -68,7 +68,7 @@ dotnet new razorclasslib
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-Utilisez le modèle de projet **bibliothèque de classes Razor** .
+Utilisez le modèle de projet ** Razor bibliothèque de classes** .
 
 ---
 
@@ -86,7 +86,7 @@ Par exemple :
 
 ### <a name="support-a-specific-hosting-model"></a>Prendre en charge un modèle d’hébergement spécifique
 
-La prise en charge d’un seul modèle d’hébergement éblouissant est beaucoup moins courante. Par exemple, pour prendre en charge la consommation de composants Razor à partir de projets [serveur éblouissants](xref:blazor/hosting-models#blazor-server) uniquement :
+La prise en charge d’un modèle d’hébergement unique est beaucoup moins courante Blazor . Par exemple, pour prendre en charge Razor la consommation de composants à partir de projets [ Blazor serveur](xref:blazor/hosting-models#blazor-server) uniquement :
 
 * Ciblez .NET Core 3. x.
 * Ajoutez un `<FrameworkReference>` élément pour le Framework partagé.
@@ -95,32 +95,32 @@ Par exemple :
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-components-library.csproj)]
 
-Pour plus d’informations sur les bibliothèques contenant des composants Razor, consultez [ASP.net Core bibliothèques de classes des composants Razor](xref:blazor/class-libraries).
+Pour plus d’informations sur les bibliothèques contenant des Razor composants, consultez [ASP.net Core les bibliothèques de Razor classes](xref:blazor/components/class-libraries).
 
 ## <a name="include-mvc-extensibility"></a>Inclure l’extensibilité MVC
 
 Cette section décrit les recommandations pour les bibliothèques qui incluent :
 
-* [Vues Razor ou Razor Pages](#razor-views-or-razor-pages)
+* [Razorvues ou Razor pages](#razor-views-or-razor-pages)
 * [Tag Helpers](#tag-helpers)
 * [Composants de vue](#view-components)
 
 Cette section n’aborde pas le multi-ciblage pour prendre en charge plusieurs versions de MVC. Pour obtenir des conseils sur la prise en charge de plusieurs versions de ASP.NET Core, consultez [prise en charge de plusieurs versions de ASP.net Core](#support-multiple-aspnet-core-versions).
 
-### <a name="razor-views-or-razor-pages"></a>Vues Razor ou Razor Pages
+### <a name="razor-views-or-razor-pages"></a>Razorvues ou Razor pages
 
-Un projet qui comprend des [vues Razor](xref:mvc/views/overview) ou [Razor pages](xref:razor-pages/index) doit utiliser le [Kit de développement logiciel (SDK) Microsoft. net. Sdk. Razor](xref:razor-pages/sdk).
+Un projet qui comprend des [ Razor affichages](xref:mvc/views/overview) ou des [ Razor pages](xref:razor-pages/index) doit utiliser le [Kit de développement logiciel (SDK) Razor Microsoft. net. SDK](xref:razor-pages/sdk).
 
 Si le projet cible .NET Core 3. x, il requiert :
 
-* Propriété `AddRazorSupportForMvc` MSBuild ayant la valeur `true`.
-* `<FrameworkReference>` Élément pour le Framework partagé.
+* `AddRazorSupportForMvc`Propriété MSBuild ayant la valeur `true` .
+* `<FrameworkReference>`Élément pour le Framework partagé.
 
-Le modèle de projet de **bibliothèque de classes Razor** remplit les conditions précédentes pour les projets ciblant .net Core 3. x. Utilisez les instructions suivantes pour votre éditeur.
+Le modèle de projet ** Razor bibliothèque de classes** remplit les conditions précédentes pour les projets ciblant .net Core 3. x. Utilisez les instructions suivantes pour votre éditeur.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Utilisez le modèle de projet **bibliothèque de classes Razor** . La case à cocher **pages de prise en charge et vues** du modèle doit être activée.
+Utilisez le modèle de projet ** Razor bibliothèque de classes** . La case à cocher **pages de prise en charge et vues** du modèle doit être activée.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -140,23 +140,23 @@ Par exemple :
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-views-pages-library.csproj)]
 
-Si le projet cible .NET Standard à la place, une référence de package [Microsoft. AspNetCore. Mvc](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc) est requise. Le `Microsoft.AspNetCore.Mvc` package a été déplacé dans le Framework partagé dans ASP.net Core 3,0 et n’est donc plus publié. Par exemple :
+Si le projet cible .NET Standard à la place, une référence de package [Microsoft. AspNetCore. Mvc](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc) est requise. Le `Microsoft.AspNetCore.Mvc` package a été déplacé dans le Framework partagé dans ASP.NET Core 3,0 et n’est donc plus publié. Par exemple :
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-razor-views-pages-library.csproj?highlight=8)]
 
 ### <a name="tag-helpers"></a>Tag Helpers
 
-Le kit de développement logiciel (SDK) doit être `Microsoft.NET.Sdk` utilisé dans un projet qui comprend des [tag Helper](xref:mvc/views/tag-helpers/intro) . Si vous ciblez .NET Core 3. x, `<FrameworkReference>` ajoutez un élément pour le Framework partagé. Par exemple :
+Le kit de développement logiciel (SDK) doit être utilisé dans un projet qui comprend des [tag Helper](xref:mvc/views/tag-helpers/intro) `Microsoft.NET.Sdk` . Si vous ciblez .NET Core 3. x, ajoutez un `<FrameworkReference>` élément pour le Framework partagé. Par exemple :
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj)]
 
-Si vous ciblez .NET Standard (pour prendre en charge les versions antérieures à ASP.NET Core 3. x), ajoutez une référence de package à [Microsoft. AspNetCore. Mvc.Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor) Le `Microsoft.AspNetCore.Mvc.Razor` package a été déplacé dans le Framework partagé et n’est donc plus publié. Par exemple :
+Si vous ciblez .NET Standard (pour prendre en charge les versions antérieures à ASP.NET Core 3. x), ajoutez une référence de package à [Microsoft. AspNetCore. Mvc. Razor ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor) Le `Microsoft.AspNetCore.Mvc.Razor` package a été déplacé dans le Framework partagé et n’est donc plus publié. Par exemple :
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-tag-helpers-library.csproj)]
 
 ### <a name="view-components"></a>Composants de vue
 
-Un projet qui comprend des [composants de vue](xref:mvc/views/view-components) doit `Microsoft.NET.Sdk` utiliser le kit de développement logiciel (SDK). Si vous ciblez .NET Core 3. x, `<FrameworkReference>` ajoutez un élément pour le Framework partagé. Par exemple :
+Un projet qui comprend des [composants de vue](xref:mvc/views/view-components) doit utiliser le kit de `Microsoft.NET.Sdk` développement logiciel (SDK). Si vous ciblez .NET Core 3. x, ajoutez un `<FrameworkReference>` élément pour le Framework partagé. Par exemple :
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj)]
 
@@ -172,14 +172,14 @@ Le multi-ciblage est nécessaire pour créer une bibliothèque qui prend en char
 * ASP.NET Core 2. x ciblant .NET Core 2. x
 * ASP.NET Core 3. x ciblant .NET Core 3. x
 
-Le fichier projet suivant prend en charge ces variantes `TargetFrameworks` via la propriété :
+Le fichier projet suivant prend en charge ces variantes via la `TargetFrameworks` propriété :
 
 [!code-xml[](target-aspnetcore/samples/multi-tfm/recommended-tag-helpers-library.csproj)]
 
 Avec le fichier projet précédent :
 
 * Le `Markdig` package est ajouté pour tous les consommateurs.
-* Référence à [Microsoft. AspNetCore. Mvc.Razor ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor) est ajouté pour les consommateurs ciblant .NET Framework 4.6.1 ou version ultérieure ou .NET Core 2. x. La version 2.1.0 du package fonctionne avec ASP.NET Core 2,2 en raison d’une compatibilité descendante.
+* Référence à [Microsoft. AspNetCore. Mvc. Razor ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor) est ajouté pour les consommateurs ciblant .NET Framework 4.6.1 ou version ultérieure ou .NET Core 2. x. La version 2.1.0 du package fonctionne avec ASP.NET Core 2,2 en raison d’une compatibilité descendante.
 * L’infrastructure partagée est référencée pour les consommateurs ciblant .NET Core 3. x. Le `Microsoft.AspNetCore.Mvc.Razor` package est inclus dans le Framework partagé.
 
 .NET Standard 2,0 peut également être ciblé au lieu de cibler à la fois .NET Core 2,1 et .NET Framework 4.6.1 :
@@ -234,7 +234,7 @@ Si la bibliothèque peut implémenter la fonctionnalité d’une autre façon :
 * Ajoutez un `<FrameworkReference>` élément pour le Framework partagé.
 * Utilisez la [directive de préprocesseur #if](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if) avec le symbole de Framework cible approprié pour compiler le code de façon conditionnelle.
 
-Par exemple, le tag Helper suivant utilise l' <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> interface introduite dans ASP.net Core 3,0. Les consommateurs ciblant .NET Core 3,0 exécutent le chemin de `NETCOREAPP3_0` code défini par le symbole de Framework cible. Le type de paramètre du constructeur de tag Helper devient <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment> pour .net Core 2,1 et .NET Framework 4.6.1 Consumers. Cette modification était nécessaire, car ASP.NET Core 3,0 `IHostingEnvironment` marquée comme obsolète et `IWebHostEnvironment` recommandée comme remplacement.
+Par exemple, le tag Helper suivant utilise l' <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> interface introduite dans ASP.NET Core 3,0. Les consommateurs ciblant .NET Core 3,0 exécutent le chemin de code défini par le `NETCOREAPP3_0` symbole de Framework cible. Le type de paramètre du constructeur de tag Helper devient <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment> pour .net Core 2,1 et .NET Framework 4.6.1 Consumers. Cette modification était nécessaire, car ASP.NET Core 3,0 marquée `IHostingEnvironment` comme obsolète et recommandée `IWebHostEnvironment` comme remplacement.
 
 ```csharp
 [HtmlTargetElement("script", Attributes = "asp-inline")]
@@ -286,6 +286,6 @@ Par exemple, pour ajouter le client d’API Web :
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:razor-pages/ui-class>
-* <xref:blazor/class-libraries>
+* <xref:blazor/components/class-libraries>
 * [Prise en charge des implémentations de .NET](/dotnet/standard/net-standard#net-implementation-support)
 * [Stratégies de support .NET](https://dotnet.microsoft.com/platform/support/policy)

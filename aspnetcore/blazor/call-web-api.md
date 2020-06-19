@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: 4f3fd1fca075098a94756757474b2cad3cc99775
-ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
+ms.openlocfilehash: 19e10c4eced47676c633a7d30a26726913373162
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/16/2020
-ms.locfileid: "84214776"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102429"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>Appeler une API Web à partir de ASP.NET CoreBlazor
 
@@ -35,7 +35,7 @@ Consultez les composants suivants dans l’exemple d’application *BlazorWebAss
 * Appeler l’API Web (*pages/CallWebAPI. Razor*)
 * Testeur de requêtes HTTP (*composants/HTTPRequestTester. Razor*)
 
-## <a name="packages"></a>Paquets
+## <a name="packages"></a>Packages
 
 Référencez le [System.Net.Http.Jssur](https://www.nuget.org/packages/System.Net.Http.Json/) le package NuGet dans le fichier projet.
 
@@ -85,7 +85,7 @@ Les méthodes d’assistance JSON envoient des demandes à un URI (une API Web d
 
 * <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>: Envoie une requête HTTP obtenir et analyse le corps de la réponse JSON pour créer un objet.
 
-  Dans le code suivant, les `todoItems` sont affichés par le composant. La `GetTodoItems` méthode est déclenchée lorsque le rendu du composant est terminé ([OnInitializedAsync](xref:blazor/lifecycle#component-initialization-methods)). Pour obtenir un exemple complet, consultez l’exemple d’application.
+  Dans le code suivant, les `todoItems` sont affichés par le composant. La `GetTodoItems` méthode est déclenchée lorsque le rendu du composant est terminé ([OnInitializedAsync](xref:blazor/components/lifecycle#component-initialization-methods)). Pour obtenir un exemple complet, consultez l’exemple d’application.
 
   ```razor
   @using System.Net.Http
@@ -303,7 +303,7 @@ protected override async Task OnInitializedAsync()
 > [!NOTE]
 > L’exemple précédent est fourni à des fins de démonstration. Une application serveur d’API Web peut être configurée pour retourner JSON même lorsqu’un point de terminaison n’existe pas ou qu’un exception non géré est présent sur le serveur.
 
-Pour plus d’informations, consultez <xref:blazor/handle-errors>.
+Pour plus d’informations, consultez <xref:blazor/fundamentals/handle-errors>.
 
 ## <a name="cross-origin-resource-sharing-cors"></a>Partage des ressources cross-origin (CORS)
 
@@ -315,7 +315,7 @@ Pour permettre à d’autres sites d’effectuer des demandes de partage de ress
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* <xref:security/blazor/webassembly/additional-scenarios>: Comprend la couverture de l’utilisation <xref:System.Net.Http.HttpClient> de pour créer des demandes d’API Web sécurisées.
+* <xref:blazor/security/webassembly/additional-scenarios>: Comprend la couverture de l’utilisation <xref:System.Net.Http.HttpClient> de pour créer des demandes d’API Web sécurisées.
 * <xref:fundamentals/http-requests>
 * <xref:security/enforcing-ssl>
 * [Configuration du point de terminaison HTTPs Kestrel](xref:fundamentals/servers/kestrel#endpoint-configuration)

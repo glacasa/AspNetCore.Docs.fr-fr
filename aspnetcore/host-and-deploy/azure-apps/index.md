@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 8195702a3de93bafc76dff61939dfc70d4e896b6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: cc12dc2bc6720652866227dc2bbcbcf4e8af793d
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775243"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074235"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>Déployer des applications ASP.NET Core sur Azure App Service
 
@@ -75,7 +75,7 @@ Concernant les applications avec des dépendances natives, des runtimes pour les
 
 Pour plus d’informations sur les composants .NET Core Framework et les méthodes de distribution, telles que les informations sur le Runtime .NET Core et le kit SDK .NET Core, consultez [à propos de .net Core : composition](/dotnet/core/about#composition).
 
-### <a name="packages"></a>.
+### <a name="packages"></a>Packages
 
 Ajoutez les packages NuGet suivants pour fournir des fonctionnalités de journalisation automatique aux applications déployées sur Azure App Service :
 
@@ -87,19 +87,22 @@ Les packages précédents ne sont pas disponibles dans le [métapackage Microsof
 
 ## <a name="override-app-configuration-using-the-azure-portal"></a>Remplacer la configuration de l’application à l’aide du Portail Azure
 
+::: moniker range=">= aspnetcore-3.0"
+
+Les paramètres d’application dans le portail Azure vous permettent de définir des variables d’environnement pour l’application. Celles-ci peuvent être utilisées par le [Fournisseur de configuration des variables d’environnement](xref:fundamentals/configuration/index#environment-variables).
+
+Quand un paramètre d’application est créé ou modifié dans le portail Azure et que le bouton **Enregistrer** est sélectionné, Azure App redémarre. La variable d’environnement est à la disposition de l’application après le redémarrage du service.
+
+Quand une application utilise l' [hôte générique](xref:fundamentals/host/generic-host), les variables d’environnement sont chargées dans la configuration de l’application lorsque <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> est appelé pour générer l’hôte. Pour plus d’informations, voir <xref:fundamentals/host/generic-host> et [Fournisseur de configuration des variables d’environnement](xref:fundamentals/configuration/index#environment-variables).
+
+::: moniker-end
+::: moniker range="< aspnetcore-3.0"
+
 Les paramètres d’application dans le portail Azure vous permettent de définir des variables d’environnement pour l’application. Celles-ci peuvent être utilisées par le [Fournisseur de configuration des variables d’environnement](xref:fundamentals/configuration/index#environment-variables-configuration-provider).
 
 Quand un paramètre d’application est créé ou modifié dans le portail Azure et que le bouton **Enregistrer** est sélectionné, Azure App redémarre. La variable d’environnement est à la disposition de l’application après le redémarrage du service.
 
-::: moniker range=">= aspnetcore-3.0"
-
-Quand une application utilise l' [hôte générique](xref:fundamentals/host/generic-host), les variables d’environnement sont chargées dans la configuration <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> de l’application lorsque est appelé pour générer l’hôte. Pour plus d’informations, voir <xref:fundamentals/host/generic-host> et [Fournisseur de configuration des variables d’environnement](xref:fundamentals/configuration/index#environment-variables-configuration-provider).
-
-::: moniker-end
-
-::: moniker range="< aspnetcore-3.0"
-
-Quand une application utilise l' [hôte Web](xref:fundamentals/host/web-host), les variables d’environnement sont chargées dans la configuration <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> de l’application lorsque est appelé pour générer l’hôte. Pour plus d’informations, voir <xref:fundamentals/host/web-host> et [Fournisseur de configuration des variables d’environnement](xref:fundamentals/configuration/index#environment-variables-configuration-provider).
+Quand une application utilise l' [hôte Web](xref:fundamentals/host/web-host), les variables d’environnement sont chargées dans la configuration de l’application lorsque <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> est appelé pour générer l’hôte. Pour plus d’informations, voir <xref:fundamentals/host/web-host> et [Fournisseur de configuration des variables d’environnement](xref:fundamentals/configuration/index#environment-variables-configuration-provider).
 
 ::: moniker-end
 
@@ -169,15 +172,15 @@ Utilisez [Azure App service scénarios ci/CD](/azure/app-service/deploy-continuo
 
 #### <a name="specify-the-net-core-sdk-version"></a>Spécifier la version de kit SDK .NET Core
 
-Lorsque vous utilisez le centre de déploiement App service pour créer une build Azure DevOps, le pipeline de build `Restore`par `Build`défaut `Test`comprend des `Publish`étapes pour,, et. Pour spécifier la version du kit de développement logiciel (SDK), cliquez sur le bouton **Ajouter (+)** dans la liste des travaux de l’agent pour ajouter une nouvelle étape. Recherchez **Kit SDK .net Core** dans la barre de recherche. 
+Lorsque vous utilisez le centre de déploiement App service pour créer une build Azure DevOps, le pipeline de build par défaut comprend des étapes pour `Restore` ,, `Build` `Test` et `Publish` . Pour spécifier la version du kit de développement logiciel (SDK), cliquez sur le bouton **Ajouter (+)** dans la liste des travaux de l’agent pour ajouter une nouvelle étape. Recherchez **Kit SDK .net Core** dans la barre de recherche. 
 
 ![Ajouter l’étape kit SDK .NET Core](index/add-sdk-step.png)
 
-Déplacez l’étape dans la première position de la build afin que les étapes qui suivent utilisent la version spécifiée du kit SDK .NET Core. Spécifiez la version du kit SDK .NET Core. Dans cet exemple, le kit de développement logiciel `3.0.100`(SDK) a la valeur.
+Déplacez l’étape dans la première position de la build afin que les étapes qui suivent utilisent la version spécifiée du kit SDK .NET Core. Spécifiez la version du kit SDK .NET Core. Dans cet exemple, le kit de développement logiciel (SDK) a la valeur `3.0.100` .
 
 ![Étape du SDK terminée](index/sdk-step-first-place.png)
 
-Pour publier un [Déploiement autonome (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd), configurez la SCD à `Publish` l’étape et fournissez l' [identificateur de Runtime (RID)](/dotnet/core/rid-catalog).
+Pour publier un [Déploiement autonome (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd), configurez la SCD à l' `Publish` étape et fournissez l' [identificateur de Runtime (RID)](/dotnet/core/rid-catalog).
 
 ![Publication autonome](index/self-contained.png)
 
@@ -213,7 +216,7 @@ Une fois l’opération effectuée, la dernière préversion de .NET Core est in
 
 1. Sélectionnez **Outils avancés**.
 1. Sélectionnez **Go** dans **Outils avancés**.
-1. Sélectionnez l’élément de menu > **PowerShell** de la **console de débogage**.
+1. Sélectionnez l’élément de menu PowerShell de la **console de débogage**  >  **PowerShell** .
 1. À l’invite PowerShell, exécutez la commande suivante. Remplacez `{X.Y}` par la version du runtime ASP.NET Core et `{PLATFORM}` par la plateforme dans la commande :
 
    ```powershell
@@ -227,7 +230,7 @@ Une fois l’opération effectuée, la dernière préversion de .NET Core est in
 >
 > Si l’application s’exécute en mode in-process et si la plateforme est configurée pour une architecture 64 bits (x64), le module ASP.NET Core utilise le runtime de la préversion 64 bits, le cas échéant. Installez l’extension d' **exécution de ASP.net Core {X. Y} (x64)** à l’aide du portail Azure.
 >
-> Après l’installation du runtime d’évaluation x64, exécutez la commande suivante dans la fenêtre de commande Azure Kudu PowerShell pour vérifier l’installation. Remplacez la version du runtime ASP.NET Core `{X.Y}` pour dans la commande suivante :
+> Après l’installation du runtime d’évaluation x64, exécutez la commande suivante dans la fenêtre de commande Azure Kudu PowerShell pour vérifier l’installation. Remplacez la version du runtime ASP.NET Core pour `{X.Y}` dans la commande suivante :
 >
 > ```powershell
 > Test-Path D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64\
@@ -259,7 +262,7 @@ Pour un déploiement de 64 bits :
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Sélectionnez **générer** > **publier {nom de l’application}** dans la barre d’outils de Visual Studio ou cliquez avec le bouton droit sur le projet dans **Explorateur de solutions** puis sélectionnez **publier**.
+1. Sélectionnez **générer**  >  **publier {nom de l’application}** dans la barre d’outils de Visual Studio ou cliquez avec le bouton droit sur le projet dans **Explorateur de solutions** puis sélectionnez **publier**.
 1. Dans la boîte de dialogue **Choisir une cible de publication**, confirmez qu’**App Service** est sélectionné.
 1. Sélectionnez **Avancé**. La boîte de dialogue **Publier** s’ouvre.
 1. Dans la boîte de dialogue **Publier** :
@@ -290,7 +293,7 @@ Utilisez Visual Studio ou le CLI .NET Core pour un [Déploiement autonome (SCD)]
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Sélectionnez **générer** > **publier {nom de l’application}** dans la barre d’outils de Visual Studio ou cliquez avec le bouton droit sur le projet dans **Explorateur de solutions** puis sélectionnez **publier**.
+1. Sélectionnez **générer**  >  **publier {nom de l’application}** dans la barre d’outils de Visual Studio ou cliquez avec le bouton droit sur le projet dans **Explorateur de solutions** puis sélectionnez **publier**.
 1. Dans la boîte de dialogue **Choisir une cible de publication**, confirmez qu’**App Service** est sélectionné.
 1. Sélectionnez **Avancé**. La boîte de dialogue **Publier** s’ouvre.
 1. Dans la boîte de dialogue **Publier** :

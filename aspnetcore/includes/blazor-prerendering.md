@@ -2,7 +2,7 @@
 ---
 Bien qu’une application de serveur éblouissante soit prérendue, certaines actions, telles que l’appel en JavaScript, ne sont pas possibles, car une connexion avec le navigateur n’a pas été établie. Les composants peuvent avoir besoin d’être restitués différemment lorsqu’ils sont prérendus.
 
-Pour différer les appels Interop JavaScript jusqu’à ce que la connexion avec le navigateur soit établie, vous pouvez utiliser l' [événement du cycle de vie du composant OnAfterRenderAsync](xref:blazor/lifecycle#after-component-render). Cet événement est appelé uniquement une fois que l’application est entièrement rendue et que la connexion cliente est établie.
+Pour différer les appels Interop JavaScript jusqu’à ce que la connexion avec le navigateur soit établie, vous pouvez utiliser l' [événement du cycle de vie du composant OnAfterRenderAsync](xref:blazor/components/lifecycle#after-component-render). Cet événement est appelé uniquement une fois que l’application est entièrement rendue et que la connexion cliente est établie.
 
 ```cshtml
 @using Microsoft.JSInterop
@@ -24,7 +24,7 @@ Pour différer les appels Interop JavaScript jusqu’à ce que la connexion avec
 }
 ```
 
-Pour l’exemple de code précédent, fournissez une `setElementText` fonction JavaScript à l’intérieur `<head>` de l’élément de *wwwroot/index.html* (éblouissante webassembly) ou *pages/_Host. cshtml* (serveur éblouissant). La fonction est appelée avec <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> et ne retourne pas de valeur :
+Pour l’exemple de code précédent, fournissez une `setElementText` fonction JavaScript à l’intérieur `<head>` de l’élément de *wwwroot/index.html* (éblouissant webassembly) ou *pages/_Host. cshtml* (serveur éblouissant). La fonction est appelée avec <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> et ne retourne pas de valeur :
 
 ```html
 <script>
@@ -39,7 +39,7 @@ Le composant suivant montre comment utiliser l’interopérabilité JavaScript d
 
 Où <xref:Microsoft.JSInterop.JSRuntime.InvokeAsync%2A?displayProperty=nameWithType> est appelé, `ElementRef` est utilisé uniquement dans <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> et non dans une méthode de cycle de vie antérieure, car il n’y a pas d’élément JavaScript tant que le composant n’est pas rendu.
 
-[StateHasChanged](xref:blazor/lifecycle#state-changes) est appelé pour rerestituer le composant avec le nouvel état obtenu à partir de l’appel JavaScript Interop. Le code ne crée pas de boucle infinie, car `StateHasChanged` est appelé uniquement lorsque `infoFromJs` est `null` .
+[StateHasChanged](xref:blazor/components/lifecycle#state-changes) est appelé pour rerestituer le composant avec le nouvel état obtenu à partir de l’appel JavaScript Interop. Le code ne crée pas de boucle infinie, car `StateHasChanged` est appelé uniquement lorsque `infoFromJs` est `null` .
 
 ```cshtml
 @page "/prerendered-interop"
@@ -72,7 +72,7 @@ Set value via JS interop call:
 }
 ```
 
-Pour l’exemple de code précédent, fournissez une `setElementText` fonction JavaScript à l’intérieur `<head>` de l’élément de *wwwroot/index.html* (éblouissante webassembly) ou *pages/_Host. cshtml* (serveur éblouissant). La fonction est appelée avec <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> et retourne une valeur :
+Pour l’exemple de code précédent, fournissez une `setElementText` fonction JavaScript à l’intérieur `<head>` de l’élément de *wwwroot/index.html* (éblouissant webassembly) ou *pages/_Host. cshtml* (serveur éblouissant). La fonction est appelée avec <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> et retourne une valeur :
 
 ```html
 <script>

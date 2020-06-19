@@ -5,14 +5,14 @@ Applications serveur éblouissantes en direct dans la mémoire du serveur. Cela 
 
 Vous pouvez utiliser des services Singleton avec état dans des applications éblouissantes si elles sont spécifiquement conçues pour celle-ci. Par exemple, il est possible d’utiliser un cache mémoire en tant que singleton, car il requiert une clé pour accéder à une entrée donnée, en supposant que les utilisateurs n’ont pas le contrôle des clés de cache utilisées.
 
-**De plus, pour des raisons de sécurité, vous ne devez <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> pas utiliser dans les applications éblouissantes.** Les applications éblouissantes s’exécutent en dehors du contexte du pipeline <xref:Microsoft.AspNetCore.Http.HttpContext> ASP.net Core et ne sont pas nécessairement disponibles <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor>dans le, et il est garanti qu’elles détiennent le contexte qui a démarré l’application éblouissante.
+**De plus, pour des raisons de sécurité, vous ne devez pas utiliser <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> dans les applications éblouissantes.** Les applications éblouissantes s’exécutent en dehors du contexte du pipeline ASP.NET Core et <xref:Microsoft.AspNetCore.Http.HttpContext> ne sont pas nécessairement disponibles dans le <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> , et il est garanti qu’elles détiennent le contexte qui a démarré l’application éblouissante.
 
 La méthode recommandée pour passer l’état de la demande à l’application éblouissant est d’utiliser les paramètres du composant racine dans le rendu initial de l’application :
 
 * Définissez une classe avec toutes les données que vous souhaitez transmettre à l’application éblouissante.
-* Remplissez ces données à partir de la page Razor <xref:Microsoft.AspNetCore.Http.HttpContext> en utilisant le disponible à ce moment-là.
+* Remplissez ces données à partir de la page Razor en utilisant le <xref:Microsoft.AspNetCore.Http.HttpContext> disponible à ce moment-là.
 * Transmettez les données à l’application éblouissant en tant que paramètre au composant racine (application).
 * Définissez un paramètre dans le composant racine pour stocker les données passées à l’application.
 * Utilisez les données spécifiques à l’utilisateur dans l’application. vous pouvez également copier ces données dans un service étendu dans <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> afin qu’elles puissent être utilisées dans l’application.
 
-Pour obtenir des informations supplémentaires ainsi qu'un code d'exemple, consultez <xref:security/blazor/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.
+Pour obtenir des informations supplémentaires ainsi qu'un code d'exemple, consultez <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.

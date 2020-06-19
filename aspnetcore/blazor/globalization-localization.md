@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 94faaa57cc6dd3df9e4a7c3c090fe01527399658
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 42b61c9af0c1809ecb7d9a45ec8edfa815e2df22
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84419734"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102324"
 ---
 # <a name="aspnet-core-blazor-globalization-and-localization"></a>BlazorGlobalisation et localisation ASP.net Core
 
@@ -69,7 +69,7 @@ BlazorLes applications webassembly définissent la culture à l’aide de la [pr
 
 Pour configurer explicitement la culture, définissez <xref:System.Globalization.CultureInfo.DefaultThreadCurrentCulture?displayProperty=nameWithType> et <xref:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture?displayProperty=nameWithType> dans `Program.Main` .
 
-Par défaut, Blazor la configuration de l’éditeur de liens pour les Blazor applications webassembly supprime les informations d’internationalisation, à l’exception des paramètres régionaux demandés explicitement. Pour plus d’informations et de conseils sur le contrôle du comportement de l’éditeur de liens, consultez <xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization> .
+Par défaut, Blazor la configuration de l’éditeur de liens pour les Blazor applications webassembly supprime les informations d’internationalisation, à l’exception des paramètres régionaux demandés explicitement. Pour plus d’informations et de conseils sur le contrôle du comportement de l’éditeur de liens, consultez <xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization> .
 
 Alors que la culture qui Blazor sélectionne par défaut peut être suffisante pour la plupart des utilisateurs, envisagez d’offrir aux utilisateurs un moyen de spécifier leurs paramètres régionaux préférés. Pour obtenir un Blazor exemple d’application Webassembly avec un sélecteur de culture, consultez l’exemple d’application de localisation [LocSample](https://github.com/pranavkm/LocSample) .
 

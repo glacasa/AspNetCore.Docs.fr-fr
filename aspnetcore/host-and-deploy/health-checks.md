@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: cb3ee4f3bf9061d212c1fee85f3f4a22946be097
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 00b2697a6b916718d9d0e01d1ea9f922eb2b5706
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105777"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074426"
 ---
 # <a name="health-checks-in-aspnet-core"></a>Contrôles d’intégrité dans ASP.NET Core
 
@@ -324,7 +324,7 @@ Le premier exemple de l’exemple d’application montre comment utiliser <xref:
 
 [!code-csharp[](health-checks/samples/3.x/HealthChecksSample/CustomWriterStartup.cs?name=snippet_WriteResponse_SystemTextJson)]
 
-Le deuxième exemple montre comment utiliser [Newtonsoft. JSON](https://www.nuget.org/packages/Newtonsoft.Json/):
+Le deuxième exemple montre comment utiliser [Newtonsoft.Jssur](https://www.nuget.org/packages/Newtonsoft.Json/):
 
 [!code-csharp[](health-checks/samples/3.x/HealthChecksSample/CustomWriterStartup.cs?name=snippet_WriteResponse_NewtonSoftJson)]
 
@@ -560,11 +560,11 @@ dotnet run --scenario writer
 
 Appelez `RequireHost` `MapHealthChecks` avec un modèle d’URL qui spécifie un port pour restreindre les demandes de contrôle d’intégrité au port spécifié. Ceci est généralement utilisé dans les environnements de conteneurs pour exposer un port aux services de supervision.
 
-L’exemple d’application configure le port à l’aide du [fournisseur de configuration des variables d’environnement](xref:fundamentals/configuration/index#environment-variables-configuration-provider). Le port est défini dans le fichier *launchSettings.json*, puis transmis au fournisseur de configuration via une variable d’environnement. Vous devez également configurer le serveur pour écouter les requêtes qui arrivent au port de gestion.
+L’exemple d’application configure le port à l’aide du [fournisseur de configuration des variables d’environnement](xref:fundamentals/configuration/index#environment-variables). Le port est défini dans le fichier *launchSettings.json*, puis transmis au fournisseur de configuration via une variable d’environnement. Vous devez également configurer le serveur pour écouter les requêtes qui arrivent au port de gestion.
 
 Pour utiliser l’exemple d’application dans le but d’illustrer la configuration du port de gestion, créez le fichier *launchSettings.json* dans un dossier *Propriétés*.
 
-Le fichier *Properties/launchSettings. JSON* suivant dans l’exemple d’application n’est pas inclus dans les fichiers projet de l’exemple d’application et doit être créé manuellement :
+Les *Propriétés/launchSettings.js* suivantes du fichier dans l’exemple d’application ne sont pas incluses dans les fichiers projet de l’exemple d’application et doivent être créées manuellement :
 
 ```json
 {
@@ -614,7 +614,7 @@ app.UseEndpoints(endpoints =>
 ```
 
 > [!NOTE]
-> Vous pouvez éviter de créer le fichier *launchSettings. JSON* dans l’exemple d’application en définissant le port de gestion explicitement dans le code. Dans *Program.cs* où <xref:Microsoft.Extensions.Hosting.HostBuilder> est créé, ajoutez un appel à <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenAnyIP*> et fournissez le point de terminaison du port de gestion de l’application. Dans `Configure` *ManagementPortStartup.cs*, spécifiez le port de gestion avec `RequireHost` :
+> Vous pouvez éviter de créer le *launchSettings.jssur* le fichier dans l’exemple d’application en définissant le port de gestion explicitement dans le code. Dans *Program.cs* où <xref:Microsoft.Extensions.Hosting.HostBuilder> est créé, ajoutez un appel à <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenAnyIP*> et fournissez le point de terminaison du port de gestion de l’application. Dans `Configure` *ManagementPortStartup.cs*, spécifiez le port de gestion avec `RequireHost` :
 >
 > *Program.cs*:
 >
@@ -789,7 +789,7 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-Pour plus d’informations, consultez <xref:fundamentals/middleware/index#use-run-and-map>.
+Pour plus d’informations, consultez <xref:fundamentals/middleware/index#branch-the-middleware-pipeline>.
 
 ::: moniker-end
 
@@ -1269,7 +1269,7 @@ L’exemple d’application configure le port à l’aide du [fournisseur de con
 
 Pour utiliser l’exemple d’application dans le but d’illustrer la configuration du port de gestion, créez le fichier *launchSettings.json* dans un dossier *Propriétés*.
 
-Le fichier *Properties/launchSettings. JSON* suivant dans l’exemple d’application n’est pas inclus dans les fichiers projet de l’exemple d’application et doit être créé manuellement :
+Les *Propriétés/launchSettings.js* suivantes du fichier dans l’exemple d’application ne sont pas incluses dans les fichiers projet de l’exemple d’application et doivent être créées manuellement :
 
 ```json
 {

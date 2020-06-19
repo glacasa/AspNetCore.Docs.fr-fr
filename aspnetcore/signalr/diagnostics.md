@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: d26bb71a8ae06764b58a094b28d5e6f9eb581ecd
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: 7d7ea0fe69f258c01177c7755eaee61ab42400ce
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84755961"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102941"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>Journalisation et diagnostics dans ASP.NET CoreSignalR
 
@@ -111,7 +111,7 @@ Si vous souhaitez envoyer des journaux à un système de journalisation personna
 
 Pour récupérer des journaux à partir du client .NET, vous pouvez utiliser la `ConfigureLogging` méthode sur `HubConnectionBuilder` . Cela fonctionne de la même façon que la `ConfigureLogging` méthode sur `WebHostBuilder` et `HostBuilder` . Vous pouvez configurer les mêmes fournisseurs de journalisation que ceux que vous utilisez dans ASP.NET Core. Toutefois, vous devez installer et activer manuellement les packages NuGet pour les différents fournisseurs de journalisation.
 
-Pour ajouter la journalisation du client .NET à une Blazor application Webassembly, consultez <xref:fundamentals/logging/index#blazor-webassembly-signalr-net-client-logging> .
+Pour ajouter la journalisation du client .NET à une Blazor application Webassembly, consultez <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging> .
 
 ### <a name="console-logging"></a>Écriture dans le journal de la console
 
