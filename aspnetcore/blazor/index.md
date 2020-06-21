@@ -5,7 +5,7 @@ description: Explorez ASP.NET Core Blazor , un moyen de créer une interface uti
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc, seoapril2019
-ms.date: 05/19/2020
+ms.date: 06/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: feca504a39624282961fbc6405876e970a20b5d4
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 086629f88ad04faed812bd16683e7d073f3e8ede
+ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102286"
+ms.lasthandoff: 06/20/2020
+ms.locfileid: "85122072"
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>Présentation de ASP.NET CoreBlazor
 
@@ -149,7 +149,7 @@ Pour les applications qui nécessitent des bibliothèques JavaScript tierces et 
 
 ## <a name="code-sharing-and-net-standard"></a>Partage de code et .NET Standard
 
-Blazorimplémente [.NET Standard 2,0](/dotnet/standard/net-standard). .NET Standard est une spécification formelle d’API .NET qui sont communes aux implémentations .NET. .NET Standard bibliothèques de classes peuvent être partagées entre différentes plateformes .NET, telles que Blazor , .NET Framework, .net Core, Xamarin, mono et Unity.
+Blazorimplémente [.NET Standard 2,1](/dotnet/standard/net-standard), qui permet Blazor aux projets de référencer des bibliothèques conformes à .NET standard 2,1 ou à des spécifications antérieures. .NET Standard est une spécification formelle d’API .NET qui sont communes aux implémentations .NET. .NET Standard bibliothèques de classes peuvent être partagées entre différentes plateformes .NET, telles que Blazor , .NET Framework, .net Core, Xamarin, mono et Unity.
 
 Les API qui ne sont pas applicables à l’intérieur d’un navigateur web (par exemple l’accès au système de fichiers, l’ouverture d’un socket et le threading) lèvent une <xref:System.PlatformNotSupportedException>.
 

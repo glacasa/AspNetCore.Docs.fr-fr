@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 407583533939ec1077af8e1a1511ed187ef9de69
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 068b471c1f5fa5f0ca87dd7b028badf70f8c1b67
+ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103007"
+ms.lasthandoff: 06/20/2020
+ms.locfileid: "85122163"
 ---
 # <a name="filters-in-aspnet-core"></a>Filtres dans ASP.NET Core
 
@@ -445,6 +445,9 @@ Le filtre d’actions `OnActionExecuting` peut être utilisé pour :
 * Renvoyer une erreur si l’état n’est pas valide.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/ValidateModelAttribute.cs?name=snippet)]
+
+> [!NOTE]
+> Les contrôleurs annotés avec l' `[ApiController]` attribut valident automatiquement l’état du modèle et retournent une réponse 400. Pour plus d’informations, consultez [Réponses HTTP 400 automatiques](xref:web-api/index#automatic-http-400-responses).
 
 La méthode `OnActionExecuted` s’exécute après la méthode d’action :
 

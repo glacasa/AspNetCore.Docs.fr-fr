@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: f72edda54d4201915e2494b75b4d49ec6c9c6d75
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: ff44b4b80385ffbd1a6659b2684ef2a8055ee2d0
+ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652832"
+ms.lasthandoff: 06/20/2020
+ms.locfileid: "85122111"
 ---
 # <a name="part-8-add-validation-to-an-aspnet-core-razor-page"></a>Partie 8, ajouter une validation à une Razor Page ASP.net Core
 
@@ -119,7 +119,7 @@ Examiner la classe `Movie`. L’espace de noms `System.ComponentModel.DataAnnota
 
 Les attributs `DataType` fournissent uniquement des conseils permettant au moteur de vue de mettre en forme les données (et fournissent des attributs tels que `<a>` pour les URL et `<a href="mailto:EmailAddress.com">` pour l’e-mail). Utilisez l’attribut `RegularExpression` pour valider le format des données. L’attribut `DataType` sert à spécifier un type de données qui est plus spécifique que le type intrinsèque de la base de données. Les attributs `DataType` ne sont pas des attributs de validation. Dans l’exemple d’application, seule la date est affichée, sans l’heure.
 
-L’énumération `DataType` fournit de nombreux types de données, tels que Date, Time, PhoneNumber, Currency ou EmailAddress. L’attribut `DataType` peut également permettre à l’application de fournir automatiquement des fonctionnalités propres au type. Par exemple, il est possible de créer un lien `mailto:` pour `DataType.EmailAddress`. Un sélecteur de date peut être fourni pour `DataType.Date` dans les navigateurs qui prennent en charge HTML5. Les attributs `DataType` émettent des attributs HTML 5 `data-` utilisés par les navigateurs HTML 5. Les attributs `DataType` ne fournissent **aucune** validation.
+L’énumération `DataType` fournit de nombreux types de données, tels que Date, Time, PhoneNumber, Currency ou EmailAddress. L’attribut `DataType` peut également permettre à l’application de fournir automatiquement des fonctionnalités propres au type. Par exemple, il est possible de créer un lien `mailto:` pour `DataType.EmailAddress`. Un sélecteur de date peut être fourni pour `DataType.Date` dans les navigateurs qui prennent en charge HTML5. Les `DataType` attributs émettent des attributs HTML 5 `data-` (prononciation des données) que les navigateurs HTML 5 consomment. Les attributs `DataType` ne fournissent **aucune** validation.
 
 `DataType.Date` ne spécifie pas le format de la date qui s’affiche. Par défaut, le champ de données est affiché conformément aux formats par défaut basés sur le `CultureInfo` du serveur.
 
@@ -138,9 +138,9 @@ L’attribut `DisplayFormat` peut être utilisé seul, mais il est généralemen
 
 * Le navigateur peut activer des fonctionnalités HTML5 (par exemple pour afficher un contrôle de calendrier, le symbole monétaire correspondant aux paramètres régionaux, des liens de messagerie, etc.).
 * Par défaut, le navigateur affiche les données à l’aide du format correspondant à vos paramètres régionaux.
-* L’attribut `DataType` peut permettre à l’infrastructure ASP.NET Core de choisir le modèle de champ approprié pour afficher les données. S’il est utilisé seul, `DisplayFormat` utilise le modèle de chaîne.
+* L’attribut `DataType` peut permettre à l’infrastructure ASP.NET Core de choisir le modèle de champ approprié pour afficher les données. `DisplayFormat`, S’il est utilisé par lui-même, utilise le modèle de chaîne.
 
-Remarque : La validation jQuery ne fonctionne pas avec l’attribut `Range` et `DateTime`. Par exemple, le code suivant affiche toujours une erreur de validation côté client, même quand la date se trouve dans la plage spécifiée :
+**Remarque :** la validation jQuery ne fonctionne pas avec l' `Range` attribut et `DateTime` . Par exemple, le code suivant affiche toujours une erreur de validation côté client, même quand la date se trouve dans la plage spécifiée :
 
 ```csharp
 [Range(typeof(DateTime), "1/1/1966", "1/1/2020")]

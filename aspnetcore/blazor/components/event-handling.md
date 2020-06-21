@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/event-handling
-ms.openlocfilehash: 32f7595cffc2c31116c8d876c9f9526b84c52f14
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: d15d8355b321c2938d68a109c5115db78280f6b6
+ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103725"
+ms.lasthandoff: 06/20/2020
+ms.locfileid: "85122085"
 ---
 # <a name="aspnet-core-blazor-event-handling"></a>BlazorGestion des événements ASP.net Core
 
@@ -73,7 +73,14 @@ Dans l’exemple suivant, `UpdateHeading` est appelé de façon asynchrone quand
 
 ## <a name="event-argument-types"></a>Types d’arguments d’événement
 
-Pour certains événements, les types d’arguments d’événement sont autorisés. La spécification d’un type d’événement dans l’appel de méthode n’est nécessaire que si le type d’événement est utilisé dans la méthode.
+Pour certains événements, les types d’arguments d’événement sont autorisés. La spécification d’un paramètre d’événement dans une définition de méthode d’événement est facultative et n’est nécessaire que si le type d’événement est utilisé dans la méthode. Dans l’exemple suivant, l' `MouseEventArgs` argument d’événement est utilisé dans la `ShowMessage` méthode pour définir le texte du message :
+
+```csharp
+private void ShowMessage(MouseEventArgs e)
+{
+    messageText = $"The mouse is at coordinates: {e.ScreenX}:{e.ScreenY}";
+}
+```
 
 Les informations prises en charge <xref:System.EventArgs> sont indiquées dans le tableau suivant.
 
