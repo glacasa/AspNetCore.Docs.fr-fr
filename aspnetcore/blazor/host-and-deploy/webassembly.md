@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 4f672c5117beeb09914e802012f0970389fea47f
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 4755674a4e73b245923c2c0f1f3d8ed114be8c81
+ms.sourcegitcommit: 726b8c5cf92e6f6a4d0205787b19307e889d6240
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103674"
+ms.lasthandoff: 06/21/2020
+ms.locfileid: "85127758"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>Héberger et déployer ASP.NET Core Blazor Webassembly
 
@@ -202,7 +202,7 @@ La suppression du gestionnaire ou la désactivation de l’héritage est effectu
 
 #### <a name="brotli-and-gzip-compression"></a>Compression Brotli et gzip
 
-IIS peut être configuré via *web.config* pour servir des ressources compressées Brotli ou gzip Blazor . Pour obtenir un exemple de configuration, consultez [web.config](webassembly/_samples/web.config?raw=true).
+IIS peut être configuré via *web.config* pour servir des ressources compressées Brotli ou gzip Blazor . Pour obtenir un exemple de configuration, consultez [web.config](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true).
 
 #### <a name="troubleshooting"></a>Dépannage
 
@@ -210,7 +210,7 @@ Si vous recevez un message *500 – Erreur interne du serveur* et que le Gestion
 
 Pour plus d’informations sur le dépannage des déploiements sur IIS, consultez <xref:test/troubleshoot-azure-iis>.
 
-### <a name="azure-storage"></a>Stockage Azure
+### <a name="azure-storage"></a>Azure Storage
 
 L’hébergement de fichiers statiques [Azure Storage](/azure/storage/) permet l’hébergement d’applications sans serveur Blazor . Les noms de domaine personnalisé, le réseau de distribution de contenu Azure (CDN) et HTTPS sont pris en charge.
 

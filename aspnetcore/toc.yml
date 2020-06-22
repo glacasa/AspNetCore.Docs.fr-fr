@@ -297,94 +297,134 @@
               uid: tutorials/signalr-blazor-webassembly
         - name: Modèles
           uid: blazor/templates
+        - name: Notions de base
+          items:
+            - name: Routage
+              uid: blazor/fundamentals/routing
+            - name: Configuration
+              uid: blazor/fundamentals/configuration
+            - name: Injection de dépendances
+              uid: blazor/fundamentals/dependency-injection
+            - name: Environnements
+              uid: blazor/fundamentals/environments
+            - name: Journalisation
+              uid: blazor/fundamentals/logging
+            - name: Gérer les erreurs
+              uid: blazor/fundamentals/handle-errors
+            - name: Autres cas de figure
+              uid: blazor/fundamentals/additional-scenarios
         - name: Composants
-          uid: blazor/components
-        - name: Liaison de données
-          uid: blazor/data-binding
-        - name: Gestion des événements
-          uid: blazor/event-handling
-        - name: Cycle de vie
-          uid: blazor/lifecycle
-        - name: Composants basés sur un modèle
-          uid: blazor/templated-components
-        - name: Intégrer des composants
-          uid: blazor/integrate-components
+          items:
+            - name: Vue d'ensemble
+              uid: blazor/components/index
+            - name: Composants intégrés
+              items:
+                - name: Application
+                  uid: blazor/templates
+                - name: Authentification
+                  uid: blazor/security/webassembly/additional-scenarios
+                - name: AuthorizeView
+                  uid: blazor/security/index
+                - name: InputCheckbox
+                  uid: blazor/forms-validation
+                - name: InputDate
+                  uid: blazor/forms-validation
+                - name: InputNumber
+                  uid: blazor/forms-validation
+                - name: InputSelect
+                  uid: blazor/forms-validation
+                - name: InputText
+                  uid: blazor/forms-validation
+                - name: InputTextArea
+                  uid: blazor/forms-validation
+                - name: MainLayout
+                  uid: blazor/layouts
+                - name: NavLink
+                  uid: blazor/fundamentals/routing
+                - name: NavMenu
+                  uid: blazor/fundamentals/routing
+                - name: Routeur
+                  uid: blazor/fundamentals/routing
+            - name: Valeurs et paramètres en cascade
+              uid: blazor/components/cascading-values-and-parameters
+            - name: Liaison de données
+              uid: blazor/components/data-binding
+            - name: Gestion des événements
+              uid: blazor/components/event-handling
+            - name: Cycle de vie
+              uid: blazor/components/lifecycle
+            - name: Composants basés sur un modèle
+              uid: blazor/components/templated-components
+            - name: Intégrer des composants
+              uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
+            - name: Bibliothèques de composants
+              uid: blazor/components/class-libraries
         - name: Globalisation et localisation
           uid: blazor/globalization-localization
         - name: Dispositions
           uid: blazor/layouts
         - name: Formulaires et validation
           uid: blazor/forms-validation
-        - name: Injection de dépendances
-          uid: blazor/dependency-injection
-        - name: Routage
-          uid: blazor/routing
         - name: Appeler JavaScript à partir de .NET
           uid: blazor/call-javascript-from-dotnet
         - name: Appeler .NET à partir de JavaScript
           uid: blazor/call-dotnet-from-javascript
-        - name: Configuration du modèle d’hébergement
-          uid: blazor/hosting-model-configuration
-        - name: Bibliothèques de composants
-          uid: blazor/class-libraries
         - name: Sécurité et identité
           items:
             - name: Vue d'ensemble
-              uid: security/blazor/index
+              uid: blazor/security/index
             - name: WebAssembly Blazor
               items:
                 - name: Vue d'ensemble
-                  uid: security/blazor/webassembly/index
+                  uid: blazor/security/webassembly/index
                 - name: Autonome avec la bibliothèque d’authentification
-                  uid: security/blazor/webassembly/standalone-with-authentication-library
+                  uid: blazor/security/webassembly/standalone-with-authentication-library
                 - name: Autonome avec des comptes Microsoft
-                  uid: security/blazor/webassembly/standalone-with-microsoft-accounts
+                  uid: blazor/security/webassembly/standalone-with-microsoft-accounts
                 - name: Autonome avec AAD
-                  uid: security/blazor/webassembly/standalone-with-azure-active-directory
+                  uid: blazor/security/webassembly/standalone-with-azure-active-directory
                 - name: Autonome avec AAD B2C
-                  uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
+                  uid: blazor/security/webassembly/standalone-with-azure-active-directory-b2c
                 - name: Hébergé avec AAD
-                  uid: security/blazor/webassembly/hosted-with-azure-active-directory
+                  uid: blazor/security/webassembly/hosted-with-azure-active-directory
                 - name: Hébergé avec AAD B2C
-                  uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
+                  uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
                 - name: Hébergé avec le serveur d’identité
-                  uid: security/blazor/webassembly/hosted-with-identity-server
+                  uid: blazor/security/webassembly/hosted-with-identity-server
                 - name: Autres cas de figure
-                  uid: security/blazor/webassembly/additional-scenarios
+                  uid: blazor/security/webassembly/additional-scenarios
                 - name: Ajouter des groupes et des rôles
-                  uid: security/blazor/webassembly/aad-groups-roles
+                  uid: blazor/security/webassembly/aad-groups-roles
             - name: Serveur Blazor
               items:
                 - name: Vue d'ensemble
-                  uid: security/blazor/server/index
+                  uid: blazor/security/server/index
                 - name: Atténuation des menaces
-                  uid: security/blazor/server/threat-mitigation
+                  uid: blazor/security/server/threat-mitigation
                 - name: Autres cas de figure
-                  uid: security/blazor/server/additional-scenarios
+                  uid: blazor/security/server/additional-scenarios
             - name: Stratégie de sécurité du contenu
-              uid: security/blazor/content-security-policy
+              uid: blazor/security/content-security-policy
         - name: Gestion de l’état
           uid: blazor/state-management
-        - name: Gérer les erreurs
-          uid: blazor/handle-errors
         - name: Déboguer WebAssembly
           uid: blazor/debug
         - name: Appeler une API web à partir de WebAssembly
           uid: blazor/call-web-api
         - name: Performances WebAssembly
-          uid: performance/blazor/webassembly-best-practices
+          uid: blazor/webassembly-performance-best-practices
         - name: Applications web progressives
           uid: blazor/progressive-web-app
         - name: Héberger et déployer
           items:
             - name: Vue d'ensemble
-              uid: host-and-deploy/blazor/index
+              uid: blazor/host-and-deploy/index
             - name: WebAssembly Blazor
-              uid: host-and-deploy/blazor/webassembly
+              uid: blazor/host-and-deploy/webassembly
             - name: Serveur Blazor
-              uid: host-and-deploy/blazor/server
+              uid: blazor/host-and-deploy/server
             - name: Configurer l'éditeur de liens
-              uid: host-and-deploy/blazor/configure-linker
+              uid: blazor/host-and-deploy/configure-linker
         - name: Scénarios avancés
           uid: blazor/advanced-scenarios
     - name: Développement côté client
@@ -445,15 +485,15 @@
             - name: Environnement
               uid: mvc/views/tag-helpers/builtin-th/environment-tag-helper
             - name: Formulaire
-              href: 'mvc/views/working-with-forms.md#the-form-tag-helper'
+              href: mvc/views/working-with-forms.md#the-form-tag-helper
             - name: Action de formulaire
-              href: 'mvc/views/working-with-forms.md#the-form-action-tag-helper'
+              href: mvc/views/working-with-forms.md#the-form-action-tag-helper
             - name: Image
               uid: mvc/views/tag-helpers/builtin-th/image-tag-helper
             - name: Entrée
-              href: 'mvc/views/working-with-forms.md#the-input-tag-helper'
+              href: mvc/views/working-with-forms.md#the-input-tag-helper
             - name: Etiquette
-              href: 'mvc/views/working-with-forms.md#the-label-tag-helper'
+              href: mvc/views/working-with-forms.md#the-label-tag-helper
             - name: Lien
               uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
             - name: Partial
@@ -461,13 +501,13 @@
             - name: Script
               uid: mvc/views/tag-helpers/builtin-th/script-tag-helper
             - name: Sélectionner
-              href: 'mvc/views/working-with-forms.md#the-select-tag-helper'
+              href: mvc/views/working-with-forms.md#the-select-tag-helper
             - name: Textarea
-              href: 'mvc/views/working-with-forms.md#the-textarea-tag-helper'
+              href: mvc/views/working-with-forms.md#the-textarea-tag-helper
             - name: Message de validation
-              href: 'mvc/views/working-with-forms.md#the-validation-message-tag-helper'
+              href: mvc/views/working-with-forms.md#the-validation-message-tag-helper
             - name: Résumé de validation
-              href: 'mvc/views/working-with-forms.md#the-validation-summary-tag-helper'
+              href: mvc/views/working-with-forms.md#the-validation-summary-tag-helper
     - name: Avancé
       items:
         - name: Composants d’application
@@ -640,7 +680,7 @@
       items:
         - name: Bien démarrer avec un service gRPC
           uid: tutorials/grpc/grpc-start
-    - name: 'Services gRPC avec C#'
+    - name: Services gRPC avec C#
       uid: grpc/basics
     - name: Services gRPC avec ASP.NET Core
       uid: grpc/aspnetcore
@@ -890,13 +930,13 @@
     - name: Blazor
       items:
         - name: Vue d'ensemble
-          uid: host-and-deploy/blazor/index
+          uid: blazor/host-and-deploy/index
         - name: WebAssembly Blazor
-          uid: host-and-deploy/blazor/webassembly
+          uid: blazor/host-and-deploy/webassembly
         - name: Serveur Blazor
-          uid: host-and-deploy/blazor/server
+          uid: blazor/host-and-deploy/server
         - name: Configurer l'éditeur de liens
-          uid: host-and-deploy/blazor/configure-linker
+          uid: blazor/host-and-deploy/configure-linker
 - name: Sécurité et identité
   displayName: 'authentication, authorization'
   items:
@@ -1132,39 +1172,39 @@
     - name: Blazor
       items:
         - name: Vue d'ensemble
-          uid: security/blazor/index
+          uid: blazor/security/index
         - name: WebAssembly Blazor
           items:
             - name: Vue d'ensemble
-              uid: security/blazor/webassembly/index
+              uid: blazor/security/webassembly/index
             - name: Autonome avec la bibliothèque d’authentification
-              uid: security/blazor/webassembly/standalone-with-authentication-library
+              uid: blazor/security/webassembly/standalone-with-authentication-library
             - name: Autonome avec des comptes Microsoft
-              uid: security/blazor/webassembly/standalone-with-microsoft-accounts
+              uid: blazor/security/webassembly/standalone-with-microsoft-accounts
             - name: Autonome avec AAD
-              uid: security/blazor/webassembly/standalone-with-azure-active-directory
+              uid: blazor/security/webassembly/standalone-with-azure-active-directory
             - name: Autonome avec AAD B2C
-              uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
+              uid: blazor/security/webassembly/standalone-with-azure-active-directory-b2c
             - name: Hébergé avec AAD
-              uid: security/blazor/webassembly/hosted-with-azure-active-directory
+              uid: blazor/security/webassembly/hosted-with-azure-active-directory
             - name: Hébergé avec AAD B2C
-              uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
+              uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
             - name: Hébergé avec le serveur d’identité
-              uid: security/blazor/webassembly/hosted-with-identity-server
+              uid: blazor/security/webassembly/hosted-with-identity-server
             - name: Autres cas de figure
-              uid: security/blazor/webassembly/additional-scenarios
+              uid: blazor/security/webassembly/additional-scenarios
             - name: Ajouter des groupes et des rôles
-              uid: security/blazor/webassembly/aad-groups-roles
+              uid: blazor/security/webassembly/aad-groups-roles
         - name: Serveur Blazor
           items:
             - name: Vue d'ensemble
-              uid: security/blazor/server/index
+              uid: blazor/security/server/index
             - name: Atténuation des menaces
-              uid: security/blazor/server/threat-mitigation
+              uid: blazor/security/server/threat-mitigation
             - name: Autres cas de figure
-              uid: security/blazor/server/additional-scenarios
+              uid: blazor/security/server/additional-scenarios
         - name: Stratégie de sécurité du contenu
-          uid: security/blazor/content-security-policy
+          uid: blazor/security/content-security-policy
 - name: Performances
   items:
     - name: Vue d'ensemble
@@ -1190,7 +1230,7 @@
     - name: Tests de charge et de contrainte
       uid: test/loadtests
     - name: WebAssembly Blazor
-      uid: performance/blazor/webassembly-best-practices
+      uid: blazor/webassembly-performance-best-practices
 - name: Globalisation et localisation
   items:
     - name: Vue d'ensemble
