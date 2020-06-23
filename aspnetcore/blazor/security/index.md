@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: 8c5e6c6ba741cae2634e2852e9ca141a0a7c33ce
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 14cf614bf5d4f2ad6a34c49cb08277a2deae8d00
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103662"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242948"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>BlazorAuthentification et autorisation ASP.net Core
 
@@ -48,8 +48,8 @@ Dans Blazor les applications Webassembly, les vérifications d’authentificatio
 
 Ajoutez ce qui suit :
 
-* Référence de package pour [Microsoft. AspNetCore. Components. Authorization](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Authorization/) au fichier projet de l’application.
-* `Microsoft.AspNetCore.Components.Authorization`Espace de noms du fichier *_Imports. Razor* de l’application.
+* Référence de package pour [`Microsoft.AspNetCore.Components.Authorization`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Authorization/) le fichier projet de l’application.
+* `Microsoft.AspNetCore.Components.Authorization`Espace de noms du fichier de l’application `_Imports.razor` .
 
 Pour gérer l’authentification, l’implémentation d’un service intégré ou personnalisé <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> est traitée dans les sections suivantes.
 
@@ -67,7 +67,7 @@ Le <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvid
 
 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> est le service sous-jacent utilisé par le composant <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> et le composant <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> pour obtenir l’état d’authentification.
 
-Vous n’utilisez généralement pas <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> directement. Utilisez les approches [Composant AuthorizeView](#authorizeview-component) ou [Tâche\<AuthenticationState>](#expose-the-authentication-state-as-a-cascading-parameter) décrites plus loin dans cet article. Le principal inconvénient de l’utilisation directe de <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> est que le composant n’est pas automatiquement averti en cas de modifications de données d’état de l’authentification sous-jacente.
+Vous n’utilisez généralement pas <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> directement. Utilisez le ou les [ `AuthorizeView` composants](#authorizeview-component) [`Task<AuthenticationState>`](#expose-the-authentication-state-as-a-cascading-parameter) décrits plus loin dans cet article. Le principal inconvénient de l’utilisation directe de <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> est que le composant n’est pas automatiquement averti en cas de modifications de données d’état de l’authentification sous-jacente.
 
 Le service <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> peut fournir les données <xref:System.Security.Claims.ClaimsPrincipal> de l’utilisateur actuel, comme indiqué dans l’exemple suivant :
 
@@ -149,7 +149,7 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
 }
 ```
 
-Dans une Blazor application Webassembly, le `CustomAuthStateProvider` service est inscrit `Main` dans *Program.cs*:
+Dans une Blazor application Webassembly, le `CustomAuthStateProvider` service est inscrit `Main` dans `Program.cs` :
 
 ```csharp
 using Microsoft.AspNetCore.Components.Authorization;
@@ -207,7 +207,7 @@ Si les données d’état d’authentification sont requises pour la logique pro
 
 Si `user.Identity.IsAuthenticated` est `true`, les revendications peuvent être énumérées et l’appartenance aux rôles évaluée.
 
-Configurez le `Task<` <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> `>` paramètre en cascade à l’aide des <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> composants et dans le `App` composant (*app. Razor*) :
+Configurez le `Task<` <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> `>` paramètre en cascade à l’aide des <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> composants et dans le `App` composant ( `App.razor` ) :
 
 ```razor
 <CascadingAuthenticationState>
@@ -275,7 +275,7 @@ Vous pouvez également fournir un contenu différent à afficher si l’utilisat
 </AuthorizeView>
 ```
 
-Le <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> composant peut être utilisé dans le `NavMenu` composant (*Shared/NavMenu. Razor*) pour afficher un élément de liste ( `<li>...</li>` ) pour un [composant NavLink](xref:blazor/fundamentals/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), mais notez que cette approche supprime uniquement l’élément de liste de la sortie rendue. Elle n’empêche pas l’utilisateur de naviguer jusqu’au composant.
+Le <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> composant peut être utilisé dans le `NavMenu` composant ( `Shared/NavMenu.razor` ) pour afficher un élément de liste ( `<li>...</li>` ) pour un [ `NavLink` composant](xref:blazor/fundamentals/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ), mais notez que cette approche supprime uniquement l’élément de liste de la sortie rendue. Elle n’empêche pas l’utilisateur de naviguer jusqu’au composant.
 
 Le contenu des `<Authorized>` `<NotAuthorized>` balises et peut inclure des éléments arbitraires, tels que d’autres composants interactifs.
 
@@ -380,7 +380,7 @@ Le <xref:Microsoft.AspNetCore.Components.Routing.Router> composant, conjointemen
 * L’utilisateur n’a pas [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) de condition appliquée au composant. L' [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribut est abordé dans la section [ `[Authorize]` attribut](#authorize-attribute) .
 * Une authentification asynchrone est en cours.
 
-Dans le Blazor modèle de projet serveur par défaut, le `App` composant (*app. Razor*) montre comment définir un contenu personnalisé :
+Dans le Blazor modèle de projet serveur par défaut, le `App` composant ( `App.razor` ) montre comment définir un contenu personnalisé :
 
 ```razor
 <CascadingAuthenticationState>
@@ -419,7 +419,7 @@ Not authorized.
 
 ## <a name="notification-about-authentication-state-changes"></a>Notification sur les changements d’état de l’authentification
 
-Si l’application détermine que les données d’état d’authentification sous-jacentes ont changé (par exemple, parce que l’utilisateur s’est déconnecté ou qu’un autre utilisateur a modifié ses rôles), un [AuthenticationStateProvider personnalisé](#implement-a-custom-authenticationstateprovider) peut éventuellement appeler la méthode <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider.NotifyAuthenticationStateChanged%2A> sur la <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> classe de base. Cela prévient les consommateurs des données d’état d’authentification (par exemple, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>) qu’elles doivent appliquer un nouveau rendu à l’aide des nouvelles données.
+Si l’application détermine que les données d’état d’authentification sous-jacentes ont changé (par exemple, parce que l’utilisateur s’est déconnecté ou qu’un autre utilisateur a modifié ses rôles), un [ `AuthenticationStateProvider` personnalisé](#implement-a-custom-authenticationstateprovider) peut éventuellement appeler la méthode <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider.NotifyAuthenticationStateChanged%2A> sur la <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> classe de base. Cela prévient les consommateurs des données d’état d’authentification (par exemple, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>) qu’elles doivent appliquer un nouveau rendu à l’aide des nouvelles données.
 
 ## <a name="procedural-logic"></a>Logique procédurale
 
@@ -467,17 +467,17 @@ Si l’application est requise pour vérifier les règles d’autorisation dans 
 > @using Microsoft.AspNetCore.Components.Authorization
 > ```
 >
-> Ces espaces de noms peuvent être fournis globalement en les ajoutant au fichier *_Imports. Razor* de l’application.
+> Ces espaces de noms peuvent être fournis globalement en les ajoutant au fichier de l’application `_Imports.razor` .
 
 ## <a name="troubleshoot-errors"></a>Résoudre les erreurs
 
 Erreurs courantes :
 
-* **L’autorisation nécessite un paramètre en cascade de type Task \<AuthenticationState> . Envisagez d’utiliser CascadingAuthenticationState pour fournir ce.**
+* **L’autorisation nécessite un paramètre en cascade de type `Task\<AuthenticationState>` . Envisagez `CascadingAuthenticationState` d’utiliser pour fournir ce.**
 
 * **`null`la valeur est reçue pour`authenticationStateTask`**
 
-Il est probable que le projet n’a pas été créé à l’aide d’un Blazor modèle de serveur avec l’authentification activée. Encapsulez un `<CascadingAuthenticationState>` autour d’une partie de l’arborescence de l’interface utilisateur, par exemple dans le `App` composant (*app. Razor*) comme suit :
+Il est probable que le projet n’a pas été créé à l’aide d’un Blazor modèle de serveur avec l’authentification activée. Encapsulez un `<CascadingAuthenticationState>` autour d’une partie de l’arborescence de l’interface utilisateur, par exemple dans le `App` composant ( `App.razor` ) comme suit :
 
 ```razor
 <CascadingAuthenticationState>

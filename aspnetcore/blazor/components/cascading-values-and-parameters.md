@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/cascading-values-and-parameters
-ms.openlocfilehash: 70f379b3b0e48dbb340f319f3346bbbf44588740
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 43fbaa6284fa45dee46a693ed858ed06130600b6
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103737"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242379"
 ---
 # <a name="aspnet-core-blazor-cascading-values-and-parameters"></a>ASP.NET Core Blazor les valeurs et paramètres en cascade
 
@@ -30,7 +30,7 @@ Dans certains scénarios, il est peu commode de transmettre des données d’un 
 
 Dans l’exemple suivant tiré de l’exemple d’application, la `ThemeInfo` classe spécifie les informations de thème pour descendre dans la hiérarchie des composants, de sorte que tous les boutons d’une partie donnée de l’application partagent le même style.
 
-*UIThemeClasses/themeinfo. cs*:
+`UIThemeClasses/ThemeInfo.cs`:
 
 ```csharp
 public class ThemeInfo
@@ -144,7 +144,7 @@ Dans un composant descendant, les paramètres en cascade reçoivent leurs valeur
 
 ### <a name="tabset-example"></a>Exemple TabSet
 
-Les paramètres en cascade permettent également aux composants de collaborer au sein de la hiérarchie des composants. Par exemple, considérez l’exemple *TabSet* suivant dans l’exemple d’application.
+Les paramètres en cascade permettent également aux composants de collaborer au sein de la hiérarchie des composants. Par exemple, considérez l' `TabSet` exemple suivant dans l’exemple d’application.
 
 L’exemple d’application possède une `ITab` interface qui implémente les onglets suivants :
 

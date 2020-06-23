@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 086629f88ad04faed812bd16683e7d073f3e8ede
-ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
+ms.openlocfilehash: 694be6317aaac211f5099dfca749ff8a69d146d1
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/20/2020
-ms.locfileid: "85122072"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243510"
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>Présentation de ASP.NET CoreBlazor
 
@@ -42,7 +42,7 @@ L’utilisation de .NET dans le développement web côté client offre les avant
 * Restez productif grâce à Visual Studio sur Windows, Linux et macOS.
 * Développez avec un ensemble commun de langages, de frameworks et d’outils stables, riches en fonctionnalités et faciles à utiliser.
 
-## <a name="components"></a>Components
+## <a name="components"></a>Composants
 
 Blazorles applications sont basées sur des *composants*. Un composant dans Blazor est un élément de l’interface utilisateur, tel qu’une page, une boîte de dialogue ou un formulaire de saisie de données.
 
@@ -53,9 +53,9 @@ Les composants sont des classes .NET intégrées dans des assemblys .NET qui :
 * Peuvent être imbriqués et réutilisés.
 * Peut être partagé et distribué en tant que [ Razor bibliothèques de classes](xref:razor-pages/ui-class) ou [packages NuGet](/nuget/what-is-nuget).
 
-La classe Component est généralement écrite sous la forme d’une [Razor](xref:mvc/views/razor) page de balisage avec une extension de fichier *. Razor* . Les composants dans Blazor sont officiellement désignés sous le terme de * Razor composants*. Razorest une syntaxe pour combiner le balisage HTML avec du code C# conçu pour la productivité des développeurs. Razorvous permet de basculer entre le balisage HTML et C# dans le même fichier avec la prise en charge [IntelliSense](/visualstudio/ide/using-intellisense) . RazorLes pages et MVC utilisent également Razor . Contrairement aux Razor pages et MVC, qui sont générés autour d’un modèle de demande/réponse, les composants sont utilisés spécifiquement pour la logique et la composition de l’interface utilisateur côté client.
+La classe Component est généralement écrite sous la forme d’une [Razor](xref:mvc/views/razor) page de balisage avec une `.razor` extension de fichier. Les composants dans Blazor sont officiellement désignés sous le terme de * Razor composants*. Razorest une syntaxe pour combiner le balisage HTML avec du code C# conçu pour la productivité des développeurs. Razorvous permet de basculer entre le balisage HTML et C# dans le même fichier avec la prise en charge [IntelliSense](/visualstudio/ide/using-intellisense) . RazorLes pages et MVC utilisent également Razor . Contrairement aux Razor pages et MVC, qui sont générés autour d’un modèle de demande/réponse, les composants sont utilisés spécifiquement pour la logique et la composition de l’interface utilisateur côté client.
 
-Le Razor balisage suivant illustre un composant (*Dialog. Razor*), qui peut être imbriqué dans un autre composant :
+Le Razor balisage suivant illustre un composant ( `Dialog.razor` ), qui peut être imbriqué dans un autre composant :
 
 ```razor
 <div>
@@ -86,7 +86,7 @@ Blazorutilise des balises HTML naturelles pour la composition de l’interface u
 
 Dans l’exemple suivant, le composant `Index` utilise le composant `Dialog`. `ChildContent` et `Title` sont définis par les attributs et le contenu de l’élément `<Dialog>`.
 
-*Index.razor* :
+`Pages/Index.razor`:
 
 ```razor
 @page "/"
@@ -100,7 +100,7 @@ Welcome to your new app.
 </Dialog>
 ```
 
-La boîte de dialogue est affichée lorsque le parent (*Index.razor*) est accessible dans un navigateur :
+La boîte de dialogue s’affiche lorsque le parent ( `Pages/Index.razor` ) est accessible dans un navigateur :
 
 ![Composant de boîte de dialogue affiché dans le navigateur](index/_static/dialog.png)
 
@@ -112,7 +112,7 @@ Les composants s’affichent dans une représentation en mémoire du DOM (Docume
 
 BlazorWebassembly est une infrastructure d’application à page unique pour la création d’applications Web interactives côté client avec .NET. BlazorWebassembly utilise des normes Web ouvertes sans plug-ins ou code transpilation et fonctionne dans tous les navigateurs Web modernes, y compris les navigateurs mobiles.
 
-L’exécution de code .NET à l’intérieur des navigateurs web est rendue possible grâce à [WebAssembly](https://webassembly.org) (abrégé en *wasm*). WebAssembly est un format bytecode compact optimisé pour un téléchargement rapide et une vitesse d’exécution maximale. WebAssembly est un standard web ouvert pris en charge dans les navigateurs web sans plug-in.
+L’exécution de code .NET dans des navigateurs Web est rendue possible par [Webassembly](https://webassembly.org) (abrégé `wasm` ). WebAssembly est un format bytecode compact optimisé pour un téléchargement rapide et une vitesse d’exécution maximale. WebAssembly est un standard web ouvert pris en charge dans les navigateurs web sans plug-in.
 
 Le code WebAssembly peut accéder à toutes les fonctionnalités du navigateur via JavaScript, appelé *interopérabilité JavaScript* (ou *interop JavaScript*). Le code .NET exécuté via WebAssembly dans le navigateur s’exécute dans le bac à sable JavaScript du navigateur avec les protections offertes par le bac à sable contre les actions malveillantes sur l’ordinateur client.
 

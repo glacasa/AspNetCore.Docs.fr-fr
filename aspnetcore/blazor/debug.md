@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 193dc656c2ee0154f0ae534bc00f8dc29bab3258
-ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
+ms.openlocfilehash: 75db5d5e69cb200ebf3bd1dc1e0afed0300214cc
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/16/2020
-ms.locfileid: "84239208"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242769"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Déboguer ASP.NET Core Blazor Webassembly
 
@@ -51,13 +51,13 @@ Le débogage requiert l’un des navigateurs suivants :
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Activer le débogage pour Visual Studio et Visual Studio Code
 
-Pour activer le débogage pour une Blazor application Webassembly existante, mettez à jour le *launchSettings.jssur* le fichier dans le projet de démarrage pour inclure la `inspectUri` propriété suivante dans chaque profil de lancement :
+Pour activer le débogage pour une Blazor application Webassembly existante, mettez à jour le `launchSettings.json` fichier dans le projet de démarrage pour inclure la `inspectUri` propriété suivante dans chaque profil de lancement :
 
 ```json
 "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
 ```
 
-Une fois mis à jour, l' *launchSettings.jssur* le fichier doit ressembler à l’exemple suivant :
+Une fois mis à jour, le `launchSettings.json` fichier doit ressembler à l’exemple suivant :
 
 [!code-json[](debug/launchSettings.json?highlight=14,22)]
 
@@ -74,8 +74,8 @@ Pour déboguer une Blazor application Webassembly dans Visual Studio :
 
 1. Créez une nouvelle ASP.NET Core Blazor application Webassembly hébergée.
 1. Appuyez sur <kbd>F5</kbd> pour exécuter l’application dans le débogueur.
-1. Définissez un point d’arrêt dans *Counter. Razor* dans la `IncrementCount` méthode.
-1. Accédez à l’onglet **compteur** et sélectionnez le bouton pour atteindre le point d’arrêt :
+1. Définissez un point d’arrêt dans `Pages/Counter.razor` la `IncrementCount` méthode.
+1. Accédez à l' **`Counter`** onglet et sélectionnez le bouton pour atteindre le point d’arrêt :
 
    ![Compteur de débogage](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-counter.png)
 
@@ -87,9 +87,9 @@ Pour déboguer une Blazor application Webassembly dans Visual Studio :
 
 Lors du débogage de votre Blazor application Webassembly, vous pouvez également déboguer votre code serveur :
 
-1. Définissez un point d’arrêt dans la page *fetchData. Razor* dans <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> .
+1. Définissez un point d’arrêt dans la `Pages/FetchData.razor` page de <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> .
 1. Définissez un point d’arrêt dans la `WeatherForecastController` `Get` méthode d’action.
-1. Accédez à l’onglet **extraire les données** pour atteindre le premier point d’arrêt dans le `FetchData` composant juste avant qu’il envoie une requête HTTP au serveur :
+1. Accédez à l' **`Fetch Data`** onglet pour atteindre le premier point d’arrêt dans le `FetchData` composant juste avant qu’il envoie une requête HTTP au serveur :
 
    ![Déboguer extraire des données](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-fetch-data.png)
 
@@ -145,11 +145,11 @@ Installez l' [extension C#](https://marketplace.visualstudio.com/items?itemName=
 
 1. Dans la fenêtre de sélection, sélectionnez le projet *serveur* dans la solution hébergée.
 
-Un *launch.jssur* le fichier est généré à l’aide de la configuration de lancement pour le lancement du débogueur.
+Un `launch.json` fichier est généré à l’aide de la configuration de lancement pour le lancement du débogueur.
 
 ### <a name="attach-to-an-existing-debugging-session"></a>Attacher à une session de débogage existante
 
-Pour attacher une application en cours d’exécution Blazor , créez un *launch.jssur* le fichier avec la configuration suivante :
+Pour attacher une application en cours d’exécution Blazor , créez un `launch.json` fichier avec la configuration suivante :
 
 ```json
 {
@@ -222,7 +222,7 @@ Les options de configuration de lancement suivantes sont prises en charge pour l
 
 1. Le navigateur doit être exécuté avec le débogage distant activé. Si le débogage distant est désactivé, une page d’erreur **Impossible de trouver un onglet de navigateur pouvant être débogué** est générée. La page d’erreur contient des instructions pour l’exécution du navigateur avec le port de débogage ouvert, afin que le Blazor proxy de débogage puisse se connecter à l’application. *Fermez toutes les instances de navigateur* et redémarrez le navigateur comme indiqué.
 
-Une fois que le navigateur est en cours d’exécution avec le débogage distant activé, le raccourci clavier de débogage ouvre un nouvel onglet du débogueur. Après un moment, l’onglet **sources** affiche une liste des assemblys .net dans l’application. Développez chaque assembly et recherchez les fichiers sources *. cs* / *. Razor* disponibles pour le débogage. Définissez des points d’arrêt, revenez à l’onglet de l’application, et les points d’arrêt sont atteints lorsque le code s’exécute. Une fois le point d’arrêt atteint, une seule étape (<kbd>F10</kbd>) passe par l’exécution du code ou de la reprise (<kbd>F8</kbd>).
+Une fois que le navigateur est en cours d’exécution avec le débogage distant activé, le raccourci clavier de débogage ouvre un nouvel onglet du débogueur. Après un moment, l’onglet **sources** affiche une liste des assemblys .net dans l’application. Développez chaque assembly et recherchez les `.cs` / `.razor` fichiers sources disponibles pour le débogage. Définissez des points d’arrêt, revenez à l’onglet de l’application, et les points d’arrêt sont atteints lorsque le code s’exécute. Une fois le point d’arrêt atteint, une seule étape (<kbd>F10</kbd>) passe par l’exécution du code ou de la reprise (<kbd>F8</kbd>).
 
 Blazorfournit un proxy de débogage qui implémente le [protocole chrome devtools](https://chromedevtools.github.io/devtools-protocol/) et augmente le protocole avec. Informations spécifiques à .net. Quand le raccourci clavier de débogage est enfoncé, Blazor pointe le devtools chrome au niveau du proxy. Le proxy se connecte à la fenêtre du navigateur que vous cherchez à déboguer (par conséquent, il est nécessaire d’activer le débogage distant).
 

@@ -24,7 +24,7 @@ Pour différer les appels Interop JavaScript jusqu’à ce que la connexion avec
 }
 ```
 
-Pour l’exemple de code précédent, fournissez une `setElementText` fonction JavaScript à l’intérieur `<head>` de l’élément de *wwwroot/index.html* (éblouissant webassembly) ou *pages/_Host. cshtml* (serveur éblouissant). La fonction est appelée avec <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> et ne retourne pas de valeur :
+Pour l’exemple de code précédent, fournissez une `setElementText` fonction JavaScript à l’intérieur `<head>` de l’élément de `wwwroot/index.html` (éblouissante webassembly) ou `Pages/_Host.cshtml` (serveur éblouissant). La fonction est appelée avec <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> et ne retourne pas de valeur :
 
 ```html
 <script>
@@ -72,7 +72,7 @@ Set value via JS interop call:
 }
 ```
 
-Pour l’exemple de code précédent, fournissez une `setElementText` fonction JavaScript à l’intérieur `<head>` de l’élément de *wwwroot/index.html* (éblouissant webassembly) ou *pages/_Host. cshtml* (serveur éblouissant). La fonction est appelée avec <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> et retourne une valeur :
+Pour l’exemple de code précédent, fournissez une `setElementText` fonction JavaScript à l’intérieur `<head>` de l’élément de `wwwroot/index.html` (éblouissante webassembly) ou `Pages/_Host.cshtml` (serveur éblouissant). La fonction est appelée avec <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> et retourne une valeur :
 
 ```html
 <script>

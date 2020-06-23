@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: 073a2a85369a100352a163693c5cba907203059e
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: a94dcd818c3f4e19ace57fad6390a84e704192bd
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103665"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242964"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>Guide d’atténuation des menaces pour ASP.NET Core Blazor Server
 
@@ -134,7 +134,7 @@ Pour les appels de méthodes .NET à JavaScript :
 
 Prenez les précautions suivantes pour vous protéger contre les scénarios précédents :
 
-* Encapsulez les appels d’interopérabilité JS dans des instructions [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) pour tenir compte des erreurs qui peuvent se produire pendant les appels. Pour plus d’informations, consultez <xref:blazor/fundamentals/handle-errors#javascript-interop>.
+* Encapsule les appels Interop JS dans [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) des instructions pour tenir compte des erreurs qui peuvent se produire pendant les appels. Pour plus d’informations, consultez <xref:blazor/fundamentals/handle-errors#javascript-interop>.
 * Validez les données retournées par les appels d’interopérabilité JS, y compris les messages d’erreur, avant d’entreprendre une action.
 
 ### <a name="net-methods-invoked-from-the-browser"></a>Méthodes .NET appelées à partir du navigateur
@@ -302,7 +302,7 @@ L’erreur côté client n’inclut pas la pile des appels et ne fournit pas de 
 Activez les erreurs détaillées dans JavaScript avec :
 
 * <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DetailedErrors?displayProperty=nameWithType>.
-* La `DetailedErrors` clé de configuration définie sur `true` , qui peut être définie dans le fichier de paramètres de l’application (*appsettings.jssur*). La clé peut également être définie à l’aide `ASPNETCORE_DETAILEDERRORS` de la variable d’environnement avec la valeur `true` .
+* La `DetailedErrors` clé de configuration définie sur `true` , qui peut être définie dans le fichier de paramètres de l’application ( `appsettings.json` ). La clé peut également être définie à l’aide `ASPNETCORE_DETAILEDERRORS` de la variable d’environnement avec la valeur `true` .
 
 > [!WARNING]
 > L’exposition des informations sur les erreurs aux clients sur Internet est un risque de sécurité qui doit toujours être évité.
@@ -348,7 +348,7 @@ Outre les protections implémentées par le Framework, l’application doit êtr
 * N’approuvez pas l’entrée dans les appels d’interopérabilité JS dans les deux sens entre les méthodes JavaScript et .NET.
 * L’application est chargée de valider le fait que le contenu des arguments et les résultats sont valides, même si les arguments ou les résultats sont correctement désérialisés.
 
-Pour qu’une vulnérabilité XSS existe, l’application doit incorporer une entrée d’utilisateur dans la page rendue. BlazorLes composants serveur exécutent une étape de compilation dans laquelle le balisage d’un fichier *. Razor* est transformé en logique C# procédurale. Au moment de l’exécution, la logique C# génère une *arborescence de rendu* décrivant les éléments, le texte et les composants enfants. Elle est appliquée au DOM du navigateur via une séquence d’instructions JavaScript (ou est sérialisée en HTML dans le cas du prérendu) :
+Pour qu’une vulnérabilité XSS existe, l’application doit incorporer une entrée d’utilisateur dans la page rendue. BlazorLes composants serveur exécutent une étape de compilation dans laquelle le balisage d’un `.razor` fichier est transformé en logique C# procédurale. Au moment de l’exécution, la logique C# génère une *arborescence de rendu* décrivant les éléments, le texte et les composants enfants. Elle est appliquée au DOM du navigateur via une séquence d’instructions JavaScript (ou est sérialisée en HTML dans le cas du prérendu) :
 
 * L’entrée utilisateur rendue via Razor une syntaxe normale (par exemple, `@someStringValue` ) n’expose pas de vulnérabilité XSS car la Razor syntaxe est ajoutée au DOM via des commandes qui peuvent uniquement écrire du texte. Même si la valeur comprend le balisage HTML, la valeur est affichée sous forme de texte statique. Lors du prérendu, la sortie est codée au format HTML, ce qui affiche également le contenu sous forme de texte statique.
 * Les balises de script ne sont pas autorisées et ne doivent pas être incluses dans l’arborescence de rendu des composants de l’application. Si une balise de script est incluse dans le balisage d’un composant, une erreur de compilation est générée.

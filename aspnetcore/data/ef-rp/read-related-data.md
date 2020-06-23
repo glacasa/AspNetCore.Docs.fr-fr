@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: e67738015f64ca7077c2f87a8f7eabe722aac9d8
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 5ffb57f21c89e21fcbb14b933cb0d0cb29d9c71b
+ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652617"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85240942"
 ---
 # <a name="part-6-razor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>Partie 6, Razor pages avec EF Core dans ASP.net Core-lire les données associées
 
@@ -52,7 +52,7 @@ EF Core peut charger des données associées dans les propriétés de navigation
 
   ![Exemple de requêtes distinctes](read-related-data/_static/separate-queries.png)
 
-  Remarque : EF Core corrige automatiquement les propriétés de navigation vers d’autres entités qui étaient précédemment chargées dans l’instance de contexte. Même si les données pour une propriété de navigation ne sont *pas* explicitement incluses, la propriété peut toujours être renseignée si toutes ou une partie des entités associées ont été précédemment chargées.
+  **Remarque :** EF Core résout automatiquement les propriétés de navigation vers d’autres entités précédemment chargées dans l’instance de contexte. Même si les données pour une propriété de navigation ne sont *pas* explicitement incluses, la propriété peut toujours être renseignée si toutes ou une partie des entités associées ont été précédemment chargées.
 
 * [Chargement explicite](/ef/core/querying/related-data#explicit-loading). Quand l’entité est lue pour la première fois, les données associées ne sont pas récupérées. Vous devez écrire du code pour récupérer les données associées en cas de besoin. En cas de chargement explicite avec des requêtes distinctes, plusieurs requêtes sont envoyées à la base de données. Avec le chargement explicite, le code spécifie les propriétés de navigation à charger. Utilisez la méthode `Load` pour effectuer le chargement explicite. Par exemple :
 
@@ -231,7 +231,7 @@ Le code suivant s’exécute quand un formateur est sélectionné (`id != null`)
 
 Le formateur sélectionné est récupéré à partir de la liste des formateurs dans le modèle d’affichage. La propriété `Courses` du modèle d’affichage est chargée avec les entités `Course` de la propriété de navigation `CourseAssignments` de ce formateur.
 
-La méthode `Where` retourne une collection. Mais dans ce cas, le filtre sélectionne une entité unique. La méthode `Single` est donc appelée pour convertir la collection en une seule entité `Instructor`. L’entité `Instructor` fournit l’accès à la propriété `CourseAssignments`. `CourseAssignments` fournit l’accès aux entités `Course` associées.
+La méthode `Where` retourne une collection. Toutefois, dans ce cas, le filtre sélectionne une entité unique, de sorte que la `Single` méthode est appelée pour convertir la collection en une seule `Instructor` entité. L’entité `Instructor` fournit l’accès à la propriété `CourseAssignments`. `CourseAssignments` fournit l’accès aux entités `Course` associées.
 
 ![Instructor-to-Courses m:M](complex-data-model/_static/courseassignment.png)
 

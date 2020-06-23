@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/event-handling
-ms.openlocfilehash: d15d8355b321c2938d68a109c5115db78280f6b6
-ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
+ms.openlocfilehash: 4ac7b82d734f078cf50901d02e7d0c4eb8bb45bb
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/20/2020
-ms.locfileid: "85122085"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242417"
 ---
 # <a name="aspnet-core-blazor-event-handling"></a>BlazorGestion des événements ASP.net Core
 
@@ -89,7 +89,7 @@ Les informations prises en charge <xref:System.EventArgs> sont indiquées dans l
 | Presse-papiers        | <xref:Microsoft.AspNetCore.Components.Web.ClipboardEventArgs> | `oncut`, `oncopy`, `onpaste` |
 | Glissement             | <xref:Microsoft.AspNetCore.Components.Web.DragEventArgs> | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br><xref:Microsoft.AspNetCore.Components.Web.DataTransfer>et <xref:Microsoft.AspNetCore.Components.Web.DataTransferItem> contiennent des données d’élément glissées. |
 | Erreur            | <xref:Microsoft.AspNetCore.Components.Web.ErrorEventArgs> | `onerror` |
-| Événement            | <xref:System.EventArgs> | *Généralités*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*Presse-papiers*<br>`onbeforecut`, `onbeforecopy`, `onbeforepaste`<br><br>*Input*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, <xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnSubmit><br><br>*Média*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting`<br><br><xref:Microsoft.AspNetCore.Components.Web.EventHandlers>contient des attributs permettant de configurer les mappages entre les noms d’événements et les types d’arguments d’événement. |
+| Événement            | <xref:System.EventArgs> | *Généralités*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*Presse-papiers*<br>`onbeforecut`, `onbeforecopy`, `onbeforepaste`<br><br>*Input*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, <xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnSubmit><br><br>*Média*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onended`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting`<br><br><xref:Microsoft.AspNetCore.Components.Web.EventHandlers>contient des attributs permettant de configurer les mappages entre les noms d’événements et les types d’arguments d’événement. |
 | Focus            | <xref:Microsoft.AspNetCore.Components.Web.FocusEventArgs> | `onfocus`, `onblur`, `onfocusin`, `onfocusout`<br><br>N’inclut pas la prise en charge de `relatedTarget` . |
 | Entrée            | <xref:Microsoft.AspNetCore.Components.ChangeEventArgs> | `onchange`, `oninput` |
 | Clavier         | <xref:Microsoft.AspNetCore.Components.Web.KeyboardEventArgs> | `onkeydown`, `onkeypress`, `onkeyup` |
@@ -101,7 +101,7 @@ Les informations prises en charge <xref:System.EventArgs> sont indiquées dans l
 
 Pour plus d’informations, consultez les ressources suivantes :
 
-* [Classes EventArgs dans la source de référence ASP.net Core (branche dotnet/aspnetcore ou version 3.1)](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/Components/Web/src/Web).
+* [ `EventArgs` classes de la source de référence ASP.net Core (branche dotnet/aspnetcore ou version 3.1)](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/Components/Web/src/Web).
 * [MDN Web docs : GlobalEventHandlers](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers): contient des informations sur les éléments HTML qui prennent en charge chaque événement DOM.
 
 ## <a name="lambda-expressions"></a>Expressions lambda
@@ -145,13 +145,13 @@ Il est souvent pratique de se rapprocher de valeurs supplémentaires, par exempl
 
 Un scénario courant avec des composants imbriqués est le désir d’exécuter la méthode d’un composant parent lorsqu’un événement de composant enfant se produit. Un `onclick` événement qui se produit dans le composant enfant est un cas d’usage courant. Pour exposer des événements entre les composants, utilisez un <xref:Microsoft.AspNetCore.Components.EventCallback> . Un composant parent peut affecter une méthode de rappel à un composant enfant <xref:Microsoft.AspNetCore.Components.EventCallback> .
 
-`ChildComponent`Dans l’exemple d’application (*Components/ChildComponent. Razor*), vous montre comment un gestionnaire de bouton `onclick` est configuré pour recevoir un <xref:Microsoft.AspNetCore.Components.EventCallback> délégué de l’exemple de `ParentComponent` . Le <xref:Microsoft.AspNetCore.Components.EventCallback> est typé avec `MouseEventArgs` , ce qui est approprié pour un `onclick` événement à partir d’un périphérique :
+`ChildComponent`Dans l’exemple d’application ( `Components/ChildComponent.razor` ), montre comment un gestionnaire de bouton `onclick` est configuré pour recevoir un <xref:Microsoft.AspNetCore.Components.EventCallback> délégué à partir de l’exemple de `ParentComponent` . Le <xref:Microsoft.AspNetCore.Components.EventCallback> est typé avec `MouseEventArgs` , ce qui est approprié pour un `onclick` événement à partir d’un périphérique :
 
 [!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=5-7,17-18)]
 
 `ParentComponent`Définit le () de l’enfant <xref:Microsoft.AspNetCore.Components.EventCallback%601> `OnClickCallback` sur sa `ShowMessage` méthode.
 
-*Pages/ParentComponent. Razor*:
+`Pages/ParentComponent.razor`:
 
 ```razor
 @page "/ParentComponent"
@@ -179,7 +179,7 @@ Un scénario courant avec des composants imbriqués est le désir d’exécuter 
 Lorsque le bouton est sélectionné dans le `ChildComponent` :
 
 * La `ParentComponent` `ShowMessage` méthode de est appelée. `messageText`est mis à jour et affiché dans le `ParentComponent` .
-* Un appel à [StateHasChanged](xref:blazor/components/lifecycle#state-changes) n’est pas requis dans la méthode du rappel ( `ShowMessage` ). <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>est appelé automatiquement pour rerestituer le `ParentComponent` , tout comme les événements enfants déclenchent le rerendu des composants dans les gestionnaires d’événements qui s’exécutent dans l’enfant.
+* Un appel à [`StateHasChanged`](xref:blazor/components/lifecycle#state-changes) n’est pas requis dans la méthode du rappel ( `ShowMessage` ). <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>est appelé automatiquement pour rerestituer le `ParentComponent` , tout comme les événements enfants déclenchent le rerendu des composants dans les gestionnaires d’événements qui s’exécutent dans l’enfant.
 
 <xref:Microsoft.AspNetCore.Components.EventCallback>et <xref:Microsoft.AspNetCore.Components.EventCallback%601> autorisent les délégués asynchrones. <xref:Microsoft.AspNetCore.Components.EventCallback%601>est fortement typé et requiert un type d’argument spécifique. <xref:Microsoft.AspNetCore.Components.EventCallback>est faiblement typé et autorise tout type d’argument.
 

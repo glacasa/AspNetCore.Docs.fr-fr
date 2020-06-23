@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: a8604ca6ea60386bb3c54c950205ee695d37c689
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 2bdd2f256f456cbf474181021fafc6830bfd68f4
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103661"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242925"
 ---
 # <a name="secure-aspnet-core-blazor-server-apps"></a>Sécuriser les Blazor applications ASP.net Core Server
 
@@ -67,7 +67,7 @@ Les valeurs autorisées d’authentification (`{AUTHENTICATION}`) sont présent�
 * Créez un dossier pour le projet.
 * Nommez ce projet.
 
-Pour plus d’informations, consultez la commande [dotnet new](/dotnet/core/tools/dotnet-new) dans le Guide .NET Core.
+Pour plus d’informations, consultez la [`dotnet new`](/dotnet/core/tools/dotnet-new) commande dans le guide .net core.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
@@ -101,7 +101,7 @@ Les valeurs autorisées d’authentification (`{AUTHENTICATION}`) sont présent�
 * Créez un dossier pour le projet.
 * Nommez ce projet.
 
-Pour plus d’informations, consultez la commande [dotnet new](/dotnet/core/tools/dotnet-new) dans le Guide .NET Core.
+Pour plus d’informations, consultez la [`dotnet new`](/dotnet/core/tools/dotnet-new) commande dans le guide .net core.
 
 ---
 

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: fe35645aafe29838818dcaaf7c2b42ed428ac6cc
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 6103a2e8173ccbb78372e01bd799d1bb47da4fa2
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102262"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243055"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>Dispositions de ASP.NET Core Blazor
 
@@ -33,15 +33,15 @@ Pour transformer un *composant* en une *disposition*, le composant :
 * Hérite de <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> , qui définit une <xref:Microsoft.AspNetCore.Components.LayoutComponentBase.Body> propriété pour le contenu rendu à l’intérieur de la disposition.
 * Utilise la Razor syntaxe `@Body` pour spécifier l’emplacement dans la balise de mise en page où le contenu est restitué.
 
-L’exemple de code suivant montre le Razor modèle d’un composant de disposition, *MainLayout. Razor*. La disposition hérite <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> de et définit la `@Body` entre la barre de navigation et le pied de page :
+L’exemple de code suivant montre le Razor modèle d’un composant de disposition, `MainLayout.razor` . La disposition hérite <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> de et définit la `@Body` entre la barre de navigation et le pied de page :
 
 [!code-razor[](layouts/sample_snapshot/3.x/MainLayout.razor?highlight=1,13)]
 
-Dans une application basée sur l’un des Blazor modèles d’application, le `MainLayout` composant (*MainLayout. Razor*) se trouve dans le dossier *partagé* de l’application.
+Dans une application basée sur l’un des Blazor modèles d’application, le `MainLayout` composant ( `MainLayout.razor` ) se trouve dans le dossier de l’application `Shared` .
 
 ## <a name="default-layout"></a>Disposition par défaut
 
-Spécifiez la disposition de l’application par défaut dans le <xref:Microsoft.AspNetCore.Components.Routing.Router> composant dans le fichier *app. Razor* de l’application. Le <xref:Microsoft.AspNetCore.Components.Routing.Router> composant suivant, qui est fourni par les modèles par défaut Blazor , définit la disposition par défaut sur le `MainLayout` composant :
+Spécifiez la disposition de l’application par défaut dans le <xref:Microsoft.AspNetCore.Components.Routing.Router> composant dans le fichier de l’application `App.razor` . Le <xref:Microsoft.AspNetCore.Components.Routing.Router> composant suivant, qui est fourni par les modèles par défaut Blazor , définit la disposition par défaut sur le `MainLayout` composant :
 
 [!code-razor[](layouts/sample_snapshot/3.x/App1.razor?highlight=3)]
 
@@ -61,13 +61,13 @@ Le contenu du composant suivant `MasterList` est inséré dans le `MasterLayout`
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterList.razor?highlight=1)]
 
-La spécification de la disposition directement dans un composant remplace un ensemble de *dispositions par défaut* dans le routeur ou une `@layout` directive importée à partir de *_Imports. Razor*.
+La spécification de la disposition directement dans un composant remplace un ensemble de *dispositions par défaut* dans le routeur ou une `@layout` directive importée à partir de `_Imports.razor` .
 
 ## <a name="centralized-layout-selection"></a>Sélection de la disposition centralisée
 
-Chaque dossier d’une application peut éventuellement contenir un fichier modèle nommé *_Imports. Razor*. Le compilateur comprend les directives spécifiées dans le fichier Imports dans tous les Razor modèles du même dossier et de manière récursive dans tous ses sous-dossiers. Par conséquent, un fichier *_Imports. Razor* contenant `@layout MyCoolLayout` s’assure que tous les composants d’un dossier utilisent `MyCoolLayout` . Il n’est pas nécessaire d’ajouter à plusieurs reprises `@layout MyCoolLayout` à tous les fichiers *. Razor* dans le dossier et les sous-dossiers. `@using`les directives sont également appliquées aux composants de la même façon.
+Chaque dossier d’une application peut éventuellement contenir un fichier de modèle nommé `_Imports.razor` . Le compilateur comprend les directives spécifiées dans le fichier Imports dans tous les Razor modèles du même dossier et de manière récursive dans tous ses sous-dossiers. Par conséquent, un `_Imports.razor` fichier contenant `@layout MyCoolLayout` s’assure que tous les composants d’un dossier utilisent `MyCoolLayout` . Il n’est pas nécessaire d’ajouter à plusieurs reprises `@layout MyCoolLayout` à tous les `.razor` fichiers dans le dossier et les sous-dossiers. `@using`les directives sont également appliquées aux composants de la même façon.
 
-Le fichier *_Imports. Razor* suivant importe les éléments suivants :
+Les `_Imports.razor` importations de fichiers suivantes :
 
 * `MyCoolLayout`.
 * Tous les Razor composants du même dossier et de tous les sous-dossiers.
@@ -75,23 +75,23 @@ Le fichier *_Imports. Razor* suivant importe les éléments suivants :
  
 [!code-razor[](layouts/sample_snapshot/3.x/_Imports.razor)]
 
-Le fichier *_Imports. Razor* est semblable au [fichier _ViewImports. cshtml pour les Razor affichages et les pages,](xref:mvc/views/layout#importing-shared-directives) mais appliqué spécifiquement aux Razor fichiers de composants.
+Le `_Imports.razor` fichier est semblable au [fichier _ViewImports. cshtml pour les Razor affichages et les pages,](xref:mvc/views/layout#importing-shared-directives) mais appliqué spécifiquement aux Razor fichiers de composants.
 
-La spécification d’une disposition dans *_Imports. Razor* remplace une disposition spécifiée comme *disposition par défaut*du routeur.
+La spécification d’une disposition dans `_Imports.razor` remplace une disposition spécifiée comme *disposition par défaut*du routeur.
 
 ## <a name="nested-layouts"></a>Dispositions imbriquées
 
 Les applications peuvent se composer de dispositions imbriquées. Un composant peut faire référence à une disposition qui, à son tour, fait référence à une autre disposition. Par exemple, les dispositions d’imbrication sont utilisées pour créer une structure de menus à plusieurs niveaux.
 
-L’exemple suivant montre comment utiliser des dispositions imbriquées. Le fichier *EpisodesComponent. Razor* est le composant à afficher. Le composant fait référence à `MasterListLayout` :
+L’exemple suivant montre comment utiliser des dispositions imbriquées. Le `EpisodesComponent.razor` fichier est le composant à afficher. Le composant fait référence à `MasterListLayout` :
 
 [!code-razor[](layouts/sample_snapshot/3.x/EpisodesComponent.razor?highlight=1)]
 
-Le fichier *MasterListLayout. Razor* fournit le `MasterListLayout` . La disposition fait référence à une autre disposition, `MasterLayout` , où elle est rendue. `EpisodesComponent`l’emplacement est affiché `@Body` :
+Le `MasterListLayout.razor` fichier fournit le `MasterListLayout` . La disposition fait référence à une autre disposition, `MasterLayout` , où elle est rendue. `EpisodesComponent`l’emplacement est affiché `@Body` :
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterListLayout.razor?highlight=1,9)]
 
-Enfin, `MasterLayout` dans *MasterLayout. Razor* contient les éléments de disposition de niveau supérieur, tels que l’en-tête, le menu principal et le pied de page. `MasterListLayout`avec `EpisodesComponent` est rendu où `@Body` s’affiche :
+Enfin, `MasterLayout` dans `MasterLayout.razor` contient les éléments de disposition de niveau supérieur, tels que l’en-tête, le menu principal et le pied de page. `MasterListLayout`avec `EpisodesComponent` est rendu où `@Body` s’affiche :
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterLayout.razor?highlight=6)]
 

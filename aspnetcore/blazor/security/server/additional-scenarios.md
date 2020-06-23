@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/additional-scenarios
-ms.openlocfilehash: 01ee18bf9b55b197c5ec03967d898f37bff43151
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 7f92f82d6e78771494b9f2358ee19153502f8dcb
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103658"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243042"
 ---
 # <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>BlazorScénarios de sécurité supplémentaires du serveur ASP.net Core
 
@@ -76,7 +76,7 @@ services.AddHttpClient();
 services.AddScoped<TokenProvider>();
 ```
 
-Dans le fichier *_Host. cshtml* , créez et instanciez `InitialApplicationState` et transmettez-le en tant que paramètre à l’application :
+Dans le `_Host.cshtml` fichier, créez l’instance et, `InitialApplicationState` puis transmettez-la en tant que paramètre à l’application :
 
 ```cshtml
 @using Microsoft.AspNetCore.Authentication
@@ -97,7 +97,7 @@ Dans le fichier *_Host. cshtml* , créez et instanciez `InitialApplicationState`
 </app>
 ```
 
-Dans le `App` composant (*app. Razor*), résolvez le service et initialisez-le avec les données du paramètre :
+Dans le `App` composant ( `App.razor` ), résolvez le service et initialisez-le avec les données du paramètre :
 
 ```razor
 @inject TokenProvider TokenProvider
@@ -172,7 +172,7 @@ services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme,
     }
 ```
 
-Le paramètre peut également être défini dans le fichier de paramètres de l’application (*appsettings.jssur*) :
+Le paramètre peut également être défini dans le fichier de paramètres de l’application ( `appsettings.json` ) :
 
 ```json
 {
@@ -203,11 +203,11 @@ Si l’ajout d’un segment à l’autorité n’est pas approprié pour le four
 
 ### App ID URI
 
-* When using v2.0 endpoints, APIs define an *App ID URI*, which is meant to represent a unique identifier for the API.
+* When using v2.0 endpoints, APIs define an *`App ID URI`*, which is meant to represent a unique identifier for the API.
 * All scopes include the App ID URI as a prefix, and v2.0 endpoints emit access tokens with the App ID URI as the audience.
 * When using V2.0 endpoints, the client ID configured in the Server API changes from the API Application ID (Client ID) to the App ID URI.
 
-*appsettings.json*:
+`appsettings.json`:
 
 ```json
 {

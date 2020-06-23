@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: ec55c5834093cc8c2095f25e91374d97902dd964
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 31e72eeac415f10d573de455f19aa8ff34743356
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "83851144"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242397"
 ---
 # <a name="call-net-methods-from-javascript-functions-in-aspnet-core-blazor"></a>Appeler des méthodes .NET à partir de fonctions JavaScript dans ASP.NET CoreBlazor
 
@@ -36,7 +36,7 @@ Pour appeler une méthode .NET statique à partir de JavaScript, utilisez les `D
 
 L’exemple d’application comprend une méthode C# pour retourner un `int` tableau. L' [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) attribut est appliqué à la méthode.
 
-*Pages/JsInterop. Razor*:
+`Pages/JsInterop.razor`:
 
 ```razor
 <button type="button" class="btn btn-primary"
@@ -55,11 +55,11 @@ L’exemple d’application comprend une méthode C# pour retourner un `int` tab
 
 JavaScript traité au client appelle la méthode .NET C#.
 
-*wwwroot/exampleJsInterop. js*:
+`wwwroot/exampleJsInterop.js`:
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=8-14)]
 
-Quand le bouton déclencher l’ReturnArrayAsync de la **méthode statique .net** est sélectionné, examinez la sortie de la console dans les outils de développement Web du navigateur.
+Lorsque le **`Trigger .NET static method ReturnArrayAsync`** bouton est sélectionné, examinez la sortie de la console dans les outils de développement Web du navigateur.
 
 La sortie de la console est la suivante :
 
@@ -105,9 +105,9 @@ Vous pouvez également appeler des méthodes d’instance .NET à partir de Java
 > [!NOTE]
 > L’exemple d’application enregistre les messages dans la console côté client. Pour les exemples suivants présentés dans l’exemple d’application, examinez la sortie de console du navigateur dans les outils de développement du navigateur.
 
-Lorsque le bouton de **méthode d’instance .net de déclenchement HelloHelper. SayHello** est sélectionné, `ExampleJsInterop.CallHelloHelperSayHello` est appelé et passe un nom, `Blazor` , à la méthode.
+Lorsque le **`Trigger .NET instance method HelloHelper.SayHello`** bouton est sélectionné, `ExampleJsInterop.CallHelloHelperSayHello` est appelé et passe un nom, `Blazor` , à la méthode.
 
-*Pages/JsInterop. Razor*:
+`Pages/JsInterop.razor`:
 
 ```razor
 <button type="button" class="btn btn-primary" @onclick="TriggerNetInstanceMethod">
@@ -125,17 +125,17 @@ Lorsque le bouton de **méthode d’instance .net de déclenchement HelloHelper.
 
 `CallHelloHelperSayHello`appelle la fonction JavaScript `sayHello` avec une nouvelle instance de `HelloHelper` .
 
-*JsInteropClasses/ExampleJsInterop. cs*:
+`JsInteropClasses/ExampleJsInterop.cs`:
 
 [!code-csharp[](./common/samples/3.x/BlazorWebAssemblySample/JsInteropClasses/ExampleJsInterop.cs?name=snippet1&highlight=11-18)]
 
-*wwwroot/exampleJsInterop. js*:
+`wwwroot/exampleJsInterop.js`:
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=15-18)]
 
 Le nom est passé au `HelloHelper` constructeur de, qui définit la `HelloHelper.Name` propriété. Lorsque la fonction JavaScript `sayHello` est exécutée, `HelloHelper.SayHello` retourne le `Hello, {Name}!` message, qui est écrit dans la console par la fonction JavaScript.
 
-*JsInteropClasses/HelloHelper. cs*:
+`JsInteropClasses/HelloHelper.cs`:
 
 [!code-csharp[](./common/samples/3.x/BlazorWebAssemblySample/JsInteropClasses/HelloHelper.cs?name=snippet1&highlight=5,10-11)]
 
@@ -233,7 +233,7 @@ function updateMessageCallerJS() {
 }
 ```
 
-*Pages/JSInteropComponent. Razor*:
+`Pages/JSInteropComponent.razor`:
 
 ```razor
 @page "/JSInteropComponent"
@@ -277,7 +277,7 @@ Dans l’exemple suivant :
 * Chaque `ListItem` composant se compose d’un message et d’un bouton.
 * Quand un `ListItem` bouton de composant est sélectionné, `ListItem` la `UpdateMessage` méthode modifie le texte de l’élément de liste et masque le bouton.
 
-*MessageUpdateInvokeHelper.cs*:
+`MessageUpdateInvokeHelper.cs`:
 
 ```csharp
 using System;
@@ -309,7 +309,7 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 }
 ```
 
-*Shared/ListItem. Razor*:
+`Shared/ListItem.razor`:
 
 ```razor
 @inject IJSRuntime JsRuntime
@@ -344,7 +344,7 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 }
 ```
 
-*Pages/JSInteropExample. Razor*:
+`Pages/JSInteropExample.razor`:
 
 ```razor
 @page "/JSInteropExample"
@@ -376,5 +376,5 @@ Pour plus d’informations, consultez les problèmes suivants :
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:blazor/call-javascript-from-dotnet>
-* [Exemple InteropComponent. Razor (référentiel GitHub dotnet/AspNetCore, branche de version 3,1)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
+* [`InteropComponent.razor`exemple (référentiel GitHub dotnet/AspNetCore, branche de version 3,1)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
 * [Effectuer des transferts de données volumineux dans des Blazor applications serveur](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)

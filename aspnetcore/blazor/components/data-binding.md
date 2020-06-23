@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: c901ba0cbcd79bb14cb32a6a56a2595d159f8678
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 1654c0ce40d44ad4cc679c151ef99f155e31b514
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103726"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242496"
 ---
 # <a name="aspnet-core-blazor-data-binding"></a>BlazorLiaison de données ASP.net Core
 
@@ -240,10 +240,10 @@ Un scénario courant consiste à chaîner un paramètre lié aux données à un 
 
 Une liaison chaînée ne peut pas être implémentée avec [`@bind`](xref:mvc/views/razor#bind) la syntaxe dans l’élément de la page. Le gestionnaire d’événements et la valeur doivent être spécifiés séparément. Toutefois, un composant parent peut utiliser [`@bind`](xref:mvc/views/razor#bind) la syntaxe avec le paramètre du composant.
 
-Le `PasswordField` composant suivant (*passwordField. Razor*) :
+Le `PasswordField` composant suivant ( `PasswordField.razor` ) :
 
 * Définit `<input>` la valeur d’un élément sur `Password` une propriété.
-* Expose les modifications de la `Password` propriété à un composant parent avec un [EventCallback suivante](xref:blazor/components/event-handling#eventcallback).
+* Expose les modifications de la `Password` propriété à un composant parent avec un [`EventCallback`](xref:blazor/components/event-handling#eventcallback) .
 * Utilise l' `onclick` événement pour déclencher la `ToggleShowPassword` méthode. Pour plus d’informations, consultez <xref:blazor/components/event-handling>.
 
 ```razor

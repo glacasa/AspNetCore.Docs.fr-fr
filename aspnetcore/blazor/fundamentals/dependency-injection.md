@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/dependency-injection
-ms.openlocfilehash: b4ac0dbc6dabdeff4689544f2e11278b8302c553
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 24cd5ae837eeb4c89a15bab2948dde2eface0c0d
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103702"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242795"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core l' Blazor injection de dépendances
 
@@ -47,7 +47,7 @@ Un fournisseur de services personnalisé ne fournit pas automatiquement les serv
 
 ### <a name="blazor-webassembly"></a>BlazorWebassembly
 
-Configurez les services de la collection de services de l’application dans la `Main` méthode de *Program.cs*. Dans l’exemple suivant, l' `MyDependency` implémentation est inscrite pour `IMyDependency` :
+Configurez les services de la collection de services de l’application dans la `Main` méthode de `Program.cs` . Dans l’exemple suivant, l' `MyDependency` implémentation est inscrite pour `IMyDependency` :
 
 ```csharp
 public class Program
@@ -84,7 +84,7 @@ public class Program
 }
 ```
 
-L’hôte fournit également une instance de configuration centrale pour l’application. En s’appuyant sur l’exemple précédent, l’URL du service météo est passée d’une source de configuration par défaut (par exemple, *appsettings.jssur*) à `InitializeWeatherAsync` :
+L’hôte fournit également une instance de configuration centrale pour l’application. En s’appuyant sur l’exemple précédent, l’URL du service météo est passée d’une source de configuration par défaut (par exemple, `appsettings.json` ) à `InitializeWeatherAsync` :
 
 ```csharp
 public class Program
@@ -193,7 +193,7 @@ public class DataAccess : IDataAccess
 Conditions préalables pour l’injection de constructeur :
 
 * Un constructeur doit exister dont les arguments peuvent tous être remplis par DI. Les paramètres supplémentaires non couverts par DI sont autorisés s’ils spécifient des valeurs par défaut.
-* Le constructeur applicable doit être *public*.
+* Le constructeur applicable doit être `public` .
 * Un constructeur applicable doit exister. En cas d’ambiguïté, DI lève une exception.
 
 ## <a name="utility-base-component-classes-to-manage-a-di-scope"></a>Classes de composants de base de l’utilitaire pour gérer une étendue DI
@@ -346,5 +346,5 @@ Si un seul composant peut utiliser un <xref:Microsoft.EntityFrameworkCore.DbCont
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:fundamentals/dependency-injection>
-* [Recommandations IDisposable pour les instances temporaires et partagées](xref:fundamentals/dependency-injection#idisposable-guidance-for-transient-and-shared-instances)
+* [`IDisposable`conseils pour les instances temporaires et partagées](xref:fundamentals/dependency-injection#idisposable-guidance-for-transient-and-shared-instances)
 * <xref:mvc/views/dependency-injection>

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: 726aafd2bf5d3469c30ebce1e4eea8ed8ec8d58e
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 2efc13d5d4ab91ffdf6c4c7021072a2b3f83153f
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103718"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242652"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>BlazorConfiguration du modèle d’hébergement ASP.net Core
 
@@ -32,7 +32,7 @@ Cet article traite de l’hébergement de la configuration du modèle.
 
 Pour configurer le SignalR client sous-jacent de manière à envoyer des informations d’identification, telles que des cookies ou des en-têtes d’authentification http :
 
-* Utilisez <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> pour définir <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include> les demandes d' [extraction](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) Cross-Origin :
+* Utilisez <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> pour définir <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include> les demandes Cross-Origin [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) :
 
   ```csharp
   public class IncludeRequestCredentialsMessagHandler : DelegatingHandler
@@ -65,7 +65,7 @@ Pour plus d’informations, consultez <xref:signalr/configuration#configure-addi
 
 Lorsque le client détecte que la connexion a été perdue, une interface utilisateur par défaut est affichée à l’utilisateur pendant que le client tente de se reconnecter. En cas d’échec de la reconnexion, l’utilisateur a la possibilité de réessayer.
 
-Pour personnaliser l’interface utilisateur, définissez un élément avec un `id` de `components-reconnect-modal` dans le `<body>` de la page *_Host. cshtml* Razor :
+Pour personnaliser l’interface utilisateur, définissez un élément avec un `id` de `components-reconnect-modal` dans le `<body>` de la `_Host.cshtml` Razor page :
 
 ```cshtml
 <div id="components-reconnect-modal">
@@ -86,7 +86,7 @@ Le tableau suivant décrit les classes CSS appliquées à l' `components-reconne
 
 *Cette section s’applique au Blazor serveur.*
 
-BlazorLes applications serveur sont configurées par défaut pour prérestituer l’interface utilisateur sur le serveur avant que la connexion cliente au serveur soit établie. Elle est configurée dans la page *_Host. cshtml* Razor :
+BlazorLes applications serveur sont configurées par défaut pour prérestituer l’interface utilisateur sur le serveur avant que la connexion cliente au serveur soit établie. Il est configuré dans la `_Host.cshtml` Razor page :
 
 ```cshtml
 <body>
@@ -117,7 +117,7 @@ Le rendu des composants serveur à partir d’une page HTML statique n’est pas
 
 Parfois, vous devez configurer le SignalR client utilisé par les Blazor applications serveur. Par exemple, vous pouvez configurer la journalisation sur le SignalR client pour diagnostiquer un problème de connexion.
 
-Pour configurer le SignalR client dans le fichier *Pages/_Host. cshtml* :
+Pour configurer le SignalR client dans le `Pages/_Host.cshtml` fichier :
 
 * Ajoutez un `autostart="false"` attribut à la `<script>` balise pour le `blazor.server.js` script.
 * Appelez `Blazor.start` et transmettez un objet de configuration qui spécifie le SignalR Générateur.

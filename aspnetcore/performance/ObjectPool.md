@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/ObjectPool
-ms.openlocfilehash: f29d15fc1e2d2ad84526598be14638110f08614e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 004ca5724517bf3fbf6512c0b9653793f4e0f702
+ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774780"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85241003"
 ---
 # <a name="object-reuse-with-objectpool-in-aspnet-core"></a>Réutilisation d’objets avec ObjectPool dans ASP.NET Core
 
@@ -31,7 +31,7 @@ Vous souhaiterez peut-être utiliser le pool d’objets si les objets gérés so
 - Représentent une ressource limitée.
 - Utilisé de manière prévisible et fréquente.
 
-Par exemple, l’infrastructure de ASP.NET Core utilise le pool d’objets à certains endroits <xref:System.Text.StringBuilder> pour réutiliser des instances. `StringBuilder`alloue et gère ses propres mémoires tampons pour contenir les données de caractères. ASP.NET Core utilise `StringBuilder` régulièrement pour implémenter des fonctionnalités, et les réutiliser améliorent les performances.
+Par exemple, l’infrastructure de ASP.NET Core utilise le pool d’objets à certains endroits pour réutiliser des <xref:System.Text.StringBuilder> instances. `StringBuilder`alloue et gère ses propres mémoires tampons pour contenir les données de caractères. ASP.NET Core utilise régulièrement `StringBuilder` pour implémenter des fonctionnalités, et les réutiliser améliorent les performances.
 
 La mise en pool d’objets n’améliore pas toujours les performances :
 
@@ -40,7 +40,7 @@ La mise en pool d’objets n’améliore pas toujours les performances :
 
 Utilisez le mise en pool d’objets uniquement après avoir collecté les données de performances à l’aide de scénarios réalistes pour votre application ou bibliothèque.
 
-**AVERTISSEMENT : `ObjectPool` n’implémente `IDisposable`pas. Nous vous déconseillons de l’utiliser avec des types nécessitant une suppression.**
+**AVERTISSEMENT : `ObjectPool` n’implémente pas `IDisposable` . Nous vous déconseillons de l’utiliser avec des types nécessitant une suppression.**
 
 **Remarque : le ObjectPool n’impose aucune limite quant au nombre d’objets qu’il va allouer, il limite le nombre d’objets qu’il va conserver.**
 
@@ -69,10 +69,12 @@ Le code suivant :
 
 * Ajoute `ObjectPoolProvider` au conteneur d' [injection de dépendances](xref:fundamentals/dependency-injection) (di).
 * Ajoute et configure `ObjectPool<StringBuilder>` le conteneur di.
-* Ajoute le `BirthdayMiddleware`.
+* Ajoute le `BirthdayMiddleware` .
 
 [!code-csharp[](ObjectPool/ObjectPoolSample/Startup.cs?name=snippet)]
 
 Le code suivant implémente`BirthdayMiddleware`
 
 [!code-csharp[](ObjectPool/ObjectPoolSample/BirthdayMiddleware.cs?name=snippet)]
+
+[!INCLUDE[request localized comments](~/includes/code-comments-loc.md)]

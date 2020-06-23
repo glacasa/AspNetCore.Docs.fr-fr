@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 4755674a4e73b245923c2c0f1f3d8ed114be8c81
-ms.sourcegitcommit: 726b8c5cf92e6f6a4d0205787b19307e889d6240
+ms.openlocfilehash: 7e0263200ebb9ce60f7234af3cbb18c5aeaa3e09
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/21/2020
-ms.locfileid: "85127758"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243523"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>Héberger et déployer ASP.NET Core Blazor Webassembly
 
@@ -43,11 +43,11 @@ Lors de Blazor la publication d’une application Webassembly, la sortie est com
 
 Blazors’appuie sur l’hôte pour servir les fichiers compressés appropriés. Lors de l’utilisation d’un projet hébergé ASP.NET Core, le projet hôte peut effectuer la négociation de contenu et traiter les fichiers compressés statiquement. Lors de l’hébergement d’une Blazor application autonome Webassembly, un travail supplémentaire peut être nécessaire pour s’assurer que les fichiers compressés statiquement sont pris en charge :
 
-* Pour la configuration de la compression de *web.config* IIS, consultez la section [IIS : Brotli et compression gzip](#brotli-and-gzip-compression) . 
+* Pour `web.config` la configuration de la compression IIS, consultez la section [IIS : Brotli et compression gzip](#brotli-and-gzip-compression) . 
 * Lors de l’hébergement sur des solutions d’hébergement statiques qui ne prennent pas en charge la négociation de contenu de fichier compressée statiquement, telles que les pages GitHub, envisagez de configurer l’application pour extraire et décoder les fichiers compressés Brotli :
 
   * Référencez le décodeur Brotli à partir du [référentiel GitHub Google/Brotli](https://github.com/google/brotli/) dans l’application.
-  * Mettez à jour l’application pour utiliser le décodeur. Modifiez le balisage à l’intérieur `<body>` de la balise de fermeture dans *wwwroot/index.html* en procédant comme suit :
+  * Mettez à jour l’application pour utiliser le décodeur. Remplacez le balisage `<body>` dans la balise de fermeture par `wwwroot/index.html` ce qui suit :
   
     ```html
     <script src="brotli.decode.min.js"></script>
@@ -87,29 +87,29 @@ Pour désactiver la compression, ajoutez la `BlazorEnableCompression` propriét�
 
 Les requêtes de routage pour les composants de page dans une Blazor application Webassembly ne sont pas aussi simples que les demandes de routage dans un Blazor serveur, une application hébergée. Prenons l’exemple d’une Blazor application Webassembly avec deux composants :
 
-* *Main. Razor*: charge à la racine de l’application et contient un lien vers le `About` composant ( `href="About"` ).
-* *À propos de. Razor*: `About` Component.
+* `Main.razor`: Charge à la racine de l’application et contient un lien vers le `About` composant ( `href="About"` ).
+* `About.razor`: `About` composant.
 
 Quand le document par défaut de l’application est demandé à l’aide de la barre d’adresses du navigateur (par exemple, `https://www.contoso.com/`) :
 
 1. Le navigateur effectue une requête.
-1. La page par défaut est retournée, généralement *index.html*.
-1. *index.HTML* amorce l’application.
+1. La page par défaut est retournée, qui est généralement `index.html` .
+1. `index.html`amorce l’application.
 1. Blazorle routeur est chargé et le Razor `Main` composant est rendu.
 
 Dans la page principale, le fait de sélectionner le lien vers le `About` composant fonctionne sur le client car le Blazor routeur empêche le navigateur d’effectuer une requête sur Internet pour `www.contoso.com` `About` et sert le `About` composant rendu lui-même. Toutes les demandes pour les points de terminaison internes de *l' Blazor application webassembly* fonctionnent de la même façon : les demandes ne déclenchent pas de requêtes basées sur un navigateur vers des ressources hébergées sur le serveur sur Internet. Le routeur gère les requêtes en interne.
 
 Si une requête pour `www.contoso.com/About` est effectuée à l’aide de la barre d’adresses du navigateur, elle échoue. Comme cette ressource n’existe pas sur l’hôte Internet de l’application, une réponse *404 – Non trouvé* est retournée.
 
-Étant donné que les navigateurs envoient des requêtes aux hôtes basés sur Internet pour des pages côté client, les serveurs web et les services d’hébergement doivent réécrire toutes les requêtes pour les ressources qui ne se trouvent pas physiquement sur le serveur afin qu’elles pointent vers la page *index.html*. Lorsque *index.html* est retourné, le routeur de l’application Blazor prend le relais et répond avec la ressource correcte.
+Étant donné que les navigateurs effectuent des demandes aux hôtes basés sur Internet pour les pages côté client, les serveurs Web et les services d’hébergement doivent réécrire toutes les demandes de ressources qui ne sont pas physiquement sur le serveur sur la `index.html` page. Lorsque `index.html` est retourné, le routeur de l’application Blazor prend le relais et répond avec la ressource correcte.
 
-Lors du déploiement sur un serveur IIS, vous pouvez utiliser le module de réécriture d’URL avec le fichier *web.config* publié de l’application. Pour plus d’informations, consultez la section [IIS](#iis) .
+Lors du déploiement sur un serveur IIS, vous pouvez utiliser le module de réécriture d’URL avec le fichier publié de l’application `web.config` . Pour plus d’informations, consultez la section [IIS](#iis) .
 
 ## <a name="hosted-deployment-with-aspnet-core"></a>Déploiement hébergé avec ASP.NET Core
 
 Un *déploiement hébergé* sert l' Blazor application webassembly aux navigateurs à partir d’une [application ASP.net Core](xref:index) qui s’exécute sur un serveur Web.
 
-L' Blazor application Webassembly cliente est publiée dans le dossier */bin/Release/{Target Framework}/Publish/wwwroot* de l’application serveur, ainsi que les autres ressources Web statiques de l’application serveur. Les deux applications sont déployées ensemble. Un serveur web capable d’héberger une application ASP.NET Core est nécessaire. Pour un déploiement hébergé, Visual Studio comprend le modèle de projet d' ** Blazor application webassembly** ( `blazorwasm` modèle lors de l’utilisation de la commande [dotnet New](/dotnet/core/tools/dotnet-new) ) avec l’option **hébergée** sélectionnée ( `-ho|--hosted` lors de l’utilisation de la `dotnet new` commande).
+L' Blazor application Webassembly cliente est publiée dans le `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` dossier de l’application serveur, ainsi que les autres ressources Web statiques de l’application serveur. Les deux applications sont déployées ensemble. Un serveur web capable d’héberger une application ASP.NET Core est nécessaire. Pour un déploiement hébergé, Visual Studio comprend le modèle de projet d' ** Blazor application webassembly** ( `blazorwasm` modèle lors de l’utilisation de la [`dotnet new`](/dotnet/core/tools/dotnet-new) commande) avec l' **`Hosted`** option sélectionnée (lors de l' `-ho|--hosted` utilisation de la `dotnet new` commande).
 
 Pour plus d’informations sur l’hébergement et le déploiement d’applications ASP.NET Core, consultez <xref:host-and-deploy/index>.
 
@@ -119,7 +119,7 @@ Pour plus d’informations concernant le déploiement sur Azure App Service, con
 
 Un *Déploiement autonome* sert l' Blazor application webassembly sous la forme d’un ensemble de fichiers statiques demandés directement par les clients. Tout serveur de fichiers statique peut traiter l' Blazor application.
 
-Les ressources de déploiement autonomes sont publiées dans le dossier */bin/Release/{Target Framework}/Publish/wwwroot* .
+Les ressources de déploiement autonomes sont publiées dans le `/bin/Release/{TARGET FRAMEWORK}/publish/wwwroot` dossier.
 
 ### <a name="azure-app-service"></a>Azure App Service
 
@@ -131,28 +131,28 @@ Le déploiement d’une Blazor application Webassembly autonome sur Azure App se
 
 IIS est un serveur de fichiers statiques et puissant pour les Blazor applications. Pour configurer IIS pour héberger Blazor , consultez [créer un site Web statique sur IIS](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis).
 
-Les ressources publiées sont créées dans le dossier */bin/Release/{FRAMEWORK CIBLE}/publish*. Hébergez le contenu du dossier *publish* sur le serveur web ou le service d’hébergement.
+Les ressources publiées sont créées dans le `/bin/Release/{TARGET FRAMEWORK}/publish` dossier. Hébergez le contenu du `publish` dossier sur le serveur Web ou le service d’hébergement.
 
 #### <a name="webconfig"></a>web.config
 
-Lorsqu’un Blazor projet est publié, un fichier de *web.config* est créé avec la configuration IIS suivante :
+Lorsqu’un Blazor projet est publié, un `web.config` fichier est créé avec la configuration IIS suivante :
 
 * Les types MIME sont définis pour les extensions de fichiers suivantes :
-  * *. dll*:`application/octet-stream`
-  * *. JSON*:`application/json`
-  * *.wasm* : `application/wasm`
-  * *.woff* : `application/font-woff`
-  * *.woff2* : `application/font-woff`
+  * `.dll`: `application/octet-stream`
+  * `.json`: `application/json`
+  * `.wasm`: `application/wasm`
+  * `.woff`: `application/font-woff`
+  * `.woff2`: `application/font-woff`
 * La compression HTTP est activée pour les types MIME suivants :
   * `application/octet-stream`
   * `application/wasm`
 * Des règles du module de réécriture d’URL sont établies :
-  * Servez-vous du sous-répertoire dans lequel résident les ressources statiques de l’application (*wwwroot/{chemin demandé}*).
-  * Créez le routage de secours SPA afin que les demandes pour les ressources non-fichier soient redirigées vers le document par défaut de l’application dans son dossier ressources statiques (*wwwroot/index.html*).
+  * Servez-vous du sous-répertoire dans lequel résident les ressources statiques de l’application ( `wwwroot/{PATH REQUESTED}` ).
+  * Créez le routage de secours SPA afin que les demandes pour les ressources non-fichier soient redirigées vers le document par défaut de l’application dans son dossier ressources statiques ( `wwwroot/index.html` ).
   
 #### <a name="use-a-custom-webconfig"></a>Utiliser un web.config personnalisé
 
-Pour utiliser un fichier de *web.config* personnalisé, placez le fichier *web.config* personnalisé à la racine du dossier du projet et publiez le projet.
+Pour utiliser un `web.config` fichier personnalisé, placez le `web.config` fichier personnalisé à la racine du dossier du projet et publiez le projet.
 
 #### <a name="install-the-url-rewrite-module"></a>Installer le module de réécriture d’URL
 
@@ -165,7 +165,7 @@ Le [module de réécriture d’URL](https://www.iis.net/downloads/microsoft/url-
 
 Affectez le dossier de l’application comme **chemin physique** du site web. Le dossier contient les éléments suivants :
 
-* Le fichier *web.config* utilisé par IIS pour configurer le site web, notamment les règles de redirection nécessaires et les types de contenu de fichiers
+* `web.config`Fichier utilisé par IIS pour configurer le site Web, y compris les règles de redirection et les types de contenu de fichier requis.
 * Le dossier de ressources statiques de l’application
 
 #### <a name="host-as-an-iis-sub-app"></a>Héberger en tant que sous-application IIS
@@ -174,7 +174,7 @@ Si une application autonome est hébergée en tant que sous-application IIS, eff
 
 * Désactivez le gestionnaire de module ASP.NET Core hérité.
 
-  Supprimez le gestionnaire dans le Blazor fichier *web.config* publié de l’application en ajoutant une `<handlers>` section au fichier :
+  Supprimez le gestionnaire dans le Blazor fichier publié de l’application `web.config` en ajoutant une `<handlers>` section au fichier :
 
   ```xml
   <handlers>
@@ -198,15 +198,15 @@ Si une application autonome est hébergée en tant que sous-application IIS, eff
   </configuration>
   ```
 
-La suppression du gestionnaire ou la désactivation de l’héritage est effectuée en plus de [la configuration du chemin d’accès de base de l’application](xref:blazor/host-and-deploy/index#app-base-path). Dans le fichier *index.html* de l’application, définissez le chemin de base de l’application sur l’alias IIS utilisé lors de la configuration de la sous-application dans IIS.
+La suppression du gestionnaire ou la désactivation de l’héritage est effectuée en plus de [la configuration du chemin d’accès de base de l’application](xref:blazor/host-and-deploy/index#app-base-path). Définissez le chemin d’accès de base de l’application dans le fichier de l’application `index.html` sur l’alias IIS utilisé lors de la configuration de la sous-application dans IIS.
 
 #### <a name="brotli-and-gzip-compression"></a>Compression Brotli et gzip
 
-IIS peut être configuré via *web.config* pour servir des ressources compressées Brotli ou gzip Blazor . Pour obtenir un exemple de configuration, consultez [web.config](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true).
+IIS peut être configuré via `web.config` pour servir des ressources compressées Brotli ou gzip Blazor . Pour obtenir un exemple de configuration, consultez [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true) .
 
 #### <a name="troubleshooting"></a>Dépannage
 
-Si vous recevez un message *500 – Erreur interne du serveur* et que le Gestionnaire IIS lève des erreurs quand vous tentez d’accéder à la configuration du site web, vérifiez que le module de réécriture d’URL est installé. Quand le module n’est pas installé, le fichier *web.config* ne peut pas être analysé par IIS. Cela empêche le gestionnaire des services Internet de charger la configuration du site Web et le site Web à partir des Blazor fichiers statiques de service.
+Si vous recevez un message *500 – Erreur interne du serveur* et que le Gestionnaire IIS lève des erreurs quand vous tentez d’accéder à la configuration du site web, vérifiez que le module de réécriture d’URL est installé. Lorsque le module n’est pas installé, le `web.config` fichier ne peut pas être analysé par IIS. Cela empêche le gestionnaire des services Internet de charger la configuration du site Web et le site Web à partir des Blazor fichiers statiques de service.
 
 Pour plus d’informations sur le dépannage des déploiements sur IIS, consultez <xref:test/troubleshoot-azure-iis>.
 
@@ -217,7 +217,7 @@ L’hébergement de fichiers statiques [Azure Storage](/azure/storage/) permet l
 Lorsque le service blob est activé pour l’hébergement de site Web statique sur un compte de stockage :
 
 * Définissez le **nom du document d’index** sur `index.html`.
-* Définissez le **chemin d’accès au document d’erreur** sur `index.html`. Razorles composants et autres points de terminaison non-fichier ne résident pas sur des chemins d’accès physiques dans le contenu statique stocké par le service BLOB. Lorsqu’une demande pour l’une de ces ressources est reçue que le Blazor routeur doit gérer, l’erreur *404-introuvable* générée par le service BLOB achemine la requête vers le **chemin du document d’erreur**. L’objet BLOB *index.html* est retourné et le Blazor routeur charge et traite le chemin d’accès.
+* Définissez le **chemin d’accès au document d’erreur** sur `index.html`. Razorles composants et autres points de terminaison non-fichier ne résident pas sur des chemins d’accès physiques dans le contenu statique stocké par le service BLOB. Lorsqu’une demande pour l’une de ces ressources est reçue que le Blazor routeur doit gérer, l’erreur *404-introuvable* générée par le service BLOB achemine la requête vers le **chemin du document d’erreur**. L' `index.html` objet blob est retourné et le Blazor routeur charge et traite le chemin d’accès.
 
 Si les fichiers ne sont pas chargés au moment de l’exécution en raison de types MIME inappropriés dans les `Content-Type` en-têtes des fichiers, effectuez l’une des actions suivantes :
 
@@ -233,7 +233,7 @@ Pour plus d’informations, consultez [Hébergement de sites web statiques dans 
 
 ### <a name="nginx"></a>Nginx
 
-Le fichier *nginx. conf* suivant est simplifié pour montrer comment configurer Nginx pour envoyer le fichier *index.html* lorsqu’il ne peut pas trouver de fichier correspondant sur le disque.
+Le `nginx.conf` fichier suivant est simplifié pour montrer comment configurer Nginx pour envoyer le `index.html` fichier lorsqu’il ne peut pas trouver de fichier correspondant sur le disque.
 
 ```
 events { }
@@ -253,7 +253,7 @@ Pour plus d’informations sur la configuration du serveur web Nginx de producti
 
 ### <a name="nginx-in-docker"></a>Nginx dans Docker
 
-Pour héberger Blazor dans l’ancrage à l’aide de nginx, configurez le fichier dockerfile pour utiliser l’image Nginx alpine. Mettez à jour le fichier Dockerfile pour copier le fichier *nginx.config* dans le conteneur.
+Pour héberger Blazor dans l’ancrage à l’aide de nginx, configurez le fichier dockerfile pour utiliser l’image Nginx alpine. Mettez à jour le fichier dockerfile pour copier le `nginx.config` fichier dans le conteneur.
 
 Ajoutez une ligne au fichier Dockerfile, comme indiqué dans l’exemple suivant :
 
@@ -267,7 +267,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 Pour déployer une Blazor application Webassembly sur CentOS 7 ou version ultérieure :
 
-1. Créez le fichier de configuration Apache. L’exemple suivant est un fichier de configuration simplifié (*blazorapp.config*) :
+1. Créez le fichier de configuration Apache. L’exemple suivant est un fichier de configuration simplifié ( `blazorapp.config` ) :
 
    ```
    <VirtualHost *:80>
@@ -309,13 +309,13 @@ Pour déployer une Blazor application Webassembly sur CentOS 7 ou version ultér
 
 1. Redémarrez le service Apache.
 
-Pour plus d’informations, consultez [mod_mime](https://httpd.apache.org/docs/2.4/mod/mod_mime.html) et [mod_deflate](https://httpd.apache.org/docs/current/mod/mod_deflate.html).
+Pour plus d’informations, consultez [`mod_mime`](https://httpd.apache.org/docs/2.4/mod/mod_mime.html) et [`mod_deflate`](https://httpd.apache.org/docs/current/mod/mod_deflate.html) .
 
 ### <a name="github-pages"></a>GitHub Pages
 
-Pour gérer les réécritures d’URL, ajoutez un fichier *404.html* avec un script qui gère la redirection de la requête vers la page *index.html*. Pour obtenir un exemple d’implémentation fournie par la communauté, consultez [Single Page Apps for GitHub Pages](https://spa-github-pages.rafrex.com/) (Applications à une seule page pour GitHub Pages) ([rafrex/spa-github-pages sur GitHub](https://github.com/rafrex/spa-github-pages#readme)). Vous pouvez obtenir un exemple d’utilisation de cette approche à l’adresse [blazor-demo/blazor-demo.github.io sur GitHub](https://github.com/blazor-demo/blazor-demo.github.io) ([site actif](https://blazor-demo.github.io/)).
+Pour gérer la réécriture d’URL, ajoutez un `404.html` fichier avec un script qui gère la redirection de la requête vers la `index.html` page. Pour obtenir un exemple d’implémentation fournie par la communauté, consultez [Single Page Apps for GitHub Pages](https://spa-github-pages.rafrex.com/) (Applications à une seule page pour GitHub Pages) ([rafrex/spa-github-pages sur GitHub](https://github.com/rafrex/spa-github-pages#readme)). Vous pouvez obtenir un exemple d’utilisation de cette approche à l’adresse [blazor-demo/blazor-demo.github.io sur GitHub](https://github.com/blazor-demo/blazor-demo.github.io) ([site actif](https://blazor-demo.github.io/)).
 
-Quand vous utilisez un site de projet plutôt qu’un site d’entreprise, ajoutez ou mettez à jour la balise `<base>` dans *index.html*. Définissez la valeur d’attribut `href` sur le nom du dépôt GitHub avec une barre oblique (par exemple, `my-repository/`.
+Lorsque vous utilisez un site de projet plutôt qu’un site d’organisation, ajoutez ou mettez à jour la `<base>` balise dans `index.html` . Définissez la valeur d’attribut `href` sur le nom du dépôt GitHub avec une barre oblique (par exemple, `my-repository/`.
 
 ## <a name="host-configuration-values"></a>Valeurs de configuration de l’hôte
 
@@ -331,13 +331,13 @@ L' `--contentroot` argument définit le chemin d’accès absolu au répertoire 
   dotnet run --contentroot=/content-root-path
   ```
 
-* Ajoutez une entrée au fichier *launchSettings.json* de l’application dans le profil **IIS Express**. Ce paramètre est utilisé en cas d’exécution de l’application avec le débogueur Visual Studio et dans une invite de commandes avec `dotnet run`.
+* Ajoutez une entrée au fichier de l’application `launchSettings.json` dans le profil **IIS Express** . Ce paramètre est utilisé en cas d’exécution de l’application avec le débogueur Visual Studio et dans une invite de commandes avec `dotnet run`.
 
   ```json
   "commandLineArgs": "--contentroot=/content-root-path"
   ```
 
-* Dans Visual Studio, spécifiez l’argument dans **Propriétés**  >  **Déboguer**les arguments de l'  >  **application**. Le fait de définir l’argument dans la page de propriétés Visual Studio l’ajoute au fichier *launchSettings.json*.
+* Dans Visual Studio, spécifiez l’argument dans **Propriétés**  >  **Déboguer**les arguments de l'  >  **application**. La définition de l’argument dans la page de propriétés de Visual Studio ajoute l’argument au `launchSettings.json` fichier.
 
   ```console
   --contentroot=/content-root-path
@@ -356,13 +356,13 @@ L' `--pathbase` argument définit le chemin d’accès de base d’application p
   dotnet run --pathbase=/relative-URL-path
   ```
 
-* Ajoutez une entrée au fichier *launchSettings.json* de l’application dans le profil **IIS Express**. Ce paramètre est utilisé en cas d’exécution de l’application avec le débogueur Visual Studio et dans une invite de commandes avec `dotnet run`.
+* Ajoutez une entrée au fichier de l’application `launchSettings.json` dans le profil **IIS Express** . Ce paramètre est utilisé en cas d’exécution de l’application avec le débogueur Visual Studio et dans une invite de commandes avec `dotnet run`.
 
   ```json
   "commandLineArgs": "--pathbase=/relative-URL-path"
   ```
 
-* Dans Visual Studio, spécifiez l’argument dans **Propriétés**  >  **Déboguer**les arguments de l'  >  **application**. Le fait de définir l’argument dans la page de propriétés Visual Studio l’ajoute au fichier *launchSettings.json*.
+* Dans Visual Studio, spécifiez l’argument dans **Propriétés**  >  **Déboguer**les arguments de l'  >  **application**. La définition de l’argument dans la page de propriétés de Visual Studio ajoute l’argument au `launchSettings.json` fichier.
 
   ```console
   --pathbase=/relative-URL-path
@@ -378,13 +378,13 @@ L’argument `--urls` définit les adresses IP ou les adresses d’hôtes avec 
   dotnet run --urls=http://127.0.0.1:0
   ```
 
-* Ajoutez une entrée au fichier *launchSettings.json* de l’application dans le profil **IIS Express**. Ce paramètre est utilisé en cas d’exécution de l’application avec le débogueur Visual Studio et dans une invite de commandes avec `dotnet run`.
+* Ajoutez une entrée au fichier de l’application `launchSettings.json` dans le profil **IIS Express** . Ce paramètre est utilisé en cas d’exécution de l’application avec le débogueur Visual Studio et dans une invite de commandes avec `dotnet run`.
 
   ```json
   "commandLineArgs": "--urls=http://127.0.0.1:0"
   ```
 
-* Dans Visual Studio, spécifiez l’argument dans **Propriétés**  >  **Déboguer**les arguments de l'  >  **application**. Le fait de définir l’argument dans la page de propriétés Visual Studio l’ajoute au fichier *launchSettings.json*.
+* Dans Visual Studio, spécifiez l’argument dans **Propriétés**  >  **Déboguer**les arguments de l'  >  **application**. La définition de l’argument dans la page de propriétés de Visual Studio ajoute l’argument au `launchSettings.json` fichier.
 
   ```console
   --urls=http://127.0.0.1:0
@@ -398,7 +398,7 @@ Blazoreffectue une liaison IL (Intermediate Language) sur chaque version de mise
 
 Une Blazor application Webassembly peut être initialisée avec la `loadBootResource` fonction pour remplacer le mécanisme de chargement des ressources de démarrage intégré. Utilisez `loadBootResource` pour les scénarios suivants :
 
-* Autorisez les utilisateurs à charger des ressources statiques, telles que des données de fuseau horaire ou *dotnet. WASM* à partir d’un CDN.
+* Autorisez les utilisateurs à charger des ressources statiques, telles que des données de fuseau horaire ou `dotnet.wasm` à partir d’un CDN.
 * Chargez les assemblys compressés à l’aide d’une requête HTTP et décompressez-les sur le client pour les hôtes qui ne prennent pas en charge l’extraction du contenu compressé à partir du serveur.
 * Alias des ressources à un autre nom en redirigeant chaque `fetch` requête vers un nouveau nom.
 
@@ -413,10 +413,10 @@ Une Blazor application Webassembly peut être initialisée avec la `loadBootReso
 
 `loadBootResource`retourne l’un des éléments suivants pour remplacer le processus de chargement :
 
-* Chaîne d’URI. Dans l’exemple suivant (*wwwroot/index.html*), les fichiers suivants sont pris en charge à partir d’un CDN à l’adresse `https://my-awesome-cdn.com/` :
+* Chaîne d’URI. Dans l’exemple suivant ( `wwwroot/index.html` ), les fichiers suivants sont pris en charge à partir d’un CDN à l’adresse `https://my-awesome-cdn.com/` :
 
-  * *dotnet. \* . js*
-  * *dotnet. WASM*
+  * `dotnet.*.js`
+  * `dotnet.wasm`
   * Données de fuseau horaire
 
   ```html
@@ -440,7 +440,7 @@ Une Blazor application Webassembly peut être initialisée avec la `loadBootReso
 
 * `Promise<Response>`. Transmettez le `integrity` paramètre dans un en-tête pour conserver le comportement de contrôle d’intégrité par défaut.
 
-  L’exemple suivant (*wwwroot/index.html*) ajoute un en-tête HTTP personnalisé aux demandes sortantes et passe le `integrity` paramètre à l' `fetch` appel :
+  L’exemple suivant ( `wwwroot/index.html` ) ajoute un en-tête HTTP personnalisé aux demandes sortantes et passe `integrity` le paramètre à l' `fetch` appel :
   
   ```html
   <script src="_framework/blazor.webassembly.js" autostart="false"></script>
@@ -465,11 +465,11 @@ Il vous suffit de spécifier des types pour les comportements personnalisés. Le
 
 ## <a name="change-the-filename-extension-of-dll-files"></a>Modifier l’extension de nom de fichier des fichiers DLL
 
-Si vous avez besoin de modifier les extensions de nom de fichier des fichiers *. dll* publiés de l’application, suivez les instructions de cette section.
+Si vous avez besoin de modifier les extensions de nom de fichier des fichiers publiés de l’application `.dll` , suivez les instructions de cette section.
 
-Après avoir publié l’application, utilisez un script d’interpréteur de commandes ou un pipeline de build DevOps pour renommer les fichiers *. dll* afin d’utiliser une extension de fichier différente. Ciblez les fichiers *. dll* dans le répertoire *wwwroot* de la sortie publiée de l’application (par exemple, *{root content}/bin/Release/netstandard2.1/Publish/wwwroot*).
+Après avoir publié l’application, utilisez un script d’interpréteur de commandes ou un pipeline de build DevOps pour renommer les `.dll` fichiers afin d’utiliser une extension de fichier différente. Ciblez les `.dll` fichiers dans le `wwwroot` Répertoire de la sortie publiée de l’application (par exemple, `{CONTENT ROOT}/bin/Release/netstandard2.1/publish/wwwroot` ).
 
-Dans les exemples suivants, les fichiers *. dll* sont renommés pour utiliser l’extension de fichier *. bin* .
+Dans les exemples suivants, les `.dll` fichiers sont renommés pour utiliser l' `.bin` extension de fichier.
 
 Sur Windows :
 
@@ -497,18 +497,18 @@ Si des ressources de service Worker sont également utilisées, ajoutez la comma
 sed -i 's/\.dll"/.bin"/g' service-worker-assets.js
 ```
    
-Pour utiliser une extension de fichier différente de *. bin*, remplacez *. bin* dans les commandes précédentes.
+Pour utiliser une extension de fichier différente de `.bin` , remplacez `.bin` dans les commandes précédentes.
 
-Pour traiter leblazor.boot.jscompressé sur les fichiers *. gz* et *blazor.boot.json.br* , adoptez l’une des approches suivantes :
+Pour résoudre les fichiers et compressés `blazor.boot.json.gz` `blazor.boot.json.br` , adoptez l’une des approches suivantes :
 
-* Supprimez le *blazor.boot.jscompressé sur les fichiers. gz* et *blazor.boot.json.br* . La compression est désactivée avec cette approche.
-* Recompressez le *blazor.boot.js* mis à jour dans le fichier.
+* Supprimez les `blazor.boot.json.gz` fichiers et compressés `blazor.boot.json.br` . La compression est désactivée avec cette approche.
+* Recompressez le fichier mis à jour `blazor.boot.json` .
 
-Les instructions précédentes s’appliquent également lorsque les ressources de service Worker sont en cours d’utilisation. Supprimez ou recompressez *wwwroot/service-worker-assets.js. br* et *wwwroot/service-worker-assets.js. gz*. Dans le cas contraire, les vérifications de l’intégrité des fichiers échouent dans le navigateur.
+Les instructions précédentes s’appliquent également lorsque les ressources de service Worker sont en cours d’utilisation. Supprimez ou recompressez `wwwroot/service-worker-assets.js.br` et `wwwroot/service-worker-assets.js.gz` . Dans le cas contraire, les vérifications de l’intégrité des fichiers échouent dans le navigateur.
 
 L’exemple Windows suivant utilise un script PowerShell placé à la racine du projet.
 
-*ChangeDLLExtensions.ps1 :*:
+`ChangeDLLExtensions.ps1:`:
 
 ```powershell
 param([string]$filepath,[string]$tfm)

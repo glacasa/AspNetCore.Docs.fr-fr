@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
-ms.openlocfilehash: 78d524bc0271fd2640302bb0de78571ab688bef5
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 1c71067528fb34ab141bb1ee846716834204ee40
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103738"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242457"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Intégrer Razor des composants de ASP.net core dans Razor des pages et des applications MVC
 
@@ -37,7 +37,7 @@ Après avoir [préparé l’application](#prepare-the-app), suivez les instructi
 
 Une Razor application de pages ou MVC existante peut intégrer Razor des composants dans des pages et des vues :
 
-1. Dans le fichier de disposition de l’application (*_Layout. cshtml*) :
+1. Dans le fichier de disposition de l’application ( `_Layout.cshtml` ) :
 
    * Ajoutez la `<base>` balise suivante à l' `<head>` élément :
 
@@ -47,7 +47,7 @@ Une Razor application de pages ou MVC existante peut intégrer Razor des composa
 
      La `href` valeur (le *chemin d’accès de base*de l’application) dans l’exemple précédent suppose que l’application se trouve dans le chemin d’URL racine ( `/` ). Si l’application est une sous-application, suivez les instructions de la section *chemin d’accès de base* de l’application de l' <xref:blazor/host-and-deploy/index#app-base-path> article.
 
-     Le fichier *_Layout. cshtml* se trouve dans le dossier *pages/Shared* dans une Razor application pages ou un dossier *Views/Shared* dans une application MVC.
+     Le `_Layout.cshtml` fichier se trouve dans le dossier *pages/Shared* dans une Razor application pages ou un dossier *Views/Shared* dans une application MVC.
 
    * Ajoutez une `<script>` balise pour le *blazor.server.js* script immédiatement avant la `</body>` balise de fermeture :
 
@@ -57,7 +57,7 @@ Une Razor application de pages ou MVC existante peut intégrer Razor des composa
 
      L’infrastructure ajoute le script *blazor.server.js* à l’application. Il n’est pas nécessaire d’ajouter manuellement le script à l’application.
 
-1. Ajoutez un fichier *_Imports. Razor* au dossier racine du projet avec le contenu suivant (remplacez le dernier espace de noms, `MyAppNamespace` , par l’espace de noms de l’application) :
+1. Ajoutez un `_Imports.razor` fichier au dossier racine du projet avec le contenu suivant (modifiez le dernier espace de noms,, en lui attribuant l' `MyAppNamespace` espace de noms de l’application) :
 
    ```razor
    @using System.Net.Http
@@ -92,7 +92,7 @@ Pour prendre en charge les composants routables Razor dans les Razor application
 
 1. Suivez les instructions de la section [préparer l’application](#prepare-the-app) .
 
-1. Ajoutez un fichier *app. Razor* à la racine du projet avec le contenu suivant :
+1. Ajoutez un `App.razor` fichier à la racine du projet avec le contenu suivant :
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -108,7 +108,7 @@ Pour prendre en charge les composants routables Razor dans les Razor application
    </Router>
    ```
 
-1. Ajoutez un fichier *_Host. cshtml* au dossier *pages* avec le contenu suivant :
+1. Ajoutez un `_Host.cshtml` fichier au `Pages` dossier avec le contenu suivant :
 
    ```cshtml
    @page "/blazor"
@@ -121,7 +121,7 @@ Pour prendre en charge les composants routables Razor dans les Razor application
    </app>
    ```
 
-   Les composants utilisent le fichier *_Layout. cshtml* partagé pour leur disposition.
+   Les composants utilisent le `_Layout.cshtml` fichier partagé pour leur disposition.
 
    <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>Configure si le `App` composant :
 
@@ -136,7 +136,7 @@ Pour prendre en charge les composants routables Razor dans les Razor application
 
    Pour plus d’informations sur le tag Helper composant, consultez <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper> .
 
-1. Ajoutez un itinéraire de priorité basse pour la page *_Host. cshtml* à la configuration de point de terminaison dans `Startup.Configure` :
+1. Ajoutez un itinéraire de priorité basse pour la `_Host.cshtml` page à la configuration de point de terminaison dans `Startup.Configure` :
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -167,7 +167,7 @@ Pour prendre en charge les composants routables Razor dans les applications MVC�
 
 1. Suivez les instructions de la section [préparer l’application](#prepare-the-app) .
 
-1. Ajoutez un fichier *app. Razor* à la racine du projet avec le contenu suivant :
+1. Ajoutez un `App.razor` fichier à la racine du projet avec le contenu suivant :
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -183,7 +183,7 @@ Pour prendre en charge les composants routables Razor dans les applications MVC�
    </Router>
    ```
 
-1. Ajoutez un fichier *_Host. cshtml* au dossier *views/de démarrage* avec le contenu suivant :
+1. Ajoutez un `_Host.cshtml` fichier au `Views/Home` dossier avec le contenu suivant :
 
    ```cshtml
    @{
@@ -195,7 +195,7 @@ Pour prendre en charge les composants routables Razor dans les applications MVC�
    </app>
    ```
 
-   Les composants utilisent le fichier *_Layout. cshtml* partagé pour leur disposition.
+   Les composants utilisent le `_Layout.cshtml` fichier partagé pour leur disposition.
    
    <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>Configure si le `App` composant :
 
@@ -219,7 +219,7 @@ Pour prendre en charge les composants routables Razor dans les applications MVC�
    }
    ```
 
-1. Ajoutez un itinéraire de faible priorité pour l’action de contrôleur qui retourne la vue *_Host. cshtml* à la configuration du point de terminaison dans `Startup.Configure` :
+1. Ajoutez un itinéraire de faible priorité pour l’action de contrôleur qui retourne la `_Host.cshtml` vue à la configuration du point de terminaison dans `Startup.Configure` :
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -230,7 +230,7 @@ Pour prendre en charge les composants routables Razor dans les applications MVC�
    });
    ```
 
-1. Créez un dossier *pages* et ajoutez des composants routables à l’application. Par exemple :
+1. Créez un `Pages` dossier et ajoutez des composants routables à l’application. Par exemple :
 
    ```razor
    @page "/counter"
@@ -299,7 +299,7 @@ Pour plus d’informations, consultez <xref:mvc/views/tag-helpers/builtin-th/com
 
 ## <a name="component-namespaces"></a>Espaces de noms de composants
 
-Lorsque vous utilisez un dossier personnalisé pour stocker les composants de l’application, ajoutez l’espace de noms qui représente le dossier à la page/la vue ou au fichier *_ViewImports. cshtml* . Dans l’exemple suivant :
+Lorsque vous utilisez un dossier personnalisé pour stocker les composants de l’application, ajoutez l’espace de noms représentant le dossier à la page/la vue ou au `_ViewImports.cshtml` fichier. Dans l’exemple suivant :
 
 * Accédez `MyAppNamespace` à l’espace de noms de l’application.
 * Si un dossier nommé *Components* n’est pas utilisé pour contenir les composants, accédez `Components` au dossier dans lequel se trouvent les composants.
@@ -308,6 +308,6 @@ Lorsque vous utilisez un dossier personnalisé pour stocker les composants de l�
 @using MyAppNamespace.Components
 ```
 
-Le fichier *_ViewImports. cshtml* se trouve dans le dossier *pages* d’une Razor application pages ou du dossier *views* d’une application MVC.
+Le `_ViewImports.cshtml` fichier se trouve dans le `Pages` dossier d’une Razor application pages ou dans le `Views` dossier d’une application MVC.
 
 Pour plus d’informations, consultez <xref:blazor/components/index#namespaces>.

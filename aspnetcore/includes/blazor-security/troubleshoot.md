@@ -31,7 +31,7 @@ L’une des méthodes permettant d’empêcher les cookies en attente et les don
 
 ### <a name="run-the-server-app"></a>Exécuter l’application serveur
 
-Lors du test et du dépannage d’une application éblouissante hébergée, assurez-vous que vous exécutez l’application à partir du projet **serveur** . Par exemple, dans Visual Studio, vérifiez que le projet serveur est mis en surbrillance dans **Explorateur de solutions** avant de démarrer l’application avec l’une des approches suivantes :
+Lors du test et du dépannage d’une application éblouissante hébergée, assurez-vous que vous exécutez l’application à partir du **`Server`** projet. Par exemple, dans Visual Studio, vérifiez que le projet serveur est mis en surbrillance dans **Explorateur de solutions** avant de démarrer l’application avec l’une des approches suivantes :
 
 * Sélectionnez le bouton **Exécuter**.
 * Utilisez **débogage**  >  **Démarrer le débogage** à partir du menu.

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: c67903809de60b4b0ce7a98455b6917192512b5d
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 61c1dc383728f42c5dac6742fd19d1d22c988913
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103722"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242691"
 ---
 # <a name="aspnet-core-blazor-lifecycle"></a>BlazorCycle de vie ASP.net Core
 
@@ -45,9 +45,9 @@ public override async Task SetParametersAsync(ParameterView parameters)
 
 L’implémentation par défaut de <xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A> définit la valeur de chaque propriété avec l' [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) attribut ou ayant [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) une valeur correspondante dans le <xref:Microsoft.AspNetCore.Components.ParameterView> . Les paramètres qui n’ont pas de valeur correspondante dans <xref:Microsoft.AspNetCore.Components.ParameterView> ne sont pas modifiés.
 
-Si [base. SetParametersAync](xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A) n’est pas appelé, le code personnalisé peut interpréter la valeur des paramètres entrants de la façon requise. Par exemple, il n’est pas nécessaire d’assigner les paramètres entrants aux propriétés de la classe.
+Si [`base.SetParametersAync`](xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A) n’est pas appelé, le code personnalisé peut interpréter la valeur des paramètres entrants de la façon requise. Par exemple, il n’est pas nécessaire d’assigner les paramètres entrants aux propriétés de la classe.
 
-Si des gestionnaires d’événements sont configurés, décrochez-les lors de la suppression. Pour plus d’informations, consultez la section [Suppression de composant avec IDisposable](#component-disposal-with-idisposable) .
+Si des gestionnaires d’événements sont configurés, décrochez-les lors de la suppression. Pour plus d’informations, consultez la section [suppression `IDisposable` de composant avec](#component-disposal-with-idisposable) .
 
 ### <a name="component-initialization-methods"></a>Méthodes d’initialisation de composant
 
@@ -64,7 +64,7 @@ protected override void OnInitialized()
 }
 ```
 
-Pour effectuer une opération asynchrone, substituez <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> et utilisez l’opérateur [await](/dotnet/csharp/language-reference/operators/await) sur l’opération :
+Pour effectuer une opération asynchrone, substituez <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> et utilisez l' [`await`](/dotnet/csharp/language-reference/operators/await) opérateur sur l’opération :
 
 ```csharp
 protected override async Task OnInitializedAsync()
@@ -82,7 +82,7 @@ Pour empêcher <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized
 
 Pendant Blazor le prérendu d’une application serveur, certaines actions, telles que l’appel de JavaScript, ne sont pas possibles, car une connexion avec le navigateur n’a pas été établie. Les composants peuvent avoir besoin d’être restitués différemment lorsqu’ils sont prérendus. Pour plus d’informations, consultez la section [détecter quand l’application est un prérendu](#detect-when-the-app-is-prerendering) .
 
-Si des gestionnaires d’événements sont configurés, décrochez-les lors de la suppression. Pour plus d’informations, consultez la section [Suppression de composant avec IDisposable](#component-disposal-with-idisposable) .
+Si des gestionnaires d’événements sont configurés, décrochez-les lors de la suppression. Pour plus d’informations, consultez la section [suppression `IDisposable` de composant avec](#component-disposal-with-idisposable) .
 
 ### <a name="after-parameters-are-set"></a>Une fois les paramètres définis
 
@@ -110,7 +110,7 @@ protected override void OnParametersSet()
 }
 ```
 
-Si des gestionnaires d’événements sont configurés, décrochez-les lors de la suppression. Pour plus d’informations, consultez la section [Suppression de composant avec IDisposable](#component-disposal-with-idisposable) .
+Si des gestionnaires d’événements sont configurés, décrochez-les lors de la suppression. Pour plus d’informations, consultez la section [suppression `IDisposable` de composant avec](#component-disposal-with-idisposable) .
 
 ### <a name="after-component-render"></a>Après le rendu du composant
 
@@ -148,7 +148,7 @@ protected override void OnAfterRender(bool firstRender)
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A>et <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A> *ne sont pas appelés lors du prérendu sur le serveur.*
 
-Si des gestionnaires d’événements sont configurés, décrochez-les lors de la suppression. Pour plus d’informations, consultez la section [Suppression de composant avec IDisposable](#component-disposal-with-idisposable) .
+Si des gestionnaires d’événements sont configurés, décrochez-les lors de la suppression. Pour plus d’informations, consultez la section [suppression `IDisposable` de composant avec](#component-disposal-with-idisposable) .
 
 ### <a name="suppress-ui-refreshing"></a>Supprimer l’actualisation de l’interface utilisateur
 
@@ -179,13 +179,13 @@ Les actions asynchrones exécutées dans des événements de cycle de vie peuven
 
 Dans le `FetchData` composant des Blazor modèles, <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> est remplacé par asynchrone recevoir les données de prévision ( `forecasts` ). Lorsque `forecasts` a `null` la valeur, un message de chargement est affiché à l’utilisateur. Une fois la `Task` retournée <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> terminée, le composant est rerendu avec l’État mis à jour.
 
-*Pages/fetchData. Razor* dans le Blazor modèle de serveur :
+`Pages/FetchData.razor`dans le Blazor modèle de serveur :
 
 [!code-razor[](lifecycle/samples_snapshot/3.x/FetchData.razor?highlight=9,21,25)]
 
 ## <a name="component-disposal-with-idisposable"></a>Suppression de composant avec IDisposable
 
-Si un composant implémente <xref:System.IDisposable> , la [méthode dispose](/dotnet/standard/garbage-collection/implementing-dispose) est appelée lorsque le composant est supprimé de l’interface utilisateur. Le composant suivant utilise `@implements IDisposable` et la `Dispose` méthode :
+Si un composant implémente <xref:System.IDisposable> , la [ `Dispose` méthode](/dotnet/standard/garbage-collection/implementing-dispose) est appelée lorsque le composant est supprimé de l’interface utilisateur. Le composant suivant utilise `@implements IDisposable` et la `Dispose` méthode :
 
 ```razor
 @using System
@@ -220,7 +220,7 @@ Pour plus d’informations sur la gestion des erreurs lors de l’exécution de 
 
 ## <a name="stateful-reconnection-after-prerendering"></a>Reconnexion avec état après le prérendu
 
-Dans une Blazor application serveur quand <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> est <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> , le composant est initialement restitué de manière statique dans le cadre de la page. Une fois que le navigateur a établi une connexion au serveur, le composant est *à nouveau*rendu et le composant est maintenant interactif. Si la méthode de cycle de vie [OnInitialized {Async}](#component-initialization-methods) pour initialiser le composant est présente, la méthode est exécutée *deux fois*:
+Dans une Blazor application serveur quand <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> est <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> , le composant est initialement restitué de manière statique dans le cadre de la page. Une fois que le navigateur a établi une connexion au serveur, le composant est *à nouveau*rendu et le composant est maintenant interactif. Si la [`OnInitialized{Async}`](#component-initialization-methods) méthode de cycle de vie pour l’initialisation du composant est présente, la méthode est exécutée *deux fois*:
 
 * Lorsque le composant est prérendu statiquement.
 * Après l’établissement de la connexion au serveur.
@@ -297,7 +297,7 @@ Les autres raisons pour lesquelles les éléments de travail en arrière-plan pe
 Pour implémenter un modèle de travail d’arrière-plan annulable dans un composant :
 
 * Utilisez un <xref:System.Threading.CancellationTokenSource> et un <xref:System.Threading.CancellationToken> .
-* Lors de [la suppression du composant](#component-disposal-with-idisposable) et à tout moment, l’annulation est souhaitée en annulant manuellement le jeton, appelez [CancellationTokenSource. Cancel](xref:System.Threading.CancellationTokenSource.Cancel%2A) pour signaler que le travail en arrière-plan doit être annulé.
+* Lors de [la suppression du composant](#component-disposal-with-idisposable) et à tout moment, l’annulation est souhaitée en annulant manuellement le jeton, puis appelez [`CancellationTokenSource.Cancel`](xref:System.Threading.CancellationTokenSource.Cancel%2A) pour signaler que le travail en arrière-plan doit être annulé.
 * Une fois l’appel asynchrone retourné, appelez <xref:System.Threading.CancellationToken.ThrowIfCancellationRequested%2A> sur le jeton.
 
 Dans l’exemple suivant :

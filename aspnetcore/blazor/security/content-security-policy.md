@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/content-security-policy
-ms.openlocfilehash: 63359260766846ccf14ececfae82bf02cc598cf9
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 360fff9383e25a6b5b9308cfebd397f7f4ee31a6
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103657"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242977"
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-blazor"></a>Appliquer une stratégie de sécurité de contenu pour ASP.NET CoreBlazor
 
@@ -85,7 +85,7 @@ Les sections suivantes présentent des exemples de stratégies pour Blazor Webas
 
 ### <a name="blazor-webassembly"></a>BlazorWebassembly
 
-Dans le `<head>` contenu de la page de l’hôte *wwwroot/index.html* , appliquez les directives décrites dans la section [directives de stratégie](#policy-directives) :
+Dans la `<head>` page contenu de l' `wwwroot/index.html` hôte, appliquez les directives décrites dans la section [directives de stratégie](#policy-directives) :
 
 ```html
 <meta http-equiv="Content-Security-Policy" 
@@ -108,7 +108,7 @@ Dans le `<head>` contenu de la page de l’hôte *wwwroot/index.html* , applique
 
 ### <a name="blazor-server"></a>BlazorServeurs
 
-Dans le `<head>` contenu de la page hôte *Pages/_Host. cshtml* , appliquez les directives décrites dans la section [directives de stratégie](#policy-directives) :
+Dans la `<head>` page contenu de l' `Pages/_Host.cshtml` hôte, appliquez les directives décrites dans la section [directives de stratégie](#policy-directives) :
 
 ```cshtml
 <meta http-equiv="Content-Security-Policy" 
@@ -152,7 +152,7 @@ Bien que ne `report-uri` soit plus recommandé pour une utilisation, les deux di
 
 Testez et mettez à jour la stratégie d’une application chaque version.
 
-## <a name="troubleshoot"></a>Dépannage
+## <a name="troubleshoot"></a>Dépanner
 
 * Les erreurs s’affichent dans la console outils de développement du navigateur. Les navigateurs fournissent des informations sur les éléments suivants :
   * Éléments qui ne sont pas conformes à la stratégie.

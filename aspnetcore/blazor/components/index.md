@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: a97fbe07251a61b30985695e3d207f0e3c3a777b
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: e1778d865edcfed8f5f45f4f53a57f1b3a3bd9aa
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103729"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242432"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Créer et utiliser des Razor composants ASP.net Core
 
@@ -30,7 +30,7 @@ Blazorles applications sont générées à l’aide de *composants*. Un composan
 
 ## <a name="component-classes"></a>Classes de composant
 
-Les composants sont implémentés dans les [Razor](xref:mvc/views/razor) fichiers de composants (*. Razor*) à l’aide d’une combinaison de balisage C# et html. Un composant dans Blazor est officiellement désigné sous le terme de * Razor composant*.
+Les composants sont implémentés dans des [Razor](xref:mvc/views/razor) fichiers composants ( `.razor` ) à l’aide d’une combinaison de balisage C# et html. Un composant dans Blazor est officiellement désigné sous le terme de * Razor composant*.
 
 ### <a name="razor-syntax"></a>Syntaxe de Razor
 
@@ -43,7 +43,7 @@ Lorsque vous accédez au contenu sur la Razor syntaxe, portez une attention part
 
 ### <a name="names"></a>noms
 
-Le nom d’un composant doit commencer par un caractère majuscule. Par exemple, *MyCoolComponent. Razor* est valide et *MyCoolComponent. Razor* n’est pas valide.
+Le nom d’un composant doit commencer par un caractère majuscule. Par exemple, `MyCoolComponent.razor` est valide et `myCoolComponent.razor` n’est pas valide.
 
 ### <a name="routing"></a>Routage
 
@@ -77,16 +77,16 @@ Les membres de composant peuvent être utilisés dans le cadre de la logique de 
 
 Une fois le composant restitué initialement, le composant régénère son arborescence de rendu en réponse aux événements. Blazorcompare ensuite la nouvelle arborescence de rendu à la précédente et applique toutes les modifications apportées au Document Object Model du navigateur (DOM).
 
-Les composants sont des classes C# ordinaires qui peuvent être placées n’importe où dans un projet. Les composants qui produisent des pages Web résident généralement dans le dossier *pages* . Les composants qui ne sont pas des pages sont souvent placés dans le dossier *partagé* ou dans un dossier personnalisé ajouté au projet.
+Les composants sont des classes C# ordinaires qui peuvent être placées n’importe où dans un projet. Les composants qui produisent des pages Web résident généralement dans le `Pages` dossier. Les composants qui ne sont pas des pages sont souvent placés dans le `Shared` dossier ou dans un dossier personnalisé ajouté au projet.
 
 ### <a name="namespaces"></a>Espaces de noms
 
-En règle générale, l’espace de noms d’un composant est dérivé de l’espace de noms racine de l’application et de l’emplacement (dossier) du composant dans l’application. Si l’espace de noms racine de l’application est `BlazorApp` et que le `Counter` composant se trouve dans le dossier *pages* :
+En règle générale, l’espace de noms d’un composant est dérivé de l’espace de noms racine de l’application et de l’emplacement (dossier) du composant dans l’application. Si l’espace de noms racine de l’application est `BlazorApp` et que le `Counter` composant se trouve dans le `Pages` dossier :
 
 * L' `Counter` espace de noms du composant est `BlazorApp.Pages` .
 * Le nom de type qualifié complet du composant est `BlazorApp.Pages.Counter` .
 
-Pour les dossiers personnalisés qui contiennent des composants, ajoutez une [`@using`][2] directive au composant parent ou au fichier *_Imports. Razor* de l’application. L’exemple suivant rend les composants du dossier *composants* disponibles :
+Pour les dossiers personnalisés qui contiennent des composants, ajoutez une [`@using`][2] directive au composant parent ou au fichier de l’application `_Imports.razor` . L’exemple suivant rend les composants du `Components` dossier disponibles :
 
 ```razor
 @using BlazorApp.Components
@@ -100,16 +100,16 @@ Les composants peuvent également être référencés à l’aide de leurs noms 
 
 L’espace de noms d’un composant créé avec Razor est basé sur (par ordre de priorité) :
 
-* [`@namespace`][8]désignation dans le Razor balisage de fichier (*. Razor*) ( `@namespace BlazorSample.MyNamespace` ).
+* [`@namespace`][8]désignation dans le Razor balisage de fichier ( `.razor` ) `@namespace BlazorSample.MyNamespace` .
 * Du projet `RootNamespace` dans le fichier projet ( `<RootNamespace>BlazorSample</RootNamespace>` ).
-* Nom du projet, pris à partir du nom de fichier du fichier projet (*. csproj*), et chemin d’accès de la racine du projet au composant. Par exemple, le Framework résout *{Project root}/pages/index.Razor* (*BlazorSample. csproj*) en espace de noms `BlazorSample.Pages` . Les composants suivent les règles de liaison de noms C#. Pour le `Index` composant dans cet exemple, les composants de l’étendue sont tous les composants :
-  * Dans le même dossier, *pages*.
+* Nom du projet, pris à partir du nom de fichier du fichier projet ( `.csproj` ) et chemin d’accès de la racine du projet au composant. Par exemple, le Framework résout `{PROJECT ROOT}/Pages/Index.razor` ( `BlazorSample.csproj` ) l’espace de noms `BlazorSample.Pages` . Les composants suivent les règles de liaison de noms C#. Pour le `Index` composant dans cet exemple, les composants de l’étendue sont tous les composants :
+  * Dans le même dossier, `Pages` .
   * Composants de la racine du projet qui ne spécifient pas explicitement un espace de noms différent.
 
 > [!NOTE]
 > La `global::` qualification n’est pas prise en charge.
 >
-> L’importation de composants avec des instructions [using](/dotnet/csharp/language-reference/keywords/using-statement) avec alias (par exemple, `@using Foo = Bar` ) n’est pas prise en charge.
+> L’importation de composants avec des instructions avec alias [`using`](/dotnet/csharp/language-reference/keywords/using-statement) (par exemple, `@using Foo = Bar` ) n’est pas prise en charge.
 >
 > Les noms partiellement qualifiés ne sont pas pris en charge. Par exemple, `@using BlazorSample` l’ajout et la référencement du `NavMenu` composant ( `NavMenu.razor` ) avec `<Shared.NavMenu></Shared.NavMenu>` ne sont pas pris en charge.
 
@@ -122,7 +122,7 @@ Razorles composants sont générés en tant que classes partielles. Razorles com
 
 L’exemple suivant montre le composant par défaut `Counter` avec un [`@code`][1] bloc dans une application générée à partir d’un Blazor modèle. Le balisage HTML, le Razor code et le code C# se trouvent dans le même fichier :
 
-*Counter. Razor*:
+`Pages/Counter.razor`:
 
 ```razor
 @page "/counter"
@@ -145,7 +145,7 @@ L’exemple suivant montre le composant par défaut `Counter` avec un [`@code`][
 
 Le `Counter` composant peut également être créé à l’aide d’un fichier code-behind avec une classe partielle :
 
-*Counter. Razor*:
+`Pages/Counter.razor`:
 
 ```razor
 @page "/counter"
@@ -157,7 +157,7 @@ Le `Counter` composant peut également être créé à l’aide d’un fichier c
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 ```
 
-*Counter.Razor.cs*:
+`Counter.razor.cs`:
 
 ```csharp
 namespace BlazorApp.Pages
@@ -189,7 +189,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 La [`@inherits`][6] directive peut être utilisée pour spécifier une classe de base pour un composant. L’exemple suivant montre comment un composant peut hériter d’une classe de base, `BlazorRocksBase` , pour fournir les propriétés et les méthodes du composant. La classe de base doit dériver de <xref:Microsoft.AspNetCore.Components.ComponentBase> .
 
-*Pages/BlazorRocks. Razor*:
+`Pages/BlazorRocks.razor`:
 
 ```razor
 @page "/BlazorRocks"
@@ -198,7 +198,7 @@ La [`@inherits`][6] directive peut être utilisée pour spécifier une classe de
 <h1>@BlazorRocksText</h1>
 ```
 
-*BlazorRocksBase.cs*:
+`BlazorRocksBase.cs`:
 
 ```csharp
 using Microsoft.AspNetCore.Components;
@@ -217,13 +217,13 @@ namespace BlazorSample
 
 Les composants peuvent inclure d’autres composants en les déclarant à l’aide de la syntaxe d’élément HTML. Le balisage pour l’utilisation d’un composant ressemble à une balise HTML où le nom de la balise est le type du composant.
 
-Le balisage suivant dans *index. Razor* rend une `HeadingComponent` instance de :
+Le balisage suivant dans `Pages/Index.razor` rend une `HeadingComponent` instance de :
 
 ```razor
 <HeadingComponent />
 ```
 
-*Composants/HeadingComponent. Razor*:
+`Components/HeadingComponent.razor`:
 
 [!code-razor[](index/samples_snapshot/HeadingComponent.razor)]
 
@@ -235,25 +235,25 @@ Si un composant contient un élément HTML avec une première lettre majuscule q
 
 Les composants peuvent recevoir des paramètres de routage du modèle de routage fourni dans la [`@page`][9] directive. Le routeur utilise des paramètres de routage pour remplir les paramètres de composant correspondants.
 
-*Pages/RouteParameter. Razor*:
+`Pages/RouteParameter.razor`:
 
 [!code-razor[](index/samples_snapshot/RouteParameter.razor?highlight=2,7-8)]
 
 Les paramètres facultatifs ne sont pas pris en charge [`@page`][9] . deux directives sont donc appliquées dans l’exemple précédent. La première permet de naviguer jusqu’au composant sans paramètre. La deuxième [`@page`][9] directive reçoit le `{text}` paramètre d’itinéraire et assigne la valeur à la `Text` propriété.
 
-La syntaxe de paramètre *catch-all* ( `*` / `**` ), qui capture le chemin d’accès dans plusieurs limites de dossiers, n’est **pas** prise en charge dans les Razor composants (*. Razor*).
+La syntaxe de paramètre *catch-all* ( `*` / `**` ), qui capture le chemin d’accès dans plusieurs limites de dossiers, n’est **pas** prise en charge dans les Razor composants ( `.razor` ).
 
 ### <a name="component-parameters"></a>Paramètres de composant
 
 Les composants peuvent avoir des *paramètres de composant*, qui sont définis à l’aide de propriétés publiques sur la classe de composant avec l' [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) attribut. Utilisez des attributs pour spécifier des arguments pour un composant dans le balisage.
 
-*Composants/ChildComponent. Razor*:
+`Components/ChildComponent.razor`:
 
 [!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=2,11-12)]
 
 Dans l’exemple suivant tiré de l’exemple d’application, le `ParentComponent` définit la valeur de la `Title` propriété de `ChildComponent` .
 
-*Pages/ParentComponent. Razor*:
+`Pages/ParentComponent.razor`:
 
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
 
@@ -266,7 +266,7 @@ Les composants peuvent définir le contenu d’un autre composant. Le composant 
 
 Dans l’exemple suivant, `ChildComponent` a une `ChildContent` propriété qui représente un <xref:Microsoft.AspNetCore.Components.RenderFragment> , qui représente un segment de l’interface utilisateur à restituer. La valeur de `ChildContent` est positionnée dans le balisage du composant où le contenu doit être rendu. La valeur de `ChildContent` est reçue du composant parent et rendue à l’intérieur du panneau de démarrage `panel-body` .
 
-*Composants/ChildComponent. Razor*:
+`Components/ChildComponent.razor`:
 
 [!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=3,14-15)]
 
@@ -275,7 +275,7 @@ Dans l’exemple suivant, `ChildComponent` a une `ChildContent` propriété qui 
 
 `ParentComponent`Dans l’exemple d’application, vous pouvez fournir du contenu pour le rendu de `ChildComponent` en plaçant le contenu à l’intérieur des `<ChildComponent>` balises.
 
-*Pages/ParentComponent. Razor*:
+`Pages/ParentComponent.razor`:
 
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=7-8)]
 
@@ -351,13 +351,13 @@ La <xref:Microsoft.AspNetCore.Components.ParameterAttribute.CaptureUnmatchedValu
 
 La position [`@attributes`][3] relative à la position des attributs d’élément est importante. Quand sont représentées [`@attributes`][3] sur l’élément, les attributs sont traités de droite à gauche (dernier à premier). Prenons l’exemple suivant d’un composant qui consomme un `Child` composant :
 
-*ParentComponent. Razor*:
+`ParentComponent.razor`:
 
 ```razor
 <ChildComponent extra="10" />
 ```
 
-*ChildComponent. Razor*:
+`ChildComponent.razor`:
 
 ```razor
 <div @attributes="AdditionalAttributes" extra="5" />
@@ -374,13 +374,13 @@ L' `Child` attribut du composant `extra` est défini à droite de [`@attributes`
 
 Dans l’exemple suivant, l’ordre de `extra` et [`@attributes`][3] est inversé dans le d' `Child` un composant `<div>` :
 
-*ParentComponent. Razor*:
+`ParentComponent.razor`:
 
 ```razor
 <ChildComponent extra="10" />
 ```
 
-*ChildComponent. Razor*:
+`ChildComponent.razor`:
 
 ```razor
 <div extra="5" @attributes="AdditionalAttributes" />
@@ -418,7 +418,7 @@ Les références de composant offrent un moyen de référencer une instance de c
 Lors du rendu du composant, le `loginDialog` champ est rempli avec l' `MyLoginDialog` instance du composant enfant. Vous pouvez ensuite appeler des méthodes .NET sur l’instance du composant.
 
 > [!IMPORTANT]
-> La `loginDialog` variable est remplie uniquement après le rendu du composant et sa sortie comprend l' `MyLoginDialog` élément. Jusqu’à ce stade, il n’y a rien à référencer. Pour manipuler des références de composants après la fin du rendu du composant, utilisez les [méthodes OnAfterRenderAsync ou OnAfterRender](xref:blazor/components/lifecycle#after-component-render).
+> La `loginDialog` variable est remplie uniquement après le rendu du composant et sa sortie comprend l' `MyLoginDialog` élément. Jusqu’à ce stade, il n’y a rien à référencer. Pour manipuler des références de composants après la fin du rendu du composant, utilisez les [ `OnAfterRenderAsync` `OnAfterRender` méthodes ou](xref:blazor/components/lifecycle#after-component-render).
 
 Pour référencer des composants dans une boucle, consultez [capturer des références à plusieurs composants enfants similaires (dotnet/aspnetcore #13358)](https://github.com/dotnet/aspnetcore/issues/13358).
 
@@ -706,7 +706,7 @@ Si `IsCompleted` est `false` , la case à cocher s’affiche comme suit :
 Pour plus d’informations, consultez <xref:mvc/views/razor>.
 
 > [!WARNING]
-> Certains attributs HTML, tels que [Aria](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons), ne fonctionnent pas correctement quand le type .net est `bool` . Dans ce cas, utilisez un `string` type au lieu d’un `bool` .
+> Certains attributs HTML, tels que [`aria-pressed`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons) , ne fonctionnent pas correctement quand le type .net est un `bool` . Dans ce cas, utilisez un `string` type au lieu d’un `bool` .
 
 ## <a name="raw-html"></a>HTML brut
 
@@ -762,9 +762,9 @@ Sortie rendue du code précédent :
 
 ## <a name="static-assets"></a>Les ressources statiques
 
-Blazorsuit la Convention de ASP.NET Core les applications qui placent des ressources statiques dans le [dossier racine Web (Wwwroot)](xref:fundamentals/index#web-root)du projet.
+Blazorrespecte la Convention de ASP.NET Core les applications qui placent des ressources statiques dans le [ `web root (wwwroot)` dossier](xref:fundamentals/index#web-root)du projet.
 
-Utilisez un chemin d’accès relatif à `/` la base () pour faire référence à la racine Web d’une ressource statique. Dans l’exemple suivant, *logo.png* se trouve physiquement dans le dossier *{Project root}/wwwroot/images* :
+Utilisez un chemin d’accès relatif à `/` la base () pour faire référence à la racine Web d’une ressource statique. Dans l’exemple suivant, `logo.png` se trouve physiquement dans le `{PROJECT ROOT}/wwwroot/images` dossier :
 
 ```razor
 <img alt="Company logo" src="/images/logo.png" />
@@ -776,17 +776,17 @@ Pour plus d’informations sur la définition du chemin d’accès de base d’u
 
 ## <a name="tag-helpers-arent-supported-in-components"></a>Les balises tag Helper ne sont pas prises en charge dans les composants
 
-Les [tag helpers](xref:mvc/views/tag-helpers/intro) ne sont pas pris en charge dans les Razor composants (fichiers *. Razor* ). Pour fournir des fonctionnalités semblables à tag Helper dans Blazor , créez un composant avec les mêmes fonctionnalités que le tag Helper et utilisez le composant à la place.
+[`Tag Helpers`](xref:mvc/views/tag-helpers/intro)ne sont pas pris en charge dans les Razor composants ( `.razor` fichiers). Pour fournir des fonctionnalités semblables à tag Helper dans Blazor , créez un composant avec les mêmes fonctionnalités que le tag Helper et utilisez le composant à la place.
 
 ## <a name="scalable-vector-graphics-svg-images"></a>Images SVG (Scalable Vector Graphics)
 
-Étant donné que Blazor le rendu des images HTML, prises en charge par le navigateur, y compris les images SVG (Scalable Vector Graphics) (*. svg*), est pris en charge via la `<img>` balise :
+Étant donné que Blazor le rendu des images HTML, prises en charge par le navigateur, y compris les images SVG (Scalable Vector Graphics) ( `.svg` ), est pris en charge via la `<img>` balise :
 
 ```html
 <img alt="Example image" src="some-image.svg" />
 ```
 
-De même, les images SVG sont prises en charge dans les règles CSS d’un fichier de feuille de style (*. CSS*) :
+De même, les images SVG sont prises en charge dans les règles CSS d’un fichier de feuille de style ( `.css` ) :
 
 ```css
 .my-element {
@@ -794,7 +794,7 @@ De même, les images SVG sont prises en charge dans les règles CSS d’un fichi
 }
 ```
 
-Toutefois, le balisage SVG en ligne n’est pas pris en charge dans tous les scénarios. Si vous placez une `<svg>` balise directement dans un fichier de composant (*. Razor*), le rendu d’image de base est pris en charge, mais de nombreux scénarios avancés ne sont pas encore pris en charge. Par exemple, les `<use>` balises ne sont pas actuellement respectées et [`@bind`][10] ne peuvent pas être utilisées avec certaines balises SVG. Pour plus d’informations, consultez [prise en charge SVG dans Blazor (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271).
+Toutefois, le balisage SVG en ligne n’est pas pris en charge dans tous les scénarios. Si vous placez une `<svg>` balise directement dans un fichier de composant ( `.razor` ), le rendu d’image de base est pris en charge, mais de nombreux scénarios avancés ne sont pas encore pris en charge. Par exemple, les `<use>` balises ne sont pas actuellement respectées et [`@bind`][10] ne peuvent pas être utilisées avec certaines balises SVG. Pour plus d’informations, consultez [prise en charge SVG dans Blazor (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
