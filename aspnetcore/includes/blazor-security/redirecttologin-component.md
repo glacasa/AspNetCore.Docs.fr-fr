@@ -1,4 +1,4 @@
-Le `RedirectToLogin` composant (*Shared/RedirectToLogin. Razor*) :
+Le `RedirectToLogin` composant ( `Shared/RedirectToLogin.razor` ) :
 
 * Gère la redirection des utilisateurs non autorisés vers la page de connexion.
 * Conserve l’URL actuelle à laquelle l’utilisateur tente d’accéder afin qu’il puisse être renvoyé à cette page si l’authentification réussit.

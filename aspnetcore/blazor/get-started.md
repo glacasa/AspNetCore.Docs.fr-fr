@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: c90c3bf7ccef420101c66fe04d579920209b066c
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 63fee0b6a3152640a5483c2a682eec7d04742145
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102334"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243601"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>Prise en main de ASP.NET CoreBlazor
 
@@ -70,7 +70,7 @@ Pour commencer à utiliser Blazor , suivez les instructions de votre choix d’o
 
    Pour plus d’informations sur les deux Blazor modèles d’hébergement, * Blazor webassembly* et * Blazor Server*, consultez <xref:blazor/hosting-models> .
 
-1. Ouvrez le dossier *WebApplication1* dans Visual Studio code.
+1. Ouvrez le dossier `WebApplication1` dans Visual Studio Code.
 
 1. L’IDE demande que vous ajoutiez des ressources pour générer et déboguer le projet. Sélectionnez **Oui**.
 
@@ -137,15 +137,15 @@ Plusieurs pages sont disponibles à partir des onglets de la barre latérale :
 * Compteur
 * Extraire les données
 
-Sur la page Counter, sélectionnez le bouton **Click me** pour incrémenter le compteur sans actualisation de la page. L’incrémentation d’un compteur dans une page Web nécessite normalement l’écriture de JavaScript, mais avec Blazor vous pouvez utiliser C#.
+Sur la page compteur, sélectionnez le bouton pour incrémenter le compteur sans actualiser la page. L’incrémentation d’un compteur dans une page Web nécessite normalement l’écriture de JavaScript, mais avec Blazor vous pouvez utiliser C#.
 
-*Pages/Counter.razor* :
+`Pages/Counter.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Counter1.razor?highlight=7,12-15)]
 
 Une demande de `/counter` dans le navigateur, comme spécifié par la `@page` directive en haut, fait en sorte que le `Counter` composant restitue son contenu. Les composants sont rendus dans une représentation en mémoire de l’arborescence de rendu qui peut ensuite être utilisée pour mettre à jour l’interface utilisateur de manière flexible et efficace.
 
-Chaque fois que le bouton **Click Me** est sélectionné :
+À chaque fois que le bouton est sélectionné :
 
 * L' `onclick` événement est déclenché.
 * La méthode `IncrementCount` est appelée.
@@ -156,7 +156,7 @@ Le runtime compare le nouveau contenu au contenu précédent et applique uniquem
 
 Ajoutez un composant à un autre composant à l’aide de la syntaxe HTML. Par exemple, ajoutez le `Counter` composant à la page d’accueil de l’application en ajoutant un `<Counter />` élément au `Index` composant.
 
-*Pages/Index.razor* :
+`Pages/Index.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Index1.razor?highlight=7)]
 
@@ -167,17 +167,17 @@ Les paramètres de composant sont spécifiés à l’aide d’attributs ou de [c
 * Ajoutez une propriété publique pour `IncrementAmount` avec un [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) attribut.
 * Modifiez la méthode `IncrementCount` pour utiliser `IncrementAmount` lorsque vous augmentez la valeur de `currentCount`.
 
-*Pages/Counter.razor* :
+`Pages/Counter.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Counter2.razor?highlight=12-13,17)]
 
 Spécifiez `IncrementAmount` dans l' `Index` élément du composant `<Counter>` à l’aide d’un attribut.
 
-*Pages/Index.razor* :
+`Pages/Index.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Index2.razor?highlight=7)]
 
-Exécutez l'application. Le `Index` composant a son propre compteur qui est incrémenté de dix chaque fois que le bouton **Click Me** est sélectionné. Le `Counter` composant (*Counter. Razor*) de `/counter` continue à être incrémenté d’une unité.
+Exécutez l'application. Le `Index` composant a son propre compteur qui est incrémenté de dix chaque fois que le bouton est sélectionné. Le `Counter` composant ( `Pages/Counter.razor` ) de `/counter` continue à être incrémenté d’une unité.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
