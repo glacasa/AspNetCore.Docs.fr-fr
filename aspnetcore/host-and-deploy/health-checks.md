@@ -5,7 +5,7 @@ description: Découvrez comment configurer des contrôles d’intégrité pour l
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/15/2019
+ms.date: 06/22/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: 00b2697a6b916718d9d0e01d1ea9f922eb2b5706
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: ca5540b4920bc92e968dcbc22a9407453041b01c
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074426"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292696"
 ---
 # <a name="health-checks-in-aspnet-core"></a>Contrôles d’intégrité dans ASP.NET Core
 
@@ -442,10 +442,10 @@ Unhealthy
 
 Dans certains scénarios d’hébergement, une paire de contrôles d’intégrité est utilisée pour distinguer deux états d’application :
 
-* L’application fonctionne mais n’est pas encore prête à recevoir des requêtes. Il s’agit de l’état de *readiness* qui indique que l’application est prête.
-* L’application fonctionne et répond aux requêtes. Il s’agit de l’état de *liveness* qui indique que l’application est active.
+* L’état de *préparation* indique si l’application s’exécute normalement mais n’est pas prête à recevoir des demandes.
+* L' *activité* indique si une application s’est arrêtée et doit être redémarrée.
 
-En général, la vérification qui permet de savoir si une application est prête implique un ensemble de vérifications plus complet permettant de déterminer si tous les sous-systèmes et toutes les ressources de l’application sont disponibles, ce qui est un processus assez long. La vérification qui permet de savoir si une application est active est simple et rapide, et vise à déterminer si l’application est disponible pour traiter les requêtes. Une fois que l’application est considérée comme prête, il est inutile de recommencer le test. En effet, le seul test nécessaire ensuite est celui visant à vérifier que l’application est active.
+Prenons l’exemple suivant : une application doit télécharger un fichier de configuration volumineux avant de pouvoir traiter les demandes. Nous ne voulons pas que l’application soit redémarrée si le téléchargement initial échoue parce que l’application peut réessayer de télécharger le fichier plusieurs fois. Nous utilisons une *sonde d’activité* pour décrire l’activité du processus, aucune vérification supplémentaire n’est effectuée. Nous voulons également empêcher l’envoi de demandes à l’application avant la réussite du téléchargement du fichier de configuration. Nous utilisons une *sonde de préparation* pour indiquer un État « non prêt » jusqu’à ce que le téléchargement aboutisse et que l’application soit prête à recevoir des demandes.
 
 L’exemple d’application contient un contrôle d’intégrité permettant de signaler l’achèvement d’une tâche de démarrage de longue durée dans un [service hébergé](xref:fundamentals/host/hosted-services). `StartupHostedServiceHealthCheck` expose la propriété `StartupTaskCompleted`, que le service hébergé peut définir sur `true` lorsque sa tâche de longue durée est terminée (*StartupHostedServiceHealthCheck.cs*) :
 
@@ -1155,10 +1155,10 @@ Unhealthy
 
 Dans certains scénarios d’hébergement, une paire de contrôles d’intégrité est utilisée pour distinguer deux états d’application :
 
-* L’application fonctionne mais n’est pas encore prête à recevoir des requêtes. Il s’agit de l’état de *readiness* qui indique que l’application est prête.
-* L’application fonctionne et répond aux requêtes. Il s’agit de l’état de *liveness* qui indique que l’application est active.
+* L’état de *préparation* indique si l’application s’exécute normalement mais n’est pas prête à recevoir des demandes.
+* L' *activité* indique si une application s’est arrêtée et doit être redémarrée.
 
-En général, la vérification qui permet de savoir si une application est prête implique un ensemble de vérifications plus complet permettant de déterminer si tous les sous-systèmes et toutes les ressources de l’application sont disponibles, ce qui est un processus assez long. La vérification qui permet de savoir si une application est active est simple et rapide, et vise à déterminer si l’application est disponible pour traiter les requêtes. Une fois que l’application est considérée comme prête, il est inutile de recommencer le test. En effet, le seul test nécessaire ensuite est celui visant à vérifier que l’application est active.
+Prenons l’exemple suivant : une application doit télécharger un fichier de configuration volumineux avant de pouvoir traiter les demandes. Nous ne voulons pas que l’application soit redémarrée si le téléchargement initial échoue parce que l’application peut réessayer de télécharger le fichier plusieurs fois. Nous utilisons une *sonde d’activité* pour décrire l’activité du processus, aucune vérification supplémentaire n’est effectuée. Nous voulons également empêcher l’envoi de demandes à l’application avant la réussite du téléchargement du fichier de configuration. Nous utilisons une *sonde de préparation* pour indiquer un État « non prêt » jusqu’à ce que le téléchargement aboutisse et que l’application soit prête à recevoir des demandes.
 
 L’exemple d’application contient un contrôle d’intégrité permettant de signaler l’achèvement d’une tâche de démarrage de longue durée dans un [service hébergé](xref:fundamentals/host/hosted-services). `StartupHostedServiceHealthCheck` expose la propriété `StartupTaskCompleted`, que le service hébergé peut définir sur `true` lorsque sa tâche de longue durée est terminée (*StartupHostedServiceHealthCheck.cs*) :
 

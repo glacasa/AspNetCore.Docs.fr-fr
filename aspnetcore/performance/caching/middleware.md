@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/middleware
-ms.openlocfilehash: 2ee75b1af9ffc23ff9ae1763059364de3ec8f426
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 93ac4e7e159f2b1f031e48a44c2297a741ba7b1c
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106505"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292644"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>Intergiciel de mise en cache des réponses dans ASP.NET Core
 
@@ -40,7 +40,10 @@ Dans `Startup.ConfigureServices` , ajoutez l’intergiciel de mise en cache des 
 
 Configurez l’application pour utiliser l’intergiciel avec la <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching*> méthode d’extension, qui ajoute l’intergiciel au pipeline de traitement des demandes dans `Startup.Configure` :
 
-[!code-csharp[](middleware/samples/3.x/ResponseCachingMiddleware/Startup.cs?name=snippet2&highlight=16)]
+[!code-csharp[](middleware/samples/3.x/ResponseCachingMiddleware/Startup.cs?name=snippet2&highlight=17)]
+
+> [!WARNING]
+> <xref:Owin.CorsExtensions.UseCors%2A>doit être appelé avant <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A> lors de l’utilisation de l' [intergiciel (middleware) cors](xref:security/cors).
 
 L’exemple d’application ajoute des en-têtes pour contrôler la mise en cache lors des requêtes suivantes :
 
@@ -102,7 +105,7 @@ L’utilisation d’une valeur unique égale à `*` dans fait `VaryByQueryKeys` 
 
 Le tableau suivant fournit des informations sur les en-têtes HTTP qui affectent la mise en cache des réponses.
 
-| Header | Détails |
+| En-tête | Détails |
 | ------ | ------- |
 | `Authorization` | La réponse n’est pas mise en cache si l’en-tête existe. |
 | `Cache-Control` | L’intergiciel (middleware) prend uniquement en compte les réponses de mise en cache marquées avec la `public` directive de cache. Contrôlez la mise en cache avec les paramètres suivants :<ul><li>âge maximal</li><li>Max-&#8224; obsolète</li><li>min-frais</li><li>must-revalidate</li><li>no-cache</li><li>non-Store</li><li>uniquement-en cas de mise en cache</li><li>private</li><li>public</li><li>s-maxage</li><li>proxy-revalider&#8225;</li></ul>&#8224;si aucune limite n’est spécifiée à `max-stale` , l’intergiciel n’entreprend aucune action.<br>&#8225;`proxy-revalidate` a le même effet que `must-revalidate` .<br><br>Pour plus d’informations, consultez [RFC 7231 : Request Cache-Control directives](https://tools.ietf.org/html/rfc7234#section-5.2.1). |
@@ -246,7 +249,7 @@ L’utilisation d’une valeur unique égale à `*` dans fait `VaryByQueryKeys` 
 
 Le tableau suivant fournit des informations sur les en-têtes HTTP qui affectent la mise en cache des réponses.
 
-| Header | Détails |
+| En-tête | Détails |
 | ------ | ------- |
 | `Authorization` | La réponse n’est pas mise en cache si l’en-tête existe. |
 | `Cache-Control` | L’intergiciel (middleware) prend uniquement en compte les réponses de mise en cache marquées avec la `public` directive de cache. Contrôlez la mise en cache avec les paramètres suivants :<ul><li>âge maximal</li><li>Max-&#8224; obsolète</li><li>min-frais</li><li>must-revalidate</li><li>no-cache</li><li>non-Store</li><li>uniquement-en cas de mise en cache</li><li>private</li><li>public</li><li>s-maxage</li><li>proxy-revalider&#8225;</li></ul>&#8224;si aucune limite n’est spécifiée à `max-stale` , l’intergiciel n’entreprend aucune action.<br>&#8225;`proxy-revalidate` a le même effet que `must-revalidate` .<br><br>Pour plus d’informations, consultez [RFC 7231 : Request Cache-Control directives](https://tools.ietf.org/html/rfc7234#section-5.2.1). |

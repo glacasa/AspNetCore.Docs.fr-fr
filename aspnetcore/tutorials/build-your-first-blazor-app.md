@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 2de33deccbb86bd810c4337f5aa105118de4d9b4
-ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
+ms.openlocfilehash: 892663a533a207df84b0fce9af259a7dc212bc9b
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/20/2020
-ms.locfileid: "85122150"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292774"
 ---
 # <a name="build-your-first-blazor-app"></a>Créer votre première Blazor application
 
@@ -143,7 +143,7 @@ Une [`@foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) boucle e
 
 Ajoutez un nouveau composant à l’application qui implémente une liste de tâches simple.
 
-1. Ajoutez un nouveau `Todo` Razor composant à l’application dans le `Pages` dossier. Si vous utilisez Visual Studio, cliquez avec le bouton droit sur le `Pages` dossier et sélectionnez **Ajouter**  >  **un nouvel élément**  >  ** Razor composant**. Nommez le fichier du composant `Todo.razor` . Dans d’autres environnements de développement, ajoutez un fichier vide au `Pages` dossier nommé `Todo.razor` .
+1. Ajoutez un nouveau `Todo` Razor composant à l’application dans le `Pages` dossier. Si vous utilisez Visual Studio, cliquez avec le bouton droit sur le `Pages` dossier et sélectionnez **Ajouter**  >  **un nouvel élément**  >  ** Razor composant**. Nommez le fichier du composant `Todo.razor` . Dans d’autres environnements de développement, ajoutez un fichier vide au `Pages` dossier nommé `Todo.razor` . Razorles noms de fichiers de composant requièrent une première lettre majuscule, donc confirmez que le `Todo` nom de fichier du composant commence par une lettre majuscule `T` .
 
 1. Fournissez le balisage initial pour le composant :
 
