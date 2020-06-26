@@ -1,11 +1,26 @@
 ---
-titre : Auteur : Description : monikerRange : ms. Author : ms. Custom : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: Écrire un intergiciel (middleware) ASP.NET Core personnalisé
+author: rick-anderson
+description: Découvrez comment écrire un intergiciel (middleware) ASP.NET Core personnalisé.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 5/18/2020
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: fundamentals/middleware/write
+ms.openlocfilehash: aeebc7d5a7cbfaaab6d48b8da76d35c47c2c552b
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407848"
 ---
 # <a name="write-custom-aspnet-core-middleware"></a>Écrire un intergiciel (middleware) ASP.NET Core personnalisé
 

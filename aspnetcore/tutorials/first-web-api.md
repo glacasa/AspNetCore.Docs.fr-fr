@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 2/25/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: 71ab0fc0a679acf540fa53fa2a9c8ba893b34edf
-ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.openlocfilehash: 63f91086a7e9d71add7f7a5d58d96f46fa76353c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84724352"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407783"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Didacticiel : créer une API Web avec ASP.NET Core
 
@@ -27,7 +29,7 @@ Ce tutoriel décrit les principes fondamentaux liés à la génération d’une 
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Dans ce tutoriel, vous allez apprendre à :
+Dans ce tutoriel, vous apprenez à effectuer les opérations suivantes :
 
 > [!div class="checklist"]
 > * Créer un projet d’API web.
@@ -512,7 +514,7 @@ Consultez [Didacticiel : appeler une API web ASP.net core avec JavaScript](xref
 
 ::: moniker range="< aspnetcore-3.0"
 
-Dans ce tutoriel, vous allez apprendre à :
+Dans ce tutoriel, vous apprenez à effectuer les opérations suivantes :
 
 > [!div class="checklist"]
 > * Créer un projet d’API web.

@@ -1,33 +1,35 @@
 ---
-title: Utiliser ASP.NET Core SignalR avec Blazor webassembly
+title: Utiliser ASP.NET Core SignalR avecBlazor WebAssembly
 author: guardrex
-description: Créer une application de conversation qui utilise ASP.NET Core SignalR avec Blazor webassembly.
+description: Créez une application de conversation qui utilise ASP.NET Core SignalR avec Blazor WebAssembly .
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 3f8aeec1e0471bab5034d1dcc8a42023f6b13c0d
-ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
+ms.openlocfilehash: 5a58e7ae28842e2e8a0f3bae8f47e252839903fe
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/20/2020
-ms.locfileid: "85122098"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408875"
 ---
-# <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Utiliser ASP.NET Core SignalR avec Blazor webassembly
+# <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Utiliser ASP.NET Core SignalR avecBlazor WebAssembly
 
 Par [Daniel Roth](https://github.com/danroth27) et [Luke Latham](https://github.com/guardrex)
 
-Ce didacticiel enseigne les bases de la création d’une application en temps réel à l’aide SignalR de avec Blazor webassembly. Vous allez apprendre à effectuer les actions suivantes :
+Ce didacticiel enseigne les bases de la création d’une application en temps réel à l’aide de SignalR avec Blazor WebAssembly . Vous allez apprendre à effectuer les actions suivantes :
 
 > [!div class="checklist"]
-> * Créer un Blazor projet d’application hébergée Webassembly
+> * Créer un Blazor WebAssembly projet d’application hébergée
 > * Ajouter la SignalR bibliothèque cliente
 > * Ajouter un SignalR Hub
 > * Ajouter des SignalR services et un point de terminaison pour le SignalR Hub
@@ -59,7 +61,7 @@ Ce didacticiel enseigne les bases de la création d’une application en temps r
 
 ---
 
-## <a name="create-a-hosted-blazor-webassembly-app-project"></a>Créer un Blazor projet d’application Webassembly hébergé
+## <a name="create-a-hosted-blazor-webassembly-app-project"></a>Créer un projet d’application hébergée Blazor WebAssembly
 
 Suivez les instructions de votre choix d’outils :
 
@@ -74,7 +76,7 @@ Suivez les instructions de votre choix d’outils :
 
 1. Tapez `BlazorSignalRApp` dans le champ **nom du projet** . Confirmez que l’entrée d' **emplacement** est correcte ou indiquez un emplacement pour le projet. Sélectionnez **Create** (Créer).
 
-1. Choisissez le modèle d' ** Blazor application webassembly** .
+1. Choisissez le modèle d' ** Blazor WebAssembly application** .
 
 1. Sous **avancé**, activez la case à cocher **ASP.net Core hébergé** .
 
@@ -100,7 +102,7 @@ Suivez les instructions de votre choix d’outils :
 
 1. Dans la barre latérale, sélectionnez application **Web et console**  >  **App**.
 
-1. Choisissez le modèle d' ** Blazor application webassembly** . Sélectionnez **Suivant**.
+1. Choisissez le modèle d' ** Blazor WebAssembly application** . Sélectionnez **Suivant**.
 
    Vérifiez les configurations suivantes :
 
@@ -221,7 +223,7 @@ Dans le `BlazorSignalRApp.Server` projet, créez un `Hubs` dossier (pluriel) et 
 
 1. Choisissez l’un des navigateurs, entrez un nom et un message, puis sélectionnez le bouton pour envoyer le message. Le nom et le message s’affichent instantanément sur les deux pages :
 
-   ![SignalRBlazorL’exemple d’application Webassembly est ouvert dans deux fenêtres de navigateur qui affichent les messages échangés.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![SignalRBlazor WebAssemblyl’exemple d’application est ouvert dans deux fenêtres de navigateur qui affichent les messages échangés.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    Devis : *Star Trek VI : le pays indécouvert* &copy; 1991 [primordial](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
@@ -239,7 +241,7 @@ Dans le `BlazorSignalRApp.Server` projet, créez un `Hubs` dossier (pluriel) et 
 
 1. Choisissez l’un des navigateurs, entrez un nom et un message, puis sélectionnez le bouton pour envoyer le message. Le nom et le message s’affichent instantanément sur les deux pages :
 
-   ![SignalRBlazorL’exemple d’application Webassembly est ouvert dans deux fenêtres de navigateur qui affichent les messages échangés.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![SignalRBlazor WebAssemblyl’exemple d’application est ouvert dans deux fenêtres de navigateur qui affichent les messages échangés.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    Devis : *Star Trek VI : le pays indécouvert* &copy; 1991 [primordial](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
@@ -251,7 +253,7 @@ Dans le `BlazorSignalRApp.Server` projet, créez un `Hubs` dossier (pluriel) et 
 
 1. Choisissez l’un des navigateurs, entrez un nom et un message, puis sélectionnez le bouton pour envoyer le message. Le nom et le message s’affichent instantanément sur les deux pages :
 
-   ![SignalRBlazorL’exemple d’application Webassembly est ouvert dans deux fenêtres de navigateur qui affichent les messages échangés.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![SignalRBlazor WebAssemblyl’exemple d’application est ouvert dans deux fenêtres de navigateur qui affichent les messages échangés.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    Devis : *Star Trek VI : le pays indécouvert* &copy; 1991 [primordial](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
@@ -268,7 +270,7 @@ Dans le `BlazorSignalRApp.Server` projet, créez un `Hubs` dossier (pluriel) et 
 
 1. Choisissez l’un des navigateurs, entrez un nom et un message, puis sélectionnez le bouton pour envoyer le message. Le nom et le message s’affichent instantanément sur les deux pages :
 
-   ![SignalRBlazorL’exemple d’application Webassembly est ouvert dans deux fenêtres de navigateur qui affichent les messages échangés.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![SignalRBlazor WebAssemblyl’exemple d’application est ouvert dans deux fenêtres de navigateur qui affichent les messages échangés.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    Devis : *Star Trek VI : le pays indécouvert* &copy; 1991 [primordial](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
@@ -279,7 +281,7 @@ Dans le `BlazorSignalRApp.Server` projet, créez un `Hubs` dossier (pluriel) et 
 Dans ce didacticiel, vous avez appris à :
 
 > [!div class="checklist"]
-> * Créer un Blazor projet d’application hébergée Webassembly
+> * Créer un Blazor WebAssembly projet d’application hébergée
 > * Ajouter la SignalR bibliothèque cliente
 > * Ajouter un SignalR Hub
 > * Ajouter des SignalR services et un point de terminaison pour le SignalR Hub

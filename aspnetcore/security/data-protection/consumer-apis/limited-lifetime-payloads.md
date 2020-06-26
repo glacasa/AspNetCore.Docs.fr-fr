@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/limited-lifetime-payloads
-ms.openlocfilehash: bc1597f75d8c5f786d46e59ac027d01ffca077c0
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d8c83ca46b1993af1f5e7985571ff012d90b1e01
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768609"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408368"
 ---
 # <a name="limit-the-lifetime-of-protected-payloads-in-aspnet-core"></a>Limiter la durée de vie des charges utiles protégées dans ASP.NET Core
 
@@ -26,11 +28,11 @@ Pour faciliter cette tâche pour les développeurs, le package [Microsoft. AspNe
 
 ## <a name="api-usage"></a>Utilisation des API
 
-L' `ITimeLimitedDataProtector` interface est l’interface principale pour la protection et la déprotection des charges utiles limitées dans le temps ou à l’expiration automatique. Pour créer une instance d’un `ITimeLimitedDataProtector`objet, vous avez d’abord besoin d’une instance d’un [IDataProtector](xref:security/data-protection/consumer-apis/overview) standard construit avec un objectif spécifique. Une fois `IDataProtector` l’instance disponible, appelez la `IDataProtector.ToTimeLimitedDataProtector` méthode d’extension pour obtenir un protecteur avec des fonctionnalités d’expiration intégrées.
+L' `ITimeLimitedDataProtector` interface est l’interface principale pour la protection et la déprotection des charges utiles limitées dans le temps ou à l’expiration automatique. Pour créer une instance d’un `ITimeLimitedDataProtector` objet, vous avez d’abord besoin d’une instance d’un [IDataProtector](xref:security/data-protection/consumer-apis/overview) standard construit avec un objectif spécifique. Une fois l' `IDataProtector` instance disponible, appelez la `IDataProtector.ToTimeLimitedDataProtector` méthode d’extension pour obtenir un protecteur avec des fonctionnalités d’expiration intégrées.
 
 `ITimeLimitedDataProtector`expose les méthodes d’extension et la surface d’API suivantes :
 
-* CreateProtector (String Purpose) : ITimeLimitedDataProtector : cette API est similaire à la `IDataProtectionProvider.CreateProtector` existante dans la mesure où elle peut être utilisée pour créer des [chaînes d’objectif](xref:security/data-protection/consumer-apis/purpose-strings) à partir d’un protecteur à durée limitée.
+* CreateProtector (String Purpose) : ITimeLimitedDataProtector : cette API est similaire à la existante `IDataProtectionProvider.CreateProtector` dans la mesure où elle peut être utilisée pour créer des [chaînes d’objectif](xref:security/data-protection/consumer-apis/purpose-strings) à partir d’un protecteur à durée limitée.
 
 * Protect (Byte [] texte en clair, expiration DateTimeOffset) : Byte []
 
@@ -44,7 +46,7 @@ L' `ITimeLimitedDataProtector` interface est l’interface principale pour la pr
 
 * Protect (chaîne de texte en clair) : chaîne
 
-En plus des méthodes principales `Protect` qui prennent uniquement le texte en clair, il existe de nouvelles surcharges qui permettent de spécifier la date d’expiration de la charge utile. La date d’expiration peut être spécifiée sous la forme d’une date `DateTimeOffset`absolue (par exemple,) ou sous la forme d’un temps relatif ( `TimeSpan`à partir de l’heure système actuelle, via un). Si une surcharge qui ne prend pas d’expiration est appelée, la charge utile est censée ne jamais expirer.
+En plus des méthodes principales `Protect` qui prennent uniquement le texte en clair, il existe de nouvelles surcharges qui permettent de spécifier la date d’expiration de la charge utile. La date d’expiration peut être spécifiée sous la forme d’une date absolue (par `DateTimeOffset` exemple,) ou sous la forme d’un temps relatif (à partir de l’heure système actuelle, via un `TimeSpan` ). Si une surcharge qui ne prend pas d’expiration est appelée, la charge utile est censée ne jamais expirer.
 
 * UnProtection (Byte [] protectedData, out DateTimeOffset expiration) : Byte []
 

@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 05/31/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: 17fc7fd2d65fd314d9f6f9530db5d511af248569
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 0c81dc2fd83cb9327dad46dab840d4352de89baf
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776589"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85409031"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>Développer des applications ASP.NET Core à l’aide d’un observateur de fichiers
 
@@ -102,13 +104,13 @@ public static int Product(int a, int b)
 }
 ```
 
-Enregistrez le fichier . La sortie de la console indique que `dotnet watch` a détecté un changement de fichier et a redémarré l’application.
+Enregistrez le fichier. La sortie de la console indique que `dotnet watch` a détecté un changement de fichier et a redémarré l’application.
 
 Vérifiez que `http://localhost:<port number>/api/math/product?a=4&b=5` retourne le résultat correct.
 
 ## <a name="run-tests-using-dotnet-watch"></a>Exécuter les tests à l’aide de `dotnet watch`
 
-1. Changez la méthode `Product` de *MathController.cs* pour qu’elle retourne à nouveau la somme. Enregistrez le fichier .
+1. Changez la méthode `Product` de *MathController.cs* pour qu’elle retourne à nouveau la somme. Enregistrez le fichier.
 1. Dans une interface de commande, accédez au dossier *WebAppTests*.
 1. Exécutez [dotnet restore](/dotnet/core/tools/dotnet-restore).
 1. Exécutez `dotnet watch test`. Sa sortie indique qu’un test a échoué et que l’observateur est en attente de changement de fichier :
@@ -118,7 +120,7 @@ Vérifiez que `http://localhost:<port number>/api/math/product?a=4&b=5` retourne
      Test Run Failed.
      ```
 
-1. Corrigez le code de la méthode `Product` afin qu’elle retourne le produit. Enregistrez le fichier .
+1. Corrigez le code de la méthode `Product` afin qu’elle retourne le produit. Enregistrez le fichier.
 
 `dotnet watch` détecte le changement de fichier et réexécute les tests. La sortie de la console indique que les tests ont réussi.
 

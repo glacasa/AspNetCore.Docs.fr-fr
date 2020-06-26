@@ -1,32 +1,34 @@
 ---
 title: Configurer ASP.NET CoreIdentity
 author: AdrienTorris
-description: Comprenez ASP.NET Core Identity valeurs par défaut et apprenez à configurer Identity des propriétés pour utiliser des valeurs personnalisées.
+description: Comprenez ASP.NET Core Identity valeurs par défaut et apprenez à configurer des Identity Propriétés pour utiliser des valeurs personnalisées.
 ms.author: riande
 ms.date: 02/11/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: b88f2627eabc536f2d3b8e677020a67bfd1a40ba
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 95c19b671602b45ba217dcb551110854cbbee359
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775646"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408966"
 ---
-# <a name="configure-aspnet-core-identity"></a>Configurer ASP.NET Core identité
+# <a name="configure-aspnet-core-identity"></a>Configurer ASP.NET CoreIdentity
 
-ASP.NET Core identité utilise des valeurs par défaut pour les paramètres tels que la stratégie de mot de passe, le verrouillage et la configuration des cookies. Ces paramètres peuvent être remplacés dans la `Startup` classe.
+ASP.NET Core Identity utilise les valeurs par défaut pour les paramètres tels que la stratégie de mot de passe, le verrouillage et la configuration des cookies. Ces paramètres peuvent être remplacés dans la `Startup` classe.
 
-## <a name="identity-options"></a>Options d’identité
+## <a name="identity-options"></a>IdentityOptions
 
-La classe [IdentityOptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) représente les options qui peuvent être utilisées pour configurer le système d’identité. `IdentityOptions`doit être défini **après** l' `AddIdentity` appel `AddDefaultIdentity`de ou de.
+La classe [IdentityOptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) représente les options qui peuvent être utilisées pour configurer le Identity système. `IdentityOptions`doit être défini **après** l’appel `AddIdentity` de ou de `AddDefaultIdentity` .
 
-### <a name="claims-identity"></a>Identité des revendications
+### <a name="claims-identity"></a>LégitimitéIdentity
 
 [IdentityOptions. ClaimsIdentity](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.claimsidentity) spécifie le [ClaimsIdentityOptions](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions) avec les propriétés indiquées dans le tableau suivant.
 
@@ -43,9 +45,9 @@ Le verrouillage est défini dans la méthode [PasswordSignInAsync](/dotnet/api/m
 
 [!code-csharp[](identity-configuration/sample/Areas/Identity/Pages/Account/Login.cshtml.cs?name=snippet&highlight=9)]
 
-Le code précédent est basé sur le `Login` modèle d’identité. 
+Le code précédent est basé sur le `Login` Identity modèle. 
 
-Les options de verrouillage sont `StartUp.ConfigureServices`définies dans :
+Les options de verrouillage sont définies dans `StartUp.ConfigureServices` :
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_lock)]
 
@@ -63,7 +65,7 @@ Une authentification réussie réinitialise le nombre d’échecs de tentatives 
 
 ### <a name="password"></a>Mot de passe
 
-Par défaut, l’identité requiert que les mots de passe contiennent un caractère majuscule, un caractère minuscule, un chiffre et un caractère non alphanumérique. Les mots de passe doivent comporter au moins six caractères. [PasswordOptions](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions) peut être défini dans `Startup.ConfigureServices`.
+Par défaut, Identity exige que les mots de passe contiennent un caractère majuscule, un caractère minuscule, un chiffre et un caractère non alphanumérique. Les mots de passe doivent comporter au moins six caractères. [PasswordOptions](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions) peut être défini dans `Startup.ConfigureServices` .
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -112,7 +114,7 @@ Par défaut, l’identité requiert que les mots de passe contiennent un caract�
 
 ### <a name="sign-in"></a>Connexion
 
-Le code suivant définit `SignIn` les paramètres (aux valeurs par défaut) :
+Le code suivant définit les `SignIn` paramètres (aux valeurs par défaut) :
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -143,7 +145,7 @@ Le code suivant définit `SignIn` les paramètres (aux valeurs par défaut) :
 |       [ChangeEmailTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changeemailtokenprovider)       |                                     Obtient ou définit le `ChangeEmailTokenProvider` utilisé pour générer les jetons utilisés dans les e-mails de confirmation de modification de courrier électronique.                                     |
 | [ChangePhoneNumberTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changephonenumbertokenprovider) |                                      Obtient ou définit le `ChangePhoneNumberTokenProvider` utilisé pour générer les jetons utilisés lors de la modification des numéros de téléphone.                                      |
 | [EmailConfirmationTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.emailconfirmationtokenprovider) |                                             Obtient ou définit le fournisseur de jetons utilisé pour générer les jetons utilisés dans les e-mails de confirmation de compte.                                              |
-|     [PasswordResetTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.passwordresettokenprovider)     | Obtient ou définit le [>\<TUser IUserTwoFactorTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactortokenprovider-1) utilisé pour générer les jetons utilisés dans les courriers électroniques de réinitialisation de mot de passe. |
+|     [PasswordResetTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.passwordresettokenprovider)     | Obtient ou définit le [IUserTwoFactorTokenProvider \<TUser> ](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactortokenprovider-1) utilisé pour générer les jetons utilisés dans les courriers électroniques de réinitialisation de mot de passe. |
 |                    [ProviderMap](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.providermap)                    |                Utilisé pour construire un [fournisseur de jetons utilisateur](/dotnet/api/microsoft.aspnetcore.identity.tokenproviderdescriptor) avec la clé utilisée comme nom du fournisseur.                 |
 
 ### <a name="user"></a>Utilisateur
@@ -159,7 +161,7 @@ Le code suivant définit `SignIn` les paramètres (aux valeurs par défaut) :
 
 ### <a name="cookie-settings"></a>Paramètres de cookie
 
-Configurez le cookie de `Startup.ConfigureServices`l’application dans. [ConfigureApplicationCookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) doit être appelé **après** l' `AddIdentity` appel `AddDefaultIdentity`de ou de.
+Configurez le cookie de l’application dans `Startup.ConfigureServices` . [ConfigureApplicationCookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) doit être appelé **après** l’appel `AddIdentity` de ou de `AddDefaultIdentity` .
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -187,10 +189,10 @@ Pour plus d’informations, consultez [CookieAuthenticationOptions](/dotnet/api/
 
 | Option | Description |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | Mode de compatibilité utilisé lors du hachage de nouveaux mots de passe. La valeur par défaut est <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3>. Le premier octet d’un mot de passe haché, appelé *marqueur de format*, spécifie la version de l’algorithme de hachage utilisé pour hacher le mot de passe. Lors de la vérification d’un mot de passe par <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> rapport à un hachage, la méthode sélectionne l’algorithme approprié en fonction du premier octet. Un client est en mesure de s’authentifier, quelle que soit la version de l’algorithme utilisée pour hacher le mot de passe. La définition du mode de compatibilité affecte le hachage de *nouveaux mots de passe*. |
-| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> | Nombre d’itérations utilisées pour hacher les mots de passe à l’aide de PBKDF2. Cette valeur est utilisée uniquement lorsque a <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> la valeur <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3>. La valeur doit être un entier positif et la valeur par `10000`défaut est. |
+| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | Mode de compatibilité utilisé lors du hachage de nouveaux mots de passe. La valeur par défaut est <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3>. Le premier octet d’un mot de passe haché, appelé *marqueur de format*, spécifie la version de l’algorithme de hachage utilisé pour hacher le mot de passe. Lors de la vérification d’un mot de passe par rapport à un hachage, la <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> méthode sélectionne l’algorithme approprié en fonction du premier octet. Un client est en mesure de s’authentifier, quelle que soit la version de l’algorithme utilisée pour hacher le mot de passe. La définition du mode de compatibilité affecte le hachage de *nouveaux mots de passe*. |
+| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> | Nombre d’itérations utilisées pour hacher les mots de passe à l’aide de PBKDF2. Cette valeur est utilisée uniquement lorsque <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> a la valeur <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> . La valeur doit être un entier positif et la valeur par défaut est `10000` . |
 
-Dans l’exemple suivant, a <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> la valeur `12000` dans `Startup.ConfigureServices`:
+Dans l’exemple suivant, <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> a la valeur `12000` dans `Startup.ConfigureServices` :
 
 ```csharp
 // using Microsoft.AspNetCore.Identity;

@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 04/06/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/partial-tag-helper
-ms.openlocfilehash: d3207969dfbeb9a81e0da88f38a38c6889bbfba9
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d92707ff06125a4b65f1ec18e402f5fe86547b5e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775867"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407913"
 ---
 # <a name="partial-tag-helper-in-aspnet-core"></a>Tag Helper Partial dans ASP.NET Core
 
@@ -57,7 +59,7 @@ Le balisage suivant utilise un chemin explicite indiquant que le fichier *_Produ
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Product.cshtml?name=snippet_Name)]
 
-## <a name="for"></a>for
+## <a name="for"></a>pour
 
 L’attribut `for` affecte un [ModelExpression](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.modelexpression) à évaluer par rapport au modèle actif. `ModelExpression` déduit la syntaxe `@Model.`. Par exemple, `for="Product"` peut être utilisé à la place de `for="@Model.Product"`. Pour substituer ce comportement d’inférence par défaut, utilisez le symbole `@` pour définir une expression inline.
 

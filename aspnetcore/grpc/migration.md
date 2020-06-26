@@ -7,17 +7,19 @@ ms.author: johluo
 ms.date: 09/25/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: grpc/migration
-ms.openlocfilehash: 1846195cc43aec703333e69f66380ddcabcf2ad4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 2f0cd5f224453ee7be16f8a1d10e383de2a0d426
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768820"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407250"
 ---
 # <a name="migrating-grpc-services-from-c-core-to-aspnet-core"></a>Migration des services gRPC de C Core vers ASP.NET Core
 
@@ -29,13 +31,13 @@ En raison de l’implémentation de la pile sous-jacente, certaines fonctionnali
 
 Dans la pile ASP.NET Core, les services gRPC, par défaut, sont créés avec une [durée de vie limitée](xref:fundamentals/dependency-injection#service-lifetimes). En revanche, gRPC C-Core est lié par défaut à un service avec une [durée de vie Singleton](xref:fundamentals/dependency-injection#service-lifetimes).
 
-Une durée de vie limitée permet à l’implémentation de service de résoudre d’autres services avec des durées de vie délimitées. Par exemple, une durée de vie délimitée peut `DbContext` également être résolue à partir du conteneur di via l’injection de constructeur. Utilisation de la durée de vie limitée :
+Une durée de vie limitée permet à l’implémentation de service de résoudre d’autres services avec des durées de vie délimitées. Par exemple, une durée de vie délimitée peut également être résolue `DbContext` à partir du conteneur di via l’injection de constructeur. Utilisation de la durée de vie limitée :
 
 * Une nouvelle instance de l’implémentation de service est construite pour chaque requête.
 * Il n’est pas possible de partager l’état entre les demandes via des membres d’instance sur le type d’implémentation.
 * L’objectif est de stocker les États partagés dans un service Singleton dans le conteneur DI. Les États partagés stockés sont résolus dans le constructeur de l’implémentation du service gRPC.
 
-Pour plus d’informations sur les durées de <xref:fundamentals/dependency-injection#service-lifetimes>vie des services, consultez.
+Pour plus d’informations sur les durées de vie des services, consultez <xref:fundamentals/dependency-injection#service-lifetimes> .
 
 ### <a name="add-a-singleton-service"></a>Ajouter un service Singleton
 
@@ -53,9 +55,9 @@ Toutefois, une implémentation de service avec une durée de vie Singleton n’e
 
 ## <a name="configure-grpc-services-options"></a>Configurer les options des services gRPC
 
-Dans les applications basées sur C-Core, les paramètres `grpc.max_receive_message_length` tels `grpc.max_send_message_length` que et sont `ChannelOption` configurés avec lors de [la construction de l’instance de serveur](https://grpc.io/grpc/csharp/api/Grpc.Core.Server.html#Grpc_Core_Server__ctor_System_Collections_Generic_IEnumerable_Grpc_Core_ChannelOption__).
+Dans les applications basées sur C-Core, les paramètres tels que `grpc.max_receive_message_length` et `grpc.max_send_message_length` sont configurés avec `ChannelOption` lors de [la construction de l’instance de serveur](https://grpc.io/grpc/csharp/api/Grpc.Core.Server.html#Grpc_Core_Server__ctor_System_Collections_Generic_IEnumerable_Grpc_Core_ChannelOption__).
 
-Dans ASP.NET Core, gRPC fournit la configuration par `GrpcServiceOptions` le biais du type. Par exemple, la taille maximale des messages entrants peut être configurée par le `AddGrpc`biais du service gRPC. L’exemple suivant modifie la valeur `MaxReceiveMessageSize` par défaut de 4 Mo à 16 Mo :
+Dans ASP.NET Core, gRPC fournit la configuration par le biais du `GrpcServiceOptions` type. Par exemple, la taille maximale des messages entrants peut être configurée par le biais du service gRPC `AddGrpc` . L’exemple suivant modifie la valeur par défaut `MaxReceiveMessageSize` de 4 Mo à 16 Mo :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -67,7 +69,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Pour plus d’informations sur la configuration <xref:grpc/configuration>, consultez.
+Pour plus d’informations sur la configuration, consultez <xref:grpc/configuration> .
 
 ## <a name="logging"></a>Journalisation
 
@@ -92,9 +94,9 @@ ASP.NET Core [intergiciel](xref:fundamentals/middleware/index) offre des fonctio
 
 * Sont utilisés pour construire un pipeline qui gère une demande gRPC.
 * Autorisez l’exécution du travail avant ou après le composant suivant dans le pipeline.
-* Fournir un accès `HttpContext`à :
-  * Dans l' `HttpContext` intergiciel (middleware), est un paramètre.
-  * Dans les intercepteurs, le `HttpContext` est accessible `ServerCallContext` à l’aide `ServerCallContext.GetHttpContext` du paramètre avec la méthode d’extension. Notez que cette fonctionnalité est spécifique aux intercepteurs s’exécutant dans ASP.NET Core.
+* Fournir un accès à `HttpContext` :
+  * Dans l’intergiciel (middleware), `HttpContext` est un paramètre.
+  * Dans les intercepteurs, le `HttpContext` est accessible à l’aide du `ServerCallContext` paramètre avec la `ServerCallContext.GetHttpContext` méthode d’extension. Notez que cette fonctionnalité est spécifique aux intercepteurs s’exécutant dans ASP.NET Core.
 
 différences entre l’intercepteur gRPC et l’intergiciel (middleware) ASP.NET Core :
 

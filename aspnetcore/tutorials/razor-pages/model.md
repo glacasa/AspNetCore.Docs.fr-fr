@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: d3f7d355625ce20a0cb45c785fbab259a5655c63
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 053e35e78b2bf58fded49c9a2860060d6a81c544
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652939"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408108"
 ---
 # <a name="part-2-add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>Partie 2, ajouter un modèle à une Razor application pages dans ASP.net Core
 

@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: 1b7b89b130f66c851bf01d0eb6d643e4b3676a1e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 97fe2f36aed4a2ac60a7ffc30ede5e682a838e5e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774221"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408693"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>Migrer d’ASP.NET Core 1.x vers la version 2.0
 
@@ -124,7 +126,7 @@ Dans les projets 1.x, l’ajout de fournisseurs de configuration à une applicat
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_1xStartup)]
 
-L’exemple précédent charge le `Configuration` membre avec les paramètres de configuration à partir de *appsettings.json* ainsi que celles que *appsettings.\< EnvironmentName\>.json* de fichier correspondant le `IHostingEnvironment.EnvironmentName` propriété. L’emplacement de ces fichiers est sur le même chemin que *Startup.cs*.
+L’exemple précédent charge le `Configuration` membre avec les paramètres de configuration de *appsettings.js* , ainsi que tout *appSettings. \<EnvironmentName\> fichier JSON* correspondant à la `IHostingEnvironment.EnvironmentName` propriété. L’emplacement de ces fichiers est sur le même chemin que *Startup.cs*.
 
 Dans les projets 2.0, le code de configuration réutilisable inhérent aux projets 1.x s’exécute en arrière-plan. Par exemple, les variables d’environnement et les paramètres de l’application sont chargés au démarrage. Le code équivalent *Startup.cs* est réduit à l’initialisation de `IConfiguration` avec l’instance injectée :
 
@@ -162,13 +164,13 @@ Dans les projets 2.0, déplacez l’appel de `SeedData.Initialize` vers la méth
 
 <a name="view-compilation"></a>
 
-## <a name="review-razor-view-compilation-setting"></a>Vérifier Razor le paramètre de compilation de la vue
+## <a name="review-razor-view-compilation-setting"></a>Vérifier le paramètre de compilation de la Razor vue
 
-La vitesse de démarrage d’application et la taille des bundles publiés ont une importance capitale pour vous. Pour ces raisons, [ Razor la compilation](xref:mvc/views/view-compilation) de l’affichage est activée par défaut dans ASP.net Core 2,0.
+La vitesse de démarrage d’application et la taille des bundles publiés ont une importance capitale pour vous. Pour ces raisons, la compilation de l' [ Razor affichage](xref:mvc/views/view-compilation) est activée par défaut dans ASP.net Core 2,0.
 
 L’affectation de la valeur true à la propriété `MvcRazorCompileOnPublish` n’est plus nécessaire. Vous pouvez supprimer la propriété du fichier *.csproj*, sauf si vous désactivez la compilation des vues.
 
-Quand vous ciblez .NET Framework, vous devez toujours faire référence explicitement à [Microsoft. AspNetCore.RazorMvc. ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation)Package NuGet ViewCompilation dans votre fichier *. csproj* :
+Quand vous ciblez .NET Framework, vous devez toujours faire référence explicitement à [Microsoft. AspNetCore. Mvc. Razor ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation)Package NuGet ViewCompilation dans votre fichier *. csproj* :
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App.csproj?range=15)]
 
@@ -196,9 +198,9 @@ Si vous utilisez le SDK Application Insights directement, continuez à le faire.
 
 <a name="auth-and-identity"></a>
 
-## <a name="adopt-authenticationidentity-improvements"></a>Adopter l’authentificationIdentity /les améliorations
+## <a name="adopt-authenticationidentity-improvements"></a>Adopter l’authentification/les Identity améliorations
 
-ASP.NET Core 2,0 dispose d’un nouveau modèle d’authentification et d’un certain nombre de Identitymodifications significatives apportées à ASP.net core. Si vous avez créé votre projet avec des comptes d’utilisateur individuels activés, ou si vous avez Identityajouté manuellement l’authentification ou, consultez [migrer l’authentification et Identity vers ASP.net Core 2,0](xref:migration/1x-to-2x/identity-2x).
+ASP.NET Core 2,0 dispose d’un nouveau modèle d’authentification et d’un certain nombre de modifications significatives apportées à ASP.NET Core Identity . Si vous avez créé votre projet avec des comptes d’utilisateur individuels activés, ou si vous avez ajouté manuellement l’authentification ou Identity , consultez [migrer l’authentification et Identity vers ASP.net Core 2,0](xref:migration/1x-to-2x/identity-2x).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

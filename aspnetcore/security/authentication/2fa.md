@@ -8,17 +8,19 @@ ms.date: 09/22/2018
 ms.custom: mvc, seodec18
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/2fa
-ms.openlocfilehash: e33f22356de983c8c4e0211822d5027a33b48de6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 032650296cfdcc4fef632c6a6a9ce2b56db6a6df
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775828"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408576"
 ---
 # <a name="two-factor-authentication-with-sms-in-aspnet-core"></a>Authentification à deux facteurs avec SMS dans ASP.NET Core
 
@@ -49,7 +51,7 @@ Créez un compte SMS, par exemple, à partir de [Twilio](https://www.twilio.com/
 
 Dans les paramètres de votre compte, accédez à **sensibles** et copiez-le avec votre **mot de passe**.
 
-Nous stockerons ces valeurs ultérieurement dans avec l’outil secret-Manager dans les clés `SMSAccountIdentification` et `SMSAccountPassword`.
+Nous stockerons ces valeurs ultérieurement dans avec l’outil secret-Manager dans les clés `SMSAccountIdentification` et `SMSAccountPassword` .
 
 #### <a name="specifying-senderid--originator"></a>Spécification de SenderID/Originator
 
@@ -57,7 +59,7 @@ Nous stockerons ces valeurs ultérieurement dans avec l’outil secret-Manager d
 
 **ASPSMS :** Dans le menu déverrouiller les expéditeurs, déverrouillez un ou plusieurs expéditeurs ou choisissez un expéditeur alphanumérique (non pris en charge par tous les réseaux).
 
-Nous stockerons cette valeur ultérieurement avec l’outil secret-Manager dans la clé `SMSAccountFrom`.
+Nous stockerons cette valeur ultérieurement avec l’outil secret-Manager dans la clé `SMSAccountFrom` .
 
 ### <a name="provide-credentials-for-the-sms-service"></a>Fournir les informations d’identification du service SMS
 
@@ -108,7 +110,7 @@ Ouvrez le fichier de vue *views/Manage/index. cshtml* Razor et supprimez les car
 
 ![Vue du registre de l’application Web ouverte dans Microsoft Edge](2fa/_static/login2fa1.png)
 
-* Appuyez sur votre nom d’utilisateur, ce qui active `Index` la méthode d’action dans gérer le contrôleur. Cliquez ensuite sur le lien numéro de téléphone **Ajouter** .
+* Appuyez sur votre nom d’utilisateur, ce qui active la `Index` méthode d’action dans gérer le contrôleur. Cliquez ensuite sur le lien numéro de téléphone **Ajouter** .
 
 ![Gérer l’affichage-Appuyez sur le lien « ajouter »](2fa/_static/login2fa2.png)
 
@@ -152,7 +154,7 @@ Le verrouillage de compte est recommandé avec 2FA. Une fois qu’un utilisateur
 
 [!code-csharp[](2fa/sample/Web2FA/Startup.cs?name=snippet2&highlight=13-17)]
 
-Vérifiez que [PasswordSignInAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.passwordsigninasync) définit `lockoutOnFailure` sur `true`:
+Vérifiez que [PasswordSignInAsync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.passwordsigninasync) définit `lockoutOnFailure` sur `true` :
 
 ```csharp
 var result = await _signInManager.PasswordSignInAsync(

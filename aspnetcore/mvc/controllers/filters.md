@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 02/04/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 068b471c1f5fa5f0ca87dd7b028badf70f8c1b67
-ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
+ms.openlocfilehash: 7fe33a620e43603388dd0cacb3ea42f5b5adc40f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/20/2020
-ms.locfileid: "85122163"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408290"
 ---
 # <a name="filters-in-aspnet-core"></a>Filtres dans ASP.NET Core
 
@@ -184,12 +186,12 @@ Voici un exemple qui illustre l’ordre dans lequel les méthodes de filtre sont
 
 | Séquence | Étendue de filtre | Méthode de filtre |
 |:--------:|:------------:|:-------------:|
-| 1 | Globale | `OnActionExecuting` |
+| 1 | Global | `OnActionExecuting` |
 | 2 | Contrôleur ou Razor page| `OnActionExecuting` |
 | 3 | Méthode | `OnActionExecuting` |
 | 4 | Méthode | `OnActionExecuted` |
 | 5 | Contrôleur ou Razor page | `OnActionExecuted` |
-| 6 | Globale | `OnActionExecuted` |
+| 6 | Global | `OnActionExecuted` |
 
 ### <a name="controller-level-filters"></a>Filtres au niveau du contrôleur
 
@@ -728,12 +730,12 @@ Voici un exemple qui illustre l’ordre dans lequel les méthodes de filtre sont
 
 | Séquence | Étendue de filtre | Méthode de filtre |
 |:--------:|:------------:|:-------------:|
-| 1 | Globale | `OnActionExecuting` |
+| 1 | Global | `OnActionExecuting` |
 | 2 | Contrôleur | `OnActionExecuting` |
 | 3 | Méthode | `OnActionExecuting` |
 | 4 | Méthode | `OnActionExecuted` |
 | 5 | Contrôleur | `OnActionExecuted` |
-| 6 | Globale | `OnActionExecuted` |
+| 6 | Global | `OnActionExecuted` |
 
 Cette séquence montre que :
 
@@ -790,8 +792,8 @@ Prenez en compte les mêmes 3 filtres d’actions indiqués dans l’exemple pr�
 |:--------:|:------------:|:-----------------:|:-------------:|
 | 1 | Méthode | 0 | `OnActionExecuting` |
 | 2 | Contrôleur | 1  | `OnActionExecuting` |
-| 3 | Globale | 2  | `OnActionExecuting` |
-| 4 | Globale | 2  | `OnActionExecuted` |
+| 3 | Global | 2  | `OnActionExecuting` |
+| 4 | Global | 2  | `OnActionExecuted` |
 | 5 | Contrôleur | 1  | `OnActionExecuted` |
 | 6 | Méthode | 0  | `OnActionExecuted` |
 

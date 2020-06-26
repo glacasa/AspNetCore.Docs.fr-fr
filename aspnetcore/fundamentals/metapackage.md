@@ -8,23 +8,25 @@ ms.custom: mvc
 ms.date: 10/25/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/metapackage
-ms.openlocfilehash: fe9e2f8f8970f9e5c182b68b2660c35cd09b97b2
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 32f324000dfe38eb578a580d7a315a1a687a094d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775542"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407939"
 ---
 # <a name="microsoftaspnetcoreall-metapackage-for-aspnet-core-20"></a>Métapackage Microsoft.AspNetCore.All pour ASP.NET Core 2.0
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Le `Microsoft.AspNetCore.All` package n’est pas inclus dans ASP.net Core 3,0 et versions ultérieures. Pour plus d’informations, consultez [ce problème GitHub](https://github.com/aspnet/Announcements/issues/314).
+Le `Microsoft.AspNetCore.All` package n’est pas inclus dans ASP.NET Core 3,0 et versions ultérieures. Pour plus d’informations, consultez [ce problème GitHub](https://github.com/aspnet/Announcements/issues/314).
 
 ::: moniker-end
 

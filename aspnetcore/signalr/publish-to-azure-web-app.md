@@ -1,5 +1,5 @@
 ---
-title: Publier une application SignalR ASP.NET Core sur Azure App service
+title: Publier une SignalR application ASP.net Core sur Azure App service
 author: bradygaster
 description: Découvrez comment publier une application ASP.NET Core SignalR sur Azure App service.
 monikerRange: '>= aspnetcore-2.1'
@@ -8,26 +8,28 @@ ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/publish-to-azure-web-app
-ms.openlocfilehash: a5d19c1519c69351605e8da1d8fa70bff784efd4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d3f48b3171012b03fcaf7665c2089b27d37bbeca
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777187"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408836"
 ---
-# <a name="publish-an-aspnet-core-signalr-app-to-azure-app-service"></a>Publier une application ASP.NET Core Signalr sur Azure App Service
+# <a name="publish-an-aspnet-core-signalr-app-to-azure-app-service"></a>Publier une SignalR application ASP.net Core sur Azure App service
 
 Par [Brady Gaster](https://twitter.com/bradygaster)
 
 [Azure App service](/azure/app-service/app-service-web-overview) est un service de plateforme [Microsoft Cloud Computing](https://azure.microsoft.com/) pour héberger des applications web, y compris ASP.net core.
 
 > [!NOTE]
-> Cet article fait référence à la publication d’une application Signalr ASP.NET Core à partir de Visual Studio. Pour plus d’informations, consultez [service signalr pour Azure](https://azure.microsoft.com/services/signalr-service).
+> Cet article fait référence à la publication d’une SignalR application ASP.net core à partir de Visual Studio. Pour plus d’informations, consultez [ SignalR service pour Azure](https://azure.microsoft.com/services/signalr-service).
 
 ## <a name="publish-the-app"></a>Publier l’application
 
@@ -48,13 +50,13 @@ Cet article traite de la publication à l’aide des outils de Visual Studio. Vi
    | **Groupe de ressources** | Groupe de ressources associées auxquelles l’application appartient. |
    | **Plan d’hébergement**   | Plan de tarification pour l’application Web. |
 
-1. Sélectionnez le **service SignalR Azure** dans la liste déroulante**Ajouter** des **dépendances** > :
+1. Sélectionnez le ** SignalR service Azure** dans la liste déroulante Ajouter des **dépendances**  >  **Add** :
 
    ![Zone dépendances présentant la sélection du SignalR service Azure dans la liste déroulante Ajouter](publish-to-azure-web-app/_static/signalr-service-dependency.png)
 
-1. Dans la boîte de dialogue **service Azure SignalR ** , sélectionnez **créer une SignalR nouvelle instance de service Azure**.
+1. Dans la boîte de dialogue ** SignalR service Azure** , sélectionnez **créer une nouvelle SignalR instance de service Azure**.
 
-1. Fournissez un **nom**, un **groupe de ressources**et un **emplacement**. Revenez à la boîte de dialogue **service Azure SignalR ** , puis sélectionnez **Ajouter**.
+1. Fournissez un **nom**, un **groupe de ressources**et un **emplacement**. Revenez à la boîte de dialogue ** SignalR service Azure** , puis sélectionnez **Ajouter**.
 
 Visual Studio effectue les tâches suivantes :
 
@@ -63,24 +65,24 @@ Visual Studio effectue les tâches suivantes :
 * Publie l’application.
 * Lance un navigateur, qui charge l’application Web.
 
-Le format de l’URL de l’application `{APP SERVICE NAME}.azurewebsites.net`est. Par exemple, une application nommée `SignalRChatApp` a une URL de `https://signalrchatapp.azurewebsites.net`.
+Le format de l’URL de l’application est `{APP SERVICE NAME}.azurewebsites.net` . Par exemple, une application nommée `SignalRChatApp` a une URL de `https://signalrchatapp.azurewebsites.net` .
 
 Si une erreur de *passerelle HTTP 502,2-incorrecte* se produit lors du déploiement d’une application qui cible une version préliminaire de .net Core, consultez [déployer ASP.net core version préliminaire dans Azure App service](xref:host-and-deploy/azure-apps/index#deploy-aspnet-core-preview-release-to-azure-app-service) pour la résoudre.
 
 ## <a name="configure-the-app-in-azure-app-service"></a>Configurer l’application dans Azure App Service
 
 > [!NOTE]
-> *Cette section s’applique uniquement aux applications qui n’utilisent SignalR pas le service Azure.*
+> *Cette section s’applique uniquement aux applications qui n’utilisent pas le SignalR service Azure.*
 >
-> Si l’application utilise le service SignalR Azure, le App service ne nécessite pas la configuration de l’affinité application Request Routing (arr) et des sockets Web décrits dans cette section. Les clients connectent leurs Sockets Web au SignalR service Azure, et non directement à l’application.
+> Si l’application utilise le SignalR service Azure, le App service ne nécessite pas la configuration de l’affinité application Request Routing (arr) et des sockets Web décrits dans cette section. Les clients connectent leurs Sockets Web au SignalR service Azure, et non directement à l’application.
 
-Pour les applications hébergées sans SignalR le service Azure, activez :
+Pour les applications hébergées sans le SignalR service Azure, activez :
 
 * [Affinité arr](https://azure.github.io/AppService/2016/05/16/Disable-Session-affinity-cookie-(ARR-cookie)-for-Azure-web-apps.html) pour acheminer les demandes d’un utilisateur vers la même instance de App service. La valeur par défaut est **on**.
 * [WebSockets](xref:fundamentals/websockets) pour permettre au transport Web Sockets de fonctionner. La valeur par défaut est **off**.
 
 1. Dans le Portail Azure, accédez à l’application Web dans **app services**.
-1. Ouvrez **Configuration** > **paramètres généraux**de configuration.
+1. Ouvrez **Configuration**  >  **paramètres généraux**de configuration.
 1. Affectez la valeur **on**à **Web Sockets** .
 1. Vérifiez que l' **affinité arr** est définie sur **on**.
 
@@ -90,7 +92,7 @@ Les sockets Web et les autres transports sont limités en fonction du plan de Ap
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* [Qu’est- SignalR ce que le service Azure ?](/azure/azure-signalr/signalr-overview)
+* [Qu’est-ce que le SignalR service Azure ?](/azure/azure-signalr/signalr-overview)
 * <xref:signalr/introduction>
 * <xref:host-and-deploy/index>
 * <xref:tutorials/publish-to-azure-webapp-using-vs>

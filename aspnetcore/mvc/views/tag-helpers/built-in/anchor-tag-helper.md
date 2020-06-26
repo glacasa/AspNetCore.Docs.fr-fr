@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 10/13/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: 142ad62bbbc25fc5390331b253a6173f064ef162
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: af0f07a0f50a79f25b6a14459402f9dd8b59dae2
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773963"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408251"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>Tag Helper Ancre dans ASP.NET Core
 
@@ -179,7 +181,7 @@ Les balises de hachage sont utiles lors de la création des applications côté 
 
 L’attribut [asp-area](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area*) définit le nom de la zone utilisé pour définir l’itinéraire approprié. Les exemples suivants décrivent la façon dont l’attribut `asp-area` entraîne un remappage des itinéraires.
 
-#### <a name="usage-in-razor-pages"></a>Utilisation dans Razor les pages
+#### <a name="usage-in-razor-pages"></a>Utilisation dans les Razor pages
 
 RazorLes zones de pages sont prises en charge dans ASP.NET Core 2,1 ou version ultérieure.
 
@@ -195,7 +197,7 @@ Considérez la hiérarchie de répertoires suivante :
         * *Index.cshtml.cs*
   * **Pages**
 
-Le balisage pour référencer la page d' *index* Razor de la zone *sessions* est :
+Le balisage pour référencer la page d' *index* de la zone *sessions* Razor est :
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAreaRazorPages)]
 
@@ -206,7 +208,7 @@ Code HTML généré :
 ```
 
 > [!TIP]
-> Pour prendre en charge les Razor zones dans une application de pages, effectuez l' `Startup.ConfigureServices`une des opérations suivantes dans :
+> Pour prendre en charge les zones dans une Razor application de pages, effectuez l’une des opérations suivantes dans `Startup.ConfigureServices` :
 >
 > * Définir la [version de compatibilité](xref:mvc/compatibility-version) sur 2.1 ou au-dessus.
 > * Définir la propriété [RazorPagesOptions.AllowAreas](xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.AllowAreas*) sur `true`:
@@ -241,7 +243,7 @@ Code HTML généré :
 ```
 
 > [!TIP]
-> Pour prendre en charge les zones dans une application MVC, le modèle de routage doit inclure une référence à la zone si elle existe. Ce modèle est représenté par le deuxième paramètre de l' `routes.MapRoute` appel de méthode dans *Startup. configure*:
+> Pour prendre en charge les zones dans une application MVC, le modèle de routage doit inclure une référence à la zone si elle existe. Ce modèle est représenté par le deuxième paramètre de l' `routes.MapRoute` appel de la méthode dans *Startup.Configurer*:
 >
 > [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=5)]
 
@@ -273,9 +275,9 @@ Code HTML généré :
 
 ### <a name="asp-page"></a>asp-page
 
-L’attribut [asp-page](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*) est utilisé avec Razor les pages. Utilisez-le pour définir la valeur d’attribut `href` d’une balise d’ancrage sur une page spécifique. En ajoutant une barre oblique (« / ») comme préfixe au nom de la page, vous créez l’URL.
+L’attribut [asp-page](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*) est utilisé avec les Razor pages. Utilisez-le pour définir la valeur d’attribut `href` d’une balise d’ancrage sur une page spécifique. En ajoutant une barre oblique (« / ») comme préfixe au nom de la page, vous créez l’URL.
 
-L’exemple suivant pointe vers la Razor page participant :
+L’exemple suivant pointe vers la page participant Razor :
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspPage)]
 
@@ -297,7 +299,7 @@ Code HTML généré :
 
 ### <a name="asp-page-handler"></a>asp-page-handler
 
-L’attribut [asp-page-Handler](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*) est utilisé avec Razor les pages. Il est destiné à la liaison à des gestionnaires de page spécifiques.
+L’attribut [asp-page-Handler](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*) est utilisé avec les Razor pages. Il est destiné à la liaison à des gestionnaires de page spécifiques.
 
 Prenons le gestionnaire de page suivant :
 

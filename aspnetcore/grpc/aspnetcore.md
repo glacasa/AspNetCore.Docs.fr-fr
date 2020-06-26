@@ -7,17 +7,19 @@ ms.author: johluo
 ms.date: 09/03/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: grpc/aspnetcore
-ms.openlocfilehash: fa38ec9f9cf882b1a62f74879b7d49706ee150ce
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 0d05a6dcaf6677e71181d522a9f501051ec34f9d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452380"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407549"
 ---
 # <a name="grpc-services-with-aspnet-core"></a>Services gRPC avec ASP.NET Core
 
@@ -88,7 +90,7 @@ Kestrel [prend en charge http/2](xref:fundamentals/servers/kestrel#http2-support
 
 Les points de terminaison Kestrel utilisés pour gRPC doivent être sécurisés avec TLS. En cours de développement, un point de terminaison sécurisé avec TLS est automatiquement créé `https://localhost:5001` lorsque le certificat de développement ASP.net Core est présent. Aucune configuration n'est requise. Un `https` préfixe vérifie que le point de terminaison Kestrel utilise TLS.
 
-En production, TLS doit être configuré de manière explicite. Dans l’exemple *appSettings. JSON* suivant, un point de terminaison http/2 sécurisé avec TLS est fourni :
+En production, TLS doit être configuré de manière explicite. Dans l'appsettings.jssuivant, un point *de* terminaison http/2 sécurisé avec TLS est fourni :
 
 [!code-json[](~/grpc/aspnetcore/sample/appsettings.json?highlight=4)]
 

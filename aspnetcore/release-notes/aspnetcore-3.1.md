@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 02/12/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: 6a03e35495e2ae545dc0a3cdd38578b433d8df6b
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 92804d168381526100ddb8a368f71d201bd4cad9
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102579"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407666"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>Nouveautés de ASP.NET Core 3,1
 
@@ -37,7 +39,7 @@ Dans Blazor avec ASP.NET Core 3,0, les composants étaient rendus dans des pages
 
 Le programme d’assistance HTML reste pris en charge dans ASP.NET Core 3,1, mais le tag Helper Component est recommandé.
 
-BlazorLes applications serveur peuvent désormais passer des paramètres à des composants de niveau supérieur lors du rendu initial. Auparavant, vous pouviez uniquement passer des paramètres à un composant de niveau supérieur avec [RenderMode. static](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static). Avec cette version, [RenderMode. Server](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server) et [RenderMode. ServerPrerendered](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered) sont pris en charge. Toute valeur de paramètre spécifiée est sérialisée au format JSON et incluse dans la réponse initiale.
+Blazor Serverles applications peuvent désormais passer des paramètres à des composants de niveau supérieur pendant le rendu initial. Auparavant, vous pouviez uniquement passer des paramètres à un composant de niveau supérieur avec [RenderMode. static](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static). Avec cette version, [RenderMode. Server](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server) et [RenderMode. ServerPrerendered](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered) sont pris en charge. Toute valeur de paramètre spécifiée est sérialisée au format JSON et incluse dans la réponse initiale.
 
 Par exemple, prérendez un `Counter` composant avec un volume d’incrément ( `IncrementAmount` ) :
 

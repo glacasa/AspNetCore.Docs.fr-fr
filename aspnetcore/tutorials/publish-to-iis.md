@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 10/03/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/publish-to-iis
-ms.openlocfilehash: aa79ce604539b4f09d6f17d4f43da28a6b615f53
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 837a66ef36f1394df87d56132e146ef23a5d5659
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774572"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407887"
 ---
 # <a name="publish-an-aspnet-core-app-to-iis"></a>Publier une application ASP.NET Core sur IIS
 
@@ -65,9 +67,9 @@ Téléchargez le programme d’installation à l’aide du lien suivant :
 
 1. Spécifiez le **Nom du site** et définissez le **Chemin physique** sur le dossier de déploiement de l’application que vous avez créé. Spécifiez la configuration **Liaison** et créez le site web en sélectionnant **OK**.
 
-## <a name="create-an-aspnet-core-razor-pages-app"></a>Créer une application Razor Pages ASP.NET Core
+## <a name="create-an-aspnet-core-razor-pages-app"></a>Créer une Razor application ASP.net Core pages
 
-Suivez le tutoriel <xref:getting-started> pour créer une application Razor Pages.
+Suivez le <xref:getting-started> didacticiel pour créer une Razor application pages.
 
 ## <a name="publish-and-deploy-the-app"></a>Publier et déployer l’application
 
@@ -76,7 +78,7 @@ Suivez le tutoriel <xref:getting-started> pour créer une application Razor Page
 * L’application est publiée dans un dossier.
 * Le contenu du dossier est déplacé vers le dossier du site IIS (le **chemin physique** du site dans le gestionnaire IIS).
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Cliquez avec le bouton droit sur le projet dans **l’Explorateur de solutions**, puis sélectionnez **Publier**.
 1. Dans la boîte de dialogue **Choisir une cible de publication**, sélectionnez l’option de publication **Dossier**.

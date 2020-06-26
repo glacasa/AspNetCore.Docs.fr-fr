@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: index
-ms.openlocfilehash: 7f46051193681ecac59428b77ca1e36830c7bb63
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: f58c25ec8b47b2bd8d425d0bfd0d52df9bbc2655
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776334"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408199"
 ---
 # <a name="introduction-to-aspnet-core"></a>Présentation d’ASP.NET Core
 
@@ -43,16 +45,16 @@ Des millions de développeurs utilisent ou ont utilisé [ASP.net 4. x](/aspnet/o
 Le modèle MVC d’ASP.NET Core fournit des fonctionnalités pour créer des [API web](xref:tutorials/first-web-api) et des [applications web](xref:tutorials/razor-pages/index) :
 
 * Le [modèle MVC (Modèle-Vue-Contrôleur)](xref:mvc/overview) permet de rendre vos API web et vos applications web testables.
-* [Razor pages](xref:razor-pages/index) est un modèle de programmation basé sur des pages qui rend la création d’une interface utilisateur Web plus simple et plus productive.
-* Le [balisage Razor](xref:mvc/views/razor) fournit une syntaxe efficace pour les [pages Razor](xref:razor-pages/index) et les [vues MVC](xref:mvc/views/overview).
-* Les [Tag Helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les fichiers Razor.
+* [ Razor Pages](xref:razor-pages/index) est un modèle de programmation basé sur des pages qui rend la création d’une interface utilisateur Web plus simple et plus productive.
+* le [ Razor balisage](xref:mvc/views/razor) fournit une syntaxe productive pour les [ Razor pages](xref:razor-pages/index) et les [vues MVC](xref:mvc/views/overview).
+* Les [tag helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les Razor fichiers.
 * La prise en charge intégrée de [plusieurs formats de données et de la négociation de contenu](xref:web-api/advanced/formatting) permet à vos API web d’être utilisées par un large éventail de clients, notamment des navigateurs et des appareils mobiles.
 * Le principe de la [liaison de modèle](xref:mvc/models/model-binding) permet le mappage automatiquement des données des requêtes HTTP aux paramètres des méthodes d’action.
 * La [validation de modèle](xref:mvc/models/validation) effectue automatiquement la validation côté client et côté serveur.
 
 ## <a name="client-side-development"></a>Développement côté client
 
-ASP.NET Core s’intègre parfaitement avec les frameworks et les bibliothèques populaires côté client, notamment [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react) et [Bootstrap](https://getbootstrap.com/). Pour plus d’informations, consultez <xref:blazor/index> et les rubriques connexes sous *Développement côté client*.
+ASP.NET Core s’intègre de façon transparente aux infrastructures et bibliothèques courantes côté client, notamment [Blazor](xref:blazor/index) , [angulaires](xref:spa/angular), [réactifs](xref:spa/react)et [bootstrap](https://getbootstrap.com/). Pour plus d’informations, consultez <xref:blazor/index> et les rubriques connexes sous *Développement côté client*.
 
 <a name="target-framework"></a>
 
@@ -76,18 +78,18 @@ Pour une introduction au développement d’applications ASP.NET Core, nous vous
 
    |Type d’application  |Scénario  |Didacticiel  |
    |----------|----------|----------|
-   |Application web                   | Nouveau développement de l’interface utilisateur Web côté serveur |[Bien démarrer avec les pages Razor](xref:tutorials/razor-pages/razor-pages-start) |
-   |Application web                   | Maintenance d’une application MVC |[Bien démarrer avec MVC](xref:tutorials/first-mvc-app/start-mvc)|
-   |Application web                   | Développement de l’interface utilisateur Web côté client |[Prise en main de éblouissant](xref:tutorials/first-blazor-app) |
+   |Application web                   | Nouveau développement de l’interface utilisateur Web côté serveur |[Prise en main des Razor pages](xref:tutorials/razor-pages/razor-pages-start) |
+   |Application web                   | Maintenance d’une application MVC |[Bien démarrer avec MVC](xref:tutorials/first-mvc-app/start-mvc)|
+   |Application web                   | Développement de l’interface utilisateur Web côté client |[Prise en main deBlazor](xref:tutorials/first-blazor-app) |
    |API web                   | Services HTTP RESTful |[Créer une API Web](xref:tutorials/first-web-api)&dagger; |
    |Application d’appel de procédure distante | Services contrat en premier à l’aide de mémoires tampons de protocole |[Bien démarrer avec un service gRPC](xref:tutorials/grpc/grpc-start) |
-   |Application en temps réel             | Communication bidirectionnelle entre les serveurs et les clients connectés |[Bien démarrer avec SignalR](xref:tutorials/signalr) |
+   |Application en temps réel             | Communication bidirectionnelle entre les serveurs et les clients connectés |[Prise en main deSignalR](xref:tutorials/signalr) |
 
 1. Suivez un didacticiel qui montre comment effectuer un accès aux données de base.
 
    |Scénario  |Didacticiel  |
    |----------|----------|
-   |Nouveau développement        |[Pages Razor avec Entity Framework Core](xref:data/ef-rp/intro) |
+   |Nouveau développement        |[RazorPages avec Entity Framework Core](xref:data/ef-rp/intro) |
    |Maintenance d’une application MVC |[MVC avec Entity Framework Core](xref:data/ef-mvc/intro) |
 
 1. Lisez une vue d’ensemble de ASP.NET Core [notions de base](xref:fundamentals/index) qui s’appliquent à tous les types d’applications.
@@ -98,7 +100,7 @@ Pour une introduction au développement d’applications ASP.NET Core, nous vous
 
 ## <a name="migrate-from-net-framework"></a>Migrer à partir de .NET Framework
 
-Pour obtenir un guide de référence sur la migration d’applications ASP.NET 4. x <xref:migration/proper-to-2x/index>vers ASP.net Core, consultez.
+Pour obtenir un guide de référence sur la migration d’applications ASP.NET 4. x vers ASP.NET Core, consultez <xref:migration/proper-to-2x/index> .
 
 ::: moniker-end
 
@@ -122,16 +124,16 @@ Des millions de développeurs utilisent ou ont utilisé [ASP.net 4. x](/aspnet/o
 Le modèle MVC d’ASP.NET Core fournit des fonctionnalités pour créer des [API web](xref:tutorials/first-web-api) et des [applications web](xref:tutorials/razor-pages/index) :
 
 * Le [modèle MVC (Modèle-Vue-Contrôleur)](xref:mvc/overview) permet de rendre vos API web et vos applications web testables.
-* [Razor pages](xref:razor-pages/index) est un modèle de programmation basé sur des pages qui rend la création d’une interface utilisateur Web plus simple et plus productive.
-* Le [balisage Razor](xref:mvc/views/razor) fournit une syntaxe efficace pour les [pages Razor](xref:razor-pages/index) et les [vues MVC](xref:mvc/views/overview).
-* Les [Tag Helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les fichiers Razor.
+* [ Razor Pages](xref:razor-pages/index) est un modèle de programmation basé sur des pages qui rend la création d’une interface utilisateur Web plus simple et plus productive.
+* le [ Razor balisage](xref:mvc/views/razor) fournit une syntaxe productive pour les [ Razor pages](xref:razor-pages/index) et les [vues MVC](xref:mvc/views/overview).
+* Les [tag helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les Razor fichiers.
 * La prise en charge intégrée de [plusieurs formats de données et de la négociation de contenu](xref:web-api/advanced/formatting) permet à vos API web d’être utilisées par un large éventail de clients, notamment des navigateurs et des appareils mobiles.
 * Le principe de la [liaison de modèle](xref:mvc/models/model-binding) permet le mappage automatiquement des données des requêtes HTTP aux paramètres des méthodes d’action.
 * La [validation de modèle](xref:mvc/models/validation) effectue automatiquement la validation côté client et côté serveur.
 
 ## <a name="client-side-development"></a>Développement côté client
 
-ASP.NET Core s’intègre parfaitement avec les frameworks et les bibliothèques populaires côté client, notamment [Blazor](xref:blazor/index), [Angular](xref:spa/angular), [React](xref:spa/react) et [Bootstrap](https://getbootstrap.com/). Pour plus d’informations, consultez <xref:blazor/index> et les rubriques connexes sous *Développement côté client*.
+ASP.NET Core s’intègre de façon transparente aux infrastructures et bibliothèques courantes côté client, notamment [Blazor](xref:blazor/index) , [angulaires](xref:spa/angular), [réactifs](xref:spa/react)et [bootstrap](https://getbootstrap.com/). Pour plus d’informations, consultez <xref:blazor/index> et les rubriques connexes sous *Développement côté client*.
 
 <a name="target-framework"></a>
 
@@ -164,10 +166,10 @@ Nous vous recommandons la séquence de tutoriels et d’articles suivante comme 
 
    |Type d’application  |Scénario  |Didacticiel  |
    |----------|----------|----------|
-   |Application web                   | Pour un nouveau développement        |[Bien démarrer avec les pages Razor](xref:tutorials/razor-pages/razor-pages-start) |
-   |Application web                   | Pour maintenir une application MVC |[Bien démarrer avec MVC](xref:tutorials/first-mvc-app/start-mvc)|
+   |Application web                   | Pour un nouveau développement        |[Prise en main des Razor pages](xref:tutorials/razor-pages/razor-pages-start) |
+   |Application web                   | Pour maintenir une application MVC |[Bien démarrer avec MVC](xref:tutorials/first-mvc-app/start-mvc)|
    |API web                   |                            |[Créer une API Web](xref:tutorials/first-web-api)&dagger; |
-   |Application en temps réel             |                            |[Bien démarrer avec SignalR](xref:tutorials/signalr) |
+   |Application en temps réel             |                            |[Prise en main deSignalR](xref:tutorials/signalr) |
 
 1. Suivez un didacticiel qui montre comment effectuer un accès aux données de base.
 
@@ -184,7 +186,7 @@ Nous vous recommandons la séquence de tutoriels et d’articles suivante comme 
 
 ## <a name="migrate-from-net-framework"></a>Migrer à partir de .NET Framework
 
-Pour obtenir un guide de référence sur la migration d’applications ASP.NET <xref:migration/proper-to-2x/index>vers ASP.net Core, consultez.
+Pour obtenir un guide de référence sur la migration d’applications ASP.NET vers ASP.NET Core, consultez <xref:migration/proper-to-2x/index> .
 
 ::: moniker-end
 
@@ -198,7 +200,7 @@ La plupart des articles et tutoriels contiennent des liens vers des exemples de 
 
 ### <a name="preprocessor-directives-in-sample-code"></a>Directives de préprocesseur dans l’exemple de code
 
-Pour illustrer plusieurs scénarios, les exemples d' `#define` applications `#if-#else/#elif-#endif` utilisent les directives de préprocesseur et pour compiler et exécuter de manière sélective différentes sections d’exemples de code. Pour les exemples qui utilisent cette approche, définissez la `#define` directive en haut des fichiers C# pour définir le symbole associé au scénario que vous souhaitez exécuter. Certains exemples requièrent la définition du symbole en haut de plusieurs fichiers afin d’exécuter un scénario.
+Pour illustrer plusieurs scénarios, les exemples d’applications utilisent les `#define` `#if-#else/#elif-#endif` directives de préprocesseur et pour compiler et exécuter de manière sélective différentes sections d’exemples de code. Pour les exemples qui utilisent cette approche, définissez la `#define` directive en haut des fichiers C# pour définir le symbole associé au scénario que vous souhaitez exécuter. Certains exemples requièrent la définition du symbole en haut de plusieurs fichiers afin d’exécuter un scénario.
 
 Par exemple, la liste des symboles `#define` suivante indique que les quatre scénarios sont disponibles (un scénario par symbole). La configuration actuelle de l’exemple exécute le scénario `TemplateCode` :
 

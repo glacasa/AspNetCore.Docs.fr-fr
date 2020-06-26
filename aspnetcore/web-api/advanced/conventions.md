@@ -8,23 +8,25 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/advanced/conventions
-ms.openlocfilehash: f74327cd5bb6a5794c90ffdd3896f2b343e175a6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: eece8130c152fdada1e1d86cf3c94932c5ee9f63
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774884"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408446"
 ---
 # <a name="use-web-api-conventions"></a>Utiliser les conventions d’API web
 
 Par [Pranav Krishnamoorthy](https://github.com/pranavkm) et [Scott Addie](https://github.com/scottaddie)
 
-ASP.NET Core 2.2 et ses versions ultérieures incluent un moyen d’extraire la [documentation des API](xref:tutorials/web-api-help-pages-using-swagger) courantes et de l’appliquer à plusieurs actions, à plusieurs contrôleurs ou à tous les contrôleurs au sein d’un assembly. Les conventions d’API Web sont un substitut de la décoration [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute)des actions individuelles avec.
+ASP.NET Core 2.2 et ses versions ultérieures incluent un moyen d’extraire la [documentation des API](xref:tutorials/web-api-help-pages-using-swagger) courantes et de l’appliquer à plusieurs actions, à plusieurs contrôleurs ou à tous les contrôleurs au sein d’un assembly. Les conventions d’API Web sont un substitut de la décoration des actions individuelles avec [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute) .
 
 Une convention vous permet de :
 
@@ -41,7 +43,7 @@ ASP.NET Core MVC 2.2 et ses versions ultérieures incluent un ensemble de conven
 
 Les conventions ne se combinent pas : chaque action peut être associée à une seule convention. Les conventions plus spécifiques sont prioritaires par rapport à celles qui sont moins spécifiques. La sélection est non déterministe quand plusieurs conventions de même priorité s’appliquent à une action. Les options suivantes sont disponibles pour appliquer une convention à une action, de la plus spécifique à la moins spécifique :
 
-1. `Microsoft.AspNetCore.Mvc.ApiConventionMethodAttribute`&mdash; S’applique à des actions individuelles et spécifie le type de Convention et la méthode de Convention qui s’appliquent.
+1. `Microsoft.AspNetCore.Mvc.ApiConventionMethodAttribute`&mdash;S’applique à des actions individuelles et spécifie le type de Convention et la méthode de Convention qui s’appliquent.
 
     Dans l’exemple suivant, la méthode de convention `Microsoft.AspNetCore.Mvc.DefaultApiConventions.Put` du type de convention par défaut est appliquée à l’action `Update` :
 

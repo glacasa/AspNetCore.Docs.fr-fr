@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/implementation/subkeyderivation
-ms.openlocfilehash: c4b4076d532e33b48b3438f842507a8cda2d71b6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: f373c37a5ea4dab91463d011d3ecd6799ae6d014
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776849"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408030"
 ---
 # <a name="subkey-derivation-and-authenticated-encryption-in-aspnet-core"></a>Dérivation de sous-clé et chiffrement authentifié dans ASP.NET Core
 
@@ -31,15 +33,15 @@ La plupart des clés dans l’anneau de clé contiendront une certaine forme d�
 
 ## <a name="additional-authenticated-data-and-subkey-derivation"></a>Données authentifiées supplémentaires et dérivation de sous-clé
 
-L' `IAuthenticatedEncryptor` interface sert d’interface principale pour toutes les opérations de chiffrement authentifiées. Sa `Encrypt` méthode prend deux mémoires tampons : texte en clair et ADDITIONALAUTHENTICATEDDATA (AAD). Le contenu en texte en clair n’a pas changé `IDataProtector.Protect`l’appel à, mais AAD est généré par le système et se compose de trois composants :
+L' `IAuthenticatedEncryptor` interface sert d’interface principale pour toutes les opérations de chiffrement authentifiées. Sa `Encrypt` méthode prend deux mémoires tampons : texte en clair et additionalAuthenticatedData (AAD). Le contenu en texte en clair n’a pas changé l’appel à `IDataProtector.Protect` , mais AAD est généré par le système et se compose de trois composants :
 
 1. En-tête magique 32 bits 09 F0 C9 F0 qui identifie cette version du système de protection des données.
 
 2. ID de la clé 128 bits.
 
-3. Chaîne de longueur variable formée à partir de la chaîne d’objectif qui `IDataProtector` a créé le qui effectue cette opération.
+3. Chaîne de longueur variable formée à partir de la chaîne d’objectif qui a créé le `IDataProtector` qui effectue cette opération.
 
-Étant donné que AAD est unique pour le tuple des trois composants, nous pouvons l’utiliser pour dériver de nouvelles clés de KM au lieu d’utiliser la valeur KM proprement dite dans toutes nos opérations de chiffrement. Pour chaque appel à `IAuthenticatedEncryptor.Encrypt`, le processus de dérivation de clé suivant a lieu :
+Étant donné que AAD est unique pour le tuple des trois composants, nous pouvons l’utiliser pour dériver de nouvelles clés de KM au lieu d’utiliser la valeur KM proprement dite dans toutes nos opérations de chiffrement. Pour chaque appel à `IAuthenticatedEncryptor.Encrypt` , le processus de dérivation de clé suivant a lieu :
 
 (K_E, K_H) = SP800_108_CTR_HMACSHA512 (K_M, AAD, contextHeader | | keymodifier)
 
@@ -53,7 +55,7 @@ Ici, nous appelons le NIST SP800-108 KDF en mode compteur (voir [NIST SP800-108]
 
 * Context = contextHeader | | keymodifier
 
-L’en-tête de contexte est de longueur variable et sert essentiellement d’empreinte des algorithmes pour lesquels nous créons des K_E et des K_H. Le modificateur de clé est une chaîne 128 bits générée de façon aléatoire pour chaque appel `Encrypt` à et sert à garantir une probabilité écrasante que ke et KH sont uniques pour cette opération de chiffrement d’authentification spécifique, même si toutes les autres entrées du KDF sont constantes.
+L’en-tête de contexte est de longueur variable et sert essentiellement d’empreinte des algorithmes pour lesquels nous créons des K_E et des K_H. Le modificateur de clé est une chaîne 128 bits générée de façon aléatoire pour chaque appel à `Encrypt` et sert à garantir une probabilité écrasante que ke et KH sont uniques pour cette opération de chiffrement d’authentification spécifique, même si toutes les autres entrées du KDF sont constantes.
 
 Pour les opérations de chiffrement en mode CBC + validation HMAC, | K_E | est la longueur de la clé de chiffrement par bloc symétrique, et | K_H | taille Digest de la routine HMAC. Pour les opérations de chiffrement GCM + validation, | K_H | = 0.
 

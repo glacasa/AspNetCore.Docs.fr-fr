@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 07/07/2017
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/preventing-open-redirects
-ms.openlocfilehash: ad4c9806146567b6ef1f5e78eaeca96cb649c1af
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: eb18c599d84fd08ffe97867b67a837303af188db
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774390"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408147"
 ---
 # <a name="prevent-open-redirect-attacks-in-aspnet-core"></a>Empêcher les attaques par redirection ouverte dans ASP.NET Core
 
@@ -32,18 +34,18 @@ Les applications Web redirigent fréquemment les utilisateurs vers une page de c
 
 ### <a name="an-example-attack"></a>Exemple d’attaque
 
-Un utilisateur malveillant peut développer une attaque destinée à autoriser l’utilisateur malveillant à accéder aux informations d’identification d’un utilisateur ou à des informations sensibles. Pour lancer l’attaque, l’utilisateur malveillant persuade l’utilisateur de cliquer sur un lien vers la page de connexion de votre `returnUrl` site avec une valeur QueryString ajoutée à l’URL. Par exemple, considérez une application `contoso.com` sur qui comprend une page de `http://contoso.com/Account/LogOn?returnUrl=/Home/About`connexion à l’adresse. L’attaque suit les étapes suivantes :
+Un utilisateur malveillant peut développer une attaque destinée à autoriser l’utilisateur malveillant à accéder aux informations d’identification d’un utilisateur ou à des informations sensibles. Pour lancer l’attaque, l’utilisateur malveillant persuade l’utilisateur de cliquer sur un lien vers la page de connexion de votre site avec une `returnUrl` valeur QueryString ajoutée à l’URL. Par exemple, considérez une application sur `contoso.com` qui comprend une page de connexion à l’adresse `http://contoso.com/Account/LogOn?returnUrl=/Home/About` . L’attaque suit les étapes suivantes :
 
-1. L’utilisateur clique sur un lien `http://contoso.com/Account/LogOn?returnUrl=http://contoso1.com/Account/LogOn` malveillant vers (la deuxième URL est « contoso**1**. com », et non pas « contoso.com »).
+1. L’utilisateur clique sur un lien malveillant vers `http://contoso.com/Account/LogOn?returnUrl=http://contoso1.com/Account/LogOn` (la deuxième URL est « contoso**1**. com », et non pas « contoso.com »).
 2. L’utilisateur se connecte avec succès.
-3. L’utilisateur est redirigé (par le site) vers ( `http://contoso1.com/Account/LogOn` un site malveillant qui ressemble exactement à un site réel).
+3. L’utilisateur est redirigé (par le site) vers `http://contoso1.com/Account/LogOn` (un site malveillant qui ressemble exactement à un site réel).
 4. L’utilisateur se reconnecte (ce qui donne des informations d’identification au site malveillant) et est redirigé vers le site réel.
 
 L’utilisateur pense probablement que sa première tentative de connexion a échoué et que la deuxième tentative est réussie. L’utilisateur n’est probablement pas conscient que leurs informations d’identification sont compromises.
 
 ![Processus d’attaque de redirection ouvert](preventing-open-redirects/_static/open-redirection-attack-process.png)
 
-En plus des pages de connexion, certains sites fournissent des pages de redirection ou des points de terminaison. Imaginez que votre application comporte une page avec une redirection ouverte `/Home/Redirect`,. Un attaquant pourrait créer, par exemple, un lien dans un message électronique qui accède à `[yoursite]/Home/Redirect?url=http://phishingsite.com/Home/Login`. Un utilisateur classique regardera l’URL pour voir qu’elle commence par le nom de votre site. Pour ce faire, ils cliquent sur le lien. La redirection ouverte envoie ensuite l’utilisateur au site de hameçonnage, qui ressemble à la vôtre, et l’utilisateur se connecte probablement à ce que votre site estime être.
+En plus des pages de connexion, certains sites fournissent des pages de redirection ou des points de terminaison. Imaginez que votre application comporte une page avec une redirection ouverte, `/Home/Redirect` . Un attaquant pourrait créer, par exemple, un lien dans un message électronique qui accède à `[yoursite]/Home/Redirect?url=http://phishingsite.com/Home/Login` . Un utilisateur classique regardera l’URL pour voir qu’elle commence par le nom de votre site. Pour ce faire, ils cliquent sur le lien. La redirection ouverte envoie ensuite l’utilisateur au site de hameçonnage, qui ressemble à la vôtre, et l’utilisateur se connecte probablement à ce que votre site estime être.
 
 ## <a name="protecting-against-open-redirect-attacks"></a>Protection contre les attaques par redirection ouverte
 
@@ -51,7 +53,7 @@ Lors du développement d’applications Web, traitez toutes les données fournie
 
 ### <a name="localredirect"></a>LocalRedirect
 
-Utilisez la `LocalRedirect` méthode d’assistance de la classe `Controller` de base :
+Utilisez la `LocalRedirect` méthode d’assistance de la classe de base `Controller` :
 
 ```csharp
 public IActionResult SomeAction(string redirectUrl)
@@ -60,7 +62,7 @@ public IActionResult SomeAction(string redirectUrl)
 }
 ```
 
-`LocalRedirect`lèvera une exception si une URL non locale est spécifiée. Dans le cas contraire, il se comporte comme `Redirect` la méthode.
+`LocalRedirect`lèvera une exception si une URL non locale est spécifiée. Dans le cas contraire, il se comporte comme la `Redirect` méthode.
 
 ### <a name="islocalurl"></a>IsLocalUrl
 

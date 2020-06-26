@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 04/06/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/file-providers
-ms.openlocfilehash: 1e243d31a1c6b1f6ac6c9f7966ce07ecb01ceae5
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 9c679f6cb56397632eb99708bd2edd83c55ecf50
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106180"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408264"
 ---
 # <a name="file-providers-in-aspnet-core"></a>Fournisseurs de fichiers dans ASP.NET Core
 
@@ -170,7 +172,7 @@ Le tableau suivant fournit des exemples courants de modèles glob.
 |---------|---------|
 |`directory/file.txt`|Établit une correspondance avec un fichier spécifique dans un répertoire spécifique.|
 |`directory/*.txt`|Établit une correspondance avec tous les fichiers ayant l’extension *.txt* dans un répertoire spécifique.|
-|`directory/*/appsettings.json`|Met en correspondance tous les fichiers *appSettings. JSON* des répertoires exactement un niveau sous le dossier du *répertoire* .|
+|`directory/*/appsettings.json`|Met en correspondance tous les *appsettings.jsdes* fichiers dans les répertoires exactement un niveau sous le dossier du *répertoire* .|
 |`directory/**/*.txt`|Correspond à tous les fichiers avec une extension *. txt* située n’importe où dans le dossier du *répertoire* .|
 
 ::: moniker-end

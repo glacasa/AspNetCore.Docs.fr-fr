@@ -1,37 +1,39 @@
 ---
 title: Panier ReDim pour ASP.NET Core SignalR montée en puissance parallèle
 author: bradygaster
-description: Découvrez comment configurer un backplane ReDim pour permettre la montée en charge d’une application ASP.NET Core SignalR .
+description: Découvrez comment configurer un backplane ReDim pour permettre la montée en charge d’une SignalR application ASP.net core.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/redis-backplane
-ms.openlocfilehash: 6068890f4089a13add05bf8cf8009367e343adce
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 58c1ff2c9334e75535f6e5f0f418976176822724
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775347"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408472"
 ---
 # <a name="set-up-a-redis-backplane-for-aspnet-core-signalr-scale-out"></a>Configurer un backplane ReDim pour ASP.NET Core SignalR montée en puissance parallèle
 
 Par [Andrew Stanton-infirmière](https://twitter.com/anurse), [Brady Gaster](https://twitter.com/bradygaster)et [Tom Dykstra](https://github.com/tdykstra),
 
-Cet article explique SignalRles aspects spécifiques de la configuration d’un serveur [redims](https://redis.io/) à utiliser pour la montée en charge SignalR d’une application ASP.net core.
+Cet article explique SignalR les aspects spécifiques de la configuration d’un serveur [redims](https://redis.io/) à utiliser pour la montée en charge d’une SignalR application ASP.net core.
 
 ## <a name="set-up-a-redis-backplane"></a>Configurer un backplane ReDim
 
 * Déployez un serveur ReDim.
 
   > [!IMPORTANT] 
-  > Pour une utilisation en production, un backplane ReDim est recommandé uniquement lorsqu’il s’exécute dans le même centre de SignalR données que l’application. Dans le cas contraire, la latence du réseau dégrade les performances. Si votre SignalR application s’exécute dans le Cloud Azure, nous vous recommandons SignalR le service Azure au lieu d’un backplane ReDim. Vous pouvez utiliser le Cache Service Azure Redims pour les environnements de développement et de test.
+  > Pour une utilisation en production, un backplane ReDim est recommandé uniquement lorsqu’il s’exécute dans le même centre de données que l' SignalR application. Dans le cas contraire, la latence du réseau dégrade les performances. Si votre SignalR application s’exécute dans le Cloud Azure, nous vous recommandons le SignalR service Azure au lieu d’un backplane ReDim. Vous pouvez utiliser le Cache Service Azure Redims pour les environnements de développement et de test.
 
   Pour plus d’informations, consultez les ressources suivantes :
 
@@ -42,7 +44,7 @@ Cet article explique SignalRles aspects spécifiques de la configuration d’un 
 ::: moniker range="= aspnetcore-2.1"
 
 * Dans l' SignalR application, installez le `Microsoft.AspNetCore.SignalR.Redis` package NuGet.
-* Dans la `Startup.ConfigureServices` méthode, appelez `AddRedis` après `AddSignalR`:
+* Dans la `Startup.ConfigureServices` méthode, appelez `AddRedis` après `AddSignalR` :
 
   ```csharp
   services.AddSignalR().AddRedis("<your_Redis_connection_string>");
@@ -72,13 +74,13 @@ Cet article explique SignalRles aspects spécifiques de la configuration d’un 
   * `Microsoft.AspNetCore.SignalR.StackExchangeRedis`Dépend de StackExchange. Redims 2. X.X. Il s’agit du package recommandé pour ASP.NET Core 2,2 et versions ultérieures.
   * `Microsoft.AspNetCore.SignalR.Redis`Dépend de StackExchange. Redims 1. X.X. Ce package n’est pas inclus dans ASP.NET Core 3,0 et versions ultérieures.
 
-* Dans la `Startup.ConfigureServices` méthode, appelez <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis*>:
+* Dans la `Startup.ConfigureServices` méthode, appelez <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis*> :
 
   ```csharp
   services.AddSignalR().AddStackExchangeRedis("<your_Redis_connection_string>");
   ```
 
- Lors de `Microsoft.AspNetCore.SignalR.Redis`l’utilisation <xref:Microsoft.Extensions.DependencyInjection.RedisDependencyInjectionExtensions.AddRedis*>de, appelez.
+ Lors de l’utilisation `Microsoft.AspNetCore.SignalR.Redis` de, appelez <xref:Microsoft.Extensions.DependencyInjection.RedisDependencyInjectionExtensions.AddRedis*> .
 
 * Configurez les options selon vos besoins :
  
@@ -93,7 +95,7 @@ Cet article explique SignalRles aspects spécifiques de la configuration d’un 
     });
   ```
 
- Lors de `Microsoft.AspNetCore.SignalR.Redis`l’utilisation <xref:Microsoft.Extensions.DependencyInjection.RedisDependencyInjectionExtensions.AddRedis*>de, appelez.
+ Lors de l’utilisation `Microsoft.AspNetCore.SignalR.Redis` de, appelez <xref:Microsoft.Extensions.DependencyInjection.RedisDependencyInjectionExtensions.AddRedis*> .
 
   Dans le code précédent, `options.Configuration` est initialisé avec tout ce qui a été spécifié dans la chaîne de connexion.
 
@@ -107,7 +109,7 @@ Cet article explique SignalRles aspects spécifiques de la configuration d’un 
 
   * `Microsoft.AspNetCore.SignalR.StackExchangeRedis`
   
-* Dans la `Startup.ConfigureServices` méthode, appelez <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis*>:
+* Dans la `Startup.ConfigureServices` méthode, appelez <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis*> :
 
   ```csharp
   services.AddSignalR().AddStackExchangeRedis("<your_Redis_connection_string>");
@@ -132,9 +134,9 @@ Cet article explique SignalRles aspects spécifiques de la configuration d’un 
 
 ::: moniker-end
 
-* Si vous utilisez un serveur Redims pour plusieurs SignalR applications, utilisez un préfixe de canal différent pour SignalR chaque application.
+* Si vous utilisez un serveur Redims pour plusieurs SignalR applications, utilisez un préfixe de canal différent pour chaque SignalR application.
 
-  La définition d’un préfixe de SignalR canal isole une application des autres qui utilisent des préfixes de canal différents. Si vous n’assignez pas de préfixes différents, un message envoyé à partir d’une application à tous ses propres clients est envoyé à tous les clients de toutes les applications qui utilisent le serveur ReDim comme fond de panier.
+  La définition d’un préfixe de canal isole une SignalR application des autres qui utilisent des préfixes de canal différents. Si vous n’assignez pas de préfixes différents, un message envoyé à partir d’une application à tous ses propres clients est envoyé à tous les clients de toutes les applications qui utilisent le serveur ReDim comme fond de panier.
 
 * Configurez le logiciel d’équilibrage de charge de votre batterie de serveurs pour les sessions rémanentes. Voici quelques exemples de documentation sur la manière de procéder :
 

@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: 533bddc9c4499dad99cfdb3089045ea10aed4548
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: 8c68f2a15d07909d4576a2426d92f9beaa91fbb7
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074160"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408069"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>Autorisation basée sur la stratégie dans ASP.NET Core
 
@@ -127,9 +129,11 @@ Les stratégies sont appliquées aux pages à l' Razor aide de l' `[Authorize]` 
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-Les stratégies peuvent également être appliquées aux Razor pages à l’aide d’une [Convention d’autorisation](xref:security/authorization/razor-pages-authorization).
+Les stratégies ***ne peuvent pas*** être appliquées au Razor niveau du gestionnaire de page, elles doivent être appliquées à la page.
 
-## <a name="requirements"></a>Spécifications
+Les stratégies peuvent être appliquées à Razor des pages à l’aide d’une [Convention d’autorisation](xref:security/authorization/razor-pages-authorization).
+
+## <a name="requirements"></a>Configuration requise
 
 Une spécification d’autorisation est une collection de paramètres de données qu’une stratégie peut utiliser pour évaluer le principal d’utilisateur actuel. Dans notre stratégie « AtLeast21 », l’exigence est un paramètre unique de &mdash; l’âge minimal. Une spécification implémente [IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement), qui est une interface de marqueur vide. Une exigence d’ancienneté minimale paramétrable peut être implémentée comme suit :
 
@@ -360,7 +364,7 @@ Les stratégies sont appliquées aux pages à l' Razor aide de l' `[Authorize]` 
 
 Les stratégies peuvent également être appliquées aux Razor pages à l’aide d’une [Convention d’autorisation](xref:security/authorization/razor-pages-authorization).
 
-## <a name="requirements"></a>Spécifications
+## <a name="requirements"></a>Configuration requise
 
 Une spécification d’autorisation est une collection de paramètres de données qu’une stratégie peut utiliser pour évaluer le principal d’utilisateur actuel. Dans notre stratégie « AtLeast21 », l’exigence est un paramètre unique de &mdash; l’âge minimal. Une spécification implémente [IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement), qui est une interface de marqueur vide. Une exigence d’ancienneté minimale paramétrable peut être implémentée comme suit :
 

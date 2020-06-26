@@ -8,17 +8,19 @@ ms.custom: mvc, seodec18
 ms.date: 08/17/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/first-mongo-app
-ms.openlocfilehash: 46607fc92670bb46a155ddf3248bc8a36b600a4a
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 831479f04551441b079d3f34d043c7486bad7ac0
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452250"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85409018"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>Créer une API web avec ASP.NET Core et MongoDB
 
@@ -28,7 +30,7 @@ Par [Pratik Khandelwal](https://twitter.com/K2Prk) et [Scott Addie](https://twit
 
 Ce didacticiel crée une API web qui effectue des opérations de création, lecture, mise à jour et suppression (CRUD) sur une base de données NoSQL [MongoDB](https://www.mongodb.com/what-is-mongodb).
 
-Dans ce tutoriel, vous allez apprendre à :
+Dans ce tutoriel, vous apprenez à effectuer les opérations suivantes :
 
 > [!div class="checklist"]
 > * Configurer MongoDB
@@ -378,7 +380,7 @@ Pour satisfaire les exigences précédentes, apportez les changements suivants 
 
 Ce didacticiel crée une API web qui effectue des opérations de création, lecture, mise à jour et suppression (CRUD) sur une base de données NoSQL [MongoDB](https://www.mongodb.com/what-is-mongodb).
 
-Dans ce tutoriel, vous allez apprendre à :
+Dans ce tutoriel, vous apprenez à effectuer les opérations suivantes :
 
 > [!div class="checklist"]
 > * Configurer MongoDB

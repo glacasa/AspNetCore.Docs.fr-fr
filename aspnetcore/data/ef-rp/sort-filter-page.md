@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 99b14c99cb99d106604f1a4edacf1da0a2d6125c
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 0a87fe2f4cf7014cc15752dcf25545ce7aaa4687
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652589"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408602"
 ---
 # <a name="part-3-razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Partie 3 : Razor pages avec EF Core dans ASP.net Core-Trier, filtrer, pagination
 

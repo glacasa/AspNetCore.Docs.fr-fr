@@ -6,17 +6,19 @@ ms.author: scaddie
 ms.date: 10/18/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: 985c08e0994314cec8d52a6651681c93aca96514
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 59c513038d41779a4cf56a70045f9e72f8008d28
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766509"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407718"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>Migrer d’ASP.NET vers ASP.NET Core
 
@@ -66,7 +68,7 @@ Cette approche couple l’application au serveur sur lequel elle est déployée 
 
 Cela permet de configurer vos itinéraires par défaut, et de privilégier XmlSerialization à JSON. Ajoutez d’autres intergiciels (middleware) à ce pipeline selon les besoins (services de chargement, paramètres de configuration, fichiers statiques, etc.).
 
-ASP.NET Core utilise une approche similaire mais n’a pas besoin d’OWIN pour prendre en charge l’entrée. Au lieu de cela, cette opération est effectuée via la méthode *Program.cs* `Main` (semblable aux `Startup` applications console) et est chargée par l’intermédiaire de là.
+ASP.NET Core utilise une approche similaire mais n’a pas besoin d’OWIN pour prendre en charge l’entrée. Au lieu de cela, cette opération est effectuée via la méthode *Program.cs* `Main` (semblable aux applications console) et `Startup` est chargée par l’intermédiaire de là.
 
 [!code-csharp[](samples/program.cs)]
 
@@ -149,7 +151,7 @@ Une partie importante du développement web réside dans la capacité de traitem
 
 Avec ASP.NET, les fichiers statiques sont stockés dans différents répertoires et référencés dans des vues.
 
-Dans ASP.net Core, les fichiers statiques sont stockés dans la « racine Web » (*&lt;&gt;racine du contenu/wwwroot*), sauf si configuré dans le cas contraire. Les fichiers sont chargés dans le pipeline de requêtes via l’appel de la méthode d’extension `UseStaticFiles` à partir de `Startup.Configure` :
+Dans ASP.NET Core, les fichiers statiques sont stockés dans la « racine Web » (* &lt; racine du contenu &gt; /wwwroot*), sauf si configuré dans le cas contraire. Les fichiers sont chargés dans le pipeline de requêtes via l’appel de la méthode d’extension `UseStaticFiles` à partir de `Startup.Configure` :
 
 [!code-csharp[](../../fundamentals/static-files/samples/1x/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 
@@ -167,7 +169,7 @@ Par exemple, un composant image dans le dossier *wwwroot/images* est accessible 
 
 ## <a name="partial-app-migration"></a>Migration d’application partielle
 
-L’une des approches de la migration partielle d’applications consiste à créer une sous-application IIS et à déplacer uniquement certains itinéraires de ASP.NET 4. x vers ASP.NET Core tout en conservant la structure de l’URL de l’application. Par exemple, considérez la structure de l’URL de l’application à partir du fichier *ApplicationHost. config* :
+L’une des approches de la migration partielle d’applications consiste à créer une sous-application IIS et à déplacer uniquement certains itinéraires de ASP.NET 4. x vers ASP.NET Core tout en conservant la structure de l’URL de l’application. Par exemple, considérez la structure de l’URL de l’application à partir du fichier *applicationHost.config* :
 
 ```xml
 <sites>

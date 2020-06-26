@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/02/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/script-tag-helper
-ms.openlocfilehash: 4162221ef3401427c44fb54dee9c36b78b39564f
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b9b90c1c40fccbc7bb6b6c9050bd525b5fa8cd92
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774663"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407406"
 ---
 # <a name="script-tag-helper-in-aspnet-core"></a>Tag Helper de script dans ASP.NET Core
 
@@ -29,7 +31,7 @@ Le [tag Helper script](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper)
 
 Le tag Helper script vous permet de spécifier un CDN pour le fichier de script et un secours lorsque le CDN n’est pas disponible. Le tag Helper script fournit l’avantage en termes de performances d’un CDN avec la robustesse de l’hébergement local.
 
-Le balisage suivant Razor montre `script` un élément avec une solution de secours :
+Le Razor balisage suivant montre un `script` élément avec une solution de secours :
 
 ```html
 <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
@@ -40,7 +42,7 @@ Le balisage suivant Razor montre `script` un élément avec une solution de seco
 </script>
 ```
 
-N’utilisez pas `<script>` l’attribut [defer](https://developer.mozilla.org/docs/Web/HTML/Element/script) de l’élément pour différer le chargement du script CDN. Le tag Helper script rend JavaScript qui exécute immédiatement l’expression [asp-Fallback-test](#asp-fallback-test) . L’expression échoue si le chargement du script CDN est différé.
+N’utilisez pas l' `<script>` attribut [defer](https://developer.mozilla.org/docs/Web/HTML/Element/script) de l’élément pour différer le chargement du script CDN. Le tag Helper script rend JavaScript qui exécute immédiatement l’expression [asp-Fallback-test](#asp-fallback-test) . L’expression échoue si le chargement du script CDN est différé.
 
 ## <a name="commonly-used-script-tag-helper-attributes"></a>Attributs d’assistance de balise de script couramment utilisés
 

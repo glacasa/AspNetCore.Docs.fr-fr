@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/environment-tag-helper
-ms.openlocfilehash: 144cc8988ba5797265b38f0f7364f528e0dbb97e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 23ddad23214d3e1a66415fc8706c30de838357fa
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777421"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407432"
 ---
 # <a name="environment-tag-helper-in-aspnet-core"></a>Tag Helper Environnement dans ASP.NET Core
 
@@ -47,7 +49,7 @@ L’exemple suivant utilise un Tag Helper Environnement. Le contenu est affiché
 
 ## <a name="include-and-exclude-attributes"></a>Attributs include et exclude
 
-`include`& les attributs contrôlent le rendu du contenu délimité en fonction des noms d’environnement d’hébergement inclus ou `exclude` exclus.
+`include`les & `exclude` attributs contrôlent le rendu du contenu délimité en fonction des noms d’environnement d’hébergement inclus ou exclus.
 
 ### <a name="include"></a>include
 

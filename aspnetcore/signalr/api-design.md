@@ -1,54 +1,62 @@
 ---
-title: Considérations de conception d’API de SignalR
+title: SignalRConsidérations relatives à la conception d’API
 author: anurse
-description: Apprenez à concevoir SignalR APIs pour assurer la compatibilité entre les versions de votre application.
+description: Découvrez comment concevoir des SignalR API pour la compatibilité entre les versions de votre application.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: mvc
-ms.date: 11/06/2018
+ms.date: 11/12/2019
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: signalr/api-design
-ms.openlocfilehash: 3f17bf055b793e8fc91fbcc15f668928ca261f77
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
+ms.openlocfilehash: 9ad8d30da552d3d3084534b8c7ca57386ad111ac
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64897806"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407796"
 ---
-# <a name="signalr-api-design-considerations"></a>Considérations de conception d’API de SignalR
+# <a name="signalr-api-design-considerations"></a>SignalRConsidérations relatives à la conception d’API
 
-Par [Andrew Stanton-Nurse](https://twitter.com/anurse)
+Par [Andrew Stanton-infirmière](https://twitter.com/anurse)
 
-Cet article fournit des conseils pour la création d’API basées sur SignalR.
+Cet article fournit des conseils sur la création d' SignalR API basées sur.
 
-## <a name="use-custom-object-parameters-to-ensure-backwards-compatibility"></a>Utiliser les paramètres de l’objet personnalisé pour garantir la compatibilité descendante
+## <a name="use-custom-object-parameters-to-ensure-backwards-compatibility"></a>Utiliser des paramètres d’objet personnalisés pour garantir la compatibilité descendante
 
-Ajout de paramètres à une méthode de concentrateur SignalR (sur le client ou le serveur) est un *modification avec rupture*. Cela signifie que les serveurs/clients plus anciens obtenez des erreurs lorsqu’ils tentent d’appeler la méthode sans le nombre approprié de paramètres. Toutefois, l’ajout de propriétés à un paramètre d’objet personnalisé est **pas** une modification avec rupture. Cela peut être utilisé pour concevoir des API compatibles qui résistent aux modifications sur le client ou le serveur.
+L’ajout de paramètres à une SignalR méthode de concentrateur (sur le client ou le serveur) est une *modification avec rupture*. Cela signifie que les clients/serveurs plus anciens recevront des erreurs lorsqu’ils essaieront d’appeler la méthode sans le nombre approprié de paramètres. Toutefois, l’ajout de propriétés à un paramètre d’objet personnalisé n’est **pas** une modification avec rupture. Cela peut être utilisé pour concevoir des API compatibles qui résistent aux modifications sur le client ou le serveur.
 
 Par exemple, considérez une API côté serveur comme suit :
 
 [!code-csharp[ParameterBasedOldVersion](api-design/sample/Samples.cs?name=ParameterBasedOldVersion)]
 
-Le client JavaScript appelle cette méthode à l’aide `invoke` comme suit :
+Le client JavaScript appelle cette méthode à l’aide `invoke` de comme suit :
 
 [!code-typescript[CallWithOneParameter](api-design/sample/Samples.ts?name=CallWithOneParameter)]
 
-Si vous ajoutez ultérieurement un deuxième paramètre à la méthode de serveur, les clients plus anciens ne fournissent cette valeur de paramètre. Exemple :
+Si vous ajoutez ultérieurement un deuxième paramètre à la méthode serveur, les clients plus anciens ne fourniront pas cette valeur de paramètre. Par exemple :
 
 [!code-csharp[ParameterBasedNewVersion](api-design/sample/Samples.cs?name=ParameterBasedNewVersion)]
 
-Lorsque l’ancien client tente d’appeler cette méthode, il obtiendra une erreur ressemblant à ceci :
+Lorsque l’ancien client tente d’appeler cette méthode, il obtient une erreur semblable à celle-ci :
 
 ```
 Microsoft.AspNetCore.SignalR.HubException: Failed to invoke 'GetTotalLength' due to an error on the server.
 ```
 
-Sur le serveur, vous verrez un message de journal comme suit :
+Sur le serveur, un message de journal semblable à celui-ci s’affiche :
 
 ```
 System.IO.InvalidDataException: Invocation provides 1 argument(s) but target expects 2.
 ```
 
-L’ancien client envoyé uniquement un seul paramètre, mais le API de serveur plus récent requis deux paramètres. Utilisation d’objets personnalisés en tant que paramètres offre plus de souplesse. Nous allons reconcevoir l’API d’origine pour utiliser un objet personnalisé :
+L’ancien client n’a envoyé qu’un seul paramètre, mais l’API serveur la plus récente nécessitait deux paramètres. L’utilisation d’objets personnalisés comme paramètres vous offre plus de souplesse. Nous allons modifier la conception de l’API d’origine pour utiliser un objet personnalisé :
 
 [!code-csharp[ObjectBasedOldVersion](api-design/sample/Samples.cs?name=ObjectBasedOldVersion)]
 
@@ -56,28 +64,28 @@ L’ancien client envoyé uniquement un seul paramètre, mais le API de serveur 
 
 [!code-typescript[CallWithObject](api-design/sample/Samples.ts?name=CallWithObject)]
 
-Au lieu d’ajouter un paramètre, ajoutez une propriété à la `TotalLengthRequest` objet :
+Au lieu d’ajouter un paramètre, ajoutez une propriété à l' `TotalLengthRequest` objet :
 
 [!code-csharp[ObjectBasedNewVersion](api-design/sample/Samples.cs?name=ObjectBasedNewVersion&highlight=4,9-13)]
 
-Lorsque l’ancien client envoie un seul paramètre, le fichier extra `Param2` propriété restera `null`. Vous pouvez détecter un message envoyé par un client plus ancien en vérifiant la `Param2` pour `null` et appliquer une valeur par défaut. Un nouveau client peut envoyer les deux paramètres.
+Lorsque l’ancien client envoie un seul paramètre, la `Param2` propriété supplémentaire est conservée `null` . Vous pouvez détecter un message envoyé par un ancien client en activant la `Param2` pour `null` et en appliquant une valeur par défaut. Un nouveau client peut envoyer les deux paramètres.
 
 [!code-typescript[CallWithObjectNew](api-design/sample/Samples.ts?name=CallWithObjectNew)]
 
-La même technique fonctionne pour les méthodes définies sur le client. Vous pouvez envoyer un objet personnalisé à partir du serveur :
+La même technique fonctionne pour les méthodes définies sur le client. Vous pouvez envoyer un objet personnalisé du côté serveur :
 
 [!code-csharp[ClientSideObjectBasedOld](api-design/sample/Samples.cs?name=ClientSideObjectBasedOld)]
 
-Du côté client, vous accéder à la `Message` propriété plutôt qu’à l’aide d’un paramètre :
+Côté client, vous accédez à la `Message` propriété au lieu d’utiliser un paramètre :
 
 [!code-typescript[OnWithObjectOld](api-design/sample/Samples.ts?name=OnWithObjectOld)]
 
-Si vous décidez d’ajouter l’expéditeur du message à la charge utile, ajoutez une propriété à l’objet :
+Si vous décidez par la suite d’ajouter l’expéditeur du message à la charge utile, ajoutez une propriété à l’objet :
 
 [!code-csharp[ClientSideObjectBasedNew](api-design/sample/Samples.cs?name=ClientSideObjectBasedNew&highlight=5)]
 
-Les clients plus anciens ne sont pas en avoir besoin le `Sender` valeur, donc ils amèneront l’ignorer. Un nouveau client peut l’accepter en mettant à jour pour lire la nouvelle propriété :
+Les clients plus anciens n’attendent pas la `Sender` valeur, donc ils l’ignorent. Un nouveau client peut l’accepter en mettant à jour pour lire la nouvelle propriété :
 
 [!code-typescript[OnWithObjectNew](api-design/sample/Samples.ts?name=OnWithObjectNew&highlight=2-5)]
 
-Dans ce cas, le nouveau client est également à tolérance de panne d’un ancien serveur qui ne fournit pas la `Sender` valeur. Étant donné que l’ancien serveur ne fournit le `Sender` valeur, le client vérifie si elle existe avant d’y accéder.
+Dans ce cas, le nouveau client tolère également un ancien serveur qui ne fournit pas la `Sender` valeur. Étant donné que l’ancien serveur ne fournit pas la `Sender` valeur, le client vérifie s’il existe avant d’y accéder.

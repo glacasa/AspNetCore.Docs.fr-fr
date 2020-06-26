@@ -6,25 +6,27 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-ephemeral
-ms.openlocfilehash: 22a332230e15256dc33fd1d06f2da3ea8d34d3bc
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: baec19ef0c0b1e2bf5c176bf1b3c2245de0d3dd0
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776888"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408914"
 ---
 # <a name="ephemeral-data-protection-providers-in-aspnet-core"></a>Fournisseurs de protection des données éphémères dans ASP.NET Core
 
 <a name="data-protection-implementation-key-storage-ephemeral"></a>
 
-Il existe des scénarios dans lesquels une application a `IDataProtectionProvider`besoin d’un inepte. Par exemple, le développeur peut simplement expérimenter une application console unique, ou l’application elle-même est temporaire (il s’agit d’un script ou d’un projet de test unitaire). Pour prendre en charge ces scénarios, le package [Microsoft. AspNetCore. dataprotection](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/) comprend un type `EphemeralDataProtectionProvider`. Ce type fournit une implémentation de base `IDataProtectionProvider` de dont le dépôt de clé est détenu uniquement en mémoire et n’est pas écrit dans un magasin de stockage.
+Il existe des scénarios dans lesquels une application a besoin d’un inepte `IDataProtectionProvider` . Par exemple, le développeur peut simplement expérimenter une application console unique, ou l’application elle-même est temporaire (il s’agit d’un script ou d’un projet de test unitaire). Pour prendre en charge ces scénarios, le package [Microsoft. AspNetCore. dataprotection](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/) comprend un type `EphemeralDataProtectionProvider` . Ce type fournit une implémentation de base de `IDataProtectionProvider` dont le dépôt de clé est détenu uniquement en mémoire et n’est pas écrit dans un magasin de stockage.
 
-Chaque instance de `EphemeralDataProtectionProvider` utilise sa propre clé principale unique. Par conséquent, si `IDataProtector` une racine à un `EphemeralDataProtectionProvider` génère une charge utile protégée, cette charge utile ne peut être déprotégée que `IDataProtector` par un équivalent (à partir de la même chaîne d' [objectif](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-consumer-apis-purposes) ) associé à la même `EphemeralDataProtectionProvider` instance.
+Chaque instance de `EphemeralDataProtectionProvider` utilise sa propre clé principale unique. Par conséquent, si une `IDataProtector` racine à un `EphemeralDataProtectionProvider` génère une charge utile protégée, cette charge utile ne peut être déprotégée que par un équivalent `IDataProtector` (à partir de la même chaîne d' [objectif](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-consumer-apis-purposes) ) associé à la même `EphemeralDataProtectionProvider` instance.
 
 L’exemple suivant illustre l’instanciation d’un `EphemeralDataProtectionProvider` et son utilisation pour protéger et ôter la protection des données.
 

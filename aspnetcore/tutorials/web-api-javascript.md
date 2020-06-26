@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 11/26/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/web-api-javascript
-ms.openlocfilehash: c3eb003812a31d8cf3168453fcc11601ffba19fb
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 4031289e43af75ef2026661dbecbbbce30593d43
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774351"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407978"
 ---
 # <a name="tutorial-call-an-aspnet-core-web-api-with-javascript"></a>Didacticiel : appeler une API Web ASP.NET Core avec JavaScript
 
@@ -42,7 +44,7 @@ Pour ASP.NET Core 2.2, consultez la version 2.2 de [Appeler l’API web avec J
 
 Dans cette section, vous allez ajouter une page HTML contenant des formulaires permettant de créer et de gérer des éléments de tâche. Des gestionnaires d’événements sont joints aux éléments de la page. Les gestionnaires d’événements génèrent des requêtes HTTP pour les méthodes d’action de l’API web. La fonction `fetch` de l’API Fetch lance chaque requête HTTP.
 
-La `fetch` fonction retourne un objet promise, qui contient une réponse http représentée sous `Response` la forme [d’un objet](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise) . Un modèle courant consiste à extraire le corps de réponse JSON en appelant la fonction `json` sur l'objet `Response`. JavaScript met à jour la page avec les détails de la réponse de l’API Web.
+La `fetch` fonction retourne un [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise) objet promise, qui contient une réponse http représentée sous la forme d’un `Response` objet. Un modèle courant consiste à extraire le corps de réponse JSON en appelant la fonction `json` sur l'objet `Response`. JavaScript met à jour la page avec les détails de la réponse de l’API Web.
 
 L'appel `fetch` le plus simple accepte un seul paramètre représentant l’itinéraire. Un deuxième paramètre, connu sous le nom d’objet `init`, est facultatif. `init` est utilisé pour configurer la requête HTTP.
 
@@ -54,18 +56,18 @@ L'appel `fetch` le plus simple accepte un seul paramètre représentant l’itin
 
 1. Créez un dossier *js* à l’intérieur du dossier *wwwroot* .
 
-1. Ajoutez un fichier HTML nommé *index. html* au dossier *wwwroot* . Remplacez le contenu de *index. html* par le balisage suivant :
+1. Ajoutez un fichier HTML nommé *index.html* dans le dossier *wwwroot* . Remplacez le contenu de *index.html* par le balisage suivant :
 
     [!code-html[](first-web-api/samples/3.0/TodoApi/wwwroot/index.html)]
 
-1. Ajoutez un fichier JavaScript nommé *site. js* au dossier *wwwroot/js* . Remplacez le contenu de *site. js* par le code suivant :
+1. Ajoutez un fichier JavaScript nommé *site.js* dans le dossier *wwwroot/js* . Remplacez le contenu de *site.js* par le code suivant :
 
     [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_SiteJs)]
 
 Vous devrez peut-être changer les paramètres de lancement du projet ASP.NET Core pour tester la page HTML localement :
 
 1. Ouvrez *Properties\launchSettings.json*.
-1. Supprimez `launchUrl` la propriété pour forcer l’ouverture de l’application à *index. html*&mdash;, le fichier par défaut du projet.
+1. Supprimez la `launchUrl` propriété pour forcer l’ouverture de l’application à *index.html* &mdash; fichier par défaut du projet.
 
 Cet exemple appelle toutes les méthodes CRUD de l’API web. Les explications suivantes traitent des demandes de l’API web.
 

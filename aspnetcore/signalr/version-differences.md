@@ -7,17 +7,19 @@ ms.author: bradyg
 ms.date: 11/21/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: b5899f816dc5a5f8ff4c3f05c8e2c54ded5fc47b
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: d63e9077ba23c3783d7ce1ceb9c9683bcb0d3a29
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84756039"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408888"
 ---
 # <a name="differences-between-aspnet-signalr-and-aspnet-core-signalr"></a>Différences entre ASP.NET SignalR et ASP.net CoreSignalR
 
@@ -141,11 +143,11 @@ Le modèle ScaleOut pour ASP.NET SignalR permet aux clients de se reconnecter et
 
 Dans ASP.NET Core SignalR , le modèle de connexion a été simplifié. Les connexions sont établies directement sur un concentrateur unique, au lieu d’une connexion unique utilisée pour partager l’accès à plusieurs hubs.
 
-### <a name="streaming"></a>Streaming
+### <a name="streaming"></a>Diffusion en continu
 
 ASP.NET Core SignalR prend désormais en charge la [diffusion en continu des données](xref:signalr/streaming) du concentrateur vers le client.
 
-### <a name="state"></a>État
+### <a name="state"></a>State
 
 La possibilité de passer un état arbitraire entre les clients et le Hub (souvent appelé `HubState` ) a été supprimée, ainsi que la prise en charge des messages de progression. Il n’existe aucun équivalent de proxy de Hub pour le moment.
 
@@ -286,7 +288,7 @@ ASP.NET SignalR prend en charge les SQL Server et les ReDim. ASP.NET Core Signal
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* [Concentr](xref:signalr/hubs)
+* [Hubs](xref:signalr/hubs)
 * [Client JavaScript](xref:signalr/javascript-client)
 * [Client .NET](xref:signalr/dotnet-client)
 * [Plateformes prises en charge](xref:signalr/supported-platforms)

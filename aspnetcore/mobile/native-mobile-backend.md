@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mobile/native-mobile-backend
-ms.openlocfilehash: 1ffaf61bb21f44681f530e35e746a30e9e158c6d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a6d99e4a8f05125e6e7968b088c5b7e29cb75e6c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777265"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407562"
 ---
 # <a name="create-backend-services-for-native-mobile-apps-with-aspnet-core"></a>Créer des services backend pour les applications mobiles natives avec ASP.NET Core
 
@@ -69,7 +71,7 @@ L’application doit répondre à toutes les demandes adressées au port 5000. P
 > [!NOTE]
 > Vérifiez que vous exécutez l’application directement et non pas derrière IIS Express, qui ignore par défaut les demandes non locales. Exécutez [dotnet run](/dotnet/core/tools/dotnet-run) à partir d’une invite de commandes, ou choisissez le profil du nom d’application dans la liste déroulante Cible de débogage dans la barre d’outils de Visual Studio.
 
-Ajoutez une classe de modèle pour représenter des éléments de tâche à effectuer. Marquez les champs obligatoires `[Required]` avec l’attribut :
+Ajoutez une classe de modèle pour représenter des éléments de tâche à effectuer. Marquez les champs obligatoires avec l' `[Required]` attribut :
 
 [!code-csharp[](native-mobile-backend/sample/ToDoApi/src/ToDoApi/Models/ToDoItem.cs)]
 
@@ -114,7 +116,7 @@ Vous pouvez tester votre nouvelle méthode d’API via différents outils, comme
 
 ### <a name="creating-items"></a>Création d’éléments
 
-Par convention, la création d’éléments de données est mappée au verbe HTTP POST. Un `Create` `[HttpPost]` attribut est appliqué à la méthode et accepte une `ToDoItem` instance. Étant donné `item` que l’argument est passé dans le corps de la publication, ce paramètre `[FromBody]` spécifie l’attribut.
+Par convention, la création d’éléments de données est mappée au verbe HTTP POST. `Create`Un `[HttpPost]` attribut est appliqué à la méthode et accepte une `ToDoItem` instance. Étant donné que l' `item` argument est passé dans le corps de la publication, ce paramètre spécifie l' `[FromBody]` attribut.
 
 À l’intérieur de la méthode, la validité et l’existence préalable de l’élément dans le magasin de données sont vérifiées et, si aucun problème ne se produit, il est ajouté via le référentiel. La vérification `ModelState.IsValid` effectue la [validation du modèle](../mvc/models/validation.md) et doit être effectuée dans chaque méthode d’API qui accepte une entrée utilisateur.
 

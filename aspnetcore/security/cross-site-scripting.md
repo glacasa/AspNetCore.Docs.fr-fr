@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/02/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/cross-site-scripting
-ms.openlocfilehash: 5a14042db6250d5f7a47acaf4083b44272c606ab
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a94fe1612c023468238f09a91ddb0346b65d52ba
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777486"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408017"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>Empêcher les scripts entre sites (XSS) dans ASP.NET Core
 
@@ -26,23 +28,23 @@ XSS (cross-site scripting) est une faille de sécurité qui permet à une person
 
 ## <a name="protecting-your-application-against-xss"></a>Protection de votre application contre XSS
 
-À un niveau de base, XSS fonctionne en détrucnt votre application `<script>` en insérant une balise dans votre page rendue, `On*` ou en insérant un événement dans un élément. Les développeurs doivent utiliser les étapes de prévention suivantes pour éviter d’introduire du code XSS dans leur application.
+À un niveau de base, XSS fonctionne en détrucnt votre application en insérant une `<script>` balise dans votre page rendue, ou en insérant un `On*` événement dans un élément. Les développeurs doivent utiliser les étapes de prévention suivantes pour éviter d’introduire du code XSS dans leur application.
 
 1. Ne placez jamais de données non fiables dans votre entrée HTML, sauf si vous suivez les autres étapes ci-dessous. Les données non approuvées sont toutes les données qui peuvent être contrôlées par une personne malveillante, les entrées de formulaire HTML, les chaînes de requête, les en-têtes HTTP, même les données provenant d’une base de données comme une personne malveillante peuvent être en mesure de violer votre base de données, même si elles ne peuvent pas violer votre application.
 
-2. Avant de placer des données non fiables à l’intérieur d’un élément HTML, assurez-vous qu’elles sont encodées en HTML. L’encodage HTML prend des &lt; caractères tels que et les modifie dans un &amp;format sécurisé comme lt ;
+2. Avant de placer des données non fiables à l’intérieur d’un élément HTML, assurez-vous qu’elles sont encodées en HTML. L’encodage HTML prend des caractères tels que &lt; et les modifie dans un format sécurisé comme &amp; lt ;
 
 3. Avant de placer des données non fiables dans un attribut HTML, assurez-vous qu’elles sont encodées en HTML. L’encodage d’attribut HTML est un sur-ensemble de l’encodage HTML et encode des caractères supplémentaires tels que « et ».
 
-4. Avant de placer des données non fiables dans JavaScript, placez les données dans un élément HTML dont vous récupérez le contenu au moment de l’exécution. Si ce n’est pas possible, assurez-vous que les données sont encodées en JavaScript. L’encodage JavaScript prend des caractères dangereux pour JavaScript et les remplace par leur hex &lt; , par exemple est encodé sous `\u003C`la forme.
+4. Avant de placer des données non fiables dans JavaScript, placez les données dans un élément HTML dont vous récupérez le contenu au moment de l’exécution. Si ce n’est pas possible, assurez-vous que les données sont encodées en JavaScript. L’encodage JavaScript prend des caractères dangereux pour JavaScript et les remplace par leur Hex, par exemple &lt; est encodé sous la forme `\u003C` .
 
 5. Avant de placer des données non fiables dans une chaîne de requête d’URL, assurez-vous qu’elles sont encodées dans l’URL.
 
 ## <a name="html-encoding-using-razor"></a>Encodage HTML à l’aide deRazor
 
-Le Razor moteur utilisé dans MVC encode automatiquement toute la sortie source à partir de variables, sauf si vous travaillez vraiment difficile pour l’empêcher. Elle utilise des règles d’encodage d’attribut HTML *@* chaque fois que vous utilisez la directive. Comme l’encodage d’attribut HTML est un sur-ensemble de l’encodage HTML, vous n’avez pas à vous soucier de savoir si vous devez utiliser l’encodage HTML ou l’encodage d’attribut HTML. Vous devez vous assurer que vous utilisez uniquement @ dans un contexte HTML, et non pas lors d’une tentative d’insertion d’une entrée non approuvée directement dans JavaScript. Les tag helpers encodent également l’entrée que vous utilisez dans les paramètres de balise.
+Le Razor moteur utilisé dans MVC encode automatiquement toute la sortie source à partir de variables, sauf si vous travaillez vraiment difficile pour l’empêcher. Elle utilise des règles d’encodage d’attribut HTML chaque fois que vous utilisez la *@* directive. Comme l’encodage d’attribut HTML est un sur-ensemble de l’encodage HTML, vous n’avez pas à vous soucier de savoir si vous devez utiliser l’encodage HTML ou l’encodage d’attribut HTML. Vous devez vous assurer que vous utilisez uniquement @ dans un contexte HTML, et non pas lors d’une tentative d’insertion d’une entrée non approuvée directement dans JavaScript. Les tag helpers encodent également l’entrée que vous utilisez dans les paramètres de balise.
 
-Prenez la vue Razor suivante :
+Prenez la Razor vue suivante :
 
 ```cshtml
 @{
@@ -52,7 +54,7 @@ Prenez la vue Razor suivante :
    @untrustedInput
    ```
 
-Cette vue renvoie le contenu de la variable *untrustedInput* . Cette variable comprend certains caractères qui sont utilisés dans les attaques XSS, &lt;à savoir « &gt;et. L’examen de la source montre la sortie rendue encodée comme suit :
+Cette vue renvoie le contenu de la variable *untrustedInput* . Cette variable comprend certains caractères qui sont utilisés dans les attaques XSS, à savoir &lt; «et &gt; . L’examen de la source montre la sortie rendue encodée comme suit :
 
 ```html
 &lt;&quot;123&quot;&gt;
@@ -144,7 +146,7 @@ Cela s’affiche dans le navigateur comme suit :
 ```
 
 >[!WARNING]
-> Ne concaténez pas d’entrée non fiable dans JavaScript pour créer des éléments DOM. Vous devez utiliser `createElement()` et assigner des valeurs de propriété `node.TextContent=`de manière appropriée `element.SetAttribute()` / `element[attribute]=` , par exemple, ou vous pouvez les utiliser pour vous exposer au XSS.
+> Ne concaténez pas d’entrée non fiable dans JavaScript pour créer des éléments DOM. Vous devez utiliser `createElement()` et assigner des valeurs de propriété de manière appropriée, par exemple `node.TextContent=` , ou vous pouvez les utiliser `element.SetAttribute()` / `element[attribute]=` pour vous exposer au XSS.
 
 ## <a name="accessing-encoders-in-code"></a>Accès aux encodeurs dans le code
 
@@ -179,7 +181,7 @@ var example = "\"Quoted Value with spaces and &\"";
    var encodedValue = _urlEncoder.Encode(example);
    ```
 
-Après l’encodage, la variable `%22Quoted%20Value%20with%20spaces%20and%20%26%22`EncodedValue contient. Les espaces, les guillemets, les signes de ponctuation et autres caractères non sécurisés sont codés en pourcentage à leur valeur hexadécimale, par exemple, un espace devient %20.
+Après l’encodage, la variable encodedValue contient `%22Quoted%20Value%20with%20spaces%20and%20%26%22` . Les espaces, les guillemets, les signes de ponctuation et autres caractères non sécurisés sont codés en pourcentage à leur valeur hexadécimale, par exemple, un espace devient %20.
 
 >[!WARNING]
 > N’utilisez pas d’entrée non approuvée dans le cadre d’un chemin d’URL. Transmettez toujours une entrée non fiable en tant que valeur de chaîne de requête.
@@ -188,13 +190,13 @@ Après l’encodage, la variable `%22Quoted%20Value%20with%20spaces%20and%20%26%
 
 ## <a name="customizing-the-encoders"></a>Personnalisation des encodeurs
 
-Par défaut, les encodeurs utilisent une liste sécurisée limitée à la plage Unicode latin de base et encodent tous les caractères en dehors de cette plage comme équivalents de code de caractère. Ce comportement affecte Razor également le rendu TagHelper et HtmlHelper, car il utilise les encodeurs pour générer vos chaînes.
+Par défaut, les encodeurs utilisent une liste sécurisée limitée à la plage Unicode latin de base et encodent tous les caractères en dehors de cette plage comme équivalents de code de caractère. Ce comportement affecte également Razor le rendu TagHelper et HtmlHelper, car il utilise les encodeurs pour générer vos chaînes.
 
 Le raisonnement derrière cela est de se protéger contre les bogues de navigateurs inconnus ou futurs (les bogues de navigateur précédents ont dépassé l’analyse en fonction du traitement de caractères non anglais). Si votre site Web utilise beaucoup de caractères non latins, tels que le chinois, le cyrillique ou d’autres, il ne s’agit probablement pas du comportement que vous souhaitez.
 
-Vous pouvez personnaliser les listes sécurisées de l’encodeur pour inclure les plages Unicode appropriées à `ConfigureServices()`votre application au démarrage, dans.
+Vous pouvez personnaliser les listes sécurisées de l’encodeur pour inclure les plages Unicode appropriées à votre application au démarrage, dans `ConfigureServices()` .
 
-Par exemple, en utilisant la configuration par défaut, vous Razor pouvez utiliser une HtmlHelper telle que celle-ci.
+Par exemple, en utilisant la configuration par défaut, vous pouvez utiliser une HtmlHelper telle que celle-ci Razor .
 
 ```html
 <p>This link text is in Chinese: @Html.ActionLink("汉语/漢語", "Index")</p>
@@ -206,7 +208,7 @@ Lorsque vous affichez la source de la page Web, vous voyez qu’elle a été ren
 <p>This link text is in Chinese: <a href="/">&#x6C49;&#x8BED;/&#x6F22;&#x8A9E;</a></p>
    ```
 
-Pour élargir les caractères traités comme sécurisés par l’encodeur, insérez la ligne suivante `ConfigureServices()` dans la `startup.cs`méthode dans ;
+Pour élargir les caractères traités comme sécurisés par l’encodeur, insérez la ligne suivante dans la `ConfigureServices()` méthode dans `startup.cs` ;
 
 ```csharp
 services.AddSingleton<HtmlEncoder>(
@@ -223,7 +225,7 @@ Cet exemple élargit la liste sécurisée pour inclure la plage Unicode CjkUnifi
 Les plages de liste sécurisée sont spécifiées sous la forme de graphiques de code Unicode, et non de langues. La [norme Unicode](https://unicode.org/) contient une liste de [graphiques de code](https://www.unicode.org/charts/index.html) que vous pouvez utiliser pour rechercher le graphique contenant vos caractères. Chaque encodeur, html, JavaScript et URL doivent être configurés séparément.
 
 > [!NOTE]
-> La personnalisation de la liste sécurisée affecte uniquement les encodeurs provenant de l’injection de sécurité. Si vous accédez directement à un encodeur par le biais `System.Text.Encodings.Web.*Encoder.Default` de, la valeur par défaut est l’utilisation de la Safeli Basic latin only.
+> La personnalisation de la liste sécurisée affecte uniquement les encodeurs provenant de l’injection de sécurité. Si vous accédez directement à un encodeur par `System.Text.Encodings.Web.*Encoder.Default` le biais de, la valeur par défaut est l’utilisation de la safeli Basic latin only.
 
 ## <a name="where-should-encoding-take-place"></a>Où l’encodage doit-il avoir lieu ?
 

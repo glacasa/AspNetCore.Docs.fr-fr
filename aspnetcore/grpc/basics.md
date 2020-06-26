@@ -1,11 +1,25 @@
 ---
-titre : Auteur : Description : monikerRange : ms. Author : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: Services gRPC avec C#
+author: juntaoluo
+description: Découvrez les concepts de base liés à l’écriture de services gRPC avec C#.
+monikerRange: '>= aspnetcore-3.0'
+ms.author: johluo
+ms.date: 07/03/2019
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: grpc/basics
+ms.openlocfilehash: 08c755cf078fe71d09e8c7af2cc16f5c427495f1
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407289"
 ---
 # <a name="grpc-services-with-c"></a>services gRPC avec C\#
 

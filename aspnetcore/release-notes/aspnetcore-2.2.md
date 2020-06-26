@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: aspnetcore-2.2
-ms.openlocfilehash: 3b510c7f4788a59145ef16720276fc7e4560f07e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: c2e23871866565a3f4ea0b0c72af5ec4fb770e6f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774143"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408706"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>Nouveautés d’ASP.NET Core 2.2
 
@@ -87,9 +89,9 @@ Pour plus d’informations, consultez [Hébergement in-process pour IIS](xref:ho
 
 ## <a name="signalr-java-client"></a>SignalRClient Java
 
-ASP.NET Core 2,2 introduit un client Java pour SignalR. Ce client prend en charge la connexion SignalR à un serveur ASP.net core à partir de code Java, y compris les applications Android.
+ASP.NET Core 2,2 introduit un client Java pour SignalR . Ce client prend en charge la connexion à un SignalR serveur ASP.net core à partir de code Java, y compris les applications Android.
 
-Pour plus d’informations, [consultez SignalR ASP.net Core Java client](https://docs.microsoft.com/aspnet/core/signalr/java-client?view=aspnetcore-2.2).
+Pour plus d’informations, consultez [ASP.net Core SignalR java client](https://docs.microsoft.com/aspnet/core/signalr/java-client?view=aspnetcore-2.2).
 
 ## <a name="cors-improvements"></a>Améliorations apportées à CORS
 

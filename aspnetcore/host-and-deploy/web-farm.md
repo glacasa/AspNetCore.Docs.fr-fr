@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: 37a50fa2939eb31e66925fa907212d54577bd20b
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 13c4a8e287e4b62a1429f67fbe83ff5b0dc65f52
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106570"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408277"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>Héberger ASP.NET Core dans une batterie de serveurs web
 
@@ -68,7 +70,7 @@ Les scénarios suivants ne nécessitent pas une configuration supplémentaire, m
 | -------- | ------------------- |
 | Authentification | Protection des données (voir <xref:security/data-protection/configuration/overview>).<br><br>Pour plus d’informations, consultez <xref:security/authentication/cookie> et <xref:security/cookie-sharing>. |
 | Identity | Authentification et configuration de la base de données.<br><br>Pour plus d’informations, consultez <xref:security/authentication/identity>. |
-| Session | Protection des données (cookies chiffrés) (voir <xref:security/data-protection/configuration/overview>) et Mise en cache (voir <xref:performance/caching/distributed>).<br><br>Pour plus d’informations, consultez [session and State Management : état de session](xref:fundamentals/app-state#session-state). |
+| session | Protection des données (cookies chiffrés) (voir <xref:security/data-protection/configuration/overview>) et Mise en cache (voir <xref:performance/caching/distributed>).<br><br>Pour plus d’informations, consultez [session and State Management : état de session](xref:fundamentals/app-state#session-state). |
 | TempData | Protection des données (cookies chiffrés) (consultez <xref:security/data-protection/configuration/overview> ) ou session (voir la rubrique [gestion de session et d’État : état de session](xref:fundamentals/app-state#session-state)).<br><br>Pour plus d’informations, consultez [session and State Management : TempData](xref:fundamentals/app-state#tempdata). |
 | Anti-contrefaçon | Protection des données (voir <xref:security/data-protection/configuration/overview>).<br><br>Pour plus d’informations, consultez <xref:security/anti-request-forgery>. |
 

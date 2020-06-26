@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/20/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/configuration/options
-ms.openlocfilehash: 9a9febba060cca591f2cbcdc03cb4c35edcfdda7
-ms.sourcegitcommit: 74d80a36103fdbd54baba0118535a4647f511913
+ms.openlocfilehash: 300b26c198e6ea07fe83af8fb9ae967e814396fb
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84529661"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408355"
 ---
 # <a name="options-pattern-in-aspnet-core"></a>Modèle d’options dans ASP.NET Core
 
@@ -116,7 +118,7 @@ Options nommées :
 * Sont utiles lorsque plusieurs sections de configuration sont liées aux mêmes propriétés.
 * Respecte la casse.
 
-Prenons le fichier *appSettings. JSON* suivant :
+Prenez en compte les *appsettings.jssuivantes sur* le fichier :
 
 [!code-json[](~/fundamentals/configuration/options/samples/3.x/OptionsSample/appsettings.NO.json)]
 
@@ -163,7 +165,7 @@ Nous vous recommandons de transmettre un délégué de configuration à [Configu
 
 La validation des options permet de valider les valeurs d’option.
 
-Prenons le fichier *appSettings. JSON* suivant :
+Prenez en compte les *appsettings.jssuivantes sur* le fichier :
 
 [!code-json[](~/fundamentals/configuration/options/samples/3.x/OptionsValidationSample/appsettings.Dev2.json)]
 
@@ -269,9 +271,9 @@ public void Configure(IApplicationBuilder app,
 
 N’utilisez pas <xref:Microsoft.Extensions.Options.IOptions%601> ou <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> dans `Startup.ConfigureServices`. Un état d’options incohérent peut exister en raison de l’ordre des inscriptions de service.
 
-## <a name="optionsconfigurationextensions-nuget-package"></a>Package NuGet options. ConfigurationExtensions
+## <a name="optionsconfigurationextensions-nuget-package"></a>Package NuGet Options.ConfigurationExtensions
 
-Le package [Microsoft. extensions. options. ConfigurationExtensions](https://www.nuget.org/packages/Microsoft.Extensions.Options.ConfigurationExtensions/) est implicitement référencé dans les applications ASP.net core.
+Le package [urationExtensionsMicrosoft.Extensions.Options.Config](https://www.nuget.org/packages/Microsoft.Extensions.Options.ConfigurationExtensions/) est implicitement référencé dans les applications ASP.net core.
 
 ::: moniker-end
 
@@ -469,7 +471,7 @@ L’image suivante montre les valeurs `option1` et `option2` initiales chargées
 snapshot option1 = value1_from_json, snapshot option2 = -1
 ```
 
-Changez les valeurs dans le fichier *appsettings.json* en `value1_from_json UPDATED` et `200`. Enregistrez le fichier *appSettings. JSON* . Actualisez le navigateur pour constater la mise à jour des valeurs des options :
+Changez les valeurs dans le fichier *appsettings.json* en `value1_from_json UPDATED` et `200`. Enregistrez le *appsettings.jsdans* le fichier. Actualisez le navigateur pour constater la mise à jour des valeurs des options :
 
 ```html
 snapshot option1 = value1_from_json UPDATED, snapshot option2 = 200
@@ -479,7 +481,7 @@ snapshot option1 = value1_from_json UPDATED, snapshot option2 = 200
 
 La prise en charge des options nommées avec <xref:Microsoft.Extensions.Options.IConfigureNamedOptions%601> est illustrée dans l’exemple 6 de l’exemple d’application.
 
-La prise en charge des options nommées permet à l’application de faire la distinction entre les configurations d’options nommées. Dans l’exemple d’application, les options nommées sont déclarées avec [OptionsServiceCollectionExtensions. configure](xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.Configure*), qui appelle [ConfigureNamedOptions \<TOptions> . Configurez](xref:Microsoft.Extensions.Options.ConfigureNamedOptions`1.Configure*) la méthode d’extension. Les options nommées respectent la casse.
+La prise en charge des options nommées permet à l’application de faire la distinction entre les configurations d’options nommées. Dans l’exemple d’application, les options nommées sont déclarées avec [OptionsServiceCollectionExtensions.Configurer](xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.Configure*), qui appelle [ConfigureNamedOptions \<TOptions> . Configurez](xref:Microsoft.Extensions.Options.ConfigureNamedOptions`1.Configure*) la méthode d’extension. Les options nommées respectent la casse.
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example6)]
 
@@ -883,7 +885,7 @@ L’image suivante montre les valeurs `option1` et `option2` initiales chargées
 snapshot option1 = value1_from_json, snapshot option2 = -1
 ```
 
-Changez les valeurs dans le fichier *appsettings.json* en `value1_from_json UPDATED` et `200`. Enregistrez le fichier *appSettings. JSON* . Actualisez le navigateur pour constater la mise à jour des valeurs des options :
+Changez les valeurs dans le fichier *appsettings.json* en `value1_from_json UPDATED` et `200`. Enregistrez le *appsettings.jsdans* le fichier. Actualisez le navigateur pour constater la mise à jour des valeurs des options :
 
 ```html
 snapshot option1 = value1_from_json UPDATED, snapshot option2 = 200
@@ -893,7 +895,7 @@ snapshot option1 = value1_from_json UPDATED, snapshot option2 = 200
 
 La prise en charge des options nommées avec <xref:Microsoft.Extensions.Options.IConfigureNamedOptions%601> est illustrée dans l’exemple 6 de l’exemple d’application.
 
-La prise en charge des options nommées permet à l’application de faire la distinction entre les configurations d’options nommées. Dans l’exemple d’application, les options nommées sont déclarées avec [OptionsServiceCollectionExtensions. configure](xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.Configure*), qui appelle [ConfigureNamedOptions \<TOptions> . Configurez](xref:Microsoft.Extensions.Options.ConfigureNamedOptions`1.Configure*) la méthode d’extension. Les options nommées respectent la casse.
+La prise en charge des options nommées permet à l’application de faire la distinction entre les configurations d’options nommées. Dans l’exemple d’application, les options nommées sont déclarées avec [OptionsServiceCollectionExtensions.Configurer](xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.Configure*), qui appelle [ConfigureNamedOptions \<TOptions> . Configurez](xref:Microsoft.Extensions.Options.ConfigureNamedOptions`1.Configure*) la méthode d’extension. Les options nommées respectent la casse.
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example6)]
 

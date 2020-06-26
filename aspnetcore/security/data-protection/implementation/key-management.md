@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-management
-ms.openlocfilehash: 0f54ceedf3558fb4fa2349903461fdfdb4dc02e6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 68913d13c97ba6be73dabf79e03c146a37388ad3
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776901"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408940"
 ---
 # <a name="key-management-in-aspnet-core"></a>Gestion des clés dans ASP.NET Core
 
@@ -65,7 +67,7 @@ services.AddDataProtection()
        .SetDefaultKeyLifetime(TimeSpan.FromDays(14));
 ```
 
-Un administrateur peut également modifier l’ensemble du système par défaut, bien qu’un appel `SetDefaultKeyLifetime` explicite à remplace toute stratégie à l’ensemble du système. La durée de vie de la clé par défaut ne peut pas être inférieure à 7 jours.
+Un administrateur peut également modifier l’ensemble du système par défaut, bien qu’un appel explicite à `SetDefaultKeyLifetime` remplace toute stratégie à l’ensemble du système. La durée de vie de la clé par défaut ne peut pas être inférieure à 7 jours.
 
 ## <a name="automatic-key-ring-refresh"></a>Actualisation automatique des sonneries de touche
 
@@ -74,11 +76,11 @@ Lorsque le système de protection des données est initialisé, il lit l’annea
 >[!WARNING]
 > Les développeurs doivent très rarement (voire jamais) utiliser directement les API de gestion de clés. Le système de protection des données effectuera la gestion automatique des clés comme décrit ci-dessus.
 
-Le système de protection des données expose `IKeyManager` une interface qui peut être utilisée pour inspecter et apporter des modifications à l’anneau de clé. Le système DI qui a fourni l’instance `IDataProtectionProvider` de peut également fournir une instance `IKeyManager` de pour votre consommation. Vous pouvez également extraire `IKeyManager` directement du `IServiceProvider` comme dans l’exemple ci-dessous.
+Le système de protection des données expose une interface `IKeyManager` qui peut être utilisée pour inspecter et apporter des modifications à l’anneau de clé. Le système DI qui a fourni l’instance de `IDataProtectionProvider` peut également fournir une instance de `IKeyManager` pour votre consommation. Vous pouvez également extraire `IKeyManager` directement du `IServiceProvider` comme dans l’exemple ci-dessous.
 
 Toute opération qui modifie l’anneau de clé (création explicite d’une nouvelle clé ou exécution d’un révocation) invalidera le cache en mémoire. Le prochain appel à `Protect` ou `Unprotect` entraînera la relecture par le système de protection des données de l’anneau de clé et la recréation du cache.
 
-L’exemple ci-dessous illustre `IKeyManager` l’utilisation de l’interface pour inspecter et manipuler l’anneau clé, y compris la révocation manuelle des clés existantes et la génération manuelle d’une nouvelle clé.
+L’exemple ci-dessous illustre l’utilisation `IKeyManager` de l’interface pour inspecter et manipuler l’anneau clé, y compris la révocation manuelle des clés existantes et la génération manuelle d’une nouvelle clé.
 
 [!code-csharp[](key-management/samples/key-management.cs)]
 

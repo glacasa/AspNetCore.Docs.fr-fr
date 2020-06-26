@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/error-handling
-ms.openlocfilehash: bbd16e2e045a24f018eb59b67dfdf50d9bed6f32
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 46654b61d631ef36a6501c6bf6c187ec064a7c9a
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775035"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407679"
 ---
 # <a name="handle-errors-in-aspnet-core"></a>Gérer les erreurs dans ASP.NET Core
 
@@ -26,7 +28,7 @@ Par [Tom Dykstra](https://github.com/tdykstra/) et [Steve Smith](https://ardalis
 
 Cet article décrit les approches courantes de gestion des erreurs dans ASP.NET Core Web Apps. Consultez <xref:web-api/handle-errors> pour les API Web.
 
-[Affichez ou téléchargez l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples). ([Comment télécharger](xref:index#how-to-download-a-sample).) L’article contient des instructions sur la façon de définir des directives de`#if`préprocesseur (, `#endif`, `#define`) dans l’exemple d’application pour activer différents scénarios.
+[Affichez ou téléchargez l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples). ([Comment télécharger](xref:index#how-to-download-a-sample).) L’article contient des instructions sur la façon de définir des directives de préprocesseur ( `#if` , `#endif` , `#define` ) dans l’exemple d’application pour activer différents scénarios.
 
 ## <a name="developer-exception-page"></a>Page d’exceptions du développeur
 
@@ -44,7 +46,7 @@ Cette page inclut les informations suivantes sur l’exception et la demande :
 * Arborescence des appels de procédure
 * Paramètres de la chaîne de requête (le cas échéant)
 * Cookies (le cas échéant)
-* En-têtes
+* headers
 
 Pour afficher la Page d’exceptions du développeur dans [l’exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples), utilisez la directive de préprocesseur `DevEnvironment` et sélectionnez **Déclencher une exception** sur la page d’accueil.
 
@@ -59,7 +61,7 @@ Dans l’exemple suivant, <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExt
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_DevPageAndHandlerPage&highlight=5-9)]
 
-Le Razor modèle d’application pages fournit une page d’erreur (*. cshtml*) <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> et`ErrorModel`une classe () dans le dossier *pages* . Pour une application MVC, le modèle de projet comprend une méthode d’action d’erreur et un affichage correspondant. Voici la méthode d’action :
+Le Razor modèle d’application pages fournit une page d’erreur (*. cshtml*) et une <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> classe ( `ErrorModel` ) dans le dossier *pages* . Pour une application MVC, le modèle de projet comprend une méthode d’action d’erreur et un affichage correspondant. Voici la méthode d’action :
 
 ```csharp
 [AllowAnonymous]
@@ -70,7 +72,7 @@ public IActionResult Error()
 }
 ```
 
-Ne Marquez pas la méthode d’action du gestionnaire d’erreurs avec des `HttpGet`attributs de méthode http, tels que. Les verbes explicites empêchent certaines demandes d’atteindre la méthode. Autorisez l’accès anonyme à la méthode afin que les utilisateurs non authentifiés puissent recevoir la vue des erreurs.
+Ne Marquez pas la méthode d’action du gestionnaire d’erreurs avec des attributs de méthode HTTP, tels que `HttpGet` . Les verbes explicites empêchent certaines demandes d’atteindre la méthode. Autorisez l’accès anonyme à la méthode afin que les utilisateurs non authentifiés puissent recevoir la vue des erreurs.
 
 ### <a name="access-the-exception"></a>Accéder à l'exception
 
@@ -139,7 +141,7 @@ La méthode d’extension <xref:Microsoft.AspNetCore.Builder.StatusCodePagesExte
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_StatusCodePagesWithRedirect)]
 
-Le modèle d’URL peut comporter un espace réservé `{0}` pour le code d’état, comme dans l’exemple. S’il commence par un tilde (~), celui-ci est remplacé par le `PathBase` de l’application. Si vous pointez vers un point de terminaison au sein de l’application, Razor créez une vue ou une page MVC pour le point de terminaison. Pour obtenir Razor un exemple de pages, consultez *pages/StatusCode. cshtml* dans l' [exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples).
+Le modèle d’URL peut comporter un espace réservé `{0}` pour le code d’état, comme dans l’exemple. S’il commence par un tilde (~), celui-ci est remplacé par le `PathBase` de l’application. Si vous pointez vers un point de terminaison au sein de l’application, créez une vue ou une Razor page MVC pour le point de terminaison. Pour obtenir un Razor exemple de pages, consultez *pages/StatusCode. cshtml* dans l' [exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples).
 
 Cette méthode est généralement utilisée lorsque l’application :
 
@@ -155,14 +157,14 @@ La méthode d’extension <xref:Microsoft.AspNetCore.Builder.StatusCodePagesExte
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_StatusCodePagesWithReExecute)]
 
-Si vous pointez vers un point de terminaison au sein de l’application, Razor créez une vue ou une page MVC pour le point de terminaison. Pour obtenir Razor un exemple de pages, consultez *pages/StatusCode. cshtml* dans l' [exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples).
+Si vous pointez vers un point de terminaison au sein de l’application, créez une vue ou une Razor page MVC pour le point de terminaison. Pour obtenir un Razor exemple de pages, consultez *pages/StatusCode. cshtml* dans l' [exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples).
 
 Cette méthode est généralement utilisée lorsque l’application doit :
 
 * Traiter la demande sans la rediriger vers un autre point de terminaison. Pour les applications web, la barre d’adresses du navigateur client reflète le point de terminaison demandé à l’origine.
 * Conserver et retourner le code d’état d’origine avec la réponse.
 
-Les modèles d’URL et de chaîne de requête peuvent comporter un espace réservé (`{0}`) pour le code d’état. Le modèle d’URL doit commencer par une barre oblique (`/`). Si vous utilisez un espace réservé dans le chemin, vérifiez que le point de terminaison (page ou contrôleur) peut traiter le segment de chemin. Par exemple, une Razor page pour les erreurs doit accepter la valeur de segment de chemin `@page` d’accès facultative avec la directive :
+Les modèles d’URL et de chaîne de requête peuvent comporter un espace réservé (`{0}`) pour le code d’état. Le modèle d’URL doit commencer par une barre oblique (`/`). Si vous utilisez un espace réservé dans le chemin, vérifiez que le point de terminaison (page ou contrôleur) peut traiter le segment de chemin. Par exemple, une Razor page pour les erreurs doit accepter la valeur de segment de chemin d’accès facultative avec la `@page` directive :
 
 ```cshtml
 @page "{code?}"
@@ -174,9 +176,9 @@ Le point de terminaison qui traite l’erreur peut récupérer l’URL d’origi
 
 ## <a name="disable-status-code-pages"></a>Désactiver les pages de codes d’état
 
-Pour désactiver les pages de codes d’État pour un contrôleur MVC ou une méthode [`[SkipStatusCodePages]`](xref:Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute) d’action, utilisez l’attribut.
+Pour désactiver les pages de codes d’État pour un contrôleur MVC ou une méthode d’action, utilisez l' [`[SkipStatusCodePages]`](xref:Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute) attribut.
 
-Pour désactiver les pages de codes d’État pour des Razor demandes spécifiques dans une méthode de gestionnaire de pages ou <xref:Microsoft.AspNetCore.Diagnostics.IStatusCodePagesFeature>dans un contrôleur MVC, utilisez :
+Pour désactiver les pages de codes d’État pour des demandes spécifiques dans une Razor méthode de gestionnaire de pages ou dans un contrôleur MVC, utilisez <xref:Microsoft.AspNetCore.Diagnostics.IStatusCodePagesFeature> :
 
 ```csharp
 var statusCodePagesFeature = HttpContext.Features.Get<IStatusCodePagesFeature>();
@@ -212,7 +214,7 @@ La couche d’hébergement ne peut afficher la page d’une erreur de démarrage
 * Le processus dotnet tombe en panne.
 * Aucune page d’erreur ne s’affiche si le serveur HTTP est [Kestrel](xref:fundamentals/servers/kestrel).
 
-En cas d’exécution sur [IIS](/iis) (ou Azure App Service) ou [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview), une réponse *502.5 - Échec du processus* est retournée par le [module ASP.NET Core](xref:host-and-deploy/aspnet-core-module) si le processus ne peut pas démarrer. Pour plus d'informations, consultez <xref:test/troubleshoot-azure-iis>.
+En cas d’exécution sur [IIS](/iis) (ou Azure App Service) ou [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview), une réponse *502.5 - Échec du processus* est retournée par le [module ASP.NET Core](xref:host-and-deploy/aspnet-core-module) si le processus ne peut pas démarrer. Pour plus d’informations, consultez <xref:test/troubleshoot-azure-iis>.
 
 ## <a name="database-error-page"></a>Page d’erreur de base de données
 
@@ -229,7 +231,7 @@ if (env.IsDevelopment())
 
 ## <a name="exception-filters"></a>Filtres d’exceptions
 
-Dans les applications MVC, vous pouvez configurer les filtres d’exception globalement, contrôleur par contrôleur ou action par action. Dans Razor les applications pages, elles peuvent être configurées globalement ou par modèle de page. Ces filtres gèrent les exceptions non prises en charge qui se produisent pendant l’exécution d’une action de contrôleur ou d’un autre filtre. Pour plus d'informations, consultez <xref:mvc/controllers/filters#exception-filters>.
+Dans les applications MVC, vous pouvez configurer les filtres d’exception globalement, contrôleur par contrôleur ou action par action. Dans Razor les applications pages, elles peuvent être configurées globalement ou par modèle de page. Ces filtres gèrent les exceptions non prises en charge qui se produisent pendant l’exécution d’une action de contrôleur ou d’un autre filtre. Pour plus d’informations, consultez <xref:mvc/controllers/filters#exception-filters>.
 
 > [!TIP]
 > Les filtres d’exceptions sont utiles pour intercepter les exceptions qui se produisent dans les actions MVC, mais n’offrent pas la même souplesse que le middleware de gestion des exceptions. Nous vous recommandons d’utiliser le middleware. N’utilisez des filtres que si vous devez gérer les erreurs différemment en fonction de l’action MVC choisie.

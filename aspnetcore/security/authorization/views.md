@@ -1,34 +1,36 @@
 ---
 title: Autorisation basée sur les vues dans ASP.NET Core MVC
 author: rick-anderson
-description: Ce document montre comment injecter et utiliser le service d’autorisation à l’intérieur Razor d’une vue de ASP.net core.
+description: Ce document montre comment injecter et utiliser le service d’autorisation à l’intérieur d’une vue de ASP.NET Core Razor .
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/08/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/views
-ms.openlocfilehash: 1a3b4a92d270844fa99fc9fb0283226e94edb22d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: ce2365dbdcffc8c44d0d9d7cc6c9d29d0fe1895c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775620"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408927"
 ---
 # <a name="view-based-authorization-in-aspnet-core-mvc"></a>Autorisation basée sur les vues dans ASP.NET Core MVC
 
-Un développeur souhaite souvent afficher, masquer ou modifier une interface utilisateur en fonction de l’identité de l’utilisateur actuel. Vous pouvez accéder au service d’autorisation dans les vues MVC via l' [injection de dépendances](xref:fundamentals/dependency-injection). Pour injecter le service d’autorisation Razor dans une vue, `@inject` utilisez la directive :
+Un développeur souhaite souvent afficher, masquer ou modifier une interface utilisateur en fonction de l’identité de l’utilisateur actuel. Vous pouvez accéder au service d’autorisation dans les vues MVC via l' [injection de dépendances](xref:fundamentals/dependency-injection). Pour injecter le service d’autorisation dans une Razor vue, utilisez la `@inject` directive :
 
 ```cshtml
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 ```
 
-Si vous souhaitez utiliser le service d’autorisation dans chaque vue, `@inject` Placez la directive dans le fichier *_ViewImports. cshtml* du répertoire *views* . Pour plus d’informations, consultez [Injection de dépendances dans les vues](xref:mvc/views/dependency-injection).
+Si vous souhaitez utiliser le service d’autorisation dans chaque vue, placez la `@inject` directive dans le fichier *_ViewImports. cshtml* du répertoire *views* . Pour plus d’informations, consultez [Injection de dépendances dans les vues](xref:mvc/views/dependency-injection).
 
 Utilisez le service d’autorisation injecté pour appeler `AuthorizeAsync` exactement de la même façon que lors de l' [autorisation basée sur les ressources](xref:security/authorization/resourcebased#security-authorization-resource-based-imperative):
 

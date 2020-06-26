@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/simple
-ms.openlocfilehash: b5f97038145ed479c315af50a35d6c64d85425a7
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 497103a14591476f3167602631b6b011264f5086
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652950"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408329"
 ---
 # <a name="simple-authorization-in-aspnet-core"></a>Autorisation simple dans ASP.NET Core
 
@@ -84,7 +86,7 @@ Cela autorise uniquement les utilisateurs authentifiés à, à l' `AccountContro
 
 ## <a name="authorize-attribute-and-razor-pages"></a>Autoriser l’attribut et les Razor pages
 
-<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>Ne peut ***pas*** être appliqué aux Razor gestionnaires de pages. Par exemple, `[Authorize]` ne peut pas être appliqué à `OnGet` , `OnPost` ou à un autre gestionnaire de page.
+<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>Ne peut ***pas*** être appliqué aux Razor gestionnaires de pages. Par exemple, `[Authorize]` ne peut pas être appliqué à `OnGet` , `OnPost` ou à un autre gestionnaire de page. Envisagez d’utiliser un contrôleur ASP.NET Core MVC pour les pages avec des exigences d’autorisation différentes pour différents gestionnaires.
 
 Les deux approches suivantes peuvent être utilisées pour appliquer l’autorisation aux Razor méthodes du gestionnaire de page :
 

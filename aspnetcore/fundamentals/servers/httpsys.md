@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 11c2aa8d8633d1ca165d05ce5ea7b277d6ab7ad2
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 27ee69130bc455ab2570556091692053d59e89a5
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106791"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408225"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>Implémentation du serveur web HTTP.sys dans ASP.NET Core
 
@@ -101,7 +103,7 @@ Le reste de la configuration de HTTP.sys est géré par le biais des [paramètre
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | Consultez la section <a href="#maxrequestbodysize">MaxRequestBodySize</a>. | 30 000 000 octets<br>(env. 28,6 Mo) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.RequestQueueLimit> | Nombre maximal de demandes pouvant être placées en file d'attente. | 1 000 |
 | `RequestQueueMode` | Cela indique si le serveur est responsable de la création et de la configuration de la file d’attente des demandes, ou s’il doit être attaché à une file d’attente existante.<br>La plupart des options de configuration existantes ne s’appliquent pas lors de l’attachement à une file d’attente existante. | `RequestQueueMode.Create` |
-| `RequestQueueName` | Nom de la file d’attente de demandes HTTP. sys. | `null`(File d’attente anonyme) |
+| `RequestQueueName` | Nom de la file d’attente de demandes de HTTP.sys. | `null`(File d’attente anonyme) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | Indique si les écritures dans le corps de la réponse qui échouent en raison d’une déconnexion du client doivent lever des exceptions ou se terminer normalement. | `false`<br>(se terminer normalement) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | Expose la configuration <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager> de HTTP.sys, également paramétrable dans le Registre. Suivez les liens de l’API pour en savoir plus sur chaque paramètre, y compris les valeurs par défaut :<ul><li>[TimeoutManager. DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody): temps accordé à l’API du serveur http pour vider le corps d’entité sur une connexion persistante.</li><li>[TimeoutManager. EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody): temps autorisé pour l’arrivée du corps d’entité de la requête.</li><li>[TimeoutManager. HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait): temps accordé à l’API du serveur http pour analyser l’en-tête de la demande.</li><li>[TimeoutManager. IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection): temps autorisé pour une connexion inactive.</li><li>[TimeoutManager. MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond): taux d’envoi minimal pour la réponse.</li><li>[TimeoutManager. RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue): temps pendant lequel la demande doit rester dans la file d’attente des demandes avant que l’application la récupère.</li></ul> |  |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | Spécifiez <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection> à inscrire auprès de HTTP.sys. La plus utile est [UrlPrefixCollection.Add](xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add*), qui permet d’ajouter un préfixe à la collection. Ces choix peuvent être modifiés à tout moment avant la suppression de l’écouteur. |  |

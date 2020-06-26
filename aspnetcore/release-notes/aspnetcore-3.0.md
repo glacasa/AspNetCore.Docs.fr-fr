@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: f2588665c26887a6e3864866425b887e97e656d5
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: 6e31a8f49ca535f98f4e073af13896386a4a0feb
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84755870"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408212"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>Nouveautés de ASP.NET Core 3,0
 
@@ -43,13 +45,13 @@ Blazorscénarios pris en charge par l’infrastructure :
 
 Pour plus d’informations, consultez <xref:blazor/index>.
 
-### <a name="blazor-server"></a>BlazorServeurs
+### Blazor Server
 
-Blazordissocie la logique de rendu des composants de l’application des mises à jour de l’interface utilisateur. BlazorLe serveur prend en charge Razor l’hébergement de composants sur le serveur dans une application ASP.net core. Les mises à jour de l’interface utilisateur sont gérées via une SignalR connexion. BlazorLe serveur est pris en charge dans ASP.NET Core 3,0.
+Blazordissocie la logique de rendu des composants de l’application des mises à jour de l’interface utilisateur. Blazor Serverprend en charge l’hébergement de Razor composants sur le serveur dans une application ASP.net core. Les mises à jour de l’interface utilisateur sont gérées via une SignalR connexion. Blazor Serverest pris en charge dans ASP.NET Core 3,0.
 
-### <a name="blazor-webassembly-preview"></a>BlazorWebassembly (version préliminaire)
+### <a name="blazor-webassembly-preview"></a>Blazor WebAssembly (version préliminaire)
 
-Blazorles applications peuvent également être exécutées directement dans le navigateur à l’aide d’un Runtime .NET basé sur webassembly. BlazorWebassembly est en version préliminaire et *n’est pas* pris en charge dans ASP.net Core 3,0. BlazorWebassembly sera pris en charge dans une prochaine version de ASP.NET Core.
+Blazorles applications peuvent également être exécutées directement dans le navigateur à l’aide d’un Runtime .NET basé sur webassembly. Blazor WebAssemblyest en version préliminaire et *n’est pas* pris en charge dans ASP.net Core 3,0. Blazor WebAssemblysera pris en charge dans une prochaine version de ASP.NET Core.
 
 ### <a name="razor-components"></a>Composants Razor
 
@@ -495,7 +497,7 @@ Les erreurs de démarrage lors de l’hébergement d’applications ASP.NET Core
 
 .NET Core 3,0 introduit le nouveau modèle d’application de service Worker. Ce modèle fournit un point de départ pour l’écriture de services à long terme dans .NET Core.
 
-Pour plus d'informations, consultez les pages suivantes :
+Pour plus d’informations, voir :
 
 * [Les Workers .NET Core en tant que services Windows](https://devblogs.microsoft.com/aspnet/net-core-workers-as-windows-services/)
 * <xref:fundamentals/host/hosted-services>

@@ -7,25 +7,27 @@ ms.author: riande
 ms.date: 09/24/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/metapackage-app
-ms.openlocfilehash: 5f3511b31b45b2c4ad4467bb49d4eaacf22ad437
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 89f447699e8219ec4dd48b2342095d86a011860f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775555"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407965"
 ---
 # <a name="microsoftaspnetcoreapp-for-aspnet-core"></a>Microsoft. AspNetCore. app pour ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
- Le ASP.NET Core Framework partagé (`Microsoft.AspNetCore.App`) contient des assemblys développés et pris en charge par Microsoft. `Microsoft.AspNetCore.App`est installé lors de l’installation du [Kit de développement logiciel (SDK) .net Core 3,0 ou version ultérieure](https://dotnet.microsoft.com/download/dotnet-core/3.0) . L' *infrastructure partagée* est l’ensemble d’assemblys (fichiers *. dll* ) qui sont installés sur l’ordinateur et comprend un composant d’exécution et un pack de ciblage. Pour plus d’informations, consultez [Le framework partagé](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
+ Le ASP.NET Core Framework partagé ( `Microsoft.AspNetCore.App` ) contient des assemblys développés et pris en charge par Microsoft. `Microsoft.AspNetCore.App`est installé lors de l’installation du [Kit de développement logiciel (SDK) .net Core 3,0 ou version ultérieure](https://dotnet.microsoft.com/download/dotnet-core/3.0) . L' *infrastructure partagée* est l’ensemble d’assemblys (fichiers *. dll* ) qui sont installés sur l’ordinateur et comprend un composant d’exécution et un pack de ciblage. Pour plus d’informations, consultez [Le framework partagé](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
 
-* Les projets qui ciblent le `Microsoft.NET.Sdk.Web` Kit de développement `Microsoft.AspNetCore.App` logiciel (SDK) référencent implicitement le Framework.
+* Les projets qui ciblent le `Microsoft.NET.Sdk.Web` Kit de développement logiciel (SDK) référencent implicitement le `Microsoft.AspNetCore.App` Framework.
 
 Aucune référence supplémentaire n’est requise pour ces projets :
 
@@ -55,7 +57,7 @@ Le [AspNetCore Microsoft.. app](https://www.nuget.org/packages/Microsoft.AspNetC
 * Inclut tous les packages pris en charge par l’équipe ASP.NET Core, sauf ceux qui contiennent des dépendances tierces (autres que celles mentionnées au-dessus).
 * Inclut tous les packages pris en charge par l’équipe Entity Framework Core, sauf ceux qui contiennent des dépendances tierces (autres que celles mentionnées au-dessus).
 
-Toutes les fonctionnalités d’ASP.NET Core 2.x et d’Entity Framework Core 2.x sont incluses dans le package `Microsoft.AspNetCore.App`. Les modèles de projet par défaut ciblant ASP.NET Core 2. x utilisent ce package. Nous recommandons aux applications ciblant ASP.NET Core 2. x et Entity Framework Core 2. x `Microsoft.AspNetCore.App` d’utiliser le package.
+Toutes les fonctionnalités d’ASP.NET Core 2.x et d’Entity Framework Core 2.x sont incluses dans le package `Microsoft.AspNetCore.App`. Les modèles de projet par défaut ciblant ASP.NET Core 2. x utilisent ce package. Nous recommandons aux applications ciblant ASP.NET Core 2. x et Entity Framework Core 2. x d’utiliser le `Microsoft.AspNetCore.App` Package.
 
 Le numéro de version du métapaquet `Microsoft.AspNetCore.App` représente la version minimale d’ASP.NET Core et la version d’Entity Framework Core.
 
@@ -67,7 +69,7 @@ L’utilisation du métapackage `Microsoft.AspNetCore.App` offre des restriction
 
 Les applications qui utilisent le métapackage `Microsoft.AspNetCore.App` tirent automatiquement parti du framework partagé ASP.NET Core. Quand vous utilisez le métapackage `Microsoft.AspNetCore.App`, **** aucune&mdash; des ressources des packages NuGet ASP.NET Core référencés n’est déployée avec l’application : le framework partagé ASP.NET Core contient ces ressources. Les ressources présentes dans le framework partagé sont précompilées afin d’améliorer la vitesse de démarrage des applications. Pour plus d’informations, consultez [Le framework partagé](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
 
-Le fichier projet suivant fait référence `Microsoft.AspNetCore.App` au « package » pour ASP.net Core et représente un modèle ASP.net Core 2,2 standard :
+Le fichier projet suivant fait référence au « `Microsoft.AspNetCore.App` package » pour ASP.net Core et représente un modèle ASP.NET Core 2,2 standard :
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
