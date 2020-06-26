@@ -8,23 +8,25 @@ ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/fundamentals/logging
-ms.openlocfilehash: 841c4021d9217312b2601b0e775542c6455cca82
-ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
+ms.openlocfilehash: 1f4b18bdea02016fb76b75dd01a8fcbeab9b2bc9
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85240871"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402830"
 ---
-# <a name="aspnet-core-blazor-logging"></a><span data-ttu-id="b6302-103">BlazorJournalisation ASP.net Core</span><span class="sxs-lookup"><span data-stu-id="b6302-103">ASP.NET Core Blazor logging</span></span>
+# <a name="aspnet-core-blazor-logging"></a><span data-ttu-id="2e213-103">BlazorJournalisation ASP.net Core</span><span class="sxs-lookup"><span data-stu-id="2e213-103">ASP.NET Core Blazor logging</span></span>
 
-## <a name="blazor-webassembly"></a>Blazor<span data-ttu-id="b6302-104">Webassembly</span><span class="sxs-lookup"><span data-stu-id="b6302-104"> WebAssembly</span></span>
+## Blazor WebAssembly
 
-<span data-ttu-id="b6302-105">Configurez la journalisation dans Blazor les applications Webassembly avec la `WebAssemblyHostBuilder.Logging` propriété dans `Program.Main` :</span><span class="sxs-lookup"><span data-stu-id="b6302-105">Configure logging in Blazor WebAssembly apps with the `WebAssemblyHostBuilder.Logging` property in `Program.Main`:</span></span>
+<span data-ttu-id="2e213-104">Configurez la journalisation dans Blazor WebAssembly les applications avec la `WebAssemblyHostBuilder.Logging` propriété dans `Program.Main` :</span><span class="sxs-lookup"><span data-stu-id="2e213-104">Configure logging in Blazor WebAssembly apps with the `WebAssemblyHostBuilder.Logging` property in `Program.Main`:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -37,17 +39,17 @@ builder.Logging.SetMinimumLevel(LogLevel.Debug);
 builder.Logging.AddProvider(new CustomLoggingProvider());
 ```
 
-<span data-ttu-id="b6302-106">La `Logging` propriété est de type <xref:Microsoft.Extensions.Logging.ILoggingBuilder> , donc toutes les méthodes d’extension disponibles sur <xref:Microsoft.Extensions.Logging.ILoggingBuilder> sont également disponibles sur `Logging` .</span><span class="sxs-lookup"><span data-stu-id="b6302-106">The `Logging` property is of type <xref:Microsoft.Extensions.Logging.ILoggingBuilder>, so all of the extension methods available on <xref:Microsoft.Extensions.Logging.ILoggingBuilder> are also available on `Logging`.</span></span>
+<span data-ttu-id="2e213-105">La `Logging` propriété est de type <xref:Microsoft.Extensions.Logging.ILoggingBuilder> , donc toutes les méthodes d’extension disponibles sur <xref:Microsoft.Extensions.Logging.ILoggingBuilder> sont également disponibles sur `Logging` .</span><span class="sxs-lookup"><span data-stu-id="2e213-105">The `Logging` property is of type <xref:Microsoft.Extensions.Logging.ILoggingBuilder>, so all of the extension methods available on <xref:Microsoft.Extensions.Logging.ILoggingBuilder> are also available on `Logging`.</span></span>
 
-<span data-ttu-id="b6302-107">La configuration de la journalisation peut être chargée à partir des fichiers de paramètres d’application.</span><span class="sxs-lookup"><span data-stu-id="b6302-107">Logging configuration can be loaded from app settings files.</span></span> <span data-ttu-id="b6302-108">Pour plus d’informations, consultez <xref:blazor/fundamentals/configuration#logging-configuration>.</span><span class="sxs-lookup"><span data-stu-id="b6302-108">For more information, see <xref:blazor/fundamentals/configuration#logging-configuration>.</span></span>
+<span data-ttu-id="2e213-106">La configuration de la journalisation peut être chargée à partir des fichiers de paramètres d’application.</span><span class="sxs-lookup"><span data-stu-id="2e213-106">Logging configuration can be loaded from app settings files.</span></span> <span data-ttu-id="2e213-107">Pour plus d’informations, consultez <xref:blazor/fundamentals/configuration#logging-configuration>.</span><span class="sxs-lookup"><span data-stu-id="2e213-107">For more information, see <xref:blazor/fundamentals/configuration#logging-configuration>.</span></span>
 
-## <a name="blazor-server"></a>Blazor<span data-ttu-id="b6302-109">Serveurs</span><span class="sxs-lookup"><span data-stu-id="b6302-109"> Server</span></span>
+## Blazor Server
 
-<span data-ttu-id="b6302-110">Pour obtenir des instructions générales sur la journalisation des ASP.NET Core, consultez <xref:fundamentals/logging/index> .</span><span class="sxs-lookup"><span data-stu-id="b6302-110">For general ASP.NET Core logging guidance, see <xref:fundamentals/logging/index>.</span></span>
+<span data-ttu-id="2e213-108">Pour obtenir des instructions générales sur la journalisation des ASP.NET Core, consultez <xref:fundamentals/logging/index> .</span><span class="sxs-lookup"><span data-stu-id="2e213-108">For general ASP.NET Core logging guidance, see <xref:fundamentals/logging/index>.</span></span>
 
-## <a name="blazor-webassembly-signalr-net-client-logging"></a>Blazor<span data-ttu-id="b6302-111">SignalRJournalisation du client .net Webassembly</span><span class="sxs-lookup"><span data-stu-id="b6302-111"> WebAssembly SignalR .NET client logging</span></span>
+## <a name="blazor-webassembly-signalr-net-client-logging"></a>Blazor WebAssembly<span data-ttu-id="2e213-109">SignalRJournalisation du client .net</span><span class="sxs-lookup"><span data-stu-id="2e213-109"> SignalR .NET client logging</span></span>
 
-<span data-ttu-id="b6302-112">Injectez un <xref:Microsoft.Extensions.Logging.ILoggerProvider> pour ajouter une `WebAssemblyConsoleLogger` aux fournisseurs de journalisation passés à <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder> .</span><span class="sxs-lookup"><span data-stu-id="b6302-112">Inject an <xref:Microsoft.Extensions.Logging.ILoggerProvider> to add a `WebAssemblyConsoleLogger` to the logging providers passed to <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder>.</span></span> <span data-ttu-id="b6302-113">Contrairement à un traditionnel <xref:Microsoft.Extensions.Logging.Console.ConsoleLogger> , `WebAssemblyConsoleLogger` est un wrapper autour des API de journalisation spécifiques aux navigateurs (par exemple, `console.log` ).</span><span class="sxs-lookup"><span data-stu-id="b6302-113">Unlike a traditional <xref:Microsoft.Extensions.Logging.Console.ConsoleLogger>, `WebAssemblyConsoleLogger` is a wrapper around browser-specific logging APIs (for example, `console.log`).</span></span> <span data-ttu-id="b6302-114">L’utilisation de `WebAssemblyConsoleLogger` rend la journalisation possible dans mono dans un contexte de navigateur.</span><span class="sxs-lookup"><span data-stu-id="b6302-114">Use of `WebAssemblyConsoleLogger` makes logging possible within Mono inside a browser context.</span></span>
+<span data-ttu-id="2e213-110">Injectez un <xref:Microsoft.Extensions.Logging.ILoggerProvider> pour ajouter une `WebAssemblyConsoleLogger` aux fournisseurs de journalisation passés à <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder> .</span><span class="sxs-lookup"><span data-stu-id="2e213-110">Inject an <xref:Microsoft.Extensions.Logging.ILoggerProvider> to add a `WebAssemblyConsoleLogger` to the logging providers passed to <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder>.</span></span> <span data-ttu-id="2e213-111">Contrairement à un traditionnel <xref:Microsoft.Extensions.Logging.Console.ConsoleLogger> , `WebAssemblyConsoleLogger` est un wrapper autour des API de journalisation spécifiques aux navigateurs (par exemple, `console.log` ).</span><span class="sxs-lookup"><span data-stu-id="2e213-111">Unlike a traditional <xref:Microsoft.Extensions.Logging.Console.ConsoleLogger>, `WebAssemblyConsoleLogger` is a wrapper around browser-specific logging APIs (for example, `console.log`).</span></span> <span data-ttu-id="2e213-112">L’utilisation de `WebAssemblyConsoleLogger` rend la journalisation possible dans mono dans un contexte de navigateur.</span><span class="sxs-lookup"><span data-stu-id="2e213-112">Use of `WebAssemblyConsoleLogger` makes logging possible within Mono inside a browser context.</span></span>
 
 ```csharp
 @using Microsoft.Extensions.Logging
@@ -61,13 +63,13 @@ var connection = new HubConnectionBuilder()
     .Build();
 ```
 
-## <a name="log-in-razor-components"></a><span data-ttu-id="b6302-115">Connecter les Razor composants</span><span class="sxs-lookup"><span data-stu-id="b6302-115">Log in Razor components</span></span>
+## <a name="log-in-razor-components"></a><span data-ttu-id="2e213-113">Connecter les Razor composants</span><span class="sxs-lookup"><span data-stu-id="2e213-113">Log in Razor components</span></span>
 
-<span data-ttu-id="b6302-116">Les journaux respectent la configuration de démarrage de l’application.</span><span class="sxs-lookup"><span data-stu-id="b6302-116">Loggers respect app startup configuration.</span></span>
+<span data-ttu-id="2e213-114">Les journaux respectent la configuration de démarrage de l’application.</span><span class="sxs-lookup"><span data-stu-id="2e213-114">Loggers respect app startup configuration.</span></span>
 
-<span data-ttu-id="b6302-117">La `using` directive pour <xref:Microsoft.Extensions.Logging> est requise pour prendre en charge les saisies semi-automatiques IntelliSense pour les API, telles que <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogWarning%2A> et <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogError%2A> .</span><span class="sxs-lookup"><span data-stu-id="b6302-117">The `using` directive for <xref:Microsoft.Extensions.Logging> is required to support Intellisense completions for APIs, such as <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogWarning%2A> and <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogError%2A>.</span></span>
+<span data-ttu-id="2e213-115">La `using` directive pour <xref:Microsoft.Extensions.Logging> est requise pour prendre en charge les saisies semi-automatiques IntelliSense pour les API, telles que <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogWarning%2A> et <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogError%2A> .</span><span class="sxs-lookup"><span data-stu-id="2e213-115">The `using` directive for <xref:Microsoft.Extensions.Logging> is required to support Intellisense completions for APIs, such as <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogWarning%2A> and <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogError%2A>.</span></span>
 
-<span data-ttu-id="b6302-118">L’exemple suivant illustre la journalisation avec un <xref:Microsoft.Extensions.Logging.ILogger> dans des Razor composants :</span><span class="sxs-lookup"><span data-stu-id="b6302-118">The following example demonstrates logging with an <xref:Microsoft.Extensions.Logging.ILogger> in Razor components:</span></span>
+<span data-ttu-id="2e213-116">L’exemple suivant illustre la journalisation avec un <xref:Microsoft.Extensions.Logging.ILogger> dans des Razor composants :</span><span class="sxs-lookup"><span data-stu-id="2e213-116">The following example demonstrates logging with an <xref:Microsoft.Extensions.Logging.ILogger> in Razor components:</span></span>
 
 ```razor
 @page "/counter"
@@ -92,7 +94,7 @@ var connection = new HubConnectionBuilder()
 }
 ```
 
-<span data-ttu-id="b6302-119">L’exemple suivant illustre la journalisation avec un <xref:Microsoft.Extensions.Logging.ILoggerFactory> dans des Razor composants :</span><span class="sxs-lookup"><span data-stu-id="b6302-119">The following example demonstrates logging with an <xref:Microsoft.Extensions.Logging.ILoggerFactory> in Razor components:</span></span>
+<span data-ttu-id="2e213-117">L’exemple suivant illustre la journalisation avec un <xref:Microsoft.Extensions.Logging.ILoggerFactory> dans des Razor composants :</span><span class="sxs-lookup"><span data-stu-id="2e213-117">The following example demonstrates logging with an <xref:Microsoft.Extensions.Logging.ILoggerFactory> in Razor components:</span></span>
 
 ```razor
 @page "/counter"
@@ -118,6 +120,6 @@ var connection = new HubConnectionBuilder()
 }
 ```
 
-## <a name="additional-resources"></a><span data-ttu-id="b6302-120">Ressources supplémentaires</span><span class="sxs-lookup"><span data-stu-id="b6302-120">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="2e213-118">Ressources supplémentaires</span><span class="sxs-lookup"><span data-stu-id="2e213-118">Additional resources</span></span>
 
 * <xref:fundamentals/logging/index>
