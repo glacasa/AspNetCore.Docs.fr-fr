@@ -8,25 +8,27 @@ ms.custom: mvc
 ms.date: 02/18/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/advanced-scenarios
-ms.openlocfilehash: d4ebab0d8fc2ee48fa4d9c8b1f1b8e5cbf43cab9
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: bdea9f2fe5c552b56414bb49588733c8dc2a34db
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242443"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400217"
 ---
 # <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core des Blazor scénarios avancés
 
 Par [Luke Latham](https://github.com/guardrex) et [Daniel Roth](https://github.com/danroth27)
 
-## <a name="blazor-server-circuit-handler"></a>BlazorGestionnaire de circuits de serveur
+## <a name="blazor-server-circuit-handler"></a>Blazor ServerGestionnaire de circuit
 
-BlazorLe serveur permet au code de définir un *Gestionnaire de circuit*qui permet d’exécuter du code sur les modifications de l’état du circuit d’un utilisateur. Un gestionnaire de circuit est implémenté en dérivant de `CircuitHandler` et en inscrivant la classe dans le conteneur de services de l’application. L’exemple suivant d’un gestionnaire de circuit effectue le suivi des SignalR connexions ouvertes :
+Blazor Serverpermet au code de définir un *Gestionnaire de circuit*qui permet d’exécuter du code sur les modifications de l’état du circuit d’un utilisateur. Un gestionnaire de circuit est implémenté en dérivant de `CircuitHandler` et en inscrivant la classe dans le conteneur de services de l’application. L’exemple suivant d’un gestionnaire de circuit effectue le suivi des SignalR connexions ouvertes :
 
 ```csharp
 using System.Collections.Generic;
@@ -68,7 +70,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Si les méthodes d’un gestionnaire de circuit personnalisé lèvent une exception non gérée, l’exception est irrécupérable pour le Blazor circuit serveur. Pour tolérer des exceptions dans le code d’un gestionnaire ou les méthodes appelées, encapsulez le code dans une ou plusieurs [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) instructions avec la gestion des erreurs et la journalisation.
+Si les méthodes d’un gestionnaire de circuit personnalisé lèvent une exception non gérée, l’exception est irrécupérable pour le Blazor Server circuit. Pour tolérer des exceptions dans le code d’un gestionnaire ou les méthodes appelées, encapsulez le code dans une ou plusieurs [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) instructions avec la gestion des erreurs et la journalisation.
 
 Lorsqu’un circuit se termine parce qu’un utilisateur s’est déconnecté et que l’infrastructure nettoie l’état du circuit, le Framework supprime l’étendue de l’injection de port. La suppression de l’étendue supprime tous les services d’étendue de circuit qui implémentent <xref:System.IDisposable?displayProperty=fullName> . Si un service d’injection de services lève une exception non gérée pendant la suppression, le Framework journalise l’exception.
 
@@ -221,14 +223,14 @@ Il s’agit d’un exemple trivial. Dans des cas plus réalistes avec des struct
 * Si les numéros de séquence sont codés en dur, l’algorithme diff exige uniquement que les numéros de séquence augmentent dans la valeur. La valeur initiale et les écarts ne sont pas pertinents. Une option légitime consiste à utiliser le numéro de ligne de code comme numéro de séquence, ou à commencer à partir de zéro et à augmenter par des ou des centaines (ou un intervalle de préférence). 
 * Blazorutilise des numéros de séquence, tandis que d’autres infrastructures d’interface utilisateur de comparaison d’arborescence ne les utilisent pas. La comparaison est beaucoup plus rapide lorsque les numéros de séquence sont utilisés et Blazor présente l’avantage d’une étape de compilation qui traite automatiquement les numéros séquentiels pour les développeurs qui créent des `.razor` fichiers.
 
-## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>Effectuer des transferts de données volumineux dans des Blazor applications serveur
+## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>Effectuer des transferts de données volumineux dans des Blazor Server applications
 
 Dans certains scénarios, de grandes quantités de données doivent être transférées entre JavaScript et Blazor . En général, les transferts de données volumineux se produisent dans les cas suivants :
 
 * Les API du système de fichiers du navigateur sont utilisées pour charger ou télécharger un fichier.
 * L’interopérabilité avec une bibliothèque tierce est nécessaire.
 
-Dans Blazor le serveur, une limitation est en place pour empêcher le passage de messages volumineux qui peuvent entraîner des problèmes de performances.
+Dans Blazor Server , une limitation est en place pour empêcher le passage de messages volumineux qui peuvent entraîner des problèmes de performances.
 
 Tenez compte des conseils suivants lors du développement de code qui transfère des données entre JavaScript et Blazor :
 

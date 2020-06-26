@@ -8,17 +8,19 @@ ms.date: 02/04/2019
 ms.topic: tutorial
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 51334370b07709a773f6acd18d302f8b3ea88290
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 0be63811874709db95285f4013e47bc1706050b1
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773586"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401478"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Didacticiel : implémenter la fonctionnalité CRUD-ASP.NET MVC avec EF Core
 
@@ -70,7 +72,7 @@ La dernière partie de l’URL (« ?courseID=2021 ») est une valeur de chaîne 
 http://localhost:1230/Instructor/Index?id=1&CourseID=2021
 ```
 
-Dans la page index, les URL de lien hypertexte sont créées par des instructions tag Razor Helper dans la vue. Dans le code Razor suivant, le `id` paramètre correspond à l’itinéraire par défaut `id` . par conséquent, est ajouté aux données d’itinéraire.
+Dans la page index, les URL de lien hypertexte sont créées par des instructions tag Helper dans la Razor vue. Dans le Razor code suivant, le `id` paramètre correspond à l’itinéraire par défaut. par conséquent, `id` est ajouté aux données d’itinéraire.
 
 ```html
 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a>
@@ -82,7 +84,7 @@ Ceci génère le code HTML suivant quand `item.ID` vaut 6 :
 <a href="/Students/Edit/6">Edit</a>
 ```
 
-Dans le code Razor suivant, `studentID` ne correspond pas à un paramètre de l’itinéraire par défaut. il est donc ajouté en tant que chaîne de requête.
+Dans le Razor code suivant, `studentID` ne correspond pas à un paramètre de l’itinéraire par défaut. il est donc ajouté en tant que chaîne de requête.
 
 ```html
 <a asp-action="Edit" asp-route-studentID="@item.ID">Edit</a>
@@ -157,7 +159,7 @@ Une autre façon d’empêcher la survalidation qui est préférée par de nombr
 
 ### <a name="test-the-create-page"></a>Tester la page Create
 
-Le code dans *views/Students/Create. cshtml* `label`utilise `input`,, `span` et (pour les messages de validation) tag helpers pour chaque champ.
+Le code dans *views/Students/Create. cshtml* utilise `label` , `input` , et `span` (pour les messages de validation) tag helpers pour chaque champ.
 
 Exécutez l’application, sélectionnez l’onglet **Students**, puis cliquez sur **Create New**.
 

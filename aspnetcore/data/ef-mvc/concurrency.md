@@ -8,17 +8,19 @@ ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: bbf04e3500b11a339dc59b6086d910b76eace735
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 3038ae8f01273013e6c35694583d9674a1668bac
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773599"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401556"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>Didacticiel : gérer la concurrence-ASP.NET MVC avec EF Core
 
@@ -212,7 +214,7 @@ Changez un champ sous le deuxième onglet du navigateur.
 
 ![Page Edit 2 du département après changement](concurrency/_static/edit-after-change-2.png)
 
-Cliquez sur **Enregistrer**. Vous voyez un message d’erreur :
+Cliquez sur **Save**. Vous voyez un message d’erreur :
 
 ![Message d’erreur de page de modification de département](concurrency/_static/edit-error.png)
 

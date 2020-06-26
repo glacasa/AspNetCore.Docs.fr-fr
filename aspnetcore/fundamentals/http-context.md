@@ -8,25 +8,27 @@ ms.custom: mvc
 ms.date: 5/5/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/httpcontext
-ms.openlocfilehash: 716e74551b95455c99abbac58b712f013acfde56
-ms.sourcegitcommit: d4527df91f2c15bbe1cbf5a541adbea5747897aa
+ms.openlocfilehash: d4512c9fa136e518fa0230c0cf9c607519eed6d8
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82852359"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399450"
 ---
 # <a name="access-httpcontext-in-aspnet-core"></a>Accéder à HttpContext dans ASP.NET Core
 
-ASP.NET Core les applications `HttpContext` accessibles par <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> le biais de l’interface <xref:Microsoft.AspNetCore.Http.HttpContextAccessor>et de son implémentation par défaut. Il est seulement nécessaire d’utiliser `IHttpContextAccessor` quand vous avez besoin d’accéder à `HttpContext` à l’intérieur d’un service.
+ASP.NET Core les applications accessibles par `HttpContext` le biais de l' <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> interface et de son implémentation par défaut <xref:Microsoft.AspNetCore.Http.HttpContextAccessor> . Il est seulement nécessaire d’utiliser `IHttpContextAccessor` quand vous avez besoin d’accéder à `HttpContext` à l’intérieur d’un service.
 
-## <a name="use-httpcontext-from-razor-pages"></a>Utiliser HttpContext à Razor partir de pages
+## <a name="use-httpcontext-from-razor-pages"></a>Utiliser HttpContext à partir de Razor pages
 
-Les Razor pages <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> exposent <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> la propriété :
+Les Razor pages <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> exposent la <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> propriété :
 
 ```csharp
 public class AboutModel : PageModel
@@ -40,9 +42,9 @@ public class AboutModel : PageModel
 }
 ```
 
-## <a name="use-httpcontext-from-a-razor-view"></a>Utiliser HttpContext à partir Razor d’une vue
+## <a name="use-httpcontext-from-a-razor-view"></a>Utiliser HttpContext à partir d’une Razor vue
 
-Razorles vues exposent directement le `HttpContext` via une propriété [RazorPage. Context](xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context) sur la vue. L’exemple suivant récupère le nom d’utilisateur actuel dans une application intranet à l’aide de l’authentification Windows :
+Razorles vues exposent `HttpContext` directement le via une propriété [RazorPage. Context](xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context) sur la vue. L’exemple suivant récupère le nom d’utilisateur actuel dans une application intranet à l’aide de l’authentification Windows :
 
 ```cshtml
 @{
@@ -86,7 +88,7 @@ public class MyCustomMiddleware
 
 ## <a name="use-httpcontext-from-custom-components"></a>Utiliser HttpContext à partir de composants personnalisés
 
-Pour les autres infrastructures et les composants personnalisés qui requièrent l’accès à `HttpContext`, l’approche recommandée consiste à inscrire une dépendance à l’aide du conteneur d’[injection de dépendances](xref:fundamentals/dependency-injection) intégré. Le conteneur `IHttpContextAccessor` d’injection de dépendances fournit à toutes les classes qui le déclarent comme une dépendance dans leurs constructeurs :
+Pour les autres infrastructures et les composants personnalisés qui requièrent l’accès à `HttpContext`, l’approche recommandée consiste à inscrire une dépendance à l’aide du conteneur d’[injection de dépendances](xref:fundamentals/dependency-injection) intégré. Le conteneur d’injection de dépendances fournit `IHttpContextAccessor` à toutes les classes qui le déclarent comme une dépendance dans leurs constructeurs :
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -143,14 +145,14 @@ public class UserRepository : IUserRepository
 `HttpContext`n’est pas thread-safe. La lecture ou l’écriture de propriétés de `HttpContext` en dehors du traitement d’une requête peut entraîner une exception <xref:System.NullReferenceException>.
 
 > [!NOTE]
-> Si votre application génère des `NullReferenceException` Erreurs sporadiques, examinez les parties du code qui démarrent le traitement en arrière-plan ou qui poursuivent le traitement après la fin d’une demande. Recherchez des erreurs, telles que la définition d’une méthode `async void`de contrôleur comme.
+> Si votre application génère des `NullReferenceException` Erreurs sporadiques, examinez les parties du code qui démarrent le traitement en arrière-plan ou qui poursuivent le traitement après la fin d’une demande. Recherchez des erreurs, telles que la définition d’une méthode de contrôleur comme `async void` .
 
 Pour effectuer un travail en arrière-plan en toute sécurité avec des données `HttpContext` :
 
 * Copiez les données nécessaires pendant le traitement de la requête.
 * Transmettez les données copiées à une tâche en arrière-plan.
 
-Pour éviter tout code non sécurisé, ne transmettez jamais `HttpContext` à une méthode qui effectue un travail en arrière-plan. Transmettez les données requises à la place. Dans l’exemple suivant, `SendEmailCore` est appelé pour commencer à envoyer un message électronique. `correlationId` Est passé à, `SendEmailCore`et non à `HttpContext`. L’exécution du `SendEmailCore` code n’attend pas la fin de :
+Pour éviter tout code non sécurisé, ne transmettez jamais `HttpContext` à une méthode qui effectue un travail en arrière-plan. Transmettez les données requises à la place. Dans l’exemple suivant, `SendEmailCore` est appelé pour commencer à envoyer un message électronique. `correlationId`Est passé à `SendEmailCore` , et non à `HttpContext` . L’exécution du code n’attend pas la `SendEmailCore` fin de :
 
 ```csharp
 public class EmailController : Controller

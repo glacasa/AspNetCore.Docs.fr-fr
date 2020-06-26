@@ -6,17 +6,19 @@ ms.author: avickers
 ms.date: 07/01/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 96ee703da4ced69c5d9c703139e33b76b5dcdff1
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: 3a5bac0e3e34602b1f8a85a7bcde1ba92b372607
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074145"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399164"
 ---
 # <a name="identity-model-customization-in-aspnet-core"></a>Identitypersonnalisation de modèle dans ASP.NET Core
 
@@ -361,7 +363,7 @@ services.AddIdentity<ApplicationUser>()
         .AddDefaultUI();
 ```
 
-Dans ASP.NET Core 2,1 ou version ultérieure, Identity est fourni en tant que Razor bibliothèque de classes. Pour plus d’informations, consultez <xref:security/authentication/scaffold-identity>. Par conséquent, le code précédent requiert un appel à <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> . Si le générateur de Identity modèles automatique a été utilisé pour ajouter des Identity fichiers au projet, supprimez l’appel à `AddDefaultUI` . Pour plus d'informations, consultez les pages suivantes :
+Dans ASP.NET Core 2,1 ou version ultérieure, Identity est fourni en tant que Razor bibliothèque de classes. Pour plus d’informations, consultez <xref:security/authentication/scaffold-identity>. Par conséquent, le code précédent requiert un appel à <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> . Si le générateur de Identity modèles automatique a été utilisé pour ajouter des Identity fichiers au projet, supprimez l’appel à `AddDefaultUI` . Pour plus d’informations, voir :
 
 * [DestinIdentity](xref:security/authentication/scaffold-identity)
 * [Ajouter, télécharger et supprimer des données utilisateur personnaliséesIdentity](xref:security/authentication/add-user-data)

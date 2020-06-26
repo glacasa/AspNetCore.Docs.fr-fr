@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 07/07/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: grpc/security
-ms.openlocfilehash: 8bbe198087f8ba80abfe6b518f8223c719801a85
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: f06e239054b1c4edf126d1cf974dff1ca36ee56a
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774953"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400126"
 ---
 # <a name="security-considerations-in-grpc-for-aspnet-core"></a>Considérations sur la sécurité dans gRPC pour ASP.NET Core
 
@@ -45,7 +47,7 @@ Les messages entrants aux clients et services gRPC sont chargés en mémoire. Le
 
 gRPC utilise des limites de taille par message pour gérer les messages entrants et sortants. Par défaut, gRPC limite les messages entrants à 4 Mo. Il n’existe aucune limite pour les messages sortants.
 
-Sur le serveur, les limites de messages gRPC peuvent être configurées pour tous les services `AddGrpc`d’une application avec :
+Sur le serveur, les limites de messages gRPC peuvent être configurées pour tous les services d’une application avec `AddGrpc` :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -58,7 +60,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Les limites peuvent également être configurées pour un service `AddServiceOptions<TService>`individuel à l’aide de. Pour plus d’informations sur la configuration des limites de taille des messages, consultez [configuration de gRPC](xref:grpc/configuration).
+Les limites peuvent également être configurées pour un service individuel à l’aide de `AddServiceOptions<TService>` . Pour plus d’informations sur la configuration des limites de taille des messages, consultez [configuration de gRPC](xref:grpc/configuration).
 
 ## <a name="client-certificate-validation"></a>Validation du certificat client
 

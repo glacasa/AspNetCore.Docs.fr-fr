@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/06/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/azure-continuous-deployment
-ms.openlocfilehash: 0b9f5f15403c7d18d68a41baa2a59582cf039f44
-ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
+ms.openlocfilehash: 97da88b6fb79944d99b69c92eb611dd0e4e39454
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82850563"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400165"
 ---
 # <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a>Déploiement continu sur Azure avec Visual Studio et Git avec ASP.NET Core
 
@@ -36,7 +38,7 @@ Voir aussi [Créer votre premier pipeline avec Azure Pipelines](/azure/devops/pi
 
 Ce tutoriel suppose que les logiciels suivants sont installés :
 
-* [Visual Studio](https://visualstudio.microsoft.com)
+* [Visual Studio](https://visualstudio.microsoft.com)
 * [!INCLUDE [](~/includes/net-core-sdk-download-link.md)]
 * [Git](https://git-scm.com/downloads) pour Windows
 

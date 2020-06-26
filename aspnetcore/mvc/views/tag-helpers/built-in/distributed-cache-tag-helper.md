@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 01/24/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper
-ms.openlocfilehash: df1daa68a3e18f7aad4507ce9526d76ff6a2114d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 4b8e393542c56502a825000773bbf714d91e4128
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773914"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399229"
 ---
 # <a name="distributed-cache-tag-helper-in-aspnet-core"></a>Tag Helper Cache distribué dans ASP.NET Core
 
@@ -54,9 +56,9 @@ Le Tag Helper Cache distribué hérite de la même classe que le Tag Helper Cach
 | -------------- | ------------------------------------- |
 | String         | `my-distributed-cache-unique-key-101` |
 
-`name` est obligatoire. L’attribut `name` est utilisé en tant que clé pour chaque instance de cache stockée. Contrairement au tag Helper cache qui affecte une clé de cache à chaque instance en fonction du Razor nom et de l’emplacement de la Razor page dans la page, le tag Helper cache distribué base uniquement sa clé sur `name`l’attribut.
+`name` est obligatoire. L’attribut `name` est utilisé en tant que clé pour chaque instance de cache stockée. Contrairement au tag Helper cache qui affecte une clé de cache à chaque instance en fonction du Razor nom et de l’emplacement de la page dans la Razor page, le tag Helper cache distribué base uniquement sa clé sur l’attribut `name` .
 
-Exemple :
+Exemple :
 
 ```cshtml
 <distributed-cache name="my-distributed-cache-unique-key-101">

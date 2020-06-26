@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 5/1/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: f3314458a504af7f44dcdc276de890fa9485a2b3
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 155bdfbeea06022d35bbb551d5b2d0ee5a51a093
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103035"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400815"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>Génération Identity de modèles automatique dans les projets ASP.net Core
 
@@ -178,7 +180,7 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-## <a name="scaffold-identity-into-a-blazor-server-project-without-existing-authorization"></a>Génération Identity de modèles automatique dans un Blazor projet serveur sans autorisation existante
+## <a name="scaffold-identity-into-a-blazor-server-project-without-existing-authorization"></a>Générer Identity une structure dans un Blazor Server projet sans autorisation existante
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -289,11 +291,11 @@ Dans le `MainLayout` composant (*Shared/MainLayout. Razor*), ajoutez le `LoginDi
 
 ### <a name="style-authentication-endpoints"></a>Points de terminaison d’authentification de style
 
-Étant donné que Blazor le serveur utilise Razor Identity des pages de pages, le style de l’interface utilisateur change lorsqu’un visiteur navigue entre Identity les pages et les composants. Vous avez deux options pour traiter les styles Incongruous :
+Étant donné que Blazor Server utilise Razor Identity les pages pages, le style de l’interface utilisateur change lorsqu’un visiteur navigue entre Identity les pages et les composants. Vous avez deux options pour traiter les styles Incongruous :
 
 #### <a name="build-identity-components"></a>Composants de build Identity
 
-Une approche de l’utilisation de composants Identity au lieu de pages consiste à créer des Identity composants. Étant donné que `SignInManager` et `UserManager` ne sont pas pris en charge dans Razor les composants, utilisez les points de terminaison d’API dans l' Blazor application serveur pour traiter les actions de compte d’utilisateur.
+Une approche de l’utilisation de composants Identity au lieu de pages consiste à créer des Identity composants. Étant donné que `SignInManager` et `UserManager` ne sont pas pris en charge dans Razor les composants, utilisez les points de terminaison d’API dans l' Blazor Server application pour traiter les actions de compte d’utilisateur.
 
 #### <a name="use-a-custom-layout-with-blazor-app-styles"></a>Utiliser une disposition personnalisée avec les Blazor styles d’application
 
@@ -360,7 +362,7 @@ Dans le fichier *pages/Shared/Layout. cshtml* , apportez les modifications suiva
   <script src="_framework/blazor.server.js"></script>
   ```
 
-## <a name="scaffold-identity-into-a-blazor-server-project-with-authorization"></a>Génération Identity de modèles automatique dans un Blazor projet serveur avec autorisation
+## <a name="scaffold-identity-into-a-blazor-server-project-with-authorization"></a>Génération de modèles automatique Identity dans un Blazor Server projet avec autorisation
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 

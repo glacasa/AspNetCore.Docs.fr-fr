@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 10/07/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: f7697260e6ab29d0e9ba955dfdf0c8c81e4e1130
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 33b4d43471932ed5e9e328163672028b00e6b5b8
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775490"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399476"
 ---
 # <a name="static-files-in-aspnet-core"></a>Fichiers statiques dans ASP.NET Core
 
@@ -56,7 +58,7 @@ Les fichiers statiques sont accessibles via un chemin d’accès relatif à la [
   * **images**
   * **js**
 
-Le format d’URI pour accéder à un fichier dans le sous-dossier *images* est *http://\<adresse_serveur>/images/\<nom_fichier_image>*. Par exemple : *http://localhost:9189/images/banner3.svg* .
+Le format d’URI permettant d’accéder à un fichier dans le sous-dossier *images* est *http:// \<server_address> /images/ \<image_file_name> *. Par exemple : *http://localhost:9189/images/banner3.svg* .
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -84,11 +86,11 @@ Appelez la méthode [UseStaticFiles](/dotnet/api/microsoft.aspnetcore.builder.st
 
 [!code-csharp[](static-files/samples/1x/StartupStaticFiles.cs?name=snippet_ConfigureMethod&highlight=3)]
 
-La surcharge de `UseStaticFiles` méthode sans paramètre marque les fichiers dans la [racine Web](xref:fundamentals/index#web-root) comme étant reservables. Le balisage suivant référence *wwwroot/images/banner1.svg* :
+La `UseStaticFiles` surcharge de méthode sans paramètre marque les fichiers dans la [racine Web](xref:fundamentals/index#web-root) comme étant reservables. Le balisage suivant référence *wwwroot/images/banner1.svg* :
 
 [!code-cshtml[](static-files/samples/1x/Views/Home/Index.cshtml?name=snippet_static_file_wwwroot)]
 
-Dans le code précédent, le caractère `~/` tilde pointe vers la [racine Web](xref:fundamentals/index#web-root).
+Dans le code précédent, le caractère tilde `~/` pointe vers la [racine Web](xref:fundamentals/index#web-root).
 
 ### <a name="serve-files-outside-of-web-root"></a>Délivrer des fichiers en dehors de la racine web
 
@@ -106,7 +108,7 @@ Vous permettez à une requête d’accéder au fichier *banner1.svg* en configur
 
 [!code-csharp[](static-files/samples/1x/StartupTwoStaticFiles.cs?name=snippet_ConfigureMethod&highlight=5-10)]
 
-Dans le code précédent, la hiérarchie de répertoires *MyStaticFiles* est exposée publiquement via le segment d’URI *StaticFiles*. Une requête à *http://\<adresse_serveur>/StaticFiles/images/banner1.svg* délivre le fichier *banner1.svg*.
+Dans le code précédent, la hiérarchie de répertoires *MyStaticFiles* est exposée publiquement via le segment d’URI *StaticFiles*. Une demande à *http:// \<server_address> /StaticFiles/images/banner1.svg* sert le fichier *banner1. svg* .
 
 Le balisage suivant référence *MyStaticFiles/images/banner1.svg* :
 
@@ -114,7 +116,7 @@ Le balisage suivant référence *MyStaticFiles/images/banner1.svg* :
 
 ### <a name="set-http-response-headers"></a>Définir des en-têtes de réponse HTTP
 
-Un objet [StaticFileOptions](/dotnet/api/microsoft.aspnetcore.builder.staticfileoptions) peut être utilisé pour définir des en-têtes de réponse HTTP. En plus de configurer le service de fichiers statiques à partir de la [racine Web](xref:fundamentals/index#web-root), le `Cache-Control` code suivant définit l’en-tête :
+Un objet [StaticFileOptions](/dotnet/api/microsoft.aspnetcore.builder.staticfileoptions) peut être utilisé pour définir des en-têtes de réponse HTTP. En plus de configurer le service de fichiers statiques à partir de la [racine Web](xref:fundamentals/index#web-root), le code suivant définit l' `Cache-Control` en-tête :
 
 [!code-csharp[](static-files/samples/1x/StartupAddHeader.cs?name=snippet_ConfigureMethod)]
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
@@ -144,13 +146,13 @@ Ajoutez les services nécessaires en appelant la méthode [AddDirectoryBrowser](
 
 [!code-csharp[](static-files/samples/1x/StartupBrowse.cs?name=snippet_ConfigureServicesMethod&highlight=3)]
 
-Le code précédent permet l’exploration des répertoires du dossier *wwwroot/images* en utilisant l’URL *http://\<adresse_serveur>/MyImages*, avec des liens vers chaque fichier et dossier :
+Le code précédent autorise l’exploration des répertoires du dossier *wwwroot/images* à l’aide de l’URL *http:// \<server_address> /myImages*, avec des liens vers chaque fichier et dossier :
 
 ![exploration des répertoires](static-files/_static/dir-browse.png)
 
 Consultez [Considérations](#considerations) sur les risques de sécurité lors de l’activation de l’exploration.
 
-Notez les deux appels de `UseStaticFiles` dans l’exemple suivant. Le premier appel permet de délivrer des fichiers statiques dans le dossier *wwwroot*. Le deuxième appel active l’exploration des répertoires du dossier *wwwroot/images* en utilisant l’URL *http://\<adresse_serveur>/MyImages* :
+Notez les deux appels de `UseStaticFiles` dans l’exemple suivant. Le premier appel permet de délivrer des fichiers statiques dans le dossier *wwwroot*. Le deuxième appel active l’exploration des répertoires du dossier *wwwroot/images* à l’aide de l’URL *http:// \<server_address> /myImages*:
 
 [!code-csharp[](static-files/samples/1x/StartupBrowse.cs?name=snippet_ConfigureMethod&highlight=3,5)]
 
@@ -168,7 +170,7 @@ Avec `UseDefaultFiles`, les requêtes sur un dossier recherchent :
 * *default.htm*
 * *default.html*
 * *index.htm*
-* *index. html*
+* *index.html*
 
 Le premier fichier trouvé dans la liste est délivré comme si la requête était l’URI qualifié complet. L’URL du navigateur continue de refléter l’URI demandé.
 
@@ -178,7 +180,7 @@ Le code suivant change le nom de fichier par défaut en *mydefault.html* :
 
 ## <a name="usefileserver"></a>UseFileServer
 
-<xref:Microsoft.AspNetCore.Builder.FileServerExtensions.UseFileServer*>combine les fonctionnalités de `UseStaticFiles`, `UseDefaultFiles`et éventuellement `UseDirectoryBrowser`.
+<xref:Microsoft.AspNetCore.Builder.FileServerExtensions.UseFileServer*>combine les fonctionnalités de `UseStaticFiles` , `UseDefaultFiles` et éventuellement `UseDirectoryBrowser` .
 
 Le code suivant active la possibilité de délivrer des fichiers statiques et le fichier par défaut. L’exploration des répertoires n’est pas activée.
 
@@ -215,10 +217,10 @@ En utilisant la hiérarchie de fichiers et le code précédent, les URL sont ré
 
 | URI            |                             response  |
 | ------- | ------|
-| *http://\<server_address>/staticfiles/images/banner1.svg*    |      MyStaticFiles/images/banner1.svg |
-| *http://\<server_address>/staticfiles*             |     MyStaticFiles/default.html |
+| *http:// \<server_address> /StaticFiles/images/banner1.svg*    |      MyStaticFiles/images/banner1.svg |
+| *http:// \<server_address> /StaticFiles*             |     MyStaticFiles/default.html |
 
-Si aucun fichier nommé default n’existe dans le répertoire *MyStaticFiles*, *http://\<adresse_serveur>/StaticFiles* retourne la liste des répertoires avec des liens cliquables :
+Si aucun fichier nommé par défaut n’existe dans le répertoire *MyStaticFiles* , *http:// \<server_address> /StaticFiles* retourne la liste des répertoires avec des liens interactives :
 
 ![Liste des fichiers statiques](static-files/_static/db2.png)
 
@@ -248,12 +250,12 @@ Avec le code précédent, une requête pour un fichier avec un type de contenu i
 
 ## <a name="serve-files-from-multiple-locations"></a>Servir des fichiers à partir de plusieurs emplacements
 
-`UseStaticFiles`la `UseFileServer` valeur par défaut est le fournisseur de fichiers qui pointe vers *wwwroot*. Vous pouvez fournir des instances supplémentaires `UseStaticFiles` de `UseFileServer` et avec d’autres fournisseurs de fichiers pour servir des fichiers à partir d’autres emplacements. Pour plus d’informations, consultez [ce problème GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/15578).
+`UseStaticFiles``UseFileServer`la valeur par défaut est le fournisseur de fichiers qui pointe vers *wwwroot*. Vous pouvez fournir des instances supplémentaires de `UseStaticFiles` et `UseFileServer` avec d’autres fournisseurs de fichiers pour servir des fichiers à partir d’autres emplacements. Pour plus d’informations, consultez [ce problème GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/15578).
 
 ### <a name="considerations"></a>Considérations
 
 > [!WARNING]
-> `UseDirectoryBrowser` et `UseStaticFiles` peuvent entraîner une fuite de secrets. La désactivation de l’exploration de répertoires est fortement recommandée en production. Examinez attentivement les répertoires qui sont activés via `UseStaticFiles` ou `UseDirectoryBrowser`. L’ensemble du répertoire et de ses sous-répertoires deviennent accessibles publiquement. Stocker les fichiers pouvant être affectés au public dans un répertoire dédié, par exemple * \<content_root>/wwwroot*. Séparez ces fichiers des vues MVC Razor , des pages (2. x uniquement), des fichiers de configuration, etc.
+> `UseDirectoryBrowser` et `UseStaticFiles` peuvent entraîner une fuite de secrets. La désactivation de l’exploration de répertoires est fortement recommandée en production. Examinez attentivement les répertoires qui sont activés via `UseStaticFiles` ou `UseDirectoryBrowser`. L’ensemble du répertoire et de ses sous-répertoires deviennent accessibles publiquement. Stocker les fichiers pouvant être affectés au public dans un répertoire dédié, par exemple * \<content_root> /wwwroot*. Séparez ces fichiers des vues MVC, des Razor pages (2. x uniquement), des fichiers de configuration, etc.
 
 * Les URL pour le contenu exposé avec `UseDirectoryBrowser` et `UseStaticFiles` sont soumises aux restrictions de respect de la casse et de caractères du système de fichiers sous-jacent. Par exemple, Windows ne respecte pas la casse, mais macOS et Linux la respectent.
 

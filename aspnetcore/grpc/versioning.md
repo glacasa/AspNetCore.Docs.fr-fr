@@ -7,17 +7,19 @@ ms.author: jamesnk
 ms.date: 01/09/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: grpc/versioning
-ms.openlocfilehash: dcf089f1e5f27639d048e91ee3aa42c7da6d8398
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: af8c6cac621ed073fc34e2afe0402e640c2c5727
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775360"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400009"
 ---
 # <a name="versioning-grpc-services"></a>Contrôle de version des services gRPC
 
@@ -54,7 +56,7 @@ Les modifications suivantes sont sans rupture au niveau du protocole gRPC, mais 
 
 * La **Suppression d’une** valeur de champ d’un champ supprimé est désérialisée dans les [champs inconnus](https://developers.google.com/protocol-buffers/docs/proto3#unknowns)d’un message. Il ne s’agit pas d’une modification avec rupture de protocole gRPC, mais le client doit être mis à jour s’il est mis à niveau vers le dernier contrat. Il est important qu’un numéro de champ supprimé ne soit pas réutilisé par la suite. Pour vous assurer que cela ne se produit pas, spécifiez les numéros de champ et les noms supprimés dans le message à l’aide du mot clé [réservé](https://developers.google.com/protocol-buffers/docs/proto3#reserved) de Protobuf.
 * Si vous **renommez un message** , les noms de message ne sont généralement pas envoyés sur le réseau. il ne s’agit donc pas d’une modification avec rupture de protocole gRPC. Le client devra être mis à jour s’il est mis à niveau vers le dernier contrat. Dans les cas où le nom du message est utilisé pour identifier le type de message, il peut [arriver que les](https://developers.google.com/protocol-buffers/docs/proto3#any) noms des messages **soient** envoyés sur le réseau.
-* La modification **csharp_namespace** `csharp_namespace` modification de l’espace de noms des types .NET générés. Il ne s’agit pas d’une modification avec rupture de protocole gRPC, mais le client doit être mis à jour s’il est mis à niveau vers le dernier contrat.
+* La modification **csharp_namespace** modification `csharp_namespace` de l’espace de noms des types .NET générés. Il ne s’agit pas d’une modification avec rupture de protocole gRPC, mais le client doit être mis à jour s’il est mis à niveau vers le dernier contrat.
 
 ### <a name="protocol-breaking-changes"></a>Modifications avec rupture de protocole
 

@@ -1,30 +1,32 @@
 ---
-title: BlazorMeilleures pratiques relatives aux performances de ASP.net Core Webassembly
+title: Blazor WebAssemblyMeilleures pratiques en matière de performances de ASP.net Core
 author: pranavkm
-description: Conseils pour améliorer les performances dans ASP.NET Core Blazor les applications Webassembly et éviter les problèmes de performances courants.
+description: Conseils pour améliorer les performances dans les Blazor WebAssembly applications ASP.net Core et éviter les problèmes de performances courants.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/08/2020
+ms.date: 06/25/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 2b6d4e706856cb28f26c2502feca4f959ca4abac
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: f7bd0d356030e6ddb95c77d7376995320e3ec40e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243029"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401881"
 ---
-# <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>BlazorMeilleures pratiques relatives aux performances de ASP.net Core Webassembly
+# <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>Blazor WebAssemblyMeilleures pratiques en matière de performances de ASP.net Core
 
 Par [Pranav Krishnamoorthy](https://github.com/pranavkm)
 
-Cet article fournit des instructions pour ASP.NET Core Blazor meilleures pratiques en matière de performances Webassembly.
+Cet article fournit des instructions pour ASP.NET Core Blazor WebAssembly meilleures pratiques en matière de performances.
 
 ## <a name="avoid-unnecessary-component-renders"></a>Éviter les rendus de composants inutiles
 
@@ -38,7 +40,7 @@ Si vous créez un composant d’interface utilisateur qui n’est jamais modifi�
 }
 ```
 
-La plupart des applications n’ont pas besoin d’un contrôle affiné, mais elles <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> peuvent également être utilisées pour restituer de manière sélective un composant qui répond à un événement d’interface utilisateur.
+La plupart des applications n’ont pas besoin d’un contrôle affiné, mais elles <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> peuvent être utilisées pour afficher de manière sélective un composant répondant à un événement d’interface utilisateur. L’utilisation de <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> peut également être importante dans les scénarios où un grand nombre de composants sont rendus. Imaginez une grille, où l’utilisation de <xref:Microsoft.AspNetCore.Components.EventCallback> dans un composant dans une cellule de la grille appelle <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> sur la grille. L’appel <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> de provoque un nouveau rendu de chaque composant enfant. Si seulement un petit nombre de cellules requièrent un rerendu, utilisez <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> pour éviter une altération des performances des rendus inutiles.
 
 Dans l’exemple suivant :
 
@@ -83,7 +85,7 @@ Par exemple, une grille ou une liste qui restitue des centaines de lignes conten
 
 ## <a name="avoid-javascript-interop-to-marshal-data"></a>Éviter l’interopérabilité JavaScript pour marshaler des données
 
-Dans Blazor Webassembly, un appel Interop JavaScript (js) doit traverser la limite Webassembly-js. La sérialisation et la désérialisation du contenu entre les deux contextes entraînent la surcharge du traitement de l’application. Les appels d’interopérabilité JS fréquents ont souvent des répercussions néfastes sur les performances. Pour réduire le marshalling des données à travers la limite, déterminez si l’application peut regrouper de nombreuses charges utiles dans une seule grande charge utile pour éviter le basculement de contexte élevé entre webassembly et JS.
+Dans Blazor WebAssembly , un appel Interop JavaScript (js) doit traverser la limite Webassembly-js. La sérialisation et la désérialisation du contenu entre les deux contextes entraînent la surcharge du traitement de l’application. Les appels d’interopérabilité JS fréquents ont souvent des répercussions néfastes sur les performances. Pour réduire le marshalling des données à travers la limite, déterminez si l’application peut regrouper de nombreuses charges utiles dans une seule grande charge utile pour éviter le basculement de contexte élevé entre webassembly et JS.
 
 ## <a name="use-systemtextjson"></a>Utiliser System.Text.Jssur
 
@@ -93,7 +95,7 @@ Pour obtenir des conseils sur la migration, consultez [Comment migrer de `Newton
 
 ## <a name="use-synchronous-and-unmarshalled-js-interop-apis-where-appropriate"></a>Utiliser les API d’interopérabilité JS synchrones et démarshalées lorsque cela est approprié
 
-BlazorWebassembly offre deux versions supplémentaires de <xref:Microsoft.JSInterop.IJSRuntime> sur la version unique disponible pour les Blazor applications serveur :
+Blazor WebAssemblyoffre deux versions supplémentaires de <xref:Microsoft.JSInterop.IJSRuntime> sur la version unique disponible pour les Blazor Server applications :
 
 * <xref:Microsoft.JSInterop.IJSInProcessRuntime>permet d’appeler des appels d’interopérabilité JS de manière synchrone, ce qui a moins de surcharge que les versions asynchrones :
 
@@ -138,21 +140,21 @@ BlazorWebassembly offre deux versions supplémentaires de <xref:Microsoft.JSInte
 
 ### <a name="intermediate-language-il-linking"></a>Liaison en langage intermédiaire (IL)
 
-[Liaison d’un Blazor L’application webassembly](xref:blazor/host-and-deploy/configure-linker) réduit la taille de l’application en découpant le code inutilisé dans les fichiers binaires de l’application. Par défaut, l’éditeur de liens est activé uniquement lors de la génération de la `Release` Configuration. Pour tirer parti de ce, publiez l’application pour le déploiement à l’aide de la [`dotnet publish`](/dotnet/core/tools/dotnet-publish) commande avec l’option [-c |--configuration](/dotnet/core/tools/dotnet-publish#options) définie sur `Release` :
+La [liaison d’une Blazor WebAssembly application](xref:blazor/host-and-deploy/configure-linker) réduit la taille de l’application en découpant le code inutilisé dans les fichiers binaires de l’application. Par défaut, l’éditeur de liens est activé uniquement lors de la génération de la `Release` Configuration. Pour tirer parti de ce, publiez l’application pour le déploiement à l’aide de la [`dotnet publish`](/dotnet/core/tools/dotnet-publish) commande avec l’option [-c |--configuration](/dotnet/core/tools/dotnet-publish#options) définie sur `Release` :
 
 ```dotnetcli
 dotnet publish -c Release
 ```
 
-### <a name="compression"></a>compression ;
+### <a name="compression"></a>Compression
 
-Lors de Blazor la publication d’une application Webassembly, la sortie est compressée statiquement lors de la publication afin de réduire la taille de l’application et de supprimer la surcharge liée à la compression du Runtime. Blazors’appuie sur le serveur pour effectuer des negotation de contenu et traiter des fichiers compressés statiquement.
+Quand une Blazor WebAssembly application est publiée, la sortie est compressée de manière statique lors de la publication afin de réduire la taille de l’application et de supprimer la surcharge liée à la compression du Runtime. Blazors’appuie sur le serveur pour effectuer des negotation de contenu et traiter des fichiers compressés statiquement.
 
 Une fois qu’une application a été déployée, vérifiez que l’application dessert des fichiers compressés. Examinez l’onglet réseau dans le Outils de développement d’un navigateur et vérifiez que les fichiers sont pris en charge avec `Content-Encoding: br` ou `Content-Encoding: gz` . Si l’hôte ne dessert pas de fichiers compressés, suivez les instructions de la procédure <xref:blazor/host-and-deploy/webassembly#compression> .
 
 ### <a name="disable-unused-features"></a>Désactiver les fonctionnalités inutilisées
 
-BlazorLe runtime de webassembly comprend les fonctionnalités .NET suivantes qui peuvent être désactivées si l’application n’en a pas besoin pour une plus petite taille de charge utile :
+Blazor WebAssemblyle runtime de comprend les fonctionnalités .NET suivantes qui peuvent être désactivées si l’application n’en a pas besoin pour une plus petite taille de charge utile :
 
 * Un fichier de données est inclus pour corriger les informations de fuseau horaire. Si l’application n’a pas besoin de cette fonctionnalité, envisagez de la désactiver en définissant la `BlazorEnableTimeZoneSupport` propriété MSBuild dans le fichier projet de l’application sur `false` :
 

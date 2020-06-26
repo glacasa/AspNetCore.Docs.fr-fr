@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: performance/caching/middleware
-ms.openlocfilehash: 93ac4e7e159f2b1f031e48a44c2297a741ba7b1c
-ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
+ms.openlocfilehash: 0d13c44b5538f617343a89a441856d4a3f0cc7f1
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85292644"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399944"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>Intergiciel de mise en cache des réponses dans ASP.NET Core
 
@@ -130,7 +132,7 @@ Pour plus de contrôle sur le comportement de mise en cache, explorez les autres
 * <xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper>
 * <xref:mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper>
 
-## <a name="troubleshooting"></a>Dépannage
+## <a name="troubleshooting"></a>Résolution des problèmes
 
 Si le comportement de mise en cache n’est pas le même que prévu, vérifiez que les réponses sont mises en cache et peuvent être servies à partir du cache. Examinez les en-têtes entrants de la demande et les en-têtes sortants de la réponse. Activez la [journalisation](xref:fundamentals/logging/index) pour faciliter le débogage.
 
@@ -274,7 +276,7 @@ Pour plus de contrôle sur le comportement de mise en cache, explorez les autres
 * <xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper>
 * <xref:mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper>
 
-## <a name="troubleshooting"></a>Dépannage
+## <a name="troubleshooting"></a>Résolution des problèmes
 
 Si le comportement de mise en cache n’est pas le même que prévu, vérifiez que les réponses sont mises en cache et peuvent être servies à partir du cache. Examinez les en-têtes entrants de la demande et les en-têtes sortants de la réponse. Activez la [journalisation](xref:fundamentals/logging/index) pour faciliter le débogage.
 

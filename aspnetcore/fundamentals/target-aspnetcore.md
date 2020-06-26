@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/16/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/target-aspnetcore
-ms.openlocfilehash: 70a445d109a1a9553178e94d79df87cd373e6b06
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 1c794092b856a916a318956d7cfb357d46a22d1d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103018"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399645"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>Utiliser des API ASP.NET Core dans une bibliothèque de classes
 
@@ -52,7 +54,7 @@ Blazorprend en charge webassembly (WASM) et les [modèles d’hébergement](xref
 
 ### <a name="support-both-hosting-models"></a>Prendre en charge les modèles d’hébergement
 
-Pour prendre en charge la Razor consommation des composants à partir des projets [ Blazor serveur](xref:blazor/hosting-models#blazor-server) et [ Blazor WASM](xref:blazor/hosting-models#blazor-webassembly) , utilisez les instructions suivantes pour votre éditeur.
+Pour prendre en charge la Razor consommation des composants à partir des [Blazor Server](xref:blazor/hosting-models#blazor-server) projets et [ Blazor WASM](xref:blazor/hosting-models#blazor-webassembly) , utilisez les instructions suivantes pour votre éditeur.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -86,7 +88,7 @@ Par exemple :
 
 ### <a name="support-a-specific-hosting-model"></a>Prendre en charge un modèle d’hébergement spécifique
 
-La prise en charge d’un modèle d’hébergement unique est beaucoup moins courante Blazor . Par exemple, pour prendre en charge Razor la consommation de composants à partir de projets [ Blazor serveur](xref:blazor/hosting-models#blazor-server) uniquement :
+La prise en charge d’un modèle d’hébergement unique est beaucoup moins courante Blazor . Par exemple, pour prendre en charge Razor la consommation de composants à partir de [Blazor Server](xref:blazor/hosting-models#blazor-server) projets uniquement :
 
 * Ciblez .NET Core 3. x.
 * Ajoutez un `<FrameworkReference>` élément pour le Framework partagé.

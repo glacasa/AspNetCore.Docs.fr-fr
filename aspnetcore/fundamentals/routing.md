@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 4/1/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: f4bba10f7ce0b5a95c2aed8644aed18fa0637457
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: 7ac6dc983454153792610a07c1df01fbc38c8d67
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074508"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400828"
 ---
 # <a name="routing-in-aspnet-core"></a>Routage dans ASP.NET Core
 
@@ -563,7 +565,7 @@ Pour échapper les caractères de délimiteur de paramètre de routage `{` ,,,, 
 
 Les expressions régulières utilisées dans le routage commencent souvent par le `^` caractère et correspondent à la position de départ de la chaîne. Les expressions se terminent souvent par le `$` caractère et correspondent à la fin de la chaîne. Les `^` `$` caractères et garantissent que l’expression régulière correspond à l’intégralité de la valeur du paramètre d’itinéraire. Sans les `^` `$` caractères et, l’expression régulière correspond à toute sous-chaîne de la chaîne, ce qui est souvent indésirable. Le tableau suivant fournit des exemples et explique pourquoi ils correspondent ou ne parviennent pas à faire correspondre :
 
-| Expression   | String    | Correspond | Comment               |
+| Expression   | String    | Correspond | Commentaire               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
 | `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
@@ -1484,7 +1486,7 @@ Pour échapper les caractères de délimiteur de paramètre de routage `{` , `}`
 
 Les expressions régulières utilisées dans le routage commencent souvent par le `^` caractère de signe insertion et correspondent à la position de départ de la chaîne. Les expressions se terminent souvent par le `$` caractère de signe dollar et la fin de la chaîne. Les caractères `^` et `$` garantissent que l’expression régulière établit une correspondance avec la totalité de la valeur du paramètre de route. Sans les caractères `^` et `$`, l’expression régulière peut correspondre à n’importe quelle sous-chaîne dans la chaîne, ce qui est souvent indésirable. Le tableau suivant contient des exemples et explique pourquoi ils établissent ou non une correspondance.
 
-| Expression   | String    | Correspond | Comment               |
+| Expression   | String    | Correspond | Commentaire               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
 | `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
@@ -1928,7 +1930,7 @@ Les expressions régulières utilisent les délimiteurs et des jetons semblables
 
 Les expressions régulières utilisées dans le routage commencent souvent par un caret (`^`) et correspondent à la position de début de la chaîne. Les expressions se terminent souvent par le signe dollar (`$`) de caractère et correspondent à la fin de la chaîne. Les caractères `^` et `$` garantissent que l’expression régulière établit une correspondance avec la totalité de la valeur du paramètre de route. Sans les caractères `^` et `$`, l’expression régulière peut correspondre à n’importe quelle sous-chaîne dans la chaîne, ce qui est souvent indésirable. Le tableau suivant contient des exemples et explique pourquoi ils établissent ou non une correspondance.
 
-| Expression   | String    | Correspond | Comment               |
+| Expression   | String    | Correspond | Commentaire               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
 | `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |

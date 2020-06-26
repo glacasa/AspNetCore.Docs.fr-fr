@@ -6,4 +6,4 @@ Le schéma est utilisé dans la génération de lien qui affecte le flux d’aut
 
 Utilisez l’intergiciel Forwarded Headers afin de mettre les informations de demande d’origine à la disposition de l’application pour le traitement des demandes.
 
-Pour plus d'informations, consultez <xref:host-and-deploy/proxy-load-balancer>.
+Pour plus d’informations, consultez <xref:host-and-deploy/proxy-load-balancer>.

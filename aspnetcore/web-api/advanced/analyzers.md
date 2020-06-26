@@ -8,21 +8,23 @@ ms.custom: mvc
 ms.date: 09/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/advanced/analyzers
-ms.openlocfilehash: 530ce2d2a7f67f549f6d188a0c571a5d58518377
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 1f44fd65836cc42ffb2303890eefb053b61c4c30
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776244"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399463"
 ---
 # <a name="use-web-api-analyzers"></a>Utiliser les analyseurs d’API web
 
-ASP.NET Core 2,2 et versions ultérieures fournissent un package d’analyseurs MVC destiné à être utilisé avec des projets d’API Web. Les analyseurs fonctionnent avec les contrôleurs annotés avec <xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute>, tout en s’appuyant sur les conventions d' [API Web](xref:web-api/advanced/conventions).
+ASP.NET Core 2,2 et versions ultérieures fournissent un package d’analyseurs MVC destiné à être utilisé avec des projets d’API Web. Les analyseurs fonctionnent avec les contrôleurs annotés avec <xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute> , tout en s’appuyant sur les [conventions d’API Web](xref:web-api/advanced/conventions).
 
 Le package des analyseurs vous avertit des actions du contrôleur qui :
 
@@ -35,7 +37,7 @@ Le package des analyseurs vous avertit des actions du contrôleur qui :
 
 ## <a name="reference-the-analyzer-package"></a>Référencer le package de l’analyseur
 
-Dans ASP.NET Core 3,0 ou version ultérieure, les analyseurs sont inclus dans le kit SDK .NET Core. Pour activer l’analyseur dans votre projet, incluez `IncludeOpenAPIAnalyzers` la propriété dans le fichier projet :
+Dans ASP.NET Core 3,0 ou version ultérieure, les analyseurs sont inclus dans le kit SDK .NET Core. Pour activer l’analyseur dans votre projet, incluez la `IncludeOpenAPIAnalyzers` propriété dans le fichier projet :
 
 ```xml
 <PropertyGroup>

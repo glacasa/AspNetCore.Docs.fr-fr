@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 02/06/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: spa/angular
-ms.openlocfilehash: d6e52a7e2c8e9c2e440b187312eeee9fc06699ae
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 1c91f1adadca8b339e4daf33207ca60008679810
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773740"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401777"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>Utiliser le modèle de projet Angular avec ASP.NET Core
 
@@ -60,7 +62,7 @@ Now listening on: http://localhost:<port>
 Accédez à cette URL dans un navigateur.
 
 > [!WARNING]
-> L’application démarre une instance du serveur CLI Angular en arrière-plan. Un message semblable au suivant est consigné : *ng Live serveur de développement écoute sur localhost :&lt;otherport&gt;, ouvrez un navigateur sur http://localhost:&lt; otherport&gt;*. Ignorez ce message&mdash;ce n’est **pas** l’URL de l’application ASP.NET Core et CLI Angular combinée.
+> L’application démarre une instance du serveur CLI Angular en arrière-plan. Un message semblable au suivant est consigné : *ng Live serveur de développement écoute sur localhost : &lt; otherport &gt; , ouvrez un navigateur sur http://localhost:&lt ; otherport &gt; / *. Ignorez ce message&mdash;ce n’est **pas** l’URL de l’application ASP.NET Core et CLI Angular combinée.
 
 ---
 
@@ -97,7 +99,7 @@ npm install --save <package_name>
 
 Pendant le développement, l’application s’exécute en mode optimisé pour des raisons pratiques. Par exemple, les bundles JavaScript incluent des mappages de sources (ce qui vous permet de voir votre code TypeScript d’origine pendant le débogage). L’application se recompile et se recharge automatiquement en cas de modification des fichiers TypeScript, HTML et CSS sur le disque.
 
-Dans un environnement de production, fournissez une version de votre application qui est optimisée pour les performances. Ce comportement est configuré pour se produire automatiquement. Quand vous publiez, la configuration de build émet une build compilée AoT (Ahead-of-Time) réduite de votre code côté client. Contrairement à la version de développement, la génération de production ne nécessite pas l’installation de node. js sur le serveur (sauf si vous avez activé le rendu côté serveur (SSR)).
+Dans un environnement de production, fournissez une version de votre application qui est optimisée pour les performances. Ce comportement est configuré pour se produire automatiquement. Quand vous publiez, la configuration de build émet une build compilée AoT (Ahead-of-Time) réduite de votre code côté client. Contrairement à la version de développement, la génération de production ne nécessite pas l’installation de Node.js sur le serveur (sauf si vous avez activé le rendu côté serveur (SSR)).
 
 Vous pouvez utiliser des [méthodes d’hébergement et de déploiement ASP.NET Core](xref:host-and-deploy/index) standard.
 

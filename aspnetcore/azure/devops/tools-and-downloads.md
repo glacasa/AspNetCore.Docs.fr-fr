@@ -7,17 +7,19 @@ ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: azure/devops/tools-and-downloads
-ms.openlocfilehash: 1917a329a5dcbe60542541cfcdc746799307e3d5
-ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
+ms.openlocfilehash: ed8aee214ff9b9e941aeea01887882c3bdfc56a7
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82850407"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400295"
 ---
 # <a name="tools-and-downloads"></a>Outils et téléchargements
 
@@ -33,8 +35,8 @@ Les abonnements suivants sont requis :
 
 Les outils suivants sont requis :
 
-* [Git](https://git-scm.com/downloads) &mdash; une compréhension fondamentale de git est recommandée pour ce guide. Consultez la [documentation git](https://git-scm.com/doc), en particulier [git remote](https://git-scm.com/docs/git-remote) et [git push](https://git-scm.com/docs/git-push).
-* [Kit SDK .net Core](https://dotnet.microsoft.com/download/) &mdash; version 2.1.300 ou ultérieure est nécessaire pour générer et exécuter l’exemple d’application. Si Visual Studio est installé avec la charge de travail de **développement multiplateforme .net Core** , le kit SDK .net Core est déjà installé.
+* [Git](https://git-scm.com/downloads) &mdash; Il est recommandé d’avoir une compréhension fondamentale de Git pour ce guide. Consultez la [documentation git](https://git-scm.com/doc), en particulier [git remote](https://git-scm.com/docs/git-remote) et [git push](https://git-scm.com/docs/git-push).
+* [Kit SDK .net Core](https://dotnet.microsoft.com/download/) &mdash; La version 2.1.300 ou ultérieure est requise pour générer et exécuter l’exemple d’application. Si Visual Studio est installé avec la charge de travail de **développement multiplateforme .net Core** , le kit SDK .net Core est déjà installé.
 
     Vérifiez votre installation de kit SDK .NET Core. Ouvrez une interface de commande, puis exécutez la commande suivante :
 

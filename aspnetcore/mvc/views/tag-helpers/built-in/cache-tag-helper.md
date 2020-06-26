@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
-ms.openlocfilehash: ced10a7b7b221188fdac2a4e3c54f66292110ece
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 65d8bbcdaed76a308b924ba024219e8f520bb585
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773940"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399281"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>Tag Helper Cache dans ASP.NET Core MVC
 
@@ -27,7 +29,7 @@ Le Tag Helper Cache permet d’améliorer les performances de votre application 
 
 Pour avoir une vue d’ensemble de Tag Helpers, consultez <xref:mvc/views/tag-helpers/intro>.
 
-Le balisage Razor suivant met en cache la date actuelle :
+Le balisage suivant met en Razor cache la date actuelle :
 
 ```cshtml
 <cache>@DateTime.Now</cache>
@@ -45,7 +47,7 @@ La première requête à la page qui contient le Tag Helper affiche la date actu
 
 `enabled` détermine si le contenu joint par le Tag Helper Cache est mis en cache. Par défaut, il s’agit de `true`. Si la valeur est `false`, la sortie rendue n’est **pas** mise en cache.
 
-Exemple :
+Exemple :
 
 ```cshtml
 <cache enabled="true">
@@ -77,7 +79,7 @@ L’exemple suivant met en cache le contenu du Tag Helper Cache jusqu’à 17:02
 
 `expires-after` définit la durée à partir de l’heure de la première demande pour mettre en cache le contenu.
 
-Exemple :
+Exemple :
 
 ```cshtml
 <cache expires-after="@TimeSpan.FromSeconds(120)">
@@ -85,7 +87,7 @@ Exemple :
 </cache>
 ```
 
-Le moteur de vue Razor définit la valeur par défaut `expires-after` sur vingt minutes.
+Le Razor moteur d’affichage définit la `expires-after` valeur par défaut sur vingt minutes.
 
 ### <a name="expires-sliding"></a>expires-sliding
 
@@ -95,7 +97,7 @@ Le moteur de vue Razor définit la valeur par défaut `expires-after` sur vingt 
 
 Définit l’heure à laquelle une entrée de cache doit être supprimée si sa valeur n’a fait l’objet d’aucun accès.
 
-Exemple :
+Exemple :
 
 ```cshtml
 <cache expires-sliding="@TimeSpan.FromSeconds(60)">
@@ -143,7 +145,7 @@ L’exemple suivant analyse les valeurs de `Make` et `Model`. L’exemple met en
 
 `vary-by-route` accepte une liste séparée par des virgules de noms de paramètre de route qui déclenchent une actualisation du cache quand la valeur du paramètre des données de route change.
 
-Exemple :
+Exemple :
 
 *Startup.cs*:
 
@@ -169,7 +171,7 @@ routes.MapRoute(
 
 `vary-by-cookie` accepte une liste séparée par des virgules de noms de cookie qui déclenchent une actualisation du cache quand la valeur du cookie change.
 
-L’exemple suivant analyse le cookie associé à ASP.NET Core Identity. Lorsqu’un utilisateur est authentifié, une modification dans le cookie Identity déclenche une actualisation du cache :
+L’exemple suivant surveille le cookie associé à ASP.NET Core Identity . Lorsqu’un utilisateur est authentifié, une modification du Identity cookie déclenche une actualisation du cache :
 
 ```cshtml
 <cache vary-by-cookie=".AspNetCore.Identity.Application">
@@ -183,7 +185,7 @@ L’exemple suivant analyse le cookie associé à ASP.NET Core Identity. Lorsqu�
 | --------------- | --------------- | ------- |
 | Boolean         | `true`, `false` | `true`  |
 
-`vary-by-user` spécifie si le cache se réinitialise ou pas quand l’utilisateur connecté (ou principal du contexte) change. L’utilisateur actuel est également connu comme principal du contexte de la demande et peut être affiché dans une vue Razor en référençant `@User.Identity.Name`.
+`vary-by-user` spécifie si le cache se réinitialise ou pas quand l’utilisateur connecté (ou principal du contexte) change. L’utilisateur actuel est également appelé principal du contexte de la demande et peut être affiché dans une Razor vue en référençant `@User.Identity.Name` .
 
 L’exemple suivant analyse l’utilisateur actuellement connecté pour déclencher une actualisation du cache :
 
@@ -234,7 +236,7 @@ public IActionResult Index(string myParam1, string myParam2, string myParam3)
 
 `priority` fournit des instructions de suppression de cache au fournisseur de caches intégré. Le serveur web supprime d’abord les entrées de cache `Low` en cas de sollicitation de la mémoire.
 
-Exemple :
+Exemple :
 
 ```cshtml
 <cache priority="High">

@@ -1,7 +1,7 @@
 > [!WARNING]
 > Pour des raisons de sécurité, vous devez choisir de lier les données de requête `GET` aux propriétés du modèle de page. Vérifiez l’entrée utilisateur avant de la mapper à des propriétés. L’utilisation `GET` de la liaison est utile lors de l’adressage de scénarios qui reposent sur une chaîne de requête ou des valeurs de route.
 >
-> Pour lier une propriété à `GET` des demandes, affectez [`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) à `SupportsGet` `true`la propriété de l’attribut la valeur :
+> Pour lier une propriété à des `GET` demandes, affectez [`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) à la propriété de l’attribut la valeur `SupportsGet` `true` :
 >
 > ```csharp
 > [BindProperty(SupportsGet = true)]

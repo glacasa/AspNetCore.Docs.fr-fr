@@ -7,17 +7,19 @@ ms.date: 10/24/2018
 ms.custom: mvc, seodec18
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: azure/devops/cicd
-ms.openlocfilehash: f5b0e0ee1c903de26188815c7dc01ed547cca97e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 0edded18d766d6f2af08f6be5dbecbfd52a14a35
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767133"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400555"
 ---
 # <a name="continuous-integration-and-deployment"></a>Intégration et déploiement continus
 
@@ -36,8 +38,8 @@ Dans cette section, vous allez effectuer les tâches suivantes :
 
 ## <a name="publish-the-apps-code-to-github"></a>Publier le code de l’application sur GitHub
 
-1. Ouvrez une fenêtre de navigateur et accédez à `https://github.com`.
-1. Cliquez sur **+** la liste déroulante dans l’en-tête, puis sélectionnez **nouveau référentiel**:
+1. Ouvrez une fenêtre de navigateur et accédez à `https://github.com` .
+1. Cliquez sur la **+** liste déroulante dans l’en-tête, puis sélectionnez **nouveau référentiel**:
 
     ![GitHub nouvelle option de référentiel](media/cicd/github-new-repo.png)
 
@@ -62,13 +64,13 @@ Dans cette section, vous allez effectuer les tâches suivantes :
     git push -u origin master
     ```
 
-1. Ouvrez une fenêtre de navigateur et accédez à `https://github.com/<GitHub_username>/simple-feed-reader/`. Vérifiez que votre code apparaît dans le référentiel GitHub.
+1. Ouvrez une fenêtre de navigateur et accédez à `https://github.com/<GitHub_username>/simple-feed-reader/` . Vérifiez que votre code apparaît dans le référentiel GitHub.
 
 ## <a name="disconnect-local-git-deployment"></a>Déconnecter le déploiement Git local
 
 Supprimez le déploiement Git local en suivant les étapes ci-dessous. Azure Pipelines (un service Azure DevOps) remplace et augmente cette fonctionnalité.
 
-1. Ouvrez la [portail Azure](https://portal.azure.com/)et accédez à l’application Web *intermédiaire (myWebApp\<unique_number\>/staging)* . L’application Web peut être rapidement localisée en entrant *intermédiaire* dans la zone de recherche du portail :
+1. Ouvrez le [portail Azure](https://portal.azure.com/), puis accédez à l’application Web *intermédiaire (myWebApp \<unique_number\> /staging)* . L’application Web peut être rapidement localisée en entrant *intermédiaire* dans la zone de recherche du portail :
 
     ![terme de recherche de l’application Web intermédiaire](media/cicd/portal-search-box.png)
 
@@ -89,7 +91,7 @@ Supprimez le déploiement Git local en suivant les étapes ci-dessous. Azure Pip
 
     ![Bouton Démarrer votre projet](media/cicd/vsts-start-project.png)
 
-1. Un navigateur s’ouvre * \<sur\>account_name. VisualStudio.com*. Cliquez sur le lien *MyFirstProject* pour commencer à configurer le pipeline DevOps du projet.
+1. Un navigateur s’ouvre sur * \<account_name\> . VisualStudio.com*. Cliquez sur le lien *MyFirstProject* pour commencer à configurer le pipeline DevOps du projet.
 
 ## <a name="configure-the-azure-pipelines-pipeline"></a>Configurer le pipeline de Azure Pipelines
 
@@ -136,7 +138,7 @@ Il existe trois étapes distinctes à effectuer. La réalisation des étapes dé
 
     ![Boîte de dialogue Enregistrer la définition de build-modal](media/cicd/vsts-save-modal.png)
 
-    Utilisez le dossier par défaut *\\*de, puis cliquez sur le bouton **Enregistrer** .
+    Utilisez le dossier par défaut de *\\* , puis cliquez sur le bouton **Enregistrer** .
 
 ### <a name="create-the-release-pipeline"></a>Créer le pipeline de mise en production
 
@@ -178,7 +180,7 @@ Il existe trois étapes distinctes à effectuer. La réalisation des étapes dé
 
 1. Cliquez sur le lien **1 phase, 2 tâches** dans la zone **production** :
 
-    ![Pipeline de mise en production-environnement de production Link. png](media/cicd/vsts-production-link.png)
+    ![Pipeline de mise en production-link.png de l’environnement de production](media/cicd/vsts-production-link.png)
 
     L’onglet **tâches** de l’environnement s’affiche.
 1. Cliquez sur la tâche **déployer Azure App service à l’emplacement** . Ses paramètres s’affichent dans un panneau à droite.
@@ -198,7 +200,7 @@ Il existe trois étapes distinctes à effectuer. La réalisation des étapes dé
 
 1. Ouvrez *SimpleFeedReader. sln* dans Visual Studio.
 1. Dans Explorateur de solutions, ouvrez *Pages\Index.cshtml*. Remplacez `<h2>Simple Feed Reader - V3</h2>` par `<h2>Simple Feed Reader - V4</h2>`.
-1. Appuyez sur **CTRL**+**MAJ**+**B** pour générer l’application.
+1. Appuyez sur **CTRL** + **MAJ** + **B** pour générer l’application.
 1. Validez le fichier dans le référentiel GitHub. Utilisez la page **modifications** dans l’onglet *Team Explorer* de Visual Studio, ou exécutez la commande suivante à l’aide de l’interface de commande de l’ordinateur local :
 
     ```console
@@ -219,7 +221,7 @@ Il existe trois étapes distinctes à effectuer. La réalisation des étapes dé
 
     ![activer l’intégration continue](media/cicd/enable-ci.png)
 
-1. Accédez à l’onglet en **file d’attente** de la page **Azure pipelines** > **Builds** dans Azure DevOps services. La build en file d’attente affiche la branche et la validation qui ont déclenché la build :
+1. Accédez à l’onglet en **file d’attente** de la page **Azure pipelines**  >  **Builds** dans Azure DevOps services. La build en file d’attente affiche la branche et la validation qui ont déclenché la build :
 
     ![Build mise en file d’attente](media/cicd/build-queued.png)
 
@@ -237,15 +239,15 @@ L’onglet **tâches** de la définition de build répertorie les étapes indivi
 
 ![tâches de définition de build](media/cicd/build-definition-tasks.png)
 
-1. **Restore** &mdash; exécute la `dotnet restore` commande pour restaurer les packages NuGet de l’application. Le flux de package par défaut utilisé est nuget.org.
-1. **Build** &mdash; exécute la `dotnet build --configuration release` commande pour compiler le code de l’application. Cette `--configuration` option est utilisée pour produire une version optimisée du code, qui convient au déploiement dans un environnement de production. Modifiez la variable *BuildConfiguration* sous l’onglet **variables** de la définition de build si, par exemple, une configuration Debug est nécessaire.
-1. **Test** &mdash; exécute la `dotnet test --configuration release --logger trx --results-directory <local_path_on_build_agent>` commande pour exécuter les tests unitaires de l’application. Les tests unitaires sont exécutés dans n’importe `**/*Tests/*.csproj` quel projet C# correspondant au modèle glob. Les résultats des tests sont enregistrés dans un fichier *. trx* à l’emplacement spécifié `--results-directory` par l’option. Si des tests échouent, la génération échoue et n’est pas déployée.
+1. **Restaurer** &mdash; Exécute la `dotnet restore` commande pour restaurer les packages NuGet de l’application. Le flux de package par défaut utilisé est nuget.org.
+1. **Créer** &mdash; Exécute la `dotnet build --configuration release` commande pour compiler le code de l’application. Cette `--configuration` option est utilisée pour produire une version optimisée du code, qui convient au déploiement dans un environnement de production. Modifiez la variable *BuildConfiguration* sous l’onglet **variables** de la définition de build si, par exemple, une configuration Debug est nécessaire.
+1. **Test** &mdash; Exécute la `dotnet test --configuration release --logger trx --results-directory <local_path_on_build_agent>` commande pour exécuter les tests unitaires de l’application. Les tests unitaires sont exécutés dans n’importe quel projet C# correspondant au `**/*Tests/*.csproj` modèle glob. Les résultats des tests sont enregistrés dans un fichier *. trx* à l’emplacement spécifié par l' `--results-directory` option. Si des tests échouent, la génération échoue et n’est pas déployée.
 
     > [!NOTE]
     > Pour vérifier le fonctionnement des tests unitaires, modifiez *SimpleFeedReader. Tests\Services\NewsServiceTests.cs* afin de rompre intentionnellement l’un des tests. Par exemple, remplacez `Assert.True(result.Count > 0);` par `Assert.False(result.Count > 0);` dans la `Returns_News_Stories_Given_Valid_Uri` méthode. Valider et transmettre la modification à GitHub. La génération est déclenchée et échoue. L’état du pipeline de build passe à **échec**. Rétablissez la modification, la validation et la transmission de type push. La génération a échoué.
 
-1. La **publication** &mdash; exécute la `dotnet publish --configuration release --output <local_path_on_build_agent>` commande pour générer un fichier *. zip* avec les artefacts à déployer. L' `--output` option spécifie l’emplacement de publication du fichier *. zip* . Cet emplacement est spécifié en passant une [variable prédéfinie](/azure/devops/pipelines/build/variables) nommée `$(build.artifactstagingdirectory)`. Cette variable se développe en un chemin d’accès local, tel que *c:\Agent\_work\1\a*, sur l’agent de Build.
-1. L' **artefact** &mdash; de publication publie le fichier *. zip* généré par la tâche de **publication** . La tâche accepte l’emplacement du fichier *. zip* en tant que paramètre, qui est la variable `$(build.artifactstagingdirectory)`prédéfinie. Le fichier *. zip* est publié sous la forme d’un dossier nommé *Drop*.
+1. **Publication** &mdash; Exécute la `dotnet publish --configuration release --output <local_path_on_build_agent>` commande pour générer un fichier *. zip* avec les artefacts à déployer. L' `--output` option spécifie l’emplacement de publication du fichier *. zip* . Cet emplacement est spécifié en passant une [variable prédéfinie](/azure/devops/pipelines/build/variables) nommée `$(build.artifactstagingdirectory)` . Cette variable se développe en un chemin d’accès local, tel que *c:\Agent \_ work\1\a*, sur l’agent de Build.
+1. **Publier l’artefact** &mdash; Publie le fichier *. zip* produit par la tâche de **publication** . La tâche accepte l’emplacement du fichier *. zip* en tant que paramètre, qui est la variable prédéfinie `$(build.artifactstagingdirectory)` . Le fichier *. zip* est publié sous la forme d’un dossier nommé *Drop*.
 
 Cliquez sur le lien **Résumé** de la définition de build pour afficher un historique des builds avec la définition :
 
@@ -279,7 +281,7 @@ Le pipeline de mise en version est constitué de deux tâches : *déployer des 
 
 ![Capture d’écran montrant la tâche de déploiement du pipeline de version](media/cicd/release-definition-task1.png)
 
-L’abonnement Azure, le type de service, le nom de l’application Web, le groupe de ressources et l’emplacement de déploiement sont définis dans la tâche de déploiement. La zone de texte **package ou dossier** contient le chemin d’accès du fichier *. zip* à extraire et à déployer dans l’emplacement *intermédiaire* de l’application Web *\<\> myWebApp unique_number* .
+L’abonnement Azure, le type de service, le nom de l’application Web, le groupe de ressources et l’emplacement de déploiement sont définis dans la tâche de déploiement. La zone de texte **package ou dossier** contient le chemin d’accès du fichier *. zip* à extraire et à déployer dans l’emplacement *intermédiaire* de l’application Web *myWebApp \<unique_number\> * .
 
 Le fait de cliquer sur la tâche d’échange d’emplacement révèle la configuration de tâche suivante :
 

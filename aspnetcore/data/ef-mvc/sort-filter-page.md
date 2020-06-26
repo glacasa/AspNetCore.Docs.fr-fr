@@ -7,17 +7,19 @@ ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-mvc/sort-filter-page
-ms.openlocfilehash: d9cd3a74c35d531b5e8c91fc7f922b0cdf8e9558
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 45aabc644fbeaeaa31d534877ba93cb0611f3f34
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773508"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401335"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>Didacticiel : ajouter le tri, le filtrage et l’échange de ASP.NET MVC avec EF Core
 
@@ -97,7 +99,7 @@ Dans *StudentsController.cs*, remplacez la méthode `Index` par le code suivant 
 Vous avez ajouté un paramètre `searchString` à la méthode `Index`. La valeur de chaîne de recherche est reçue à partir d’une zone de texte que vous ajouterez à la vue Index. Vous avez également ajouté à l’instruction LINQ une clause where qui sélectionne uniquement les étudiants dont le prénom ou le nom contient la chaîne de recherche. L’instruction qui ajoute la clause where est exécutée uniquement s’il existe une valeur à rechercher.
 
 > [!NOTE]
-> Ici, vous appelez la méthode `Where` sur un objet `IQueryable`, et le filtre sera traité sur le serveur. Dans certains scénarios, vous pouvez appeler la méthode `Where` en tant que méthode d’extension sur une collection en mémoire. (Par exemple, supposons que vous modifiez la `_context.Students` référence à afin qu’à la `DbSet` place d’un EF, elle fasse référence à une `IEnumerable` méthode de référentiel qui retourne une collection.) Le résultat serait normalement le même, mais dans certains cas peut être différent.
+> Ici, vous appelez la méthode `Where` sur un objet `IQueryable`, et le filtre sera traité sur le serveur. Dans certains scénarios, vous pouvez appeler la méthode `Where` en tant que méthode d’extension sur une collection en mémoire. (Par exemple, supposons que vous modifiez la référence à `_context.Students` afin qu’à la place d’un EF, `DbSet` elle fasse référence à une méthode de référentiel qui retourne une `IEnumerable` collection.) Le résultat serait normalement le même, mais dans certains cas peut être différent.
 >
 >Par exemple, l’implémentation par le .NET Framework de la méthode `Contains` effectue une comparaison respectant la casse par défaut, mais dans SQL Server, cela est déterminé par le paramètre de classement de l’instance SQL Server. Ce paramètre définit par défaut le non-respect de la casse. Vous pouvez appeler la méthode `ToUpper` pour rendre explicitement le test sensible à la casse :  *Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())*. Cela garantit que les résultats resteront les mêmes si vous modifiez le code ultérieurement pour utiliser un référentiel qui renverra une collection `IEnumerable` à la place d’un objet `IQueryable`. (Lorsque vous appelez la `Contains` méthode sur une `IEnumerable` collection, vous recevez l’implémentation .NET Framework ; lorsque vous l’appelez sur un `IQueryable` objet, vous recevez l’implémentation du fournisseur de base de données.) Toutefois, il y a une baisse des performances pour cette solution. Le code `ToUpper` place une fonction dans la clause WHERE de l’instruction TSQL SELECT. Elle empêche l’optimiseur d’utiliser un index. Étant donné que SQL est généralement installé comme non sensible à la casse, il est préférable d’éviter le code `ToUpper` jusqu’à ce que vous ayez migré vers un magasin de données qui respecte la casse.
 

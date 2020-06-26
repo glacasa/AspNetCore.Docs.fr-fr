@@ -7,17 +7,19 @@ ms.custom: H1Hack27Feb2017
 ms.date: 01/09/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: client-side/using-browserlink
-ms.openlocfilehash: 619d19ba90298b2455d4a558fea138c86a751f07
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 95ddf379d7cab336356cbfd3853311cb0911552a
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773655"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401712"
 ---
 # <a name="browser-link-in-aspnet-core"></a>Lien du navigateur dans ASP.NET Core
 
@@ -29,25 +31,25 @@ Le lien du navigateur est une fonctionnalité de Visual Studio. Il crée un cana
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Ajoutez le package [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) à votre projet. Pour les Razor pages ASP.net Core ou les projets MVC, activez également la Razor compilation du runtime des fichiers (*. cshtml*) comme décrit dans <xref:mvc/views/view-compilation>. Razorles modifications de syntaxe sont appliquées uniquement lorsque la compilation du runtime a été activée.
+Ajoutez le package [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) à votre projet. Pour les Razor Pages ASP.net Core ou les projets MVC, activez également la compilation du runtime des Razor fichiers (*. cshtml*) comme décrit dans <xref:mvc/views/view-compilation> . Razorles modifications de syntaxe sont appliquées uniquement lorsque la compilation du runtime a été activée.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
 
-Lors de la conversion d’un projet ASP.NET Core 2,0 en ASP.NET Core 2,1 et de la transition vers le [AspNetCore Microsoft.. app](xref:fundamentals/metapackage-app), installez le package [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) pour la fonctionnalité de lien du navigateur. Les modèles de projet ASP.NET Core 2,1 utilisent `Microsoft.AspNetCore.App` le package par défaut.
+Lors de la conversion d’un projet ASP.NET Core 2,0 en ASP.NET Core 2,1 et de la transition vers le [AspNetCore Microsoft.. app](xref:fundamentals/metapackage-app), installez le package [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) pour la fonctionnalité de lien du navigateur. Les modèles de projet ASP.NET Core 2,1 utilisent le `Microsoft.AspNetCore.App` package par défaut.
 
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.0"
 
-Les modèles de projet **application web**ASP.net Core 2,0, **vide**et **API Web** utilisent le sous- [package Microsoft. AspNetCore. All](xref:fundamentals/metapackage), qui contient une référence de package pour [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/). Par conséquent, l' `Microsoft.AspNetCore.All` utilisation du package ne nécessite aucune action supplémentaire pour rendre le lien de navigateur disponible.
+Les modèles de projet **application web**ASP.net Core 2,0, **vide**et **API Web** utilisent le sous- [package Microsoft. AspNetCore. All](xref:fundamentals/metapackage), qui contient une référence de package pour [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/). Par conséquent, l’utilisation du `Microsoft.AspNetCore.All` package ne nécessite aucune action supplémentaire pour rendre le lien de navigateur disponible.
 
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-1.1"
 
-Le modèle de projet d' **application Web** ASP.net Core 1. x a une référence de package pour le package [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) . D’autres types de projets nécessitent l’ajout d’une référence `Microsoft.VisualStudio.Web.BrowserLink`de package à.
+Le modèle de projet d' **application Web** ASP.net Core 1. x a une référence de package pour le package [Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) . D’autres types de projets nécessitent l’ajout d’une référence de package à `Microsoft.VisualStudio.Web.BrowserLink` .
 
 ::: moniker-end
 
@@ -59,7 +61,7 @@ Appelez `UseBrowserLink` dans la méthode `Startup.Configure` :
 app.UseBrowserLink();
 ```
 
-L' `UseBrowserLink` appel est généralement placé à l' `if` intérieur d’un bloc qui active uniquement le lien de navigateur dans l’environnement de développement. Par exemple :
+L' `UseBrowserLink` appel est généralement placé à l’intérieur d’un `if` bloc qui active uniquement le lien de navigateur dans l’environnement de développement. Par exemple :
 
 ```csharp
 if (env.IsDevelopment())
@@ -134,7 +136,7 @@ Lorsque la synchronisation automatique CSS est activée, les navigateurs connect
 
 ## <a name="how-it-works"></a>Fonctionnement
 
-Le lien du [SignalR](xref:signalr/introduction) navigateur utilise pour créer un canal de communication entre Visual Studio et le navigateur. Lorsque le lien du navigateur est activé, Visual Studio agit SignalR comme un serveur auquel plusieurs clients (navigateurs) peuvent se connecter. Le lien du navigateur inscrit également un composant d’intergiciel dans le pipeline de demande ASP.NET Core. Ce composant injecte des `<script>` références spéciales dans chaque demande de page à partir du serveur. Vous pouvez voir les références de script en sélectionnant **afficher la source** dans le navigateur et en faisant défiler jusqu’à la fin du contenu de la `<body>` balise :
+Le lien du navigateur utilise [SignalR](xref:signalr/introduction) pour créer un canal de communication entre Visual Studio et le navigateur. Lorsque le lien du navigateur est activé, Visual Studio agit comme un SignalR serveur auquel plusieurs clients (navigateurs) peuvent se connecter. Le lien du navigateur inscrit également un composant d’intergiciel dans le pipeline de demande ASP.NET Core. Ce composant injecte `<script>` des références spéciales dans chaque demande de page à partir du serveur. Vous pouvez voir les références de script en sélectionnant **afficher la source** dans le navigateur et en faisant défiler jusqu’à la fin du contenu de la `<body>` balise :
 
 ```html
     <!-- Visual Studio Browser Link -->

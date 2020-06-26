@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 01/14/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/dotnet-client
-ms.openlocfilehash: 7423624bdddfe6cee696cf87c255415170f46455
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: 54e86479b9f9f0acc861769f9ab78958f79acfd3
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84755753"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400139"
 ---
 # <a name="aspnet-core-signalr-net-client"></a>SignalRClient .net ASP.net Core
 
@@ -262,7 +264,7 @@ Gérer les erreurs à l’aide d’une instruction try-catch. Inspectez l' `Exce
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* [Concentr](xref:signalr/hubs)
+* [Hubs](xref:signalr/hubs)
 * [Client JavaScript](xref:signalr/javascript-client)
 * [Publication dans Azure](xref:signalr/publish-to-azure-web-app)
 * [SignalRDocumentation sans serveur de service Azure](/azure/azure-signalr/signalr-concept-serverless-development-config)

@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/configuration
-ms.openlocfilehash: f65db927d79224695861101aff00897315c6e0b2
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 9be321850b14847973877fb6a32217bd2dbb5171
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777226"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399814"
 ---
 # <a name="migrate-configuration-to-aspnet-core"></a>Migrer la configuration vers ASP.NET Core
 
@@ -28,9 +30,9 @@ Dans l’article précédent, nous avons commencé à [migrer un projet mvc ASP.
 
 ## <a name="setup-configuration"></a>Configuration
 
-ASP.NET Core n’utilise plus les fichiers *global. asax* et *Web. config* utilisés par les versions précédentes de ASP.net. Dans les versions antérieures de ASP.NET, la logique de démarrage de l’application `Application_StartUp` était placée dans une méthode au sein de *global. asax*. Plus tard, dans ASP.NET MVC, un fichier *Startup.cs* était inclus à la racine du projet. et, elle a été appelée au démarrage de l’application. ASP.NET Core a entièrement adopté cette approche en plaçant toutes les logiques de démarrage dans le fichier *Startup.cs* .
+ASP.NET Core n’utilise plus les fichiers *global. asax* et *web.config* utilisés par les versions précédentes de ASP.net. Dans les versions antérieures de ASP.NET, la logique de démarrage de l’application était placée dans une `Application_StartUp` méthode au sein de *global. asax*. Plus tard, dans ASP.NET MVC, un fichier *Startup.cs* était inclus à la racine du projet. et, elle a été appelée au démarrage de l’application. ASP.NET Core a entièrement adopté cette approche en plaçant toutes les logiques de démarrage dans le fichier *Startup.cs* .
 
-Le fichier *Web. config* a également été remplacé dans ASP.net core. La configuration elle-même peut désormais être configurée dans le cadre de la procédure de démarrage de l’application décrite dans *Startup.cs*. La configuration peut toujours utiliser des fichiers XML, mais en général ASP.NET Core les projets placent les valeurs de configuration dans un fichier au format JSON, par exemple *appSettings. JSON*. Le système de configuration de ASP.NET Core peut également accéder facilement à des variables d’environnement, ce qui peut fournir un [emplacement plus sécurisé et plus robuste](xref:security/app-secrets) pour les valeurs propres à l’environnement. Cela est particulièrement vrai pour les secrets comme les chaînes de connexion et les clés API qui ne doivent pas être archivées dans le contrôle de code source. Consultez [configuration](xref:fundamentals/configuration/index) pour en savoir plus sur la configuration dans ASP.net core.
+Le fichier *web.config* a également été remplacé dans ASP.net core. La configuration elle-même peut désormais être configurée dans le cadre de la procédure de démarrage de l’application décrite dans *Startup.cs*. La configuration peut toujours utiliser des fichiers XML, mais en général ASP.NET Core les projets placent les valeurs de configuration dans un fichier au format JSON, comme *appsettings.jssur*. Le système de configuration de ASP.NET Core peut également accéder facilement à des variables d’environnement, ce qui peut fournir un [emplacement plus sécurisé et plus robuste](xref:security/app-secrets) pour les valeurs propres à l’environnement. Cela est particulièrement vrai pour les secrets comme les chaînes de connexion et les clés API qui ne doivent pas être archivées dans le contrôle de code source. Consultez [configuration](xref:fundamentals/configuration/index) pour en savoir plus sur la configuration dans ASP.net core.
 
 Pour cet article, nous commençons par le projet ASP.NET Core partiellement migré de [l’article précédent](xref:migration/mvc). Pour configurer la configuration, ajoutez le constructeur et la propriété suivants au fichier *Startup.cs* situé à la racine du projet :
 
@@ -42,13 +44,13 @@ Notez qu’à ce stade, le fichier *Startup.cs* ne se compile pas, car nous devo
 using Microsoft.Extensions.Configuration;
 ```
 
-Ajoutez un fichier *appSettings. JSON* à la racine du projet à l’aide du modèle d’élément approprié :
+Ajoutez un *appsettings.jssur* le fichier à la racine du projet à l’aide du modèle d’élément approprié :
 
 ![Ajouter le JSON AppSettings](configuration/_static/add-appsettings-json.png)
 
-## <a name="migrate-configuration-settings-from-webconfig"></a>Migrer les paramètres de configuration à partir de Web. config
+## <a name="migrate-configuration-settings-from-webconfig"></a>Migrer les paramètres de configuration à partir de web.config
 
-Notre projet MVC ASP.NET incluait la chaîne de connexion de base de données requise dans le `<connectionStrings>` *fichier Web. config*, dans l’élément. Dans notre projet de ASP.NET Core, nous allons stocker ces informations dans le fichier *appSettings. JSON* . Ouvrez *appSettings. JSON*et Notez qu’il contient déjà les éléments suivants :
+Notre projet MVC ASP.NET incluait la chaîne de connexion de base de données requise dans *web.config*, dans l' `<connectionStrings>` élément. Dans notre projet de ASP.NET Core, nous allons stocker ces informations dans le fichier *appsettings.js* . Ouvrez *appsettings.jssur*et Notez qu’il contient déjà les éléments suivants :
 
 [!code-json[](../migration/configuration/samples/WebApp1/src/WebApp1/appsettings.json?highlight=4)]
 
@@ -56,4 +58,4 @@ Dans la ligne en surbrillance décrite ci-dessus, remplacez le nom de la base de
 
 ## <a name="summary"></a>Résumé
 
-ASP.NET Core place toute la logique de démarrage de l’application dans un fichier unique, dans lequel les services et dépendances nécessaires peuvent être définis et configurés. Il remplace le fichier *Web. config* par une fonctionnalité de configuration flexible qui peut tirer parti d’un large éventail de formats de fichiers, tels que JSON, ainsi que des variables d’environnement.
+ASP.NET Core place toute la logique de démarrage de l’application dans un fichier unique, dans lequel les services et dépendances nécessaires peuvent être définis et configurés. Il remplace le fichier *web.config* par une fonctionnalité de configuration flexible qui peut tirer parti d’un large éventail de formats de fichiers, tels que JSON, ainsi que des variables d’environnement.

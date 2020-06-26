@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 03/07/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: spa/react
-ms.openlocfilehash: 1dd352f1a00d30df915fe1936d7dcb34af1b6634
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d5185a80895423bdd60309509ab4d1dad4dad12f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773674"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401725"
 ---
 # <a name="use-the-react-project-template-with-aspnet-core"></a>Utiliser le modèle de projet React avec ASP.NET Core
 
@@ -26,7 +28,7 @@ Le modèle de projet React mis à jour fournit un point de départ pratique pour
 
 Le modèle revient à créer un projet ASP.NET Core faisant office de backend d’API et un projet React CRA standard en guise d’interface utilisateur, qu’il héberge tous deux dans un projet d’application unique pouvant être généré et publié en tant qu’unité unique.
 
-Le modèle de projet REACT n’est pas destiné au rendu côté serveur (SSR). Pour SSR avec REACT et node. js, examinez [Next. js](https://github.com/zeit/next.js/) ou [Razzle](https://github.com/jaredpalmer/razzle).
+Le modèle de projet REACT n’est pas destiné au rendu côté serveur (SSR). Pour SSR avec REACT et Node.js, envisagez [Next.js](https://github.com/zeit/next.js/) ou [Razzle](https://github.com/jaredpalmer/razzle).
 
 ## <a name="create-a-new-app"></a>Créer une application
 
@@ -41,7 +43,7 @@ cd my-new-app
 
 Exécutez l’application à partir de Visual Studio ou de CLI .NET Core :
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Ouvrez le fichier *.csproj* généré, puis exécutez l’application normalement à partir de là.
 
@@ -86,7 +88,7 @@ Vous pouvez utiliser des [méthodes d’hébergement et de déploiement ASP.NET 
 
 Le projet est configuré pour démarrer sa propre instance du serveur de développement CRA en arrière-plan quand l’application ASP.NET Core démarre en mode de développement. Ainsi, vous n’êtes pas obligé d’exécuter un serveur distinct manuellement.
 
-Cette configuration par défaut présente un inconvénient. Chaque fois que vous modifiez votre code C# et que votre application ASP.NET Core doit redémarrer, le serveur CRA redémarre. Quelques secondes sont nécessaires avant de démarrer la sauvegarde. Si vous apportez des modifications fréquentes au code C# et que vous ne souhaitez pas attendre que le serveur CRA redémarre, exécutez ce dernier en externe, indépendamment du processus ASP.NET Core. Pour cela :
+Cette configuration par défaut présente un inconvénient. Chaque fois que vous modifiez votre code C# et que votre application ASP.NET Core doit redémarrer, le serveur CRA redémarre. Quelques secondes sont nécessaires avant de démarrer la sauvegarde. Si vous apportez des modifications fréquentes au code C# et que vous ne souhaitez pas attendre que le serveur CRA redémarre, exécutez ce dernier en externe, indépendamment du processus ASP.NET Core. Pour ce faire :
 
 1. Ajoutez un fichier *. env* au sous-répertoire *ClientApp* avec le paramètre suivant :
 

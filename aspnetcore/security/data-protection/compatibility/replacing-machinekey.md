@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 04/06/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/compatibility/replacing-machinekey
-ms.openlocfilehash: 72e736f820ec243a7ad1461fc70e2711ac8b76ee
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: db041ab4939fc7c39ac01cc02e350aca2fbee93e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777460"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400542"
 ---
 # <a name="replace-the-aspnet-machinekey-in-aspnet-core"></a>Remplacez ASP.NET machineKey dans ASP.NET Core
 
@@ -29,16 +31,16 @@ L’implémentation de l' `<machineKey>` élément dans ASP.NET [est remplaçabl
 > [!NOTE]
 > Le nouveau système de protection des données ne peut être installé que dans une application ASP.NET existante ciblant .NET 4.5.1 ou version ultérieure. L’installation échoue si l’application cible .NET 4,5 ou une partie antérieure.
 
-Pour installer le nouveau système de protection des données dans un projet ASP.NET 4.5.1 + existant, installez le package Microsoft. AspNetCore. DataProtection. SystemWeb. Cette opération instancie le système de protection des données à l’aide des paramètres de [configuration par défaut](xref:security/data-protection/configuration/default-settings) .
+Pour installer le nouveau système de protection des données dans un projet ASP.NET 4.5.1 + existant, installez le package Microsoft.AspNetCore.DataProtection.SystemWeb. Cette opération instancie le système de protection des données à l’aide des paramètres de [configuration par défaut](xref:security/data-protection/configuration/default-settings) .
 
-Lorsque vous installez le package, il insère une ligne dans *Web. config* qui indique à ASP.net de l’utiliser pour [la plupart des opérations de chiffrement](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/), y compris l’authentification par formulaire, l’état d’affichage et les appels à machineKey. Protect. La ligne insérée est lue comme suit.
+Quand vous installez le package, il insère une ligne dans *Web.config* qui indique à ASP.net de l’utiliser pour [la plupart des opérations de chiffrement](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/), y compris l’authentification par formulaire, l’état d’affichage et les appels à machineKey. Protect. La ligne insérée est lue comme suit.
 
 ```xml
 <machineKey compatibilityMode="Framework45" dataProtectorType="..." />
 ```
 
 >[!TIP]
-> Vous pouvez déterminer si le nouveau système de protection des données est actif en inspectant `__VIEWSTATE`des champs comme, qui doit commencer par « CfDJ8 » comme dans l’exemple ci-dessous. « CfDJ8 » est la représentation en base64 de l’en-tête magique « 09 F0 C9 F0 » qui identifie une charge utile protégée par le système de protection des données.
+> Vous pouvez déterminer si le nouveau système de protection des données est actif en inspectant des champs comme `__VIEWSTATE` , qui doit commencer par « CfDJ8 » comme dans l’exemple ci-dessous. « CfDJ8 » est la représentation en base64 de l’en-tête magique « 09 F0 C9 F0 » qui identifie une charge utile protégée par le système de protection des données.
 
 ```html
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="CfDJ8AWPr2EQPTBGs3L2GCZOpk...">
@@ -73,9 +75,9 @@ namespace DataProtectionDemo
 ```
 
 >[!TIP]
-> Vous pouvez également utiliser `<machineKey applicationName="my-app" ... />` à la place d’un appel explicite à SetApplicationName. Il s’agit d’un mécanisme pratique qui évite au développeur de créer un type dérivé de DataProtectionStartup s’il veut configurer le nom de l’application.
+> Vous pouvez également utiliser à la `<machineKey applicationName="my-app" ... />` place d’un appel explicite à SetApplicationName. Il s’agit d’un mécanisme pratique qui évite au développeur de créer un type dérivé de DataProtectionStartup s’il veut configurer le nom de l’application.
 
-Pour activer cette configuration personnalisée, revenez à Web. config et recherchez l' `<appSettings>` élément que le package installe ajouté au fichier de configuration. Elle doit ressembler à la balise suivante :
+Pour activer cette configuration personnalisée, revenez à Web.config et recherchez l' `<appSettings>` élément que le package installe ajouté au fichier de configuration. Elle doit ressembler à la balise suivante :
 
 ```xml
 <appSettings>

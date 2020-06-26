@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/components/event-handling
-ms.openlocfilehash: 4ac7b82d734f078cf50901d02e7d0c4eb8bb45bb
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 2fce394202be5df9af67e8afca27a0914f410402
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242417"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399034"
 ---
 # <a name="aspnet-core-blazor-event-handling"></a>BlazorGestion des événements ASP.net Core
 
@@ -139,7 +141,7 @@ Il est souvent pratique de se rapprocher de valeurs supplémentaires, par exempl
 ```
 
 > [!NOTE]
-> N’utilisez **pas** directement une variable de boucle dans une expression lambda, comme `i` dans l' `for` exemple de boucle précédent ou une variable de référence dans une `foreach` boucle. Dans le cas contraire, la même variable est utilisée par toutes les expressions lambda, ce qui entraîne l’utilisation de la même valeur dans toutes les expressions lambda. Capturez toujours la valeur de la variable dans une variable locale, puis utilisez-la. Dans l’exemple précédent, la variable `i` de boucle est assignée à `buttonNumber` .
+> N’utilisez **pas** directement une variable de boucle dans une expression lambda, comme `i` dans l' `for` exemple de boucle précédent. Dans le cas contraire, la même variable est utilisée par toutes les expressions lambda, ce qui entraîne l’utilisation de la même valeur dans toutes les expressions lambda. Capturez toujours la valeur de la variable dans une variable locale, puis utilisez-la. Dans l’exemple précédent, la variable `i` de boucle est assignée à `buttonNumber` .
 
 ## <a name="eventcallback"></a>EventCallback suivante
 

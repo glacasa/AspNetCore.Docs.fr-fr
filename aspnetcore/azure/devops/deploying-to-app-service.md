@@ -7,17 +7,19 @@ ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: 811b6d047e344fa98ce14f436d3cd8f03c786aff
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 7cf6395b6f57413d85532ed15e5a875af10f905b
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767029"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400386"
 ---
 # <a name="deploy-an-app-to-app-service"></a>Déployer une application sur App Service
 
@@ -35,13 +37,13 @@ Dans cette section, vous allez effectuer les tâches suivantes :
 
 ## <a name="download-and-test-the-app"></a>Télécharger et tester l’application
 
-L’application utilisée dans ce guide est une application ASP.NET Core pré-générée, un [lecteur de flux simple](https://github.com/Azure-Samples/simple-feed-reader/). Il s’agit Razor d’une application pages qui `Microsoft.SyndicationFeed.ReaderWriter` utilise l’API pour récupérer un flux RSS/Atom et afficher les éléments d’actualité dans une liste.
+L’application utilisée dans ce guide est une application ASP.NET Core pré-générée, un [lecteur de flux simple](https://github.com/Azure-Samples/simple-feed-reader/). Il s’agit d’une Razor application pages qui utilise l' `Microsoft.SyndicationFeed.ReaderWriter` API pour récupérer un flux RSS/Atom et afficher les éléments d’actualité dans une liste.
 
 N’hésitez pas à examiner le code, mais il est important de comprendre qu’il n’y a rien de spécial sur cette application. Il s’agit simplement d’une simple ASP.NET Core application à des fins d’illustration.
 
 À partir d’une interface de commande, téléchargez le code, générez le projet et exécutez-le comme suit.
 
-> *Remarque : les utilisateurs Linux/macOS doivent apporter les modifications appropriées pour les chemins d’accès, par exemple`/`, à l’aide de la`\`barre oblique () au lieu de la barre oblique inverse ().*
+> *Remarque : les utilisateurs Linux/macOS doivent apporter les modifications appropriées pour les chemins d’accès, par exemple, à l’aide de la barre oblique ( `/` ) au lieu de la barre oblique inverse ( `\` ).*
 
 1. Clonez le code dans un dossier sur votre ordinateur local.
 
@@ -73,7 +75,7 @@ N’hésitez pas à examiner le code, mais il est important de comprendre qu’i
 
      ![Application affichant le contenu d’un flux RSS](./media/deploying-to-app-service/app-in-browser.png)
 
-6. Une fois que vous êtes satisfait du bon fonctionnement de l’application, arrêtez-la en appuyant sur **CTRL**+**C** dans l’interface de commande.
+6. Une fois que vous êtes satisfait du bon fonctionnement de l’application, arrêtez-la en appuyant sur **CTRL** + **C** dans l’interface de commande.
 
 ## <a name="create-the-azure-app-service-web-app"></a>Créer l’application Web Azure App Service
 
@@ -83,7 +85,7 @@ Pour déployer l’application, vous devez créer une [application Web](/azure/a
 
 2. Utilisez l’Cloud Shell pour les étapes suivantes.
 
-    a. Déclarez une variable pour stocker le nom de votre application Web. Le nom doit être unique pour être utilisé dans l’URL par défaut. L’utilisation `$RANDOM` de la fonction bash pour construire le nom garantit l’unicité et les `webappname99999`résultats au format.
+    a. Déclarez une variable pour stocker le nom de votre application Web. Le nom doit être unique pour être utilisé dans l’URL par défaut. L’utilisation de la `$RANDOM` fonction bash pour construire le nom garantit l’unicité et les résultats au format `webappname99999` .
 
     ```console
     webappname=mywebapp$RANDOM
@@ -127,7 +129,7 @@ Pour déployer l’application, vous devez créer une [application Web](/azure/a
     echo Web app URL: http://$webappname.azurewebsites.net
     ```
 
-3. À l’aide d’un interpréteur de commandes sur votre ordinateur local, accédez au dossier du projet de l' `.\simple-feed-reader\SimpleFeedReader`application Web (par exemple,). Exécutez les commandes suivantes pour configurer Git pour l’envoi vers l’URL de déploiement :
+3. À l’aide d’un interpréteur de commandes sur votre ordinateur local, accédez au dossier du projet de l’application Web (par exemple, `.\simple-feed-reader\SimpleFeedReader` ). Exécutez les commandes suivantes pour configurer Git pour l’envoi vers l’URL de déploiement :
 
     a. Ajoutez l’URL distante au référentiel local.
 
@@ -143,17 +145,17 @@ Pour déployer l’application, vous devez créer une [application Web](/azure/a
 
     Vous serez invité à entrer les informations d’identification de déploiement que vous avez créées précédemment. Observez la sortie dans l’interface de commande. Azure génère l’application ASP.NET Core à distance.
 
-4. Dans un navigateur, accédez à l' *URL de l’application Web* et notez que l’application a été générée et déployée. Des modifications supplémentaires peuvent être validées dans le référentiel Git local avec `git commit`. Ces modifications sont transmises à Azure avec la commande `git push` précédente.
+4. Dans un navigateur, accédez à l' *URL de l’application Web* et notez que l’application a été générée et déployée. Des modifications supplémentaires peuvent être validées dans le référentiel Git local avec `git commit` . Ces modifications sont transmises à Azure avec la `git push` commande précédente.
 
 ## <a name="deployment-with-visual-studio"></a>Déploiement avec Visual Studio
 
-> *Remarque : cette section s’applique uniquement à Windows. Les utilisateurs de Linux et macOS doivent apporter la modification décrite à l’étape 2 ci-dessous. Enregistrez le fichier et validez la modification dans le référentiel local avec `git commit`. Enfin, envoyez la modification avec `git push`, comme dans la première section.*
+> *Remarque : cette section s’applique uniquement à Windows. Les utilisateurs de Linux et macOS doivent apporter la modification décrite à l’étape 2 ci-dessous. Enregistrez le fichier et validez la modification dans le référentiel local avec `git commit` . Enfin, envoyez la modification avec `git push` , comme dans la première section.*
 
 L’application a déjà été déployée à partir de l’interface de commande. Nous allons utiliser les outils intégrés de Visual Studio pour déployer une mise à jour de l’application. En arrière-plan, Visual Studio remplit la même fonction que les outils de ligne de commande, mais dans l’interface utilisateur familière de Visual Studio.
 
 1. Ouvrez *SimpleFeedReader. sln* dans Visual Studio.
 2. Dans Explorateur de solutions, ouvrez *Pages\Index.cshtml*. Remplacez `<h2>Simple Feed Reader</h2>` par `<h2>Simple Feed Reader - V2</h2>`.
-3. Appuyez sur **CTRL**+**MAJ**+**B** pour générer l’application.
+3. Appuyez sur **CTRL** + **MAJ** + **B** pour générer l’application.
 4. Dans Explorateur de solutions, cliquez avec le bouton droit sur le projet et cliquez sur **publier**.
 
     ![Capture d’écran montrant un clic droit, publier](./media/deploying-to-app-service/publish.png)
@@ -192,7 +194,7 @@ Les emplacements de déploiement prennent en charge la mise en lots des modifica
     echo Staging web app URL: http://$webappname-staging.azurewebsites.net
     ```
 
-3. Dans un éditeur de texte ou Visual Studio, modifiez *pages/index. cshtml* à nouveau afin `<h2>` que l' `<h2>Simple Feed Reader - V3</h2>` élément Lise et enregistre le fichier.
+3. Dans un éditeur de texte ou Visual Studio, modifiez *pages/index. cshtml* à nouveau afin que l' `<h2>` élément Lise `<h2>Simple Feed Reader - V3</h2>` et enregistre le fichier.
 
 4. Validez le fichier dans le référentiel Git local, à l’aide de la page **modifications** dans l’onglet *Team Explorer* de Visual Studio, ou en entrant la commande suivante à l’aide de l’interface de commande de l’ordinateur local :
 
@@ -246,7 +248,7 @@ Dans la section suivante, vous apprendrez à créer un pipeline DevOps avec Azur
 
 ## <a name="additional-reading"></a>Documentation supplémentaire
 
-* [Vue d'ensemble de Web Apps](/azure/app-service/app-service-web-overview)
+* [Vue d’ensemble des applications web](/azure/app-service/app-service-web-overview)
 * [Créer une application Web .NET Core et SQL Database dans Azure App Service](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)
 * [Configurer les informations d’identification de déploiement pour Azure App Service](/azure/app-service/app-service-deployment-credentials)
 * [Configurer des environnements intermédiaires dans Azure App Service](/azure/app-service/web-sites-staged-publishing)
