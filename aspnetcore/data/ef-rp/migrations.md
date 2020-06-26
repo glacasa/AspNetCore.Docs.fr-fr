@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 07/22/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-rp/migrations
-ms.openlocfilehash: 74fe8771718647c3adf8288a72b11c30fb097a63
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 7d326bd5d8204d98e2f13b433f49fd740557905f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652633"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405677"
 ---
 # <a name="part-4-razor-pages-with-ef-core-migrations-in-aspnet-core"></a>Partie 4 : Razor pages avec EF Core migrations dans ASP.net Core
 
@@ -134,7 +136,7 @@ La migration de base de données doit être effectuée dans le cadre du déploie
 * L’utilisation de migrations pour créer des scripts SQL et l’utilisation de scripts SQL dans le déploiement
 * L’exécution de `dotnet ef database update` à partir d’un environnement contrôlé
 
-## <a name="troubleshooting"></a>Dépannage
+## <a name="troubleshooting"></a>Résolution des problèmes
 
 Si l’application utilise la Base de données locale SQL Server et affiche l’exception suivante :
 
@@ -299,7 +301,7 @@ La migration de base de données doit être effectuée dans le cadre du déploie
 
 EF Core utilise la table `__MigrationsHistory` pour voir si des migrations doivent s’exécuter. Si la base de données est à jour, aucune migration n’est exécutée.
 
-## <a name="troubleshooting"></a>Dépannage
+## <a name="troubleshooting"></a>Résolution des problèmes
 
 Téléchargez [l’application terminée](
 https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21snapshots/cu-part4-migrations).

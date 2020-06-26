@@ -7,17 +7,19 @@ ms.custom: mvc, seodec18
 ms.date: 03/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/google-logins
-ms.openlocfilehash: 8b1eee7ff088fb1229ec1d2dd538ea4f01e094c3
-ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
+ms.openlocfilehash: ba0b9a0da30f761f12f6015dace5ba8046535761
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "83003107"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405417"
 ---
 # <a name="google-external-login-setup-in-aspnet-core"></a>Configuration de la connexion à Google External dans ASP.NET Core
 
@@ -39,7 +41,7 @@ Ce didacticiel vous montre comment permettre aux utilisateurs de se connecter av
 Stockez les paramètres sensibles tels que l’ID client Google et les valeurs secrètes avec le [Gestionnaire de secret](xref:security/app-secrets). Pour cet exemple, procédez comme suit :
 
 1. Initialisez le projet pour le stockage secret conformément aux instructions de la procédure [activer le stockage secret](xref:security/app-secrets#enable-secret-storage).
-1. Stockez les paramètres sensibles dans le magasin de secret local avec les `Authentication:Google:ClientId` clés `Authentication:Google:ClientSecret`secrètes et :
+1. Stockez les paramètres sensibles dans le magasin de secret local avec les clés secrètes `Authentication:Google:ClientId` et `Authentication:Google:ClientSecret` :
 
     ```dotnetcli
     dotnet user-secrets set "Authentication:Google:ClientId" "<client-id>"
@@ -52,7 +54,7 @@ Vous pouvez gérer les informations d’identification et l’utilisation de vot
 
 ## <a name="configure-google-authentication"></a>Configurer l’authentification Google
 
-Ajoutez le service Google à `Startup.ConfigureServices`:
+Ajoutez le service Google à `Startup.ConfigureServices` :
 
 [!code-csharp[](~/security/authentication/social/social-code/3.x/StartupGoogle3x.cs?highlight=11-19)]
 
@@ -68,20 +70,20 @@ Ajoutez le service Google à `Startup.ConfigureServices`:
 
 [!INCLUDE[](includes/chain-auth-providers.md)]
 
-Pour plus <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions> d’informations sur les options de configuration prises en charge par l’authentification Google, consultez la référence de l’API. Cela peut être utilisé pour demander différentes informations sur l’utilisateur.
+<xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions>Pour plus d’informations sur les options de configuration prises en charge par l’authentification Google, consultez la référence de l’API. Cela peut être utilisé pour demander différentes informations sur l’utilisateur.
 
 ## <a name="change-the-default-callback-uri"></a>Modifier l’URI de rappel par défaut
 
 Le segment `/signin-google` d’URI est défini en tant que rappel par défaut du fournisseur d’authentification Google. Vous pouvez modifier l’URI de rappel par défaut lors de la configuration de l’intergiciel d’authentification Google via la propriété héritée [RemoteAuthenticationOptions. CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) de la classe [GoogleOptions](/dotnet/api/microsoft.aspnetcore.authentication.google.googleoptions) .
 
-## <a name="troubleshooting"></a>Dépannage
+## <a name="troubleshooting"></a>Résolution des problèmes
 
 * Si la connexion ne fonctionne pas et que vous ne recevez pas d’erreurs, passez en mode développement pour faciliter le débogage du problème.
-* Si Identity n’est pas configuré `services.AddIdentity` en `ConfigureServices`appelant dans, toute tentative d’authentification des résultats dans *ArgumentException : l’option « SignInScheme » doit être fournie*. Le modèle de projet utilisé dans ce didacticiel permet d’effectuer cette opération.
+* Si Identity n’est pas configuré en appelant `services.AddIdentity` dans `ConfigureServices` , toute tentative d’authentification des résultats dans *ArgumentException : l’option « SignInScheme » doit être fournie*. Le modèle de projet utilisé dans ce didacticiel permet d’effectuer cette opération.
 * Si la base de données de site n’a pas été créée en appliquant la migration initiale, vous recevez *une opération de base de données qui a échoué lors du traitement de l’erreur de demande* . Sélectionnez **appliquer les migrations** pour créer la base de données, puis actualisez la page pour poursuivre l’erreur.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Cet article vous a montré comment vous pouvez vous authentifier auprès de Google. Vous pouvez suivre une approche similaire pour vous authentifier auprès d’autres fournisseurs listés dans la [page précédente](xref:security/authentication/social/index).
-* Une fois que vous avez publié l’application dans Azure `ClientSecret` , réinitialisez la dans la console de l’API Google.
+* Une fois que vous avez publié l’application dans Azure, réinitialisez la `ClientSecret` dans la console de l’API Google.
 * Définissez les `Authentication:Google:ClientId` et `Authentication:Google:ClientSecret` en tant que paramètres d’application dans la portail Azure. Le système de configuration est configuré pour lire des clés à partir de variables d’environnement.

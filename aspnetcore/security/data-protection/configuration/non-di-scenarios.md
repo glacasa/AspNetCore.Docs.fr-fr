@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/configuration/non-di-scenarios
-ms.openlocfilehash: 31013e97038338d72c98151e23a5caa68008ce4f
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 9ae3d1ec039768b1008702a7a29f4d9a716cb99c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776823"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404845"
 ---
 # <a name="non-di-aware-scenarios-for-data-protection-in-aspnet-core"></a>Scénarios non compatibles avec l’injection de dépendances pour la protection des données dans ASP.NET Core
 
@@ -37,4 +39,4 @@ Le constructeur [DataProtectionProvider](/dotnet/api/microsoft.aspnetcore.datapr
 [!code-csharp[](non-di-scenarios/_static/nodisample2.cs)]
 
 > [!TIP]
-> Les `DataProtectionProvider` instances du type concret sont coûteuses à créer. Si une application gère plusieurs instances de ce type et si elles utilisent toutes le même répertoire de stockage de clés, les performances de l’application peuvent se dégrader. Si vous utilisez le `DataProtectionProvider` type, nous vous recommandons de créer ce type une seule fois et de le réutiliser autant que possible. Le `DataProtectionProvider` type et toutes les instances [IDataProtector](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotector) créées à partir de celui-ci sont thread-safe pour plusieurs appelants.
+> Les instances du `DataProtectionProvider` type concret sont coûteuses à créer. Si une application gère plusieurs instances de ce type et si elles utilisent toutes le même répertoire de stockage de clés, les performances de l’application peuvent se dégrader. Si vous utilisez le `DataProtectionProvider` type, nous vous recommandons de créer ce type une seule fois et de le réutiliser autant que possible. Le `DataProtectionProvider` type et toutes les instances [IDataProtector](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotector) créées à partir de celui-ci sont thread-safe pour plusieurs appelants.

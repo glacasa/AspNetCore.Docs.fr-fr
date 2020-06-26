@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 09/28/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: 5ffb57f21c89e21fcbb14b933cb0d0cb29d9c71b
-ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
+ms.openlocfilehash: 14b28f04f4077cb5622858dad1bd18b81b198f3d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85240942"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405794"
 ---
 # <a name="part-6-razor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>Partie 6, Razor pages avec EF Core dans ASP.net Core-lire les données associées
 

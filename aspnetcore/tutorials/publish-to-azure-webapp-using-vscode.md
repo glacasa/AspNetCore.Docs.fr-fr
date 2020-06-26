@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 07/10/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/publish-to-azure-webapp-using-vscode
-ms.openlocfilehash: fde0290020e08701bd19b72ebea0e2739462b232
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 43a2c4fed3a8873f64259167d3949d720f2c5dab
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767842"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406743"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio-code"></a>Publier une application ASP.NET Core sur Azure avec Visual Studio Code
 
@@ -79,7 +81,7 @@ Si la commande ci-dessous ne fonctionne pas, vérifiez que votre installation es
 
 ### <a name="through-visual-studio-code-interface"></a>Via l’interface Visual Studio Code
 
-- Ouvrez Visual Studio Code.
+- Ouvrez Visual Studio Code
 - Dans le menu, sélectionnez `File > Open Folder`.
 - Sélectionnez la racine du dossier dans lequel vous avez créé le projet MVC.
 

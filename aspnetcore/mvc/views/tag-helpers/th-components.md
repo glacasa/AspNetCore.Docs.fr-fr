@@ -7,17 +7,19 @@ ms.author: scaddie
 ms.date: 06/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: df118cdc8346b99e4e5c60c9f0441c963543f4b4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 58781880764b26a67d71e70c225ab4ed4e5da109
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767510"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406704"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>Tag Helper Components dans ASP.NET Core
 
@@ -25,7 +27,7 @@ Par [Scott Addie](https://twitter.com/Scott_Addie) et [Fiyaz Bin Hasan](https://
 
 Un Tag Helper Component est un Tag Helper qui vous permet de modifier ou d’ajouter des éléments HTML de manière conditionnelle à partir du code côté serveur. Cette fonctionnalité est disponible dans ASP.NET Core 2.0 ou version ultérieure.
 
-ASP.NET Core inclut deux Tag Helper Components intégrés : `head` et `body`. Ils sont situés dans l' <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> espace de noms et peuvent être utilisés à la Razor fois dans MVC et dans les pages. Les Tag Helper Components ne nécessitent pas d’être inscrits avec l’application dans *_ViewImports.cshtml*.
+ASP.NET Core inclut deux Tag Helper Components intégrés : `head` et `body`. Ils sont situés dans l' <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> espace de noms et peuvent être utilisés à la fois dans MVC et dans les Razor pages. Les Tag Helper Components ne nécessitent pas d’être inscrits avec l’application dans *_ViewImports.cshtml*.
 
 [Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/th-components/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
@@ -33,8 +35,8 @@ ASP.NET Core inclut deux Tag Helper Components intégrés : `head` et `body`. Il
 
 Voici deux cas d’usage courants des Tag Helper Components :
 
-1. [Injection d’un `<link>` dans le `<head>`.](#inject-into-html-head-element)
-1. [Injection d’un `<script>` dans le `<body>`.](#inject-into-html-body-element)
+1. [Injection d’un `<link>` dans le `<head>` .](#inject-into-html-head-element)
+1. [Injection d’un `<script>` dans le `<body>` .](#inject-into-html-body-element)
 
 Les sections suivantes décrivent ces cas d’usage.
 
@@ -69,7 +71,7 @@ Le code précédent lie un [widget tooltip amorçable](https://getbootstrap.com/
 Un Tag Helper Component doit être ajouté à la collection des Tag Helper Components de l’application. Cet ajout à la collection peut s’effectuer de trois façons :
 
 * [Inscription par le biais d’un conteneur de services](#registration-via-services-container)
-* [Inscription par Razor le biais du fichier](#registration-via-razor-file)
+* [Inscription par le biais du Razor fichier](#registration-via-razor-file)
 * [Inscription à l’aide d’un modèle de page ou d’un contrôleur](#registration-via-page-model-or-controller)
 
 ### <a name="registration-via-services-container"></a>Inscription par le biais d’un conteneur de services
@@ -78,9 +80,9 @@ Si la classe Tag Helper Component n’est pas managée avec <xref:Microsoft.AspN
 
 [!code-csharp[](th-components/samples/RazorPagesSample/Startup.cs?name=snippet_ConfigureServices&highlight=12-15)]
 
-### <a name="registration-via-razor-file"></a>Inscription par Razor le biais du fichier
+### <a name="registration-via-razor-file"></a>Inscription par le biais du Razor fichier
 
-Si le composant tag Helper n’est pas inscrit auprès de DI, il peut être enregistré Razor à partir d’une page pages ou d’une vue Mvc. Cette technique est utilisée pour contrôler le balisage injecté et l’ordre d’exécution du composant Razor à partir d’un fichier.
+Si le composant tag Helper n’est pas inscrit auprès de DI, il peut être enregistré à partir d’une Razor page pages ou d’une vue Mvc. Cette technique est utilisée pour contrôler le balisage injecté et l’ordre d’exécution du composant à partir d’un Razor fichier.
 
 `ITagHelperComponentManager` est utilisé pour ajouter ou supprimer des Tag Helper Components dans l’application. Le code suivant illustre cette technique avec `AddressTagHelperComponent` :
 
@@ -88,7 +90,7 @@ Si le composant tag Helper n’est pas inscrit auprès de DI, il peut être enre
 
 Dans le code précédent :
 
-* La directive `@inject` fournit une instance de `ITagHelperComponentManager`. L’instance est assignée à une `manager` variable nommée pour l’accès Razor en aval dans le fichier.
+* La directive `@inject` fournit une instance de `ITagHelperComponentManager`. L’instance est assignée à une variable nommée `manager` pour l’accès en aval dans le Razor fichier.
 * Une instance de `AddressTagHelperComponent` est ajoutée à la collection des Tag Helper Components de l’application.
 
 `AddressTagHelperComponent` est modifié pour contenir un constructeur qui accepte les paramètres `markup` et `order` :
@@ -101,9 +103,9 @@ Voici comment le paramètre `markup` s’utilise dans `ProcessAsync` :
 
 ### <a name="registration-via-page-model-or-controller"></a>Inscription à l’aide d’un modèle de page ou d’un contrôleur
 
-Si le composant tag Helper n’est pas inscrit auprès de DI, il peut être inscrit Razor à partir d’un modèle de page pages ou d’un contrôleur Mvc. Cette technique est utile pour séparer la logique C# des Razor fichiers.
+Si le composant tag Helper n’est pas inscrit auprès de DI, il peut être inscrit à partir d’un Razor modèle de page pages ou d’un contrôleur Mvc. Cette technique est utile pour séparer la logique C# des Razor fichiers.
 
-L’injection de constructeur est utilisée pour accéder à une instance de `ITagHelperComponentManager`. Le Tag Helper Component est ajouté à la collection des Tag Helper Components de l’instance. Le modèle Razor de page pages suivant illustre cette technique `AddressTagHelperComponent`avec :
+L’injection de constructeur est utilisée pour accéder à une instance de `ITagHelperComponentManager`. Le Tag Helper Component est ajouté à la collection des Tag Helper Components de l’instance. Le Razor modèle de page pages suivant illustre cette technique avec `AddressTagHelperComponent` :
 
 [!code-csharp[](th-components/samples/RazorPagesSample/Pages/Index.cshtml.cs?name=snippet_IndexModelClass)]
 

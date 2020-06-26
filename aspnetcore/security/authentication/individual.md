@@ -6,23 +6,25 @@ ms.author: riande
 ms.date: 12/11/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/individual
-ms.openlocfilehash: 26f53b6452e307bbd0816c1a3604f38b04c6af15
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 6d3743fc31c29bed5075ac29381aea51a64a908c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768648"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406249"
 ---
 # <a name="articles-based-on-aspnet-core-projects-created-with-individual-user-accounts"></a>Articles basés sur des projets de ASP.NET Core créés avec des comptes d’utilisateur individuels
 
-ASP.NET Core identité est incluse dans les modèles de projet dans Visual Studio avec l’option « comptes d’utilisateur individuels ».
+ASP.NET Core Identity est inclus dans les modèles de projet dans Visual Studio avec l’option « comptes d’utilisateur individuels ».
 
-Les modèles d’authentification sont disponibles dans CLI .NET Core `-au Individual`avec :
+Les modèles d’authentification sont disponibles dans CLI .NET Core avec `-au Individual` :
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -48,7 +50,7 @@ Consultez [ce problème GitHub](https://github.com/dotnet/AspNetCore/issues/5833
 
 ## <a name="no-authentication"></a>Aucune authentification
 
-L’authentification est spécifiée dans le CLI .NET Core avec `-au` l’option. Dans Visual Studio, la boîte de dialogue **modifier l’authentification** est disponible pour les nouvelles applications Web. La valeur par défaut pour les nouvelles applications Web dans Visual Studio n’est **pas une authentification**.
+L’authentification est spécifiée dans le CLI .NET Core avec l' `-au` option. Dans Visual Studio, la boîte de dialogue **modifier l’authentification** est disponible pour les nouvelles applications Web. La valeur par défaut pour les nouvelles applications Web dans Visual Studio n’est **pas une authentification**.
 
 Projets créés sans authentification :
 
@@ -59,7 +61,7 @@ Projets créés sans authentification :
 
 ## <a name="windows-authentication"></a>Authentification Windows
 
-L’authentification Windows est spécifiée pour les nouvelles applications Web dans le CLI .NET Core `-au Windows` avec l’option. Dans Visual Studio, la boîte de dialogue **modifier l’authentification** fournit les options **d’authentification Windows** .
+L’authentification Windows est spécifiée pour les nouvelles applications Web dans le CLI .NET Core avec l' `-au Windows` option. Dans Visual Studio, la boîte de dialogue **modifier l’authentification** fournit les options **d’authentification Windows** .
 
 Si l’authentification Windows est sélectionnée, l’application est configurée pour utiliser le [module IIS d’authentification Windows](xref:host-and-deploy/iis/modules). L’authentification Windows est destinée aux sites Web intranet.
 

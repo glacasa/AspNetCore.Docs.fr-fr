@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 01/21/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: d62889ba6dba6748ce3d047f0d37b3a904199496
-ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
+ms.openlocfilehash: 4933203b8bdd8f653268c1df7ff83b8e9423341f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82850433"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405066"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>Authentification Cloud avec Azure Active Directory B2C dans ASP.NET Core
 
@@ -58,9 +60,9 @@ Utilisez les valeurs suivantes :
 | **Nom**                      | *&lt;nom de l’application&gt;*        | Entrez un **nom** pour l’application qui décrit votre application aux consommateurs.                                                                                                                                 |
 | **Inclure une application/API web** | Oui                       |                                                                                                                                                                                                    |
 | **Autoriser le flux implicite**       | Oui                       |                                                                                                                                                                                                    |
-| **URL de réponse**                 | `https://localhost:44300/signin-oidc` | Les URL de réponse sont des points de terminaison auxquels Azure AD B2C retourne les jetons demandés par votre application. Visual Studio fournit l’URL de réponse à utiliser. Pour le moment, `https://localhost:44300/signin-oidc` entrez pour remplir le formulaire. |
+| **URL de réponse**                 | `https://localhost:44300/signin-oidc` | Les URL de réponse sont des points de terminaison auxquels Azure AD B2C retourne les jetons demandés par votre application. Visual Studio fournit l’URL de réponse à utiliser. Pour le moment, entrez `https://localhost:44300/signin-oidc` pour remplir le formulaire. |
 | **URI ID d’application**                | Laisser vide               | Non requis pour ce didacticiel.                                                                                                                                                                    |
-| **Inclure le client natif**     | Non                         |                                                                                                                                                                                                    |
+| **Inclure le client natif**     | Non                        |                                                                                                                                                                                                    |
 
 > [!WARNING]
 > Si vous configurez une URL de réponse non-localhost, tenez compte des [contraintes sur ce qui est autorisé dans la liste des URL de réponse](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application). 
@@ -90,7 +92,7 @@ Dans Visual Studio :
     | Paramètre                       | Valeur                                                 |
     |-------------------------------|-------------------------------------------------------|
     | **Nom de domaine**               | *&lt;nom de domaine de votre client B2C&gt;*          |
-    | **ID de l'application**            | *&lt;coller l’ID d’application à partir du presse-papiers&gt;* |
+    | **ID d’application**            | *&lt;coller l’ID d’application à partir du presse-papiers&gt;* |
     | **Chemin de rappel**             | *&lt;utiliser la valeur par défaut&gt;*                       |
     | **Stratégie d’inscription ou de connexion** | `B2C_1_SiUpIn`                                        |
     | **Réinitialiser la stratégie de mot de passe**     | `B2C_1_SSPR`                                          |
@@ -103,18 +105,18 @@ Dans Visual Studio :
 Revenez à la fenêtre du navigateur avec les propriétés de l’application B2C toujours ouverte. Modifiez l' **URL de réponse** temporaire spécifiée précédemment pour la valeur copiée à partir de Visual Studio. Sélectionnez **Enregistrer** en haut de la fenêtre.
 
 > [!TIP]
-> Si vous n’avez pas copié l’URL de réponse, utilisez l’adresse HTTPs à partir de l’onglet Déboguer dans les propriétés du projet Web, puis ajoutez la valeur **CallbackPath** à partir de *appSettings. JSON*.
+> Si vous n’avez pas copié l’URL de réponse, utilisez l’adresse HTTPs à partir de l’onglet Déboguer dans les propriétés du projet Web, puis ajoutez la valeur **CallbackPath** à partir de *appsettings.jssur*.
 
 ## <a name="configure-policies"></a>Configurer des stratégies
 
 Utilisez les étapes de la documentation de Azure AD B2C pour [créer une stratégie d’inscription ou de connexion](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions), puis [créez une stratégie de réinitialisation de mot de passe](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions). Utilisez les exemples de valeurs fournis dans la documentation pour les ** Identity fournisseurs**, les **attributs d’inscription**et les **revendications d’application**. L’utilisation du bouton **Exécuter maintenant** pour tester les stratégies, comme décrit dans la documentation, est facultative.
 
 > [!WARNING]
-> Vérifiez que les noms de stratégie sont exactement comme décrit dans la documentation, car ces stratégies ont été utilisées dans la boîte de dialogue **modifier l’authentification** dans Visual Studio. Les noms de stratégie peuvent être vérifiés dans *appSettings. JSON*.
+> Vérifiez que les noms de stratégie sont exactement comme décrit dans la documentation, car ces stratégies ont été utilisées dans la boîte de dialogue **modifier l’authentification** dans Visual Studio. Les noms de stratégie peuvent être vérifiés dans *appsettings.jssur*.
 
 ## <a name="configure-the-underlying-openidconnectoptionsjwtbearercookie-options"></a>Configurer les options OpenIdConnectOptions/JwtBearer/cookie sous-jacentes
 
-Pour configurer directement les options sous-jacentes, utilisez la constante de `Startup.ConfigureServices`schéma appropriée dans :
+Pour configurer directement les options sous-jacentes, utilisez la constante de schéma appropriée dans `Startup.ConfigureServices` :
 
 ```csharp
 services.Configure<OpenIdConnectOptions>(

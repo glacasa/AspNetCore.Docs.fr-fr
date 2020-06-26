@@ -8,17 +8,19 @@ ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/configuration/platform-specific-configuration
-ms.openlocfilehash: 8cf6a4467f041fa71b75ee8d1e7a08d8f572acf3
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 0636c62c4373533234ab252d64052b476b123bbf
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106349"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405092"
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>Utiliser des assemblys de démarrage d’hébergement dans ASP.NET Core
 
@@ -244,7 +246,7 @@ Les options d’activation de l’hébergement au démarrage sont les suivantes 
 
 * [Magasin du runtime](#runtime-store): l’activation ne nécessite pas de référence au moment de la compilation pour l’activation. L’exemple d’application place les fichiers de l’assembly d’hébergement au démarrage et de ses dépendances dans le dossier *deployment* pour faciliter le déploiement de l’hébergement au démarrage dans un environnement multimachine. Le dossier *deployment* inclut également un script PowerShell qui crée ou modifie des variables d’environnement sur le système de déploiement pour activer l’hébergement au démarrage.
 * Référence au moment de la compilation requise pour l’activation
-  * [Package NuGet](#nuget-package)
+  * [Package NuGet](#nuget-package)
   * [Dossier bin du projet](#project-bin-folder)
 
 ### <a name="runtime-store"></a>Magasin de runtime
@@ -275,7 +277,7 @@ Pour activer l’amélioration sans référence de package à l’amélioration,
 L’approche recommandée pour la génération du fichier de dépendances supplémentaire est la suivante :
 
  1. Exécutez `dotnet publish` sur le fichier manifeste du magasin de runtime référencé dans la section précédente.
- 1. Supprimez la référence de manifeste des bibliothèques et la `runtime` section du fichier *. DEPS. JSON* résultant.
+ 1. Supprimez la référence de manifeste des bibliothèques et la `runtime` section du *.deps.jsrésultant sur* le fichier.
 
 Dans l’exemple de projet, la propriété `store.manifest/1.0.0` est supprimée de la section `targets` et de la section `libraries` :
 
@@ -438,8 +440,8 @@ dotnet nuget locals all --clear
 1. Le projet *StartupDiagnostics* utilise [PowerShell](/powershell/scripting/powershell-scripting) pour modifier le fichier *StartupDiagnostics.deps.json* associé. PowerShell est installé par défaut sur Windows à compter de Windows 7 SP1 et de Windows Server 2008 R2 SP1. Pour obtenir PowerShell sur d’autres plateformes, consultez [installation de différentes versions de PowerShell](/powershell/scripting/install/installing-powershell).
 1. Exécutez le script *build.ps1* du dossier *RuntimeStore*. Le script :
    * Génère le `StartupDiagnostics` package dans le dossier *obj\packages* .
-   * Génère le magasin de runtime de `StartupDiagnostics` dans le dossier *store*. La commande `dotnet store` du script utilise l’ [identificateur de runtime (RID)](/dotnet/core/rid-catalog)`win7-x64` pour un hébergement au démarrage déployé sur Windows. Si vous fournissez l’hébergement au démarrage pour un autre runtime, spécifiez l’identificateur du runtime à la ligne 37 du script. Le magasin du runtime pour `StartupDiagnostics` serait déplacé ultérieurement vers la Banque d’exécution du système ou de l’utilisateur sur l’ordinateur sur lequel l’assembly sera consommé. L’emplacement d’installation du magasin d’exécution de l’utilisateur pour l' `StartupDiagnostics` assembly est *. dotnet/Store/x64/netcoreapp 3.0/startupdiagnostics/1.0.0/lib/netcoreapp 3.0/startupdiagnostics. dll*.
-   * Génère le `additionalDeps` pour `StartupDiagnostics` dans le dossier *additionalDeps* . Les dépendances supplémentaires seraient ensuite déplacées vers les dépendances supplémentaires du système ou de l’utilisateur. L' `StartupDiagnostics` emplacement d’installation des dépendances supplémentaires de l’utilisateur est *. dotnet/x64/AdditionalDeps/StartupDiagnostics/Shared/Microsoft. Netcore. app/3.0.0/StartupDiagnostics. DEPS. JSON*.
+   * Génère le magasin de runtime de `StartupDiagnostics` dans le dossier *store*. La commande `dotnet store` du script utilise l’ [identificateur de runtime (RID)](/dotnet/core/rid-catalog)`win7-x64` pour un hébergement au démarrage déployé sur Windows. Si vous fournissez l’hébergement au démarrage pour un autre runtime, spécifiez l’identificateur du runtime à la ligne 37 du script. Le magasin du runtime pour `StartupDiagnostics` serait déplacé ultérieurement vers la Banque d’exécution du système ou de l’utilisateur sur l’ordinateur sur lequel l’assembly sera consommé. L’emplacement d’installation du magasin d’exécution de l’utilisateur pour l' `StartupDiagnostics` assembly est *. dotnet/Store/x64/netcoreapp 3.0/startupdiagnostics/1.0.0/lib/netcoreapp 3.0/StartupDiagnostics.dll*.
+   * Génère le `additionalDeps` pour `StartupDiagnostics` dans le dossier *additionalDeps* . Les dépendances supplémentaires seraient ensuite déplacées vers les dépendances supplémentaires du système ou de l’utilisateur. L' `StartupDiagnostics` emplacement d’installation des dépendances supplémentaires de l’utilisateur est *. dotnet/x64/AdditionalDeps/StartupDiagnostics/Shared/Microsoft. Netcore. app/3.0.0/StartupDiagnostics.deps.jssur*.
    * Place le fichier *deploy.ps1* dans le dossier *deployment*.
 1. Exécutez le script *deploy.ps1* du dossier *Deployment*. Le script ajoute :
    * `StartupDiagnostics` à la variable d’environnement `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES`.
@@ -630,7 +632,7 @@ Les options d’activation de l’hébergement au démarrage sont les suivantes 
 
 * [Magasin du runtime](#runtime-store): l’activation ne nécessite pas de référence au moment de la compilation pour l’activation. L’exemple d’application place les fichiers de l’assembly d’hébergement au démarrage et de ses dépendances dans le dossier *deployment* pour faciliter le déploiement de l’hébergement au démarrage dans un environnement multimachine. Le dossier *deployment* inclut également un script PowerShell qui crée ou modifie des variables d’environnement sur le système de déploiement pour activer l’hébergement au démarrage.
 * Référence au moment de la compilation requise pour l’activation
-  * [Package NuGet](#nuget-package)
+  * [Package NuGet](#nuget-package)
   * [Dossier bin du projet](#project-bin-folder)
 
 ### <a name="runtime-store"></a>Magasin de runtime
@@ -661,7 +663,7 @@ Pour activer l’amélioration sans référence de package à l’amélioration,
 L’approche recommandée pour la génération du fichier de dépendances supplémentaire est la suivante :
 
  1. Exécutez `dotnet publish` sur le fichier manifeste du magasin de runtime référencé dans la section précédente.
- 1. Supprimez la référence de manifeste des bibliothèques et la `runtime` section du fichier *. DEPS. JSON* résultant.
+ 1. Supprimez la référence de manifeste des bibliothèques et la `runtime` section du *.deps.jsrésultant sur* le fichier.
 
 Dans l’exemple de projet, la propriété `store.manifest/1.0.0` est supprimée de la section `targets` et de la section `libraries` :
 
@@ -824,8 +826,8 @@ dotnet nuget locals all --clear
 1. Le projet *StartupDiagnostics* utilise [PowerShell](/powershell/scripting/powershell-scripting) pour modifier le fichier *StartupDiagnostics.deps.json* associé. PowerShell est installé par défaut sur Windows à compter de Windows 7 SP1 et de Windows Server 2008 R2 SP1. Pour obtenir PowerShell sur d’autres plateformes, consultez [installation de différentes versions de PowerShell](/powershell/scripting/install/installing-powershell).
 1. Exécutez le script *build.ps1* du dossier *RuntimeStore*. Le script :
    * Génère le `StartupDiagnostics` package dans le dossier *obj\packages* .
-   * Génère le magasin de runtime de `StartupDiagnostics` dans le dossier *store*. La commande `dotnet store` du script utilise l’ [identificateur de runtime (RID)](/dotnet/core/rid-catalog)`win7-x64` pour un hébergement au démarrage déployé sur Windows. Si vous fournissez l’hébergement au démarrage pour un autre runtime, spécifiez l’identificateur du runtime à la ligne 37 du script. Le magasin du runtime pour `StartupDiagnostics` serait déplacé ultérieurement vers la Banque d’exécution du système ou de l’utilisateur sur l’ordinateur sur lequel l’assembly sera consommé. L’emplacement d’installation du magasin d’exécution de l’utilisateur pour l' `StartupDiagnostics` assembly est *. dotnet/Store/x64/netcoreapp 2.2/startupdiagnostics/1.0.0/lib/netcoreapp 2.2/startupdiagnostics. dll*.
-   * Génère le `additionalDeps` pour `StartupDiagnostics` dans le dossier *additionalDeps* . Les dépendances supplémentaires seraient ensuite déplacées vers les dépendances supplémentaires du système ou de l’utilisateur. L' `StartupDiagnostics` emplacement d’installation des dépendances supplémentaires de l’utilisateur est *. dotnet/x64/AdditionalDeps/StartupDiagnostics/Shared/Microsoft. Netcore. app/2.2.0/StartupDiagnostics. DEPS. JSON*.
+   * Génère le magasin de runtime de `StartupDiagnostics` dans le dossier *store*. La commande `dotnet store` du script utilise l’ [identificateur de runtime (RID)](/dotnet/core/rid-catalog)`win7-x64` pour un hébergement au démarrage déployé sur Windows. Si vous fournissez l’hébergement au démarrage pour un autre runtime, spécifiez l’identificateur du runtime à la ligne 37 du script. Le magasin du runtime pour `StartupDiagnostics` serait déplacé ultérieurement vers la Banque d’exécution du système ou de l’utilisateur sur l’ordinateur sur lequel l’assembly sera consommé. L’emplacement d’installation du magasin d’exécution de l’utilisateur pour l' `StartupDiagnostics` assembly est *. dotnet/Store/x64/netcoreapp 2.2/startupdiagnostics/1.0.0/lib/netcoreapp 2.2/StartupDiagnostics.dll*.
+   * Génère le `additionalDeps` pour `StartupDiagnostics` dans le dossier *additionalDeps* . Les dépendances supplémentaires seraient ensuite déplacées vers les dépendances supplémentaires du système ou de l’utilisateur. L' `StartupDiagnostics` emplacement d’installation des dépendances supplémentaires de l’utilisateur est *. dotnet/x64/AdditionalDeps/StartupDiagnostics/Shared/Microsoft. Netcore. app/2.2.0/StartupDiagnostics.deps.jssur*.
    * Place le fichier *deploy.ps1* dans le dossier *deployment*.
 1. Exécutez le script *deploy.ps1* du dossier *Deployment*. Le script ajoute :
    * `StartupDiagnostics` à la variable d’environnement `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES`.

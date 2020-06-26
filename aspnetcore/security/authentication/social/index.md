@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 01/23/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: 880aeea4dce5f5ae6533a3293067d89f98587e72
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a2c068df85290a59d45432cb168b2c882b59405b
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777148"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405365"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>Authentification à l’aide de fournisseurs externes (Facebook, Google et autres) dans ASP.NET Core
 
@@ -40,7 +42,7 @@ Pour obtenir des exemples de la façon dont les connexions des réseaux sociaux 
 
 * Créez un projet.
 * Sélectionnez **Nouvelle application web ASP.NET Core** et **Suivant**.
-* Fournissez un **Nom de projet** et confirmez ou changez l’**Emplacement**. Sélectionnez **Créer**.
+* Fournissez un **Nom de projet** et confirmez ou changez l’**Emplacement**. Sélectionnez **Create** (Créer).
 * Sélectionnez la dernière version de ASP.NET Core dans la liste déroulante (**ASP.net Core {X. Y}**), puis sélectionnez **application Web**.
 * Sous **Authentification**, sélectionnez **Changer** et définissez l’authentification sur **Comptes d’utilisateur individuels**. Sélectionnez **OK**.
 * Dans la fenêtre **Créer une application web ASP.NET Core**, sélectionnez **Créer**.
@@ -63,7 +65,7 @@ Pour obtenir des exemples de la façon dont les connexions des réseaux sociaux 
   dotnet new webapp -o WebApp1 -au Individual
   ```
 
-  * La commande `dotnet new` crée un nouveau projet Razor Pages dans le dossier *WebApp1*.
+  * La `dotnet new` commande crée un Razor projet de pages dans le dossier *application Web 1* .
   * `-au Individual` crée le code servant à l’authentification individuelle.
   * `-uld`utilise la base de données locale, une version allégée de SQL Server Express pour Windows. Omettez `-uld` pour utiliser SQLite.
   * La commande `code` ouvre le dossier *WebApp1* dans une nouvelle instance de Visual Studio Code.

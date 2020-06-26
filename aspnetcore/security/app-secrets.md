@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 4/20/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/app-secrets
-ms.openlocfilehash: 7508aebcda4e14812140f13ece635428908a4abb
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a12262d182ce84a326086935627b55d2edc4885e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776680"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407003"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>Stockage sécurisé des secrets d’application en développement dans ASP.NET Core
 
@@ -33,7 +35,7 @@ Ce document décrit les techniques de stockage et de récupération des données
 
 Les variables d’environnement sont utilisées pour éviter le stockage des secrets d’application dans le code ou dans des fichiers de configuration locaux. Les variables d’environnement remplacent les valeurs de configuration pour toutes les sources de configuration spécifiées précédemment.
 
-Prenons l’exemple d’une application Web ASP.NET Core dans laquelle la sécurité **des comptes d’utilisateur individuels** est activée. Une chaîne de connexion de base de données par défaut est incluse dans le fichier *appSettings. JSON* du projet avec la clé `DefaultConnection`. La chaîne de connexion par défaut est pour la base de données locale, qui s’exécute en mode utilisateur et ne nécessite pas de mot de passe. Pendant le déploiement de l' `DefaultConnection` application, la valeur de clé peut être remplacée par la valeur d’une variable d’environnement. La variable d’environnement peut stocker la chaîne de connexion complète avec des informations d’identification sensibles.
+Prenons l’exemple d’une application Web ASP.NET Core dans laquelle la sécurité **des comptes d’utilisateur individuels** est activée. Une chaîne de connexion de base de données par défaut est incluse dans le fichier *appsettings.js* du projet avec la clé `DefaultConnection` . La chaîne de connexion par défaut est pour la base de données locale, qui s’exécute en mode utilisateur et ne nécessite pas de mot de passe. Pendant le déploiement de l’application, la `DefaultConnection` valeur de clé peut être remplacée par la valeur d’une variable d’environnement. La variable d’environnement peut stocker la chaîne de connexion complète avec des informations d’identification sensibles.
 
 > [!WARNING]
 > Les variables d’environnement sont généralement stockées en texte brut et non chiffré. Si l’ordinateur ou le processus est compromis, les variables d’environnement sont accessibles aux parties non fiables. Des mesures supplémentaires pour empêcher la divulgation de secrets d’utilisateur peuvent être nécessaires.
@@ -65,7 +67,7 @@ Chemin d’accès au système de fichiers :
 
 ---
 
-Dans les chemins d’accès de fichier `<user_secrets_id>` précédents, `UserSecretsId` remplacez par la valeur spécifiée dans le fichier *. csproj* .
+Dans les chemins d’accès de fichier précédents, remplacez `<user_secrets_id>` par la `UserSecretsId` valeur spécifiée dans le fichier *. csproj* .
 
 N’écrivez pas de code dépendant de l’emplacement ou du format des données enregistrées avec l’outil secret Manager. Ces détails d’implémentation peuvent changer. Par exemple, les valeurs secrètes ne sont pas chiffrées, mais peuvent être dans le futur.
 
@@ -73,7 +75,7 @@ N’écrivez pas de code dépendant de l’emplacement ou du format des données
 
 L’outil Gestionnaire de secret fonctionne sur les paramètres de configuration spécifiques au projet stockés dans votre profil utilisateur.
 
-L’outil Gestionnaire de secret comprend `init` une commande dans kit SDK .net Core 3.0.100 ou version ultérieure. Pour utiliser des secrets d’utilisateur, exécutez la commande suivante dans le répertoire du projet :
+L’outil Gestionnaire de secret comprend une `init` commande dans kit SDK .net Core 3.0.100 ou version ultérieure. Pour utiliser des secrets d’utilisateur, exécutez la commande suivante dans le répertoire du projet :
 
 ```dotnetcli
 dotnet user-secrets init
@@ -87,13 +89,13 @@ Dans Visual Studio, cliquez avec le bouton droit sur le projet dans Explorateur 
 
 ## <a name="set-a-secret"></a>Définir une clé secrète
 
-Définissez un secret d’application comprenant une clé et sa valeur. Le secret est associé à la valeur du `UserSecretsId` projet. Par exemple, exécutez la commande suivante à partir du répertoire dans lequel se trouve le fichier *. csproj* :
+Définissez un secret d’application comprenant une clé et sa valeur. Le secret est associé à la valeur du projet `UserSecretsId` . Par exemple, exécutez la commande suivante à partir du répertoire dans lequel se trouve le fichier *. csproj* :
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345"
 ```
 
-Dans l’exemple précédent, le signe deux-points indique `Movies` qu’il s’agit d’un `ServiceApiKey` littéral d’objet avec une propriété.
+Dans l’exemple précédent, le signe deux-points indique qu' `Movies` il s’agit d’un littéral d’objet avec une `ServiceApiKey` propriété.
 
 L’outil Gestionnaire de secret peut également être utilisé à partir d’autres annuaires. Utilisez l' `--project` option pour fournir le chemin d’accès au système de fichiers où se trouve le fichier *. csproj* . Par exemple :
 
@@ -103,7 +105,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>Aplatissement de la structure JSON dans Visual Studio
 
-Le geste **gérer les secrets** de l’utilisateur de Visual Studio ouvre un fichier *secrets. JSON* dans l’éditeur de texte. Remplacez le contenu de *secrets. JSON* par les paires clé-valeur à stocker. Par exemple :
+Le geste **gérer les secrets** de l’utilisateur de Visual Studio ouvre un *secrets.jssur* le fichier dans l’éditeur de texte. Remplacez le contenu de *secrets.js* par les paires clé-valeur à stocker. Par exemple :
 
 ```json
 {
@@ -114,7 +116,7 @@ Le geste **gérer les secrets** de l’utilisateur de Visual Studio ouvre un fic
 }
 ```
 
-La structure JSON est aplatie après des modifications `dotnet user-secrets remove` via `dotnet user-secrets set`ou. Par exemple, l' `dotnet user-secrets remove "Movies:ConnectionString"` exécution de réduit `Movies` le littéral d’objet. Le fichier modifié ressemble à ce qui suit :
+La structure JSON est aplatie après des modifications via `dotnet user-secrets remove` ou `dotnet user-secrets set` . Par exemple, l’exécution de `dotnet user-secrets remove "Movies:ConnectionString"` réduit le `Movies` littéral d’objet. Le fichier modifié ressemble à ce qui suit :
 
 ```json
 {
@@ -124,7 +126,7 @@ La structure JSON est aplatie après des modifications `dotnet user-secrets remo
 
 ## <a name="set-multiple-secrets"></a>Définir plusieurs secrets
 
-Un lot de secrets peut être défini par la canalisation JSON `set` à la commande. Dans l’exemple suivant, le contenu du fichier *Input. JSON* est dirigé vers la `set` commande.
+Un lot de secrets peut être défini par la canalisation JSON à la `set` commande. Dans l’exemple suivant, le *input.js* le contenu du fichier est dirigé vers la `set` commande.
 
 # <a name="windows"></a>[Windows](#tab/windows)
 
@@ -148,15 +150,15 @@ Ouvrez une interface de commande, puis exécutez la commande suivante :
 
 L' [API de Configuration ASP.net Core](xref:fundamentals/configuration/index) permet d’accéder aux secrets du gestionnaire de secret.
 
-La source de configuration des secrets de l’utilisateur est automatiquement ajoutée en mode de <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder%2A> développement lorsque le projet appelle pour initialiser une nouvelle instance de l’hôte avec des valeurs par défaut préconfigurées. `CreateDefaultBuilder`appelle <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> lorsque <xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName> est <xref:Microsoft.Extensions.Hosting.EnvironmentName.Development>:
+La source de configuration des secrets de l’utilisateur est automatiquement ajoutée en mode de développement lorsque le projet appelle <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder%2A> pour initialiser une nouvelle instance de l’hôte avec des valeurs par défaut préconfigurées. `CreateDefaultBuilder`appelle <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> lorsque <xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName> est <xref:Microsoft.Extensions.Hosting.EnvironmentName.Development> :
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Program.cs?name=snippet_CreateHostBuilder&highlight=2)]
 
-Quand `CreateDefaultBuilder` n’est pas appelé, ajoutez explicitement la source de configuration des <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A>secrets de l’utilisateur en appelant. Appelez `AddUserSecrets` uniquement lorsque l’application s’exécute dans l’environnement de développement, comme illustré dans l’exemple suivant :
+Quand `CreateDefaultBuilder` n’est pas appelé, ajoutez explicitement la source de configuration des secrets de l’utilisateur en appelant <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> . Appelez `AddUserSecrets` uniquement lorsque l’application s’exécute dans l’environnement de développement, comme illustré dans l’exemple suivant :
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Program2.cs?name=snippet_Host&highlight=6-9)]
 
-Les secrets de l’utilisateur peuvent être `Configuration` récupérés via l’API :
+Les secrets de l’utilisateur peuvent être récupérés via l' `Configuration` API :
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup.cs?name=snippet_StartupClass&highlight=14)]
 
@@ -166,17 +168,17 @@ Le mappage d’un littéral d’objet entier à un POCO (une classe .NET simple 
 
 [!INCLUDE[secrets.json file](~/includes/app-secrets/secrets-json-file-and-text.md)]
 
-Pour mapper les secrets précédents à un POCO, utilisez la `Configuration` fonctionnalité de [liaison de graphique d’objets](xref:fundamentals/configuration/index#bind-to-an-object-graph) de l’API. Le code suivant est lié à un poco `MovieSettings` personnalisé et accède à la `ServiceApiKey` valeur de la propriété :
+Pour mapper les secrets précédents à un POCO, utilisez la `Configuration` fonctionnalité de [liaison de graphique d’objets](xref:fundamentals/configuration/index#bind-to-an-object-graph) de l’API. Le code suivant est lié à un `MovieSettings` poco personnalisé et accède à la `ServiceApiKey` valeur de la propriété :
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup3.cs?name=snippet_BindToObjectGraph)]
 
-Les `Movies:ConnectionString` secrets `Movies:ServiceApiKey` et sont mappés aux propriétés respectives dans `MovieSettings`:
+Les `Movies:ConnectionString` `Movies:ServiceApiKey` secrets et sont mappés aux propriétés respectives dans `MovieSettings` :
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Models/MovieSettings.cs?name=snippet_MovieSettingsClass)]
 
 ## <a name="string-replacement-with-secrets"></a>Remplacement de chaîne par des secrets
 
-Le stockage des mots de passe en texte brut n’est pas sécurisé. Par exemple, une chaîne de connexion de base de données stockée dans *appSettings. JSON* peut inclure un mot de passe pour l’utilisateur spécifié :
+Le stockage des mots de passe en texte brut n’est pas sécurisé. Par exemple, une chaîne de connexion de base de données stockée dans *appsettings.jssur* peut inclure un mot de passe pour l’utilisateur spécifié :
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
@@ -186,11 +188,11 @@ Une approche plus sécurisée consiste à stocker le mot de passe en tant que se
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-Supprimez `Password` la paire clé-valeur de la chaîne de connexion dans *appSettings. JSON*. Par exemple :
+Supprimez la `Password` paire clé-valeur de la chaîne de connexion dans *appsettings.jssur*. Par exemple :
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings.json?highlight=3)]
 
-La valeur du secret peut être définie sur la <xref:System.Data.SqlClient.SqlConnectionStringBuilder> propriété d' <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> un objet pour terminer la chaîne de connexion :
+La valeur du secret peut être définie sur la <xref:System.Data.SqlClient.SqlConnectionStringBuilder> propriété d’un objet <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> pour terminer la chaîne de connexion :
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup2.cs?name=snippet_StartupClass&highlight=14-17)]
 
@@ -211,7 +213,7 @@ Movies:ConnectionString = Server=(localdb)\mssqllocaldb;Database=Movie-1;Trusted
 Movies:ServiceApiKey = 12345
 ```
 
-Dans l’exemple précédent, un signe deux-points dans le nom de clé désigne la hiérarchie d’objets dans *secrets. JSON*.
+Dans l’exemple précédent, un signe deux-points dans les noms de clé désigne la hiérarchie d’objets dans *secrets.jssur*.
 
 ## <a name="remove-a-single-secret"></a>Supprimer une seule clé secrète
 
@@ -223,7 +225,7 @@ Exécutez la commande suivante à partir du répertoire dans lequel se trouve le
 dotnet user-secrets remove "Movies:ConnectionString"
 ```
 
-Le fichier *secrets. JSON* de l’application a été modifié pour supprimer la paire clé-valeur associée `MoviesConnectionString` à la clé :
+L'secrets.jsde l’application *sur* le fichier a été modifiée pour supprimer la paire clé-valeur associée à la `MoviesConnectionString` clé :
 
 ```json
 {
@@ -249,13 +251,13 @@ Exécutez la commande suivante à partir du répertoire dans lequel se trouve le
 dotnet user-secrets clear
 ```
 
-Tous les secrets d’utilisateur de l’application ont été supprimés du fichier *secrets. JSON* :
+Tous les secrets d’utilisateur de l’application ont été supprimés de l' *secrets.jssur* le fichier :
 
 ```json
 {}
 ```
 
-L' `dotnet user-secrets list` exécution affiche le message suivant :
+`dotnet user-secrets list`L’exécution affiche le message suivant :
 
 ```console
 No secrets configured for this application.
@@ -281,7 +283,7 @@ Ce document décrit les techniques de stockage et de récupération des données
 
 Les variables d’environnement sont utilisées pour éviter le stockage des secrets d’application dans le code ou dans des fichiers de configuration locaux. Les variables d’environnement remplacent les valeurs de configuration pour toutes les sources de configuration spécifiées précédemment.
 
-Prenons l’exemple d’une application Web ASP.NET Core dans laquelle la sécurité **des comptes d’utilisateur individuels** est activée. Une chaîne de connexion de base de données par défaut est incluse dans le fichier *appSettings. JSON* du projet avec la clé `DefaultConnection`. La chaîne de connexion par défaut est pour la base de données locale, qui s’exécute en mode utilisateur et ne nécessite pas de mot de passe. Pendant le déploiement de l' `DefaultConnection` application, la valeur de clé peut être remplacée par la valeur d’une variable d’environnement. La variable d’environnement peut stocker la chaîne de connexion complète avec des informations d’identification sensibles.
+Prenons l’exemple d’une application Web ASP.NET Core dans laquelle la sécurité **des comptes d’utilisateur individuels** est activée. Une chaîne de connexion de base de données par défaut est incluse dans le fichier *appsettings.js* du projet avec la clé `DefaultConnection` . La chaîne de connexion par défaut est pour la base de données locale, qui s’exécute en mode utilisateur et ne nécessite pas de mot de passe. Pendant le déploiement de l’application, la `DefaultConnection` valeur de clé peut être remplacée par la valeur d’une variable d’environnement. La variable d’environnement peut stocker la chaîne de connexion complète avec des informations d’identification sensibles.
 
 > [!WARNING]
 > Les variables d’environnement sont généralement stockées en texte brut et non chiffré. Si l’ordinateur ou le processus est compromis, les variables d’environnement sont accessibles aux parties non fiables. Des mesures supplémentaires pour empêcher la divulgation de secrets d’utilisateur peuvent être nécessaires.
@@ -313,7 +315,7 @@ Chemin d’accès au système de fichiers :
 
 ---
 
-Dans les chemins d’accès de fichier `<user_secrets_id>` précédents, `UserSecretsId` remplacez par la valeur spécifiée dans le fichier *. csproj* .
+Dans les chemins d’accès de fichier précédents, remplacez `<user_secrets_id>` par la `UserSecretsId` valeur spécifiée dans le fichier *. csproj* .
 
 N’écrivez pas de code dépendant de l’emplacement ou du format des données enregistrées avec l’outil secret Manager. Ces détails d’implémentation peuvent changer. Par exemple, les valeurs secrètes ne sont pas chiffrées, mais peuvent être dans le futur.
 
@@ -321,7 +323,7 @@ N’écrivez pas de code dépendant de l’emplacement ou du format des données
 
 L’outil Gestionnaire de secret fonctionne sur les paramètres de configuration spécifiques au projet stockés dans votre profil utilisateur.
 
-Pour utiliser des secrets d’utilisateur, `UserSecretsId` définissez un élément `PropertyGroup` dans un du fichier *. csproj* . Le texte interne de `UserSecretsId` est arbitraire, mais il est unique pour le projet. Les développeurs génèrent généralement un GUID `UserSecretsId`pour le.
+Pour utiliser des secrets d’utilisateur, définissez un `UserSecretsId` élément dans un `PropertyGroup` du fichier *. csproj* . Le texte interne de `UserSecretsId` est arbitraire, mais il est unique pour le projet. Les développeurs génèrent généralement un GUID pour le `UserSecretsId` .
 
 [!code-xml[](app-secrets/samples/2.x/UserSecrets/UserSecrets.csproj?name=snippet_PropertyGroup&highlight=3)]
 
@@ -330,13 +332,13 @@ Pour utiliser des secrets d’utilisateur, `UserSecretsId` définissez un élém
 
 ## <a name="set-a-secret"></a>Définir une clé secrète
 
-Définissez un secret d’application comprenant une clé et sa valeur. Le secret est associé à la valeur du `UserSecretsId` projet. Par exemple, exécutez la commande suivante à partir du répertoire dans lequel se trouve le fichier *. csproj* :
+Définissez un secret d’application comprenant une clé et sa valeur. Le secret est associé à la valeur du projet `UserSecretsId` . Par exemple, exécutez la commande suivante à partir du répertoire dans lequel se trouve le fichier *. csproj* :
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345"
 ```
 
-Dans l’exemple précédent, le signe deux-points indique `Movies` qu’il s’agit d’un `ServiceApiKey` littéral d’objet avec une propriété.
+Dans l’exemple précédent, le signe deux-points indique qu' `Movies` il s’agit d’un littéral d’objet avec une `ServiceApiKey` propriété.
 
 L’outil Gestionnaire de secret peut également être utilisé à partir d’autres annuaires. Utilisez l' `--project` option pour fournir le chemin d’accès au système de fichiers où se trouve le fichier *. csproj* . Par exemple :
 
@@ -346,7 +348,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>Aplatissement de la structure JSON dans Visual Studio
 
-Le geste **gérer les secrets** de l’utilisateur de Visual Studio ouvre un fichier *secrets. JSON* dans l’éditeur de texte. Remplacez le contenu de *secrets. JSON* par les paires clé-valeur à stocker. Par exemple :
+Le geste **gérer les secrets** de l’utilisateur de Visual Studio ouvre un *secrets.jssur* le fichier dans l’éditeur de texte. Remplacez le contenu de *secrets.js* par les paires clé-valeur à stocker. Par exemple :
 
 ```json
 {
@@ -357,7 +359,7 @@ Le geste **gérer les secrets** de l’utilisateur de Visual Studio ouvre un fic
 }
 ```
 
-La structure JSON est aplatie après des modifications `dotnet user-secrets remove` via `dotnet user-secrets set`ou. Par exemple, l' `dotnet user-secrets remove "Movies:ConnectionString"` exécution de réduit `Movies` le littéral d’objet. Le fichier modifié ressemble à ce qui suit :
+La structure JSON est aplatie après des modifications via `dotnet user-secrets remove` ou `dotnet user-secrets set` . Par exemple, l’exécution de `dotnet user-secrets remove "Movies:ConnectionString"` réduit le `Movies` littéral d’objet. Le fichier modifié ressemble à ce qui suit :
 
 ```json
 {
@@ -367,7 +369,7 @@ La structure JSON est aplatie après des modifications `dotnet user-secrets remo
 
 ## <a name="set-multiple-secrets"></a>Définir plusieurs secrets
 
-Un lot de secrets peut être défini par la canalisation JSON `set` à la commande. Dans l’exemple suivant, le contenu du fichier *Input. JSON* est dirigé vers la `set` commande.
+Un lot de secrets peut être défini par la canalisation JSON à la `set` commande. Dans l’exemple suivant, le *input.js* le contenu du fichier est dirigé vers la `set` commande.
 
 # <a name="windows"></a>[Windows](#tab/windows)
 
@@ -391,17 +393,17 @@ Ouvrez une interface de commande, puis exécutez la commande suivante :
 
 L' [API de Configuration ASP.net Core](xref:fundamentals/configuration/index) permet d’accéder aux secrets du gestionnaire de secret.
 
-Si votre projet cible .NET Framework, installez le package NuGet [Microsoft. extensions. Configuration. UserSecrets](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets) .
+Si votre projet cible .NET Framework, installez le [Microsoft.Extensions.Configfiguration. ](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets)Package NuGet UserSecrets.
 
-Dans ASP.NET Core 2,0 ou version ultérieure, la source de configuration des secrets de l’utilisateur est automatiquement ajoutée en mode <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> de développement lorsque le projet appelle pour initialiser une nouvelle instance de l’hôte avec des valeurs par défaut préconfigurées. `CreateDefaultBuilder`appelle <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> lorsque <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName> est <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development>:
+Dans ASP.NET Core 2,0 ou version ultérieure, la source de configuration des secrets de l’utilisateur est automatiquement ajoutée en mode de développement lorsque le projet appelle <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> pour initialiser une nouvelle instance de l’hôte avec des valeurs par défaut préconfigurées. `CreateDefaultBuilder`appelle <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> lorsque <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName> est <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development> :
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Program.cs?name=snippet_CreateWebHostBuilder&highlight=2)]
 
-Quand `CreateDefaultBuilder` n’est pas appelé, ajoutez explicitement la source de configuration des <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> secrets de `Startup` l’utilisateur en appelant dans le constructeur. Appelez `AddUserSecrets` uniquement lorsque l’application s’exécute dans l’environnement de développement, comme illustré dans l’exemple suivant :
+Quand `CreateDefaultBuilder` n’est pas appelé, ajoutez explicitement la source de configuration des secrets de l’utilisateur en appelant <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> dans le `Startup` constructeur. Appelez `AddUserSecrets` uniquement lorsque l’application s’exécute dans l’environnement de développement, comme illustré dans l’exemple suivant :
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup3.cs?name=snippet_StartupConstructor&highlight=12)]
 
-Les secrets de l’utilisateur peuvent être `Configuration` récupérés via l’API :
+Les secrets de l’utilisateur peuvent être récupérés via l' `Configuration` API :
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup.cs?name=snippet_StartupClass&highlight=14)]
 
@@ -411,17 +413,17 @@ Le mappage d’un littéral d’objet entier à un POCO (une classe .NET simple 
 
 [!INCLUDE[secrets.json file](~/includes/app-secrets/secrets-json-file-and-text.md)]
 
-Pour mapper les secrets précédents à un POCO, utilisez la `Configuration` fonctionnalité de [liaison de graphique d’objets](xref:fundamentals/configuration/index#bind-to-an-object-graph) de l’API. Le code suivant est lié à un poco `MovieSettings` personnalisé et accède à la `ServiceApiKey` valeur de la propriété :
+Pour mapper les secrets précédents à un POCO, utilisez la `Configuration` fonctionnalité de [liaison de graphique d’objets](xref:fundamentals/configuration/index#bind-to-an-object-graph) de l’API. Le code suivant est lié à un `MovieSettings` poco personnalisé et accède à la `ServiceApiKey` valeur de la propriété :
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup3.cs?name=snippet_BindToObjectGraph)]
 
-Les `Movies:ConnectionString` secrets `Movies:ServiceApiKey` et sont mappés aux propriétés respectives dans `MovieSettings`:
+Les `Movies:ConnectionString` `Movies:ServiceApiKey` secrets et sont mappés aux propriétés respectives dans `MovieSettings` :
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Models/MovieSettings.cs?name=snippet_MovieSettingsClass)]
 
 ## <a name="string-replacement-with-secrets"></a>Remplacement de chaîne par des secrets
 
-Le stockage des mots de passe en texte brut n’est pas sécurisé. Par exemple, une chaîne de connexion de base de données stockée dans *appSettings. JSON* peut inclure un mot de passe pour l’utilisateur spécifié :
+Le stockage des mots de passe en texte brut n’est pas sécurisé. Par exemple, une chaîne de connexion de base de données stockée dans *appsettings.jssur* peut inclure un mot de passe pour l’utilisateur spécifié :
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
@@ -431,11 +433,11 @@ Une approche plus sécurisée consiste à stocker le mot de passe en tant que se
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-Supprimez `Password` la paire clé-valeur de la chaîne de connexion dans *appSettings. JSON*. Par exemple :
+Supprimez la `Password` paire clé-valeur de la chaîne de connexion dans *appsettings.jssur*. Par exemple :
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings.json?highlight=3)]
 
-La valeur du secret peut être définie sur la <xref:System.Data.SqlClient.SqlConnectionStringBuilder> propriété d' <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> un objet pour terminer la chaîne de connexion :
+La valeur du secret peut être définie sur la <xref:System.Data.SqlClient.SqlConnectionStringBuilder> propriété d’un objet <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> pour terminer la chaîne de connexion :
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup2.cs?name=snippet_StartupClass&highlight=14-17)]
 
@@ -456,7 +458,7 @@ Movies:ConnectionString = Server=(localdb)\mssqllocaldb;Database=Movie-1;Trusted
 Movies:ServiceApiKey = 12345
 ```
 
-Dans l’exemple précédent, un signe deux-points dans le nom de clé désigne la hiérarchie d’objets dans *secrets. JSON*.
+Dans l’exemple précédent, un signe deux-points dans les noms de clé désigne la hiérarchie d’objets dans *secrets.jssur*.
 
 ## <a name="remove-a-single-secret"></a>Supprimer une seule clé secrète
 
@@ -468,7 +470,7 @@ Exécutez la commande suivante à partir du répertoire dans lequel se trouve le
 dotnet user-secrets remove "Movies:ConnectionString"
 ```
 
-Le fichier *secrets. JSON* de l’application a été modifié pour supprimer la paire clé-valeur associée `MoviesConnectionString` à la clé :
+L'secrets.jsde l’application *sur* le fichier a été modifiée pour supprimer la paire clé-valeur associée à la `MoviesConnectionString` clé :
 
 ```json
 {
@@ -478,7 +480,7 @@ Le fichier *secrets. JSON* de l’application a été modifié pour supprimer la
 }
 ```
 
-L' `dotnet user-secrets list` exécution affiche le message suivant :
+`dotnet user-secrets list`L’exécution affiche le message suivant :
 
 ```console
 Movies:ServiceApiKey = 12345
@@ -494,13 +496,13 @@ Exécutez la commande suivante à partir du répertoire dans lequel se trouve le
 dotnet user-secrets clear
 ```
 
-Tous les secrets d’utilisateur de l’application ont été supprimés du fichier *secrets. JSON* :
+Tous les secrets d’utilisateur de l’application ont été supprimés de l' *secrets.jssur* le fichier :
 
 ```json
 {}
 ```
 
-L' `dotnet user-secrets list` exécution affiche le message suivant :
+`dotnet user-secrets list`L’exécution affiche le message suivant :
 
 ```console
 No secrets configured for this application.

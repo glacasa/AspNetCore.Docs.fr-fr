@@ -7,17 +7,19 @@ ms.author: riande
 ms.date: 07/04/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: 58f7aa30d3e916307437d56c61e80765ac0c21cf
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a106654c8a37e84e9186a2f06d90605df753e8a7
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766470"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405599"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
@@ -62,8 +64,8 @@ Le générateur de code à effectuer. Les générateurs suivants sont disponible
 | ----------------- | ------------ | 
 | superficie      | [Génération de modèles automatique pour une zone](/aspnet/core/mvc/controllers/areas) |
   contrôleur| [Génération de modèles automatique pour un contrôleur](/aspnet/core/tutorials/first-mvc-app/adding-model) |
-  identité  | [Génération de modèles automatique pour une identité](/aspnet/core/security/authentication/scaffold-identity) |
-  razorpage | [Génération de modèles automatique pour Razor Pages](/aspnet/core/tutorials/razor-pages/model) |
+  identité  | [StructureIdentity](/aspnet/core/security/authentication/scaffold-identity) |
+  razorpage | [Pages de modèles Razor](/aspnet/core/tutorials/razor-pages/model) |
   vue      | [Génération de modèles automatique pour une vue](/aspnet/core/mvc/views/overview) |
 
 ## <a name="options"></a>Options
@@ -102,17 +104,17 @@ Les sections suivantes décrivent en détail les options disponibles pour les g�
 
 * Domaine
 * Contrôleur
-* Identité  
+* Identity  
 * Razorpage
-* Affichage
+* Vue
 
 <a name="area"></a>
 
 ### <a name="area-options"></a>Options de zone
 
-Cet outil est conçu pour les projets web ASP.NET Core avec des contrôleurs et des vues. Il n’est pas destinée aux applications Razor Pages.
+Cet outil est conçu pour les projets web ASP.NET Core avec des contrôleurs et des vues. Elle n’est pas destinée aux Razor applications pages.
 
-Utilisation : `dotnet aspnet-codegenerator area AreaNameToGenerate`
+Utilisation : `dotnet aspnet-codegenerator area AreaNameToGenerate`
 
 La commande précédente génère les dossiers suivants :
 
@@ -127,7 +129,7 @@ La commande précédente génère les dossiers suivants :
 
 ### <a name="controller-options"></a>Options de contrôleur
 
-Le tableau suivant répertorie les `aspnet-codegenerator` `controller` options `razorpage`pour et :
+Le tableau suivant répertorie les options pour `aspnet-codegenerator` `controller` et `razorpage` :
 
 [!INCLUDE [aspnet-codegenerator-args-md.md](~/includes/aspnet-codegenerator-args-md.md)]
 
@@ -153,7 +155,7 @@ Consultez [Générer automatiquement le modèle de film](/aspnet/core/tutorials/
 
 <a name="rp"></a>
 
-Les Razor Pages peuvent être structurées individuellement en spécifiant le nom de la nouvelle page et le modèle à utiliser. Les modèles pris en charge sont :
+RazorLes pages peuvent être structurées individuellement en spécifiant le nom de la nouvelle page et le modèle à utiliser. Les modèles pris en charge sont :
 
 * `Empty`
 * `Create`
@@ -176,7 +178,7 @@ En règle générale, le modèle et le nom de fichier générés ne sont pas sp�
 * `Details`
 * `List`
 
-Le tableau suivant répertorie les `aspnet-codegenerator` `razorpage` options `controller`pour et :
+Le tableau suivant répertorie les options pour `aspnet-codegenerator` `razorpage` et `controller` :
 
 [!INCLUDE [aspnet-codegenerator-args-md.md](~/includes/aspnet-codegenerator-args-md.md)]
 

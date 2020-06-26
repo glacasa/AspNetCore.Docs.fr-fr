@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 07/30/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: fbae94f315c1bb49f1b04be7e71c841f46826216
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 08e6284a6c5fc8e8926651f6fe873a71df449acb
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766483"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406652"
 ---
 # <a name="layout-in-aspnet-core"></a>Disposition dans ASP.NET Core
 
@@ -59,7 +61,7 @@ Le code suivant montre le fichier de disposition pour un projet créé avec un m
 
 ## <a name="specifying-a-layout"></a>Spécification d’une disposition
 
-Razorles vues ont `Layout` une propriété. Chaque vue spécifie une disposition en définissant cette propriété :
+Razorles vues ont une `Layout` propriété. Chaque vue spécifie une disposition en définissant cette propriété :
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 
@@ -79,7 +81,7 @@ Une disposition peut éventuellement faire référence à une ou plusieurs *sect
 @RenderSection("Scripts", required: false)
 ```
 
-Si une section obligatoire est introuvable, une exception est levée. Les vues individuelles spécifient le contenu à restituer dans une section `@section` Razor à l’aide de la syntaxe. Si une page ou vue définit une section, elle doit être affichée (sinon, une erreur se produit).
+Si une section obligatoire est introuvable, une exception est levée. Les vues individuelles spécifient le contenu à restituer dans une section à l’aide de la `@section` Razor syntaxe. Si une page ou vue définit une section, elle doit être affichée (sinon, une erreur se produit).
 
 Exemple `@section` de définition en Razor mode pages :
 
@@ -115,7 +117,7 @@ Le corps et chaque section d’une Razor page doivent être rendus ou ignorés.
 
 ## <a name="importing-shared-directives"></a>Importation de directives partagées
 
-Les vues et les pages Razor peuvent utiliser des directives pour importer des espaces de noms et utiliser l' [injection de dépendances](dependency-injection.md). Les directives partagées par plusieurs vues peuvent être spécifiées dans un fichier *_ViewImports.cshtml* commun. Le fichier `_ViewImports` prend en charge les directives suivantes :
+Les vues et les pages peuvent utiliser des Razor directives pour importer des espaces de noms et utiliser l' [injection de dépendances](dependency-injection.md). Les directives partagées par plusieurs vues peuvent être spécifiées dans un fichier *_ViewImports.cshtml* commun. Le fichier `_ViewImports` prend en charge les directives suivantes :
 
 * `@addTagHelper`
 * `@removeTagHelper`
@@ -125,7 +127,7 @@ Les vues et les pages Razor peuvent utiliser des directives pour importer des es
 * `@inherits`
 * `@inject`
 
-Le fichier ne prend pas Razor en charge d’autres fonctionnalités, telles que les fonctions et les définitions de section.
+Le fichier ne prend pas en charge d’autres Razor fonctionnalités, telles que les fonctions et les définitions de section.
 
 Exemple de fichier `_ViewImports.cshtml` :
 

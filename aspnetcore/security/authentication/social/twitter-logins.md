@@ -8,17 +8,19 @@ ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/twitter-logins
-ms.openlocfilehash: c6498704214de5e805c9bf57033529d4acc5fd3e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 61c983de33b91a16ad207d8a350daf4859c89eaf
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775789"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406093"
 ---
 # <a name="twitter-external-sign-in-setup-with-aspnet-core"></a>Configuration de la connexion externe Twitter avec ASP.NET Core
 
@@ -38,10 +40,10 @@ Cet exemple montre comment permettre aux utilisateurs de [se connecter avec leur
 
 * Microsoft. AspNetCore.Identity requiert que les utilisateurs aient une adresse de messagerie par défaut. Accédez à l’onglet **autorisations** , cliquez sur le bouton **modifier** et cochez la case en regard de **demander l’adresse de messagerie des utilisateurs**.
 
-* Entrez votre URI de développement `/signin-twitter` avec ajouté dans le champ **URL de rappel** (par exemple `https://webapp128.azurewebsites.net/signin-twitter`:). Le schéma d’authentification Twitter configuré plus tard dans cet exemple gère automatiquement les `/signin-twitter` demandes à l’itinéraire pour implémenter le Flow OAuth.
+* Entrez votre URI de développement avec `/signin-twitter` ajouté dans le champ **URL de rappel** (par exemple : `https://webapp128.azurewebsites.net/signin-twitter` ). Le schéma d’authentification Twitter configuré plus tard dans cet exemple gère automatiquement les demandes à `/signin-twitter` l’itinéraire pour implémenter le Flow OAuth.
 
   > [!NOTE]
-  > Le segment `/signin-twitter` d’URI est défini en tant que rappel par défaut du fournisseur d’authentification Twitter. Vous pouvez modifier l’URI de rappel par défaut lors de la configuration de l’intergiciel d’authentification Twitter via la propriété héritée [RemoteAuthenticationOptions. CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) de la classe [TwitterOptions](/dotnet/api/microsoft.aspnetcore.authentication.twitter.twitteroptions) .
+  > Le segment d’URI `/signin-twitter` est défini en tant que rappel par défaut du fournisseur d’authentification Twitter. Vous pouvez modifier l’URI de rappel par défaut lors de la configuration de l’intergiciel d’authentification Twitter via la propriété héritée [RemoteAuthenticationOptions. CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) de la classe [TwitterOptions](/dotnet/api/microsoft.aspnetcore.authentication.twitter.twitteroptions) .
 
 * Remplissez le reste du formulaire et sélectionnez **créer**. Les détails de la nouvelle application s’affichent :
 
@@ -50,7 +52,7 @@ Cet exemple montre comment permettre aux utilisateurs de [se connecter avec leur
 Stockez les paramètres sensibles, tels que la clé de l’API du consommateur Twitter et le secret avec le [Gestionnaire de secret](xref:security/app-secrets). Pour cet exemple, procédez comme suit :
 
 1. Initialisez le projet pour le stockage secret conformément aux instructions de la procédure [activer le stockage secret](xref:security/app-secrets#enable-secret-storage).
-1. Stockez les paramètres sensibles dans le magasin de secret local avec les `Authentication:Twitter:ConsumerKey` clés `Authentication:Twitter:ConsumerSecret`secrètes et :
+1. Stockez les paramètres sensibles dans le magasin de secret local avec les clés secrètes `Authentication:Twitter:ConsumerKey` et `Authentication:Twitter:ConsumerSecret` :
 
     ```dotnetcli
     dotnet user-secrets set "Authentication:Twitter:ConsumerAPIKey" "<consumer-api-key>"
@@ -91,15 +93,15 @@ Twitter doesn't support AccessDeniedPath
 Rather in the twitter setup, you can provide an External sign-in homepage. The external sign-in homepage doesn't support localhost. Tested with https://cors3.azurewebsites.net/ and that works.
 -->
 
-## <a name="troubleshooting"></a>Dépannage
+## <a name="troubleshooting"></a>Résolution des problèmes
 
-* **ASP.net Core 2. x uniquement :** Si Identity n’est pas configuré `services.AddIdentity` en `ConfigureServices`appelant dans, toute tentative d’authentification entraîne une *exception ArgumentException : l’option « SignInScheme » doit être fournie*. Le modèle de projet utilisé dans cet exemple permet de s’assurer que cette opération est effectuée.
+* **ASP.net Core 2. x uniquement :** Si Identity n’est pas configuré en appelant `services.AddIdentity` dans `ConfigureServices` , toute tentative d’authentification entraîne une *exception ArgumentException : l’option « SignInScheme » doit être fournie*. Le modèle de projet utilisé dans cet exemple permet de s’assurer que cette opération est effectuée.
 * Si la base de données de site n’a pas été créée en appliquant la migration initiale, vous obtiendrez *une opération de base de données qui a échoué lors du traitement de l’erreur de demande* . Appuyez sur **appliquer des migrations** pour créer la base de données, puis sur Actualiser pour poursuivre l’erreur.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Cet article vous a montré comment vous pouvez vous authentifier avec Twitter. Vous pouvez suivre une approche similaire pour vous authentifier auprès d’autres fournisseurs listés dans la [page précédente](xref:security/authentication/social/index).
 
-* Une fois que vous publiez votre site Web sur Azure Web App, vous `ConsumerSecret` devez réinitialiser le dans le portail des développeurs Twitter.
+* Une fois que vous publiez votre site Web sur Azure Web App, vous devez réinitialiser le `ConsumerSecret` dans le portail des développeurs Twitter.
 
 * Définissez les `Authentication:Twitter:ConsumerKey` et `Authentication:Twitter:ConsumerSecret` en tant que paramètres d’application dans la portail Azure. Le système de configuration est configuré pour lire des clés à partir de variables d’environnement.

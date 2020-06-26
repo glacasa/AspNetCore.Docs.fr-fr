@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 09b004abd423abc9cc8e83d3bb3fea1dddf09e14
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 65095f3990c72224d95f1f5fe46d320ab8f12040
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776628"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404832"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Résoudre les problèmes de ASP.NET Core sur Azure App Service et IIS
 
@@ -59,18 +61,18 @@ L’erreur est généralement causée par un déploiement rompu sur le système 
 
 * L’application est déployée dans le mauvais dossier sur le système d’hébergement.
 * Le processus de déploiement n’a pas réussi à déplacer tous les fichiers et dossiers de l’application vers le dossier de déploiement sur le système d’hébergement.
-* Le fichier *Web. config* est manquant dans le déploiement ou le contenu du fichier *Web. config* est incorrect.
+* Le fichier *web.config* est manquant dans le déploiement ou le contenu du fichier *web.config* est incorrect.
 
 Procédez comme suit :
 
 1. Supprimez tous les fichiers et dossiers du dossier de déploiement sur le système d’hébergement.
 1. Redéployez le contenu du dossier de *publication* de l’application sur le système d’hébergement à l’aide de votre méthode de déploiement normale, telle que Visual Studio, PowerShell ou le déploiement manuel :
-   * Vérifiez que le fichier *Web. config* est présent dans le déploiement et que son contenu est correct.
+   * Vérifiez que le fichier *web.config* est présent dans le déploiement et que son contenu est correct.
    * Lors de l’hébergement sur Azure App Service, vérifiez que l’application est déployée dans le `D:\home\site\wwwroot` dossier.
    * Lorsque l’application est hébergée par IIS, vérifiez que l’application est déployée sur le **chemin d’accès physique** IIS indiqué dans les **paramètres de base**du gestionnaire des **services Internet**.
 1. Confirmez que tous les fichiers et dossiers de l’application sont déployés en comparant le déploiement sur le système d’hébergement au contenu du dossier de *publication* du projet.
 
-Pour plus d’informations sur la disposition d’une application ASP.NET Core publiée, <xref:host-and-deploy/directory-structure>consultez. Pour plus d’informations sur le fichier *Web. config* , <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig>consultez.
+Pour plus d’informations sur la disposition d’une application ASP.NET Core publiée, consultez <xref:host-and-deploy/directory-structure> . Pour plus d’informations sur le fichier *web.config* , consultez <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig> .
 
 ### <a name="500-internal-server-error"></a>500 Erreur interne du serveur
 
@@ -172,8 +174,8 @@ ANCM n’a pas pu localiser la DLL de l’application, qui doit être à côté 
 
 Cette erreur se produit lors de l’hébergement d’une application empaquetée en tant qu' [exécutable à fichier unique](/dotnet/core/whats-new/dotnet-core-3-0#single-file-executables) à l’aide du modèle d’hébergement in-process. Le modèle in-process requiert que le ANCM charge l’application .NET Core dans le processus IIS existant. Ce scénario n’est pas pris en charge par le modèle de déploiement à fichier unique. Utilisez l' **une** des approches suivantes dans le fichier projet de l’application pour corriger cette erreur :
 
-1. Désactivez la publication sur un seul `PublishSingleFile` fichier en affectant à `false`la propriété MSBuild la valeur.
-1. Basculez vers le modèle d’hébergement out-of-process en `AspNetCoreHostingModel` affectant à `OutOfProcess`la propriété MSBuild la valeur.
+1. Désactivez la publication sur un seul fichier en affectant `PublishSingleFile` à la propriété MSBuild la valeur `false` .
+1. Basculez vers le modèle d’hébergement out-of-process en affectant `AspNetCoreHostingModel` à la propriété MSBuild la valeur `OutOfProcess` .
 
 ### <a name="5025-process-failure"></a>Échec de processus 502.5
 
@@ -205,7 +207,7 @@ Vérifiez que le paramètre 32 bits du pool d’applications est correct :
    * Si vous déployez une application 32 bits (x86), définissez la valeur sur `True`.
    * Si vous déployez une application 64 bits (x64), définissez la valeur sur `False`.
 
-Confirmez qu’il n’existe pas de `<Platform>` conflit entre une propriété MSBuild dans le fichier projet et le nombre de bits publié de l’application.
+Confirmez qu’il n’existe pas de conflit entre une `<Platform>` propriété MSBuild dans le fichier projet et le nombre de bits publié de l’application.
 
 ### <a name="connection-reset"></a>Réinitialisation de la connexion
 
@@ -249,7 +251,7 @@ De nombreuses erreurs de démarrage ne produisent pas d’informations utiles da
 **Version actuelle**
 
 1. `cd d:\home\site\wwwroot`
-1. Exécutez l’application :
+1. Exécutez l’application :
    * Si l’application est un [déploiement dépendant du framework](/dotnet/core/deploying/#framework-dependent-deployments-fdd) :
 
      ```dotnetcli
@@ -335,10 +337,10 @@ Le journal de débogage du module ASP.NET Core fournit une journalisation suppl�
    * Ajoutez le `<handlerSettings>` présenté dans [Journaux de diagnostic améliorés](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) au fichier *web.config* de l’application en production à l’aide de la console Kudu :
      1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
      1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
-     1. Ouvrez les dossiers sur le chemin d’accès du **site** > **wwwroot**. Modifiez le fichier *web.config* en sélectionnant le bouton représentant un crayon. Ajoutez la section `<handlerSettings>` comme indiqué dans [Journaux de diagnostic améliorés](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs). Sélectionnez le bouton **Enregistrer**.
+     1. Ouvrez les dossiers sur le chemin d’accès du **site**  >  **wwwroot**. Modifiez le fichier *web.config* en sélectionnant le bouton représentant un crayon. Ajoutez la section `<handlerSettings>` comme indiqué dans [Journaux de diagnostic améliorés](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs). Sélectionnez le bouton **Enregistrer**.
 1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
 1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
-1. Ouvrez les dossiers sur le chemin d’accès du **site** > **wwwroot**. Si vous n’avez pas indiqué de chemin pour le fichier *aspnetcore-debug.log*, le fichier apparaît dans la liste. Si vous avez indiqué un chemin, accédez à l’emplacement du fichier journal.
+1. Ouvrez les dossiers sur le chemin d’accès du **site**  >  **wwwroot**. Si vous n’avez pas indiqué de chemin pour le fichier *aspnetcore-debug.log*, le fichier apparaît dans la liste. Si vous avez indiqué un chemin, accédez à l’emplacement du fichier journal.
 1. Ouvrez le fichier journal à l’aide du bouton représentant un crayon à côté du nom de fichier.
 
 Désactivez la journalisation du débogage, une fois la résolution des problèmes effectuée :
@@ -346,7 +348,7 @@ Désactivez la journalisation du débogage, une fois la résolution des problèm
 Pour désactiver la journalisation de débogage améliorée, effectuez l’une des opérations suivantes :
 
 * Supprimez `<handlerSettings>` du fichier *web.config* localement, puis redéployez l’application.
-* Utilisez la console Kudu pour modifier le fichier *web.config* et supprimer la section `<handlerSettings>`. Enregistrez le fichier .
+* Utilisez la console Kudu pour modifier le fichier *web.config* et supprimer la section `<handlerSettings>`. Enregistrez le fichier.
 
 Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>.
 
@@ -429,7 +431,7 @@ De nombreuses erreurs de démarrage ne produisent pas d’informations utiles da
 
 Si l’application est un [déploiement dépendant du framework](/dotnet/core/deploying/#framework-dependent-deployments-fdd) :
 
-1. Depuis une invite de commandes, accédez au dossier de déploiement et exécutez l’application en exécutant l’assembly de l’application avec *dotnet.exe*. Dans la commande suivante, substituez le nom de l’assembly de l’application à \<assembly_name>: `dotnet .\<assembly_name>.dll`.
+1. Depuis une invite de commandes, accédez au dossier de déploiement et exécutez l’application en exécutant l’assembly de l’application avec *dotnet.exe*. Dans la commande suivante, remplacez le nom de l’assembly de l’application par \<assembly_name> : `dotnet .\<assembly_name>.dll` .
 1. La sortie de console de l’application est écrite dans la fenêtre de console, affichant toutes les erreurs éventuelles.
 1. Si les erreurs se produisent pendant qu’une requête est adressée à l’application, effectuez une requête en direction de l’hôte et du port sur lequel Kestrel écoute. À l’aide de l’hôte et du port par défaut, faites une requête en direction de `http://localhost:5000/`. Si l’application répond normalement à l’adresse de point de terminaison Kestrel, le problème est probablement lié à la configuration de l’hébergement plutôt qu’à l’application.
 
@@ -437,7 +439,7 @@ Si l’application est un [déploiement dépendant du framework](/dotnet/core/de
 
 Si l’application est un [déploiement autonome](/dotnet/core/deploying/#self-contained-deployments-scd) :
 
-1. Depuis une invite de commandes, accédez au dossier de déploiement et exécutez l’exécutable de l’application. Dans la commande suivante, substituez le nom de l’assembly de l’application à \<assembly_name>: `<assembly_name>.exe`.
+1. Depuis une invite de commandes, accédez au dossier de déploiement et exécutez l’exécutable de l’application. Dans la commande suivante, remplacez le nom de l’assembly de l’application par \<assembly_name> : `<assembly_name>.exe` .
 1. La sortie de console de l’application est écrite dans la fenêtre de console, affichant toutes les erreurs éventuelles.
 1. Si les erreurs se produisent pendant qu’une requête est adressée à l’application, effectuez une requête en direction de l’hôte et du port sur lequel Kestrel écoute. À l’aide de l’hôte et du port par défaut, faites une requête en direction de `http://localhost:5000/`. Si l’application répond normalement à l’adresse de point de terminaison Kestrel, le problème est probablement lié à la configuration de l’hébergement plutôt qu’à l’application.
 
@@ -458,7 +460,7 @@ Désactivez la journalisation stdout, une fois les problèmes résolus :
 
 1. Modifiez le fichier *web.config*.
 1. Définissez **stdoutLogEnabled** sur `false`.
-1. Enregistrez le fichier .
+1. Enregistrez le fichier.
 
 Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
 
@@ -469,7 +471,7 @@ Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#l
 
 ### <a name="aspnet-core-module-debug-log-iis"></a>Journal de débogage du module ASP.NET Core (IIS)
 
-Ajoutez les paramètres de gestionnaire suivants au fichier *Web. config* de l’application pour activer ASP.net Core journal de débogage du module :
+Ajoutez les paramètres de gestionnaire suivants au fichier *web.config* de l’application pour activer le journal de débogage du module ASP.net Core :
 
 ```xml
 <aspNetCore ...>
@@ -562,7 +564,7 @@ Une application fonctionnelle peut échouer immédiatement après la mise à niv
 1. Supprimez les dossiers *bin* et *obj*.
 1. Effacez les caches de package en exécutant [dotnet NuGet LOCALS tout--Clear](/dotnet/core/tools/dotnet-nuget-locals) dans une interface de commande.
 
-   L’effacement des caches de package peut également être effectué à l’aide de l’outil [NuGet. exe](https://www.nuget.org/downloads) et en exécutant la commande `nuget locals all -clear`. *NuGet.exe* n’étant pas une installation fournie avec le système d’exploitation de bureau Windows, il doit être obtenu séparément à partir du [site web de NuGet](https://www.nuget.org/downloads).
+   L’effacement des caches de package peut également être effectué à l’aide de l’outil [nuget.exe](https://www.nuget.org/downloads) et en exécutant la commande `nuget locals all -clear` . *NuGet.exe* n’étant pas une installation fournie avec le système d’exploitation de bureau Windows, il doit être obtenu séparément à partir du [site web de NuGet](https://www.nuget.org/downloads).
 
 1. Restaurez et regénérez le projet.
 1. Supprimez tous les fichiers du dossier de déploiement sur le serveur avant de redéployer l’application.
@@ -634,18 +636,18 @@ L’erreur est généralement causée par un déploiement rompu sur le système 
 
 * L’application est déployée dans le mauvais dossier sur le système d’hébergement.
 * Le processus de déploiement n’a pas réussi à déplacer tous les fichiers et dossiers de l’application vers le dossier de déploiement sur le système d’hébergement.
-* Le fichier *Web. config* est manquant dans le déploiement ou le contenu du fichier *Web. config* est incorrect.
+* Le fichier *web.config* est manquant dans le déploiement ou le contenu du fichier *web.config* est incorrect.
 
 Procédez comme suit :
 
 1. Supprimez tous les fichiers et dossiers du dossier de déploiement sur le système d’hébergement.
 1. Redéployez le contenu du dossier de *publication* de l’application sur le système d’hébergement à l’aide de votre méthode de déploiement normale, telle que Visual Studio, PowerShell ou le déploiement manuel :
-   * Vérifiez que le fichier *Web. config* est présent dans le déploiement et que son contenu est correct.
+   * Vérifiez que le fichier *web.config* est présent dans le déploiement et que son contenu est correct.
    * Lors de l’hébergement sur Azure App Service, vérifiez que l’application est déployée dans le `D:\home\site\wwwroot` dossier.
    * Lorsque l’application est hébergée par IIS, vérifiez que l’application est déployée sur le **chemin d’accès physique** IIS indiqué dans les **paramètres de base**du gestionnaire des **services Internet**.
 1. Confirmez que tous les fichiers et dossiers de l’application sont déployés en comparant le déploiement sur le système d’hébergement au contenu du dossier de *publication* du projet.
 
-Pour plus d’informations sur la disposition d’une application ASP.NET Core publiée, <xref:host-and-deploy/directory-structure>consultez. Pour plus d’informations sur le fichier *Web. config* , <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig>consultez.
+Pour plus d’informations sur la disposition d’une application ASP.NET Core publiée, consultez <xref:host-and-deploy/directory-structure> . Pour plus d’informations sur le fichier *web.config* , consultez <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig> .
 
 ### <a name="500-internal-server-error"></a>500 Erreur interne du serveur
 
@@ -657,7 +659,7 @@ Cette erreur se produit dans le code de l’application pendant le démarrage ou
 
 Le processus de travail échoue. L’application ne démarre pas.
 
-Le [Module ASP.net Core](xref:host-and-deploy/aspnet-core-module) ne parvient pas à trouver le CLR .net Core et à rechercher le gestionnaire de demandes in-process (*aspnetcorev2_inprocess. dll*). Vérifiez les éléments suivants :
+Le [Module ASP.net Core](xref:host-and-deploy/aspnet-core-module) ne parvient pas à trouver le CLR .net Core et à rechercher le gestionnaire de demandes in-process (*aspnetcorev2_inprocess.dll*). Vérifiez les éléments suivants :
 
 * l’application cible le package NuGet [Microsoft.AspNetCore.Server.IIS](https://www.nuget.org/packages/Microsoft.AspNetCore.Server.IIS) ou le [métapaquet Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app) ;
 * la version du framework partagé ASP.NET Core que l’application cible est installée sur l’ordinateur cible.
@@ -698,7 +700,7 @@ Vérifiez que le paramètre 32 bits du pool d’applications est correct :
    * Si vous déployez une application 32 bits (x86), définissez la valeur sur `True`.
    * Si vous déployez une application 64 bits (x64), définissez la valeur sur `False`.
 
-Confirmez qu’il n’existe pas de `<Platform>` conflit entre une propriété MSBuild dans le fichier projet et le nombre de bits publié de l’application.
+Confirmez qu’il n’existe pas de conflit entre une `<Platform>` propriété MSBuild dans le fichier projet et le nombre de bits publié de l’application.
 
 ### <a name="connection-reset"></a>Réinitialisation de la connexion
 
@@ -742,7 +744,7 @@ De nombreuses erreurs de démarrage ne produisent pas d’informations utiles da
 **Version actuelle**
 
 1. `cd d:\home\site\wwwroot`
-1. Exécutez l’application :
+1. Exécutez l’application :
    * Si l’application est un [déploiement dépendant du framework](/dotnet/core/deploying/#framework-dependent-deployments-fdd) :
 
      ```dotnetcli
@@ -828,10 +830,10 @@ Le journal de débogage du module ASP.NET Core fournit une journalisation suppl�
    * Ajoutez le `<handlerSettings>` présenté dans [Journaux de diagnostic améliorés](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) au fichier *web.config* de l’application en production à l’aide de la console Kudu :
      1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
      1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
-     1. Ouvrez les dossiers sur le chemin d’accès du **site** > **wwwroot**. Modifiez le fichier *web.config* en sélectionnant le bouton représentant un crayon. Ajoutez la section `<handlerSettings>` comme indiqué dans [Journaux de diagnostic améliorés](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs). Sélectionnez le bouton **Enregistrer**.
+     1. Ouvrez les dossiers sur le chemin d’accès du **site**  >  **wwwroot**. Modifiez le fichier *web.config* en sélectionnant le bouton représentant un crayon. Ajoutez la section `<handlerSettings>` comme indiqué dans [Journaux de diagnostic améliorés](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs). Sélectionnez le bouton **Enregistrer**.
 1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
 1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
-1. Ouvrez les dossiers sur le chemin d’accès du **site** > **wwwroot**. Si vous n’avez pas indiqué de chemin pour le fichier *aspnetcore-debug.log*, le fichier apparaît dans la liste. Si vous avez indiqué un chemin, accédez à l’emplacement du fichier journal.
+1. Ouvrez les dossiers sur le chemin d’accès du **site**  >  **wwwroot**. Si vous n’avez pas indiqué de chemin pour le fichier *aspnetcore-debug.log*, le fichier apparaît dans la liste. Si vous avez indiqué un chemin, accédez à l’emplacement du fichier journal.
 1. Ouvrez le fichier journal à l’aide du bouton représentant un crayon à côté du nom de fichier.
 
 Désactivez la journalisation du débogage, une fois la résolution des problèmes effectuée :
@@ -839,7 +841,7 @@ Désactivez la journalisation du débogage, une fois la résolution des problèm
 Pour désactiver la journalisation de débogage améliorée, effectuez l’une des opérations suivantes :
 
 * Supprimez `<handlerSettings>` du fichier *web.config* localement, puis redéployez l’application.
-* Utilisez la console Kudu pour modifier le fichier *web.config* et supprimer la section `<handlerSettings>`. Enregistrez le fichier .
+* Utilisez la console Kudu pour modifier le fichier *web.config* et supprimer la section `<handlerSettings>`. Enregistrez le fichier.
 
 Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>.
 
@@ -922,7 +924,7 @@ De nombreuses erreurs de démarrage ne produisent pas d’informations utiles da
 
 Si l’application est un [déploiement dépendant du framework](/dotnet/core/deploying/#framework-dependent-deployments-fdd) :
 
-1. Depuis une invite de commandes, accédez au dossier de déploiement et exécutez l’application en exécutant l’assembly de l’application avec *dotnet.exe*. Dans la commande suivante, substituez le nom de l’assembly de l’application à \<assembly_name>: `dotnet .\<assembly_name>.dll`.
+1. Depuis une invite de commandes, accédez au dossier de déploiement et exécutez l’application en exécutant l’assembly de l’application avec *dotnet.exe*. Dans la commande suivante, remplacez le nom de l’assembly de l’application par \<assembly_name> : `dotnet .\<assembly_name>.dll` .
 1. La sortie de console de l’application est écrite dans la fenêtre de console, affichant toutes les erreurs éventuelles.
 1. Si les erreurs se produisent pendant qu’une requête est adressée à l’application, effectuez une requête en direction de l’hôte et du port sur lequel Kestrel écoute. À l’aide de l’hôte et du port par défaut, faites une requête en direction de `http://localhost:5000/`. Si l’application répond normalement à l’adresse de point de terminaison Kestrel, le problème est probablement lié à la configuration de l’hébergement plutôt qu’à l’application.
 
@@ -930,7 +932,7 @@ Si l’application est un [déploiement dépendant du framework](/dotnet/core/de
 
 Si l’application est un [déploiement autonome](/dotnet/core/deploying/#self-contained-deployments-scd) :
 
-1. Depuis une invite de commandes, accédez au dossier de déploiement et exécutez l’exécutable de l’application. Dans la commande suivante, substituez le nom de l’assembly de l’application à \<assembly_name>: `<assembly_name>.exe`.
+1. Depuis une invite de commandes, accédez au dossier de déploiement et exécutez l’exécutable de l’application. Dans la commande suivante, remplacez le nom de l’assembly de l’application par \<assembly_name> : `<assembly_name>.exe` .
 1. La sortie de console de l’application est écrite dans la fenêtre de console, affichant toutes les erreurs éventuelles.
 1. Si les erreurs se produisent pendant qu’une requête est adressée à l’application, effectuez une requête en direction de l’hôte et du port sur lequel Kestrel écoute. À l’aide de l’hôte et du port par défaut, faites une requête en direction de `http://localhost:5000/`. Si l’application répond normalement à l’adresse de point de terminaison Kestrel, le problème est probablement lié à la configuration de l’hébergement plutôt qu’à l’application.
 
@@ -951,7 +953,7 @@ Désactivez la journalisation stdout, une fois les problèmes résolus :
 
 1. Modifiez le fichier *web.config*.
 1. Définissez **stdoutLogEnabled** sur `false`.
-1. Enregistrez le fichier .
+1. Enregistrez le fichier.
 
 Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
 
@@ -962,7 +964,7 @@ Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#l
 
 ### <a name="aspnet-core-module-debug-log-iis"></a>Journal de débogage du module ASP.NET Core (IIS)
 
-Ajoutez les paramètres de gestionnaire suivants au fichier *Web. config* de l’application pour activer ASP.net Core journal de débogage du module :
+Ajoutez les paramètres de gestionnaire suivants au fichier *web.config* de l’application pour activer le journal de débogage du module ASP.net Core :
 
 ```xml
 <aspNetCore ...>
@@ -1055,7 +1057,7 @@ Une application fonctionnelle peut échouer immédiatement après la mise à niv
 1. Supprimez les dossiers *bin* et *obj*.
 1. Effacez les caches de package en exécutant [dotnet NuGet LOCALS tout--Clear](/dotnet/core/tools/dotnet-nuget-locals) dans une interface de commande.
 
-   L’effacement des caches de package peut également être effectué à l’aide de l’outil [NuGet. exe](https://www.nuget.org/downloads) et en exécutant la commande `nuget locals all -clear`. *NuGet.exe* n’étant pas une installation fournie avec le système d’exploitation de bureau Windows, il doit être obtenu séparément à partir du [site web de NuGet](https://www.nuget.org/downloads).
+   L’effacement des caches de package peut également être effectué à l’aide de l’outil [nuget.exe](https://www.nuget.org/downloads) et en exécutant la commande `nuget locals all -clear` . *NuGet.exe* n’étant pas une installation fournie avec le système d’exploitation de bureau Windows, il doit être obtenu séparément à partir du [site web de NuGet](https://www.nuget.org/downloads).
 
 1. Restaurez et regénérez le projet.
 1. Supprimez tous les fichiers du dossier de déploiement sur le serveur avant de redéployer l’application.
@@ -1127,18 +1129,18 @@ L’erreur est généralement causée par un déploiement rompu sur le système 
 
 * L’application est déployée dans le mauvais dossier sur le système d’hébergement.
 * Le processus de déploiement n’a pas réussi à déplacer tous les fichiers et dossiers de l’application vers le dossier de déploiement sur le système d’hébergement.
-* Le fichier *Web. config* est manquant dans le déploiement ou le contenu du fichier *Web. config* est incorrect.
+* Le fichier *web.config* est manquant dans le déploiement ou le contenu du fichier *web.config* est incorrect.
 
 Procédez comme suit :
 
 1. Supprimez tous les fichiers et dossiers du dossier de déploiement sur le système d’hébergement.
 1. Redéployez le contenu du dossier de *publication* de l’application sur le système d’hébergement à l’aide de votre méthode de déploiement normale, telle que Visual Studio, PowerShell ou le déploiement manuel :
-   * Vérifiez que le fichier *Web. config* est présent dans le déploiement et que son contenu est correct.
+   * Vérifiez que le fichier *web.config* est présent dans le déploiement et que son contenu est correct.
    * Lors de l’hébergement sur Azure App Service, vérifiez que l’application est déployée dans le `D:\home\site\wwwroot` dossier.
    * Lorsque l’application est hébergée par IIS, vérifiez que l’application est déployée sur le **chemin d’accès physique** IIS indiqué dans les **paramètres de base**du gestionnaire des **services Internet**.
 1. Confirmez que tous les fichiers et dossiers de l’application sont déployés en comparant le déploiement sur le système d’hébergement au contenu du dossier de *publication* du projet.
 
-Pour plus d’informations sur la disposition d’une application ASP.NET Core publiée, <xref:host-and-deploy/directory-structure>consultez. Pour plus d’informations sur le fichier *Web. config* , <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig>consultez.
+Pour plus d’informations sur la disposition d’une application ASP.NET Core publiée, consultez <xref:host-and-deploy/directory-structure> . Pour plus d’informations sur le fichier *web.config* , consultez <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig> .
 
 ### <a name="500-internal-server-error"></a>500 Erreur interne du serveur
 
@@ -1176,7 +1178,7 @@ Vérifiez que le paramètre 32 bits du pool d’applications est correct :
    * Si vous déployez une application 32 bits (x86), définissez la valeur sur `True`.
    * Si vous déployez une application 64 bits (x64), définissez la valeur sur `False`.
 
-Confirmez qu’il n’existe pas de `<Platform>` conflit entre une propriété MSBuild dans le fichier projet et le nombre de bits publié de l’application.
+Confirmez qu’il n’existe pas de conflit entre une `<Platform>` propriété MSBuild dans le fichier projet et le nombre de bits publié de l’application.
 
 ### <a name="connection-reset"></a>Réinitialisation de la connexion
 
@@ -1220,7 +1222,7 @@ De nombreuses erreurs de démarrage ne produisent pas d’informations utiles da
 **Version actuelle**
 
 1. `cd d:\home\site\wwwroot`
-1. Exécutez l’application :
+1. Exécutez l’application :
    * Si l’application est un [déploiement dépendant du framework](/dotnet/core/deploying/#framework-dependent-deployments-fdd) :
 
      ```dotnetcli
@@ -1371,7 +1373,7 @@ De nombreuses erreurs de démarrage ne produisent pas d’informations utiles da
 
 Si l’application est un [déploiement dépendant du framework](/dotnet/core/deploying/#framework-dependent-deployments-fdd) :
 
-1. Depuis une invite de commandes, accédez au dossier de déploiement et exécutez l’application en exécutant l’assembly de l’application avec *dotnet.exe*. Dans la commande suivante, substituez le nom de l’assembly de l’application à \<assembly_name>: `dotnet .\<assembly_name>.dll`.
+1. Depuis une invite de commandes, accédez au dossier de déploiement et exécutez l’application en exécutant l’assembly de l’application avec *dotnet.exe*. Dans la commande suivante, remplacez le nom de l’assembly de l’application par \<assembly_name> : `dotnet .\<assembly_name>.dll` .
 1. La sortie de console de l’application est écrite dans la fenêtre de console, affichant toutes les erreurs éventuelles.
 1. Si les erreurs se produisent pendant qu’une requête est adressée à l’application, effectuez une requête en direction de l’hôte et du port sur lequel Kestrel écoute. À l’aide de l’hôte et du port par défaut, faites une requête en direction de `http://localhost:5000/`. Si l’application répond normalement à l’adresse de point de terminaison Kestrel, le problème est probablement lié à la configuration de l’hébergement plutôt qu’à l’application.
 
@@ -1379,7 +1381,7 @@ Si l’application est un [déploiement dépendant du framework](/dotnet/core/de
 
 Si l’application est un [déploiement autonome](/dotnet/core/deploying/#self-contained-deployments-scd) :
 
-1. Depuis une invite de commandes, accédez au dossier de déploiement et exécutez l’exécutable de l’application. Dans la commande suivante, substituez le nom de l’assembly de l’application à \<assembly_name>: `<assembly_name>.exe`.
+1. Depuis une invite de commandes, accédez au dossier de déploiement et exécutez l’exécutable de l’application. Dans la commande suivante, remplacez le nom de l’assembly de l’application par \<assembly_name> : `<assembly_name>.exe` .
 1. La sortie de console de l’application est écrite dans la fenêtre de console, affichant toutes les erreurs éventuelles.
 1. Si les erreurs se produisent pendant qu’une requête est adressée à l’application, effectuez une requête en direction de l’hôte et du port sur lequel Kestrel écoute. À l’aide de l’hôte et du port par défaut, faites une requête en direction de `http://localhost:5000/`. Si l’application répond normalement à l’adresse de point de terminaison Kestrel, le problème est probablement lié à la configuration de l’hébergement plutôt qu’à l’application.
 
@@ -1400,7 +1402,7 @@ Désactivez la journalisation stdout, une fois les problèmes résolus :
 
 1. Modifiez le fichier *web.config*.
 1. Définissez **stdoutLogEnabled** sur `false`.
-1. Enregistrez le fichier .
+1. Enregistrez le fichier.
 
 Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
 
@@ -1486,7 +1488,7 @@ Une application fonctionnelle peut échouer immédiatement après la mise à niv
 1. Supprimez les dossiers *bin* et *obj*.
 1. Effacez les caches de package en exécutant [dotnet NuGet LOCALS tout--Clear](/dotnet/core/tools/dotnet-nuget-locals) dans une interface de commande.
 
-   L’effacement des caches de package peut également être effectué à l’aide de l’outil [NuGet. exe](https://www.nuget.org/downloads) et en exécutant la commande `nuget locals all -clear`. *NuGet.exe* n’étant pas une installation fournie avec le système d’exploitation de bureau Windows, il doit être obtenu séparément à partir du [site web de NuGet](https://www.nuget.org/downloads).
+   L’effacement des caches de package peut également être effectué à l’aide de l’outil [nuget.exe](https://www.nuget.org/downloads) et en exécutant la commande `nuget locals all -clear` . *NuGet.exe* n’étant pas une installation fournie avec le système d’exploitation de bureau Windows, il doit être obtenu séparément à partir du [site web de NuGet](https://www.nuget.org/downloads).
 
 1. Restaurez et regénérez le projet.
 1. Supprimez tous les fichiers du dossier de déploiement sur le serveur avant de redéployer l’application.

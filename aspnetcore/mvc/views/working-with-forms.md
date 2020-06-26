@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: ba523fba60153e2ae804f5a875cfaa1aa8fffedd
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 06d5d6e2db1cf3ccb148c24c40c264016d47a0ed
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82769100"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406587"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>Tag Helpers dans les formulaires dans ASP.NET Core
 
@@ -33,7 +35,7 @@ Dans de nombreux cas, les HTML Helpers offrent une autre approche par rapport à
 
 Tag Helper [Form](https://www.w3.org/TR/html401/interact/forms.html) :
 
-* Génère le [ \<formulaire HTML>](https://www.w3.org/TR/html401/interact/forms.html) `action` valeur d’attribut pour une action du contrôleur MVC ou un itinéraire nommé
+* Génère la [\<FORM>](https://www.w3.org/TR/html401/interact/forms.html) `action` valeur de l’attribut HTML pour une action du contrôleur MVC ou un itinéraire nommé
 
 * Génère un [jeton de vérification de requête](/aspnet/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages) masqué pour empêcher la falsification de requête intersites (quand il est utilisé avec l’attribut `[ValidateAntiForgeryToken]` dans la méthode d’action HTTP Post)
 
@@ -75,7 +77,7 @@ Un bon nombre des vues du dossier *Vues/Compte* (généré quand vous créez une
 
 ## <a name="the-form-action-tag-helper"></a>Le Tag Helper Form Action
 
-Le Tag Helper Form Action génère l’attribut `formaction` sur la balise `<button ...>` ou `<input type="image" ...>` générée. L’attribut `formaction` détermine où un formulaire envoie ses données. Il crée une liaison [ \<](https://www.w3.org/wiki/HTML/Elements/input) avec les éléments>d' `image` entrée [ \<](https://www.w3.org/wiki/HTML/Elements/button) de type et les éléments de>de bouton. Le Tag Helper Form Action permet l’utilisation de plusieurs attributs [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) `asp-` pour contrôler quel lien `formaction` est généré pour l’élément correspondant.
+Le Tag Helper Form Action génère l’attribut `formaction` sur la balise `<button ...>` ou `<input type="image" ...>` générée. L’attribut `formaction` détermine où un formulaire envoie ses données. Il crée une liaison avec [\<input>](https://www.w3.org/wiki/HTML/Elements/input) des éléments de type `image` et des [\<button>](https://www.w3.org/wiki/HTML/Elements/button) éléments. Le Tag Helper Form Action permet l’utilisation de plusieurs attributs [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) `asp-` pour contrôler quel lien `formaction` est généré pour l’élément correspondant.
 
 Attributs [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) pris en charge pour contrôler la valeur de `formaction` :
 
@@ -84,8 +86,8 @@ Attributs [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-hel
 |[asp-controller](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-controller)|Nom du contrôleur.|
 |[asp-action](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-action)|Nom de la méthode d’action.|
 |[asp-area](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-area)|Nom de la zone.|
-|[asp-page](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page)|Nom de la page Razor.|
-|[asp-page-handler](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page-handler)|Nom du gestionnaire de la page Razor.|
+|[asp-page](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page)|Nom de la Razor page.|
+|[asp-page-handler](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page-handler)|Nom du gestionnaire de Razor page.|
 |[asp-route](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route)|Nom de l’itinéraire.|
 |[asp-route-{value}](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|Valeur de routage d’URL unique. Par exemple : `asp-route-id="1234"`.|
 |[asp-all-route-data](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-all-route-data)|Toutes les valeurs d’itinéraire.|
@@ -114,7 +116,7 @@ Le balisage précédent génère le code HTML suivant :
 
 ### <a name="submit-to-page-example"></a>Exemple d’envoi à la page
 
-Le balisage suivant envoie le formulaire à Razor Page `About` :
+Le balisage suivant envoie le formulaire à la `About` Razor page :
 
 ```cshtml
 <form method="post">
@@ -167,7 +169,7 @@ Le balisage précédent génère le code HTML suivant :
 
 ## <a name="the-input-tag-helper"></a>Tag Helper Input
 
-Le tag Helper d’entrée lie une entrée HTML [ \<>](https://www.w3.org/wiki/HTML/Elements/input) élément à une expression de modèle dans votre vue Razor.
+Le tag Helper d’entrée lie un élément HTML [\<input>](https://www.w3.org/wiki/HTML/Elements/input) à une expression de modèle dans votre vue Razor.
 
 Syntaxe :
 
@@ -247,7 +249,7 @@ Le code ci-dessus génère le code HTML suivant :
    </form>
 ```
 
-Les annotations de données appliquées aux propriétés `Email` et `Password` génèrent des métadonnées pour le modèle. Le Tag Helper Input consomme les métadonnées du modèle et génère les attributs [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) `data-val-*` (consultez [Validation de modèle](../models/validation.md)). Ces attributs décrivent les validateurs à attacher aux champs d’entrée. Cela permet d’effectuer une validation HTML5 et [jQuery](https://jquery.com/) discrète. Les attributs discrets ont le format `data-val-rule="Error Message"`, où Rule est le nom de la règle de validation (telle `data-val-required`que `data-val-email`, `data-val-maxlength`,, etc.) Si un message d’erreur est fourni dans l’attribut, il est affiché en tant que valeur `data-val-rule` de l’attribut. Il existe également des attributs ayant la forme `data-val-ruleName-argumentName="argumentValue"` et qui fournissent des détails supplémentaires sur la règle, par exemple `data-val-maxlength-max="1024"`.
+Les annotations de données appliquées aux propriétés `Email` et `Password` génèrent des métadonnées pour le modèle. Le Tag Helper Input consomme les métadonnées du modèle et génère les attributs [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) `data-val-*` (consultez [Validation de modèle](../models/validation.md)). Ces attributs décrivent les validateurs à attacher aux champs d’entrée. Cela permet d’effectuer une validation HTML5 et [jQuery](https://jquery.com/) discrète. Les attributs discrets ont le format `data-val-rule="Error Message"` , où Rule est le nom de la règle de validation (telle que `data-val-required` ,, `data-val-email` `data-val-maxlength` , etc.) Si un message d’erreur est fourni dans l’attribut, il est affiché en tant que valeur de l' `data-val-rule` attribut. Il existe également des attributs ayant la forme `data-val-ruleName-argumentName="argumentValue"` et qui fournissent des détails supplémentaires sur la règle, par exemple `data-val-maxlength-max="1024"`.
 
 ### <a name="html-helper-alternatives-to-input-tag-helper"></a>Alternatives HTML Helper au Tag Helper Input
 
@@ -321,7 +323,7 @@ public IActionResult Edit(int id, int colorIndex)
 }
 ```
 
-Le code Razor suivant montre comment accéder à un élément `Color` spécifique :
+L’exemple suivant Razor montre comment accéder à un `Color` élément spécifique :
 
 [!code-HTML[](working-with-forms/sample/final/Views/Demo/EditColor.cshtml)]
 
@@ -333,7 +335,7 @@ Exemple utilisant `List<T>` :
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/ToDoItem.cs?range=3-8)]
 
-Le code Razor suivant montre comment effectuer une itération dans une collection :
+L’exemple suivant Razor montre comment effectuer une itération au sein d’une collection :
 
 [!code-HTML[](working-with-forms/sample/final/Views/Demo/Edit.cshtml)]
 
@@ -352,7 +354,7 @@ Utilisez si possible `foreach` quand la valeur doit être employée dans un cont
 
 Le Tag Helper `Textarea Tag Helper` est similaire au Tag Helper Input.
 
-* Génère les `id` attributs `name` et, ainsi que les attributs de validation des données à partir du modèle pour un [ \<élément textarea>](https://www.w3.org/wiki/HTML/Elements/textarea) .
+* Génère les `id` `name` attributs et, ainsi que les attributs de validation des données à partir du modèle pour un [\<textarea>](https://www.w3.org/wiki/HTML/Elements/textarea) élément.
 
 * Fournit un typage fort.
 
@@ -382,7 +384,7 @@ Le code HTML suivant est généré :
 
 ## <a name="the-label-tag-helper"></a>Tag Helper Label
 
-* Génère la légende et `for` l’attribut de l’étiquette sur une [ \<étiquette>](https://www.w3.org/wiki/HTML/Elements/label) élément pour un nom d’expression
+* Génère la légende et l' `for` attribut de l’étiquette sur un [\<label>](https://www.w3.org/wiki/HTML/Elements/label) élément pour un nom d’expression
 
 * Alternative HTML Helper : `Html.LabelFor`.
 
@@ -464,7 +466,7 @@ Le `Validation Summary Tag Helper` est utilisé pour afficher un récapitulatif 
 
 ### <a name="sample"></a>Exemple
 
-Dans l’exemple suivant, le modèle de données `DataAnnotation` a des attributs, qui génèrent des messages `<input>` d’erreur de validation sur l’élément.  Quand une erreur de validation se produit, le Tag Helper Validation affiche le message d’erreur :
+Dans l’exemple suivant, le modèle de données a des `DataAnnotation` attributs, qui génèrent des messages d’erreur de validation sur l' `<input>` élément.  Quand une erreur de validation se produit, le Tag Helper Validation affiche le message d’erreur :
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/RegisterViewModel.cs)]
 
@@ -552,7 +554,7 @@ La méthode `GetEnumSelectList` génère un objet `SelectList` pour un enum.
 
 [!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexEnum.cshtml?highlight=5)]
 
-Vous pouvez marquer votre liste d’énumérateurs `Display` avec l’attribut pour obtenir une interface utilisateur plus riche :
+Vous pouvez marquer votre liste d’énumérateurs avec l' `Display` attribut pour obtenir une interface utilisateur plus riche :
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/CountryEnum.cs?highlight=5,7)]
 
@@ -576,7 +578,7 @@ Le code HTML suivant est généré :
 
 ### <a name="option-group"></a>Groupe d’options
 
-L’élément [ \<>html optgroup](https://www.w3.org/wiki/HTML/Elements/optgroup) est généré lorsque le modèle de vue contient un ou `SelectListGroup` plusieurs objets.
+L' [\<optgroup>](https://www.w3.org/wiki/HTML/Elements/optgroup) élément HTML est généré lorsque le modèle de vue contient un ou plusieurs `SelectListGroup` objets.
 
 `CountryViewModelGroup` regroupe les éléments `SelectListItem` dans les groupes « North America » et « Europe » :
 
@@ -645,7 +647,7 @@ Modèle *Views/Shared/EditorTemplates/CountryViewModel.cshtml* :
 
 [!code-HTML[](working-with-forms/sample/final/Views/Shared/EditorTemplates/CountryViewModel.cshtml)]
 
-L’ajout de l' [ \<option HTML>](https://www.w3.org/wiki/HTML/Elements/option) éléments n’est pas limité au cas *sans sélection* . Par exemple, la vue et la méthode d’action suivante génèrent du code HTML similaire au code ci-dessus :
+L’ajout [\<option>](https://www.w3.org/wiki/HTML/Elements/option) d’éléments HTML n’est pas limité au cas *sans sélection* . Par exemple, la vue et la méthode d’action suivante génèrent du code HTML similaire au code ci-dessus :
 
 [!code-csharp[](working-with-forms/sample/final/Controllers/HomeController.cs?name=snippetNone)]
 

@@ -7,23 +7,25 @@ ms.custom: mvc
 ms.date: 11/15/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/resourcebased
-ms.openlocfilehash: 5af4dd6a33e43191dbb5e7a8431fd8468a5fa11b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 35d8521227d82bb066cfbf2badf4a1e1f30bfd8e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774312"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405625"
 ---
 # <a name="resource-based-authorization-in-aspnet-core"></a>Autorisation basée sur les ressources dans ASP.NET Core
 
 La stratégie d’autorisation dépend de la ressource faisant l’objet d’un accès. Prenons l’exemple d’un document qui a une propriété auteur. Seul l’auteur est autorisé à mettre à jour le document. Par conséquent, le document doit être récupéré à partir du magasin de données avant que l’évaluation de l’autorisation puisse se produire.
 
-L’évaluation d’attribut se produit avant la liaison de données et avant l’exécution du gestionnaire de page ou de l’action qui charge le document. Pour ces raisons, l’autorisation déclarative avec un `[Authorize]` attribut n’est pas suffisante. Au lieu de cela, vous pouvez appeler une&mdash;méthode d’autorisation personnalisée un style appelé *autorisation impérative*.
+L’évaluation d’attribut se produit avant la liaison de données et avant l’exécution du gestionnaire de page ou de l’action qui charge le document. Pour ces raisons, l’autorisation déclarative avec un `[Authorize]` attribut n’est pas suffisante. Au lieu de cela, vous pouvez appeler une méthode d’autorisation personnalisée &mdash; un style appelé *autorisation impérative*.
 
 ::: moniker range=">= aspnetcore-3.0"
 [Affichez ou téléchargez un exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/3_0) ([procédure de téléchargement](xref:index#how-to-download-a-sample)).
@@ -41,7 +43,7 @@ L’évaluation d’attribut se produit avant la liaison de données et avant l�
 
 ## <a name="use-imperative-authorization"></a>Utiliser l’autorisation impérative
 
-L’autorisation est implémentée en tant que service [IAuthorizationService](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationservice) et est inscrite dans la `Startup` collection de services au sein de la classe. Le service est rendu disponible via l' [injection de dépendances](xref:fundamentals/dependency-injection) aux gestionnaires de pages ou aux actions.
+L’autorisation est implémentée en tant que service [IAuthorizationService](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationservice) et est inscrite dans la collection de services au sein de la `Startup` classe. Le service est rendu disponible via l' [injection de dépendances](xref:fundamentals/dependency-injection) aux gestionnaires de pages ou aux actions.
 
 [!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Controllers/DocumentController.cs?name=snippet_IAuthServiceDI&highlight=6)]
 
@@ -75,10 +77,10 @@ Task<bool> AuthorizeAsync(ClaimsPrincipal user,
 
 <a name="security-authorization-resource-based-imperative"></a>
 
-Dans l’exemple suivant, la ressource à sécuriser est chargée dans un objet `Document` personnalisé. Une `AuthorizeAsync` surcharge est appelée pour déterminer si l’utilisateur actuel est autorisé à modifier le document fourni. Une stratégie d’autorisation « EditPolicy » personnalisée est prise en compte dans la décision. Consultez [autorisation basée sur une stratégie personnalisée](xref:security/authorization/policies) pour plus d’informations sur la création de stratégies d’autorisation.
+Dans l’exemple suivant, la ressource à sécuriser est chargée dans un `Document` objet personnalisé. Une `AuthorizeAsync` surcharge est appelée pour déterminer si l’utilisateur actuel est autorisé à modifier le document fourni. Une stratégie d’autorisation « EditPolicy » personnalisée est prise en compte dans la décision. Consultez [autorisation basée sur une stratégie personnalisée](xref:security/authorization/policies) pour plus d’informations sur la création de stratégies d’autorisation.
 
 > [!NOTE]
-> Les exemples de code suivants supposent que l’authentification s' `User` exécute et définit la propriété.
+> Les exemples de code suivants supposent que l’authentification s’exécute et définit la `User` propriété.
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -110,9 +112,9 @@ La classe de gestionnaire spécifie la spécification et le type de ressource. P
 
 ::: moniker-end
 
-Dans l’exemple précédent, imaginez qu' `SameAuthorRequirement` il s’agit d’un cas spécial d' `SpecificAuthorRequirement` une classe plus générique. La `SpecificAuthorRequirement` classe (non affichée) contient une `Name` propriété représentant le nom de l’auteur. La `Name` propriété peut être définie sur l’utilisateur actuel.
+Dans l’exemple précédent, imaginez qu' `SameAuthorRequirement` il s’agit d’un cas spécial d’une classe plus générique `SpecificAuthorRequirement` . La `SpecificAuthorRequirement` classe (non affichée) contient une `Name` propriété représentant le nom de l’auteur. La `Name` propriété peut être définie sur l’utilisateur actuel.
 
-Inscrire la spécification et le gestionnaire `Startup.ConfigureServices`dans :
+Inscrire la spécification et le gestionnaire dans `Startup.ConfigureServices` :
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Startup.cs?name=snippet_ConfigureServicesSample&highlight=4-8,10)]
@@ -132,7 +134,7 @@ Si vous prenez des décisions en fonction des résultats des opérations CRUD (c
 
 [!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Services/DocumentAuthorizationCrudHandler.cs?name=snippet_OperationsClass)]
 
-Le gestionnaire est implémenté comme suit, à l' `OperationAuthorizationRequirement` aide d’une `Document` spécification et d’une ressource :
+Le gestionnaire est implémenté comme suit, à l’aide d’une `OperationAuthorizationRequirement` spécification et d’une `Document` ressource :
 
  ::: moniker range=">= aspnetcore-2.0"
 [!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Services/DocumentAuthorizationCrudHandler.cs?name=snippet_Handler)]
@@ -145,22 +147,22 @@ Le gestionnaire est implémenté comme suit, à l' `OperationAuthorizationRequir
 
 ::: moniker-end
 
-Le gestionnaire précédent valide l’opération à l’aide de la ressource, de l’identité de l’utilisateur et `Name` de la propriété de la spécification.
+Le gestionnaire précédent valide l’opération à l’aide de la ressource, de l’identité de l’utilisateur et de la propriété de la spécification `Name` .
 
 ## <a name="challenge-and-forbid-with-an-operational-resource-handler"></a>Défi et interdisent avec un gestionnaire de ressources opérationnelles
 
 Cette section montre comment le problème et les résultats de l’action interdire sont traités et comment les problèmes et les interdisent diffèrent.
 
-Pour appeler un gestionnaire de ressources opérationnelles, spécifiez l’opération `AuthorizeAsync` lors de l’appel de votre gestionnaire de page ou action. L’exemple suivant détermine si l’utilisateur authentifié est autorisé à afficher le document fourni.
+Pour appeler un gestionnaire de ressources opérationnelles, spécifiez l’opération lors de l’appel `AuthorizeAsync` de votre gestionnaire de page ou action. L’exemple suivant détermine si l’utilisateur authentifié est autorisé à afficher le document fourni.
 
 > [!NOTE]
-> Les exemples de code suivants supposent que l’authentification s' `User` exécute et définit la propriété.
+> Les exemples de code suivants supposent que l’authentification s’exécute et définit la `User` propriété.
 
 ::: moniker range=">= aspnetcore-2.0"
 
 [!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Pages/Document/View.cshtml.cs?name=snippet_DocumentViewHandler&highlight=10-11)]
 
-Si l’autorisation est établie, la page d’affichage du document est retournée. Si l’autorisation échoue mais que l’utilisateur est authentifié, `ForbidResult` le retour de informe l’intergiciel d’authentification qui a échoué. Une `ChallengeResult` est retournée lorsque l’authentification doit être effectuée. Pour les clients de navigateur interactifs, il peut être approprié de rediriger l’utilisateur vers une page de connexion.
+Si l’autorisation est établie, la page d’affichage du document est retournée. Si l’autorisation échoue mais que l’utilisateur est authentifié, le retour `ForbidResult` de informe l’intergiciel d’authentification qui a échoué. Une `ChallengeResult` est retournée lorsque l’authentification doit être effectuée. Pour les clients de navigateur interactifs, il peut être approprié de rediriger l’utilisateur vers une page de connexion.
 
 ::: moniker-end
 

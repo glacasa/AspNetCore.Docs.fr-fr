@@ -1,41 +1,43 @@
 ---
-title: Plateformes prises en charge ASP.NET Core SignalR
+title: SignalRPlateformes prises en charge ASP.net Core
 author: bradygaster
-description: En savoir plus sur les plateformes SignalRprises en charge pour ASP.net core.
+description: En savoir plus sur les plateformes prises en charge pour ASP.NET Core SignalR .
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/supported-platforms
-ms.openlocfilehash: 70a05dabb95aaf561aa78d5c8b24b430c51bd973
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 9d7dd946ae5cf83b76a83ba1faeed0bb3fc31cef
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772603"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405820"
 ---
-# <a name="aspnet-core-signalr-supported-platforms"></a>Plateformes prises en charge par ASP.NET Core Signalr
+# <a name="aspnet-core-signalr-supported-platforms"></a>SignalRPlateformes prises en charge ASP.net Core
 
 ## <a name="server-system-requirements"></a>Configuration requise pour le serveur
 
-Signalr pour ASP.NET Core prend en charge toute plateforme de serveur prise en charge par ASP.NET Core.
+SignalRpour ASP.NET Core prend en charge toutes les plateformes de serveur prises en charge par ASP.NET Core.
 
 ## <a name="javascript-client"></a>Client JavaScript
 
 Le [client JavaScript](xref:signalr/javascript-client) s’exécute sur NodeJS 8 et versions ultérieures, ainsi que sur les navigateurs suivants :
 
-| Browser                         | Version         |
+| Navigateur                         | Version         |
 | ------------------------------- | --------------- |
-| Microsoft Edge                  | Actif&dagger; |
-| Mozilla Firefox                 | Actif&dagger; |
-| Google Chrome ; comprend Android | Actif&dagger; |
-| Safari comprend iOS            | Actif&dagger; |
+| Microsoft Edge                  | Actuel&dagger; |
+| Mozilla Firefox                 | Actuel&dagger; |
+| Google Chrome ; comprend Android | Actuel&dagger; |
+| Safari comprend iOS            | Actuel&dagger; |
 | Microsoft Internet Explorer     | 11              |
 
 &dagger;*Current* fait référence à la dernière version du navigateur.

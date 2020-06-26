@@ -7,17 +7,19 @@ ms.author: riande
 ms.date: 11/08/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/limitingidentitybyscheme
-ms.openlocfilehash: 69b6412f249355573faa785743b124a67ecb8b9e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 042b22a220d961773437e9d85d5f0c5782e29bea
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777512"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406015"
 ---
 # <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>Autorisation avec un schéma spécifique dans ASP.NET Core
 
@@ -44,11 +46,11 @@ public void ConfigureServices(IServiceCollection services)
 Dans le code précédent, deux gestionnaires d’authentification ont été ajoutés : un pour les cookies et un pour le porteur.
 
 >[!NOTE]
->La spécification du schéma par défaut entraîne `HttpContext.User` la définition de la propriété sur cette identité. Si ce comportement n’est pas souhaité, désactivez-le en appelant la `AddAuthentication`forme sans paramètre de.
+>La spécification du schéma par défaut entraîne la définition de la `HttpContext.User` propriété sur cette identité. Si ce comportement n’est pas souhaité, désactivez-le en appelant la forme sans paramètre de `AddAuthentication` .
 
 ## <a name="selecting-the-scheme-with-the-authorize-attribute"></a>Sélection du schéma avec l’attribut Authorize
 
-Au point d’autorisation, l’application indique le gestionnaire à utiliser. Sélectionnez le gestionnaire avec lequel l’application autorisera en passant une liste de schémas d’authentification délimités par des `[Authorize]`virgules à. L' `[Authorize]` attribut spécifie le ou les schémas d’authentification à utiliser, qu’une valeur par défaut soit configurée ou non. Par exemple :
+Au point d’autorisation, l’application indique le gestionnaire à utiliser. Sélectionnez le gestionnaire avec lequel l’application autorisera en passant une liste de schémas d’authentification délimités par des virgules à `[Authorize]` . L' `[Authorize]` attribut spécifie le ou les schémas d’authentification à utiliser, qu’une valeur par défaut soit configurée ou non. Par exemple :
 
 ```csharp
 [Authorize(AuthenticationSchemes = AuthSchemes)]
@@ -73,7 +75,7 @@ Dans le code précédent, seul le gestionnaire avec le schéma « Bearer » s�
 
 ## <a name="selecting-the-scheme-with-policies"></a>Sélection du schéma avec des stratégies
 
-Si vous préférez spécifier les schémas souhaités dans la [stratégie](xref:security/authorization/policies), vous pouvez définir `AuthenticationSchemes` le regroupement lors de l’ajout de votre stratégie :
+Si vous préférez spécifier les schémas souhaités dans la [stratégie](xref:security/authorization/policies), vous pouvez définir le `AuthenticationSchemes` regroupement lors de l’ajout de votre stratégie :
 
 ```csharp
 services.AddAuthorization(options =>
@@ -87,7 +89,7 @@ services.AddAuthorization(options =>
 });
 ```
 
-Dans l’exemple précédent, la stratégie « 18 ans » s’exécute uniquement sur l’identité créée par le gestionnaire « porteur ». Utilisez la stratégie en définissant `[Authorize]` la propriété `Policy` de l’attribut :
+Dans l’exemple précédent, la stratégie « 18 ans » s’exécute uniquement sur l’identité créée par le gestionnaire « porteur ». Utilisez la stratégie en définissant la `[Authorize]` propriété de l’attribut `Policy` :
 
 ```csharp
 [Authorize(Policy = "Over18")]
@@ -122,7 +124,7 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 > [!NOTE]
-> Une seule authentification du porteur JWT est enregistrée avec le schéma `JwtBearerDefaults.AuthenticationScheme`d’authentification par défaut. Une authentification supplémentaire doit être inscrite avec un schéma d’authentification unique.
+> Une seule authentification du porteur JWT est enregistrée avec le schéma d’authentification par défaut `JwtBearerDefaults.AuthenticationScheme` . Une authentification supplémentaire doit être inscrite avec un schéma d’authentification unique.
 
 L’étape suivante consiste à mettre à jour la stratégie d’autorisation par défaut pour accepter les deux schémas d’authentification. Par exemple :
 
@@ -143,6 +145,6 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Étant donné que la stratégie d’autorisation par défaut est remplacée, il est possible `[Authorize]` d’utiliser l’attribut dans les contrôleurs. Le contrôleur accepte ensuite les demandes avec le jeton JWT émis par le premier ou le deuxième émetteur.
+Étant donné que la stratégie d’autorisation par défaut est remplacée, il est possible d’utiliser l' `[Authorize]` attribut dans les contrôleurs. Le contrôleur accepte ensuite les demandes avec le jeton JWT émis par le premier ou le deuxième émetteur.
 
 ::: moniker-end

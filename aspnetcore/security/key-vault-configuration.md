@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/key-vault-configuration
-ms.openlocfilehash: 4a5689af9ffea175838a869e92752de889cbb227
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 47172339f1c82a572a8a2c5d4ba49e4906e30b29
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106674"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406873"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>Fournisseur de configuration Azure Key Vault dans ASP.NET Core
 
@@ -33,9 +35,9 @@ Ce document explique comment utiliser le fournisseur de configuration [Microsoft
 
 [Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/key-vault-configuration/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
-## <a name="packages"></a>.
+## <a name="packages"></a>Paquets
 
-Ajoutez une référence de package au package [Microsoft. extensions. Configuration. AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) .
+Ajoutez une référence de package à la [Microsoft.Extensions.Configfiguration. Package AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) .
 
 ## <a name="sample-app"></a>Exemple d'application
 
@@ -129,10 +131,10 @@ L’exemple d’application utilise un ID d’application et un certificat X. 50
    1. Sélectionnez l’application dans Azure AD.
    1. Accédez à **certificats & secrets**.
    1. Sélectionnez **Télécharger le certificat** pour télécharger le certificat, qui contient la clé publique. Un certificat. *CER*, *. pem*ou *. CRT* est acceptable.
-1. Stockez le nom du coffre de clés, l’ID de l’application et l’empreinte numérique du certificat dans le fichier *appSettings. JSON* de l’application.
+1. Stockez le nom du coffre de clés, l’ID de l’application et l’empreinte numérique du certificat dans le fichier de *appsettings.js* de l’application.
 1. Accédez à **coffres de clés** dans le portail Azure.
 1. Sélectionnez le coffre de clés que vous avez créé dans la section [stockage secret dans l’environnement de production avec Azure Key Vault](#secret-storage-in-the-production-environment-with-azure-key-vault) .
-1. Sélectionnez **stratégies d’accès**.
+1. Sélectionnez **Stratégies d’accès**.
 1. Sélectionnez **Ajouter une stratégie d’accès**.
 1. Ouvrez les **autorisations secret** et fournissez à l’application les autorisations **obtenir** et **liste** .
 1. Sélectionnez **Sélectionner un principal** et sélectionnez l’application inscrite par son nom. Sélectionnez le bouton **Sélectionner**.
@@ -147,7 +149,7 @@ L' `Certificate` exemple d’application obtient ses valeurs de configuration à
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
-Le certificat X. 509 est géré par le système d’exploitation. L’application appelle <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> avec les valeurs fournies par le fichier *appSettings. JSON* :
+Le certificat X. 509 est géré par le système d’exploitation. L’application appelle <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> avec les valeurs fournies par l' *appsettings.jssur* le fichier :
 
 [!code-csharp[](key-vault-configuration/samples/3.x/SampleApp/Program.cs?name=snippet1&highlight=20-23)]
 
@@ -157,7 +159,7 @@ Exemples de valeurs
 * ID de l’application :`627e911e-43cc-61d4-992e-12db9c81b413`
 * Empreinte numérique du certificat :`fe14593dd66b2406c5269d742d04b6e1ab03adb1`
 
-*appSettings. JSON*:
+*appsettings.js*:
 
 [!code-json[](key-vault-configuration/samples/3.x/SampleApp/appsettings.json?highlight=10-12)]
 
@@ -169,7 +171,7 @@ Quand vous exécutez l’application, une page Web affiche les valeurs de secret
 
 L’exemple d’application utilise des identités gérées pour les ressources Azure lorsque l' `#define` instruction en haut du fichier *Program.cs* a la valeur `Managed` .
 
-Entrez le nom du coffre dans le fichier *appSettings. JSON* de l’application. L’exemple d’application n’a pas besoin d’un ID d’application et d’un mot de passe (clé secrète client) lorsqu’il est défini sur la `Managed` version. vous pouvez donc ignorer ces entrées de configuration. L’application est déployée sur Azure et Azure authentifie l’application pour accéder à Azure Key Vault uniquement à l’aide du nom de coffre stocké dans le fichier *appSettings. JSON* .
+Entrez le nom du coffre dans leappsettings.jsde l’application *sur* le fichier. L’exemple d’application n’a pas besoin d’un ID d’application et d’un mot de passe (clé secrète client) lorsqu’il est défini sur la `Managed` version. vous pouvez donc ignorer ces entrées de configuration. L’application est déployée sur Azure et Azure authentifie l’application pour accéder à Azure Key Vault uniquement à l’aide du nom du coffre stocké dans le fichier *appsettings.js* .
 
 Déployez l’exemple d’application sur Azure App Service.
 
@@ -193,7 +195,7 @@ L’exemple d’application :
 
 Exemple de valeur de nom de coffre de clés :`contosovault`
     
-*appSettings. JSON*:
+*appsettings.js*:
 
 ```json
 {
@@ -379,9 +381,9 @@ Ce document explique comment utiliser le fournisseur de configuration [Microsoft
 
 [Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/key-vault-configuration/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
-## <a name="packages"></a>.
+## <a name="packages"></a>Paquets
 
-Ajoutez une référence de package au package [Microsoft. extensions. Configuration. AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) .
+Ajoutez une référence de package à la [Microsoft.Extensions.Configfiguration. Package AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) .
 
 ## <a name="sample-app"></a>Exemple d'application
 
@@ -475,10 +477,10 @@ L’exemple d’application utilise un ID d’application et un certificat X. 50
    1. Sélectionnez l’application dans Azure AD.
    1. Accédez à **certificats & secrets**.
    1. Sélectionnez **Télécharger le certificat** pour télécharger le certificat, qui contient la clé publique. Un certificat. *CER*, *. pem*ou *. CRT* est acceptable.
-1. Stockez le nom du coffre de clés, l’ID de l’application et l’empreinte numérique du certificat dans le fichier *appSettings. JSON* de l’application.
+1. Stockez le nom du coffre de clés, l’ID de l’application et l’empreinte numérique du certificat dans le fichier de *appsettings.js* de l’application.
 1. Accédez à **coffres de clés** dans le portail Azure.
 1. Sélectionnez le coffre de clés que vous avez créé dans la section [stockage secret dans l’environnement de production avec Azure Key Vault](#secret-storage-in-the-production-environment-with-azure-key-vault) .
-1. Sélectionnez **stratégies d’accès**.
+1. Sélectionnez **Stratégies d’accès**.
 1. Sélectionnez **Ajouter une stratégie d’accès**.
 1. Ouvrez les **autorisations secret** et fournissez à l’application les autorisations **obtenir** et **liste** .
 1. Sélectionnez **Sélectionner un principal** et sélectionnez l’application inscrite par son nom. Sélectionnez le bouton **Sélectionner**.
@@ -493,7 +495,7 @@ L' `Certificate` exemple d’application obtient ses valeurs de configuration à
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
-Le certificat X. 509 est géré par le système d’exploitation. L’application appelle <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> avec les valeurs fournies par le fichier *appSettings. JSON* :
+Le certificat X. 509 est géré par le système d’exploitation. L’application appelle <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> avec les valeurs fournies par l' *appsettings.jssur* le fichier :
 
 [!code-csharp[](key-vault-configuration/samples/2.x/SampleApp/Program.cs?name=snippet1&highlight=20-23)]
 
@@ -503,7 +505,7 @@ Exemples de valeurs
 * ID de l’application :`627e911e-43cc-61d4-992e-12db9c81b413`
 * Empreinte numérique du certificat :`fe14593dd66b2406c5269d742d04b6e1ab03adb1`
 
-*appSettings. JSON*:
+*appsettings.js*:
 
 [!code-json[](key-vault-configuration/samples/2.x/SampleApp/appsettings.json?highlight=10-12)]
 
@@ -515,7 +517,7 @@ Quand vous exécutez l’application, une page Web affiche les valeurs de secret
 
 L’exemple d’application utilise des identités gérées pour les ressources Azure lorsque l' `#define` instruction en haut du fichier *Program.cs* a la valeur `Managed` .
 
-Entrez le nom du coffre dans le fichier *appSettings. JSON* de l’application. L’exemple d’application n’a pas besoin d’un ID d’application et d’un mot de passe (clé secrète client) lorsqu’il est défini sur la `Managed` version. vous pouvez donc ignorer ces entrées de configuration. L’application est déployée sur Azure et Azure authentifie l’application pour accéder à Azure Key Vault uniquement à l’aide du nom de coffre stocké dans le fichier *appSettings. JSON* .
+Entrez le nom du coffre dans leappsettings.jsde l’application *sur* le fichier. L’exemple d’application n’a pas besoin d’un ID d’application et d’un mot de passe (clé secrète client) lorsqu’il est défini sur la `Managed` version. vous pouvez donc ignorer ces entrées de configuration. L’application est déployée sur Azure et Azure authentifie l’application pour accéder à Azure Key Vault uniquement à l’aide du nom du coffre stocké dans le fichier *appsettings.js* .
 
 Déployez l’exemple d’application sur Azure App Service.
 
@@ -539,7 +541,7 @@ L’exemple d’application :
 
 Exemple de valeur de nom de coffre de clés :`contosovault`
     
-*appSettings. JSON*:
+*appsettings.js*:
 
 ```json
 {
