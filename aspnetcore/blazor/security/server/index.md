@@ -1,40 +1,42 @@
 ---
-title: Sécuriser les Blazor applications ASP.net Core Server
+title: Sécuriser les Blazor Server applications ASP.net Core
 author: guardrex
-description: Découvrez comment sécuriser des applications Blazor serveur en tant qu’applications ASP.net core.
+description: Découvrez comment sécuriser des applications Blazor Server en tant qu’applications ASP.net core.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/02/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: 2811e08fd2f6c66112ffa0bb40f474158f4c7a59
-ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
+ms.openlocfilehash: ab3baad30f78c5d5e2f969b3292d4886fcd0406d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85292683"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402310"
 ---
-# <a name="secure-aspnet-core-blazor-server-apps"></a>Sécuriser les Blazor applications ASP.net Core Server
+# <a name="secure-aspnet-core-blazor-server-apps"></a>Sécuriser les Blazor Server applications ASP.net Core
 
 Par [Luke Latham](https://github.com/guardrex)
 
-BlazorLes applications serveur sont configurées pour la sécurité de la même façon que les applications ASP.NET Core. Pour plus d’informations, consultez les articles sous <xref:security/index> . Les rubriques de cette vue d’ensemble s’appliquent spécifiquement au Blazor serveur. 
+Blazor Serverles applications sont configurées pour la sécurité de la même façon que les applications ASP.NET Core. Pour plus d’informations, consultez les articles sous <xref:security/index> . Les rubriques de cette vue d’ensemble s’appliquent spécifiquement à Blazor Server . 
 
-## <a name="blazor-server-project-template"></a>BlazorModèle de projet serveur
+## <a name="blazor-server-project-template"></a>Blazor Servermodèle de projet
 
-Le Blazor modèle de projet serveur peut être configuré pour l’authentification lors de la création du projet.
+Le Blazor Server modèle de projet peut être configuré pour l’authentification lors de la création du projet.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Suivez les instructions de Visual Studio dans l' <xref:blazor/get-started> article pour créer un nouveau Blazor projet serveur avec un mécanisme d’authentification.
+Suivez les instructions de Visual Studio dans l' <xref:blazor/get-started> article pour créer un nouveau Blazor Server projet avec un mécanisme d’authentification.
 
-Après avoir choisi le modèle d’application ** Blazor serveur** dans la boîte de dialogue **créer une application Web ASP.net Core** , sélectionnez **modifier** sous **authentification**.
+Après avoir choisi le modèle d' ** Blazor Server application** dans la boîte de dialogue **créer une application Web ASP.net Core** , sélectionnez **modifier** sous **authentification**.
 
 Une boîte de dialogue s’ouvre pour offrir le même ensemble de mécanismes d’authentification que ceux disponibles pour les autres projets ASP.NET Core :
 
@@ -47,7 +49,7 @@ Une boîte de dialogue s’ouvre pour offrir le même ensemble de mécanismes d�
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Suivez les instructions de Visual Studio Code dans l' <xref:blazor/get-started> article pour créer un nouveau Blazor projet serveur avec un mécanisme d’authentification :
+Suivez les instructions de Visual Studio Code dans l' <xref:blazor/get-started> article pour créer un Blazor Server projet avec un mécanisme d’authentification :
 
 ```dotnetcli
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
@@ -75,13 +77,13 @@ Pour plus d’informations, consultez la [`dotnet new`](/dotnet/core/tools/dotne
 
 1. Suivez les instructions de Visual Studio pour Mac dans l' <xref:blazor/get-started> article.
 
-1. Dans l’étape **configurer votre Blazor application de serveur** , sélectionnez **authentification individuelle (dans l’application)** dans la liste déroulante **authentification** .
+1. Dans l’étape **configurer votre nouvelle Blazor Server application** , sélectionnez **authentification individuelle (dans l’application)** dans la liste déroulante **authentification** .
 
 1. L’application est créée pour les utilisateurs individuels stockés dans l’application avec ASP.NET Core Identity .
 
 # <a name="net-core-cli"></a>[CLI .NET Core](#tab/netcore-cli/)
 
-Suivez les instructions de CLI .NET Core dans l' <xref:blazor/get-started> article pour créer un nouveau Blazor projet serveur avec un mécanisme d’authentification :
+Suivez les instructions de CLI .NET Core dans l' <xref:blazor/get-started> article pour créer un Blazor Server projet avec un mécanisme d’authentification :
 
 ```dotnetcli
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
@@ -109,7 +111,7 @@ Pour plus d’informations, consultez la [`dotnet new`](/dotnet/core/tools/dotne
 
 ## <a name="scaffold-identity"></a>DestinIdentity
 
-Génération Identity de modèles automatique dans un Blazor projet serveur :
+Génération Identity de modèles automatique dans un Blazor Server projet :
 
 * [Sans autorisation existante](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-without-existing-authorization).
 * [Avec autorisation](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-with-authorization).

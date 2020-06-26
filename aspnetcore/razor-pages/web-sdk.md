@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 01/25/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: razor-pages/web-sdk
-ms.openlocfilehash: 2797f0b3003b8ad89093fe1115dee2acc8650c73
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 2d154ebdbcb564ff5174940691b63ecce4154987
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777161"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403727"
 ---
 # <a name="aspnet-core-web-sdk"></a>Kit de développement logiciel (SDK) Web ASP.NET Core
 
@@ -49,4 +51,4 @@ Fonctionnalités activées à l’aide du kit de développement logiciel (SDK) W
 | -------- | ----------- |
 | `DisableImplicitFrameworkReferences` | Désactive la référence implicite à l' `Microsoft.AspNetCore.App` infrastructure partagée. |
 | `DisableImplicitAspNetCoreAnalyzers` | Désactive la référence implicite aux analyseurs de ASP.NET Core. |
-| `DisableImplicitComponentsAnalyzers` | Désactive la référence implicite aux Razor analyseurs de composants lors Blazor de la génération d’applications (serveur). |
+| `DisableImplicitComponentsAnalyzers` | Désactive la référence implicite aux Razor analyseurs de composants lors de la génération d' Blazor applications (serveur). |

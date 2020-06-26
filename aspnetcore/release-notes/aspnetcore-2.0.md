@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: aspnetcore-2.0
-ms.openlocfilehash: b1fc486633ab7c7d7bee4f8981a978747b2890da
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 97d8606ba6bef0bb8bf23d1553c7cb5681fbdbd8
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775815"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404364"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>Nouveautés d’ASP.NET Core 2.0
 
@@ -30,7 +32,7 @@ RazorPages est une nouvelle fonctionnalité de ASP.NET Core MVC qui rend le coda
 Pour plus d’informations, consultez l’introduction et le didacticiel :
 
 * [Présentation des Razor pages](xref:razor-pages/index)
-* [Prise en main Razor des pages](xref:tutorials/razor-pages/razor-pages-start)
+* [Prise en main des Razor pages](xref:tutorials/razor-pages/razor-pages-start)
 
 ## <a name="aspnet-core-metapackage"></a>Métapackage ASP.NET Core
 
@@ -44,7 +46,7 @@ Les applications qui utilisent le métapackage `Microsoft.AspNetCore.All` tirent
 
 Pour plus d’informations, consultez [Magasin de packages Runtime](/dotnet/core/deploying/runtime-store)
 
-## <a name="net-standard-20"></a>.NET Standard 2.0
+## <a name="net-standard-20"></a>.NET Standard 2.0
 
 Les packages ASP.NET Core 2.0 ciblent .NET Standard 2.0. Les packages peuvent être référencés par d’autres bibliothèques .NET Standard 2.0, et ils peuvent s’exécuter sur des implémentations de .NET conformes à .NET Standard 2.0, notamment .NET Core 2.0 et le .NET Framework 4.6.1. 
 
@@ -72,13 +74,13 @@ Pour plus d’informations sur l’état de la documentation planifiée, consult
 
 ## <a name="identity-update"></a>Identity update
 
-Nous avons simplifié la création d’API Web sécurisées à Identity l’aide de dans ASP.net Core 2,0. Vous pouvez acquérir des jetons d’accès pour accéder à vos API web à l’aide de la [bibliothèque d’authentification Microsoft (MSAL, Microsoft Authentication Library)](https://www.nuget.org/packages/Microsoft.Identity.Client).
+Nous avons simplifié la création d’API Web sécurisées à l’aide Identity de dans ASP.NET Core 2,0. Vous pouvez acquérir des jetons d’accès pour accéder à vos API web à l’aide de la [bibliothèque d’authentification Microsoft (MSAL, Microsoft Authentication Library)](https://www.nuget.org/packages/Microsoft.Identity.Client).
 
 Pour plus d’informations sur les modifications apportées à l’authentification dans la version 2.0, consultez les ressources suivantes :
 
 * [Account confirmation and password recovery in ASP.NET Core (Confirmation de compte et récupération de mot de passe dans ASP.NET Core)](xref:security/authentication/accconfirm)
 * [Activer la génération de code QR pour les applications d’authentification dans ASP.NET Core](xref:security/authentication/identity-enable-qrcodes)
-* [Migrer l' Identity authentification et vers ASP.net Core 2,0](xref:migration/1x-to-2x/identity-2x)
+* [Migrer l’authentification et Identity vers ASP.NET Core 2,0](xref:migration/1x-to-2x/identity-2x)
 
 ## <a name="spa-templates"></a>Modèles SPA
 
@@ -158,7 +160,7 @@ Pour plus d’informations sur l’état des fonctionnalités de C# 7.1, consult
 Pour obtenir des conseils sur la migration d’applications ASP.NET Core 1.x vers ASP.NET Core 2.0, consultez les ressources suivantes :
 
 * [Migrer d’ASP.NET Core 1.x vers ASP.NET Core 2.0](xref:migration/1x-to-2x/index)
-* [Migrer l' Identity authentification et vers ASP.net Core 2,0](xref:migration/1x-to-2x/identity-2x)
+* [Migrer l’authentification et Identity vers ASP.NET Core 2,0](xref:migration/1x-to-2x/identity-2x)
 
 ## <a name="additional-information"></a>Informations supplémentaires
 

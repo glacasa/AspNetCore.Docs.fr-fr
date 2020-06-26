@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/20/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: 4c42ad56bbdb7b66824b290cd118903cbe4311e8
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: ead745ae8843173bb25b94672005cc6ce295db2e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452211"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403376"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>Tester des API web avec la boucle REPL HTTP
 
@@ -371,9 +373,9 @@ pref set editor.command.default.arguments "--disable-extensions --new-window"
 
 Par défaut, HTTP REPL possède un ensemble de chemins relatifs qu’il utilise pour rechercher le document Swagger lors de l'exécution de la commande `connect` sans l’option `--swagger`. Ces chemins relatifs sont combinés avec les chemins racine et de base spécifiés dans la commande `connect`. Les chemins relatifs par défaut sont les suivants :
 
-- *Swagger. JSON*
-- *Swagger/v1/Swagger. JSON*
-- */Swagger.JSON*
+- *swagger.js*
+- *Swagger/v1/swagger.jssur*
+- */swagger.jssur*
 - */swagger/v1/swagger.json*
 
 Pour utiliser un autre ensemble de chemins de recherche dans votre environnement, définissez la préférence `swagger.searchPaths`. La valeur doit être une liste de chemins relatifs délimités par des barres verticales. Par exemple :

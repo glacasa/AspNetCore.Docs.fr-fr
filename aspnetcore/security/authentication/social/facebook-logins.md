@@ -8,17 +8,19 @@ ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/facebook-logins
-ms.openlocfilehash: 11ddc7314a694446d488da6ef1b2e3423bf7241a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: df91b6f324de70b8492ccf0aef74c9264c3e9711
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777031"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403948"
 ---
 # <a name="facebook-external-login-setup-in-aspnet-core"></a>Configuration de la connexion externe Facebook dans ASP.NET Core
 
@@ -55,16 +57,16 @@ Ce didacticiel avec des exemples de code montre comment permettre à vos utilisa
 
   ![Page Paramètres OAuth du client](index/_static/FBOAuthSetup.png)
 
-* Entrez votre URI de développement avec */SignIn-Facebook* ajouté dans le champ **URI de redirection OAuth valide** (par exemple `https://localhost:44320/signin-facebook`:). L’authentification Facebook configurée plus tard dans ce didacticiel gère automatiquement les demandes à l’itinéraire */SignIn-Facebook* pour implémenter le Flow OAuth.
+* Entrez votre URI de développement avec */SignIn-Facebook* ajouté dans le champ **URI de redirection OAuth valide** (par exemple : `https://localhost:44320/signin-facebook` ). L’authentification Facebook configurée plus tard dans ce didacticiel gère automatiquement les demandes à l’itinéraire */SignIn-Facebook* pour implémenter le Flow OAuth.
 
 > [!NOTE]
 > L’URI */SignIn-Facebook* est défini comme rappel par défaut du fournisseur d’authentification Facebook. Vous pouvez modifier l’URI de rappel par défaut lors de la configuration de l’intergiciel d’authentification Facebook à l’aide de la propriété héritée [RemoteAuthenticationOptions. CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) de la classe [FacebookOptions](/dotnet/api/microsoft.aspnetcore.authentication.facebook.facebookoptions) .
 
 * Cliquez sur **Enregistrer les modifications**.
 
-* Cliquez sur **paramètres** > lien de**base** dans le volet de navigation gauche.
+* Cliquez sur **paramètres**  >  lien de**base** dans le volet de navigation gauche.
 
-  Sur cette page, Notez votre `App ID` et votre. `App Secret` Vous allez les ajouter à votre application ASP.NET Core dans la section suivante :
+  Sur cette page, Notez votre `App ID` et votre `App Secret` . Vous allez les ajouter à votre application ASP.NET Core dans la section suivante :
 
 * Lors du déploiement du site, vous devez revisiter la page de configuration de la **connexion Facebook** et inscrire un nouvel URI public.
 
@@ -73,7 +75,7 @@ Ce didacticiel avec des exemples de code montre comment permettre à vos utilisa
 Stockez les paramètres sensibles tels que l’ID d’application Facebook et les valeurs secrètes avec le [Gestionnaire de secret](xref:security/app-secrets). Pour cet exemple, procédez comme suit :
 
 1. Initialisez le projet pour le stockage secret conformément aux instructions de la procédure [activer le stockage secret](xref:security/app-secrets#enable-secret-storage).
-1. Stockez les paramètres sensibles dans le magasin de secret local avec les `Authentication:Facebook:AppId` clés `Authentication:Facebook:AppSecret`secrètes et :
+1. Stockez les paramètres sensibles dans le magasin de secret local avec les clés secrètes `Authentication:Facebook:AppId` et `Authentication:Facebook:AppSecret` :
 
     ```dotnetcli
     dotnet user-secrets set "Authentication:Facebook:AppId" "<app-id>"
@@ -112,11 +114,11 @@ Vous êtes maintenant connecté à l’aide de vos informations d’identificati
 
 <xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.AccessDeniedPath>peut fournir un chemin de redirection vers l’agent utilisateur lorsque l’utilisateur n’approuve pas la demande d’autorisation demandée.
 
-Le code suivant affecte à `AccessDeniedPath` la `"/AccessDeniedPathInfo"`valeur :
+Le code suivant affecte `AccessDeniedPath` à la valeur `"/AccessDeniedPathInfo"` :
 
 [!code-csharp[](~/security/authentication/social/social-code/StartupAccessDeniedPath.cs?name=snippetFB)]
 
-Nous vous recommandons `AccessDeniedPath` d’utiliser la page contenant les informations suivantes :
+Nous vous recommandons d’utiliser la `AccessDeniedPath` page contenant les informations suivantes :
 
 *  L’authentification distante a été annulée.
 * Cette application nécessite une authentification.
@@ -139,15 +141,15 @@ Pour plus d’informations sur les options de configuration prises en charge par
 * Demander des informations différentes sur l’utilisateur.
 * Ajoutez des arguments de chaîne de requête pour personnaliser l’expérience de connexion.
 
-## <a name="troubleshooting"></a>Dépannage
+## <a name="troubleshooting"></a>Résolution des problèmes
 
-* **ASP.net Core 2. x uniquement :** Si Identity n’est pas configuré `services.AddIdentity` en `ConfigureServices`appelant dans, toute tentative d’authentification entraîne une *exception ArgumentException : l’option « SignInScheme » doit être fournie*. Le modèle de projet utilisé dans ce didacticiel permet d’effectuer cette opération.
+* **ASP.net Core 2. x uniquement :** Si Identity n’est pas configuré en appelant `services.AddIdentity` dans `ConfigureServices` , toute tentative d’authentification entraîne une *exception ArgumentException : l’option « SignInScheme » doit être fournie*. Le modèle de projet utilisé dans ce didacticiel permet d’effectuer cette opération.
 * Si la base de données de site n’a pas été créée en appliquant la migration initiale, vous recevez *une opération de base de données qui a échoué lors du traitement de l’erreur de demande* . Appuyez sur **appliquer des migrations** pour créer la base de données, puis sur Actualiser pour poursuivre l’erreur.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Cet article vous a montré comment vous pouvez vous authentifier avec Facebook. Vous pouvez suivre une approche similaire pour vous authentifier auprès d’autres fournisseurs listés dans la [page précédente](xref:security/authentication/social/index).
 
-* Une fois que vous publiez votre site Web sur Azure Web App, vous `AppSecret` devez réinitialiser le dans le portail des développeurs Facebook.
+* Une fois que vous publiez votre site Web sur Azure Web App, vous devez réinitialiser le `AppSecret` dans le portail des développeurs Facebook.
 
 * Définissez les `Authentication:Facebook:AppId` et `Authentication:Facebook:AppSecret` en tant que paramètres d’application dans la portail Azure. Le système de configuration est configuré pour lire des clés à partir de variables d’environnement.

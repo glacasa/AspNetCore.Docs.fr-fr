@@ -1,5 +1,5 @@
 ---
-title: Sécuriser une Blazor application hébergée par l’ASP.net Core Webassembly avec le Identity serveur
+title: Sécuriser une Blazor WebAssembly application hébergée ASP.net core avec le Identity serveur
 author: guardrex
 description: Pour créer une Blazor application hébergée avec l’authentification à partir de Visual Studio qui utilise un backend [IdentityServer](https://identityserver.io/)
 monikerRange: '>= aspnetcore-3.1'
@@ -8,19 +8,21 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 8251658a2bb99ec17424ec26b8a44171082fab05
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: cce6b6b1ec144e362415fe34645aef567269c873
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243468"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402206"
 ---
-# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>Sécuriser une Blazor application hébergée par l’ASP.net Core Webassembly avec le Identity serveur
+# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>Sécuriser une Blazor WebAssembly application hébergée ASP.net core avec le Identity serveur
 
 Par [Javier Calvarro Nelson](https://github.com/javiercn) et [Luke Latham](https://github.com/guardrex)
 
@@ -30,7 +32,7 @@ Cet article explique comment créer une Blazor application hébergée qui utilis
 
 Dans Visual Studio :
 
-1. Créez une application ** Blazor webassembly** . Pour plus d’informations, consultez <xref:blazor/get-started>.
+1. Créer une **Blazor WebAssembly** application. Pour plus d’informations, consultez <xref:blazor/get-started>.
 1. Dans la boîte de dialogue **créer une nouvelle Blazor application** , sélectionnez **modifier** dans la section **authentification** .
 1. Sélectionnez **des comptes d’utilisateur individuels** , puis cliquez sur **OK**.
 1. Activez la case à cocher **ASP.net Core hébergé** dans la section **avancé** .

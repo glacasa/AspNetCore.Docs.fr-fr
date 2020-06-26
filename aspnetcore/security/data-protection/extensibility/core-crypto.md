@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 08/11/2017
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/core-crypto
-ms.openlocfilehash: c63cc124e1893f23c18581841194fa66848a2a1e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: de34968f21eec28cf375ee9f75d3cb8b212c7e70
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776420"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404273"
 ---
 # <a name="core-cryptography-extensibility-in-aspnet-core"></a>Extensibilité du chiffrement de base dans ASP.NET Core
 
@@ -126,10 +128,10 @@ La principale différence entre IAuthenticatedEncryptor et IAuthenticatedEncrypt
 
 Le descripteur peut être sérialisé par le biais de sa routine ExportToXml. Cette routine retourne un XmlSerializedDescriptorInfo qui contient deux propriétés : la représentation XElement du descripteur et le type qui représente un [IAuthenticatedEncryptorDescriptorDeserializer](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptordeserializer) qui peut être utilisé pour ressusciter ce descripteur en fonction du XElement correspondant.
 
-Le descripteur sérialisé peut contenir des informations sensibles telles que le matériel de clé de chiffrement. Le système de protection des données offre une prise en charge intégrée du chiffrement des informations avant qu’elles ne soient rendues persistantes dans le stockage. Pour tirer parti de cela, le descripteur doit marquer l’élément qui contient des informations sensibles avec le nom d’attribut « requiresEncryption<http://schemas.asp.net/2015/03/dataProtection>» (xmlns « »), la valeur «true ».
+Le descripteur sérialisé peut contenir des informations sensibles telles que le matériel de clé de chiffrement. Le système de protection des données offre une prise en charge intégrée du chiffrement des informations avant qu’elles ne soient rendues persistantes dans le stockage. Pour tirer parti de cela, le descripteur doit marquer l’élément qui contient des informations sensibles avec le nom d’attribut « requiresEncryption » (xmlns « <http://schemas.asp.net/2015/03/dataProtection> »), la valeur « true ».
 
 >[!TIP]
-> Il existe une API d’assistance pour définir cet attribut. Appelez la méthode d’extension XElement. MarkAsRequiresEncryption () située dans l’espace de noms Microsoft. AspNetCore. DataProtection. AuthenticatedEncryption. distribuée.
+> Il existe une API d’assistance pour définir cet attribut. Appelez la méthode d’extension XElement. MarkAsRequiresEncryption () située dans l’espace de noms Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.
 
 Il peut également y avoir des cas où le descripteur sérialisé ne contient pas d’informations sensibles. Reprenons le cas d’une clé de chiffrement stockée dans un HSM. Le descripteur ne peut pas écrire le matériel de clé lors de la sérialisation, car le HSM n’expose pas les éléments sous forme de texte en clair. Au lieu de cela, le descripteur peut écrire la version encapsulée de la clé (si le HSM autorise l’exportation de cette manière) ou l’identificateur unique du HSM pour la clé.
 

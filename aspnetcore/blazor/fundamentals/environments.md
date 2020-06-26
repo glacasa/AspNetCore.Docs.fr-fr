@@ -1,33 +1,35 @@
 ---
 title: BlazorEnvironnements ASP.net Core
 author: guardrex
-description: Découvrez les environnements dans Blazor , notamment comment définir l’environnement d’une Blazor application webassembly.
+description: Découvrez les environnements dans Blazor , notamment comment définir l’environnement d’une Blazor WebAssembly application.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/fundamentals/environments
-ms.openlocfilehash: a527e04cf97dd2d2b88dcc6e866475835498545d
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: f8d0fc3cba22973628f405b4399cef39d562d6ed
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243614"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402895"
 ---
 # <a name="aspnet-core-blazor-environments"></a>BlazorEnvironnements ASP.net Core
 
 > [!NOTE]
-> Cette rubrique s’applique à Blazor Webassembly. Pour obtenir des instructions générales sur ASP.NET Core configuration des applications, consultez <xref:fundamentals/environments> .
+> Cette rubrique s’applique à Blazor WebAssembly . Pour obtenir des instructions générales sur ASP.NET Core configuration des applications, consultez <xref:fundamentals/environments> .
 
 Lors de l’exécution locale d’une application, l’environnement est par défaut développement. Lorsque l’application est publiée, l’environnement prend par défaut la valeur production.
 
-Une Blazor application Webassembly hébergée récupère l’environnement à partir du serveur via un intergiciel qui communique l’environnement au navigateur en ajoutant l' `blazor-environment` en-tête. La valeur de l’en-tête est l’environnement. L’application hébergée Blazor et l’application serveur partagent le même environnement. Pour plus d’informations, notamment sur la configuration de l’environnement, consultez <xref:fundamentals/environments> .
+Une application hébergée Blazor WebAssembly récupère l’environnement à partir du serveur via un intergiciel qui communique l’environnement au navigateur en ajoutant l' `blazor-environment` en-tête. La valeur de l’en-tête est l’environnement. L’application hébergée Blazor et l’application serveur partagent le même environnement. Pour plus d’informations, notamment sur la configuration de l’environnement, consultez <xref:fundamentals/environments> .
 
 Pour une application autonome exécutée localement, le serveur de développement ajoute l' `blazor-environment` en-tête pour spécifier l’environnement de développement. Pour spécifier l’environnement pour d’autres environnements d’hébergement, ajoutez l' `blazor-environment` en-tête.
 

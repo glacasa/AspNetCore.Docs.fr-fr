@@ -8,17 +8,19 @@ ms.custom: mvc, seoapril2019
 ms.date: 06/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 694be6317aaac211f5099dfca749ff8a69d146d1
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 30f11a137e711b1cf7a8b036af92fbb5fa2a1f05
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243510"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402570"
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>Présentation de ASP.NET CoreBlazor
 
@@ -42,7 +44,7 @@ L’utilisation de .NET dans le développement web côté client offre les avant
 * Restez productif grâce à Visual Studio sur Windows, Linux et macOS.
 * Développez avec un ensemble commun de langages, de frameworks et d’outils stables, riches en fonctionnalités et faciles à utiliser.
 
-## <a name="components"></a>Composants
+## <a name="components"></a>Components
 
 Blazorles applications sont basées sur des *composants*. Un composant dans Blazor est un élément de l’interface utilisateur, tel qu’une page, une boîte de dialogue ou un formulaire de saisie de données.
 
@@ -108,37 +110,37 @@ Quand ce composant est utilisé dans l’application, IntelliSense dans [Visual 
 
 Les composants s’affichent dans une représentation en mémoire du DOM (Document Object Model) du navigateur appelé *arborescence de rendu*, utilisée pour mettre à jour l’interface utilisateur de manière flexible et efficace.
 
-## <a name="blazor-webassembly"></a>BlazorWebassembly
+## Blazor WebAssembly
 
-BlazorWebassembly est une infrastructure d’application à page unique pour la création d’applications Web interactives côté client avec .NET. BlazorWebassembly utilise des normes Web ouvertes sans plug-ins ou code transpilation et fonctionne dans tous les navigateurs Web modernes, y compris les navigateurs mobiles.
+Blazor WebAssemblyest une infrastructure d’application à page unique pour la création d’applications Web interactives côté client avec .NET. Blazor WebAssemblyutilise des normes Web ouvertes sans plug-ins ou code transpilation et fonctionne dans tous les navigateurs Web modernes, y compris les navigateurs mobiles.
 
 L’exécution de code .NET dans des navigateurs Web est rendue possible par [Webassembly](https://webassembly.org) (abrégé `wasm` ). WebAssembly est un format bytecode compact optimisé pour un téléchargement rapide et une vitesse d’exécution maximale. WebAssembly est un standard web ouvert pris en charge dans les navigateurs web sans plug-in.
 
 Le code WebAssembly peut accéder à toutes les fonctionnalités du navigateur via JavaScript, appelé *interopérabilité JavaScript* (ou *interop JavaScript*). Le code .NET exécuté via WebAssembly dans le navigateur s’exécute dans le bac à sable JavaScript du navigateur avec les protections offertes par le bac à sable contre les actions malveillantes sur l’ordinateur client.
 
-![BlazorWebassembly exécute du code .NET dans le navigateur avec webassembly.](index/_static/blazor-webassembly.png)
+![Blazor WebAssemblyexécute du code .NET dans le navigateur avec webassembly.](index/_static/blazor-webassembly.png)
 
-Quand une Blazor application Webassembly est générée et exécutée dans un navigateur :
+Quand une Blazor WebAssembly application est générée et exécutée dans un navigateur :
 
 * Les fichiers de code C# et les Razor fichiers sont compilés dans des assemblys .net.
 * Les assemblys et le runtime .NET sont téléchargés dans le navigateur.
-* BlazorWebassembly amorce le Runtime .NET et configure le runtime pour charger les assemblys de l’application. Le Blazor Runtime Webassembly utilise l’interopérabilité JavaScript pour gérer les appels de l’API de manipulation et du navigateur DOM.
+* Blazor WebAssemblyamorce le Runtime .NET et configure le runtime pour charger les assemblys de l’application. Le Blazor WebAssembly Runtime utilise l’interopérabilité JavaScript pour gérer les appels de l’API de manipulation et du navigateur DOM.
 
-La taille de l’application publiée, sa *taille de charge utile*, est un facteur de performance essentiel pour qu’une application soit facile à utiliser. Le téléchargement d’une application volumineuse dans un navigateur prend un certain temps, ce qui nuit à l’expérience utilisateur. BlazorWebassembly optimise la taille de la charge utile pour réduire les temps de téléchargement :
+La taille de l’application publiée, sa *taille de charge utile*, est un facteur de performance essentiel pour qu’une application soit facile à utiliser. Le téléchargement d’une application volumineuse dans un navigateur prend un certain temps, ce qui nuit à l’expérience utilisateur. Blazor WebAssemblyoptimise la taille de la charge utile pour réduire les temps de téléchargement :
 
 * Du code inutilisé est extrait de l’application lorsqu’elle est publiée par l’[éditeur de liens de langage intermédiaire (IL)](xref:blazor/host-and-deploy/configure-linker).
 * Réponses HTTP compressées.
 * Le runtime .NET et les assemblys sont mis en cache dans le navigateur.
 
-## <a name="blazor-server"></a>BlazorServeurs
+## Blazor Server
 
-Blazordissocie la logique de rendu des composants de l’application des mises à jour de l’interface utilisateur. BlazorLe serveur prend en charge Razor l’hébergement de composants sur le serveur dans une application ASP.net core. Les mises à jour de l’interface utilisateur sont gérées via une [SignalR](xref:signalr/introduction) connexion.
+Blazordissocie la logique de rendu des composants de l’application des mises à jour de l’interface utilisateur. Blazor Serverprend en charge l’hébergement de Razor composants sur le serveur dans une application ASP.net core. Les mises à jour de l’interface utilisateur sont gérées via une [SignalR](xref:signalr/introduction) connexion.
 
 Le runtime gère l’envoi des événements d’interface utilisateur du navigateur au serveur et applique les mises à jour de l’interface utilisateur renvoyées par le serveur dans le navigateur après avoir exécuté les composants.
 
-La connexion utilisée par Blazor le serveur pour communiquer avec le navigateur est également utilisée pour gérer les appels Interop JavaScript.
+La connexion utilisée par Blazor Server pour communiquer avec le navigateur est également utilisée pour gérer les appels Interop JavaScript.
 
-![BlazorLe serveur exécute le code .NET sur le serveur et interagit avec le Document Object Model sur le client via une SignalR connexion](index/_static/blazor-server.png)
+![Blazor Serverexécute du code .NET sur le serveur et interagit avec le Document Object Model sur le client via une SignalR connexion](index/_static/blazor-server.png)
 
 ## <a name="javascript-interop"></a>Interopérabilité JavaScript
 

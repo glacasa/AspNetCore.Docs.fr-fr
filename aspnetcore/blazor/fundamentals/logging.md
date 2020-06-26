@@ -8,23 +8,25 @@ ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/fundamentals/logging
-ms.openlocfilehash: 841c4021d9217312b2601b0e775542c6455cca82
-ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
+ms.openlocfilehash: 1f4b18bdea02016fb76b75dd01a8fcbeab9b2bc9
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85240871"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402830"
 ---
 # <a name="aspnet-core-blazor-logging"></a>BlazorJournalisation ASP.net Core
 
-## <a name="blazor-webassembly"></a>BlazorWebassembly
+## Blazor WebAssembly
 
-Configurez la journalisation dans Blazor les applications Webassembly avec la `WebAssemblyHostBuilder.Logging` propriété dans `Program.Main` :
+Configurez la journalisation dans Blazor WebAssembly les applications avec la `WebAssemblyHostBuilder.Logging` propriété dans `Program.Main` :
 
 ```csharp
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -41,11 +43,11 @@ La `Logging` propriété est de type <xref:Microsoft.Extensions.Logging.ILogging
 
 La configuration de la journalisation peut être chargée à partir des fichiers de paramètres d’application. Pour plus d’informations, consultez <xref:blazor/fundamentals/configuration#logging-configuration>.
 
-## <a name="blazor-server"></a>BlazorServeurs
+## Blazor Server
 
 Pour obtenir des instructions générales sur la journalisation des ASP.NET Core, consultez <xref:fundamentals/logging/index> .
 
-## <a name="blazor-webassembly-signalr-net-client-logging"></a>BlazorSignalRJournalisation du client .net Webassembly
+## <a name="blazor-webassembly-signalr-net-client-logging"></a>Blazor WebAssemblySignalRJournalisation du client .net
 
 Injectez un <xref:Microsoft.Extensions.Logging.ILoggerProvider> pour ajouter une `WebAssemblyConsoleLogger` aux fournisseurs de journalisation passés à <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder> . Contrairement à un traditionnel <xref:Microsoft.Extensions.Logging.Console.ConsoleLogger> , `WebAssemblyConsoleLogger` est un wrapper autour des API de journalisation spécifiques aux navigateurs (par exemple, `console.log` ). L’utilisation de `WebAssemblyConsoleLogger` rend la journalisation possible dans mono dans un contexte de navigateur.
 

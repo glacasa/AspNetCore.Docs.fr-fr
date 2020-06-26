@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 5/7/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 878af251a30fe284293e5293d2059199b42de272
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 951ae53876edf345af1a3eb32cb9be1b9668fa53
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106102"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404169"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>Héberger ASP.NET Core sur Windows avec IIS
 
@@ -195,7 +197,7 @@ Si un fichier *web.config* se trouve dans le projet, il est transformé avec le 
 
 Le fichier *web.config* peut fournir des paramètres de configuration IIS supplémentaires qui contrôlent les modules IIS actifs. Pour plus d’informations sur les modules IIS capables de traiter les requêtes avec des applications ASP.NET Core, consultez la rubrique [Modules IIS](xref:host-and-deploy/iis/modules).
 
-Pour empêcher le kit de développement logiciel (SDK) Web de transformer le fichier *Web. config* , utilisez la **\<IsTransformWebConfigDisabled>** propriété dans le fichier projet :
+Pour empêcher le kit de développement logiciel (SDK) Web de transformer le fichier *web.config* , utilisez la **\<IsTransformWebConfigDisabled>** propriété dans le fichier projet :
 
 ```xml
 <PropertyGroup>
@@ -207,15 +209,15 @@ Lorsque vous désactivez le Kit de développement logiciel (SDK) Web en transfor
 
 ### <a name="webconfig-file-location"></a>emplacement du fichier web.config
 
-Pour configurer correctement le [Module ASP.net Core](xref:host-and-deploy/aspnet-core-module) , le fichier *Web. config* doit être présent au chemin d’accès [racine du contenu](xref:fundamentals/index#content-root) (en général, le chemin d’accès de base de l’application) de l’application déployée. Il s’agit du même emplacement que le chemin physique du site Web fourni à IIS. Le fichier *web.config* est nécessaire à la racine de l’application pour permettre la publication de plusieurs applications à l’aide de Web Deploy.
+Pour configurer correctement le [Module ASP.net Core](xref:host-and-deploy/aspnet-core-module) , le fichier *web.config* doit être présent au chemin d’accès [racine du contenu](xref:fundamentals/index#content-root) (en général, le chemin d’accès de base de l’application) de l’application déployée. Il s’agit du même emplacement que le chemin physique du site Web fourni à IIS. Le fichier *web.config* est nécessaire à la racine de l’application pour permettre la publication de plusieurs applications à l’aide de Web Deploy.
 
-Des fichiers sensibles existent sur le chemin d’accès physique de l’application, par exemple * \<assembly> . runtimeconfig. JSON*, * \<assembly> . xml* (commentaires de documentation XML) et * \<assembly> . DEPS. JSON*. Lorsque le fichier *web.config* est présent et que le site démarre normalement, IIS ne traite pas ces fichiers sensibles s’ils sont demandés. Si le fichier *web.config* est absent, nommé de manière incorrecte ou s’il est incapable de configurer le site pour un démarrage normal, IIS peut traiter des fichiers sensibles publiquement.
+Des fichiers sensibles existent sur le chemin d’accès physique de l’application, par exemple * \<assembly>.runtimeconfig.jssur*, * \<assembly> . xml* (commentaires de documentation XML) et * \<assembly>.deps.jssur*. Lorsque le fichier *web.config* est présent et que le site démarre normalement, IIS ne traite pas ces fichiers sensibles s’ils sont demandés. Si le fichier *web.config* est absent, nommé de manière incorrecte ou s’il est incapable de configurer le site pour un démarrage normal, IIS peut traiter des fichiers sensibles publiquement.
 
-**Le fichier *Web. config* doit être présent dans le déploiement à tout moment, correctement nommé et capable de configurer le site pour un démarrage normal. Ne supprimez jamais le fichier *Web. config* d’un déploiement de production.**
+**Le fichier *web.config* doit être présent dans le déploiement à tout moment, correctement nommé et capable de configurer le site pour un démarrage normal. Ne supprimez jamais le fichier *web.config* d’un déploiement de production.**
 
 ### <a name="transform-webconfig"></a>Transformer web.config
 
-Si vous devez transformer le *fichier Web. config* lors de la publication, consultez <xref:host-and-deploy/iis/transform-webconfig> . Vous devrez peut-être transformer le *fichier Web. config* lors de la publication pour définir des variables d’environnement en fonction de la configuration, du profil ou de l’environnement.
+Si vous devez transformer des *web.config* lors de la publication, consultez <xref:host-and-deploy/iis/transform-webconfig> . Vous devrez peut-être transformer *web.config* lors de la publication pour définir des variables d’environnement en fonction de la configuration, du profil ou de l’environnement.
 
 ## <a name="iis-configuration"></a>Configuration d’IIS
 
@@ -298,7 +300,7 @@ Pour obtenir une version antérieure du programme d’installation :
    * `OPT_NO_RUNTIME=1`: Ignorez l’installation du Runtime .NET Core. Utilisé lorsque le serveur héberge uniquement [des déploiements autonomes (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_SHAREDFX=1`: Ignorez l’installation du Framework partagé ASP.NET (runtime ASP.NET). Utilisé lorsque le serveur héberge uniquement [des déploiements autonomes (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_X86=1`: Ignorez l’installation des runtimes x86. Utilisez ce paramètre lorsque vous savez que vous n’hébergerez pas d’applications 32 bits. Si vous n’excluez pas d’avoir à héberger des applications 32 bits et 64 bits dans le futur, n'utilisez pas ce paramètre et installez les deux runtimes.
-   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Désactive la vérification de l’utilisation d’une configuration partagée IIS lorsque la configuration partagée (*ApplicationHost. config*) se trouve sur le même ordinateur que l’installation d’IIS. *Disponible uniquement pour les programmes d’installation du pack d’hébergement ASP.NET Core 2.2 ou version ultérieure.* Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
+   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Désactive la vérification de l’utilisation d’une configuration partagée IIS lorsque la configuration partagée (*applicationHost.config*) se trouve sur le même ordinateur que l’installation d’IIS. *Disponible uniquement pour les programmes d’installation du pack d’hébergement ASP.NET Core 2.2 ou version ultérieure.* Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
 1. Redémarrez le système ou exécutez les commandes suivantes dans une interface de commande :
 
    ```console
@@ -391,7 +393,7 @@ Les fichiers dans le dossier de déploiement sont verrouillés quand l’applica
 
 * Utilisez Web Deploy et référencez `Microsoft.NET.Sdk.Web` dans le fichier projet. Un fichier *app_offline.htm* est placé à la racine du répertoire de l’application web. Quand le fichier est présent, le module ASP.NET Core ferme l’application normalement et sert le fichier *app_offline.htm* pendant le déploiement. Pour plus d’informations, consultez les [Informations de référence sur la configuration du module ASP.NET Core](xref:host-and-deploy/aspnet-core-module#app_offlinehtm).
 * Arrêtez manuellement le pool d’applications dans le Gestionnaire IIS sur le serveur.
-* Utilisez PowerShell pour supprimer *App_offline. htm* (nécessite PowerShell 5 ou version ultérieure) :
+* Utilisez PowerShell pour supprimer des *app_offline.htm* (nécessite PowerShell 5 ou version ultérieure) :
 
   ```powershell
   $pathToApp = 'PATH_TO_APP'
@@ -406,7 +408,7 @@ Les fichiers dans le dossier de déploiement sont verrouillés quand l’applica
 
   ```
 
-## <a name="data-protection"></a>Protection des données
+## <a name="data-protection"></a>Protection de données
 
 La [pile de protection des données ASP.NET Core](xref:security/data-protection/introduction) est utilisée par plusieurs [intergiciels (middlewares)](xref:fundamentals/middleware/index) ASP.NET Core, y compris l’intergiciel utilisé dans l’authentification. Même si les API de protection des données ne sont pas appelées par le code de l’utilisateur, la protection des données doit être configurée avec un script de déploiement ou dans un code utilisateur pour créer un [magasin de clés](xref:security/data-protection/implementation/key-management) de chiffrement persistantes. Si la protection des données n’est pas configurée, les clés sont conservées en mémoire et ignorées au redémarrage de l’application.
 
@@ -486,7 +488,7 @@ Pour plus d'informations, voir les rubriques suivantes :
 * <xref:host-and-deploy/aspnet-core-module>
 * <xref:host-and-deploy/iis/modules>
 
-Pour définir des variables d’environnement pour des applications individuelles s’exécutant dans des pools d’applications isolés (pris en charge pour IIS 10,0 ou version ultérieure), consultez la section *commande appcmd. exe* de la rubrique [ \<environmentVariables> variables d’environnement](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) dans la documentation de référence IIS.
+Pour définir des variables d’environnement pour des applications individuelles s’exécutant dans des pools d’applications isolés (pris en charge pour IIS 10,0 ou version ultérieure), consultez la section *commandeAppCmd.exe* de la rubrique [variables \<environmentVariables> d’environnement](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) dans la documentation de référence IIS.
 
 ## <a name="configuration-sections-of-webconfig"></a>Sections de configuration de web.config
 
@@ -566,7 +568,7 @@ HTTP/2 est activé par défaut. Les connexions reviennent à HTTP/1.1 si une con
 
 *Cette section s’applique uniquement aux applications ASP.NET Core qui ciblent le .NET Framework.*
 
-Pour une application ASP.NET Core qui cible le .NET Framework, les requêtes OPTIONS ne sont pas transmises à l’application par défaut dans IIS. Pour savoir comment configurer les gestionnaires IIS de l’application dans *Web. config* pour passer des demandes d’options, consultez [activer les demandes Cross-Origin dans API Web ASP.NET 2 : fonctionnement de cors](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works).
+Pour une application ASP.NET Core qui cible le .NET Framework, les requêtes OPTIONS ne sont pas transmises à l’application par défaut dans IIS. Pour savoir comment configurer les gestionnaires IIS de l’application dans *web.config* pour passer des demandes d’options, consultez [activer les demandes Cross-Origin dans API Web ASP.NET 2 : fonctionnement de cors](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works).
 
 ## <a name="application-initialization-module-and-idle-timeout"></a>Module d’initialisation de l’application et délai d’inactivité
 
@@ -808,7 +810,7 @@ Si un fichier *web.config* se trouve dans le projet, il est transformé avec le 
 
 Le fichier *web.config* peut fournir des paramètres de configuration IIS supplémentaires qui contrôlent les modules IIS actifs. Pour plus d’informations sur les modules IIS capables de traiter les requêtes avec des applications ASP.NET Core, consultez la rubrique [Modules IIS](xref:host-and-deploy/iis/modules).
 
-Pour empêcher le kit de développement logiciel (SDK) Web de transformer le fichier *Web. config* , utilisez la **\<IsTransformWebConfigDisabled>** propriété dans le fichier projet :
+Pour empêcher le kit de développement logiciel (SDK) Web de transformer le fichier *web.config* , utilisez la **\<IsTransformWebConfigDisabled>** propriété dans le fichier projet :
 
 ```xml
 <PropertyGroup>
@@ -820,11 +822,11 @@ Lorsque vous désactivez le Kit de développement logiciel (SDK) Web en transfor
 
 ### <a name="webconfig-file-location"></a>emplacement du fichier web.config
 
-Pour configurer correctement le [Module ASP.net Core](xref:host-and-deploy/aspnet-core-module) , le fichier *Web. config* doit être présent au chemin d’accès [racine du contenu](xref:fundamentals/index#content-root) (en général, le chemin d’accès de base de l’application) de l’application déployée. Il s’agit du même emplacement que le chemin physique du site Web fourni à IIS. Le fichier *web.config* est nécessaire à la racine de l’application pour permettre la publication de plusieurs applications à l’aide de Web Deploy.
+Pour configurer correctement le [Module ASP.net Core](xref:host-and-deploy/aspnet-core-module) , le fichier *web.config* doit être présent au chemin d’accès [racine du contenu](xref:fundamentals/index#content-root) (en général, le chemin d’accès de base de l’application) de l’application déployée. Il s’agit du même emplacement que le chemin physique du site Web fourni à IIS. Le fichier *web.config* est nécessaire à la racine de l’application pour permettre la publication de plusieurs applications à l’aide de Web Deploy.
 
-Des fichiers sensibles existent sur le chemin d’accès physique de l’application, par exemple * \<assembly> . runtimeconfig. JSON*, * \<assembly> . xml* (commentaires de documentation XML) et * \<assembly> . DEPS. JSON*. Lorsque le fichier *web.config* est présent et que le site démarre normalement, IIS ne traite pas ces fichiers sensibles s’ils sont demandés. Si le fichier *web.config* est absent, nommé de manière incorrecte ou s’il est incapable de configurer le site pour un démarrage normal, IIS peut traiter des fichiers sensibles publiquement.
+Des fichiers sensibles existent sur le chemin d’accès physique de l’application, par exemple * \<assembly>.runtimeconfig.jssur*, * \<assembly> . xml* (commentaires de documentation XML) et * \<assembly>.deps.jssur*. Lorsque le fichier *web.config* est présent et que le site démarre normalement, IIS ne traite pas ces fichiers sensibles s’ils sont demandés. Si le fichier *web.config* est absent, nommé de manière incorrecte ou s’il est incapable de configurer le site pour un démarrage normal, IIS peut traiter des fichiers sensibles publiquement.
 
-**Le fichier *Web. config* doit être présent dans le déploiement à tout moment, correctement nommé et capable de configurer le site pour un démarrage normal. Ne supprimez jamais le fichier *Web. config* d’un déploiement de production.**
+**Le fichier *web.config* doit être présent dans le déploiement à tout moment, correctement nommé et capable de configurer le site pour un démarrage normal. Ne supprimez jamais le fichier *web.config* d’un déploiement de production.**
 
 ### <a name="transform-webconfig"></a>Transformer web.config
 
@@ -885,7 +887,7 @@ Installez le *bundle d’hébergement .NET Core* sur le système hôte. L’offr
 >
 > Si le bundle d’hébergement est installé après l’installation de la version 64 bits (x 64) de .NET Core, les SDK peuvent apparaître manquants ([Aucun SDK .NET Core n’a été détecté](xref:test/troubleshoot#no-net-core-sdks-were-detected)). Pour résoudre le problème, consultez <xref:test/troubleshoot#missing-sdk-after-installing-the-net-core-hosting-bundle>.
 
-### <a name="download"></a>Téléchargement
+### <a name="download"></a>Télécharger
 
 1. Accédez à la page [Télécharger .net Core](https://dotnet.microsoft.com/download/dotnet-core) .
 1. Sélectionnez la version .NET Core de votre choix.
@@ -903,7 +905,7 @@ Installez le *bundle d’hébergement .NET Core* sur le système hôte. L’offr
    * `OPT_NO_RUNTIME=1`: Ignorez l’installation du Runtime .NET Core. Utilisé lorsque le serveur héberge uniquement [des déploiements autonomes (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_SHAREDFX=1`: Ignorez l’installation du Framework partagé ASP.NET (runtime ASP.NET). Utilisé lorsque le serveur héberge uniquement [des déploiements autonomes (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_X86=1`: Ignorez l’installation des runtimes x86. Utilisez ce paramètre lorsque vous savez que vous n’hébergerez pas d’applications 32 bits. Si vous n’excluez pas d’avoir à héberger des applications 32 bits et 64 bits dans le futur, n'utilisez pas ce paramètre et installez les deux runtimes.
-   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Désactive la vérification de l’utilisation d’une configuration partagée IIS lorsque la configuration partagée (*ApplicationHost. config*) se trouve sur le même ordinateur que l’installation d’IIS. *Disponible uniquement pour les programmes d’installation du pack d’hébergement ASP.NET Core 2.2 ou version ultérieure.* Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
+   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Désactive la vérification de l’utilisation d’une configuration partagée IIS lorsque la configuration partagée (*applicationHost.config*) se trouve sur le même ordinateur que l’installation d’IIS. *Disponible uniquement pour les programmes d’installation du pack d’hébergement ASP.NET Core 2.2 ou version ultérieure.* Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
 1. Redémarrez le système ou exécutez les commandes suivantes dans une interface de commande :
 
    ```console
@@ -991,7 +993,7 @@ Les fichiers dans le dossier de déploiement sont verrouillés quand l’applica
 
 * Utilisez Web Deploy et référencez `Microsoft.NET.Sdk.Web` dans le fichier projet. Un fichier *app_offline.htm* est placé à la racine du répertoire de l’application web. Quand le fichier est présent, le module ASP.NET Core ferme l’application normalement et sert le fichier *app_offline.htm* pendant le déploiement. Pour plus d’informations, consultez les [Informations de référence sur la configuration du module ASP.NET Core](xref:host-and-deploy/aspnet-core-module#app_offlinehtm).
 * Arrêtez manuellement le pool d’applications dans le Gestionnaire IIS sur le serveur.
-* Utilisez PowerShell pour supprimer *App_offline. htm* (nécessite PowerShell 5 ou version ultérieure) :
+* Utilisez PowerShell pour supprimer des *app_offline.htm* (nécessite PowerShell 5 ou version ultérieure) :
 
   ```powershell
   $pathToApp = 'PATH_TO_APP'
@@ -1006,7 +1008,7 @@ Les fichiers dans le dossier de déploiement sont verrouillés quand l’applica
 
   ```
 
-## <a name="data-protection"></a>Protection des données
+## <a name="data-protection"></a>Protection de données
 
 La [pile de protection des données ASP.NET Core](xref:security/data-protection/introduction) est utilisée par plusieurs [intergiciels (middlewares)](xref:fundamentals/middleware/index) ASP.NET Core, y compris l’intergiciel utilisé dans l’authentification. Même si les API de protection des données ne sont pas appelées par le code de l’utilisateur, la protection des données doit être configurée avec un script de déploiement ou dans un code utilisateur pour créer un [magasin de clés](xref:security/data-protection/implementation/key-management) de chiffrement persistantes. Si la protection des données n’est pas configurée, les clés sont conservées en mémoire et ignorées au redémarrage de l’application.
 
@@ -1086,7 +1088,7 @@ Pour plus d'informations, voir les rubriques suivantes :
 * <xref:host-and-deploy/aspnet-core-module>
 * <xref:host-and-deploy/iis/modules>
 
-Pour définir des variables d’environnement pour des applications individuelles s’exécutant dans des pools d’applications isolés (pris en charge pour IIS 10,0 ou version ultérieure), consultez la section *commande appcmd. exe* de la rubrique [ \<environmentVariables> variables d’environnement](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) dans la documentation de référence IIS.
+Pour définir des variables d’environnement pour des applications individuelles s’exécutant dans des pools d’applications isolés (pris en charge pour IIS 10,0 ou version ultérieure), consultez la section *commandeAppCmd.exe* de la rubrique [variables \<environmentVariables> d’environnement](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) dans la documentation de référence IIS.
 
 ## <a name="configuration-sections-of-webconfig"></a>Sections de configuration de web.config
 
@@ -1166,7 +1168,7 @@ HTTP/2 est activé par défaut. Les connexions reviennent à HTTP/1.1 si une con
 
 *Cette section s’applique uniquement aux applications ASP.NET Core qui ciblent le .NET Framework.*
 
-Pour une application ASP.NET Core qui cible le .NET Framework, les requêtes OPTIONS ne sont pas transmises à l’application par défaut dans IIS. Pour savoir comment configurer les gestionnaires IIS de l’application dans *Web. config* pour passer des demandes d’options, consultez [activer les demandes Cross-Origin dans API Web ASP.NET 2 : fonctionnement de cors](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works).
+Pour une application ASP.NET Core qui cible le .NET Framework, les requêtes OPTIONS ne sont pas transmises à l’application par défaut dans IIS. Pour savoir comment configurer les gestionnaires IIS de l’application dans *web.config* pour passer des demandes d’options, consultez [activer les demandes Cross-Origin dans API Web ASP.NET 2 : fonctionnement de cors](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works).
 
 ## <a name="application-initialization-module-and-idle-timeout"></a>Module d’initialisation de l’application et délai d’inactivité
 
@@ -1376,7 +1378,7 @@ Si un fichier *web.config* se trouve dans le projet, il est transformé avec le 
 
 Le fichier *web.config* peut fournir des paramètres de configuration IIS supplémentaires qui contrôlent les modules IIS actifs. Pour plus d’informations sur les modules IIS capables de traiter les requêtes avec des applications ASP.NET Core, consultez la rubrique [Modules IIS](xref:host-and-deploy/iis/modules).
 
-Pour empêcher le kit de développement logiciel (SDK) Web de transformer le fichier *Web. config* , utilisez la **\<IsTransformWebConfigDisabled>** propriété dans le fichier projet :
+Pour empêcher le kit de développement logiciel (SDK) Web de transformer le fichier *web.config* , utilisez la **\<IsTransformWebConfigDisabled>** propriété dans le fichier projet :
 
 ```xml
 <PropertyGroup>
@@ -1388,11 +1390,11 @@ Lorsque vous désactivez le Kit de développement logiciel (SDK) Web en transfor
 
 ### <a name="webconfig-file-location"></a>emplacement du fichier web.config
 
-Pour configurer correctement le [Module ASP.net Core](xref:host-and-deploy/aspnet-core-module) , le fichier *Web. config* doit être présent au chemin d’accès [racine du contenu](xref:fundamentals/index#content-root) (en général, le chemin d’accès de base de l’application) de l’application déployée. Il s’agit du même emplacement que le chemin physique du site Web fourni à IIS. Le fichier *web.config* est nécessaire à la racine de l’application pour permettre la publication de plusieurs applications à l’aide de Web Deploy.
+Pour configurer correctement le [Module ASP.net Core](xref:host-and-deploy/aspnet-core-module) , le fichier *web.config* doit être présent au chemin d’accès [racine du contenu](xref:fundamentals/index#content-root) (en général, le chemin d’accès de base de l’application) de l’application déployée. Il s’agit du même emplacement que le chemin physique du site Web fourni à IIS. Le fichier *web.config* est nécessaire à la racine de l’application pour permettre la publication de plusieurs applications à l’aide de Web Deploy.
 
-Des fichiers sensibles existent sur le chemin d’accès physique de l’application, par exemple * \<assembly> . runtimeconfig. JSON*, * \<assembly> . xml* (commentaires de documentation XML) et * \<assembly> . DEPS. JSON*. Lorsque le fichier *web.config* est présent et que le site démarre normalement, IIS ne traite pas ces fichiers sensibles s’ils sont demandés. Si le fichier *web.config* est absent, nommé de manière incorrecte ou s’il est incapable de configurer le site pour un démarrage normal, IIS peut traiter des fichiers sensibles publiquement.
+Des fichiers sensibles existent sur le chemin d’accès physique de l’application, par exemple * \<assembly>.runtimeconfig.jssur*, * \<assembly> . xml* (commentaires de documentation XML) et * \<assembly>.deps.jssur*. Lorsque le fichier *web.config* est présent et que le site démarre normalement, IIS ne traite pas ces fichiers sensibles s’ils sont demandés. Si le fichier *web.config* est absent, nommé de manière incorrecte ou s’il est incapable de configurer le site pour un démarrage normal, IIS peut traiter des fichiers sensibles publiquement.
 
-**Le fichier *Web. config* doit être présent dans le déploiement à tout moment, correctement nommé et capable de configurer le site pour un démarrage normal. Ne supprimez jamais le fichier *Web. config* d’un déploiement de production.**
+**Le fichier *web.config* doit être présent dans le déploiement à tout moment, correctement nommé et capable de configurer le site pour un démarrage normal. Ne supprimez jamais le fichier *web.config* d’un déploiement de production.**
 
 ### <a name="transform-webconfig"></a>Transformer web.config
 
@@ -1453,7 +1455,7 @@ Installez le *bundle d’hébergement .NET Core* sur le système hôte. L’offr
 >
 > Si le bundle d’hébergement est installé après l’installation de la version 64 bits (x 64) de .NET Core, les SDK peuvent apparaître manquants ([Aucun SDK .NET Core n’a été détecté](xref:test/troubleshoot#no-net-core-sdks-were-detected)). Pour résoudre le problème, consultez <xref:test/troubleshoot#missing-sdk-after-installing-the-net-core-hosting-bundle>.
 
-### <a name="download"></a>Téléchargement
+### <a name="download"></a>Télécharger
 
 1. Accédez à la page [Télécharger .net Core](https://dotnet.microsoft.com/download/dotnet-core) .
 1. Sélectionnez la version .NET Core de votre choix.
@@ -1471,7 +1473,7 @@ Installez le *bundle d’hébergement .NET Core* sur le système hôte. L’offr
    * `OPT_NO_RUNTIME=1`: Ignorez l’installation du Runtime .NET Core. Utilisé lorsque le serveur héberge uniquement [des déploiements autonomes (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_SHAREDFX=1`: Ignorez l’installation du Framework partagé ASP.NET (runtime ASP.NET). Utilisé lorsque le serveur héberge uniquement [des déploiements autonomes (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd).
    * `OPT_NO_X86=1`: Ignorez l’installation des runtimes x86. Utilisez ce paramètre lorsque vous savez que vous n’hébergerez pas d’applications 32 bits. Si vous n’excluez pas d’avoir à héberger des applications 32 bits et 64 bits dans le futur, n'utilisez pas ce paramètre et installez les deux runtimes.
-   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Désactive la vérification de l’utilisation d’une configuration partagée IIS lorsque la configuration partagée (*ApplicationHost. config*) se trouve sur le même ordinateur que l’installation d’IIS. *Disponible uniquement pour les programmes d’installation du pack d’hébergement ASP.NET Core 2.2 ou version ultérieure.* Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
+   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Désactive la vérification de l’utilisation d’une configuration partagée IIS lorsque la configuration partagée (*applicationHost.config*) se trouve sur le même ordinateur que l’installation d’IIS. *Disponible uniquement pour les programmes d’installation du pack d’hébergement ASP.NET Core 2.2 ou version ultérieure.* Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
 1. Redémarrez le système ou exécutez les commandes suivantes dans une interface de commande :
 
    ```console
@@ -1559,7 +1561,7 @@ Les fichiers dans le dossier de déploiement sont verrouillés quand l’applica
 
 * Utilisez Web Deploy et référencez `Microsoft.NET.Sdk.Web` dans le fichier projet. Un fichier *app_offline.htm* est placé à la racine du répertoire de l’application web. Quand le fichier est présent, le module ASP.NET Core ferme l’application normalement et sert le fichier *app_offline.htm* pendant le déploiement. Pour plus d’informations, consultez les [Informations de référence sur la configuration du module ASP.NET Core](xref:host-and-deploy/aspnet-core-module#app_offlinehtm).
 * Arrêtez manuellement le pool d’applications dans le Gestionnaire IIS sur le serveur.
-* Utilisez PowerShell pour supprimer *App_offline. htm* (nécessite PowerShell 5 ou version ultérieure) :
+* Utilisez PowerShell pour supprimer des *app_offline.htm* (nécessite PowerShell 5 ou version ultérieure) :
 
   ```powershell
   $pathToApp = 'PATH_TO_APP'
@@ -1574,7 +1576,7 @@ Les fichiers dans le dossier de déploiement sont verrouillés quand l’applica
 
   ```
 
-## <a name="data-protection"></a>Protection des données
+## <a name="data-protection"></a>Protection de données
 
 La [pile de protection des données ASP.NET Core](xref:security/data-protection/introduction) est utilisée par plusieurs [intergiciels (middlewares)](xref:fundamentals/middleware/index) ASP.NET Core, y compris l’intergiciel utilisé dans l’authentification. Même si les API de protection des données ne sont pas appelées par le code de l’utilisateur, la protection des données doit être configurée avec un script de déploiement ou dans un code utilisateur pour créer un [magasin de clés](xref:security/data-protection/implementation/key-management) de chiffrement persistantes. Si la protection des données n’est pas configurée, les clés sont conservées en mémoire et ignorées au redémarrage de l’application.
 
@@ -1687,7 +1689,7 @@ Pour plus d'informations, voir les rubriques suivantes :
 * <xref:host-and-deploy/aspnet-core-module>
 * <xref:host-and-deploy/iis/modules>
 
-Pour définir des variables d’environnement pour des applications individuelles s’exécutant dans des pools d’applications isolés (pris en charge pour IIS 10,0 ou version ultérieure), consultez la section *commande appcmd. exe* de la rubrique [ \<environmentVariables> variables d’environnement](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) dans la documentation de référence IIS.
+Pour définir des variables d’environnement pour des applications individuelles s’exécutant dans des pools d’applications isolés (pris en charge pour IIS 10,0 ou version ultérieure), consultez la section *commandeAppCmd.exe* de la rubrique [variables \<environmentVariables> d’environnement](/iis/configuration/system.applicationHost/applicationPools/add/environmentVariables/#appcmdexe) dans la documentation de référence IIS.
 
 ## <a name="configuration-sections-of-webconfig"></a>Sections de configuration de web.config
 
@@ -1757,7 +1759,7 @@ HTTP/2 est activé par défaut. Les connexions reviennent à HTTP/1.1 si une con
 
 *Cette section s’applique uniquement aux applications ASP.NET Core qui ciblent le .NET Framework.*
 
-Pour une application ASP.NET Core qui cible le .NET Framework, les requêtes OPTIONS ne sont pas transmises à l’application par défaut dans IIS. Pour savoir comment configurer les gestionnaires IIS de l’application dans *Web. config* pour passer des demandes d’options, consultez [activer les demandes Cross-Origin dans API Web ASP.NET 2 : fonctionnement de cors](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works).
+Pour une application ASP.NET Core qui cible le .NET Framework, les requêtes OPTIONS ne sont pas transmises à l’application par défaut dans IIS. Pour savoir comment configurer les gestionnaires IIS de l’application dans *web.config* pour passer des demandes d’options, consultez [activer les demandes Cross-Origin dans API Web ASP.NET 2 : fonctionnement de cors](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works).
 
 ## <a name="deployment-resources-for-iis-administrators"></a>Déploiement de ressources pour les administrateurs IIS
 

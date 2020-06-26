@@ -1,20 +1,34 @@
 ---
-titre : Auteur : Description : monikerRange : ms. Author : ms. Date : No-Loc :
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- SignalRUID : 
-
+title: Présentation de gRPC sur .NET Core
+author: juntaoluo
+description: Découvrez les services gRPC avec le serveur Kestrel et la pile ASP.NET Core.
+monikerRange: '>= aspnetcore-3.0'
+ms.author: johluo
+ms.date: 09/20/2019
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: grpc/index
+ms.openlocfilehash: 9f3a2041059c1d890ce72ce5f2a88151253d9bd9
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: MT
+ms.contentlocale: fr-FR
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404182"
 ---
 # <a name="introduction-to-grpc-on-net-core"></a>Présentation de gRPC sur .NET Core
 
 Par [John Luo](https://github.com/juntaoluo) et [James Newton-King](https://twitter.com/jamesnk)
 
-[gRPC](https://grpc.io/docs/guides/) est un framework d’appel de procédure distante (RPC) indépendant du langage et très performant.
+[gRPC](https://grpc.io/docs/guides/) est un Framework d’appel de procédure distante (RPC) indépendant du langage.
 
 Les principaux avantages de gRPC sont :
-* Infrastructure RPC moderne, hautement performante et légère.
+* Framework RPC léger, moderne et à haut niveau de performance.
 * Développement d’API « Contract-first », à l’aide de mémoires tampons de protocole par défaut, permettant des implémentations indépendantes du langage.
 * Outils disponibles pour de nombreux langages afin de générer des clients et serveurs fortement typés.
 * Prise en charge d’appels de streaming client, serveur et bidirectionnels.

@@ -6,17 +6,19 @@ ms.author: johluo
 ms.date: 04/08/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: a4676803361d71a3199b2cd1232d0ced8c93db5f
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: c2ec543bd73c0c15c65358c95def0109c295a0f8
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451938"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403467"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>Didacticiel : créer un client et un serveur gRPC dans ASP.NET Core
 
@@ -126,7 +128,7 @@ Fichiers projet *GrpcGreeter* :
 
 * *Greeter. proto*: le fichier *protos/Greeter. proto* définit le `Greeter` gRPC et est utilisé pour générer les ressources du serveur gRPC. Pour plus d’informations, consultez [Introduction à gRPC](xref:grpc/index).
 * Dossier *services* : contient l’implémentation du `Greeter` service.
-* *appSettings. JSON*: contient des données de configuration, telles que le protocole utilisé par Kestrel. Pour plus d’informations, consultez <xref:fundamentals/configuration/index>.
+* *appSettings.jssur*: contient des données de configuration, telles que le protocole utilisé par Kestrel. Pour plus d’informations, consultez <xref:fundamentals/configuration/index>.
 * *Program.cs*: contient le point d’entrée pour le service gRPC. Pour plus d’informations, consultez <xref:fundamentals/host/generic-host>.
 * *Startup.cs*: contient le code qui configure le comportement de l’application. Pour plus d’informations, consultez [Démarrage des applications](xref:fundamentals/startup).
 

@@ -1,26 +1,28 @@
 ---
-title: Scénarios de sécurité supplémentaires pour l’ASP.NET Core Blazor Webassembly
+title: ASP.NET Core Blazor WebAssembly des scénarios de sécurité supplémentaires
 author: guardrex
-description: Découvrez comment configurer Blazor Webassembly pour des scénarios de sécurité supplémentaires.
+description: Découvrez comment configurer Blazor WebAssembly pour d’autres scénarios de sécurité.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/10/2020
+ms.date: 06/24/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 13007df4ddddd31dd0508e9526775a6d33e0fd97
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 4e7f7c89e7dbc1851069b6e7024065e96495a317
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242912"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402180"
 ---
-# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>Scénarios de sécurité supplémentaires pour l’ASP.NET Core Blazor Webassembly
+# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly des scénarios de sécurité supplémentaires
 
 Par [Javier Calvarro Nelson](https://github.com/javiercn) et [Luke Latham](https://github.com/guardrex)
 
@@ -116,7 +118,7 @@ builder.Services.AddTransient(sp =>
 });
 ```
 
-Pour plus de commodité, une <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> est incluse et préconfigurée avec l’adresse de base de l’application en tant qu’URL autorisée. Les Blazor modèles Webassembly compatibles avec l’authentification utilisent désormais <xref:System.Net.Http.IHttpClientFactory> ( [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) Package) dans le projet d’API serveur pour configurer un <xref:System.Net.Http.HttpClient> avec les <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> éléments suivants :
+Pour plus de commodité, une <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> est incluse et préconfigurée avec l’adresse de base de l’application en tant qu’URL autorisée. Les modèles compatibles avec l’authentification Blazor WebAssembly utilisent désormais <xref:System.Net.Http.IHttpClientFactory> ( [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) Package) dans le projet d’API serveur pour configurer un <xref:System.Net.Http.HttpClient> avec les <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> éléments suivants :
 
 ```csharp
 using System.Net.Http;
@@ -244,7 +246,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client => client.BaseAddre
 
 ## <a name="unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client"></a>Demandes d’API Web non authentifiées ou non autorisées dans une application avec un client par défaut sécurisé
 
-Si l' Blazor application Webassembly utilise généralement une valeur par défaut sécurisée <xref:System.Net.Http.HttpClient> , l’application peut également effectuer des demandes d’API Web non authentifiées ou non autorisées en configurant un nom <xref:System.Net.Http.HttpClient> :
+Si l' Blazor WebAssembly application utilise généralement une valeur par défaut sécurisée <xref:System.Net.Http.HttpClient> , l’application peut également effectuer des demandes d’API Web non authentifiées ou non autorisées en configurant un nom <xref:System.Net.Http.HttpClient> :
 
 `Program.Main` (`Program.cs`):
 
@@ -255,7 +257,7 @@ builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient",
 
 L’inscription précédente s’ajoute à l’inscription par défaut sécurisée existante <xref:System.Net.Http.HttpClient> .
 
-Un composant crée le <xref:System.Net.Http.HttpClient> à partir du <xref:System.Net.Http.IHttpClientFactory> ( [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) Package) pour effectuer des demandes non authentifiées ou non autorisées :
+Un composant crée le <xref:System.Net.Http.HttpClient> à partir du <xref:System.Net.Http.IHttpClientFactory> ( [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) Package) pour effectuer des demandes non authentifiées ou non autorisées :
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -277,6 +279,10 @@ Un composant crée le <xref:System.Net.Http.HttpClient> à partir du <xref:Syste
 
 > [!NOTE]
 > Dans l’exemple précédent, le contrôleur de l’API serveur `WeatherForecastNoAuthenticationController` n’est pas marqué avec l' [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribut.
+
+Le développeur doit décider s’il faut utiliser un client sécurisé ou un client non sécurisé comme instance par défaut <xref:System.Net.Http.HttpClient> . L’une des façons de prendre cette décision est de prendre en compte le nombre de points de terminaison authentifiés et non authentifiés que l’application contacte. Si la majorité des demandes de l’application sont de sécuriser les points de terminaison d’API, utilisez l’instance authentifiée <xref:System.Net.Http.HttpClient> comme valeur par défaut. Sinon, inscrivez l’instance non authentifiée <xref:System.Net.Http.HttpClient> comme valeur par défaut.
+
+Une autre approche de l’utilisation de l' <xref:System.Net.Http.IHttpClientFactory> consiste à créer un [client typé](#typed-httpclient) pour l’accès non authentifié aux points de terminaison anonymes.
 
 ## <a name="request-additional-access-tokens"></a>Demander des jetons d’accès supplémentaires
 
@@ -328,7 +334,7 @@ if (tokenResult.TryGetToken(out var token))
 
 ## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>HttpClient et HttpRequestMessage avec les options de demande d’API Fetch
 
-Lors de l’exécution sur webassembly dans une Blazor application Webassembly, elle [`HttpClient`](xref:fundamentals/http-requests) <xref:System.Net.Http.HttpRequestMessage> peut être utilisée pour personnaliser les demandes. Par exemple, vous pouvez spécifier la méthode HTTP et les en-têtes de demande. Le composant suivant envoie une `POST` demande à un point de terminaison d’API de liste de tâches sur le serveur et affiche le corps de la réponse :
+Lors de l’exécution sur webassembly dans une Blazor WebAssembly application, [`HttpClient`](xref:fundamentals/http-requests) et <xref:System.Net.Http.HttpRequestMessage> peuvent être utilisés pour personnaliser les demandes. Par exemple, vous pouvez spécifier la méthode HTTP et les en-têtes de demande. Le composant suivant envoie une `POST` demande à un point de terminaison d’API de liste de tâches sur le serveur et affiche le corps de la réponse :
 
 ```razor
 @page "/todorequest"
@@ -403,7 +409,7 @@ Les options de requête HTTP FETCH peuvent être configurées avec <xref:System.
 
 Vous pouvez définir des options supplémentaires à l’aide de la méthode d’extension plus générique <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestOption%2A> .
  
-La réponse HTTP est généralement mise en mémoire tampon dans une Blazor application Webassembly pour permettre la prise en charge des lectures de synchronisation sur le contenu de la réponse. Pour activer la prise en charge de la diffusion en continu de réponse, utilisez la <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserResponseStreamingEnabled%2A> méthode d’extension sur la demande.
+La réponse HTTP est généralement mise en mémoire tampon dans une Blazor WebAssembly application pour permettre la prise en charge des lectures de synchronisation sur le contenu de la réponse. Pour activer la prise en charge de la diffusion en continu de réponse, utilisez la <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserResponseStreamingEnabled%2A> méthode d’extension sur la demande.
 
 Pour inclure des informations d’identification dans une demande Cross-Origin, utilisez la <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> méthode d’extension :
 
@@ -861,7 +867,7 @@ Inscrivez le `CustomAccountFactory` pour le fournisseur d’authentification en 
 
 ## <a name="support-prerendering-with-authentication"></a>Prendre en charge le prérendu avec l’authentification
 
-Après avoir utilisé les instructions de l’une des Blazor rubriques de l’application Webassembly hébergées, suivez les instructions ci-dessous pour créer une application qui :
+Après avoir utilisé les instructions de l’une des rubriques de l’application hébergée Blazor WebAssembly , suivez les instructions ci-dessous pour créer une application qui :
 
 * Prérend les chemins d’accès pour lesquels l’autorisation n’est pas requise.
 * N’effectue pas de prérendu des chemins pour lesquels une autorisation est requise.
@@ -946,7 +952,7 @@ Dans l’application serveur, créez un `Pages` dossier s’il n’existe pas. C
   
 ## <a name="options-for-hosted-apps-and-third-party-login-providers"></a>Options pour les applications hébergées et les fournisseurs de connexion tiers
 
-Lors de l’authentification et de l’autorisation d’une Blazor application Webassembly hébergée auprès d’un fournisseur tiers, plusieurs options sont disponibles pour l’authentification de l’utilisateur. Celui que vous choisissez dépend de votre scénario.
+Lors de l’authentification et de l’autorisation d’une application hébergée Blazor WebAssembly auprès d’un fournisseur tiers, plusieurs options sont disponibles pour l’authentification de l’utilisateur. Celui que vous choisissez dépend de votre scénario.
 
 Pour plus d’informations, consultez <xref:security/authentication/social/additional-claims>.
 

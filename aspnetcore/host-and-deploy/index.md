@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/index
-ms.openlocfilehash: 796d7da76da6723ea996b57510da9c45ab21b3e7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 79022af0e6ee1294e12c21492bc81bc40482a3fb
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775919"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403961"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>Héberger et déployer ASP.NET Core
 
@@ -49,7 +51,7 @@ Une application ASP.NET Core est une application console qui doit être démarr�
 * Linux
   * [Nginx](xref:host-and-deploy/linux-nginx)
   * [Apache](xref:host-and-deploy/linux-apache)
-*  Windows
+* Windows
   * [IIS](xref:host-and-deploy/iis/index)
   * [Service Windows](xref:host-and-deploy/windows-service)
 
@@ -79,7 +81,7 @@ Consultez <xref:host-and-deploy/visual-studio-publish-profiles> pour obtenir des
 
 ## <a name="internet-information-services-iis"></a>Internet Information Services (IIS)
 
-Pour les déploiements vers Internet Information Services (IIS) avec la configuration fournie par le fichier *Web. config* , consultez les <xref:host-and-deploy/iis/index>Articles sous.
+Pour les déploiements vers Internet Information Services (IIS) avec la configuration fournie par le fichier *web.config* , consultez les articles sous <xref:host-and-deploy/iis/index> .
 
 ## <a name="host-in-a-web-farm"></a>Héberger dans une batterie de serveurs web
 
@@ -127,7 +129,7 @@ Une application ASP.NET Core est une application console qui doit être démarr�
 * Linux
   * [Nginx](xref:host-and-deploy/linux-nginx)
   * [Apache](xref:host-and-deploy/linux-apache)
-*  Windows
+* Windows
   * [IIS](xref:host-and-deploy/iis/index)
   * [Service Windows](xref:host-and-deploy/windows-service)
 
@@ -157,7 +159,7 @@ Consultez <xref:host-and-deploy/visual-studio-publish-profiles> pour obtenir des
 
 ## <a name="internet-information-services-iis"></a>Internet Information Services (IIS)
 
-Pour les déploiements vers Internet Information Services (IIS) avec la configuration fournie par le fichier *Web. config* , consultez les <xref:host-and-deploy/iis/index>Articles sous.
+Pour les déploiements vers Internet Information Services (IIS) avec la configuration fournie par le fichier *web.config* , consultez les articles sous <xref:host-and-deploy/iis/index> .
 
 ## <a name="host-in-a-web-farm"></a>Héberger dans une batterie de serveurs web
 

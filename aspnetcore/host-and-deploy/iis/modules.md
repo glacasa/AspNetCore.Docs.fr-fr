@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/iis/modules
-ms.openlocfilehash: 7262b9ea18e4cf6acd278d087fcc44262f8f9c80
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 124f2a629ebd14210cb21351a720e007bba48f02
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775945"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404013"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>Modules IIS avec ASP.NET Core
 
@@ -33,17 +35,17 @@ Le tableau indique les modules IIS natifs qui fonctionnent avec les application
 | **Authentification anonyme**<br>`AnonymousAuthenticationModule`                                  | Oui | |
 | **Authentification de base**<br>`BasicAuthenticationModule`                                          | Oui | |
 | **Authentification par mappage de certification cliente**<br>`CertificateMappingAuthenticationModule`      | Oui | |
-| **CGI**<br>`CgiModule`                                                                           | Non   | |
+| **CGI**<br>`CgiModule`                                                                           | Non  | |
 | **Validation de la configuration**<br>`ConfigurationValidationModule`                                  | Oui | |
-| **Erreurs HTTP**<br>`CustomErrorModule`                                                           | Non   | [Middleware (intergiciel) de pages de codes d’état](xref:fundamentals/error-handling#usestatuscodepages) |
+| **Erreurs HTTP**<br>`CustomErrorModule`                                                           | Non  | [Middleware (intergiciel) de pages de codes d’état](xref:fundamentals/error-handling#usestatuscodepages) |
 | **Journalisation personnalisée**<br>`CustomLoggingModule`                                                      | Oui | |
-| **Document par défaut**<br>`DefaultDocumentModule`                                                  | Non   | [Middleware de fichiers par défaut](xref:fundamentals/static-files#serve-a-default-document) |
+| **Document par défaut**<br>`DefaultDocumentModule`                                                  | Non  | [Middleware de fichiers par défaut](xref:fundamentals/static-files#serve-a-default-document) |
 | **Authentification Digest**<br>`DigestAuthenticationModule`                                        | Oui | |
-| **Exploration des répertoires**<br>`DirectoryListingModule`                                               | Non   | [Middleware d’exploration des répertoires](xref:fundamentals/static-files#enable-directory-browsing) |
+| **Exploration des répertoires**<br>`DirectoryListingModule`                                               | Non  | [Middleware d’exploration des répertoires](xref:fundamentals/static-files#enable-directory-browsing) |
 | **Compression dynamique**<br>`DynamicCompressionModule`                                            | Oui | [Middleware de compression des réponses](xref:performance/response-compression) |
 | **Suivi des demandes ayant échoué**<br>`FailedRequestsTracingModule`                                     | Oui | [Journalisation ASP.NET Core](xref:fundamentals/logging/index#tracesource-provider) |
-| **Mise en cache des fichiers**<br>`FileCacheModule`                                                            | Non   | [Intergiciel (middleware) de mise en cache des réponses](xref:performance/caching/middleware) |
-| **Mise en cache HTTP**<br>`HttpCacheModule`                                                            | Non   | [Intergiciel (middleware) de mise en cache des réponses](xref:performance/caching/middleware) |
+| **Mise en cache des fichiers**<br>`FileCacheModule`                                                            | Non  | [Intergiciel (middleware) de mise en cache des réponses](xref:performance/caching/middleware) |
+| **Mise en cache HTTP**<br>`HttpCacheModule`                                                            | Non  | [Intergiciel (middleware) de mise en cache des réponses](xref:performance/caching/middleware) |
 | **Journalisation HTTP**<br>`HttpLoggingModule`                                                          | Oui | [Journalisation ASP.NET Core](xref:fundamentals/logging/index) |
 | **Redirection HTTP**<br>`HttpRedirectionModule`                                                  | Oui | [Intergiciel (middleware) de réécriture d’URL](xref:fundamentals/url-rewriting) |
 | **Suivi HTTP**<br>`TracingModule`                                                              | Oui | |
@@ -55,12 +57,12 @@ Le tableau indique les modules IIS natifs qui fonctionnent avec les application
 | **Filtrage des demandes**<br>`RequestFilteringModule`                                                | Oui | [Middleware de réécriture d’URL`IRule`](xref:fundamentals/url-rewriting#irule-based-rule) |
 | **Observateur de demandes**<br>`RequestMonitorModule`                                                    | Oui | |
 | **Réécriture d’URL**&#8224;<br>`RewriteModule`                                                      | Oui | [Intergiciel (middleware) de réécriture d’URL](xref:fundamentals/url-rewriting) |
-| **Inclusions côté serveur**<br>`ServerSideIncludeModule`                                            | Non   | |
-| **Compression statique**<br>`StaticCompressionModule`                                              | Non   | [Middleware de compression des réponses](xref:performance/response-compression) |
-| **Contenu statique**<br>`StaticFileModule`                                                         | Non   | [Middleware de fichiers statiques](xref:fundamentals/static-files) |
+| **Inclusions côté serveur**<br>`ServerSideIncludeModule`                                            | Non  | |
+| **Compression statique**<br>`StaticCompressionModule`                                              | Non  | [Middleware de compression des réponses](xref:performance/response-compression) |
+| **Contenu statique**<br>`StaticFileModule`                                                         | Non  | [Middleware de fichiers statiques](xref:fundamentals/static-files) |
 | **Mise en cache des jetons**<br>`TokenCacheModule`                                                          | Oui | |
 | **Mise en cache d’URI**<br>`UriCacheModule`                                                              | Oui | |
-| **Autorisation d’URL**<br>`UrlAuthorizationModule`                                                | Oui | [Identité ASP.NET Core](xref:security/authentication/identity) |
+| **Autorisation URL**<br>`UrlAuthorizationModule`                                                | Oui | [ASP.NET CoreIdentity](xref:security/authentication/identity) |
 | **Authentification Windows**<br>`WindowsAuthenticationModule`                                      | Oui | |
 
 &#8224;Les types de correspondance `isFile` et `isDirectory` du module de réécriture d’URL ne fonctionnent pas avec les applications ASP.NET Core en raison des modifications apportées à la [structure de répertoires](xref:host-and-deploy/directory-structure).
@@ -105,7 +107,7 @@ De nombreux modules disposent d’un paramètre de configuration qui vous permet
 </configuration>
 ```
 
-Pour plus d’informations sur la désactivation de modules avec des paramètres de configuration, suivez les liens dans la section *Éléments enfants* de la page [IIS \<system.webServer>](/iis/configuration/system.webServer/).
+Pour plus d’informations sur la désactivation des modules avec des paramètres de configuration, suivez les liens de la section *éléments enfants* d' [IIS \<system.webServer> ](/iis/configuration/system.webServer/).
 
 ### <a name="module-removal"></a>Suppression de module
 
@@ -113,9 +115,9 @@ Si vous décidez de supprimer un module avec un paramètre dans *web.config*, d�
 
 1. Déverrouillez le module au niveau du serveur. Sélectionnez le serveur IIS dans la barre latérale **Connexions** du Gestionnaire IIS. Ouvrez les **Modules** dans la zone **IIS**. Sélectionnez le module dans la liste. Dans la barre latérale **Actions** à droite, sélectionnez **Déverrouiller**. Si l’entrée d’action du module indique **Verrouiller**, cela signifie que le module est déjà déverrouillé et qu’aucune action n’est nécessaire. Déverrouillez tous les modules que vous envisagez de supprimer de *web.config*.
 
-2. Déployez l’application sans `<modules>` section dans *Web. config*. Si une application est déployée avec un *fichier Web. config* contenant la `<modules>` section sans avoir préalablement déverrouillé la section dans le gestionnaire des services Internet, le Configuration Manager lève une exception lors de la tentative de déverrouillage de la section. Vous devez donc déployer l’application sans section `<modules>`.
+2. Déployez l’application sans `<modules>` section dans *web.config*. Si une application est déployée avec un *web.config* contenant la `<modules>` section sans avoir préalablement déverrouillé la section dans le gestionnaire des services internet, le Configuration Manager lève une exception lors de la tentative de déverrouillage de la section. Vous devez donc déployer l’application sans section `<modules>`.
 
-3. Déverrouillez la `<modules>` section du *fichier Web. config*. Dans la barre latérale **connexions** , sélectionnez le site Web dans **sites**. Dans la zone **Gestion**, ouvrez **l’Éditeur de configuration**. Utilisez les contrôles de navigation pour sélectionner la section `system.webServer/modules`. Dans la barre latérale **Actions** à droite, sélectionnez l’option permettant de **Déverrouiller** la section. Si l’entrée d’action de la section du module indique **Verrouiller la section**, cela signifie que le module est déjà déverrouillé et qu’aucune action n’est nécessaire.
+3. Déverrouillez la `<modules>` section de *web.config*. Dans la barre latérale **connexions** , sélectionnez le site Web dans **sites**. Dans la zone **Gestion**, ouvrez **l’Éditeur de configuration**. Utilisez les contrôles de navigation pour sélectionner la section `system.webServer/modules`. Dans la barre latérale **Actions** à droite, sélectionnez l’option permettant de **Déverrouiller** la section. Si l’entrée d’action de la section du module indique **Verrouiller la section**, cela signifie que le module est déjà déverrouillé et qu’aucune action n’est nécessaire.
 
 4. Ajoutez une section `<modules>` au fichier *web.config* local de l’application avec un élément `<remove>` pour supprimer le module de l’application. Ajoutez plusieurs éléments `<remove>` pour supprimer plusieurs modules. Si des modifications sont apportées au fichier *web.config* sur le serveur, effectuez immédiatement les mêmes modifications dans le fichier *web.config* du projet localement. La suppression d’un module à l’aide de cette approche n’affecte pas l’utilisation du module avec d’autres applications sur le serveur.
 
@@ -174,4 +176,4 @@ Le module de mise en cache HTTP (`HttpCacheModule`) implémente le cache de sort
 * [Présentation des architectures IIS : modules dans IIS](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture#modules-in-iis)
 * [Vue d’ensemble des modules IIS](/iis/get-started/introduction-to-iis/iis-modules-overview)
 * [Customizing IIS 7.0 Roles and Modules](https://technet.microsoft.com/library/cc627313.aspx) (Personnalisation des rôles et des modules dans IIS 7.0)
-* [IIS \<System. webserver>](/iis/configuration/system.webServer/)
+* [INFORMATION\<system.webServer>](/iis/configuration/system.webServer/)

@@ -8,17 +8,19 @@ ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: 74153b9a185d382a3418dd9470ce6ca4c3c70041
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 7233d6baf139d2ef362f4e3d1a56cf7f0e2514d2
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773612"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403116"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>Didacticiel : en savoir plus sur les scénarios avancés-ASP.NET MVC avec EF Core
 
@@ -99,7 +101,7 @@ Lorsque vous cliquez sur le bouton **Update**, la méthode HttpPost est appelée
 
 Dans l’**Explorateur de solutions**, cliquez avec le bouton droit sur le dossier *Views/Courses*, puis cliquez sur **Ajouter > Nouvel élément**.
 
-Dans la boîte de dialogue **Ajouter un nouvel élément** , cliquez sur **ASP.net Core** sous **installé** dans le volet gauche, cliquez sur ** Razor afficher**, puis nommez la nouvelle vue *UpdateCourseCredits. cshtml*.
+Dans la boîte de dialogue **Ajouter un nouvel élément** , cliquez sur **ASP.net Core** sous **installé** dans le volet gauche, cliquez sur ** Razor Afficher**, puis nommez la nouvelle vue *UpdateCourseCredits. cshtml*.
 
 Dans *Views/Courses/UpdateCourseCredits.cshtml*, remplacez le code du modèle par le code suivant :
 
@@ -187,7 +189,7 @@ _context.ChangeTracker.AutoDetectChangesEnabled = false;
 
 ## <a name="ef-core-source-code-and-development-plans"></a>Code source et plans de développement EF Core
 
-La source de Entity Framework Core est [https://github.com/dotnet/efcore](https://github.com/dotnet/efcore). Le dépôt EF Core contient les builds nocturnes, le suivi des problèmes, les spécifications des fonctionnalités, les notes des réunions de conception et [la feuille de route de développement futur](https://github.com/dotnet/efcore/wiki/Roadmap). Vous pouvez signaler ou rechercher des bogues, et apporter votre contribution.
+La source de Entity Framework Core est [https://github.com/dotnet/efcore](https://github.com/dotnet/efcore) . Le dépôt EF Core contient les builds nocturnes, le suivi des problèmes, les spécifications des fonctionnalités, les notes des réunions de conception et [la feuille de route de développement futur](https://github.com/dotnet/efcore/wiki/Roadmap). Vous pouvez signaler ou rechercher des bogues, et apporter votre contribution.
 
 Bien que le code source soit ouvert, Entity Framework Core est entièrement pris en charge comme produit Microsoft. L’équipe Microsoft Entity Framework garde le contrôle sur le choix des contributions qui sont acceptées et teste toutes les modifications du code pour garantir la qualité de chaque version.
 
@@ -249,7 +251,7 @@ dotnet ef database drop
 
 Message d’erreur :
 
-> Une erreur liée au réseau ou propre à une instance s’est produite lors de l’établissement d’une connexion à SQL Server. Le serveur est introuvable ou inaccessible. Vérifiez que le nom de l’instance est correct et que SQL Server est configuré pour autoriser les connexions à distance. (fournisseur : interfaces réseau SQL, erreur : 26 - Erreur lors de la localisation du serveur/de l’instance spécifiés)
+> Une erreur liée au réseau ou propre à une instance s’est produite lors de l’établissement d’une connexion à SQL Server. Le serveur est introuvable ou inaccessible. Vérifiez que le nom de l’instance est correct et que SQL Server est configuré pour autoriser les connexions à distance. (fournisseur : interfaces réseau SQL, erreur : 26 - Erreur lors de la localisation du serveur/de l’instance spécifiés)
 
 Solution :
 

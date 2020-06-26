@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 01/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: getting-started
-ms.openlocfilehash: 565cde233d6fc5f085ae1709e167e73980d5c3c2
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b88460cdff5d8c30c6a28afdb4f67e8e0b6b819c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776231"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403363"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>Tutoriel : Bien démarrer avec ASP.NET Core
 
@@ -29,7 +31,7 @@ Vous découvrirez comment effectuer les actions suivantes :
 > * Créer un projet application web.
 > * Approuver le certificat de développement.
 > * Exécutez l'application.
-> * Modifier une page Razor.
+> * Modifiez une Razor page.
 
 À la fin du tutoriel, vous disposerez d’une application web qui fonctionne et s’exécute sur votre machine locale.
 
@@ -68,7 +70,7 @@ La commande précédente affiche la boîte de dialogue suivante :
 
 Sélectionnez **Oui** si vous acceptez d’approuver le certificat de développement.
 
-# <a name="macos"></a>[MacOS](#tab/macos)
+# <a name="macos"></a>[macOS](#tab/macos)
 
 ```dotnetcli
 dotnet dev-certs https --trust
@@ -105,7 +107,7 @@ Ouvrez *pages/index. cshtml* et modifiez et enregistrez la page avec le balisage
 
 [!code-cshtml[](sample/index.cshtml?highlight=9)]
 
-Accédez à `https://localhost:5001`, actualisez la page et vérifiez que les modifications sont affichées.
+Accédez à `https://localhost:5001` , actualisez la page et vérifiez que les modifications sont affichées.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

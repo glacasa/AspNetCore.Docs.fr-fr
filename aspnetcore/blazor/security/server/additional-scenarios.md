@@ -1,34 +1,36 @@
 ---
-title: BlazorScénarios de sécurité supplémentaires du serveur ASP.net Core
+title: ASP.NET Core Blazor Server des scénarios de sécurité supplémentaires
 author: guardrex
-description: Découvrez comment configurer le Blazor serveur pour d’autres scénarios de sécurité.
+description: Découvrez comment configurer Blazor Server pour d’autres scénarios de sécurité.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/server/additional-scenarios
-ms.openlocfilehash: 7f92f82d6e78771494b9f2358ee19153502f8dcb
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 46de9a22dec540b8dfda7583b7a3c5c2dcbbc549
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243042"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402323"
 ---
-# <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>BlazorScénarios de sécurité supplémentaires du serveur ASP.net Core
+# <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor Server des scénarios de sécurité supplémentaires
 
 Par [Javier Calvarro Nelson](https://github.com/javiercn)
 
-## <a name="pass-tokens-to-a-blazor-server-app"></a>Passer des jetons à une Blazor application serveur
+## <a name="pass-tokens-to-a-blazor-server-app"></a>Passer des jetons à une Blazor Server application
 
-Les jetons disponibles en dehors des Razor composants d’une Blazor application serveur peuvent être passés aux composants avec l’approche décrite dans cette section. Pour obtenir un exemple de code, y compris un `Startup.ConfigureServices` exemple complet, consultez la page [transmission de jetons à une Blazor application côté serveur](https://github.com/javiercn/blazor-server-aad-sample).
+Les jetons disponibles en dehors des Razor composants d’une Blazor Server application peuvent être passés aux composants avec l’approche décrite dans cette section. Pour obtenir un exemple de code, y compris un `Startup.ConfigureServices` exemple complet, consultez la page [transmission de jetons à une Blazor application côté serveur](https://github.com/javiercn/blazor-server-aad-sample).
 
-Authentifiez l' Blazor application serveur comme vous le feriez avec une Razor application de pages ou MVC standard. Approvisionnez et enregistrez les jetons dans le cookie d’authentification. Par exemple :
+Authentifiez l' Blazor Server application comme vous le feriez avec une Razor application de pages ou MVC standard. Approvisionnez et enregistrez les jetons dans le cookie d’authentification. Par exemple :
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;

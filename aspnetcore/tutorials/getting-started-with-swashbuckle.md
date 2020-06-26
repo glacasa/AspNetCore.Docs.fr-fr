@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 01/17/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: 6e4d80afa1c38344321ad45031ff21fec71ae0a4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 00b42243e45c97c12ad2a4f97dff4a17b7bbb002
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776719"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403402"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Bien démarrer avec Swashbuckle et ASP.NET Core
 
@@ -40,7 +42,7 @@ Vous pouvez ajouter Swashbuckle en adoptant l’une des approches suivantes :
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * À partir de la fenêtre **Console du Gestionnaire de package** :
-  * Accéder à **la** > console du**Gestionnaire de package** **Windows** > 
+  * Accéder à **la**  >  console du gestionnaire de**Other Windows**  >  **package** Windows
   * Accédez au répertoire où se trouve le fichier *TodoApi.csproj*.
   * Exécutez la commande suivante :
 
@@ -49,7 +51,7 @@ Vous pouvez ajouter Swashbuckle en adoptant l’une des approches suivantes :
     ```
 
 * À partir de la boîte de dialogue **Gérer les packages NuGet** :
-  * Cliquez avec le bouton droit sur le projet dans **Explorateur de solutions** > **gérer les packages NuGet**
+  * Cliquez avec le bouton droit sur le projet dans **Explorateur de solutions**  >  **gérer les packages NuGet**
   * Affectez la valeur « nuget.org » à **Source du package**.
   * Vérifiez que l’option « Inclure la version préliminaire » est activée
   * Entrez « Swashbuckle.AspNetCore » dans la zone de recherche.
@@ -182,7 +184,7 @@ Vous pouvez activer les commentaires XML en adoptant l’une des approches suiva
 
 ::: moniker range=">= aspnetcore-2.0"
 
-* Dans le *Panneau Solutions*, appuyez sur **contrôle** et cliquez sur le nom du projet. Accédez à **Outils** > **modifier le fichier**.
+* Dans le *Panneau Solutions*, appuyez sur **contrôle** et cliquez sur le nom du projet. Accédez à **Outils**  >  **modifier le fichier**.
 * Ajoutez manuellement les lignes en surbrillance au fichier *.csproj* :
 
 [!code-xml[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.Swashbuckle/TodoApi.csproj?name=snippet_SuppressWarnings&highlight=1-2,4)]
@@ -250,7 +252,7 @@ Pour supprimer des avertissements à l’échelle d’un projet, définissez une
 
 ::: moniker-end
 
-Pour supprimer des avertissements uniquement pour des membres spécifiques, placez le code dans les directives de préprocesseur [#pragma warning](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-pragma-warning). Cette approche est utile pour le code qui ne doit pas être exposé via les docs de l’API. Dans l’exemple suivant, le code d’avertissement CS1591 est ignoré pour `Program` la classe entière. La mise en œuvre de code d’avertissement est restaurée à la fin de la définition de classe. Spécifier plusieurs codes d’avertissement avec une liste délimitée par des virgules.
+Pour supprimer des avertissements uniquement pour des membres spécifiques, placez le code dans les directives de préprocesseur [#pragma warning](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-pragma-warning). Cette approche est utile pour le code qui ne doit pas être exposé via les docs de l’API. Dans l’exemple suivant, le code d’avertissement CS1591 est ignoré pour la `Program` classe entière. La mise en œuvre de code d’avertissement est restaurée à la fin de la définition de classe. Spécifier plusieurs codes d’avertissement avec une liste délimitée par des virgules.
 
 ```csharp
 namespace TodoApi
@@ -298,7 +300,7 @@ Configurez Swagger de façon à utiliser le fichier XML généré avec les instr
 
 Dans le code précédent, la [réflexion](/dotnet/csharp/programming-guide/concepts/reflection) est utilisée pour générer un nom de fichier XML correspondant à celui du projet d’API Web. La propriété [AppContext.BaseDirectory](xref:System.AppContext.BaseDirectory*) est utilisée pour construire le chemin du fichier XML. Certaines fonctionnalités de Swagger (par exemple, les schémas de paramètres d’entrée ou les méthodes HTTP et les codes de réponse issus des attributs respectifs) fonctionnent sans fichier de documentation XML. Pour la plupart des fonctionnalités cependant, à savoir les résumés de méthode et les descriptions des paramètres et des codes de réponse, l’utilisation d’un fichier XML est obligatoire.
 
-Quand vous ajoutez des commentaires avec trois barres obliques à une action, la description est ajoutée à l’en-tête de section dans l’interface utilisateur Swagger. Ajoutez un élément de [ \<synthèse>](/dotnet/csharp/programming-guide/xmldoc/summary) au `Delete` -dessus de l’action :
+Quand vous ajoutez des commentaires avec trois barres obliques à une action, la description est ajoutée à l’en-tête de section dans l’interface utilisateur Swagger. Ajoutez un [\<summary>](/dotnet/csharp/programming-guide/xmldoc/summary) élément au-dessus de l' `Delete` action :
 
 [!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.Swashbuckle/Controllers/TodoController.cs?name=snippet_Delete&highlight=1-3)]
 
@@ -335,7 +337,7 @@ L’IU est définie par le schéma JSON généré :
 }
 ```
 
-Ajoutez un [ \<élément notes>](/dotnet/csharp/programming-guide/xmldoc/remarks) à la `Create` documentation de la méthode d’action. Il complète les informations spécifiées dans l’élément `<summary>` et fournit une interface utilisateur Swagger plus robuste. Le contenu de l’élément `<remarks>` peut être du texte, du code JSON ou du code XML.
+Ajoutez un [\<remarks>](/dotnet/csharp/programming-guide/xmldoc/remarks) élément à la `Create` documentation de la méthode d’action. Il complète les informations spécifiées dans l’élément `<summary>` et fournit une interface utilisateur Swagger plus robuste. Le contenu de l’élément `<remarks>` peut être du texte, du code JSON ou du code XML.
 
 ::: moniker range="<= aspnetcore-2.0"
 

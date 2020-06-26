@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/iis/transform-webconfig
-ms.openlocfilehash: f7e1fb0adc669b4bffa02e6688231c8f1447bd98
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: bebba7a72012b8be6257b14642bf130613627778
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775932"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404000"
 ---
 # <a name="transform-webconfig"></a>Transformer web.config
 
@@ -29,7 +31,7 @@ Les transformations du fichier *web.config* peuvent être appliquées automatiqu
 * [Configuration de build](#build-configuration)
 * [Profil](#profile)
 * [Environment](#environment)
-* [Personnalisée](#custom)
+* [Personnalisé](#custom)
 
 Ces transformations se produisent pour l’un des scénarios de génération *web.config* suivants :
 
@@ -144,7 +146,7 @@ Lors de la publication à partir de Visual Studio et à l’aide d’un profil d
 
 La variable d’environnement `ASPNETCORE_ENVIRONMENT` est automatiquement ajoutée au fichier *web.config* lorsque le nom de l’environnement est spécifié.
 
-## <a name="custom"></a>Custom
+## <a name="custom"></a>Personnalisé
 
 Les transformations personnalisées sont exécutées en dernier, après les transformations de la [configuration de build](#build-configuration), du [profil](#profile) et de [l’environnement](#environment).
 

@@ -8,17 +8,19 @@ ms.date: 02/06/2019
 ms.topic: tutorial
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 7f17352d2e7e3f4239b338ec961120ab3088c77a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 3a42ce1773bef74fab35884025765d147c534dd2
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773547"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403220"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Didacticiel : prise en main de EF Core dans une application Web MVC ASP.NET
 
@@ -55,7 +57,7 @@ Dans ce tutoriel, vous allez :
   * Charge de travail **Développement web et ASP.NET**
   * Charge de travail **Développement multiplateforme .NET Core**
 
-## <a name="troubleshooting"></a>Dépannage
+## <a name="troubleshooting"></a>Résolution des problèmes
 
 Si vous rencontrez un problème que vous ne pouvez pas résoudre, vous pouvez généralement trouver la solution en comparant votre code au [projet terminé](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final). Pour obtenir la liste des erreurs courantes et comment les résoudre, consultez [la section Dépannage du dernier didacticiel de la série](advanced.md#common-errors). Si vous n’y trouvez pas ce dont vous avez besoin, vous pouvez publier une question sur StackOverflow.com pour [ASP.NET Core](https://stackoverflow.com/questions/tagged/asp.net-core) ou [EF Core](https://stackoverflow.com/questions/tagged/entity-framework-core).
 
@@ -318,7 +320,7 @@ Cliquez avec le bouton droit sur la table **Student** et cliquez sur **Afficher 
 
 ![Table Student dans SSOX](intro/_static/ssox-student-table.png)
 
-Les fichiers de base de données *. mdf* et *. ldf* se trouvent dans le dossier *\\\<C:\Users yourusername>* .
+Les fichiers de base de données *.mdf* et *.ldf* se trouvent dans le dossier *C:\Utilisateurs\\\<yourusername>*.
 
 Étant donné que vous appelez `EnsureCreated` dans la méthode d’initialiseur qui s’exécute au démarrage de l’application, vous pouvez maintenant apporter une modification à la classe `Student`, supprimer la base de données ou réexécuter l’application, et la base de données serait automatiquement recréée conformément à votre modification. Par exemple, si vous ajoutez une propriété `EmailAddress` à la classe `Student`, vous voyez une nouvelle colonne `EmailAddress` dans la table recréée.
 
@@ -332,7 +334,7 @@ La quantité de code que vous deviez écrire pour qu’Entity Framework puisse c
 
 * Les propriétés d’entité nommées ID ou classnameID sont reconnues comme propriétés de clé primaire.
 
-* Une propriété est interprétée comme une propriété de clé étrangère si elle est `StudentID` nommée `Student` `Student` * \<nom de \<la propriété de navigation>nom de la propriété de clé primaire>* (par exemple, pour la propriété `ID`de navigation dans la mesure où la clé primaire de l’entité est). Les propriétés de clé étrangère peuvent également être nommées simplement * \<nom de propriété de clé primaire>* ( `Enrollment` par exemple, `EnrollmentID` puisque la clé primaire de l’entité est `EnrollmentID`).
+* Une propriété est interprétée comme une propriété de clé étrangère si elle est nommée *\<navigation property name>\<primary key property name>* (par exemple, `StudentID` pour la `Student` propriété de navigation, puisque la `Student` clé primaire de l’entité est `ID` ). Les propriétés de clé étrangère peuvent également être nommées simplement *\<primary key property name>* (par exemple, `EnrollmentID` puisque la `Enrollment` clé primaire de l’entité est `EnrollmentID` ).
 
 Le comportement conventionnel peut être remplacé. Par exemple, vous pouvez spécifier explicitement les noms de tables, comme vous l’avez vu précédemment dans ce didacticiel. De plus, vous pouvez définir des noms de colonne et définir une propriété quelconque en tant que clé primaire ou clé étrangère, comme vous le verrez dans un [didacticiel ultérieur](complex-data-model.md) dans cette série.
 

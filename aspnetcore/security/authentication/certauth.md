@@ -7,17 +7,19 @@ ms.author: bdorrans
 ms.date: 01/02/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: cf80f7009334f49d877d2bd296b512e23f7fded8
-ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.openlocfilehash: 493046e288c6b1ccd8e41f15a8e6e532a10a4adc
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84724248"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403194"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Configurer l’authentification par certificat dans ASP.NET Core
 
@@ -34,7 +36,7 @@ L’authentification par certificat est un scénario avec état principalement u
 
 Une alternative à l’authentification par certificat dans les environnements où les proxies et les équilibreurs de charge sont utilisés est Active Directory Services fédérés (ADFS) avec OpenID Connect (OIDC).
 
-## <a name="get-started"></a>Prise en main
+## <a name="get-started"></a>Prendre en main
 
 Obtenez un certificat HTTPs, appliquez-le et [configurez votre serveur](#configure-your-server-to-require-certificates) pour exiger des certificats.
 
@@ -573,7 +575,7 @@ L’approche suivante prend en charge les certificats clients facultatifs :
 
 * Configuration de la liaison pour le domaine et le sous-domaine :
   * Par exemple, configurez des liaisons sur `contoso.com` et `myClient.contoso.com` . L' `contoso.com` hôte n’a pas besoin d’un certificat client, mais ce `myClient.contoso.com` n’est pas le cas.
-  * Pour plus d'informations, consultez les pages suivantes :
+  * Pour plus d’informations, voir :
     * [Kestrel](/fundamentals/servers/kestrel):
       * [ListenOptions.UseHttps](xref:fundamentals/servers/kestrel#listenoptionsusehttps)
       * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>

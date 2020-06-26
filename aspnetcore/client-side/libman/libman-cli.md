@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: client-side/libman/libman-cli
-ms.openlocfilehash: 1a42d162e28d4bb4cce284b8b5e37f1be6ff64c6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: ed5dffb83a2f1a40f3d6596d23135c0fa5b6791f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82770550"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403181"
 ---
 # <a name="use-the-libman-cli-with-aspnet-core"></a>Utiliser l’interface CLI LibMan avec ASP.NET Core
 
@@ -47,7 +49,7 @@ dotnet tool install -g Microsoft.Web.LibraryManager.Cli --version 1.0.94-g606058
 
 Dans l’exemple précédent, un outil Global .NET Core est installé à partir du fichier *C:\Temp\Microsoft.Web.librarymanager.cli.1.0.94-g606058a278.nupkg* de l’ordinateur Windows local.
 
-## <a name="usage"></a>Usage
+## <a name="usage"></a>Utilisation
 
 Une fois l’installation de l’interface CLI réussie, vous pouvez utiliser la commande suivante :
 
@@ -98,7 +100,7 @@ Les sections suivantes décrivent les commandes CLI disponibles.
 
 ## <a name="initialize-libman-in-the-project"></a>Initialiser LibMan dans le projet
 
-La `libman init` commande crée un fichier *Libman. JSON* s’il n’en existe pas. Le fichier est créé avec le contenu du modèle d’élément par défaut.
+La `libman init` commande crée un *libman.jssur* le fichier s’il n’en existe pas. Le fichier est créé avec le contenu du modèle d’élément par défaut.
 
 ### <a name="synopsis"></a>Synopsis
 
@@ -113,11 +115,11 @@ Les options suivantes sont disponibles pour la commande `libman init` :
 
 * `-d|--default-destination <PATH>`
 
-  Chemin d’accès relatif au dossier actif. Les fichiers de bibliothèque sont installés à cet emplacement si aucune `destination` propriété n’est définie pour une bibliothèque dans *Libman. JSON*. La `<PATH>` valeur est écrite dans la `defaultDestination` propriété de *Libman. JSON*.
+  Chemin d’accès relatif au dossier actif. Les fichiers de bibliothèque sont installés à cet emplacement si aucune `destination` propriété n’est définie pour une bibliothèque dans *libman.jssur*. La `<PATH>` valeur est écrite dans la `defaultDestination` propriété de *libman.js*.
 
 * `-p|--default-provider <PROVIDER>`
 
-  Fournisseur à utiliser si aucun fournisseur n’est défini pour une bibliothèque donnée. La `<PROVIDER>` valeur est écrite dans la `defaultProvider` propriété de *Libman. JSON*. Remplacez `<PROVIDER>` par l’une des valeurs suivantes :
+  Fournisseur à utiliser si aucun fournisseur n’est défini pour une bibliothèque donnée. La `<PROVIDER>` valeur est écrite dans la `defaultProvider` propriété de *libman.js*. Remplacez `<PROVIDER>` par l’une des valeurs suivantes :
 
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
@@ -125,7 +127,7 @@ Les options suivantes sont disponibles pour la commande `libman init` :
 
 ### <a name="examples"></a>Exemples
 
-Pour créer un fichier *Libman. JSON* dans un projet ASP.net Core :
+Pour créer un *libman.jssur* un fichier dans un projet ASP.net Core :
 
 * Accédez à la racine du projet.
 * Exécutez la commande suivante :
@@ -140,7 +142,7 @@ Pour créer un fichier *Libman. JSON* dans un projet ASP.net Core :
 
   ![commande Libman init-fournisseur par défaut](_static/libman-init-provider.png)
 
-Un fichier *Libman. JSON* est ajouté à la racine du projet avec le contenu suivant :
+Un *libman.jssur* le fichier est ajouté à la racine du projet avec le contenu suivant :
 
 ```json
 {
@@ -152,7 +154,7 @@ Un fichier *Libman. JSON* est ajouté à la racine du projet avec le contenu sui
 
 ## <a name="add-library-files"></a>Ajouter des fichiers de bibliothèque
 
-La `libman install` commande télécharge et installe les fichiers de bibliothèque dans le projet. Un fichier *Libman. JSON* est ajouté s’il n’en existe pas. Le fichier *Libman. JSON* est modifié pour stocker les détails de configuration des fichiers de la bibliothèque.
+La `libman install` commande télécharge et installe les fichiers de bibliothèque dans le projet. Un *libman.jssur le* fichier est ajouté s’il n’en existe pas. La *libman.jssur* le fichier est modifiée pour stocker les détails de configuration des fichiers de la bibliothèque.
 
 ### <a name="synopsis"></a>Synopsis
 
@@ -173,7 +175,7 @@ Les options suivantes sont disponibles pour la commande `libman install` :
 
 * `-d|--destination <PATH>`
 
-  Emplacement d’installation de la bibliothèque. S’il n’est pas spécifié, l’emplacement par défaut est utilisé. Si aucune `defaultDestination` propriété n’est spécifiée dans *Libman. JSON*, cette option est requise.
+  Emplacement d’installation de la bibliothèque. S’il n’est pas spécifié, l’emplacement par défaut est utilisé. Si aucune `defaultDestination` propriété n’est spécifiée dans *libman.jssur*, cette option est obligatoire.
 
 * `--files <FILE>`
 
@@ -185,13 +187,13 @@ Les options suivantes sont disponibles pour la commande `libman install` :
   
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-  S’il n’est pas spécifié, la `defaultProvider` propriété dans *Libman. JSON* est utilisée. Si aucune `defaultProvider` propriété n’est spécifiée dans *Libman. JSON*, cette option est requise.
+  S’il n’est pas spécifié, la `defaultProvider` propriété de *libman.jssur* est utilisée. Si aucune `defaultProvider` propriété n’est spécifiée dans *libman.jssur*, cette option est obligatoire.
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
 ### <a name="examples"></a>Exemples
 
-Prenons le fichier *Libman. JSON* suivant :
+Prenez en compte les *libman.jssuivantes sur* le fichier :
 
 ```json
 {
@@ -201,13 +203,13 @@ Prenons le fichier *Libman. JSON* suivant :
 }
 ```
 
-Pour installer le fichier jQuery version 3.2.1 *jQuery. min. js* dans le dossier *wwwroot/scripts/jQuery* à l’aide du fournisseur CDNJS :
+Pour installer le fichier de *jquery.min.js* jQuery version 3.2.1 dans le dossier *wwwroot/scripts/jQuery* à l’aide du fournisseur CDNJS :
 
 ```console
 libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquery --files jquery.min.js
 ```
 
-Le fichier *Libman. JSON* ressemble à ce qui suit :
+Le *libman.jssur* le fichier ressemble à ce qui suit :
 
 ```json
 {
@@ -225,7 +227,7 @@ Le fichier *Libman. JSON* ressemble à ce qui suit :
 }
 ```
 
-Pour installer les fichiers *Calendar. js* et *Calendar. CSS* à partir de *C : \\ temp \\ contosoCalendar \\ * à l’aide du fournisseur de système de fichiers :
+Pour installer les fichiers *calendar.js* et *Calendar. CSS* à partir de *C : \\ temp \\ contosoCalendar \\ * à l’aide du fournisseur de système de fichiers :
 
   ```console
   libman install C:\temp\contosoCalendar\ --provider filesystem --files calendar.js --files calendar.css
@@ -233,12 +235,12 @@ Pour installer les fichiers *Calendar. js* et *Calendar. CSS* à partir de *C :
 
 L’invite suivante s’affiche pour deux raisons :
 
-* Le fichier *Libman. JSON* ne contient pas de `defaultDestination` propriété.
+* Le *libman.jssur* le fichier ne contient pas de `defaultDestination` propriété.
 * La `libman install` commande ne contient pas l' `-d|--destination` option.
 
 ![commande d’installation de Libman-destination](_static/libman-install-destination.png)
 
-Après avoir accepté la destination par défaut, le fichier *Libman. JSON* ressemble à ce qui suit :
+Après avoir accepté la destination par défaut, le *libman.jssur* le fichier ressemble à ce qui suit :
 
 ```json
 {
@@ -267,11 +269,11 @@ Après avoir accepté la destination par défaut, le fichier *Libman. JSON* ress
 
 ## <a name="restore-library-files"></a>Restaurer les fichiers de bibliothèque
 
-La `libman restore` commande installe les fichiers de bibliothèque définis dans *Libman. JSON*. Les règles suivantes s’appliquent :
+La `libman restore` commande installe les fichiers de bibliothèque définis dans *libman.jssur*. Les règles suivantes s’appliquent :
 
-* S’il n’existe aucun fichier *Libman. JSON* dans la racine du projet, une erreur est retournée.
-* Si une bibliothèque spécifie un fournisseur, la `defaultProvider` propriété dans *Libman. JSON* est ignorée.
-* Si une bibliothèque spécifie une destination, la `defaultDestination` propriété dans *Libman. JSON* est ignorée.
+* S’il n’existe aucun *libman.jssur* le fichier dans la racine du projet, une erreur est retournée.
+* Si une bibliothèque spécifie un fournisseur, la `defaultProvider` propriété de *libman.jssur* est ignorée.
+* Si une bibliothèque spécifie une destination, la `defaultDestination` propriété de *libman.jssur* est ignorée.
 
 ### <a name="synopsis"></a>Synopsis
 
@@ -288,7 +290,7 @@ Les options suivantes sont disponibles pour la commande `libman restore` :
 
 ### <a name="examples"></a>Exemples
 
-Pour restaurer les fichiers de bibliothèque définis dans *Libman. JSON*:
+Pour restaurer les fichiers de bibliothèque définis dans *libman.jssur*:
 
 ```console
 libman restore
@@ -296,7 +298,7 @@ libman restore
 
 ## <a name="delete-library-files"></a>Supprimer les fichiers de bibliothèque
 
-La `libman clean` commande supprime les fichiers de bibliothèque précédemment restaurés via LibMan. Dossiers qui deviennent vides après la suppression de cette opération. Les configurations associées aux fichiers de bibliothèque dans la `libraries` propriété de *Libman. JSON* ne sont pas supprimées.
+La `libman clean` commande supprime les fichiers de bibliothèque précédemment restaurés via LibMan. Dossiers qui deviennent vides après la suppression de cette opération. Les configurations associées aux fichiers de bibliothèque dans la `libraries` propriété de *libman.jssur* ne sont pas supprimées.
 
 ### <a name="synopsis"></a>Synopsis
 
@@ -323,12 +325,12 @@ libman clean
 
 `libman uninstall`Commande :
 
-* Supprime tous les fichiers associés à la bibliothèque spécifiée à partir de la destination dans *Libman. JSON*.
-* Supprime la configuration de bibliothèque associée de *Libman. JSON*.
+* Supprime de la destination tous les fichiers associés à la bibliothèque spécifiée dans *libman.js*.
+* Supprime la configuration de bibliothèque associée de *libman.js*.
 
 Une erreur se produit dans les cas suivants :
 
-* Il n’existe aucun fichier *Libman. JSON* dans la racine du projet.
+* Il n’existe aucun *libman.jssur* le fichier dans la racine du projet.
 * La bibliothèque spécifiée n’existe pas.
 
 Si plusieurs bibliothèques portant le même nom sont installées, vous êtes invité à en choisir une.
@@ -354,7 +356,7 @@ Les options suivantes sont disponibles pour la commande `libman uninstall` :
 
 ### <a name="examples"></a>Exemples
 
-Prenons le fichier *Libman. JSON* suivant :
+Prenez en compte les *libman.jssuivantes sur* le fichier :
 
 [!code-json[](samples/LibManSample/libman.json)]
 
@@ -380,7 +382,7 @@ La `libman update` commande met à jour une bibliothèque installée via LibMan 
 
 Une erreur se produit dans les cas suivants :
 
-* Il n’existe aucun fichier *Libman. JSON* dans la racine du projet.
+* Il n’existe aucun *libman.jssur* le fichier dans la racine du projet.
 * La bibliothèque spécifiée n’existe pas.
 
 Si plusieurs bibliothèques portant le même nom sont installées, vous êtes invité à en choisir une.

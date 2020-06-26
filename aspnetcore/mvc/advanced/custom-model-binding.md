@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 01/06/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/advanced/custom-model-binding
-ms.openlocfilehash: 109bebe79c9e77d26b02ca27367b8ff33191a4b4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 54080191d76df674444019d43180a7f9d84b471c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776693"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403636"
 ---
 # <a name="custom-model-binding-in-aspnet-core"></a>Liaison de données personnalisée dans ASP.NET Core
 
@@ -36,13 +38,13 @@ Les classeurs de modèles par défaut prennent en charge la plupart des types de
 
 La liaison de données utilise des définitions spécifiques pour les types sur lesquels elle opère. Un *type simple* est converti à partir d’une seule chaîne dans l’entrée. Un *type complexe* est converti à partir de plusieurs valeurs d’entrée. Le framework détermine la différence en fonction de l’existence de `TypeConverter`. Nous vous recommandons de créer un convertisseur de type si vous disposez d’un mappage `string` -> `SomeType` simple qui ne nécessite pas de ressources externes.
 
-Avant de créer votre propre classeur de modèles personnalisé, vérifiez la façon dont les classeurs de modèles existants sont implémentés. Considérez <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinder> le qui peut être utilisé pour convertir des chaînes encodées en base64 en tableaux d’octets. Les tableaux d’octets sont souvent stockés sous forme de fichiers ou de champs BLOB de base de données.
+Avant de créer votre propre classeur de modèles personnalisé, vérifiez la façon dont les classeurs de modèles existants sont implémentés. Considérez le <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinder> qui peut être utilisé pour convertir des chaînes encodées en base64 en tableaux d’octets. Les tableaux d’octets sont souvent stockés sous forme de fichiers ou de champs BLOB de base de données.
 
 ### <a name="working-with-the-bytearraymodelbinder"></a>Utilisation de ByteArrayModelBinder
 
-Les chaînes encodées au format Base64 peuvent être utilisées pour représenter des données binaires. Par exemple, une image peut être encodée sous forme de chaîne. L’exemple comprend une image sous forme de chaîne encodée en Base64 dans [Base64String. txt](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/advanced/custom-model-binding/samples/3.x/CustomModelBindingSample/Base64String.txt).
+Les chaînes encodées au format Base64 peuvent être utilisées pour représenter des données binaires. Par exemple, une image peut être encodée sous forme de chaîne. L’exemple comprend une image sous forme de chaîne encodée en Base64 dans [Base64String.txt](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/advanced/custom-model-binding/samples/3.x/CustomModelBindingSample/Base64String.txt).
 
-ASP.NET Core MVC peut accepter une chaîne encodée au format base64 et utiliser `ByteArrayModelBinder` pour la convertir en tableau d’octets. Les <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider> arguments `byte[]` Maps pour `ByteArrayModelBinder`:
+ASP.NET Core MVC peut accepter une chaîne encodée au format base64 et utiliser `ByteArrayModelBinder` pour la convertir en tableau d’octets. Les <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider> `byte[]` arguments Maps pour `ByteArrayModelBinder` :
 
 ```csharp
 public IModelBinder GetBinder(ModelBinderProviderContext context)
@@ -62,7 +64,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 }
 ```
 
-Quand vous créez votre propre classeur de modèles personnalisé, vous pouvez implémenter votre propre `IModelBinderProvider` type ou <xref:Microsoft.AspNetCore.Mvc.ModelBinderAttribute>utiliser le.
+Quand vous créez votre propre classeur de modèles personnalisé, vous pouvez implémenter votre propre `IModelBinderProvider` type ou utiliser le <xref:Microsoft.AspNetCore.Mvc.ModelBinderAttribute> .
 
 L’exemple suivant montre comment utiliser `ByteArrayModelBinder` pour convertir une chaîne encodée au format base64 en `byte[]`, et comment enregistrer le résultat dans un fichier :
 
@@ -160,13 +162,13 @@ Les classeurs de modèles par défaut prennent en charge la plupart des types de
 
 La liaison de données utilise des définitions spécifiques pour les types sur lesquels elle opère. Un *type simple* est converti à partir d’une seule chaîne dans l’entrée. Un *type complexe* est converti à partir de plusieurs valeurs d’entrée. Le framework détermine la différence en fonction de l’existence de `TypeConverter`. Nous vous recommandons de créer un convertisseur de type si vous disposez d’un mappage `string` -> `SomeType` simple qui ne nécessite pas de ressources externes.
 
-Avant de créer votre propre classeur de modèles personnalisé, vérifiez la façon dont les classeurs de modèles existants sont implémentés. Considérez <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinder> le qui peut être utilisé pour convertir des chaînes encodées en base64 en tableaux d’octets. Les tableaux d’octets sont souvent stockés sous forme de fichiers ou de champs BLOB de base de données.
+Avant de créer votre propre classeur de modèles personnalisé, vérifiez la façon dont les classeurs de modèles existants sont implémentés. Considérez le <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinder> qui peut être utilisé pour convertir des chaînes encodées en base64 en tableaux d’octets. Les tableaux d’octets sont souvent stockés sous forme de fichiers ou de champs BLOB de base de données.
 
 ### <a name="working-with-the-bytearraymodelbinder"></a>Utilisation de ByteArrayModelBinder
 
-Les chaînes encodées au format Base64 peuvent être utilisées pour représenter des données binaires. Par exemple, une image peut être encodée sous forme de chaîne. L’exemple comprend une image sous forme de chaîne encodée en Base64 dans [Base64String. txt](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/advanced/custom-model-binding/samples/2.x/CustomModelBindingSample/Base64String.txt).
+Les chaînes encodées au format Base64 peuvent être utilisées pour représenter des données binaires. Par exemple, une image peut être encodée sous forme de chaîne. L’exemple comprend une image sous forme de chaîne encodée en Base64 dans [Base64String.txt](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/advanced/custom-model-binding/samples/2.x/CustomModelBindingSample/Base64String.txt).
 
-ASP.NET Core MVC peut accepter une chaîne encodée au format base64 et utiliser `ByteArrayModelBinder` pour la convertir en tableau d’octets. Les <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider> arguments `byte[]` Maps pour `ByteArrayModelBinder`:
+ASP.NET Core MVC peut accepter une chaîne encodée au format base64 et utiliser `ByteArrayModelBinder` pour la convertir en tableau d’octets. Les <xref:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider> `byte[]` arguments Maps pour `ByteArrayModelBinder` :
 
 ```csharp
 public IModelBinder GetBinder(ModelBinderProviderContext context)
@@ -185,7 +187,7 @@ public IModelBinder GetBinder(ModelBinderProviderContext context)
 }
 ```
 
-Quand vous créez votre propre classeur de modèles personnalisé, vous pouvez implémenter votre propre `IModelBinderProvider` type ou <xref:Microsoft.AspNetCore.Mvc.ModelBinderAttribute>utiliser le.
+Quand vous créez votre propre classeur de modèles personnalisé, vous pouvez implémenter votre propre `IModelBinderProvider` type ou utiliser le <xref:Microsoft.AspNetCore.Mvc.ModelBinderAttribute> .
 
 L’exemple suivant montre comment utiliser `ByteArrayModelBinder` pour convertir une chaîne encodée au format base64 en `byte[]`, et comment enregistrer le résultat dans un fichier :
 

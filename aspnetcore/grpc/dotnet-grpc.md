@@ -7,17 +7,19 @@ ms.author: johluo
 ms.date: 10/17/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: grpc/dotnet-grpc
-ms.openlocfilehash: 0990013947be2cee5045deac92efc3c6bcf12e03
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 1e4e5cd6a4a687ecacf0c4803784e68aee228498
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768833"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404208"
 ---
 # <a name="manage-protobuf-references-with-dotnet-grpc"></a>Gérer les références Protobuf avec dotnet-GRPC
 
@@ -158,11 +160,11 @@ dotnet-grpc refresh [options] [<references>...]
 | -p | --projet | Chemin d’accès au fichier projet sur lequel effectuer l’opération. Si aucun fichier n’est spécifié, la commande effectue une recherche dans le répertoire actif.
 | | --à sec-exécution | Génère une liste des fichiers qui seraient mis à jour sans télécharger de nouveau contenu.
 
-## <a name="list"></a>Liste
+## <a name="list"></a>List
 
 La `list` commande est utilisée pour afficher toutes les références Protobuf dans le fichier projet. Si toutes les valeurs d’une colonne sont des valeurs par défaut, la colonne peut être omise.
 
-### <a name="usage"></a>Usage
+### <a name="usage"></a>Utilisation
 
 ```dotnetcli
 dotnet-grpc list [options]

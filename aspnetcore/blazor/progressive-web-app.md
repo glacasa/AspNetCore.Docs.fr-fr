@@ -1,5 +1,5 @@
 ---
-title: Créez des applications Web progressifs avec ASP.NET Core Blazor Webassembly
+title: Créez des applications Web progressifs avec ASP.NET CoreBlazor WebAssembly
 author: guardrex
 description: Découvrez comment créer une Blazor application Web progressive (PWA) qui utilise des fonctionnalités de navigateur modernes pour se comporter comme une application de bureau.
 monikerRange: '>= aspnetcore-3.1'
@@ -8,23 +8,25 @@ ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: f56fb0f09845ded6ef6907221a27f71621a155d1
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 237a8fceb75ba724625f018cf94c8d5bc5acfdad
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242808"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402583"
 ---
-# <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>Créez des applications Web progressifs avec ASP.NET Core Blazor Webassembly
+# <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>Créez des applications Web progressifs avec ASP.NET CoreBlazor WebAssembly
 
 Par [Steve Sanderson](https://github.com/SteveSandersonMS)
 
-Une application Web progressive (PWA) est généralement une application à page unique (SPA) qui utilise des API et des fonctionnalités de navigateur modernes pour se comporter comme une application de bureau. BlazorWebassembly est une plate-forme d’application Web cliente basée sur des normes, de sorte qu’elle peut utiliser n’importe quelle API de navigateur, y compris les API PWA requises pour les fonctionnalités suivantes :
+Une application Web progressive (PWA) est généralement une application à page unique (SPA) qui utilise des API et des fonctionnalités de navigateur modernes pour se comporter comme une application de bureau. Blazor WebAssemblyest une plate-forme d’application Web côté client basée sur des normes. elle peut donc utiliser n’importe quelle API de navigateur, y compris les API PWA requises pour les fonctionnalités suivantes :
 
 * Travailler en mode hors connexion et se charger instantanément, indépendamment de la vitesse du réseau.
 * S’exécutant dans sa propre fenêtre d’application, et pas seulement dans une fenêtre de navigateur.
@@ -41,7 +43,7 @@ Le mot *progressif* est utilisé pour décrire de telles applications, car :
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Lorsque vous créez une ** Blazor application webassembly** dans la boîte de dialogue **créer un nouveau projet** , activez la case à cocher **application Web progressive** :
+Quand vous créez une nouvelle ** Blazor WebAssembly application** dans la boîte de dialogue **créer un nouveau projet** , activez la case à cocher **application Web progressive** :
 
 ![La case à cocher « application Web progressive » est activée dans la boîte de dialogue Nouveau projet de Visual Studio.](progressive-web-app/_static/image1.png)
 
@@ -155,7 +157,7 @@ Si les composants de l’application s' Razor appuient sur la demande de donnée
 
 ### <a name="support-server-rendered-pages"></a>Prendre en charge les pages rendues par le serveur
 
-Réfléchissez à ce qui se passe quand l’utilisateur accède pour la première fois à une URL telle que `/counter` ou à tout autre lien profond dans l’application. Dans ce cas, vous ne souhaitez pas renvoyer le contenu mis en cache en tant que `/counter` , mais vous avez besoin du navigateur pour charger le contenu mis en cache en tant que `/index.html` pour démarrer votre Blazor application webassembly. Ces demandes initiales sont appelées demandes de *navigation* , par opposition à :
+Réfléchissez à ce qui se passe quand l’utilisateur accède pour la première fois à une URL telle que `/counter` ou à tout autre lien profond dans l’application. Dans ce cas, vous ne souhaitez pas renvoyer le contenu mis en cache en tant que `/counter` , mais vous avez besoin du navigateur pour charger le contenu mis en cache en tant que `/index.html` pour démarrer votre Blazor WebAssembly application. Ces demandes initiales sont appelées demandes de *navigation* , par opposition à :
 
 * `subresource`demandes d’images, de feuilles de style ou d’autres fichiers.
 * `fetch/XHR`demandes de données d’API.
@@ -192,7 +194,7 @@ Par défaut, ce manifeste répertorie les éléments suivants :
 * Toutes les Blazor ressources managées, telles que les assemblys .net et les fichiers d’exécution Webassembly .net nécessaires pour fonctionner hors connexion.
 * Toutes les ressources pour la publication dans le répertoire de l’application `wwwroot` , telles que les images, les feuilles de style et les fichiers JavaScript, y compris les ressources Web statiques fournies par les projets externes et les packages NuGet.
 
-Vous pouvez contrôler les ressources qui sont extraites et mises en cache par le service Worker en modifiant la logique dans `onInstall` dans `service-worker.published.js` . Par défaut, le service Worker récupère et met en cache les fichiers correspondant à des extensions de nom de fichier Web typiques, telles que `.html` ,, `.css` et, ainsi que `.js` `.wasm` des types de fichiers spécifiques à Blazor webassembly ( `.dll` , `.pdb` ).
+Vous pouvez contrôler les ressources qui sont extraites et mises en cache par le service Worker en modifiant la logique dans `onInstall` dans `service-worker.published.js` . Par défaut, le service Worker récupère et met en cache les fichiers correspondant à des extensions de nom de fichier Web typiques, telles que `.html` ,, `.css` et, ainsi que `.js` `.wasm` des types de fichiers spécifiques à Blazor WebAssembly ( `.dll` , `.pdb` ).
 
 Pour inclure des ressources supplémentaires qui ne sont pas présentes dans le répertoire de l’application `wwwroot` , définissez des entrées MSBuild supplémentaires `ItemGroup` , comme indiqué dans l’exemple suivant :
 
@@ -210,11 +212,11 @@ Les `AssetUrl` métadonnées spécifient l’URL relative de base que le navigat
 
 ## <a name="push-notifications"></a>Notifications push
 
-Comme tout autre PWA, un Blazor Webassembly PWA peut recevoir des notifications push à partir d’un serveur principal. Le serveur peut envoyer des notifications push à tout moment, même lorsque l’utilisateur n’utilise pas activement l’application. Par exemple, les notifications push peuvent être envoyées lorsqu’un autre utilisateur effectue une action appropriée.
+Comme tout autre PWA, Blazor WebAssembly PWA peut recevoir des notifications push à partir d’un serveur principal. Le serveur peut envoyer des notifications push à tout moment, même lorsque l’utilisateur n’utilise pas activement l’application. Par exemple, les notifications push peuvent être envoyées lorsqu’un autre utilisateur effectue une action appropriée.
 
-Le mécanisme d’envoi d’une notification push est entièrement indépendant de Blazor Webassembly, car il est implémenté par le serveur principal qui peut utiliser n’importe quelle technologie. Si vous souhaitez envoyer des notifications push à partir d’un serveur de ASP.NET Core, envisagez d' [utiliser une technique similaire à l’approche adoptée dans l’atelier de pizzas éblouissant](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#sending-push-notifications).
+Le mécanisme d’envoi d’une notification push est entièrement indépendant de Blazor WebAssembly , puisqu’il est implémenté par le serveur principal qui peut utiliser n’importe quelle technologie. Si vous souhaitez envoyer des notifications push à partir d’un serveur de ASP.NET Core, envisagez d' [utiliser une technique similaire à l’approche adoptée dans l’atelier de pizzas éblouissant](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#sending-push-notifications).
 
-Le mécanisme de réception et d’affichage d’une notification push sur le client est également indépendant de Blazor Webassembly, puisqu’il est implémenté dans le fichier JavaScript Service Worker. Pour obtenir un exemple, consultez [l’approche utilisée dans l’atelier de pizzas éblouissant](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#displaying-notifications).
+Le mécanisme de réception et d’affichage d’une notification push sur le client est également indépendant de Blazor WebAssembly , puisqu’il est implémenté dans le fichier JavaScript Service Worker. Pour obtenir un exemple, consultez [l’approche utilisée dans l’atelier de pizzas éblouissant](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#displaying-notifications).
 
 ## <a name="caveats-for-offline-pwas"></a>Avertissements pour les PWA hors connexion
 
