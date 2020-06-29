@@ -4,7 +4,7 @@ author: zuckerthoben
 description: Découvrez comment ajouter Swashbuckle à votre projet d’API web ASP.NET Core pour intégrer l’IU Swagger.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 01/17/2020
+ms.date: 06/26/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: 00b42243e45c97c12ad2a4f97dff4a17b7bbb002
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0a47ed3338ebfbc5361a6082978d407543fb95c5
+ms.sourcegitcommit: b06511252f165dd4590ba9b5beca4153fa220779
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403402"
+ms.lasthandoff: 06/27/2020
+ms.locfileid: "85459777"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Bien démarrer avec Swashbuckle et ASP.NET Core
 
@@ -47,7 +47,7 @@ Vous pouvez ajouter Swashbuckle en adoptant l’une des approches suivantes :
   * Exécutez la commande suivante :
 
     ```powershell
-    Install-Package Swashbuckle.AspNetCore -Version 5.0.0
+    Install-Package Swashbuckle.AspNetCore -Version 5.5.0
     ```
 
 * À partir de la boîte de dialogue **Gérer les packages NuGet** :
@@ -70,7 +70,7 @@ Vous pouvez ajouter Swashbuckle en adoptant l’une des approches suivantes :
 Exécutez la commande suivante à partir du **Terminal intégré** :
 
 ```dotnetcli
-dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.0.0
+dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.5.0
 ```
 
 ### <a name="net-core-cli"></a>[CLI .NET Core](#tab/netcore-cli)
@@ -78,34 +78,30 @@ dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.0.0
 Exécutez la commande suivante :
 
 ```dotnetcli
-dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.0.0
+dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.5.0
 ```
 
 ---
 
 ## <a name="add-and-configure-swagger-middleware"></a>Ajouter et configurer l’intergiciel (middleware) Swagger
 
-Dans la classe `Startup`, importez l’espace de noms suivant pour utiliser la classe `OpenApiInfo` :
-
-[!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.Swashbuckle/Startup2.cs?name=snippet_InfoClassNamespace)]
-
 Ajoutez le générateur Swagger à la collection de services dans la méthode `Startup.ConfigureServices` :
 
 ::: moniker range="<= aspnetcore-2.0"
 
-[!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.Swashbuckle/Startup2.cs?name=snippet_ConfigureServices&highlight=8-11)]
+[!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.Swashbuckle/Startup2.cs?name=snippet_ConfigureServices&highlight=8)]
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
 
-[!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.Swashbuckle/Startup2.cs?name=snippet_ConfigureServices&highlight=9-12)]
+[!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.Swashbuckle/Startup2.cs?name=snippet_ConfigureServices&highlight=9)]
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/3.0/TodoApi.Swashbuckle/Startup2.cs?name=snippet_ConfigureServices&highlight=8-11)]
+[!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/3.0/TodoApi.Swashbuckle/Startup2.cs?name=snippet_ConfigureServices&highlight=8)]
 
 ::: moniker-end
 
@@ -123,6 +119,9 @@ Dans la méthode `Startup.Configure`, activez l’intergiciel pour traiter le do
 
 ::: moniker-end
 
+> [!NOTE]
+> Swashbuckle s’appuie sur MVC <xref:Microsoft.AspNetCore.Mvc.ApiExplorer> pour découvrir les itinéraires et les points de terminaison. Si le projet appelle <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc%2A> , les itinéraires et les points de terminaison sont découverts automatiquement. Lors <xref:Microsoft.Extensions.DependencyInjection.MvcCoreServiceCollectionExtensions.AddMvcCore%2A> de l’appel de, la <xref:Microsoft.Extensions.DependencyInjection.MvcApiExplorerMvcCoreBuilderExtensions.AddApiExplorer%2A> méthode doit être appelée explicitement. Pour plus d’informations, consultez [Swashbuckle, ApiExplorer et routage](https://github.com/domaindrivendev/Swashbuckle.AspNetCore#swashbuckle-apiexplorer-and-routing).
+
 L’appel de méthode `UseSwaggerUI` précédent active le [middleware (intergiciel) des fichiers statiques](xref:fundamentals/static-files). Si vous ciblez .NET Framework ou .NET Core 1. x, ajoutez le package NuGet [Microsoft. AspNetCore. StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) au projet.
 
 Lancez l’application et accédez à `http://localhost:<port>/swagger/v1/swagger.json`. Le document généré décrivant les points de terminaison s’affiche comme illustré dans la [spécification Swagger (swagger.json)](xref:tutorials/web-api-help-pages-using-swagger#swagger-specification-swaggerjson).
@@ -135,6 +134,11 @@ L’interface utilisateur Swagger se trouve à l’adresse `http://localhost:<po
 > [!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.Swashbuckle/Startup3.cs?name=snippet_UseSwaggerUI&highlight=4)]
 
 Si vous utilisez des répertoires avec IIS ou un proxy inverse, définissez le point de terminaison Swagger sur un chemin relatif avec le préfixe `./`. Par exemple : `./swagger/v1/swagger.json`. L’utilisation de `/swagger/v1/swagger.json` indique à l’application de rechercher le fichier JSON à la racine réelle de l’URL (plus le préfixe de la route s’il est utilisé). Par exemple, utilisez `http://localhost:<port>/<route_prefix>/swagger/v1/swagger.json` au lieu de `http://localhost:<port>/<virtual_directory>/<route_prefix>/swagger/v1/swagger.json`.
+
+> [!NOTE]
+> Par défaut, Swashbuckle génère et expose Swagger JSON dans la version 3,0 de la spécification &mdash; officiellement appelée spécification openapi. Pour prendre en charge la compatibilité descendante, vous pouvez choisir d’exposer JSON au format 2,0 à la place. Ce format 2,0 est important pour les intégrations telles que Microsoft Power Apps et Microsoft Flow qui prennent actuellement en charge OpenAPI version 2,0. Pour choisir le format 2,0, définissez la `SerializeAsV2` propriété dans `Startup.Configure` :
+>
+> [!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/3.0/TodoApi.Swashbuckle/Startup3.cs?name=snippet_Configure&highlight=4-7)]
 
 ## <a name="customize-and-extend"></a>Personnaliser et étendre
 
@@ -151,6 +155,12 @@ using System.IO;
 ### <a name="api-info-and-description"></a>Informations sur l’API et description
 
 L’action de configuration transmise à la méthode `AddSwaggerGen` ajoute des informations comme l’auteur, la license et la description :
+
+Dans la classe `Startup`, importez l’espace de noms suivant pour utiliser la classe `OpenApiInfo` :
+
+[!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.Swashbuckle/Startup2.cs?name=snippet_InfoClassNamespace)]
+
+À l’aide de la `OpenApiInfo` classe, modifiez les informations affichées dans l’interface utilisateur :
 
 [!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.Swashbuckle/Startup4.cs?name=snippet_AddSwaggerGen)]
 
@@ -453,11 +463,13 @@ L’interface utilisateur de Swagger documente maintenant clairement les codes d
 
 Dans ASP.NET Core 2.2 ou une version ultérieure, les conventions peuvent être utilisées comme alternatives à la décoration explicites des actions individuelles avec `[ProducesResponseType]`. Pour plus d’informations, consultez <xref:web-api/advanced/conventions>.
 
+Pour prendre en charge la `[ProducesResponseType]` décoration, le package [Swashbuckle. AspNetCore. Annotations](https://github.com/domaindrivendev/Swashbuckle.AspNetCore/blob/master/README.md#swashbuckleaspnetcoreannotations) propose des extensions permettant d’activer et d’enrichir la réponse, le schéma et les métadonnées de paramètre.
+
 ::: moniker-end
 
 ### <a name="customize-the-ui"></a>Personnaliser l’interface utilisateur
 
-L’interface utilisateur est fonctionnelle et conviviale. Toutefois, les pages de documentation d’API doivent représenter votre marque ou thème. La personnalisation des composants Swashbuckle nécessite d’ajouter les ressources qui traitent les fichiers statiques et de générer la structure de dossiers pour héberger ces fichiers.
+L’interface utilisateur par défaut est à la fois fonctionnelle et présente. Toutefois, les pages de documentation d’API doivent représenter votre marque ou thème. La personnalisation des composants Swashbuckle nécessite d’ajouter les ressources qui traitent les fichiers statiques et de générer la structure de dossiers pour héberger ces fichiers.
 
 Si vous ciblez le .NET Framework ou .NET Core 1.x, ajoutez le package NuGet [Microsoft.AspNetCore.StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles) au projet :
 
@@ -481,20 +493,11 @@ Activez le middleware de fichiers statiques :
 
 ::: moniker-end
 
-Faites l’acquisition du contenu du dossier *dist* à partir du [dépôt GitHub de l’interface utilisateur de Swagger](https://github.com/swagger-api/swagger-ui/tree/master/dist). Ce dossier contient les ressources nécessaires pour la page de l’interface utilisateur de Swagger.
+Pour injecter des feuilles de style CSS supplémentaires, ajoutez-les au dossier *wwwroot* du projet et spécifiez le chemin d’accès relatif dans les options de l’intergiciel (middleware) :
 
-Créez un dossier *wwwroot/swagger/ui* et copiez dedans le contenu du dossier *dist*.
-
-Créez un fichier *custom.css* dans *wwwroot/swagger/ui* avec le code CSS suivant pour personnaliser l’en-tête de page :
-
-[!code-css[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.Swashbuckle/wwwroot/swagger/ui/custom.css)]
-
-Référencez *custom.css* dans le fichier *index.html* situé à l’intérieur du dossier UI, à la suite de n’importe quel autre fichier CSS :
-
-[!code-html[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.Swashbuckle/wwwroot/swagger/ui/index.html?name=snippet_SwaggerUiCss&highlight=3)]
-
-Accédez à la page *index.html* à l’adresse `http://localhost:<port>/swagger/ui/index.html`. Entrez `https://localhost:<port>/swagger/v1/swagger.json` dans la zone de texte de l’en-tête, puis cliquez sur le bouton **Explorer**. La page résultante ressemble à ceci :
-
-![Interface utilisateur de Swagger avec titre d’en-tête personnalisé](web-api-help-pages-using-swagger/_static/custom-header.png)
-
-Vous pouvez faire encore beaucoup avec cette page. Pour découvrir toutes les fonctionnalités pour les ressources d’interface utilisateur, accédez au [dépôt GitHub de l’interface utilisateur de Swagger](https://github.com/swagger-api/swagger-ui).
+```csharp
+app.UseSwaggerUI(c =>
+{
+     c.InjectStylesheet("/swagger-ui/custom.css");
+}
+```

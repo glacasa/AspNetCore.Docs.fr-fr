@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 25d6bdae0fce7821ec7b9195817dc07ef9aed40f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5c3314991d05ea868fe9190bb3a0206b27fd920f
+ms.sourcegitcommit: b06511252f165dd4590ba9b5beca4153fa220779
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408186"
+ms.lasthandoff: 06/27/2020
+ms.locfileid: "85459764"
 ---
 # <a name="response-caching-in-aspnet-core"></a>Mise en cache des réponses dans ASP.NET Core
 
@@ -176,7 +176,17 @@ Au lieu de dupliquer les paramètres du cache de réponse sur de nombreux attrib
 
 Configurez un profil de cache. L’exemple suivant montre un profil de cache de 30 secondes dans l’exemple d’application `Startup.ConfigureServices` :
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](response/samples/3.x/Startup.cs?name=snippet1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](response/samples/2.x/ResponseCacheSample/Startup.cs?name=snippet1)]
+
+::: moniker-end
 
 Le modèle de page cache4 de l’exemple d’application fait référence au `Default30` profil de cache :
 
@@ -184,9 +194,9 @@ Le modèle de page cache4 de l’exemple d’application fait référence au `De
 
 Le <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> peut être appliqué aux éléments suivants :
 
-* RazorGestionnaires de page (classes) : les attributs ne peuvent pas être appliqués aux méthodes de gestionnaire.
-* Contrôleurs MVC (classes).
-* Actions MVC (méthodes) : les attributs au niveau de la méthode remplacent les paramètres spécifiés dans les attributs de niveau classe.
+* RazorPages : les attributs ne peuvent pas être appliqués aux méthodes de gestionnaire.
+* Contrôleurs MVC.
+* Méthodes d’action MVC : les attributs au niveau de la méthode remplacent les paramètres spécifiés dans les attributs de niveau classe.
 
 En-tête résultant appliqué à la réponse de la page cache4 par le `Default30` profil de cache :
 

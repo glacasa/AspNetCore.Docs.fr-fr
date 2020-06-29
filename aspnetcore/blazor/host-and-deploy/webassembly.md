@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 47ba6f54c68158b3f6dcbbdda06ec8747cf88241
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2b100ba029c08e0ce68d208df761f22a712fbbfd
+ms.sourcegitcommit: 99c784a873b62fbd97a73c5c07f4fe7a7f5db638
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402544"
+ms.lasthandoff: 06/27/2020
+ms.locfileid: "85503511"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>Héberger et déployer des ASP.NET CoreBlazor WebAssembly
 
@@ -67,16 +67,16 @@ Blazors’appuie sur l’hôte pour servir les fichiers compressés appropriés.
             const originalResponseArray = new Int8Array(originalResponseBuffer);
             const decompressedResponseArray = BrotliDecode(originalResponseArray);
             const contentType = type === 
-          'dotnetwasm' ? 'application/wasm' : 'application/octet-stream';
+              'dotnetwasm' ? 'application/wasm' : 'application/octet-stream';
             return new Response(decompressedResponseArray, 
-          { headers: { 'content-type': contentType } });
+              { headers: { 'content-type': contentType } });
           })();
         }
       }
     });
-  </script>
-  ```
-   
+    </script>
+    ```
+ 
 Pour désactiver la compression, ajoutez la `BlazorEnableCompression` propriété MSBuild au fichier projet de l’application et définissez la valeur sur `false` :
 
 ```xml
@@ -206,7 +206,7 @@ La suppression du gestionnaire ou la désactivation de l’héritage est effectu
 
 IIS peut être configuré via `web.config` pour servir des ressources compressées Brotli ou gzip Blazor . Pour obtenir un exemple de configuration, consultez [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true) .
 
-#### <a name="troubleshooting"></a>Résolution des problèmes
+#### <a name="troubleshooting"></a>Dépannage
 
 Si vous recevez un message *500 – Erreur interne du serveur* et que le Gestionnaire IIS lève des erreurs quand vous tentez d’accéder à la configuration du site web, vérifiez que le module de réécriture d’URL est installé. Lorsque le module n’est pas installé, le `web.config` fichier ne peut pas être analysé par IIS. Cela empêche le gestionnaire des services Internet de charger la configuration du site Web et le site Web à partir des Blazor fichiers statiques de service.
 
