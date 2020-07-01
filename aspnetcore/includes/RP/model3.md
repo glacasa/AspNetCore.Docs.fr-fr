@@ -1,5 +1,6 @@
+[!INCLUDE [more information on the CLI for EF Core](~/includes/ef-cli.md)]
 
-<span data-ttu-id="d0587-101">Exécutez les commandes CLI .NET Core suivantes :</span><span class="sxs-lookup"><span data-stu-id="d0587-101">Run the following .NET Core CLI commands:</span></span>
+<span data-ttu-id="c09e9-101">Exécutez les commandes CLI .NET Core suivantes :</span><span class="sxs-lookup"><span data-stu-id="c09e9-101">Run the following .NET Core CLI commands:</span></span>
 
 ```dotnetcli
 dotnet ef migrations add InitialCreate
