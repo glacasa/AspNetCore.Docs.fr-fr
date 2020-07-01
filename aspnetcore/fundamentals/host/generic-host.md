@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: eb0797a26393ce425d07ea9a97109b7fe8983f91
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5a2d39af6c921323ae9113fd4aca27dcdedd44a5
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407874"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793460"
 ---
 # <a name="net-generic-host"></a>Hôte générique .NET
 
@@ -37,7 +37,7 @@ Un *hôte* est un objet qui encapsule les ressources de l’application, telles 
 * Configuration
 * Implémentations de `IHostedService`
 
-Quand un hôte démarre, il appelle `IHostedService.StartAsync` sur chaque implémentation de <xref:Microsoft.Extensions.Hosting.IHostedService> qu’il trouve dans le conteneur d’injection de dépendances. Dans une application web, l’une des implémentations de `IHostedService` est un service web qui démarre une [implémentation de serveur HTTP](xref:fundamentals/index#servers).
+Lorsqu’un hôte démarre, il appelle <xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync%2A?displayProperty=nameWithType> sur chaque implémentation de <xref:Microsoft.Extensions.Hosting.IHostedService> inscrite dans la collection de services hébergés du conteneur de services. Dans une application web, l’une des implémentations de `IHostedService` est un service web qui démarre une [implémentation de serveur HTTP](xref:fundamentals/index#servers).
 
 La principale raison d’inclure toutes les ressources interdépendantes de l’application dans un objet est la gestion de la durée de vie : contrôler le démarrage de l’application et l’arrêt approprié.
 
@@ -225,7 +225,7 @@ Host.CreateDefaultBuilder(args)
     //...
 ```
 
-Pour plus d’informations, voir :
+Pour plus d'informations, voir :
 
 * [Notions de base : racine du contenu](xref:fundamentals/index#content-root)
 * [WebRoot](#webroot)
@@ -437,7 +437,7 @@ Pour définir cette valeur, utilisez la variable d’environnement ou appelez `U
 webBuilder.UseWebRoot("public");
 ```
 
-Pour plus d’informations, voir :
+Pour plus d'informations, voir :
 
 * [Notions de base : racine Web](xref:fundamentals/index#web-root)
 * [ContentRoot](#contentroot)
@@ -446,7 +446,7 @@ Pour plus d’informations, voir :
 
 Appelez des méthodes sur l’implémentation de <xref:Microsoft.Extensions.Hosting.IHost> pour démarrer et arrêter l’application. Ces méthodes affectent toutes les implémentations de <xref:Microsoft.Extensions.Hosting.IHostedService> qui sont inscrites dans le conteneur de service.
 
-### <a name="run"></a>Exécuter
+### <a name="run"></a>Exécutez
 
 <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run*> exécute l’application et bloque le thread appelant jusqu’à l’arrêt de l’hôte.
 
@@ -458,7 +458,7 @@ Appelez des méthodes sur l’implémentation de <xref:Microsoft.Extensions.Host
 
 <xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.RunConsoleAsync*>active la prise en charge de la console, crée et démarre l’hôte, puis attend que <kbd>CTRL</kbd> + <kbd>C</kbd>/SIGINT ou SIGTERM s’arrête.
 
-### <a name="start"></a>Start
+### <a name="start"></a>Démarrer
 
 <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Start*> démarre l’hôte en mode synchrone.
 
@@ -766,7 +766,7 @@ public static class Extensions
 
 L’implémentation <xref:Microsoft.Extensions.Hosting.IHost> est chargée de démarrer et d’arrêter les implémentations <xref:Microsoft.Extensions.Hosting.IHostedService> qui sont inscrites dans le conteneur de service.
 
-### <a name="run"></a>Exécuter
+### <a name="run"></a>Exécutez
 
 <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run*> exécute l’application et bloque le thread appelant jusqu’à l’arrêt de l’hôte :
 
@@ -1014,7 +1014,7 @@ Un *hôte* est un objet qui encapsule les ressources de l’application, telles 
 * Configuration
 * Implémentations de `IHostedService`
 
-Quand un hôte démarre, il appelle `IHostedService.StartAsync` sur chaque implémentation de <xref:Microsoft.Extensions.Hosting.IHostedService> qu’il trouve dans le conteneur d’injection de dépendances. Dans une application web, l’une des implémentations de `IHostedService` est un service web qui démarre une [implémentation de serveur HTTP](xref:fundamentals/index#servers).
+Lorsqu’un hôte démarre, il appelle <xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync%2A?displayProperty=nameWithType> sur chaque implémentation de <xref:Microsoft.Extensions.Hosting.IHostedService> inscrite dans la collection de services hébergés du conteneur de services. Dans une application web, l’une des implémentations de `IHostedService` est un service web qui démarre une [implémentation de serveur HTTP](xref:fundamentals/index#servers).
 
 La principale raison d’inclure toutes les ressources interdépendantes de l’application dans un objet est la gestion de la durée de vie : contrôler le démarrage de l’application et l’arrêt approprié.
 
@@ -1200,7 +1200,7 @@ Host.CreateDefaultBuilder(args)
     //...
 ```
 
-Pour plus d’informations, voir :
+Pour plus d'informations, voir :
 
 * [Notions de base : racine du contenu](xref:fundamentals/index#content-root)
 * [WebRoot](#webroot)
@@ -1425,7 +1425,7 @@ Pour définir cette valeur, utilisez la variable d’environnement ou appelez `U
 webBuilder.UseWebRoot("public");
 ```
 
-Pour plus d’informations, voir :
+Pour plus d'informations, voir :
 
 * [Notions de base : racine Web](xref:fundamentals/index#web-root)
 * [ContentRoot](#contentroot)
@@ -1434,7 +1434,7 @@ Pour plus d’informations, voir :
 
 Appelez des méthodes sur l’implémentation de <xref:Microsoft.Extensions.Hosting.IHost> pour démarrer et arrêter l’application. Ces méthodes affectent toutes les implémentations de <xref:Microsoft.Extensions.Hosting.IHostedService> qui sont inscrites dans le conteneur de service.
 
-### <a name="run"></a>Exécuter
+### <a name="run"></a>Exécutez
 
 <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run*> exécute l’application et bloque le thread appelant jusqu’à l’arrêt de l’hôte.
 
@@ -1446,7 +1446,7 @@ Appelez des méthodes sur l’implémentation de <xref:Microsoft.Extensions.Host
 
 <xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.RunConsoleAsync*>active la prise en charge de la console, crée et démarre l’hôte, puis attend que <kbd>CTRL</kbd> + <kbd>C</kbd>/SIGINT ou SIGTERM s’arrête.
 
-### <a name="start"></a>Start
+### <a name="start"></a>Démarrer
 
 <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Start*> démarre l’hôte en mode synchrone.
 

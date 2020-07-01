@@ -14,16 +14,16 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/ObjectPool
-ms.openlocfilehash: 8244acb39a345875d80c5528a822de23f78b6e38
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 9df7f370eb550172493478bcd8d94a9541926fec
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403545"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793558"
 ---
 # <a name="object-reuse-with-objectpool-in-aspnet-core"></a>Réutilisation d’objets avec ObjectPool dans ASP.NET Core
 
-Par [Steve Gordon](https://twitter.com/stevejgordon), [Ryan Nowak](https://github.com/rynowak)et [Rick Anderson](https://twitter.com/RickAndMSFT)
+Par [Steve Gordon](https://twitter.com/stevejgordon), [Ryan Nowak](https://github.com/rynowak)et [Günther Foidl](https://github.com/gfoidl)
 
 <xref:Microsoft.Extensions.ObjectPool>fait partie de l’infrastructure ASP.NET Core qui prend en charge la conservation d’un groupe d’objets en mémoire à des fins de réutilisation, au lieu d’autoriser les objets à être récupérés par le garbage collector.
 
@@ -42,7 +42,9 @@ La mise en pool d’objets n’améliore pas toujours les performances :
 
 Utilisez le mise en pool d’objets uniquement après avoir collecté les données de performances à l’aide de scénarios réalistes pour votre application ou bibliothèque.
 
-**AVERTISSEMENT : `ObjectPool` n’implémente pas `IDisposable` . Nous vous déconseillons de l’utiliser avec des types nécessitant une suppression.**
+::: moniker range="< aspnetcore-3.0"
+**AVERTISSEMENT : `ObjectPool` n’implémente pas `IDisposable` . Nous vous déconseillons de l’utiliser avec des types nécessitant une suppression.** `ObjectPool`dans ASP.NET Core 3,0 et versions ultérieures prend en charge `IDisposable` .
+::: moniker-end
 
 **Remarque : le ObjectPool n’impose aucune limite quant au nombre d’objets qu’il va allouer, il limite le nombre d’objets qu’il va conserver.**
 
@@ -63,7 +65,20 @@ Le ObjectPool peut être utilisé dans une application de plusieurs façons :
 
 ## <a name="how-to-use-objectpool"></a>Utilisation de ObjectPool
 
-Appelez <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1> pour obtenir un objet et <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> pour retourner l’objet.  Vous n’avez pas besoin de retourner chaque objet. Si vous ne renvoyez pas d’objet, il sera récupéré par le garbage collector.
+Appelez <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Get*> pour obtenir un objet et <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> pour retourner l’objet.  Vous n’avez pas besoin de retourner chaque objet. Si vous ne renvoyez pas d’objet, il sera récupéré par le garbage collector.
+
+::: moniker range=">= aspnetcore-3.0"
+Lorsque <xref:Microsoft.Extensions.ObjectPool.DefaultObjectPoolProvider> est utilisé et `T` implémente `IDisposable` :
+
+* Les éléments qui ne sont ***pas*** retournés au pool seront supprimés.
+* Lorsque le pool est supprimé par DI, tous les éléments du pool sont supprimés.
+
+Remarque : une fois le pool supprimé :
+
+* L’appel `Get` de lève une `ObjectDisposedException` .
+* `return`supprime l’élément donné.
+
+::: moniker-end
 
 ## <a name="objectpool-sample"></a>Exemple ObjectPool
 

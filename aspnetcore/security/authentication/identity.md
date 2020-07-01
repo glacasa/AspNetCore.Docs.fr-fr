@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 97cbc5f68d20c06e92a56ead85c8377d4e8ef582
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 31970bd2b52ad83c116067d258aa9dca2d9b3b66
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404585"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793583"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>Présentation de Identity sur ASP.net Core
 
@@ -93,7 +93,11 @@ Exécutez la commande suivante dans la console du gestionnaire de package (PMC)�
 
 # <a name="net-core-cli"></a>[CLI .NET Core](#tab/netcore-cli)
 
-Les migrations ne sont pas nécessaires pour cette étape lors de l’utilisation de SQLite. Pour la base de données locale, exécutez la commande suivante :
+Les migrations ne sont pas nécessaires pour cette étape lors de l’utilisation de SQLite.
+
+[!INCLUDE [more information on the CLI for EF Core](~/includes/ef-cli.md)]
+
+Pour la base de données locale, exécutez la commande suivante :
 
 ```dotnetcli
 dotnet ef database update
