@@ -1,8 +1,8 @@
 ## <a name="debug-diagnostics"></a>Diagnostics de débogage
 
-Pour une sortie de diagnostic de routage `Logging:LogLevel:Microsoft` détaillée `Debug`, affectez à la valeur. Par exemple, dans l’environnement de développement, définissez *appSettings. Development. JSON*:
+Pour une sortie de diagnostic de routage détaillée, affectez à la valeur `Logging:LogLevel:Microsoft` `Debug` . Dans l’environnement de développement, définissez le niveau de journalisation dans *appsettings.Development.jssur*:
 
-```JSON
+```json
 {
   "Logging": {
     "LogLevel": {
@@ -12,3 +12,4 @@ Pour une sortie de diagnostic de routage `Logging:LogLevel:Microsoft` détaillé
     }
   }
 }
+```
