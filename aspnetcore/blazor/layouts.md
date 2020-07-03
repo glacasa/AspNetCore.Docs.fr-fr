@@ -5,7 +5,7 @@ description: Découvrez comment créer des composants de disposition réutilisab
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/12/2020
+ms.date: 06/23/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: f405bb655b2879bd546420d99ff645401ead92fc
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: fe78a144b413bf97be83d20b11148e1856608f78
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402518"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944229"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>Dispositions de ASP.NET Core Blazor
 
@@ -80,6 +80,9 @@ Les `_Imports.razor` importations de fichiers suivantes :
 Le `_Imports.razor` fichier est semblable au [fichier _ViewImports. cshtml pour les Razor affichages et les pages,](xref:mvc/views/layout#importing-shared-directives) mais appliqué spécifiquement aux Razor fichiers de composants.
 
 La spécification d’une disposition dans `_Imports.razor` remplace une disposition spécifiée comme *disposition par défaut*du routeur.
+
+> [!WARNING]
+> N’ajoutez **pas** de Razor `@layout` directive au fichier racine `_Imports.razor` , ce qui entraîne une boucle infinie de dispositions dans l’application. Pour contrôler la disposition de l’application par défaut, spécifiez la disposition dans le `Router` composant. Pour plus d’informations, consultez la section [disposition par défaut](#default-layout) .
 
 ## <a name="nested-layouts"></a>Dispositions imbriquées
 

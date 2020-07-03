@@ -5,7 +5,7 @@ description: Découvrez comment utiliser des formulaires et des scénarios de va
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/04/2020
+ms.date: 07/01/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 1ed87b4aa2519334d2339b500a615aa96ef4d57d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 925051d7426470aebfddbdb5ff83d7dab9f82726
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402960"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944430"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor les formulaires et la validation
 
@@ -302,7 +302,7 @@ Le `CustomInputText` composant peut être utilisé partout où <xref:Microsoft.A
 }
 ```
 
-## <a name="work-with-radio-buttons"></a>Utiliser des cases d’option
+## <a name="radio-buttons"></a>Cases d’option
 
 Lorsque vous utilisez des cases d’option dans un formulaire, la liaison de données est gérée différemment des autres éléments, car les cases d’option sont évaluées en tant que groupe. La valeur de chaque case d’option est fixe, mais la valeur du groupe de cases d’option est la valeur de la case d’option sélectionnée. L’exemple suivant montre comment :
 
@@ -390,6 +390,30 @@ L’exemple suivant <xref:Microsoft.AspNetCore.Components.Forms.EditForm> utilis
 }
 ```
 
+## <a name="binding-select-element-options-to-c-object-null-values"></a>Liaison `<select>` d’options d’élément aux valeurs d’objet C# `null`
+
+Il n’existe pas de méthode raisonnable pour représenter une `<select>` valeur d’option d’élément en tant que valeur d’objet C# `null` , car :
+
+* Les attributs HTML ne peuvent pas avoir de `null` valeurs. L’équivalent le plus proche de `null` en HTML est l’absence de l' `value` attribut HTML de l' `<option>` élément.
+* Quand vous sélectionnez un `<option>` `value` élément sans attribut, le navigateur traite la valeur comme le *contenu de texte* de cet `<option>` élément.
+
+L' Blazor infrastructure ne tente pas de supprimer le comportement par défaut, car cela impliquerait :
+
+* Création d’une chaîne de solutions de contournement de cas spéciaux dans le Framework.
+* Modifications avec rupture apportées au comportement actuel de l’infrastructure.
+
+::: moniker range=">= aspnetcore-5.0"
+
+L’équivalent le plus plausible `null` en HTML est une *chaîne vide* `value` . Le Blazor Framework gère les `null` conversions de chaînes vides pour une liaison bidirectionnelle vers une `<select>` valeur de.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+L' Blazor infrastructure ne gère pas automatiquement les `null` conversions de chaînes vides lors de la tentative de liaison bidirectionnelle à la `<select>` valeur de. Pour plus d’informations, consultez [fixer `<select>` la liaison à une valeur null (dotnet/aspnetcore #23221)](https://github.com/dotnet/aspnetcore/pull/23221).
+
+::: moniker-end
+
 ## <a name="validation-support"></a>Prise en charge de la validation
 
 Le <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> composant attache la prise en charge de la validation à l’aide d’annotations de données à la Cascaded <xref:Microsoft.AspNetCore.Components.Forms.EditContext> . L’activation de la prise en charge de la validation à l’aide d’annotations de données requiert ce geste explicite. Pour utiliser un système de validation différent des annotations de données, remplacez <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> par une implémentation personnalisée. L’implémentation de ASP.NET Core est disponible pour l’inspection dans la source de référence : [`DataAnnotationsValidator`](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/DataAnnotationsValidator.cs) / [`AddDataAnnotationsValidation`](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs) . Les liens précédents vers la source de référence fournissent du code à partir de la branche du référentiel `master` , qui représente le développement actuel de l’unité du produit pour la prochaine version de ASP.net core. Pour sélectionner la branche pour une version différente, utilisez le sélecteur de branche GitHub (par exemple `release/3.1` ).
@@ -429,7 +453,7 @@ Pour vous assurer qu’un résultat de validation est correctement associé à u
 using System;
 using System.ComponentModel.DataAnnotations;
 
-private class MyCustomValidator : ValidationAttribute
+private class CustomValidator : ValidationAttribute
 {
     protected override ValidationResult IsValid(object value, 
         ValidationContext validationContext)
@@ -441,6 +465,9 @@ private class MyCustomValidator : ValidationAttribute
     }
 }
 ```
+
+> [!NOTE]
+> <xref:System.ComponentModel.DataAnnotations.ValidationContext.GetService%2A?displayProperty=nameWithType> a la valeur `null`. L’injection de services pour la validation dans la `IsValid` méthode n’est pas prise en charge.
 
 ### <a name="blazor-data-annotations-validation-package"></a>Blazorpackage de validation des annotations de données
 
@@ -576,7 +603,7 @@ L’un des effets secondaires de l’approche précédente est qu’un <xref:Mic
 }
 ```
 
-## <a name="troubleshoot"></a>Dépanner
+## <a name="troubleshoot"></a>Résoudre des problèmes
 
 > InvalidOperationException : EditForm requiert un paramètre de modèle, ou un paramètre EditContext, mais pas les deux.
 

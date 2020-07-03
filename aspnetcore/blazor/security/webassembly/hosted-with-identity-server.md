@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: cce6b6b1ec144e362415fe34645aef567269c873
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b0c6cbd814a23afabbbf9a0d943d28125ac1f61c
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402206"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944577"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>Sécuriser une Blazor WebAssembly application hébergée ASP.net core avec le Identity serveur
 
@@ -32,7 +32,7 @@ Cet article explique comment créer une Blazor application hébergée qui utilis
 
 Dans Visual Studio :
 
-1. Créer une **Blazor WebAssembly** application. Pour plus d’informations, consultez <xref:blazor/get-started>.
+1. Créer une **Blazor WebAssembly** application.
 1. Dans la boîte de dialogue **créer une nouvelle Blazor application** , sélectionnez **modifier** dans la section **authentification** .
 1. Sélectionnez **des comptes d’utilisateur individuels** , puis cliquez sur **OK**.
 1. Activez la case à cocher **ASP.net Core hébergé** dans la section **avancé** .

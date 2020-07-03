@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: c41ba2e067c8dc978b1359db548733c5f8890a2b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: dbdb7cd86218fd9ba63ae4ac2aa516836d4fd1a1
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408381"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944293"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>Intergiciel (middleware) de réécriture d’URL dans ASP.NET Core
 
@@ -94,7 +94,7 @@ Les principales raisons d’utiliser les technologies de réécriture d’URL ba
 
   Mener des tests de performances est la seule façon de savoir exactement quelle approche dégrade le plus les performances ou si la dégradation des performances est négligeable.
 
-## <a name="package"></a>Paquet
+## <a name="package"></a>Package
 
 L’intergiciel (middleware) de réécriture d’URL est fourni par le package [Microsoft.AspNetCore.Rewrite](https://www.nuget.org/packages/Microsoft.AspNetCore.Rewrite), qui est implicitement inclus dans les applications ASP.NET Core.
 
@@ -194,7 +194,7 @@ Le caret (`^`) au début de l’expression signifie que la correspondance commen
 
 Dans l’exemple précédent avec la règle de redirection, `redirect-rule/(.*)`, il n’existe pas de caret (`^`) au début de l’expression régulière. Ainsi, n’importe quel caractère peut précéder `redirect-rule/` dans le chemin pour qu’une correspondance soit établie.
 
-| Chemin d’accès                               | Correspond |
+| Chemin                               | Faire correspondre |
 | ---------------------------------- | :---: |
 | `/redirect-rule/1234/5678`         | Oui   |
 | `/my-cool-redirect-rule/1234/5678` | Oui   |
@@ -202,7 +202,7 @@ Dans l’exemple précédent avec la règle de redirection, `redirect-rule/(.*)`
 
 La règle de réécriture, `^rewrite-rule/(\d+)/(\d+)`, établit une correspondance uniquement avec des chemins d’accès s’ils commencent par `rewrite-rule/`. Dans le tableau suivant, notez la différence de correspondance.
 
-| Chemin d’accès                              | Correspond |
+| Chemin                              | Faire correspondre |
 | --------------------------------- | :---: |
 | `/rewrite-rule/1234/5678`         | Oui   |
 | `/my-cool-rewrite-rule/1234/5678` | Non    |
@@ -325,7 +325,7 @@ L’intergiciel prend en charge les variables serveur du module de réécriture 
 
 Utilisez <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> pour implémenter votre propre logique de règle dans une méthode. `Add` expose <xref:Microsoft.AspNetCore.Rewrite.RewriteContext>, ce qui rend <xref:Microsoft.AspNetCore.Http.HttpContext> disponible pour une utilisation dans votre méthode. [RewriteContext.Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) détermine la façon dont le traitement du pipeline supplémentaire est géré. Définissez la valeur sur un des champs <xref:Microsoft.AspNetCore.Rewrite.RuleResult> décrits dans le tableau suivant.
 
-| `RewriteContext.Result`              | Action                                                           |
+| Réécrire le résultat du contexte               | Action                                                           |
 | ------------------------------------ | ---------------------------------------------------------------- |
 | `RuleResult.ContinueRules` (valeur par défaut) | Continuer à appliquer les règles.                                         |
 | `RuleResult.EndResponse`             | Cesser d’appliquer les règles et envoyer la réponse.                       |
@@ -446,7 +446,7 @@ Les principales raisons d’utiliser les technologies de réécriture d’URL ba
 
   Mener des tests de performances est la seule façon de savoir exactement quelle approche dégrade le plus les performances ou si la dégradation des performances est négligeable.
 
-## <a name="package"></a>Paquet
+## <a name="package"></a>Package
 
 Pour inclure le middleware dans votre projet, ajoutez une référence de package au [métapackage Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app) dans le fichier projet, qui contient le package [Microsoft.AspNetCore.Rewrite](https://www.nuget.org/packages/Microsoft.AspNetCore.Rewrite).
 
@@ -548,7 +548,7 @@ Le caret (`^`) au début de l’expression signifie que la correspondance commen
 
 Dans l’exemple précédent avec la règle de redirection, `redirect-rule/(.*)`, il n’existe pas de caret (`^`) au début de l’expression régulière. Ainsi, n’importe quel caractère peut précéder `redirect-rule/` dans le chemin pour qu’une correspondance soit établie.
 
-| Chemin d’accès                               | Correspond |
+| Chemin                               | Faire correspondre |
 | ---------------------------------- | :---: |
 | `/redirect-rule/1234/5678`         | Oui   |
 | `/my-cool-redirect-rule/1234/5678` | Oui   |
@@ -556,7 +556,7 @@ Dans l’exemple précédent avec la règle de redirection, `redirect-rule/(.*)`
 
 La règle de réécriture, `^rewrite-rule/(\d+)/(\d+)`, établit une correspondance uniquement avec des chemins d’accès s’ils commencent par `rewrite-rule/`. Dans le tableau suivant, notez la différence de correspondance.
 
-| Chemin d’accès                              | Correspond |
+| Chemin                              | Faire correspondre |
 | --------------------------------- | :---: |
 | `/rewrite-rule/1234/5678`         | Oui   |
 | `/my-cool-rewrite-rule/1234/5678` | Non    |
@@ -679,7 +679,7 @@ L’intergiciel prend en charge les variables serveur du module de réécriture 
 
 Utilisez <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> pour implémenter votre propre logique de règle dans une méthode. `Add` expose <xref:Microsoft.AspNetCore.Rewrite.RewriteContext>, ce qui rend <xref:Microsoft.AspNetCore.Http.HttpContext> disponible pour une utilisation dans votre méthode. [RewriteContext.Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) détermine la façon dont le traitement du pipeline supplémentaire est géré. Définissez la valeur sur un des champs <xref:Microsoft.AspNetCore.Rewrite.RuleResult> décrits dans le tableau suivant.
 
-| `RewriteContext.Result`              | Action                                                           |
+| Réécrire le résultat du contexte               | Action                                                           |
 | ------------------------------------ | ---------------------------------------------------------------- |
 | `RuleResult.ContinueRules` (valeur par défaut) | Continuer à appliquer les règles.                                         |
 | `RuleResult.EndResponse`             | Cesser d’appliquer les règles et envoyer la réponse.                       |

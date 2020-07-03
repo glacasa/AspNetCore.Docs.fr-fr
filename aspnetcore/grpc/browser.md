@@ -4,7 +4,7 @@ author: jamesnk
 description: Découvrez comment configurer les services gRPC sur ASP.NET Core à appeler à partir d’applications de navigateur à l’aide de gRPC-Web.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 06/29/2020
+ms.date: 06/30/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: 20f72deb9895111a6e691eb1ee5cd7419c8c4cb4
-ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
+ms.openlocfilehash: 05ff343f7116509128b7370a50bcfa3c67ffb9fe
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85793500"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944238"
 ---
 # <a name="use-grpc-in-browser-apps"></a>Utiliser gRPC dans les applications de navigateur
 
@@ -79,6 +79,15 @@ Le code précédent :
 * Appelle `AddCors` pour ajouter des services cors et configure une stratégie cors qui expose des en-têtes spécifiques à gRPC.
 * Appelle `UseCors` pour ajouter l’intergiciel (middleware) cors après le routage et avant les points de terminaison.
 * Spécifie que la `endpoints.MapGrpcService<GreeterService>()` méthode prend en charge cors avec `RequiresCors` .
+
+### <a name="grpc-web-and-streaming"></a>gRPC-Web et streaming
+
+Le gRPC traditionnel sur HTTP/2 prend en charge la diffusion en continu dans toutes les directions. gRPC-Web offre une prise en charge limitée de la diffusion en continu :
+
+* gRPC-les clients de navigateur Web ne prennent pas en charge l’appel des méthodes de diffusion en continu bidirectionnelle et de streaming client.
+* ASP.NET Core Services gRPC hébergés sur Azure App Service et IIS ne prennent pas en charge la diffusion bidirectionnelle.
+
+Lors de l’utilisation de gRPC-Web, nous vous recommandons uniquement d’utiliser des méthodes unaires et des méthodes de diffusion de serveur.
 
 ## <a name="call-grpc-web-from-the-browser"></a>Appeler gRPC-Web à partir du navigateur
 

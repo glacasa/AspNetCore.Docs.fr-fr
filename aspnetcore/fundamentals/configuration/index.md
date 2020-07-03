@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 5e413fad090ff2cb5e1379bf7311caf159a57a4b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5a9ed8d6737352f56be78039a895a85f22dec361
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408589"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944650"
 ---
 # <a name="configuration-in-aspnet-core"></a>Configuration dans ASP.NET Core
 
@@ -184,6 +184,10 @@ Pour plus d’informations, consultez [Azure Apps : remplacer la configuration 
 
 Consultez [préfixes de chaîne de connexion](#constr) pour plus d’informations sur les chaînes de connexion de base de données Azure.
 
+### <a name="environment-variables-set-in-launchsettingsjson"></a>Variables d’environnement définies dans launchSettings.jssur
+
+Les variables d’environnement définies dans *launchSettings.jslors de* la substitution de celles définies dans l’environnement système.
+
 <a name="clcp"></a>
 
 ## <a name="command-line"></a>Ligne de commande
@@ -219,7 +223,7 @@ dotnet run --MyKey "Using --" --Position:Title=Cmd-- --Position:Name=Cmd--Rick
 Valeur de la clé :
 
 * Doit suivre `=` ou la clé doit avoir un préfixe `--` ou `/` lorsque la valeur suit un espace.
-* N’est pas obligatoire si `=` est utilisé. Par exemple : `MySetting=`.
+* N’est pas obligatoire si `=` est utilisé. Par exemple, `MySetting=`.
 
 Dans la même commande, ne mélangez pas les paires clé-valeur d’argument de ligne de commande qui utilisent `=` des paires clé-valeur utilisant un espace.
 
@@ -751,6 +755,8 @@ Cette rubrique se rapporte uniquement à la configuration de l' *application*. D
   * <xref:host-and-deploy/iis/index>
   * <xref:host-and-deploy/aspnet-core-module>
 
+Les variables d’environnement définies dans *launchSettings.jslors de* la substitution de celles définies dans l’environnement système.
+
 Pour plus d’informations sur la migration de la configuration d’application à partir de versions antérieures de ASP.NET, consultez <xref:migration/proper-to-2x/index#store-configurations> .
 
 ## <a name="add-configuration-from-an-external-assembly"></a>Ajouter la configuration à partir d’un assembly externe
@@ -904,7 +910,7 @@ public class HomeController : Controller
 
 Les fournisseurs de configuration ne peuvent pas utiliser le DI, car celui-ci n’est pas disponible lorsque les fournisseurs sont configurés par l’hôte.
 
-### <a name="keys"></a>Touches
+### <a name="keys"></a>Keys
 
 Les clés de configuration adoptent les conventions suivantes :
 

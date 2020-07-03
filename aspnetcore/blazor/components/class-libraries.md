@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: b54eb7142fc7e1665cc0aaaad068a67852ac2f74
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b172059407f9a08dacc0fadd804864c7aee7fb90
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399073"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944498"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>RazorBibliothèques de classes des composants ASP.net Core
 
@@ -36,14 +36,12 @@ Tout comme les composants sont des types .NET standard, les composants fournis p
 
 ## <a name="create-an-rcl"></a>Créer un RCL
 
-Suivez les instructions de l' <xref:blazor/get-started> article pour configurer votre environnement pour Blazor .
-
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 1. Créez un projet.
 1. Sélectionnez ** Razor bibliothèque de classes**. Sélectionnez **Suivant**.
 1. Dans la boîte de dialogue **créer une nouvelle Razor bibliothèque de classes** , sélectionnez **créer**.
-1. Indiquez un nom de projet dans le champ **Nom du projet**, ou acceptez le nom de projet par défaut. Les exemples de cette rubrique utilisent le nom du projet `MyComponentLib1` . Sélectionnez **Create** (Créer).
+1. Indiquez un nom de projet dans le champ **Nom du projet**, ou acceptez le nom de projet par défaut. Les exemples de cette rubrique utilisent le nom du projet `MyComponentLib1` . Sélectionnez **Créer**.
 1. Ajouter RCL à une solution :
    1. Cliquez avec le bouton droit sur la solution. Sélectionnez **Ajouter**un  >  **projet existant**.
    1. Accédez au fichier projet de RCL.

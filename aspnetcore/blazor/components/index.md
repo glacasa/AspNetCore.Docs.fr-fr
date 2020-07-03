@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 02e3f7f5442a5abde0b13b7bba14d9d0f29c1de7
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d25dc3441c2373655558dfc101b899252a280814
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399086"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944443"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Créer et utiliser des Razor composants ASP.net Core
 
@@ -420,7 +420,22 @@ Les références de composant offrent un moyen de référencer une instance de c
 Lors du rendu du composant, le `loginDialog` champ est rempli avec l' `MyLoginDialog` instance du composant enfant. Vous pouvez ensuite appeler des méthodes .NET sur l’instance du composant.
 
 > [!IMPORTANT]
-> La `loginDialog` variable est remplie uniquement après le rendu du composant et sa sortie comprend l' `MyLoginDialog` élément. Jusqu’à ce stade, il n’y a rien à référencer. Pour manipuler des références de composants après la fin du rendu du composant, utilisez les [ `OnAfterRenderAsync` `OnAfterRender` méthodes ou](xref:blazor/components/lifecycle#after-component-render).
+> La `loginDialog` variable est remplie uniquement après le rendu du composant et sa sortie comprend l' `MyLoginDialog` élément. Tant que le composant n’est pas rendu, il n’y a rien à référencer.
+>
+> Pour manipuler des références de composants après la fin du rendu du composant, utilisez les [ `OnAfterRenderAsync` `OnAfterRender` méthodes ou](xref:blazor/components/lifecycle#after-component-render).
+>
+> Pour utiliser une variable de référence avec un gestionnaire d’événements, utilisez une expression lambda ou assignez le délégué de gestionnaire d’événements dans les [ `OnAfterRenderAsync` `OnAfterRender` méthodes ou](xref:blazor/components/lifecycle#after-component-render). Cela garantit que la variable de référence est assignée avant que le gestionnaire d’événements soit affecté.
+>
+> ```razor
+> <button type="button" 
+>     @onclick="@(() => loginDialog.DoSomething())">Do Something</button>
+>
+> <MyLoginDialog @ref="loginDialog" ... />
+>
+> @code {
+>     private MyLoginDialog loginDialog;
+> }
+> ```
 
 Pour référencer des composants dans une boucle, consultez [capturer des références à plusieurs composants enfants similaires (dotnet/aspnetcore #13358)](https://github.com/dotnet/aspnetcore/issues/13358).
 

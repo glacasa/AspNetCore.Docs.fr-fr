@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/dependency-injection
-ms.openlocfilehash: 0e99e2e3e2dafae0c35d2cfe6903bf4f511f5dc1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e88a471a35e1c2be5f77407a6c594cd6a97e1737
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402882"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944365"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core l' Blazor injection de dépendances
 
@@ -52,6 +52,12 @@ Un fournisseur de services personnalisé ne fournit pas automatiquement les serv
 Configurez les services de la collection de services de l’application dans la `Main` méthode de `Program.cs` . Dans l’exemple suivant, l' `MyDependency` implémentation est inscrite pour `IMyDependency` :
 
 ```csharp
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+
 public class Program
 {
     public static async Task Main(string[] args)
@@ -59,6 +65,9 @@ public class Program
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
         builder.Services.AddSingleton<IMyDependency, MyDependency>();
         builder.RootComponents.Add<App>("app");
+        
+        builder.Services.AddTransient(sp => 
+            new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
         await builder.Build().RunAsync();
     }
@@ -75,6 +84,9 @@ public class Program
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
         builder.Services.AddSingleton<WeatherService>();
         builder.RootComponents.Add<App>("app");
+        
+        builder.Services.AddTransient(sp => 
+            new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
         var host = builder.Build();
 
@@ -96,6 +108,9 @@ public class Program
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
         builder.Services.AddSingleton<WeatherService>();
         builder.RootComponents.Add<App>("app");
+        
+        builder.Services.AddTransient(sp => 
+            new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
         var host = builder.Build();
 
@@ -113,13 +128,17 @@ public class Program
 Après avoir créé une nouvelle application, examinez la `Startup.ConfigureServices` méthode :
 
 ```csharp
+using Microsoft.Extensions.DependencyInjection;
+
+...
+
 public void ConfigureServices(IServiceCollection services)
 {
-    // Add custom services here
+    ...
 }
 ```
 
-<xref:Microsoft.Extensions.Hosting.IHostBuilder.ConfigureServices%2A>Une <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> , qui est une liste d’objets descripteurs de service (), est passée à la méthode <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor> . Les services sont ajoutés en fournissant des descripteurs de service à la collection de services. L’exemple suivant illustre le concept avec l' `IDataAccess` interface et son implémentation concrète `DataAccess` :
+<xref:Microsoft.Extensions.Hosting.IHostBuilder.ConfigureServices%2A>Une <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> , qui est une liste d’objets descripteurs de service (), est passée à la méthode <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor> . Les services sont ajoutés dans la `ConfigureServices` méthode en fournissant des descripteurs de service à la collection de services. L’exemple suivant illustre le concept avec l' `IDataAccess` interface et son implémentation concrète `DataAccess` :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -158,11 +177,13 @@ L’exemple suivant montre comment utiliser [`@inject`](xref:mvc/views/razor#inj
 En interne, la propriété générée ( `DataRepository` ) utilise l' [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) attribut. En règle générale, cet attribut n’est pas utilisé directement. Si une classe de base est requise pour les composants et les propriétés injectées sont également requises pour la classe de base, ajoutez manuellement l' [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) attribut :
 
 ```csharp
+using Microsoft.AspNetCore.Components;
+
 public class ComponentBase : IComponent
 {
-    // DI works even if using the InjectAttribute in a component's base class.
     [Inject]
     protected IDataAccess DataRepository { get; set; }
+
     ...
 }
 ```
@@ -178,13 +199,11 @@ Dans les composants dérivés de la classe de base, la [`@inject`](xref:mvc/view
 
 ## <a name="use-di-in-services"></a>Utiliser DI dans les services
 
-Les services complexes peuvent nécessiter des services supplémentaires. Dans l’exemple précédent, `DataAccess` peut nécessiter le <xref:System.Net.Http.HttpClient> service par défaut. [`@inject`](xref:mvc/views/razor#inject)(ou l' [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) attribut) n’est pas disponible pour une utilisation dans les services. L' *injection de constructeur* doit être utilisée à la place. Les services requis sont ajoutés en ajoutant des paramètres au constructeur du service. Lorsque DI crée le service, il reconnaît les services dont il a besoin dans le constructeur et les fournit en conséquence.
+Les services complexes peuvent nécessiter des services supplémentaires. Dans l’exemple précédent, `DataAccess` peut nécessiter le <xref:System.Net.Http.HttpClient> service par défaut. [`@inject`](xref:mvc/views/razor#inject)(ou l' [`[Inject]`](xref:Microsoft.AspNetCore.Components.InjectAttribute) attribut) n’est pas disponible pour une utilisation dans les services. L' *injection de constructeur* doit être utilisée à la place. Les services requis sont ajoutés en ajoutant des paramètres au constructeur du service. Lorsque DI crée le service, il reconnaît les services dont il a besoin dans le constructeur et les fournit en conséquence. Dans l’exemple suivant, le constructeur reçoit un <xref:System.Net.Http.HttpClient> via di. <xref:System.Net.Http.HttpClient>est un service par défaut.
 
 ```csharp
 public class DataAccess : IDataAccess
 {
-    // The constructor receives an HttpClient via dependency
-    // injection. HttpClient is a default service.
     public DataAccess(HttpClient client)
     {
         ...

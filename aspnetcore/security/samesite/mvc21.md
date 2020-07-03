@@ -15,16 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/samesite/mvc21
-ms.openlocfilehash: 4239321531f3a7696a15b1dea164450ea0860c2b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ce301cd7e2cbfbfc724d78bd5734dff231d0ab93
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85409057"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944739"
 ---
 # <a name="aspnet-core-21-mvc-samesite-cookie-sample"></a>Exemple de cookie SameSite ASP.NET Core MVC 2,1
 
 ASP.NET Core 2,1 dispose d’une prise en charge intégrée de l’attribut [SameSite](https://www.owasp.org/index.php/SameSite) , mais il a été écrit dans la norme d’origine. Le [comportement corrigé](https://github.com/dotnet/aspnetcore/issues/8212) a modifié la signification de `SameSite.None` pour émettre l’attribut sameSite avec une valeur de `None` , au lieu de ne pas émettre la valeur du tout. Si vous ne souhaitez pas émettre la valeur, vous pouvez définir la `SameSite` propriété sur un cookie sur-1.
+
+[!INCLUDE[](~/includes/SameSiteIdentity.md)]
 
 ## <a name="writing-the-samesite-attribute"></a><a name="sampleCode"></a>Écriture de l’attribut SameSite
 

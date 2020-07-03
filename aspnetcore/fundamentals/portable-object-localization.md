@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/portable-object-localization
-ms.openlocfilehash: e4053bd5024914242db1755ca34ddbeb2f2d5013
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 531e836db8613cc3382ef2f38f336a0986116334
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408121"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944482"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>Configurer la localisation d’objets portables dans ASP.NET Core
 
@@ -28,7 +28,7 @@ Cet article présente les étapes d’utilisation d’objets portables (PO, Port
 
 **Remarque :** Orchard Core n’est pas un produit Microsoft. Par conséquent, Microsoft ne fournit aucun support pour cette fonctionnalité.
 
-[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/POLocalization) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
+[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/2.x/POLocalization) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
 ## <a name="what-is-a-po-file"></a>Qu’est-ce qu’un fichier PO ?
 

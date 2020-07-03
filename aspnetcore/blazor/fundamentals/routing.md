@@ -5,7 +5,7 @@ description: Découvrez comment acheminer des requêtes dans des applications et
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 07/01/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: ba85cc901127725d674b699638fef5fe363081a8
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: c41736e7c5a3e59a08b579de54f9810381c8df1c
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402791"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944176"
 ---
 # <a name="aspnet-core-blazor-routing"></a>Routage de ASP.NET Core Blazor
 
@@ -174,7 +174,7 @@ Pour plus d’informations, consultez <xref:fundamentals/routing>.
 
 ## <a name="navlink-component"></a>Composant NavLink
 
-Utilisez un <xref:Microsoft.AspNetCore.Components.Routing.NavLink> composant à la place des éléments Hyperlink html ( `<a>` ) lors de la création de liens de navigation. Un <xref:Microsoft.AspNetCore.Components.Routing.NavLink> composant se comporte comme un `<a>` élément, sauf qu’il fait basculer une `active` classe CSS selon que son `href` correspond à l’URL actuelle. La `active` classe permet à un utilisateur de comprendre quelle page est la page active parmi les liens de navigation affichés.
+Utilisez un <xref:Microsoft.AspNetCore.Components.Routing.NavLink> composant à la place des éléments Hyperlink html ( `<a>` ) lors de la création de liens de navigation. Un <xref:Microsoft.AspNetCore.Components.Routing.NavLink> composant se comporte comme un `<a>` élément, sauf qu’il fait basculer une `active` classe CSS selon que son `href` correspond à l’URL actuelle. La `active` classe permet à un utilisateur de comprendre quelle page est la page active parmi les liens de navigation affichés. Éventuellement, assignez un nom de classe CSS à pour <xref:Microsoft.AspNetCore.Components.Routing.NavLink.ActiveClass?displayProperty=nameWithType> appliquer une classe CSS personnalisée au lien rendu lorsque l’itinéraire actuel correspond à `href` .
 
 Le `NavMenu` composant suivant crée une [`Bootstrap`](https://getbootstrap.com/docs/) barre de navigation qui montre comment utiliser des <xref:Microsoft.AspNetCore.Components.Routing.NavLink> composants :
 
@@ -196,7 +196,7 @@ Dans l’exemple précédent, la page <xref:Microsoft.AspNetCore.Components.Rout
 Le balisage HTML suivant est rendu :
 
 ```html
-<a href="my-page" target="_blank" rel="noopener noreferrer">My page</a>
+<a href="my-page" target="_blank">My page</a>
 ```
 
 ## <a name="uri-and-navigation-state-helpers"></a>Aide des URI et de l’état de navigation
@@ -232,7 +232,7 @@ Le composant suivant accède au composant de l’application `Counter` lorsque l
 }
 ```
 
-Le composant suivant gère un événement de modification d’emplacement en définissant <xref:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged?displayProperty=nameWithType> . La `HandleLocationChanged` méthode est déconnectée lorsque `Dispose` est appelé par l’infrastructure. Le déraccordement de la méthode permet de garbage collection du composant.
+Le composant suivant gère un événement de modification d’emplacement en s’abonnant à <xref:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged?displayProperty=nameWithType> . La `HandleLocationChanged` méthode est déconnectée lorsque `Dispose` est appelé par l’infrastructure. Le déraccordement de la méthode permet de garbage collection du composant.
 
 ```razor
 @implements IDisposable

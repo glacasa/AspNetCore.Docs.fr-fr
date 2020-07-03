@@ -15,12 +15,12 @@ no-loc:
 - SignalR
 - Electron
 uid: security/samesite
-ms.openlocfilehash: 68766591ec86e12e5602d741de74e20aec67cf49
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3e3c12e17de3e12ead15c405e9339761a3f2f711
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399502"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944272"
 ---
 # <a name="work-with-samesite-cookies-in-aspnet-core"></a>Utiliser des cookies SameSite dans ASP.NET Core
 
@@ -37,6 +37,10 @@ SameSite est un projet standard de l' [IETF](https://ietf.org/about/) conçu pou
 Le `SameSite=Lax` paramètre fonctionne pour la plupart des cookies d’application. Certaines formes d’authentification comme [OpenID Connect](https://openid.net/connect/) (OIDC) et [WS-Federation](https://auth0.com/docs/protocols/ws-fed) default pour la publication de redirections basées sur. Les redirections basées sur la publication déclenchent les protections du navigateur SameSite, donc SameSite est désactivé pour ces composants. La plupart des connexions [OAuth](https://oauth.net/) ne sont pas affectées en raison de différences de flux de demande.
 
 Chaque composant ASP.NET Core qui émet des cookies doit décider si SameSite est approprié.
+
+## <a name="samesite-and-identity"></a>SameSite etIdentity
+
+[!INCLUDE[](~/includes/SameSiteIdentity.md)]
 
 ## <a name="samesite-test-sample-code"></a>Exemple de code de test SameSite
 
@@ -93,7 +97,7 @@ La valeur SameSite par défaut pour les cookies d’authentification par formula
 
 Tous les composants ASP.NET Core qui émettent des cookies remplacent les valeurs par défaut précédentes par les paramètres appropriés pour leurs scénarios. Les valeurs par défaut substituées ne sont pas modifiées.
 
-| Composant | cookie | Default |
+| Composant | cookie | Valeur par défaut |
 | ------------- | ------------- |
 | <xref:Microsoft.AspNetCore.Http.CookieBuilder> | <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite> | `Unspecified` |
 | <xref:Microsoft.AspNetCore.Http.HttpContext.Session>  | [SessionOptions. cookie](xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie) |`Lax` |

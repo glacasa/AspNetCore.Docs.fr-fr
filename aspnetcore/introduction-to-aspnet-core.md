@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: index
-ms.openlocfilehash: f58c25ec8b47b2bd8d425d0bfd0d52df9bbc2655
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2ad97dd7eb38b4cb69fa7af5ae1e1d1837a97443
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408199"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944555"
 ---
 # <a name="introduction-to-aspnet-core"></a>Présentation d’ASP.NET Core
 
@@ -78,9 +78,9 @@ Pour une introduction au développement d’applications ASP.NET Core, nous vous
 
    |Type d’application  |Scénario  |Didacticiel  |
    |----------|----------|----------|
-   |Application web                   | Nouveau développement de l’interface utilisateur Web côté serveur |[Prise en main des Razor pages](xref:tutorials/razor-pages/razor-pages-start) |
-   |Application web                   | Maintenance d’une application MVC |[Bien démarrer avec MVC](xref:tutorials/first-mvc-app/start-mvc)|
-   |Application web                   | Développement de l’interface utilisateur Web côté client |[Prise en main deBlazor](xref:tutorials/first-blazor-app) |
+   |Application web                   | Nouveau développement de l’interface utilisateur Web côté serveur |[Prise en main des Razor pages](xref:tutorials/razor-pages/razor-pages-start) |
+   |Application web                   | Maintenance d’une application MVC |[Bien démarrer avec MVC](xref:tutorials/first-mvc-app/start-mvc)|
+   |Application web                   | Développement de l’interface utilisateur Web côté client |[Prise en main deBlazor](https://dotnet.microsoft.com/learn/aspnet/blazor-tutorial/intro) |
    |API web                   | Services HTTP RESTful |[Créer une API Web](xref:tutorials/first-web-api)&dagger; |
    |Application d’appel de procédure distante | Services contrat en premier à l’aide de mémoires tampons de protocole |[Bien démarrer avec un service gRPC](xref:tutorials/grpc/grpc-start) |
    |Application en temps réel             | Communication bidirectionnelle entre les serveurs et les clients connectés |[Prise en main deSignalR](xref:tutorials/signalr) |
@@ -166,8 +166,8 @@ Nous vous recommandons la séquence de tutoriels et d’articles suivante comme 
 
    |Type d’application  |Scénario  |Didacticiel  |
    |----------|----------|----------|
-   |Application web                   | Pour un nouveau développement        |[Prise en main des Razor pages](xref:tutorials/razor-pages/razor-pages-start) |
-   |Application web                   | Pour maintenir une application MVC |[Bien démarrer avec MVC](xref:tutorials/first-mvc-app/start-mvc)|
+   |Application web                   | Pour un nouveau développement        |[Prise en main des Razor pages](xref:tutorials/razor-pages/razor-pages-start) |
+   |Application web                   | Pour maintenir une application MVC |[Bien démarrer avec MVC](xref:tutorials/first-mvc-app/start-mvc)|
    |API web                   |                            |[Créer une API Web](xref:tutorials/first-web-api)&dagger; |
    |Application en temps réel             |                            |[Prise en main deSignalR](xref:tutorials/signalr) |
 
