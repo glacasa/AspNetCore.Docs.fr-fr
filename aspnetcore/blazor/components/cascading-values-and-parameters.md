@@ -5,7 +5,7 @@ description: Apprenez à transmettre des données d’un composant ancêtre à d
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/16/2020
+ms.date: 07/06/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,16 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/cascading-values-and-parameters
-ms.openlocfilehash: c72bf5584c7e0afdeadbb4103b5e58d91ae8c1e9
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: c426be21b520520c6745ada95be35816f7365c21
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399216"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059927"
 ---
 # <a name="aspnet-core-blazor-cascading-values-and-parameters"></a>ASP.NET Core Blazor les valeurs et paramètres en cascade
 
-## <a name="cascading-values-and-parameters"></a>Valeurs et paramètres en cascade
+Par [Luke Latham](https://github.com/guardrex) et [Daniel Roth](https://github.com/danroth27)
+
+[Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
 Dans certains scénarios, il est peu commode de transmettre des données d’un composant ancêtre à un composant descendant à l’aide de [paramètres de composant](xref:blazor/components/index#component-parameters), en particulier lorsqu’il existe plusieurs couches de composant. Les valeurs et paramètres en cascade résolvent ce problème en fournissant un moyen pratique pour un composant ancêtre de fournir une valeur à tous ses composants descendants. Les valeurs et les paramètres en cascade fournissent également une approche pour les composants à coordonner.
 
@@ -114,8 +116,8 @@ Dans l’exemple d’application, le `CascadingValuesParametersTheme` composant 
 Pour mettre en cascade plusieurs valeurs du même type dans la même sous-arborescence, fournissez une <xref:Microsoft.AspNetCore.Components.CascadingValue%601.Name%2A> chaîne unique à chaque <xref:Microsoft.AspNetCore.Components.CascadingValue%601> composant et à son [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) attribut correspondant. Dans l’exemple suivant, deux <xref:Microsoft.AspNetCore.Components.CascadingValue%601> composants montent en cascade différentes instances de `MyCascadingType` par nom :
 
 ```razor
-<CascadingValue Value=@parentCascadeParameter1 Name="CascadeParam1">
-    <CascadingValue Value=@ParentCascadeParameter2 Name="CascadeParam2">
+<CascadingValue Value="@parentCascadeParameter1" Name="CascadeParam1">
+    <CascadingValue Value="@ParentCascadeParameter2" Name="CascadeParam2">
         ...
     </CascadingValue>
 </CascadingValue>
@@ -155,6 +157,8 @@ L’exemple d’application possède une `ITab` interface qui implémente les on
 Le `CascadingValuesParametersTabSet` composant utilise le `TabSet` composant, qui contient plusieurs `Tab` composants :
 
 ```razor
+@page "/CascadingValuesParametersTabSet"
+
 <TabSet>
     <Tab Title="First tab">
         <h4>Greetings from the first tab!</h4>
@@ -176,6 +180,10 @@ Le `CascadingValuesParametersTabSet` composant utilise le `TabSet` composant, qu
         </Tab>
     }
 </TabSet>
+
+@code {
+    private bool showThirdTab;
+}
 ```
 
 Les `Tab` composants enfants ne sont pas explicitement passés comme paramètres à `TabSet` . Au lieu de cela, les `Tab` composants enfants font partie du contenu enfant de `TabSet` . Toutefois, le `TabSet` doit toujours connaître chaque `Tab` composant pour pouvoir afficher les en-têtes et l’onglet actif. Pour activer cette coordination sans nécessiter de code supplémentaire, le `TabSet` composant *peut se présenter comme une valeur en cascade* qui est ensuite récupérée par les `Tab` composants descendants.

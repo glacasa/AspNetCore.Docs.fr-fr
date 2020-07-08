@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/handle-errors
-ms.openlocfilehash: 23118193ec3829fddce392123210856839471058
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e3ce3a62f351255fd059adaa6e9b0a8e9bdc2ce7
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402843"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059875"
 ---
 # <a name="handle-errors-in-aspnet-core-blazor-apps"></a>Gérer les erreurs dans les Blazor applications ASP.net Core
 
@@ -62,7 +62,7 @@ Dans une Blazor Server application, personnalisez l’expérience dans le `Pages
 </div>
 ```
 
-L' `blazor-error-ui` élément est masqué par les styles inclus dans les Blazor modèles ( `wwwroot/css/site.css` ), puis indiqué lorsqu’une erreur se produit :
+L' `blazor-error-ui` élément est masqué par les styles inclus dans les Blazor modèles ( `wwwroot/css/app.css` ou `wwwroot/css/site.css` ), puis indiqué lorsqu’une erreur se produit :
 
 ```css
 #blazor-error-ui {

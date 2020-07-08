@@ -5,7 +5,7 @@ description: En savoir plus sur les scénarios supplémentaires pour ASP.NET Cor
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/10/2020
+ms.date: 07/07/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: ff9b2b089ca61a4ac6dd8bc6bd5ab1f1e68a050b
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: e62cb2ab865fbf57166d5ec3d1344183c00c2095
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944417"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059837"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>BlazorConfiguration du modèle d’hébergement ASP.net Core
 
@@ -73,6 +73,18 @@ Pour personnaliser l’interface utilisateur, définissez un élément avec un `
 <div id="components-reconnect-modal">
     ...
 </div>
+```
+
+Ajoutez le code suivant à la feuille de style de l’application ( `wwwroot/css/app.css` ou `wwwroot/css/site.css` ) :
+
+```css
+#components-reconnect-modal {
+    display: none;
+}
+
+#components-reconnect-modal.components-reconnect-show {
+    display: block;
+}
 ```
 
 Le tableau suivant décrit les classes CSS appliquées à l' `components-reconnect-modal` élément.

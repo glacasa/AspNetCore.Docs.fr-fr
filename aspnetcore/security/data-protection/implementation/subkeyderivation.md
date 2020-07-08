@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/subkeyderivation
-ms.openlocfilehash: f373c37a5ea4dab91463d011d3ecd6799ae6d014
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 619a848eb96faab6997f9ddbf4d62a1e04ee66b1
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408030"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060369"
 ---
 # <a name="subkey-derivation-and-authenticated-encryption-in-aspnet-core"></a>Dérivation de sous-clé et chiffrement authentifié dans ASP.NET Core
 
@@ -43,11 +43,11 @@ L' `IAuthenticatedEncryptor` interface sert d’interface principale pour toutes
 
 Étant donné que AAD est unique pour le tuple des trois composants, nous pouvons l’utiliser pour dériver de nouvelles clés de KM au lieu d’utiliser la valeur KM proprement dite dans toutes nos opérations de chiffrement. Pour chaque appel à `IAuthenticatedEncryptor.Encrypt` , le processus de dérivation de clé suivant a lieu :
 
-(K_E, K_H) = SP800_108_CTR_HMACSHA512 (K_M, AAD, contextHeader | | keymodifier)
+`( K_E, K_H ) = SP800_108_CTR_HMACSHA512(K_M, AAD, contextHeader || keyModifier)`
 
 Ici, nous appelons le NIST SP800-108 KDF en mode compteur (voir [NIST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), Sec. 5,1) avec les paramètres suivants :
 
-* Clé de dérivation de clé (KDK) = K_M
+* Clé de dérivation de clé (KDK) =`K_M`
 
 * PRF = HMACSHA512
 
@@ -55,28 +55,28 @@ Ici, nous appelons le NIST SP800-108 KDF en mode compteur (voir [NIST SP800-108]
 
 * Context = contextHeader | | keymodifier
 
-L’en-tête de contexte est de longueur variable et sert essentiellement d’empreinte des algorithmes pour lesquels nous créons des K_E et des K_H. Le modificateur de clé est une chaîne 128 bits générée de façon aléatoire pour chaque appel à `Encrypt` et sert à garantir une probabilité écrasante que ke et KH sont uniques pour cette opération de chiffrement d’authentification spécifique, même si toutes les autres entrées du KDF sont constantes.
+L’en-tête de contexte est de longueur variable et sert essentiellement d’empreinte numérique des algorithmes pour lesquels nous allons dériver `K_E` et `K_H` . Le modificateur de clé est une chaîne 128 bits générée de façon aléatoire pour chaque appel à `Encrypt` et sert à garantir une probabilité écrasante que ke et KH sont uniques pour cette opération de chiffrement d’authentification spécifique, même si toutes les autres entrées du KDF sont constantes.
 
-Pour les opérations de chiffrement en mode CBC + validation HMAC, | K_E | est la longueur de la clé de chiffrement par bloc symétrique, et | K_H | taille Digest de la routine HMAC. Pour les opérations de chiffrement GCM + validation, | K_H | = 0.
+Pour les opérations de chiffrement en mode CBC + validation HMAC, `| K_E |` est la longueur de la clé de chiffrement par bloc symétrique et `| K_H |` est la taille Digest de la routine HMAC. Pour les opérations de chiffrement GCM + validation, `| K_H | = 0` .
 
 ## <a name="cbc-mode-encryption--hmac-validation"></a>Chiffrement en mode CBC + validation HMAC
 
-Une fois K_E générée à l’aide du mécanisme ci-dessus, nous générons un vecteur d’initialisation aléatoire et exécutons l’algorithme de chiffrement par bloc symétrique pour chiffrer le texte en clair. Le vecteur d’initialisation et le texte chiffré sont ensuite exécutés via la routine HMAC initialisée avec la clé K_H pour produire le MAC. Ce processus et la valeur de retour sont représentés graphiquement ci-dessous.
+Une fois que `K_E` est généré via le mécanisme ci-dessus, nous générons un vecteur d’initialisation aléatoire et exécutons l’algorithme de chiffrement par bloc symétrique pour chiffrer le texte en clair. Le vecteur d’initialisation et le texte chiffré sont ensuite exécutés via la routine HMAC initialisée avec la clé `K_H` pour produire le Mac. Ce processus et la valeur de retour sont représentés graphiquement ci-dessous.
 
 ![Processus et retour CBC en mode](subkeyderivation/_static/cbcprocess.png)
 
-*sortie : = keymodifier | | IV | | E_cbc (K_E, IV, données) | | HMAC (K_H, IV | | E_cbc (K_E, IV, données))*
+`output:= keyModifier || iv || E_cbc (K_E,iv,data) || HMAC(K_H, iv || E_cbc (K_E,iv,data))`
 
 > [!NOTE]
 > L' `IDataProtector.Protect` implémentation [ajoute l’en-tête et l’ID de clé Magic](xref:security/data-protection/implementation/authenticated-encryption-details) à la sortie avant de la renvoyer à l’appelant. Étant donné que l’en-tête Magic et l’ID de clé font implicitement partie d' [AAD](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation-aad), et que le modificateur de clé est alimenté comme entrée à KDF, cela signifie que chaque octet de la charge utile finale retournée est authentifié par le Mac.
 
 ## <a name="galoiscounter-mode-encryption--validation"></a>Chiffrement et validation du mode Galois/Counter
 
-Une fois K_E générée via le mécanisme ci-dessus, nous générons une valeur à usage unique 96 bits aléatoire et exécutons l’algorithme de chiffrement par bloc symétrique pour chiffrer le texte en clair et produire la balise d’authentification 128 bits.
+Une fois `K_E` générée via le mécanisme ci-dessus, nous générons une valeur à usage unique 96 bits aléatoire et exécutons l’algorithme de chiffrement par bloc symétrique pour chiffrer le texte en clair et produire la balise d’authentification 128 bits.
 
 ![Processus GCM-mode et retour](subkeyderivation/_static/galoisprocess.png)
 
-*sortie : = keymodifier | | valeur à usage unique | | E_gcm (K_E, nonce, données) | | authTag*
+`output := keyModifier || nonce || E_gcm (K_E,nonce,data) || authTag`
 
 > [!NOTE]
-> Bien que GCM prenne en charge nativement le concept d’AAD, nous n’utilisons toujours AAD que dans le KDF d’origine, en choisissant de passer une chaîne vide dans GCM pour son paramètre AAD. La raison en est le double. Tout d’abord, [pour prendre en charge l’agilité](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers) , nous ne voulons jamais utiliser K_M directement en tant que clé de chiffrement. En outre, GCM impose des exigences d’unicité très strictes à ses entrées. La probabilité que la routine de chiffrement GCM soit appelée sur deux ou plusieurs jeux de données d’entrée distincts avec la même paire (clé, nonce) ne doit pas dépasser 2 ^ 32. Si nous corrigeons K_E nous ne pouvons pas effectuer plus de 2 ^ 32 opérations de chiffrement avant d’exécuter le afoul de la limite de 2 ^-32. Cela peut sembler un très grand nombre d’opérations, mais un serveur Web à trafic élevé peut passer par 4 milliards demandes en quelques jours, et dans la durée de vie normale de ces clés. Pour rester conforme de la limite de probabilité de 2 ^ 32, nous continuons d’utiliser un modificateur de clé 128 bits et une valeur à usage unique de 96 bits, qui étend radicalement le nombre d’opérations utilisables pour tout K_M donné. Pour simplifier la conception, nous partageons le chemin de code KDF entre les opérations CBC et GCM, et dans la mesure où AAD est déjà pris en compte dans le KDF, il n’est pas nécessaire de le transférer à la routine GCM.
+> Bien que GCM prenne en charge nativement le concept d’AAD, nous n’utilisons toujours AAD que dans le KDF d’origine, en choisissant de passer une chaîne vide dans GCM pour son paramètre AAD. La raison en est le double. Tout d’abord, [pour prendre en charge l’agilité](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers) , nous ne souhaitons jamais utiliser `K_M` directement comme clé de chiffrement. En outre, GCM impose des exigences d’unicité très strictes à ses entrées. La probabilité que la routine de chiffrement GCM soit appelée sur deux ou plusieurs jeux de données d’entrée distincts avec la même paire (clé, nonce) ne doit pas dépasser 2 ^ 32. Si nous corrigeons que nous `K_E` ne pouvons pas effectuer plus de 2 ^ 32 opérations de chiffrement avant d’exécuter le afoul de la limite de 2 ^-32. Cela peut sembler un très grand nombre d’opérations, mais un serveur Web à trafic élevé peut passer par 4 milliards demandes en quelques jours, et dans la durée de vie normale de ces clés. Pour rester conforme de la limite de probabilité de 2 ^ 32, nous continuons d’utiliser un modificateur de clé 128 bits et une valeur à usage unique de 96 bits, qui étend radicalement le nombre d’opérations utilisables pour un donné `K_M` . Pour simplifier la conception, nous partageons le chemin de code KDF entre les opérations CBC et GCM, et dans la mesure où AAD est déjà pris en compte dans le KDF, il n’est pas nécessaire de le transférer à la routine GCM.

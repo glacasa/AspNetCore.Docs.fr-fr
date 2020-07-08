@@ -5,7 +5,7 @@ description: Découvrez comment utiliser les Razor méthodes de cycle de vie des
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/01/2020
+ms.date: 07/06/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 312a265dd251eadf876b4252e3d9f9858adcde1b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6b9653356659700ae8396a01b38c04d59a86625f
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400984"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059888"
 ---
 # <a name="aspnet-core-blazor-lifecycle"></a>BlazorCycle de vie ASP.net Core
 
@@ -171,9 +171,11 @@ Même si <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> es
 
 Pour plus d’informations, consultez <xref:blazor/webassembly-performance-best-practices#avoid-unnecessary-component-renders>.
 
-## <a name="state-changes"></a>Changements d'état
+## <a name="state-changes"></a>Modifications d'état
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>notifie le composant que son état a changé. Le cas échéant, <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> l’appel de entraîne le rerendu du composant.
+
+<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>est appelé automatiquement pour les <xref:Microsoft.AspNetCore.Components.EventCallback> méthodes. Pour plus d’informations, consultez <xref:blazor/components/event-handling#eventcallback>.
 
 ## <a name="handle-incomplete-async-actions-at-render"></a>Gérer les actions asynchrones incomplètes au rendu
 

@@ -5,7 +5,7 @@ description: En savoir plus sur les outils disponibles pour créer des Blazor ap
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/02/2020
+ms.date: 07/07/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -16,12 +16,12 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems-set-one
-ms.openlocfilehash: 538257597ec5c6c705d8280a817c409debe22224
-ms.sourcegitcommit: c6467f86c09b1f608b09d37d33c8c43de7ae8bc7
+ms.openlocfilehash: bda287e54efadf8575c15c7b621416f20ae591c9
+ms.sourcegitcommit: d1fa3d69dda675d7a52c7100742dfa6297413376
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85946818"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86093323"
 ---
 # <a name="tooling-for-aspnet-core-blazor"></a>Outils pour ASP.NET CoreBlazor
 
@@ -35,13 +35,15 @@ Par [Daniel Roth](https://github.com/danroth27) et [Luke Latham](https://github.
 
 1. Sélectionnez ** Blazor application**. Sélectionnez **Suivant**.
 
-1. Indiquez un nom de projet dans le champ **Nom du projet**, ou acceptez le nom de projet par défaut. Confirmez que l’entrée d' **emplacement** est correcte ou indiquez un emplacement pour le projet. Sélectionnez **Créer**.
+1. Indiquez un nom de projet dans le champ **Nom du projet**, ou acceptez le nom de projet par défaut. Confirmez que l’entrée d' **emplacement** est correcte ou indiquez un emplacement pour le projet. Sélectionnez **Create** (Créer).
 
-1. Pour une Blazor WebAssembly expérience, choisissez le modèle d' ** Blazor WebAssembly application** . Pour une Blazor Server expérience, choisissez le modèle d' ** Blazor Server application** . Sélectionnez **Créer**.
+1. Pour une Blazor WebAssembly expérience, choisissez le modèle d' ** Blazor WebAssembly application** . Pour une Blazor Server expérience, choisissez le modèle d' ** Blazor Server application** . Sélectionnez **Create** (Créer).
 
    Pour plus d’informations sur les deux Blazor modèles d’hébergement, *Blazor WebAssembly* et *Blazor Server* , consultez <xref:blazor/hosting-models> .
 
 1. Appuyez sur <kbd>CTRL</kbd> + <kbd>F5</kbd> pour exécuter l’application.
+
+Pour plus d’informations sur l’approbation du certificat de développement HTTPs ASP.NET Core, consultez <xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos> .
 
 ::: zone-end
 
@@ -55,9 +57,7 @@ Par [Daniel Roth](https://github.com/danroth27) et [Luke Latham](https://github.
 
 1. Installez la dernière version de [Visual Studio code](https://code.visualstudio.com/).
 
-1. Installez la dernière [extension C# for Visual Studio code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) et l’extension de [débogueur JavaScript (nocturne)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) avec la `debug.javascript.usePreview` valeur `true` .
-
-   Pour définir `debug.javascript.usePreview` à `true` l’aide de l’interface utilisateur vs code, ouvrez paramètres des préférences de **fichier**  >  **Preferences**  >  **Settings** et recherchez `debug javascript use preview` . Activez la case à cocher **utiliser le nouveau débogueur JavaScript en préversion pour Node.js et chrome**.
+1. Installez la dernière [extension C# for Visual Studio code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp).
 
 1. Pour une Blazor WebAssembly expérience, exécutez la commande suivante dans une interface de commande :
 
@@ -78,6 +78,16 @@ Par [Daniel Roth](https://github.com/danroth27) et [Luke Latham](https://github.
 1. L’IDE demande que vous ajoutiez des ressources pour générer et déboguer le projet. Sélectionnez **Oui**.
 
 1. Appuyez sur <kbd>CTRL</kbd> + <kbd>F5</kbd> pour exécuter l’application.
+
+## <a name="trust-a-development-certificate"></a>Approuver un certificat de développement
+
+Il n’existe pas de méthode centralisée pour approuver un certificat sur Linux. En règle générale, l’une des approches suivantes est adoptée :
+
+* Excluez l’URL de l’application dans la liste d’exclusion du navigateur.
+* Faites confiance à tous les certificats auto-signés pour `localhost` .
+* Ajoutez le certificat à la liste des certificats approuvés dans le navigateur.
+
+Pour plus d’informations, consultez les instructions fournies par votre navigateur et Linux distribution.
 
 ::: zone-end
 
@@ -100,10 +110,10 @@ Par [Daniel Roth](https://github.com/danroth27) et [Luke Latham](https://github.
    
    Sélectionnez **Suivant**.
 
-1. Dans le champ **nom du projet** , nommez l’application `WebApplication1` . Sélectionnez **Créer**.
+1. Dans le champ **nom du projet** , nommez l’application `WebApplication1` . Sélectionnez **Create** (Créer).
 
 1. Sélectionnez **exécuter**  >  **Démarrer sans débogage** pour exécuter l’application *sans le débogueur*. Exécutez l’application avec **Run**  >  le bouton exécuter**Démarrer le débogage** ou exécuter (&#9654;) pour exécuter l’application *avec le débogueur*.
 
-Si une invite s’affiche pour faire confiance au certificat de développement, approuvez le certificat et continuez. Les mots de passe utilisateur et trousseau sont requis pour approuver le certificat.
+Si une invite s’affiche pour faire confiance au certificat de développement, approuvez le certificat et continuez. Les mots de passe utilisateur et trousseau sont requis pour approuver le certificat. Pour plus d’informations sur l’approbation du certificat de développement HTTPs ASP.NET Core, consultez <xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos> .
 
 ::: zone-end

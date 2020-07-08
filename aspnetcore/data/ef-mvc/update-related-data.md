@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 59bf94f6818108f09e9af147559fc304f48936bc
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 066bebf95a941fca5e7cc175c4c0d6d56abc9cb5
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401309"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060057"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Didacticiel : mettre à jour les données associées-ASP.NET MVC avec EF Core
 
@@ -143,7 +143,7 @@ Le code effectue les actions suivantes :
 
 * Obtient l’entité Instructor actuelle auprès de la base de données en utilisant le chargement hâtif pour la propriété de navigation `OfficeAssignment`. C’est identique à ce que vous avez fait dans la méthode HttpGet `Edit`.
 
-* Elle met à jour l’entité Instructor récupérée avec des valeurs dans le classeur de modèles. La surcharge de `TryUpdateModel` vous permet de mettre en liste verte les propriétés que vous voulez inclure. Ceci empêche la survalidation, comme expliqué dans le [deuxième didacticiel](crud.md).
+* Elle met à jour l’entité Instructor récupérée avec des valeurs dans le classeur de modèles. La `TryUpdateModel` surcharge vous permet de déclarer les propriétés que vous souhaitez inclure. Ceci empêche la survalidation, comme expliqué dans le [deuxième didacticiel](crud.md).
 
     <!-- Snippets don't play well with <ul> [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?range=241-244)] -->
 
@@ -211,7 +211,7 @@ Ensuite, ajoutez le code qui est exécuté quand l’utilisateur clique sur **Sa
 
 La signature de la méthode diffère maintenant de celle de la méthode HttpGet `Edit` : le nom de la méthode change donc de `EditPost` en `Edit`.
 
-Comme la vue n’a pas de collection d’entités Course, le classeur de modèles ne peut pas mettre à jour automatiquement la propriété de navigation `CourseAssignments`. Au lieu d’utiliser le classeur de modèles pour mettre à jour la propriété de navigation `CourseAssignments`, vous faites cela dans la nouvelle méthode `UpdateInstructorCourses`. Par conséquent, vous devez exclure la propriété `CourseAssignments` de la liaison de modèle. Ceci ne nécessite aucune modification du code qui appelle `TryUpdateModel`, car vous utilisez la surcharge de mise en liste verte et `CourseAssignments` n’est pas dans la liste des éléments à inclure.
+Comme la vue n’a pas de collection d’entités Course, le classeur de modèles ne peut pas mettre à jour automatiquement la propriété de navigation `CourseAssignments`. Au lieu d’utiliser le classeur de modèles pour mettre à jour la propriété de navigation `CourseAssignments`, vous faites cela dans la nouvelle méthode `UpdateInstructorCourses`. Par conséquent, vous devez exclure la `CourseAssignments` propriété de la liaison de modèle. Cela ne nécessite aucune modification du code qui appelle `TryUpdateModel` car vous utilisez la surcharge qui requiert une approbation explicite et qui `CourseAssignments` ne figure pas dans la liste d’inclusion.
 
 Si aucune case n’a été cochée, le code de `UpdateInstructorCourses` initialise la propriété de navigation `CourseAssignments` avec une collection vide et retourne :
 

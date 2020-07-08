@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 7ac6dc983454153792610a07c1df01fbc38c8d67
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 25464817314f79c5bfd11d982cc9b09a3c72df15
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400828"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060343"
 ---
 # <a name="routing-in-aspnet-core"></a>Routage dans ASP.NET Core
 
@@ -435,7 +435,7 @@ Les modèles d’URL qui tentent de capturer un nom de fichier avec une extensio
 * `/files/myFile.txt`
 * `/files/myFile`
 
-Les paramètres de route peuvent avoir des **valeurs par défaut**, désignées en spécifiant la valeur par défaut après le nom du paramètre, séparée par un signe égal (`=`). Par exemple, `{controller=Home}` définit `Home` comme valeur par défaut de `controller`. La valeur par défaut est utilisée si aucune valeur n’est présente dans l’URL pour le paramètre. Les paramètres de routage sont rendus facultatifs en ajoutant un point d’interrogation ( `?` ) à la fin du nom du paramètre. Par exemple : `id?`. La différence entre les valeurs facultatives et les paramètres d’itinéraire par défaut est la suivante :
+Les paramètres de route peuvent avoir des **valeurs par défaut**, désignées en spécifiant la valeur par défaut après le nom du paramètre, séparée par un signe égal (`=`). Par exemple, `{controller=Home}` définit `Home` comme valeur par défaut de `controller`. La valeur par défaut est utilisée si aucune valeur n’est présente dans l’URL pour le paramètre. Les paramètres de routage sont rendus facultatifs en ajoutant un point d’interrogation ( `?` ) à la fin du nom du paramètre. Par exemple, `id?`. La différence entre les valeurs facultatives et les paramètres d’itinéraire par défaut est la suivante :
 
 * Un paramètre d’itinéraire avec une valeur par défaut produit toujours une valeur.
 * Un paramètre facultatif a une valeur uniquement lorsqu’une valeur est fournie par l’URL de la requête.
@@ -565,14 +565,14 @@ Pour échapper les caractères de délimiteur de paramètre de routage `{` ,,,, 
 
 Les expressions régulières utilisées dans le routage commencent souvent par le `^` caractère et correspondent à la position de départ de la chaîne. Les expressions se terminent souvent par le `$` caractère et correspondent à la fin de la chaîne. Les `^` `$` caractères et garantissent que l’expression régulière correspond à l’intégralité de la valeur du paramètre d’itinéraire. Sans les `^` `$` caractères et, l’expression régulière correspond à toute sous-chaîne de la chaîne, ce qui est souvent indésirable. Le tableau suivant fournit des exemples et explique pourquoi ils correspondent ou ne parviennent pas à faire correspondre :
 
-| Expression   | String    | Correspond | Commentaire               |
+| Expression   | String    | Faire correspondre | Commentaire               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | mz        | Oui   | Correspondance avec l’expression    |
-| `[a-z]{2}`   | MZ        | Oui   | Non-respect de la casse    |
-| `^[a-z]{2}$` | hello     | Non    | Voir `^` et `$` ci-dessus |
-| `^[a-z]{2}$` | 123abc456 | Non    | Voir `^` et `$` ci-dessus |
+| `[a-z]{2}`   | hello     | Yes   | Correspondances de sous-chaînes     |
+| `[a-z]{2}`   | 123abc456 | Yes   | Correspondances de sous-chaînes     |
+| `[a-z]{2}`   | mz        | Yes   | Correspondance avec l’expression    |
+| `[a-z]{2}`   | MZ        | Yes   | Non-respect de la casse    |
+| `^[a-z]{2}$` | hello     | No    | Voir `^` et `$` ci-dessus |
+| `^[a-z]{2}$` | 123abc456 | No    | Voir `^` et `$` ci-dessus |
 
 Pour plus d’informations sur la syntaxe des expressions régulières, consultez [Expressions régulières du .NET Framework](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1436,26 +1436,26 @@ Les contraintes de route s’exécutent quand une correspondance s’est produit
 
 Le tableau suivant montre des exemples de contrainte de route et leur comportement attendu.
 
-| contrainte | Exemple | Exemples de correspondances | Notes |
-| ---------- | ------- | --------------- | ----- |
-| `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier. |
-| `bool` | `{active:bool}` | `true`, `FALSE` | Correspond à `true` ou à’false. Non-respect de la casse. |
+| Contrainte | Exemple | Exemples de correspondances | Notes |
+|------------|---------|-----------------|-------|
+| `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier.|
+| `bool` | `{active:bool}` | `true`, `FALSE` | Correspond à `true` ou `false` . Non-respect de la casse.|
 | `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | Correspond à une `DateTime` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent.|
 | `decimal` | `{price:decimal}` | `49.99`, `-1,000.01` | Correspond à une `decimal` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent.|
 | `double` | `{weight:double}` | `1.234`, `-1,001.01e8` | Correspond à une `double` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent.|
 | `float` | `{weight:float}` | `1.234`, `-1,001.01e8` | Correspond à une `float` valeur valide dans la culture dite indifférente. Consultez l’avertissement précédent.|
-| `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Correspond à une `Guid` valeur valide. |
-| `long` | `{ticks:long}` | `123456789`, `-123456789` | Correspond à une `long` valeur valide. |
-| `minlength(value)` | `{username:minlength(4)}` | `Rick` | La chaîne doit comporter au moins 4 caractères. |
-| `maxlength(value)` | `{filename:maxlength(8)}` | `MyFile` | La chaîne ne doit pas comporter plus de 8 caractères. |
-| `length(length)` | `{filename:length(12)}` | `somefile.txt` | La chaîne doit contenir exactement 12 caractères. |
-| `length(min,max)` | `{filename:length(8,16)}` | `somefile.txt` | La chaîne doit être au moins égale à 8 et comporter jusqu’à 16 caractères. |
-| `min(value)` | `{age:min(18)}` | `19` | La valeur entière doit être au moins égale à 18. |
-| `max(value)` | `{age:max(120)}` | `91` | Valeur entière maximale de 120. |
-| `range(min,max)` | `{age:range(18,120)}` | `91` | La valeur entière doit être au moins égale à 18 et 120. |
-| `alpha` | `{name:alpha}` | `Rick` | La chaîne doit comporter un ou plusieurs caractères alphabétiques `a` - `z` .  Non-respect de la casse. |
-| `regex(expression)` | `{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}` | `123-45-6789` | La chaîne doit correspondre à l’expression régulière. Consultez les conseils relatifs à la définition d’une expression régulière. |
-| `required` | `{name:required}` | `Rick` | Permet d’appliquer qu’une valeur sans paramètre est présente pendant la génération de l’URL. |
+| `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Correspond à une `Guid` valeur valide.|
+| `long` | `{ticks:long}` | `123456789`, `-123456789` | Correspond à une `long` valeur valide.|
+| `minlength(value)` | `{username:minlength(4)}` | `Rick` | La chaîne doit comporter au moins 4 caractères.|
+| `maxlength(value)` | `{filename:maxlength(8)}` | `MyFile` | La chaîne ne doit pas comporter plus de 8 caractères.|
+| `length(length)` | `{filename:length(12)}` | `somefile.txt` | La chaîne doit contenir exactement 12 caractères.|
+| `length(min,max)` | `{filename:length(8,16)}` | `somefile.txt` | La chaîne doit être au moins égale à 8 et comporter jusqu’à 16 caractères.|
+| `min(value)` | `{age:min(18)}` | `19` | La valeur entière doit être au moins égale à 18.|
+| `max(value)` | `{age:max(120)}` | `91` | Valeur entière maximale de 120.|
+| `range(min,max)` | `{age:range(18,120)}` | `91` | La valeur entière doit être au moins égale à 18 et 120.|
+| `alpha` | `{name:alpha}` | `Rick` | La chaîne doit comporter un ou plusieurs caractères alphabétiques `a` - `z` . Non-respect de la casse.|
+| `regex(expression)` | `{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}` | `123-45-6789` | La chaîne doit correspondre à l’expression régulière. Consultez les conseils relatifs à la définition d’une expression régulière.|
+| `required` | `{name:required}` | `Rick` | Permet d’appliquer qu’une valeur sans paramètre est présente pendant la génération de l’URL.|
 
 Il est possible d’appliquer plusieurs contraintes séparées par un point-virgule à un même paramètre. Par exemple, la contrainte suivante limite un paramètre à une valeur entière supérieure ou égale à 1 :
 
@@ -1486,14 +1486,14 @@ Pour échapper les caractères de délimiteur de paramètre de routage `{` , `}`
 
 Les expressions régulières utilisées dans le routage commencent souvent par le `^` caractère de signe insertion et correspondent à la position de départ de la chaîne. Les expressions se terminent souvent par le `$` caractère de signe dollar et la fin de la chaîne. Les caractères `^` et `$` garantissent que l’expression régulière établit une correspondance avec la totalité de la valeur du paramètre de route. Sans les caractères `^` et `$`, l’expression régulière peut correspondre à n’importe quelle sous-chaîne dans la chaîne, ce qui est souvent indésirable. Le tableau suivant contient des exemples et explique pourquoi ils établissent ou non une correspondance.
 
-| Expression   | String    | Correspond | Commentaire               |
+| Expression   | String    | Faire correspondre | Commentaire               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | mz        | Oui   | Correspondance avec l’expression    |
-| `[a-z]{2}`   | MZ        | Oui   | Non-respect de la casse    |
-| `^[a-z]{2}$` | hello     | Non    | Voir `^` et `$` ci-dessus |
-| `^[a-z]{2}$` | 123abc456 | Non    | Voir `^` et `$` ci-dessus |
+| `[a-z]{2}`   | hello     | Yes   | Correspondances de sous-chaînes     |
+| `[a-z]{2}`   | 123abc456 | Yes   | Correspondances de sous-chaînes     |
+| `[a-z]{2}`   | mz        | Yes   | Correspondance avec l’expression    |
+| `[a-z]{2}`   | MZ        | Yes   | Non-respect de la casse    |
+| `^[a-z]{2}$` | hello     | No    | Voir `^` et `$` ci-dessus |
+| `^[a-z]{2}$` | 123abc456 | No    | Voir `^` et `$` ci-dessus |
 
 Pour plus d’informations sur la syntaxe des expressions régulières, consultez [Expressions régulières du .NET Framework](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1930,14 +1930,14 @@ Les expressions régulières utilisent les délimiteurs et des jetons semblables
 
 Les expressions régulières utilisées dans le routage commencent souvent par un caret (`^`) et correspondent à la position de début de la chaîne. Les expressions se terminent souvent par le signe dollar (`$`) de caractère et correspondent à la fin de la chaîne. Les caractères `^` et `$` garantissent que l’expression régulière établit une correspondance avec la totalité de la valeur du paramètre de route. Sans les caractères `^` et `$`, l’expression régulière peut correspondre à n’importe quelle sous-chaîne dans la chaîne, ce qui est souvent indésirable. Le tableau suivant contient des exemples et explique pourquoi ils établissent ou non une correspondance.
 
-| Expression   | String    | Correspond | Commentaire               |
+| Expression   | String    | Faire correspondre | Commentaire               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | mz        | Oui   | Correspondance avec l’expression    |
-| `[a-z]{2}`   | MZ        | Oui   | Non-respect de la casse    |
-| `^[a-z]{2}$` | hello     | Non    | Voir `^` et `$` ci-dessus |
-| `^[a-z]{2}$` | 123abc456 | Non    | Voir `^` et `$` ci-dessus |
+| `[a-z]{2}`   | hello     | Yes   | Correspondances de sous-chaînes     |
+| `[a-z]{2}`   | 123abc456 | Yes   | Correspondances de sous-chaînes     |
+| `[a-z]{2}`   | mz        | Yes   | Correspondance avec l’expression    |
+| `[a-z]{2}`   | MZ        | Yes   | Non-respect de la casse    |
+| `^[a-z]{2}$` | hello     | No    | Voir `^` et `$` ci-dessus |
+| `^[a-z]{2}$` | 123abc456 | No    | Voir `^` et `$` ci-dessus |
 
 Pour plus d’informations sur la syntaxe des expressions régulières, consultez [Expressions régulières du .NET Framework](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 

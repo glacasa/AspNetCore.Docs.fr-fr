@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: d63e9077ba23c3783d7ce1ceb9c9683bcb0d3a29
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b5b5686f87d6e511672f6a50db7be8e2613a8a9e
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408888"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060148"
 ---
 # <a name="differences-between-aspnet-signalr-and-aspnet-core-signalr"></a>Différences entre ASP.NET SignalR et ASP.net CoreSignalR
 
@@ -31,12 +31,12 @@ ASP.NET Core SignalR n’est pas compatible avec les clients ou les serveurs pou
 
 |                      | ASP.NETSignalR | ASP.NET CoreSignalR |
 | -------------------- | --------------- | -------------------- |
-| Package NuGet de serveur | [Microsoft. AspNet.SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | Aucun. Inclus dans l’infrastructure partagée [Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app) . |
-| Packages NuGet client | [Microsoft. AspNet. SignalR . Client](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft. AspNet. SignalR . JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [Microsoft. AspNetCore. SignalR . Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
-| Package NPM du client JavaScript | [signalr](https://www.npmjs.com/package/signalr) | [`@microsoft/signalr`](https://www.npmjs.com/package/@microsoft/signalr) |
-| Client Java | [Dépôt github](https://github.com/SignalR/java-client) (déconseillé)  | Package Maven [com. Microsoft. signalr](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
-| Type d’application serveur | ASP.NET (System. Web) ou auto-hôte OWIN | ASP.NET Core |
-| Plateformes serveur prises en charge | .NET Framework 4,5 ou version ultérieure | .NET Core 3,0 ou version ultérieure |
+| **Package NuGet de serveur** | [Microsoft. AspNet.SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | Aucun. Inclus dans l’infrastructure partagée [Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app) . |
+| **Packages NuGet client** | [Microsoft. AspNet. SignalR . Client](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft. AspNet. SignalR . JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [Microsoft. AspNetCore. SignalR . Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
+| **Package NPM du client JavaScript** | [signalr](https://www.npmjs.com/package/signalr) | [`@microsoft/signalr`](https://www.npmjs.com/package/@microsoft/signalr) |
+| **Client Java** | [Dépôt github](https://github.com/SignalR/java-client) (déconseillé)  | Package Maven [com. Microsoft. signalr](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
+| **Type d’application serveur** | ASP.NET (System. Web) ou auto-hôte OWIN | ASP.NET Core |
+| **Plateformes serveur prises en charge** | .NET Framework 4,5 ou version ultérieure | .NET Core 3,0 ou version ultérieure |
 
 ::: moniker-end
 
@@ -44,12 +44,12 @@ ASP.NET Core SignalR n’est pas compatible avec les clients ou les serveurs pou
 
 |                      | ASP.NETSignalR | ASP.NET CoreSignalR |
 | -------------------- | --------------- | -------------------- |
-| Package NuGet de serveur | [Microsoft. AspNet.SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | [Microsoft. AspNetCore. app](https://www.nuget.org/packages/Microsoft.AspNetCore.App/) (.net Core)<br>[Microsoft. AspNetCore.SignalR](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR/) (.NET Framework) |
-| Packages NuGet client | [Microsoft. AspNet. SignalR . Client](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft. AspNet. SignalR . JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [Microsoft. AspNetCore. SignalR . Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
-| Package NPM du client JavaScript | [signalr](https://www.npmjs.com/package/signalr) | [`@aspnet/signalr`](https://www.npmjs.com/package/@aspnet/signalr) |
-| Client Java | [Dépôt github](https://github.com/SignalR/java-client) (déconseillé)  | Package Maven [com. Microsoft. signalr](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
-| Type d’application serveur | ASP.NET (System. Web) ou auto-hôte OWIN | ASP.NET Core |
-| Plateformes serveur prises en charge | .NET Framework 4,5 ou version ultérieure | .NET Framework 4.6.1 ou ultérieur<br>.NET Core 2,1 ou version ultérieure |
+| **Package NuGet de serveur** | [Microsoft. AspNet.SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | [Microsoft. AspNetCore. app](https://www.nuget.org/packages/Microsoft.AspNetCore.App/) (.net Core)<br>[Microsoft. AspNetCore.SignalR](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR/) (.NET Framework) |
+| **Packages NuGet client** | [Microsoft. AspNet. SignalR . Client](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft. AspNet. SignalR . JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [Microsoft. AspNetCore. SignalR . Client](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
+| **Package NPM du client JavaScript** | [signalr](https://www.npmjs.com/package/signalr) | [`@aspnet/signalr`](https://www.npmjs.com/package/@aspnet/signalr) |
+| **Client Java** | [Dépôt github](https://github.com/SignalR/java-client) (déconseillé)  | Package Maven [com. Microsoft. signalr](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
+| **Type d’application serveur** | ASP.NET (System. Web) ou auto-hôte OWIN | ASP.NET Core |
+| **Plateformes serveur prises en charge** | .NET Framework 4,5 ou version ultérieure | .NET Framework 4.6.1 ou ultérieur<br>.NET Core 2,1 ou version ultérieure |
 
 ::: moniker-end
 

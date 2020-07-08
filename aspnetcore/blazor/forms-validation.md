@@ -5,7 +5,7 @@ description: Découvrez comment utiliser des formulaires et des scénarios de va
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/01/2020
+ms.date: 07/06/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 925051d7426470aebfddbdb5ff83d7dab9f82726
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: f31a1f1d8942c9d9654dc26e946c022cf21ed9d1
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944430"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059862"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>ASP.NET Core Blazor les formulaires et la validation
 
@@ -445,6 +445,14 @@ Le <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessage%601> composant 
 
 Les <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessage%601> <xref:Microsoft.AspNetCore.Components.Forms.ValidationSummary> composants et prennent en charge des attributs arbitraires. Tout attribut qui ne correspond pas à un paramètre de composant est ajouté à l' `<div>` élément ou généré `<ul>` .
 
+Contrôler le style des messages de validation dans la feuille de style de l’application ( `wwwroot/css/app.css` ou `wwwroot/css/site.css` ). La classe par défaut `validation-message` définit la couleur du texte des messages de validation sur rouge :
+
+```css
+.validation-message {
+    color: red;
+}
+```
+
 ### <a name="custom-validation-attributes"></a>Attributs de validation personnalisés
 
 Pour vous assurer qu’un résultat de validation est correctement associé à un champ lors de l’utilisation d’un [attribut de validation personnalisé](xref:mvc/models/validation#custom-attributes), transmettez le contexte de validation <xref:System.ComponentModel.DataAnnotations.ValidationContext.MemberName> lors de la création du <xref:System.ComponentModel.DataAnnotations.ValidationResult> :
@@ -467,7 +475,7 @@ private class CustomValidator : ValidationAttribute
 ```
 
 > [!NOTE]
-> <xref:System.ComponentModel.DataAnnotations.ValidationContext.GetService%2A?displayProperty=nameWithType> a la valeur `null`. L’injection de services pour la validation dans la `IsValid` méthode n’est pas prise en charge.
+> <xref:System.ComponentModel.DataAnnotations.ValidationContext.GetService%2A?displayProperty=nameWithType> est `null`. L’injection de services pour la validation dans la `IsValid` méthode n’est pas prise en charge.
 
 ### <a name="blazor-data-annotations-validation-package"></a>Blazorpackage de validation des annotations de données
 
@@ -603,7 +611,7 @@ L’un des effets secondaires de l’approche précédente est qu’un <xref:Mic
 }
 ```
 
-## <a name="troubleshoot"></a>Résoudre des problèmes
+## <a name="troubleshoot"></a>Résoudre les problèmes
 
 > InvalidOperationException : EditForm requiert un paramètre de modèle, ou un paramètre EditContext, mais pas les deux.
 

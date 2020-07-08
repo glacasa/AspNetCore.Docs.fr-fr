@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: 08efb79f5085acff455744e46ca411777b2641e5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: caf9e99bcd4a1887fe5d69a3641fabee08573ef1
+ms.sourcegitcommit: d1fa3d69dda675d7a52c7100742dfa6297413376
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406158"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86093309"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>Comparer les services gRPC avec les API HTTP
 
@@ -31,14 +31,14 @@ Cet article explique comment les [services gRPC](https://grpc.io/docs/guides/) s
 
 Le tableau suivant présente une comparaison de haut niveau des fonctionnalités entre les API gRPC et HTTP avec JSON.
 
-| Fonctionnalité          | gRPC                                               | API HTTP avec JSON           |
+| Composant          | gRPC                                               | API HTTP avec JSON           |
 | ---------------- | -------------------------------------------------- | ----------------------------- |
 | Contrat         | Obligatoire (*. proto*)                                | Facultatif (OpenAPI)            |
 | Protocole         | HTTP/2                                             | HTTP                          |
 | Payload          | [Protobuf (petit, binaire)](#performance)           | JSON (grand, lisible par l’utilisateur)  |
 | Prescriptiveness | [Spécification stricte](#strict-specification)      | Compatibilité. Tout HTTP est valide.     |
 | Diffusion en continu        | [Client, serveur, bidirectionnel](#streaming)       | Client, serveur                |
-| Prise en charge des navigateurs  | [Non (requiert GRPC-Web)](#limited-browser-support) | Oui                           |
+| Prise en charge des navigateurs  | [Non (requiert GRPC-Web)](#limited-browser-support) | Yes                           |
 | Sécurité         | Transport (TLS)                                    | Transport (TLS)               |
 | Génération de code client | [Oui](#code-generation)                      | OpenAPI + outils tiers |
 
@@ -104,7 +104,7 @@ Il est impossible d’appeler directement un service gRPC à partir d’un navig
 Les fonctionnalités de gRPC ne sont pas toutes prises en charge par gRPC-Web. Le client et la diffusion bidirectionnelle ne sont pas pris en charge, et la prise en charge de la diffusion de serveur est limitée.
 
 > [!TIP]
-> .NET Core offre une prise en charge expérimentale de gRPC-Web. <xref:grpc/browser>Pour plus d’informations, consultez.
+> .NET Core prend en charge gRPC-Web. <xref:grpc/browser>Pour plus d’informations, consultez.
 
 ### <a name="not-human-readable"></a>Non lisible par l’homme
 

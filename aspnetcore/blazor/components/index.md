@@ -5,7 +5,7 @@ description: Découvrez comment créer et utiliser des Razor composants, notamme
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/25/2020
+ms.date: 07/06/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 0a8335461b4c9cd628d9c65b97f7ab6a74487fca
-ms.sourcegitcommit: 7f423602a1475736f61fc361327d4de0976c9649
+ms.openlocfilehash: 23aab2504368559b8d3dd21b3c0896ffc3348e2f
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85950893"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059816"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Créer et utiliser des Razor composants ASP.net Core
 
@@ -83,15 +83,15 @@ Les composants sont des classes C# ordinaires qui peuvent être placées n’imp
 
 ### <a name="namespaces"></a>Espaces de noms
 
-En règle générale, l’espace de noms d’un composant est dérivé de l’espace de noms racine de l’application et de l’emplacement (dossier) du composant dans l’application. Si l’espace de noms racine de l’application est `BlazorApp` et que le `Counter` composant se trouve dans le `Pages` dossier :
+En règle générale, l’espace de noms d’un composant est dérivé de l’espace de noms racine de l’application et de l’emplacement (dossier) du composant dans l’application. Si l’espace de noms racine de l’application est `BlazorSample` et que le `Counter` composant se trouve dans le `Pages` dossier :
 
-* L' `Counter` espace de noms du composant est `BlazorApp.Pages` .
-* Le nom de type qualifié complet du composant est `BlazorApp.Pages.Counter` .
+* L' `Counter` espace de noms du composant est `BlazorSample.Pages` .
+* Le nom de type qualifié complet du composant est `BlazorSample.Pages.Counter` .
 
 Pour les dossiers personnalisés qui contiennent des composants, ajoutez une [`@using`][2] directive au composant parent ou au fichier de l’application `_Imports.razor` . L’exemple suivant rend les composants du `Components` dossier disponibles :
 
 ```razor
-@using BlazorApp.Components
+@using BlazorSample.Components
 ```
 
 Les composants peuvent également être référencés à l’aide de leurs noms complets, ce qui ne requiert pas la [`@using`][2] directive :
@@ -162,7 +162,7 @@ Le `Counter` composant peut également être créé à l’aide d’un fichier c
 `Counter.razor.cs`:
 
 ```csharp
-namespace BlazorApp.Pages
+namespace BlazorSample.Pages
 {
     public partial class Counter
     {
@@ -481,15 +481,15 @@ public class NotifierService
 }
 ```
 
-Inscrivez le `NotifierService` en tant que singletion :
+Inscrire `NotifierService` :
 
-* Dans Blazor WebAssembly , inscrivez le service dans `Program.Main` :
+* Dans Blazor WebAssembly , inscrivez le service comme Singleton dans `Program.Main` :
 
   ```csharp
   builder.Services.AddSingleton<NotifierService>();
   ```
 
-* Dans Blazor Server , inscrivez le service dans `Startup.ConfigureServices` :
+* Dans Blazor Server , inscrivez le service comme étant étendu dans `Startup.ConfigureServices` :
 
   ```csharp
   services.AddScoped<NotifierService>();
@@ -619,13 +619,19 @@ Prenons le `Expander` composant suivant :
 * Active ou désactive l’indication du contenu enfant avec un paramètre de composant.
 
 ```razor
-<div @onclick="@Toggle">
-    Toggle (Expanded = @Expanded)
+<div @onclick="@Toggle" class="card text-white bg-success mb-3">
+    <div class="card-body">
+        <div class="panel-heading">
+            <h2>Toggle (Expanded = @Expanded)</h2>
+        </div>
 
-    @if (Expanded)
-    {
-        @ChildContent
-    }
+        @if (Expanded)
+        {
+            <div class="card-text">
+                @ChildContent
+            </div>
+        }
+    </div>
 </div>
 
 @code {
@@ -645,13 +651,15 @@ Prenons le `Expander` composant suivant :
 Le `Expander` composant est ajouté à un composant parent qui peut appeler <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> :
 
 ```razor
+@page "/expander"
+
 <Expander Expanded="true">
-    <h1>Hello, world!</h1>
+    Expander 1 content
 </Expander>
 
 <Expander Expanded="true" />
 
-<button @onclick="@(() => StateHasChanged())">
+<button @onclick="StateHasChanged">
     Call StateHasChanged
 </button>
 ```
@@ -660,30 +668,36 @@ Au départ, les `Expander` composants se comportent indépendamment lorsque leur
 
 Pour maintenir l’État dans le scénario précédent, utilisez un *champ privé* dans le `Expander` composant pour maintenir son état bascule.
 
-Le `Expander` composant suivant :
+Le composant révisé suivant `Expander` :
 
 * Accepte la `Expanded` valeur de paramètre du composant à partir du parent.
 * Affecte la valeur du paramètre de composant à un *champ privé* ( `expanded` ) dans l' [événement OnInitialized](xref:blazor/components/lifecycle#component-initialization-methods).
 * Utilise le champ privé pour conserver son état bascule interne.
 
 ```razor
-<div @onclick="@Toggle">
-    Toggle (Expanded = @expanded)
+<div @onclick="@Toggle" class="card text-white bg-success mb-3">
+    <div class="card-body">
+        <div class="panel-heading">
+            <h2>Toggle (Expanded = @expanded)</h2>
+        </div>
 
-    @if (expanded)
-    {
-        @ChildContent
-    }
+        @if (Expanded)
+        {
+            <div class="card-text">
+                @ChildContent
+            </div>
+        }
+    </div>
 </div>
 
 @code {
+    private bool expanded;
+
     [Parameter]
     public bool Expanded { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
-
-    private bool expanded;
 
     protected override void OnInitialized()
     {

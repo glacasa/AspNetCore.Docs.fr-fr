@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cors
-ms.openlocfilehash: 76e79c2d9762e242dc44857370b0ce1d13f1d1cb
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0a2be31092ab491e23ab9de9be676b5b4d3963ee
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403779"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060278"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>Activer les requêtes Cross-Origin (CORS) dans ASP.NET Core
 
@@ -56,7 +56,7 @@ Ces URL ont des origines différentes des deux précédentes URL :
 * `http://example.com/foo.html`: Schéma différent
 * `https://example.com:9000/foo.html`: Autre port
 
-## <a name="enable-cors"></a>Activez CORS
+## <a name="enable-cors"></a>Activer CORS
 
 Il existe trois façons d’activer CORS :
 
@@ -794,7 +794,7 @@ Par exemple, considérez une application configurée comme suit :
 app.UseCors(policy => policy.WithHeaders(HeaderNames.CacheControl));
 ```
 
-L’intergiciel (middleware) CORS répond correctement à une demande préliminaire avec l’en-tête de demande suivant, car est toujours ajouté à la liste `Content-Language` blanche :
+L’intergiciel (middleware) CORS répond correctement à une demande préliminaire avec l’en-tête de demande suivant, car `Content-Language` est toujours autorisé :
 
 ```
 Access-Control-Request-Headers: Cache-Control, Content-Language

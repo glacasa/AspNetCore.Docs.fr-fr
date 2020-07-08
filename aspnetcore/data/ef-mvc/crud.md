@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 0be63811874709db95285f4013e47bc1706050b1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e7e4c4b15cca9612a552c58029ae8b34b79070d1
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401478"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060122"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Didacticiel : implémenter la fonctionnalité CRUD-ASP.NET MVC avec EF Core
 
@@ -187,7 +187,7 @@ Ces modifications implémentent une bonne pratique de sécurité pour empêcher 
 
 Le nouveau code lit l’entité existante et appelle `TryUpdateModel` pour mettre à jour les champs dans l’entité récupérée [en fonction de l’entrée d’utilisateur dans les données du formulaire envoyé](xref:mvc/models/model-binding). Le suivi automatique des modifications d’Entity Framework définit l’indicateur `Modified` sur les champs qui sont modifiés via une entrée dans le formulaire. Quand la méthode `SaveChanges` est appelée, Entity Framework crée des instructions SQL pour mettre à jour la ligne de la base de données. Les conflits d’accès concurrentiel sont ignorés, et seules les colonnes de table qui ont été mises à jour par l’utilisateur sont mises à jour dans la base de données. (Un didacticiel suivant montre comment gérer les conflits d’accès concurrentiel.)
 
-Au titre de bonne pratique pour empêcher la survalidation, les champs dont vous voulez qu’ils puissent être mis à jour par la page **Edit** sont placés en liste verte dans les paramètres de `TryUpdateModel`. (La chaîne vide qui précède la liste de champs dans la liste de paramètres correspond à un préfixe à utiliser avec les noms de champs de formulaire.) Actuellement, il n’y a aucun champ supplémentaire que vous protégez, mais la liste des champs que vous souhaitez lier au classeur de modèles garantit que si vous ajoutez des champs au modèle de données à l’avenir, ils sont automatiquement protégés jusqu’à ce que vous les ajoutiez explicitement ici.
+Comme meilleure pratique pour empêcher la survalidation, les champs que vous souhaitez mettre à jour par la page de **modification** sont déclarés dans les `TryUpdateModel` paramètres. (La chaîne vide qui précède la liste de champs dans la liste de paramètres correspond à un préfixe à utiliser avec les noms de champs de formulaire.) Actuellement, il n’y a aucun champ supplémentaire que vous protégez, mais la liste des champs que vous souhaitez lier au classeur de modèles garantit que si vous ajoutez des champs au modèle de données à l’avenir, ils sont automatiquement protégés jusqu’à ce que vous les ajoutiez explicitement ici.
 
 À la suite de ces modifications, la signature de méthode de la méthode HttpPost `Edit` est la même que celle de la méthode HttpGet `Edit` ; par conséquent, vous avez renommé la méthode `EditPost`.
 

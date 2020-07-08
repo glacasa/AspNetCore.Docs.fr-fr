@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/context-headers
-ms.openlocfilehash: 078392662281253b8b6cfc0d50fddc8d66482b63
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0995cd80c10f638c90a60630378518988ffb89ed
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406892"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060096"
 ---
 # <a name="context-headers-in-aspnet-core"></a>En-têtes de contexte dans ASP.NET Core
 
@@ -26,7 +26,7 @@ ms.locfileid: "85406892"
 
 ## <a name="background-and-theory"></a>Arrière-plan et théorie
 
-Dans le système de protection des données, une « clé » désigne un objet qui peut fournir des services de chiffrement authentifiés. Chaque clé est identifiée par un ID unique (GUID) et elle contient des informations algorithmiques et des documents Entropic. Il est prévu que chaque clé porte une entropie unique, mais le système ne peut pas le faire, et nous devons également tenir compte des développeurs qui peuvent changer manuellement l’anneau de clé en modifiant les informations algorithmiques d’une clé existante dans l’anneau de clé. Pour répondre à nos exigences de sécurité, le système de protection des données présente un concept d' [agilité cryptographique](https://www.microsoft.com/en-us/research/publication/cryptographic-agility-and-its-relation-to-circular-encryption/), qui permet d’utiliser en toute sécurité une valeur Entropic unique sur plusieurs algorithmes de chiffrement.
+Dans le système de protection des données, une « clé » désigne un objet qui peut fournir des services de chiffrement authentifiés. Chaque clé est identifiée par un ID unique (GUID) et elle contient des informations algorithmiques et des documents Entropic. Il est prévu que chaque clé porte une entropie unique, mais le système ne peut pas le faire, et nous devons également tenir compte des développeurs qui peuvent changer manuellement l’anneau de clé en modifiant les informations algorithmiques d’une clé existante dans l’anneau de clé. Pour répondre à nos exigences de sécurité, le système de protection des données présente un concept d' [agilité cryptographique](https://www.microsoft.com/research/publication/cryptographic-agility-and-its-relation-to-circular-encryption), qui permet d’utiliser en toute sécurité une valeur Entropic unique sur plusieurs algorithmes de chiffrement.
 
 La plupart des systèmes qui prennent en charge l’agilité de chiffrement le font en incluant des informations d’identification sur l’algorithme à l’intérieur de la charge utile. L’OID de l’algorithme est généralement un bon candidat pour cela. Toutefois, l’un des problèmes que nous avons rencontré est qu’il existe plusieurs façons de spécifier le même algorithme : « AES » (CNG) et les classes AES, AesManaged, AesCryptoServiceProvider, AesCng et RijndaelManaged (données spécifiques) managées sont toutes identiques, et nous devons conserver un mappage de tous ces éléments sur l’OID correct. Si un développeur souhaitait fournir un algorithme personnalisé (ou même une autre implémentation d’AES !), il aurait à nous dire son OID. Cette étape d’enregistrement supplémentaire rend la configuration du système particulièrement pénible.
 
@@ -50,21 +50,21 @@ L’en-tête de contexte est constitué des composants suivants :
 
 * [32 bits] Taille du condensé (en octets, Big-endian) de l’algorithme HMAC.
 
-* EncCBC (K_E, IV, ""), qui est la sortie de l’algorithme de chiffrement par bloc symétrique en fonction d’une entrée de chaîne vide et où IV est un vecteur tout zéro. La construction de K_E est décrite ci-dessous.
+* `EncCBC(K_E, IV, "")`, qui est la sortie de l’algorithme de chiffrement par bloc symétrique en fonction d’une entrée de chaîne vide et où IV est un vecteur tout zéro. La construction de `K_E` est décrite ci-dessous.
 
-* MAC (K_H, ""), qui est la sortie de l’algorithme HMAC en fonction d’une entrée de chaîne vide. La construction de K_H est décrite ci-dessous.
+* `MAC(K_H, "")`, qui est la sortie de l’algorithme HMAC en fonction d’une entrée de chaîne vide. La construction de `K_H` est décrite ci-dessous.
 
-Idéalement, nous pourrions transmettre tous les vecteurs nuls pour K_E et K_H. Toutefois, nous souhaitons éviter la situation dans laquelle l’algorithme sous-jacent vérifie l’existence de clés faibles avant d’effectuer des opérations (notamment DES et 3DES), ce qui empêche l’utilisation d’un modèle simple ou reproductible comme un vecteur tout zéro.
+Idéalement, nous pourrions passer tous les vecteurs nuls pour `K_E` et `K_H` . Toutefois, nous souhaitons éviter la situation dans laquelle l’algorithme sous-jacent vérifie l’existence de clés faibles avant d’effectuer des opérations (notamment DES et 3DES), ce qui empêche l’utilisation d’un modèle simple ou reproductible comme un vecteur tout zéro.
 
-Au lieu de cela, nous utilisons le KDF NIST SP800-108 en mode compteur (voir [NIST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), Sec. 5,1) avec une clé, une étiquette et un contexte de longueur nulle, et HMACSHA512 comme le PRF sous-jacent. Nous dériverons | K_E | + | K_H | octets de sortie, puis décomposent le résultat en K_E et K_H eux-mêmes. Mathématiquement, ce qui est représenté comme suit.
+Au lieu de cela, nous utilisons le KDF NIST SP800-108 en mode compteur (voir [NIST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), Sec. 5,1) avec une clé, une étiquette et un contexte de longueur nulle, et HMACSHA512 comme le PRF sous-jacent. Nous dérivez `| K_E | + | K_H |` des octets de sortie, puis décomposons le résultat en `K_E` et `K_H` eux-mêmes. Mathématiquement, ce qui est représenté comme suit.
 
-(K_E | | K_H) = SP800_108_CTR (PRF = HMACSHA512, Key = "", étiquette = "", context = "")
+`( K_E || K_H ) = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")`
 
 ### <a name="example-aes-192-cbc--hmacsha256"></a>Exemple : AES-192-CBC + HMACSHA256
 
 Par exemple, considérez le cas où l’algorithme de chiffrement par bloc symétrique est AES-192-CBC et que l’algorithme de validation est HMACSHA256. Le système génère l’en-tête de contexte à l’aide des étapes suivantes.
 
-Tout d’abord, Let (K_E | | K_H) = SP800_108_CTR (PRF = HMACSHA512, Key = "", étiquette = "", context = ""), où | K_E | = 192 bits et | K_H | = 256 bits selon les algorithmes spécifiés. Cela amène à K_E = 5BB6. 21DD et K_H = A04A.. 00A9 dans l’exemple ci-dessous :
+Tout d’abord, indiquez `( K_E || K_H ) = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")` , où `| K_E | = 192 bits` et `| K_H | = 256 bits` par les algorithmes spécifiés. Cela amène à `K_E = 5BB6..21DD` et `K_H = A04A..00A9` dans l’exemple ci-dessous :
 
 ```
 5B B6 C9 83 13 78 22 1D 8E 10 73 CA CF 65 8E B0
@@ -73,13 +73,13 @@ Tout d’abord, Let (K_E | | K_H) = SP800_108_CTR (PRF = HMACSHA512, Key = "", �
 B7 92 3D BF 59 90 00 A9
 ```
 
-Ensuite, calculez Enc_CBC (K_E, IV, "") pour AES-192-CBC donné IV = 0 * et K_E comme indiqué ci-dessus.
+Ensuite, calculez `Enc_CBC (K_E, IV, "")` pour AES-192-CBC donné `IV = 0*` et `K_E` comme indiqué ci-dessus.
 
-résultat : = F474B1872B3B53E4721DE19C0841DB6F
+`result := F474B1872B3B53E4721DE19C0841DB6F`
 
-Ensuite, calculez MAC (K_H, "") pour HMACSHA256 donné K_H comme indiqué ci-dessus.
+Ensuite, calculez `MAC(K_H, "")` pour HMACSHA256 donné `K_H` comme indiqué ci-dessus.
 
-résultat : = D4791184B996092EE1202F36E8608FA8FBD98ABDFF5402F264B1D7211536220C
+`result := D4791184B996092EE1202F36E8608FA8FBD98ABDFF5402F264B1D7211536220C`
 
 Cela génère l’en-tête de contexte complet ci-dessous :
 
@@ -93,26 +93,26 @@ DB 6F D4 79 11 84 B9 96 09 2E E1 20 2F 36 E8 60
 
 Cet en-tête de contexte est l’empreinte numérique de la paire d’algorithmes de chiffrement authentifiée (AES-192-CBC Encryption + HMACSHA256 validation). Les composants, comme décrit [ci-dessus](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers-cbc-components) , sont les suivants :
 
-* marqueur (00 00)
+* le marqueur`(00 00)`
 
-* longueur de la clé de chiffrement par bloc (00 00 00 18)
+* longueur de la clé de chiffrement par bloc`(00 00 00 18)`
 
-* taille du bloc de chiffrement par bloc (00 00 00 10)
+* taille du bloc de chiffrement par bloc`(00 00 00 10)`
 
-* longueur de clé HMAC (00 00 00 20)
+* longueur de clé HMAC`(00 00 00 20)`
 
-* taille du condensé HMAC (00 00 00 20)
+* taille du condensé HMAC`(00 00 00 20)`
 
-* sortie de chiffrement par bloc PRP (F4 74-DB 6F) et
+* sortie de chiffrement par bloc `(F4 74 - DB 6F)` et
 
-* résultat de la sortie HMAC PRF (D4 79-end).
+* sortie du PRF HMAC `(D4 79 - end)` .
 
 > [!NOTE]
 > L’en-tête du contexte d’authentification du chiffrement en mode CBC + HMAC est créé de la même façon que les implémentations des algorithmes soient fournies par le CNG Windows ou par les types SymmetricAlgorithm et KeyedHashAlgorithm managés. Cela permet aux applications exécutées sur différents systèmes d’exploitation de produire de manière fiable le même en-tête de contexte même si les implémentations des algorithmes diffèrent entre les systèmes d’exploitation. (En pratique, KeyedHashAlgorithm n’a pas besoin d’être un HMAC approprié. Il peut s’agir de n’importe quel type d’algorithme de hachage à clé.)
 
 ### <a name="example-3des-192-cbc--hmacsha1"></a>Exemple : 3DES-192-CBC + HMACSHA1
 
-Tout d’abord, Let (K_E | | K_H) = SP800_108_CTR (PRF = HMACSHA512, Key = "", étiquette = "", context = ""), où | K_E | = 192 bits et | K_H | = 160 bits selon les algorithmes spécifiés. Cela amène à K_E = A219. E2BB et K_H = DC4A.. B464 dans l’exemple ci-dessous :
+Tout d’abord, indiquez `( K_E || K_H ) = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")` , où `| K_E | = 192 bits` et `| K_H | = 160 bits` par les algorithmes spécifiés. Cela amène à `K_E = A219..E2BB` et `K_H = DC4A..B464` dans l’exemple ci-dessous :
 
 ```
 A2 19 60 2F 83 A9 13 EA B0 61 3A 39 B8 A6 7E 22
@@ -120,13 +120,13 @@ A2 19 60 2F 83 A9 13 EA B0 61 3A 39 B8 A6 7E 22
 D1 F7 5A 34 EB 28 3E D7 D4 67 B4 64
 ```
 
-Ensuite, calculez Enc_CBC (K_E, IV, "") pour 3DES-192-CBC donné IV = 0 * et K_E comme indiqué ci-dessus.
+Ensuite, calculez `Enc_CBC (K_E, IV, "")` pour 3DES-192-CBC donné `IV = 0*` et `K_E` comme indiqué ci-dessus.
 
-résultat : = ABB100F81E53E10E
+`result := ABB100F81E53E10E`
 
-Ensuite, calculez MAC (K_H, "") pour HMACSHA1 donné K_H comme indiqué ci-dessus.
+Ensuite, calculez `MAC(K_H, "")` pour HMACSHA1 `K_H` comme indiqué ci-dessus.
 
-résultat : = 76EB189B35CF03461DDF877CD9F4B1B4D63A7555
+`result := 76EB189B35CF03461DDF877CD9F4B1B4D63A7555`
 
 Cela génère l’en-tête de contexte complet qui est une empreinte de la paire d’algorithmes de chiffrement authentifiés (3DES-192-CBC Encryption + HMACSHA1 validation), comme indiqué ci-dessous :
 
@@ -138,19 +138,19 @@ Cela génère l’en-tête de contexte complet qui est une empreinte de la paire
 
 Les composants s’interrompent comme suit :
 
-* marqueur (00 00)
+* le marqueur`(00 00)`
 
-* longueur de la clé de chiffrement par bloc (00 00 00 18)
+* longueur de la clé de chiffrement par bloc`(00 00 00 18)`
 
-* taille du bloc de chiffrement par bloc (00 00 00 08)
+* taille du bloc de chiffrement par bloc`(00 00 00 08)`
 
-* longueur de clé HMAC (00 00 00 14)
+* longueur de clé HMAC`(00 00 00 14)`
 
-* taille du condensé HMAC (00 00 00 14)
+* taille du condensé HMAC`(00 00 00 14)`
 
-* sortie de chiffrement par bloc PRP (AB B1-E1 0E) et
+* sortie de chiffrement par bloc `(AB B1 - E1 0E)` et
 
-* sortie du PRF HMAC (76 EB-end).
+* sortie du PRF HMAC `(76 EB - end)` .
 
 ## <a name="galoiscounter-mode-encryption--authentication"></a>Chiffrement + authentification du mode Galois/Counter
 
@@ -166,21 +166,21 @@ L’en-tête de contexte est constitué des composants suivants :
 
 * [32 bits] Taille de la balise d’authentification (en octets, Big-endian) produite par la fonction de chiffrement authentifié. (Pour notre système, ce problème est résolu au niveau de la balise Size = 128 bits.)
 
-* [128 bits] La balise de Enc_GCM (K_E, nonce, ""), qui est la sortie de l’algorithme de chiffrement par bloc symétrique en fonction d’une entrée de chaîne vide et où nonce est un vecteur tout zéro 96 bits.
+* [128 bits] La balise de `Enc_GCM (K_E, nonce, "")` , qui est la sortie de l’algorithme de chiffrement par bloc symétrique en fonction d’une entrée de chaîne vide et où nonce est un vecteur tout-zéro 96 bits.
 
-K_E est dérivée à l’aide du même mécanisme que dans le scénario d’authentification CBC Encryption + HMAC. Toutefois, étant donné qu’il n’y a pas de K_H en cours, nous avons essentiellement | K_H | = 0, et l’algorithme est réduit au formulaire ci-dessous.
+`K_E`est dérivé à l’aide du même mécanisme que dans le scénario d’authentification CBC Encryption + HMAC. Toutefois, étant donné qu’il n’y a aucun `K_H` dans la lecture ici, nous avons essentiellement `| K_H | = 0` , et l’algorithme est réduit au formulaire ci-dessous.
 
-K_E = SP800_108_CTR (PRF = HMACSHA512, Key = "", étiquette = "", context = "")
+`K_E = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")`
 
 ### <a name="example-aes-256-gcm"></a>Exemple : AES-256-GCM
 
-Tout d’abord, laissez K_E = SP800_108_CTR (PRF = HMACSHA512, Key = "", étiquette = "", context = ""), où | K_E | = 256 bits.
+Tout d’abord, `K_E = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")` où `| K_E | = 256 bits` .
 
-K_E : = 22BC6F1B171C08C4AE2F27444AF8FC8B3087A90006CAEA91FDCFB47C1B8733B8
+`K_E := 22BC6F1B171C08C4AE2F27444AF8FC8B3087A90006CAEA91FDCFB47C1B8733B8`
 
-Ensuite, calculez l’étiquette d’authentification de Enc_GCM (K_E, nonce, "") pour AES-256-GCM donnée nonce = 096 et K_E comme indiqué ci-dessus.
+Ensuite, calculez la balise d’authentification de `Enc_GCM (K_E, nonce, "")` pour AES-256-GCM donné `nonce = 096` et `K_E` comme indiqué ci-dessus.
 
-résultat : = E7DCCE66DF855A323A6BB7BD7A59BE45
+`result := E7DCCE66DF855A323A6BB7BD7A59BE45`
 
 Cela génère l’en-tête de contexte complet ci-dessous :
 
@@ -192,14 +192,14 @@ BE 45
 
 Les composants s’interrompent comme suit :
 
-* marqueur (00 01)
+* le marqueur`(00 01)`
 
-* longueur de la clé de chiffrement par bloc (00 00 00 20)
+* longueur de la clé de chiffrement par bloc`(00 00 00 20)`
 
-* taille de la valeur à usage unique (00 00 00 0C)
+* la taille de la valeur à usage unique`(00 00 00 0C)`
 
-* taille du bloc de chiffrement par bloc (00 00 00 10)
+* taille du bloc de chiffrement par bloc`(00 00 00 10)`
 
-* la taille de la balise d’authentification (00 00 00 10) et
+* la taille de la balise d’authentification `(00 00 00 10)` et
 
-* balise d’authentification à partir de l’exécution du chiffrement par blocs (E7 DC-end).
+* balise d’authentification de l’exécution du chiffrement par blocs `(E7 DC - end)` .

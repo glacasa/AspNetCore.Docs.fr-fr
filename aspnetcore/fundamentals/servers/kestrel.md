@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 9f70de3c4c3f936f25a390c3a7ab1a1e2a000138
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 03c25c103f03c3f9b17311f468d96907d2498641
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401023"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060382"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>Implémentation du serveur web Kestrel dans ASP.NET Core
 
@@ -686,7 +686,7 @@ Quand l’application est exécutée, la sortie de la fenêtre de console indiqu
 Listening on the following addresses: http://127.0.0.1:48508
 ```
 
-### <a name="limitations"></a>Limites
+### <a name="limitations"></a>Limitations
 
 Configurez des points de terminaison avec les approches suivantes :
 
@@ -1687,7 +1687,7 @@ Quand l’application est exécutée, la sortie de la fenêtre de console indiqu
 Listening on the following addresses: http://127.0.0.1:48508
 ```
 
-### <a name="limitations"></a>Limites
+### <a name="limitations"></a>Limitations
 
 Configurez des points de terminaison avec les approches suivantes :
 
@@ -1725,7 +1725,7 @@ Restrictions TLS pour HTTP/2 :
 * Tailles minimales de l’échange de clé éphémère :
   * Elliptic Curve Diffie-Hellman (ECDHE) &lbrack; [RFC4492](https://www.ietf.org/rfc/rfc4492.txt) &rbrack; : 224 bits minimum
   * Diffie-Hellman de champ fini (dhe) &lbrack; `TLS12` &rbrack; : 2048 bits minimum
-* Suite de chiffrement non inscrite sur liste rouge
+* Suite de chiffrement non bloquée
 
 `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`&lbrack;`TLS-ECDHE`&rbrack; avec la courbe elliptique P-256 &lbrack; `FIPS186` &rbrack; est pris en charge par défaut.
 
@@ -2600,7 +2600,7 @@ Quand l’application est exécutée, la sortie de la fenêtre de console indiqu
 Listening on the following addresses: http://127.0.0.1:48508
 ```
 
-### <a name="limitations"></a>Limites
+### <a name="limitations"></a>Limitations
 
 Configurez des points de terminaison avec les approches suivantes :
 
