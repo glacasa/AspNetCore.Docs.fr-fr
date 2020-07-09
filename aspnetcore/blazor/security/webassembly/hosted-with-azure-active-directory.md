@@ -5,7 +5,7 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 07/08/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 2e761f6f4d8e15569c0eb12388db04c401bbb1f5
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 82916c06413300bbefa85c619239c23a8e40468a
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944339"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147752"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory"></a>Sécuriser une Blazor WebAssembly application hébergée ASP.net core avec Azure Active Directory
 
@@ -47,9 +47,9 @@ Suivez les instructions de [démarrage rapide : inscrire une application auprè
 
 Notez les informations suivantes :
 
-* *Application API serveur* ID d’application (ID client) (par exemple, `11111111-1111-1111-1111-111111111111` )
-* ID de répertoire (ID de locataire) (par exemple, `222222222-2222-2222-2222-222222222222` )
-* Domaine du locataire AAD (par exemple, `contoso.onmicrosoft.com` ) : le domaine est disponible en tant que domaine du serveur de **publication** dans le panneau de **personnalisation** du portail Azure pour l’application inscrite.
+* *Application API serveur* ID de l’application (client) (par exemple, `41451fa7-82d9-4673-8fa5-69eff5a761fd` )
+* ID de répertoire (locataire) (par exemple, `e86c78e2-8bb4-4c41-aefd-918e0565a45e` )
+* Le domaine principal/serveur de publication/client AAD (par exemple, `contoso.onmicrosoft.com` ) : le domaine est disponible en tant que domaine du serveur de **publication** dans le panneau de **personnalisation** du portail Azure pour l’application inscrite.
 
 Dans **autorisations d’API**, supprimez l’autorisation **Microsoft Graph**  >  **User. Read** , car l’application ne nécessite pas d’accès de connexion ou de profil utilisateur.
 
@@ -65,8 +65,10 @@ Dans **exposer une API**:
 
 Notez les informations suivantes :
 
-* URI ID d’application (par exemple,, `https://contoso.onmicrosoft.com/11111111-1111-1111-1111-111111111111` `api://11111111-1111-1111-1111-111111111111` ou la valeur personnalisée que vous avez fournie)
+* URI ID d’application (par exemple,, `https://contoso.onmicrosoft.com/41451fa7-82d9-4673-8fa5-69eff5a761fd` `api://41451fa7-82d9-4673-8fa5-69eff5a761fd` ou la valeur personnalisée que vous avez fournie)
 * Étendue par défaut (par exemple, `API.Access` )
+
+L’URI ID d’application peut nécessiter une configuration spéciale dans l’application cliente, qui est décrite dans la section [étendues de jetons d’accès](#access-token-scopes) plus loin dans cette rubrique.
 
 ### <a name="register-a-client-app"></a>Inscrire une application cliente
 
@@ -79,7 +81,7 @@ Suivez les instructions de [démarrage rapide : inscrire une application auprè
 1. Désactivez **la case**  >  à cocher**accorder le consentement de l’administrateur aux autorisations OpenID et offline_access** .
 1. Sélectionnez **Inscription**.
 
-Enregistrez l’ID de l’application *cliente* (ID client) (par exemple, `33333333-3333-3333-3333-333333333333` ).
+Enregistrez l’ID de l’application *cliente* (client) (par exemple, `4369008b-21fa-427c-abaa-9b53bf58e538` ).
 
 Dans **Authentication**le  >  **Platform configurations**  >  **site Web**configurations de la plateforme d’authentification :
 
@@ -100,13 +102,23 @@ Dans **autorisations d’API**:
 
 ### <a name="create-the-app"></a>Créer l’application
 
-Remplacez les espaces réservés dans la commande suivante par les informations enregistrées précédemment et exécutez la commande dans une interface de commande :
+Dans un dossier vide, remplacez les espaces réservés dans la commande suivante par les informations enregistrées précédemment et exécutez la commande dans une interface de commande :
 
 ```dotnetcli
-dotnet new blazorwasm -au SingleOrg --api-client-id "{SERVER API APP CLIENT ID}" --app-id-uri "{SERVER API APP ID URI}" --client-id "{CLIENT APP CLIENT ID}" --default-scope "{DEFAULT SCOPE}" --domain "{TENANT DOMAIN}" -ho --tenant-id "{TENANT ID}"
+dotnet new blazorwasm -au SingleOrg --api-client-id "{SERVER API APP CLIENT ID}" --app-id-uri "{SERVER API APP ID URI}" --client-id "{CLIENT APP CLIENT ID}" --default-scope "{DEFAULT SCOPE}" --domain "{TENANT DOMAIN}" -ho -o {APP NAME} --tenant-id "{TENANT ID}"
 ```
 
-Pour spécifier l’emplacement de sortie, qui crée un dossier de projet s’il n’existe pas, incluez l’option de sortie dans la commande avec un chemin d’accès (par exemple, `-o BlazorSample` ). Le nom du dossier devient également une partie du nom du projet.
+| Espace réservé                  | Nom du portail Azure                                     | Exemple                                |
+| ---------------------------- | ----------------------------------------------------- | -------------------------------------- |
+| `{APP NAME}`                 | &mdash;                                               | `BlazorSample`                         |
+| `{CLIENT APP CLIENT ID}`     | ID de l’application (client) pour l' *application cliente*          | `4369008b-21fa-427c-abaa-9b53bf58e538` |
+| `{DEFAULT SCOPE}`            | Nom de l’étendue                                            | `API.Access`                           |
+| `{SERVER API APP CLIENT ID}` | ID de l’application (client) pour l’application *API serveur*      | `41451fa7-82d9-4673-8fa5-69eff5a761fd` |
+| `{SERVER API APP ID URI}`    | URI d’ID d’application ([Voir la remarque](#access-token-scopes)) | `41451fa7-82d9-4673-8fa5-69eff5a761fd` |
+| `{TENANT DOMAIN}`            | Domaine principal/serveur de publication/locataire                       | `contoso.onmicrosoft.com`              |
+| `{TENANT ID}`                | ID d’annuaire (locataire)                                 | `e86c78e2-8bb4-4c41-aefd-918e0565a45e` |
+
+L’emplacement de sortie spécifié avec l' `-o|--output` option crée un dossier de projet s’il n’existe pas et fait partie du nom de l’application.
 
 > [!NOTE]
 > Passez l’URI ID d’application à l' `app-id-uri` option, mais notez qu’une modification de configuration peut être nécessaire dans l’application cliente, qui est décrite dans la section [étendues de jeton d’accès](#access-token-scopes) .
@@ -114,7 +126,7 @@ Pour spécifier l’emplacement de sortie, qui crée un dossier de projet s’il
 > [!NOTE]
 > Dans le portail Azure, l’URI de redirection Web des configurations de plateforme d’authentification *de l’application cliente* **Authentication**  >  **Platform configurations**  >  **Web**  >  **Redirect URI** est configuré pour le port 5001 pour les applications qui s’exécutent sur le serveur Kestrel avec les paramètres par défaut.
 >
-> Si l' *application cliente* est exécutée sur un port IIS Express aléatoire, le port de l’application se trouve dans les propriétés de l' *application serveur* dans le panneau **débogage** .
+> Si l' *application cliente* est exécutée sur un port IIS Express aléatoire, le port de l’application se trouve dans les propriétés de l' *application API serveur* dans le panneau **débogage** .
 >
 > Si le port n’a pas été configuré précédemment avec le port connu *de l’application cliente* , revenez à l’inscription de l' *application cliente* dans la portail Azure et mettez à jour l’URI de redirection avec le port approprié.
 

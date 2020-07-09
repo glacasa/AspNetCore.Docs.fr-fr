@@ -5,7 +5,7 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 07/08/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: df957c5ee385b29ca390c014187a4c10e79d37f4
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 02960e6c7d70be3ea1be3ed9e2280e5b5847c926
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944633"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147678"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-the-authentication-library"></a>Sécuriser une Blazor WebAssembly application ASP.net Core autonome avec la bibliothèque d’authentification
 
@@ -28,15 +28,41 @@ Par [Javier Calvarro Nelson](https://github.com/javiercn) et [Luke Latham](https
 
 *Pour Azure Active Directory (AAD) et Azure Active Directory B2C (AAD B2C), ne suivez pas les instructions de cette rubrique. Consultez les rubriques AAD et AAD B2C dans ce nœud de table des matières.*
 
-Pour créer une Blazor WebAssembly application autonome qui utilise une [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) bibliothèque, exécutez la commande suivante dans une interface de commande :
+Pour créer une Blazor WebAssembly application autonome qui utilise [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) la bibliothèque, suivez les instructions de votre choix d’outils.
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+Pour créer un nouveau Blazor WebAssembly projet avec un mécanisme d’authentification :
+
+1. Après avoir choisi le modèle d' ** Blazor WebAssembly application** dans la boîte de dialogue **créer une application Web ASP.net Core** , sélectionnez **modifier** sous **authentification**.
+
+1. Sélectionnez **des comptes d’utilisateur individuels** avec l’option **stocker les comptes d’utilisateur dans l’application** pour stocker les utilisateurs au sein de l’application à l’aide du système de ASP.net Core [Identity](xref:security/authentication/identity) .
+
+# <a name="visual-studio-code--net-core-cli"></a>[Visual Studio Code/.NET Core CLI](#tab/visual-studio-code+netcore-cli)
+
+Créez un Blazor WebAssembly projet avec un mécanisme d’authentification dans un dossier vide. Spécifiez le `Individual` mécanisme d’authentification avec l' `-au|--auth` option permettant de stocker les utilisateurs au sein de l’application à l’aide du système de ASP.net Core [Identity](xref:security/authentication/identity) :
 
 ```dotnetcli
-dotnet new blazorwasm -au Individual
+dotnet new blazorwasm -au Individual -o {APP NAME}
 ```
 
-Pour spécifier l’emplacement de sortie, qui crée un dossier de projet s’il n’existe pas, incluez l’option de sortie dans la commande avec un chemin d’accès (par exemple, `-o BlazorSample` ). Le nom du dossier devient également une partie du nom du projet.
+| Espace réservé  | Exemple        |
+| ------------ | -------------- |
+| `{APP NAME}` | `BlazorSample` |
 
-Si vous utilisez Visual Studio pour créer une Blazor WebAssembly application, définissez **l’authentification** sur **des comptes d’utilisateur individuels** avec l’option **stocker les comptes d’utilisateur dans l’application** .
+L’emplacement de sortie spécifié avec l' `-o|--output` option crée un dossier de projet s’il n’existe pas et fait partie du nom de l’application.
+
+Pour plus d’informations, consultez la [`dotnet new`](/dotnet/core/tools/dotnet-new) commande dans le guide .net core.
+
+# <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
+
+Pour créer un nouveau Blazor WebAssembly projet avec un mécanisme d’authentification :
+
+1. Dans l’étape **configurer votre nouvelle Blazor WebAssembly application** , sélectionnez **authentification individuelle (dans l’application)** dans la liste déroulante **authentification** .
+
+1. L’application est créée pour les utilisateurs individuels stockés dans l’application avec ASP.NET Core [Identity](xref:security/authentication/identity) .
+
+---
 
 ## <a name="authentication-package"></a>Package d’authentification
 

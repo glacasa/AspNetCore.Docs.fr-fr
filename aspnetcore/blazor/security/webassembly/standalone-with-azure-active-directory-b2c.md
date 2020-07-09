@@ -5,7 +5,7 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 07/08/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-azure-active-directory-b2c
-ms.openlocfilehash: f98afc3d5dd73dca23be9a9c1202802f270bcee7
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3b477b45ae70c6ad66578fbf0ed18589cecbec8d
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402115"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147744"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>Sécuriser une Blazor WebAssembly application ASP.net Core autonome avec Azure Active Directory B2C
 
@@ -34,8 +34,8 @@ Suivez les instructions des rubriques suivantes pour créer un locataire et insc
 
 Notez les informations suivantes :
 
-* AAD B2C instance (par exemple, `https://contoso.b2clogin.com/` , qui comprend la barre oblique finale).
-* AAD B2C domaine de locataire (par exemple, `contoso.onmicrosoft.com` ).
+* AAD B2C instance (par exemple, `https://contoso.b2clogin.com/` , qui comprend la barre oblique finale) : l’instance est le schéma et l’hôte d’une inscription d’application Azure B2C, que vous pouvez trouver en ouvrant la fenêtre **points de terminaison** à partir de la page **inscriptions d’applications** de la portail Azure.
+* AAD B2C domaine principal/éditeur/locataire (par exemple, `contoso.onmicrosoft.com` ) : le domaine est disponible en tant que domaine du serveur de **publication** dans le panneau de **personnalisation** du portail Azure pour l’application inscrite.
 
 Suivez les instructions du [Didacticiel : inscrire une application dans Azure Active Directory B2C](/azure/active-directory-b2c/tutorial-register-applications) à nouveau pour inscrire une application AAD pour l' *application cliente* , puis procédez comme suit :
 
@@ -46,7 +46,7 @@ Suivez les instructions du [Didacticiel : inscrire une application dans Azure A
 1. Vérifiez que **Permissions**  >  **les autorisations accordent le consentement de l’administrateur à OpenID et que les autorisations offline_access** sont activées.
 1. Sélectionnez **Inscription**.
 
-Enregistrez l’ID d’application (ID client) (par exemple, `11111111-1111-1111-1111-111111111111` ).
+Enregistrez l’ID de l’application (client) (par exemple, `41451fa7-82d9-4673-8fa5-69eff5a761fd` ).
 
 Dans **Authentication**le  >  **Platform configurations**  >  **site Web**configurations de la plateforme d’authentification :
 
@@ -63,13 +63,21 @@ Au minimum, sélectionnez l' **Application claims**  >  attribut utilisateur**no
 
 Notez le nom du workflow d’inscription et de connexion de l’utilisateur créé pour l’application (par exemple, `B2C_1_signupsignin` ).
 
-Remplacez les espaces réservés dans la commande suivante par les informations enregistrées précédemment et exécutez la commande dans une interface de commande :
+Dans un dossier vide, remplacez les espaces réservés dans la commande suivante par les informations enregistrées précédemment et exécutez la commande dans une interface de commande :
 
 ```dotnetcli
-dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" --client-id "{CLIENT ID}" --domain "{TENANT DOMAIN}" -ssp "{SIGN UP OR SIGN IN POLICY}"
+dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" --client-id "{CLIENT ID}" --domain "{TENANT DOMAIN}" -o {APP NAME} -ssp "{SIGN UP OR SIGN IN POLICY}"
 ```
 
-Pour spécifier l’emplacement de sortie, qui crée un dossier de projet s’il n’existe pas, incluez l’option de sortie dans la commande avec un chemin d’accès (par exemple, `-o BlazorSample` ). Le nom du dossier devient également une partie du nom du projet.
+| Espace réservé                   | Nom du portail Azure               | Exemple                                |
+| ----------------------------- | ------------------------------- | -------------------------------------- |
+| `{AAD B2C INSTANCE}`          | Instance                        | `https://contoso.b2clogin.com/`        |
+| `{APP NAME}`                  | &mdash;                         | `BlazorSample`                         |
+| `{CLIENT ID}`                 | ID d’application (client)         | `41451fa7-82d9-4673-8fa5-69eff5a761fd` |
+| `{SIGN UP OR SIGN IN POLICY}` | Workflow d’inscription/de connexion       | `B2C_1_signupsignin1`                  |
+| `{TENANT DOMAIN}`             | Domaine principal/serveur de publication/locataire | `contoso.onmicrosoft.com`              |
+
+L’emplacement de sortie spécifié avec l' `-o|--output` option crée un dossier de projet s’il n’existe pas et fait partie du nom de l’application.
 
 > [!NOTE]
 > Dans le portail Azure, l’URI de redirection Web de la plateforme **d’authentification**de l’application  >  **Platform configurations**  >  **Web**  >  **Redirect URI** est configuré pour le port 5001 pour les applications qui s’exécutent sur le serveur Kestrel avec les paramètres par défaut.
@@ -81,7 +89,7 @@ Pour spécifier l’emplacement de sortie, qui crée un dossier de projet s’il
 Après avoir créé l’application, vous devez être en mesure d’effectuer les opérations suivantes :
 
 * Connectez-vous à l’application à l’aide d’un compte d’utilisateur AAD.
-* Demander des jetons d’accès pour les API Microsoft. Pour plus d’informations, voir :
+* Demander des jetons d’accès pour les API Microsoft. Pour plus d'informations, consultez les pages suivantes :
   * [Étendues de jeton d’accès](#access-token-scopes)
   * [Démarrage rapide : configurer une application pour exposer des API Web](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis).
 

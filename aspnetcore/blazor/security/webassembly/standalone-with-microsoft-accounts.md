@@ -5,7 +5,7 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 07/08/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-microsoft-accounts
-ms.openlocfilehash: 38452c3e9578d8a942035174a28d945e58e4008d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 58dd791718a820e1a326db309afcd173d73c667b
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402037"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147698"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-microsoft-accounts"></a>Sécuriser une Blazor WebAssembly application ASP.net Core autonome avec des comptes Microsoft
 
@@ -38,7 +38,7 @@ Inscrire une application AAD dans la **Azure Active Directory**  >  zone de**ins
 1. Désactivez **la case**  >  à cocher**accorder le consentement de l’administrateur aux autorisations OpenID et offline_access** .
 1. Sélectionnez **Inscription**.
 
-Enregistrez l’ID d’application (ID client) (par exemple, `11111111-1111-1111-1111-111111111111` ).
+Enregistrez l’ID de l’application (client) (par exemple, `41451fa7-82d9-4673-8fa5-69eff5a761fd` ).
 
 Dans **Authentication**le  >  **Platform configurations**  >  **site Web**configurations de la plateforme d’authentification :
 
@@ -50,10 +50,15 @@ Dans **Authentication**le  >  **Platform configurations**  >  **site Web**config
 Créez l'application. Remplacez les espaces réservés dans la commande suivante par les informations enregistrées précédemment et exécutez la commande suivante dans une interface de commande :
 
 ```dotnetcli
-dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" --tenant-id "common"
+dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" --tenant-id "common" -o {APP NAME}
 ```
 
-Pour spécifier l’emplacement de sortie, qui crée un dossier de projet s’il n’existe pas, incluez l’option de sortie dans la commande avec un chemin d’accès (par exemple, `-o BlazorSample` ). Le nom du dossier devient également une partie du nom du projet.
+| Espace réservé   | Nom du portail Azure       | Exemple                                |
+| ------------- | ----------------------- | -------------------------------------- |
+| `{APP NAME}`  | &mdash;                 | `BlazorSample`                         |
+| `{CLIENT ID}` | ID d’application (client) | `41451fa7-82d9-4673-8fa5-69eff5a761fd` |
+
+L’emplacement de sortie spécifié avec l' `-o|--output` option crée un dossier de projet s’il n’existe pas et fait partie du nom de l’application.
 
 > [!NOTE]
 > Dans le portail Azure, l’URI de redirection Web de la plateforme **d’authentification**de l’application  >  **Platform configurations**  >  **Web**  >  **Redirect URI** est configuré pour le port 5001 pour les applications qui s’exécutent sur le serveur Kestrel avec les paramètres par défaut.
@@ -65,7 +70,7 @@ Pour spécifier l’emplacement de sortie, qui crée un dossier de projet s’il
 Après avoir créé l’application, vous devez être en mesure d’effectuer les opérations suivantes :
 
 * Connectez-vous à l’application à l’aide d’un compte Microsoft.
-* Demander des jetons d’accès pour les API Microsoft. Pour plus d’informations, voir :
+* Demander des jetons d’accès pour les API Microsoft. Pour plus d'informations, consultez les pages suivantes :
   * [Étendues de jeton d’accès](#access-token-scopes)
   * [Démarrage rapide : configurer une application pour exposer des API Web](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis).
 

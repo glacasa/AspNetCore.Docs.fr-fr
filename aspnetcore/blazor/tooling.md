@@ -16,12 +16,12 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems-set-one
-ms.openlocfilehash: bda287e54efadf8575c15c7b621416f20ae591c9
-ms.sourcegitcommit: d1fa3d69dda675d7a52c7100742dfa6297413376
+ms.openlocfilehash: 30a76eda0e94ee7bb2b2d3db918bc029865bdf1a
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 07/08/2020
-ms.locfileid: "86093323"
+ms.locfileid: "86147649"
 ---
 # <a name="tooling-for-aspnet-core-blazor"></a>Outils pour ASP.NET CoreBlazor
 
@@ -35,9 +35,9 @@ Par [Daniel Roth](https://github.com/danroth27) et [Luke Latham](https://github.
 
 1. Sélectionnez ** Blazor application**. Sélectionnez **Suivant**.
 
-1. Indiquez un nom de projet dans le champ **Nom du projet**, ou acceptez le nom de projet par défaut. Confirmez que l’entrée d' **emplacement** est correcte ou indiquez un emplacement pour le projet. Sélectionnez **Create** (Créer).
+1. Indiquez un nom de projet dans le champ **Nom du projet**, ou acceptez le nom de projet par défaut. Confirmez que l’entrée d' **emplacement** est correcte ou indiquez un emplacement pour le projet. Sélectionnez **Créer**.
 
-1. Pour une Blazor WebAssembly expérience, choisissez le modèle d' ** Blazor WebAssembly application** . Pour une Blazor Server expérience, choisissez le modèle d' ** Blazor Server application** . Sélectionnez **Create** (Créer).
+1. Pour une Blazor WebAssembly expérience, choisissez le modèle d' ** Blazor WebAssembly application** . Pour une Blazor Server expérience, choisissez le modèle d' ** Blazor Server application** . Sélectionnez **Créer**.
 
    Pour plus d’informations sur les deux Blazor modèles d’hébergement, *Blazor WebAssembly* et *Blazor Server* , consultez <xref:blazor/hosting-models> .
 
@@ -103,14 +103,9 @@ Pour plus d’informations, consultez les instructions fournies par votre naviga
 
    Pour plus d’informations sur les deux Blazor modèles d’hébergement, *Blazor WebAssembly* et *Blazor Server* , consultez <xref:blazor/hosting-models> .
 
-1. Vérifiez les configurations suivantes :
+1. Vérifiez que **l’authentification** est définie sur **aucune authentification**. Sélectionnez **Suivant**.
 
-   * **Framework cible** défini sur **.net Core 3,1**.
-   * **L’authentification** est définie sur **aucune authentification**.
-   
-   Sélectionnez **Suivant**.
-
-1. Dans le champ **nom du projet** , nommez l’application `WebApplication1` . Sélectionnez **Create** (Créer).
+1. Dans le champ **nom du projet** , nommez l’application `WebApplication1` . Sélectionnez **Créer**.
 
 1. Sélectionnez **exécuter**  >  **Démarrer sans débogage** pour exécuter l’application *sans le débogueur*. Exécutez l’application avec **Run**  >  le bouton exécuter**Démarrer le débogage** ou exécuter (&#9654;) pour exécuter l’application *avec le débogueur*.
 

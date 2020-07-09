@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 5a58e7ae28842e2e8a0f3bae8f47e252839903fe
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d5aa7520a637b18e014519134dfe2d2139e7c11d
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408875"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147783"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Utiliser ASP.NET Core SignalR avecBlazor WebAssembly
 
@@ -74,13 +74,13 @@ Suivez les instructions de votre choix d’outils :
 
 1. Sélectionnez ** Blazor application** , puis sélectionnez **suivant**.
 
-1. Tapez `BlazorSignalRApp` dans le champ **nom du projet** . Confirmez que l’entrée d' **emplacement** est correcte ou indiquez un emplacement pour le projet. Sélectionnez **Create** (Créer).
+1. Tapez `BlazorSignalRApp` dans le champ **nom du projet** . Confirmez que l’entrée d' **emplacement** est correcte ou indiquez un emplacement pour le projet. Sélectionnez **Créer**.
 
 1. Choisissez le modèle d' ** Blazor WebAssembly application** .
 
 1. Sous **avancé**, activez la case à cocher **ASP.net Core hébergé** .
 
-1. Sélectionnez **Create** (Créer).
+1. Sélectionnez **Créer**.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -104,16 +104,9 @@ Suivez les instructions de votre choix d’outils :
 
 1. Choisissez le modèle d' ** Blazor WebAssembly application** . Sélectionnez **Suivant**.
 
-   Vérifiez les configurations suivantes :
+1. Vérifiez que **l’authentification** est définie sur **aucune authentification**. Activez la case à cocher **ASP.net Core hébergé** . Sélectionnez **Suivant**.
 
-   * **Framework cible** défini sur **.net Core 3,1**.
-   * **L’authentification** est définie sur **aucune authentification**.
-
-   Activez la case à cocher **ASP.net Core hébergé** .
-
-   Sélectionnez **Suivant**.
-
-1. Dans le champ **nom du projet** , nommez l’application `BlazorSignalRApp` . Sélectionnez **Create** (Créer).
+1. Dans le champ **nom du projet** , nommez l’application `BlazorSignalRApp` . Sélectionnez **Créer**.
 
    Si une invite s’affiche pour faire confiance au certificat de développement, approuvez le certificat et continuez. Les mots de passe utilisateur et trousseau sont requis pour approuver le certificat.
 

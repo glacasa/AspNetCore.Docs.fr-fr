@@ -5,7 +5,7 @@ description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 07/08/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-azure-active-directory
-ms.openlocfilehash: 0f7bf6de44b3fb62291b4698b67de3a350817a45
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 9cd6097dfaa31a1329d3ea8ca6293b33e3bdb3c3
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402076"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147719"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-azure-active-directory"></a>Sécuriser une Blazor WebAssembly application ASP.net Core autonome avec Azure Active Directory
 
@@ -40,8 +40,8 @@ Inscrire une application AAD dans la **Azure Active Directory**  >  zone de**ins
 
 Notez les informations suivantes :
 
-* ID d’application (ID client) (par exemple, `11111111-1111-1111-1111-111111111111` )
-* ID de répertoire (ID de locataire) (par exemple, `22222222-2222-2222-2222-222222222222` )
+* ID de l’application (client) (par exemple, `41451fa7-82d9-4673-8fa5-69eff5a761fd` )
+* ID de répertoire (locataire) (par exemple, `e86c78e2-8bb4-4c41-aefd-918e0565a45e` )
 
 Dans **Authentication**le  >  **Platform configurations**  >  **site Web**configurations de la plateforme d’authentification :
 
@@ -50,13 +50,19 @@ Dans **Authentication**le  >  **Platform configurations**  >  **site Web**config
 1. Les valeurs par défaut restantes pour l’application sont acceptables pour cette expérience.
 1. Sélectionnez le bouton **Enregistrer**.
 
-Créez l'application. Remplacez les espaces réservés dans la commande suivante par les informations enregistrées précédemment et exécutez la commande dans une interface de commande :
+Créez l’application dans un dossier vide. Remplacez les espaces réservés dans la commande suivante par les informations enregistrées précédemment et exécutez la commande dans une interface de commande :
 
 ```dotnetcli
-dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" --tenant-id "{TENANT ID}"
+dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" -o {APP NAME} --tenant-id "{TENANT ID}"
 ```
 
-Pour spécifier l’emplacement de sortie, qui crée un dossier de projet s’il n’existe pas, incluez l’option de sortie dans la commande avec un chemin d’accès (par exemple, `-o BlazorSample` ). Le nom du dossier devient également une partie du nom du projet.
+| Espace réservé   | Nom du portail Azure       | Exemple                                |
+| ------------- | ----------------------- | -------------------------------------- |
+| `{APP NAME}`  | &mdash;                 | `BlazorSample`                         |
+| `{CLIENT ID}` | ID d’application (client) | `41451fa7-82d9-4673-8fa5-69eff5a761fd` |
+| `{TENANT ID}` | ID d’annuaire (locataire)   | `e86c78e2-8bb4-4c41-aefd-918e0565a45e` |
+
+L’emplacement de sortie spécifié avec l' `-o|--output` option crée un dossier de projet s’il n’existe pas et fait partie du nom de l’application.
 
 > [!NOTE]
 > Dans le portail Azure, l’URI de redirection Web de la plateforme **d’authentification**de l’application  >  **Platform configurations**  >  **Web**  >  **Redirect URI** est configuré pour le port 5001 pour les applications qui s’exécutent sur le serveur Kestrel avec les paramètres par défaut.
@@ -68,7 +74,7 @@ Pour spécifier l’emplacement de sortie, qui crée un dossier de projet s’il
 Après avoir créé l’application, vous devez être en mesure d’effectuer les opérations suivantes :
 
 * Connectez-vous à l’application à l’aide d’un compte d’utilisateur AAD.
-* Demander des jetons d’accès pour les API Microsoft. Pour plus d’informations, voir :
+* Demander des jetons d’accès pour les API Microsoft. Pour plus d'informations, consultez les pages suivantes :
   * [Étendues de jeton d’accès](#access-token-scopes)
   * [Démarrage rapide : configurer une application pour exposer des API Web](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis).
 

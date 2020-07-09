@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: 0a47ed3338ebfbc5361a6082978d407543fb95c5
-ms.sourcegitcommit: b06511252f165dd4590ba9b5beca4153fa220779
+ms.openlocfilehash: bf6375f8f63bb9db50c423706a48363f53e96549
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/27/2020
-ms.locfileid: "85459777"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147667"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Bien démarrer avec Swashbuckle et ASP.NET Core
 
@@ -44,7 +44,7 @@ Vous pouvez ajouter Swashbuckle en adoptant l’une des approches suivantes :
 * À partir de la fenêtre **Console du Gestionnaire de package** :
   * Accéder à **la**  >  console du gestionnaire de**Other Windows**  >  **package** Windows
   * Accédez au répertoire où se trouve le fichier *TodoApi.csproj*.
-  * Exécutez la commande suivante :
+  * Exécutez la commande suivante :
 
     ```powershell
     Install-Package Swashbuckle.AspNetCore -Version 5.5.0
@@ -75,7 +75,7 @@ dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.5.0
 
 ### <a name="net-core-cli"></a>[CLI .NET Core](#tab/netcore-cli)
 
-Exécutez la commande suivante :
+Exécutez la commande suivante :
 
 ```dotnetcli
 dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.5.0
@@ -124,7 +124,7 @@ Dans la méthode `Startup.Configure`, activez l’intergiciel pour traiter le do
 
 L’appel de méthode `UseSwaggerUI` précédent active le [middleware (intergiciel) des fichiers statiques](xref:fundamentals/static-files). Si vous ciblez .NET Framework ou .NET Core 1. x, ajoutez le package NuGet [Microsoft. AspNetCore. StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) au projet.
 
-Lancez l’application et accédez à `http://localhost:<port>/swagger/v1/swagger.json`. Le document généré décrivant les points de terminaison s’affiche comme illustré dans la [spécification Swagger (swagger.json)](xref:tutorials/web-api-help-pages-using-swagger#swagger-specification-swaggerjson).
+Lancez l’application et accédez à `http://localhost:<port>/swagger/v1/swagger.json`. Le document généré décrivant les points de terminaison s’affiche comme indiqué dans la [spécification openapi (openapi.jssur)](xref:tutorials/web-api-help-pages-using-swagger#openapi-specification-openapijson).
 
 L’interface utilisateur Swagger se trouve à l’adresse `http://localhost:<port>/swagger`. Explorez l’API via l’interface utilisateur Swagger et incorporez-la dans d’autres programmes.
 
