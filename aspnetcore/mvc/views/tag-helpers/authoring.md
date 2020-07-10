@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: 5e250debb5c4c2ef00b844557d31ed8281d2ff2f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e630bf4b0c121796315be077623abae73d240b37
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407588"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212456"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>Créer des Tag Helpers dans ASP.NET Core
 
@@ -87,14 +87,14 @@ Autrement dit, une balise d’ancrage qui en fait un lien e-mail. Vous pouvez ef
 
 <!--
 the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
-    [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImports.cshtml?highlight=3&range=1-3)]
+    [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImports.cshtml?highlight=3&range=1-3)]
 -->
 
 Pour ajouter un Tag Helper à une vue à l’aide d’un nom qualifié complet, ajoutez d’abord ce nom (`AuthoringTagHelpers.TagHelpers.EmailTagHelper`), puis le **nom d’assembly** (*AuthoringTagHelpers*, pas nécessairement `namespace`). La plupart des développeurs préfèrent utiliser la syntaxe d’expressions génériques. [Introduction aux Tag Helpers](intro.md) décrit en détail l’ajout et la suppression de Tag Helpers, la hiérarchie et la syntaxe d’expressions génériques.
 
 1. Mettez à jour le balisage dans le fichier *Views/Home/Contact.cshtml* avec les modifications suivantes :
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=15,16&range=1-17)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=15,16&range=1-17)]
 
 1. Exécutez l’application et utilisez votre navigateur favori pour afficher la source HTML afin de vérifier que les balises e-mail sont remplacées par un balisage d’ancrage (par exemple, `<a>Support</a>`). *Support* et *Marketing* s’affichent sous forme de liens, mais sans l’attribut `href` pour les rendre fonctionnels. Nous le corrigerons dans la section suivante.
 
@@ -118,7 +118,7 @@ Cette approche fonctionne pour l’attribut « href » tant qu’il n’existe p
 
 1. Mettez à jour le balisage dans le fichier *Views/Home/Contact.cshtml* avec les modifications suivantes :
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/ContactCopy.cshtml?highlight=15,16)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/ContactCopy.cshtml?highlight=15,16)]
 
 1. Exécutez l’application et vérifiez qu’elle génère les liens corrects.
 
@@ -147,7 +147,7 @@ Dans cette section, nous allons écrire un Tag Helper e-mail asynchrone.
 
 1. Apportez la modification suivante au fichier *Views/Home/Contact.cshtml* pour que le Tag Helper puisse obtenir l’e-mail cible.
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=15,16&range=1-17)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=15,16&range=1-17)]
 
 1. Exécutez l’application et vérifiez qu’elle génère des liens e-mail valides.
 
@@ -163,9 +163,9 @@ Dans cette section, nous allons écrire un Tag Helper e-mail asynchrone.
 
 1. Modifiez la vue *About.cshtml* pour qu’elle contienne une valeur d’attribut `bold`. Le code terminé est indiqué ci-dessous.
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/AboutBoldOnly.cshtml?highlight=7)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/AboutBoldOnly.cshtml?highlight=7)]
 
-1. Exécutez l'application. Vous pouvez utiliser votre navigateur favori pour inspecter la source et vérifier le balisage.
+1. Exécutez l’application. Vous pouvez utiliser votre navigateur favori pour inspecter la source et vérifier le balisage.
 
    L’attribut `[HtmlTargetElement]` ci-dessus cible uniquement le balisage HTML qui fournit le nom d’attribut « bold ». L’élément `<bold>` n’a pas été modifié par le Tag Helper.
 
@@ -225,7 +225,7 @@ Vous pouvez également utiliser l’attribut `[HtmlTargetElement]` pour modifier
 
 1. Ajoutez le balisage suivant à la vue *About.cshtml*. Le balisage en surbrillance affiche les informations de site web.
 
-   [!code-html[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?highlight=1,4-8, 18-999)]
+   [!code-cshtml[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?highlight=1,4-8, 18-999)]
 
    > [!NOTE]
    > Dans le Razor balisage illustré ci-dessous :
@@ -251,7 +251,7 @@ Le Tag Helper Condition restitue la sortie quand une valeur true lui est transmi
 
 1. Remplacez le contenu du fichier *Views/Home/Index.cshtml* par le balisage suivant :
 
-   [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Index.cshtml)]
+   [!code-cshtml[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Index.cshtml)]
 
 1. Remplacez la méthode `Index` dans le contrôleur `Home` par le code suivant :
 
@@ -281,7 +281,7 @@ Comme ces deux Tag Helpers sont étroitement liés et que vous pouvez les refact
 
 1. Ajoutez le balisage suivant à la fin du fichier *Views/Home/Contact.cshtml* :
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=19)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=19)]
 
 1. Exécutez l’application et vérifiez que le Tag Helper restitue correctement l’ancre.
 
@@ -289,7 +289,7 @@ Comme ces deux Tag Helpers sont étroitement liés et que vous pouvez les refact
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/z1AutoLinker.cs?highlight=15-34&range=7-34)]
 
-1. Exécutez l'application. Notez que le texte www est affiché sous forme de lien, contrairement au texte HTTP. Si vous placez un point d’arrêt dans les deux classes, vous pouvez voir que la classe du Tag Helper HTTP s’exécute en premier. Le problème est que la sortie du Tag Helper est mise en cache et, quand le Tag Helper WWW est exécuté, il remplace la sortie mise en cache du Tag Helper HTTP. Plus loin dans ce didacticiel, nous verrons comment contrôler l’ordre d’exécution des Tag Helpers. Nous allons corriger le code avec les éléments suivants :
+1. Exécutez l’application. Notez que le texte www est affiché sous forme de lien, contrairement au texte HTTP. Si vous placez un point d’arrêt dans les deux classes, vous pouvez voir que la classe du Tag Helper HTTP s’exécute en premier. Le problème est que la sortie du Tag Helper est mise en cache et, quand le Tag Helper WWW est exécuté, il remplace la sortie mise en cache du Tag Helper HTTP. Plus loin dans ce didacticiel, nous verrons comment contrôler l’ordre d’exécution des Tag Helpers. Nous allons corriger le code avec les éléments suivants :
 
    [!code-csharp[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/z1AutoLinkerCopy.cs?highlight=5,6,10,21,22,26&range=8-37)]
 

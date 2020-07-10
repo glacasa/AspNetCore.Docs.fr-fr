@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: 14b28f04f4077cb5622858dad1bd18b81b198f3d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 171607544bfe89fdd0a1ed9efb68f7a532f9aee1
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405794"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212659"
 ---
 # <a name="part-6-razor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>Partie 6, Razor pages avec EF Core dans ASP.net Core-lire les données associées
 
@@ -420,7 +420,7 @@ Le code précédent ajoute `AsNoTracking`. `AsNoTracking` améliore les performa
 
 Mettez à jour *Pages/Courses/Index.cshtml* avec le balisage en surbrillance suivant :
 
-[!code-html[](intro/samples/cu/Pages/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
+[!code-cshtml[](intro/samples/cu/Pages/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
 
 Les modifications suivantes ont été apportées au code généré automatiquement :
 
@@ -515,7 +515,7 @@ La requête comporte deux Include :
 
 Mettez à jour *Pages/Instructors/Index.cshtml* avec le balisage suivant :
 
-[!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=1-65&highlight=1,5,8,16-21,25-32,43-57)]
+[!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=1-65&highlight=1,5,8,16-21,25-32,43-57)]
 
 Le balisage précédent apporte les modifications suivantes :
 
@@ -595,7 +595,7 @@ Le code suivant renseigne la propriété `Enrollments` du modèle d’affichage 
 
 Ajoutez le balisage suivant à la fin de la page *pages/Instructors/index. cshtml* Razor :
 
-[!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=60-102&highlight=7-999)]
+[!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=60-102&highlight=7-999)]
 
 Le balisage précédent affiche une liste de cours associés à un formateur quand un formateur est sélectionné.
 
@@ -611,7 +611,7 @@ Mettez à jour la requête dans la méthode `OnGetAsync` dans *Pages/Instructors
 
 Mettez à jour *Pages/Instructors/Index.cshtml*. Ajoutez le balisage suivant à la fin du fichier :
 
-[!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=103-)]
+[!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=103-)]
 
 Le balisage précédent affiche une liste des étudiants qui sont inscrits au cours sélectionné.
 

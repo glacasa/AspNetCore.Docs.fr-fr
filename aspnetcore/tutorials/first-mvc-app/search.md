@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/search
-ms.openlocfilehash: 652ee8c4bfe8980eb09246720f9ddf1743021f34
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 65bf5e6b022699268f9e7e5677ea8632f1a489c7
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399047"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213134"
 ---
 # <a name="part-7-add-search-to-an-aspnet-core-mvc-app"></a>Partie 7, ajouter une recherche à une application ASP.NET Core MVC
 
@@ -75,7 +75,7 @@ Cependant, vous ne pouvez pas attendre des utilisateurs qu’ils modifient l’U
 
 Ouvrez le fichier *Views/Movies/Index.cshtml* et ajoutez le balisage `<form>` mis en surbrillance ci-dessous :
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexForm1.cshtml?highlight=10-16&range=4-21)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexForm1.cshtml?highlight=10-16&range=4-21)]
 
 La balise HTML `<form>` utilise le [Tag Helper de formulaire](xref:mvc/views/working-with-forms), de façon que quand vous envoyez le formulaire, la chaîne de filtrage soit envoyée à l’action `Index` du contrôleur de films. Enregistrez vos modifications puis testez le filtre.
 
@@ -101,7 +101,7 @@ Vous pouvez voir le paramètre de recherche et le jeton [XSRF](xref:security/ant
 
 Comme le paramètre de recherche se trouve dans le corps de la demande et pas dans l’URL, vous ne pouvez pas capturer ces informations de recherche pour les insérer dans un signet ou les partager avec d’autres personnes. Corrigez ce problème en indiquant que la requête doit être `HTTP GET` trouvée dans le fichier *Views/Movies/Index.cshtml*.
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexGet.cshtml?highlight=12&range=1-23)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexGet.cshtml?highlight=12&range=1-23)]
 
 Maintenant, quand vous soumettez une recherche, l’URL contient la chaîne de requête de la recherche. La recherche accède également à la méthode d’action `HttpGet Index`, même si vous avez une méthode `HttpPost Index`.
 

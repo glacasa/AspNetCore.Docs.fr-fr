@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 25464817314f79c5bfd11d982cc9b09a3c72df15
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 18f1aee5ac33b17914bd182e46453120e14b31ab
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060343"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176209"
 ---
 # <a name="routing-in-aspnet-core"></a>Routage dans ASP.NET Core
 
@@ -32,7 +32,7 @@ Le routage est responsable de la mise en correspondance des demandes HTTP entran
 
 Les applications peuvent configurer le routage à l’aide de :
 
-- Contrôleurs
+- Controllers
 - RazorPages
 - SignalR
 - Services gRPC
@@ -84,7 +84,7 @@ La `MapGet` méthode est utilisée pour définir un **point de terminaison**. Un
 
 Les points de terminaison qui peuvent être mis en correspondance et exécutés par l’application sont configurés dans `UseEndpoints` . Par exemple, <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet*> , <xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapPost*> et les [méthodes similaires](xref:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions) connectent les délégués de demande au système de routage.
 Des méthodes supplémentaires peuvent être utilisées pour connecter les fonctionnalités de ASP.NET Core Framework au système de routage :
-- [MapRazorPages pour les Razor pages](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*)
+- [Mapper Razor des pages pour les Razor pages](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages*)
 - [MapControllers pour les contrôleurs](xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*)
 - [MapHub \<THub> pourSignalR](xref:Microsoft.AspNetCore.SignalR.HubRouteBuilder.MapHub*) 
 - [MapGrpcService \<TService> pour gRPC](xref:grpc/aspnetcore)
@@ -502,7 +502,7 @@ Les contraintes de route s’exécutent quand une correspondance s’est produit
 
 Le tableau suivant montre des exemples de contraintes de routage et leur comportement attendu :
 
-| contrainte | Exemple | Exemples de correspondances | Notes |
+| contrainte | Exemple | Exemples de correspondances | Remarques |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier |
 | `bool` | `{active:bool}` | `true`, `FALSE` | Correspond à `true` ou `false` . Non-respect de la casse |
@@ -565,14 +565,14 @@ Pour échapper les caractères de délimiteur de paramètre de routage `{` ,,,, 
 
 Les expressions régulières utilisées dans le routage commencent souvent par le `^` caractère et correspondent à la position de départ de la chaîne. Les expressions se terminent souvent par le `$` caractère et correspondent à la fin de la chaîne. Les `^` `$` caractères et garantissent que l’expression régulière correspond à l’intégralité de la valeur du paramètre d’itinéraire. Sans les `^` `$` caractères et, l’expression régulière correspond à toute sous-chaîne de la chaîne, ce qui est souvent indésirable. Le tableau suivant fournit des exemples et explique pourquoi ils correspondent ou ne parviennent pas à faire correspondre :
 
-| Expression   | String    | Faire correspondre | Commentaire               |
+| Expression   | Chaîne    | Faire correspondre | Comment               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Yes   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | 123abc456 | Yes   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | mz        | Yes   | Correspondance avec l’expression    |
-| `[a-z]{2}`   | MZ        | Yes   | Non-respect de la casse    |
-| `^[a-z]{2}$` | hello     | No    | Voir `^` et `$` ci-dessus |
-| `^[a-z]{2}$` | 123abc456 | No    | Voir `^` et `$` ci-dessus |
+| `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
+| `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
+| `[a-z]{2}`   | mz        | Oui   | Correspondance avec l’expression    |
+| `[a-z]{2}`   | MZ        | Oui   | Non-respect de la casse    |
+| `^[a-z]{2}$` | hello     | Non    | Voir `^` et `$` ci-dessus |
+| `^[a-z]{2}$` | 123abc456 | Non    | Voir `^` et `$` ci-dessus |
 
 Pour plus d’informations sur la syntaxe des expressions régulières, consultez [Expressions régulières du .NET Framework](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -602,7 +602,7 @@ L’implémentation de `MyCustomConstraint` empêche d' `0` être appliquée à 
 
 [!INCLUDE[](~/includes/regex.md)]
 
-Le code précédent :
+Le code précédent :
 
 * Empêche `0` dans le `{id}` segment de l’itinéraire.
 * Est présenté pour fournir un exemple de base de l’implémentation d’une contrainte personnalisée. Il ne doit pas être utilisé dans une application de production.
@@ -701,7 +701,7 @@ L’exemple suivant montre des valeurs ambiantes et des valeurs explicites. Il f
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Controllers/WidgetController.cs?name=snippet)]
 
-Le code précédent :
+Le code précédent :
 
 * Retourne `/Widget/Index/17`.
 * Obtient <xref:Microsoft.AspNetCore.Routing.LinkGenerator> via [di](xref:fundamentals/dependency-injection).
@@ -720,7 +720,7 @@ Le code suivant fournit le contrôleur à partir des valeurs ambiantes dans la r
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/Controllers/GadgetController.cs?name=snippet)]
 
-Dans le code précédent :
+Dans le code précédent :
 
 * `/Gadget/Edit/17`est retourné.
 * <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Url>Obtient <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> .
@@ -806,7 +806,7 @@ Ensuite, les **valeurs acceptées** peuvent être utilisées pour développer le
 
 Les valeurs fournies explicitement qui ne correspondent pas à un segment de l’itinéraire sont ajoutées à la chaîne de requête. Le tableau suivant présente le résultat en cas d’utilisation du modèle de routage `{controller}/{action}/{id?}`.
 
-| Valeurs ambiantes                     | Valeurs explicites                        | Résultats                  |
+| Valeurs ambiantes                     | Valeurs explicites                        | Résultat                  |
 | ---------------------------------- | -------------------------------------- | ----------------------- |
 | controller = "Home"                | action = "About"                       | `/Home/About`           |
 | controller = "Home"                | controller = "Order", action = "About" | `/Order/About`          |
@@ -936,7 +936,7 @@ La déclaration de votre propre type vous permet d’ajouter vos propres fonctio
 app.UseEndpoints(endpoints =>
 {
     // Your framework
-    endpoints.MapMyFramework(...).RequrireAuthorization()
+    endpoints.MapMyFramework(...).RequireAuthorization()
                                  .WithMyFrameworkFeature(awesome: true);
 
     endpoints.MapHealthChecks("/healthz");
@@ -988,7 +988,7 @@ app.UseAuthorization(new AuthorizationPolicy() { ... });
 app.UseEndpoints(endpoints =>
 {
     // Your framework
-    endpoints.MapMyFramework(...).RequrireAuthorization();
+    endpoints.MapMyFramework(...).RequireAuthorization();
 });
 ```
 
@@ -1351,7 +1351,7 @@ Les routes doivent être configurées dans la méthode `Startup.Configure`. L’
 
 Le tableau suivant montre les réponses avec les URI donnés.
 
-| URI                    | response                                          |
+| URI                    | Réponse                                          |
 | ---------------------- | ------------------------------------------------- |
 | `/package/create/3`    | Hello! Valeurs de route : [operation, create], [id, 3] |
 | `/package/track/-3`    | Hello! Valeurs de route : [operation, track], [id, -3] |
@@ -1436,7 +1436,7 @@ Les contraintes de route s’exécutent quand une correspondance s’est produit
 
 Le tableau suivant montre des exemples de contrainte de route et leur comportement attendu.
 
-| Contrainte | Exemple | Exemples de correspondances | Notes |
+| Contrainte | Exemple | Exemples de correspondances | Remarques |
 |------------|---------|-----------------|-------|
 | `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier.|
 | `bool` | `{active:bool}` | `true`, `FALSE` | Correspond à `true` ou `false` . Non-respect de la casse.|
@@ -1486,14 +1486,14 @@ Pour échapper les caractères de délimiteur de paramètre de routage `{` , `}`
 
 Les expressions régulières utilisées dans le routage commencent souvent par le `^` caractère de signe insertion et correspondent à la position de départ de la chaîne. Les expressions se terminent souvent par le `$` caractère de signe dollar et la fin de la chaîne. Les caractères `^` et `$` garantissent que l’expression régulière établit une correspondance avec la totalité de la valeur du paramètre de route. Sans les caractères `^` et `$`, l’expression régulière peut correspondre à n’importe quelle sous-chaîne dans la chaîne, ce qui est souvent indésirable. Le tableau suivant contient des exemples et explique pourquoi ils établissent ou non une correspondance.
 
-| Expression   | String    | Faire correspondre | Commentaire               |
+| Expression   | Chaîne    | Faire correspondre | Comment               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Yes   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | 123abc456 | Yes   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | mz        | Yes   | Correspondance avec l’expression    |
-| `[a-z]{2}`   | MZ        | Yes   | Non-respect de la casse    |
-| `^[a-z]{2}$` | hello     | No    | Voir `^` et `$` ci-dessus |
-| `^[a-z]{2}$` | 123abc456 | No    | Voir `^` et `$` ci-dessus |
+| `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
+| `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
+| `[a-z]{2}`   | mz        | Oui   | Correspondance avec l’expression    |
+| `[a-z]{2}`   | MZ        | Oui   | Non-respect de la casse    |
+| `^[a-z]{2}$` | hello     | Non    | Voir `^` et `$` ci-dessus |
+| `^[a-z]{2}$` | 123abc456 | Non    | Voir `^` et `$` ci-dessus |
 
 Pour plus d’informations sur la syntaxe des expressions régulières, consultez [Expressions régulières du .NET Framework](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1571,7 +1571,7 @@ Les valeurs ambiantes qui ne correspondent pas à un paramètre sont ignorées. 
 
 Les valeurs fournies explicitement mais qui n’ont pas de correspondance avec un segment de la route sont ajoutées à la chaîne de requête. Le tableau suivant présente le résultat en cas d’utilisation du modèle de routage `{controller}/{action}/{id?}`.
 
-| Valeurs ambiantes                     | Valeurs explicites                        | Résultats                  |
+| Valeurs ambiantes                     | Valeurs explicites                        | Résultat                  |
 | ---------------------------------- | -------------------------------------- | ----------------------- |
 | controller = "Home"                | action = "About"                       | `/Home/About`           |
 | controller = "Home"                | controller = "Order", action = "About" | `/Order/About`          |
@@ -1809,7 +1809,7 @@ Les routes doivent être configurées dans la méthode `Startup.Configure`. L’
 
 Le tableau suivant montre les réponses avec les URI donnés.
 
-| URI                    | response                                          |
+| URI                    | Réponse                                          |
 | ---------------------- | ------------------------------------------------- |
 | `/package/create/3`    | Hello! Valeurs de route : [operation, create], [id, 3] |
 | `/package/track/-3`    | Hello! Valeurs de route : [operation, track], [id, -3] |
@@ -1886,7 +1886,7 @@ Les contraintes de route s’exécutent quand une correspondance s’est produit
 
 Le tableau suivant montre des exemples de contrainte de route et leur comportement attendu.
 
-| contrainte | Exemple | Exemples de correspondances | Notes |
+| contrainte | Exemple | Exemples de correspondances | Remarques |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier |
 | `bool` | `{active:bool}` | `true`, `FALSE` | Correspond à `true` ou à `false` (non-respect de la casse) |
@@ -1930,14 +1930,14 @@ Les expressions régulières utilisent les délimiteurs et des jetons semblables
 
 Les expressions régulières utilisées dans le routage commencent souvent par un caret (`^`) et correspondent à la position de début de la chaîne. Les expressions se terminent souvent par le signe dollar (`$`) de caractère et correspondent à la fin de la chaîne. Les caractères `^` et `$` garantissent que l’expression régulière établit une correspondance avec la totalité de la valeur du paramètre de route. Sans les caractères `^` et `$`, l’expression régulière peut correspondre à n’importe quelle sous-chaîne dans la chaîne, ce qui est souvent indésirable. Le tableau suivant contient des exemples et explique pourquoi ils établissent ou non une correspondance.
 
-| Expression   | String    | Faire correspondre | Commentaire               |
+| Expression   | Chaîne    | Faire correspondre | Comment               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Yes   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | 123abc456 | Yes   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | mz        | Yes   | Correspondance avec l’expression    |
-| `[a-z]{2}`   | MZ        | Yes   | Non-respect de la casse    |
-| `^[a-z]{2}$` | hello     | No    | Voir `^` et `$` ci-dessus |
-| `^[a-z]{2}$` | 123abc456 | No    | Voir `^` et `$` ci-dessus |
+| `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
+| `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
+| `[a-z]{2}`   | mz        | Oui   | Correspondance avec l’expression    |
+| `[a-z]{2}`   | MZ        | Oui   | Non-respect de la casse    |
+| `^[a-z]{2}$` | hello     | Non    | Voir `^` et `$` ci-dessus |
+| `^[a-z]{2}$` | 123abc456 | Non    | Voir `^` et `$` ci-dessus |
 
 Pour plus d’informations sur la syntaxe des expressions régulières, consultez [Expressions régulières du .NET Framework](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1977,7 +1977,7 @@ Les valeurs ambiantes qui ne correspondent pas à un paramètre sont ignorées. 
 
 Les valeurs fournies explicitement mais qui n’ont pas de correspondance avec un segment de la route sont ajoutées à la chaîne de requête. Le tableau suivant présente le résultat en cas d’utilisation du modèle de routage `{controller}/{action}/{id?}`.
 
-| Valeurs ambiantes                     | Valeurs explicites                        | Résultats                  |
+| Valeurs ambiantes                     | Valeurs explicites                        | Résultat                  |
 | ---------------------------------- | -------------------------------------- | ----------------------- |
 | controller = "Home"                | action = "About"                       | `/Home/About`           |
 | controller = "Home"                | controller = "Order", action = "About" | `/Order/About`          |

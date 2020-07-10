@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 79cfe50f7e074954291c88689940c3263b68e151
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 700370fd11a0df40a45c47e8c378d5bdd0c60009
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401355"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212694"
 ---
 # <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>RazorPages avec Entity Framework Core dans ASP.NET Core-didacticiel 1 sur 8
 
@@ -53,7 +53,7 @@ Les instructions Visual Studio Code utilisent [SQLite](https://www.sqlite.org/),
 
 Si vous choisissez d’utiliser SQLite, téléchargez et installez un outil tiers pour la gestion et l’affichage d’une base de données SQLite, comme [Browser for SQLite](https://sqlitebrowser.org/).
 
-## <a name="troubleshooting"></a>Résolution des problèmes
+## <a name="troubleshooting"></a>Dépannage
 
 Si vous rencontrez un problème que vous ne pouvez pas résoudre, comparez votre code au [projet terminé](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples). Un bon moyen d’obtenir de l’aide est de poster une question sur StackOverflow.com en utilisant le [mot-clé ASP.NET Core](https://stackoverflow.com/questions/tagged/asp.net-core) ou le [mot-clé EF Core](https://stackoverflow.com/questions/tagged/entity-framework-core).
 
@@ -357,16 +357,16 @@ La méthode [EnsureCreated](/dotnet/api/microsoft.entityframeworkcore.infrastruc
 
 * Supprimez la base de données. Toutes les données existantes sont perdues.
 * Modifiez le modèle de données. Par exemple, ajoutez un champ `EmailAddress`.
-* Exécutez l'application.
+* Exécutez l’application.
 * `EnsureCreated` crée une base de données avec le nouveau schéma.
 
 Ce workflow fonctionne bien à un stade précoce du développement, quand le schéma évolue rapidement, aussi longtemps que vous n’avez pas besoin de conserver les données. La situation est différente quand les données qui ont été entrées dans la base de données doivent être conservées. Dans ce cas, procédez à des migrations.
 
 Plus tard dans cette série de tutoriels, vous supprimerez la base de données créée par `EnsureCreated` et procéderez à des migrations. Une base de données créée par `EnsureCreated` ne peut pas être mise à jour via des migrations.
 
-### <a name="test-the-app"></a>Tester l'application
+### <a name="test-the-app"></a>Tester l’application
 
-* Exécutez l'application.
+* Exécutez l’application.
 * Sélectionnez le lien **Students**, puis **Créer nouveau**.
 * Testez les liens Edit, Details et Delete.
 
@@ -482,7 +482,7 @@ L’exemple d’application est un site web pour une université Contoso fictive
 
 Vous êtes familiarisé avec les [ Razor pages](xref:razor-pages/index). Les nouveaux programmeurs doivent effectuer la [prise en main des Razor pages avant de](xref:tutorials/razor-pages/razor-pages-start) commencer cette série.
 
-## <a name="troubleshooting"></a>Résolution des problèmes
+## <a name="troubleshooting"></a>Dépannage
 
 Si vous rencontrez un problème que vous ne pouvez pas résoudre, vous pouvez généralement trouver la solution en comparant votre code au [projet terminé](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples). Un bon moyen d’obtenir de l’aide est de publier une question sur [StackOverflow.com](https://stackoverflow.com/questions/tagged/asp.net-core) pour [ASP.NET Core](https://stackoverflow.com/questions/tagged/asp.net-core) ou [EF Core](https://stackoverflow.com/questions/tagged/entity-framework-core).
 
@@ -507,7 +507,7 @@ Le style de l’interface utilisateur de ce site est proche de ce qui est géné
 * Sélectionnez **ASP.NET Core 2.1** dans la liste déroulante, puis sélectionnez **Application web**.
 
 Pour obtenir des images des étapes précédentes, consultez [créer une Razor application Web](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app).
-Exécutez l'application.
+Exécutez l’application.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -529,11 +529,11 @@ Quelques changements permettent de définir le menu, la disposition et la page d
 
 Les modifications sont mises en surbrillance. (Tout le balisage n’est *pas* affiché.)
 
-[!code-html[](intro/samples/cu21/Pages/Shared/_Layout.cshtml?highlight=6,29,35-38,50&name=snippet)]
+[!code-cshtml[](intro/samples/cu21/Pages/Shared/_Layout.cshtml?highlight=6,29,35-38,50&name=snippet)]
 
 Dans *Pages/Index.cshtml*, remplacez le contenu du fichier par le code suivant afin de remplacer le texte sur ASP.NET et MVC par le texte concernant cette application :
 
-[!code-html[](intro/samples/cu21/Pages/Index.cshtml)]
+[!code-cshtml[](intro/samples/cu21/Pages/Index.cshtml)]
 
 ## <a name="create-the-data-model"></a>Créer le modèle de données
 
@@ -666,12 +666,12 @@ Le code suivant montre le fichier *Program.cs* mis à jour.
 
 * Supprimez la base de données.
 * Modification du schéma de base de données (par exemple, ajout d’un champ `EmailAddress`).
-* Exécutez l'application.
+* Exécutez l’application.
 * `EnsureCreated` crée une base de données avec la colonne `EmailAddress`.
 
 `EnsureCreated` est pratique au début du développement quand le schéma évolue rapidement. Plus loin dans le tutoriel, la base de données est supprimée et les migrations sont utilisées.
 
-### <a name="test-the-app"></a>Tester l'application
+### <a name="test-the-app"></a>Tester l’application
 
 Exécutez l’application et acceptez la politique de cookies. Cette application ne conserve pas les informations personnelles. Vous pouvez en savoir plus sur la politique de cookies à la section [Prise en charge du règlement général sur la protection des données (RGPD)](xref:security/gdpr).
 

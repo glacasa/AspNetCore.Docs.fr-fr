@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 01321d68defafbe79371250669f921307bcfdba6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d4eb1744b1186704603430584b3da0793f90ee49
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407042"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213083"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>Bien démarrer avec ASP.NET Core MVC
 
@@ -106,14 +106,12 @@ Il part du principe que vous connaissez déjà VS Code. Pour plus d’informatio
 
   ![sélection du modèle d’application Web macOS](start-mvc/_static/web_app_template_vsmac.png)
 
-* Vérifiez les configurations suivantes :
+* Dans la boîte de dialogue **configurer votre nouvelle application Web** :
 
-  * **Framework cible** défini sur **.net Core 3,1**.
-  * **L’authentification** est définie sur **aucune authentification**.
-   
+  * Vérifiez que **l’authentification** est définie sur **aucune authentification**.
+  * Si vous avez présenté une option permettant de sélectionner un **Framework cible**, sélectionnez la version la plus récente de 3. x.
+
   Sélectionnez **Suivant**.
-
-  ![sélection de macOS .NET Core 3,1](start-mvc/_static/new_project_31_vsmac.png)
 
 * Nommez le projet **MvcMovie**, puis sélectionnez **Créer**.
 
@@ -130,7 +128,7 @@ Sélectionnez **Ctrl-F5** pour exécuter l'application en mode non-débogage.
 [!INCLUDE[](~/includes/trustCertVS.md)]
 
 * Visual Studio démarre [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) et exécute l’application. Notez que la barre d’adresse affiche `localhost:port#`, et non quelque chose comme `example.com`. En effet, `localhost` est le nom d’hôte standard de votre ordinateur local. Quand Visual Studio crée un projet web, un port aléatoire est utilisé pour le serveur web.
-* Si vous lancez l’application avec Ctrl+F5 (mode sans débogage), vous pouvez apporter des modifications au code, enregistrer le fichier, actualiser le navigateur et examiner les modifications apportées au code. De nombreux développeurs préfèrent utiliser le mode non-débogage pour lancer rapidement l’application et voir les modifications.
+* Si vous lancez l’application avec Ctrl+F5 (mode sans débogage), vous pouvez apporter des modifications au code, enregistrer le fichier, actualiser le navigateur et examiner les modifications apportées au code. Beaucoup de développeurs préfèrent utiliser ce mode pour lancer rapidement l’application et voir les modifications.
 * Vous pouvez lancer l’application en mode débogage ou non-débogage à partir de l’élément de menu **Déboguer** :
 
   ![Menu Déboguer](start-mvc/_static/debug_menu.png)
@@ -259,9 +257,12 @@ Il part du principe que vous connaissez déjà VS Code. Pour plus d’informatio
 
 * Dans Visual Studio pour Mac antérieure à la version 8,6, sélectionnez application Web de l’application **.net Core**  >  **App**  >  **(Model-View-Controller)**  >  **suivant**. Dans la version 8,6 ou une version ultérieure, sélectionnez application Web **et**  >  **App**  >  **application console (Model-View-Controller)**  >  **suivant**.
 
-* Dans la boîte de dialogue **configurer votre nouvelle API Web ASP.net Core** , acceptez le **Framework cible** par défaut de **.net Core 2,2**.
+* Dans la boîte de dialogue **configurer votre nouvelle application Web** :
 
-  ![sélection de .NET Core 2.2 pour macOS](./start-mvc/_static/new_project_22_vsmac.png)
+  * Vérifiez que **l’authentification** est définie sur **aucune authentification**.
+  * Si vous avez présenté une option permettant de sélectionner un **Framework cible**, sélectionnez la version la plus récente de 2. x.
+
+  Sélectionnez **Suivant**.
 
 * Nommez le projet **MvcMovie**, puis sélectionnez **Créer**.
 
@@ -276,7 +277,7 @@ Sélectionnez **Ctrl-F5** pour exécuter l'application en mode non-débogage.
 [!INCLUDE[](~/includes/trustCertVS.md)]
 
 * Visual Studio démarre [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) et exécute l’application. Notez que la barre d’adresse affiche `localhost:port#`, et non quelque chose comme `example.com`. En effet, `localhost` est le nom d’hôte standard de votre ordinateur local. Quand Visual Studio crée un projet web, un port aléatoire est utilisé pour le serveur web.
-* Si vous lancez l’application avec Ctrl+F5 (mode sans débogage), vous pouvez apporter des modifications au code, enregistrer le fichier, actualiser le navigateur et examiner les modifications apportées au code. De nombreux développeurs préfèrent utiliser le mode non-débogage pour lancer rapidement l’application et voir les modifications.
+* Si vous lancez l’application avec Ctrl+F5 (mode sans débogage), vous pouvez apporter des modifications au code, enregistrer le fichier, actualiser le navigateur et examiner les modifications apportées au code. Beaucoup de développeurs préfèrent utiliser ce mode pour lancer rapidement l’application et voir les modifications.
 * Vous pouvez lancer l’application en mode débogage ou non-débogage à partir de l’élément de menu **Déboguer** :
 
   ![Menu Déboguer](start-mvc/_static/debug_menu.png)
@@ -285,7 +286,7 @@ Sélectionnez **Ctrl-F5** pour exécuter l'application en mode non-débogage.
 
   ![IIS Express](start-mvc/_static/iis_express.png)
 
-* Sélectionnez **Accepter** pour accepter le suivi. Cette application n’effectue pas le suivi d’informations personnelles. Le code généré par le modèle inclut des ressources qui aident à satisfaire au [Règlement général sur la protection des données (RGPD)](xref:security/gdpr).
+* Sélectionnez **Accepter** pour consentir au suivi. Cette application ne suit pas les informations personnelles. Le code généré par le modèle inclut des ressources qui aident à satisfaire au [Règlement général sur la protection des données (RGPD)](xref:security/gdpr).
 
   ![Page d’accueil ou d’index](start-mvc/_static/privacy.png)
 
@@ -303,7 +304,7 @@ Appuyez sur Ctrl+F5 pour exécuter sans le débogueur.
 
   Si vous lancez l’application avec Ctrl+F5 (mode sans débogage), vous pouvez apporter des modifications au code, enregistrer le fichier, actualiser le navigateur et examiner les modifications apportées au code. De nombreux développeurs préfèrent utiliser le mode sans débogage pour actualiser les modifications des pages et des vues.
 
-* Sélectionnez **Accepter** pour accepter le suivi. Cette application n’effectue pas le suivi d’informations personnelles. Le code généré par le modèle inclut des ressources qui aident à satisfaire au [Règlement général sur la protection des données (RGPD)](xref:security/gdpr).
+* Sélectionnez **Accepter** pour consentir au suivi. Cette application ne suit pas les informations personnelles. Le code généré par le modèle inclut des ressources qui aident à satisfaire au [Règlement général sur la protection des données (RGPD)](xref:security/gdpr).
 
   ![Page d’accueil ou d’index](start-mvc/_static/privacy.png)
 
@@ -320,7 +321,7 @@ Sélectionnez **exécuter**  >  **Démarrer sans débogage** pour lancer l’app
 * La barre d’adresses affiche `localhost:port#` au lieu de quelque chose qui ressemble à `example.com`. En effet, `localhost` est le nom d’hôte standard de votre ordinateur local. Quand Visual Studio crée un projet web, un port aléatoire est utilisé pour le serveur web. Quand vous exécutez l’application, vous voyez un autre numéro de port.
 * Vous pouvez lancer l’application en mode débogage ou non-débogage à partir du menu **Exécuter**.
 
-* Sélectionnez **Accepter** pour accepter le suivi. Cette application n’effectue pas le suivi d’informations personnelles. Le code généré par le modèle inclut des ressources qui aident à satisfaire au [Règlement général sur la protection des données (RGPD)](xref:security/gdpr).
+* Sélectionnez **Accepter** pour consentir au suivi. Cette application ne suit pas les informations personnelles. Le code généré par le modèle inclut des ressources qui aident à satisfaire au [Règlement général sur la protection des données (RGPD)](xref:security/gdpr).
 
   ![Page d’accueil ou d’index](./start-mvc/_static/output_privacy_macos.png)
 

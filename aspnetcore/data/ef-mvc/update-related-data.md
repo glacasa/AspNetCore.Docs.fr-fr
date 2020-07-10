@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 066bebf95a941fca5e7cc175c4c0d6d56abc9cb5
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 754ca2f94b1abde30ae650c9c3bcf00499520383
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060057"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212572"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Didacticiel : mettre à jour les données associées-ASP.NET MVC avec EF Core
 
@@ -87,19 +87,19 @@ Pour optimiser les performances des pages Details et Delete pour les cours, ajou
 
 Dans *Views/Courses/Create.cshtml*, ajoutez une option « Select Department » à la liste déroulante **Department**, changez la légende de **DepartmentID** en **Department** et ajoutez un message de validation.
 
-[!code-html[](intro/samples/cu/Views/Courses/Create.cshtml?highlight=2-6&range=29-34)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Create.cshtml?highlight=2-6&range=29-34)]
 
 Dans *Views/Courses/Edit.cshtml*, faites les mêmes modifications pour le champ Department que ce que vous venez de faire dans *Create.cshtml*.
 
 Également dans *Views/Courses/Edit.cshtml*, ajoutez un champ de numéro de cours avant le champ **Title**. Comme le numéro de cours est la clé primaire, il est affiché mais ne peut pas être modifié.
 
-[!code-html[](intro/samples/cu/Views/Courses/Edit.cshtml?range=15-18)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Edit.cshtml?range=15-18)]
 
 Il existe déjà un champ masqué (`<input type="hidden">`) pour le numéro de cours dans la vue Edit. L’ajout d’un tag helper `<label>` n’élimine la nécessité d’avoir le champ masqué, car cela n’a pas comme effet que le numéro de cours est inclut dans les données envoyées quand l’utilisateur clique sur **Save** dans la page **Edit**.
 
 Dans *Views/Courses/Delete.cshtml*, ajoutez un champ pour le numéro de cours en haut et changez l’ID de département en nom de département.
 
-[!code-html[](intro/samples/cu/Views/Courses/Delete.cshtml?highlight=14-19,36)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Delete.cshtml?highlight=14-19,36)]
 
 Dans *Views/Courses/Details.cshtml*, faites la même modification que celle que vous venez de faire pour *Delete.cshtml*.
 
@@ -171,7 +171,7 @@ Le code effectue les actions suivantes :
 
 Dans *Views/Instructors/Edit.cshtml*, ajoutez un nouveau champ pour la modification de l’emplacement du bureau, à la fin et avant le bouton **Save** :
 
-[!code-html[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=30-34)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=30-34)]
 
 Exécutez l’application, sélectionnez l’onglet **Instructors**, puis cliquez sur **Edit** pour un formateur. Modifiez **Office Location** et cliquez sur **Save**.
 
@@ -235,7 +235,7 @@ Dans *Views/Instructors/Edit.cshtml*, ajoutez un champ **Courses** avec un table
 > [!NOTE]
 > Quand vous collez le code dans Visual Studio, les sauts de ligne peuvent être changés d’une façon qui casse le code. Si le code semble différent après un collage, appuyez une fois sur Ctrl+Z pour annuler la mise en forme automatique. Ceci permet de corriger les sauts de ligne de façon à ce qu’ils apparaissent comme ce que vous voyez ici. L’indentation ne doit pas nécessairement être parfaite, mais les lignes `@:</tr><tr>`, `@:<td>`, `@:</td>` et `@:</tr>` doivent chacune tenir sur une seule ligne comme dans l’illustration, sinon vous recevrez une erreur d’exécution. Avec le bloc de nouveau code sélectionné, appuyez trois fois sur Tab pour aligner le nouveau code avec le code existant. Ce problème est résolu dans Visual Studio 2019.
 
-[!code-html[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=35-61)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=35-61)]
 
 Ce code crée un tableau HTML qui a trois colonnes. Dans chaque colonne se trouve une case à cocher, suivie d’une légende qui est constituée du numéro et du titre du cours. Toutes les cases à cocher ont le même nom (« selectedCourses »), qui indique au classeur de modèles qu’ils doivent être traités comme un groupe. L’attribut de valeur de chaque case à cocher est défini sur la valeur de `CourseID`. Quand la page est envoyée, le classeur de modèles passe un tableau au contrôleur, constitué des valeurs de `CourseID` seulement pour les cases qui sont cochées.
 
@@ -299,7 +299,7 @@ Si vous modifiez la propriété `CourseAssignments` de cette façon, vous pouvez
 
 Dans *Views/Instructor/Create.cshtml*, ajoutez une zone de texte pour l’emplacement du bureau et des cases à cocher pour les cours avant le bouton Envoyer. Comme dans le cas de la page Edit, [corrigez la mise en forme si Visual Studio remet en forme le code quand vous le collez](#notepad).
 
-[!code-html[](intro/samples/cu/Views/Instructors/Create.cshtml?range=29-61)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Create.cshtml?range=29-61)]
 
 Testez en exécutant l’application et en créant un formateur.
 

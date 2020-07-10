@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 726380c42c952f47d6fdff09a811f35a20462d96
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 174a8e561701bb3ebd68ed05e42dfc3d70a9b450
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944955"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176226"
 ---
 # <a name="build-a-blazor-todo-list-app"></a>Créer une Blazor application de liste de tâches
 
@@ -142,7 +142,7 @@ Dans ce didacticiel, vous avez appris à :
 > * Utiliser la gestion des événements et la liaison de données dans les composants
 > * Utiliser l’injection de dépendances et le routage dans une Blazor application
 
-En savoir plus sur les Blazor modèles de projet :
+En savoir plus sur les outils pour ASP.NET Core Blazor :
 
 > [!div class="nextstepaction"]
-> <xref:blazor/templates>
+> <xref:blazor/tooling>

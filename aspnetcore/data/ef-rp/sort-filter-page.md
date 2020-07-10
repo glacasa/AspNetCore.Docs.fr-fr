@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 0a87fe2f4cf7014cc15752dcf25545ce7aaa4687
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 496221bb4e34e1f9e4177d1934786a77d8c9b411
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408602"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212540"
 ---
 # <a name="part-3-razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Partie 3 : Razor pages avec EF Core dans ASP.net Core-Trier, filtrer, pagination
 
@@ -41,7 +41,7 @@ Remplacez le code de *Pages/Students/Index.cshtml.cs* par le code suivant pour a
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_All&highlight=21-24,26,28-52)]
 
-Le code précédent :
+Le code précédent :
 
 * Ajoute des propriétés devant contenir les paramètres de tri.
 * Remplace le nom de la propriété `Student` par `Students`.
@@ -84,7 +84,7 @@ Remplacez le code de *Students/Index.cshtml* par le code suivant : Les modifica
 
 [!code-cshtml[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml?highlight=5,8,17-19,22,25-27,33)]
 
-Le code précédent :
+Le code précédent :
 
 * Ajoute des liens hypertexte aux en-têtes de colonne `LastName` et `EnrollmentDate`.
 * Utilise les informations contenues dans `NameSort` et `DateSort` pour définir des liens hypertexte avec les valeurs d’ordre de tri actuelles.
@@ -109,7 +109,7 @@ Remplacez le code de *Students/Index.cshtml.cs* par le code suivant pour ajouter
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml.cs?name=snippet_All&highlight=28,33,37-41)]
 
-Le code précédent :
+Le code précédent :
 
 * Ajoute le paramètre `searchString` à la méthode `OnGetAsync`, et enregistre la valeur de paramètre dans la propriété `CurrentFilter`. La valeur de chaîne de recherche est reçue à partir d’une zone de texte qui est ajoutée dans la section suivante.
 * Ajoute une clause `Where` à l’instruction LINQ. La clause `Where` sélectionne uniquement les étudiants dont le prénom ou le nom de famille contient la chaîne de recherche. L’instruction LINQ est exécutée uniquement s’il y a une valeur à rechercher.
@@ -180,7 +180,7 @@ Remplacez le code de *Students/Index.cshtml.cs* pour ajouter la fonctionnalité 
 
 [!code-csharp[Main](intro/samples/cu30/Pages/Students/Index.cshtml.cs?name=snippet_All&highlight=26,28-29,31,34-41,68-70)]
 
-Le code précédent :
+Le code précédent :
 
 * Remplace le type `IList<Student>` de la propriété `Students` par le type `PaginatedList<Student>`.
 * Ajoute l’index de page, le `sortOrder` actuel et le `currentFilter` à la signature de méthode `OnGetAsync`.
@@ -337,9 +337,9 @@ La méthode utilise LINQ to Entities pour spécifier la colonne d’après laque
 
 Remplacez le code dans *Students/Index.cshtml* par le code en surbrillance suivant :
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index2.cshtml?highlight=17-19,25-27)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index2.cshtml?highlight=17-19,25-27)]
 
-Le code précédent :
+Le code précédent :
 
 * Ajoute des liens hypertexte aux en-têtes de colonne `LastName` et `EnrollmentDate`.
 * Utilise les informations contenues dans `NameSort` et `DateSort` pour définir des liens hypertexte avec les valeurs d’ordre de tri actuelles.
@@ -371,7 +371,7 @@ Mettez à jour le Student */index. cshtml. cs* `OnGetAsync` avec le code suivant
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilter&highlight=1,5,9-13)]
 
-Le code précédent :
+Le code précédent :
 
 * Ajoute le paramètre `searchString` à la méthode `OnGetAsync`. La valeur de chaîne de recherche est reçue à partir d’une zone de texte qui est ajoutée dans la section suivante.
 * A ajouté une clause `Where` à l’instruction LINQ. La clause `Where` sélectionne uniquement les étudiants dont le prénom ou le nom de famille contient la chaîne de recherche. L’instruction LINQ est exécutée uniquement s’il y a une valeur à rechercher.
@@ -393,7 +393,7 @@ Il existe un coût en matière de performances en cas d’appel à `ToUpper`. Le
 
 Dans *Pages/Students/Index.cshtml*, ajoutez le code en surbrillance suivant pour créer un bouton **Search** et le chrome assorti.
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index3.cshtml?highlight=14-23&range=1-25)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index3.cshtml?highlight=14-23&range=1-25)]
 
 Le code précédent utilise le  [Tag Helper](xref:mvc/views/tag-helpers/intro)`<form>` pour ajouter le bouton et la zone de texte de recherche. Par défaut, le Tag Helper `<form>` envoie les données de formulaire avec un POST. Avec POST, les paramètres sont passés dans le corps du message HTTP et non dans l’URL. Quand HTTP GET est utilisé, les données du formulaire sont transmises dans l’URL sous forme de chaînes de requête. La transmission des données avec des chaînes de requête permet aux utilisateurs d’ajouter l’URL aux favoris. Les [recommandations du W3C](https://www.w3.org/2001/tag/doc/whenToUseGet.html) stipulent que GET doit être utilisé quand l’action ne produit pas de mise à jour.
 
@@ -471,15 +471,15 @@ Les deux points d’interrogation dans `PaginatedList.CreateAsync` représentent
 
 Mettez à jour le balisage dans *Students/Index.cshtml*. Les modifications apparaissent en surbrillance :
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index.cshtml?highlight=28-31,37-40,68-999)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index.cshtml?highlight=28-31,37-40,68-999)]
 
 Les liens d’en-tête de colonne utilisent la chaîne de requête pour passer la chaîne de recherche actuelle à la méthode `OnGetAsync` afin que l’utilisateur puisse trier dans les résultats du filtrage :
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index.cshtml?range=28-31)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index.cshtml?range=28-31)]
 
 Les boutons de changement de page sont affichés par des Tag Helpers :
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index.cshtml?range=72-)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index.cshtml?range=72-)]
 
 Exécutez l’application et accédez à la page des étudiants.
 
@@ -525,7 +525,7 @@ L’instruction LINQ regroupe les entités Student par date d’inscription, cal
 
 Remplacez le code du fichier *Pages/About.cshtml* par le code suivant :
 
-[!code-html[](intro/samples/cu21/Pages/About.cshtml)]
+[!code-cshtml[](intro/samples/cu21/Pages/About.cshtml)]
 
 Exécutez l’application et accédez à la page About. Le nombre d’étudiants pour chaque date d’inscription s’affiche dans une table.
 

@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: 3038ae8f01273013e6c35694583d9674a1668bac
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f6ee60bf5e75256a9bf330f56b2f09b06f720a85
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401556"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212800"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>Didacticiel : gérer la concurrence-ASP.NET MVC avec EF Core
 
@@ -148,7 +148,7 @@ Le moteur de génération de modèles automatique a créé une colonne RowVersio
 
 Remplacez le code dans *Students/Index.cshtml* par le code suivant.
 
-[!code-html[](intro/samples/cu/Views/Departments/Index.cshtml?highlight=4,7,44)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Index.cshtml?highlight=4,7,44)]
 
 Ceci change l’en-tête en « Departments », supprime la colonne RowVersion et montre à l’administrateur le nom complet au lieu du prénom.
 
@@ -198,7 +198,7 @@ Dans *Views/Departments/Edit.cshtml*, faites les modifications suivantes :
 
 * Ajoutez une option « Select Administrator » à la liste déroulante.
 
-[!code-html[](intro/samples/cu/Views/Departments/Edit.cshtml?highlight=16,34-36)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Edit.cshtml?highlight=16,34-36)]
 
 ## <a name="test-concurrency-conflicts"></a>Tester les conflits d'accès concurrentiel
 
@@ -214,7 +214,7 @@ Changez un champ sous le deuxième onglet du navigateur.
 
 ![Page Edit 2 du département après changement](concurrency/_static/edit-after-change-2.png)
 
-Cliquez sur **Save**. Vous voyez un message d’erreur :
+Cliquez sur **Enregistrer**. Vous voyez un message d’erreur :
 
 ![Message d’erreur de page de modification de département](concurrency/_static/edit-error.png)
 
@@ -258,7 +258,7 @@ Si une erreur d’accès concurrentiel est interceptée, le code réaffiche la p
 
 Dans *Views/Departments/Delete.cshtml*, remplacez le code du modèle généré automatiquement par le code suivant, qui ajoute un champ de message d’erreur et des champs masqués pour les propriétés DepartmentID et RowVersion. Les modifications sont mises en surbrillance.
 
-[!code-html[](intro/samples/cu/Views/Departments/Delete.cshtml?highlight=9,38,44,45,48)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Delete.cshtml?highlight=9,38,44,45,48)]
 
 Ceci apporte les modifications suivantes :
 
@@ -288,11 +288,11 @@ Vous pouvez éventuellement nettoyer le code du modèle généré automatiquemen
 
 Remplacez le code de *Views/Departments/Details.cshtml* pour supprimer la colonne RowVersion et afficher le nom complet de l’administrateur.
 
-[!code-html[](intro/samples/cu/Views/Departments/Details.cshtml?highlight=35)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Details.cshtml?highlight=35)]
 
 Remplacez le code de *Views/Departments/Create.cshtml* pour ajouter une option de sélection à la liste déroulante.
 
-[!code-html[](intro/samples/cu/Views/Departments/Create.cshtml?highlight=32-34)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Create.cshtml?highlight=32-34)]
 
 ## <a name="get-the-code"></a>Obtenir le code
 
