@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 69c253171c51e08802b82415245a66921168ec80
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ea11b2fa70b9aef96971c41910136f0b09a31f55
+ms.sourcegitcommit: e216e8f4afa21215dc38124c28d5ee19f5ed7b1e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404260"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86239658"
 ---
 # <a name="aspnet-core-middleware"></a>Intergiciel (middleware) ASP.NET Core
 
@@ -58,7 +58,7 @@ Chaînez plusieurs délégués de requête avec <xref:Microsoft.AspNetCore.Build
 Quand un délégué ne passe pas une requête au délégué suivant, on parle alors de *court-circuit du pipeline de requête*. Un court-circuit est souvent souhaitable car il évite le travail inutile. Par exemple, le [middleware Fichier statique](xref:fundamentals/static-files) peut agir en tant que *middleware terminal* en traitant une requête pour un fichier statique et en court-circuitant le reste du pipeline. Le middleware ajouté au pipeline avant de le middleware qui met fin à la poursuite du traitement traite tout de même le code après les instructions `next.Invoke`. Toutefois, consultez l’avertissement suivant à propos de la tentative d’écriture sur une réponse qui a déjà été envoyée.
 
 > [!WARNING]
-> N’appelez pas `next.Invoke` une fois que la réponse a été envoyée au client. Les changements apportés à <xref:Microsoft.AspNetCore.Http.HttpResponse> après le démarrage de la réponse lèvent une exception. Par exemple, les changements comme la définition des en-têtes et du code d’état lèvent une exception. Écrire dans le corps de la réponse après avoir appelé `next` :
+> N’appelez pas `next.Invoke` une fois que la réponse a été envoyée au client. Les changements apportés à <xref:Microsoft.AspNetCore.Http.HttpResponse> après le démarrage de la réponse lèvent une exception. Par exemple, [la définition d’en-têtes et d’un code d’État lève une exception](xref:performance/performance-best-practices#do-not-modify-the-status-code-or-headers-after-the-response-body-has-started). Écrire dans le corps de la réponse après avoir appelé `next` :
 >
 > * Peut entraîner une violation de protocole. Par exemple, écrire plus que le `Content-Length` indiqué.
 > * Peut altérer le format du corps. Par exemple, l’écriture d’un pied de page HTML dans un fichier CSS.
@@ -90,7 +90,7 @@ La `Startup.Configure` méthode suivante ajoute des composants d’intergiciel (
 
 [!code-csharp[](index/snapshot/StartupAll3.cs?name=snippet)]
 
-Dans le code précédent :
+Dans le code précédent :
 
 * Les intergiciels (middleware) qui ne sont pas ajoutés lors de la création d’une nouvelle application Web avec des [comptes d’utilisateurs individuels](xref:security/authentication/identity) sont commentés.
 * Tous les intergiciels (middleware) ne doivent pas être placés dans cet ordre exact, mais beaucoup d’entre eux. Par exemple :
@@ -247,7 +247,7 @@ Dans l’exemple précédent, une réponse « hello from principal pipeline »
 
 ASP.NET Core est fourni avec les composants de middleware suivant. La colonne *Ordre* fournit des notes sur l’emplacement du middleware dans le pipeline de traitement de la requête et sur les conditions dans lesquelles le middleware peut mettre fin au traitement de la requête. Lorsqu’un middleware court-circuite le pipeline de traitement de la requête et empêche tout middleware en aval de traiter une requête, on parle de *middleware terminal*. Pour plus d’informations sur le court-circuit, consultez la section [Créer un pipeline de middlewares avec IApplicationBuilder](#create-a-middleware-pipeline-with-iapplicationbuilder).
 
-| Intergiciel (middleware) | Description | JSON |
+| Intergiciel (middleware) | Description | Commande |
 | ---------- | ----------- | ----- |
 | [Authentification](xref:security/authentication/identity) | Prend en charge l’authentification. | Avant que `HttpContext.User` ne soit nécessaire. Terminal pour les rappels OAuth. |
 | [Autorisation](xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization*) | Fournit la prise en charge des autorisations. | Immédiatement après l’intergiciel (middleware) d’authentification. |
@@ -337,7 +337,7 @@ La `Startup.Configure` méthode suivante ajoute les composants de l’intergicie
 
 [!code-csharp[](index/snapshot/Startup22.cs?name=snippet)]
 
-Dans le code précédent :
+Dans le code précédent :
 
 * Les intergiciels (middleware) qui ne sont pas ajoutés lors de la création d’une nouvelle application Web avec des [comptes d’utilisateurs individuels](xref:security/authentication/identity) sont commentés.
 * Tous les intergiciels (middleware) ne doivent pas être placés dans cet ordre exact, mais beaucoup d’entre eux. Par exemple, `UseCors` et `UseAuthentication` doivent être placés dans l’ordre indiqué.
@@ -454,7 +454,7 @@ app.Map("/level1", level1App => {
 
 ASP.NET Core est fourni avec les composants de middleware suivant. La colonne *Ordre* fournit des notes sur l’emplacement du middleware dans le pipeline de traitement de la requête et sur les conditions dans lesquelles le middleware peut mettre fin au traitement de la requête. Lorsqu’un middleware court-circuite le pipeline de traitement de la requête et empêche tout middleware en aval de traiter une requête, on parle de *middleware terminal*. Pour plus d’informations sur le court-circuit, consultez la section [Créer un pipeline de middlewares avec IApplicationBuilder](#create-a-middleware-pipeline-with-iapplicationbuilder).
 
-| Intergiciel (middleware) | Description | JSON |
+| Intergiciel (middleware) | Description | Commande |
 | ---------- | ----------- | ----- |
 | [Authentification](xref:security/authentication/identity) | Prend en charge l’authentification. | Avant que `HttpContext.User` ne soit nécessaire. Terminal pour les rappels OAuth. |
 | [Stratégie de cookies](xref:security/gdpr) | Effectue le suivi de consentement des utilisateurs pour le stockage des informations personnelles et applique des normes minimales pour les champs de cookie, comme `secure` et `SameSite`. | Avant le middleware qui émet les cookies. Exemples : authentification, session, MVC (TempData). |

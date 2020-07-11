@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: 0974abfe632fd897c08435b82a7c695534cc3139
-ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
+ms.openlocfilehash: 77c12b98462c8a84ab807abef247573b6a028fcc
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85793613"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213159"
 ---
 # <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a>Partie 4 : ajouter un modèle à une application ASP.NET Core MVC
 
@@ -63,7 +63,7 @@ L' <xref:System.ComponentModel.DataAnnotations.DataType> attribut sur `ReleaseDa
 
 Les [DataAnnotations](/dotnet/api/system.componentmodel.dataannotations) sont traitées dans un prochain didacticiel.
 
-## <a name="add-nuget-packages"></a>Ajout de packages NuGet
+## <a name="add-nuget-packages"></a>Ajouter des packages NuGet
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -204,7 +204,7 @@ La création automatique de ces fichiers est appelée *génération de modèles 
   export PATH=$HOME/.dotnet/tools:$PATH
   ```
 
-* Exécutez la commande suivante :
+* Exécutez la commande suivante :
 
   ```dotnetcli
   dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -216,7 +216,7 @@ La création automatique de ces fichiers est appelée *génération de modèles 
 
 * Ouvrez une fenêtre Commande dans le répertoire de projet (répertoire qui contient les fichiers *Program.cs*, *Startup.cs* et *.csproj*).
 
-* Exécutez la commande suivante :
+* Exécutez la commande suivante :
 
   ```dotnetcli
   dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -286,7 +286,7 @@ La méthode `Up` crée la table Movie et configure `Id` comme la clé primaire. 
 
 <a name="test"></a>
 
-## <a name="test-the-app"></a>Tester l'application
+## <a name="test-the-app"></a>Tester l’application
 
 * Exécutez l’application et cliquez sur le lien **Movie App**.
 
@@ -490,7 +490,7 @@ La création automatique du contexte de base de données et de méthodes d’act
     export PATH=$HOME/.dotnet/tools:$PATH
   ```
 
-* Exécutez la commande suivante :
+* Exécutez la commande suivante :
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -509,7 +509,7 @@ La création automatique du contexte de base de données et de méthodes d’act
    dotnet tool install --global dotnet-aspnet-codegenerator
    ```
 
-* Exécutez la commande suivante :
+* Exécutez la commande suivante :
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -613,7 +613,7 @@ Vous avez créé un contexte de base de données et vous l’avez inscrit dans l
 
 <a name="test"></a>
 
-### <a name="test-the-app"></a>Tester l'application
+### <a name="test-the-app"></a>Tester l’application
 
 * Exécutez l’application et ajoutez `/Movies` à l’URL dans le navigateur (`http://localhost:port/movies`).
 
@@ -690,7 +690,7 @@ return View(movie);
 
 Examinez le contenu du fichier *Views/Movies/Details.cshtml*:
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/DetailsOriginal.cshtml)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/DetailsOriginal.cshtml)]
 
 En incluant une instruction `@model` en haut du fichier de la vue, vous pouvez spécifier le type d’objet attendu par la vue. Quand vous avez créé le contrôleur pour les films, l’instruction `@model` suivante a été incluse automatiquement en haut du fichier *Details.cshtml* :
 
@@ -708,11 +708,11 @@ Quand vous avez créé le contrôleur pour les films, la génération de modèle
 
 <!-- Copy Index.cshtml to IndexOriginal.cshtml -->
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?range=1)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?range=1)]
 
 La directive `@model` vous permet d’accéder à la liste des films que le contrôleur a passé à la vue en utilisant un objet `Model` qui est fortement typé. Par exemple, dans la vue *Index.cshtml*, le code boucle dans les films avec une instruction `foreach` sur l’objet `Model` fortement typé :
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?highlight=1,31,34,37,40,43,46-48)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?highlight=1,31,34,37,40,43,46-48)]
 
 Comme l’objet `Model` est fortement typé (en tant qu’objet `IEnumerable<Movie>`), chaque élément de la boucle est typé en tant que `Movie`. Entre autres avantages, cela signifie que votre code est vérifié au moment de la compilation :
 
