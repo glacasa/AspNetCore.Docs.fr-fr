@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/handle-errors
-ms.openlocfilehash: f756d9abfb92fd4d6d51d8762967ac2288b54b2a
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0abb5e78e1971925c8e741386c65bdf71a0f0072
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405755"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407630"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>Gérer les erreurs dans les API Web ASP.NET Core
 
@@ -42,7 +42,7 @@ curl -i https://localhost:5001/weatherforecast/chicago
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Dans ASP.NET Core 3,0 et versions ultérieures, la page exception du développeur affiche une réponse en texte brut si le client ne demande pas de sortie au format HTML. Vous obtenez la sortie suivante :
+Dans ASP.NET Core 3,0 et versions ultérieures, la page exception du développeur affiche une réponse en texte brut si le client ne demande pas de sortie au format HTML. Vous obtenez la sortie suivante :
 
 ```console
 HTTP/1.1 500 Internal Server Error
@@ -290,11 +290,11 @@ La réponse d’erreur peut être configurée de l’une des manières suivantes
 1. [Implémenter ProblemDetailsFactory](#implement-problemdetailsfactory)
 1. [Utilisez ApiBehaviorOptions. ClientErrorMapping](#use-apibehavioroptionsclienterrormapping)
 
-### <a name="implement-problemdetailsfactory"></a>Implémenter ProblemDetailsFactory
+### <a name="implement-problemdetailsfactory"></a>Implémentez `ProblemDetailsFactory`
 
-MVC utilise `Microsoft.AspNetCore.Mvc.ProblemDetailsFactory` pour générer toutes les instances de <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> et <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> . Cela comprend les réponses d’erreur du client, les réponses d’erreur de validation et les `Microsoft.AspNetCore.Mvc.ControllerBase.Problem` <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem> méthodes d’assistance et.
+MVC utilise <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ProblemDetailsFactory?displayProperty=fullName> pour générer toutes les instances de <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> et <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> . Cela comprend les réponses d’erreur du client, les réponses d’erreur de validation et les <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Problem%2A?displayProperty=nameWithType> <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem%2A?displayProperty=nameWithType> méthodes d’assistance et.
 
-Pour personnaliser la réponse des détails du problème, inscrivez une implémentation personnalisée de `ProblemDetailsFactory` dans `Startup.ConfigureServices` :
+Pour personnaliser la réponse des détails du problème, inscrivez une implémentation personnalisée de <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ProblemDetailsFactory> dans `Startup.ConfigureServices` :
 
 ```csharp
 public void ConfigureServices(IServiceCollection serviceCollection)

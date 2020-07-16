@@ -5,7 +5,7 @@ description: Découvrez comment héberger et déployer des Blazor applications.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 07/15/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/index
-ms.openlocfilehash: 040f9560bd51841063ca2785b0c0730c6bb16002
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 77202cd60d357c27237cdb925e0adc00e66d2e56
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402648"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407708"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor"></a>Héberger et déployer des ASP.NET CoreBlazor
 
@@ -106,6 +106,20 @@ dotnet run --pathbase=/CoolApp
 ```
 
 L' Blazor WebAssembly application répond localement à l’adresse `http://localhost:port/CoolApp` .
+
+**Blazor Server`MapFallbackToPage`configuration de**
+
+Transmettez le chemin d’accès suivant à <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A> dans `Startup.Configure` :
+
+```csharp
+endpoints.MapFallbackToPage("/{RELATIVE PATH}/{**path:nonfile}");
+```
+
+L’espace réservé `{RELATIVE PATH}` est le chemin d’accès non racine sur le serveur. Par exemple, `CoolApp` est le segment de l’espace réservé si l’URL non racine de l’application est `https://{HOST}:{PORT}/CoolApp/` :
+
+```csharp
+endpoints.MapFallbackToPage("/CoolApp/{**path:nonfile}");
+```
 
 ## <a name="deployment"></a>Déploiement
 

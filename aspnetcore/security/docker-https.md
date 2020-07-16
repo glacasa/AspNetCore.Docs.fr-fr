@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-https
-ms.openlocfilehash: fd2338f433e1651fb974c95b293eaa3fb2009046
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6a83695ff2a9ac7229d1d5086ed13594626476ee
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403103"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407656"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>Hébergement d’images ASP.NET Core avec l’arrimeur sur HTTPs
 
@@ -90,7 +90,7 @@ dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p { password her
 dotnet dev-certs https --trust
 ```
 
-`dotnet dev-certs https --trust`est pris en charge uniquement sur macOS et Windows. Vous devez faire confiance aux certificats sur Linux de la manière prise en charge par votre distribution. Il est probable que vous ayez besoin d’approuver le certificat dans votre navigateur.
+`dotnet dev-certs https --trust`est pris en charge uniquement sur macOS et Windows. Vous devez faire confiance aux certificats sur Linux de la même façon que votre distribution. Il est probable que vous ayez besoin d’approuver le certificat dans votre navigateur.
 
 Dans les commandes précédentes, remplacez `{ password here }` par un mot de passe.
 

@@ -5,7 +5,7 @@ description: Découvrez comment déboguer des Blazor applications.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/06/2020
+ms.date: 07/15/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: c48eb19c5a1759aace112e2afb1637c649173a3d
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 828fb0ce5101407b6f40195138d59c335eec389f
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059901"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407669"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>ASP.NET Core de débogageBlazor WebAssembly
 
@@ -48,8 +48,8 @@ Nous continuerons à améliorer l’expérience de débogage dans les versions �
 
 Le débogage requiert l’un des navigateurs suivants :
 
+* Google Chrome (version 70 ou ultérieure) (par défaut)
 * Microsoft Edge (version 80 ou ultérieure)
-* Google Chrome (version 70 ou ultérieure)
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Activer le débogage pour Visual Studio et Visual Studio Code
 
@@ -133,13 +133,13 @@ Pour plus d’informations sur l’installation de Visual Studio Code pour le Bl
 
 ### <a name="debug-hosted-blazor-webassembly"></a>Débogage hébergéBlazor WebAssembly
 
-1. Ouvrez l’application hébergée Blazor WebAssembly dans vs code.
+1. Ouvrez le Blazor WebAssembly dossier de solution de l’application hébergée dans vs code.
 
 1. Si aucune configuration de lancement n’est définie pour le projet, la notification suivante s’affiche. Sélectionnez **Oui**.
 
    ![Ajouter les ressources requises](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-required-assets.png)
 
-1. Dans la fenêtre de sélection, sélectionnez le projet *serveur* dans la solution hébergée.
+1. Dans la palette de commandes en haut de la fenêtre, sélectionnez le projet *serveur* dans la solution hébergée.
 
 Un `launch.json` fichier est généré à l’aide de la configuration de lancement pour le lancement du débogueur.
 
@@ -160,7 +160,7 @@ Pour attacher une application en cours d’exécution Blazor , créez un `launch
 
 ### <a name="launch-configuration-options"></a>Lancer les options de configuration
 
-Les options de configuration de lancement suivantes sont prises en charge pour le `blazorwasm` type de débogage.
+Les options de configuration de lancement suivantes sont prises en charge pour le `blazorwasm` type de débogage ( `.vscode/launch.json` ).
 
 | Option    | Description |
 | --------- | ----------- |
@@ -198,17 +198,23 @@ Les options de configuration de lancement suivantes sont prises en charge pour l
 }
 ```
 
-#### <a name="launch-and-debug-a-hosted-blazor-webassembly-app"></a>Lancer et déboguer une application hébergée Blazor WebAssembly
+#### <a name="launch-and-debug-a-hosted-blazor-webassembly-app-with-microsoft-edge"></a>Lancer et déboguer une application hébergée Blazor WebAssembly avec Microsoft Edge
+
+La configuration du navigateur est par défaut Google Chrome. Lorsque vous utilisez Microsoft Edge pour le débogage, affectez à la valeur `browser` `edge` . Pour utiliser Google Chrome, vous ne devez pas définir l' `browser` option ou définir la valeur de l’option sur `chrome` .
 
 ```json
 {
+  "name": "Launch and Debug Hosted Blazor WebAssembly App",
   "type": "blazorwasm",
   "request": "launch",
-  "name": "Launch and Debug Hosted App",
+  "hosted": true,
   "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/MyHostedApp.Server.dll",
-  "cwd": "${workspaceFolder}"
+  "cwd": "${workspaceFolder}/Server",
+  "browser": "edge"
 }
 ```
+
+Dans l’exemple précédent, `MyHostedApp.Server.dll` est l’assembly de l’application *serveur* . Le `.vscode` dossier se trouve dans le dossier de la solution, en regard des `Client` `Server` dossiers, et `Shared` .
 
 ## <a name="debug-in-the-browser"></a>Déboguer dans le navigateur
 
@@ -232,7 +238,7 @@ Blazorfournit un proxy de débogage qui implémente le [protocole chrome devtool
 
 Les mappages de source de navigateur permettent au navigateur de mapper les fichiers compilés à leurs fichiers sources d’origine et sont couramment utilisés pour le débogage côté client. Toutefois, Blazor ne mappe actuellement pas C# directement à JavaScript/WASM. Au lieu de cela, Blazor fait l’interprétation du langage intermédiaire dans le navigateur, les mappages de source ne sont donc pas pertinents.
 
-## <a name="troubleshoot"></a>Résoudre les problèmes
+## <a name="troubleshoot"></a>Dépanner
 
 Si vous rencontrez des erreurs, les conseils suivants peuvent vous aider :
 
