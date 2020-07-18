@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: bf599487fdc3e574f72f1a3d35278cc9c2ce7513
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1156ddd2921afbfeccaf077ca29d267f8b1e844a
+ms.sourcegitcommit: 3544941682869734ea0113e24e02ed0ec9e1a9ec
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404650"
+ms.lasthandoff: 07/18/2020
+ms.locfileid: "86464551"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>Account confirmation and password recovery in ASP.NET Core (Confirmation de compte et récupération de mot de passe dans ASP.NET Core)
 
@@ -32,13 +32,7 @@ Ce didacticiel montre comment créer une application ASP.NET Core avec une confi
 
 <!-- see C:/Dropbox/wrk/Code/SendGridConsole/Program.cs -->
 
-::: moniker range="<= aspnetcore-2.0"
-
-Consultez [ce fichier PDF](https://webpifeed.blob.core.windows.net/webpifeed/Partners/asp.net_repo_pdf_1-16-18.pdf) pour obtenir la version ASP.net Core 1,1.
-
-::: moniker-end
-
-::: moniker range="> aspnetcore-2.2"
+::: moniker range=">= aspnetcore-3.0"
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -136,6 +130,16 @@ Ajoutez le code suivant à la `ConfigureServices` méthode dans le fichier *Star
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/Startup.cs?name=snippet1&highlight=11-15)]
 
+## <a name="scaffold-registerconfirmation"></a>RegisterConfirmation de structure
+
+Suivez les instructions pour [l' Identity échafaudage](xref:security/authentication/scaffold-identity) et l’échafaudage `RegisterConfirmation` .
+
+<!-- .NET 5 fixes this, see
+https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Identity/Pages/V4/Account/RegisterConfirmation.cshtml.cs#L74-L77
+-->
+
+[!INCLUDE[](~/includes/disableVer.md)]
+
 ## <a name="register-confirm-email-and-reset-password"></a>Inscrire, confirmer l’e-mail et réinitialiser le mot de passe
 
 Exécutez l’application Web et testez le processus de confirmation et de récupération du mot de passe du compte.
@@ -225,7 +229,7 @@ L’activation de la confirmation de compte sur un site avec des utilisateurs ve
 
 ::: moniker-end
 
-::: moniker range="> aspnetcore-2.0 < aspnetcore-3.0"
+::: moniker range="< aspnetcore-3.0"
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -244,8 +248,10 @@ dotnet aspnet-codegenerator identity -dc WebPWrecover.Data.ApplicationDbContext 
 dotnet ef database drop -f
 dotnet ef database update
 dotnet run
-
 ```
+
+> [!NOTE]
+> Si <xref:Microsoft.AspNetCore.Identity.PasswordOptions> est configuré dans `Startup.ConfigureServices` , la configuration de l' [ `[StringLength]` attribut](xref:System.ComponentModel.DataAnnotations.StringLengthAttribute) peut être requise pour la `Password` propriété dans les pages de génération de modèles automatique Identity . Une `InputModel` `Password` propriété se trouve dans le `Areas/Identity/Pages/Account/Register.cshtml.cs` fichier après la génération de modèles automatique Identity .
 
 ## <a name="test-new-user-registration"></a>Tester l’inscription d’un nouvel utilisateur
 

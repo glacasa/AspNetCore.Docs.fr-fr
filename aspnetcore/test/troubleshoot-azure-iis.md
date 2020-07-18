@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 65095f3990c72224d95f1f5fe46d320ab8f12040
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 17ada36c40997353528f922bece5acc34ce760d2
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404832"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445383"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Résoudre les problèmes de ASP.NET Core sur Azure App Service et IIS
 
@@ -30,7 +30,7 @@ Par [Justin Kotalik](https://github.com/jkotalik)
 
 Cet article fournit des informations sur les erreurs de démarrage d’application courantes et des instructions sur la façon de diagnostiquer les erreurs quand une application est déployée sur Azure App Service ou IIS :
 
-[Erreurs de démarrage des applications](#app-startup-errors)  
+[Erreurs de démarrage d’application](#app-startup-errors)  
 Explique les scénarios courants de code d’état HTTP de démarrage.
 
 [Résoudre les problèmes sur Azure App Service](#troubleshoot-on-azure-app-service)  
@@ -45,9 +45,9 @@ Explique ce qu’il faut faire quand des packages incohérents interrompent une 
 [Ressources supplémentaires](#additional-resources)  
 Répertorie des rubriques supplémentaires sur la résolution des problèmes.
 
-## <a name="app-startup-errors"></a>Erreurs de démarrage des applications
+## <a name="app-startup-errors"></a>Erreurs de démarrage d’application
 
-Dans Visual Studio, un projet ASP.NET Core est par défaut hébergé sur [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) pendant une opération de débogage. Un *échec de processus 502,5* ou un *échec de démarrage de 500,30* qui se produit lorsque le débogage local peut être diagnostiqué à l’aide des conseils de cette rubrique.
+Dans Visual Studio, un ASP.NET Core projet [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) héberge par défaut pendant le débogage. Un *échec de processus 502,5* ou un *échec de démarrage de 500,30* qui se produit lorsque le débogage local peut être diagnostiqué à l’aide des conseils de cette rubrique.
 
 ### <a name="40314-forbidden"></a>403,14 interdit
 
@@ -63,7 +63,7 @@ L’erreur est généralement causée par un déploiement rompu sur le système 
 * Le processus de déploiement n’a pas réussi à déplacer tous les fichiers et dossiers de l’application vers le dossier de déploiement sur le système d’hébergement.
 * Le fichier *web.config* est manquant dans le déploiement ou le contenu du fichier *web.config* est incorrect.
 
-Procédez comme suit :
+Effectuez les étapes suivantes :
 
 1. Supprimez tous les fichiers et dossiers du dossier de déploiement sur le système d’hébergement.
 1. Redéployez le contenu du dossier de *publication* de l’application sur le système d’hébergement à l’aide de votre méthode de déploiement normale, telle que Visual Studio, PowerShell ou le déploiement manuel :
@@ -74,7 +74,7 @@ Procédez comme suit :
 
 Pour plus d’informations sur la disposition d’une application ASP.NET Core publiée, consultez <xref:host-and-deploy/directory-structure> . Pour plus d’informations sur le fichier *web.config* , consultez <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig> .
 
-### <a name="500-internal-server-error"></a>500 Erreur interne du serveur
+### <a name="500-internal-server-error"></a>500 erreur interne du serveur
 
 L’application démarre, mais une erreur empêche le serveur de répondre à la requête.
 
@@ -177,7 +177,7 @@ Cette erreur se produit lors de l’hébergement d’une application empaquetée
 1. Désactivez la publication sur un seul fichier en affectant `PublishSingleFile` à la propriété MSBuild la valeur `false` .
 1. Basculez vers le modèle d’hébergement out-of-process en affectant `AspNetCoreHostingModel` à la propriété MSBuild la valeur `OutOfProcess` .
 
-### <a name="5025-process-failure"></a>Échec de processus 502.5
+### <a name="5025-process-failure"></a>502.5 échec du processus
 
 Le processus de travail échoue. L’application ne démarre pas.
 
@@ -233,7 +233,7 @@ Pour accéder au Journal des événements de l’application, utilisez le pannea
 
 En dehors de la solution consistant à utiliser le panneau **Diagnostiquer et résoudre les problèmes**, vous pouvez examiner directement le fichier Journal des événements de l’application avec [Kudu](https://github.com/projectkudu/kudu/wiki) :
 
-1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
+1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le **bouton &rarr; OK** . La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
 1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
 1. Ouvrez le fichier **LogFiles** .
 1. Sélectionnez l’icône en forme de crayon à côté du fichier *eventlog.xml*.
@@ -243,7 +243,7 @@ En dehors de la solution consistant à utiliser le panneau **Diagnostiquer et r�
 
 De nombreuses erreurs de démarrage ne produisent pas d’informations utiles dans le Journal des événements de l’application. Vous pouvez exécuter l’application dans la console d’exécution à distance [Kudu](https://github.com/projectkudu/kudu/wiki) pour détecter l’erreur :
 
-1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
+1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le **bouton &rarr; OK** . La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
 1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
 
 #### <a name="test-a-32-bit-x86-app"></a>Tester une application 32 bits (x86)
@@ -264,16 +264,16 @@ De nombreuses erreurs de démarrage ne produisent pas d’informations utiles da
      {ASSEMBLY NAME}.exe
      ```
 
-La sortie de console de l’application, affichant toutes les erreurs éventuelles, est transmise à la console Kudu.
+La sortie de la console de l’application, qui affiche les erreurs, est dirigée vers la console Kudu.
 
 **Déploiement dépendant du framework sur une préversion**
 
 *Installation de l’extension de site du runtime ASP.NET Core {VERSION} (x86) requise.*
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x32` (`{X.Y}` est la version du runtime).
-1. Exécutez l'application : `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`.
+1. Exécutez l’application : `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 
-La sortie de console de l’application, affichant toutes les erreurs éventuelles, est transmise à la console Kudu.
+La sortie de la console de l’application, qui affiche les erreurs, est dirigée vers la console Kudu.
 
 #### <a name="test-a-64-bit-x64-app"></a>Tester une application 64 bits (x64)
 
@@ -281,52 +281,42 @@ La sortie de console de l’application, affichant toutes les erreurs éventuell
 
 * Si l’application est un [déploiement dépendant du framework](/dotnet/core/deploying/#framework-dependent-deployments-fdd) 64 bits (x64) :
   1. `cd D:\Program Files\dotnet`
-  1. Exécutez l'application : `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`.
+  1. Exécutez l’application : `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 * Si l’application est un [déploiement autonome](/dotnet/core/deploying/#self-contained-deployments-scd) :
   1. `cd D:\home\site\wwwroot`
-  1. Exécutez l'application : `{ASSEMBLY NAME}.exe`.
+  1. Exécutez l’application : `{ASSEMBLY NAME}.exe`
 
-La sortie de console de l’application, affichant toutes les erreurs éventuelles, est transmise à la console Kudu.
+La sortie de la console de l’application, qui affiche les erreurs, est dirigée vers la console Kudu.
 
 **Déploiement dépendant du framework sur une préversion**
 
 *Installation de l’extension de site du runtime ASP.NET Core {VERSION} (x64) requise.*
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64` (`{X.Y}` est la version du runtime).
-1. Exécutez l'application : `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`.
+1. Exécutez l’application : `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 
-La sortie de console de l’application, affichant toutes les erreurs éventuelles, est transmise à la console Kudu.
+La sortie de la console de l’application, qui affiche les erreurs, est dirigée vers la console Kudu.
 
 ### <a name="aspnet-core-module-stdout-log-azure-app-service"></a>Journal stdout du module ASP.NET Core (Azure App Service)
-
-Le journal stdout du module ASP.NET Core enregistre souvent des messages d’erreur utiles et absents du Journal des événements de l’application. Pour activer et afficher les journaux stdout :
-
-1. Accédez au panneau **Diagnostiquer et résoudre les problèmes** du Portail Azure.
-1. Sous **SÉLECTIONNER UNE CATÉGORIE DE PROBLÈME**, sélectionnez le bouton **Application web en panne**.
-1. Sous **Solutions suggérées** > **Activer la redirection de journaux stdout**, sélectionnez le bouton **Ouvrir la console Kudu pour modifier web.config**.
-1. Dans la **Console de diagnostic** Kudu, ouvrez les dossiers sur le chemin d’accès **site** > **wwwroot**. Faites défiler la page jusqu’à révéler le fichier *web.config* en bas de la liste.
-1. Cliquez sur l’icône en forme de crayon à côté du fichier *web.config*.
-1. Définissez **stdoutLogEnabled** sur `true` et remplacez le chemin **stdoutLogFile** par : `\\?\%home%\LogFiles\stdout`.
-1. Sélectionnez **Enregistrer** pour enregistrer le fichier *web.config* mis à jour.
-1. Adressez une requête à l’application.
-1. Revenez au Portail Azure. Sélectionnez le panneau **Outils avancés** dans la zone **OUTILS DE DÉVELOPPEMENT**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
-1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
-1. Sélectionnez le dossier **LogFiles**.
-1. Inspectez la colonne **Modifié** et sélectionnez l’icône en forme de crayon pour modifier le journal stdout avec la date de dernière modification.
-1. Lorsque le fichier journal s’ouvre, l’erreur s’affiche.
-
-Désactivez la journalisation stdout, une fois les problèmes résolus :
-
-1. Dans la **Console de diagnostic** Kudu, revenez au chemin d’accès **site** > **wwwroot** pour faire apparaître le fichier *web.config*. Ouvrez à nouveau le fichier **web.config** en sélectionnant l’icône en forme de crayon.
-1. Définissez **stdoutLogEnabled** sur `false`.
-1. Sélectionnez **Enregistrer** pour enregistrer le fichier.
-
-Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
 
 > [!WARNING]
 > Si vous ne désactivez pas le journal stdout, l’application ou le serveur risque d’échouer. Il n’existe aucune limite quant à la taille du fichier journal ou au nombre de fichiers journaux créés. N’utilisez la journalisation stdout que pour résoudre les problèmes de démarrage de l’application.
 >
 > Pour la journalisation générale dans une application ASP.NET Core après le démarrage, utilisez une bibliothèque de journalisation qui limite la taille du fichier journal et applique une rotation aux journaux. Pour plus d’informations, consultez [Fournisseurs de journalisation tiers](xref:fundamentals/logging/index#third-party-logging-providers).
+
+Le journal stdout du module ASP.NET Core enregistre souvent des messages d’erreur utiles et absents du Journal des événements de l’application. Pour activer et afficher les journaux stdout :
+
+1. Dans le portail Azure, accédez à l’application Web.
+1. Dans le panneau **app service** , entrez **Kudu** dans la zone de recherche.
+1. Sélectionnez **Outils avancés** > **Go**.
+1. Sélectionnez **console de débogage > cmd**.
+1. Accédez à *site/wwwroot*
+1. Sélectionnez l’icône de crayon pour modifier le fichier *web.config* .
+1. Dans l' `<aspNetCore />` élément, définissez `stdoutLogEnabled="true"` et sélectionnez **Enregistrer**.
+
+Désactivez la journalisation stdout lorsque la résolution des problèmes est terminée en définissant `stdoutLogEnabled="false"` .
+
+Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
 
 ### <a name="aspnet-core-module-debug-log-azure-app-service"></a>Journal de débogage du module ASP.NET Core (Azure App Service)
 
@@ -335,10 +325,10 @@ Le journal de débogage du module ASP.NET Core fournit une journalisation suppl�
 1. Pour activer le journal de diagnostic amélioré, effectuez l’une des opérations suivantes :
    * Suivez les instructions indiquées dans [Journaux de diagnostic améliorés](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) afin de configurer l’application pour une journalisation des diagnostics améliorée. Redéployez l’application.
    * Ajoutez le `<handlerSettings>` présenté dans [Journaux de diagnostic améliorés](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) au fichier *web.config* de l’application en production à l’aide de la console Kudu :
-     1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
+     1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le **bouton &rarr; OK** . La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
      1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
      1. Ouvrez les dossiers sur le chemin d’accès du **site**  >  **wwwroot**. Modifiez le fichier *web.config* en sélectionnant le bouton représentant un crayon. Ajoutez la section `<handlerSettings>` comme indiqué dans [Journaux de diagnostic améliorés](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs). Sélectionnez le bouton **Enregistrer**.
-1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
+1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le **bouton &rarr; OK** . La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
 1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
 1. Ouvrez les dossiers sur le chemin d’accès du **site**  >  **wwwroot**. Si vous n’avez pas indiqué de chemin pour le fichier *aspnetcore-debug.log*, le fichier apparaît dans la liste. Si vous avez indiqué un chemin, accédez à l’emplacement du fichier journal.
 1. Ouvrez le fichier journal à l’aide du bouton représentant un crayon à côté du nom de fichier.
@@ -380,7 +370,7 @@ Vérifiez que les extensions ASP.NET Core sont installées. Si ce n’est pas le
 
 Si la journalisation stdout n’est pas activée, suivez les étapes ci-dessous :
 
-1. Sur le Portail Azure, sélectionnez le panneau **Outils avancés** dans la zone **OUTILS DE DÉVELOPPEMENT**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
+1. Sur le Portail Azure, sélectionnez le panneau **Outils avancés** dans la zone **OUTILS DE DÉVELOPPEMENT**. Sélectionnez le **bouton &rarr; OK** . La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
 1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
 1. Ouvrez les dossiers sur le chemin d’accès **site** > **wwwroot** et faites défiler la page jusqu’à révéler le fichier *web.config* en bas de la liste.
 1. Cliquez sur l’icône en forme de crayon à côté du fichier *web.config*.
@@ -605,7 +595,7 @@ Une application fonctionnelle peut échouer immédiatement après la mise à niv
 
 Cet article fournit des informations sur les erreurs de démarrage d’application courantes et des instructions sur la façon de diagnostiquer les erreurs quand une application est déployée sur Azure App Service ou IIS :
 
-[Erreurs de démarrage des applications](#app-startup-errors)  
+[Erreurs de démarrage d’application](#app-startup-errors)  
 Explique les scénarios courants de code d’état HTTP de démarrage.
 
 [Résoudre les problèmes sur Azure App Service](#troubleshoot-on-azure-app-service)  
@@ -620,9 +610,9 @@ Explique ce qu’il faut faire quand des packages incohérents interrompent une 
 [Ressources supplémentaires](#additional-resources)  
 Répertorie des rubriques supplémentaires sur la résolution des problèmes.
 
-## <a name="app-startup-errors"></a>Erreurs de démarrage des applications
+## <a name="app-startup-errors"></a>Erreurs de démarrage d’application
 
-Dans Visual Studio, un projet ASP.NET Core est par défaut hébergé sur [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) pendant une opération de débogage. Un *échec de processus 502,5* ou un *échec de démarrage de 500,30* qui se produit lorsque le débogage local peut être diagnostiqué à l’aide des conseils de cette rubrique.
+Dans Visual Studio, un ASP.NET Core projet [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) héberge par défaut pendant le débogage. Un *échec de processus 502,5* ou un *échec de démarrage de 500,30* qui se produit lorsque le débogage local peut être diagnostiqué à l’aide des conseils de cette rubrique.
 
 ### <a name="40314-forbidden"></a>403,14 interdit
 
@@ -638,7 +628,7 @@ L’erreur est généralement causée par un déploiement rompu sur le système 
 * Le processus de déploiement n’a pas réussi à déplacer tous les fichiers et dossiers de l’application vers le dossier de déploiement sur le système d’hébergement.
 * Le fichier *web.config* est manquant dans le déploiement ou le contenu du fichier *web.config* est incorrect.
 
-Procédez comme suit :
+Effectuez les étapes suivantes :
 
 1. Supprimez tous les fichiers et dossiers du dossier de déploiement sur le système d’hébergement.
 1. Redéployez le contenu du dossier de *publication* de l’application sur le système d’hébergement à l’aide de votre méthode de déploiement normale, telle que Visual Studio, PowerShell ou le déploiement manuel :
@@ -649,7 +639,7 @@ Procédez comme suit :
 
 Pour plus d’informations sur la disposition d’une application ASP.NET Core publiée, consultez <xref:host-and-deploy/directory-structure> . Pour plus d’informations sur le fichier *web.config* , consultez <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig> .
 
-### <a name="500-internal-server-error"></a>500 Erreur interne du serveur
+### <a name="500-internal-server-error"></a>500 erreur interne du serveur
 
 L’application démarre, mais une erreur empêche le serveur de répondre à la requête.
 
@@ -670,7 +660,7 @@ Le processus de travail échoue. L’application ne démarre pas.
 
 Le [Module ASP.net Core](xref:host-and-deploy/aspnet-core-module) ne parvient pas à trouver le gestionnaire de demandes d’hébergement hors processus. Vérifiez que le fichier *aspnetcorev2_outofprocess.dll* est présent dans un sous-dossier en regard de *aspnetcorev2.dll*.
 
-### <a name="5025-process-failure"></a>Échec de processus 502.5
+### <a name="5025-process-failure"></a>502.5 échec du processus
 
 Le processus de travail échoue. L’application ne démarre pas.
 
@@ -726,7 +716,7 @@ Pour accéder au Journal des événements de l’application, utilisez le pannea
 
 En dehors de la solution consistant à utiliser le panneau **Diagnostiquer et résoudre les problèmes**, vous pouvez examiner directement le fichier Journal des événements de l’application avec [Kudu](https://github.com/projectkudu/kudu/wiki) :
 
-1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
+1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le **bouton &rarr; OK** . La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
 1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
 1. Ouvrez le fichier **LogFiles** .
 1. Sélectionnez l’icône en forme de crayon à côté du fichier *eventlog.xml*.
@@ -736,7 +726,7 @@ En dehors de la solution consistant à utiliser le panneau **Diagnostiquer et r�
 
 De nombreuses erreurs de démarrage ne produisent pas d’informations utiles dans le Journal des événements de l’application. Vous pouvez exécuter l’application dans la console d’exécution à distance [Kudu](https://github.com/projectkudu/kudu/wiki) pour détecter l’erreur :
 
-1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
+1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le **bouton &rarr; OK** . La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
 1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
 
 #### <a name="test-a-32-bit-x86-app"></a>Tester une application 32 bits (x86)
@@ -757,16 +747,16 @@ De nombreuses erreurs de démarrage ne produisent pas d’informations utiles da
      {ASSEMBLY NAME}.exe
      ```
 
-La sortie de console de l’application, affichant toutes les erreurs éventuelles, est transmise à la console Kudu.
+La sortie de la console de l’application, qui affiche les erreurs, est dirigée vers la console Kudu.
 
 **Déploiement dépendant du framework sur une préversion**
 
 *Installation de l’extension de site du runtime ASP.NET Core {VERSION} (x86) requise.*
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x32` (`{X.Y}` est la version du runtime).
-1. Exécutez l'application : `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`.
+1. Exécutez l’application : `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 
-La sortie de console de l’application, affichant toutes les erreurs éventuelles, est transmise à la console Kudu.
+La sortie de la console de l’application, qui affiche les erreurs, est dirigée vers la console Kudu.
 
 #### <a name="test-a-64-bit-x64-app"></a>Tester une application 64 bits (x64)
 
@@ -774,21 +764,21 @@ La sortie de console de l’application, affichant toutes les erreurs éventuell
 
 * Si l’application est un [déploiement dépendant du framework](/dotnet/core/deploying/#framework-dependent-deployments-fdd) 64 bits (x64) :
   1. `cd D:\Program Files\dotnet`
-  1. Exécutez l'application : `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`.
+  1. Exécutez l’application : `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 * Si l’application est un [déploiement autonome](/dotnet/core/deploying/#self-contained-deployments-scd) :
   1. `cd D:\home\site\wwwroot`
-  1. Exécutez l'application : `{ASSEMBLY NAME}.exe`.
+  1. Exécutez l’application : `{ASSEMBLY NAME}.exe`
 
-La sortie de console de l’application, affichant toutes les erreurs éventuelles, est transmise à la console Kudu.
+La sortie de la console de l’application, qui affiche les erreurs, est dirigée vers la console Kudu.
 
 **Déploiement dépendant du framework sur une préversion**
 
 *Installation de l’extension de site du runtime ASP.NET Core {VERSION} (x64) requise.*
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64` (`{X.Y}` est la version du runtime).
-1. Exécutez l'application : `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`.
+1. Exécutez l’application : `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 
-La sortie de console de l’application, affichant toutes les erreurs éventuelles, est transmise à la console Kudu.
+La sortie de la console de l’application, qui affiche les erreurs, est dirigée vers la console Kudu.
 
 ### <a name="aspnet-core-module-stdout-log-azure-app-service"></a>Journal stdout du module ASP.NET Core (Azure App Service)
 
@@ -802,7 +792,7 @@ Le journal stdout du module ASP.NET Core enregistre souvent des messages d’err
 1. Définissez **stdoutLogEnabled** sur `true` et remplacez le chemin **stdoutLogFile** par : `\\?\%home%\LogFiles\stdout`.
 1. Sélectionnez **Enregistrer** pour enregistrer le fichier *web.config* mis à jour.
 1. Adressez une requête à l’application.
-1. Revenez au Portail Azure. Sélectionnez le panneau **Outils avancés** dans la zone **OUTILS DE DÉVELOPPEMENT**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
+1. Revenez au portail Azure. Sélectionnez le panneau **Outils avancés** dans la zone **OUTILS DE DÉVELOPPEMENT**. Sélectionnez le **bouton &rarr; OK** . La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
 1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
 1. Sélectionnez le dossier **LogFiles**.
 1. Inspectez la colonne **Modifié** et sélectionnez l’icône en forme de crayon pour modifier le journal stdout avec la date de dernière modification.
@@ -828,10 +818,10 @@ Le journal de débogage du module ASP.NET Core fournit une journalisation suppl�
 1. Pour activer le journal de diagnostic amélioré, effectuez l’une des opérations suivantes :
    * Suivez les instructions indiquées dans [Journaux de diagnostic améliorés](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) afin de configurer l’application pour une journalisation des diagnostics améliorée. Redéployez l’application.
    * Ajoutez le `<handlerSettings>` présenté dans [Journaux de diagnostic améliorés](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs) au fichier *web.config* de l’application en production à l’aide de la console Kudu :
-     1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
+     1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le **bouton &rarr; OK** . La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
      1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
      1. Ouvrez les dossiers sur le chemin d’accès du **site**  >  **wwwroot**. Modifiez le fichier *web.config* en sélectionnant le bouton représentant un crayon. Ajoutez la section `<handlerSettings>` comme indiqué dans [Journaux de diagnostic améliorés](xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs). Sélectionnez le bouton **Enregistrer**.
-1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
+1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le **bouton &rarr; OK** . La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
 1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
 1. Ouvrez les dossiers sur le chemin d’accès du **site**  >  **wwwroot**. Si vous n’avez pas indiqué de chemin pour le fichier *aspnetcore-debug.log*, le fichier apparaît dans la liste. Si vous avez indiqué un chemin, accédez à l’emplacement du fichier journal.
 1. Ouvrez le fichier journal à l’aide du bouton représentant un crayon à côté du nom de fichier.
@@ -873,7 +863,7 @@ Vérifiez que les extensions ASP.NET Core sont installées. Si ce n’est pas le
 
 Si la journalisation stdout n’est pas activée, suivez les étapes ci-dessous :
 
-1. Sur le Portail Azure, sélectionnez le panneau **Outils avancés** dans la zone **OUTILS DE DÉVELOPPEMENT**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
+1. Sur le Portail Azure, sélectionnez le panneau **Outils avancés** dans la zone **OUTILS DE DÉVELOPPEMENT**. Sélectionnez le **bouton &rarr; OK** . La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
 1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
 1. Ouvrez les dossiers sur le chemin d’accès **site** > **wwwroot** et faites défiler la page jusqu’à révéler le fichier *web.config* en bas de la liste.
 1. Cliquez sur l’icône en forme de crayon à côté du fichier *web.config*.
@@ -1098,7 +1088,7 @@ Une application fonctionnelle peut échouer immédiatement après la mise à niv
 
 Cet article fournit des informations sur les erreurs de démarrage d’application courantes et des instructions sur la façon de diagnostiquer les erreurs quand une application est déployée sur Azure App Service ou IIS :
 
-[Erreurs de démarrage des applications](#app-startup-errors)  
+[Erreurs de démarrage d’application](#app-startup-errors)  
 Explique les scénarios courants de code d’état HTTP de démarrage.
 
 [Résoudre les problèmes sur Azure App Service](#troubleshoot-on-azure-app-service)  
@@ -1113,9 +1103,9 @@ Explique ce qu’il faut faire quand des packages incohérents interrompent une 
 [Ressources supplémentaires](#additional-resources)  
 Répertorie des rubriques supplémentaires sur la résolution des problèmes.
 
-## <a name="app-startup-errors"></a>Erreurs de démarrage des applications
+## <a name="app-startup-errors"></a>Erreurs de démarrage d’application
 
-Dans Visual Studio, un projet ASP.NET Core est par défaut hébergé sur [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) pendant une opération de débogage. Un *échec de processus 502,5* qui se produit lorsque le débogage local peut être diagnostiqué à l’aide des conseils de cette rubrique.
+Dans Visual Studio, un ASP.NET Core projet [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview) héberge par défaut pendant le débogage. Un *échec de processus 502,5* qui se produit lorsque le débogage local peut être diagnostiqué à l’aide des conseils de cette rubrique.
 
 ### <a name="40314-forbidden"></a>403,14 interdit
 
@@ -1131,7 +1121,7 @@ L’erreur est généralement causée par un déploiement rompu sur le système 
 * Le processus de déploiement n’a pas réussi à déplacer tous les fichiers et dossiers de l’application vers le dossier de déploiement sur le système d’hébergement.
 * Le fichier *web.config* est manquant dans le déploiement ou le contenu du fichier *web.config* est incorrect.
 
-Procédez comme suit :
+Effectuez les étapes suivantes :
 
 1. Supprimez tous les fichiers et dossiers du dossier de déploiement sur le système d’hébergement.
 1. Redéployez le contenu du dossier de *publication* de l’application sur le système d’hébergement à l’aide de votre méthode de déploiement normale, telle que Visual Studio, PowerShell ou le déploiement manuel :
@@ -1142,13 +1132,13 @@ Procédez comme suit :
 
 Pour plus d’informations sur la disposition d’une application ASP.NET Core publiée, consultez <xref:host-and-deploy/directory-structure> . Pour plus d’informations sur le fichier *web.config* , consultez <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig> .
 
-### <a name="500-internal-server-error"></a>500 Erreur interne du serveur
+### <a name="500-internal-server-error"></a>500 erreur interne du serveur
 
 L’application démarre, mais une erreur empêche le serveur de répondre à la requête.
 
 Cette erreur se produit dans le code de l’application pendant le démarrage ou durant la création d’une réponse. La réponse peut être dépourvue de contenu ou apparaître sous la forme d’une *erreur de serveur interne 500* dans le navigateur. Le Journal des événements de l’application indique généralement qu’elle a démarré normalement. Du point de vue du serveur, c’est exact. L’application a démarré, mais elle ne peut pas générer de réponse valide. Exécutez l’application depuis une invite de commandes sur le serveur ou activez le journal stdout du module ASP.NET Core pour résoudre le problème.
 
-### <a name="5025-process-failure"></a>Échec de processus 502.5
+### <a name="5025-process-failure"></a>502.5 échec du processus
 
 Le processus de travail échoue. L’application ne démarre pas.
 
@@ -1204,7 +1194,7 @@ Pour accéder au Journal des événements de l’application, utilisez le pannea
 
 En dehors de la solution consistant à utiliser le panneau **Diagnostiquer et résoudre les problèmes**, vous pouvez examiner directement le fichier Journal des événements de l’application avec [Kudu](https://github.com/projectkudu/kudu/wiki) :
 
-1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
+1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le **bouton &rarr; OK** . La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
 1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
 1. Ouvrez le fichier **LogFiles** .
 1. Sélectionnez l’icône en forme de crayon à côté du fichier *eventlog.xml*.
@@ -1214,7 +1204,7 @@ En dehors de la solution consistant à utiliser le panneau **Diagnostiquer et r�
 
 De nombreuses erreurs de démarrage ne produisent pas d’informations utiles dans le Journal des événements de l’application. Vous pouvez exécuter l’application dans la console d’exécution à distance [Kudu](https://github.com/projectkudu/kudu/wiki) pour détecter l’erreur :
 
-1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
+1. Ouvrez les **Outils avancés** dans la zone **Outils de développement**. Sélectionnez le **bouton &rarr; OK** . La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
 1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
 
 #### <a name="test-a-32-bit-x86-app"></a>Tester une application 32 bits (x86)
@@ -1235,16 +1225,16 @@ De nombreuses erreurs de démarrage ne produisent pas d’informations utiles da
      {ASSEMBLY NAME}.exe
      ```
 
-La sortie de console de l’application, affichant toutes les erreurs éventuelles, est transmise à la console Kudu.
+La sortie de la console de l’application, qui affiche les erreurs, est dirigée vers la console Kudu.
 
 **Déploiement dépendant du framework sur une préversion**
 
 *Installation de l’extension de site du runtime ASP.NET Core {VERSION} (x86) requise.*
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x32` (`{X.Y}` est la version du runtime).
-1. Exécutez l'application : `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`.
+1. Exécutez l’application : `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 
-La sortie de console de l’application, affichant toutes les erreurs éventuelles, est transmise à la console Kudu.
+La sortie de la console de l’application, qui affiche les erreurs, est dirigée vers la console Kudu.
 
 #### <a name="test-a-64-bit-x64-app"></a>Tester une application 64 bits (x64)
 
@@ -1252,21 +1242,21 @@ La sortie de console de l’application, affichant toutes les erreurs éventuell
 
 * Si l’application est un [déploiement dépendant du framework](/dotnet/core/deploying/#framework-dependent-deployments-fdd) 64 bits (x64) :
   1. `cd D:\Program Files\dotnet`
-  1. Exécutez l'application : `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`.
+  1. Exécutez l’application : `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 * Si l’application est un [déploiement autonome](/dotnet/core/deploying/#self-contained-deployments-scd) :
   1. `cd D:\home\site\wwwroot`
-  1. Exécutez l'application : `{ASSEMBLY NAME}.exe`.
+  1. Exécutez l’application : `{ASSEMBLY NAME}.exe`
 
-La sortie de console de l’application, affichant toutes les erreurs éventuelles, est transmise à la console Kudu.
+La sortie de la console de l’application, qui affiche les erreurs, est dirigée vers la console Kudu.
 
 **Déploiement dépendant du framework sur une préversion**
 
 *Installation de l’extension de site du runtime ASP.NET Core {VERSION} (x64) requise.*
 
 1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64` (`{X.Y}` est la version du runtime).
-1. Exécutez l'application : `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`.
+1. Exécutez l’application : `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 
-La sortie de console de l’application, affichant toutes les erreurs éventuelles, est transmise à la console Kudu.
+La sortie de la console de l’application, qui affiche les erreurs, est dirigée vers la console Kudu.
 
 ### <a name="aspnet-core-module-stdout-log-azure-app-service"></a>Journal stdout du module ASP.NET Core (Azure App Service)
 
@@ -1280,7 +1270,7 @@ Le journal stdout du module ASP.NET Core enregistre souvent des messages d’err
 1. Définissez **stdoutLogEnabled** sur `true` et remplacez le chemin **stdoutLogFile** par : `\\?\%home%\LogFiles\stdout`.
 1. Sélectionnez **Enregistrer** pour enregistrer le fichier *web.config* mis à jour.
 1. Adressez une requête à l’application.
-1. Revenez au Portail Azure. Sélectionnez le panneau **Outils avancés** dans la zone **OUTILS DE DÉVELOPPEMENT**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
+1. Revenez au portail Azure. Sélectionnez le panneau **Outils avancés** dans la zone **OUTILS DE DÉVELOPPEMENT**. Sélectionnez le **bouton &rarr; OK** . La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
 1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
 1. Sélectionnez le dossier **LogFiles**.
 1. Inspectez la colonne **Modifié** et sélectionnez l’icône en forme de crayon pour modifier le journal stdout avec la date de dernière modification.
@@ -1322,7 +1312,7 @@ Vérifiez que les extensions ASP.NET Core sont installées. Si ce n’est pas le
 
 Si la journalisation stdout n’est pas activée, suivez les étapes ci-dessous :
 
-1. Sur le Portail Azure, sélectionnez le panneau **Outils avancés** dans la zone **OUTILS DE DÉVELOPPEMENT**. Sélectionnez le bouton **Atteindre&rarr;**. La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
+1. Sur le Portail Azure, sélectionnez le panneau **Outils avancés** dans la zone **OUTILS DE DÉVELOPPEMENT**. Sélectionnez le **bouton &rarr; OK** . La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
 1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
 1. Ouvrez les dossiers sur le chemin d’accès **site** > **wwwroot** et faites défiler la page jusqu’à révéler le fichier *web.config* en bas de la liste.
 1. Cliquez sur l’icône en forme de crayon à côté du fichier *web.config*.

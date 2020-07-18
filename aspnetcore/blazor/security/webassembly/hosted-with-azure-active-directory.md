@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 82916c06413300bbefa85c619239c23a8e40468a
-ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.openlocfilehash: d2732819dd8f18da1f99965bb91e5eb3670ff4db
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86147752"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445188"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory"></a>Sécuriser une Blazor WebAssembly application hébergée ASP.net core avec Azure Active Directory
 
@@ -98,9 +98,9 @@ Dans **autorisations d’API**:
 1. Ouvrez la liste des **API** .
 1. Activez l’accès à l’API (par exemple, `API.Access` ).
 1. Sélectionnez **Ajouter des autorisations**.
-1. Sélectionnez le bouton **accorder le consentement de l’administrateur pour {nom du locataire}** . Sélectionnez **Oui** pour confirmer.
+1. Sélectionnez le bouton **accorder le consentement de l’administrateur pour {nom du locataire}** . Sélectionnez **Oui** pour confirmer l’opération.
 
-### <a name="create-the-app"></a>Créer l’application
+### <a name="create-the-app"></a>Créer l'application
 
 Dans un dossier vide, remplacez les espaces réservés dans la commande suivante par les informations enregistrées précédemment et exécutez la commande dans une interface de commande :
 
@@ -116,7 +116,7 @@ dotnet new blazorwasm -au SingleOrg --api-client-id "{SERVER API APP CLIENT ID}"
 | `{SERVER API APP CLIENT ID}` | ID de l’application (client) pour l’application *API serveur*      | `41451fa7-82d9-4673-8fa5-69eff5a761fd` |
 | `{SERVER API APP ID URI}`    | URI d’ID d’application ([Voir la remarque](#access-token-scopes)) | `41451fa7-82d9-4673-8fa5-69eff5a761fd` |
 | `{TENANT DOMAIN}`            | Domaine principal/serveur de publication/locataire                       | `contoso.onmicrosoft.com`              |
-| `{TENANT ID}`                | ID d’annuaire (locataire)                                 | `e86c78e2-8bb4-4c41-aefd-918e0565a45e` |
+| `{TENANT ID}`                | ID de l’annuaire (locataire)                                 | `e86c78e2-8bb4-4c41-aefd-918e0565a45e` |
 
 L’emplacement de sortie spécifié avec l' `-o|--output` option crée un dossier de projet s’il n’existe pas et fait partie du nom de l’application.
 
@@ -257,7 +257,7 @@ builder.Services.AddHttpClient("{APP ASSEMBLY}.ServerAPI", client =>
         client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
-builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
+builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("{APP ASSEMBLY}.ServerAPI"));
 ```
 

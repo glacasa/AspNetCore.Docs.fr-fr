@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: e905f08f867b73fc37d5fed7138256ac89811312
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 85446ac18608b39c469da766e1a9f2e92a1f5e11
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402401"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445110"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>BlazorAuthentification et autorisation ASP.net Core
 
@@ -320,7 +320,7 @@ Si ni <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Roles> n
 
 Blazorpermet de déterminer l’état d’authentification de *manière asynchrone*. Le scénario principal de cette approche se trouve dans les Blazor WebAssembly applications qui effectuent une demande à un point de terminaison externe pour l’authentification.
 
-Lorsque l’authentification est en cours, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> n’affiche aucun contenu par défaut. Pour afficher le contenu pendant que l’authentification se produit, utilisez l’élément `<Authorizing>` :
+Lorsque l’authentification est en cours, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> n’affiche aucun contenu par défaut. Pour afficher le contenu pendant que l’authentification se produit, utilisez la `<Authorizing>` balise :
 
 ```razor
 <AuthorizeView>
@@ -413,7 +413,7 @@ Dans le modèle de projet par défaut Blazor Server , le `App` composant ( `App.
 
 Le contenu des `<NotFound>` `<NotAuthorized>` `<Authorizing>` balises, et peut inclure des éléments arbitraires, tels que d’autres composants interactifs.
 
-Si l' `<NotAuthorized>` élément n’est pas spécifié, le <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> utilise le message de secours suivant :
+Si la `<NotAuthorized>` balise n’est pas spécifiée, le <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> utilise le message de secours suivant :
 
 ```html
 Not authorized.
