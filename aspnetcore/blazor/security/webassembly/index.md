@@ -5,7 +5,7 @@ description: Découvrez comment sécuriser des applications Blazor WebAssemlby e
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/01/2020
+ms.date: 07/16/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: 0ff580dd7cbefdfe3121b30490f99e0235d93bc3
-ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
+ms.openlocfilehash: fbb3f6d254e6d294edc7af59d7980a1d67e4a801
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86176155"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568806"
 ---
 # <a name="secure-aspnet-core-blazor-webassembly"></a>ASP.NET Core sécuriséBlazor WebAssembly
 
@@ -73,6 +73,22 @@ Pour plus d’informations et d’exemples, consultez <xref:blazor/security/weba
 Dans Blazor WebAssembly les applications, les vérifications d’autorisation peuvent être ignorées, car tout le code côté client peut être modifié par les utilisateurs. Cela vaut également pour toutes les technologies d’application côté client, y compris les infrastructures d’application JavaScript SPA ou les applications natives pour n’importe quel système d’exploitation.
 
 **Effectuez toujours les vérifications d’autorisation sur le serveur au sein des points de terminaison de l’API auxquels votre application côté client accède.**
+
+## <a name="require-authorization-for-the-entire-app"></a>Exiger une autorisation pour l’ensemble de l’application
+
+Appliquez l' [ `[Authorize]` attribut](xref:blazor/security/index#authorize-attribute) ([documentation](xref:System.Web.Mvc.AuthorizeAttribute)de l’API) à chaque Razor composant de l’application à l’aide de l’une des approches suivantes :
+
+* Utilisez la [`@attribute`](xref:mvc/views/razor#attribute) directive dans le `_Imports.razor` fichier :
+
+  ```razor
+  @using Microsoft.AspNetCore.Authorization
+  @attribute [Authorize]
+  ```
+
+* Ajoutez l’attribut à chaque Razor composant dans le `Pages` dossier.
+
+> [!NOTE]
+> La définition d’une <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy?displayProperty=nameWithType> sur une stratégie avec <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> n’est **pas** prise en charge.
 
 ## <a name="refresh-tokens"></a>Jetons d’actualisation
 

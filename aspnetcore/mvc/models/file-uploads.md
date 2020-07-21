@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 055dc7295aad67f92fe5f4e8271a1543262257b5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 720da8a8fe22f0e1911fd554c094661b4465a335
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404598"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568832"
 ---
 # <a name="upload-files-in-aspnet-core"></a>Charger des fichiers dans ASP.NET Core
 
@@ -111,7 +111,7 @@ La mise en mémoire tampon de petits fichiers est traitée dans les sections sui
 * [Stockage physique](#upload-small-files-with-buffered-model-binding-to-physical-storage)
 * [Sauvegarde de la base de données](#upload-small-files-with-buffered-model-binding-to-a-database)
 
-**Diffusion en continu**
+**Streaming**
 
 Le fichier est reçu à partir d’une demande en plusieurs parties et est directement traité ou enregistré par l’application. La diffusion en continu n’améliore pas les performances de manière significative. La diffusion en continu réduit les demandes de mémoire ou d’espace disque lors du chargement de fichiers.
 
@@ -424,7 +424,7 @@ La réponse de page initiale charge le formulaire et enregistre un jeton anti-co
 
 Dans l’exemple d’application, `GenerateAntiforgeryTokenCookieAttribute` et `DisableFormValueModelBindingAttribute` sont appliqués en tant que filtres aux modèles d’application de page de et à l' `/StreamedSingleFileUploadDb` aide des conventions de `/StreamedSingleFileUploadPhysical` `Startup.ConfigureServices` [ Razor pages](xref:razor-pages/razor-pages-conventions):
 
-[!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_AddRazorPages&highlight=8-11,17-20)]
+[!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_AddRazorPages&highlight=7-10,16-19)]
 
 Étant donné que la liaison de modèle ne lit pas le formulaire, les paramètres qui sont liés depuis le formulaire ne sont pas liés (la requête, l’itinéraire et l’en-tête continuent de fonctionner). La méthode d’action fonctionne directement avec la `Request` propriété. Un `MultipartReader` est utilisé pour lire chaque section. Les données de clé/valeur sont stockées dans un `KeyValueAccumulator` . Une fois les sections en plusieurs parties lues, le contenu du `KeyValueAccumulator` est utilisé pour lier les données de formulaire à un type de modèle.
 
@@ -621,18 +621,17 @@ public void ConfigureServices(IServiceCollection services)
 Dans une Razor application pages, appliquez le filtre avec une [Convention](xref:razor-pages/razor-pages-conventions) dans `Startup.ConfigureServices` :
 
 ```csharp
-services.AddRazorPages()
-    .AddRazorPagesOptions(options =>
-    {
-        options.Conventions
-            .AddPageApplicationModelConvention("/FileUploadPage",
-                model.Filters.Add(
-                    new RequestFormLimitsAttribute()
-                    {
-                        // Set the limit to 256 MB
-                        MultipartBodyLengthLimit = 268435456
-                    });
-    });
+services.AddRazorPages(options =>
+{
+    options.Conventions
+        .AddPageApplicationModelConvention("/FileUploadPage",
+            model.Filters.Add(
+                new RequestFormLimitsAttribute()
+                {
+                    // Set the limit to 256 MB
+                    MultipartBodyLengthLimit = 268435456
+                });
+});
 ```
 
 Dans une Razor application de pages ou une application MVC, appliquez le filtre au modèle de page ou à la méthode d’action :
@@ -669,18 +668,17 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 Dans une Razor application pages, appliquez le filtre avec une [Convention](xref:razor-pages/razor-pages-conventions) dans `Startup.ConfigureServices` :
 
 ```csharp
-services.AddRazorPages()
-    .AddRazorPagesOptions(options =>
-    {
-        options.Conventions
-            .AddPageApplicationModelConvention("/FileUploadPage",
-                model =>
-                {
-                    // Handle requests up to 50 MB
-                    model.Filters.Add(
-                        new RequestSizeLimitAttribute(52428800));
-                });
-    });
+services.AddRazorPages(options =>
+{
+    options.Conventions
+        .AddPageApplicationModelConvention("/FileUploadPage",
+            model =>
+            {
+                // Handle requests up to 50 MB
+                model.Filters.Add(
+                    new RequestSizeLimitAttribute(52428800));
+            });
+});
 ```
 
 Dans une Razor application de pages ou une application MVC, appliquez le filtre à la classe du gestionnaire de pages ou à la méthode d’action :
@@ -840,7 +838,7 @@ La mise en mémoire tampon de petits fichiers est traitée dans les sections sui
 * [Stockage physique](#upload-small-files-with-buffered-model-binding-to-physical-storage)
 * [Sauvegarde de la base de données](#upload-small-files-with-buffered-model-binding-to-a-database)
 
-**Diffusion en continu**
+**Streaming**
 
 Le fichier est reçu à partir d’une demande en plusieurs parties et est directement traité ou enregistré par l’application. La diffusion en continu n’améliore pas les performances de manière significative. La diffusion en continu réduit les demandes de mémoire ou d’espace disque lors du chargement de fichiers.
 

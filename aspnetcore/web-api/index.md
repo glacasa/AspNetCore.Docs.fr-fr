@@ -5,7 +5,7 @@ description: Découvrez les principes fondamentaux de la création d’une API w
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 02/02/2020
+ms.date: 07/20/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/index
-ms.openlocfilehash: 7c9762d23ff612155846357bfadeaaad492c7299
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 98fb8c0a26f5f8e7ce5f07066f2f36e748ab2398
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404728"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568741"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>Créer des API web avec ASP.NET Core
 
@@ -54,7 +54,7 @@ La classe `ControllerBase` fournit de nombreuses propriétés et méthodes qui s
 
 Voici d’autres exemples de méthodes fournies par `ControllerBase`.
 
-|Méthode   |Notes    |
+|Méthode   |Remarques    |
 |---------|---------|
 |<xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest%2A>| Retourne le code d’état 400.|
 |<xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A>|Retourne le code d’état 404.|
@@ -72,7 +72,7 @@ L’espace de noms <xref:Microsoft.AspNetCore.Mvc> fournit des attributs qui peu
 
 Voici d’autres exemples d’attributs disponibles.
 
-|Attribut|Notes|
+|Attribut|Remarques|
 |---------|-----|
 |[`[Route]`](<xref:Microsoft.AspNetCore.Mvc.RouteAttribute>)      |Spécifie le modèle d’URL pour un contrôleur ou une action.|
 |[`[Bind]`](<xref:Microsoft.AspNetCore.Mvc.BindAttribute>)        |Spécifie le préfixe et les propriétés à inclure pour la liaison de modèle.|
@@ -98,16 +98,12 @@ La fonctionnalité *Détails du problème pour les codes d’état d’erreur* r
 
 ::: moniker-end
 
-::: moniker range="= aspnetcore-2.1"
-
 * [Exigence du routage d’attribut](#attribute-routing-requirement)
 * [Réponses HTTP 400 automatiques](#automatic-http-400-responses)
 * [Inférence de paramètre de source de liaison](#binding-source-parameter-inference)
 * [Inférence de demande multipart/form-data](#multipartform-data-request-inference)
 
 Ces fonctionnalités nécessitent une [version de compatibilité](xref:mvc/compatibility-version) 2.1 ou ultérieure.
-
-::: moniker-end
 
 ### <a name="attribute-on-specific-controllers"></a>Attribut sur des contrôleurs spécifiques
 
@@ -232,9 +228,11 @@ Avec une version de compatibilité 2,2 ou ultérieure, le type de réponse par d
 
 ::: moniker-end
 
+Pour assurer la cohérence des réponses automatiques et personnalisées, appelez la méthode à la <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem%2A> place de <xref:System.Web.Http.ApiController.BadRequest%2A> . `ValidationProblem`retourne un <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> objet ainsi que la réponse automatique.
+
 ### <a name="log-automatic-400-responses"></a>Consigner automatiquement 400 réponses
 
-Voir Guide pratique pour consigner automatiquement 400 réponses en cas d’erreurs de validation de modèle (aspnet/AspNetCore.Docs no 12157).
+Consultez [Comment consigner les réponses automatiques 400 sur les erreurs de validation de modèle (dotnet/AspNetCore.Docs # 12157)](https://github.com/dotnet/AspNetCore.Docs/issues/12157).
 
 ### <a name="disable-automatic-400-response"></a>Désactiver la réponse automatique 400
 

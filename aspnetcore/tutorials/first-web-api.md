@@ -6,19 +6,19 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 2/25/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: tutorials/first-web-api
 ms.openlocfilehash: 79f36168d0430ceee3794cfb5a4e29f3671ac73f
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2020
+ms.lasthandoff: 07/21/2020
 ms.locfileid: "86212623"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Didacticiel : créer une API Web avec ASP.NET Core
@@ -50,7 +50,7 @@ Ce didacticiel crée l’API suivante :
 |`GET /api/TodoItems/{id}` | Obtenir un élément par ID | Aucun | Tâche|
 |`POST /api/TodoItems` | Ajouter un nouvel élément | Tâche | Tâche |
 |`PUT /api/TodoItems/{id}` | Mettre à jour un élément existant &nbsp; | Tâche | Aucun |
-|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Supprimer un élément &nbsp;&nbsp; | Aucune | Aucune|
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Supprimer un élément &nbsp;&nbsp; | None | None|
 
 Le diagramme suivant illustre la conception de l’application.
 
@@ -87,7 +87,7 @@ Le diagramme suivant illustre la conception de l’application.
 
 * Ouvrez le [terminal intégré](https://code.visualstudio.com/docs/editor/integrated-terminal).
 * Définissez les répertoires (`cd`) sur le dossier destiné à contenir le dossier du projet.
-* Exécutez les commandes suivantes :
+* Exécutez les commandes suivantes :
 
    ```dotnetcli
    dotnet new webapi -o TodoApi
@@ -194,7 +194,7 @@ Un *modèle* est un ensemble de classes qui représentent les données gérées 
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Dans l’**Explorateur de solutions**, cliquez avec le bouton droit sur le projet. Sélectionnez **Ajouter**  >  **un nouveau dossier**. Nommez le dossier *Models*.
+* Dans l’**Explorateur de solutions**, cliquez avec le bouton droit sur le projet. Sélectionnez **Ajouter**  >  **un nouveau dossier**. Nommez le dossier *modèles*.
 
 * Cliquez avec le bouton droit sur le dossier *Models* et sélectionnez **Ajouter** > **Classe**. Nommez la classe *TodoItem* et sélectionnez sur **Ajouter**.
 
@@ -208,7 +208,7 @@ Un *modèle* est un ensemble de classes qui représentent les données gérées 
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-* Cliquez avec le bouton droit sur le projet. Sélectionnez **Ajouter**  >  **un nouveau dossier**. Nommez le dossier *Models*.
+* Cliquez avec le bouton droit sur le projet. Sélectionnez **Ajouter**  >  **un nouveau dossier**. Nommez le dossier *modèles*.
 
   ![nouveau dossier](first-web-api-mac/_static/folder.png)
 
@@ -285,7 +285,7 @@ Le code précédent :
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code / Visual Studio pour Mac](#tab/visual-studio-code+visual-studio-mac)
 
-Exécutez les commandes suivantes :
+Exécutez les commandes suivantes :
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
@@ -401,7 +401,7 @@ Une réponse semblable à la suivante est produite par l’appel à `GetTodoItem
 
 * Créez une requête.
 * Définissez la méthode HTTP sur **GET**.
-* Définissez l’URL de la requête sur `https://localhost:<port>/api/TodoItems`. Par exemple, `https://localhost:5001/api/TodoItems`.
+* Définissez l’URL de la requête sur `https://localhost:<port>/api/TodoItems`. Par exemple : `https://localhost:5001/api/TodoItems`.
 * Définissez l’**affichage à deux volets** dans Postman.
 * Sélectionnez **Envoyer**.
 
@@ -422,7 +422,7 @@ Dans la méthode `GetTodoItem` suivante, `"{id}"` est une variable d’espace r�
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_GetByID&highlight=1-2)]
 
-## <a name="return-values"></a>Valeurs de retour
+## <a name="return-values"></a>Valeurs retournées
 
 Le type de retour des `GetTodoItems` `GetTodoItem` méthodes et est [ActionResult \<T> type](xref:web-api/action-return-types#actionresultt-type). ASP.NET Core sérialise automatiquement l’objet en [JSON](https://www.json.org/) et écrit le JSON dans le corps du message de réponse. Le code de réponse pour ce type de retour est 200, en supposant qu’il n’existe pas d’exception non gérée. Les exceptions non gérées sont converties en erreurs 5xx.
 
@@ -536,7 +536,7 @@ Ce didacticiel crée l’API suivante :
 |GET /api/TodoItems/{id} | Obtenir un élément par ID | Aucun | Tâche|
 |POST /api/TodoItems | Ajouter un nouvel élément | Tâche | Tâche |
 |PUT /api/TodoItems/{id} | Mettre à jour un élément existant &nbsp; | Tâche | Aucun |
-|SUPPRIMER/api/TodoItems/{id} &nbsp;&nbsp; | Supprimer un élément &nbsp;&nbsp; | Aucune | Aucune|
+|SUPPRIMER/api/TodoItems/{id} &nbsp;&nbsp; | Supprimer un élément &nbsp;&nbsp; | None | None|
 
 Le diagramme suivant illustre la conception de l’application.
 
@@ -573,7 +573,7 @@ Le diagramme suivant illustre la conception de l’application.
 
 * Ouvrez le [terminal intégré](https://code.visualstudio.com/docs/editor/integrated-terminal).
 * Définissez les répertoires (`cd`) sur le dossier destiné à contenir le dossier du projet.
-* Exécutez les commandes suivantes :
+* Exécutez les commandes suivantes :
 
    ```dotnetcli
    dotnet new webapi -o TodoApi
@@ -632,7 +632,7 @@ Un *modèle* est un ensemble de classes qui représentent les données gérées 
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Dans l’**Explorateur de solutions**, cliquez avec le bouton droit sur le projet. Sélectionnez **Ajouter**  >  **un nouveau dossier**. Nommez le dossier *Models*.
+* Dans l’**Explorateur de solutions**, cliquez avec le bouton droit sur le projet. Sélectionnez **Ajouter**  >  **un nouveau dossier**. Nommez le dossier *modèles*.
 
 * Cliquez avec le bouton droit sur le dossier *Models* et sélectionnez **Ajouter** > **Classe**. Nommez la classe *TodoItem* et sélectionnez sur **Ajouter**.
 
@@ -646,7 +646,7 @@ Un *modèle* est un ensemble de classes qui représentent les données gérées 
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-* Cliquez avec le bouton droit sur le projet. Sélectionnez **Ajouter**  >  **un nouveau dossier**. Nommez le dossier *Models*.
+* Cliquez avec le bouton droit sur le projet. Sélectionnez **Ajouter**  >  **un nouveau dossier**. Nommez le dossier *modèles*.
 
   ![nouveau dossier](first-web-api-mac/_static/folder.png)
 
@@ -696,7 +696,7 @@ Le code précédent :
 * Ajoute le contexte de base de données au conteneur d’injection de dépendances.
 * Spécifie que le contexte de base de données utilise une base de données en mémoire.
 
-## <a name="add-a-controller"></a>Ajouter un contrôleur
+## <a name="add-a-controller"></a>Ajout d'un contrôleur
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -769,7 +769,7 @@ Dans la méthode `GetTodoItem` suivante, `"{id}"` est une variable d’espace r�
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_GetByID&highlight=1-2)]
 
-## <a name="return-values"></a>Valeurs de retour
+## <a name="return-values"></a>Valeurs retournées
 
 Le type de retour des `GetTodoItems` `GetTodoItem` méthodes et est [ActionResult \<T> type](xref:web-api/action-return-types#actionresultt-type). ASP.NET Core sérialise automatiquement l’objet en [JSON](https://www.json.org/) et écrit le JSON dans le corps du message de réponse. Le code de réponse pour ce type de retour est 200, en supposant qu’il n’existe pas d’exception non gérée. Les exceptions non gérées sont converties en erreurs 5xx.
 
@@ -802,7 +802,7 @@ Ce tutoriel utilise Postman pour tester l’API web.
 
 * Créez une requête.
   * Définissez la méthode HTTP sur **GET**.
-  * Définissez l’URL de la requête sur `https://localhost:<port>/api/todo`. Par exemple, `https://localhost:5001/api/todo`.
+  * Définissez l’URL de la requête sur `https://localhost:<port>/api/todo`. Par exemple : `https://localhost:5001/api/todo`.
 * Définissez l’**affichage à deux volets** dans Postman.
 * Sélectionnez **Envoyer**.
 
@@ -917,7 +917,7 @@ Ajoutez un fichier HTML nommé *index.html* au répertoire *wwwroot*. Remplacez 
 
 [!code-html[](first-web-api/samples/2.2/TodoApi/wwwroot/index.html)]
 
-Ajoutez un fichier JavaScript nommé *site.js* au répertoire *wwwroot*. Remplacez son contenu par le code ci-dessous :
+Ajoutez un fichier JavaScript nommé *site.js* au répertoire *wwwroot*. Remplacez le contenu par le code suivant :
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_SiteJs)]
 
@@ -958,7 +958,7 @@ Pour supprimer une tâche, vous devez définir le `type` sur l’appel AJAX avec
 
 ## <a name="add-authentication-support-to-a-web-api"></a>Ajouter la prise en charge de l’authentification à une API Web
 
-[!INCLUDE[](~/includes/IdentityServer4.md)]
+[!INCLUDE[](~/includes/:::no-loc(Identity):::Server4.md)]
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

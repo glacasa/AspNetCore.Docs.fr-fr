@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 2c58a274e8de0b1205b223287b7690b1d5caed23
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 06803ee57824bbfac5725763938abbb9db0e360a
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445123"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568845"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Configurer l’authentification par certificat dans ASP.NET Core
 
@@ -36,7 +36,7 @@ L’authentification par certificat est un scénario avec état principalement u
 
 Une alternative à l’authentification par certificat dans les environnements où les proxies et les équilibreurs de charge sont utilisés est Active Directory Services fédérés (ADFS) avec OpenID Connect (OIDC).
 
-## <a name="get-started"></a>Prendre en main
+## <a name="get-started"></a>Bien démarrer
 
 Obtenez un certificat HTTPs, appliquez-le et [configurez votre serveur](#configure-your-server-to-require-certificates) pour exiger des certificats.
 
@@ -630,13 +630,13 @@ La renégociation TLS était une ancienne façon d’implémenter des certificat
 - HTTP/2 [interdit explicitement](https://tools.ietf.org/html/rfc7540#section-9.2.1) la renégociation.
 - TLS 1,3 a [supprimé](https://tools.ietf.org/html/rfc8740#section-1) la prise en charge de la renégociation.
 
-ASP.NET Core 5 Preview 4 et versions ultérieures ajoute une prise en charge plus pratique pour les certificats clients facultatifs. Pour plus d’informations, consultez l' [exemple de certificats facultatifs](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample).
+ASP.NET Core 5 Preview 7 et versions ultérieures ajoute une prise en charge plus pratique pour les certificats clients facultatifs. Pour plus d’informations, consultez l' [exemple de certificats facultatifs](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample).
 
 L’approche suivante prend en charge les certificats clients facultatifs :
 
 * Configuration de la liaison pour le domaine et le sous-domaine :
   * Par exemple, configurez des liaisons sur `contoso.com` et `myClient.contoso.com` . L' `contoso.com` hôte n’a pas besoin d’un certificat client, mais ce `myClient.contoso.com` n’est pas le cas.
-  * Pour plus d’informations, consultez :
+  * Pour plus d'informations, consultez les pages suivantes :
     * [Kestrel](/fundamentals/servers/kestrel):
       * [ListenOptions.UseHttps](xref:fundamentals/servers/kestrel#listenoptionsusehttps)
       * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
