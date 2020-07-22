@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 0141ad2df5216183424980a6ca50bf6bcd64ade5
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 96d24940af6c591e3c02bfa26ed9d7d6ea60d27d
+ms.sourcegitcommit: d00a200bc8347af794b24184da14ad5c8b6bba9a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86213064"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86869976"
 ---
 # <a name="filters-in-aspnet-core"></a>Filtres dans ASP.NET Core
 
@@ -83,6 +83,8 @@ Les filtres prennent en charge les implémentations synchrones et asynchrones vi
 Les filtres synchrones exécutent le code avant et après leur étape de pipeline. Par exemple, <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*> est appelé avant l’appel de la méthode d’action. <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*> est appelé après le retour de la méthode d’action.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MySampleActionFilter.cs?name=snippet_ActionFilter)]
+
+Dans le code précédent, [MyDebug](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/filters/3.1sample/FiltersSample/Helper/MyDebug.cs) est une fonction utilitaire dans l' [exemple de téléchargement](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/filters/3.1sample/FiltersSample/Helper/MyDebug.cs).
 
 Les filtres asynchrones définissent une `On-Stage-ExecutionAsync` méthode. Par exemple, <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*>:
 
@@ -186,12 +188,12 @@ Voici un exemple qui illustre l’ordre dans lequel les méthodes de filtre sont
 
 | Séquence | Étendue de filtre | Méthode de filtre |
 |:--------:|:------------:|:-------------:|
-| 1 | Mondiale | `OnActionExecuting` |
+| 1 | Global | `OnActionExecuting` |
 | 2 | Contrôleur ou Razor page| `OnActionExecuting` |
 | 3 | Méthode | `OnActionExecuting` |
 | 4 | Méthode | `OnActionExecuted` |
 | 5 | Contrôleur ou Razor page | `OnActionExecuted` |
-| 6 | Mondiale | `OnActionExecuted` |
+| 6 | Global | `OnActionExecuted` |
 
 ### <a name="controller-level-filters"></a>Filtres au niveau du contrôleur
 
@@ -211,6 +213,8 @@ Par exemple, dans l’échantillon à télécharger, `MySampleActionFilter` est 
 * Remplace `OnActionExecuting` et `OnActionExecuted`.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/TestController.cs?name=snippet)]
+
+[!INCLUDE[](~/includes/MyDisplayRouteInfo.md)]
 
 <!-- test via  webBuilder.UseStartup<Startup>(); -->
 
@@ -730,12 +734,12 @@ Voici un exemple qui illustre l’ordre dans lequel les méthodes de filtre sont
 
 | Séquence | Étendue de filtre | Méthode de filtre |
 |:--------:|:------------:|:-------------:|
-| 1 | Mondiale | `OnActionExecuting` |
+| 1 | Global | `OnActionExecuting` |
 | 2 | Contrôleur | `OnActionExecuting` |
 | 3 | Méthode | `OnActionExecuting` |
 | 4 | Méthode | `OnActionExecuted` |
 | 5 | Contrôleur | `OnActionExecuted` |
-| 6 | Mondiale | `OnActionExecuted` |
+| 6 | Global | `OnActionExecuted` |
 
 Cette séquence montre que :
 
@@ -792,8 +796,8 @@ Prenez en compte les mêmes 3 filtres d’actions indiqués dans l’exemple pr�
 |:--------:|:------------:|:-----------------:|:-------------:|
 | 1 | Méthode | 0 | `OnActionExecuting` |
 | 2 | Contrôleur | 1  | `OnActionExecuting` |
-| 3 | Mondiale | 2  | `OnActionExecuting` |
-| 4 | Mondiale | 2  | `OnActionExecuted` |
+| 3 | Global | 2  | `OnActionExecuting` |
+| 4 | Global | 2  | `OnActionExecuted` |
 | 5 | Contrôleur | 1  | `OnActionExecuted` |
 | 6 | Méthode | 0  | `OnActionExecuted` |
 
