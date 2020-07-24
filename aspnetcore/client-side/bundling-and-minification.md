@@ -4,22 +4,22 @@ author: scottaddie
 description: Découvrez comment optimiser les ressources statiques dans une application Web ASP.NET Core en appliquant des techniques de regroupement et de minimisation.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 04/15/2020
+ms.date: 07/23/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: de7c155189008e1f78bfb1eba062fcc86f9e4839
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5db6ab3d790257c677c0a4ed7e605eb39c2982ed
+ms.sourcegitcommit: cc845634a490c49ff869c89b6e422b6d65d0e886
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401907"
+ms.lasthandoff: 07/24/2020
+ms.locfileid: "87159713"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>Regrouper et réduire les ressources statiques dans ASP.NET Core
 
@@ -61,7 +61,7 @@ Original | Affectation d'un nouveau nom
 
 Le tableau suivant présente les différences entre le chargement individuel des ressources et l’utilisation du regroupement et de la minimisation :
 
-Action | Avec B/M | Sans B/M | Changement
+Action | Avec B/M | Sans B/M | Modifier
 --- | :---: | :---: | :---:
 Demandes de fichier  | 7   | 18     | 157%
 Ko transférés | 156 | 264,68 | 70 %
@@ -71,19 +71,19 @@ Les navigateurs sont relativement détaillés en ce qui concerne les en-têtes d
 
 ## <a name="choose-a-bundling-and-minification-strategy"></a>Choisir une stratégie de regroupement et de minimisation
 
-Les modèles de Razor projet MVC et pages fournissent une solution pour le regroupement et la minimisation consistant en un fichier de configuration JSON. Des outils tiers, tels que le testeur de tâches [grunt](xref:client-side/using-grunt) , accomplissent les mêmes tâches avec un peu plus de complexité. Un outil tiers est une solution idéale lorsque votre flux de travail de développement nécessite un traitement au-delà du regroupement et de la minimisation &mdash; , tels que le tissu et l’optimisation d’image. En utilisant le regroupement et la minimisation au moment du design, les fichiers minimisés sont créés avant le déploiement de l’application. Le regroupement et le minimisation avant le déploiement offrent l’avantage de réduire la charge du serveur. Toutefois, il est important de reconnaître que le regroupement et la minimisation au moment du design augmentent la complexité de la génération et ne fonctionne qu’avec les fichiers statiques.
+Les modèles de :::no-loc(Razor)::: projet MVC et pages fournissent une solution pour le regroupement et la minimisation consistant en un fichier de configuration JSON. Des outils tiers, tels que le testeur de tâches [grunt](xref:client-side/using-grunt) , accomplissent les mêmes tâches avec un peu plus de complexité. Un outil tiers est une solution idéale lorsque votre flux de travail de développement nécessite un traitement au-delà du regroupement et de la minimisation &mdash; , tels que le tissu et l’optimisation d’image. En utilisant le regroupement et la minimisation au moment du design, les fichiers minimisés sont créés avant le déploiement de l’application. Le regroupement et le minimisation avant le déploiement offrent l’avantage de réduire la charge du serveur. Toutefois, il est important de reconnaître que le regroupement et la minimisation au moment du design augmentent la complexité de la génération et ne fonctionne qu’avec les fichiers statiques.
 
 ## <a name="configure-bundling-and-minification"></a>Configurer le regroupement et la minimisation
 
 ::: moniker range="<= aspnetcore-2.0"
 
-Dans ASP.NET Core 2,0 ou version antérieure, les modèles de projet MVC et Razor pages fournissent un *bundleconfig.jssur* le fichier de configuration qui définit les options pour chaque Bundle :
+Dans ASP.NET Core 2,0 ou version antérieure, les modèles de projet MVC et :::no-loc(Razor)::: pages fournissent un *bundleconfig.jssur* le fichier de configuration qui définit les options pour chaque Bundle :
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1"
 
-Dans ASP.NET Core 2,1 ou version ultérieure, ajoutez un nouveau fichier JSON, nommé *bundleconfig.jssur*, à la racine du projet MVC ou Razor pages. Incluez le code JSON suivant dans ce fichier comme point de départ :
+Dans ASP.NET Core 2,1 ou version ultérieure, ajoutez un nouveau fichier JSON, nommé *bundleconfig.jssur*, à la racine du projet MVC ou :::no-loc(Razor)::: pages. Incluez le code JSON suivant dans ce fichier comme point de départ :
 
 ::: moniker-end
 
@@ -93,7 +93,7 @@ Le *bundleconfig.jssur* le fichier définit les options pour chaque bundle. Dans
 
 Les options de configuration comprennent ce qui suit :
 
-* `outputFileName`: Nom du fichier de Bundle à générer. Peut contenir un chemin d’accès relatif à partir de l' *bundleconfig.jssur* le fichier. **obligatoire**
+* `outputFileName`: Nom du fichier de Bundle à générer. Peut contenir un chemin d’accès relatif à partir de l' *bundleconfig.jssur* le fichier. **Obligatoire**
 * `inputFiles`: Tableau de fichiers à regrouper. Il s’agit de chemins d’accès relatifs au fichier de configuration. **facultatif**, * une valeur vide génère un fichier de sortie vide. les modèles [globbing](https://www.tldp.org/LDP/abs/html/globbingref.html) sont pris en charge.
 * `minify`: Options de minimisation pour le type de sortie. **facultatif**, *par défaut `minify: { enabled: true }` :*
   * Les options de configuration sont disponibles pour chaque type de fichier de sortie.
@@ -174,13 +174,13 @@ Ajoutez un *package.jssur* le fichier, avec les éléments suivants `devDependen
 
 Installez les dépendances en exécutant la commande suivante au même niveau que *package.jssur*:
 
-```console
+```bash
 npm i
 ```
 
 Installez Gulp CLI en tant que dépendance globale :
 
-```console
+```bash
 npm i -g gulp-cli
 ```
 
@@ -190,9 +190,12 @@ Copiez le fichier *gulpfile.js* ci-dessous sur la racine du projet :
 
 ### <a name="run-gulp-tasks"></a>Exécuter des tâches Gulp
 
-Pour déclencher la tâche de minimisation Gulp avant la génération du projet dans Visual Studio, ajoutez la [cible MSBuild](/visualstudio/msbuild/msbuild-targets) suivante au fichier *. csproj :
+Pour déclencher la tâche de minimisation Gulp avant la génération du projet dans Visual Studio :
 
-[!code-xml[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/BuildBundlerMinifierApp.csproj?range=14-16)]
+1. Installez le package NuGet [BuildBundlerMinifier](https://www.nuget.org/packages/BuildBundlerMinifier) .
+1. Ajoutez la [cible MSBuild](/visualstudio/msbuild/msbuild-targets) suivante au fichier projet :
+
+    [!code-xml[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/BuildBundlerMinifierApp.csproj?range=14-16)]
 
 Dans cet exemple, toutes les tâches définies dans la `MyPreCompileTarget` cible s’exécutent avant la cible prédéfinie `Build` . Une sortie similaire à ce qui suit apparaît dans la fenêtre sortie de Visual Studio :
 

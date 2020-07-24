@@ -9,7 +9,7 @@
 >
 > Un correctif d’abonnement pour ce bogue est contenu dans [.net Core 3.1.301 SDK et versions ultérieures](https://dotnet.microsoft.com/download/dotnet-core/3.1). Le code suivant définit un commutateur interne qui corrige ce bogue :
 >
->```
+>```csharp
 >public static void Main(string[] args)
 >{
 >    AppContext.SetSwitch("Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior", 

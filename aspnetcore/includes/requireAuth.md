@@ -1,0 +1,1 @@
+Pour plus d’informations sur la façon d’exiger l’authentification globale de tous les utilisateurs, consultez [exiger des utilisateurs authentifiés](xref:security/authorization/secure-data#rau).
