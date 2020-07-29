@@ -6,13 +6,13 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 07/23/2020
 no-loc:
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: client-side/bundling-and-minification
 ms.openlocfilehash: 5db6ab3d790257c677c0a4ed7e605eb39c2982ed
 ms.sourcegitcommit: cc845634a490c49ff869c89b6e422b6d65d0e886
@@ -71,19 +71,19 @@ Les navigateurs sont relativement détaillés en ce qui concerne les en-têtes d
 
 ## <a name="choose-a-bundling-and-minification-strategy"></a>Choisir une stratégie de regroupement et de minimisation
 
-Les modèles de :::no-loc(Razor)::: projet MVC et pages fournissent une solution pour le regroupement et la minimisation consistant en un fichier de configuration JSON. Des outils tiers, tels que le testeur de tâches [grunt](xref:client-side/using-grunt) , accomplissent les mêmes tâches avec un peu plus de complexité. Un outil tiers est une solution idéale lorsque votre flux de travail de développement nécessite un traitement au-delà du regroupement et de la minimisation &mdash; , tels que le tissu et l’optimisation d’image. En utilisant le regroupement et la minimisation au moment du design, les fichiers minimisés sont créés avant le déploiement de l’application. Le regroupement et le minimisation avant le déploiement offrent l’avantage de réduire la charge du serveur. Toutefois, il est important de reconnaître que le regroupement et la minimisation au moment du design augmentent la complexité de la génération et ne fonctionne qu’avec les fichiers statiques.
+Les modèles de Razor projet MVC et pages fournissent une solution pour le regroupement et la minimisation consistant en un fichier de configuration JSON. Des outils tiers, tels que le testeur de tâches [grunt](xref:client-side/using-grunt) , accomplissent les mêmes tâches avec un peu plus de complexité. Un outil tiers est une solution idéale lorsque votre flux de travail de développement nécessite un traitement au-delà du regroupement et de la minimisation &mdash; , tels que le tissu et l’optimisation d’image. En utilisant le regroupement et la minimisation au moment du design, les fichiers minimisés sont créés avant le déploiement de l’application. Le regroupement et le minimisation avant le déploiement offrent l’avantage de réduire la charge du serveur. Toutefois, il est important de reconnaître que le regroupement et la minimisation au moment du design augmentent la complexité de la génération et ne fonctionne qu’avec les fichiers statiques.
 
 ## <a name="configure-bundling-and-minification"></a>Configurer le regroupement et la minimisation
 
 ::: moniker range="<= aspnetcore-2.0"
 
-Dans ASP.NET Core 2,0 ou version antérieure, les modèles de projet MVC et :::no-loc(Razor)::: pages fournissent un *bundleconfig.jssur* le fichier de configuration qui définit les options pour chaque Bundle :
+Dans ASP.NET Core 2,0 ou version antérieure, les modèles de projet MVC et Razor pages fournissent un *bundleconfig.jssur* le fichier de configuration qui définit les options pour chaque Bundle :
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1"
 
-Dans ASP.NET Core 2,1 ou version ultérieure, ajoutez un nouveau fichier JSON, nommé *bundleconfig.jssur*, à la racine du projet MVC ou :::no-loc(Razor)::: pages. Incluez le code JSON suivant dans ce fichier comme point de départ :
+Dans ASP.NET Core 2,1 ou version ultérieure, ajoutez un nouveau fichier JSON, nommé *bundleconfig.jssur*, à la racine du projet MVC ou Razor pages. Incluez le code JSON suivant dans ce fichier comme point de départ :
 
 ::: moniker-end
 

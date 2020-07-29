@@ -5,13 +5,13 @@ description: Découvrez comment utiliser l’attribut Authorize pour restreindre
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/simple
 ms.openlocfilehash: 09514032349d489b73d5bb785f11e44ca18b169c
 ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
@@ -24,7 +24,7 @@ ms.locfileid: "87160239"
 
 <a name="security-authorization-simple"></a>
 
-L’autorisation dans ASP.NET Core est contrôlée par <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> et ses différents paramètres. Dans sa forme la plus simple, l’application `[Authorize]` de l’attribut à un contrôleur, une action ou une :::no-loc(Razor)::: page limite l’accès à ce composant à n’importe quel utilisateur authentifié.
+L’autorisation dans ASP.NET Core est contrôlée par <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> et ses différents paramètres. Dans sa forme la plus simple, l’application `[Authorize]` de l’attribut à un contrôleur, une action ou une Razor page limite l’accès à ce composant à n’importe quel utilisateur authentifié.
 
 Par exemple, le code suivant limite l’accès à `AccountController` n’importe quel utilisateur authentifié.
 
@@ -86,11 +86,11 @@ Cela autorise uniquement les utilisateurs authentifiés à, à l' `AccountContro
 
 <a name="aarp"></a>
 
-## <a name="authorize-attribute-and-no-locrazor-pages"></a>Autoriser l’attribut et les :::no-loc(Razor)::: pages
+## <a name="authorize-attribute-and-no-locrazor-pages"></a>Autoriser l’attribut et les Razor pages
 
-<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>Ne peut ***pas*** être appliqué aux :::no-loc(Razor)::: gestionnaires de pages. Par exemple, `[Authorize]` ne peut pas être appliqué à `OnGet` , `OnPost` ou à un autre gestionnaire de page. Envisagez d’utiliser un contrôleur ASP.NET Core MVC pour les pages avec des exigences d’autorisation différentes pour différents gestionnaires.
+<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute>Ne peut ***pas*** être appliqué aux Razor gestionnaires de pages. Par exemple, `[Authorize]` ne peut pas être appliqué à `OnGet` , `OnPost` ou à un autre gestionnaire de page. Envisagez d’utiliser un contrôleur ASP.NET Core MVC pour les pages avec des exigences d’autorisation différentes pour différents gestionnaires.
 
-Les deux approches suivantes peuvent être utilisées pour appliquer l’autorisation aux :::no-loc(Razor)::: méthodes du gestionnaire de page :
+Les deux approches suivantes peuvent être utilisées pour appliquer l’autorisation aux Razor méthodes du gestionnaire de page :
 
 * Utilisez des pages distinctes pour les gestionnaires de pages nécessitant une autorisation différente. Déplacement du contenu partagé dans une ou plusieurs [vues partielles](xref:mvc/views/partial). Dans la mesure du possible, il s’agit de l’approche recommandée.
 * Pour le contenu qui doit partager une page commune, écrivez un filtre qui effectue une autorisation dans le cadre de [IAsyncPageFilter. OnPageHandlerSelectionAsync](xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter.OnPageHandlerSelectionAsync%2A). Le projet GitHub [PageHandlerAuth](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/simple/samples/3.1/PageHandlerAuth) illustre cette approche :
@@ -103,4 +103,4 @@ Les deux approches suivantes peuvent être utilisées pour appliquer l’autoris
 > * Compose avec les attributs d’autorisation appliqués à la page, au modèle de page ou globalement. La composition des attributs d’autorisation entraîne l’exécution de plusieurs fois `AuthorizeAttribute` pour une ou plusieurs `AuthorizeFilter` instances sur la page.
 > * Travaillez conjointement avec le reste du système d’authentification et d’autorisation de ASP.NET Core. Vous devez vérifier que l’utilisation de cette approche fonctionne correctement pour votre application.
 
-Il n’est pas prévu de prendre en charge le `AuthorizeAttribute` sur les :::no-loc(Razor)::: gestionnaires de page. 
+Il n’est pas prévu de prendre en charge le `AuthorizeAttribute` sur les Razor gestionnaires de page. 
