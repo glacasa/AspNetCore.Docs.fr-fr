@@ -15,10 +15,10 @@ no-loc:
 - SignalR
 uid: tutorials/first-web-api
 ms.openlocfilehash: 2383934070a65b8131e890a170186b736d3fcec0
-ms.sourcegitcommit: d00a200bc8347af794b24184da14ad5c8b6bba9a
+ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/21/2020
+ms.lasthandoff: 07/28/2020
 ms.locfileid: "86869989"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Didacticiel : créer une API Web avec ASP.NET Core
@@ -29,7 +29,7 @@ Ce tutoriel décrit les principes fondamentaux liés à la génération d’une 
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Dans ce tutoriel, vous apprenez à effectuer les opérations suivantes :
+Dans ce tutoriel, vous allez apprendre à :
 
 > [!div class="checklist"]
 > * Créer un projet d’API web.
@@ -50,7 +50,7 @@ Ce didacticiel crée l’API suivante :
 |`GET /api/TodoItems/{id}` | Obtenir un élément par ID | Aucun | Tâche|
 |`POST /api/TodoItems` | Ajouter un nouvel élément | Tâche | Tâche |
 |`PUT /api/TodoItems/{id}` | Mettre à jour un élément existant &nbsp; | Tâche | Aucun |
-|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Supprimer un élément &nbsp;&nbsp; | Aucune | Aucune|
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Supprimer un élément &nbsp;&nbsp; | None | None|
 
 Le diagramme suivant illustre la conception de l’application.
 
@@ -380,7 +380,7 @@ Ces méthodes implémentent deux points de terminaison GET :
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Testez l’application en appelant les deux points de terminaison à partir d’un navigateur ou de Postman. Par exemple :
+Testez l’application en appelant les deux points de terminaison à partir d’un navigateur ou de Postman. Par exemple :
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
@@ -401,7 +401,7 @@ Une réponse semblable à la suivante est produite par l’appel à `GetTodoItem
 
 * Créez une requête.
 * Définissez la méthode HTTP sur **GET**.
-* Définissez l’URL de la requête sur `https://localhost:<port>/api/TodoItems`. Par exemple, `https://localhost:5001/api/TodoItems`.
+* Définissez l’URL de la requête sur `https://localhost:<port>/api/TodoItems`. Par exemple : `https://localhost:5001/api/TodoItems`.
 * Définissez l’**affichage à deux volets** dans Postman.
 * Sélectionnez **Envoyer**.
 
@@ -512,7 +512,7 @@ Consultez [Didacticiel : appeler une API web ASP.net core avec JavaScript](xref
 
 ::: moniker range="< aspnetcore-3.0"
 
-Dans ce tutoriel, vous apprenez à effectuer les opérations suivantes :
+Dans ce tutoriel, vous allez apprendre à :
 
 > [!div class="checklist"]
 > * Créer un projet d’API web.
@@ -536,7 +536,7 @@ Ce didacticiel crée l’API suivante :
 |GET /api/TodoItems/{id} | Obtenir un élément par ID | Aucun | Tâche|
 |POST /api/TodoItems | Ajouter un nouvel élément | Tâche | Tâche |
 |PUT /api/TodoItems/{id} | Mettre à jour un élément existant &nbsp; | Tâche | Aucun |
-|SUPPRIMER/api/TodoItems/{id} &nbsp;&nbsp; | Supprimer un élément &nbsp;&nbsp; | Aucune | Aucune|
+|SUPPRIMER/api/TodoItems/{id} &nbsp;&nbsp; | Supprimer un élément &nbsp;&nbsp; | None | None|
 
 Le diagramme suivant illustre la conception de l’application.
 
@@ -737,7 +737,7 @@ Ces méthodes implémentent deux points de terminaison GET :
 
 Arrêtez l’application si elle est toujours en cours d’exécution. Ensuite, réexécutez-la pour inclure les dernières modifications.
 
-Testez l’application en appelant les deux points de terminaison à partir d’un navigateur. Par exemple :
+Testez l’application en appelant les deux points de terminaison à partir d’un navigateur. Par exemple :
 
 * `https://localhost:<port>/api/todo`
 * `https://localhost:<port>/api/todo/1`
@@ -802,7 +802,7 @@ Ce tutoriel utilise Postman pour tester l’API web.
 
 * Créez une requête.
   * Définissez la méthode HTTP sur **GET**.
-  * Définissez l’URL de la requête sur `https://localhost:<port>/api/todo`. Par exemple, `https://localhost:5001/api/todo`.
+  * Définissez l’URL de la requête sur `https://localhost:<port>/api/todo`. Par exemple : `https://localhost:5001/api/todo`.
 * Définissez l’**affichage à deux volets** dans Postman.
 * Sélectionnez **Envoyer**.
 
@@ -917,7 +917,7 @@ Ajoutez un fichier HTML nommé *index.html* au répertoire *wwwroot*. Remplacez 
 
 [!code-html[](first-web-api/samples/2.2/TodoApi/wwwroot/index.html)]
 
-Ajoutez un fichier JavaScript nommé *site.js* au répertoire *wwwroot*. Remplacez le contenu par le code suivant :
+Ajoutez un fichier JavaScript nommé *site.js* au répertoire *wwwroot*. Remplacez son contenu par le code ci-dessous :
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_SiteJs)]
 

@@ -5,7 +5,7 @@ description: Découvrez comment déboguer des Blazor applications.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/15/2020
+ms.date: 07/27/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 14943b9f7847ac9144addfdf16a003f6fc8c340c
-ms.sourcegitcommit: cc845634a490c49ff869c89b6e422b6d65d0e886
+ms.openlocfilehash: b4199c3a99af5875c5d9a87f29f7c7e2758ffd71
+ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87159705"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87303558"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core de débogageBlazor WebAssembly
 
@@ -109,13 +109,15 @@ Lors du débogage de votre Blazor WebAssembly application, vous pouvez égalemen
 
 1. Ouvrez l' Blazor WebAssembly application autonome dans vs code.
 
-   Si vous recevez la notification suivante indiquant qu’une configuration supplémentaire est requise pour activer le débogage :
+   Vous pouvez recevoir la notification suivante indiquant qu’une configuration supplémentaire est requise pour activer le débogage :
    
-   * Vérifiez que vous avez installé les extensions appropriées.
-   * Confirmez que le débogage de l’aperçu JavaScript est activé.
-   * Rechargez la fenêtre.
-
    ![Configuration supplémentaire requise](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-additional-setup.png)
+   
+   Si vous recevez la notification :
+
+   * Vérifiez que la dernière [extension C# pour Visual Studio code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) est installée. Pour inspecter les extensions installées, ouvrez **Afficher**les  >  **Extensions** à partir de la barre de menus ou sélectionnez l’icône **Extensions** dans l’encadré **activité** .
+   * Confirmez que le débogage de l’aperçu JavaScript est activé. Ouvrez les paramètres à partir de la barre de menus (paramètres préférences de**fichiers**  >  **Preferences**  >  **Settings**). Recherchez à l’aide des mots clés `debug preview` . Dans les résultats de la recherche, vérifiez que la case à cocher **Déboguer > JavaScript : utiliser l’aperçu** est activée.
+   * Rechargez la fenêtre.
 
 1. Démarrez le débogage à l’aide du raccourci clavier <kbd>F5</kbd> ou de l’élément de menu.
 
