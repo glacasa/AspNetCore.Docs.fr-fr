@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 18f1aee5ac33b17914bd182e46453120e14b31ab
-ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
+ms.openlocfilehash: fcf79966abf7a023773ef892636530278b668c44
+ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86176209"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87303610"
 ---
 # <a name="routing-in-aspnet-core"></a>Routage dans ASP.NET Core
 
@@ -435,7 +435,7 @@ Les modèles d’URL qui tentent de capturer un nom de fichier avec une extensio
 * `/files/myFile.txt`
 * `/files/myFile`
 
-Les paramètres de route peuvent avoir des **valeurs par défaut**, désignées en spécifiant la valeur par défaut après le nom du paramètre, séparée par un signe égal (`=`). Par exemple, `{controller=Home}` définit `Home` comme valeur par défaut de `controller`. La valeur par défaut est utilisée si aucune valeur n’est présente dans l’URL pour le paramètre. Les paramètres de routage sont rendus facultatifs en ajoutant un point d’interrogation ( `?` ) à la fin du nom du paramètre. Par exemple, `id?`. La différence entre les valeurs facultatives et les paramètres d’itinéraire par défaut est la suivante :
+Les paramètres de route peuvent avoir des **valeurs par défaut**, désignées en spécifiant la valeur par défaut après le nom du paramètre, séparée par un signe égal (`=`). Par exemple, `{controller=Home}` définit `Home` comme valeur par défaut de `controller`. La valeur par défaut est utilisée si aucune valeur n’est présente dans l’URL pour le paramètre. Les paramètres de routage sont rendus facultatifs en ajoutant un point d’interrogation ( `?` ) à la fin du nom du paramètre. Par exemple : `id?`. La différence entre les valeurs facultatives et les paramètres d’itinéraire par défaut est la suivante :
 
 * Un paramètre d’itinéraire avec une valeur par défaut produit toujours une valeur.
 * Un paramètre facultatif a une valeur uniquement lorsqu’une valeur est fournie par l’URL de la requête.
@@ -502,7 +502,7 @@ Les contraintes de route s’exécutent quand une correspondance s’est produit
 
 Le tableau suivant montre des exemples de contraintes de routage et leur comportement attendu :
 
-| contrainte | Exemple | Exemples de correspondances | Remarques |
+| contrainte | Exemple | Exemples de correspondances | Notes |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier |
 | `bool` | `{active:bool}` | `true`, `FALSE` | Correspond à `true` ou `false` . Non-respect de la casse |
@@ -565,7 +565,7 @@ Pour échapper les caractères de délimiteur de paramètre de routage `{` ,,,, 
 
 Les expressions régulières utilisées dans le routage commencent souvent par le `^` caractère et correspondent à la position de départ de la chaîne. Les expressions se terminent souvent par le `$` caractère et correspondent à la fin de la chaîne. Les `^` `$` caractères et garantissent que l’expression régulière correspond à l’intégralité de la valeur du paramètre d’itinéraire. Sans les `^` `$` caractères et, l’expression régulière correspond à toute sous-chaîne de la chaîne, ce qui est souvent indésirable. Le tableau suivant fournit des exemples et explique pourquoi ils correspondent ou ne parviennent pas à faire correspondre :
 
-| Expression   | Chaîne    | Faire correspondre | Comment               |
+| Expression   | String    | Faire correspondre | Commentaire               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
 | `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
@@ -831,7 +831,7 @@ Dans le code précédent, le `culture` paramètre route est utilisé pour la loc
 Les liens suivants fournissent des informations sur la configuration des métadonnées de point de terminaison :
 
 * [Activer cors avec routage du point de terminaison](xref:security/cors#enable-cors-with-endpoint-routing)
-* [Exemple IAuthorizationPolicyProvider](https://github.com/dotnet/AspNetCore/tree/release/3.0/src/Security/samples/CustomPolicyProvider) utilisant un `[MinimumAgeAuthorize]` attribut personnalisé
+* [Exemple IAuthorizationPolicyProvider](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/CustomPolicyProvider) utilisant un `[MinimumAgeAuthorize]` attribut personnalisé
 * [Tester l’authentification avec l’attribut [Authorize]](xref:security/authentication/identity#test-identity)
 * <xref:Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions.RequireAuthorization*>
 * [Sélection du schéma avec l’attribut [Authorize]](xref:security/authorization/limitingidentitybyscheme#selecting-the-scheme-with-the-authorize-attribute)
@@ -1351,7 +1351,7 @@ Les routes doivent être configurées dans la méthode `Startup.Configure`. L’
 
 Le tableau suivant montre les réponses avec les URI donnés.
 
-| URI                    | Réponse                                          |
+| URI                    | response                                          |
 | ---------------------- | ------------------------------------------------- |
 | `/package/create/3`    | Hello! Valeurs de route : [operation, create], [id, 3] |
 | `/package/track/-3`    | Hello! Valeurs de route : [operation, track], [id, -3] |
@@ -1436,7 +1436,7 @@ Les contraintes de route s’exécutent quand une correspondance s’est produit
 
 Le tableau suivant montre des exemples de contrainte de route et leur comportement attendu.
 
-| Contrainte | Exemple | Exemples de correspondances | Remarques |
+| Contrainte | Exemple | Exemples de correspondances | Notes |
 |------------|---------|-----------------|-------|
 | `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier.|
 | `bool` | `{active:bool}` | `true`, `FALSE` | Correspond à `true` ou `false` . Non-respect de la casse.|
@@ -1486,7 +1486,7 @@ Pour échapper les caractères de délimiteur de paramètre de routage `{` , `}`
 
 Les expressions régulières utilisées dans le routage commencent souvent par le `^` caractère de signe insertion et correspondent à la position de départ de la chaîne. Les expressions se terminent souvent par le `$` caractère de signe dollar et la fin de la chaîne. Les caractères `^` et `$` garantissent que l’expression régulière établit une correspondance avec la totalité de la valeur du paramètre de route. Sans les caractères `^` et `$`, l’expression régulière peut correspondre à n’importe quelle sous-chaîne dans la chaîne, ce qui est souvent indésirable. Le tableau suivant contient des exemples et explique pourquoi ils établissent ou non une correspondance.
 
-| Expression   | Chaîne    | Faire correspondre | Comment               |
+| Expression   | String    | Faire correspondre | Commentaire               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
 | `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
@@ -1809,7 +1809,7 @@ Les routes doivent être configurées dans la méthode `Startup.Configure`. L’
 
 Le tableau suivant montre les réponses avec les URI donnés.
 
-| URI                    | Réponse                                          |
+| URI                    | response                                          |
 | ---------------------- | ------------------------------------------------- |
 | `/package/create/3`    | Hello! Valeurs de route : [operation, create], [id, 3] |
 | `/package/track/-3`    | Hello! Valeurs de route : [operation, track], [id, -3] |
@@ -1886,7 +1886,7 @@ Les contraintes de route s’exécutent quand une correspondance s’est produit
 
 Le tableau suivant montre des exemples de contrainte de route et leur comportement attendu.
 
-| contrainte | Exemple | Exemples de correspondances | Remarques |
+| contrainte | Exemple | Exemples de correspondances | Notes |
 | ---------- | ------- | --------------- | ----- |
 | `int` | `{id:int}` | `123456789`, `-123456789` | Correspond à n’importe quel entier |
 | `bool` | `{active:bool}` | `true`, `FALSE` | Correspond à `true` ou à `false` (non-respect de la casse) |
@@ -1930,7 +1930,7 @@ Les expressions régulières utilisent les délimiteurs et des jetons semblables
 
 Les expressions régulières utilisées dans le routage commencent souvent par un caret (`^`) et correspondent à la position de début de la chaîne. Les expressions se terminent souvent par le signe dollar (`$`) de caractère et correspondent à la fin de la chaîne. Les caractères `^` et `$` garantissent que l’expression régulière établit une correspondance avec la totalité de la valeur du paramètre de route. Sans les caractères `^` et `$`, l’expression régulière peut correspondre à n’importe quelle sous-chaîne dans la chaîne, ce qui est souvent indésirable. Le tableau suivant contient des exemples et explique pourquoi ils établissent ou non une correspondance.
 
-| Expression   | Chaîne    | Faire correspondre | Comment               |
+| Expression   | String    | Faire correspondre | Commentaire               |
 | ------------ | --------- | :---: |  -------------------- |
 | `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
 | `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
