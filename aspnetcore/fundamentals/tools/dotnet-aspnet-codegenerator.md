@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: a106654c8a37e84e9186a2f06d90605df753e8a7
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: af151b65d3fefb5863529de1cd97c6315f11ca82
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405599"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444125"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
@@ -60,13 +60,13 @@ La commande globale `dotnet aspnet-codegenerator` exécute le générateur de co
 
 Le générateur de code à effectuer. Les générateurs suivants sont disponibles :
 
-| Générateur | Opération |
-| ----------------- | ------------ | 
-| superficie      | [Génération de modèles automatique pour une zone](/aspnet/core/mvc/controllers/areas) |
-  contrôleur| [Génération de modèles automatique pour un contrôleur](/aspnet/core/tutorials/first-mvc-app/adding-model) |
-  identité  | [StructureIdentity](/aspnet/core/security/authentication/scaffold-identity) |
-  razorpage | [Pages de modèles Razor](/aspnet/core/tutorials/razor-pages/model) |
-  vue      | [Génération de modèles automatique pour une vue](/aspnet/core/mvc/views/overview) |
+| Générateur  | Opération                                                            |
+| ---------- | -------------------------------------------------------------------- |
+| superficie       | [Génération de modèles automatique pour une zone](xref:mvc/controllers/areas)                      |
+| contrôleur | [Génération de modèles automatique pour un contrôleur](xref:tutorials/first-mvc-app/adding-model)  |
+| identité   | [StructureIdentity](xref:security/authentication/scaffold-identity) |
+| razorpage  | [Pages de modèles Razor](xref:tutorials/razor-pages/model)            |
+| vue       | [Génération de modèles automatique pour une vue](xref:mvc/views/overview)                          |
 
 ## <a name="options"></a>Options
 
@@ -120,7 +120,7 @@ La commande précédente génère les dossiers suivants :
 
 * *Zones (Areas)*
   * *AreaNameToGenerate*
-    * *Contrôleurs*
+    * *Secondaires*
     * *Données*
     * *Modèles*
     * *Views*
@@ -135,13 +135,13 @@ Le tableau suivant répertorie les options pour `aspnet-codegenerator` `controll
 
 Le tableau ci-dessous répertorie les options uniques à `aspnet-codegenerator controller` :
 
-| Option               | Description|
-| ----------------- | ------------ |
-| --controllerName ou -name | Nom du contrôleur. |
-| --useAsyncActions ou -async | Générer des actions asynchrones du contrôleur. |
-| --noViews ou -nv | Ne générer **aucune** vue. |
-| --restWithNoViews ou -api  | Générer un contrôleur avec l’API de style REST. `noViews` est supposé et les options associées à la vue sont ignorées. |
-| --readWriteActions ou -actions | Générer un contrôleur avec actions en lecture/écriture sans modèle. |
+| Option                         | Description                                                                                               |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------- |
+| --controllerName ou -name      | Nom du contrôleur.                                                                                   |
+| --useAsyncActions ou -async    | Générer des actions asynchrones du contrôleur.                                                                        |
+| --noViews ou -nv               | Ne générer **aucune** vue.                                                                                    |
+| --restWithNoViews ou -api      | Générer un contrôleur avec l’API de style REST. `noViews` est supposé et les options associées à la vue sont ignorées. |
+| --readWriteActions ou -actions | Générer un contrôleur avec actions en lecture/écriture sans modèle.                                              |
 
 Utilisez le commutateur `-h` pour obtenir de l’aide sur la commande `aspnet-codegenerator controller` :
 
@@ -149,9 +149,9 @@ Utilisez le commutateur `-h` pour obtenir de l’aide sur la commande `aspnet-co
 dotnet aspnet-codegenerator controller -h
 ```
 
-Consultez [Générer automatiquement le modèle de film](/aspnet/core/tutorials/razor-pages/model) pour obtenir un exemple de `dotnet aspnet-codegenerator controller`.
+Consultez [Générer automatiquement le modèle de film](xref:tutorials/first-mvc-app/adding-model) pour obtenir un exemple de `dotnet aspnet-codegenerator controller`.
 
-### <a name="razorpage"></a>Razorpage
+### <a name="no-locrazorpage"></a>Razorpage
 
 <a name="rp"></a>
 
@@ -184,11 +184,11 @@ Le tableau suivant répertorie les options pour `aspnet-codegenerator` `razorpag
 
 Le tableau ci-dessous répertorie les options uniques à `aspnet-codegenerator razorpage` :
 
-| Option               | Description|
-| ----------------- | ------------ |
-|   --namespaceName ou -namespace | Nom de l’espace de noms à utiliser pour le PageModel généré |
-| --partialView ou -partial | Générer une vue partielle. Les options de mise en page -l et -udl sont ignorées si ceci est spécifié. |
-| --noPageModel ou -npm | Choisir de ne pas générer une classe PageModel pour le modèle vide |
+| Option                        | Description                                                                           |
+| ----------------------------- | ------------------------------------------------------------------------------------- |
+| --namespaceName ou -namespace | Nom de l’espace de noms à utiliser pour le PageModel généré                          |
+| --partialView ou -partial     | Générer une vue partielle. Les options de mise en page -l et -udl sont ignorées si ceci est spécifié. |
+| --noPageModel ou -npm         | Choisir de ne pas générer une classe PageModel pour le modèle vide                           |
 
 Utilisez le commutateur `-h` pour obtenir de l’aide sur la commande `aspnet-codegenerator razorpage` :
 
@@ -196,8 +196,8 @@ Utilisez le commutateur `-h` pour obtenir de l’aide sur la commande `aspnet-co
 dotnet aspnet-codegenerator razorpage -h
 ```
 
-Consultez [Générer automatiquement le modèle de film](/aspnet/core/tutorials/razor-pages/model) pour obtenir un exemple de `dotnet aspnet-codegenerator razorpage`.
+Consultez [Générer automatiquement le modèle de film](xref:tutorials/razor-pages/model) pour obtenir un exemple de `dotnet aspnet-codegenerator razorpage`.
 
 ### Identity
 
-Voir [l' Identity échafaudage](/aspnet/core/security/authentication/scaffold-identity)
+Voir [l' Identity échafaudage](xref:security/authentication/scaffold-identity)

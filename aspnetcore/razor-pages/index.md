@@ -14,14 +14,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: e7e9bc76a2bba1c15b32c97f0f3629285f256499
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: bd9f991a2aba32cbbeb193ad422005f910e6795b
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568703"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444075"
 ---
-# <a name="introduction-to-razor-pages-in-aspnet-core"></a>Présentation Razor des pages dans ASP.net Core
+# <a name="introduction-to-no-locrazor-pages-in-aspnet-core"></a>Présentation Razor des pages dans ASP.net Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -51,7 +51,7 @@ Ce document fournit une introduction aux Razor pages. Il ne s’agit pas d’un 
 
 <a name="rpvs17"></a>
 
-## <a name="create-a-razor-pages-project"></a>Créer un Razor projet pages
+## <a name="create-a-no-locrazor-pages-project"></a>Créer un Razor projet pages
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -67,7 +67,7 @@ Pour obtenir des instructions détaillées sur la création d’un projet de pag
 
 ---
 
-## <a name="razor-pages"></a>RazorPages
+## <a name="no-locrazor-pages"></a>RazorPages
 
 RazorPages est activée dans *Startup.cs*:
 
@@ -109,6 +109,8 @@ RazorLes pages sont conçues pour rendre les modèles courants utilisés avec le
 
 Pour les exemples de ce document, le `DbContext` est initialisé dans le fichier [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/3.0sample/RazorPagesContacts/Startup.cs#L23-L24).
 
+La base de données en mémoire requiert le `Microsoft.EntityFrameworkCore.InMemory` package NuGet.
+
 [!code-csharp[](index/3.0sample/RazorPagesContacts/Startup.cs?name=snippet)]
 
 Le modèle de données :
@@ -132,7 +134,7 @@ Par convention, la classe `PageModel` se nomme `<PageName>Model` et se trouve da
 La classe `PageModel` permet de séparer la logique d’une page de sa présentation. Elle définit des gestionnaires de page pour les demandes envoyées à la page et les données utilisées pour l’afficher. Cette séparation permet :
 
 * Gestion des dépendances de page via l' [injection de dépendances](xref:fundamentals/dependency-injection).
-* [Test des unités](xref:test/razor-pages-tests)
+* [Test unitaire](xref:test/razor-pages-tests)
 
 La page a une  *méthode de gestionnaire*`OnPostAsync`, qui s’exécute sur les requêtes `POST` (quand un utilisateur poste le formulaire). Les méthodes de gestionnaire pour tout verbe HTTP peuvent être ajoutées. Les gestionnaires les plus courants sont :
 
@@ -323,7 +325,7 @@ La page créer du modèle affiche des `Movie` Erreurs avec des valeurs non valid
 
 ![Formulaire de vue Movie avec plusieurs erreurs de validation jQuery côté client](~/tutorials/razor-pages/validation/_static/val.png)
 
-Pour plus d'informations, consultez les pages suivantes :
+Pour plus d'informations, voir :
 
 * [Ajouter la validation à l’application vidéo](xref:tutorials/razor-pages/validation)
 * [Validation de modèle dans ASP.net Core](xref:mvc/models/validation).
@@ -340,13 +342,13 @@ RazorLes pages reviennent à appeler le `OnGet` Gestionnaire si aucun `OnHead` g
 
 <a name="xsrf"></a>
 
-## <a name="xsrfcsrf-and-razor-pages"></a>XSRF/CSRF et Razor pages
+## <a name="xsrfcsrf-and-no-locrazor-pages"></a>XSRF/CSRF et Razor pages
 
 RazorLes pages sont protégées par la validation anti- [contrefaçon](xref:security/anti-request-forgery). Le [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) injecte des jetons anti-contrefaçon dans des éléments de formulaire HTML.
 
 <a name="layout"></a>
 
-## <a name="using-layouts-partials-templates-and-tag-helpers-with-razor-pages"></a>Utilisation de dispositions, de partiels, de modèles et d’aide pour les balises avec des Razor pages
+## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>Utilisation de dispositions, de partiels, de modèles et d’aide pour les balises avec des Razor pages
 
 Les pages fonctionnent avec toutes les fonctionnalités du Razor moteur d’affichage. Les mises en page, les partiels, les modèles, les tag helpers, *_ViewStart. cshtml*et *_ViewImports. cshtml* fonctionnent de la même façon que pour les Razor vues conventionnelles.
 
@@ -585,13 +587,13 @@ Utilisez <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions> pour défi
 
 Pour précompiler des vues, consultez [ Razor afficher la compilation](xref:mvc/views/view-compilation).
 
-### <a name="specify-that-razor-pages-are-at-the-content-root"></a>Spécifier que Razor les pages se trouvent à la racine du contenu
+### <a name="specify-that-no-locrazor-pages-are-at-the-content-root"></a>Spécifier que Razor les pages se trouvent à la racine du contenu
 
 Par défaut, Razor les pages sont enracinées dans le répertoire */pages* Ajouter <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.WithRazorPagesAtContentRoot*> pour spécifier que vos Razor pages se trouvent à la [racine du contenu](xref:fundamentals/index#content-root) ( <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath> ) de l’application :
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/StartupWithRazorPagesAtContentRoot.cs?name=snippet)]
 
-### <a name="specify-that-razor-pages-are-at-a-custom-root-directory"></a>Spécifier que Razor les pages se trouvent dans un répertoire racine personnalisé
+### <a name="specify-that-no-locrazor-pages-are-at-a-custom-root-directory"></a>Spécifier que Razor les pages se trouvent dans un répertoire racine personnalisé
 
 Ajouter <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuilderExtensions.WithRazorPagesRoot*> pour spécifier que Razor les pages se trouvent dans un répertoire racine personnalisé dans l’application (fournissez un chemin d’accès relatif) :
 
@@ -642,7 +644,7 @@ Ce document fournit une introduction aux Razor pages. Il ne s’agit pas d’un 
 
 <a name="rpvs17"></a>
 
-## <a name="create-a-razor-pages-project"></a>Créer un Razor projet pages
+## <a name="create-a-no-locrazor-pages-project"></a>Créer un Razor projet pages
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -660,7 +662,7 @@ Exécutez `dotnet new webapp` à partir de la ligne de commande.
 
 ---
 
-## <a name="razor-pages"></a>RazorPages
+## <a name="no-locrazor-pages"></a>RazorPages
 
 RazorPages est activée dans *Startup.cs*:
 
@@ -860,13 +862,13 @@ services.AddMvc()
 
 <a name="xsrf"></a>
 
-## <a name="xsrfcsrf-and-razor-pages"></a>XSRF/CSRF et Razor pages
+## <a name="xsrfcsrf-and-no-locrazor-pages"></a>XSRF/CSRF et Razor pages
 
 Vous n’avez aucun code à écrire pour la [validation anti-contrefaçon](xref:security/anti-request-forgery). La génération et la validation des jetons anti-contrefaçon sont automatiquement incluses dans les Razor pages.
 
 <a name="layout"></a>
 
-## <a name="using-layouts-partials-templates-and-tag-helpers-with-razor-pages"></a>Utilisation de dispositions, de partiels, de modèles et d’aide pour les balises avec des Razor pages
+## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>Utilisation de dispositions, de partiels, de modèles et d’aide pour les balises avec des Razor pages
 
 Les pages fonctionnent avec toutes les fonctionnalités du Razor moteur d’affichage. Les mises en page, les partiels, les modèles, les tag helpers, *_ViewStart. cshtml*, *_ViewImports. cshtml* fonctionnent de la même façon que pour les Razor vues conventionnelles.
 
@@ -1094,7 +1096,7 @@ Pour précompiler des vues, consultez [ Razor afficher la compilation](xref:mvc/
 
 Consultez [prise en main des Razor pages](xref:tutorials/razor-pages/razor-pages-start), qui s’appuie sur cette introduction.
 
-### <a name="specify-that-razor-pages-are-at-the-content-root"></a>Spécifier que Razor les pages se trouvent à la racine du contenu
+### <a name="specify-that-no-locrazor-pages-are-at-the-content-root"></a>Spécifier que Razor les pages se trouvent à la racine du contenu
 
 Par défaut, Razor les pages sont enracinées dans le répertoire */pages* Ajoutez [avec Razor PagesAtContentRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvcbuilderextensions.withrazorpagesatcontentroot) à [AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) pour spécifier que vos Razor pages se trouvent à la [racine du contenu](xref:fundamentals/index#content-root) ([ContentRootPath](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.contentrootpath)) de l’application :
 
@@ -1107,7 +1109,7 @@ services.AddMvc()
     .WithRazorPagesAtContentRoot();
 ```
 
-### <a name="specify-that-razor-pages-are-at-a-custom-root-directory"></a>Spécifier que Razor les pages se trouvent dans un répertoire racine personnalisé
+### <a name="specify-that-no-locrazor-pages-are-at-a-custom-root-directory"></a>Spécifier que Razor les pages se trouvent dans un répertoire racine personnalisé
 
 Ajoutez [avec Razor PagesRoot](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvccorebuilderextensions.withrazorpagesroot) à [AddMvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) pour spécifier que vos Razor pages se trouvent dans un répertoire racine personnalisé dans l’application (fournissez un chemin d’accès relatif) :
 

@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/http-requests
-ms.openlocfilehash: 578263978959100e266626aeccccc0830d9462b7
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: fb9001c06228b4290ca1e0c7cfb6b1338f431cd6
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399112"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444109"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>Effectuer des requêtes HTTP en utilisant IHttpClientFactory dans ASP.NET Core
 
@@ -107,7 +107,7 @@ Un client typé accepte un `HttpClient` paramètre dans son constructeur :
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/GitHub/GitHubService.cs?name=snippet1&highlight=5)]
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
-Dans le code précédent :
+Dans le code précédent :
 
 * La configuration est déplacée vers le client typé.
 * L’objet `HttpClient` est exposé en tant que propriété publique.
@@ -198,7 +198,7 @@ Dans les exemples précédents, toutes les requêtes HTTP utilisent le verbe HTT
 
 * POST
 * PUT
-* Suppression
+* DELETE
 * PATCH
 
 Pour obtenir la liste complète des verbes HTTP pris en charge, consultez <xref:System.Net.Http.HttpMethod> .
@@ -248,7 +248,7 @@ Pour en savoir plus sur l’utilisation de différents verbes HTTP avec `HttpCli
 Pour créer un gestionnaire de délégation :
 
 * Dériver de <xref:System.Net.Http.DelegatingHandler> .
-* Substituez <xref:System.Net.Http.DelegatingHandler.SendAsync*> Exécutez le code avant de passer la requête au gestionnaire suivant dans le pipeline :
+* Remplacez <xref:System.Net.Http.DelegatingHandler.SendAsync*>. Exécutez le code avant de passer la requête au gestionnaire suivant dans le pipeline :
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Handlers/ValidateHeaderHandler.cs?name=snippet1)]
 
@@ -306,7 +306,7 @@ Il est courant d’imbriquer les stratégies Polly :
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet9)]
 
-Dans l'exemple précédent :
+Dans l’exemple précédent :
 
 * Deux gestionnaires sont ajoutés.
 * Le premier gestionnaire utilise <xref:Microsoft.Extensions.DependencyInjection.PollyHttpClientBuilderExtensions.AddTransientHttpErrorPolicy*> pour ajouter une stratégie de nouvelle tentative. Les requêtes qui ont échoué sont retentées jusqu’à trois fois.
@@ -318,7 +318,7 @@ Une approche de la gestion des stratégies régulièrement utilisées consiste �
 
 Dans le code suivant :
 
-* Les stratégies « régulières » et « longues » sont ajoutées.
+* Les stratégies « standard » et « longues » sont ajoutées.
 * <xref:Microsoft.Extensions.DependencyInjection.PollyHttpClientBuilderExtensions.AddPolicyHandlerFromRegistry*>Ajoute les stratégies « standard » et « longues » à partir du Registre.
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup4.cs?name=snippet1)]

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: b917671053313c74acfff36518e8f36d5ef2eb22
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 962b42239b2101fc95e55fb38ce214481bf0ef01
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405482"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444141"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>Routage vers les actions du contrôleur dans ASP.NET Core
 
@@ -52,7 +52,7 @@ Ce document :
 
 [!code-csharp[](routing/samples/3.x/main/StartupDefaultMVC.cs?name=snippet)]
 
-À l’intérieur de l’appel à <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> , <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> est utilisé pour créer un itinéraire unique. L’itinéraire unique est nommé `default` route. La plupart des applications avec contrôleurs et vues utilisent un modèle de routage similaire à l' `default` itinéraire. Les API REST doivent utiliser le [routage d’attributs](#ar).
+À l’intérieur de l’appel à <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints%2A> , <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> est utilisé pour créer un itinéraire unique. L’itinéraire unique est nommé `default` route. La plupart des applications avec contrôleurs et vues utilisent un modèle de routage similaire à l' `default` itinéraire. Les API REST doivent utiliser le [routage d’attributs](#ar).
 
 Le modèle de routage `"{controller=Home}/{action=Index}/{id?}"` :
 
@@ -89,7 +89,7 @@ public class HomeController : Controller
 
 Le chemin d’accès de l’URL `/` utilise les `Home` contrôleurs et l’action du modèle de routage par défaut `Index` . Le chemin d’accès de l’URL `/Home` utilise l’action par défaut du modèle de routage `Index` .
 
-La méthode pratique <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*> :
+La méthode pratique <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute%2A> :
 
 ```csharp
 endpoints.MapDefaultControllerRoute();
@@ -102,10 +102,10 @@ endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"
 ```
 
 > [!IMPORTANT]
-> Le routage est configuré à l’aide de et de l' <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> intergiciel (middleware). Pour utiliser des contrôleurs :
+> Le routage est configuré à l’aide de et de l' <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting%2A> <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints%2A> intergiciel (middleware). Pour utiliser des contrôleurs :
 >
-> * Appelez <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> à l’intérieur `UseEndpoints` pour mapper les contrôleurs [routés d’attribut](#ar) .
-> * Appelez <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> ou <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> pour mapper les contrôleurs routés de façon [conventionnelle](#cr) et les contrôleurs [routés d’attribut](#ar) .
+> * Appelez <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers%2A> à l’intérieur `UseEndpoints` pour mapper les contrôleurs [routés d’attribut](#ar) .
+> * Appelez <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> ou <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> pour mapper les contrôleurs routés de façon [conventionnelle](#cr) et les contrôleurs [routés d’attribut](#ar) .
 
 <a name="routing-conventional-ref-label"></a>
 <a name="crd"></a>
@@ -151,7 +151,7 @@ La plupart des applications doivent choisir un schéma de routage de base et des
 * Est un point de départ pratique pour les applications basées sur une interface utilisateur.
 * Est le seul modèle de routage nécessaire pour de nombreuses applications d’interface utilisateur Web. Pour les applications d’interface utilisateur Web plus volumineuses, un autre itinéraire utilise des [zones](#areas) si tout cela est nécessaire.
 
-<xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>et <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute*> :
+<xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A>et <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute%2A> :
 
 * Assigner automatiquement une valeur de **commande** à leurs points de terminaison en fonction de l’ordre dans lequel ils sont appelés.
 
@@ -168,7 +168,7 @@ Le [routage des attributs](#ar) est expliqué plus loin dans ce document.
 
 ### <a name="multiple-conventional-routes"></a>Plusieurs itinéraires conventionnels
 
-Vous pouvez ajouter plusieurs [itinéraires conventionnels](#cr) dans `UseEndpoints` en ajoutant des appels à <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> et <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> . Cela permet de définir plusieurs conventions ou d’ajouter des itinéraires conventionnels dédiés à une [action](#action)spécifique, par exemple :
+Vous pouvez ajouter plusieurs [itinéraires conventionnels](#cr) dans `UseEndpoints` en ajoutant des appels à <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> et <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> . Cela permet de définir plusieurs conventions ou d’ajouter des itinéraires conventionnels dédiés à une [action](#action)spécifique, par exemple :
 
 [!code-csharp[](routing/samples/3.x/main/Startup.cs?name=snippet_1)]
 
@@ -203,7 +203,7 @@ L’exemple précédent :
 ### <a name="conventional-routing-order"></a>Ordre de routage conventionnel
 
 Le routage conventionnel correspond uniquement à une combinaison d’action et de contrôleur définie par l’application. Cela vise à simplifier les cas où les itinéraires conventionnels se chevauchent.
-L’ajout d’itinéraires à l’aide de <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> , <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*> et <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> assigne automatiquement une valeur de commande à leurs points de terminaison en fonction de l’ordre dans lequel ils sont appelés. Les correspondances d’un itinéraire qui apparaît précédemment ont une priorité plus élevée. Le routage conventionnel est dépendant de l’ordre. En général, les itinéraires avec des zones doivent être placés plus tôt, car ils sont plus spécifiques que les itinéraires sans zone. Les [itinéraires conventionnels dédiés](#dcr) avec des paramètres d’itinéraire Catch-All comme `{*article}` peuvent rendre une route trop [gourmande](xref:fundamentals/routing#greedy), ce qui signifie qu’elle correspond aux URL que vous avez prévues pour être mises en correspondance par d’autres itinéraires. Mettez les itinéraires gourmands plus tard dans la table de routage pour empêcher les correspondances gourmandes.
+L’ajout d’itinéraires à l’aide de <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> , <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute%2A> et <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> assigne automatiquement une valeur de commande à leurs points de terminaison en fonction de l’ordre dans lequel ils sont appelés. Les correspondances d’un itinéraire qui apparaît précédemment ont une priorité plus élevée. Le routage conventionnel est dépendant de l’ordre. En général, les itinéraires avec des zones doivent être placés plus tôt, car ils sont plus spécifiques que les itinéraires sans zone. Les [itinéraires conventionnels dédiés](#dcr) avec des paramètres d’itinéraire Catch-All comme `{*article}` peuvent rendre une route trop [gourmande](xref:fundamentals/routing#greedy), ce qui signifie qu’elle correspond aux URL que vous avez prévues pour être mises en correspondance par d’autres itinéraires. Mettez les itinéraires gourmands plus tard dans la table de routage pour empêcher les correspondances gourmandes.
 
 [!INCLUDE[](~/includes/catchall.md)]
 
@@ -272,7 +272,7 @@ Le routage par attributs utilise un ensemble d’attributs pour mapper les actio
 
 [!code-csharp[](routing/samples/3.x/main/StartupAPI.cs?name=snippet)]
 
-Dans le code précédent, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> est appelé dans `UseEndpoints` pour mapper les contrôleurs routés d’attribut.
+Dans le code précédent, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers%2A> est appelé dans `UseEndpoints` pour mapper les contrôleurs routés d’attribut.
 
 Dans l’exemple suivant :
 
@@ -347,7 +347,7 @@ Prenons le contrôleur suivant :
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/Test2Controller.cs?name=snippet)]
 
-Dans le code précédent :
+Dans le code précédent :
 
 * Chaque action contient l' `[HttpGet]` attribut, qui limite la correspondance aux requêtes http obtient uniquement.
 * L' `GetProduct` action comprend le `"{id}"` modèle. par conséquent, `id` est ajouté au `"api/[controller]"` modèle sur le contrôleur. Le modèle de méthode est `"api/[controller]/"{id}""` . Par conséquent, cette action correspond uniquement aux demandes d’extraction de pour le formulaire `/api/test2/xyz` ,, `/api/test2/123` `/api/test2/{any string}` , etc.
@@ -413,7 +413,7 @@ Pour rendre le routage par attributs moins répétitif, les attributs de route s
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsApiController.cs?name=snippet)]
 
-Dans l'exemple précédent :
+Dans l’exemple précédent :
 
 * Le chemin d’accès de l’URL `/products` peut correspondre`ProductsApi.ListProducts`
 * Le chemin d’accès de l’URL `/products/5` peut correspondre `ProductsApi.GetProduct(int)` .
@@ -490,7 +490,7 @@ Les jetons `[action]` , `[area]` et `[controller]` sont remplacés par les valeu
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet)]
 
-Dans le code précédent :
+Dans le code précédent :
 
   [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet10)]
 
@@ -629,7 +629,7 @@ Considérons, par exemple, le contrôleur suivant :
 
 [!code-csharp[](routing/samples/3.x/nsrc/Controllers/UsersController.cs)]
 
-Dans le code précédent :
+Dans le code précédent :
 
 * La base `namespace` est `My.Application` .
 * Le nom complet du contrôleur précédent est `My.Application.Admin.Controllers.UsersController` .
@@ -758,7 +758,7 @@ Le Razor fichier suivant génère un lien HTML vers `Destination_Route` :
 
 <a name="routing-gen-urls-html-ref-label"></a>
 
-### <a name="generate-urls-in-html-and-razor"></a>Générer des URL en HTML etRazor
+### <a name="generate-urls-in-html-and-no-locrazor"></a>Générer des URL en HTML etRazor
 
 <xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper>fournit les <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper> méthodes [html. BeginForm](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.BeginForm*) et [html. ActionLink](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.ActionLink*) pour générer `<form>` des `<a>` éléments et respectivement. Ces méthodes utilisent la méthode [URL. action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) pour générer une URL et elles acceptent des arguments similaires. Les pendants de `Url.RouteUrl` pour `HtmlHelper` sont `Html.BeginRouteForm` et `Html.RouteLink`, qui ont des fonctionnalités similaires.
 
@@ -776,7 +776,7 @@ Les classes de base <xref:Microsoft.AspNetCore.Mvc.ControllerBase> et <xref:Micr
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/CustomerController.cs?name=snippet)]
 
-Les méthodes de fabrique des résultats d’action, telles que <xref:Microsoft.AspNetCore.Mvc.ControllerBase.RedirectToAction*> et, <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> suivent un modèle similaire aux méthodes sur `IUrlHelper` .
+Les méthodes de fabrique des résultats d’action, telles que <xref:Microsoft.AspNetCore.Mvc.ControllerBase.RedirectToAction%2A> et, <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction%2A> suivent un modèle similaire aux méthodes sur `IUrlHelper` .
 
 <a name="routing-dedicated-ref-label"></a>
 
@@ -805,7 +805,7 @@ L’exemple suivant configure MVC pour utiliser l’itinéraire conventionnel pa
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Startup.cs?name=snippet1)]
 
-Dans le code précédent, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> est appelé pour créer le `"blog_route"` . Le deuxième paramètre, `"Blog"` , est le nom de la zone.
+Dans le code précédent, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> est appelé pour créer le `"blog_route"` . Le deuxième paramètre, `"Blog"` , est le nom de la zone.
 
 En cas de correspondance avec un chemin d’URL comme `/Manage/Users/AddUser` , l' `"blog_route"` itinéraire génère les valeurs d’itinéraire `{ area = Blog, controller = Users, action = AddUser }` . La `area` valeur de route est produite par une valeur par défaut pour `area` . L’itinéraire créé par `MapAreaControllerRoute` est équivalent à ce qui suit :
 

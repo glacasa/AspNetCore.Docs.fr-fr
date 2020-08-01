@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 6e47e627915bd8988d161f7d5af4a89f3671c0a7
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: a08993a7909d67be34446815b10d32089d9e0629
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445448"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444147"
 ---
 # <a name="configuration-in-aspnet-core"></a>Configuration dans ASP.NET Core
 
@@ -31,8 +31,8 @@ Par [Rick Anderson](https://twitter.com/RickAndMSFT) et [Kirk Larkin](https://tw
 La configuration dans ASP.NET Core est effectuée à l’aide d’un ou de plusieurs [fournisseurs de configuration](#cp). Les fournisseurs de configuration lisent les données de configuration des paires clé-valeur à l’aide d’une variété de sources de configuration :
 
 * Fichiers de paramètres, tels que *appsettings.jssur*
-* Variables d’environnement
-* Azure Key Vault
+* Variables d'environnement
+* Azure Key Vault
 * Azure App Configuration
 * Arguments de ligne de commande
 * Fournisseurs personnalisés, installés ou créés
@@ -117,7 +117,7 @@ Pour plus d’informations sur le stockage des mots de passe ou d’autres donn�
 
 <a name="evcp"></a>
 
-## <a name="environment-variables"></a>Variables d’environnement
+## <a name="environment-variables"></a>Variables d'environnement
 
 À l’aide de la configuration [par défaut](#default) , le <xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> charge la configuration à partir des paires clé-valeur de variable d’environnement après la lecture *appsettings.jssur*, *appSettings.* `Environment` *. JSON*et le [Gestionnaire de secret](xref:security/app-secrets). Par conséquent, les valeurs de clés lues à partir de l’environnement remplacent les valeurs lues à partir de *appsettings.jssur*, *appSettings.* `Environment` *. JSON*et le gestionnaire de secret.
 
@@ -307,11 +307,11 @@ Le tableau suivant présente les fournisseurs de configuration disponibles pour 
 
 | Fournisseur | Fournit la configuration à partir de |
 | -------- | ----------------------------------- |
-| [Fournisseur de configuration Azure Key Vault](xref:security/key-vault-configuration) | Azure Key Vault |
+| [Fournisseur de configuration Azure Key Vault](xref:security/key-vault-configuration) | Azure Key Vault |
 | [Fournisseur de configuration Azure App](/azure/azure-app-configuration/quickstart-aspnet-core-app) | Azure App Configuration |
 | [Fournisseur de configuration de ligne de commande](#clcp) | Paramètres de ligne de commande |
 | [Fournisseur de configuration personnalisé](#custom-configuration-provider) | Source personnalisée |
-| [Fournisseur de configuration des variables d’environnement](#evcp) | Variables d’environnement |
+| [Fournisseur de configuration des variables d’environnement](#evcp) | Variables d'environnement |
 | [Fournisseur de configuration de fichier](#file-configuration-provider) | Fichiers INI, JSON et XML |
 | [Fournisseur de configuration de clé par fichier](#key-per-file-configuration-provider) | Fichiers de répertoire |
 | [Fournisseur de configuration de la mémoire](#memory-configuration-provider) | Collections en mémoire |
@@ -675,7 +675,7 @@ Une méthode d’extension `AddEFConfiguration` permet d’ajouter la source de 
 
 Le code suivant montre comment utiliser le `EFConfigurationProvider` personnalisé dans *Program.cs* :
 
-[!code-csharp[](index/samples/3.x/ConfigurationSample/Program.cs?name=snippet_Program&highlight=29-30)]
+[!code-csharp[](index/samples_snippets/3.x/ConfigurationSample/Program.cs?highlight=7-8)]
 
 <a name="acs"></a>
 
@@ -687,7 +687,7 @@ Le code suivant affiche les données de configuration dans les `Startup` méthod
 
 Pour obtenir un exemple d’accès à la configuration à l’aide des méthodes pratiques de démarrage, consultez [Démarrage de l’application : méthodes pratiques](xref:fundamentals/startup#convenience-methods).
 
-## <a name="access-configuration-in-razor-pages"></a>Configuration de l’accès dans les Razor pages
+## <a name="access-configuration-in-no-locrazor-pages"></a>Configuration de l’accès dans les Razor pages
 
 Le code suivant affiche les données de configuration dans une Razor page :
 
@@ -775,12 +775,12 @@ Une implémentation de <xref:Microsoft.AspNetCore.Hosting.IHostingStartup> perme
 
 La configuration d’application dans ASP.NET Core est basée sur des paires clé-valeur établies par les *fournisseurs de configuration*. Les fournisseurs de configuration lisent les données de configuration dans les paires clé-valeur à partir de diverses sources de configuration :
 
-* Azure Key Vault
+* Azure Key Vault
 * Azure App Configuration
 * Arguments de ligne de commande
 * Fournisseurs personnalisés (installés ou créés)
 * Fichiers de répertoire
-* Variables d’environnement
+* Variables d'environnement
 * Objets .NET en mémoire
 * Fichiers de paramètres
 
@@ -910,7 +910,7 @@ public class HomeController : Controller
 
 Les fournisseurs de configuration ne peuvent pas utiliser le DI, car celui-ci n’est pas disponible lorsque les fournisseurs sont configurés par l’hôte.
 
-### <a name="keys"></a>Touches
+### <a name="keys"></a>Keys
 
 Les clés de configuration adoptent les conventions suivantes :
 
@@ -935,11 +935,11 @@ Le tableau suivant présente les fournisseurs de configuration disponibles pour 
 
 | Fournisseur | Fournit la configuration à partir de&hellip; |
 | -------- | ----------------------------------- |
-| [Fournisseur de configuration Azure Key Vault](xref:security/key-vault-configuration) (rubrique *Sécurité*) | Azure Key Vault |
+| [Fournisseur de configuration Azure Key Vault](xref:security/key-vault-configuration) (rubrique *Sécurité*) | Azure Key Vault |
 | [Fournisseur Azure App Configuration](/azure/azure-app-configuration/quickstart-aspnet-core-app) (documentation Azure) | Azure App Configuration |
 | [Fournisseur de configuration de ligne de commande](#command-line-configuration-provider) | Paramètres de ligne de commande |
 | [Fournisseur de configuration personnalisé](#custom-configuration-provider) | Source personnalisée |
-| [Fournisseur de configuration de variables d’environnement](#environment-variables-configuration-provider) | Variables d’environnement |
+| [Fournisseur de configuration de variables d’environnement](#environment-variables-configuration-provider) | Variables d'environnement |
 | [Fournisseur de configuration de fichier](#file-configuration-provider) | Fichiers (INI, JSON, XML) |
 | [Fournisseur de configuration clé par fichier](#key-per-file-configuration-provider) | Fichiers de répertoire |
 | [Fournisseur de configuration de mémoire](#memory-configuration-provider) | Collections en mémoire |
@@ -950,9 +950,9 @@ Au démarrage, les sources de configuration sont lues dans l’ordre où leurs f
 Une séquence type des fournisseurs de configuration est la suivante :
 
 1. Fichiers (*appsettings.json*, *appsettings.{Environment}.json*, où `{Environment}` est l'environnement d’hébergement actuel de l'application)
-1. [Azure Key Vault](xref:security/key-vault-configuration)
+1. [Azure Key Vault](xref:security/key-vault-configuration)
 1. [Secrets utilisateur (Secret Manager)](xref:security/app-secrets) (dans l’environnement de développement uniquement)
-1. Variables d’environnement
+1. Variables d'environnement
 1. Arguments de ligne de commande
 
 Une pratique courante consiste à placer le Fournisseur de configuration de ligne de commande en dernier dans une série de fournisseurs pour permettre aux arguments de ligne de commande de remplacer la configuration définie par les autres fournisseurs.
@@ -1799,7 +1799,7 @@ public class Startup
 
 Pour obtenir un exemple d’accès à la configuration à l’aide des méthodes pratiques de démarrage, consultez [Démarrage de l’application : méthodes pratiques](xref:fundamentals/startup#convenience-methods).
 
-## <a name="access-configuration-in-a-razor-pages-page-or-mvc-view"></a>Configuration de l’accès dans une Razor page pages ou une vue MVC
+## <a name="access-configuration-in-a-no-locrazor-pages-page-or-mvc-view"></a>Configuration de l’accès dans une Razor page pages ou une vue MVC
 
 Pour accéder aux paramètres de configuration dans une Razor page pages ou une vue MVC, ajoutez une [directive using](xref:mvc/views/razor#using) ([référence C# : directive using](/dotnet/csharp/language-reference/keywords/using-directive)) pour l' [espace de nomsMicrosoft.Extensions.Configfiguration](xref:Microsoft.Extensions.Configuration) et injectez <xref:Microsoft.Extensions.Configuration.IConfiguration> dans la page ou la vue.
 

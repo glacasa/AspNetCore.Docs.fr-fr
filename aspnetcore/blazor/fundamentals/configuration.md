@@ -5,7 +5,7 @@ description: En savoir plus sur la configuration des Blazor applications, notamm
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/10/2020
+ms.date: 07/29/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,24 +15,29 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/configuration
-ms.openlocfilehash: f78803a3954feb98a39f26874b9de0aa08dc6327
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 9ae0dcc16b9debd47a61010953243b0abe499c4f
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445214"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87443969"
 ---
-# <a name="aspnet-core-blazor-configuration"></a>Configuration de ASP.NET Core Blazor
+# <a name="aspnet-core-no-locblazor-configuration"></a>Configuration de ASP.NET Core Blazor
 
 > [!NOTE]
 > Cette rubrique s’applique à Blazor WebAssembly . Pour obtenir des instructions générales sur ASP.NET Core configuration des applications, consultez <xref:fundamentals/configuration/index> .
 
-Blazor WebAssemblycharge la configuration à partir de :
+Blazor WebAssemblycharge la configuration à partir des fichiers de paramètres d’application par défaut :
 
-* Fichiers de paramètres d’application par défaut :
-  * `wwwroot/appsettings.json`
-  * `wwwroot/appsettings.{ENVIRONMENT}.json`
-* Autres [fournisseurs de configuration](xref:fundamentals/configuration/index) inscrits par l’application. Tous les fournisseurs ne sont pas appropriés pour les Blazor WebAssembly applications. La clarification des fournisseurs pris en charge pour Blazor WebAssembly est suivie par [clarifier les fournisseurs de configuration pour Blazor WASM (dotnet/AspNetCore.Docs #18134)](https://github.com/dotnet/AspNetCore.Docs/issues/18134).
+* `wwwroot/appsettings.json`
+* `wwwroot/appsettings.{ENVIRONMENT}.json`
+
+D’autres fournisseurs de configuration inscrits par l’application peuvent également fournir une configuration.
+
+Les fonctionnalités des fournisseurs ou du fournisseur ne sont pas toutes appropriées pour les Blazor WebAssembly applications :
+
+* [Fournisseur de configuration Azure Key Vault](xref:security/key-vault-configuration): le fournisseur n’est pas pris en charge pour l’identité managée et l’ID d’application (ID client) avec des scénarios de clé secrète client. L’ID d’application avec une clé secrète client n’est pas recommandé pour une application ASP.NET Core, en particulier pour les Blazor WebAssembly applications, car la clé secrète client ne peut pas être sécurisée côté client pour accéder au service.
+* [Fournisseur de configuration Azure App](/azure/azure-app-configuration/quickstart-aspnet-core-app): le fournisseur n’est pas approprié pour les Blazor WebAssembly applications, car les Blazor WebAssembly applications ne s’exécutent pas sur un serveur dans Azure.
 
 > [!WARNING]
 > La configuration dans une Blazor WebAssembly application est visible pour les utilisateurs. **Ne stockez pas les secrets ou les informations d’identification de l’application dans la configuration.**
@@ -61,7 +66,31 @@ Injecter une <xref:Microsoft.Extensions.Configuration.IConfiguration> instance d
 <p>Message: @Configuration["message"]</p>
 ```
 
-## <a name="provider-configuration"></a>Configuration du fournisseur
+## <a name="custom-configuration-provider-with-ef-core"></a>Fournisseur de configuration personnalisé avec EF Core
+
+Le fournisseur de configuration personnalisé avec EF Core illustré dans <xref:fundamentals/configuration/index#custom-configuration-provider> fonctionne avec les Blazor WebAssembly applications.
+
+Ajoutez le fournisseur de configuration de l’exemple avec le code suivant dans `Program.Main` ( `Program.cs` ) :
+
+```csharp
+builder.Configuration.AddEFConfiguration(
+    options => options.UseInMemoryDatabase("InMemoryDb"));
+```
+
+Injecter une <xref:Microsoft.Extensions.Configuration.IConfiguration> instance dans un composant pour accéder aux données de configuration :
+
+```razor
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<ul>
+    <li>@Configuration["quote1"]</li>
+    <li>@Configuration["quote2"]</li>
+    <li>@Configuration["quote3"]</li>
+</ul>
+```
+
+## <a name="memory-configuration-source"></a>Source de la configuration de la mémoire
 
 L’exemple suivant utilise un <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> pour fournir une configuration supplémentaire :
 

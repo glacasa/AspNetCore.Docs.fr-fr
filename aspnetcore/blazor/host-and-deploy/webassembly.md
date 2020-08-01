@@ -5,7 +5,7 @@ description: Découvrez comment héberger et déployer une Blazor application à
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/09/2020
+ms.date: 07/27/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 2a2b0dabc26c14624144ce7eceb5861fe56f1054
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 15c5f02043a83e499eb5ec36fda52171124fe202
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445136"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87443987"
 ---
-# <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>Héberger et déployer des ASP.NET CoreBlazor WebAssembly
+# <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>Héberger et déployer des ASP.NET CoreBlazor WebAssembly
 
 Par [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com), [Daniel Roth](https://github.com/danroth27), [Ben Adams](https://twitter.com/ben_a_adams)et [safia Abdalla](https://safia.rocks)
 
@@ -36,7 +36,7 @@ Les stratégies de déploiement suivantes sont prises en charge :
 * L' Blazor application est traitée par une application ASP.net core. Cette stratégie est abordée dans la section [Déploiement hébergé avec ASP.NET Core](#hosted-deployment-with-aspnet-core).
 * L' Blazor application est placée sur un service ou un serveur Web d’hébergement statique, où .net n’est pas utilisé pour traiter l' Blazor application. Cette stratégie est traitée dans la section [Déploiement autonome](#standalone-deployment) , qui comprend des informations sur l’hébergement d’une Blazor WebAssembly application en tant que sous-application IIS.
 
-## <a name="compression"></a>Compression
+## <a name="compression"></a>compression ;
 
 Quand une Blazor WebAssembly application est publiée, la sortie est compressée de manière statique lors de la publication afin de réduire la taille de l’application et de supprimer la surcharge liée à la compression du Runtime. Les algorithmes de compression suivants sont utilisés :
 
@@ -48,32 +48,32 @@ Blazors’appuie sur l’hôte pour servir les fichiers compressés appropriés.
 * Pour `web.config` la configuration de la compression IIS, consultez la section [IIS : Brotli et compression gzip](#brotli-and-gzip-compression) . 
 * Lors de l’hébergement sur des solutions d’hébergement statiques qui ne prennent pas en charge la négociation de contenu de fichier compressée statiquement, telles que les pages GitHub, envisagez de configurer l’application pour extraire et décoder les fichiers compressés Brotli :
 
-  * Référencez le décodeur Brotli à partir du [référentiel GitHub Google/Brotli](https://github.com/google/brotli/) dans l’application.
+  * Obtenez le décodeur Brotli JavaScript à partir du [référentiel GitHub Google/Brotli](https://github.com/google/brotli). Depuis le 2020 juillet, le fichier de décodeur est nommé `decode.min.js` et se trouve dans le [ `js` dossier](https://github.com/google/brotli/tree/master/js)du référentiel.
   * Mettez à jour l’application pour utiliser le décodeur. Remplacez le balisage `<body>` dans la balise de fermeture par `wwwroot/index.html` ce qui suit :
   
     ```html
-    <script src="brotli.decode.min.js"></script>
+    <script src="decode.min.js"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
     <script>
-    Blazor.start({
-      loadBootResource: function (type, name, defaultUri, integrity) {
-        if (type !== 'dotnetjs' && location.hostname !== 'localhost') {
-          return (async function () {
-            const response = await fetch(defaultUri + '.br', { cache: 'no-cache' });
-            if (!response.ok) {
-              throw new Error(response.statusText);
-            }
-            const originalResponseBuffer = await response.arrayBuffer();
-            const originalResponseArray = new Int8Array(originalResponseBuffer);
-            const decompressedResponseArray = BrotliDecode(originalResponseArray);
-            const contentType = type === 
-              'dotnetwasm' ? 'application/wasm' : 'application/octet-stream';
-            return new Response(decompressedResponseArray, 
-              { headers: { 'content-type': contentType } });
-          })();
+      Blazor.start({
+        loadBootResource: function (type, name, defaultUri, integrity) {
+          if (type !== 'dotnetjs' && location.hostname !== 'localhost') {
+            return (async function () {
+              const response = await fetch(defaultUri + '.br', { cache: 'no-cache' });
+              if (!response.ok) {
+                throw new Error(response.statusText);
+              }
+              const originalResponseBuffer = await response.arrayBuffer();
+              const originalResponseArray = new Int8Array(originalResponseBuffer);
+              const decompressedResponseArray = BrotliDecode(originalResponseArray);
+              const contentType = type === 
+                'dotnetwasm' ? 'application/wasm' : 'application/octet-stream';
+              return new Response(decompressedResponseArray, 
+                { headers: { 'content-type': contentType } });
+            })();
+          }
         }
-      }
-    });
+      });
     </script>
     ```
  

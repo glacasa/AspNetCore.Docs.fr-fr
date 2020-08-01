@@ -5,7 +5,7 @@ description: Générez une Blazor application pas à pas.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/02/2020
+ms.date: 07/30/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 174a8e561701bb3ebd68ed05e42dfc3d70a9b450
-ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
+ms.openlocfilehash: b58c0c3db685d0a5b082aaf2eb434635bd10e2eb
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86176226"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444030"
 ---
-# <a name="build-a-blazor-todo-list-app"></a>Créer une Blazor application de liste de tâches
+# <a name="build-a-no-locblazor-todo-list-app"></a>Créer une Blazor application de liste de tâches
 
 Par [Daniel Roth](https://github.com/danroth27) et [Luke Latham](https://github.com/guardrex)
 
@@ -32,9 +32,15 @@ Ce didacticiel vous montre comment créer et modifier une Blazor application. Vo
 > * Créer un projet d’application de liste de tâches Blazor
 > * Modifier les Razor composants
 > * Utiliser la gestion des événements et la liaison de données dans les composants
-> * Utiliser l’injection de dépendances et le routage dans une Blazor application
+> * Utiliser le routage dans une Blazor application
 
 À la fin de ce didacticiel, vous disposerez d’une application de liste de tâches en cours d’utilisation.
+
+## <a name="prerequisites"></a>Prérequis
+
+[!INCLUDE[](~/includes/3.1-SDK.md)]
+
+## <a name="create-a-todo-list-no-locblazor-app"></a>Créer une application de liste de tâches Blazor
 
 1. Créez une Blazor application nommée `TodoList` dans une interface de commande :
 
@@ -140,7 +146,7 @@ Dans ce didacticiel, vous avez appris à :
 > * Créer un projet d’application de liste de tâches Blazor
 > * Modifier les Razor composants
 > * Utiliser la gestion des événements et la liaison de données dans les composants
-> * Utiliser l’injection de dépendances et le routage dans une Blazor application
+> * Utiliser le routage dans une Blazor application
 
 En savoir plus sur les outils pour ASP.NET Core Blazor :
 
