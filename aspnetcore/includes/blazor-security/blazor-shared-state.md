@@ -5,7 +5,7 @@ Applications serveur éblouissantes en direct dans la mémoire du serveur. Cela 
 
 Vous pouvez utiliser des services Singleton avec état dans des applications éblouissantes si elles sont spécifiquement conçues pour celle-ci. Par exemple, il est possible d’utiliser un cache mémoire en tant que singleton, car il requiert une clé pour accéder à une entrée donnée, en supposant que les utilisateurs n’ont pas le contrôle des clés de cache utilisées.
 
-**De plus, pour des raisons de sécurité, vous ne devez pas utiliser <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> dans les applications éblouissantes.** Les applications éblouissantes s’exécutent en dehors du contexte du pipeline ASP.NET Core et <xref:Microsoft.AspNetCore.Http.HttpContext> ne sont pas nécessairement disponibles dans le <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> , et il est garanti qu’elles détiennent le contexte qui a démarré l’application éblouissante.
+**De plus, pour des raisons de sécurité, vous ne devez pas utiliser <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> dans les applications éblouissantes.** Les applications éblouissantes s’exécutent en dehors du contexte du pipeline ASP.NET Core. Le <xref:Microsoft.AspNetCore.Http.HttpContext> n’est pas forcément disponible dans le <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> , et il n’est pas garanti qu’il détient le contexte qui a démarré l’application éblouissante.
 
 La méthode recommandée pour passer l’état de la demande à l’application éblouissant est d’utiliser les paramètres du composant racine dans le rendu initial de l’application :
 
