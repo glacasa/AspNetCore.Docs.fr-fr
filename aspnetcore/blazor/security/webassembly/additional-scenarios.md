@@ -5,7 +5,7 @@ description: Découvrez comment configurer Blazor WebAssembly pour d’autres sc
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/24/2020
+ms.date: 08/03/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,29 +15,79 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 79f7b2177d6d07101c73cde841c062b0e1468593
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 81ab2bb139dfcbea712d4eb51acfc9d7f6767d46
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445149"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818831"
 ---
-# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly des scénarios de sécurité supplémentaires
+# <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly des scénarios de sécurité supplémentaires
 
 Par [Javier Calvarro Nelson](https://github.com/javiercn) et [Luke Latham](https://github.com/guardrex)
 
 ## <a name="attach-tokens-to-outgoing-requests"></a>Attacher des jetons aux demandes sortantes
 
-Le <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> service peut être utilisé avec <xref:System.Net.Http.HttpClient> pour joindre des jetons d’accès aux demandes sortantes. Les jetons sont acquis à l’aide du <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> service existant. Si un jeton ne peut pas être acquis, une <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> exception est levée. <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException>dispose d’une <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> méthode qui peut être utilisée pour accéder au fournisseur d’identité de l’utilisateur afin d’acquérir un nouveau jeton. <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>Peut être configuré avec les URL, les portées et l’URL de retour autorisées à l’aide de la <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> méthode.
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>est <xref:System.Net.Http.DelegatingHandler> utilisé pour attacher des jetons d’accès aux instances sortantes <xref:System.Net.Http.HttpResponseMessage> . Les jetons sont acquis à l’aide du <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> service, qui est enregistré par le Framework. Si un jeton ne peut pas être acquis, une <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> exception est levée. <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException>dispose d’une <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> méthode qui peut être utilisée pour accéder au fournisseur d’identité de l’utilisateur afin d’acquérir un nouveau jeton.
 
-Utilisez l’une des approches suivantes pour configurer un gestionnaire de messages pour les demandes sortantes :
+Pour plus de commodité, le Framework fournit l' <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> adresse préconfigurée avec l’adresse de base de l’application en tant qu’URL autorisée. **Les jetons d’accès sont ajoutés uniquement lorsque l’URI de la demande se trouve dans l’URI de base de l’application.** Lorsque les URI de demande sortants ne se trouvent pas dans l’URI de base de l’application, utilisez une [ `AuthorizationMessageHandler` classe personnalisée (*recommandé*)](#custom-authorizationmessagehandler-class) ou [configurez le `AuthorizationMessageHandler` ](#configure-authorizationmessagehandler).
 
-* [ `AuthorizationMessageHandler` Classe personnalisée](#custom-authorizationmessagehandler-class) (*recommandée*)
-* [Configurer`AuthorizationMessageHandler`](#configure-authorizationmessagehandler)
+> [!NOTE]
+> Outre la configuration de l’application cliente pour l’accès à l’API serveur, l’API serveur doit également autoriser les requêtes Cross-Origin (CORS) lorsque le client et le serveur ne se trouvent pas à la même adresse de base. Pour plus d’informations sur la configuration CORS côté serveur, consultez la section relative au [partage des ressources Cross-Origin (cors)](#cross-origin-resource-sharing-cors) plus loin dans cet article.
 
-### <a name="custom-authorizationmessagehandler-class"></a>Classe AuthorizationMessageHandler personnalisée
+Dans l’exemple suivant :
 
-Dans l’exemple suivant, une classe personnalisée étend <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> qui peut être utilisée pour configurer un <xref:System.Net.Http.HttpClient> :
+* <xref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient%2A>Ajoute <xref:System.Net.Http.IHttpClientFactory> des services connexes à la collection de services et configure un nommé <xref:System.Net.Http.HttpClient> ( `ServerAPI` ). <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType>adresse de base de l’URI de la ressource lors de l’envoi des demandes. <xref:System.Net.Http.IHttpClientFactory>est fourni par le [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) package NuGet.
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler>est <xref:System.Net.Http.DelegatingHandler> utilisé pour attacher des jetons d’accès aux instances sortantes <xref:System.Net.Http.HttpResponseMessage> . Les jetons d’accès sont ajoutés uniquement lorsque l’URI de la demande se trouve dans l’URI de base de l’application.
+* <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A?displayProperty=nameWithType>crée et configure une <xref:System.Net.Http.HttpClient> instance pour les demandes sortantes à l’aide de la configuration qui correspond au nommé <xref:System.Net.Http.HttpClient> ( `ServerAPI` ).
+
+```csharp
+using System.Net.Http;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+...
+
+builder.Services.AddHttpClient("ServerAPI", 
+        client => client.BaseAddress = new Uri("https://www.example.com/base"))
+    .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
+    .CreateClient("ServerAPI"));
+```
+
+Pour une Blazor application basée sur le Blazor WebAssembly modèle de projet hébergé, les URI de requête se trouvent dans l’URI de base de l’application par défaut. Par conséquent, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `new Uri(builder.HostEnvironment.BaseAddress)` ) est assigné au <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> dans une application générée à partir du modèle de projet.
+
+Le configuré <xref:System.Net.Http.HttpClient> est utilisé pour effectuer des demandes autorisées à l’aide du [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) modèle :
+
+```razor
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject HttpClient Client
+
+...
+
+protected override async Task OnInitializedAsync()
+{
+    private ExampleType[] examples;
+
+    try
+    {
+        examples = 
+            await Client.GetFromJsonAsync<ExampleType[]>("ExampleAPIMethod");
+
+        ...
+    }
+    catch (AccessTokenNotAvailableException exception)
+    {
+        exception.Redirect();
+    }
+}
+```
+
+### <a name="custom-authorizationmessagehandler-class"></a>`AuthorizationMessageHandler`Classe personnalisée
+
+*Ce guide de cette section est recommandé pour les applications clientes qui effectuent des requêtes sortantes vers des URI qui ne se trouvent pas dans l’URI de base de l’application.*
+
+Dans l’exemple suivant, une classe personnalisée étend <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> pour une utilisation en tant que <xref:System.Net.Http.DelegatingHandler> pour un <xref:System.Net.Http.HttpClient> . <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A>Configure ce gestionnaire pour autoriser les requêtes HTTP sortantes à l’aide d’un jeton d’accès. Le jeton d’accès est attaché uniquement si au moins l’une des URL autorisées est une base de l’URI de la demande ( <xref:System.Net.Http.HttpRequestMessage.RequestUri?displayProperty=nameWithType> ).
 
 ```csharp
 using Microsoft.AspNetCore.Components;
@@ -56,7 +106,7 @@ public class CustomAuthorizationMessageHandler : AuthorizationMessageHandler
 }
 ```
 
-Dans `Program.Main` ( `Program.cs` ), un <xref:System.Net.Http.HttpClient> est configuré avec le gestionnaire de messages d’autorisation personnalisé :
+Dans `Program.Main` ( `Program.cs` ), `CustomAuthorizationMessageHandler` est inscrit en tant que service délimitéd et est configuré en tant que <xref:System.Net.Http.DelegatingHandler> pour les instances sortantes <xref:System.Net.Http.HttpResponseMessage> effectuées par un nommé <xref:System.Net.Http.HttpClient> :
 
 ```csharp
 builder.Services.AddScoped<CustomAuthorizationMessageHandler>();
@@ -66,9 +116,9 @@ builder.Services.AddHttpClient("ServerAPI",
     .AddHttpMessageHandler<CustomAuthorizationMessageHandler>();
 ```
 
-Pour une Blazor application basée sur le Blazor WebAssembly modèle hébergé, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `new Uri(builder.HostEnvironment.BaseAddress)` ) peut être affecté à <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> .
+Pour une Blazor application basée sur le Blazor WebAssembly modèle de projet hébergé, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `new Uri(builder.HostEnvironment.BaseAddress)` ) est assigné à <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> par défaut.
 
-Le configuré <xref:System.Net.Http.HttpClient> est utilisé pour effectuer des demandes autorisées à l’aide du [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) modèle. Lorsque le client est créé avec <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> ( [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) Package), le <xref:System.Net.Http.HttpClient> est fourni par des instances qui incluent des jetons d’accès lors de l’exécution de requêtes à l’API serveur :
+Le configuré <xref:System.Net.Http.HttpClient> est utilisé pour effectuer des demandes autorisées à l’aide du [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) modèle. Lorsque le client est créé avec <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> ( [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) Package), <xref:System.Net.Http.HttpClient> est fourni les instances qui incluent des jetons d’accès lors de l’exécution de requêtes à l’API serveur. Si l’URI de la demande est un URI relatif, comme c’est le cas dans l’exemple suivant ( `ExampleAPIMethod` ), il est combiné avec le <xref:System.Net.Http.HttpClient.BaseAddress> lorsque l’application cliente effectue la requête :
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -85,7 +135,7 @@ Le configuré <xref:System.Net.Http.HttpClient> est utilisé pour effectuer des 
             var client = ClientFactory.CreateClient("ServerAPI");
 
             examples = 
-                await client.GetFromJsonAsync<ExampleType[]>("{API METHOD}");
+                await client.GetFromJsonAsync<ExampleType[]>("ExampleAPIMethod");
 
             ...
         }
@@ -93,12 +143,13 @@ Le configuré <xref:System.Net.Http.HttpClient> est utilisé pour effectuer des 
         {
             exception.Redirect();
         }
-        
     }
 }
 ```
 
-### <a name="configure-authorizationmessagehandler"></a>Configurer AuthorizationMessageHandler
+### <a name="configure-authorizationmessagehandler"></a>Configurer `AuthorizationMessageHandler`
+
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>peut être configuré avec des URL, des étendues et une URL de retour autorisées à l’aide de la <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> méthode. <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A>configure le gestionnaire pour autoriser les requêtes HTTP sortantes à l’aide d’un jeton d’accès. Le jeton d’accès est attaché uniquement si au moins l’une des URL autorisées est une base de l’URI de la demande ( <xref:System.Net.Http.HttpRequestMessage.RequestUri?displayProperty=nameWithType> ). Si l’URI de la demande est un URI relatif, il est associé au <xref:System.Net.Http.HttpClient.BaseAddress> .
 
 Dans l’exemple suivant, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> configure un <xref:System.Net.Http.HttpClient> dans `Program.Main` ( `Program.cs` ) :
 
@@ -118,58 +169,12 @@ builder.Services.AddScoped(sp => new HttpClient(
     });
 ```
 
-Pour une Blazor application basée sur le Blazor WebAssembly modèle hébergé, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> peut être assigné à :
+Pour une Blazor application basée sur le Blazor WebAssembly modèle de projet hébergé, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> est assigné aux éléments suivants par défaut :
 
 * <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType>( `new Uri(builder.HostEnvironment.BaseAddress)` ).
 * URL du `authorizedUrls` tableau.
 
-Pour plus de commodité, une <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> est incluse et préconfigurée avec l’adresse de base de l’application en tant qu’URL autorisée. Les modèles compatibles avec l’authentification Blazor WebAssembly utilisent <xref:System.Net.Http.IHttpClientFactory> ( [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) Package) dans le projet d’API serveur pour configurer un <xref:System.Net.Http.HttpClient> avec les <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> éléments suivants :
-
-```csharp
-using System.Net.Http;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-
-...
-
-builder.Services.AddHttpClient("ServerAPI", 
-        client => client.BaseAddress = new Uri("https://www.example.com/base"))
-    .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
-
-builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
-    .CreateClient("ServerAPI"));
-```
-
-Pour une Blazor application basée sur le Blazor WebAssembly modèle hébergé, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `new Uri(builder.HostEnvironment.BaseAddress)` ) peut être affecté à <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> .
-
-Dans le cas où le client est créé avec <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> dans l’exemple précédent, <xref:System.Net.Http.HttpClient> est fourni les instances qui incluent des jetons d’accès lors de l’exécution de demandes au projet serveur.
-
-Le configuré <xref:System.Net.Http.HttpClient> est utilisé pour effectuer des demandes autorisées à l’aide du [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) modèle :
-
-```razor
-@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-@inject HttpClient Client
-
-...
-
-protected override async Task OnInitializedAsync()
-{
-    private ExampleType[] examples;
-
-    try
-    {
-        examples = 
-            await Client.GetFromJsonAsync<ExampleType[]>("{API METHOD}");
-
-        ...
-    }
-    catch (AccessTokenNotAvailableException exception)
-    {
-        exception.Redirect();
-    }
-}
-```
-
-## <a name="typed-httpclient"></a>HttpClient typé
+## <a name="typed-httpclient"></a>Tapé`HttpClient`
 
 Vous pouvez définir un client typé qui gère tous les problèmes d’acquisition de jetons et HTTP dans une même classe.
 
@@ -225,7 +230,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 ```
 
-Pour une Blazor application basée sur le Blazor WebAssembly modèle hébergé, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `new Uri(builder.HostEnvironment.BaseAddress)` ) peut être affecté à <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> .
+Pour une Blazor application basée sur le Blazor WebAssembly modèle de projet hébergé, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `new Uri(builder.HostEnvironment.BaseAddress)` ) est assigné à <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> par défaut.
 
 `FetchData`composant ( `Pages/FetchData.razor` ) :
 
@@ -240,7 +245,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-## <a name="configure-the-httpclient-handler"></a>Configurer le gestionnaire HttpClient
+## <a name="configure-the-httpclient-handler"></a>Configurer le `HttpClient` Gestionnaire
 
 Le gestionnaire peut être configuré avec <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> pour les requêtes http sortantes.
 
@@ -255,7 +260,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(
         scopes: new[] { "example.read", "example.write" }));
 ```
 
-Pour une Blazor application basée sur le Blazor WebAssembly modèle hébergé, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> peut être assigné à :
+Pour une Blazor application basée sur le Blazor WebAssembly modèle de projet hébergé, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> est assigné aux éléments suivants par défaut :
 
 * <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType>( `new Uri(builder.HostEnvironment.BaseAddress)` ).
 * URL du `authorizedUrls` tableau.
@@ -271,7 +276,7 @@ builder.Services.AddHttpClient("ServerAPI.NoAuthenticationClient",
     client => client.BaseAddress = new Uri("https://www.example.com/base"));
 ```
 
-Pour une Blazor application basée sur le Blazor WebAssembly modèle hébergé, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `new Uri(builder.HostEnvironment.BaseAddress)` ) peut être affecté à <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> .
+Pour une Blazor application basée sur le Blazor WebAssembly modèle de projet hébergé, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `new Uri(builder.HostEnvironment.BaseAddress)` ) est assigné à <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> par défaut.
 
 L’inscription précédente s’ajoute à l’inscription par défaut sécurisée existante <xref:System.Net.Http.HttpClient> .
 
@@ -350,7 +355,7 @@ if (tokenResult.TryGetToken(out var token))
 * `true`avec le `token` à utiliser.
 * `false`Si le jeton n’est pas récupéré.
 
-## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>HttpClient et HttpRequestMessage avec les options de demande d’API Fetch
+## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>`HttpClient`et `HttpRequestMessage` avec les options de requête de l’API Fetch
 
 Lors de l’exécution sur webassembly dans une Blazor WebAssembly application, [`HttpClient`](xref:fundamentals/http-requests) (documentation de l'[API](xref:System.Net.Http.HttpClient)) et <xref:System.Net.Http.HttpRequestMessage> peut être utilisé pour personnaliser les demandes. Par exemple, vous pouvez spécifier la méthode HTTP et les en-têtes de demande. Le composant suivant envoie une `POST` demande à un point de terminaison d’API de liste de tâches sur le serveur et affiche le corps de la réponse :
 
@@ -456,11 +461,13 @@ app.UseCors(policy =>
     .AllowCredentials());
 ```
 
+Une solution hébergée Blazor basée sur le Blazor modèle de projet hébergé utilise la même adresse de base pour les applications clientes et serveur. La valeur de l’URI de l’application cliente <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> est `builder.HostEnvironment.BaseAddress` par défaut. La configuration CORS n’est **pas** requise dans la configuration par défaut d’une application hébergée créée à partir du Blazor modèle de projet hébergé. Les applications clientes supplémentaires qui ne sont pas hébergées par le projet serveur et ne partagent pas **l’adresse de** base de l’application serveur nécessitent une configuration cors dans le projet serveur.
+
 Pour plus d’informations, consultez <xref:security/cors> et le composant testeur de requêtes http de l’exemple d’application ( `Components/HTTPRequestTester.razor` ).
 
 ## <a name="handle-token-request-errors"></a>Gérer les erreurs de demande de jeton
 
-Lorsqu’une application à page unique (SPA) authentifie un utilisateur à l’aide d’Open ID Connect (OIDC), l’état d’authentification est conservé localement au sein du SPA et dans le Identity fournisseur (IP) sous la forme d’un cookie de session défini à la suite de l’utilisateur qui fournit ses informations d’identification.
+Lorsqu’une application à page unique (SPA) authentifie un utilisateur à l’aide de OpenID Connect (OIDC), l’état d’authentification est conservé localement au sein du SPA et dans le Identity fournisseur (IP) sous la forme d’un cookie de session défini à la suite de l’utilisateur qui fournit ses informations d’identification.
 
 Les jetons que l’adresse IP émet pour l’utilisateur sont généralement valides pendant de courtes périodes, environ une heure normalement, de sorte que l’application cliente doit régulièrement extraire les nouveaux jetons. Dans le cas contraire, l’utilisateur est déconnecté après l’expiration des jetons accordés. Dans la plupart des cas, les clients OIDC sont en mesure de configurer de nouveaux jetons sans que l’utilisateur soit obligé de s’authentifier à nouveau grâce à l’état d’authentification ou à la « session » qui est conservée au sein de l’adresse IP.
 
@@ -552,7 +559,7 @@ L’exemple suivant montre comment :
 
 Au cours d’une opération d’authentification, il existe des cas où vous souhaitez enregistrer l’état de l’application avant que le navigateur soit redirigé vers l’adresse IP. Cela peut être le cas lorsque vous utilisez un conteneur d’État et que vous souhaitez restaurer l’État une fois l’authentification réussie. Vous pouvez utiliser un objet d’état d’authentification personnalisé pour conserver l’état spécifique à l’application ou une référence à celui-ci, et restaurer cet État une fois l’opération d’authentification terminée. L’exemple suivant illustre l’approche.
 
-Une classe de conteneur d’État est créée dans l’application avec des propriétés pour contenir les valeurs d’état de l’application. Dans l’exemple suivant, le conteneur est utilisé pour conserver la valeur de compteur du composant du modèle par défaut `Counter` ( `Pages/Counter.razor` ). Les méthodes de sérialisation et de désérialisation du conteneur sont basées sur <xref:System.Text.Json> .
+Une classe de conteneur d’État est créée dans l’application avec des propriétés pour contenir les valeurs d’état de l’application. Dans l’exemple suivant, le conteneur est utilisé pour conserver la valeur de compteur du composant du modèle de projet par défaut `Counter` ( `Pages/Counter.razor` ). Les méthodes de sérialisation et de désérialisation du conteneur sont basées sur <xref:System.Text.Json> .
 
 ```csharp
 using System.Text.Json;
@@ -975,7 +982,7 @@ Dans l’application serveur, créez un `Pages` dossier s’il n’existe pas. C
 
 Lors de l’authentification et de l’autorisation d’une application hébergée Blazor WebAssembly auprès d’un fournisseur tiers, plusieurs options sont disponibles pour l’authentification de l’utilisateur. Celui que vous choisissez dépend de votre scénario.
 
-Pour plus d’informations, consultez <xref:security/authentication/social/additional-claims>.
+Pour plus d'informations, consultez <xref:security/authentication/social/additional-claims>.
 
 ### <a name="authenticate-users-to-only-call-protected-third-party-apis"></a>Authentifier les utilisateurs pour appeler uniquement des API tierces protégées
 
@@ -1015,9 +1022,9 @@ Bien que cette approche nécessite un saut de réseau supplémentaire par le bia
 * Le serveur peut stocker des jetons d’actualisation et s’assurer que l’application ne perd pas l’accès aux ressources tierces.
 * L’application ne peut pas perdre les jetons d’accès du serveur qui peuvent contenir des autorisations plus sensibles.
 
-## <a name="use-open-id-connect-oidc-v20-endpoints"></a>Utiliser des points de terminaison OIDC (Open ID Connect) v 2.0
+## <a name="use-openid-connect-oidc-v20-endpoints"></a>Utiliser des points de terminaison OpenID Connect (OIDC) v 2.0
 
-La bibliothèque d’authentification et les Blazor modèles utilisent des points de terminaison OIDC (Open ID Connect) v 1.0. Pour utiliser un point de terminaison v 2.0, configurez l’option de support JWT <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> . Dans l’exemple suivant, AAD est configuré pour v 2.0 en ajoutant un `v2.0` segment à la <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> propriété :
+La bibliothèque d’authentification et les Blazor modèles de projet utilisent des points de terminaison OpenID Connect (OIDC) v 1.0. Pour utiliser un point de terminaison v 2.0, configurez l’option de support JWT <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> . Dans l’exemple suivant, AAD est configuré pour v 2.0 en ajoutant un `v2.0` segment à la <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> propriété :
 
 ```csharp
 builder.Services.Configure<JwtBearerOptions>(
@@ -1047,7 +1054,7 @@ La liste des revendications dans le jeton d’ID change pour les points de termi
 
 Pour configurer une Blazor WebAssembly application afin d’utiliser l' [infrastructure ASP.net Core gRPC](xref:grpc/index):
 
-* Activez gRPC-Web sur le serveur. Pour plus d’informations, consultez <xref:grpc/browser>.
+* Activez gRPC-Web sur le serveur. Pour plus d'informations, consultez <xref:grpc/browser>.
 * Inscrivez les services gRPC pour le gestionnaire de messages de l’application. L’exemple suivant configure le gestionnaire de messages d’autorisation de l’application pour qu’il utilise le [ `GreeterClient` service à partir du didacticiel gRPC](xref:tutorials/grpc/grpc-start#create-a-grpc-service) ( `Program.Main` ) :
 
 ```csharp
@@ -1117,4 +1124,4 @@ Server response: <strong>@serverResponse</strong>
 
 L’espace réservé `{APP ASSEMBLY}` est le nom de l’assembly de l’application (par exemple, `BlazorSample` ). Pour utiliser la `Status.DebugException` propriété, utilisez [GRPC .net. client](https://www.nuget.org/packages/Grpc.Net.Client) version 2.30.0 ou ultérieure.
 
-Pour plus d’informations, consultez <xref:grpc/browser>.
+Pour plus d'informations, consultez <xref:grpc/browser>.

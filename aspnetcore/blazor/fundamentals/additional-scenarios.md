@@ -15,20 +15,20 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: b28e4e43b88fcf8eab9e8959142cca21223c57ff
-ms.sourcegitcommit: e216e8f4afa21215dc38124c28d5ee19f5ed7b1e
+ms.openlocfilehash: b32710e515d111b7dd6556f1db55082cd56a82b5
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86239632"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819000"
 ---
-# <a name="aspnet-core-blazor-hosting-model-configuration"></a>BlazorConfiguration du modèle d’hébergement ASP.net Core
+# <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>BlazorConfiguration du modèle d’hébergement ASP.net Core
 
-Par [Daniel Roth](https://github.com/danroth27) et [Luke Latham](https://github.com/guardrex)
+Par [Daniel Roth](https://github.com/danroth27), [MacKinnon argent](https://github.com/MackinnonBuck)et [Luke Latham](https://github.com/guardrex)
 
 Cet article traite de l’hébergement de la configuration du modèle.
 
-### <a name="signalr-cross-origin-negotiation-for-authentication"></a>SignalRnégociation Cross-Origin pour l’authentification
+### <a name="no-locsignalr-cross-origin-negotiation-for-authentication"></a>SignalRnégociation Cross-Origin pour l’authentification
 
 *Cette section s’applique à Blazor WebAssembly .*
 
@@ -59,7 +59,7 @@ Pour configurer le SignalR client sous-jacent de manière à envoyer des informa
       }).Build();
   ```
 
-Pour plus d’informations, consultez <xref:signalr/configuration#configure-additional-options>.
+Pour plus d'informations, consultez <xref:signalr/configuration#configure-additional-options>.
 
 ## <a name="reflect-the-connection-state-in-the-ui"></a>Refléter l’état de la connexion dans l’interface utilisateur
 
@@ -125,7 +125,7 @@ Blazor Serverles applications sont configurées par défaut pour prérestituer l
 
 Le rendu des composants serveur à partir d’une page HTML statique n’est pas pris en charge.
 
-## <a name="configure-the-signalr-client-for-blazor-server-apps"></a>Configurer le SignalR client pour les Blazor Server applications
+## <a name="configure-the-no-locsignalr-client-for-no-locblazor-server-apps"></a>Configurer le SignalR client pour les Blazor Server applications
 
 *Cette section s’applique à Blazor Server .*
 
@@ -141,7 +141,7 @@ Pour configurer la SignalR journalisation du client :
 ```cshtml
     ...
 
-    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
       Blazor.start({
         configureSignalR: function (builder) {
@@ -169,7 +169,7 @@ Pour modifier les événements de connexion :
 ```cshtml
     ...
 
-    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
       Blazor.start({
         reconnectionHandler: {
@@ -191,7 +191,7 @@ Pour régler le nombre et l’intervalle de nouvelles tentatives de connexion :
 ```cshtml
     ...
 
-    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
       Blazor.start({
         reconnectionOptions: {
@@ -213,7 +213,7 @@ Pour masquer l’affichage de reconnexion :
 ```cshtml
     ...
 
-    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
       window.addEventListener('beforeunload', function () {
         Blazor.defaultReconnectionHandler._reconnectionDisplay = {};
@@ -230,6 +230,41 @@ Blazor.defaultReconnectionHandler._reconnectionDisplay =
 ```
 
 L’espace réservé `{ELEMENT ID}` est l’ID de l’élément HTML à afficher.
+
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="influence-html-head-tag-elements"></a>Influencer les `<head>` éléments de balise HTML
+
+*Cette section s’applique à Blazor WebAssembly et Blazor Server .*
+
+Lors du rendu, `Title` les `Link` composants, et `Meta` ajoutent ou mettent à jour des données dans les `<head>` éléments de balise HTML :
+
+```razor
+@using Microsoft.AspNetCore.Components.Web.Extensions.Head
+
+<Title Value="{TITLE}" />
+<Link href="{URL}" rel="stylesheet" />
+<Meta content="{DESCRIPTION}" name="description" />
+```
+
+Dans l’exemple précédent, les espaces réservés pour `{TITLE}` , `{URL}` et `{DESCRIPTION}` sont des valeurs de chaîne, des Razor variables ou des Razor expressions.
+
+Les caractéristiques suivantes s’appliquent :
+
+* Le prérendu côté serveur est pris en charge.
+* Le `Value` paramètre est le seul paramètre valide pour le `Title` composant.
+* Les attributs HTML fournis aux `Meta` `Link` composants et sont capturés dans des [attributs supplémentaires](xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters) et passés à la balise HTML rendue.
+* Pour plusieurs `Title` composants, le titre de la page reflète le `Value` du dernier `Title` composant restitué.
+* Si plusieurs `Meta` `Link` composants ou sont inclus avec des attributs identiques, une seule balise HTML est restituée pour chaque `Meta` `Link` composant ou. Deux `Meta` `Link` composants ou ne peuvent pas faire référence à la même balise HTML rendue.
+* Les modifications apportées aux paramètres des `Meta` composants ou existants `Link` sont reflétées dans leurs balises HTML rendues.
+* Lorsque les `Link` `Meta` composants ou ne sont plus restitués et donc supprimés par l’infrastructure, leurs balises HTML rendues sont supprimées.
+
+Quand l’un des composants de l’infrastructure est utilisé dans un composant enfant, la balise HTML rendue influence tout autre composant enfant du composant parent, à condition que le composant enfant contenant le composant d’infrastructure soit rendu. La distinction entre l’utilisation de l’un de ces composants d’infrastructure dans un composant enfant et la mise en place d’une balise HTML dans `wwwroot/index.html` ou `Pages/_Host.cshtml` est que la balise HTML rendue d’un composant d’infrastructure :
+
+* Peut être modifié par l’état de l’application. Une balise HTML codée en dur ne peut pas être modifiée par l’état de l’application.
+* Est supprimé du code HTML `<head>` lorsque le composant parent n’est plus rendu.
+
+::: moniker-end
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

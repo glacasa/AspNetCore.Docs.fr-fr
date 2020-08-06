@@ -15,18 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: fbb3f6d254e6d294edc7af59d7980a1d67e4a801
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: 8d75852c74b33fe538d05c5945829e0726a5030f
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568806"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818818"
 ---
-# <a name="secure-aspnet-core-blazor-webassembly"></a>ASP.NET Core sécuriséBlazor WebAssembly
+# <a name="secure-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core sécuriséBlazor WebAssembly
 
 Par [Javier Calvarro Nelson](https://github.com/javiercn)
 
-Blazor WebAssemblyles applications sont sécurisées de la même façon que les applications à page unique (SPAs). Il existe plusieurs approches pour authentifier les utilisateurs dans la base de code, mais l’approche la plus courante et la plus complète consiste à utiliser une implémentation basée sur le [protocole OAuth 2,0](https://oauth.net/), par exemple [Open ID Connect (OIDC)](https://openid.net/connect/).
+Blazor WebAssemblyles applications sont sécurisées de la même façon que les applications à page unique (SPAs). Il existe plusieurs approches pour l’authentification des utilisateurs sur la base de cas, mais l’approche la plus courante et la plus complète consiste à utiliser une implémentation basée sur le [protocole OAuth 2,0](https://oauth.net/), tel que [OpenID Connect (OIDC)](https://openid.net/connect/).
 
 ## <a name="authentication-library"></a>Bibliothèque d’authentification
 
@@ -94,7 +94,7 @@ Appliquez l' [ `[Authorize]` attribut](xref:blazor/security/index#authorize-attr
 
 Les jetons d’actualisation ne peuvent pas être sécurisés côté client dans les Blazor WebAssembly applications. Par conséquent, les jetons d’actualisation ne doivent pas être envoyés à l’application pour une utilisation directe.
 
-Les jetons d’actualisation peuvent être conservés et utilisés par l’application côté serveur dans une solution hébergée Blazor WebAssembly pour accéder aux API tierces. Pour plus d’informations, consultez <xref:blazor/security/webassembly/additional-scenarios#authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party>.
+Les jetons d’actualisation peuvent être conservés et utilisés par l’application côté serveur dans une solution hébergée Blazor WebAssembly pour accéder aux API tierces. Pour plus d'informations, consultez <xref:blazor/security/webassembly/additional-scenarios#authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party>.
 
 ## <a name="implementation-guidance"></a>Conseils d’implémentation
 

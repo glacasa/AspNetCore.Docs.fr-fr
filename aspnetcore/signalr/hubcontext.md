@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hubcontext
-ms.openlocfilehash: 85f0f48dd6586b40b8db21eb4b59793069afe2c5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d38cb5b3e818879d3ec40a927acfdd69dc85377a
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405807"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819248"
 ---
 # <a name="send-messages-from-outside-a-hub"></a>Envoyer des messages provenant de l’extérieur d’un concentrateur
 
@@ -114,5 +114,5 @@ public class ChatController : Controller
 ## <a name="related-resources"></a>Ressources associées
 
 * [Prise en main](xref:tutorials/signalr)
-* [Hubs](xref:signalr/hubs)
+* [Concentr](xref:signalr/hubs)
 * [Publication dans Azure](xref:signalr/publish-to-azure-web-app)

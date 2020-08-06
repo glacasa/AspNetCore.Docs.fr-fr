@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 56681e713e008188d57166da9c8fd4eb6923928c
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 6e3753131388c294130f11aa913a0bb7e8127fa3
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944215"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818948"
 ---
-# <a name="aspnet-core-blazor-hosting-models"></a>BlazorModèles d’hébergement ASP.net Core
+# <a name="aspnet-core-no-locblazor-hosting-models"></a>BlazorModèles d’hébergement ASP.net Core
 
 Par [Daniel Roth](https://github.com/danroth27)
 
@@ -32,7 +32,7 @@ Blazorest un Framework Web conçu pour s’exécuter côté client dans le navig
 
 Le modèle d’hébergement principal pour Blazor s’exécute côté client dans le navigateur sur Webassembly. L' Blazor application, ses dépendances et le Runtime .net sont téléchargés dans le navigateur. L’application est exécutée directement sur le thread d’interface utilisateur du navigateur. Les mises à jour de l’interface utilisateur et la gestion des événements se produisent dans le même processus. Les ressources de l’application sont déployées en tant que fichiers statiques sur un serveur Web ou un service qui prend en charge le contenu statique sur les clients.
 
-![Blazor WebAssembly: L' Blazor application s’exécute sur un thread d’interface utilisateur dans le navigateur.](hosting-models/_static/blazor-webassembly.png)
+![::: No-Loc (éblouissant webassembly) :::::::: No-Loc (éblouissant) ::: app s’exécute sur un thread d’interface utilisateur dans le navigateur.](hosting-models/_static/blazor-webassembly.png)
 
 Pour créer une Blazor application à l’aide du modèle d’hébergement côté client, utilisez le modèle d' ** Blazor WebAssembly application** ( [`dotnet new blazorwasm`](/dotnet/core/tools/dotnet-new) ).
 
@@ -57,13 +57,13 @@ L’hébergement présente des inconvénients Blazor WebAssembly :
 * La taille du téléchargement est supérieure, et les applications prennent plus de temps à se charger.
 * Le Runtime .NET et la prise en charge des outils sont moins matures. Par exemple, des limitations existent dans la prise en charge de [.NET standard](/dotnet/standard/net-standard) et le débogage.
 
-Le Blazor modèle d’application hébergée prend en charge les [conteneurs dockers](/dotnet/standard/microservices-architecture/container-docker-introduction/index). Cliquez avec le bouton droit sur le projet serveur dans Visual Studio, puis sélectionnez **Ajouter**la  >  **prise en charge**de l’ancrage.
+Le modèle d’application hébergée Blazor prend en charge les [conteneurs dockers](/dotnet/standard/microservices-architecture/container-docker-introduction/index). Cliquez avec le bouton droit sur le projet serveur dans Visual Studio, puis sélectionnez **Ajouter**la  >  **prise en charge**de l’ancrage.
 
 ## Blazor Server
 
 Avec le Blazor Server modèle d’hébergement, l’application est exécutée sur le serveur à partir d’une application ASP.net core. Les mises à jour de l’interface utilisateur, la gestion des événements et les appels JavaScript sont gérés sur une [SignalR](xref:signalr/introduction) connexion.
 
-![Le navigateur interagit avec l’application (hébergée à l’intérieur d’une application ASP.NET Core) sur le serveur via une SignalR connexion.](hosting-models/_static/blazor-server.png)
+![Le navigateur interagit avec l’application (hébergée à l’intérieur d’une application ASP.NET Core) sur le serveur via un ::: No-Loc (Signalr) ::: Connection.](hosting-models/_static/blazor-server.png)
 
 Pour créer une Blazor application à l’aide du Blazor Server modèle d’hébergement, utilisez le modèle d' ** Blazor Server application** ASP.net Core ( [`dotnet new blazorserver`](/dotnet/core/tools/dotnet-new) ). L’application ASP.NET Core héberge l' Blazor Server application et crée le SignalR point de terminaison où les clients se connectent.
 
@@ -124,7 +124,7 @@ Chaque écran de navigateur (onglet de navigateur ou IFRAME) qui est connecté �
 
 Blazortient compte de la fermeture d’un onglet de navigateur ou de la navigation vers une URL externe un arrêt *normal* . En cas de résiliation appropriée, le circuit et les ressources associées sont immédiatement libérés. Un client peut également se déconnecter de manière non appropriée, par exemple en raison d’une interruption du réseau. Blazor Serverstocke les circuits déconnectés pour un intervalle configurable afin de permettre au client de se reconnecter.
 
-Blazor Serverpermet au code de définir un *Gestionnaire de circuit*qui permet d’exécuter du code sur les modifications de l’état du circuit d’un utilisateur. Pour plus d’informations, consultez <xref:blazor/advanced-scenarios#blazor-server-circuit-handler>.
+Blazor Serverpermet au code de définir un *Gestionnaire de circuit*qui permet d’exécuter du code sur les modifications de l’état du circuit d’un utilisateur. Pour plus d'informations, consultez <xref:blazor/advanced-scenarios#blazor-server-circuit-handler>.
 
 ### <a name="ui-latency"></a>Latence de l’interface utilisateur
 
@@ -145,7 +145,7 @@ Blazor Serverles applications requièrent une SignalR connexion active au serveu
 
 Une Blazor Server application effectue un prérendu en réponse à la première demande du client, qui configure l’état de l’interface utilisateur sur le serveur. Lorsque le client tente de créer une SignalR connexion, le client doit se reconnecter au même serveur. Blazor Serverles applications qui utilisent plusieurs serveurs principaux doivent implémenter des *sessions rémanentes* pour les SignalR connexions.
 
-Nous vous recommandons d’utiliser le [ SignalR service Azure](/azure/azure-signalr) pour les Blazor Server applications. Le service permet la mise à l’échelle d’une Blazor Server application vers un grand nombre de connexions simultanées SignalR . Les sessions rémanentes sont activées pour le SignalR service Azure en définissant l' `ServerStickyMode` option ou la valeur de configuration du service sur `Required` . Pour plus d’informations, consultez <xref:blazor/host-and-deploy/server#signalr-configuration>.
+Nous vous recommandons d’utiliser le [ SignalR service Azure](/azure/azure-signalr) pour les Blazor Server applications. Le service permet la mise à l’échelle d’une Blazor Server application vers un grand nombre de connexions simultanées SignalR . Les sessions rémanentes sont activées pour le SignalR service Azure en définissant l' `ServerStickyMode` option ou la valeur de configuration du service sur `Required` . Pour plus d'informations, consultez <xref:blazor/host-and-deploy/server#signalr-configuration>.
 
 Lorsque vous utilisez IIS, les sessions rémanentes sont activées avec Application Request Routing. Pour plus d’informations, consultez [équilibrage de charge http à l’aide de application Request Routing](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing).
 

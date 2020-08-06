@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: f7bd0d356030e6ddb95c77d7376995320e3ec40e
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6bd3d2f7902baf16e278e58feb83abb13f6e6821
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401881"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818610"
 ---
-# <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>Blazor WebAssemblyMeilleures pratiques en matière de performances de ASP.net Core
+# <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>Blazor WebAssemblyMeilleures pratiques en matière de performances de ASP.net Core
 
 Par [Pranav Krishnamoorthy](https://github.com/pranavkm)
 
@@ -72,7 +72,7 @@ Dans l’exemple suivant :
 }
 ```
 
-Pour plus d’informations, consultez <xref:blazor/components/lifecycle#after-component-render>.
+Pour plus d'informations, consultez <xref:blazor/components/lifecycle#after-component-render>.
 
 ## <a name="virtualize-re-usable-fragments"></a>Virtualiser les fragments réutilisables
 
@@ -145,6 +145,10 @@ La [liaison d’une Blazor WebAssembly application](xref:blazor/host-and-deploy/
 ```dotnetcli
 dotnet publish -c Release
 ```
+
+### <a name="lazy-load-assemblies"></a>Charger des assemblys en différé
+
+Chargez les assemblys au moment de l’exécution lorsque les assemblys sont requis par un itinéraire. Pour plus d'informations, consultez <xref:blazor/webassembly-lazy-load-assemblies>.
 
 ### <a name="compression"></a>Compression
 

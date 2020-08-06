@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
-ms.openlocfilehash: 6aef51a0f8bf4ec2e7cb6115856bc465a90ec2ee
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: a28c43ed68adb7af9c30f7ae62872811361d8f9c
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059847"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819091"
 ---
-# <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Intégrer Razor des composants de ASP.net core dans Razor des pages et des applications MVC
+# <a name="integrate-aspnet-core-no-locrazor-components-into-no-locrazor-pages-and-mvc-apps"></a>Intégrer Razor des composants de ASP.net core dans Razor des pages et des applications MVC
 
 Par [Luke Latham](https://github.com/guardrex) et [Daniel Roth](https://github.com/danroth27)
 
@@ -86,7 +86,7 @@ Une Razor application de pages ou MVC existante peut intégrer Razor des composa
 
 1. Intégrer des composants dans n’importe quelle page ou vue. Pour plus d’informations, consultez la section [rendre les composants à partir d’une page ou d’une vue](#render-components-from-a-page-or-view) .
 
-## <a name="use-routable-components-in-a-razor-pages-app"></a>Utiliser des composants routables dans une Razor application pages
+## <a name="use-routable-components-in-a-no-locrazor-pages-app"></a>Utiliser des composants routables dans une Razor application pages
 
 *Cette section concerne l’ajout de composants qui sont directement routables à partir des demandes des utilisateurs.*
 
@@ -99,7 +99,7 @@ Pour prendre en charge les composants routables Razor dans les Razor application
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
 
-   <Router AppAssembly="typeof(Program).Assembly">
+   <Router AppAssembly="@typeof(Program).Assembly">
        <Found Context="routeData">
            <RouteView RouteData="routeData" />
        </Found>
@@ -174,7 +174,7 @@ Pour prendre en charge les composants routables Razor dans les applications MVC�
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
 
-   <Router AppAssembly="typeof(Program).Assembly">
+   <Router AppAssembly="@typeof(Program).Assembly">
        <Found Context="routeData">
            <RouteView RouteData="routeData" />
        </Found>
@@ -274,7 +274,7 @@ La Razor page suivante affiche un `Counter` composant :
 }
 ```
 
-Pour plus d’informations, consultez <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
+Pour plus d'informations, consultez <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
 
 ### <a name="render-noninteractive-components"></a>Rendre les composants non interactifs
 
@@ -297,7 +297,7 @@ Dans la Razor page suivante, le `Counter` composant est rendu statiquement avec 
 }
 ```
 
-Pour plus d’informations, consultez <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
+Pour plus d'informations, consultez <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
 
 ## <a name="component-namespaces"></a>Espaces de noms de composants
 
@@ -312,4 +312,4 @@ Lorsque vous utilisez un dossier personnalisé pour stocker les composants de l�
 
 Le `_ViewImports.cshtml` fichier se trouve dans le `Pages` dossier d’une Razor application pages ou dans le `Views` dossier d’une application MVC.
 
-Pour plus d’informations, consultez <xref:blazor/components/index#namespaces>.
+Pour plus d'informations, consultez <xref:blazor/components/index#namespaces>.

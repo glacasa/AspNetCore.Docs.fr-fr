@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 4f85c4a9803482f39446dda599f10829c9879f27
-ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
+ms.openlocfilehash: f7110688a7a03dd0cf533fa5f9759af3363169f8
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/15/2020
-ms.locfileid: "86407760"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818935"
 ---
-# <a name="aspnet-core-blazor-routing"></a>Routage de ASP.NET Core Blazor
+# <a name="aspnet-core-no-locblazor-routing"></a>Routage de ASP.NET Core Blazor
 
 Par [Luke Latham](https://github.com/guardrex)
 
@@ -43,7 +43,7 @@ Pour plus d’informations sur la configuration <xref:Microsoft.AspNetCore.Build
 Le <xref:Microsoft.AspNetCore.Components.Routing.Router> composant active le routage vers chaque composant avec un itinéraire spécifié. Le <xref:Microsoft.AspNetCore.Components.Routing.Router> composant apparaît dans le `App.razor` fichier :
 
 ```razor
-<Router AppAssembly="typeof(Startup).Assembly">
+<Router AppAssembly="@typeof(Startup).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
     </Found>
@@ -72,7 +72,7 @@ Plusieurs modèles de routage peuvent être appliqués à un composant. Le compo
 ```
 
 > [!IMPORTANT]
-> Pour que les URL soient correctement résolues, l’application doit inclure une `<base>` balise dans son `wwwroot/index.html` fichier ( Blazor WebAssembly ) ou `Pages/_Host.cshtml` fichier ( Blazor Server ) avec le chemin d’accès de base de l’application spécifié dans l' `href` attribut ( `<base href="/">` ). Pour plus d’informations, consultez <xref:blazor/host-and-deploy/index#app-base-path>.
+> Pour que les URL soient correctement résolues, l’application doit inclure une `<base>` balise dans son `wwwroot/index.html` fichier ( Blazor WebAssembly ) ou `Pages/_Host.cshtml` fichier ( Blazor Server ) avec le chemin d’accès de base de l’application spécifié dans l' `href` attribut ( `<base href="/">` ). Pour plus d'informations, consultez <xref:blazor/host-and-deploy/index#app-base-path>.
 
 ## <a name="provide-custom-content-when-content-isnt-found"></a>Fournir du contenu personnalisé lorsque le contenu est introuvable
 
@@ -100,7 +100,7 @@ Utilisez le <xref:Microsoft.AspNetCore.Components.Routing.Router.AdditionalAssem
 
 ```razor
 <Router
-    AppAssembly="typeof(Program).Assembly"
+    AppAssembly="@typeof(Program).Assembly"
     AdditionalAssemblies="new[] { typeof(Component1).Assembly }">
     ...
 </Router>
@@ -172,7 +172,7 @@ Le `"/{**path}"` modèle comprend les éléments suivants :
 > [!NOTE]
 > La syntaxe de paramètre *catch-all* ( `*` / `**` ) n’est **pas** prise en charge dans les Razor composants ( `.razor` ).
 
-Pour plus d’informations, consultez <xref:fundamentals/routing>.
+Pour plus d'informations, consultez <xref:fundamentals/routing>.
 
 ## <a name="navlink-component"></a>Composant NavLink
 
