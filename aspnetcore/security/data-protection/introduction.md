@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/introduction
-ms.openlocfilehash: 60cf659c720012d05bb2a6f1433c18d347469462
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: bf41d5a756c988b239824c19ef7a9d177a93a4a1
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399528"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913824"
 ---
 # <a name="aspnet-core-data-protection"></a>Protection des données ASP.NET Core
 
@@ -53,7 +53,7 @@ Nous avons commencé par identifier les problèmes avec la pile existante. Aprè
 
 Avec ces principes à l’esprit, nous avons développé une pile de protection des données simple et [facile à utiliser](xref:security/data-protection/using-data-protection) .
 
-Les API de protection des données ASP.NET Core ne sont pas principalement destinées à la persistance illimitée des charges utiles confidentielles. D’autres technologies telles que [DPAPI Windows CNG](https://msdn.microsoft.com/library/windows/desktop/hh706794%28v=vs.85%29.aspx) et [Azure Rights Management](/rights-management/) sont plus adaptées au scénario de stockage indéfini, et elles ont des fonctionnalités de gestion de clés fortes. Cela dit, rien n’empêche un développeur d’utiliser les API de protection des données ASP.NET Core pour la protection à long terme des données confidentielles.
+Les API de protection des données ASP.NET Core ne sont pas principalement destinées à la persistance illimitée des charges utiles confidentielles. D’autres technologies telles que [DPAPI Windows CNG](/windows/win32/seccng/cng-dpapi) et [Azure Rights Management](/rights-management/) sont plus adaptées au scénario de stockage indéfini, et elles ont des fonctionnalités de gestion de clés fortes. Cela dit, rien n’empêche un développeur d’utiliser les API de protection des données ASP.NET Core pour la protection à long terme des données confidentielles.
 
 ## <a name="audience"></a>Public visé
 
@@ -81,9 +81,9 @@ La pile de protection des données est constituée de cinq packages.
 
 * [Microsoft. AspNetCore. dataprotection. extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) contient des API supplémentaires que les développeurs peuvent trouver utiles, mais qui n’appartiennent pas au package de base. Par exemple, ce package contient des méthodes de fabrique pour instancier le système de protection des données afin de stocker les clés à un emplacement sur le système de fichiers sans injection de dépendances (consultez <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider> ). Il contient également des méthodes d’extension pour limiter la durée de vie des charges utiles protégées (consultez <xref:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector> ).
 
-* [Microsoft.AspNetCore.DataProtection.SystemWeb](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.SystemWeb/) peut être installé dans une application ASP.net 4. x existante pour rediriger ses `<machineKey>` opérations afin d’utiliser la nouvelle pile de protection des données ASP.net core. Pour plus d’informations, consultez <xref:security/data-protection/compatibility/replacing-machinekey>.
+* [Microsoft.AspNetCore.DataProtection.SystemWeb](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.SystemWeb/) peut être installé dans une application ASP.net 4. x existante pour rediriger ses `<machineKey>` opérations afin d’utiliser la nouvelle pile de protection des données ASP.net core. Pour plus d'informations, consultez <xref:security/data-protection/compatibility/replacing-machinekey>.
 
-* [Microsoft. AspNetCore. Cryptography. Keydérivation](https://www.nuget.org/packages/Microsoft.AspNetCore.Cryptography.KeyDerivation/) fournit une implémentation de la routine de hachage de mot de passe PBKDF2 et peut être utilisé par les systèmes qui doivent gérer les mots de passe utilisateur en toute sécurité. Pour plus d’informations, consultez <xref:security/data-protection/consumer-apis/password-hashing>.
+* [Microsoft. AspNetCore. Cryptography. Keydérivation](https://www.nuget.org/packages/Microsoft.AspNetCore.Cryptography.KeyDerivation/) fournit une implémentation de la routine de hachage de mot de passe PBKDF2 et peut être utilisé par les systèmes qui doivent gérer les mots de passe utilisateur en toute sécurité. Pour plus d'informations, consultez <xref:security/data-protection/consumer-apis/password-hashing>.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

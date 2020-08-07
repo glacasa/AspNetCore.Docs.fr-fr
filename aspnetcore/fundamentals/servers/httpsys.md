@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 27ee69130bc455ab2570556091692053d59e89a5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f7c5d75fbbbecacea8bbe3a0e54b526f000a001b
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408225"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913756"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>Implémentation du serveur web HTTP.sys dans ASP.NET Core
 
@@ -169,7 +169,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
    Les paramètres de `UrlPrefixes` remplacent les paramètres `UseUrls`/`urls`/`ASPNETCORE_URLS`. Par conséquent, avec `UseUrls`, `urls` et la variable d’environnement `ASPNETCORE_URLS`, il est plus facile de basculer entre Kestrel et HTTP.sys.
 
-   HTTP.sys utilise les [formats de chaîne UrlPrefix de l’API de serveur HTTP](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx).
+   HTTP.sys utilise les [formats de chaîne UrlPrefix de l’API de serveur HTTP](/windows/win32/http/urlprefix-strings).
 
    > [!WARNING]
    > Les liaisons génériques de niveau supérieur (`http://*:80/` et `http://+:80`) ne doivent **pas** être utilisées. Les liaisons génériques de niveau supérieur créent des failles de sécurité dans l’application. Cela s’applique aux caractères génériques forts et faibles. Utilisez des noms d’hôte ou des adresses IP explicites plutôt que des caractères génériques. Une liaison générique de sous-domaine (par exemple, `*.mysub.com`) ne constitue pas un risque de sécurité si vous contrôlez le domaine parent en entier (par opposition à `*.com`, qui est vulnérable). Pour plus d’informations, consultez [RFC 7230 : Section 5,4 : Host](https://tools.ietf.org/html/rfc7230#section-5.4).
@@ -253,7 +253,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    Documentation de référence de *netsh.exe* :
 
    * [Commandes netsh pour le protocole HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
-   * [Chaînes UrlPrefix](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)
+   * [Chaînes UrlPrefix](/windows/win32/http/urlprefix-strings)
 
 1. Exécutez l'application.
 
@@ -272,7 +272,7 @@ Pour les applications hébergées par HTTP.sys qui interagissent avec les demand
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Activer l’authentification Windows avec HTTP.sys](xref:security/authentication/windowsauth#httpsys)
-* [API de serveur HTTP](https://msdn.microsoft.com/library/windows/desktop/aa364510.aspx)
+* [API de serveur HTTP](/windows/win32/http/http-api-start-page)
 * [Référentiel GitHub aspnet/HttpSysServer (code source)](https://github.com/aspnet/HttpSysServer/)
 * [Hôte](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>
@@ -420,7 +420,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
    Les paramètres de `UrlPrefixes` remplacent les paramètres `UseUrls`/`urls`/`ASPNETCORE_URLS`. Par conséquent, avec `UseUrls`, `urls` et la variable d’environnement `ASPNETCORE_URLS`, il est plus facile de basculer entre Kestrel et HTTP.sys.
 
-   HTTP.sys utilise les [formats de chaîne UrlPrefix de l’API de serveur HTTP](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx).
+   HTTP.sys utilise les [formats de chaîne UrlPrefix de l’API de serveur HTTP](/windows/win32/http/urlprefix-strings).
 
    > [!WARNING]
    > Les liaisons génériques de niveau supérieur (`http://*:80/` et `http://+:80`) ne doivent **pas** être utilisées. Les liaisons génériques de niveau supérieur créent des failles de sécurité dans l’application. Cela s’applique aux caractères génériques forts et faibles. Utilisez des noms d’hôte ou des adresses IP explicites plutôt que des caractères génériques. Une liaison générique de sous-domaine (par exemple, `*.mysub.com`) ne constitue pas un risque de sécurité si vous contrôlez le domaine parent en entier (par opposition à `*.com`, qui est vulnérable). Pour plus d’informations, consultez [RFC 7230 : Section 5,4 : Host](https://tools.ietf.org/html/rfc7230#section-5.4).
@@ -504,7 +504,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    Documentation de référence de *netsh.exe* :
 
    * [Commandes netsh pour le protocole HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
-   * [Chaînes UrlPrefix](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)
+   * [Chaînes UrlPrefix](/windows/win32/http/urlprefix-strings)
 
 1. Exécutez l'application.
 
@@ -523,7 +523,7 @@ Pour les applications hébergées par HTTP.sys qui interagissent avec les demand
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Activer l’authentification Windows avec HTTP.sys](xref:security/authentication/windowsauth#httpsys)
-* [API de serveur HTTP](https://msdn.microsoft.com/library/windows/desktop/aa364510.aspx)
+* [API de serveur HTTP](/windows/win32/http/http-api-start-page)
 * [Référentiel GitHub aspnet/HttpSysServer (code source)](https://github.com/aspnet/HttpSysServer/)
 * [Hôte](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>
@@ -673,7 +673,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
    Les paramètres de `UrlPrefixes` remplacent les paramètres `UseUrls`/`urls`/`ASPNETCORE_URLS`. Par conséquent, avec `UseUrls`, `urls` et la variable d’environnement `ASPNETCORE_URLS`, il est plus facile de basculer entre Kestrel et HTTP.sys.
 
-   HTTP.sys utilise les [formats de chaîne UrlPrefix de l’API de serveur HTTP](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx).
+   HTTP.sys utilise les [formats de chaîne UrlPrefix de l’API de serveur HTTP](/windows/win32/http/urlprefix-strings).
 
    > [!WARNING]
    > Les liaisons génériques de niveau supérieur (`http://*:80/` et `http://+:80`) ne doivent **pas** être utilisées. Les liaisons génériques de niveau supérieur créent des failles de sécurité dans l’application. Cela s’applique aux caractères génériques forts et faibles. Utilisez des noms d’hôte ou des adresses IP explicites plutôt que des caractères génériques. Une liaison générique de sous-domaine (par exemple, `*.mysub.com`) ne constitue pas un risque de sécurité si vous contrôlez le domaine parent en entier (par opposition à `*.com`, qui est vulnérable). Pour plus d’informations, consultez [RFC 7230 : Section 5,4 : Host](https://tools.ietf.org/html/rfc7230#section-5.4).
@@ -757,7 +757,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    Documentation de référence de *netsh.exe* :
 
    * [Commandes netsh pour le protocole HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
-   * [Chaînes UrlPrefix](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)
+   * [Chaînes UrlPrefix](/windows/win32/http/urlprefix-strings)
 
 1. Exécutez l'application.
 
@@ -776,7 +776,7 @@ Pour les applications hébergées par HTTP.sys qui interagissent avec les demand
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Activer l’authentification Windows avec HTTP.sys](xref:security/authentication/windowsauth#httpsys)
-* [API de serveur HTTP](https://msdn.microsoft.com/library/windows/desktop/aa364510.aspx)
+* [API de serveur HTTP](/windows/win32/http/http-api-start-page)
 * [Référentiel GitHub aspnet/HttpSysServer (code source)](https://github.com/aspnet/HttpSysServer/)
 * [Hôte](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>
@@ -926,7 +926,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
    Les paramètres de `UrlPrefixes` remplacent les paramètres `UseUrls`/`urls`/`ASPNETCORE_URLS`. Par conséquent, avec `UseUrls`, `urls` et la variable d’environnement `ASPNETCORE_URLS`, il est plus facile de basculer entre Kestrel et HTTP.sys.
 
-   HTTP.sys utilise les [formats de chaîne UrlPrefix de l’API de serveur HTTP](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx).
+   HTTP.sys utilise les [formats de chaîne UrlPrefix de l’API de serveur HTTP](/windows/win32/http/urlprefix-strings).
 
    > [!WARNING]
    > Les liaisons génériques de niveau supérieur (`http://*:80/` et `http://+:80`) ne doivent **pas** être utilisées. Les liaisons génériques de niveau supérieur créent des failles de sécurité dans l’application. Cela s’applique aux caractères génériques forts et faibles. Utilisez des noms d’hôte ou des adresses IP explicites plutôt que des caractères génériques. Une liaison générique de sous-domaine (par exemple, `*.mysub.com`) ne constitue pas un risque de sécurité si vous contrôlez le domaine parent en entier (par opposition à `*.com`, qui est vulnérable). Pour plus d’informations, consultez [RFC 7230 : Section 5,4 : Host](https://tools.ietf.org/html/rfc7230#section-5.4).
@@ -1010,7 +1010,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
    Documentation de référence de *netsh.exe* :
 
    * [Commandes netsh pour le protocole HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
-   * [Chaînes UrlPrefix](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)
+   * [Chaînes UrlPrefix](/windows/win32/http/urlprefix-strings)
 
 1. Exécutez l'application.
 
@@ -1029,7 +1029,7 @@ Pour les applications hébergées par HTTP.sys qui interagissent avec les demand
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Activer l’authentification Windows avec HTTP.sys](xref:security/authentication/windowsauth#httpsys)
-* [API de serveur HTTP](https://msdn.microsoft.com/library/windows/desktop/aa364510.aspx)
+* [API de serveur HTTP](/windows/win32/http/http-api-start-page)
 * [Référentiel GitHub aspnet/HttpSysServer (code source)](https://github.com/aspnet/HttpSysServer/)
 * [Hôte](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>

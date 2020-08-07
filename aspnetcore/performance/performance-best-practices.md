@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 15f3ce5a8e8d47ac567acaadcdc4bf8ba738b2ff
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f74f6ce93093adbc931dd90b32a14de5d4f89096
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408173"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913891"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>Meilleures pratiques en matière de performances de ASP.NET Core
 
@@ -29,7 +29,7 @@ Cet article fournit des instructions pour les meilleures pratiques en matière d
 
 ## <a name="cache-aggressively"></a>Mettre en cache de façon agressive
 
-La mise en cache est présentée dans plusieurs sections de ce document. Pour plus d’informations, consultez <xref:performance/caching/response>.
+La mise en cache est présentée dans plusieurs sections de ce document. Pour plus d'informations, consultez <xref:performance/caching/response>.
 
 ## <a name="understand-hot-code-paths"></a>Comprendre les chemins de code à chaud
 
@@ -50,7 +50,7 @@ Un problème de performances courant dans les applications de ASP.NET Core consi
 **Procédez**comme suit :
 
 * Rendez les [chemins de code à chaud](#understand-hot-code-paths) asynchrones.
-* Appeler l’accès aux données, les e/s et les API d’opérations de longue durée de manière asynchrone si une API asynchrone est disponible. N' **not** utilisez pas [Task. Run](/dotnet/api/system.threading.tasks.task.run) pour rendre une API synchronus asynchrone.
+* Appeler l’accès aux données, les e/s et les API d’opérations de longue durée de manière asynchrone si une API asynchrone est disponible. N' **not** utilisez pas [Task. Run](/dotnet/api/system.threading.tasks.task.run) pour rendre une API synchrone asynchrone.
 * Rendez les actions de contrôleur/ Razor page asynchrones. L’ensemble de la pile des appels est asynchrone afin de tirer parti des modèles [Async/await](/dotnet/csharp/programming-guide/concepts/async/) .
 
 Un profileur, tel que [PerfView](https://github.com/Microsoft/perfview), peut être utilisé pour rechercher les threads ajoutés fréquemment au [pool de threads](/windows/desktop/procthread/thread-pools). L' `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` événement indique qu’un thread a été ajouté au pool de threads. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
@@ -81,7 +81,7 @@ Recommandations :
 
 * **Appelez toutes** les API d’accès aux données de manière asynchrone.
 * **Ne** récupérez pas plus de données que nécessaire. Écrivez des requêtes pour retourner uniquement les données nécessaires pour la requête HTTP actuelle.
-* **Envisagez** de mettre en cache les données fréquemment sollicitées récupérées à partir d’une base de données ou d’un service distant, si les données obsolètes sont légèrement obsolètes. Selon le scénario, utilisez un [MemoryCache](xref:performance/caching/memory) ou un [DistributedCache](xref:performance/caching/distributed). Pour plus d’informations, consultez <xref:performance/caching/response>.
+* **Envisagez** de mettre en cache les données fréquemment sollicitées récupérées à partir d’une base de données ou d’un service distant, si les données obsolètes sont légèrement obsolètes. Selon le scénario, utilisez un [MemoryCache](xref:performance/caching/memory) ou un [DistributedCache](xref:performance/caching/distributed). Pour plus d'informations, consultez <xref:performance/caching/response>.
 * Réduisez les allers **-** retours réseau. L’objectif est de récupérer les données requises dans un appel unique plutôt que plusieurs appels.
 * **Utilisez** des [requêtes sans suivi](/ef/core/querying/tracking#no-tracking-queries) dans Entity Framework Core lors de l’accès à des données en lecture seule. EF Core pouvez retourner les résultats des requêtes sans suivi plus efficacement.
 * **Filtrez** et regroupez des requêtes LINQ (avec des `.Where` `.Select` instructions, ou `.Sum` , par exemple) pour que le filtrage soit effectué par la base de données.
@@ -146,7 +146,7 @@ Recommandations :
 
 ## <a name="use-the-latest-aspnet-core-release"></a>Utiliser la dernière version de ASP.NET Core
 
-Chaque nouvelle version de ASP.NET Core comprend des améliorations des performances. Les optimisations dans .NET Core et ASP.NET Core signifient que les versions plus récentes sont généralement plus performantes que les anciennes. Par exemple, .NET Core 2,1 a ajouté la prise en charge des expressions régulières compilées et bénéficié à partir de [span \<T> ](https://msdn.microsoft.com/magazine/mt814808.aspx). ASP.NET Core 2,2 a ajouté la prise en charge de HTTP/2. [ASP.NET Core 3,0 ajoute de nombreuses améliorations](xref:aspnetcore-3.0) qui réduisent l’utilisation de la mémoire et améliorent le débit. Si les performances sont prioritaires, envisagez une mise à niveau vers la version actuelle de ASP.NET Core.
+Chaque nouvelle version de ASP.NET Core comprend des améliorations des performances. Les optimisations dans .NET Core et ASP.NET Core signifient que les versions plus récentes sont généralement plus performantes que les anciennes. Par exemple, .NET Core 2,1 a ajouté la prise en charge des expressions régulières compilées et bénéficié à partir de [span \<T> ](/archive/msdn-magazine/2018/january/csharp-all-about-span-exploring-a-new-net-mainstay). ASP.NET Core 2,2 a ajouté la prise en charge de HTTP/2. [ASP.NET Core 3,0 ajoute de nombreuses améliorations](xref:aspnetcore-3.0) qui réduisent l’utilisation de la mémoire et améliorent le débit. Si les performances sont prioritaires, envisagez une mise à niveau vers la version actuelle de ASP.NET Core.
 
 ## <a name="minimize-exceptions"></a>Réduire les exceptions
 
@@ -192,7 +192,7 @@ Le code précédent désérialise de manière asynchrone le corps de la requête
 
 ## <a name="prefer-readformasync-over-requestform"></a>Préférer ReadFormAsync sur Request. Form
 
-Utilisez `HttpContext.Request.ReadFormAsync` à la place de `HttpContext.Request.Form`.
+Utilisez `HttpContext.Request.ReadFormAsync` au lieu de `HttpContext.Request.Form`.
 `HttpContext.Request.Form`peut être lu en toute sécurité uniquement avec les conditions suivantes :
 
 * Le formulaire a été lu par un appel à `ReadFormAsync` , et

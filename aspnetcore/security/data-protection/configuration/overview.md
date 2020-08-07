@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/overview
-ms.openlocfilehash: 65ef506d5857afb71113a0309613a2cbd82893be
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 096862b7149679c14e3d1ca17d38468a14e438a2
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399541"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913877"
 ---
 # <a name="configure-aspnet-core-data-protection"></a>Configurer la protection des données ASP.NET Core
 
@@ -357,7 +357,7 @@ services.AddDataProtection()
 ::: moniker-end
 
 > [!NOTE]
-> L’algorithme de chiffrement par bloc symétrique doit avoir une longueur de clé de >= 128 bits, une taille de bloc de >= 64 bits et doit prendre en charge le chiffrement en mode CBC avec un remplissage de #7 PKCS. L’algorithme de hachage doit avoir une taille Digest de >= 128 bits et doit prendre en charge l’ouverture avec l’indicateur de l' \_ \_ indicateur HMAC de handle de BCRYPT \_ \_ . Les \* Propriétés du fournisseur peuvent avoir la valeur null pour utiliser le fournisseur par défaut pour l’algorithme spécifié. Pour plus d’informations, consultez la documentation de [BCryptOpenAlgorithmProvider](https://msdn.microsoft.com/library/windows/desktop/aa375479(v=vs.85).aspx) .
+> L’algorithme de chiffrement par bloc symétrique doit avoir une longueur de clé de >= 128 bits, une taille de bloc de >= 64 bits et doit prendre en charge le chiffrement en mode CBC avec un remplissage de #7 PKCS. L’algorithme de hachage doit avoir une taille Digest de >= 128 bits et doit prendre en charge l’ouverture avec l’indicateur de l' \_ \_ indicateur HMAC de handle de BCRYPT \_ \_ . Les \* Propriétés du fournisseur peuvent avoir la valeur null pour utiliser le fournisseur par défaut pour l’algorithme spécifié. Pour plus d’informations, consultez la documentation de [BCryptOpenAlgorithmProvider](/windows/win32/api/bcrypt/nf-bcrypt-bcryptopenalgorithmprovider) .
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -400,7 +400,7 @@ services.AddDataProtection()
 ::: moniker-end
 
 > [!NOTE]
-> L’algorithme de chiffrement par bloc symétrique doit avoir une longueur de clé de >= 128 bits, une taille de bloc de 128 bits exactement et le chiffrement GCM doit être pris en charge. Vous pouvez définir la propriété [EncryptionAlgorithmProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.configurationmodel.cngcbcauthenticatedencryptorconfiguration.encryptionalgorithmprovider) sur la valeur null pour utiliser le fournisseur par défaut pour l’algorithme spécifié. Pour plus d’informations, consultez la documentation de [BCryptOpenAlgorithmProvider](https://msdn.microsoft.com/library/windows/desktop/aa375479(v=vs.85).aspx) .
+> L’algorithme de chiffrement par bloc symétrique doit avoir une longueur de clé de >= 128 bits, une taille de bloc de 128 bits exactement et le chiffrement GCM doit être pris en charge. Vous pouvez définir la propriété [EncryptionAlgorithmProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.configurationmodel.cngcbcauthenticatedencryptorconfiguration.encryptionalgorithmprovider) sur la valeur null pour utiliser le fournisseur par défaut pour l’algorithme spécifié. Pour plus d’informations, consultez la documentation de [BCryptOpenAlgorithmProvider](/windows/win32/api/bcrypt/nf-bcrypt-bcryptopenalgorithmprovider) .
 
 ### <a name="specifying-other-custom-algorithms"></a>Spécification d’autres algorithmes personnalisés
 

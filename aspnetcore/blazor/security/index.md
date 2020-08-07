@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: 85446ac18608b39c469da766e1a9f2e92a1f5e11
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 7b19ac9170fc99a3524fedda419bd03498aa999a
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445110"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913782"
 ---
-# <a name="aspnet-core-blazor-authentication-and-authorization"></a>BlazorAuthentification et autorisation ASP.net Core
+# <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>BlazorAuthentification et autorisation ASP.net Core
 
 Par [Steve Sanderson](https://github.com/SteveSandersonMS) et [Luke Latham](https://github.com/guardrex)
 
@@ -44,7 +44,7 @@ Les [ Razor conventions d’autorisation des pages](xref:security/authorization/
 
 Blazorutilise les mécanismes d’authentification ASP.NET Core existants pour établir l’identité de l’utilisateur. Le mécanisme exact dépend de la façon dont l' Blazor application est hébergée, Blazor WebAssembly ou Blazor Server .
 
-### <a name="blazor-webassembly-authentication"></a>l’authentification Blazor WebAssembly
+### <a name="no-locblazor-webassembly-authentication"></a>l’authentification Blazor WebAssembly
 
 Dans Blazor WebAssembly les applications, les vérifications d’authentification peuvent être ignorées, car tout le code côté client peut être modifié par les utilisateurs. Cela vaut également pour toutes les technologies d’application côté client, y compris les infrastructures d’application JavaScript SPA ou les applications natives pour n’importe quel système d’exploitation.
 
@@ -53,19 +53,19 @@ Ajoutez ce qui suit :
 * Référence de package pour [`Microsoft.AspNetCore.Components.Authorization`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Authorization/) le fichier projet de l’application.
 * `Microsoft.AspNetCore.Components.Authorization`Espace de noms du fichier de l’application `_Imports.razor` .
 
-Pour gérer l’authentification, l’implémentation d’un service intégré ou personnalisé <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> est traitée dans les sections suivantes.
+Pour gérer l’authentification, l’utilisation d’un service intégré ou personnalisé <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> est traitée dans les sections suivantes.
 
 Pour plus d’informations sur la création d’applications et la configuration, consultez <xref:blazor/security/webassembly/index> .
 
-### <a name="blazor-server-authentication"></a>l’authentification Blazor Server
+### <a name="no-locblazor-server-authentication"></a>l’authentification Blazor Server
 
 Blazor Serverles applications fonctionnent sur une connexion en temps réel créée à l’aide de SignalR . L' [authentification dans les SignalR applications basées](xref:signalr/authn-and-authz) sur est gérée lorsque la connexion est établie. L’authentification peut reposer sur un cookie ou un autre jeton du porteur.
+
+Le <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> service intégré pour les Blazor Server applications obtient les données d’état d’authentification du ASP.net Core `HttpContext.User` . C’est ainsi que l’état d’authentification s’intègre aux mécanismes d’authentification ASP.NET Core existants.
 
 Pour plus d’informations sur la création d’applications et la configuration, consultez <xref:blazor/security/server/index> .
 
 ## <a name="authenticationstateprovider-service"></a>Service AuthenticationStateProvider
-
-Le <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> service intégré obtient les données d’état d’authentification de l’ASP.net Core `HttpContext.User` . C’est ainsi que l’état d’authentification s’intègre aux mécanismes d’authentification ASP.NET Core existants.
 
 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> est le service sous-jacent utilisé par le composant <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> et le composant <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> pour obtenir l’état d’authentification.
 
@@ -300,7 +300,7 @@ Pour l’autorisation en fonction du rôle, utilisez le paramètre <xref:Microso
 </AuthorizeView>
 ```
 
-Pour plus d’informations, consultez <xref:security/authorization/roles>.
+Pour plus d'informations, consultez <xref:security/authorization/roles>.
 
 Pour l’autorisation en fonction des stratégies, utilisez le paramètre <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Policy> :
 
@@ -310,7 +310,7 @@ Pour l’autorisation en fonction des stratégies, utilisez le paramètre <xref:
 </AuthorizeView>
 ```
 
-L’autorisation basée sur les revendications est un cas spécial d’autorisation basée sur les stratégies. Par exemple, vous pouvez définir une stratégie qui impose aux utilisateurs d’avoir une certaine revendication. Pour plus d’informations, consultez <xref:security/authorization/policies>.
+L’autorisation basée sur les revendications est un cas spécial d’autorisation basée sur les stratégies. Par exemple, vous pouvez définir une stratégie qui impose aux utilisateurs d’avoir une certaine revendication. Pour plus d'informations, consultez <xref:security/authorization/policies>.
 
 Ces API peuvent être utilisées dans les Blazor Server Blazor WebAssembly applications ou.
 
