@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/1/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: fcf79966abf7a023773ef892636530278b668c44
-ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
+ms.openlocfilehash: 06c4f215c1c8d970cdfe41e395f39d4215b693f7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87303610"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016854"
 ---
 # <a name="routing-in-aspnet-core"></a>Routage dans ASP.NET Core
 
@@ -32,7 +34,7 @@ Le routage est responsable de la mise en correspondance des demandes HTTP entran
 
 Les applications peuvent configurer le routage à l’aide de :
 
-- Controllers
+- Contrôleurs
 - RazorPages
 - SignalR
 - Services gRPC
@@ -435,7 +437,7 @@ Les modèles d’URL qui tentent de capturer un nom de fichier avec une extensio
 * `/files/myFile.txt`
 * `/files/myFile`
 
-Les paramètres de route peuvent avoir des **valeurs par défaut**, désignées en spécifiant la valeur par défaut après le nom du paramètre, séparée par un signe égal (`=`). Par exemple, `{controller=Home}` définit `Home` comme valeur par défaut de `controller`. La valeur par défaut est utilisée si aucune valeur n’est présente dans l’URL pour le paramètre. Les paramètres de routage sont rendus facultatifs en ajoutant un point d’interrogation ( `?` ) à la fin du nom du paramètre. Par exemple : `id?`. La différence entre les valeurs facultatives et les paramètres d’itinéraire par défaut est la suivante :
+Les paramètres de route peuvent avoir des **valeurs par défaut**, désignées en spécifiant la valeur par défaut après le nom du paramètre, séparée par un signe égal (`=`). Par exemple, `{controller=Home}` définit `Home` comme valeur par défaut de `controller`. La valeur par défaut est utilisée si aucune valeur n’est présente dans l’URL pour le paramètre. Les paramètres de routage sont rendus facultatifs en ajoutant un point d’interrogation ( `?` ) à la fin du nom du paramètre. Par exemple, `id?`. La différence entre les valeurs facultatives et les paramètres d’itinéraire par défaut est la suivante :
 
 * Un paramètre d’itinéraire avec une valeur par défaut produit toujours une valeur.
 * Un paramètre facultatif a une valeur uniquement lorsqu’une valeur est fournie par l’URL de la requête.
@@ -567,12 +569,12 @@ Les expressions régulières utilisées dans le routage commencent souvent par l
 
 | Expression   | String    | Faire correspondre | Commentaire               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | mz        | Oui   | Correspondance avec l’expression    |
-| `[a-z]{2}`   | MZ        | Oui   | Non-respect de la casse    |
-| `^[a-z]{2}$` | hello     | Non    | Voir `^` et `$` ci-dessus |
-| `^[a-z]{2}$` | 123abc456 | Non    | Voir `^` et `$` ci-dessus |
+| `[a-z]{2}`   | hello     | Yes   | Correspondances de sous-chaînes     |
+| `[a-z]{2}`   | 123abc456 | Yes   | Correspondances de sous-chaînes     |
+| `[a-z]{2}`   | mz        | Yes   | Correspondance avec l’expression    |
+| `[a-z]{2}`   | MZ        | Yes   | Non-respect de la casse    |
+| `^[a-z]{2}$` | hello     | No    | Voir `^` et `$` ci-dessus |
+| `^[a-z]{2}$` | 123abc456 | No    | Voir `^` et `$` ci-dessus |
 
 Pour plus d’informations sur la syntaxe des expressions régulières, consultez [Expressions régulières du .NET Framework](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -806,7 +808,7 @@ Ensuite, les **valeurs acceptées** peuvent être utilisées pour développer le
 
 Les valeurs fournies explicitement qui ne correspondent pas à un segment de l’itinéraire sont ajoutées à la chaîne de requête. Le tableau suivant présente le résultat en cas d’utilisation du modèle de routage `{controller}/{action}/{id?}`.
 
-| Valeurs ambiantes                     | Valeurs explicites                        | Résultat                  |
+| Valeurs ambiantes                     | Valeurs explicites                        | Résultats                  |
 | ---------------------------------- | -------------------------------------- | ----------------------- |
 | controller = "Home"                | action = "About"                       | `/Home/About`           |
 | controller = "Home"                | controller = "Order", action = "About" | `/Order/About`          |
@@ -1488,12 +1490,12 @@ Les expressions régulières utilisées dans le routage commencent souvent par l
 
 | Expression   | String    | Faire correspondre | Commentaire               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | mz        | Oui   | Correspondance avec l’expression    |
-| `[a-z]{2}`   | MZ        | Oui   | Non-respect de la casse    |
-| `^[a-z]{2}$` | hello     | Non    | Voir `^` et `$` ci-dessus |
-| `^[a-z]{2}$` | 123abc456 | Non    | Voir `^` et `$` ci-dessus |
+| `[a-z]{2}`   | hello     | Yes   | Correspondances de sous-chaînes     |
+| `[a-z]{2}`   | 123abc456 | Yes   | Correspondances de sous-chaînes     |
+| `[a-z]{2}`   | mz        | Yes   | Correspondance avec l’expression    |
+| `[a-z]{2}`   | MZ        | Yes   | Non-respect de la casse    |
+| `^[a-z]{2}$` | hello     | No    | Voir `^` et `$` ci-dessus |
+| `^[a-z]{2}$` | 123abc456 | No    | Voir `^` et `$` ci-dessus |
 
 Pour plus d’informations sur la syntaxe des expressions régulières, consultez [Expressions régulières du .NET Framework](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1571,7 +1573,7 @@ Les valeurs ambiantes qui ne correspondent pas à un paramètre sont ignorées. 
 
 Les valeurs fournies explicitement mais qui n’ont pas de correspondance avec un segment de la route sont ajoutées à la chaîne de requête. Le tableau suivant présente le résultat en cas d’utilisation du modèle de routage `{controller}/{action}/{id?}`.
 
-| Valeurs ambiantes                     | Valeurs explicites                        | Résultat                  |
+| Valeurs ambiantes                     | Valeurs explicites                        | Résultats                  |
 | ---------------------------------- | -------------------------------------- | ----------------------- |
 | controller = "Home"                | action = "About"                       | `/Home/About`           |
 | controller = "Home"                | controller = "Order", action = "About" | `/Order/About`          |
@@ -1932,12 +1934,12 @@ Les expressions régulières utilisées dans le routage commencent souvent par u
 
 | Expression   | String    | Faire correspondre | Commentaire               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Oui   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | 123abc456 | Oui   | Correspondances de sous-chaînes     |
-| `[a-z]{2}`   | mz        | Oui   | Correspondance avec l’expression    |
-| `[a-z]{2}`   | MZ        | Oui   | Non-respect de la casse    |
-| `^[a-z]{2}$` | hello     | Non    | Voir `^` et `$` ci-dessus |
-| `^[a-z]{2}$` | 123abc456 | Non    | Voir `^` et `$` ci-dessus |
+| `[a-z]{2}`   | hello     | Yes   | Correspondances de sous-chaînes     |
+| `[a-z]{2}`   | 123abc456 | Yes   | Correspondances de sous-chaînes     |
+| `[a-z]{2}`   | mz        | Yes   | Correspondance avec l’expression    |
+| `[a-z]{2}`   | MZ        | Yes   | Non-respect de la casse    |
+| `^[a-z]{2}$` | hello     | No    | Voir `^` et `$` ci-dessus |
+| `^[a-z]{2}$` | 123abc456 | No    | Voir `^` et `$` ci-dessus |
 
 Pour plus d’informations sur la syntaxe des expressions régulières, consultez [Expressions régulières du .NET Framework](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1977,7 +1979,7 @@ Les valeurs ambiantes qui ne correspondent pas à un paramètre sont ignorées. 
 
 Les valeurs fournies explicitement mais qui n’ont pas de correspondance avec un segment de la route sont ajoutées à la chaîne de requête. Le tableau suivant présente le résultat en cas d’utilisation du modèle de routage `{controller}/{action}/{id?}`.
 
-| Valeurs ambiantes                     | Valeurs explicites                        | Résultat                  |
+| Valeurs ambiantes                     | Valeurs explicites                        | Résultats                  |
 | ---------------------------------- | -------------------------------------- | ----------------------- |
 | controller = "Home"                | action = "About"                       | `/Home/About`           |
 | controller = "Home"                | controller = "Order", action = "About" | `/Order/About`          |

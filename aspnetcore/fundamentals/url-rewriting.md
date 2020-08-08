@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/16/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: dbdb7cd86218fd9ba63ae4ac2aa516836d4fd1a1
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 9f7eb15271a0b7adb3964b4fe039497bda7fef08
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944293"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016542"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>Intergiciel (middleware) de réécriture d’URL dans ASP.NET Core
 
@@ -94,7 +96,7 @@ Les principales raisons d’utiliser les technologies de réécriture d’URL ba
 
   Mener des tests de performances est la seule façon de savoir exactement quelle approche dégrade le plus les performances ou si la dégradation des performances est négligeable.
 
-## <a name="package"></a>Package
+## <a name="package"></a>Paquet
 
 L’intergiciel (middleware) de réécriture d’URL est fourni par le package [Microsoft.AspNetCore.Rewrite](https://www.nuget.org/packages/Microsoft.AspNetCore.Rewrite), qui est implicitement inclus dans les applications ASP.NET Core.
 
@@ -194,7 +196,7 @@ Le caret (`^`) au début de l’expression signifie que la correspondance commen
 
 Dans l’exemple précédent avec la règle de redirection, `redirect-rule/(.*)`, il n’existe pas de caret (`^`) au début de l’expression régulière. Ainsi, n’importe quel caractère peut précéder `redirect-rule/` dans le chemin pour qu’une correspondance soit établie.
 
-| Chemin                               | Faire correspondre |
+| Chemin d’accès                               | Faire correspondre |
 | ---------------------------------- | :---: |
 | `/redirect-rule/1234/5678`         | Oui   |
 | `/my-cool-redirect-rule/1234/5678` | Oui   |
@@ -202,7 +204,7 @@ Dans l’exemple précédent avec la règle de redirection, `redirect-rule/(.*)`
 
 La règle de réécriture, `^rewrite-rule/(\d+)/(\d+)`, établit une correspondance uniquement avec des chemins d’accès s’ils commencent par `rewrite-rule/`. Dans le tableau suivant, notez la différence de correspondance.
 
-| Chemin                              | Faire correspondre |
+| Chemin d’accès                              | Faire correspondre |
 | --------------------------------- | :---: |
 | `/rewrite-rule/1234/5678`         | Oui   |
 | `/my-cool-rewrite-rule/1234/5678` | Non    |
@@ -327,7 +329,7 @@ Utilisez <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> pour 
 
 | Réécrire le résultat du contexte               | Action                                                           |
 | ------------------------------------ | ---------------------------------------------------------------- |
-| `RuleResult.ContinueRules` (valeur par défaut) | Continuer à appliquer les règles.                                         |
+| `RuleResult.ContinueRules` (par défaut) | Continuer à appliquer les règles.                                         |
 | `RuleResult.EndResponse`             | Cesser d’appliquer les règles et envoyer la réponse.                       |
 | `RuleResult.SkipRemainingRules`      | Cesser d’appliquer les règles et envoyer le contexte au middleware suivant. |
 
@@ -446,7 +448,7 @@ Les principales raisons d’utiliser les technologies de réécriture d’URL ba
 
   Mener des tests de performances est la seule façon de savoir exactement quelle approche dégrade le plus les performances ou si la dégradation des performances est négligeable.
 
-## <a name="package"></a>Package
+## <a name="package"></a>Paquet
 
 Pour inclure le middleware dans votre projet, ajoutez une référence de package au [métapackage Microsoft.AspNetCore.App](xref:fundamentals/metapackage-app) dans le fichier projet, qui contient le package [Microsoft.AspNetCore.Rewrite](https://www.nuget.org/packages/Microsoft.AspNetCore.Rewrite).
 
@@ -548,7 +550,7 @@ Le caret (`^`) au début de l’expression signifie que la correspondance commen
 
 Dans l’exemple précédent avec la règle de redirection, `redirect-rule/(.*)`, il n’existe pas de caret (`^`) au début de l’expression régulière. Ainsi, n’importe quel caractère peut précéder `redirect-rule/` dans le chemin pour qu’une correspondance soit établie.
 
-| Chemin                               | Faire correspondre |
+| Chemin d’accès                               | Faire correspondre |
 | ---------------------------------- | :---: |
 | `/redirect-rule/1234/5678`         | Oui   |
 | `/my-cool-redirect-rule/1234/5678` | Oui   |
@@ -556,7 +558,7 @@ Dans l’exemple précédent avec la règle de redirection, `redirect-rule/(.*)`
 
 La règle de réécriture, `^rewrite-rule/(\d+)/(\d+)`, établit une correspondance uniquement avec des chemins d’accès s’ils commencent par `rewrite-rule/`. Dans le tableau suivant, notez la différence de correspondance.
 
-| Chemin                              | Faire correspondre |
+| Chemin d’accès                              | Faire correspondre |
 | --------------------------------- | :---: |
 | `/rewrite-rule/1234/5678`         | Oui   |
 | `/my-cool-rewrite-rule/1234/5678` | Non    |
@@ -681,7 +683,7 @@ Utilisez <xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*> pour 
 
 | Réécrire le résultat du contexte               | Action                                                           |
 | ------------------------------------ | ---------------------------------------------------------------- |
-| `RuleResult.ContinueRules` (valeur par défaut) | Continuer à appliquer les règles.                                         |
+| `RuleResult.ContinueRules` (par défaut) | Continuer à appliquer les règles.                                         |
 | `RuleResult.EndResponse`             | Cesser d’appliquer les règles et envoyer la réponse.                       |
 | `RuleResult.SkipRemainingRules`      | Cesser d’appliquer les règles et envoyer le contexte au middleware suivant. |
 
@@ -732,7 +734,7 @@ Requête d’origine : `/image.jpg`
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>

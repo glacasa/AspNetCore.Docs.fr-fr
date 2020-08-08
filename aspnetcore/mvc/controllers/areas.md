@@ -5,6 +5,8 @@ description: Découvrez les zones, fonctionnalité d’ASP.NET MVC utilisée pou
 ms.author: riande
 ms.date: 03/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/areas
-ms.openlocfilehash: f4471f54e92b940ecb0eabab82f03e0c77a0509f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: af765eebfa8bfd147bd3b721508b5794d15d64a7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406405"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018440"
 ---
 # <a name="areas-in-aspnet-core"></a>Zones dans ASP.NET Core
 
@@ -162,7 +164,7 @@ Le code suivant remplace le dossier de zone par défaut `"Areas"` par `"MyAreas"
 
 <a name="arp"></a>
 
-## <a name="areas-with-razor-pages"></a>Zones avec Razor pages
+## <a name="areas-with-no-locrazor-pages"></a>Zones avec Razor pages
 
 Les zones avec Razor pages requièrent un `Areas/<area name>/Pages` dossier à la racine de l’application. La structure de dossiers suivante est utilisée avec [l’exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples) :
 
@@ -179,7 +181,7 @@ Les zones avec Razor pages requièrent un `Areas/<area name>/Pages` dossier à l
           * À propos de
           * Index
 
-### <a name="link-generation-with-razor-pages-and-areas"></a>Génération de liens avec des Razor pages et des zones
+### <a name="link-generation-with-no-locrazor-pages-and-areas"></a>Génération de liens avec des Razor pages et des zones
 
 Le code suivant tiré de [l’exemple de code téléchargeable](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas) illustre une génération de liens avec la zone spécifiée (par exemple, `asp-area="Products"`) :
 
@@ -222,7 +224,7 @@ Dans le fichier précédent, l’espace de noms et la `@addTagHelper` directive 
 
 Pour plus d’informations, consultez [Gestion de l’étendue des Tag Helpers](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) et [Importation de directives partagées](xref:mvc/views/layout#importing-shared-directives).
 
-### <a name="shared-layout-for-razor-pages-areas"></a>Disposition partagée pour les Razor zones de pages
+### <a name="shared-layout-for-no-locrazor-pages-areas"></a>Disposition partagée pour les Razor zones de pages
 
 Pour partager une disposition commune pour l’ensemble de l’application, déplacez *_ViewStart.cshtml* dans le dossier racine de l’application.
 
@@ -349,7 +351,7 @@ Le code suivant remplace le dossier de zone par défaut `"Areas"` par `"MyAreas"
 
 <a name="arp"></a>
 
-## <a name="areas-with-razor-pages"></a>Zones avec Razor pages
+## <a name="areas-with-no-locrazor-pages"></a>Zones avec Razor pages
 
 Les zones avec Razor pages requièrent un `Areas/<area name>/Pages` dossier à la racine de l’application. La structure de dossiers suivante est utilisée avec [l’exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) :
 
@@ -366,7 +368,7 @@ Les zones avec Razor pages requièrent un `Areas/<area name>/Pages` dossier à l
           * À propos de
           * Index
 
-### <a name="link-generation-with-razor-pages-and-areas"></a>Génération de liens avec des Razor pages et des zones
+### <a name="link-generation-with-no-locrazor-pages-and-areas"></a>Génération de liens avec des Razor pages et des zones
 
 Le code suivant tiré de [l’exemple de code téléchargeable](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas) illustre une génération de liens avec la zone spécifiée (par exemple, `asp-area="Products"`) :
 
@@ -411,7 +413,7 @@ Dans le fichier précédent, l’espace de noms et la `@addTagHelper` directive 
 
 Pour plus d’informations, consultez [Gestion de l’étendue des Tag Helpers](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) et [Importation de directives partagées](xref:mvc/views/layout#importing-shared-directives).
 
-### <a name="shared-layout-for-razor-pages-areas"></a>Disposition partagée pour les Razor zones de pages
+### <a name="shared-layout-for-no-locrazor-pages-areas"></a>Disposition partagée pour les Razor zones de pages
 
 Pour partager une disposition commune pour l’ensemble de l’application, déplacez *_ViewStart.cshtml* dans le dossier racine de l’application.
 

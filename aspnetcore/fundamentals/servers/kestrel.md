@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/04/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 03c25c103f03c3f9b17311f468d96907d2498641
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: ad15a7e3bfdb8da79db091f0116bdd2f580ccb31
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060382"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016698"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>Implémentation du serveur web Kestrel dans ASP.NET Core
 
@@ -686,7 +688,7 @@ Quand l’application est exécutée, la sortie de la fenêtre de console indiqu
 Listening on the following addresses: http://127.0.0.1:48508
 ```
 
-### <a name="limitations"></a>Limitations
+### <a name="limitations"></a>Limites
 
 Configurez des points de terminaison avec les approches suivantes :
 
@@ -1687,7 +1689,7 @@ Quand l’application est exécutée, la sortie de la fenêtre de console indiqu
 Listening on the following addresses: http://127.0.0.1:48508
 ```
 
-### <a name="limitations"></a>Limitations
+### <a name="limitations"></a>Limites
 
 Configurez des points de terminaison avec les approches suivantes :
 
@@ -2600,7 +2602,7 @@ Quand l’application est exécutée, la sortie de la fenêtre de console indiqu
 Listening on the following addresses: http://127.0.0.1:48508
 ```
 
-### <a name="limitations"></a>Limitations
+### <a name="limitations"></a>Limites
 
 Configurez des points de terminaison avec les approches suivantes :
 
@@ -2750,7 +2752,7 @@ Ce processus est différent pour HTTP/2, car le protocole prend en charge l’ab
 
 Si possible, il est préférable que les clients utilisent l’en-tête de demande [expect : 100-continue](https://developer.mozilla.org/docs/Web/HTTP/Status/100) et attendent que le serveur réponde avant de commencer à envoyer le corps de la demande. Cela donne au client la possibilité d’examiner la réponse et de l’abandonner avant d’envoyer des données inutiles.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * Lorsque vous utilisez des sockets UNIX sur Linux, le socket n’est pas supprimé automatiquement lors de l’arrêt de l’application. Pour plus d’informations, consultez [ce problème GitHub](https://github.com/dotnet/aspnetcore/issues/14134).
 * <xref:test/troubleshoot>

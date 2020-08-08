@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 06/30/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: 05ff343f7116509128b7370a50bcfa3c67ffb9fe
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: f995fdaee1009ff51359df720c39d664aea6e3b1
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944238"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016269"
 ---
 # <a name="use-grpc-in-browser-apps"></a>Utiliser gRPC dans les applications de navigateur
 
@@ -52,7 +54,7 @@ Pour activer gRPC-Web avec un service ASP.NET Core gRPC :
 
 [!code-csharp[](~/grpc/browser/sample/Startup.cs?name=snippet_1&highlight=10,14)]
 
-Le code précédent :
+Le code précédent :
 
 * Ajoute l’intergiciel (middleware) Web gRPC, `UseGrpcWeb` , après le routage et avant les points de terminaison.
 * Spécifie que la `endpoints.MapGrpcService<GreeterService>()` méthode prend en charge gRPC-Web avec `EnableGrpcWeb` . 
@@ -74,7 +76,7 @@ Pour permettre à une application de navigateur d’effectuer des appels gRPC-We
 
 [!code-csharp[](~/grpc/browser/sample/CORS_Startup.cs?name=snippet_1&highlight=5-11,19,24)]
 
-Le code précédent :
+Le code précédent :
 
 * Appelle `AddCors` pour ajouter des services cors et configure une stratégie cors qui expose des en-têtes spécifiques à gRPC.
 * Appelle `UseCors` pour ajouter l’intergiciel (middleware) cors après le routage et avant les points de terminaison.
@@ -113,7 +115,7 @@ Pour utiliser gRPC-Web :
 
 [!code-csharp[](~/grpc/browser/sample/Handler.cs?name=snippet_1)]
 
-Le code précédent :
+Le code précédent :
 
 * Configure un canal pour utiliser gRPC-Web.
 * Crée un client et effectue un appel à l’aide du canal.
@@ -129,7 +131,7 @@ Le code précédent :
 > [!IMPORTANT]
 > Les clients gRPC générés ont des méthodes synchrones et asynchrones pour appeler des méthodes unaires. Par exemple, `SayHello` est Sync et `SayHelloAsync` est Async. L’appel d’une méthode de synchronisation dans une Blazor WebAssembly application entraîne le blocage de l’application. Les méthodes Async doivent toujours être utilisées dans Blazor WebAssembly .
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [gRPC pour le projet GitHub des clients Web](https://github.com/grpc/grpc-web)
 * <xref:security/cors>

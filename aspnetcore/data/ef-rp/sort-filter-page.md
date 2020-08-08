@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 496221bb4e34e1f9e4177d1934786a77d8c9b411
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 5bfea63cc1ff85adbe5ce572858b78a8e86b2280
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212540"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017725"
 ---
-# <a name="part-3-razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Partie 3 : Razor pages avec EF Core dans ASP.net Core-Trier, filtrer, pagination
+# <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Partie 3 : Razor pages avec EF Core dans ASP.net Core-Trier, filtrer, pagination
 
 Par [Tom Dykstra](https://github.com/tdykstra), [Rick Anderson](https://twitter.com/RickAndMSFT) et [Jon P Smith](https://twitter.com/thereformedprog)
 
@@ -134,7 +136,7 @@ Il existe un coût en matière de performances en cas d’appel à `ToUpper`. Le
 
 Pour plus d’informations, consultez [How to use case-insensitive query with Sqlite provider](https://github.com/aspnet/EntityFrameworkCore/issues/11414).
 
-### <a name="update-the-razor-page"></a>Mettre à jour la Razor page
+### <a name="update-the-no-locrazor-page"></a>Mettre à jour la Razor page
 
 Remplacez le code de *Pages/Students/Index.cshtml* pour créer un bouton **Search** et le chrome assorti.
 
@@ -211,7 +213,7 @@ Si la chaîne de recherche est modifiée pendant la pagination, la page est réi
 
   Les deux points d’interrogation situés après `pageIndex` dans l’appel `PaginatedList.CreateAsync` représentent l’[opérateur de fusion avec valeur Null](/dotnet/csharp/language-reference/operators/null-conditional-operator). L’opérateur de fusion de Null définit une valeur par défaut pour un type nullable. L’expression `(pageIndex ?? 1)` signifie qu’il faut retourner la valeur de `pageIndex` s’il a une valeur. Si `pageIndex` n’a pas de valeur, il faut retourner 1.
 
-### <a name="add-paging-links-to-the-razor-page"></a>Ajouter des liens de pagination à la Razor page
+### <a name="add-paging-links-to-the-no-locrazor-page"></a>Ajouter des liens de pagination à la Razor page
 
 Remplacez le code dans *students/index. cshtml* par le code suivant. Les modifications apparaissent en surbrillance :
 
@@ -247,7 +249,7 @@ Créez *SchoolViewModels/EnrollmentDateGroup.cs* avec le code suivant :
 
 [!code-csharp[Main](intro/samples/cu30/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
 
-### <a name="create-the-razor-page"></a>Créer la Razor page
+### <a name="create-the-no-locrazor-page"></a>Créer la Razor page
 
 Créez un fichier *Pages/About.cshtml* avec le code suivant :
 
@@ -467,7 +469,7 @@ La méthode `PaginatedList.CreateAsync` convertit la requête d’étudiant en u
 
 Les deux points d’interrogation dans `PaginatedList.CreateAsync` représentent [l’opérateur de fusion de Null](/dotnet/csharp/language-reference/operators/null-conditional-operator). L’opérateur de fusion de Null définit une valeur par défaut pour un type nullable. L’expression `(pageIndex ?? 1)` signifie qu’il faut retourner la valeur de `pageIndex` s’il a une valeur. Si `pageIndex` n’a pas de valeur, il faut retourner 1.
 
-## <a name="add-paging-links-to-the-student-razor-page"></a>Ajouter des liens de pagination à la page Student Razor
+## <a name="add-paging-links-to-the-student-no-locrazor-page"></a>Ajouter des liens de pagination à la page Student Razor
 
 Mettez à jour le balisage dans *Students/Index.cshtml*. Les modifications apparaissent en surbrillance :
 
@@ -521,7 +523,7 @@ Mettez à jour le fichier *Pages/About.cshtml.cs* avec le code suivant :
 
 L’instruction LINQ regroupe les entités Student par date d’inscription, calcule le nombre d’entités dans chaque groupe et stocke les résultats dans une collection d’objets de modèle de vue `EnrollmentDateGroup`.
 
-### <a name="modify-the-about-razor-page"></a>Modifier la page à propos de Razor
+### <a name="modify-the-about-no-locrazor-page"></a>Modifier la page à propos de Razor
 
 Remplacez le code du fichier *Pages/About.cshtml* par le code suivant :
 
@@ -533,7 +535,7 @@ Si vous rencontrez des problèmes que vous ne pouvez pas résoudre, télécharge
 
 ![Page About](sort-filter-page/_static/about.png)
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Débogage d’une source ASP.NET Core 2.x](https://github.com/dotnet/AspNetCore.Docs/issues/4155)
 * [Version YouTube de ce tutoriel](https://www.youtube.com/watch?v=MDs7PFpoMqI)

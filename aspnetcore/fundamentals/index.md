@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/30/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/index
-ms.openlocfilehash: c797ce8bcb22aec2b56df2f3b108da4cbfde263d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f141e9248a702ad9a1d9737f82543a0ccc8fb573
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403298"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017205"
 ---
 # <a name="aspnet-core-fundamentals"></a>Notions de base d’ASP.NET Core
 
@@ -39,7 +41,7 @@ Voici un exemple de classe `Startup` :
 
 [!code-csharp[](index/samples_snapshot/3.x/Startup.cs?highlight=3,12)]
 
-Pour plus d’informations, consultez <xref:fundamentals/startup>.
+Pour plus d'informations, consultez <xref:fundamentals/startup>.
 
 ## <a name="dependency-injection-services"></a>Injection de dépendances (services)
 
@@ -57,7 +59,7 @@ L’exemple suivant utilise l’injection de constructeur pour résoudre un `Raz
 
 Si le conteneur inversion de contrôle (IoC) intégré ne répond pas à tous les besoins d’une application, un conteneur IoC tiers peut être utilisé à la place.
 
-Pour plus d’informations, consultez <xref:fundamentals/dependency-injection>.
+Pour plus d'informations, consultez <xref:fundamentals/dependency-injection>.
 
 ## <a name="middleware"></a>Intergiciel (middleware)
 
@@ -71,9 +73,9 @@ L’exemple suivant configure un pipeline de traitement des demandes :
 
 ASP.NET Core comprend un ensemble complet d’intergiciels (middleware) intégrés. Vous pouvez également écrire des composants d’intergiciel (middleware) personnalisés.
 
-Pour plus d’informations, consultez <xref:fundamentals/middleware/index>.
+Pour plus d'informations, consultez <xref:fundamentals/middleware/index>.
 
-## <a name="host"></a>Host
+## <a name="host"></a>Hôte
 
 Au démarrage, une application ASP.NET Core crée un *hôte*. L’hôte encapsule toutes les ressources de l’application, telles que :
 
@@ -100,7 +102,7 @@ Les `CreateDefaultBuilder` `ConfigureWebHostDefaults` méthodes et configurent u
 * Chargez la configuration à partir de *appsettings.json*, *appsettings.{Environment Name}.json*, des variables d’environnement, des arguments de ligne de commande et d’autres sources de configuration.
 * Envoyez la sortie de journalisation aux fournisseurs Console et Debug.
 
-Pour plus d’informations, consultez <xref:fundamentals/host/generic-host>.
+Pour plus d'informations, consultez <xref:fundamentals/host/generic-host>.
 
 ### <a name="non-web-scenarios"></a>Scénarios non basés sur le web
 
@@ -128,7 +130,7 @@ ASP.NET Core fournit l’implémentation du serveur multiplateforme *Kestrel*. D
 
 ---
 
-Pour plus d’informations, consultez <xref:fundamentals/servers/index>.
+Pour plus d'informations, consultez <xref:fundamentals/servers/index>.
 
 ## <a name="configuration"></a>Configuration
 
@@ -140,7 +142,7 @@ La méthode recommandée pour lire les valeurs de configuration associées utili
 
 Pour la gestion des données de configuration confidentielles telles que les mots de passe, ASP.NET Core fournit le [Gestionnaire de secret](xref:security/app-secrets#secret-manager). Pour les secrets de production, nous vous recommandons [Azure Key Vault](xref:security/key-vault-configuration).
 
-Pour plus d’informations, consultez <xref:fundamentals/configuration/index>.
+Pour plus d'informations, consultez <xref:fundamentals/configuration/index>.
 
 ## <a name="environments"></a>Environnements
 
@@ -150,7 +152,7 @@ L’exemple suivant configure l’application pour fournir des informations dét
 
 [!code-csharp[](index/samples_snapshot/3.x/StartupConfigure.cs?highlight=3-6)]
 
-Pour plus d’informations, consultez <xref:fundamentals/environments>.
+Pour plus d'informations, consultez <xref:fundamentals/environments>.
 
 ## <a name="logging"></a>Journalisation
 
@@ -170,13 +172,13 @@ Pour créer des journaux, résolvez un <xref:Microsoft.Extensions.Logging.ILogge
 
 Les méthodes de journalisation, telles que `LogInformation` prennent en charge un nombre quelconque de champs. Ces champs sont couramment utilisés pour construire un message `string` , mais certains fournisseurs de journalisation les envoient à un magasin de données en tant que champs distincts. Cette fonctionnalité permet aux fournisseurs de journalisation d’implémenter la [journalisation sémantique, également appelée journalisation structurée](https://softwareengineering.stackexchange.com/questions/312197/benefits-of-structured-logging-vs-basic-logging).
 
-Pour plus d’informations, consultez <xref:fundamentals/logging/index>.
+Pour plus d'informations, consultez <xref:fundamentals/logging/index>.
 
 ## <a name="routing"></a>Routage
 
 Un *itinéraire* est un modèle d’URL qui est mappé à un gestionnaire. Le gestionnaire est généralement une Razor page, une méthode d’action dans un contrôleur MVC ou un intergiciel (middleware). Le routage ASP.NET Core vous permet de contrôler les URL utilisées par votre application.
 
-Pour plus d’informations, consultez <xref:fundamentals/routing>.
+Pour plus d'informations, consultez <xref:fundamentals/routing>.
 
 ## <a name="error-handling"></a>Gestion des erreurs
 
@@ -187,7 +189,7 @@ ASP.NET Core offre des fonctionnalités intégrées pour gérer des erreurs, tel
 * Pages de codes d’état statique
 * Gestion des exceptions de démarrage
 
-Pour plus d’informations, consultez <xref:fundamentals/error-handling>.
+Pour plus d'informations, consultez <xref:fundamentals/error-handling>.
 
 ## <a name="make-http-requests"></a>Effectuer des requêtes HTTP
 
@@ -199,7 +201,7 @@ Une implémentation de `IHttpClientFactory` est disponible pour la création d�
 * Gère le regroupement et la durée de vie des instances sous-jacentes `HttpClientHandler` afin d’éviter les problèmes DNS courants qui se produisent lors de la gestion `HttpClient` manuelle des durées de vie.
 * Ajoute une expérience de journalisation configurable via <xref:Microsoft.Extensions.Logging.ILogger> pour toutes les requêtes envoyées via les clients créés par la fabrique.
 
-Pour plus d’informations, consultez <xref:fundamentals/http-requests>.
+Pour plus d'informations, consultez <xref:fundamentals/http-requests>.
 
 ## <a name="content-root"></a>Racine de contenu
 
@@ -235,7 +237,7 @@ Empêcher la publication de fichiers dans *wwwroot* avec l' [ \<Content> éléme
 
 Dans Razor les fichiers *. cshtml* , les barres obliques `~/` inverses () pointent vers la racine Web. Un chemin d’accès commençant par `~/` est désigné sous le terme de « *chemin d’accès virtuel*».
 
-Pour plus d’informations, consultez <xref:fundamentals/static-files>.
+Pour plus d'informations, consultez <xref:fundamentals/static-files>.
 
 ::: moniker-end
 
@@ -258,7 +260,7 @@ Voici un exemple de classe `Startup` :
 
 [!code-csharp[](index/samples_snapshot/2.x/Startup.cs?highlight=3,12)]
 
-Pour plus d’informations, consultez <xref:fundamentals/startup>.
+Pour plus d'informations, consultez <xref:fundamentals/startup>.
 
 ## <a name="dependency-injection-services"></a>Injection de dépendances (services)
 
@@ -270,7 +272,7 @@ Voici une classe qui utilise l’injection de dépendances pour obtenir un objet
 
 Si l’injection de dépendances est intégrée, elle est conçue pour vous permettre d’incorporer un conteneur d’inversion de contrôle (IoC) tiers si vous préférez.
 
-Pour plus d’informations, consultez <xref:fundamentals/dependency-injection>.
+Pour plus d'informations, consultez <xref:fundamentals/dependency-injection>.
 
 ## <a name="middleware"></a>Intergiciel (middleware)
 
@@ -284,9 +286,9 @@ Le code en surbrillance dans l’exemple suivant configure le pipeline de traite
 
 ASP.NET Core inclut un ensemble complet de middlewares intégrés, et vous pouvez écrire un middleware personnalisé.
 
-Pour plus d’informations, consultez <xref:fundamentals/middleware/index>.
+Pour plus d'informations, consultez <xref:fundamentals/middleware/index>.
 
-## <a name="host"></a>Host
+## <a name="host"></a>Hôte
 
 Une application ASP.NET Core génère un *hôte* au démarrage. L’hôte est un objet qui encapsule toutes les ressources de l’application, telles que :
 
@@ -310,7 +312,7 @@ La méthode `CreateDefaultBuilder` permet de configurer un hôte avec les option
 * Chargez la configuration à partir de *appsettings.json*, *appsettings.{Environment Name}.json*, des variables d’environnement, des arguments de ligne de commande et d’autres sources de configuration.
 * Envoyez la sortie de journalisation aux fournisseurs Console et Debug.
 
-Pour plus d’informations, consultez <xref:fundamentals/host/web-host>.
+Pour plus d'informations, consultez <xref:fundamentals/host/web-host>.
 
 ### <a name="non-web-scenarios"></a>Scénarios non basés sur le web
 
@@ -367,7 +369,7 @@ ASP.NET Core fournit l’implémentation du serveur multiplateforme *Kestrel*. K
 
 ::: moniker range="< aspnetcore-3.0"
 
-Pour plus d’informations, consultez <xref:fundamentals/servers/index>.
+Pour plus d'informations, consultez <xref:fundamentals/servers/index>.
 
 ## <a name="configuration"></a>Configuration
 
@@ -377,7 +379,7 @@ Par exemple, vous pouvez spécifier que la configuration provient de *appsetting
 
 Pour gérer des données de configuration confidentielles telles que les mots de passe, ASP.NET Core fournit un [outil Secret Manager](xref:security/app-secrets). Pour les secrets de production, nous vous recommandons [Azure Key Vault](xref:security/key-vault-configuration).
 
-Pour plus d’informations, consultez <xref:fundamentals/configuration/index>.
+Pour plus d'informations, consultez <xref:fundamentals/configuration/index>.
 
 ## <a name="options"></a>Options
 
@@ -387,7 +389,7 @@ Par exemple, le code suivant définit des options WebSockets :
 
 [!code-csharp[](index/samples_snapshot/2.x/UseWebSockets.cs)]
 
-Pour plus d’informations, consultez <xref:fundamentals/configuration/options>.
+Pour plus d'informations, consultez <xref:fundamentals/configuration/options>.
 
 ## <a name="environments"></a>Environnements
 
@@ -397,7 +399,7 @@ L’exemple de code suivant de la classe `Startup` configure l’application pou
 
 [!code-csharp[](index/samples_snapshot/2.x/StartupConfigure.cs?highlight=3-6)]
 
-Pour plus d’informations, consultez <xref:fundamentals/environments>.
+Pour plus d'informations, consultez <xref:fundamentals/environments>.
 
 ## <a name="logging"></a>Journalisation
 
@@ -419,13 +421,13 @@ Voici un exemple de code qui utilise un objet `ILogger`, avec l’injection de c
 
 L’interface `ILogger` vous permet de passer un certain nombre de champs au fournisseur de journalisation. Les champs sont couramment utilisés pour construire une chaîne de message, mais le fournisseur peut également les envoyer en tant que champs distincts dans un magasin de données. Cette fonctionnalité permet aux fournisseurs de journalisation d’implémenter la [journalisation sémantique, également appelée journalisation structurée](https://softwareengineering.stackexchange.com/questions/312197/benefits-of-structured-logging-vs-basic-logging).
 
-Pour plus d’informations, consultez <xref:fundamentals/logging/index>.
+Pour plus d'informations, consultez <xref:fundamentals/logging/index>.
 
 ## <a name="routing"></a>Routage
 
 Un *itinéraire* est un modèle d’URL qui est mappé à un gestionnaire. Le gestionnaire est généralement une Razor page, une méthode d’action dans un contrôleur MVC ou un intergiciel (middleware). Le routage ASP.NET Core vous permet de contrôler les URL utilisées par votre application.
 
-Pour plus d’informations, consultez <xref:fundamentals/routing>.
+Pour plus d'informations, consultez <xref:fundamentals/routing>.
 
 ## <a name="error-handling"></a>Gestion des erreurs
 
@@ -436,7 +438,7 @@ ASP.NET Core offre des fonctionnalités intégrées pour gérer des erreurs, tel
 * Pages de codes d’état statique
 * Gestion des exceptions de démarrage
 
-Pour plus d’informations, consultez <xref:fundamentals/error-handling>.
+Pour plus d'informations, consultez <xref:fundamentals/error-handling>.
 
 ## <a name="make-http-requests"></a>Effectuer des requêtes HTTP
 
@@ -448,7 +450,7 @@ Une implémentation de `IHttpClientFactory` est disponible pour la création d�
 * Gère le regroupement et la durée de vie des instances de `HttpClientHandler` sous-jacentes pour éviter les problèmes DNS courants qui se produisent lors de la gestion manuelle des durées de vie de `HttpClient`.
 * Ajoute une expérience de journalisation configurable (via `ILogger`) pour toutes les requêtes envoyées via des clients créés par la fabrique.
 
-Pour plus d’informations, consultez <xref:fundamentals/http-requests>.
+Pour plus d'informations, consultez <xref:fundamentals/http-requests>.
 
 ## <a name="content-root"></a>Racine de contenu
 
@@ -469,7 +471,7 @@ Lors du développement :
   * Chemin d’accès aux fichiers de contenu sans code de l’application dans le répertoire racine du projet.
   * [Racine Web](#web-root), généralement le dossier *wwwroot* dans le répertoire racine du projet.
 
-Vous pouvez spécifier un autre chemin d’accès racine [de contenu lors de la génération de l’hôte](#host). Pour plus d’informations, consultez <xref:fundamentals/host/web-host#content-root>.
+Vous pouvez spécifier un autre chemin d’accès racine [de contenu lors de la génération de l’hôte](#host). Pour plus d'informations, consultez <xref:fundamentals/host/web-host#content-root>.
 
 ## <a name="web-root"></a>Racine web
 
@@ -493,6 +495,6 @@ Empêcher la publication de fichiers dans *wwwroot* avec l' [ \<Content> éléme
 
 Dans les Razor fichiers (*. cshtml*), le tilde-slash ( `~/` ) pointe vers la racine Web. Un chemin d’accès commençant par `~/` est désigné sous le terme de « *chemin d’accès virtuel*».
 
-Pour plus d’informations, consultez <xref:fundamentals/static-files>.
+Pour plus d'informations, consultez <xref:fundamentals/static-files>.
 
 ::: moniker-end

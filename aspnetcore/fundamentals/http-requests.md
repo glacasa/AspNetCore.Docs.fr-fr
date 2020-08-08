@@ -7,6 +7,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/09/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/http-requests
-ms.openlocfilehash: fb9001c06228b4290ca1e0c7cfb6b1338f431cd6
-ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
+ms.openlocfilehash: ef6ed0911c2615ea543b1c2cea31a9a453f0c604
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87444109"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017231"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>Effectuer des requêtes HTTP en utilisant IHttpClientFactory dans ASP.NET Core
 
@@ -359,14 +361,14 @@ Les approches précédentes résolvent les problèmes de gestion des ressources 
 - Le `SocketsHttpHandler` partage les connexions entre les `HttpClient` instances. Ce partage empêche l’épuisement des sockets.
 - Le `SocketsHttpHandler` cycle des connexions en fonction de `PooledConnectionLifetime` pour éviter les problèmes DNS périmés.
 
-### <a name="cookies"></a>Cookies
+### <a name="no-loccookies"></a>Cookies
 
-Les instances regroupées `HttpMessageHandler` entraînent le `CookieContainer` partage des objets. Le `CookieContainer` partage d’objets imprévus aboutit souvent à un code incorrect. Pour les applications qui nécessitent des cookies, utilisez l’une des deux opérations suivantes :
+Les instances regroupées `HttpMessageHandler` entraînent le `CookieContainer` partage des objets. Le `CookieContainer` partage d’objets imprévus aboutit souvent à un code incorrect. Pour les applications qui nécessitent des cookie , envisagez l’une des deux opérations suivantes :
 
- - Désactivation de la gestion automatique des cookies
+ - Désactivation de la cookie gestion automatique
  - Éviter`IHttpClientFactory`
 
-Appelez <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> pour désactiver la gestion automatique des cookies :
+Appelez <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> pour désactiver la cookie gestion automatique :
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
@@ -421,7 +423,7 @@ La propagation d’en-tête est un intergiciel (middleware) ASP.NET Core pour pr
   var response = client.GetAsync(...);
   ```
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Utilisez HttpClientFactory pour implémenter des requêtes HTTP résilientes](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)
 * [Implémenter de nouvelles tentatives d’appel HTTP avec interruption exponentielle avec des stratégies Polly et HttpClientFactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-http-call-retries-exponential-backoff-polly)
@@ -677,14 +679,14 @@ Les approches précédentes résolvent les problèmes de gestion des ressources 
 - Le `SocketsHttpHandler` partage les connexions entre les `HttpClient` instances. Ce partage empêche l’épuisement des sockets.
 - Le `SocketsHttpHandler` cycle des connexions en fonction de `PooledConnectionLifetime` pour éviter les problèmes DNS périmés.
 
-### <a name="cookies"></a>Cookies
+### <a name="no-loccookies"></a>Cookies
 
-Les instances regroupées `HttpMessageHandler` entraînent le `CookieContainer` partage des objets. Le `CookieContainer` partage d’objets imprévus aboutit souvent à un code incorrect. Pour les applications qui nécessitent des cookies, utilisez l’une des deux opérations suivantes :
+Les instances regroupées `HttpMessageHandler` entraînent le `CookieContainer` partage des objets. Le `CookieContainer` partage d’objets imprévus aboutit souvent à un code incorrect. Pour les applications qui nécessitent des cookie , envisagez l’une des deux opérations suivantes :
 
- - Désactivation de la gestion automatique des cookies
+ - Désactivation de la cookie gestion automatique
  - Éviter`IHttpClientFactory`
 
-Appelez <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> pour désactiver la gestion automatique des cookies :
+Appelez <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> pour désactiver la cookie gestion automatique :
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
@@ -723,7 +725,7 @@ Dans l’exemple suivant :
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactoryConsoleSample/Program.cs?highlight=14-15,20,26-27,59-62)]
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Utilisez HttpClientFactory pour implémenter des requêtes HTTP résilientes](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)
 * [Implémenter de nouvelles tentatives d’appel HTTP avec interruption exponentielle avec des stratégies Polly et HttpClientFactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-http-call-retries-exponential-backoff-polly)
@@ -985,14 +987,14 @@ Les approches précédentes résolvent les problèmes de gestion des ressources 
 - Le `SocketsHttpHandler` partage les connexions entre les `HttpClient` instances. Ce partage empêche l’épuisement des sockets.
 - Le `SocketsHttpHandler` cycle des connexions en fonction de `PooledConnectionLifetime` pour éviter les problèmes DNS périmés.
 
-### <a name="cookies"></a>Cookies
+### <a name="no-loccookies"></a>Cookies
 
-Les instances regroupées `HttpMessageHandler` entraînent le `CookieContainer` partage des objets. Le `CookieContainer` partage d’objets imprévus aboutit souvent à un code incorrect. Pour les applications qui nécessitent des cookies, utilisez l’une des deux opérations suivantes :
+Les instances regroupées `HttpMessageHandler` entraînent le `CookieContainer` partage des objets. Le `CookieContainer` partage d’objets imprévus aboutit souvent à un code incorrect. Pour les applications qui nécessitent des cookie , envisagez l’une des deux opérations suivantes :
 
- - Désactivation de la gestion automatique des cookies
+ - Désactivation de la cookie gestion automatique
  - Éviter`IHttpClientFactory`
 
-Appelez <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> pour désactiver la gestion automatique des cookies :
+Appelez <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> pour désactiver la cookie gestion automatique :
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
@@ -1048,7 +1050,7 @@ La propagation d’en-tête est un intergiciel (middleware) pris en charge par l
   var response = client.GetAsync(...);
   ```
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Utilisez HttpClientFactory pour implémenter des requêtes HTTP résilientes](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)
 * [Implémenter de nouvelles tentatives d’appel HTTP avec interruption exponentielle avec des stratégies Polly et HttpClientFactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-http-call-retries-exponential-backoff-polly)

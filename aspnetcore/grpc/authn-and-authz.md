@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 05/26/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/authn-and-authz
-ms.openlocfilehash: 4216a6f28d7c4fdcd45fbd639617fa99b91e784c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: edaf96fb9c7f0f175efe82f8b85d4d1a41da87a5
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407484"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016347"
 ---
 # <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>Authentification et autorisation dans gRPC pour ASP.NET Core
 
@@ -148,7 +150,7 @@ Un grand nombre ASP.NET Core mécanismes d’authentification pris en charge fon
 
 * Azure Active Directory
 * Certificat client
-* IdentityServer
+* IdentityServeur
 * Jeton JWT
 * OAuth 2.0
 * OpenID Connect
@@ -205,7 +207,7 @@ public class TicketerService : Ticketer.TicketerBase
 }
 ```
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Authentification du jeton du porteur dans ASP.NET Core](https://blogs.msdn.microsoft.com/webdev/2016/10/27/bearer-token-authentication-in-asp-net-core/)
 * [Configurer l’authentification par certificat client dans ASP.NET Core](xref:security/authentication/certauth)

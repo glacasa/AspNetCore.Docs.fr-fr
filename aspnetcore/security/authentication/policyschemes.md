@@ -5,6 +5,8 @@ description: Les schémas de stratégie d’authentification facilitent l’util
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,16 +15,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/policyschemes
-ms.openlocfilehash: a8bde9633f06f41ebcb55480eb2322544db4b4da
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ddee613bf9c603542f17adf59a835a2ddbdc25a3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408758"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017803"
 ---
 # <a name="policy-schemes-in-aspnet-core"></a>Schémas de stratégie dans ASP.NET Core
 
-Les schémas de stratégie d’authentification facilitent l’utilisation d’un seul schéma d’authentification logique. Par exemple, un modèle de stratégie peut utiliser l’authentification Google pour résoudre les problèmes et l’authentification des cookies pour tout le reste. Les schémas de stratégie d’authentification le font :
+Les schémas de stratégie d’authentification facilitent l’utilisation d’un seul schéma d’authentification logique. Par exemple, un modèle de stratégie peut utiliser l’authentification Google pour résoudre les problèmes et cookie l’authentification pour tout le reste. Les schémas de stratégie d’authentification le font :
 
 * Action d’authentification facile à transférer vers un autre schéma.
 * Transférer dynamiquement en fonction de la requête.
@@ -36,11 +38,11 @@ Tous les schémas d’authentification qui utilisent dérivé <xref:Microsoft.As
 
 ## <a name="examples"></a>Exemples
 
-L’exemple suivant montre un modèle de niveau supérieur qui combine des schémas de niveau inférieur. L’authentification Google est utilisée pour les défis et l’authentification par cookie est utilisée pour tout le reste :
+L’exemple suivant montre un modèle de niveau supérieur qui combine des schémas de niveau inférieur. L’authentification Google est utilisée pour les défis et cookie l’authentification est utilisée pour tout le reste :
 
 [!code-csharp[sample](policyschemes/samples/Startup.cs?name=snippet1)]
 
-L’exemple suivant active la sélection dynamique de schémas pour chaque demande. Autrement dit, comment mélanger les cookies et l’authentification de l’API :
+L’exemple suivant active la sélection dynamique de schémas pour chaque demande. Autrement dit, comment mélanger cookie les s et l’authentification d’API :
 
  <!-- REVIEW, missing If set in public Func<HttpContext, string> ForwardDefaultSelector -->
 

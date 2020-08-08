@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 38d3753b889da709e2d4691590290a5438208290
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b3531f786b3101fcbea4b25d3950d1bce9a289dc
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401452"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018050"
 ---
-# <a name="part-5-razor-pages-with-ef-core-in-aspnet-core---data-model"></a>Partie 5, Razor pages avec EF Core dans le modèle de données ASP.net Core
+# <a name="part-5-no-locrazor-pages-with-ef-core-in-aspnet-core---data-model"></a>Partie 5, Razor pages avec EF Core dans le modèle de données ASP.net Core
 
 Par [Tom Dykstra](https://github.com/tdykstra) et [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -29,7 +31,7 @@ Par [Tom Dykstra](https://github.com/tdykstra) et [Rick Anderson](https://twitte
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Dans les didacticiels précédents, nous avons travaillé avec un modèle de données de base composé de trois entités. Dans ce tutoriel :
+Dans les didacticiels précédents, nous avons travaillé avec un modèle de données de base composé de trois entités. Dans ce tutoriel, vous allez :
 
 * Nous allons ajouter d’autres entités et relations
 * Nous allons personnaliser le modèle de données en spécifiant des règles de mise en forme, de validation et de mappage de base de données.
@@ -618,7 +620,7 @@ Pour forcer EF Core à créer une base de données, supprimez et mettez à jour 
 
 * Ouvrez une fenêtre de commande et accédez au dossier du projet. Le dossier du projet contient le fichier *ContosoUniversity.csproj*.
 
-* Exécutez la commande suivante :
+* Exécutez la commande suivante :
 
   ```dotnetcli
   dotnet ef database drop --force
@@ -733,7 +735,7 @@ Les deux tutoriels suivants montrent comment lire et mettre à jour des données
 
 ::: moniker range="< aspnetcore-3.0"
 
-Dans les didacticiels précédents, nous avons travaillé avec un modèle de données de base composé de trois entités. Dans ce tutoriel :
+Dans les didacticiels précédents, nous avons travaillé avec un modèle de données de base composé de trois entités. Dans ce tutoriel, vous allez :
 
 * Nous allons ajouter d’autres entités et relations
 * Nous allons personnaliser le modèle de données en spécifiant des règles de mise en forme, de validation et de mappage de base de données.
@@ -1375,7 +1377,7 @@ Une application de production :
 
 Le didacticiel suivant traite des données associées.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Version YouTube de ce tutoriel(Partie 1)](https://www.youtube.com/watch?v=0n2f0ObgCoA)
 * [Version YouTube de ce tutoriel(Partie 2)](https://www.youtube.com/watch?v=Je0Z5K1TNmY)

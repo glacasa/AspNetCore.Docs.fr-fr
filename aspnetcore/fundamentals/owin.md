@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 12/18/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/owin
-ms.openlocfilehash: 3d90788fa300bf099f44aa284e77879698240a74
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e6069e5051530e88c43d99758d891b53c9f35233
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407822"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016893"
 ---
 # <a name="open-web-interface-for-net-owin-with-aspnet-core"></a>OWIN (Open Web Interface for .NET) avec ASP.NET Core
 
@@ -321,7 +323,7 @@ OWIN dépend d’un objet `IDictionary<string,object>` pour communiquer des info
 | websocket.ClientCloseStatus | `int` | Facultatif |
 | websocket.ClientCloseDescription | `String` | Facultatif |
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Middleware](xref:fundamentals/middleware/index)
 * [Serveurs](xref:fundamentals/servers/index)

@@ -5,6 +5,8 @@ description: Découvrez comment diagnostiquer les problèmes liés à la localis
 ms.author: riande
 ms.date: 01/24/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/troubleshoot-aspnet-core-localization
-ms.openlocfilehash: 48f75b4fbfdb2078f07efeffd8d4105366998876
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 801ae3a708d23308cbf909ceeace160e3c0db1bd
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407081"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016464"
 ---
 # <a name="troubleshoot-aspnet-core-localization"></a>Résoudre les problèmes liés à la localisation ASP.NET Core
 
@@ -58,7 +60,7 @@ Les causes courantes de ressources introuvables sont notamment les suivantes :
 - La ressource est manquante dans le `resx` pour certaines langues, mais elle existe dans d’autres.
 - Si le problème persiste, vérifiez les messages du journal de localisation (qui se trouvent au niveau du journal `Debug`) pour obtenir plus de détails sur les ressources manquantes.
 
-_**Indicateur :** Lorsque `CookieRequestCultureProvider` vous utilisez, vérifiez que les guillemets simples ne sont pas utilisés avec les cultures à l’intérieur de la valeur du cookie de localisation. Par exemple, `c='en-UK'|uic='en-US'` est une valeur de cookie non valide, tandis que `c=en-UK|uic=en-US` est un valide._
+_**Indicateur :** Lorsque `CookieRequestCultureProvider` vous utilisez, vérifiez que les guillemets simples ne sont pas utilisés avec les cultures à l’intérieur de la valeur de localisation cookie . Par exemple, `c='en-UK'|uic='en-US'` est une valeur non valide cookie , tandis que `c=en-UK|uic=en-US` est un valide._
 
 ## <a name="resources--class-libraries-issues"></a>Problèmes liés aux ressources et aux bibliothèques de classes
 

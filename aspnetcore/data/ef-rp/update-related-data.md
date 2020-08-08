@@ -5,6 +5,8 @@ description: Partie 7 de Razor pages et Entity Framework série de didacticiels.
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: b442a4ce1f63c047c123315626f559155fd06424
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 3807c52bb843c4d6403e8236fde50c034a8d1e2b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060135"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017738"
 ---
-# <a name="part-7-razor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>Partie 7, Razor pages avec EF Core dans ASP.net Core mettre à jour les données associées
+# <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>Partie 7, Razor pages avec EF Core dans ASP.net Core mettre à jour les données associées
 
 De [Tom Dykstra](https://github.com/tdykstra) et [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -59,13 +61,13 @@ Mettez à jour *Pages/Courses/Create.cshtml.cs* à l’aide du code suivant :
 
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
-Le code précédent :
+Le code précédent :
 
 * Dérive de `DepartmentNamePageModel`.
 * Utilise `TryUpdateModelAsync` pour empêcher la [sur-validation](xref:data/ef-rp/crud#overposting).
 * Supprime `ViewData["DepartmentID"]`. `DepartmentNameSL`à partir de la classe de base est un modèle fortement typé et sera utilisé par la Razor page. Les modèles fortement typés sont préférables aux modèles faiblement typés. Pour plus d’informations, consultez [Données faiblement typées (ViewData et ViewBag)](xref:mvc/views/overview#VD_VB).
 
-### <a name="update-the-course-create-razor-page"></a>Mettre à jour la page de création de cours Razor
+### <a name="update-the-course-create-no-locrazor-page"></a>Mettre à jour la page de création de cours Razor
 
 Mettez à jour *Pages/Courses/Create.cshtml* à l’aide du code suivant :
 
@@ -92,7 +94,7 @@ Mettez à jour *Pages/Courses/Edit.cshtml.cs* avec le code suivant :
 
 Les modifications sont semblables à celles effectuées dans le modèle de page Create. Dans le code précédent, `PopulateDepartmentsDropDownList` passe l’ID du département, ce qui sélectionne le département correspondant dans la liste déroulante.
 
-### <a name="update-the-course-edit-razor-page"></a>Mettre à jour la page de modification du cours Razor
+### <a name="update-the-course-edit-no-locrazor-page"></a>Mettre à jour la page de modification du cours Razor
 
 Mettez à jour *Pages/Courses/Edit.cshtml* avec le code suivant :
 
@@ -120,7 +122,7 @@ Apportez la même modification dans le fichier *Pages/Courses/Details.cshtml.cs*
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Details.cshtml.cs?highlight=28)]
 
-### <a name="update-the-course-razor-pages"></a>Mettre à jour les pages de cours Razor
+### <a name="update-the-course-no-locrazor-pages"></a>Mettre à jour les pages de cours Razor
 
 Mettez à jour *Pages/Courses/Delete.cshtml* à l’aide du code suivant :
 
@@ -188,7 +190,7 @@ Mettez à jour *Pages/Instructors/Edit.cshtml.cs* avec le code suivant :
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/Edit.cshtml.cs?name=snippet_All&highlight=9,28-32,38,42-77)]
 
-Le code précédent :
+Le code précédent :
 
 * Obtient l’entité `Instructor` actuelle de la base de données à l’aide d’un chargement hâtif des propriétés de navigation `OfficeAssignment`, `CourseAssignment` et `CourseAssignment.Course`.
 * Met à jour l’entité `Instructor` récupérée avec les valeurs du classeur de modèles. `TryUpdateModel` empêche la [survalidation](xref:data/ef-rp/crud#overposting).
@@ -197,7 +199,7 @@ Le code précédent :
 * Appelle `UpdateInstructorCourses` dans `OnPostAsync` pour appliquer les informations des cases à cocher à l’entité de formateur en cours de modification.
 * Appelle `PopulateAssignedCourseData` et `UpdateInstructorCourses` dans `OnPostAsync` si `TryUpdateModel` échoue. Ces appels de méthode restaurent les données de cours affectées qui ont été entrées dans la page lorsqu’elles sont réaffichées avec un message d’erreur.
 
-### <a name="update-the-instructor-edit-razor-page"></a>Mettre à jour la page de modification du formateur Razor
+### <a name="update-the-instructor-edit-no-locrazor-page"></a>Mettre à jour la page de modification du formateur Razor
 
 Mettez à jour *Pages/Instructors/Edit.cshtml* avec le code suivant :
 
@@ -274,7 +276,7 @@ Mettez à jour le modèle de la page Create avec le code suivant :
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Create.cshtml.cs?highlight=7,18,32-999)]
 
-Le code précédent :
+Le code précédent :
 
 * Dérive de `DepartmentNamePageModel`.
 * Utilise `TryUpdateModelAsync` pour empêcher la [sur-validation](xref:data/ef-rp/crud#overposting).
@@ -361,7 +363,7 @@ Mettez à jour le modèle de page Edit d'instructeur avec le code suivant :
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Edit1.cshtml.cs?name=snippet&highlight=20-23,32,39-999)]
 
-Le code précédent :
+Le code précédent :
 
 * Obtient l'entité `Instructor` en cours à partir de la base de données à l’aide d’un chargement hâtif de la propriété de navigation `OfficeAssignment`.
 * Met à jour l’entité `Instructor` récupérée avec les valeurs du classeur de modèles. `TryUpdateModel` empêche la [survalidation](xref:data/ef-rp/crud#overposting).
@@ -452,7 +454,7 @@ Le code précédent apporte les modifications suivantes :
 
 * Si le formateur à supprimer est attribué en tant qu’administrateur d’un département, supprime l’attribution de l'instructeur de ces départements.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Version YouTube de ce tutoriel (Partie 1)](https://www.youtube.com/watch?v=Csh6gkmwc9E)
 * [Version YouTube de ce tutoriel (Partie 2)](https://www.youtube.com/watch?v=mOAankB_Zgc)

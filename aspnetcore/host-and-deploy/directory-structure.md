@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/09/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/directory-structure
-ms.openlocfilehash: a4f02a021bc2317e9e63cead521ff4a031a5243b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8756fa5b85deb3a30991062942803e701e5e0792
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408095"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015814"
 ---
 # <a name="aspnet-core-directory-structure"></a>Structure de répertoires ASP.NET Core
 
@@ -45,7 +47,7 @@ Le répertoire *publish* représente le *chemin racine du contenu*, également a
 
 Le répertoire *wwwroot*, s’il existe, contient uniquement des ressources statiques.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [dotnet publish](/dotnet/core/tools/dotnet-publish)
 * [Déploiement d’applications .NET Core](/dotnet/core/deploying/)
@@ -98,7 +100,7 @@ Vous pouvez créer le répertoire *Logs* pour le déploiement à l’aide de l�
 
 Le répertoire de déploiement requiert des autorisations de lecture et d’exécution. Le répertoire *Logs* requiert des autorisations de lecture et d’écriture. D’autres répertoires où des fichiers sont écrits nécessitent des autorisations de lecture et d’écriture.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [dotnet publish](/dotnet/core/tools/dotnet-publish)
 * [Déploiement d’applications .NET Core](/dotnet/core/deploying/)
