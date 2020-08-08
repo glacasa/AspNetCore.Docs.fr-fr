@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/1/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: a8ca520d84d382b95cd4c0e2962ba4e5c922049e
-ms.sourcegitcommit: 3544941682869734ea0113e24e02ed0ec9e1a9ec
+ms.openlocfilehash: 4404a5513d9dc989e50c904f3e7863de59991939
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/18/2020
-ms.locfileid: "86464564"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022327"
 ---
-# <a name="scaffold-identity-in-aspnet-core-projects"></a>Génération Identity de modèles automatique dans les projets ASP.net Core
+# <a name="scaffold-no-locidentity-in-aspnet-core-projects"></a>Génération Identity de modèles automatique dans les projets ASP.net Core
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -52,7 +54,7 @@ Le code précédent fait un commentaire sur le code qui est dupliqué dans *Area
 
 En règle générale, les applications créées avec des comptes individuels ne doivent ***pas*** créer de contexte de données.
 
-## <a name="scaffold-identity-into-an-empty-project"></a>Génération de modèles automatique Identity dans un projet vide
+## <a name="scaffold-no-locidentity-into-an-empty-project"></a>Génération de modèles automatique Identity dans un projet vide
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -64,7 +66,7 @@ Mettez à jour la `Startup` classe avec un code similaire à ce qui suit :
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>Générer Identity une structure dans un Razor projet sans autorisation existante
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-without-existing-authorization"></a>Générer Identity une structure dans un Razor projet sans autorisation existante
 
 <!--  Updated for 3.0
 set projNam=RPnoAuth
@@ -117,7 +119,7 @@ Facultatif : ajoutez la connexion partielle ( `_LoginPartial` ) au fichier de d
 
 [!code-cshtml[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
 
-## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Génération de modèles automatique Identity dans un Razor projet avec autorisation
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-with-authorization"></a>Génération de modèles automatique Identity dans un Razor projet avec autorisation
 
 <!--
 Use >=2.1: dotnet new webapp -au Individual -o RPauth
@@ -134,7 +136,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 Certaines Identity options sont configurées dans *Areas/ Identity / Identity HostingStartup.cs*. Pour plus d’informations, consultez [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration).
 
-## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Génération de modèles automatique Identity dans un projet MVC sans autorisation existante
+## <a name="scaffold-no-locidentity-into-an-mvc-project-without-existing-authorization"></a>Génération de modèles automatique Identity dans un projet MVC sans autorisation existante
 
 <!--
 set projNam=MvcNoAuth
@@ -168,7 +170,7 @@ Mettez à jour la `Startup` classe avec un code similaire à ce qui suit :
 
 [!INCLUDE[](~/includes/scaffold-identity/hsts.md)]
 
-## <a name="scaffold-identity-into-an-mvc-project-with-authorization"></a>Génération Identity de modèles automatique dans un projet MVC avec autorisation
+## <a name="scaffold-no-locidentity-into-an-mvc-project-with-authorization"></a>Génération Identity de modèles automatique dans un projet MVC avec autorisation
 
 <!--
 dotnet new mvc -au Individual -o MvcAuth
@@ -180,7 +182,7 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-## <a name="scaffold-identity-into-a-blazor-server-project-without-existing-authorization"></a>Générer Identity une structure dans un Blazor Server projet sans autorisation existante
+## <a name="scaffold-no-locidentity-into-a-no-locblazor-server-project-without-existing-authorization"></a>Générer Identity une structure dans un Blazor Server projet sans autorisation existante
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -194,10 +196,10 @@ Identityest configuré dans *Areas/ Identity / Identity HostingStartup.cs*. Pour
 
 Les jetons peuvent être passés à des composants :
 
-* Lorsque les jetons d’authentification sont approvisionnés et enregistrés dans le cookie d’authentification, ils peuvent être passés à des composants.
+* Lorsque les jetons d’authentification sont approvisionnés et enregistrés dans l’authentification cookie , ils peuvent être passés à des composants.
 * Razorles composants ne peuvent pas être utilisés `HttpContext` directement. il n’existe donc aucun moyen d’obtenir un [jeton XSRF (contrefaçon anti-request)](xref:security/anti-request-forgery) pour effectuer une publication sur le Identity point de terminaison de déconnexion de `/Identity/Account/Logout` . Un jeton XSRF peut être passé à des composants.
 
-Pour plus d’informations, consultez <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.
+Pour plus d'informations, consultez <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.
 
 Dans le fichier *pages/_Host. cshtml* , établissez le jeton après l’avoir ajouté `InitialApplicationState` aux `TokenProvider` classes et :
 
@@ -293,11 +295,11 @@ Dans le `MainLayout` composant (*Shared/MainLayout. Razor*), ajoutez le `LoginDi
 
 Étant donné que Blazor Server utilise Razor Identity les pages pages, le style de l’interface utilisateur change lorsqu’un visiteur navigue entre Identity les pages et les composants. Vous avez deux options pour traiter les styles Incongruous :
 
-#### <a name="build-identity-components"></a>Composants de build Identity
+#### <a name="build-no-locidentity-components"></a>Composants de build Identity
 
 Une approche de l’utilisation de composants Identity au lieu de pages consiste à créer des Identity composants. Étant donné que `SignInManager` et `UserManager` ne sont pas pris en charge dans Razor les composants, utilisez les points de terminaison d’API dans l' Blazor Server application pour traiter les actions de compte d’utilisateur.
 
-#### <a name="use-a-custom-layout-with-blazor-app-styles"></a>Utiliser une disposition personnalisée avec les Blazor styles d’application
+#### <a name="use-a-custom-layout-with-no-locblazor-app-styles"></a>Utiliser une disposition personnalisée avec les Blazor styles d’application
 
 La Identity disposition et les styles des pages peuvent être modifiés pour produire des pages qui utilisent le thème par défaut Blazor .
 
@@ -362,7 +364,7 @@ Dans le fichier *pages/Shared/Layout. cshtml* , apportez les modifications suiva
   <script src="_framework/blazor.server.js"></script>
   ```
 
-## <a name="scaffold-identity-into-a-blazor-server-project-with-authorization"></a>Génération de modèles automatique Identity dans un Blazor Server projet avec autorisation
+## <a name="scaffold-no-locidentity-into-a-no-locblazor-server-project-with-authorization"></a>Génération de modèles automatique Identity dans un Blazor Server projet avec autorisation
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
@@ -370,7 +372,7 @@ Certaines Identity options sont configurées dans *Areas/ Identity / Identity Ho
 
 <a name="full"></a>
 
-## <a name="create-full-identity-ui-source"></a>Créer une Identity source d’interface utilisateur complète
+## <a name="create-full-no-locidentity-ui-source"></a>Créer une Identity source d’interface utilisateur complète
 
 Pour conserver le contrôle total de l' Identity interface utilisateur, exécutez le générateur de Identity modèles automatique et sélectionnez **remplacer tous les fichiers**.
 
@@ -476,11 +478,11 @@ L’exemple de code suivant présente l’ajout d’un utilisateur :
 
 Une approche similaire peut être suivie pour les scénarios de production.
 
-## <a name="prevent-publish-of-static-identity-assets"></a>Empêcher la publication d' Identity actifs statiques
+## <a name="prevent-publish-of-static-no-locidentity-assets"></a>Empêcher la publication d' Identity actifs statiques
 
 Pour empêcher la publication Identity des ressources statiques sur la racine Web, consultez <xref:security/authentication/identity#prevent-publish-of-static-identity-assets> .
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Modifications apportées au code d’authentification pour ASP.NET Core 2,1 et versions ultérieures](xref:migration/20_21#changes-to-authentication-code)
 
@@ -501,7 +503,7 @@ Nous vous recommandons d’utiliser un système de contrôle de code source qui 
 > [!NOTE]
 > Les services sont requis lorsque vous utilisez l' [authentification à deux facteurs](xref:security/authentication/identity-enable-qrcodes), la [confirmation de compte et la récupération de mot de passe](xref:security/authentication/accconfirm), ainsi que d’autres fonctionnalités de sécurité avec Identity . Les services ou stubs de service ne sont pas générés lors de la génération de modèles automatique Identity . Les services pour activer ces fonctionnalités doivent être ajoutés manuellement. Par exemple, consultez [exiger une confirmation par courrier électronique](xref:security/authentication/accconfirm#require-email-confirmation).
 
-## <a name="scaffold-identity-into-an-empty-project"></a>Génération de modèles automatique Identity dans un projet vide
+## <a name="scaffold-no-locidentity-into-an-empty-project"></a>Génération de modèles automatique Identity dans un projet vide
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -513,7 +515,7 @@ Ajoutez les appels en surbrillance suivants à la `Startup` classe :
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>Générer Identity une structure dans un Razor projet sans autorisation existante
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-without-existing-authorization"></a>Générer Identity une structure dans un Razor projet sans autorisation existante
 
 <!--  Updated for 3.0
 set projNam=RPnoAuth
@@ -558,7 +560,7 @@ Facultatif : ajoutez la connexion partielle ( `_LoginPartial` ) au fichier de d
 
 [!code-cshtml[](scaffold-identity/sample/_Layout.cshtml?highlight=37)]
 
-## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Génération de modèles automatique Identity dans un Razor projet avec autorisation
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-with-authorization"></a>Génération de modèles automatique Identity dans un Razor projet avec autorisation
 
 <!--
 Use >=2.1: dotnet new webapp -au Individual -o RPauth
@@ -575,7 +577,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 Certaines Identity options sont configurées dans *Areas/ Identity / Identity HostingStartup.cs*. Pour plus d’informations, consultez [IHostingStartup](xref:fundamentals/configuration/platform-specific-configuration).
 
-## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Génération de modèles automatique Identity dans un projet MVC sans autorisation existante
+## <a name="scaffold-no-locidentity-into-an-mvc-project-without-existing-authorization"></a>Génération de modèles automatique Identity dans un projet MVC sans autorisation existante
 
 <!--
 set projNam=MvcNoAuth
@@ -609,7 +611,7 @@ Appeler [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuil
 
 [!INCLUDE[](~/includes/scaffold-identity/hsts.md)]
 
-## <a name="scaffold-identity-into-an-mvc-project-with-authorization"></a>Génération Identity de modèles automatique dans un projet MVC avec autorisation
+## <a name="scaffold-no-locidentity-into-an-mvc-project-with-authorization"></a>Génération Identity de modèles automatique dans un projet MVC avec autorisation
 
 <!--
 dotnet new mvc -au Individual -o MvcAuth
@@ -625,7 +627,7 @@ Supprimez le dossier *pages/Shared* et les fichiers de ce dossier.
 
 <a name="full"></a>
 
-## <a name="create-full-identity-ui-source"></a>Créer une Identity source d’interface utilisateur complète
+## <a name="create-full-no-locidentity-ui-source"></a>Créer une Identity source d’interface utilisateur complète
 
 Pour conserver le contrôle total de l' Identity interface utilisateur, exécutez le générateur de Identity modèles automatique et sélectionnez **remplacer tous les fichiers**.
 
@@ -729,7 +731,7 @@ L’exemple de code suivant présente l’ajout d’un utilisateur :
 
 Une approche similaire peut être suivie pour les scénarios de production.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Modifications apportées au code d’authentification pour ASP.NET Core 2,1 et versions ultérieures](xref:migration/20_21#changes-to-authentication-code)
 

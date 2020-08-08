@@ -5,6 +5,8 @@ description: Partie 4 de la série de didacticiels sur ASP.NET Core MVC.
 ms.author: riande
 ms.date: 01/13/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: 77c12b98462c8a84ab807abef247573b6a028fcc
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: cc9c0447dc032ff0a88d379cd9d542e3406777bf
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86213159"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021963"
 ---
 # <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a>Partie 4 : ajouter un modèle à une application ASP.NET Core MVC
 
@@ -185,7 +187,7 @@ Renseignez la boîte de dialogue **Ajouter un contrôleur** :
 
 * **Affichages :** conservez la valeur par défaut de chaque option activée.
 * **Nom du contrôleur :** conservez la valeur par défaut *MoviesController*.
-* Sélectionnez **Ajouter** .
+* Sélectionnez **Ajouter**
 
 Visual Studio crée :
 
@@ -286,7 +288,7 @@ La méthode `Up` crée la table Movie et configure `Id` comme la clé primaire. 
 
 <a name="test"></a>
 
-## <a name="test-the-app"></a>Tester l’application
+## <a name="test-the-app"></a>Test de l'application
 
 * Exécutez l’application et cliquez sur le lien **Movie App**.
 
@@ -407,7 +409,7 @@ La directive `@model` vous permet d’accéder à la liste des films que le cont
 
 Comme l’objet `Model` est fortement typé (en tant qu’objet `IEnumerable<Movie>`), chaque élément de la boucle est typé en tant que `Movie`. Entre autres avantages, cela signifie que votre code est vérifié au moment de la compilation :
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Tag Helpers](xref:mvc/views/tag-helpers/intro)
 * [Globalisation et localisation](xref:fundamentals/localization)
@@ -460,7 +462,7 @@ Renseignez la boîte de dialogue **Ajouter un contrôleur** :
 
 * **Affichages :** conservez la valeur par défaut de chaque option activée.
 * **Nom du contrôleur :** conservez la valeur par défaut *MoviesController*.
-* Sélectionnez **Ajouter** .
+* Sélectionnez **Ajouter**
 
 ![Boîte de dialogue Ajouter un contrôleur](adding-model/_static/add_controller2.png)
 
@@ -571,7 +573,7 @@ Dans cette section, vous devez effectuer les tâches suivantes :
 
    La commande `Add-Migration` génère du code pour créer le schéma de base de données initial.
 
-   Le schéma de base de données est basé sur le modèle spécifié dans la classe `MvcMovieContext`. L’argument `Initial` est le nom de la migration. Vous pouvez utiliser n’importe quel nom, mais par convention, un nom décrivant la migration est utilisé. Pour plus d’informations, consultez <xref:data/ef-mvc/migrations>.
+   Le schéma de base de données est basé sur le modèle spécifié dans la classe `MvcMovieContext`. L’argument `Initial` est le nom de la migration. Vous pouvez utiliser n’importe quel nom, mais par convention, un nom décrivant la migration est utilisé. Pour plus d'informations, consultez <xref:data/ef-mvc/migrations>.
 
    La `Update-Database` commande exécute la `Up` méthode dans le fichier *migrations/{Time-horodatage} _InitialCreate. cs* , qui crée la base de données.
 
@@ -613,7 +615,7 @@ Vous avez créé un contexte de base de données et vous l’avez inscrit dans l
 
 <a name="test"></a>
 
-### <a name="test-the-app"></a>Tester l’application
+### <a name="test-the-app"></a>Test de l'application
 
 * Exécutez l’application et ajoutez `/Movies` à l’URL dans le navigateur (`http://localhost:port/movies`).
 
@@ -716,7 +718,7 @@ La directive `@model` vous permet d’accéder à la liste des films que le cont
 
 Comme l’objet `Model` est fortement typé (en tant qu’objet `IEnumerable<Movie>`), chaque élément de la boucle est typé en tant que `Movie`. Entre autres avantages, cela signifie que votre code est vérifié au moment de la compilation :
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Tag Helpers](xref:mvc/views/tag-helpers/intro)
 * [Globalisation et localisation](xref:fundamentals/localization)

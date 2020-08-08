@@ -7,6 +7,8 @@ ms.author: anurse
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: 4e125fd6c4ad2cd4989d692dd28a63638218ee57
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e004899e334738f723cb98638cb31de8d314a830
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400412"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022470"
 ---
-# <a name="security-considerations-in-aspnet-core-signalr"></a>Considérations relatives à la sécurité dans ASP.NET CoreSignalR
+# <a name="security-considerations-in-aspnet-core-no-locsignalr"></a>Considérations relatives à la sécurité dans ASP.NET CoreSignalR
 
 Par [Andrew Stanton-infirmière](https://twitter.com/anurse)
 
@@ -41,12 +43,12 @@ Pour plus d’informations sur la configuration de CORS, consultez [activer les 
 
 * Autorisez les origines attendues spécifiques. L’autorisation d’une origine est possible, mais elle n’est **pas** sécurisée ou recommandée.
 * Les méthodes HTTP `GET` et `POST` doivent être autorisées.
-* Les informations d’identification doivent être autorisées afin que les sessions rémanentes basées sur des cookies fonctionnent correctement. Ils doivent être activés même lorsque l’authentification n’est pas utilisée.
+* Les informations d’identification doivent être autorisées pour que les cookie sessions rémanentes basées sur fonctionnent correctement. Ils doivent être activés même lorsque l’authentification n’est pas utilisée.
 
 ::: moniker range=">= aspnetcore-5.0"
 
 Toutefois, dans 5,0, nous avons fourni une option dans le client de machine à écrire pour ne pas utiliser les informations d’identification.
-L’option permettant de ne pas utiliser les informations d’identification ne doit être utilisée que si vous connaissez 100% que les informations d’identification telles que les cookies ne sont pas nécessaires dans votre application (les cookies sont utilisés par Azure App service lors de l’utilisation de plusieurs serveurs pour les sessions rémanentes).
+L’option permettant de ne pas utiliser les informations d’identification ne doit être utilisée que si vous connaissez 100% que les informations d’identification telles que ne Cookie sont pas nécessaires dans votre application ( cookie s sont utilisées par Azure App service lors de l’utilisation de plusieurs serveurs pour les sessions rémanentes).
 
 ::: moniker-end
 

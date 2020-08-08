@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: e76ddad795237991c49bf2a3b1ca840795989260
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: c0edf56c966cb90c1c308f300a8944d392fdc0e7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404910"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020975"
 ---
-# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>Validation de modèle dans ASP.NET Core MVC et les Razor pages
+# <a name="model-validation-in-aspnet-core-mvc-and-no-locrazor-pages"></a>Validation de modèle dans ASP.NET Core MVC et les Razor pages
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -384,9 +386,9 @@ Autres options pour désactiver la validation côté client :
 * Commentez la référence à `_ValidationScriptsPartial` dans tous les fichiers *. cshtml* .
 * Supprimez le contenu du fichier *Pages\Shared \_ ValidationScriptsPartial. cshtml* .
 
-L’approche précédente n’empêchera pas la validation côté client de ASP.NET Core Identity Razor bibliothèque de classes. Pour plus d’informations, consultez <xref:security/authentication/scaffold-identity>.
+L’approche précédente n’empêchera pas la validation côté client de ASP.NET Core Identity Razor bibliothèque de classes. Pour plus d'informations, consultez <xref:security/authentication/scaffold-identity>.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Espace de noms System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations)
 * [Liaison de modèle](model-binding.md)
@@ -756,7 +758,7 @@ Et dans les Razor pages :
 
 Une autre option permettant de désactiver la validation côté client consiste à commenter la référence à `_ValidationScriptsPartial` dans votre fichier *.cshtml*.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Espace de noms System.ComponentModel.DataAnnotations](xref:System.ComponentModel.DataAnnotations)
 * [Liaison de modèle](model-binding.md)

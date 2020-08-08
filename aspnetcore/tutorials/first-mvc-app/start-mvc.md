@@ -5,6 +5,8 @@ description: Découvrez comment bien démarrer avec ASP.NET Core MVC.
 ms.author: riande
 ms.date: 10/16/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: d4eb1744b1186704603430584b3da0793f90ee49
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 3df00af8e6bca0dbf2d7871f383dd67b465aa5da
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86213083"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021170"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>Bien démarrer avec ASP.NET Core MVC
 
@@ -84,7 +86,7 @@ Il part du principe que vous connaissez déjà VS Code. Pour plus d’informatio
 
 * Ouvrez le [terminal intégré](https://code.visualstudio.com/docs/editor/integrated-terminal).
 * Accédez à un répertoire (`cd`) destiné à contenir le projet.
-* Exécutez la commande suivante :
+* Exécutez la commande suivante :
 
    ```dotnetcli
    dotnet new mvc -o MvcMovie
@@ -173,7 +175,7 @@ Sélectionnez **exécuter**  >  **Démarrer sans débogage** pour lancer l’app
 Dans la prochaine partie de ce didacticiel, vous allez découvrir MVC et commencer à écrire du code.
 
 > [!div class="step-by-step"]
-> [Suivant](adding-controller.md)
+> [Next](adding-controller.md)
 
 ::: moniker-end
 
@@ -237,7 +239,7 @@ Il part du principe que vous connaissez déjà VS Code. Pour plus d’informatio
 
 * Ouvrez le [terminal intégré](https://code.visualstudio.com/docs/editor/integrated-terminal).
 * Accédez à un répertoire (`cd`) destiné à contenir le projet.
-* Exécutez la commande suivante :
+* Exécutez la commande suivante :
 
    ```dotnetcli
    dotnet new mvc -o MvcMovie
@@ -336,6 +338,6 @@ Sélectionnez **exécuter**  >  **Démarrer sans débogage** pour lancer l’app
 Dans la prochaine partie de ce didacticiel, vous allez découvrir MVC et commencer à écrire du code.
 
 > [!div class="step-by-step"]
-> [Suivant](adding-controller.md)
+> [Next](adding-controller.md)
 
 ::: moniker-end

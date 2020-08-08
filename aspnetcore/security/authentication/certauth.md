@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 07/16/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 06803ee57824bbfac5725763938abbb9db0e360a
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: 7a23f2b17cc8fb3a4989b9fddd5c128add13db5b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568845"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021950"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Configurer l’authentification par certificat dans ASP.NET Core
 
@@ -614,7 +616,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-L’implémentation de la mise en cache par défaut stocke les résultats en mémoire. Vous pouvez fournir votre propre cache en l’implémentant et en l' `ICertificateValidationCache` inscrivant avec l’injection de dépendances. Par exemple : `services.AddSingleton<ICertificateValidationCache, YourCache>()`.
+L’implémentation de la mise en cache par défaut stocke les résultats en mémoire. Vous pouvez fournir votre propre cache en l’implémentant et en l' `ICertificateValidationCache` inscrivant avec l’injection de dépendances. Par exemple, `services.AddSingleton<ICertificateValidationCache, YourCache>()`.
 
 ::: moniker-end
 
@@ -648,7 +650,7 @@ L’approche suivante prend en charge les certificats clients facultatifs :
 * Pour les demandes adressées à l’application Web qui requièrent un certificat client et n’en ont pas :
   * Rediriger vers la même page à l’aide du sous-domaine protégé par certificat du client.
   * Par exemple, redirigez vers `myClient.contoso.com/requestedPage` . Étant donné que la demande à `myClient.contoso.com/requestedPage` est un nom d’hôte différent de `contoso.com/requestedPage` , le client établit une connexion différente et le certificat client est fourni.
-  * Pour plus d’informations, consultez <xref:security/authorization/introduction>.
+  * Pour plus d'informations, consultez <xref:security/authorization/introduction>.
 
 Laissez des questions, des commentaires et d’autres commentaires sur les certificats clients facultatifs dans ce problème de [discussion GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/18720) .
 

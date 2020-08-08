@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/03/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 720da8a8fe22f0e1911fd554c094661b4465a335
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: a11e6325143b9db57d6fbd1cd67478dc1dd6122d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568832"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021248"
 ---
 # <a name="upload-files-in-aspnet-core"></a>Charger des fichiers dans ASP.NET Core
 
@@ -191,7 +193,7 @@ L’exemple suivant est similaire à l’exemple précédent, à l’exception d
 Pour exécuter la publication de formulaire dans JavaScript pour les clients qui [ne prennent pas en charge l’API FETCH](https://caniuse.com/#feat=fetch), utilisez l’une des approches suivantes :
 
 * Utilisez un Polyfill d’extraction (par exemple, [Window. Fetch Polyfill (GitHub/fetch)](https://github.com/github/fetch)).
-* Utilisez `XMLHttpRequest`. Par exemple :
+* Utiliser `XMLHttpRequest`. Par exemple :
 
   ```javascript
   <script>
@@ -918,7 +920,7 @@ L’exemple suivant est similaire à l’exemple précédent, à l’exception d
 Pour exécuter la publication de formulaire dans JavaScript pour les clients qui [ne prennent pas en charge l’API FETCH](https://caniuse.com/#feat=fetch), utilisez l’une des approches suivantes :
 
 * Utilisez un Polyfill d’extraction (par exemple, [Window. Fetch Polyfill (GitHub/fetch)](https://github.com/github/fetch)).
-* Utilisez `XMLHttpRequest`. Par exemple :
+* Utiliser `XMLHttpRequest`. Par exemple :
 
   ```javascript
   <script>
@@ -1476,7 +1478,7 @@ Les exemples de cette rubrique reposent sur <xref:System.IO.MemoryStream> pour s
 ::: moniker-end
 
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Vidange des demandes de connexion HTTP](xref:fundamentals/servers/kestrel#http11-request-draining)
 * [Unrestricted File Upload](https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload) (Chargement de fichiers illimité)

@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 47bd91f4d2bf166a4d0c9a0829e24cbe26a81a10
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 826d7cf96d95ee7eb98b0f05a233401a1e3bff33
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399710"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020832"
 ---
 # <a name="partial-views-in-aspnet-core"></a>Vues partielles dans ASP.NET Core
 
@@ -80,7 +82,7 @@ Les noms de fichiers des vues partielles commencent souvent par un trait de soul
 
 ::: moniker range=">= aspnetcore-2.0"
 
-### <a name="use-a-partial-view-in-a-razor-pages-pagemodel"></a>Utiliser une vue partielle dans une Razor page PageModel
+### <a name="use-a-partial-view-in-a-no-locrazor-pages-pagemodel"></a>Utiliser une vue partielle dans une Razor page PageModel
 
 Dans ASP.NET Core 2,0 ou 2,1, la méthode de gestionnaire suivante restitue la vue partielle * \_ AuthorPartialRP. cshtml* à la réponse :
 
@@ -165,7 +167,7 @@ L’exemple suivant référence une vue partielle avec un chemin relatif :
 <partial name="../Account/_PartialName.cshtml" />
 ```
 
-Pour plus d’informations, consultez <xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper>.
+Pour plus d'informations, consultez <xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper>.
 
 ::: moniker-end
 

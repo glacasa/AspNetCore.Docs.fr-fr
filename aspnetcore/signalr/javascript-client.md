@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/08/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: 8c7acad42f3a49ccf1bc60f8ae5b4f68a602d97b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 04200ced41113eb9a68cefc2f485f2d3798476c6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406925"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022340"
 ---
-# <a name="aspnet-core-signalr-javascript-client"></a>SignalRClient JavaScript ASP.net Core
+# <a name="aspnet-core-no-locsignalr-javascript-client"></a>SignalRClient JavaScript ASP.net Core
 
 Par [Rachel Appel](https://twitter.com/rachelappel)
 
@@ -30,7 +32,7 @@ La SignalR bibliothèque cliente JavaScript ASP.net Core permet aux développeur
 
 [Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/javascript-client/sample) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
-## <a name="install-the-signalr-client-package"></a>Installer le SignalR package client
+## <a name="install-the-no-locsignalr-client-package"></a>Installer le SignalR package client
 
 La SignalR bibliothèque cliente JavaScript est fournie en tant que package [NPM](https://www.npmjs.com/) . Les sections suivantes décrivent différentes façons d’installer la bibliothèque cliente.
 
@@ -309,7 +311,7 @@ Le code suivant illustre une approche de reconnexion manuelle classique :
 
 Une implémentation réelle utilise une interruption exponentielle ou une nouvelle tentative un nombre spécifié de fois avant d’abandonner.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Informations de référence sur l’API JavaScript](/javascript/api/?view=signalr-js-latest)
 * [Didacticiel JavaScript](xref:tutorials/signalr)

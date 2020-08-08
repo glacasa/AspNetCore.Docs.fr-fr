@@ -6,6 +6,8 @@ ms.author: riserrad
 ms.custom: mvc
 ms.date: 07/10/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-azure-webapp-using-vscode
-ms.openlocfilehash: 43a2c4fed3a8873f64259167d3949d720f2c5dab
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: a07786b1ae7e92e73d4336d0dd0bdbf99b571a0a
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406743"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022314"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio-code"></a>Publier une application ASP.NET Core sur Azure avec Visual Studio Code
 
@@ -81,7 +83,7 @@ Si la commande ci-dessous ne fonctionne pas, vérifiez que votre installation es
 
 ### <a name="through-visual-studio-code-interface"></a>Via l’interface Visual Studio Code
 
-- Ouvrez Visual Studio Code
+- Ouvrez Visual Studio Code.
 - Dans le menu, sélectionnez `File > Open Folder`.
 - Sélectionnez la racine du dossier dans lequel vous avez créé le projet MVC.
 
@@ -153,7 +155,7 @@ L’extension déploiera le contenu mis à jour dans l’application web. Une fo
 
 - [Créer votre premier pipeline Azure DevOps](/azure/devops/pipelines/create-first-pipeline)
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 - [Azure App Service](/azure/app-service/app-service-web-overview)
 - [Groupes de ressources Azure](/azure/azure-resource-manager/resource-group-overview#resource-groups)

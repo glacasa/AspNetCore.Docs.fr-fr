@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/23/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: 137b73529a6c3d2a1dece201ebd8a7a5a96da349
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 27f6130742e25e07d4b908973e1ebf26288fdbfd
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404741"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021534"
 ---
-# <a name="custom-storage-providers-for-aspnet-core-identity"></a>Fournisseurs de stockage personnalisés pour ASP.NET CoreIdentity
+# <a name="custom-storage-providers-for-aspnet-core-no-locidentity"></a>Fournisseurs de stockage personnalisés pour ASP.NET CoreIdentity
 
 Par [Steve Smith](https://ardalis.com/)
 
@@ -47,7 +49,7 @@ Lorsque vous utilisez l’CLI .NET Core, ajoutez `-au Individual` :
 dotnet new mvc -au Individual
 ```
 
-## <a name="the-aspnet-core-identity-architecture"></a>Architecture ASP.NET Core Identity
+## <a name="the-aspnet-core-no-locidentity-architecture"></a>Architecture ASP.NET Core Identity
 
 ASP.NET Core Identity se compose de classes appelées gestionnaires et magasins. Les *gestionnaires* sont des classes de haut niveau qu’un développeur d’applications utilise pour effectuer des opérations, telles que la création d’un Identity utilisateur. Les *magasins* sont des classes de niveau inférieur qui spécifient la façon dont les entités, telles que les utilisateurs et les rôles, sont conservées. Les magasins suivent le modèle de référentiel et sont étroitement couplés avec le mécanisme de persistance. Les gestionnaires sont dissociés des magasins, ce qui signifie que vous pouvez remplacer le mécanisme de persistance sans modifier le code de votre application (à l’exception de la configuration).
 
@@ -61,13 +63,13 @@ Lorsque vous créez une nouvelle instance de `UserManager` ou `RoleManager` que 
 
 [Reconfigurer l’application pour utiliser le nouveau fournisseur de stockage](#reconfigure-app-to-use-a-new-storage-provider) montre comment instancier `UserManager` et `RoleManager` avec un magasin personnalisé.
 
-## <a name="aspnet-core-identity-stores-data-types"></a>ASP.NET Core Identity stocke les types de données
+## <a name="aspnet-core-no-locidentity-stores-data-types"></a>ASP.NET Core Identity stocke les types de données
 
 [ASP.net Core Identity ](https://github.com/aspnet/identity) les types de données sont détaillés dans les sections suivantes :
 
 ### <a name="users"></a>Utilisateurs
 
-Utilisateurs inscrits de votre site Web. Le type [IdentityUser](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuser) peut être étendu ou utilisé comme exemple pour votre propre type personnalisé. Vous n’avez pas besoin d’hériter d’un type particulier pour implémenter votre propre solution de stockage d’identité personnalisée.
+Utilisateurs inscrits de votre site Web. Le type d' [ Identity utilisateur](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuser) peut être étendu ou utilisé comme exemple pour votre propre type personnalisé. Vous n’avez pas besoin d’hériter d’un type particulier pour implémenter votre propre solution de stockage d’identité personnalisée.
 
 ### <a name="user-claims"></a>Revendications utilisateur
 
@@ -123,7 +125,7 @@ La logique d’implémentation pour créer l’utilisateur se trouve dans la `_u
 
 ## <a name="customize-the-user-class"></a>Personnaliser la classe utilisateur
 
-Lors de l’implémentation d’un fournisseur de stockage, créez une classe d’utilisateur qui est équivalente à la [classe IdentityUser](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuser).
+Lors de l’implémentation d’un fournisseur de stockage, créez une classe d’utilisateur qui est équivalente à la [ Identity classe utilisateur](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuser).
 
 Au minimum, votre classe d’utilisateur doit inclure un `Id` et une `UserName` propriété.
 
@@ -191,9 +193,9 @@ public class UserStore : IUserStore<IdentityUser>,
 }
 ```
 
-### <a name="identityuserclaim-identityuserlogin-and-identityuserrole"></a>IdentityUserClaim, IdentityUserLogin et IdentityUserRole
+### <a name="no-locidentityuserclaim-no-locidentityuserlogin-and-no-locidentityuserrole"></a>IdentityUserClaim, Identity Userlogin et Identity userrole
 
-L' `Microsoft.AspNet.Identity.EntityFramework` espace de noms contient des implémentations des classes [IdentityUserClaim](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityuserclaim-1), [IdentityUserLogin](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuserlogin)et [IdentityUserRole](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityuserrole-1) . Si vous utilisez ces fonctionnalités, vous souhaiterez peut-être créer vos propres versions de ces classes et définir les propriétés de votre application. Toutefois, il est parfois plus efficace de ne pas charger ces entités dans la mémoire lors de l’exécution d’opérations de base (telles que l’ajout ou la suppression d’une revendication d’utilisateur). Au lieu de cela, les classes du magasin principal peuvent exécuter ces opérations directement sur la source de données. Par exemple, la `UserStore.GetClaimsAsync` méthode peut appeler la `userClaimTable.FindByUserId(user.Id)` méthode pour exécuter directement une requête sur cette table et retourner une liste de revendications.
+L' `Microsoft.AspNet.Identity.EntityFramework` espace de noms contient des implémentations des classes [ Identity UserClaim](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityuserclaim-1), [ Identity Userlogin](/dotnet/api/microsoft.aspnet.identity.corecompat.identityuserlogin)et [ Identity userrole](/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityuserrole-1) . Si vous utilisez ces fonctionnalités, vous souhaiterez peut-être créer vos propres versions de ces classes et définir les propriétés de votre application. Toutefois, il est parfois plus efficace de ne pas charger ces entités dans la mémoire lors de l’exécution d’opérations de base (telles que l’ajout ou la suppression d’une revendication d’utilisateur). Au lieu de cela, les classes du magasin principal peuvent exécuter ces opérations directement sur la source de données. Par exemple, la `UserStore.GetClaimsAsync` méthode peut appeler la `userClaimTable.FindByUserId(user.Id)` méthode pour exécuter directement une requête sur cette table et retourner une liste de revendications.
 
 ## <a name="customize-the-role-class"></a>Personnaliser la classe de rôle
 
@@ -219,7 +221,7 @@ Une fois que vous avez implémenté un fournisseur de stockage, vous configurez 
 1. Supprimez le `Microsoft.AspNetCore.EntityFramework.Identity` package NuGet.
 1. Si le fournisseur de stockage réside dans un autre projet ou package, ajoutez une référence à ce dernier.
 1. Remplacez toutes les références à `Microsoft.AspNetCore.EntityFramework.Identity` par une instruction using pour l’espace de noms de votre fournisseur de stockage.
-1. Dans la `ConfigureServices` méthode, modifiez la `AddIdentity` méthode pour utiliser vos types personnalisés. Vous pouvez créer vos propres méthodes d’extension à cet effet. Pour obtenir un exemple, consultez [IdentityServiceCollectionExtensions](https://github.com/aspnet/Identity/blob/rel/1.1.0/src/Microsoft.AspNetCore.Identity/IdentityServiceCollectionExtensions.cs) .
+1. Dans la `ConfigureServices` méthode, modifiez la `AddIdentity` méthode pour utiliser vos types personnalisés. Vous pouvez créer vos propres méthodes d’extension à cet effet. Pour obtenir un exemple, consultez [ Identity ServiceCollectionExtensions](https://github.com/aspnet/Identity/blob/rel/1.1.0/src/Microsoft.AspNetCore.Identity/IdentityServiceCollectionExtensions.cs) .
 1. Si vous utilisez des rôles, mettez à jour `RoleManager` pour utiliser votre `RoleStore` classe.
 1. Mettez à jour la chaîne de connexion et les informations d’identification dans la configuration de votre application.
 
@@ -243,7 +245,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-## <a name="references"></a>References
+## <a name="references"></a>Références
 
 * [Fournisseurs de stockage personnalisés pour ASP.NET 4. xIdentity](/aspnet/identity/overview/extensibility/overview-of-custom-storage-providers-for-aspnet-identity)
 * [ASP.net Core Identity ](https://github.com/dotnet/AspNetCore/tree/master/src/Identity): ce référentiel contient des liens vers des fournisseurs de magasins gérés par la communauté.

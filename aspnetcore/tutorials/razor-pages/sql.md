@@ -5,6 +5,8 @@ description: Partie 4 de la série de didacticiels sur les Razor pages.
 ms.author: riande
 ms.date: 7/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: 68764a5b8c908012cc0053aa4e3ea071f2ce423d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6d1a93a9cab49d33181e88b7fdc0f203a1e2546c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400906"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022418"
 ---
 # <a name="part-4-with-a-database-and-aspnet-core"></a>Partie 4, avec une base de données et une ASP.NET Core
 
@@ -120,7 +122,7 @@ L’exception suivante se produit lorsque `Update-Database` n’a pas été exé
 > `SqlException: Cannot open database "RazorPagesMovieContext-" requested by the login. The login failed.`
 > `Login failed for user 'user name'.`
 
-### <a name="test-the-app"></a>Tester l'application
+### <a name="test-the-app"></a>Test de l'application
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -146,7 +148,7 @@ L’application affiche les données de départ.
 
 Le tutoriel suivant sert à améliorer la présentation des données.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 > [!div class="step-by-step"]
 > [Précédent : génération de modèles Razor automatique Pages](xref:tutorials/razor-pages/page)suivantes 
@@ -261,10 +263,10 @@ Le code suivant montre le fichier *Program.cs* mis à jour.
 
 Une application de production n’appelle pas `Database.Migrate`. Il est ajouté au code précédent afin d’éviter l’exception suivante quand `Update-Database` n’a pas été exécutée :
 
-SqlException: impossible d’ouvrir la base de données 'RazorPagesMovieContext-21' demandée par la connexion. La connexion a échoué.
+SqlException : impossible d’ouvrir la base de données « Razor PagesMovieContext-21 » demandée par la connexion. La connexion a échoué.
 Échec de la connexion de l’utilisateur 'nom utilisateur'.
 
-### <a name="test-the-app"></a>Tester l'application
+### <a name="test-the-app"></a>Test de l'application
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -300,7 +302,7 @@ L’application affiche les données de départ :
 
 Le didacticiel suivant nettoie la présentation des données.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Version YouTube de ce tutoriel](https://youtu.be/A_5ff11sDHY)
 

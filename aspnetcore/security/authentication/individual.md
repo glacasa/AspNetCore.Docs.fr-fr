@@ -5,6 +5,8 @@ description: Découvrez des articles basés sur des projets ASP.NET Core créés
 ms.author: riande
 ms.date: 12/11/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/individual
-ms.openlocfilehash: 6d3743fc31c29bed5075ac29381aea51a64a908c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6b72612c12d52cfc1736c141bdad95ace6c84546
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406249"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022288"
 ---
 # <a name="articles-based-on-aspnet-core-projects-created-with-individual-user-accounts"></a>Articles basés sur des projets de ASP.NET Core créés avec des comptes d’utilisateur individuels
 
@@ -71,7 +73,7 @@ Le tableau suivant présente les options d’authentification disponibles pour l
 
 | Option | Type d'authentification | Lien vers plus d’informations |
  | ----------------- | ------------ | ---------- |
-| None            |  Aucune authentification | | 
+| Aucun            |  Aucune authentification | | 
 | Individuel      |  Authentification individuelle | <xref:security/authentication/identity>
 | IndividualB2C   |  Authentification individuelle hébergée dans le Cloud avec Azure AD B2C | [Azure AD B2C](/azure/active-directory-b2c/) |
 | SingleOrg       |  Authentification d’organisation pour un seul locataire | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
@@ -84,14 +86,14 @@ Le tableau suivant présente les options d’authentification disponibles lors d
 
 | Option | Type d'authentification | Lien vers plus d’informations |
  | ----------------- | ------------ | ---------- |
-| None            |  Aucune authentification | | 
+| Aucun            |  Aucune authentification | | 
 | Comptes d’utilisateur individuels/stocker les comptes d’utilisateur dans l’application |  Authentification individuelle | <xref:security/authentication/identity> |
 | Comptes d’utilisateur individuels/se connecter à un magasin d’utilisateurs existant dans le Cloud |  Authentification individuelle hébergée dans le Cloud avec Azure AD B2C | [Azure AD B2C](/azure/active-directory-b2c/) |
 | Cloud professionnel ou scolaire/organisation unique  |  Authentification d’organisation pour un seul locataire | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
 | Cloud professionnel ou scolaire/organisation multiple |  Authentification d’organisation pour plusieurs locataires | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
 | Windows         |  Authentification Windows | [Authentification Windows](xref:security/authentication/windowsauth)
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 Les articles suivants montrent comment utiliser le code généré dans ASP.NET Core modèles qui utilisent des comptes d’utilisateur individuels :
 

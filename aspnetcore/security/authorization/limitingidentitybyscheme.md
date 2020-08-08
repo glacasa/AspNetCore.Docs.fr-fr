@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/08/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,16 +16,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/limitingidentitybyscheme
-ms.openlocfilehash: 042b22a220d961773437e9d85d5f0c5782e29bea
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 66b307a3629e18e49b5bb6e65a156054c0002ba8
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406015"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022106"
 ---
 # <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>Autorisation avec un schéma spécifique dans ASP.NET Core
 
-Dans certains scénarios, tels que les applications à page unique (SPAs), il est courant d’utiliser plusieurs méthodes d’authentification. Par exemple, l’application peut utiliser l’authentification basée sur les cookies pour se connecter et l’authentification du porteur JWT pour les demandes JavaScript. Dans certains cas, l’application peut avoir plusieurs instances d’un gestionnaire d’authentification. Par exemple, deux gestionnaires de cookies où l’un contient une identité de base et l’autre est créé lorsqu’une authentification multifacteur (MFA) a été déclenchée. L’authentification multifacteur peut être déclenchée, car l’utilisateur a demandé une opération nécessitant une sécurité supplémentaire. Pour plus d’informations sur l’application de l’authentification MFA lorsqu’un utilisateur demande une ressource qui requiert l’authentification MFA, consultez la section GitHub issue [protection avec MFA](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195).
+Dans certains scénarios, tels que les applications à page unique (SPAs), il est courant d’utiliser plusieurs méthodes d’authentification. Par exemple, l’application peut utiliser l' cookie authentification basée sur pour se connecter et l’authentification du porteur JWT pour les demandes JavaScript. Dans certains cas, l’application peut avoir plusieurs instances d’un gestionnaire d’authentification. Par exemple, deux cookie gestionnaires où l’un contient une identité de base et l’autre est créé lorsqu’une authentification multifacteur (MFA) a été déclenchée. L’authentification multifacteur peut être déclenchée, car l’utilisateur a demandé une opération nécessitant une sécurité supplémentaire. Pour plus d’informations sur l’application de l’authentification MFA lorsqu’un utilisateur demande une ressource qui requiert l’authentification MFA, consultez la section GitHub issue [protection avec MFA](https://github.com/dotnet/AspNetCore.Docs/issues/15791#issuecomment-580464195).
 
 Un schéma d’authentification est nommé lorsque le service d’authentification est configuré pendant l’authentification. Par exemple :
 
@@ -43,7 +45,7 @@ public void ConfigureServices(IServiceCollection services)
         });
 ```
 
-Dans le code précédent, deux gestionnaires d’authentification ont été ajoutés : un pour les cookies et un pour le porteur.
+Dans le code précédent, deux gestionnaires d’authentification ont été ajoutés : un pour cookie s et un pour le porteur.
 
 >[!NOTE]
 >La spécification du schéma par défaut entraîne la définition de la `HttpContext.User` propriété sur cette identité. Si ce comportement n’est pas souhaité, désactivez-le en appelant la forme sans paramètre de `AddAuthentication` .
@@ -63,7 +65,7 @@ public class MixedController : Controller
         JwtBearerDefaults.AuthenticationScheme;
 ```
 
-Dans l’exemple précédent, les gestionnaires de cookies et de porteur s’exécutent et ont la possibilité de créer et d’ajouter une identité pour l’utilisateur actuel. En spécifiant un seul schéma, le gestionnaire correspondant s’exécute.
+Dans l’exemple précédent, les cookie gestionnaires de porteur et sont exécutés et ont la possibilité de créer et d’ajouter une identité pour l’utilisateur actuel. En spécifiant un seul schéma, le gestionnaire correspondant s’exécute.
 
 ```csharp
 [Authorize(AuthenticationSchemes = 
@@ -71,7 +73,7 @@ Dans l’exemple précédent, les gestionnaires de cookies et de porteur s’ex�
 public class MixedController : Controller
 ```
 
-Dans le code précédent, seul le gestionnaire avec le schéma « Bearer » s’exécute. Toutes les identités basées sur les cookies sont ignorées.
+Dans le code précédent, seul le gestionnaire avec le schéma « Bearer » s’exécute. Toutes les cookie identités basées sur sont ignorées.
 
 ## <a name="selecting-the-scheme-with-policies"></a>Sélection du schéma avec des stratégies
 

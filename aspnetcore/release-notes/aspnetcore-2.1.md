@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: bf041965b009d5c10b96ad4f2a349c6efb346eb5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3fb524748b9e2aa2c12b64f67a7960c4f0f911b0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408160"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021157"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>Nouveautés d’ASP.NET Core 2.1
 
@@ -38,7 +40,7 @@ SignalRa été réécrite pour ASP.NET Core 2,1. ASP.NET Core SignalR comprend u
 
 Pour plus d’informations, [consultez SignalR ASP.net Core ](xref:signalr/introduction).
 
-## <a name="razor-class-libraries"></a>Razorbibliothèques de classes
+## <a name="no-locrazor-class-libraries"></a>Razorbibliothèques de classes
 
 ASP.NET Core 2,1 facilite la génération et Razor l’inclusion de l’interface utilisateur basée sur dans une bibliothèque et la partage entre plusieurs projets. Le nouveau Razor Kit de développement logiciel (SDK) permet de générer des Razor fichiers dans un projet de bibliothèque de classes qui peut être empaqueté dans un package NuGet. Les vues et les pages dans les bibliothèques sont automatiquement découvertes et peuvent être remplacées par l’application. En intégrant Razor la compilation dans la build :
 
@@ -47,7 +49,7 @@ ASP.NET Core 2,1 facilite la génération et Razor l’inclusion de l’interfac
 
 Pour plus d’informations, consultez [créer une interface utilisateur réutilisable à l’aide du Razor projet de bibliothèque de classes](xref:razor-pages/ui-class).
 
-## <a name="identity-ui-library--scaffolding"></a>IdentityGénération de modèles automatique & bibliothèque d’interface utilisateur
+## <a name="no-locidentity-ui-library--scaffolding"></a>IdentityGénération de modèles automatique & bibliothèque d’interface utilisateur
 
 ASP.NET Core 2,1 fournit [ASP.net Core Identity ](xref:security/authentication/identity) sous la forme d’une [ Razor bibliothèque de classes](xref:razor-pages/ui-class). Les applications qui incluent Identity peuvent appliquer le nouveau générateur Identity de modèles automatique pour ajouter de manière sélective le code source contenu dans la Identity Razor bibliothèque de classes (RCL). Vous pouvez souhaiter générer le code source afin de pouvoir modifier le code et changer le comportement. Par exemple, vous pouvez demander au générateur de modèles automatique de générer le code utilisé dans l’inscription. Le code généré est prioritaire sur le même code dans le Identity RCL.
 
@@ -153,13 +155,13 @@ Les modèles d’applications monopages pour Angular, React et React avec Redux 
 
 Le modèle Angular est basé sur l’interface CLI Angular, tandis que les modèles React sont basés sur create-react-app.
 
-Pour plus d’informations, voir :
+Pour plus d'informations, consultez les pages suivantes :
 
 * <xref:spa/angular>
 * <xref:spa/react>
 * <xref:spa/react-with-redux>
 
-## <a name="razor-pages-search-for-razor-assets"></a>RazorRecherche de pages pour les Razor ressources
+## <a name="no-locrazor-pages-search-for-no-locrazor-assets"></a>RazorRecherche de pages pour les Razor ressources
 
 Dans 2,1, les Razor pages recherchent les Razor ressources (telles que les mises en page et les éléments partiels) dans les répertoires suivants dans l’ordre indiqué :
 
@@ -167,7 +169,7 @@ Dans 2,1, les Razor pages recherchent les Razor ressources (telles que les mises
 1. */Pages/Shared/*
 1. */Views/Shared/*
 
-## <a name="razor-pages-in-an-area"></a>RazorPages dans une zone
+## <a name="no-locrazor-pages-in-an-area"></a>RazorPages dans une zone
 
 RazorLes pages prennent désormais en charge les [zones](xref:mvc/controllers/areas). Pour voir un exemple de zones, créez une Razor application Web de pages avec des comptes d’utilisateur individuels. Une Razor application Web de pages avec des comptes d’utilisateur individuels comprend */Areas/ Identity /pages*.
 
@@ -175,7 +177,7 @@ RazorLes pages prennent désormais en charge les [zones](xref:mvc/controllers/ar
 
 La méthode <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> permet à une application d’accepter ou de refuser les changements de comportement potentiellement cassants introduits dans ASP.NET Core MVC 2.1 ou version ultérieure.
 
-Pour plus d’informations, consultez <xref:mvc/compatibility-version>.
+Pour plus d'informations, consultez <xref:mvc/compatibility-version>.
 
 ## <a name="migrate-from-20-to-21"></a>Migrer depuis la version 2.0 vers la version 2.1
 

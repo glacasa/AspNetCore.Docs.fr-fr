@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/supported-platforms
-ms.openlocfilehash: 9d7dd946ae5cf83b76a83ba1faeed0bb3fc31cef
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e6989f431d0d72241a6e1b94759585c02ef7398f
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405820"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021547"
 ---
-# <a name="aspnet-core-signalr-supported-platforms"></a>SignalRPlateformes prises en charge ASP.net Core
+# <a name="aspnet-core-no-locsignalr-supported-platforms"></a>SignalRPlateformes prises en charge ASP.net Core
 
 ## <a name="server-system-requirements"></a>Configuration requise pour le serveur
 
@@ -32,12 +34,12 @@ SignalRpour ASP.NET Core prend en charge toutes les plateformes de serveur prise
 
 Le [client JavaScript](xref:signalr/javascript-client) s’exécute sur NodeJS 8 et versions ultérieures, ainsi que sur les navigateurs suivants :
 
-| Navigateur                         | Version         |
+| Browser                         | Version         |
 | ------------------------------- | --------------- |
-| Microsoft Edge                  | Actuel&dagger; |
-| Mozilla Firefox                 | Actuel&dagger; |
-| Google Chrome ; comprend Android | Actuel&dagger; |
-| Safari comprend iOS            | Actuel&dagger; |
+| Microsoft Edge                  | Actif&dagger; |
+| Mozilla Firefox                 | Actif&dagger; |
+| Google Chrome ; comprend Android | Actif&dagger; |
+| Safari comprend iOS            | Actif&dagger; |
 | Microsoft Internet Explorer     | 11              |
 
 &dagger;*Current* fait référence à la dernière version du navigateur.

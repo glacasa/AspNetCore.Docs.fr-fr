@@ -5,6 +5,8 @@ description: Cet article explique comment personnaliser le modèle de données E
 ms.author: avickers
 ms.date: 07/01/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,20 +15,20 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 3a5bac0e3e34602b1f8a85a7bcde1ba92b372607
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4e6d91de013755f1ae998e36481f4c3b659270ae
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399164"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022002"
 ---
-# <a name="identity-model-customization-in-aspnet-core"></a>Identitypersonnalisation de modèle dans ASP.NET Core
+# <a name="no-locidentity-model-customization-in-aspnet-core"></a>Identitypersonnalisation de modèle dans ASP.NET Core
 
 Par [Arthur Vickers](https://github.com/ajcvickers)
 
 ASP.NET Core Identity fournit une infrastructure pour la gestion et le stockage des comptes d’utilisateur dans les applications ASP.net core. Identityest ajouté à votre projet lorsque **des comptes d’utilisateur individuels** est sélectionné comme mécanisme d’authentification. Par défaut, utilise Identity un modèle de données de base Entity Framework (EF). Cet article explique comment personnaliser le Identity modèle.
 
-## <a name="identity-and-ef-core-migrations"></a>IdentityMigrations et EF Core
+## <a name="no-locidentity-and-ef-core-migrations"></a>IdentityMigrations et EF Core
 
 Avant d’examiner le modèle, il est utile de comprendre comment Identity fonctionne avec [EF Core migrations](/ef/core/managing-schemas/migrations/) pour créer et mettre à jour une base de données. Au niveau supérieur, le processus est le suivant :
 
@@ -52,7 +54,7 @@ Quand une nouvelle application utilisant Identity est créée, les étapes 1 et 
 
 Répétez les étapes précédentes au fur et à mesure que des modifications sont apportées au modèle.
 
-## <a name="the-identity-model"></a>Le Identity modèle
+## <a name="the-no-locidentity-model"></a>Le Identity modèle
 
 ### <a name="entity-types"></a>Types d’entités
 
@@ -355,7 +357,7 @@ Mettez à jour *pages/Shared/_LoginPartial. cshtml* et remplacez `IdentityUser` 
 @inject UserManager<ApplicationUser> UserManager
 ```
 
-Mettez à jour les *zones/ Identity /IdentityHostingStartup.cs* ou `Startup.ConfigureServices` Remplacez `IdentityUser` par `ApplicationUser` .
+Mettez à jour *Areas/ Identity / Identity HostingStartup.cs* ou `Startup.ConfigureServices` et remplacez `IdentityUser` par `ApplicationUser` .
 
 ```csharp
 services.AddIdentity<ApplicationUser>()
@@ -363,7 +365,7 @@ services.AddIdentity<ApplicationUser>()
         .AddDefaultUI();
 ```
 
-Dans ASP.NET Core 2,1 ou version ultérieure, Identity est fourni en tant que Razor bibliothèque de classes. Pour plus d’informations, consultez <xref:security/authentication/scaffold-identity>. Par conséquent, le code précédent requiert un appel à <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> . Si le générateur de Identity modèles automatique a été utilisé pour ajouter des Identity fichiers au projet, supprimez l’appel à `AddDefaultUI` . Pour plus d’informations, voir :
+Dans ASP.NET Core 2,1 ou version ultérieure, Identity est fourni en tant que Razor bibliothèque de classes. Pour plus d'informations, consultez <xref:security/authentication/scaffold-identity>. Par conséquent, le code précédent requiert un appel à <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> . Si le générateur de Identity modèles automatique a été utilisé pour ajouter des Identity fichiers au projet, supprimez l’appel à `AddDefaultUI` . Pour plus d'informations, consultez les pages suivantes :
 
 * [DestinIdentity](xref:security/authentication/scaffold-identity)
 * [Ajouter, télécharger et supprimer des données utilisateur personnaliséesIdentity](xref:security/authentication/add-user-data)
@@ -472,7 +474,7 @@ Pour modifier le type de clé primaire, procédez comme suit :
 
     Le type de données de la clé primaire est déduit en analysant l’objet [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) .
 
-    Dans ASP.NET Core 2,1 ou version ultérieure, Identity est fourni en tant que Razor bibliothèque de classes. Pour plus d’informations, consultez <xref:security/authentication/scaffold-identity>. Par conséquent, le code précédent requiert un appel à <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> . Si le générateur de Identity modèles automatique a été utilisé pour ajouter des Identity fichiers au projet, supprimez l’appel à `AddDefaultUI` .
+    Dans ASP.NET Core 2,1 ou version ultérieure, Identity est fourni en tant que Razor bibliothèque de classes. Pour plus d'informations, consultez <xref:security/authentication/scaffold-identity>. Par conséquent, le code précédent requiert un appel à <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> . Si le générateur de Identity modèles automatique a été utilisé pour ajouter des Identity fichiers au projet, supprimez l’appel à `AddDefaultUI` .
 
     ::: moniker-end
 
@@ -516,7 +518,7 @@ Pour modifier le type de clé primaire, procédez comme suit :
 
     Le type de données de la clé primaire est déduit en analysant l’objet [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) .
 
-    Dans ASP.NET Core 2,1 ou version ultérieure, Identity est fourni en tant que Razor bibliothèque de classes. Pour plus d’informations, consultez <xref:security/authentication/scaffold-identity>. Par conséquent, le code précédent requiert un appel à <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> . Si le générateur de Identity modèles automatique a été utilisé pour ajouter des Identity fichiers au projet, supprimez l’appel à `AddDefaultUI` .
+    Dans ASP.NET Core 2,1 ou version ultérieure, Identity est fourni en tant que Razor bibliothèque de classes. Pour plus d'informations, consultez <xref:security/authentication/scaffold-identity>. Par conséquent, le code précédent requiert un appel à <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> . Si le générateur de Identity modèles automatique a été utilisé pour ajouter des Identity fichiers au projet, supprimez l’appel à `AddDefaultUI` .
 
     ::: moniker-end
 

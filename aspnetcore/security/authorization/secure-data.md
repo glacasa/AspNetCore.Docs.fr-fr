@@ -6,6 +6,8 @@ ms.author: riande
 ms.date: 7/18/2020
 ms.custom: mvc, seodec18
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/secure-data
-ms.openlocfilehash: 7d4c10fa0b1c569179fc3e0a518917ec0185c51f
-ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
+ms.openlocfilehash: 44777369693f9eb29d78c3ba638db2e692f430ae
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87160282"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021183"
 ---
 # <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>Créer une application Web ASP.NET Core avec les données utilisateur protégées par l’autorisation
 
@@ -330,9 +332,9 @@ Un moyen simple de tester l’application terminée consiste à lancer trois nav
 
 | Utilisateur                | Amorcé par l’application | Options                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | Non                | Modifiez/supprimez les données.                |
-| manager@contoso.com | Oui               | Approuver/refuser et modifier/supprimer des données. |
-| admin@contoso.com   | Oui               | Approuver/refuser et modifier/supprimer toutes les données. |
+| test@example.com    | No                | Modifiez/supprimez les données.                |
+| manager@contoso.com | Yes               | Approuver/refuser et modifier/supprimer des données. |
+| admin@contoso.com   | Yes               | Approuver/refuser et modifier/supprimer toutes les données. |
 
 Créez un contact dans le navigateur de l’administrateur. Copiez l’URL de la suppression et de la modification à partir du contact de l’administrateur. Collez ces liens dans le navigateur de l’utilisateur de test pour vérifier que l’utilisateur de test ne peut pas effectuer ces opérations.
 
@@ -657,9 +659,9 @@ Un moyen simple de tester l’application terminée consiste à lancer trois nav
 
 | Utilisateur                | Amorcé par l’application | Options                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | Non                | Modifiez/supprimez les données.                |
-| manager@contoso.com | Oui               | Approuver/refuser et modifier/supprimer des données. |
-| admin@contoso.com   | Oui               | Approuver/refuser et modifier/supprimer toutes les données. |
+| test@example.com    | No                | Modifiez/supprimez les données.                |
+| manager@contoso.com | Yes               | Approuver/refuser et modifier/supprimer des données. |
+| admin@contoso.com   | Yes               | Approuver/refuser et modifier/supprimer toutes les données. |
 
 Créez un contact dans le navigateur de l’administrateur. Copiez l’URL de la suppression et de la modification à partir du contact de l’administrateur. Collez ces liens dans le navigateur de l’utilisateur de test pour vérifier que l’utilisateur de test ne peut pas effectuer ces opérations.
 
@@ -710,7 +712,7 @@ Vérifiez que l’application a amorcé la base de données. Si la base de coord
 
 <a name="secure-data-add-resources-label"></a>
 
-### <a name="additional-resources"></a>Ressources supplémentaires
+### <a name="additional-resources"></a>Ressources complémentaires
 
 * [Créer une application Web .NET Core et SQL Database dans Azure App Service](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)
 * [ASP.net Core laboratoire d’autorisation](https://github.com/blowdart/AspNetAuthorizationWorkshop). Ce laboratoire aborde plus en détail les fonctionnalités de sécurité présentées dans ce didacticiel.

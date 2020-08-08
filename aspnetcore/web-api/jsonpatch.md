@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/02/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/jsonpatch
-ms.openlocfilehash: 08ae366859c4466e6957592f78dda813d6670bb4
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 09da557d678889ba16abe6f9af40ae1b33583d8b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405027"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022366"
 ---
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>JsonPatch dans l’API web ASP.NET Core
 
@@ -110,11 +112,11 @@ Les modifications apportées en appliquant un document de correctif JSON à une 
 
 ## <a name="path-syntax"></a>Syntaxe du chemin
 
-Les différents niveaux de la propriété [path](https://tools.ietf.org/html/rfc6901) d’un objet de l’opération sont séparés par des barres obliques. Par exemple : `"/address/zipCode"`.
+Les différents niveaux de la propriété [path](https://tools.ietf.org/html/rfc6901) d’un objet de l’opération sont séparés par des barres obliques. Par exemple, `"/address/zipCode"`.
 
 Les index de base zéro sont utilisés pour spécifier les éléments du tableau. Le premier élément du tableau `addresses` serait à `/addresses/0`. À `add` la fin d’un tableau, utilisez un trait d’Union ( `-` ) au lieu d’un numéro d’index : `/addresses/-` .
 
-### <a name="operations"></a>Opérations
+### <a name="operations"></a>Operations
 
 Le tableau suivant mentionne les opérations prises en charge telles qu’elles sont définies dans la [spécification JSON Patch](https://tools.ietf.org/html/rfc6902) :
 
@@ -256,7 +258,7 @@ Pour tester l’exemple, exécutez l’application et envoyez des demandes HTTP 
 * En-tête : `Content-Type: application/json-patch+json`
 * Corps : copiez et collez l’un des exemples de document de correctif JSON à partir du dossier de projet *JSON* .
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Spécification de méthode PATCH IETF RFC 5789 PATCH](https://tools.ietf.org/html/rfc5789)
 * [Spécification JSON Patch IETF RFC 6902](https://tools.ietf.org/html/rfc6902)
@@ -322,11 +324,11 @@ Les modifications apportées en appliquant un document JSON Patch à une ressour
 
 ## <a name="path-syntax"></a>Syntaxe du chemin
 
-Les différents niveaux de la propriété [path](https://tools.ietf.org/html/rfc6901) d’un objet de l’opération sont séparés par des barres obliques. Par exemple : `"/address/zipCode"`.
+Les différents niveaux de la propriété [path](https://tools.ietf.org/html/rfc6901) d’un objet de l’opération sont séparés par des barres obliques. Par exemple, `"/address/zipCode"`.
 
 Les index de base zéro sont utilisés pour spécifier les éléments du tableau. Le premier élément du tableau `addresses` serait à `/addresses/0`. Pour `add` à la fin d’un tableau, utilisez un trait d’union (-) plutôt qu’un numéro d’index : `/addresses/-`.
 
-### <a name="operations"></a>Opérations
+### <a name="operations"></a>Operations
 
 Le tableau suivant mentionne les opérations prises en charge telles qu’elles sont définies dans la [spécification JSON Patch](https://tools.ietf.org/html/rfc6902) :
 
@@ -468,7 +470,7 @@ Pour tester l’exemple, exécutez l’application et envoyez des demandes HTTP 
 * En-tête : `Content-Type: application/json-patch+json`
 * Corps : copiez et collez l’un des exemples de document de correctif JSON à partir du dossier de projet *JSON* .
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Spécification de méthode PATCH IETF RFC 5789 PATCH](https://tools.ietf.org/html/rfc5789)
 * [Spécification JSON Patch IETF RFC 6902](https://tools.ietf.org/html/rfc6902)

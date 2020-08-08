@@ -6,6 +6,8 @@ ms.author: rybrande
 ms.date: 09/26/2019
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/Microsoft.dotnet-openapi
-ms.openlocfilehash: eb8d6a1dc70b2aabf495bdb359e243c91e94289f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6a9b80e868a54bd76503a6421c34ae159421699b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404793"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022236"
 ---
 # <a name="develop-aspnet-core-apps-using-openapi-tools"></a>Développer des applications ASP.NET Core à l’aide des outils OpenAPI
 
@@ -67,7 +69,7 @@ La référence précédente est requise pour que l’application appelle le code
 | Option Short| Option longue| Description | Exemple |
 |-------|------|-------|---------|
 | -p|--updateProject | Projet sur lequel effectuer l’opération. |dotnet openapi ajouter *un fichier--updateProject .\Ref.csproj* .\OpenAPI.jssur |
-| -c|--Code-Generator| Générateur de code à appliquer à la référence. Les options sont `NSwagCSharp` et `NSwagTypeScript` . Si `--code-generator` n’est pas spécifié, l’outil prend par défaut la valeur `NSwagCSharp` .|.\OpenApi.jsdotnet openapi ajouter un fichier sur--Code-Generator
+| -c|--Code-Generator| Générateur de code à appliquer à la référence. Les options sont `NSwagCSharp` et `NSwagTypeScript`. Si `--code-generator` n’est pas spécifié, l’outil prend par défaut la valeur `NSwagCSharp` .|.\OpenApi.jsdotnet openapi ajouter un fichier sur--Code-Generator
 | -H|--help|Afficher les informations d’aide|Ajouter un fichier Dotnet openapi--Help|
 
 #### <a name="arguments"></a>Arguments
@@ -84,7 +86,7 @@ La référence précédente est requise pour que l’application appelle le code
 |-------|------|-------------|---------|
 | -p|--updateProject | Projet sur lequel effectuer l’opération. |Ajouter une URL dotnet openapi *--updateProject .\Ref.csproj*`https://contoso.com/openapi.json` |
 | -o|--fichier de sortie | Où placer la copie locale du fichier OpenAPI. |dotnet openapi Add URL `https://contoso.com/openapi.json` *--output-file myclient.json* |
-| -c|--Code-Generator| Générateur de code à appliquer à la référence. Les options sont `NSwagCSharp` et `NSwagTypeScript` . |.\OpenApi.jsdotnet openapi ajouter un fichier sur--Code-Generator
+| -c|--Code-Generator| Générateur de code à appliquer à la référence. Les options sont `NSwagCSharp` et `NSwagTypeScript`. |.\OpenApi.jsdotnet openapi ajouter un fichier sur--Code-Generator
 | -H|--help|Afficher les informations d’aide|Ajouter une URL dotnet openapi--Help|
 
 #### <a name="arguments"></a>Arguments

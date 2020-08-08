@@ -6,6 +6,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/client-features
-ms.openlocfilehash: 10752e8cace82dc08721af7d38c0250182e9bfb0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4f5fa2f4ff1ac3d00b04845aedc26fb0118b9991
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408485"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021469"
 ---
-# <a name="aspnet-core-signalr-clients"></a>SignalRClients ASP.net Core
+# <a name="aspnet-core-no-locsignalr-clients"></a>SignalRClients ASP.net Core
 
 ## <a name="versioning-support-and-compatibility"></a>Contrôle de version, prise en charge et compatibilité
 
@@ -57,7 +59,7 @@ Le tableau ci-dessous présente les fonctionnalités et la prise en charge des c
 
 La prise en charge de l’activation de fonctionnalités supplémentaires du client est suivie dans [notre suivi des problèmes](https://github.com/dotnet/AspNetCore/issues).
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Prise en main SignalR de pour ASP.net Core](xref:tutorials/signalr)
 * [Plateformes prises en charge](xref:signalr/supported-platforms)

@@ -5,6 +5,8 @@ description: Partie 3 de la série de didacticiels sur ASP.NET Core MVC.
 ms.author: riande
 ms.date: 8/04/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: d6a541e9633d3ecc2768744956c3b43d830b0b2b
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 45ae6059e039ccfb4d835c615b660abc39251530
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86213124"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021989"
 ---
 # <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>Partie 3 : ajouter une vue à une application ASP.NET Core MVC
 
@@ -52,7 +54,7 @@ Le code précédent appelle la méthode <xref:Microsoft.AspNetCore.Mvc.Controlle
 
   * Conservez la valeur de la zone **Nom**, *Index.cshtml*.
 
-  * Sélectionnez **Ajouter** .
+  * Sélectionnez **Ajouter**
 
 ![Boîte de dialogue Ajouter un nouvel élément](adding-view/_static/add_view.png)
 
@@ -209,7 +211,7 @@ Le code précédent appelle la méthode <xref:Microsoft.AspNetCore.Mvc.Controlle
 
   * Conservez la valeur de la zone **Nom**, *Index.cshtml*.
 
-  * Sélectionnez **Ajouter** .
+  * Sélectionnez **Ajouter**
 
 ![Boîte de dialogue Ajouter un nouvel élément](adding-view/_static/add_view.png)
 

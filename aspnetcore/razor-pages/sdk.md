@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 03/26/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/sdk
-ms.openlocfilehash: 56b4d4c13023918a4ac25c8c5d8ad1ee2c346ac6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b960460a50558a11bc47f9a1844931aa32e3d696
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403038"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021417"
 ---
-# <a name="aspnet-core-razor-sdk"></a>RazorSDK ASP.net Core
+# <a name="aspnet-core-no-locrazor-sdk"></a>RazorSDK ASP.net Core
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -52,7 +54,7 @@ Le Razor Kit de développement logiciel (SDK) comprend un `Content` élément do
 
 [!INCLUDE[](~/includes/2.1-SDK.md)]
 
-## <a name="use-the-razor-sdk"></a>Utiliser le Razor Kit de développement logiciel
+## <a name="use-the-no-locrazor-sdk"></a>Utiliser le Razor Kit de développement logiciel
 
 La plupart des applications Web ne sont pas requises pour référencer explicitement le Razor Kit de développement logiciel (SDK).
 
@@ -133,7 +135,7 @@ Les propriétés et les éléments du tableau suivant sont utilisés pour config
 | `CopyRazorGenerateFilesToPublishDirectory` | Lorsque la `true` valeur est, copie `RazorGenerate` les fichiers d’éléments (*. cshtml*) dans le répertoire de publication. En règle générale, Razor les fichiers ne sont pas requis pour une application publiée s’ils participent à la compilation au moment de la génération ou de la publication. La valeur par défaut est `false`. |
 | `PreserveCompilationReferences` | Si la valeur est `true`, copie les éléments d’assembly de référence dans le répertoire de publication. En général, les assemblys de référence ne sont pas requis pour une application publiée si la Razor compilation se produit au moment de la génération ou de la publication. Affectez `true` la valeur si votre application publiée requiert la compilation du Runtime. Par exemple, définissez la valeur sur `true` si l’application modifie les fichiers *. cshtml* au moment de l’exécution ou utilise des vues incorporées. La valeur par défaut est `false`. |
 | `IncludeRazorContentInPack` | Lorsque `true` , tous les Razor éléments de contenu (fichiers *. cshtml* ) sont marqués pour être inclus dans le package NuGet généré. La valeur par défaut est `false`. |
-| `EmbedRazorGenerateSources` | Lorsque la `true` valeur est, ajoute des éléments RazorGenerate (*. cshtml*) comme fichiers incorporés à l' Razor assembly généré. La valeur par défaut est `false`. |
+| `EmbedRazorGenerateSources` | Lorsque la `true` valeur est, ajoute Razor des éléments Generate (*. cshtml*) comme fichiers incorporés à l' Razor assembly généré. La valeur par défaut est `false`. |
 | `UseRazorBuildServer` | Si la valeur est `true`, utilise un processus de serveur de build persistant pour décharger le travail de génération de code. Utilise par défaut la valeur de `UseSharedCompilation`. |
 | `GenerateMvcApplicationPartsAssemblyAttributes` | Lorsque `true` la valeur est, le kit de développement logiciel (SDK) génère des attributs supplémentaires utilisés par MVC au moment de l’exécution pour effectuer la découverte des parties |
 | `DefaultWebContentItemExcludes` | Modèle globbing pour les éléments Item qui doivent être exclus du `Content` groupe d’éléments dans les projets ciblant le Web ou le Razor Kit de développement logiciel (SDK) |
@@ -157,7 +159,7 @@ Les propriétés et les éléments du tableau suivant sont utilisés pour config
 | `CopyRazorGenerateFilesToPublishDirectory` | Lorsque la `true` valeur est, copie `RazorGenerate` les fichiers d’éléments (*. cshtml*) dans le répertoire de publication. En règle générale, Razor les fichiers ne sont pas requis pour une application publiée s’ils participent à la compilation au moment de la génération ou de la publication. La valeur par défaut est `false`. |
 | `CopyRefAssembliesToPublishDirectory` | Si la valeur est `true`, copie les éléments d’assembly de référence dans le répertoire de publication. En général, les assemblys de référence ne sont pas requis pour une application publiée si la Razor compilation se produit au moment de la génération ou de la publication. Affectez `true` la valeur si votre application publiée requiert la compilation du Runtime. Par exemple, définissez la valeur sur `true` si l’application modifie les fichiers *. cshtml* au moment de l’exécution ou utilise des vues incorporées. La valeur par défaut est `false`. |
 | `IncludeRazorContentInPack` | Lorsque `true` , tous les Razor éléments de contenu (fichiers *. cshtml* ) sont marqués pour être inclus dans le package NuGet généré. La valeur par défaut est `false`. |
-| `EmbedRazorGenerateSources` | Lorsque la `true` valeur est, ajoute des éléments RazorGenerate (*. cshtml*) comme fichiers incorporés à l' Razor assembly généré. La valeur par défaut est `false`. |
+| `EmbedRazorGenerateSources` | Lorsque la `true` valeur est, ajoute Razor des éléments Generate (*. cshtml*) comme fichiers incorporés à l' Razor assembly généré. La valeur par défaut est `false`. |
 | `UseRazorBuildServer` | Si la valeur est `true`, utilise un processus de serveur de build persistant pour décharger le travail de génération de code. Utilise par défaut la valeur de `UseSharedCompilation`. |
 | `GenerateMvcApplicationPartsAssemblyAttributes` | Lorsque `true` la valeur est, le kit de développement logiciel (SDK) génère des attributs supplémentaires utilisés par MVC au moment de l’exécution pour effectuer la découverte des parties |
 | `DefaultWebContentItemExcludes` | Modèle globbing pour les éléments Item qui doivent être exclus du `Content` groupe d’éléments dans les projets ciblant le Web ou le Razor Kit de développement logiciel (SDK) |
@@ -177,13 +179,13 @@ Le Razor Kit de développement logiciel (SDK) définit deux cibles principales 
 * `RazorCompile`: Compile les fichiers *. cs* générés dans en un Razor assembly. Utilisez `RazorCompileDependsOn` pour spécifier des cibles supplémentaires qui peuvent s’exécuter avant ou après cette cible.
 * `RazorComponentGenerate`: Le code génère des fichiers *. cs* pour les `RazorComponent` éléments Item. Utilisez la `RazorComponentGenerateDependsOn` propriété pour spécifier des cibles supplémentaires qui peuvent s’exécuter avant ou après cette cible.
 
-### <a name="runtime-compilation-of-razor-views"></a>Compilation du runtime des Razor vues
+### <a name="runtime-compilation-of-no-locrazor-views"></a>Compilation du runtime des Razor vues
 
 * Par défaut, le Razor Kit de développement logiciel (SDK) ne publie pas les assemblys de référence requis pour effectuer la compilation du Runtime. Cela entraîne des échecs de compilation quand le modèle d’application s’appuie sur la compilation au moment du runtime&mdash;par exemple, l’application utilise des vues incorporées ou change les vues une fois l’application publiée. Définissez `CopyRefAssembliesToPublishDirectory` sur `true` pour continuer à publier les assemblys de référence.
 
 * Pour une application Web, vérifiez que votre application cible le `Microsoft.NET.Sdk.Web` Kit de développement logiciel (SDK).
 
-## <a name="razor-language-version"></a>Razorversion du langage
+## <a name="no-locrazor-language-version"></a>Razorversion du langage
 
 Lorsque vous ciblez le `Microsoft.NET.Sdk.Web` Kit de développement logiciel (SDK), la Razor version du langage est déduite de la version du Framework cible de l’application. Pour les projets ciblant le `Microsoft.NET.Sdk.Razor` Kit de développement logiciel (SDK) ou dans le cas rare où l’application requiert une version de langue différente de Razor la valeur déduite, une version peut être configurée en définissant la `<RazorLangVersion>` propriété dans le fichier projet de l’application :
 
@@ -195,7 +197,7 @@ Lorsque vous ciblez le `Microsoft.NET.Sdk.Web` Kit de développement logiciel (S
 
 Razorla version de langage de est étroitement intégrée à la version du runtime pour laquelle elle a été générée. Le ciblage d’une version de langage qui n’est pas conçue pour le runtime n’est pas pris en charge et génère probablement des erreurs de Build.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Ajouts au format csproj pour .NET Core](/dotnet/core/tools/csproj)
 * [Éléments communs des projets MSBuild](/visualstudio/msbuild/common-msbuild-project-items)

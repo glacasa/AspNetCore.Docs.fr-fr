@@ -5,6 +5,8 @@ description: Partie 6 de la série de didacticiels sur les Razor pages.
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/search
-ms.openlocfilehash: b0ee3294a4646b199f85d6a023e152e5eabaa225
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b28d228449549e1071df4100ee2d52626c50845b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408784"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021638"
 ---
-# <a name="part-6-add-search-to-aspnet-core-razor-pages"></a>Partie 6, ajouter une recherche aux Razor Pages ASP.net Core
+# <a name="part-6-add-search-to-aspnet-core-no-locrazor-pages"></a>Partie 6, ajouter une recherche aux Razor Pages ASP.net Core
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -109,7 +111,7 @@ La liste `SelectList` de genres est créée en projetant des différents genres.
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs?name=snippet_SelectList)]
 
-### <a name="add-search-by-genre-to-the-razor-page"></a>Ajouter la recherche par genre à la Razor page
+### <a name="add-search-by-genre-to-the-no-locrazor-page"></a>Ajouter la recherche par genre à la Razor page
 
 Mettez à jour *Index.cshtml* comme suit :
 
@@ -117,7 +119,7 @@ Mettez à jour *Index.cshtml* comme suit :
 
 Testez l’application en effectuant une recherche par genre, par titre de film et selon ces deux critères.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Version YouTube de ce tutoriel](https://youtu.be/4B6pHtdyo08)
 
@@ -211,7 +213,7 @@ La liste `SelectList` de genres est créée en projetant des différents genres.
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Index.cshtml.cs?name=snippet_SelectList)]
 
-### <a name="add-search-by-genre-to-the-razor-page"></a>Ajouter la recherche par genre à la Razor page
+### <a name="add-search-by-genre-to-the-no-locrazor-page"></a>Ajouter la recherche par genre à la Razor page
 
 Mettez à jour *Index.cshtml* comme suit :
 
@@ -220,7 +222,7 @@ Mettez à jour *Index.cshtml* comme suit :
 Testez l’application en effectuant une recherche par genre, par titre de film et selon ces deux critères.
 Le code précédent utilise le [tag Helper Select](xref:mvc/views/working-with-forms#the-select-tag-helper) et option tag Helper.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Version YouTube de ce tutoriel](https://youtu.be/4B6pHtdyo08)
 

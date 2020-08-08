@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-nswag
-ms.openlocfilehash: 7c24340af0f0d589d683b0134d186bf9304d91b1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8fd42c7d31edd20c2aae7577c5a490b54ab8129c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403441"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022262"
 ---
 # <a name="get-started-with-nswag-and-aspnet-core"></a>Bien démarrer avec NSwag et ASP.NET Core
 
@@ -60,7 +62,7 @@ Vous pouvez installer le package NuGet NSwag avec l’une des méthodes suivante
 * À partir de la fenêtre **Console du Gestionnaire de package** :
   * Accéder à **la**  >  console du gestionnaire de**Other Windows**  >  **package** Windows
   * Accédez au répertoire où se trouve le fichier *TodoApi.csproj*.
-  * Exécutez la commande suivante :
+  * Exécutez la commande suivante :
 
     ```powershell
     Install-Package NSwag.AspNetCore
@@ -81,7 +83,7 @@ Vous pouvez installer le package NuGet NSwag avec l’une des méthodes suivante
 
 # <a name="net-core-cli"></a>[CLI .NET Core](#tab/netcore-cli)
 
-Exécutez la commande suivante :
+Exécutez la commande suivante :
 
 ```dotnetcli
 dotnet add TodoApi.csproj package NSwag.AspNetCore
@@ -101,7 +103,7 @@ Ajoutez et configurez Swagger dans votre application ASP.NET Core en exécutant 
 
 [!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.NSwag/Startup.cs?name=snippet_Configure&highlight=6-7)]
 
-* Lancez l’application. Accédez à :
+* Lancer l’application. Accédez à :
   * `http://localhost:<port>/swagger` pour voir l’IU de Swagger.
   * `http://localhost:<port>/swagger/v1/swagger.json` pour voir la spécification Swagger.
 
@@ -118,7 +120,7 @@ Vous pouvez tirer parti des fonctionnalités de génération de code de NSwag en
 ### <a name="generate-code-with-nswagstudio"></a>Générer du code avec NSwagStudio
 
 * Installez NSwagStudio en suivant les instructions fournies dans le [référentiel GitHub de NSwagStudio](https://github.com/RicoSuter/NSwag/wiki/NSwagStudio). Dans la page de publication de NSwag, vous pouvez télécharger une version xcopy qui peut être démarrée sans les privilèges d’installation et d’administration.
-* Lancez NSwagStudio et entrez l’URL du fichier *swagger.json* dans la zone de texte **Swagger Specification URL** (URL de spécification Swagger). Par exemple : *http://localhost:44354/swagger/v1/swagger.json* .
+* Lancez NSwagStudio et entrez l’URL du fichier *swagger.json* dans la zone de texte **Swagger Specification URL** (URL de spécification Swagger). Par exemple : *http://localhost:44354/swagger/v1/swagger.json*.
 * Cliquez sur le bouton **Créer une copie locale** pour générer la représentation JSON de votre spécification Swagger.
 
   ![Créer une copie locale de la spécification Swagger](web-api-help-pages-using-swagger/_static/CreateLocalCopy-NSwagStudio.PNG)
@@ -197,7 +199,7 @@ L’IU Swagger affiche les informations de la version :
 
 ![Interface utilisateur de Swagger avec des informations de version](web-api-help-pages-using-swagger/_static/custom-info-nswag.png)
 
-### <a name="xml-comments"></a>commentaires XML
+### <a name="xml-comments"></a>Commentaires XML
 
 Pour activer les commentaires XML, procédez comme suit :
 
@@ -283,7 +285,7 @@ L’action précédente retourne `ActionResult<T>`. À l’intérieur de l’act
 
 [!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.NSwag/Controllers/TodoController.cs?name=snippet_CreateActionAttributes)]
 
-Dans ASP.NET Core 2.2 ou une version ultérieure, vous pouvez utiliser les conventions comme alternatives à la décoration explicite des actions individuelles avec `[ProducesResponseType]`. Pour plus d’informations, consultez <xref:web-api/advanced/conventions>.
+Dans ASP.NET Core 2.2 ou une version ultérieure, vous pouvez utiliser les conventions comme alternatives à la décoration explicite des actions individuelles avec `[ProducesResponseType]`. Pour plus d'informations, consultez <xref:web-api/advanced/conventions>.
 
 ::: moniker-end
 

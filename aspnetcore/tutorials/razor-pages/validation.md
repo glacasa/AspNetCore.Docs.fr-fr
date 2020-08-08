@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: 1bc9b2b081c58392bd2c226ebedc804b43810bc2
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: dad2e667cb6fa3ace7cb5e5dcb982511357ed49b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408849"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021521"
 ---
-# <a name="part-8-add-validation-to-an-aspnet-core-razor-page"></a>Partie 8, ajouter une validation à une Razor Page ASP.net Core
+# <a name="part-8-add-validation-to-an-aspnet-core-no-locrazor-page"></a>Partie 8, ajouter une validation à une Razor Page ASP.net Core
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -57,13 +59,13 @@ Les attributs de validation spécifient le comportement que vous souhaitez appli
   * Nécessite que le premier caractère soit une lettre majuscule.
   * Autorise les caractères spéciaux et les chiffres aux emplacements qui suivent. « PG-13 » est valide pour une évaluation, mais échoue pour un « Genre ».
 
-* L’attribut `Range` contraint une valeur à une plage spécifiée.
+* L’attribut `Range` limite une valeur à une plage spécifiée.
 * L’attribut `StringLength` vous permet de définir la longueur maximale d’une propriété de chaîne, et éventuellement sa longueur minimale.
 * Les types valeur (tels que `decimal`, `int`, `float` et `DateTime`) sont obligatoires par nature et n’ont pas besoin de l’attribut `[Required]`.
 
 L’application automatique des règles de validation par ASP.NET Core permet d’accroître la fiabilité de votre application. Cela garantit également que vous n’oublierez pas de valider un élément et que vous n’autoriserez pas par inadvertance l’insertion de données incorrectes dans la base de données.
 
-### <a name="validation-error-ui-in-razor-pages"></a>Interface utilisateur d’erreur de validation dans les Razor pages
+### <a name="validation-error-ui-in-no-locrazor-pages"></a>Interface utilisateur d’erreur de validation dans les Razor pages
 
 Exécutez l’application, puis accédez à Pages/Movies.
 
@@ -115,7 +117,7 @@ Quand la logique de validation doit être modifiée, cela s’effectue uniquemen
 
 ## <a name="using-datatype-attributes"></a>Utilisation d’attributs DataType
 
-Examiner la classe `Movie`. L’espace de noms `System.ComponentModel.DataAnnotations` fournit des attributs de mise en forme en plus de l’ensemble intégré d’attributs de validation. L'attribut `DataType` est appliqué aux propriétés `ReleaseDate` et `Price`.
+Examiner la classe `Movie`. L’espace de noms `System.ComponentModel.DataAnnotations` fournit des attributs de mise en forme en plus de l’ensemble intégré d’attributs de validation. L’attribut `DataType` est appliqué aux propriétés `ReleaseDate` et `Price`.
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
 
@@ -221,7 +223,7 @@ Pour plus d’informations sur le déploiement sur Azure, consultez [Didacticiel
 
 Merci d’avoir effectué cette introduction aux Razor pages. [Prise en main de Razor Pages et EF Core](xref:data/ef-rp/intro) est un excellent suivi de ce didacticiel.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * <xref:mvc/views/working-with-forms>
 * <xref:fundamentals/localization>

@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/16/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/ws-federation
-ms.openlocfilehash: 91dab7764e6915ccacacf73f74861faaee532777
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e303679190a7d7f42d8525541cec031ba090fd7a
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406223"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022301"
 ---
 # <a name="authenticate-users-with-ws-federation-in-aspnet-core"></a>Authentifier les utilisateurs avec WS-Federation dans ASP.NET Core
 
@@ -88,7 +90,7 @@ Par défaut, le nouveau Middleware :
 
 ![Azure Active Directory : propriétés d’inscription de l’application](ws-federation/_static/AadAppIdUri.png)
 
-## <a name="use-ws-federation-without-aspnet-core-identity"></a>Utiliser WS-Federation sans ASP.NET CoreIdentity
+## <a name="use-ws-federation-without-aspnet-core-no-locidentity"></a>Utiliser WS-Federation sans ASP.NET CoreIdentity
 
 L’intergiciel (middleware) WS-Federation peut être utilisé sans Identity . Par exemple :
 ::: moniker range=">= aspnetcore-3.0"
@@ -99,7 +101,7 @@ L’intergiciel (middleware) WS-Federation peut être utilisé sans Identity . P
 [!code-csharp[](ws-federation/samples/StartupNon21.cs?name=snippet)]
 ::: moniker-end
 
-## <a name="add-ws-federation-as-an-external-login-provider-for-aspnet-core-identity"></a>Ajouter WS-Federation comme fournisseur de connexion externe pour ASP.NET CoreIdentity
+## <a name="add-ws-federation-as-an-external-login-provider-for-aspnet-core-no-locidentity"></a>Ajouter WS-Federation comme fournisseur de connexion externe pour ASP.NET CoreIdentity
 
 * Ajoutez une dépendance sur [Microsoft. AspNetCore. Authentication. WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation) au projet.
 * Ajouter WS-Federation à `Startup.ConfigureServices` :

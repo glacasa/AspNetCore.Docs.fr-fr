@@ -5,6 +5,8 @@ description: Explication de l’utilisation de l’authentification utilisateur 
 ms.author: riande
 ms.date: 12/10/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/social-without-identity
-ms.openlocfilehash: ed908526604b04f9aebb93935aa3ad4719621526
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 73055a262ac69c0fd6a7f59e77d23121e71ea3dd
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406041"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021664"
 ---
-# <a name="use-social-sign-in-provider-authentication-without-aspnet-core-identity"></a>Utiliser l’authentification du fournisseur de connexion sociale sans ASP.NET CoreIdentity
+# <a name="use-social-sign-in-provider-authentication-without-aspnet-core-no-locidentity"></a>Utiliser l’authentification du fournisseur de connexion sociale sans ASP.NET CoreIdentity
 
 Par [Kirk Larkin](https://twitter.com/serpent5) et [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -51,13 +53,13 @@ L’appel à <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServic
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*>
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>
 
-La définition de l’application `DefaultScheme` sur [CookieAuthenticationDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) (« cookies ») configure l’application pour utiliser les cookies comme schéma par défaut pour ces méthodes d’extension. La définition de l’application <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> sur [GoogleDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) (« Google ») configure l’application pour utiliser Google comme modèle par défaut pour les appels à `ChallengeAsync` . `DefaultChallengeScheme`remplace `DefaultScheme` . Pour obtenir des <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions> propriétés supplémentaires qui remplacent lorsqu’elles sont `DefaultScheme` définies, consultez.
+La définition de l’application `DefaultScheme` sur [ Cookie AuthenticationDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) (« Cookie s ») configure l’application pour qu’elle utilise les Cookie s comme schéma par défaut pour ces méthodes d’extension. La définition de l’application <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> sur [GoogleDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) (« Google ») configure l’application pour utiliser Google comme modèle par défaut pour les appels à `ChallengeAsync` . `DefaultChallengeScheme`remplace `DefaultScheme` . Pour obtenir des <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions> propriétés supplémentaires qui remplacent lorsqu’elles sont `DefaultScheme` définies, consultez.
 
 Dans `Startup.Configure` , appelez `UseAuthentication` et `UseAuthorization` entre appelant `UseRouting` et `UseEndpoints` . Cela définit la `HttpContext.User` propriété et exécute l’intergiciel (middleware) des autorisations pour les demandes :
 
 [!code-csharp[](social-without-identity/samples_snapshot/3.x/Startup.cs?name=snippet2&highlight=3-4)]
 
-Pour en savoir plus sur les schémas d’authentification, consultez [concepts d’authentification](xref:security/authentication/index#authentication-concepts). Pour en savoir plus sur l’authentification par cookie, consultez <xref:security/authentication/cookie> .
+Pour en savoir plus sur les schémas d’authentification, consultez [concepts d’authentification](xref:security/authentication/index#authentication-concepts). Pour en savoir plus sur cookie l’authentification, consultez <xref:security/authentication/cookie> .
 
 ## <a name="apply-authorization"></a>Appliquer l’autorisation
 
@@ -67,13 +69,13 @@ Testez la configuration d’authentification de l’application en appliquant l'
 
 ## <a name="sign-out"></a>Se déconnecter
 
-Pour déconnecter l’utilisateur actuel et supprimer son cookie, appelez [SignOutAsync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*). Le code suivant ajoute un `Logout` Gestionnaire de page à la page d' *index* :
+Pour déconnecter l’utilisateur actuel et supprimer son cookie , appelez [SignOutAsync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*). Le code suivant ajoute un `Logout` Gestionnaire de page à la page d' *index* :
 
 [!code-csharp[](social-without-identity/samples_snapshot/3.x/Pages/Index.cshtml.cs?name=snippet&highlight=3-7)]
 
 Notez que l’appel à `SignOutAsync` ne spécifie pas de schéma d’authentification. Le de l' `DefaultScheme` application `CookieAuthenticationDefaults.AuthenticationScheme` est utilisé comme un recul.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * <xref:security/authorization/simple>
 * <xref:security/authentication/social/additional-claims>
@@ -106,13 +108,13 @@ L’appel à [AddAuthentication](/dotnet/api/microsoft.extensions.dependencyinje
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*>
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>
 
-La définition de l’application `DefaultScheme` sur [CookieAuthenticationDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) (« cookies ») configure l’application pour utiliser les cookies comme schéma par défaut pour ces méthodes d’extension. La définition de l’application <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> sur [GoogleDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) (« Google ») configure l’application pour utiliser Google comme modèle par défaut pour les appels à `ChallengeAsync` . `DefaultChallengeScheme`remplace `DefaultScheme` . Pour obtenir des <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions> propriétés supplémentaires qui remplacent lorsqu’elles sont `DefaultScheme` définies, consultez.
+La définition de l’application `DefaultScheme` sur [ Cookie AuthenticationDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) (« Cookie s ») configure l’application pour qu’elle utilise les Cookie s comme schéma par défaut pour ces méthodes d’extension. La définition de l’application <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> sur [GoogleDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) (« Google ») configure l’application pour utiliser Google comme modèle par défaut pour les appels à `ChallengeAsync` . `DefaultChallengeScheme`remplace `DefaultScheme` . Pour obtenir des <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions> propriétés supplémentaires qui remplacent lorsqu’elles sont `DefaultScheme` définies, consultez.
 
 Dans la `Configure` méthode, appelez la `UseAuthentication` méthode pour appeler l’intergiciel (middleware) d’authentification qui définit la `HttpContext.User` propriété. Appelez la `UseAuthentication` méthode avant d’appeler `UseMvcWithDefaultRoute` ou `UseMvc` :
 
 [!code-csharp[](social-without-identity/samples_snapshot/2.x/Startup.cs?name=snippet2)]
 
-Pour en savoir plus sur les schémas d’authentification, consultez [concepts d’authentification](xref:security/authentication/index#authentication-concepts). Pour en savoir plus sur l’authentification par cookie, consultez <xref:security/authentication/cookie> .
+Pour en savoir plus sur les schémas d’authentification, consultez [concepts d’authentification](xref:security/authentication/index#authentication-concepts). Pour en savoir plus sur cookie l’authentification, consultez <xref:security/authentication/cookie> .
 
 ## <a name="apply-authorization"></a>Appliquer l’autorisation
 
@@ -122,7 +124,7 @@ Testez la configuration d’authentification de l’application en appliquant l'
 
 ## <a name="sign-out"></a>Se déconnecter
 
-Pour déconnecter l’utilisateur actuel et supprimer son cookie, appelez [SignOutAsync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*). Le code suivant ajoute un `Logout` Gestionnaire de page à la page d' *index* :
+Pour déconnecter l’utilisateur actuel et supprimer son cookie , appelez [SignOutAsync](xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*). Le code suivant ajoute un `Logout` Gestionnaire de page à la page d' *index* :
 
 [!code-csharp[](social-without-identity/samples_snapshot/2.x/Pages/Index.cshtml.cs?name=snippet&highlight=3-7)]
 

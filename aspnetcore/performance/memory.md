@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: d261a26de7b9ba77e5f9787ae2eb37293257a0fc
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 09df67657c9b6e4e59d6a1379bf801c289028819
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406392"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020936"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>Gestion de la mémoire et garbage collection (GC) dans ASP.NET Core
 
@@ -147,7 +149,7 @@ Le mode GC peut être défini explicitement dans le fichier projet ou dans le *r
 
 La modification du `ServerGarbageCollection` fichier projet nécessite que l’application soit reconstruite.
 
-**Remarque :** Le garbage collection serveur n’est **pas** disponible sur les machines avec un seul cœur. Pour plus d’informations, consultez <xref:System.Runtime.GCSettings.IsServerGC>.
+**Remarque :** Le garbage collection serveur n’est **pas** disponible sur les machines avec un seul cœur. Pour plus d'informations, consultez <xref:System.Runtime.GCSettings.IsServerGC>.
 
 L’illustration suivante montre le profil de mémoire sous un RPS de 5 Ko à l’aide du GC de station de travail.
 
@@ -185,7 +187,7 @@ public ActionResult<string> GetStaticString()
 }
 ```
 
-Le code précédent :
+Le code précédent :
 
 * Est un exemple de fuite de mémoire classique.
 * Avec des appels fréquents, provoque l’augmentation de la mémoire de l’application jusqu’à ce que le processus se bloque avec une `OutOfMemory` exception.
@@ -206,7 +208,7 @@ Certains objets .NET Core s’appuient sur la mémoire native. La mémoire nativ
 
 .NET fournit l' <xref:System.IDisposable> interface pour permettre aux développeurs de libérer de la mémoire native. Même si <xref:System.IDisposable.Dispose*> n’est pas appelé, les classes correctement implémentées appellent `Dispose` lorsque le [finaliseur](/dotnet/csharp/programming-guide/classes-and-structs/destructors) s’exécute.
 
-Examinons le code ci-dessous.
+Considérez le code suivant :
 
 ```csharp
 [HttpGet("fileprovider")]
@@ -289,7 +291,7 @@ Les liens suivants présentent l’approche ASP.NET Core pour la conservation de
 * [ResponseCaching/Streams/StreamUtilities. cs](https://github.com/dotnet/AspNetCore/blob/v3.0.0/src/Middleware/ResponseCaching/src/Streams/StreamUtilities.cs#L16)
 * [ResponseCaching/MemoryResponseCache. cs](https://github.com/aspnet/ResponseCaching/blob/c1cb7576a0b86e32aec990c22df29c780af29ca5/src/Microsoft.AspNetCore.ResponseCaching/Internal/MemoryResponseCache.cs#L55)
 
-Pour plus d’informations, voir :
+Pour plus d'informations, consultez les pages suivantes :
 
 * [Segment de mémoire Large Object non couvert](https://devblogs.microsoft.com/dotnet/large-object-heap-uncovered-from-an-old-msdn-article/)
 * [Tas d’objets volumineux](/dotnet/standard/garbage-collection/large-object-heap)
@@ -440,7 +442,7 @@ L’application de la même charge que la version non regroupée produit le grap
 
 La principale différence est le nombre d’octets alloués et, par conséquent, beaucoup moins de collections de génération 0.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Garbage collection](/dotnet/standard/garbage-collection/)
 * [Fonctionnement de différents modes GC avec le visualiseur concurrentiel](https://blogs.msdn.microsoft.com/seteplia/2017/01/05/understanding-different-gc-modes-with-concurrency-visualizer/)

@@ -5,6 +5,8 @@ description: 'Partie 6 : ajouter un modèle à une application ASP.NET Core MVC
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: b473b8575a870b91d83e5494103d39486ef4fee1
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: b5b54adb1d86e4ab982647dc8207839cc9afdac9
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86213048"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021066"
 ---
 # <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>Partie 6, méthodes et vues de contrôleur dans ASP.NET Core
 
@@ -154,7 +156,7 @@ Avant que le formulaire soit publié sur le serveur, la validation côté client
 
 Toutes les méthodes `HttpGet` du contrôleur Movies suivent un modèle similaire. Elles reçoivent un objet de film (ou une liste d’objets, dans le cas de `Index`) et passent l’objet (modèle) à la vue. La méthode `Create` passe un objet de film vide à la vue `Create`. Toutes les méthodes qui créent, modifient, suppriment ou changent d’une quelconque manière des données le font dans la surcharge `[HttpPost]` de la méthode. Modifier des données dans une méthode `HTTP GET` présente un risque pour la sécurité. La modification des données dans une méthode `HTTP GET` enfreint également les bonnes pratiques HTTP et le modèle architectural [REST](http://rest.elkstein.org/), qui spécifie que les requêtes GET ne doivent pas changer l’état de votre application. En d’autres termes, une opération GET doit être sûre, ne doit avoir aucun effet secondaire et ne doit pas modifier vos données persistantes.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Globalisation et localisation](xref:fundamentals/localization)
 * [Introduction aux Tag Helpers](xref:mvc/views/tag-helpers/intro)

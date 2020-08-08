@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/response-compression
-ms.openlocfilehash: 83f5b2da8fdba784131e8d159171b8433b13a091
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1dd931d0ee654b888814df8a0d0675d32b5c3a20
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406470"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020962"
 ---
 # <a name="response-compression-in-aspnet-core"></a>Compression des réponses en ASP.NET Core
 
@@ -53,12 +55,12 @@ Lorsqu’un client peut traiter du contenu compressé, le client doit informer l
 | `Accept-Encoding`valeurs d’en-tête | Intergiciel pris en charge | Description |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | Oui (valeur par défaut)        | [Format de données compressées Brotli](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | Non                   | [Format de données compressées compressé](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | Non                   | [Échange XML efficace W3C](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
-| `gzip`                          | Oui                  | [Format de fichier gzip](https://tools.ietf.org/html/rfc1952) |
-| `identity`                      | Oui                  | Identificateur « no Encoding » : la réponse ne doit pas être encodée. |
-| `pack200-gzip`                  | Non                   | [Format de transfert réseau pour les archives Java](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
-| `*`                             | Oui                  | Tout encodage de contenu disponible qui n’est pas explicitement demandé |
+| `deflate`                       | No                   | [Format de données compressées compressé](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | No                   | [Échange XML efficace W3C](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `gzip`                          | Yes                  | [Format de fichier gzip](https://tools.ietf.org/html/rfc1952) |
+| `identity`                      | Yes                  | Identificateur « no Encoding » : la réponse ne doit pas être encodée. |
+| `pack200-gzip`                  | No                   | [Format de transfert réseau pour les archives Java](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `*`                             | Yes                  | Tout encodage de contenu disponible qui n’est pas explicitement demandé |
 
 Pour plus d’informations, consultez la [liste de codage de contenu officielle IANA](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry).
 
@@ -109,7 +111,7 @@ public class Startup
 
 Remarques :
 
-* `app.UseResponseCompression`doit être appelé avant tout middleware qui compresse les réponses. Pour plus d’informations, consultez <xref:fundamentals/middleware/index#middleware-order>.
+* `app.UseResponseCompression`doit être appelé avant tout middleware qui compresse les réponses. Pour plus d'informations, consultez <xref:fundamentals/middleware/index#middleware-order>.
 * Utilisez un outil tel que [Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/)ou [postal](https://www.getpostman.com/) pour définir l' `Accept-Encoding` en-tête de la demande et étudier les en-têtes, la taille et le corps de la réponse.
 
 Envoyez une demande à l’exemple d’application sans l' `Accept-Encoding` en-tête et observez que la réponse n’est pas compressée. Les `Content-Encoding` `Vary` en-têtes et ne sont pas présents dans la réponse.
@@ -250,7 +252,7 @@ Lorsqu’une demande est traitée par un proxy par nginx, l' `Accept-Encoding` e
 
 Si vous disposez d’un module de compression dynamique IIS configuré au niveau du serveur que vous souhaitez désactiver pour une application, désactivez le module en ajoutant le fichier *web.config* . Pour plus d’informations, consultez [Désactivation de modules IIS](xref:host-and-deploy/iis/modules#disabling-iis-modules).
 
-## <a name="troubleshooting"></a>Résolution des problèmes
+## <a name="troubleshooting"></a>Dépannage
 
 Utilisez un outil tel que [Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/)ou [postal](https://www.getpostman.com/), qui vous permet de définir l' `Accept-Encoding` en-tête de la demande et d’étudier les en-têtes, la taille et le corps de la réponse. Par défaut, l’intergiciel (middleware) de compression des réponses compresse les réponses qui remplissent les conditions suivantes :
 
@@ -259,7 +261,7 @@ Utilisez un outil tel que [Fiddler](https://www.telerik.com/fiddler), [Firebug](
 * La requête ne doit pas inclure l' `Content-Range` en-tête.
 * La demande doit utiliser le protocole http, sauf si le protocole sécurisé (https) est configuré dans les options de l’intergiciel (middleware) de compression des réponses. *Notez le danger [décrit ci-dessus](#compression-with-secure-protocol) lors de l’activation de la compression de contenu sécurisé.*
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
@@ -299,12 +301,12 @@ Lorsqu’un client peut traiter du contenu compressé, le client doit informer l
 | `Accept-Encoding`valeurs d’en-tête | Intergiciel pris en charge | Description |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | Oui (valeur par défaut)        | [Format de données compressées Brotli](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | Non                   | [Format de données compressées compressé](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | Non                   | [Échange XML efficace W3C](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
-| `gzip`                          | Oui                  | [Format de fichier gzip](https://tools.ietf.org/html/rfc1952) |
-| `identity`                      | Oui                  | Identificateur « no Encoding » : la réponse ne doit pas être encodée. |
-| `pack200-gzip`                  | Non                   | [Format de transfert réseau pour les archives Java](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
-| `*`                             | Oui                  | Tout encodage de contenu disponible qui n’est pas explicitement demandé |
+| `deflate`                       | No                   | [Format de données compressées compressé](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | No                   | [Échange XML efficace W3C](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `gzip`                          | Yes                  | [Format de fichier gzip](https://tools.ietf.org/html/rfc1952) |
+| `identity`                      | Yes                  | Identificateur « no Encoding » : la réponse ne doit pas être encodée. |
+| `pack200-gzip`                  | No                   | [Format de transfert réseau pour les archives Java](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `*`                             | Yes                  | Tout encodage de contenu disponible qui n’est pas explicitement demandé |
 
 Pour plus d’informations, consultez la [liste de codage de contenu officielle IANA](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry).
 
@@ -355,7 +357,7 @@ public class Startup
 
 Remarques :
 
-* `app.UseResponseCompression`doit être appelé avant tout middleware qui compresse les réponses. Pour plus d’informations, consultez <xref:fundamentals/middleware/index#middleware-order>.
+* `app.UseResponseCompression`doit être appelé avant tout middleware qui compresse les réponses. Pour plus d'informations, consultez <xref:fundamentals/middleware/index#middleware-order>.
 * Utilisez un outil tel que [Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/)ou [postal](https://www.getpostman.com/) pour définir l' `Accept-Encoding` en-tête de la demande et étudier les en-têtes, la taille et le corps de la réponse.
 
 Envoyez une demande à l’exemple d’application sans l' `Accept-Encoding` en-tête et observez que la réponse n’est pas compressée. Les `Content-Encoding` `Vary` en-têtes et ne sont pas présents dans la réponse.
@@ -495,7 +497,7 @@ Lorsqu’une demande est traitée par un proxy par nginx, l' `Accept-Encoding` e
 
 Si vous disposez d’un module de compression dynamique IIS configuré au niveau du serveur que vous souhaitez désactiver pour une application, désactivez le module en ajoutant le fichier *web.config* . Pour plus d’informations, consultez [Désactivation de modules IIS](xref:host-and-deploy/iis/modules#disabling-iis-modules).
 
-## <a name="troubleshooting"></a>Résolution des problèmes
+## <a name="troubleshooting"></a>Dépannage
 
 Utilisez un outil tel que [Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/)ou [postal](https://www.getpostman.com/), qui vous permet de définir l' `Accept-Encoding` en-tête de la demande et d’étudier les en-têtes, la taille et le corps de la réponse. Par défaut, l’intergiciel (middleware) de compression des réponses compresse les réponses qui remplissent les conditions suivantes :
 
@@ -504,7 +506,7 @@ Utilisez un outil tel que [Fiddler](https://www.telerik.com/fiddler), [Firebug](
 * La requête ne doit pas inclure l' `Content-Range` en-tête.
 * La demande doit utiliser le protocole http, sauf si le protocole sécurisé (https) est configuré dans les options de l’intergiciel (middleware) de compression des réponses. *Notez le danger [décrit ci-dessus](#compression-with-secure-protocol) lors de l’activation de la compression de contenu sécurisé.*
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
@@ -544,12 +546,12 @@ Lorsqu’un client peut traiter du contenu compressé, le client doit informer l
 | `Accept-Encoding`valeurs d’en-tête | Intergiciel pris en charge | Description |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | Non                   | [Format de données compressées Brotli](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | Non                   | [Format de données compressées compressé](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | Non                   | [Échange XML efficace W3C](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `deflate`                       | No                   | [Format de données compressées compressé](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | No                   | [Échange XML efficace W3C](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
 | `gzip`                          | Oui (valeur par défaut)        | [Format de fichier gzip](https://tools.ietf.org/html/rfc1952) |
-| `identity`                      | Oui                  | Identificateur « no Encoding » : la réponse ne doit pas être encodée. |
-| `pack200-gzip`                  | Non                   | [Format de transfert réseau pour les archives Java](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
-| `*`                             | Oui                  | Tout encodage de contenu disponible qui n’est pas explicitement demandé |
+| `identity`                      | Yes                  | Identificateur « no Encoding » : la réponse ne doit pas être encodée. |
+| `pack200-gzip`                  | No                   | [Format de transfert réseau pour les archives Java](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `*`                             | Yes                  | Tout encodage de contenu disponible qui n’est pas explicitement demandé |
 
 Pour plus d’informations, consultez la [liste de codage de contenu officielle IANA](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry).
 
@@ -600,7 +602,7 @@ public class Startup
 
 Remarques :
 
-* `app.UseResponseCompression`doit être appelé avant tout middleware qui compresse les réponses. Pour plus d’informations, consultez <xref:fundamentals/middleware/index#middleware-order>.
+* `app.UseResponseCompression`doit être appelé avant tout middleware qui compresse les réponses. Pour plus d'informations, consultez <xref:fundamentals/middleware/index#middleware-order>.
 * Utilisez un outil tel que [Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/)ou [postal](https://www.getpostman.com/) pour définir l' `Accept-Encoding` en-tête de la demande et étudier les en-têtes, la taille et le corps de la réponse.
 
 Envoyez une demande à l’exemple d’application sans l' `Accept-Encoding` en-tête et observez que la réponse n’est pas compressée. Les `Content-Encoding` `Vary` en-têtes et ne sont pas présents dans la réponse.
@@ -700,7 +702,7 @@ Lorsqu’une demande est traitée par un proxy par nginx, l' `Accept-Encoding` e
 
 Si vous disposez d’un module de compression dynamique IIS configuré au niveau du serveur que vous souhaitez désactiver pour une application, désactivez le module en ajoutant le fichier *web.config* . Pour plus d’informations, consultez [Désactivation de modules IIS](xref:host-and-deploy/iis/modules#disabling-iis-modules).
 
-## <a name="troubleshooting"></a>Résolution des problèmes
+## <a name="troubleshooting"></a>Dépannage
 
 Utilisez un outil tel que [Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/)ou [postal](https://www.getpostman.com/), qui vous permet de définir l' `Accept-Encoding` en-tête de la demande et d’étudier les en-têtes, la taille et le corps de la réponse. Par défaut, l’intergiciel (middleware) de compression des réponses compresse les réponses qui remplissent les conditions suivantes :
 
@@ -709,7 +711,7 @@ Utilisez un outil tel que [Fiddler](https://www.telerik.com/fiddler), [Firebug](
 * La requête ne doit pas inclure l' `Content-Range` en-tête.
 * La demande doit utiliser le protocole http, sauf si le protocole sécurisé (https) est configuré dans les options de l’intergiciel (middleware) de compression des réponses. *Notez le danger [décrit ci-dessus](#compression-with-secure-protocol) lors de l’activation de la compression de contenu sécurisé.*
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>

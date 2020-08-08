@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.0
-ms.openlocfilehash: 97d8606ba6bef0bb8bf23d1553c7cb5681fbdbd8
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1ec51bf054f1f0d60ed27ee280f436e6d4c8c4b0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404364"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021194"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>Nouveautés d’ASP.NET Core 2.0
 
 Cet article met en évidence les modifications les plus importantes dans ASP.NET 2.0 Core et fournit des liens vers la documentation appropriée.
 
-## <a name="razor-pages"></a>RazorPages
+## <a name="no-locrazor-pages"></a>RazorPages
 
 RazorPages est une nouvelle fonctionnalité de ASP.NET Core MVC qui rend le codage des scénarios orientés page plus facile et plus productif.
 
@@ -72,7 +74,7 @@ De nouveaux modèles sont disponibles pour configurer l’authentification pour 
 
 Pour plus d’informations sur l’état de la documentation planifiée, consultez le [problème GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/3054).
 
-## <a name="identity-update"></a>Identity update
+## <a name="no-locidentity-update"></a>Identity update
 
 Nous avons simplifié la création d’API Web sécurisées à l’aide Identity de dans ASP.NET Core 2,0. Vous pouvez acquérir des jetons d’accès pour accéder à vos API web à l’aide de la [bibliothèque d’authentification Microsoft (MSAL, Microsoft Authentication Library)](https://www.nuget.org/packages/Microsoft.Identity.Client).
 
@@ -94,7 +96,7 @@ Le serveur web Kestrel offre de nouvelles fonctionnalités qui le rendent plus a
 * Taille maximale du corps de la requête
 * Débit données minimal du corps de la requête
 
-Pour plus d’informations, consultez [Kestrel web server implementation in ASP.NET Core](xref:fundamentals/servers/kestrel) (Implémentation du serveur web Kestrel dans ASP.NET Core).
+Pour plus d'informations, consultez [Implémentation du serveur web Kestrel dans ASP.NET Core](xref:fundamentals/servers/kestrel).
 
 ## <a name="weblistener-renamed-to-httpsys"></a>WebListener a été renommé HTTP.sys
 
@@ -136,7 +138,7 @@ Razorla précompilation de la vue est activée lors de la publication par défau
 
 Pour plus d’informations, consultez [ Razor afficher la compilation et la précompilation dans ASP.net Core](xref:mvc/views/view-compilation).
 
-## <a name="razor-support-for-c-71"></a>Razorprise en charge de C# 7,1
+## <a name="no-locrazor-support-for-c-71"></a>Razorprise en charge de C# 7,1
 
 Le Razor moteur d’affichage a été mis à jour pour fonctionner avec le nouveau compilateur Roslyn. Cela comprend la prise en charge des fonctionnalités de C# 7.1 telles que les expressions par défaut, la déduction des noms de tuples et les critères spéciaux avec les génériques. Pour utiliser C# 7.1 dans votre projet, ajoutez la propriété suivante dans votre fichier projet, puis rechargez la solution :
 

@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/14/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/iauthorizationpolicyprovider
-ms.openlocfilehash: bb9b52da08639680b05a102dd4df71ff1af00971
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 724b1f065e83302137d920fe4e0e2b381be505b7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399554"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022132"
 ---
 # <a name="custom-authorization-policy-providers-using-iauthorizationpolicyprovider-in-aspnet-core"></a>Fournisseurs de stratégies d’autorisation personnalisés utilisant IAuthorizationPolicyProvider dans ASP.NET Core 
 
@@ -100,7 +102,7 @@ Lorsque `MinimumAgeAuthorizationAttribute` vous utilisez, les noms de stratégie
 
 * Analyse de l’âge à partir du nom de la stratégie.
 * Utilisation `AuthorizationPolicyBuilder` de pour créer un nouveau`AuthorizationPolicy`
-* Dans cet exemple et les exemples suivants, on suppose que l’utilisateur est authentifié via un cookie. `AuthorizationPolicyBuilder`Doit être construit avec au moins un nom de schéma d’autorisation, ou toujours correctement. Dans le cas contraire, il n’y a pas d’informations sur la façon de fournir une stimulation à l’utilisateur et une exception sera levée.
+* Dans cet exemple et les exemples suivants, on suppose que l’utilisateur est authentifié via un cookie . `AuthorizationPolicyBuilder`Doit être construit avec au moins un nom de schéma d’autorisation, ou toujours correctement. Dans le cas contraire, il n’y a pas d’informations sur la façon de fournir une stimulation à l’utilisateur et une exception sera levée.
 * Ajout de spécifications à la stratégie en fonction de l’âge avec `AuthorizationPolicyBuilder.AddRequirements` . Dans d’autres scénarios, vous pouvez utiliser `RequireClaim` , ou à la `RequireRole` `RequireUserName` place.
 
 ```csharp

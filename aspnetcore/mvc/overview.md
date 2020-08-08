@@ -5,6 +5,8 @@ description: Découvrez ASP.NET Core MVC, un puissant framework qui vous permet 
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/overview
-ms.openlocfilehash: 68a0b14eb0897f6ff6e24e74b1fe5536bee1adfe
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 64bee1966eff40e9057166adfafbf78d0cc5b6aa
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405846"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021443"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>Vue d’ensemble du modèle MVC d’ASP.NET Core
 
@@ -194,7 +196,7 @@ Utilisez la génération de lien pour activer la prise en charge de liens hyperm
 
 Le framework utilise les interfaces et l’injection de dépendances, ce qui le rend particulièrement adapté aux tests unitaires. De plus, le framework inclut des fonctionnalités (par exemple un fournisseur TestHost et InMemory pour Entity Framework) qui facilitent aussi les [tests d’intégration](xref:test/integration-tests). Découvrez en plus sur le [test de la logique du contrôleur](controllers/testing.md).
 
-### <a name="razor-view-engine"></a>Razormoteur d’affichage
+### <a name="no-locrazor-view-engine"></a>Razormoteur d’affichage
 
 [ASP.net Core vues MVC](views/overview.md) utilisent le [ Razor moteur d’affichage](views/razor.md) pour restituer les vues. Razorest un langage de balisage de modèle fluide, expressif et compact pour la définition de vues à l’aide de code C# incorporé. Razorest utilisé pour générer dynamiquement du contenu Web sur le serveur. Vous pouvez mélanger sans problème du code serveur avec du contenu et du code côté client.
 
@@ -261,9 +263,9 @@ Les [composants de vues](views/view-components.md) vous permettent de compresser
 
 La méthode <xref:Microsoft.Extensions.DependencyInjection.MvcCoreMvcBuilderExtensions.SetCompatibilityVersion*> permet à une application d’accepter ou de refuser les changements de comportement potentiellement cassants introduits dans ASP.NET Core MVC 2.1 ou version ultérieure.
 
-Pour plus d’informations, consultez <xref:mvc/compatibility-version>.
+Pour plus d'informations, consultez <xref:mvc/compatibility-version>.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Bibliothèque de tests MyTested. AspNetCore. Mvc-Fluent pour ASP.net Core MVC](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc): bibliothèque de tests unitaires fortement typés, fournissant une interface Fluent pour tester les applications MVC et API Web. (*Non géré ou pris en charge par Microsoft.*)
 * <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps>

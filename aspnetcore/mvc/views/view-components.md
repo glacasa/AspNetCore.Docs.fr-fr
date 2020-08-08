@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/view-components
-ms.openlocfilehash: 272b5a89601a9e6ef24f3e60a3da7e2a40297c97
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 0c952502d58744bbbe06c92f51bd51bd547fb8ae
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86213114"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020949"
 ---
 # <a name="view-components-in-aspnet-core"></a>Composants de vue dans ASP.NET Core
 
@@ -50,7 +52,7 @@ Les composants de vue sont conçus pour être utilisés là où vous avez une lo
 
 Un composant de vue a deux éléments : sa classe (généralement dérivée de [ViewComponent](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponent)) et le résultat qu’il retourne (en général, une vue). Comme les contrôleurs, un composant de vue peut être un OCT, mais la plupart des développeurs préfèrent utiliser les méthodes et propriétés dérivées de `ViewComponent`.
 
-Si vous envisagez que les composants de vue répondent aux spécifications d’une application, envisagez plutôt d’utiliser des Razor composants. RazorLes composants combinent également le balisage avec du code C# pour produire des unités d’interface utilisateur réutilisables. RazorLes composants sont conçus pour la productivité des développeurs lorsqu’ils fournissent la logique de l’interface utilisateur côté client et la composition. Pour plus d’informations, consultez <xref:blazor/components/index>.
+Si vous envisagez que les composants de vue répondent aux spécifications d’une application, envisagez plutôt d’utiliser des Razor composants. RazorLes composants combinent également le balisage avec du code C# pour produire des unités d’interface utilisateur réutilisables. RazorLes composants sont conçus pour la productivité des développeurs lorsqu’ils fournissent la logique de l’interface utilisateur côté client et la composition. Pour plus d'informations, consultez <xref:blazor/components/index>.
 
 ## <a name="creating-a-view-component"></a>Création d’un composant de vue
 
@@ -189,7 +191,7 @@ Remarques sur le code :
 * `InvokeAsync` expose une méthode qui peut être appelée à partir d’une vue et qui peut prendre un nombre arbitraire d’arguments.
 * La méthode `InvokeAsync` retourne l’ensemble des tâches `ToDo` qui correspondent aux paramètres `isDone` et `maxPriority` spécifiés.
 
-### <a name="create-the-view-component-razor-view"></a>Créer la vue de composant de vue Razor
+### <a name="create-the-view-component-no-locrazor-view"></a>Créer la vue de composant de vue Razor
 
 * Créez le dossier *Views/Shared/Components*. Ce dossier **doit** être nommé *Components*.
 
@@ -351,6 +353,6 @@ Chaque paramètre d’un composant de vue est un attribut requis. Consultez [ce 
 * ViewComponent n’affiche aucun balisage.
 * Aucune erreur n’est levée.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Injection de dépendances dans les vues](xref:mvc/views/dependency-injection)

@@ -5,6 +5,8 @@ description: En savoir plus sur la gestion et la durée de vie des clés de prot
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/default-settings
-ms.openlocfilehash: f758c814280ee09a240d99cc59cdab2dc4590df6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b39187d93247dc83c34bbbe6ec6accfd77108794
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407094"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021378"
 ---
 # <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>Gestion et durée de vie des clés de protection des données dans ASP.NET Core
 
@@ -31,7 +33,7 @@ L’application tente de détecter son environnement d’exploitation et de gér
 1. Si l’application est hébergée dans des [applications Azure](https://azure.microsoft.com/services/app-service/), les clés sont conservées dans le dossier *%Home%\ASP.NET\DataProtection-Keys* . Ce dossier est alimenté par le stockage réseau et synchronisé sur tous les ordinateurs hébergeant l’application.
    * Les clés ne sont pas protégées au repos.
    * Le dossier *dataprotection-Keys* fournit l’anneau clé à toutes les instances d’une application dans un seul emplacement de déploiement.
-   * Les emplacements de déploiement distincts, tels que Préproduction et Production, ne partagent pas de porte-clés. Lorsque vous basculez entre les emplacements de déploiement, par exemple en échange de la mise en lots vers la production ou à l’aide d’un test A/B, toute application utilisant la protection des données ne pourra pas déchiffrer les données stockées à l’aide de l’anneau de clé à l’intérieur de l’emplacement précédent. Cela amène les utilisateurs à se déconnecter d’une application qui utilise l’authentification par cookie ASP.NET Core standard, car elle utilise la protection des données pour protéger ses cookies. Si vous souhaitez des sonneries de clé indépendantes du logement, utilisez un fournisseur de sonneries de clé externe, tel que le stockage d’objets BLOB Azure, Azure Key Vault, un magasin SQL ou un cache ReDim.
+   * Les emplacements de déploiement distincts, tels que Préproduction et Production, ne partagent pas de porte-clés. Lorsque vous basculez entre les emplacements de déploiement, par exemple en échange de la mise en lots vers la production ou à l’aide d’un test A/B, toute application utilisant la protection des données ne pourra pas déchiffrer les données stockées à l’aide de l’anneau de clé à l’intérieur de l’emplacement précédent. Cela amène les utilisateurs à se déconnecter d’une application qui utilise l’authentification ASP.NET Core standard cookie , car elle utilise la protection des données pour protéger ses cookie s. Si vous souhaitez des sonneries de clé indépendantes du logement, utilisez un fournisseur de sonneries de clé externe, tel que le stockage d’objets BLOB Azure, Azure Key Vault, un magasin SQL ou un cache ReDim.
 
 1. Si le profil utilisateur est disponible, les clés sont conservées dans le dossier *%LocalAppData%\ASP.NET\DataProtection-Keys* . Si le système d’exploitation est Windows, les clés sont chiffrées au repos à l’aide de DPAPI.
 

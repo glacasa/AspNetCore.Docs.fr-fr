@@ -7,6 +7,8 @@ ms.author: anurse
 ms.custom: signalr
 ms.date: 06/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: f2b864d47c98a031872be676a68143bd79f49829
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 61733fe4fbcd7b94662404a39a288ff2ce75ec53
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85409096"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021833"
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>Journalisation et diagnostics dans ASP.NET CoreSignalR
+# <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>Journalisation et diagnostics dans ASP.NET CoreSignalR
 
 Par [Andrew Stanton-infirmière](https://twitter.com/anurse)
 
@@ -218,7 +220,7 @@ Vous pouvez joindre des fichiers de diagnostic à des problèmes de GitHub en le
 
 Les métriques sont une représentation de mesures de données sur des intervalles de temps. Par exemple, les demandes par seconde. Les données de métriques permettent l’observation de l’état d’une application à un niveau élevé. Les métriques .NET gRPC sont émises à l’aide de <xref:System.Diagnostics.Tracing.EventCounter> .
 
-### <a name="signalr-server-metrics"></a>SignalRmétriques du serveur
+### <a name="no-locsignalr-server-metrics"></a>SignalRmétriques du serveur
 
 SignalRles métriques du serveur sont signalées sur la source de l' <xref:Microsoft.AspNetCore.Http.Connections> événement.
 

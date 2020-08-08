@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,20 +17,20 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/authn-and-authz
-ms.openlocfilehash: 794465ceb69f47ee3d5cc8c100b321cb958d9cfe
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1e022c510dda3e39dd02d607f1d9c493aecdeb5a
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407133"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021560"
 ---
-# <a name="authentication-and-authorization-in-aspnet-core-signalr"></a>Authentification et autorisation dans ASP.NET CoreSignalR
+# <a name="authentication-and-authorization-in-aspnet-core-no-locsignalr"></a>Authentification et autorisation dans ASP.NET CoreSignalR
 
 Par [Andrew Stanton-infirmière](https://twitter.com/anurse)
 
 [Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/authn-and-authz/sample/) [(procédure de téléchargement)](xref:index#how-to-download-a-sample)
 
-## <a name="authenticate-users-connecting-to-a-signalr-hub"></a>Authentifier les utilisateurs se connectant à un SignalR Hub
+## <a name="authenticate-users-connecting-to-a-no-locsignalr-hub"></a>Authentifier les utilisateurs se connectant à un SignalR Hub
 
 SignalRpeut être utilisé avec [l’authentification ASP.net Core](xref:security/authentication/identity) pour associer un utilisateur à chaque connexion. Dans un concentrateur, les données d’authentification sont accessibles à partir de la propriété [HubConnectionContext. User](/dotnet/api/microsoft.aspnetcore.signalr.hubconnectioncontext.user) . L’authentification permet au hub d’appeler des méthodes sur toutes les connexions associées à un utilisateur. Pour plus d’informations, consultez [gérer les utilisateurs et SignalR les groupes dans ](xref:signalr/groups). Plusieurs connexions peuvent être associées à un seul utilisateur.
 
@@ -86,15 +88,15 @@ public void Configure(IApplicationBuilder app)
 
 ::: moniker-end
 
-### <a name="cookie-authentication"></a>Authentification par cookie
+### <a name="no-loccookie-authentication"></a>l’authentification Cookie
 
-Dans une application basée sur un navigateur, l’authentification par cookie permet à vos informations d’identification d’utilisateur existantes d’être automatiquement transmises aux SignalR connexions. Lorsque vous utilisez le navigateur client, aucune configuration supplémentaire n’est nécessaire. Si l’utilisateur est connecté à votre application, la SignalR connexion hérite automatiquement de cette authentification.
+Dans une application basée sur un navigateur, cookie l’authentification permet de transmettre automatiquement les informations d’identification de l’utilisateur existant aux SignalR connexions. Lorsque vous utilisez le navigateur client, aucune configuration supplémentaire n’est nécessaire. Si l’utilisateur est connecté à votre application, la SignalR connexion hérite automatiquement de cette authentification.
 
-Les cookies sont un moyen spécifique au navigateur d’envoyer des jetons d’accès, mais les clients sans navigateur peuvent les envoyer. Lorsque vous utilisez le [client .net](xref:signalr/dotnet-client), la `Cookies` propriété peut être configurée dans l' `.WithUrl` appel pour fournir un cookie. Toutefois, l’utilisation de l’authentification par cookie à partir du client .NET requiert que l’application fournisse une API pour échanger les données d’authentification d’un cookie.
+Cookieles s sont une méthode propre au navigateur pour envoyer des jetons d’accès, mais les clients sans navigateur peuvent les envoyer. Lorsque vous utilisez le [client .net](xref:signalr/dotnet-client), la `Cookies` propriété peut être configurée dans l' `.WithUrl` appel pour fournir un cookie . Toutefois, l’utilisation cookie de l’authentification à partir du client .net requiert que l’application fournisse une API pour échanger les données d’authentification d’un cookie .
 
 ### <a name="bearer-token-authentication"></a>Authentification du jeton du porteur
 
-Le client peut fournir un jeton d’accès au lieu d’utiliser un cookie. Le serveur valide le jeton et l’utilise pour identifier l’utilisateur. Cette validation est effectuée uniquement lorsque la connexion est établie. Pendant la durée de vie de la connexion, le serveur n’est pas automatiquement revalidé pour vérifier la révocation des jetons.
+Le client peut fournir un jeton d’accès au lieu d’utiliser un cookie . Le serveur valide le jeton et l’utilise pour identifier l’utilisateur. Cette validation est effectuée uniquement lorsque la connexion est établie. Pendant la durée de vie de la connexion, le serveur n’est pas automatiquement revalidé pour vérifier la révocation des jetons.
 
 Sur le serveur, l’authentification du jeton du porteur est configurée à l’aide de l’intergiciel (middleware) du [porteur JWT](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer).
 
@@ -125,9 +127,9 @@ Dans les API Web standard, les jetons du porteur sont envoyés dans un en-tête 
 > [!NOTE]
 > La chaîne de requête est utilisée sur les navigateurs lors de la connexion à WebSockets et aux événements envoyés par le serveur en raison des limitations de l’API du navigateur. Lors de l’utilisation de HTTPs, les valeurs de chaîne de requête sont sécurisées par la connexion TLS. Toutefois, de nombreux serveurs consignent des valeurs de chaîne de requête. Pour plus d’informations, consultez [Considérations sur la SignalR sécurité dans ASP.net Core ](xref:signalr/security). SignalRutilise des en-têtes pour transmettre des jetons dans des environnements qui les prennent en charge (tels que les clients .NET et Java).
 
-### <a name="cookies-vs-bearer-tokens"></a>Cookies et jetons de porteur 
+### <a name="no-loccookies-vs-bearer-tokens"></a>Cookiejetons s et porteur 
 
-Les cookies sont spécifiques aux navigateurs. Leur envoi à partir d’autres types de clients augmente la complexité par rapport à l’envoi des jetons de porteur. Par conséquent, l’authentification des cookies n’est pas recommandée, sauf si l’application doit uniquement authentifier les utilisateurs à partir du navigateur client. L’authentification par jeton du porteur est l’approche recommandée lors de l’utilisation de clients autres que le navigateur client.
+Cookieles s sont spécifiques aux navigateurs. Leur envoi à partir d’autres types de clients augmente la complexité par rapport à l’envoi des jetons de porteur. Par conséquent, l' cookie authentification n’est pas recommandée, sauf si l’application doit uniquement authentifier les utilisateurs à partir du navigateur client. L’authentification par jeton du porteur est l’approche recommandée lors de l’utilisation de clients autres que le navigateur client.
 
 ### <a name="windows-authentication"></a>Authentification Windows
 
@@ -296,7 +298,7 @@ Dans l’exemple précédent, la `DomainRestrictedRequirement` classe est à la 
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Authentification du jeton du porteur dans ASP.NET Core](https://blogs.msdn.microsoft.com/webdev/2016/10/27/bearer-token-authentication-in-asp-net-core/)
 * [Autorisation basée sur les ressources](xref:security/authorization/resourcebased)
