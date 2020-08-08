@@ -5,6 +5,8 @@ description: Découvrez les rubriques qui se rapportent au développement mobile
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,13 +15,13 @@ no-loc:
 - Razor
 - SignalR
 uid: mobile/index
-ms.openlocfilehash: 1af888a9d9e74ea4fafd35bff79d0617aa33a97c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ebcffc6f636e99f5e7cb5ba5e6e88fb6c85121bf
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400739"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019402"
 ---
-# <a name="mobile-development-with-aspnet-core"></a><span data-ttu-id="d9e8a-103">Développement mobile avec ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="d9e8a-103">Mobile development with ASP.NET Core</span></span>
+# <a name="mobile-development-with-aspnet-core"></a><span data-ttu-id="9aab4-103">Développement mobile avec ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="9aab4-103">Mobile development with ASP.NET Core</span></span>
 
-* [<span data-ttu-id="d9e8a-104">Créer des services backend pour les applications mobiles natives</span><span class="sxs-lookup"><span data-stu-id="d9e8a-104">Create backend services for native mobile apps</span></span>](native-mobile-backend.md)
+* [<span data-ttu-id="9aab4-104">Créer des services backend pour les applications mobiles natives</span><span class="sxs-lookup"><span data-stu-id="9aab4-104">Create backend services for native mobile apps</span></span>](native-mobile-backend.md)

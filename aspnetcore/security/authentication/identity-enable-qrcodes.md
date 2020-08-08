@@ -5,6 +5,8 @@ description: Découvrez comment activer la génération de code QR pour les appl
 ms.author: riande
 ms.date: 08/14/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,47 +15,47 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-enable-qrcodes
-ms.openlocfilehash: 4ed5a550b5d3ca00179ae0492bf61e7fe91e324c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4ccfd83c273f7179ac26b075eb33f138e724b967
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408771"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019558"
 ---
-# <a name="enable-qr-code-generation-for-totp-authenticator-apps-in-aspnet-core"></a><span data-ttu-id="4a15a-103">Activer la génération de code QR pour les applications TOTP Authenticator dans ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="4a15a-103">Enable QR Code generation for TOTP authenticator apps in ASP.NET Core</span></span>
+# <a name="enable-qr-code-generation-for-totp-authenticator-apps-in-aspnet-core"></a><span data-ttu-id="90785-103">Activer la génération de code QR pour les applications TOTP Authenticator dans ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="90785-103">Enable QR Code generation for TOTP authenticator apps in ASP.NET Core</span></span>
 
 ::: moniker range="<= aspnetcore-2.0"
 
-<span data-ttu-id="4a15a-104">Les codes QR requièrent ASP.NET Core 2,0 ou une version ultérieure.</span><span class="sxs-lookup"><span data-stu-id="4a15a-104">QR Codes requires ASP.NET Core 2.0 or later.</span></span>
+<span data-ttu-id="90785-104">Les codes QR requièrent ASP.NET Core 2,0 ou une version ultérieure.</span><span class="sxs-lookup"><span data-stu-id="90785-104">QR Codes requires ASP.NET Core 2.0 or later.</span></span>
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.0"
 
-<span data-ttu-id="4a15a-105">ASP.NET Core est fourni avec la prise en charge des applications de l’authentificateur pour l’authentification individuelle.</span><span class="sxs-lookup"><span data-stu-id="4a15a-105">ASP.NET Core ships with support for authenticator applications for individual authentication.</span></span> <span data-ttu-id="4a15a-106">Les applications de l’authentificateur 2FA (authentification à deux facteurs), utilisant un algorithme de mot de passe à usage unique (TOTP), sont l’approche recommandée pour 2FA.</span><span class="sxs-lookup"><span data-stu-id="4a15a-106">Two factor authentication (2FA) authenticator apps, using a Time-based One-time Password Algorithm (TOTP), are the industry recommended approach for 2FA.</span></span> <span data-ttu-id="4a15a-107">2FA utilise TOTP est préférable à SMS 2FA.</span><span class="sxs-lookup"><span data-stu-id="4a15a-107">2FA using TOTP is preferred to SMS 2FA.</span></span> <span data-ttu-id="4a15a-108">Une application d’authentificateur fournit un code de 6 à 8 chiffres que les utilisateurs doivent entrer après avoir confirmé leur nom d’utilisateur et leur mot de passe.</span><span class="sxs-lookup"><span data-stu-id="4a15a-108">An authenticator app provides a 6 to 8 digit code which users must enter after confirming their username and password.</span></span> <span data-ttu-id="4a15a-109">En général, une application authentificateur est installée sur un smartphone.</span><span class="sxs-lookup"><span data-stu-id="4a15a-109">Typically an authenticator app is installed on a smart phone.</span></span>
+<span data-ttu-id="90785-105">ASP.NET Core est fourni avec la prise en charge des applications de l’authentificateur pour l’authentification individuelle.</span><span class="sxs-lookup"><span data-stu-id="90785-105">ASP.NET Core ships with support for authenticator applications for individual authentication.</span></span> <span data-ttu-id="90785-106">Les applications de l’authentificateur 2FA (authentification à deux facteurs), utilisant un algorithme de mot de passe à usage unique (TOTP), sont l’approche recommandée pour 2FA.</span><span class="sxs-lookup"><span data-stu-id="90785-106">Two factor authentication (2FA) authenticator apps, using a Time-based One-time Password Algorithm (TOTP), are the industry recommended approach for 2FA.</span></span> <span data-ttu-id="90785-107">2FA utilise TOTP est préférable à SMS 2FA.</span><span class="sxs-lookup"><span data-stu-id="90785-107">2FA using TOTP is preferred to SMS 2FA.</span></span> <span data-ttu-id="90785-108">Une application d’authentificateur fournit un code de 6 à 8 chiffres que les utilisateurs doivent entrer après avoir confirmé leur nom d’utilisateur et leur mot de passe.</span><span class="sxs-lookup"><span data-stu-id="90785-108">An authenticator app provides a 6 to 8 digit code which users must enter after confirming their username and password.</span></span> <span data-ttu-id="90785-109">En général, une application authentificateur est installée sur un smartphone.</span><span class="sxs-lookup"><span data-stu-id="90785-109">Typically an authenticator app is installed on a smart phone.</span></span>
 
-<span data-ttu-id="4a15a-110">Les modèles d’application Web ASP.NET Core prennent en charge les authentificateurs, mais ne fournissent pas de prise en charge pour la génération de QRCode.</span><span class="sxs-lookup"><span data-stu-id="4a15a-110">The ASP.NET Core web app templates support authenticators, but don't provide support for QRCode generation.</span></span> <span data-ttu-id="4a15a-111">Les générateurs QRCode facilitent la configuration de 2FA.</span><span class="sxs-lookup"><span data-stu-id="4a15a-111">QRCode generators ease the setup of 2FA.</span></span> <span data-ttu-id="4a15a-112">Ce document vous guide tout au long de l’ajout de la génération de [code QR](https://wikipedia.org/wiki/QR_code) à la page de configuration 2FA.</span><span class="sxs-lookup"><span data-stu-id="4a15a-112">This document will guide you through adding [QR Code](https://wikipedia.org/wiki/QR_code) generation to the 2FA configuration page.</span></span>
+<span data-ttu-id="90785-110">Les modèles d’application Web ASP.NET Core prennent en charge les authentificateurs, mais ne fournissent pas de prise en charge pour la génération de QRCode.</span><span class="sxs-lookup"><span data-stu-id="90785-110">The ASP.NET Core web app templates support authenticators, but don't provide support for QRCode generation.</span></span> <span data-ttu-id="90785-111">Les générateurs QRCode facilitent la configuration de 2FA.</span><span class="sxs-lookup"><span data-stu-id="90785-111">QRCode generators ease the setup of 2FA.</span></span> <span data-ttu-id="90785-112">Ce document vous guide tout au long de l’ajout de la génération de [code QR](https://wikipedia.org/wiki/QR_code) à la page de configuration 2FA.</span><span class="sxs-lookup"><span data-stu-id="90785-112">This document will guide you through adding [QR Code](https://wikipedia.org/wiki/QR_code) generation to the 2FA configuration page.</span></span>
 
-<span data-ttu-id="4a15a-113">L’authentification à deux facteurs ne se produit pas à l’aide d’un fournisseur d’authentification externe, tel que [Google](xref:security/authentication/google-logins) ou [Facebook](xref:security/authentication/facebook-logins).</span><span class="sxs-lookup"><span data-stu-id="4a15a-113">Two factor authentication does not happen using an external authentication provider, such as [Google](xref:security/authentication/google-logins) or [Facebook](xref:security/authentication/facebook-logins).</span></span> <span data-ttu-id="4a15a-114">Les connexions externes sont protégées par le mécanisme fourni par le fournisseur de connexion externe.</span><span class="sxs-lookup"><span data-stu-id="4a15a-114">External logins are protected by whatever mechanism the external login provider provides.</span></span> <span data-ttu-id="4a15a-115">Par exemple, le fournisseur d’authentification [Microsoft](xref:security/authentication/microsoft-logins) requiert une clé matérielle ou une autre approche 2FA.</span><span class="sxs-lookup"><span data-stu-id="4a15a-115">Consider, for example, the [Microsoft](xref:security/authentication/microsoft-logins) authentication provider requires a hardware key or another 2FA approach.</span></span> <span data-ttu-id="4a15a-116">Si les modèles par défaut appliquent le 2FA « local », les utilisateurs doivent satisfaire deux approches 2FA, ce qui n’est pas un scénario couramment utilisé.</span><span class="sxs-lookup"><span data-stu-id="4a15a-116">If the default templates enforced "local" 2FA then users would be required to satisfy two 2FA approaches, which is not a commonly used scenario.</span></span>
+<span data-ttu-id="90785-113">L’authentification à deux facteurs ne se produit pas à l’aide d’un fournisseur d’authentification externe, tel que [Google](xref:security/authentication/google-logins) ou [Facebook](xref:security/authentication/facebook-logins).</span><span class="sxs-lookup"><span data-stu-id="90785-113">Two factor authentication does not happen using an external authentication provider, such as [Google](xref:security/authentication/google-logins) or [Facebook](xref:security/authentication/facebook-logins).</span></span> <span data-ttu-id="90785-114">Les connexions externes sont protégées par le mécanisme fourni par le fournisseur de connexion externe.</span><span class="sxs-lookup"><span data-stu-id="90785-114">External logins are protected by whatever mechanism the external login provider provides.</span></span> <span data-ttu-id="90785-115">Par exemple, le fournisseur d’authentification [Microsoft](xref:security/authentication/microsoft-logins) requiert une clé matérielle ou une autre approche 2FA.</span><span class="sxs-lookup"><span data-stu-id="90785-115">Consider, for example, the [Microsoft](xref:security/authentication/microsoft-logins) authentication provider requires a hardware key or another 2FA approach.</span></span> <span data-ttu-id="90785-116">Si les modèles par défaut appliquent le 2FA « local », les utilisateurs doivent satisfaire deux approches 2FA, ce qui n’est pas un scénario couramment utilisé.</span><span class="sxs-lookup"><span data-stu-id="90785-116">If the default templates enforced "local" 2FA then users would be required to satisfy two 2FA approaches, which is not a commonly used scenario.</span></span>
 
-## <a name="adding-qr-codes-to-the-2fa-configuration-page"></a><span data-ttu-id="4a15a-117">Ajout de codes QR à la page de configuration 2FA</span><span class="sxs-lookup"><span data-stu-id="4a15a-117">Adding QR Codes to the 2FA configuration page</span></span>
+## <a name="adding-qr-codes-to-the-2fa-configuration-page"></a><span data-ttu-id="90785-117">Ajout de codes QR à la page de configuration 2FA</span><span class="sxs-lookup"><span data-stu-id="90785-117">Adding QR Codes to the 2FA configuration page</span></span>
 
-<span data-ttu-id="4a15a-118">Ces instructions utilisent *qrcode.js* à partir de https://davidshimjs.github.io/qrcodejs/ référentiel.</span><span class="sxs-lookup"><span data-stu-id="4a15a-118">These instructions use *qrcode.js* from the https://davidshimjs.github.io/qrcodejs/ repo.</span></span>
+<span data-ttu-id="90785-118">Ces instructions utilisent *qrcode.js* à partir de https://davidshimjs.github.io/qrcodejs/ référentiel.</span><span class="sxs-lookup"><span data-stu-id="90785-118">These instructions use *qrcode.js* from the https://davidshimjs.github.io/qrcodejs/ repo.</span></span>
 
-* <span data-ttu-id="4a15a-119">Téléchargez la [bibliothèque javascriptqrcode.js](https://davidshimjs.github.io/qrcodejs/) dans le `wwwroot\lib` dossier de votre projet.</span><span class="sxs-lookup"><span data-stu-id="4a15a-119">Download the [qrcode.js javascript library](https://davidshimjs.github.io/qrcodejs/) to the `wwwroot\lib` folder in your project.</span></span>
+* <span data-ttu-id="90785-119">Téléchargez la [bibliothèque javascriptqrcode.js](https://davidshimjs.github.io/qrcodejs/) dans le `wwwroot\lib` dossier de votre projet.</span><span class="sxs-lookup"><span data-stu-id="90785-119">Download the [qrcode.js javascript library](https://davidshimjs.github.io/qrcodejs/) to the `wwwroot\lib` folder in your project.</span></span>
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1"
 
-* <span data-ttu-id="4a15a-120">Suivez les instructions de [l' Identity échafaudage](xref:security/authentication/scaffold-identity) pour générer */Areas/ Identity /pages/Account/Manage/EnableAuthenticator.cshtml*.</span><span class="sxs-lookup"><span data-stu-id="4a15a-120">Follow the instructions in [Scaffold Identity](xref:security/authentication/scaffold-identity) to generate */Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml*.</span></span>
-* <span data-ttu-id="4a15a-121">Dans */Areas/ Identity /pages/Account/Manage/EnableAuthenticator.cshtml*, localisez la `Scripts` section à la fin du fichier :</span><span class="sxs-lookup"><span data-stu-id="4a15a-121">In */Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml*, locate the `Scripts` section at the end of the file:</span></span>
+* <span data-ttu-id="90785-120">Suivez les instructions de [l' Identity échafaudage](xref:security/authentication/scaffold-identity) pour générer */Areas/ Identity /pages/Account/Manage/EnableAuthenticator.cshtml*.</span><span class="sxs-lookup"><span data-stu-id="90785-120">Follow the instructions in [Scaffold Identity](xref:security/authentication/scaffold-identity) to generate */Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml*.</span></span>
+* <span data-ttu-id="90785-121">Dans */Areas/ Identity /pages/Account/Manage/EnableAuthenticator.cshtml*, localisez la `Scripts` section à la fin du fichier :</span><span class="sxs-lookup"><span data-stu-id="90785-121">In */Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml*, locate the `Scripts` section at the end of the file:</span></span>
 
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.0"
 
-* <span data-ttu-id="4a15a-122">Dans *pages/Account/Manage/EnableAuthenticator. cshtml* ( Razor pages) ou *views/Manage/EnableAuthenticator. cshtml* (MVC), localisez la `Scripts` section à la fin du fichier :</span><span class="sxs-lookup"><span data-stu-id="4a15a-122">In *Pages/Account/Manage/EnableAuthenticator.cshtml* (Razor Pages) or *Views/Manage/EnableAuthenticator.cshtml* (MVC), locate the `Scripts` section at the end of the file:</span></span>
+* <span data-ttu-id="90785-122">Dans *pages/Account/Manage/EnableAuthenticator. cshtml* ( Razor pages) ou *views/Manage/EnableAuthenticator. cshtml* (MVC), localisez la `Scripts` section à la fin du fichier :</span><span class="sxs-lookup"><span data-stu-id="90785-122">In *Pages/Account/Manage/EnableAuthenticator.cshtml* (Razor Pages) or *Views/Manage/EnableAuthenticator.cshtml* (MVC), locate the `Scripts` section at the end of the file:</span></span>
 
 ::: moniker-end
 
@@ -65,7 +67,7 @@ ms.locfileid: "85408771"
 }
 ```
 
-* <span data-ttu-id="4a15a-123">Mettez à jour la `Scripts` section pour ajouter une référence à la `qrcodejs` bibliothèque que vous avez ajoutée et un appel pour générer le code QR.</span><span class="sxs-lookup"><span data-stu-id="4a15a-123">Update the `Scripts` section to add a reference to the `qrcodejs` library you added and a call to generate the QR Code.</span></span> <span data-ttu-id="4a15a-124">Il doit se présenter comme suit :</span><span class="sxs-lookup"><span data-stu-id="4a15a-124">It should look as follows:</span></span>
+* <span data-ttu-id="90785-123">Mettez à jour la `Scripts` section pour ajouter une référence à la `qrcodejs` bibliothèque que vous avez ajoutée et un appel pour générer le code QR.</span><span class="sxs-lookup"><span data-stu-id="90785-123">Update the `Scripts` section to add a reference to the `qrcodejs` library you added and a call to generate the QR Code.</span></span> <span data-ttu-id="90785-124">Il doit se présenter comme suit :</span><span class="sxs-lookup"><span data-stu-id="90785-124">It should look as follows:</span></span>
 
 ```cshtml
 @section Scripts {
@@ -83,29 +85,29 @@ ms.locfileid: "85408771"
 }
 ```
 
-* <span data-ttu-id="4a15a-125">Supprimez le paragraphe qui vous lie à ces instructions.</span><span class="sxs-lookup"><span data-stu-id="4a15a-125">Delete the paragraph which links you to these instructions.</span></span>
+* <span data-ttu-id="90785-125">Supprimez le paragraphe qui vous lie à ces instructions.</span><span class="sxs-lookup"><span data-stu-id="90785-125">Delete the paragraph which links you to these instructions.</span></span>
 
-<span data-ttu-id="4a15a-126">Exécutez votre application et assurez-vous que vous pouvez analyser le code QR et valider le code que l’authentificateur prouve.</span><span class="sxs-lookup"><span data-stu-id="4a15a-126">Run your app and ensure that you can scan the QR code and validate the code the authenticator proves.</span></span>
+<span data-ttu-id="90785-126">Exécutez votre application et assurez-vous que vous pouvez analyser le code QR et valider le code que l’authentificateur prouve.</span><span class="sxs-lookup"><span data-stu-id="90785-126">Run your app and ensure that you can scan the QR code and validate the code the authenticator proves.</span></span>
 
-## <a name="change-the-site-name-in-the-qr-code"></a><span data-ttu-id="4a15a-127">Modifier le nom du site dans le code QR</span><span class="sxs-lookup"><span data-stu-id="4a15a-127">Change the site name in the QR Code</span></span>
+## <a name="change-the-site-name-in-the-qr-code"></a><span data-ttu-id="90785-127">Modifier le nom du site dans le code QR</span><span class="sxs-lookup"><span data-stu-id="90785-127">Change the site name in the QR Code</span></span>
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1"
 
-<span data-ttu-id="4a15a-128">Le nom du site dans le code QR est extrait du nom du projet que vous choisissez lors de la création initiale de votre projet.</span><span class="sxs-lookup"><span data-stu-id="4a15a-128">The site name in the QR Code is taken from the project name you choose when initially creating your project.</span></span> <span data-ttu-id="4a15a-129">Vous pouvez le modifier en recherchant la `GenerateQrCodeUri(string email, string unformattedKey)` méthode dans le \* Identity /pages/Account/Manage/EnableAuthenticator.cshtml.cs/Areas/\*.</span><span class="sxs-lookup"><span data-stu-id="4a15a-129">You can change it by looking for the `GenerateQrCodeUri(string email, string unformattedKey)` method in the */Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml.cs*.</span></span>
+<span data-ttu-id="90785-128">Le nom du site dans le code QR est extrait du nom du projet que vous choisissez lors de la création initiale de votre projet.</span><span class="sxs-lookup"><span data-stu-id="90785-128">The site name in the QR Code is taken from the project name you choose when initially creating your project.</span></span> <span data-ttu-id="90785-129">Vous pouvez le modifier en recherchant la `GenerateQrCodeUri(string email, string unformattedKey)` méthode dans le \* Identity /pages/Account/Manage/EnableAuthenticator.cshtml.cs/Areas/\*.</span><span class="sxs-lookup"><span data-stu-id="90785-129">You can change it by looking for the `GenerateQrCodeUri(string email, string unformattedKey)` method in the */Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml.cs*.</span></span>
 
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.0"
 
-<span data-ttu-id="4a15a-130">Le nom du site dans le code QR est extrait du nom du projet que vous choisissez lors de la création initiale de votre projet.</span><span class="sxs-lookup"><span data-stu-id="4a15a-130">The site name in the QR Code is taken from the project name you choose when initially creating your project.</span></span> <span data-ttu-id="4a15a-131">Vous pouvez le modifier en recherchant la `GenerateQrCodeUri(string email, string unformattedKey)` méthode dans le fichier *pages/Account/Manage/EnableAuthenticator. cshtml. cs* ( Razor pages) ou le fichier *Controllers/ManageController. cs* (MVC).</span><span class="sxs-lookup"><span data-stu-id="4a15a-131">You can change it by looking for the `GenerateQrCodeUri(string email, string unformattedKey)` method in the *Pages/Account/Manage/EnableAuthenticator.cshtml.cs* (Razor Pages) file or the *Controllers/ManageController.cs* (MVC) file.</span></span>
+<span data-ttu-id="90785-130">Le nom du site dans le code QR est extrait du nom du projet que vous choisissez lors de la création initiale de votre projet.</span><span class="sxs-lookup"><span data-stu-id="90785-130">The site name in the QR Code is taken from the project name you choose when initially creating your project.</span></span> <span data-ttu-id="90785-131">Vous pouvez le modifier en recherchant la `GenerateQrCodeUri(string email, string unformattedKey)` méthode dans le fichier *pages/Account/Manage/EnableAuthenticator. cshtml. cs* ( Razor pages) ou le fichier *Controllers/ManageController. cs* (MVC).</span><span class="sxs-lookup"><span data-stu-id="90785-131">You can change it by looking for the `GenerateQrCodeUri(string email, string unformattedKey)` method in the *Pages/Account/Manage/EnableAuthenticator.cshtml.cs* (Razor Pages) file or the *Controllers/ManageController.cs* (MVC) file.</span></span>
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.0"
 
-<span data-ttu-id="4a15a-132">Le code par défaut du modèle ressemble à ce qui suit :</span><span class="sxs-lookup"><span data-stu-id="4a15a-132">The default code from the template looks as follows:</span></span>
+<span data-ttu-id="90785-132">Le code par défaut du modèle ressemble à ce qui suit :</span><span class="sxs-lookup"><span data-stu-id="90785-132">The default code from the template looks as follows:</span></span>
 
 ```csharp
 private string GenerateQrCodeUri(string email, string unformattedKey)
@@ -118,19 +120,19 @@ private string GenerateQrCodeUri(string email, string unformattedKey)
 }
 ```
 
-<span data-ttu-id="4a15a-133">Le deuxième paramètre de l’appel à `string.Format` est le nom de votre site, pris à partir du nom de votre solution.</span><span class="sxs-lookup"><span data-stu-id="4a15a-133">The second parameter in the call to `string.Format` is your site name, taken from your solution name.</span></span> <span data-ttu-id="4a15a-134">Vous pouvez le remplacer par n’importe quelle valeur, mais il doit toujours être encodé URL.</span><span class="sxs-lookup"><span data-stu-id="4a15a-134">It can be changed to any value, but it must always be URL encoded.</span></span>
+<span data-ttu-id="90785-133">Le deuxième paramètre de l’appel à `string.Format` est le nom de votre site, pris à partir du nom de votre solution.</span><span class="sxs-lookup"><span data-stu-id="90785-133">The second parameter in the call to `string.Format` is your site name, taken from your solution name.</span></span> <span data-ttu-id="90785-134">Vous pouvez le remplacer par n’importe quelle valeur, mais il doit toujours être encodé URL.</span><span class="sxs-lookup"><span data-stu-id="90785-134">It can be changed to any value, but it must always be URL encoded.</span></span>
 
-## <a name="using-a-different-qr-code-library"></a><span data-ttu-id="4a15a-135">Utilisation d’une autre bibliothèque de code QR</span><span class="sxs-lookup"><span data-stu-id="4a15a-135">Using a different QR Code library</span></span>
+## <a name="using-a-different-qr-code-library"></a><span data-ttu-id="90785-135">Utilisation d’une autre bibliothèque de code QR</span><span class="sxs-lookup"><span data-stu-id="90785-135">Using a different QR Code library</span></span>
 
-<span data-ttu-id="4a15a-136">Vous pouvez remplacer la bibliothèque de code QR par votre bibliothèque par défaut.</span><span class="sxs-lookup"><span data-stu-id="4a15a-136">You can replace the QR Code library with your preferred library.</span></span> <span data-ttu-id="4a15a-137">Le code HTML contient un `qrCode` élément dans lequel vous pouvez placer un code QR selon le mécanisme fourni par votre bibliothèque.</span><span class="sxs-lookup"><span data-stu-id="4a15a-137">The HTML contains a `qrCode` element into which you can place a QR Code by whatever mechanism your library provides.</span></span>
+<span data-ttu-id="90785-136">Vous pouvez remplacer la bibliothèque de code QR par votre bibliothèque par défaut.</span><span class="sxs-lookup"><span data-stu-id="90785-136">You can replace the QR Code library with your preferred library.</span></span> <span data-ttu-id="90785-137">Le code HTML contient un `qrCode` élément dans lequel vous pouvez placer un code QR selon le mécanisme fourni par votre bibliothèque.</span><span class="sxs-lookup"><span data-stu-id="90785-137">The HTML contains a `qrCode` element into which you can place a QR Code by whatever mechanism your library provides.</span></span>
 
-<span data-ttu-id="4a15a-138">L’URL correctement mise en forme pour le code QR est disponible dans le :</span><span class="sxs-lookup"><span data-stu-id="4a15a-138">The correctly formatted URL for the QR Code is available in the:</span></span>
+<span data-ttu-id="90785-138">L’URL correctement mise en forme pour le code QR est disponible dans le :</span><span class="sxs-lookup"><span data-stu-id="90785-138">The correctly formatted URL for the QR Code is available in the:</span></span>
 
-* <span data-ttu-id="4a15a-139">`AuthenticatorUri`propriété du modèle.</span><span class="sxs-lookup"><span data-stu-id="4a15a-139">`AuthenticatorUri` property of the model.</span></span>
-* <span data-ttu-id="4a15a-140">`data-url`propriété dans l' `qrCodeData` élément.</span><span class="sxs-lookup"><span data-stu-id="4a15a-140">`data-url` property in the `qrCodeData` element.</span></span>
+* <span data-ttu-id="90785-139">`AuthenticatorUri`propriété du modèle.</span><span class="sxs-lookup"><span data-stu-id="90785-139">`AuthenticatorUri` property of the model.</span></span>
+* <span data-ttu-id="90785-140">`data-url`propriété dans l' `qrCodeData` élément.</span><span class="sxs-lookup"><span data-stu-id="90785-140">`data-url` property in the `qrCodeData` element.</span></span>
 
-## <a name="totp-client-and-server-time-skew"></a><span data-ttu-id="4a15a-141">Décalage horaire du client et du serveur TOTP</span><span class="sxs-lookup"><span data-stu-id="4a15a-141">TOTP client and server time skew</span></span>
+## <a name="totp-client-and-server-time-skew"></a><span data-ttu-id="90785-141">Décalage horaire du client et du serveur TOTP</span><span class="sxs-lookup"><span data-stu-id="90785-141">TOTP client and server time skew</span></span>
 
-<span data-ttu-id="4a15a-142">L’authentification TOTP (mot de passe à usage unique basé sur le temps) dépend à la fois du serveur et du périphérique authentificateur dont l’heure est précise.</span><span class="sxs-lookup"><span data-stu-id="4a15a-142">TOTP (Time-based One-Time Password) authentication depends on both the server and authenticator device having an accurate time.</span></span> <span data-ttu-id="4a15a-143">Jetons uniquement en dernier pendant 30 secondes.</span><span class="sxs-lookup"><span data-stu-id="4a15a-143">Tokens only last for 30 seconds.</span></span> <span data-ttu-id="4a15a-144">Si les connexions TOTP 2FA échouent, vérifiez que l’heure du serveur est exacte et synchronisée de préférence avec un service NTP précis.</span><span class="sxs-lookup"><span data-stu-id="4a15a-144">If TOTP 2FA logins are failing, check that the server time is accurate, and preferably synchronized to an accurate NTP service.</span></span>
+<span data-ttu-id="90785-142">L’authentification TOTP (mot de passe à usage unique basé sur le temps) dépend à la fois du serveur et du périphérique authentificateur dont l’heure est précise.</span><span class="sxs-lookup"><span data-stu-id="90785-142">TOTP (Time-based One-Time Password) authentication depends on both the server and authenticator device having an accurate time.</span></span> <span data-ttu-id="90785-143">Jetons uniquement en dernier pendant 30 secondes.</span><span class="sxs-lookup"><span data-stu-id="90785-143">Tokens only last for 30 seconds.</span></span> <span data-ttu-id="90785-144">Si les connexions TOTP 2FA échouent, vérifiez que l’heure du serveur est exacte et synchronisée de préférence avec un service NTP précis.</span><span class="sxs-lookup"><span data-stu-id="90785-144">If TOTP 2FA logins are failing, check that the server time is accurate, and preferably synchronized to an accurate NTP service.</span></span>
 
 ::: moniker-end
