@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/30/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: cb0a8737fb975db285986d18b995e488f09580e8
-ms.sourcegitcommit: 37f6f2e13ceb4eae268d20973d76e4b83acf6a24
+ms.openlocfilehash: 225916411550cc8e89c604e1426316843bb0ff52
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526288"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014540"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core de débogageBlazor WebAssembly
 
@@ -76,6 +78,10 @@ Pour déboguer une Blazor WebAssembly application dans Visual Studio :
 
 1. Créez une nouvelle ASP.NET Core application hébergée Blazor WebAssembly .
 1. Appuyez sur <kbd>F5</kbd> pour exécuter l’application dans le débogueur.
+
+   > [!NOTE]
+   > **Exécuter sans débogage** (<kbd>CTRL</kbd> + <kbd>F5</kbd>) n’est pas pris en charge.
+
 1. Définissez un point d’arrêt dans `Pages/Counter.razor` la `IncrementCount` méthode.
 1. Accédez à l' **`Counter`** onglet et sélectionnez le bouton pour atteindre le point d’arrêt :
 
@@ -116,10 +122,13 @@ Lors du débogage de votre Blazor WebAssembly application, vous pouvez égalemen
    Si vous recevez la notification :
 
    * Vérifiez que la dernière [extension C# pour Visual Studio code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) est installée. Pour inspecter les extensions installées, ouvrez **Afficher**les  >  **Extensions** à partir de la barre de menus ou sélectionnez l’icône **Extensions** dans l’encadré **activité** .
-   * Confirmez que le débogage de l’aperçu JavaScript est activé. Ouvrez les paramètres à partir de la barre de menus (paramètres préférences de**fichiers**  >  **Preferences**  >  **Settings**). Recherchez à l’aide des mots clés `debug preview` . Dans les résultats de la recherche, vérifiez que la case à cocher **Déboguer > JavaScript : utiliser l’aperçu** est activée.
+   * Confirmez que le débogage de l’aperçu JavaScript est activé. Ouvrez les paramètres à partir de la barre de menus (paramètres préférences de**fichiers**  >  **Preferences**  >  **Settings**). Recherchez à l’aide des mots clés `debug preview` . Dans les résultats de la recherche, vérifiez que la case à cocher **Déboguer > JavaScript : utiliser l’aperçu** est activée. Si l’option permettant d’activer le débogage de l’aperçu n’est pas présente, effectuez une mise à niveau vers la dernière version de VS Code ou installez l' [extension de débogueur JavaScript](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) (VS Code versions 1,46 ou antérieures).
    * Rechargez la fenêtre.
 
 1. Démarrez le débogage à l’aide du raccourci clavier <kbd>F5</kbd> ou de l’élément de menu.
+
+   > [!NOTE]
+   > L' **exécution sans débogage** (<kbd>CTRL</kbd> + <kbd>F5</kbd>) n’est pas prise en charge.
 
 1. Quand vous y êtes invité, sélectionnez l’option de ** Blazor WebAssembly débogage** pour démarrer le débogage.
 
@@ -243,7 +252,7 @@ Les mappages de source de navigateur permettent au navigateur de mapper les fich
 Si vous rencontrez des erreurs, les conseils suivants peuvent vous aider :
 
 * Dans l’onglet **débogueur** , ouvrez les outils de développement de votre navigateur. Dans la console, exécutez `localStorage.clear()` pour supprimer tous les points d’arrêt.
-* Confirmez que vous avez installé et approuvé le certificat de développement ASP.NET Core HTTPs. Pour plus d’informations, consultez <xref:security/enforcing-ssl#troubleshoot-certificate-problems>.
+* Confirmez que vous avez installé et approuvé le certificat de développement ASP.NET Core HTTPs. Pour plus d'informations, consultez <xref:security/enforcing-ssl#troubleshoot-certificate-problems>.
 * Visual Studio requiert l’option **activer le débogage JavaScript pour ASP.net (chrome, Edge et IE)** dans **Outils**  >  **options**  >  **débogage**  >  **général**. Il s’agit du paramètre par défaut pour Visual Studio. Si le débogage ne fonctionne pas, vérifiez que l’option est sélectionnée.
 
 ### <a name="breakpoints-in-oninitializedasync-not-hit"></a>Points d’arrêt `OnInitialized{Async}` non atteints

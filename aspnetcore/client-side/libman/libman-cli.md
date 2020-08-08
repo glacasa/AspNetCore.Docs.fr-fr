@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/libman/libman-cli
-ms.openlocfilehash: ed5dffb83a2f1a40f3d6596d23135c0fa5b6791f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6e1ab9c540e1714f2f8cd6e6f2603e4d589a7d2b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403181"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013474"
 ---
 # <a name="use-the-libman-cli-with-aspnet-core"></a>Utiliser l’interface CLI LibMan avec ASP.NET Core
 
@@ -130,7 +132,7 @@ Les options suivantes sont disponibles pour la commande `libman init` :
 Pour créer un *libman.jssur* un fichier dans un projet ASP.net Core :
 
 * Accédez à la racine du projet.
-* Exécutez la commande suivante :
+* Exécutez la commande suivante :
 
   ```console
   libman init
@@ -179,7 +181,7 @@ Les options suivantes sont disponibles pour la commande `libman install` :
 
 * `--files <FILE>`
 
-  Spécifiez le nom du fichier à installer à partir de la bibliothèque. S’il n’est pas spécifié, tous les fichiers de la bibliothèque sont installés. Fournissez une `--files` option par fichier à installer. Les chemins d’accès relatifs sont également pris en charge. Par exemple : `--files dist/browser/signalr.js`.
+  Spécifiez le nom du fichier à installer à partir de la bibliothèque. S’il n’est pas spécifié, tous les fichiers de la bibliothèque sont installés. Fournissez une `--files` option par fichier à installer. Les chemins d’accès relatifs sont également pris en charge. Par exemple : `--files dist/browser/signalr.js`.
 
 * `-p|--provider <PROVIDER>`
 
@@ -584,7 +586,7 @@ Les options suivantes sont disponibles pour la commande `libman cache` :
       (empty)
   ```
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Installer un outil global](/dotnet/core/tools/global-tools#install-a-global-tool)
 * <xref:client-side/libman/libman-vs>

@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/index
-ms.openlocfilehash: 79022af0e6ee1294e12c21492bc81bc40482a3fb
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1084cdb9120b1b40acd21fa2de45c7f280337da3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403961"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015593"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>Héberger et déployer ASP.NET Core
 
@@ -42,7 +44,7 @@ Le dossier *publish* contient un ou plusieurs fichiers d’assembly d’applicat
 
 Une application .NET Core peut être publiée en tant que *déploiement autonome* ou *déploiement dépendant du framework*. Si l’application est autonome, les fichiers d’assembly qui contiennent le runtime .NET sont inclus dans le dossier *publish*. Si l’application dépend du framework, les fichiers du runtime .NET ne sont pas inclus, car l’application a une référence à une version de .NET installée sur le serveur. Le modèle de déploiement par défaut est « dépendante du framework ». Pour plus d’informations, consultez [Déploiement d’applications .NET Core](/dotnet/core/deploying/).
 
-En plus des fichiers *.exe* et *.dll*, le dossier *publish* d’une application ASP.NET Core contient généralement des fichiers de configuration, des ressources statiques et des vues MVC. Pour plus d’informations, consultez <xref:host-and-deploy/directory-structure>.
+En plus des fichiers *.exe* et *.dll*, le dossier *publish* d’une application ASP.NET Core contient généralement des fichiers de configuration, des ressources statiques et des vues MVC. Pour plus d'informations, consultez <xref:host-and-deploy/directory-structure>.
 
 ## <a name="set-up-a-process-manager"></a>Configurer un gestionnaire de processus
 
@@ -89,13 +91,13 @@ Pour plus d’informations sur la configuration pour héberger des applications 
 
 ## <a name="host-on-docker"></a>Héberger sur l’ancrage
 
-Pour plus d’informations, consultez <xref:host-and-deploy/docker/index>.
+Pour plus d'informations, consultez <xref:host-and-deploy/docker/index>.
 
 ## <a name="perform-health-checks"></a>Effectuer des contrôles d’intégrité
 
-Utilisez Health Check Middleware pour effectuer des contrôles d’intégrité sur une application et ses dépendances. Pour plus d’informations, consultez <xref:host-and-deploy/health-checks>.
+Utilisez Health Check Middleware pour effectuer des contrôles d’intégrité sur une application et ses dépendances. Pour plus d'informations, consultez <xref:host-and-deploy/health-checks>.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * <xref:test/troubleshoot>
 * [Hébergement ASP.NET](https://dotnet.microsoft.com/apps/aspnet/hosting)
@@ -120,7 +122,7 @@ Le dossier *publish* contient un ou plusieurs fichiers d’assembly d’applicat
 
 Une application .NET Core peut être publiée en tant que *déploiement autonome* ou *déploiement dépendant du framework*. Si l’application est autonome, les fichiers d’assembly qui contiennent le runtime .NET sont inclus dans le dossier *publish*. Si l’application dépend du framework, les fichiers du runtime .NET ne sont pas inclus, car l’application a une référence à une version de .NET installée sur le serveur. Le modèle de déploiement par défaut est « dépendante du framework ». Pour plus d’informations, consultez [Déploiement d’applications .NET Core](/dotnet/core/deploying/).
 
-En plus des fichiers *.exe* et *.dll*, le dossier *publish* d’une application ASP.NET Core contient généralement des fichiers de configuration, des ressources statiques et des vues MVC. Pour plus d’informations, consultez <xref:host-and-deploy/directory-structure>.
+En plus des fichiers *.exe* et *.dll*, le dossier *publish* d’une application ASP.NET Core contient généralement des fichiers de configuration, des ressources statiques et des vues MVC. Pour plus d'informations, consultez <xref:host-and-deploy/directory-structure>.
 
 ## <a name="set-up-a-process-manager"></a>Configurer un gestionnaire de processus
 
@@ -167,9 +169,9 @@ Pour plus d’informations sur la configuration pour héberger des applications 
 
 ## <a name="host-on-docker"></a>Héberger sur l’ancrage
 
-Pour plus d’informations, consultez <xref:host-and-deploy/docker/index>.
+Pour plus d'informations, consultez <xref:host-and-deploy/docker/index>.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * <xref:test/troubleshoot>
 * [Hébergement ASP.NET](https://dotnet.microsoft.com/apps/aspnet/hosting)

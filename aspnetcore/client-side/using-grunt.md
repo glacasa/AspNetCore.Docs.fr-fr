@@ -5,6 +5,8 @@ description: Utiliser grunt dans ASP.NET Core
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/using-grunt
-ms.openlocfilehash: fc871e22f9bd5a9c137008f1d87019542c45b5d2
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 019f31c1a6fa3a33783f78f2fee71f710642ce6d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401764"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013201"
 ---
 # <a name="use-grunt-in-aspnet-core"></a>Utiliser grunt dans ASP.NET Core
 
@@ -246,7 +248,7 @@ Grunt est configuré à l’aide d’un manifeste nommé *Gruntfile.js* qui déf
     > [!NOTE]
     > Pour plus d’informations sur les options pour chaque package, visitez [https://www.npmjs.com/](https://www.npmjs.com/) et recherchez le nom du package dans la zone de recherche de la page principale. Par exemple, vous pouvez consulter le grunt-pretrib-Clean package pour obtenir un lien vers la documentation qui décrit tous ses paramètres.
 
-### <a name="all-together-now"></a>Récapitulons
+### <a name="all-together-now"></a>Vue globale
 
 Utilisez la `registerTask()` méthode grunt pour exécuter une série de tâches dans une séquence particulière. Par exemple, pour exécuter les étapes de l’exemple ci-dessus dans l’ordre de nettoyage-> Concat-> jshint-> uglify, ajoutez le code ci-dessous au module. Le code doit être ajouté au même niveau que les appels loadNpmTasks (), en dehors de initConfig.
 

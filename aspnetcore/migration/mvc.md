@@ -5,6 +5,8 @@ description: Découvrez comment démarrer la migration d’un projet ASP.NET MVC
 ms.author: wpickett
 ms.date: 06/18/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc
-ms.openlocfilehash: 6a645d0e5959b4301ee7d2bcfc692f7499574dc4
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 17f2a2532c58c3796835328260231d63f8fb2e40
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407321"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015047"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>Migrer ASP.NET MVC vers ASP.NET Core MVC
 
@@ -74,7 +76,7 @@ Dans ASP.NET Core, la `Startup` classe :
 * Remplace *global. asax*.
 * Gère toutes les tâches de démarrage de l’application.
 
-Pour plus d’informations, consultez <xref:fundamentals/startup>.
+Pour plus d'informations, consultez <xref:fundamentals/startup>.
 
 Dans le projet ASP.NET Core, ouvrez le fichier *Startup.cs* :
 
@@ -83,8 +85,8 @@ Dans le projet ASP.NET Core, ouvrez le fichier *Startup.cs* :
 Les applications ASP.NET Core doivent accepter les fonctionnalités d’infrastructure avec l’intergiciel (middleware). Le code précédent généré par le modèle ajoute les services et l’intergiciel (middleware) suivants :
 
 * La <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllersWithViews%2A> méthode d’extension enregistre la prise en charge du service MVC pour les contrôleurs, les fonctionnalités liées à l’API et les vues. Pour plus d’informations sur les options d’inscription du service MVC, consultez [inscription du service MVC](xref:migration/22-to-30#mvc-service-registration)
-* La <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A> méthode d’extension ajoute le gestionnaire de fichiers statiques `Microsoft.AspNetCore.StaticFiles` . La `UseStaticFiles` méthode d’extension doit être appelée avant `UseRouting` . Pour plus d’informations, consultez <xref:fundamentals/static-files>.
-* La <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting%2A> méthode d’extension ajoute le routage. Pour plus d’informations, consultez <xref:fundamentals/routing>.
+* La <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A> méthode d’extension ajoute le gestionnaire de fichiers statiques `Microsoft.AspNetCore.StaticFiles` . La `UseStaticFiles` méthode d’extension doit être appelée avant `UseRouting` . Pour plus d'informations, consultez <xref:fundamentals/static-files>.
+* La <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting%2A> méthode d’extension ajoute le routage. Pour plus d'informations, consultez <xref:fundamentals/routing>.
 
 Cette configuration existante comprend ce qui est nécessaire pour migrer l’exemple de projet MVC ASP.NET. Pour plus d’informations sur les options de l’intergiciel (middleware) ASP.NET Core, consultez <xref:fundamentals/startup> .
 
@@ -106,7 +108,7 @@ Pour plus d’informations, consultez <xref:mvc/controllers/actions> et <xref:mv
 Chaque point de terminaison de contrôleur peut être testé ; Toutefois, la disposition et les styles sont traités plus loin dans le document.
 
 1. Exécutez l’application ASP.NET Core.
-1. Appelez les vues rendues à partir du navigateur sur l’application ASP.NET Core en cours en remplaçant le numéro de port actuel par le numéro de port utilisé dans le projet ASP.NET Core. Par exemple : `https://localhost:44375/home/about`.
+1. Appelez les vues rendues à partir du navigateur sur l’application ASP.NET Core en cours en remplaçant le numéro de port actuel par le numéro de port utilisé dans le projet ASP.NET Core. Par exemple, `https://localhost:44375/home/about`.
 
 ## <a name="migrate-static-content"></a>Migrer le contenu statique
 
@@ -183,7 +185,7 @@ ASP.NET Core convertit les exceptions non gérées en réponses d’erreur HTTP 
 
 * <xref:migration/identity>
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * <xref:blazor/index>
 * <xref:mvc/views/tag-helpers/intro>
@@ -296,7 +298,7 @@ Les fonctionnalités suivantes requièrent la migration à partir de l’exemple
 
 Le fichier de disposition et les styles n’ont pas encore été migrés, donc les vues rendues contiennent uniquement le contenu des fichiers de vue. Les liens générés par le fichier de disposition pour les `About` vues et ne sont `Contact` pas encore disponibles.
 
-Appelez les vues rendues à partir du navigateur sur l’application ASP.NET Core en cours d’exécution en remplaçant le numéro de port actuel par le numéro de port utilisé dans le projet ASP.NET Core. Par exemple : `https://localhost:44375/home/about`.
+Appelez les vues rendues à partir du navigateur sur l’application ASP.NET Core en cours d’exécution en remplaçant le numéro de port actuel par le numéro de port utilisé dans le projet ASP.NET Core. Par exemple : `https://localhost:44375/home/about`.
 
 ![Page de contact](mvc/_static/contact-page.png)
 
@@ -369,7 +371,7 @@ De nombreux problèmes peuvent provoquer des messages d’erreur HTTP 500 qui ne
 
 ASP.NET Core convertit les exceptions non gérées en réponses d’erreur HTTP 500. Normalement, les détails de l’erreur ne sont pas inclus dans ces réponses pour empêcher la divulgation d’informations potentiellement sensibles sur le serveur. Pour plus d’informations, consultez la [page exception du développeur](xref:fundamentals/error-handling#developer-exception-page).
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * <xref:blazor/index>
 * <xref:mvc/views/tag-helpers/intro>
@@ -482,7 +484,7 @@ Les fonctionnalités suivantes requièrent la migration à partir de l’exemple
 
 Le fichier de disposition et les styles n’ont pas encore été migrés, donc les vues rendues contiennent uniquement le contenu des fichiers de vue. Les liens générés par le fichier de disposition pour les `About` vues et ne sont `Contact` pas encore disponibles.
 
-* Appelez les vues rendues à partir du navigateur sur l’application ASP.NET Core en cours d’exécution en remplaçant le numéro de port actuel par le numéro de port utilisé dans le projet ASP.NET Core. Par exemple : `https://localhost:44375/home/about`.
+* Appelez les vues rendues à partir du navigateur sur l’application ASP.NET Core en cours d’exécution en remplaçant le numéro de port actuel par le numéro de port utilisé dans le projet ASP.NET Core. Par exemple : `https://localhost:44375/home/about`.
 
 ![Page de contact](mvc/_static/contact-page.png)
 

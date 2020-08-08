@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/10/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: afad542a18a357a77f4542511a3d2c3108dbfb31
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 97039ac1c7bcd6a1ff7b53e1579c623b26564d26
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059771"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014891"
 ---
-# <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-identity"></a>Migrer de l’authentification d’appartenance ASP.NET vers ASP.NET Core 2,0Identity
+# <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-no-locidentity"></a>Migrer de l’authentification d’appartenance ASP.NET vers ASP.NET Core 2,0Identity
 
 De [Isaac Levin](https://isaaclevin.com)
 
@@ -38,14 +40,14 @@ Avant ASP.NET 2,0, les développeurs devaient créer l’intégralité du proces
 
 Pour migrer des applications existantes vers ASP.NET Core 2,0 Identity , les données de ces tables doivent être migrées vers les tables utilisées par le nouveau Identity schéma.
 
-## <a name="aspnet-core-identity-20-schema"></a>IdentitySchéma ASP.NET Core 2,0
+## <a name="aspnet-core-no-locidentity-20-schema"></a>IdentitySchéma ASP.NET Core 2,0
 
 ASP.NET Core 2,0 suit le [Identity](/aspnet/identity/index) principe introduit dans ASP.NET 4,5. Bien que le principe soit partagé, l’implémentation entre les frameworks est différente, même entre les versions de ASP.NET Core (consultez [migrer l’authentification et Identity vers ASP.net Core 2,0](xref:migration/1x-to-2x/index)).
 
 La façon la plus rapide d’afficher le schéma pour ASP.NET Core 2,0 Identity consiste à créer une nouvelle application ASP.NET Core 2,0. Procédez comme suit dans Visual Studio 2017 :
 
 1. Sélectionnez **Fichier** > **Nouveau** > **Projet**.
-1. Créez un projet d' **application Web ASP.net Core** nommé *CoreIdentitySample*.
+1. Créez un projet d' **application Web ASP.net Core** nommé *Core Identity Sample*.
 1. Sélectionnez **ASP.NET Core 2,0** dans la liste déroulante, puis sélectionnez **application Web**. Ce modèle produit une application [ Razor pages](xref:razor-pages/index) . Avant de cliquer sur **OK**, cliquez sur **modifier l’authentification**.
 1. Choisissez des **comptes d’utilisateur individuels** pour les Identity modèles. Enfin, cliquez sur **OK**, puis sur **OK**. Visual Studio crée un projet à l’aide du Identity modèle ASP.net core.
 1. Sélectionnez **Outils**  >  **Gestionnaire de package NuGet**  >  **console du gestionnaire** de package pour ouvrir la fenêtre **console du gestionnaire de package** (PMC).
@@ -67,7 +69,7 @@ La façon la plus rapide d’afficher le schéma pour ASP.NET Core 2,0 Identity 
 
     La `Update-Database` commande a créé la base de données spécifiée avec le schéma et toutes les données nécessaires à l’initialisation de l’application. L’image suivante représente la structure de table créée à l’aide des étapes précédentes.
 
-    ![IdentityElles](identity/_static/identity-tables.png)
+    ![::: No-Loc (Identity) ::: tables](identity/_static/identity-tables.png)
 
 ## <a name="migrate-the-schema"></a>Migrer le schéma
 
@@ -75,7 +77,7 @@ Il existe des différences subtiles entre les structures et les champs de table 
 
 ### <a name="users"></a>Utilisateurs
 
-|Identity<br>`dbo.AspNetUsers`colonne ()  |Type     |Adhésion<br>`dbo.aspnet_Users`  /  `dbo.aspnet_Membership` colonne ()|Type      |
+|Identity<br>`dbo.AspNetUsers`colonne ()  |Type     |Membership<br>`dbo.aspnet_Users`  /  `dbo.aspnet_Membership` colonne ()|Type      |
 |-------------------------------------------|-----------------------------------------------------------------------|
 | `Id`                            | `string`| `aspnet_Users.UserId`                                      | `string` |
 | `UserName`                      | `string`| `aspnet_Users.UserName`                                    | `string` |
@@ -90,7 +92,7 @@ Il existe des différences subtiles entre les structures et les champs de table 
 
 ### <a name="roles"></a>Rôles
 
-|Identity<br>`dbo.AspNetRoles`colonne ()|Type|Adhésion<br>`dbo.aspnet_Roles`colonne ()|Type|
+|Identity<br>`dbo.AspNetRoles`colonne ()|Type|Membership<br>`dbo.aspnet_Roles`colonne ()|Type|
 |----------------------------------------|-----------------------------------|
 |`Id`                           |`string`|`RoleId`         | `string`        |
 |`Name`                         |`string`|`RoleName`       | `string`        |
@@ -98,12 +100,12 @@ Il existe des différences subtiles entre les structures et les champs de table 
 
 ### <a name="user-roles"></a>Rôles d'utilisateur
 
-|Identity<br>`dbo.AspNetUserRoles`colonne ()|Type|Adhésion<br>`dbo.aspnet_UsersInRoles`colonne ()|Type|
+|Identity<br>`dbo.AspNetUserRoles`colonne ()|Type|Membership<br>`dbo.aspnet_UsersInRoles`colonne ()|Type|
 |-------------------------|----------|--------------|---------------------------|
 |`RoleId`                 |`string`  |`RoleId`      |`string`                   |
 |`UserId`                 |`string`  |`UserId`      |`string`                   |
 
-Référencez les tables de mappage précédentes lors de la création d’un script de migration pour *les utilisateurs et les* *rôles*. L’exemple suivant suppose que vous disposez de deux bases de données sur un serveur de base de données. Une base de données contient le schéma et les données d’appartenance ASP.NET existants. L’autre base de données *CoreIdentitySample* a été créée à l’aide des étapes décrites précédemment. Les commentaires sont inclus dans Inline pour plus d’informations.
+Référencez les tables de mappage précédentes lors de la création d’un script de migration pour *les utilisateurs et les* *rôles*. L’exemple suivant suppose que vous disposez de deux bases de données sur un serveur de base de données. Une base de données contient le schéma et les données d’appartenance ASP.NET existants. L’autre * Identity exemple* de base de données de base a été créé à l’aide des étapes décrites précédemment. Les commentaires sont inclus dans Inline pour plus d’informations.
 
 ```sql
 -- THIS SCRIPT NEEDS TO RUN FROM THE CONTEXT OF THE MEMBERSHIP DB

@@ -7,6 +7,8 @@ ms.author: stevesa
 ms.custom: mvc
 ms.date: 02/06/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: spa/angular
-ms.openlocfilehash: 1c91f1adadca8b339e4daf33207ca60008679810
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ce29d891b0fba2581d352637c2ae50ac792b785e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401777"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013162"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>Utiliser le modèle de projet Angular avec ASP.NET Core
 
@@ -129,7 +131,7 @@ Quand vous démarrez votre application ASP.NET Core, elle ne lance pas un serveu
 
 ### <a name="pass-data-from-net-code-into-typescript-code"></a>Transmettre des données à partir du code .NET dans le code TypeScript
 
-Au cours du rendu côté serveur (SSR), vous pouvez souhaiter transmettre des données par requête à partir de votre application ASP.NET Core dans votre application Angular. Par exemple, vous pouvez transmettre des informations sur le cookie ou un élément lu dans une base de données. Pour ce faire, modifiez votre classe *Démarrer*. Dans le rappel pour `UseSpaPrerendering`, définissez une valeur pour `options.SupplyData` telle que la suivante :
+Au cours du rendu côté serveur (SSR), vous pouvez souhaiter transmettre des données par requête à partir de votre application ASP.NET Core dans votre application Angular. Par exemple, vous pouvez transmettre des cookie informations ou des éléments lus à partir d’une base de données. Pour ce faire, modifiez votre classe *Démarrer*. Dans le rappel pour `UseSpaPrerendering`, définissez une valeur pour `options.SupplyData` telle que la suivante :
 
 ```csharp
 options.SupplyData = (context, data) =>

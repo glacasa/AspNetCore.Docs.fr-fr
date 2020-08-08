@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc, seoapril2019
 ms.date: 06/19/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 30f11a137e711b1cf7a8b036af92fbb5fa2a1f05
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ad543087243658f09a23e4f6d957d0c6aa77b361
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402570"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014176"
 ---
-# <a name="introduction-to-aspnet-core-blazor"></a>Présentation de ASP.NET CoreBlazor
+# <a name="introduction-to-aspnet-core-no-locblazor"></a>Présentation de ASP.NET CoreBlazor
 
 Par [Daniel Roth](https://github.com/danroth27) et [Luke Latham](https://github.com/guardrex)
 
@@ -44,7 +46,7 @@ L’utilisation de .NET dans le développement web côté client offre les avant
 * Restez productif grâce à Visual Studio sur Windows, Linux et macOS.
 * Développez avec un ensemble commun de langages, de frameworks et d’outils stables, riches en fonctionnalités et faciles à utiliser.
 
-## <a name="components"></a>Components
+## <a name="components"></a>Composants
 
 Blazorles applications sont basées sur des *composants*. Un composant dans Blazor est un élément de l’interface utilisateur, tel qu’une page, une boîte de dialogue ou un formulaire de saisie de données.
 
@@ -118,7 +120,7 @@ L’exécution de code .NET dans des navigateurs Web est rendue possible par [We
 
 Le code WebAssembly peut accéder à toutes les fonctionnalités du navigateur via JavaScript, appelé *interopérabilité JavaScript* (ou *interop JavaScript*). Le code .NET exécuté via WebAssembly dans le navigateur s’exécute dans le bac à sable JavaScript du navigateur avec les protections offertes par le bac à sable contre les actions malveillantes sur l’ordinateur client.
 
-![Blazor WebAssemblyexécute du code .NET dans le navigateur avec webassembly.](index/_static/blazor-webassembly.png)
+![::: No-Loc (éblouissant webassembly) ::: exécute le code .NET dans le navigateur avec webassembly.](index/_static/blazor-webassembly.png)
 
 Quand une Blazor WebAssembly application est générée et exécutée dans un navigateur :
 
@@ -140,7 +142,7 @@ Le runtime gère l’envoi des événements d’interface utilisateur du navigat
 
 La connexion utilisée par Blazor Server pour communiquer avec le navigateur est également utilisée pour gérer les appels Interop JavaScript.
 
-![Blazor Serverexécute du code .NET sur le serveur et interagit avec le Document Object Model sur le client via une SignalR connexion](index/_static/blazor-server.png)
+![::: No-Loc (serveur éblouissant) ::: exécute le code .NET sur le serveur et interagit avec le Document Object Model sur le client via un ::: No-Loc (Signalr) ::: Connection](index/_static/blazor-server.png)
 
 ## <a name="javascript-interop"></a>Interopérabilité JavaScript
 
@@ -155,7 +157,7 @@ Blazorimplémente [.NET Standard 2,1](/dotnet/standard/net-standard), qui permet
 
 Les API qui ne sont pas applicables à l’intérieur d’un navigateur web (par exemple l’accès au système de fichiers, l’ouverture d’un socket et le threading) lèvent une <xref:System.PlatformNotSupportedException>.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [WebAssembly](https://webassembly.org/)
 * <xref:blazor/hosting-models>

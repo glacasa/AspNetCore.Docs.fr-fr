@@ -6,6 +6,8 @@ ms.author: casoper
 ms.date: 08/07/2018
 ms.custom: mvc, seodec18
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/index
-ms.openlocfilehash: 138a8e04e057e5679c3d2b84d5351a3a4ab7cd8c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 10df1eab6de064b824ce067aff3ecc07e81c38fd
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400347"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012265"
 ---
 # <a name="devops-with-aspnet-core-and-azure"></a>DevOps avec ASP.NET Core et Azure
 
@@ -69,7 +71,7 @@ Autres parcours d’apprentissage pour les développeurs ASP.NET Core découvran
 
 S’il s’agit de votre premier contact avec le cloud computing, ces articles expliquent les principes de base.
 
-* [Qu’est-ce que le cloud computing ?](https://azure.microsoft.com/overview/what-is-cloud-computing/)
+* [Qu’est-ce que le Cloud Computing ?](https://azure.microsoft.com/overview/what-is-cloud-computing/)
 * [Exemples de cloud computing](https://azure.microsoft.com/overview/examples-of-cloud-computing/)
 * [Qu’est-ce que IaaS ?](https://azure.microsoft.com/overview/what-is-iaas/)
 * [Qu’est-ce que PaaS ?](https://azure.microsoft.com/overview/what-is-paas/)

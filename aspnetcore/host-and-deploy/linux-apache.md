@@ -7,6 +7,8 @@ ms.author: shboyer
 ms.custom: mvc
 ms.date: 04/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-apache
-ms.openlocfilehash: 5efd84cc4b54c2ad21a7c038137fe68ee3a40f55
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2bf5633461996bfecaaa6b730adc9a19bb2769c4
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403987"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015554"
 ---
 # <a name="host-aspnet-core-on-linux-with-apache"></a>Héberger ASP.NET Core sur Linux avec Apache
 
@@ -100,7 +102,7 @@ services.Configure<ForwardedHeadersOptions>(options =>
 });
 ```
 
-Pour plus d’informations, consultez <xref:host-and-deploy/proxy-load-balancer>.
+Pour plus d'informations, consultez <xref:host-and-deploy/proxy-load-balancer>.
 
 ### <a name="install-apache"></a>Installer Apache
 
@@ -289,13 +291,13 @@ sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-
 
 ## <a name="data-protection"></a>Protection de données
 
-La [pile de protection des données ASP.NET Core](xref:security/data-protection/introduction) est utilisée par plusieurs [intergiciels (middleware)](xref:fundamentals/middleware/index) ASP.NET Core, notamment le middleware d’authentification (par exemple, le middleware cookie) et les protections de la falsification de requête intersites (CSRF, Cross Site Request Forgery). Même si les API de protection des données ne sont pas appelées par le code de l’utilisateur, la protection des données doit être configurée pour créer un [magasin de clés](xref:security/data-protection/implementation/key-management) de chiffrement persistantes. Si la protection des données n’est pas configurée, les clés sont conservées en mémoire et ignorées au redémarrage de l’application.
+La [pile de protection des données ASP.net Core](xref:security/data-protection/introduction) est utilisée par plusieurs ASP.net Core [intergiciels](xref:fundamentals/middleware/index), y compris l’intergiciel (middleware) d’authentification (par exemple, cookie intergiciel) et les protections CSRF (cross-site request falsification). Même si les API de protection des données ne sont pas appelées par le code de l’utilisateur, la protection des données doit être configurée pour créer un [magasin de clés](xref:security/data-protection/implementation/key-management) de chiffrement persistantes. Si la protection des données n’est pas configurée, les clés sont conservées en mémoire et ignorées au redémarrage de l’application.
 
 Si le Key Ring est stocké en mémoire, au redémarrage de l’application :
 
-* tous les jetons d’authentification basés sur des cookies sont invalidés
+* Tous les cookie jetons d’authentification de base sont invalidés.
 * Les utilisateurs doivent se reconnecter pour envoyer leur prochaine demande.
-* toutes les données protégées par le Key Ring ne peuvent plus être déchiffrées. Ceci peut inclure des [jetons CSRF](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) et des [cookies TempData ASP.NET Core MVC](xref:fundamentals/app-state#tempdata).
+* toutes les données protégées par le Key Ring ne peuvent plus être déchiffrées. Cela peut inclure des [jetons CSRF](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) et des ASP.NET Core les de la [MVC cookie ](xref:fundamentals/app-state#tempdata).
 
 Pour configurer la protection des données de façon à conserver et chiffrer le porte-clés (Key Ring), consultez :
 
@@ -432,7 +434,7 @@ Pour atténuer les attaques par détournement de clic :
    ```
 
    Ajoutez la ligne `Header append X-FRAME-OPTIONS "SAMEORIGIN"`.
-1. Enregistrez le fichier.
+1. Enregistrez le fichier .
 1. Redémarrez Apache.
 
 #### <a name="mime-type-sniffing"></a>Détection de type MIME
@@ -445,7 +447,7 @@ Modifiez le fichier *httpd.conf* :
 sudo nano /etc/httpd/conf/httpd.conf
 ```
 
-Ajoutez la ligne `Header set X-Content-Type-Options "nosniff"`. Enregistrez le fichier. Redémarrez Apache.
+Ajoutez la ligne `Header set X-Content-Type-Options "nosniff"`. Enregistrez le fichier . Redémarrez Apache.
 
 ### <a name="load-balancing"></a>Équilibrage de la charge.
 
@@ -519,7 +521,7 @@ Les paramètres par défaut du serveur proxy limitent généralement les champs 
 > [!WARNING]
 > N’augmentez pas la valeur par défaut de `LimitRequestFieldSize` à moins que ce ne soit nécessaire. Son augmentation augmente le risque de dépassement de mémoire tampon (dépassement de capacité) et d’attaques par déni de service (DoS) par des utilisateurs malveillants.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Prérequis pour .NET Core sur Linux](/dotnet/core/linux-prerequisites)
 * <xref:test/troubleshoot>

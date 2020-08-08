@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/18/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/advanced-scenarios
-ms.openlocfilehash: bdea9f2fe5c552b56414bb49588733c8dc2a34db
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d6446447a51e22b7df1289e7ef20a4a6381c2b20
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400217"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012525"
 ---
-# <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core des Blazor scénarios avancés
+# <a name="aspnet-core-no-locblazor-advanced-scenarios"></a>ASP.NET Core des Blazor scénarios avancés
 
 Par [Luke Latham](https://github.com/guardrex) et [Daniel Roth](https://github.com/danroth27)
 
-## <a name="blazor-server-circuit-handler"></a>Blazor ServerGestionnaire de circuit
+## <a name="no-locblazor-server-circuit-handler"></a>Blazor ServerGestionnaire de circuit
 
 Blazor Serverpermet au code de définir un *Gestionnaire de circuit*qui permet d’exécuter du code sur les modifications de l’état du circuit d’un utilisateur. Un gestionnaire de circuit est implémenté en dérivant de `CircuitHandler` et en inscrivant la classe dans le conteneur de services de l’application. L’exemple suivant d’un gestionnaire de circuit effectue le suivi des SignalR connexions ouvertes :
 
@@ -165,7 +167,7 @@ Lorsque le code s’exécute pour la première fois, si `someFlag` est `true` , 
 
 | Séquence | Type      | Données   |
 | :------: | --------- | :----: |
-| 0        | Nœud de texte | Premier  |
+| 0        | Nœud de texte | First  |
 | 1        | Nœud de texte | Seconde |
 
 Imaginez que `someFlag` devient `false` et le balisage est de nouveau restitué. Cette fois-ci, le générateur reçoit :
@@ -197,7 +199,7 @@ La première sortie est désormais :
 
 | Séquence | Type      | Données   |
 | :------: | --------- | :----: |
-| 0        | Nœud de texte | Premier  |
+| 0        | Nœud de texte | First  |
 | 1        | Nœud de texte | Seconde |
 
 Ce résultat est identique au cas précédent, donc aucun problème négatif n’existe. `someFlag`se trouve `false` sur le deuxième rendu et la sortie est :
@@ -223,7 +225,7 @@ Il s’agit d’un exemple trivial. Dans des cas plus réalistes avec des struct
 * Si les numéros de séquence sont codés en dur, l’algorithme diff exige uniquement que les numéros de séquence augmentent dans la valeur. La valeur initiale et les écarts ne sont pas pertinents. Une option légitime consiste à utiliser le numéro de ligne de code comme numéro de séquence, ou à commencer à partir de zéro et à augmenter par des ou des centaines (ou un intervalle de préférence). 
 * Blazorutilise des numéros de séquence, tandis que d’autres infrastructures d’interface utilisateur de comparaison d’arborescence ne les utilisent pas. La comparaison est beaucoup plus rapide lorsque les numéros de séquence sont utilisés et Blazor présente l’avantage d’une étape de compilation qui traite automatiquement les numéros séquentiels pour les développeurs qui créent des `.razor` fichiers.
 
-## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>Effectuer des transferts de données volumineux dans des Blazor Server applications
+## <a name="perform-large-data-transfers-in-no-locblazor-server-apps"></a>Effectuer des transferts de données volumineux dans des Blazor Server applications
 
 Dans certains scénarios, de grandes quantités de données doivent être transférées entre JavaScript et Blazor . En général, les transferts de données volumineux se produisent dans les cas suivants :
 
@@ -335,7 +337,7 @@ public class FileUploader : IDisposable
 }
 ```
 
-Dans l'exemple précédent :
+Dans l’exemple précédent :
 
 * `maxBase64SegmentSize`A la valeur `8192` , qui est calculée à partir de `maxBase64SegmentSize = segmentSize * 4 / 3` .
 * Les API de gestion de mémoire .NET Core de bas niveau sont utilisées pour stocker les segments de mémoire sur le serveur dans `uploadedSegments` .

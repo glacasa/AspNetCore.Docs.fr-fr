@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 237a8fceb75ba724625f018cf94c8d5bc5acfdad
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1c33a3abd2ebee60a4025d4598495d276663dc9b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402583"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014163"
 ---
-# <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>Créez des applications Web progressifs avec ASP.NET CoreBlazor WebAssembly
+# <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>Créez des applications Web progressifs avec ASP.NET CoreBlazor WebAssembly
 
 Par [Steve Sanderson](https://github.com/SteveSandersonMS)
 
@@ -69,13 +71,13 @@ dotnet new blazorwasm -o MyNewProject --pwa
 
 Quand vous visitez une application créée à l’aide du modèle PWA, les utilisateurs ont la possibilité d’installer l’application dans le menu Démarrer, l’ancre ou l’écran d’accueil de son système d’exploitation. La façon dont cette option est présentée dépend du navigateur de l’utilisateur. Quand vous utilisez des navigateurs basés sur Desktop chrome, tels que Edge ou chrome, un bouton **Ajouter** apparaît dans la barre d’URL. Une fois que l’utilisateur a sélectionné le bouton **Ajouter** , une boîte de dialogue de confirmation s’affiche :
 
-![Le diaglog de confirmation de Google Chrome présente un bouton installer pour l’utilisateur de l’application « MyBlazorPwa ».](progressive-web-app/_static/image2.png)
+![Le diaglog de confirmation de Google Chrome présente un bouton installer pour l’utilisateur de l’application « my ::: No-Loc (éblouissant) :::P wa ».](progressive-web-app/_static/image2.png)
 
 Sur iOS, les visiteurs peuvent installer le PWA à l’aide du bouton de **partage** de Safari et de l’option **Ajouter à homescreen** . Sur chrome pour Android, les utilisateurs doivent sélectionner le bouton de **menu** dans l’angle supérieur droit, puis **Ajouter à l’écran d’accueil**.
 
 Une fois installé, l’application s’affiche dans sa propre fenêtre sans barre d’adresses :
 
-![L’application « MyBlazorPwa » s’exécute dans Google Chrome sans barre d’adresses.](progressive-web-app/_static/image3.png)
+![L’application’My ::: No-Loc (éblouissant) :::P wa’s’exécute dans Google Chrome sans barre d’adresses.](progressive-web-app/_static/image3.png)
 
 Pour personnaliser le titre, le modèle de couleurs, l’icône ou d’autres détails de la fenêtre, consultez le `manifest.json` fichier dans le répertoire du projet `wwwroot` . Le schéma de ce fichier est défini par les normes Web. Pour plus d’informations, consultez [MDN Web docs : Web App manifest](https://developer.mozilla.org/docs/Web/Manifest).
 
@@ -91,7 +93,7 @@ Par défaut, les applications créées à l’aide de l’option de modèle PWA 
 
 Pour voir comment fonctionne la prise en charge hors connexion :
 
-1. Publiez l’application. Pour plus d’informations, consultez <xref:blazor/host-and-deploy/index#publish-the-app>.
+1. Publiez l’application. Pour plus d'informations, consultez <xref:blazor/host-and-deploy/index#publish-the-app>.
 1. Déployez l’application sur un serveur qui prend en charge le protocole HTTPs, et accédez à l’application dans un navigateur à son adresse HTTPs sécurisée.
 1. Ouvrez les outils de développement du navigateur, puis vérifiez qu’un *Worker service* est inscrit pour l’ordinateur hôte sous l’onglet **application** :
 
@@ -164,7 +166,7 @@ Réfléchissez à ce qui se passe quand l’utilisateur accède pour la premièr
 
 Le service Worker par défaut contient une logique de cas spéciale pour les demandes de navigation. Le Worker de service résout les demandes en retournant le contenu mis en cache pour `/index.html` , quelle que soit l’URL demandée. Cette logique est implémentée dans la `onFetch` fonction à l’intérieur de `service-worker.published.js` .
 
-Si votre application comporte certaines URL qui doivent retourner le HTML rendu serveur et ne servent pas `/index.html` à partir du cache, vous devez modifier la logique de votre service Worker. Si toutes les URL contenant `/Identity/` doivent être gérées en tant que demandes standard en ligne uniquement au serveur, modifiez la `service-worker.published.js` `onFetch` logique. Recherchez le code suivant :
+Si votre application comporte certaines URL qui doivent retourner le HTML rendu serveur et ne servent pas `/index.html` à partir du cache, vous devez modifier la logique de votre service Worker. Si toutes les URL contenant `/Identity/` doivent être gérées en tant que demandes standard en ligne uniquement au serveur, modifiez la `service-worker.published.js` `onFetch` logique. Recherchez le code suivant :
 
 ```javascript
 const shouldServeIndexHtml = event.request.mode === 'navigate';
@@ -210,7 +212,7 @@ Les `AssetUrl` métadonnées spécifient l’URL relative de base que le navigat
 > [!IMPORTANT]
 > L’ajout de `ServiceWorkerAssetsManifestItem` n’entraîne pas la publication du fichier dans le répertoire de l’application `wwwroot` . La sortie de publication doit être contrôlée séparément. Le `ServiceWorkerAssetsManifestItem` seul fait apparaître une entrée supplémentaire dans le manifeste des ressources du Worker.
 
-## <a name="push-notifications"></a>Notifications push
+## <a name="push-notifications"></a>Notifications Push
 
 Comme tout autre PWA, Blazor WebAssembly PWA peut recevoir des notifications push à partir d’un serveur principal. Le serveur peut envoyer des notifications push à tout moment, même lorsque l’utilisateur n’utilise pas activement l’application. Par exemple, les notifications push peuvent être envoyées lorsqu’un autre utilisateur effectue une action appropriée.
 
@@ -295,6 +297,6 @@ L' [`CarChecker`](https://github.com/SteveSandersonMS/CarChecker) exemple d’ap
 * `LocalVehiclesStore` (`Client/Data/LocalVehiclesStore.cs`)
 * `LoginStatus`composant ( `Client/Shared/LoginStatus.razor` )
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [SignalRnégociation Cross-Origin pour l’authentification](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)

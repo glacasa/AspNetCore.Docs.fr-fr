@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/16/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: 0fb744b4e9d44e6b8136123fddfb75ace8901d52
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: 0ce03badccad4e06aa3c316580ab82be38a806c6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87819943"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013370"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>Chargement différé d’assemblys dans ASP.NET CoreBlazor WebAssembly
 
@@ -82,7 +84,7 @@ Si le `OnNavigateAsync` rappel lève une exception non gérée, l' [ Blazor inte
 * La `Path` propriété est le chemin d’accès de destination de l’utilisateur par rapport au chemin d’accès de base de l’application, par exemple `/robot` .
 * Le `CancellationToken` peut être utilisé pour observer l’annulation de la tâche asynchrone. `OnNavigateAsync`annule automatiquement la tâche de navigation en cours d’exécution lorsque l’utilisateur accède à une autre page.
 
-Dans `OnNavigateAsync` , implémentez une logique pour déterminer les assemblys à charger. Les options sont :
+Dans `OnNavigateAsync` , implémentez une logique pour déterminer les assemblys à charger. Options disponibles :
 
 * Vérifications conditionnelles à l’intérieur de la `OnNavigateAsync` méthode.
 * Table de recherche qui mappe des itinéraires à des noms d’assemblys, soit injectés dans le composant, soit implémentée dans le [`@code`](xref:mvc/views/razor#code) bloc.
@@ -217,7 +219,7 @@ Le composant complet suivant `Router` montre le chargement de l' `GrantImaharaRo
 }
 ```
 
-## <a name="troubleshoot"></a>Résoudre les problèmes
+## <a name="troubleshoot"></a>Dépanner
 
 * Si un rendu inattendu se produit (par exemple, un composant d’une navigation précédente est rendu), confirmez que le code lève si le jeton d’annulation est défini.
 * Si les assemblys sont toujours chargés au démarrage de l’application, vérifiez que l’assembly est marqué comme étant différé dans le fichier projet.

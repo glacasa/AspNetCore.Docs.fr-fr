@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/26/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 896eed0e55986678b6bb86638ca92b04a77b4fef
-ms.sourcegitcommit: d00a200bc8347af794b24184da14ad5c8b6bba9a
+ms.openlocfilehash: 6f5ad6b8f225834c92d6e33d8bcf608b56678e67
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86869937"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014670"
 ---
-# <a name="aspnet-core-blazor-data-binding"></a>BlazorLiaison de données ASP.net Core
+# <a name="aspnet-core-no-locblazor-data-binding"></a>BlazorLiaison de données ASP.net Core
 
 Par [Luke Latham](https://github.com/guardrex) et [Daniel Roth](https://github.com/danroth27)
 
@@ -88,7 +90,7 @@ Utilisez `@bind-{ATTRIBUTE}` avec la `@bind-{ATTRIBUTE}:event` syntaxe pour lier
 
 La liaison d’attribut respecte la casse :
 
-* `@bind`est valide.
+* `@bind` est valide.
 * `@Bind`et `@BIND` ne sont pas valides.
 
 ## <a name="unparsable-values"></a>Valeurs inanalysables
@@ -172,7 +174,7 @@ Le <xref:Microsoft.AspNetCore.Components.EventCallback%601> doit être nommé en
 Le composant parent suivant utilise :
 
 * `ChildComponent`et lie le `ParentYear` paramètre du parent au `Year` paramètre sur le composant enfant.
-* L' `onclick` événement est utilisé pour déclencher la `ChangeTheYear` méthode. Pour plus d’informations, consultez <xref:blazor/components/event-handling>.
+* L' `onclick` événement est utilisé pour déclencher la `ChangeTheYear` méthode. Pour plus d'informations, consultez <xref:blazor/components/event-handling>.
 
 ```razor
 @page "/ParentComponent"
@@ -246,7 +248,7 @@ Le `PasswordField` composant suivant ( `PasswordField.razor` ) :
 
 * Définit `<input>` la valeur d’un élément sur `Password` une propriété.
 * Expose les modifications de la `Password` propriété à un composant parent avec un [`EventCallback`](xref:blazor/components/event-handling#eventcallback) .
-* Utilise l' `onclick` événement pour déclencher la `ToggleShowPassword` méthode. Pour plus d’informations, consultez <xref:blazor/components/event-handling>.
+* Utilise l' `onclick` événement pour déclencher la `ToggleShowPassword` méthode. Pour plus d'informations, consultez <xref:blazor/components/event-handling>.
 
 ```razor
 <h1>Child Component</h1>
@@ -365,7 +367,7 @@ Password:
 }
 ```
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Lier à des cases d’option dans un formulaire](xref:blazor/forms-validation#radio-buttons)
 * [Liaison `<select>` d’options d’éléments à `null` des valeurs d’objet C# dans un formulaire](xref:blazor/forms-validation#binding-select-element-options-to-c-object-null-values)

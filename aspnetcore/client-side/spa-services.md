@@ -7,6 +7,8 @@ ms.author: scaddie
 ms.custom: H1Hack27Feb2017
 ms.date: 09/06/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/spa-services
-ms.openlocfilehash: 05f76a7d341fc5c55b8234b6ff6d2be5aa61d6fd
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2c91fa13c6fcb92c5985cae21c175c0a2a2a313e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401829"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013266"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>Utilisez les services JavaScript pour créer des applications à page unique dans ASP.NET Core
 
@@ -278,7 +280,7 @@ L’application démarre sur localhost en fonction du [mode de configuration](#s
 
 Ouvrez le fichier *. csproj* généré par la commande [dotnet New](/dotnet/core/tools/dotnet-new) . Les packages NuGet et NPM requis sont restaurés automatiquement lors de l’ouverture du projet. Ce processus de restauration peut prendre quelques minutes, et l’application est prête à s’exécuter lorsqu’elle se termine. Cliquez sur le bouton vert exécuter ou appuyez sur `Ctrl + F5` , et le navigateur s’ouvre sur la page d’accueil de l’application. L’application s’exécute sur localhost en fonction du [mode de configuration du runtime](#set-the-runtime-configuration-mode).
 
-## <a name="test-the-app"></a>Tester l'application
+## <a name="test-the-app"></a>Test de l'application
 
 Les modèles SpaServices sont préconfigurés pour exécuter des tests côté client à l’aide de [Karma](https://karma-runner.github.io/1.0/index.html) et [Jasmine](https://jasmine.github.io/). Jasmine est un Framework de tests unitaires populaire pour JavaScript, tandis que Karma est un testeur de test pour ces tests. Karma est configuré pour fonctionner avec l' [intergiciel (middleware) WebPack dev](#webpack-dev-middleware) , de sorte que le développeur n’est pas obligé d’arrêter et d’exécuter le test à chaque fois que des modifications sont apportées. S’il s’agit du code qui s’exécute sur le cas de test ou le cas de test lui-même, le test s’exécute automatiquement.
 
@@ -286,7 +288,7 @@ Les modèles SpaServices sont préconfigurés pour exécuter des tests côté cl
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/app/components/counter/counter.component.spec.ts?range=15-28)]
 
-Ouvrez l’invite de commandes dans le répertoire *ClientApp* . Exécutez la commande suivante :
+Ouvrez l’invite de commandes dans le répertoire *ClientApp* . Exécutez la commande suivante :
 
 ```console
 npm test
@@ -317,6 +319,6 @@ La cible MSBuild est appelée lors de l’exécution de :
 dotnet publish -c Release
 ```
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Documents angulaires](https://angular.io/docs)

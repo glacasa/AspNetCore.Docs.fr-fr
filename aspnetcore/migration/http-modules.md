@@ -5,6 +5,8 @@ description: ''
 ms.author: riande
 ms.date: 12/07/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 362dd16db358f7ceb6730bde908fff9854c73a84
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 92672b2d05ee6bbdfcf0255ae14529a5c28c41b7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403649"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014982"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>Migrer des gestionnaires et des modules HTTP vers ASP.NET Core intergiciel
 
@@ -291,7 +293,7 @@ Donne un ID unique pour chaque demande. Très utile pour inclure dans vos journa
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Host)]
 
-**HttpContext. Request. Cookies** se traduit par :
+**HttpContext. Request. Cookie s** se traduit par :
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Cookies)]
 
@@ -374,9 +376,9 @@ La `SetHeaders` méthode de rappel ressemble à ceci :
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetHeaders)]
 
-**HttpContext. Response. Cookies**
+**HttpContext. Response. Cookie x**
 
-Les cookies passent au navigateur dans un en-tête de réponse *Set-Cookie* . Par conséquent, l’envoi de cookies requiert le même rappel que celui utilisé pour l’envoi des en-têtes de réponse :
+Cookiese déplace vers le navigateur dans un en-tête *Set- Cookie * Response. Par conséquent, l’envoi cookie de s requiert le même rappel que celui utilisé pour l’envoi des en-têtes de réponse :
 
 ```csharp
 public async Task Invoke(HttpContext httpContext)
@@ -390,7 +392,7 @@ La `SetCookies` méthode de rappel ressemble à ce qui suit :
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetCookies)]
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Vue d’ensemble des gestionnaires HTTP et des modules HTTP](/iis/configuration/system.webserver/)
 * [Configuration](xref:fundamentals/configuration/index)

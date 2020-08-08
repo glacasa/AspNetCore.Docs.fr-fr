@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 05/26/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/webapi
-ms.openlocfilehash: 530455c85c4c869f06ba795d9fb63dcfd1c8d5cf
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4888de6ad55037be540cb62b6e4f02878e2b57ab
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407224"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014813"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>Migrer de API Web ASP.NET vers ASP.NET Core
 
@@ -77,12 +79,12 @@ La solution contient maintenant deux projets. Les sections suivantes expliquent 
 
 ASP.NET Core n’utilise pas le dossier *App_Start* ou le fichier *global. asax* . En outre, le fichier *web.config* est ajouté au moment de la publication.
 
-Classe `Startup` :
+La classe `Startup` :
 
 * Remplace *global. asax*.
 * Gère toutes les tâches de démarrage de l’application.
 
-Pour plus d’informations, consultez <xref:fundamentals/startup>.
+Pour plus d'informations, consultez <xref:fundamentals/startup>.
 
 ## <a name="migrate-models-and-controllers"></a>Migrer les modèles et les contrôleurs
 
@@ -144,7 +146,7 @@ Configurez le routage comme suit :
 
 Exécutez le projet migré et accédez à `/api/products` . La liste complète des trois produits s’affiche. Accédez à `/api/products/1`. Le premier produit s’affiche.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * <xref:web-api/index>
 * <xref:web-api/action-return-types>
@@ -190,12 +192,12 @@ ASP.NET Core n’utilise pas :
 * *App_Start* dossier ou le fichier *global. asax*
 * *web.config* fichier est ajouté au moment de la publication.
 
-Classe `Startup` :
+La classe `Startup` :
 
 * Remplace *global. asax*.
 * Gère toutes les tâches de démarrage de l’application.
 
-Pour plus d’informations, consultez <xref:fundamentals/startup>.
+Pour plus d'informations, consultez <xref:fundamentals/startup>.
 
 Dans ASP.NET Core MVC, le routage des attributs est inclus par défaut quand <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc*> est appelé dans `Startup.Configure` . L' `UseMvc` appel suivant remplace le fichier *App_Start/webapiconfig.cs* du projet *ProductsApp* :
 

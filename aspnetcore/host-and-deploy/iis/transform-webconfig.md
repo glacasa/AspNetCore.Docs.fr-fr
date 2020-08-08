@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/transform-webconfig
-ms.openlocfilehash: bebba7a72012b8be6257b14642bf130613627778
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3d0bbfceb6dfedd7234112d33fd99e91a34f5793
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404000"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015580"
 ---
 # <a name="transform-webconfig"></a>Transformer web.config
 
@@ -31,7 +33,7 @@ Les transformations du fichier *web.config* peuvent être appliquées automatiqu
 * [Configuration de build](#build-configuration)
 * [Profil](#profile)
 * [Environment](#environment)
-* [Personnalisé](#custom)
+* [Personnalisée](#custom)
 
 Ces transformations se produisent pour l’un des scénarios de génération *web.config* suivants :
 
@@ -146,7 +148,7 @@ Lors de la publication à partir de Visual Studio et à l’aide d’un profil d
 
 La variable d’environnement `ASPNETCORE_ENVIRONMENT` est automatiquement ajoutée au fichier *web.config* lorsque le nom de l’environnement est spécifié.
 
-## <a name="custom"></a>Personnalisé
+## <a name="custom"></a>Custom
 
 Les transformations personnalisées sont exécutées en dernier, après les transformations de la [configuration de build](#build-configuration), du [profil](#profile) et de [l’environnement](#environment).
 
@@ -188,7 +190,7 @@ Pour empêcher les transformations du fichier *web.config*, définissez la propr
 dotnet publish /p:IsWebConfigTransformDisabled=true
 ```
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Syntaxe de transformation d'un fichier Web.config pour le déploiement d'un projet d'application Web](/previous-versions/dd465326(v=vs.100))
 * [Syntaxe de transformation d'un fichier Web.config pour le déploiement d'un projet Web à l'aide de Visual Studio](/previous-versions/aspnet/dd465326(v=vs.110))

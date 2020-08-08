@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.date: 10/24/2018
 ms.custom: mvc, seodec18
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/cicd
-ms.openlocfilehash: 0edded18d766d6f2af08f6be5dbecbfd52a14a35
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 780d233014c26e37886d6bc5bd8fcb23d857dff0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400555"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012615"
 ---
 # <a name="continuous-integration-and-deployment"></a>Intégration et déploiement continus
 
@@ -46,19 +48,19 @@ Dans cette section, vous allez effectuer les tâches suivantes :
 1. Sélectionnez votre compte dans la liste déroulante **propriétaire** , puis entrez *simple-Feed-Reader* dans la zone de texte **nom du dépôt** .
 1. Cliquez sur le bouton **créer un référentiel** .
 1. Ouvrez l’interface de commande de votre ordinateur local. Accédez au répertoire dans lequel est stocké le référentiel git du *lecteur de flux simple* .
-1. Renommez l' *origine* existante à distance en *amont*. Exécutez la commande suivante :
+1. Renommez l' *origine* existante à distance en *amont*. Exécutez la commande suivante :
 
     ```console
     git remote rename origin upstream
     ```
 
-1. Ajoutez une nouvelle *origine* à distance pointant vers votre copie du référentiel sur GitHub. Exécutez la commande suivante :
+1. Ajoutez une nouvelle *origine* à distance pointant vers votre copie du référentiel sur GitHub. Exécutez la commande suivante :
 
     ```console
     git remote add origin https://github.com/<GitHub_username>/simple-feed-reader/
     ```
 
-1. Publiez votre référentiel Git local dans le référentiel GitHub nouvellement créé. Exécutez la commande suivante :
+1. Publiez votre référentiel Git local dans le référentiel GitHub nouvellement créé. Exécutez la commande suivante :
 
     ```console
     git push -u origin master

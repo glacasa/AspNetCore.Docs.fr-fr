@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/14/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 1312ae531b0acb0ce09137cc2bae6299ddda5c32
-ms.sourcegitcommit: e6b3dd344521ce320d5c2121bbc27c211df87e57
+ms.openlocfilehash: a145cfd551650445f9ff35259cbedf71ebb686f0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/19/2020
-ms.locfileid: "86468845"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014592"
 ---
-# <a name="create-and-use-aspnet-core-razor-components"></a>Créer et utiliser des Razor composants ASP.net Core
+# <a name="create-and-use-aspnet-core-no-locrazor-components"></a>Créer et utiliser des Razor composants ASP.net Core
 
 Par [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27)et [Tobias Bartsch](https://www.aveo-solutions.com/)
 
@@ -34,7 +36,7 @@ Blazorles applications sont générées à l’aide de *composants*. Un composan
 
 Les composants sont implémentés dans des [Razor](xref:mvc/views/razor) fichiers composants ( `.razor` ) à l’aide d’une combinaison de balisage C# et html. Un composant dans Blazor est officiellement désigné sous le terme de * Razor composant*.
 
-### <a name="razor-syntax"></a>Syntaxe de Razor
+### <a name="no-locrazor-syntax"></a>Syntaxe de Razor
 
 Razorles composants dans les Blazor applications utilisent largement la Razor syntaxe. Si vous n’êtes pas familiarisé avec le Razor langage de balisage, nous vous recommandons de lire <xref:mvc/views/razor> avant de continuer.
 
@@ -49,7 +51,7 @@ Le nom d’un composant doit commencer par un caractère majuscule. Par exemple,
 
 ### <a name="routing"></a>Routage
 
-Le routage dans Blazor est effectué en fournissant un modèle de routage à chaque composant accessible dans l’application. Lorsqu’un Razor fichier avec une [`@page`][9] directive est compilé, la classe générée reçoit un <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> qui spécifie le modèle de routage. Lors de l’exécution, le routeur recherche les classes de composant avec un <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> et rend le composant qui a un modèle de routage correspondant à l’URL demandée. Pour plus d’informations, consultez <xref:blazor/fundamentals/routing>.
+Le routage dans Blazor est effectué en fournissant un modèle de routage à chaque composant accessible dans l’application. Lorsqu’un Razor fichier avec une [`@page`][9] directive est compilé, la classe générée reçoit un <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> qui spécifie le modèle de routage. Lors de l’exécution, le routeur recherche les classes de composant avec un <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> et rend le composant qui a un modèle de routage correspondant à l’URL demandée. Pour plus d'informations, consultez <xref:blazor/fundamentals/routing>.
 
 ```razor
 @page "/ParentComponent"
@@ -773,7 +775,7 @@ Si `IsCompleted` est `false` , la case à cocher s’affiche comme suit :
 <input type="checkbox" />
 ```
 
-Pour plus d’informations, consultez <xref:mvc/views/razor>.
+Pour plus d'informations, consultez <xref:mvc/views/razor>.
 
 > [!WARNING]
 > Certains attributs HTML, tels que [`aria-pressed`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons) , ne fonctionnent pas correctement quand le type .net est un `bool` . Dans ce cas, utilisez un `string` type au lieu d’un `bool` .
@@ -796,7 +798,7 @@ L’exemple suivant illustre l’utilisation du `MarkupString` type pour ajouter
 }
 ```
 
-## <a name="razor-templates"></a>Razorceux
+## <a name="no-locrazor-templates"></a>Razorceux
 
 Les fragments de rendu peuvent être définis à l’aide de la Razor syntaxe de modèle. Razorles modèles sont un moyen de définir un extrait de code d’interface utilisateur et de supposer le format suivant :
 
@@ -866,7 +868,7 @@ De même, les images SVG sont prises en charge dans les règles CSS d’un fichi
 
 Toutefois, le balisage SVG en ligne n’est pas pris en charge dans tous les scénarios. Si vous placez une `<svg>` balise directement dans un fichier de composant ( `.razor` ), le rendu d’image de base est pris en charge, mais de nombreux scénarios avancés ne sont pas encore pris en charge. Par exemple, les `<use>` balises ne sont pas actuellement respectées et [`@bind`][10] ne peuvent pas être utilisées avec certaines balises SVG. Pour plus d’informations, consultez [prise en charge SVG dans Blazor (dotnet/aspnetcore #18271)](https://github.com/dotnet/aspnetcore/issues/18271).
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * <xref:blazor/security/server/threat-mitigation>: Fournit des conseils sur la création d' Blazor Server applications qui doivent être en concurrence avec l’épuisement des ressources.
 

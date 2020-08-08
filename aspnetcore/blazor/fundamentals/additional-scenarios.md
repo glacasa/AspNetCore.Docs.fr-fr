@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: b32710e515d111b7dd6556f1db55082cd56a82b5
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: dbad91e46a95d9ab5ec62d66e0d9a18938ff4520
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87819000"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014462"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>BlazorConfiguration du modèle d’hébergement ASP.net Core
 
@@ -32,7 +34,7 @@ Cet article traite de l’hébergement de la configuration du modèle.
 
 *Cette section s’applique à Blazor WebAssembly .*
 
-Pour configurer le SignalR client sous-jacent de manière à envoyer des informations d’identification, telles que des cookies ou des en-têtes d’authentification http :
+Pour configurer le SignalR client sous-jacent pour envoyer des informations d’identification, telles que cookie les en-têtes s ou http authentication :
 
 * Utilisez <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> pour définir <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include> les demandes Cross-Origin [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) :
 
@@ -231,11 +233,9 @@ Blazor.defaultReconnectionHandler._reconnectionDisplay =
 
 L’espace réservé `{ELEMENT ID}` est l’ID de l’élément HTML à afficher.
 
-::: moniker range=">= aspnetcore-5.0"
-
 ## <a name="influence-html-head-tag-elements"></a>Influencer les `<head>` éléments de balise HTML
 
-*Cette section s’applique à Blazor WebAssembly et Blazor Server .*
+*Cette section s’applique à la prochaine version de ASP.NET Core 5,0 de Blazor WebAssembly et Blazor Server .*
 
 Lors du rendu, `Title` les `Link` composants, et `Meta` ajoutent ou mettent à jour des données dans les `<head>` éléments de balise HTML :
 
@@ -263,8 +263,6 @@ Quand l’un des composants de l’infrastructure est utilisé dans un composant
 
 * Peut être modifié par l’état de l’application. Une balise HTML codée en dur ne peut pas être modifiée par l’état de l’application.
 * Est supprimé du code HTML `<head>` lorsque le composant parent n’est plus rendu.
-
-::: moniker-end
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

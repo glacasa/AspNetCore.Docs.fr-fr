@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: 97fe2f36aed4a2ac60a7ffc30ede5e682a838e5e
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: cad1cd868ef8c972d7e0fbfec79cd1d8b49c3b6e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408693"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015333"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>Migrer d’ASP.NET Core 1.x vers la version 2.0
 
@@ -164,7 +166,7 @@ Dans les projets 2.0, déplacez l’appel de `SeedData.Initialize` vers la méth
 
 <a name="view-compilation"></a>
 
-## <a name="review-razor-view-compilation-setting"></a>Vérifier le paramètre de compilation de la Razor vue
+## <a name="review-no-locrazor-view-compilation-setting"></a>Vérifier le paramètre de compilation de la Razor vue
 
 La vitesse de démarrage d’application et la taille des bundles publiés ont une importance capitale pour vous. Pour ces raisons, la compilation de l' [ Razor affichage](xref:mvc/views/view-compilation) est activée par défaut dans ASP.net Core 2,0.
 
@@ -198,10 +200,10 @@ Si vous utilisez le SDK Application Insights directement, continuez à le faire.
 
 <a name="auth-and-identity"></a>
 
-## <a name="adopt-authenticationidentity-improvements"></a>Adopter l’authentification/les Identity améliorations
+## <a name="adopt-authenticationno-locidentity-improvements"></a>Adopter l’authentification/les Identity améliorations
 
 ASP.NET Core 2,0 dispose d’un nouveau modèle d’authentification et d’un certain nombre de modifications significatives apportées à ASP.NET Core Identity . Si vous avez créé votre projet avec des comptes d’utilisateur individuels activés, ou si vous avez ajouté manuellement l’authentification ou Identity , consultez [migrer l’authentification et Identity vers ASP.net Core 2,0](xref:migration/1x-to-2x/identity-2x).
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Changements importants dans ASP.NET Core 2.0](https://github.com/aspnet/announcements/issues?page=1&q=is%3Aissue+is%3Aopen+label%3A2.0.0+label%3A%22Breaking+change%22&utf8=%E2%9C%93)

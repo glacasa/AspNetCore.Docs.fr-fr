@@ -7,6 +7,8 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: cea19044294482adf834d998b75e0f3fc386cc46
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b57adeb2712eb58907b53809cbd938e8ec0c1f6f
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400529"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012837"
 ---
 # <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>Didacticiel : implémenter l’héritage-ASP.NET MVC avec EF Core
 
@@ -133,7 +135,7 @@ Ce code prend en charge les tâches de mise à jour de base de données suivante
 
 (Si vous aviez utilisé un GUID à la place d’un entier comme type de clé primaire, les valeurs des clés primaires des étudiants n’auraient pas changé, et plusieurs de ces étapes auraient pu être omises.)
 
-Exécutez la commande `database update` :
+Exécutez la commande `database update` :
 
 ```dotnetcli
 dotnet ef database update
@@ -160,7 +162,7 @@ Cliquez avec le bouton droit sur la table Person, puis cliquez sur **Afficher le
 
 [Télécharger ou afficher l’application complète.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 Pour plus d’informations sur l’héritage dans Entity Framework Core, consultez [Héritage](/ef/core/modeling/inheritance).
 

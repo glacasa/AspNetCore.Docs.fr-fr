@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/22/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: 6725dec7c5e6b28282e5efe3c07ef17c2f43f915
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: a74d31107d30ce04448e30f1c53e5ac475127870
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407809"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015684"
 ---
 # <a name="health-checks-in-aspnet-core"></a>Contrôles d’intégrité dans ASP.NET Core
 
@@ -229,7 +231,7 @@ app.UseEndpoints(endpoints =>
 
 ### <a name="enable-cross-origin-requests-cors"></a>Activer les requêtes d’origines différentes
 
-Bien que l’exécution manuelle de contrôles d’intégrité à partir d’un navigateur ne soit pas un scénario d’utilisation courant, l’intergiciel (middleware) CORS peut être activé en appelant `RequireCors` sur des points de terminaison de contrôle d’intégrité. Une `RequireCors` surcharge accepte un délégué de générateur de stratégie cors ( `CorsPolicyBuilder` ) ou un nom de stratégie. Si aucune stratégie n’est fournie, la stratégie CORS par défaut est utilisée. Pour plus d’informations, consultez <xref:security/cors>.
+Bien que l’exécution manuelle de contrôles d’intégrité à partir d’un navigateur ne soit pas un scénario d’utilisation courant, l’intergiciel (middleware) CORS peut être activé en appelant `RequireCors` sur des points de terminaison de contrôle d’intégrité. Une `RequireCors` surcharge accepte un délégué de générateur de stratégie cors ( `CorsPolicyBuilder` ) ou un nom de stratégie. Si aucune stratégie n’est fournie, la stratégie CORS par défaut est utilisée. Pour plus d'informations, consultez <xref:security/cors>.
 
 ## <a name="health-check-options"></a>Options de contrôle d’intégrité
 
@@ -791,7 +793,7 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-Pour plus d’informations, consultez <xref:fundamentals/middleware/index#branch-the-middleware-pipeline>.
+Pour plus d'informations, consultez <xref:fundamentals/middleware/index#branch-the-middleware-pipeline>.
 
 ::: moniker-end
 
@@ -1479,6 +1481,6 @@ app.MapWhen(
 app.UseMvc();
 ```
 
-Pour plus d’informations, consultez <xref:fundamentals/middleware/index#use-run-and-map>.
+Pour plus d'informations, consultez <xref:fundamentals/middleware/index#use-run-and-map>.
 
 ::: moniker-end

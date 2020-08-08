@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/logging
-ms.openlocfilehash: 1f4b18bdea02016fb76b75dd01a8fcbeab9b2bc9
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: c2e8ee24c135b3c2f9b6be5b0e0efa54750c68b2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402830"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014357"
 ---
-# <a name="aspnet-core-blazor-logging"></a>BlazorJournalisation ASP.net Core
+# <a name="aspnet-core-no-locblazor-logging"></a>BlazorJournalisation ASP.net Core
 
 ## Blazor WebAssembly
 
@@ -41,13 +43,13 @@ builder.Logging.AddProvider(new CustomLoggingProvider());
 
 La `Logging` propriété est de type <xref:Microsoft.Extensions.Logging.ILoggingBuilder> , donc toutes les méthodes d’extension disponibles sur <xref:Microsoft.Extensions.Logging.ILoggingBuilder> sont également disponibles sur `Logging` .
 
-La configuration de la journalisation peut être chargée à partir des fichiers de paramètres d’application. Pour plus d’informations, consultez <xref:blazor/fundamentals/configuration#logging-configuration>.
+La configuration de la journalisation peut être chargée à partir des fichiers de paramètres d’application. Pour plus d'informations, consultez <xref:blazor/fundamentals/configuration#logging-configuration>.
 
 ## Blazor Server
 
 Pour obtenir des instructions générales sur la journalisation des ASP.NET Core, consultez <xref:fundamentals/logging/index> .
 
-## <a name="blazor-webassembly-signalr-net-client-logging"></a>Blazor WebAssemblySignalRJournalisation du client .net
+## <a name="no-locblazor-webassembly-no-locsignalr-net-client-logging"></a>Blazor WebAssemblySignalRJournalisation du client .net
 
 Injectez un <xref:Microsoft.Extensions.Logging.ILoggerProvider> pour ajouter une `WebAssemblyConsoleLogger` aux fournisseurs de journalisation passés à <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder> . Contrairement à un traditionnel <xref:Microsoft.Extensions.Logging.Console.ConsoleLogger> , `WebAssemblyConsoleLogger` est un wrapper autour des API de journalisation spécifiques aux navigateurs (par exemple, `console.log` ). L’utilisation de `WebAssemblyConsoleLogger` rend la journalisation possible dans mono dans un contexte de navigateur.
 
@@ -63,7 +65,7 @@ var connection = new HubConnectionBuilder()
     .Build();
 ```
 
-## <a name="log-in-razor-components"></a>Connecter les Razor composants
+## <a name="log-in-no-locrazor-components"></a>Connecter les Razor composants
 
 Les journaux respectent la configuration de démarrage de l’application.
 

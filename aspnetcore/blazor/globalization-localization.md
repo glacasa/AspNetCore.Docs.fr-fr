@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 1d24ebe900dfcdeb8b7bcc97f1d212deea9cecae
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 59b6e4cb2f466594d8a105a239e175e9c7b37ad8
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402726"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014242"
 ---
-# <a name="aspnet-core-blazor-globalization-and-localization"></a>BlazorGlobalisation et localisation ASP.net Core
+# <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>BlazorGlobalisation et localisation ASP.net Core
 
 Par [Luke Latham](https://github.com/guardrex) et [Daniel Roth](https://github.com/danroth27)
 
@@ -36,7 +38,7 @@ Un ensemble limité de scénarios de localisation de ASP.NET Core est actuelleme
 * <xref:Microsoft.Extensions.Localization.IStringLocalizer>et <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> *sont pris en charge* dans les Blazor applications.
 * <xref:Microsoft.AspNetCore.Mvc.Localization.IHtmlLocalizer>la <xref:Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer> localisation des annotations de données, et est ASP.net Core les scénarios MVC et **non pris en charge** dans les Blazor applications.
 
-Pour plus d’informations, consultez <xref:fundamentals/localization>.
+Pour plus d'informations, consultez <xref:fundamentals/localization>.
 
 ## <a name="globalization"></a>Globalisation
 
@@ -81,20 +83,20 @@ Blazor Serverles applications sont localisées à l’aide de l' [intergiciel (m
 
 La culture peut être définie à l’aide de l’une des approches suivantes :
 
-* [Internes](#cookies)
+* [Cookies](#cookies)
 * [Fournir l’interface utilisateur pour choisir la culture](#provide-ui-to-choose-the-culture)
 
 Pour plus d’informations et d’exemples, consultez <xref:fundamentals/localization>.
 
-#### <a name="cookies"></a>Cookies
+#### <a name="no-loccookies"></a>Cookies
 
-Un cookie de culture de localisation peut conserver la culture de l’utilisateur. L’intergiciel (middleware) de localisation lit le cookie sur les demandes suivantes pour définir la culture de l’utilisateur. 
+Une culture cookie de localisation peut conserver la culture de l’utilisateur. L’intergiciel (middleware) de localisation lit les cookie sur les demandes suivantes pour définir la culture de l’utilisateur. 
 
-L’utilisation d’un cookie garantit que la connexion WebSocket peut propager correctement la culture. Si les schémas de localisation sont basés sur le chemin d’URL ou la chaîne de requête, il est possible que le schéma ne soit pas en mesure de fonctionner avec les WebSockets, et donc de ne pas conserver la culture. Par conséquent, l’utilisation d’un cookie de culture de localisation est l’approche recommandée.
+L’utilisation d’un cookie s’assure que la connexion WebSocket peut propager correctement la culture. Si les schémas de localisation sont basés sur le chemin d’URL ou la chaîne de requête, il est possible que le schéma ne soit pas en mesure de fonctionner avec les WebSockets, et donc de ne pas conserver la culture. Par conséquent, l’utilisation d’une culture de localisation cookie est l’approche recommandée.
 
-Toute technique peut être utilisée pour assigner une culture si la culture est rendue persistante dans un cookie de localisation. Si l’application a déjà un schéma de localisation établi pour les ASP.NET Core côté serveur, continuez à utiliser l’infrastructure de localisation existante de l’application et à définir le cookie de la culture de localisation dans le schéma de l’application.
+Toute technique peut être utilisée pour assigner une culture si la culture est rendue persistante dans une localisation cookie . Si l’application a déjà un schéma de localisation établi pour ASP.NET Core côté serveur, continuez à utiliser l’infrastructure de localisation existante de l’application et à définir la culture de localisation cookie dans le schéma de l’application.
 
-L’exemple suivant montre comment définir la culture actuelle dans un cookie qui peut être lu par l’intergiciel (middleware) de localisation. Créer une Razor expression dans le `Pages/_Host.cshtml` fichier immédiatement à l’intérieur de la `<body>` balise d’ouverture :
+L’exemple suivant montre comment définir la culture actuelle dans une cookie qui peut être lue par l’intergiciel (middleware) de localisation. Créer une Razor expression dans le `Pages/_Host.cshtml` fichier immédiatement à l’intérieur de la `<body>` balise d’ouverture :
 
 ```cshtml
 @using System.Globalization
@@ -120,9 +122,9 @@ La localisation est gérée par l’application dans la séquence d’événemen
 
 1. Le navigateur envoie une requête HTTP initiale à l’application.
 1. La culture est affectée par l’intergiciel (middleware) de localisation.
-1. L' Razor expression dans la `_Host` page ( `_Host.cshtml` ) conserve la culture dans un cookie dans le cadre de la réponse.
+1. L' Razor expression dans la `_Host` page ( `_Host.cshtml` ) conserve la culture dans un dans cookie le cadre de la réponse.
 1. Le navigateur ouvre une connexion WebSocket pour créer une Blazor Server session interactive.
-1. L’intergiciel de localisation lit le cookie et assigne la culture.
+1. L’intergiciel (middleware) de localisation lit cookie et assigne la culture.
 1. La Blazor Server session commence par la culture correcte.
 
 #### <a name="provide-ui-to-choose-the-culture"></a>Fournir l’interface utilisateur pour choisir la culture
@@ -153,7 +155,7 @@ public class CultureController : Controller
 ```
 
 > [!WARNING]
-> Utilisez le <xref:Microsoft.AspNetCore.Mvc.ControllerBase.LocalRedirect%2A> résultat de l’action pour empêcher les attaques de redirection ouvertes. Pour plus d’informations, consultez <xref:security/preventing-open-redirects>.
+> Utilisez le <xref:Microsoft.AspNetCore.Mvc.ControllerBase.LocalRedirect%2A> résultat de l’action pour empêcher les attaques de redirection ouvertes. Pour plus d'informations, consultez <xref:security/preventing-open-redirects>.
 
 Si l’application n’est pas configurée pour traiter les actions du contrôleur :
 

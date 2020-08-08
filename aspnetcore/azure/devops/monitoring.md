@@ -6,6 +6,8 @@ ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 07/10/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/monitor
-ms.openlocfilehash: a94b1e0b5ce2a24cf22eb665c9bcd03c25ffa67f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 9e8b48df5a3ecf78e315c7f33b5ab75d6f329cc2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400373"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012772"
 ---
 # <a name="monitor-and-debug"></a>Surveiller et déboguer
 
@@ -100,7 +102,7 @@ Les journaux de serveur Web et d’application sont désactivés par défaut dan
 1. Activez la **journalisation des applications (système de fichiers)**. Si vous y êtes invité, cliquez sur la case pour installer les extensions afin d’activer la journalisation de l’application dans l’application Web.
 1. Définissez la **journalisation du serveur Web** dans le **système de fichiers**.
 1. Entrez la **période de rétention** en jours. Par exemple, 30.
-1. Cliquez sur **Save**.
+1. Cliquez sur **Enregistrer**.
 
 Les journaux de ASP.NET Core et de serveur Web (App Service) sont générés pour l’application Web. Ils peuvent être téléchargés à l’aide des informations FTP/FTPS affichées. Le mot de passe est le même que celui des informations d’identification de déploiement créées précédemment dans ce guide. Les journaux peuvent être [transmis en continu directement sur votre machine locale avec PowerShell ou Azure CLI](/azure/app-service/web-sites-enable-diagnostic-log#download). Vous pouvez également consulter les journaux [dans application Insights](/azure/app-service/web-sites-enable-diagnostic-log#how-to-view-logs-in-application-insights).
 

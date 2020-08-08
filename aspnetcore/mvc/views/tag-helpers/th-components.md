@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: scaddie
 ms.date: 06/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: 58781880764b26a67d71e70c225ab4ed4e5da109
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 736288b6e7d2e9be7f23f6df02183a813951eb56
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406704"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014722"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>Tag Helper Components dans ASP.NET Core
 
@@ -46,7 +48,7 @@ Dans l’élément `<head>` HTML, les fichiers CSS sont généralement importés
 
 [!code-csharp[](th-components/samples/RazorPagesSample/TagHelpers/AddressStyleTagHelperComponent.cs)]
 
-Dans le code précédent :
+Dans le code précédent :
 
 * L'objet `AddressStyleTagHelperComponent` implémente l'objet <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent>. L’abstraction :
   * Permet l’initialisation de la classe avec un <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext>.
@@ -80,7 +82,7 @@ Si la classe Tag Helper Component n’est pas managée avec <xref:Microsoft.AspN
 
 [!code-csharp[](th-components/samples/RazorPagesSample/Startup.cs?name=snippet_ConfigureServices&highlight=12-15)]
 
-### <a name="registration-via-razor-file"></a>Inscription par le biais du Razor fichier
+### <a name="registration-via-no-locrazor-file"></a>Inscription par le biais du Razor fichier
 
 Si le composant tag Helper n’est pas inscrit auprès de DI, il peut être enregistré à partir d’une Razor page pages ou d’une vue Mvc. Cette technique est utilisée pour contrôler le balisage injecté et l’ordre d’exécution du composant à partir d’un Razor fichier.
 
@@ -88,7 +90,7 @@ Si le composant tag Helper n’est pas inscrit auprès de DI, il peut être enre
 
 [!code-cshtml[](th-components/samples/RazorPagesSample/Pages/Contact.cshtml?name=snippet_ITagHelperComponentManager)]
 
-Dans le code précédent :
+Dans le code précédent :
 
 * La directive `@inject` fournit une instance de `ITagHelperComponentManager`. L’instance est assignée à une variable nommée `manager` pour l’accès en aval dans le Razor fichier.
 * Une instance de `AddressTagHelperComponent` est ajoutée à la collection des Tag Helper Components de l’application.
@@ -109,7 +111,7 @@ L’injection de constructeur est utilisée pour accéder à une instance de `IT
 
 [!code-csharp[](th-components/samples/RazorPagesSample/Pages/Index.cshtml.cs?name=snippet_IndexModelClass)]
 
-Dans le code précédent :
+Dans le code précédent :
 
 * L’injection de constructeur est utilisée pour accéder à une instance de `ITagHelperComponentManager`.
 * Une instance de `AddressTagHelperComponent` est ajoutée à la collection des Tag Helper Components de l’application.
