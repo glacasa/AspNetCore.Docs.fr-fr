@@ -5,6 +5,8 @@ description: Partie 3 de la série de didacticiels sur les Razor pages.
 ms.author: riande
 ms.date: 08/17/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 898f3be045755a0ee14c738b6ffc104408ded7b6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f8942e52b3b438817e3d1041a2c6b568eb662469
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407770"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020390"
 ---
-# <a name="part-3-scaffolded-razor-pages-in-aspnet-core"></a>Partie 3, Razor pages de génération de modèles automatique dans ASP.net Core
+# <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>Partie 3, Razor pages de génération de modèles automatique dans ASP.net Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -72,7 +74,7 @@ La `@model` directive spécifie le type du modèle passé à la Razor page. Dans
 
 ### <a name="the-layout-page"></a>La page de disposition
 
-Sélectionnez les liens du menu (**RazorPagesMovie**, **Accueil** et **Confidentialité**). Chaque page affiche la même disposition de menu. La disposition du menu est implémentée dans le fichier *Pages/Shared/_Layout.cshtml*. Ouvrez le fichier *Pages/Shared/_Layout.cshtml*.
+Sélectionnez les liens de menu (** Razor PagesMovie**, **début**et **confidentialité**). Chaque page affiche la même disposition de menu. La disposition du menu est implémentée dans le fichier *Pages/Shared/_Layout.cshtml*. Ouvrez le fichier *Pages/Shared/_Layout.cshtml*.
 
 Les modèles de [Disposition](xref:mvc/views/layout) permettent que la disposition du conteneur HTML soit :
 
@@ -104,7 +106,7 @@ La ligne `@*Markup removed for brevity.*@` est un Razor commentaire. Contraireme
 
 ### <a name="update-the-layout"></a>Mettre à jour la disposition
 
-Changez l’élément `<title>` dans le fichier *Pages/Shared/_Layout.cshtml* pour afficher **Movie** au lieu de **RazorPagesMovie**.
+Modifiez l' `<title>` élément dans le fichier *pages/Shared/_Layout. cshtml* pour afficher **Movie** plutôt que ** Razor PagesMovie**.
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml?range=1-6&highlight=6)]
 
@@ -153,7 +155,7 @@ S’il existe des erreurs liées au modèle, le formulaire est réaffiché, ains
 
 S’il n’existe pas d’erreurs de modèle, les données sont enregistrées et le navigateur est redirigé vers la page Index.
 
-### <a name="the-create-razor-page"></a>La Razor page créer
+### <a name="the-create-no-locrazor-page"></a>La Razor page créer
 
 Examinez le fichier de page *pages/movies/Create. cshtml* Razor :
 
@@ -207,7 +209,7 @@ Le [tag Helper d’entrée](xref:mvc/views/working-with-forms) ( `<input asp-for
 
 Pour plus d’informations sur les Tag Helpers, comme `<form method="post">`, consultez [Tag Helpers dans ASP.NET Core](xref:mvc/views/tag-helpers/intro).
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 > [!div class="step-by-step"]
 > [Précédent : ajout d’un modèle](xref:tutorials/razor-pages/model) 
@@ -263,7 +265,7 @@ La `@model` directive spécifie le type du modèle passé à la Razor page. Dans
 
 ### <a name="the-layout-page"></a>La page de disposition
 
-Sélectionnez les liens du menu (**RazorPagesMovie**, **Accueil** et **Confidentialité**). Chaque page affiche la même disposition de menu. La disposition du menu est implémentée dans le fichier *Pages/Shared/_Layout.cshtml*. Ouvrez le fichier *Pages/Shared/_Layout.cshtml*.
+Sélectionnez les liens de menu (** Razor PagesMovie**, **début**et **confidentialité**). Chaque page affiche la même disposition de menu. La disposition du menu est implémentée dans le fichier *Pages/Shared/_Layout.cshtml*. Ouvrez le fichier *Pages/Shared/_Layout.cshtml*.
 
 Les modèles de [disposition](xref:mvc/views/layout) vous permettent de spécifier la disposition du conteneur HTML de votre site dans un emplacement unique, puis de l’appliquer sur plusieurs pages de votre site. Recherchez la ligne `@RenderBody()`. `RenderBody`est un espace réservé dans lequel tous les affichages spécifiques à la page que vous créez s’affichent, *inclus* dans la page de disposition. Par exemple, si vous sélectionnez le lien **Confidentialité**, la vue **Pages/Privacy.cshtml** est restituée dans la méthode `RenderBody`.
 
@@ -290,7 +292,7 @@ La ligne `@*Markup removed for brevity.*@` est un Razor commentaire qui n’appa
 
 ### <a name="update-the-layout"></a>Mettre à jour la disposition
 
-Changez l’élément `<title>` dans le fichier *Pages/Shared/_Layout.cshtml* pour afficher **Movie** au lieu de **RazorPagesMovie**.
+Modifiez l' `<title>` élément dans le fichier *pages/Shared/_Layout. cshtml* pour afficher **Movie** plutôt que ** Razor PagesMovie**.
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml?range=1-6&highlight=6)]
 
@@ -339,7 +341,7 @@ S’il existe des erreurs liées au modèle, le formulaire est réaffiché, ains
 
 S’il n’existe pas d’erreurs de modèle, les données sont enregistrées et le navigateur est redirigé vers la page Index.
 
-### <a name="the-create-razor-page"></a>La Razor page créer
+### <a name="the-create-no-locrazor-page"></a>La Razor page créer
 
 Examinez le fichier de page *pages/movies/Create. cshtml* Razor :
 
@@ -373,7 +375,7 @@ Le [tag Helper étiquette](xref:mvc/views/working-with-forms#the-label-tag-helpe
 
 Le [tag Helper d’entrée](xref:mvc/views/working-with-forms) ( `<input asp-for="Movie.Title" class="form-control">` ) utilise les attributs [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) et produit les attributs HTML nécessaires à la validation jQuery côté client.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Version YouTube de ce tutoriel](https://youtu.be/zxgKjPYnOMM)
 

@@ -5,6 +5,8 @@ description: Découvrez comment ASP.NET Core MVC utilise le middleware (intergic
 ms.author: riande
 ms.date: 3/25/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 962b42239b2101fc95e55fb38ce214481bf0ef01
-ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
+ms.openlocfilehash: 4d367a6b15fdcf9ef6be1bac749368fd48fa259e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87444141"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020364"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>Routage vers les actions du contrôleur dans ASP.NET Core
 
@@ -431,7 +433,7 @@ Le tableau suivant décrit les `[Route]` attributs dans le code précédent :
 | `[Route("")]` | Oui | `"Home"` |
 | `[Route("Index")]` | Oui | `"Home/Index"` |
 | `[Route("/")]` | **Non** | `""` |
-| `[Route("About")]` | Oui | `"Home/About"` |
+| `[Route("About")]` | Yes | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>
 <a name="oar"></a>
@@ -721,7 +723,7 @@ Si la valeur `{ d = Donovan }` est ajoutée :
 
 Vous pouvez vous attendre à rencontrer ce problème avec l’itinéraire par défaut `{controller}/{action}/{id?}` . Ce problème est rare dans la pratique, car `Url.Action` spécifie toujours explicitement une `controller` `action` valeur et.
 
-Plusieurs surcharges d' [URL. action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) acceptent un objet de valeurs d’itinéraire pour fournir des valeurs pour les paramètres de routage autres que `controller` et `action` . L’objet de valeurs d’itinéraire est fréquemment utilisé avec `id` . Par exemple : `Url.Action("Buy", "Products", new { id = 17 })`. Objet de valeurs d’itinéraire :
+Plusieurs surcharges d' [URL. action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) acceptent un objet de valeurs d’itinéraire pour fournir des valeurs pour les paramètres de routage autres que `controller` et `action` . L’objet de valeurs d’itinéraire est fréquemment utilisé avec `id` . Par exemple, `Url.Action("Buy", "Products", new { id = 17 })`. Objet de valeurs d’itinéraire :
 
 * Par Convention, est généralement un objet de type anonyme.
 * Il peut s’agir d’un `IDictionary<>` ou d’un [poco](https://wikipedia.org/wiki/Plain_old_CLR_object)).

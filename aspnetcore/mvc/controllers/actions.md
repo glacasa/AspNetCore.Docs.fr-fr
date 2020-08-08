@@ -5,6 +5,8 @@ description: ''
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/actions
-ms.openlocfilehash: 0c91edc947b1a17f2dd36b281afe348aa8611bd7
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 05985acb559f63eb5f1d9854041be737291a3809
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406912"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019909"
 ---
 # <a name="handle-requests-with-controllers-in-aspnet-core-mvc"></a>Gérer les requêtes avec des contrôleurs dans ASP.NET Core MVC
 
@@ -85,7 +87,7 @@ La plupart des méthodes helper de cette catégorie incluent une propriété `Co
 
 Il existe deux types de résultats dans cette catégorie : [Vue](xref:mvc/views/overview) et [Réponse mise en forme](xref:web-api/advanced/formatting).
 
-* **Afficher**
+* **Visualiser**
 
     Ce type retourne une vue qui utilise un modèle pour rendre le HTML. Par exemple, `return View(customer);` passe un modèle à la vue pour la liaison de données.
 

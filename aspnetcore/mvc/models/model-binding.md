@@ -6,6 +6,8 @@ ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: riande
 ms.date: 12/18/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: b3dcb3a80e8d5150d8513ef558531749d0884568
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6ec531a04a220f75f5793cb2c7b5232908dbd883
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400152"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019155"
 ---
 # <a name="model-binding-in-aspnet-core"></a>Liaison de données dans ASP.NET Core
 
@@ -144,7 +146,7 @@ public class Pet
 }
 ```
 
-Dans l'exemple précédent :
+Dans l’exemple précédent :
 
 * L' `[FromQuery]` attribut est ignoré.
 * La `Breed` propriété n’est pas remplie à partir d’un paramètre de chaîne de requête. 
@@ -155,13 +157,13 @@ N’appliquez pas `[FromBody]` à plus d’un paramètre par méthode d’action
 
 ### <a name="additional-sources"></a>Sources supplémentaires
 
-Les données sources sont fournies au système de liaison de modèle par les *fournisseurs de valeurs*. Vous pouvez écrire et inscrire des fournisseurs de valeurs personnalisés qui obtiennent des données de liaison de modèle à partir d’autres sources. Par exemple, vous pouvez obtenir des données provenant de cookies ou de l’état de session. Pour obtenir des données provenant d’une nouvelle source :
+Les données sources sont fournies au système de liaison de modèle par les *fournisseurs de valeurs*. Vous pouvez écrire et inscrire des fournisseurs de valeurs personnalisés qui obtiennent des données de liaison de modèle à partir d’autres sources. Par exemple, vous pouvez obtenir des données à partir de ou de l' cookie État de session. Pour obtenir des données provenant d’une nouvelle source :
 
 * Créez une classe qui implémente `IValueProvider`.
 * Créez une classe qui implémente `IValueProviderFactory`.
 * Inscrivez la classe de fabrique dans `Startup.ConfigureServices`.
 
-L’exemple d’application comprend un exemple de [fournisseur de valeurs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProvider.cs) et de [fabrique](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProviderFactory.cs), qui permet de récupérer les valeurs provenant des cookies. Voici le code d’inscription dans `Startup.ConfigureServices` :
+L’exemple d’application comprend un [fournisseur de valeur](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProvider.cs) et un exemple d' [usine](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProviderFactory.cs) qui obtient des valeurs de cookie s. Voici le code d’inscription dans `Startup.ConfigureServices` :
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=4)]
 
@@ -503,7 +505,7 @@ Pour plus d’informations, consultez [TryUpdateModelAsync](xref:data/ef-rp/crud
 
 Le nom de cet attribut suit le modèle des attributs de liaison de modèle qui spécifient une source de données. Toutefois, il ne permet pas de lier les données d’un fournisseur de valeurs. Il obtient une instance d’un type à partir du conteneur d’[injection de dépendances](xref:fundamentals/dependency-injection). Son objectif est de fournir une alternative à l’injection de constructeurs quand vous avez besoin d’un service uniquement si une méthode particulière est appelée.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * <xref:mvc/models/validation>
 * <xref:mvc/advanced/custom-model-binding>
@@ -630,7 +632,7 @@ public class Pet
 }
 ```
 
-Dans l'exemple précédent :
+Dans l’exemple précédent :
 
 * L' `[FromQuery]` attribut est ignoré.
 * La `Breed` propriété n’est pas remplie à partir d’un paramètre de chaîne de requête. 
@@ -641,13 +643,13 @@ N’appliquez pas `[FromBody]` à plus d’un paramètre par méthode d’action
 
 ### <a name="additional-sources"></a>Sources supplémentaires
 
-Les données sources sont fournies au système de liaison de modèle par les *fournisseurs de valeurs*. Vous pouvez écrire et inscrire des fournisseurs de valeurs personnalisés qui obtiennent des données de liaison de modèle à partir d’autres sources. Par exemple, vous pouvez obtenir des données provenant de cookies ou de l’état de session. Pour obtenir des données provenant d’une nouvelle source :
+Les données sources sont fournies au système de liaison de modèle par les *fournisseurs de valeurs*. Vous pouvez écrire et inscrire des fournisseurs de valeurs personnalisés qui obtiennent des données de liaison de modèle à partir d’autres sources. Par exemple, vous pouvez obtenir des données à partir de ou de l' cookie État de session. Pour obtenir des données provenant d’une nouvelle source :
 
 * Créez une classe qui implémente `IValueProvider`.
 * Créez une classe qui implémente `IValueProviderFactory`.
 * Inscrivez la classe de fabrique dans `Startup.ConfigureServices`.
 
-L’exemple d’application comprend un exemple de [fournisseur de valeurs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProvider.cs) et de [fabrique](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProviderFactory.cs), qui permet de récupérer les valeurs provenant des cookies. Voici le code d’inscription dans `Startup.ConfigureServices` :
+L’exemple d’application comprend un [fournisseur de valeur](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProvider.cs) et un exemple d' [usine](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProviderFactory.cs) qui obtient des valeurs de cookie s. Voici le code d’inscription dans `Startup.ConfigureServices` :
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=3)]
 

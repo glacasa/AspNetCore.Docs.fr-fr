@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/introduction
-ms.openlocfilehash: bf41d5a756c988b239824c19ef7a9d177a93a4a1
-ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
+ms.openlocfilehash: b29711e8e1ef1558731ba58ca2ff14000af19ca2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87913824"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019354"
 ---
 # <a name="aspnet-core-data-protection"></a>Protection des données ASP.NET Core
 
@@ -31,7 +33,7 @@ La pile de protection des données ASP.NET Core est conçue pour servir de rempl
 
 La déclaration globale du problème peut être exposée succinctement en une seule phrase : je dois conserver des informations approuvées pour une récupération ultérieure, mais je n’approuve pas le mécanisme de persistance. En termes Web, cela peut être écrit comme « j’ai besoin d’aller-retour dans un État approuvé via un client non approuvé ».
 
-L’exemple canonique est un cookie d’authentification ou un jeton de porteur. Le serveur génère un jeton « je suis Groot et dispose des autorisations XYZ » et le transmet au client. À une date ultérieure, le client présente ce jeton au serveur, mais le serveur a besoin d’un certain type d’assurance que le client n’a pas falsifié le jeton. Par conséquent, la première exigence : authenticité (également appelée intégrité, vérification de la falsification).
+L’exemple canonique est un jeton d’authentification cookie ou de porteur. Le serveur génère un jeton « je suis Groot et dispose des autorisations XYZ » et le transmet au client. À une date ultérieure, le client présente ce jeton au serveur, mais le serveur a besoin d’un certain type d’assurance que le client n’a pas falsifié le jeton. Par conséquent, la première exigence : authenticité (également appelée intégrité, vérification de la falsification).
 
 Étant donné que l’état persistant est approuvé par le serveur, nous pensons que cet État peut contenir des informations spécifiques à l’environnement d’exploitation. Cela peut se présenter sous la forme d’un chemin d’accès de fichier, d’une autorisation, d’un handle ou d’une autre référence indirecte, ou d’un autre élément de données spécifiques au serveur. Ces informations ne doivent généralement pas être divulguées à un client non approuvé. Par conséquent, la deuxième exigence : la confidentialité.
 

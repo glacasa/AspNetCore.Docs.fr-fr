@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/03/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-iis
-ms.openlocfilehash: 837a66ef36f1394df87d56132e146ef23a5d5659
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: fc8573625328fe18970cd6bcd5627b71680d5ca7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407887"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020234"
 ---
 # <a name="publish-an-aspnet-core-app-to-iis"></a>Publier une application ASP.NET Core sur IIS
 
@@ -67,7 +69,7 @@ Téléchargez le programme d’installation à l’aide du lien suivant :
 
 1. Spécifiez le **Nom du site** et définissez le **Chemin physique** sur le dossier de déploiement de l’application que vous avez créé. Spécifiez la configuration **Liaison** et créez le site web en sélectionnant **OK**.
 
-## <a name="create-an-aspnet-core-razor-pages-app"></a>Créer une Razor application ASP.net Core pages
+## <a name="create-an-aspnet-core-no-locrazor-pages-app"></a>Créer une Razor application ASP.net Core pages
 
 Suivez le <xref:getting-started> didacticiel pour créer une Razor application pages.
 
@@ -123,7 +125,7 @@ Pour plus d’informations sur l’hébergement des applications ASP.NET Core su
 > [!div class="nextstepaction"]
 > <xref:host-and-deploy/iis/index>
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 ### <a name="articles-in-the-aspnet-core-documentation-set"></a>Articles de la documentation ASP.NET Core
 

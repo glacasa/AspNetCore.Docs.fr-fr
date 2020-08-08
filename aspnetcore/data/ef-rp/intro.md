@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 700370fd11a0df40a45c47e8c378d5bdd0c60009
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: cd6624d107fb19da92a7e58a747cc85e876a6ba4
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212694"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018635"
 ---
-# <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>RazorPages avec Entity Framework Core dans ASP.NET Core-didacticiel 1 sur 8
+# <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>RazorPages avec Entity Framework Core dans ASP.NET Core-didacticiel 1 sur 8
 
 Par [Tom Dykstra](https://github.com/tdykstra) et [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -357,16 +359,16 @@ La méthode [EnsureCreated](/dotnet/api/microsoft.entityframeworkcore.infrastruc
 
 * Supprimez la base de données. Toutes les données existantes sont perdues.
 * Modifiez le modèle de données. Par exemple, ajoutez un champ `EmailAddress`.
-* Exécutez l’application.
+* Exécutez l'application.
 * `EnsureCreated` crée une base de données avec le nouveau schéma.
 
 Ce workflow fonctionne bien à un stade précoce du développement, quand le schéma évolue rapidement, aussi longtemps que vous n’avez pas besoin de conserver les données. La situation est différente quand les données qui ont été entrées dans la base de données doivent être conservées. Dans ce cas, procédez à des migrations.
 
 Plus tard dans cette série de tutoriels, vous supprimerez la base de données créée par `EnsureCreated` et procéderez à des migrations. Une base de données créée par `EnsureCreated` ne peut pas être mise à jour via des migrations.
 
-### <a name="test-the-app"></a>Tester l’application
+### <a name="test-the-app"></a>Test de l'application
 
-* Exécutez l’application.
+* Exécutez l'application.
 * Sélectionnez le lien **Students**, puis **Créer nouveau**.
 * Testez les liens Edit, Details et Delete.
 
@@ -498,7 +500,7 @@ Les utilisateurs peuvent afficher et mettre à jour les informations relatives a
 
 Le style de l’interface utilisateur de ce site est proche de ce qui est généré par les modèles prédéfinis. Ce didacticiel se concentre sur EF Core avec Razor les pages, et non sur l’interface utilisateur.
 
-## <a name="create-the-contosouniversity-razor-pages-web-app"></a>Créer l' Razor application Web ContosoUniversity pages
+## <a name="create-the-contosouniversity-no-locrazor-pages-web-app"></a>Créer l' Razor application Web ContosoUniversity pages
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -507,7 +509,7 @@ Le style de l’interface utilisateur de ce site est proche de ce qui est géné
 * Sélectionnez **ASP.NET Core 2.1** dans la liste déroulante, puis sélectionnez **Application web**.
 
 Pour obtenir des images des étapes précédentes, consultez [créer une Razor application Web](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app).
-Exécutez l’application.
+Exécutez l'application.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -666,14 +668,14 @@ Le code suivant montre le fichier *Program.cs* mis à jour.
 
 * Supprimez la base de données.
 * Modification du schéma de base de données (par exemple, ajout d’un champ `EmailAddress`).
-* Exécutez l’application.
+* Exécutez l'application.
 * `EnsureCreated` crée une base de données avec la colonne `EmailAddress`.
 
 `EnsureCreated` est pratique au début du développement quand le schéma évolue rapidement. Plus loin dans le tutoriel, la base de données est supprimée et les migrations sont utilisées.
 
-### <a name="test-the-app"></a>Tester l’application
+### <a name="test-the-app"></a>Test de l'application
 
-Exécutez l’application et acceptez la politique de cookies. Cette application ne conserve pas les informations personnelles. Vous pouvez en savoir plus sur la politique de cookies à la section [Prise en charge du règlement général sur la protection des données (RGPD)](xref:security/gdpr).
+Exécutez l’application et acceptez la cookie stratégie. Cette application ne conserve pas les informations personnelles. Pour en savoir plus sur la cookie stratégie au niveau de la [prise en charge de l’union européenne règlement général sur la protection des données (RGPD)](xref:security/gdpr).
 
 * Sélectionnez le lien **Students**, puis **Créer nouveau**.
 * Testez les liens Edit, Details et Delete.
@@ -771,11 +773,11 @@ Dans le didacticiel suivant, nous allons examiner les opérations CRUD de base (
 
 
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Version YouTube de ce tutoriel](https://www.youtube.com/watch?v=P7iTtQnkrNs)
 
 > [!div class="step-by-step"]
-> [Suivant](xref:data/ef-rp/crud)
+> [Next](xref:data/ef-rp/crud)
 
 ::: moniker-end

@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 04/06/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: f74f6ce93093adbc931dd90b32a14de5d4f89096
-ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
+ms.openlocfilehash: 0d99c5881b1ca786287d8643c82cab6a3f98f988
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87913891"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019857"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>Meilleures pratiques en matière de performances de ASP.NET Core
 
@@ -108,7 +110,7 @@ Recommandations :
 
 ## <a name="keep-common-code-paths-fast"></a>Conserver les chemins de code communs rapidement
 
-Vous souhaitez que tout votre code soit rapide. Les chemins de code fréquemment appelés sont les plus importants à optimiser. notamment :
+Vous souhaitez que tout votre code soit rapide. Les chemins de code fréquemment appelés sont les plus importants à optimiser. Il s’agit des tables suivantes :
 
 * Composants de l’intergiciel (middleware) dans le pipeline de traitement des demandes de l’application, en particulier les intergiciels (middleware) exécutés au début du pipeline. Ces composants ont un impact important sur les performances.
 * Code qui est exécuté pour chaque demande ou plusieurs fois par demande. Par exemple, la journalisation personnalisée, les gestionnaires d’autorisation ou l’initialisation de services temporaires.

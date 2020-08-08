@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 2/25/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: b6a189907f521d7d9d18c1373747a13ab38a621f
-ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
+ms.openlocfilehash: ad6eac246e5bc7039158981bbe96036389512e4f
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87444165"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019233"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Didacticiel : créer une API Web avec ASP.NET Core
 
@@ -29,7 +31,7 @@ Ce tutoriel décrit les principes fondamentaux liés à la génération d’une 
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Dans ce tutoriel, vous apprenez à effectuer les opérations suivantes :
+Dans ce tutoriel, vous allez apprendre à :
 
 > [!div class="checklist"]
 > * Créer un projet d’API web.
@@ -50,7 +52,7 @@ Ce didacticiel crée l’API suivante :
 |`GET /api/TodoItems/{id}` | Obtenir un élément par ID | Aucun | Tâche|
 |`POST /api/TodoItems` | Ajouter un nouvel élément | Tâche | Tâche |
 |`PUT /api/TodoItems/{id}` | Mettre à jour un élément existant &nbsp; | Tâche | Aucun |
-|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Supprimer un élément &nbsp;&nbsp; | Aucune | Aucune|
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Supprimer un élément &nbsp;&nbsp; | None | None|
 
 Le diagramme suivant illustre la conception de l’application.
 
@@ -401,7 +403,7 @@ Une réponse semblable à la suivante est produite par l’appel à `GetTodoItem
 
 * Créez une requête.
 * Définissez la méthode HTTP sur **GET**.
-* Définissez l’URL de la requête sur `https://localhost:<port>/api/TodoItems`. Par exemple : `https://localhost:5001/api/TodoItems`.
+* Définissez l’URL de la requête sur `https://localhost:<port>/api/TodoItems`. Par exemple, `https://localhost:5001/api/TodoItems`.
 * Définissez l’**affichage à deux volets** dans Postman.
 * Sélectionnez **Envoyer**.
 
@@ -512,7 +514,7 @@ Consultez [Didacticiel : appeler une API web ASP.net core avec JavaScript](xref
 
 ::: moniker range="< aspnetcore-3.0"
 
-Dans ce tutoriel, vous apprenez à effectuer les opérations suivantes :
+Dans ce tutoriel, vous allez apprendre à :
 
 > [!div class="checklist"]
 > * Créer un projet d’API web.
@@ -536,7 +538,7 @@ Ce didacticiel crée l’API suivante :
 |GET /api/TodoItems/{id} | Obtenir un élément par ID | Aucun | Tâche|
 |POST /api/TodoItems | Ajouter un nouvel élément | Tâche | Tâche |
 |PUT /api/TodoItems/{id} | Mettre à jour un élément existant &nbsp; | Tâche | Aucun |
-|SUPPRIMER/api/TodoItems/{id} &nbsp;&nbsp; | Supprimer un élément &nbsp;&nbsp; | Aucune | Aucune|
+|SUPPRIMER/api/TodoItems/{id} &nbsp;&nbsp; | Supprimer un élément &nbsp;&nbsp; | None | None|
 
 Le diagramme suivant illustre la conception de l’application.
 
@@ -696,7 +698,7 @@ Le code précédent :
 * Ajoute le contexte de base de données au conteneur d’injection de dépendances.
 * Spécifie que le contexte de base de données utilise une base de données en mémoire.
 
-## <a name="add-a-controller"></a>Ajout d'un contrôleur
+## <a name="add-a-controller"></a>Ajouter un contrôleur
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -802,7 +804,7 @@ Ce tutoriel utilise Postman pour tester l’API web.
 
 * Créez une requête.
   * Définissez la méthode HTTP sur **GET**.
-  * Définissez l’URL de la requête sur `https://localhost:<port>/api/todo`. Par exemple : `https://localhost:5001/api/todo`.
+  * Définissez l’URL de la requête sur `https://localhost:<port>/api/todo`. Par exemple, `https://localhost:5001/api/todo`.
 * Définissez l’**affichage à deux volets** dans Postman.
 * Sélectionnez **Envoyer**.
 
@@ -917,7 +919,7 @@ Ajoutez un fichier HTML nommé *index.html* au répertoire *wwwroot*. Remplacez 
 
 [!code-html[](first-web-api/samples/2.2/TodoApi/wwwroot/index.html)]
 
-Ajoutez un fichier JavaScript nommé *site.js* au répertoire *wwwroot*. Remplacez son contenu par le code ci-dessous :
+Ajoutez un fichier JavaScript nommé *site.js* au répertoire *wwwroot*. Remplacez le contenu par le code suivant :
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_SiteJs)]
 
@@ -960,7 +962,7 @@ Pour supprimer une tâche, vous devez définir le `type` sur l’appel AJAX avec
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 [Affichez ou téléchargez l’exemple de code de ce tutoriel](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples). Consultez [Guide pratique pour télécharger](xref:index#how-to-download-a-sample).
 

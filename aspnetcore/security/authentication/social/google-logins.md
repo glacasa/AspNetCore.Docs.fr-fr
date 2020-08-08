@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 03/19/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/google-logins
-ms.openlocfilehash: ba0b9a0da30f761f12f6015dace5ba8046535761
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 7a10b66be7f4dda25f94437b55bad9746bda97e0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405417"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020481"
 ---
 # <a name="google-external-login-setup-in-aspnet-core"></a>Configuration de la connexion à Google External dans ASP.NET Core
 
@@ -76,7 +78,7 @@ Ajoutez le service Google à `Startup.ConfigureServices` :
 
 Le segment `/signin-google` d’URI est défini en tant que rappel par défaut du fournisseur d’authentification Google. Vous pouvez modifier l’URI de rappel par défaut lors de la configuration de l’intergiciel d’authentification Google via la propriété héritée [RemoteAuthenticationOptions. CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) de la classe [GoogleOptions](/dotnet/api/microsoft.aspnetcore.authentication.google.googleoptions) .
 
-## <a name="troubleshooting"></a>Résolution des problèmes
+## <a name="troubleshooting"></a>Dépannage
 
 * Si la connexion ne fonctionne pas et que vous ne recevez pas d’erreurs, passez en mode développement pour faciliter le débogage du problème.
 * Si Identity n’est pas configuré en appelant `services.AddIdentity` dans `ConfigureServices` , toute tentative d’authentification des résultats dans *ArgumentException : l’option « SignInScheme » doit être fournie*. Le modèle de projet utilisé dans ce didacticiel permet d’effectuer cette opération.

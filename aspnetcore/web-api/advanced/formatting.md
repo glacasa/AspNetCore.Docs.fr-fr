@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 04/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: e6b78af3eeb858310eb772fdf0034510c10351c0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8aa94bd1f33d1dd8ce8e7f50468ed60b4ccb2515
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400360"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019935"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>Mettre en forme les données des réponses dans l’API web ASP.NET Core
 
@@ -33,7 +35,7 @@ ASP.NET Core MVC prend en charge la mise en forme des données de réponse. Les 
 
 Certains types de résultats d’action sont spécifiques à un format particulier, comme <xref:Microsoft.AspNetCore.Mvc.JsonResult> et <xref:Microsoft.AspNetCore.Mvc.ContentResult>. Les actions peuvent retourner des résultats mis en forme dans un format particulier, indépendamment des préférences du client. Par exemple, le retour de `JsonResult` retourne des données au format JSON. Le retour de `ContentResult` ou une chaîne retourne des données de chaîne au format texte brut.
 
-Une action n’est pas requise pour retourner un type spécifique. ASP.NET Core prend en charge toute valeur de retour d’objet.  Les résultats des actions qui retournent des objets qui ne sont pas des <xref:Microsoft.AspNetCore.Mvc.IActionResult> types sont sérialisés à l’aide de l' <xref:Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter> implémentation appropriée. Pour plus d’informations, consultez <xref:web-api/action-return-types>.
+Une action n’est pas requise pour retourner un type spécifique. ASP.NET Core prend en charge toute valeur de retour d’objet.  Les résultats des actions qui retournent des objets qui ne sont pas des <xref:Microsoft.AspNetCore.Mvc.IActionResult> types sont sérialisés à l’aide de l' <xref:Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter> implémentation appropriée. Pour plus d'informations, consultez <xref:web-api/action-return-types>.
 
 La méthode d’assistance intégrée retourne des <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Ok*> données au format JSON :[!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_get)]
 
@@ -163,7 +165,7 @@ Avant ASP.NET Core 3,0, les formateurs JSON utilisés par défaut ont été impl
 
 Certaines fonctionnalités peuvent ne pas fonctionner correctement avec `System.Text.Json` les formateurs basés sur et nécessitent une référence aux `Newtonsoft.Json` formateurs basés sur. Continuer à utiliser les `Newtonsoft.Json` formateurs basés sur, si l’application :
 
-* Utilise des `Newtonsoft.Json` attributs. Par exemple, `[JsonProperty]` ou `[JsonIgnore]`.
+* Utilise des `Newtonsoft.Json` attributs.  Par exemple, `[JsonProperty]` ou `[JsonIgnore]`.
 * Personnalise les paramètres de sérialisation.
 * S’appuie sur les fonctionnalités `Newtonsoft.Json` fournies par.
 * Configure `Microsoft.AspNetCore.Mvc.JsonResult.SerializerSettings`. Avant ASP.NET Core 3.0, `JsonResult.SerializerSettings` accepte une instance de `JsonSerializerSettings` spécifique à `Newtonsoft.Json`.

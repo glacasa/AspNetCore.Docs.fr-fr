@@ -5,6 +5,8 @@ description: Partie 2 de la série de didacticiels sur les Razor pages.
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 053e35e78b2bf58fded49c9a2860060d6a81c544
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6b50f46863a6dabb01bcf0976a42abb504e6f7b7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408108"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020455"
 ---
-# <a name="part-2-add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>Partie 2, ajouter un modèle à une Razor application pages dans ASP.net Core
+# <a name="part-2-add-a-model-to-a-no-locrazor-pages-app-in-aspnet-core"></a>Partie 2, ajouter un modèle à une Razor application pages dans ASP.net Core
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -38,7 +40,7 @@ Les classes de modèle portent le nom de classes OCT (« Objet CLR Traditionnel 
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Cliquez avec le bouton droit sur le projet **RazorPagesMovie** > **Ajouter** > **Nouveau dossier**. Nommez le dossier *Models*.
+Cliquez avec le bouton droit sur le projet ** Razor PagesMovie** > **Ajouter**  >  **un nouveau dossier**. Nommez le dossier *modèles*.
 
 Cliquez avec le bouton droit sur le dossier *Models*. Sélectionnez **Ajouter**une  >  **classe**. Nommez la classe **Movie**.
 
@@ -55,7 +57,7 @@ Cliquez avec le bouton droit sur le dossier *Models*. Sélectionnez **Ajouter**u
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-* Dans panneau solutions, cliquez avec le bouton droit sur le projet **RazorPagesMovie** , puis sélectionnez **Ajouter** > **un nouveau dossier...**. Nommez le dossier *modèles*.
+* Dans panneau solutions, cliquez avec le bouton droit sur le projet ** Razor PagesMovie** , puis sélectionnez **Ajouter** > **un nouveau dossier...**. Nommez le dossier *modèles*.
 * Cliquez avec le bouton droit sur le dossier *modèles* , puis sélectionnez **Ajouter** > **un nouveau fichier...**.
 * Dans la boîte de dialogue **Nouveau fichier** :
 
@@ -90,8 +92,8 @@ Dans la boîte de dialogue **Ajouter une structure** , sélectionnez ** Razor pa
 
 Complétez la boîte de dialogue **Ajouter des Razor pages à l’aide de Entity Framework (CRUD)** :
 
-* Dans la liste déroulante **Classe de modèle**, sélectionnez **Film (RazorPagesMovie.Models)**.
-* Dans la ligne **Classe du contexte de données**, sélectionnez le signe (plus) **+** et changez le nom généré de RazorPagesMovie.**Models**.RazorPagesMovieContext en RazorPagesMovie.**Data**.RazorPagesMovieContext. [Cette modification](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) n'est pas requise. Elle crée la classe de contexte de base de données avec l’espace de noms correct.
+* Dans la liste déroulante **classe de modèle** , sélectionnez **film ( Razor PagesMovie. Models)**.
+* Dans la ligne de la **classe de contexte de données** , sélectionnez le **+** signe (plus), puis modifiez le nom généré à partir de Razor PagesMovie.** Modèles**. Razor PagesMovieContext à Razor PagesMovie.** Données**. Razor PagesMovieContext. [Cette modification](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) n'est pas requise. Elle crée la classe de contexte de base de données avec l’espace de noms correct.
 * Sélectionnez **Ajouter**.
 
 ![Image illustrant les instructions précédentes.](model/_static/3/arp.png)
@@ -144,8 +146,8 @@ Dans la boîte de dialogue **nouvelle génération de modèles** automatique, s�
 
 Complétez la boîte de dialogue **Ajouter des Razor pages à l’aide de Entity Framework (CRUD)** :
 
-* Dans la liste déroulante **classe de modèle** , sélectionnez ou tapez **Movie (RazorPagesMovie. Models)**.
-* Dans la ligne de la **classe de contexte de données** , tapez le nom de la nouvelle classe, RazorPagesMovie. **Données**. RazorPagesMovieContext. [Cette modification](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) n'est pas requise. Elle crée la classe de contexte de base de données avec l’espace de noms correct.
+* Dans la liste déroulante **classe de modèle** , sélectionnez ou tapez **Movie ( Razor PagesMovie. Models)**.
+* Dans la ligne de la **classe de contexte de données** , tapez le nom de la nouvelle classe, Razor PagesMovie.** Données**. Razor PagesMovieContext. [Cette modification](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) n'est pas requise. Elle crée la classe de contexte de base de données avec l’espace de noms correct.
 * Sélectionnez **Ajouter**.
 
 ![Image illustrant les instructions précédentes.](model/_static/arpMac.png)
@@ -171,7 +173,7 @@ La commande précédente ajoute les outils de Entity Framework Core pour le CLI 
 Le processus de génération de modèles automatique crée et met à jour les fichiers suivants :
 
 * *Pages/Movies* : Create, Delete, Details, Edit, Index.
-* *Data/RazorPagesMovieContext.cs*
+* *Données/ Razor PagesMovieContext.cs*
 
 ### <a name="updated"></a>Mis à jour
 
@@ -184,7 +186,7 @@ Les fichiers créés et mis à jour sont expliqués dans la section suivante.
 Le processus de génération de modèles automatique crée et met à jour les fichiers suivants :
 
 * *Pages/Movies* : Create, Delete, Details, Edit, Index.
-* *Data/RazorPagesMovieContext.cs*
+* *Données/ Razor PagesMovieContext.cs*
 
 ### <a name="updated"></a>Mis à jour
 
@@ -274,7 +276,7 @@ Examinez la méthode `Up`.
 
 <a name="test"></a>
 
-### <a name="test-the-app"></a>Tester l'application
+### <a name="test-the-app"></a>Test de l'application
 
 * Exécutez l’application et ajoutez `/Movies` à l’URL dans le navigateur (`http://localhost:port/movies`).
 
@@ -298,7 +300,7 @@ Vous avez manqué [l’étape des migrations](#pmc).
 
 Le prochain didacticiel décrit les fichiers créés par la génération de modèles automatique.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 > [!div class="step-by-step"]
 > [Précédent : prise en main](xref:tutorials/razor-pages/razor-pages-start) 
@@ -319,7 +321,7 @@ Les classes de modèle portent le nom de classes OCT (« Objet CLR Traditionnel 
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Cliquez avec le bouton droit sur le projet **RazorPagesMovie** > **Ajouter** > **Nouveau dossier**. Nommez le dossier *Models*.
+Cliquez avec le bouton droit sur le projet ** Razor PagesMovie** > **Ajouter**  >  **un nouveau dossier**. Nommez le dossier *modèles*.
 
 Cliquez avec le bouton droit sur le dossier *Models*. Sélectionnez **Ajouter**une  >  **classe**. Nommez la classe **Movie**.
 
@@ -336,7 +338,7 @@ Cliquez avec le bouton droit sur le dossier *Models*. Sélectionnez **Ajouter**u
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-* Dans l’Explorateur de solutions, cliquez avec le bouton droit sur le projet **RazorPagesMovie**, puis sélectionnez **Ajouter** > **Nouveau dossier**. Nommez le dossier *Models*.
+* Dans Explorateur de solutions, cliquez avec le bouton droit sur le projet ** Razor PagesMovie** , puis sélectionnez **Ajouter**  >  **un nouveau dossier**. Nommez le dossier *modèles*.
 * Cliquez avec le bouton droit sur le dossier *Modèles*, puis sélectionnez **Ajouter** > **Nouveau fichier**.
 * Dans la boîte de dialogue **Nouveau fichier** :
 
@@ -375,8 +377,8 @@ Complétez la boîte de dialogue **Ajouter des Razor pages à l’aide de Entity
 to use Data, it should not use models. That will make the namespace the same for the VS version and the CLI version
 -->
 
-* Dans la liste déroulante **Classe de modèle**, sélectionnez **Film (RazorPagesMovie.Models)**.
-* Dans la ligne **Classe du contexte de données**, sélectionnez le signe (plus) **+** et acceptez le nom généré **RazorPagesMovie.Models.RazorPagesMovieContext**.
+* Dans la liste déroulante **classe de modèle** , sélectionnez **film ( Razor PagesMovie. Models)**.
+* Dans la ligne de la **classe de contexte de données** , sélectionnez le **+** signe (plus) et acceptez le nom généré ** Razor PagesMovie. Models. Razor PagesMovieContext**.
 * Sélectionnez **Ajouter**.
 
 ![Image illustrant les instructions précédentes.](model/_static/arp.png)
@@ -422,7 +424,7 @@ Dans la boîte de dialogue **Ajouter une nouvelle génération de modèles** aut
 Complétez la boîte de dialogue **Ajouter des Razor pages à l’aide de Entity Framework (CRUD)** :
 
 * Dans la liste déroulante **classe de modèle** , sélectionnez ou tapez **Movie**.
-* Dans la ligne de la **classe de contexte de données** , tapez Select the **RazorPagesMovieContext** This crée une nouvelle classe de contexte de base de données avec l’espace de noms correct. Dans ce cas, il s’agit de **RazorPagesMovie. Models. RazorPagesMovieContext**.
+* Dans la ligne de la **classe de contexte de données** , tapez Select the ** Razor PagesMovieContext** This crée une nouvelle classe de contexte de base de données avec l’espace de noms correct. Dans ce cas, il s’agit de ** Razor PagesMovie. Models. Razor PagesMovieContext**.
 * Sélectionnez **Ajouter**.
 
 ![Image illustrant les instructions précédentes.](model/_static/arpMac.png)
@@ -436,7 +438,7 @@ Le processus de génération de modèles automatique crée et met à jour les fi
 ### <a name="files-created"></a>Fichiers créés
 
 * *Pages/Movies* : Create, Delete, Details, Edit, Index.
-* *Data/RazorPagesMovieContext.cs*
+* *Données/ Razor PagesMovieContext.cs*
 
 ### <a name="file-updated"></a>Fichier mis à jour
 
@@ -466,7 +468,7 @@ Add-Migration Initial
 Update-Database
 ```
 
-La commande `Add-Migration` génère du code pour créer le schéma de base de données initial. Le schéma est basé sur le modèle spécifié dans `DbContext` (dans le fichier *RazorPagesMovieContext.cs*). L' `InitialCreate` argument est utilisé pour nommer la migration. Vous pouvez utiliser n’importe quel nom, mais par convention, un nom décrivant la migration est utilisé. Pour plus d’informations, consultez <xref:data/ef-mvc/migrations>.
+La commande `Add-Migration` génère du code pour créer le schéma de base de données initial. Le schéma est basé sur le modèle spécifié dans le `DbContext` (dans le fichier * Razor PagesMovieContext.cs* ). L' `InitialCreate` argument est utilisé pour nommer la migration. Vous pouvez utiliser n’importe quel nom, mais par convention, un nom décrivant la migration est utilisé. Pour plus d'informations, consultez <xref:data/ef-mvc/migrations>.
 
 La `Update-Database` commande exécute la `Up` méthode dans le fichier *migrations/ \<time-stamp> _InitialCreate. cs* . La méthode `Up` crée la base de données.
 
@@ -514,7 +516,7 @@ Examinez la méthode `Up`.
 
 <a name="test"></a>
 
-### <a name="test-the-app"></a>Tester l'application
+### <a name="test-the-app"></a>Test de l'application
 
 * Exécutez l’application et ajoutez `/Movies` à l’URL dans le navigateur (`http://localhost:port/movies`).
 
@@ -538,7 +540,7 @@ Vous avez manqué [l’étape des migrations](#pmc).
 
 Le prochain didacticiel décrit les fichiers créés par la génération de modèles automatique.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 > [!div class="step-by-step"]
 > [Précédent : prise en main](xref:tutorials/razor-pages/razor-pages-start) 

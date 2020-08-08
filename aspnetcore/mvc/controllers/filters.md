@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 96d24940af6c591e3c02bfa26ed9d7d6ea60d27d
-ms.sourcegitcommit: d00a200bc8347af794b24184da14ad5c8b6bba9a
+ms.openlocfilehash: 11d0c514dd15e787224510991ffb81680c9fc479
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86869976"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019340"
 ---
 # <a name="filters-in-aspnet-core"></a>Filtres dans ASP.NET Core
 
@@ -439,7 +441,7 @@ Levée d’une exception dans une méthode d’action :
 Pour un `IAsyncActionFilter`, un appel à <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate> :
 
 * Exécute tous les filtres d’actions suivants et la méthode d’action.
-* Retourne `ActionExecutedContext`.
+* retourne `ActionExecutedContext` ;
 
 Pour court-circuiter, attribuez <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext.Result?displayProperty=fullName> à une instance de résultat et n’appelez pas le `next` (le `ActionExecutionDelegate`).
 
@@ -746,7 +748,7 @@ Cette séquence montre que :
 * Le filtre de méthode est imbriqué dans le filtre de contrôleur.
 * Le filtre de contrôleur est imbriqué dans le filtre global.
 
-### <a name="controller-and-razor-page-level-filters"></a>Filtres au niveau du contrôleur et de la Razor page
+### <a name="controller-and-no-locrazor-page-level-filters"></a>Filtres au niveau du contrôleur et de la Razor page
 
 Chaque contrôleur qui hérite de la classe de base <xref:Microsoft.AspNetCore.Mvc.Controller> inclut les méthodes [Controller.OnActionExecuting](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*), [Controller.OnActionExecutionAsync](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*) et [ Controller.OnActionExecuted](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*)
 `OnActionExecuted`. Ces méthodes :
@@ -973,7 +975,7 @@ Levée d’une exception dans une méthode d’action :
 Pour un `IAsyncActionFilter`, un appel à <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate> :
 
 * Exécute tous les filtres d’actions suivants et la méthode d’action.
-* Retourne `ActionExecutedContext`.
+* retourne `ActionExecutedContext` ;
 
 Pour court-circuiter, attribuez <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext.Result?displayProperty=fullName> à une instance de résultat et n’appelez pas le `next` (le `ActionExecutionDelegate`).
 

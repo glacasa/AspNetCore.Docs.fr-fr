@@ -7,6 +7,8 @@ ms.custom: mvc
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: df3e738880902e3005221c6047b6be9e924f2929
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ce0e56595611a8a34d0ad11680e67e2252da66c6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406132"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020611"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>Configuration de la connexion externe à un compte Microsoft avec ASP.NET Core
 
@@ -38,7 +40,7 @@ Si vous n’avez pas de compte Microsoft, sélectionnez en **créer un**. Une fo
 * Sélectionner une **nouvelle inscription**
 * Saisissez un **Nom**.
 * Sélectionnez une option pour les **types de comptes pris en charge**.  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts. It took 24 hours after setting this up for the keys to work -->
-* Sous **URI de redirection**, entrez votre URL de développement avec le `/signin-microsoft` suffixe. Par exemple : `https://localhost:5001/signin-microsoft`. Le schéma d’authentification Microsoft configuré plus tard dans cet exemple gère automatiquement les demandes à `/signin-microsoft` l’itinéraire pour implémenter le Flow OAuth.
+* Sous **URI de redirection**, entrez votre URL de développement avec le `/signin-microsoft` suffixe. Par exemple, `https://localhost:5001/signin-microsoft`. Le schéma d’authentification Microsoft configuré plus tard dans cet exemple gère automatiquement les demandes à `/signin-microsoft` l’itinéraire pour implémenter le Flow OAuth.
 * Sélectionnez **Inscrire**.
 
 ### <a name="create-client-secret"></a>Créer un secret client
@@ -89,7 +91,7 @@ Vous êtes maintenant connecté à l’aide de vos informations d’identificati
 
 [!INCLUDE[Forward request information when behind a proxy or load balancer section](includes/forwarded-headers-middleware.md)]
 
-## <a name="troubleshooting"></a>Résolution des problèmes
+## <a name="troubleshooting"></a>Dépannage
 
 * Si le fournisseur de comptes Microsoft vous redirige vers une page d’erreur de connexion, notez le titre d’erreur et la description paramètres de chaîne de requête qui suivent directement le `#` (mot-dièse) dans l’URI.
 

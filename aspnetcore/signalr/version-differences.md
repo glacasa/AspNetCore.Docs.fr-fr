@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.date: 11/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: b5b5686f87d6e511672f6a50db7be8e2613a8a9e
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: f52bf6c82cd5125e0905d9bcbda5dd5499d6455e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060148"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020039"
 ---
-# <a name="differences-between-aspnet-signalr-and-aspnet-core-signalr"></a>Différences entre ASP.NET SignalR et ASP.net CoreSignalR
+# <a name="differences-between-aspnet-no-locsignalr-and-aspnet-core-no-locsignalr"></a>Différences entre ASP.NET SignalR et ASP.net CoreSignalR
 
 ASP.NET Core SignalR n’est pas compatible avec les clients ou les serveurs pour ASP.NET SignalR . Cet article détaille les fonctionnalités qui ont été supprimées ou modifiées dans ASP.NET Core SignalR .
 
-## <a name="how-to-identify-the-signalr-version"></a>Comment identifier la SignalR version
+## <a name="how-to-identify-the-no-locsignalr-version"></a>Comment identifier la SignalR version
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -89,7 +91,7 @@ Avant ASP.NET Core 3,0, SignalR ne prend pas en charge les reconnexions automati
 
 ::: moniker-end
 
-### <a name="protocol-support"></a>Prise en charge du protocole
+### <a name="protocol-support"></a>Prise en charge de protocole
 
 ASP.NET Core SignalR prend en charge JSON, ainsi qu’un nouveau protocole binaire basé sur [MessagePack](xref:signalr/messagepackhubprotocol). En outre, des protocoles personnalisés peuvent être créés.
 
@@ -286,7 +288,7 @@ ASP.NET SignalR prend en charge les SQL Server et les ReDim. ASP.NET Core Signal
 * [SignalRService Azure](/azure/azure-signalr/)
 * [Fond de panier ReDim](xref:signalr/redis-backplane)
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Hubs](xref:signalr/hubs)
 * [Client JavaScript](xref:signalr/javascript-client)

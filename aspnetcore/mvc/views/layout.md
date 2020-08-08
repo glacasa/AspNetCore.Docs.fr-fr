@@ -5,6 +5,8 @@ description: Apprenez à utiliser des dispositions communes, à partager des dir
 ms.author: riande
 ms.date: 07/30/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: 08e6284a6c5fc8e8926651f6fe873a71df449acb
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4d5032f02db28341d7781dd57d58d776636fd16d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406652"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020442"
 ---
 # <a name="layout-in-aspnet-core"></a>Disposition dans ASP.NET Core
 
@@ -41,7 +43,7 @@ La plupart des applications web ont une disposition commune pour offrir aux util
 
 ![Exemple de disposition de page](layout/_static/page-layout.png)
 
-Les structures HTML communes comme les scripts et les feuilles de style sont aussi fréquemment utilisées par bon nombre de pages dans une application. Tous ces éléments partagés peuvent être définis dans un fichier de *disposition*, qui peut ensuite être référencé par n’importe quelle vue utilisée dans l’application. Les dispositions réduisent les doublons de code dans les vues.
+Les structures HTML courantes, comme les scripts et les feuilles de style, sont également fréquemment utilisées par de nombreuses pages dans une application. Tous ces éléments partagés peuvent être définis dans un fichier de *disposition* , qui peut ensuite être référencé par n’importe quelle vue utilisée dans l’application. Les dispositions réduisent la duplication de code dans les vues.
 
 Par convention, la disposition par défaut d’une application ASP.NET Core se nomme *_Layout.cshtml*. Les fichiers de disposition pour les projets ASP.NET Core créés avec les modèles sont les suivants :
 
@@ -53,7 +55,7 @@ Par convention, la disposition par défaut d’une application ASP.NET Core se n
 
   ![Dossier Views dans l’Explorateur de solutions](layout/_static/mvc-web-project-views.png)
 
-La disposition définit un modèle général pour les vues dans l’application. Les applications ne nécessitent pas de disposition. Les applications peuvent définir plusieurs dispositions, avec des vues différentes spécifiant des dispositions différentes.
+La disposition définit un modèle général pour les vues dans l’application. Les applications n’ont pas besoin d’une disposition. Elles peuvent définir plusieurs dispositions, avec des vues différentes spécifiant des dispositions différentes.
 
 Le code suivant montre le fichier de disposition pour un projet créé avec un modèle, avec un contrôleur et des vues :
 

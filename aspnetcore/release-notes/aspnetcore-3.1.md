@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,22 +16,22 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: 92804d168381526100ddb8a368f71d201bd4cad9
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 68373c39461be896a52627e21577fdda89cbb661
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407666"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019586"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>Nouveautés de ASP.NET Core 3,1
 
 Cet article met en évidence les modifications les plus importantes apportées à ASP.NET Core 3,1 avec des liens vers la documentation appropriée.
 
-## <a name="partial-class-support-for-razor-components"></a>Prise en charge des classes partielles pour les Razor composants
+## <a name="partial-class-support-for-no-locrazor-components"></a>Prise en charge des classes partielles pour les Razor composants
 
 Razorles composants sont maintenant générés en tant que classes partielles. Le code d’un Razor composant peut être écrit à l’aide d’un fichier code-behind défini en tant que classe partielle, plutôt que de définir tout le code du composant dans un fichier unique. Pour plus d’informations, consultez [prise en charge des classes partielles](xref:blazor/components/index#partial-class-support).
 
-## <a name="blazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>BlazorTag Helper de composant et passer des paramètres à des composants de niveau supérieur
+## <a name="no-locblazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>BlazorTag Helper de composant et passer des paramètres à des composants de niveau supérieur
 
 Dans Blazor avec ASP.NET Core 3,0, les composants étaient rendus dans des pages et des vues à l’aide d’un programme d’assistance HTML ( `Html.RenderComponentAsync` ). Dans ASP.NET Core 3,1, restituez un composant à partir d’une page ou d’une vue avec le nouveau tag Helper du composant :
 
@@ -56,11 +58,11 @@ Pour plus d’informations, consultez [intégrer des composants dans Razor des p
 
 [!code-csharp[](sample/Program.cs?name=snippet)]
 
-## <a name="breaking-changes-for-samesite-cookies"></a>Dernières modifications pour les cookies SameSite
+## <a name="breaking-changes-for-samesite-no-loccookies"></a>Modifications avec rupture pour SameSite cookie s
 
-Le comportement des cookies SameSite a changé pour refléter les futures modifications apportées au navigateur. Cela peut affecter les scénarios d’authentification tels que AzureAd, OpenIdConnect ou WsFederation. Pour plus d’informations, consultez <xref:security/samesite>.
+Le comportement de SameSite cookie s a changé pour refléter les modifications de navigateur à venir. Cela peut affecter les scénarios d’authentification tels que AzureAd, OpenIdConnect ou WsFederation. Pour plus d'informations, consultez <xref:security/samesite>.
 
-## <a name="prevent-default-actions-for-events-in-blazor-apps"></a>Empêcher les actions par défaut des événements dans les Blazor applications
+## <a name="prevent-default-actions-for-events-in-no-locblazor-apps"></a>Empêcher les actions par défaut des événements dans les Blazor applications
 
 Utilisez l' `@on{EVENT}:preventDefault` attribut directive pour empêcher l’action par défaut d’un événement. Dans l’exemple suivant, l’action par défaut d’affichage du caractère de la clé dans la zone de texte est interdite :
 
@@ -70,7 +72,7 @@ Utilisez l' `@on{EVENT}:preventDefault` attribut directive pour empêcher l’ac
 
 Pour plus d’informations, consultez [empêcher les actions par défaut](xref:blazor/components/event-handling#prevent-default-actions).
 
-## <a name="stop-event-propagation-in-blazor-apps"></a>Arrêter la propagation des événements dans les Blazor applications
+## <a name="stop-event-propagation-in-no-locblazor-apps"></a>Arrêter la propagation des événements dans les Blazor applications
 
 Utilisez l' `@on{EVENT}:stopPropagation` attribut directive pour arrêter la propagation des événements. Dans l’exemple suivant, la sélection de la case à cocher empêche les événements de clic de l’enfant `<div>` de se propager vers le parent `<div>` :
 
@@ -90,7 +92,7 @@ Utilisez l' `@on{EVENT}:stopPropagation` attribut directive pour arrêter la pro
 
 Pour plus d’informations, consultez [arrêter la propagation des événements](xref:blazor/components/event-handling#stop-event-propagation).
 
-## <a name="detailed-errors-during-blazor-app-development"></a>Erreurs détaillées lors du Blazor développement d’applications
+## <a name="detailed-errors-during-no-locblazor-app-development"></a>Erreurs détaillées lors du Blazor développement d’applications
 
 Quand une Blazor application ne fonctionne pas correctement pendant le développement, la réception d’informations d’erreur détaillées de l’application vous aide à résoudre les problèmes et à résoudre le problème. Lorsqu’une erreur se produit, les Blazor applications affichent une barre dorée en bas de l’écran :
 

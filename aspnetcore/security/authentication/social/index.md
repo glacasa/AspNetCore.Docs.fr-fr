@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/23/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: a2c068df85290a59d45432cb168b2c882b59405b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 7dacbb00b40d2741fcbfc78ec7cdf2a67482a8da
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405365"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020468"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>Authentification à l’aide de fournisseurs externes (Facebook, Google et autres) dans ASP.NET Core
 
@@ -122,4 +124,4 @@ Pour créer un mot de passe et vous connecter à l’aide de l’e-mail que vous
 * Pour plus d’informations sur la personnalisation des boutons de connexion, consultez [ce problème GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/10563) .
 * Cet article a présenté l’authentification externe et expliqué les prérequis nécessaires pour ajouter des connexions externes à votre application ASP.NET Core.
 * Référencez les pages spécifiques au fournisseur pour configurer les connexions pour les fournisseurs nécessaires à votre application.
-* Vous souhaiterez peut-être conserver des données supplémentaires relatives à l’utilisateur et à ses jetons d’accès et d’actualisation. Pour plus d’informations, consultez <xref:security/authentication/social/additional-claims>.
+* Vous souhaiterez peut-être conserver des données supplémentaires relatives à l’utilisateur et à ses jetons d’accès et d’actualisation. Pour plus d'informations, consultez <xref:security/authentication/social/additional-claims>.

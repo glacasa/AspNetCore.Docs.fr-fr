@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: ff9e01df002ac0fc94ced6d5d093099d66a14f36
-ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
+ms.openlocfilehash: bb29001e30578e0992e578c2f98cda82c5dcf185
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86176278"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018661"
 ---
-# <a name="part-8-razor-pages-with-ef-core-in-aspnet-core---concurrency"></a>Partie 8, Razor pages avec EF Core dans ASP.net Core-concurrence
+# <a name="part-8-no-locrazor-pages-with-ef-core-in-aspnet-core---concurrency"></a>Partie 8, Razor pages avec EF Core dans ASP.net Core-concurrence
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT), [Tom Dykstra](https://github.com/tdykstra)et [Jon P Smith](https://twitter.com/thereformedprog)
 
@@ -170,7 +172,7 @@ Créez le projet.
 
 ---
 
-Cette commande :
+Cette commande :
 
 * Crée le fichier de migration *Migrations/{horodatage}_RowVersion.cs*.
 * Mettent à jour le fichier *Migrations/SchoolContextModelSnapshot.cs*. La mise à jour ajoute le code en surbrillance suivant à la méthode `BuildModel` :
@@ -367,7 +369,7 @@ Le navigateur affiche la page Index avec la valeur modifiée et un indicateur ro
 
 Supprimez le service test du deuxième onglet. Une erreur d’accès concurrentiel s’affiche avec les valeurs actuelles de la base de données. Le fait de cliquer sur **supprimer** supprime l’entité, sauf si `RowVersion` a été mis à jour.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Concurrency Tokens in EF Core (Jetons d’accès concurrentiel dans EF Core)](/ef/core/modeling/concurrency)
 * [Gestion de l’accès concurrentiel dans EF Core](/ef/core/saving/concurrency)
@@ -526,7 +528,7 @@ Suivez les instructions fournies dans [Générer automatiquement le modèle d’
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
- Exécutez la commande suivante :
+ Exécutez la commande suivante :
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Department -dc SchoolContext -udl -outDir Pages\Departments --referenceScriptLibraries
@@ -667,7 +669,7 @@ Supprimez le service test du deuxième onglet. Une erreur d’accès concurrenti
 
 Pour découvrir comment hériter d’un modèle de données, consultez [Héritage](xref:data/ef-mvc/inheritance).
 
-### <a name="additional-resources"></a>Ressources supplémentaires
+### <a name="additional-resources"></a>Ressources complémentaires
 
 * [Concurrency Tokens in EF Core (Jetons d’accès concurrentiel dans EF Core)](/ef/core/modeling/concurrency)
 * [Gestion de l’accès concurrentiel dans EF Core](/ef/core/saving/concurrency)

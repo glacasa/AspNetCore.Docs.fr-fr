@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
-ms.openlocfilehash: 65d8bbcdaed76a308b924ba024219e8f520bb585
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 7d2ff774b7654993e2cd9b126db252f81a3032d3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399281"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018752"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>Tag Helper Cache dans ASP.NET Core MVC
 
@@ -73,7 +75,7 @@ L’exemple suivant met en cache le contenu du Tag Helper Cache jusqu’à 17:02
 
 ### <a name="expires-after"></a>expires-after
 
-| Type d’attribut | Exemple                      | Default    |
+| Type d’attribut | Exemple                      | Par défaut    |
 | -------------- | ---------------------------- | ---------- |
 | `TimeSpan`     | `@TimeSpan.FromSeconds(120)` | 20 minutes |
 
@@ -163,15 +165,15 @@ routes.MapRoute(
 </cache>
 ```
 
-### <a name="vary-by-cookie"></a>vary-by-cookie
+### <a name="vary-by-no-loccookie"></a>variation parcookie
 
 | Type d’attribut | Exemples                                                                         |
 | -------------- | -------------------------------------------------------------------------------- |
 | String         | `.AspNetCore.Identity.Application`, `.AspNetCore.Identity.Application,HairColor` |
 
-`vary-by-cookie` accepte une liste séparée par des virgules de noms de cookie qui déclenchent une actualisation du cache quand la valeur du cookie change.
+`vary-by-cookie`accepte une liste de noms délimités par des virgules cookie qui déclenchent une actualisation du cache lorsque les cookie valeurs changent.
 
-L’exemple suivant surveille le cookie associé à ASP.NET Core Identity . Lorsqu’un utilisateur est authentifié, une modification du Identity cookie déclenche une actualisation du cache :
+L’exemple suivant analyse le cookie associé à ASP.net Core Identity . Lorsqu’un utilisateur est authentifié, une modification du Identity cookie déclenche une actualisation du cache :
 
 ```cshtml
 <cache vary-by-cookie=".AspNetCore.Identity.Application">
@@ -195,7 +197,7 @@ L’exemple suivant analyse l’utilisateur actuellement connecté pour déclenc
 </cache>
 ```
 
-L’utilisation de cet attribut permet de conserver le contenu dans le cache lors d’un cycle de connexion et de déconnexion. Lorsque la valeur est définie sur `true`, un cycle d’authentification invalide le cache pour l’utilisateur authentifié. Le cache est invalidé, car une nouvelle valeur de cookie unique est générée quand un utilisateur est authentifié. Le cache est conservé pour l’état anonyme quand aucun cookie n’est présent ou quand le cookie a expiré. Si l’utilisateur n’est **pas** authentifié, le cache est conservé.
+L’utilisation de cet attribut permet de conserver le contenu dans le cache lors d’un cycle de connexion et de déconnexion. Lorsque la valeur est définie sur `true`, un cycle d’authentification invalide le cache pour l’utilisateur authentifié. Le cache est invalidé, car une nouvelle valeur unique cookie est générée lors de l’authentification d’un utilisateur. Le cache est conservé pour l’État anonyme quand aucun cookie n’est présent ou que cookie a expiré. Si l’utilisateur n’est **pas** authentifié, le cache est conservé.
 
 ### <a name="vary-by"></a>vary-by
 

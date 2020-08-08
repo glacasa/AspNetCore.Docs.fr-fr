@@ -5,6 +5,8 @@ description: Partager des contrôleurs, des affichages, des Razor pages et bien 
 ms.author: riande
 ms.date: 11/11/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/extensibility/app-parts
-ms.openlocfilehash: cb1f8b045b8f2b143afc7895234733fbfb02cb07
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 690ef0843f567dc2335f4d51436e428207fd6eb1
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399749"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019571"
 ---
-# <a name="share-controllers-views-razor-pages-and-more-with-application-parts"></a>Partager des contrôleurs, des affichages, des Razor pages et d’autres éléments avec des composants d’application
+# <a name="share-controllers-views-no-locrazor-pages-and-more-with-application-parts"></a>Partager des contrôleurs, des affichages, des Razor pages et d’autres éléments avec des composants d’application
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -72,7 +74,7 @@ Les fournisseurs de fonctionnalités d’application examinent les parties de l�
 * <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperFeatureProvider>
 * <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.MetadataReferenceFeatureProvider>
 * <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.ViewsFeatureProvider>
-* `internal class`[RazorCompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)
+* `internal class`[ Razor CompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)
 
 Les fournisseurs de fonctionnalités héritent de <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>, où `T` correspond au type de la fonctionnalité. Les fournisseurs de fonctionnalités peuvent être implémentés pour l’un des types de fonctionnalités précédemment listés. L’ordre des fournisseurs de fonctionnalités dans le peut avoir un `ApplicationPartManager.FeatureProviders` impact sur le comportement de l’exécution. Les fournisseurs ajoutés ultérieurement peuvent réagir aux actions effectuées par les fournisseurs précédemment ajoutés.
 

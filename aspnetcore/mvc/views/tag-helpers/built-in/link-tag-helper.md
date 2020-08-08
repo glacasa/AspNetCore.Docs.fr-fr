@@ -6,6 +6,8 @@ description: Découvrez les attributs d’assistance de balise de lien ASP.NET C
 ms.custom: mvc
 ms.date: 09/24/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
-ms.openlocfilehash: ac9f6449e2b7b135318ecf116e1dba7b33ddff83
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 7487bc64f8e20f85ef95e5389409c0194ec31337
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212396"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018557"
 ---
 # <a name="link-tag-helper-in-aspnet-core"></a>Lier tag Helper dans ASP.NET Core
 
@@ -55,15 +57,15 @@ URL d’une feuille de style CSS vers laquelle effectuer le secours dans le cas 
 
 ### <a name="asp-fallback-test-class"></a>ASP-Fallback-test-Class
 
-Nom de classe défini dans la feuille de style à utiliser pour le test de secours. Pour plus d’informations, consultez <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestClass>.
+Nom de classe défini dans la feuille de style à utiliser pour le test de secours. Pour plus d'informations, consultez <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestClass>.
 
 ### <a name="asp-fallback-test-property"></a>ASP-Fallback-test-propriété
 
-Nom de la propriété CSS à utiliser pour le test de secours. Pour plus d’informations, consultez <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestProperty>.
+Nom de la propriété CSS à utiliser pour le test de secours. Pour plus d'informations, consultez <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestProperty>.
 
 ### <a name="asp-fallback-test-value"></a>ASP-Fallback-test-value
 
-Valeur de propriété CSS à utiliser pour le test de secours. Pour plus d’informations, consultez <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestValue>.
+Valeur de propriété CSS à utiliser pour le test de secours. Pour plus d'informations, consultez <xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestValue>.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

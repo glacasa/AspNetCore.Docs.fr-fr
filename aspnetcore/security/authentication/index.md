@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/03/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/index
-ms.openlocfilehash: a230e1ae85a54ddf16900b2ee7ed4a18d45e4ea2
-ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
+ms.openlocfilehash: b0258118e116b1686abbebf1c8d89135ae3cb1f6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87160203"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019314"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>Vue d’ensemble de l’authentification ASP.NET Core
 
@@ -37,7 +39,7 @@ Les schémas d’authentification sont spécifiés en inscrivant les services d�
 * En appelant une méthode d’extension spécifique au schéma après un appel à `services.AddAuthentication` (tel que `AddJwtBearer` ou `AddCookie` , par exemple). Ces méthodes d’extension utilisent [AuthenticationBuilder. AddScheme](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*) pour inscrire des schémas avec les paramètres appropriés.
 * Moins fréquemment, en appelant [AuthenticationBuilder. AddScheme](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*) directement.
 
-Par exemple, le code suivant inscrit des services d’authentification et des gestionnaires pour les schémas d’authentification de support JWT et de cookies :
+Par exemple, le code suivant inscrit les services d’authentification et les gestionnaires pour cookie et les schémas d’authentification du porteur JWT :
 
 ```csharp
 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -47,7 +49,7 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 Le `AddAuthentication` paramètre `JwtBearerDefaults.AuthenticationScheme` est le nom du schéma à utiliser par défaut lorsqu’un schéma spécifique n’est pas demandé.
 
-Si plusieurs schémas sont utilisés, les stratégies d’autorisation (ou attributs d’autorisation) peuvent [spécifier le schéma d’authentification (ou les schémas)](xref:security/authorization/limitingidentitybyscheme) dont ils dépendent pour authentifier l’utilisateur. Dans l’exemple ci-dessus, le schéma d’authentification de cookie peut être utilisé en spécifiant son nom ( `CookieAuthenticationDefaults.AuthenticationScheme` par défaut, bien qu’un autre nom puisse être fourni lors de l’appel de `AddCookie` ).
+Si plusieurs schémas sont utilisés, les stratégies d’autorisation (ou attributs d’autorisation) peuvent [spécifier le schéma d’authentification (ou les schémas)](xref:security/authorization/limitingidentitybyscheme) dont ils dépendent pour authentifier l’utilisateur. Dans l’exemple ci-dessus, le cookie schéma d’authentification peut être utilisé en spécifiant son nom ( `CookieAuthenticationDefaults.AuthenticationScheme` par défaut, bien qu’un autre nom puisse être fourni lors de l’appel de `AddCookie` ).
 
 Dans certains cas, l’appel à `AddAuthentication` est automatiquement effectué par d’autres méthodes d’extension. Par exemple, lors de l’utilisation de [ASP.net Core Identity ](xref:security/authentication/identity), `AddAuthentication` est appelé en interne.
 
@@ -90,14 +92,14 @@ En fonction de la configuration du schéma d’authentification et du contexte d
 
 L’action d’authentification d’un schéma d’authentification est responsable de la construction de l’identité de l’utilisateur en fonction du contexte de la requête. Elle retourne un <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult> qui indique si l’authentification a réussi et, le cas échéant, l’identité de l’utilisateur dans un ticket d’authentification. Consultez <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.AuthenticateAsync%2A>. Les exemples d’authentification sont les suivants :
 
-* Schéma d’authentification de cookie qui construit l’identité de l’utilisateur à partir des cookies.
+* Un cookie schéma d’authentification qui construit l’identité de l’utilisateur à partir de cookie s.
 * Un modèle de porteur JWT qui désérialise et valide un jeton de porteur JWT pour construire l’identité de l’utilisateur.
 
-### <a name="challenge"></a>Problème
+### <a name="challenge"></a>Défi
 
 Une demande d’authentification est appelée par l’autorisation lorsqu’un utilisateur non authentifié demande un point de terminaison qui requiert une authentification. Une demande d’authentification est émise, par exemple, lorsqu’un utilisateur anonyme demande une ressource restreinte ou clique sur un lien de connexion. L’autorisation appelle un défi à l’aide du ou des schémas d’authentification spécifiés, ou la valeur par défaut si aucun n’est spécifié. Consultez <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ChallengeAsync%2A>. Les exemples de demande d’authentification sont les suivants :
 
-* Schéma d’authentification de cookie redirigeant l’utilisateur vers une page de connexion.
+* cookieSchéma d’authentification redirigeant l’utilisateur vers une page de connexion.
 * Un modèle de porteur JWT renvoyant un résultat 401 avec un `www-authenticate: bearer` en-tête.
 
 Une action de stimulation doit permettre à l’utilisateur de connaître le mécanisme d’authentification à utiliser pour accéder à la ressource demandée.
@@ -105,7 +107,7 @@ Une action de stimulation doit permettre à l’utilisateur de connaître le mé
 ### <a name="forbid"></a>Disant
 
 L’action interdire d’un schéma d’authentification est appelée par l’autorisation lorsqu’un utilisateur authentifié tente d’accéder à une ressource à laquelle il n’est pas autorisé à accéder. Consultez <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ForbidAsync%2A>. Les exemples d’authentifications interdits sont les suivants :
-* Schéma d’authentification de cookie redirigeant l’utilisateur vers une page indiquant que l’accès a été interdit.
+* cookieSchéma d’authentification redirigeant l’utilisateur vers une page indiquant que l’accès a été interdit.
 * Un schéma de porteur JWT renvoyant un résultat 403.
 * Schéma d’authentification personnalisé redirigeant vers une page dans laquelle l’utilisateur peut demander l’accès à la ressource.
 
@@ -131,7 +133,7 @@ Noyau du verger :
 
 Consultez la source [principale du verger](https://github.com/OrchardCMS/OrchardCore) pour obtenir un exemple de fournisseurs d’authentification par client.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * <xref:security/authorization/limitingidentitybyscheme>
 * <xref:security/authentication/policyschemes>

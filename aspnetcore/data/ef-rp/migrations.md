@@ -5,6 +5,8 @@ description: Partie 4 des Razor pages et Entity Framework de la série de didact
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/migrations
-ms.openlocfilehash: 7d326bd5d8204d98e2f13b433f49fd740557905f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ebdcf5605e8b4067c52841b138184e51668f9c25
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405677"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019649"
 ---
-# <a name="part-4-razor-pages-with-ef-core-migrations-in-aspnet-core"></a>Partie 4 : Razor pages avec EF Core migrations dans ASP.net Core
+# <a name="part-4-no-locrazor-pages-with-ef-core-migrations-in-aspnet-core"></a>Partie 4 : Razor pages avec EF Core migrations dans ASP.net Core
 
 Par [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog) et [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -136,7 +138,7 @@ La migration de base de données doit être effectuée dans le cadre du déploie
 * L’utilisation de migrations pour créer des scripts SQL et l’utilisation de scripts SQL dans le déploiement
 * L’exécution de `dotnet ef database update` à partir d’un environnement contrôlé
 
-## <a name="troubleshooting"></a>Résolution des problèmes
+## <a name="troubleshooting"></a>Dépannage
 
 Si l’application utilise la Base de données locale SQL Server et affiche l’exception suivante :
 
@@ -148,7 +150,7 @@ Login failed for user 'user name'.
 
 La solution peut consister à exécuter `dotnet ef database update` à partir d’une invite de commandes.
 
-### <a name="additional-resources"></a>Ressources supplémentaires
+### <a name="additional-resources"></a>Ressources complémentaires
 
 * [CLI EF Core](/ef/core/miscellaneous/cli/dotnet)
 * [Console du Gestionnaire de package (Visual Studio)](/ef/core/miscellaneous/cli/powershell)
@@ -301,7 +303,7 @@ La migration de base de données doit être effectuée dans le cadre du déploie
 
 EF Core utilise la table `__MigrationsHistory` pour voir si des migrations doivent s’exécuter. Si la base de données est à jour, aucune migration n’est exécutée.
 
-## <a name="troubleshooting"></a>Résolution des problèmes
+## <a name="troubleshooting"></a>Dépannage
 
 Téléchargez [l’application terminée](
 https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21snapshots/cu-part4-migrations).
@@ -316,7 +318,7 @@ Login failed for user 'user name'.
 
 Solution : Exécutez `dotnet ef database update`.
 
-### <a name="additional-resources"></a>Ressources supplémentaires
+### <a name="additional-resources"></a>Ressources complémentaires
 
 * [Version YouTube de ce tutoriel](https://www.youtube.com/watch?v=OWSUuMLKTJo)
 * [CLI .net Core](/ef/core/miscellaneous/cli/dotnet).

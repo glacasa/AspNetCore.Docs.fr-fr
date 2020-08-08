@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/razor-pages-conventions
-ms.openlocfilehash: 3cb83d8cfd058c4d0a93ece9a4f19b6407dac384
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: 5fbb72d2195ca9fc1494f15ba0045cbb2707f72c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568858"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019506"
 ---
-# <a name="razor-pages-route-and-app-conventions-in-aspnet-core"></a>RazorConventions de routage et d’application des pages dans ASP.NET Core
+# <a name="no-locrazor-pages-route-and-app-conventions-in-aspnet-core"></a>RazorConventions de routage et d’application des pages dans ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -298,7 +300,7 @@ Les [filtres d’action](xref:mvc/controllers/filters#action-filters) MVC sont i
 
 Le filtre de page ( <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> ) est un filtre qui s’applique aux Razor pages. Pour plus d’informations, consultez [méthodes de filtre pour les Razor pages](xref:razor-pages/filter).
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * <xref:security/authorization/razor-pages-authorization>
 * <xref:mvc/controllers/areas#areas-with-razor-pages>
@@ -588,7 +590,7 @@ Les [filtres d’action](xref:mvc/controllers/filters#action-filters) MVC sont i
 
 Le filtre de page ( <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> ) est un filtre qui s’applique aux Razor pages. Pour plus d’informations, consultez [méthodes de filtre pour les Razor pages](xref:razor-pages/filter).
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * <xref:security/authorization/razor-pages-authorization>
 * <xref:mvc/controllers/areas#areas-with-razor-pages>

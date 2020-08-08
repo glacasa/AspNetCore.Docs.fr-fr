@@ -6,6 +6,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 02/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,20 +16,20 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-typescript-webpack
-ms.openlocfilehash: 49d185ce941d5f8e841224e7de3b72b8350a1c47
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 48b59fea5da3872fb29cacd9edbedd14de9e602f
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407900"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019415"
 ---
-# <a name="use-aspnet-core-signalr-with-typescript-and-webpack"></a>Utiliser ASP.NET Core SignalR avec la machine à écrire et WebPack
+# <a name="use-aspnet-core-no-locsignalr-with-typescript-and-webpack"></a>Utiliser ASP.NET Core SignalR avec la machine à écrire et WebPack
 
 Par [Sébastien Sougnez](https://twitter.com/ssougnez) et [Scott Addie](https://twitter.com/Scott_Addie)
 
 [Webpack](https://webpack.js.org/) permet aux développeurs de regrouper et générer les ressources côté client d’une application web. Ce didacticiel montre comment utiliser WebPack dans une SignalR application web ASP.net Core dont le client est [TypeScript](https://www.typescriptlang.org/)écrit en écriture manuscrite.
 
-Dans ce tutoriel, vous apprenez à effectuer les opérations suivantes :
+Dans ce tutoriel, vous allez apprendre à :
 
 > [!div class="checklist"]
 > * Génération automatique d’une application de démarrage ASP.NET Core SignalR
@@ -72,7 +74,7 @@ Configurez Visual Studio pour rechercher npm dans la variable d'environnement *P
 La configuration de Visual Studio est terminée.
 
 1. Utilisez l’option de menu **fichier**  >  **nouveau**  >  **projet** et choisissez le modèle **application Web ASP.net Core** . Sélectionnez **Suivant**.
-1. Nommez le projet *SignalRWebPack*, puis sélectionnez **créer**.
+1. Nommez le projet * SignalR WebPack*, puis sélectionnez **créer**.
 1. Sélectionnez *.net Core* dans la liste déroulante Framework cible, puis sélectionnez *ASP.net Core 3,1* dans la liste déroulante du sélecteur de Framework. Sélectionnez le modèle **vide** , puis sélectionnez **créer**.
 
 Ajoutez le `Microsoft.TypeScript.MSBuild` package au projet :
@@ -90,8 +92,8 @@ dotnet new web -o SignalRWebPack
 code -r SignalRWebPack
 ```
 
-* La `dotnet new` commande crée une application web ASP.net Core vide dans un répertoire *SignalRWebPack* .
-* La `code` commande ouvre le dossier *SignalRWebPack* dans l’instance actuelle de Visual Studio code.
+* La `dotnet new` commande crée une application web ASP.net Core vide dans un répertoire * SignalR WebPack* .
+* La `code` commande ouvre le dossier * SignalR WebPack* dans l’instance actuelle de Visual Studio code.
 
 Exécutez la commande CLI .NET Core suivante dans le **Terminal intégré**:
 
@@ -200,11 +202,11 @@ Les étapes suivantes configurent la conversion de TypeScript en JavaScript et l
 
    [!code-csharp[Startup](signalr-typescript-webpack/sample/3.x/Startup.cs?name=snippet_UseSignalR&highlight=3)]
 
-1. Dans `Startup.ConfigureServices` , appelez [AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_).
+1. Dans `Startup.ConfigureServices` , appelez [Add SignalR ](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_).
 
    [!code-csharp[Startup](signalr-typescript-webpack/sample/3.x/Startup.cs?name=snippet_AddSignalR)]
 
-1. Créez un répertoire nommé *hubs* dans la racine du projet *SignalRWebPack/* pour stocker le SignalR Hub.
+1. Créez un répertoire nommé *hubs* dans la racine du projet * SignalR WebPack/* pour stocker le SignalR Hub.
 
 1. Créez un hub *Hubs/ChatHub.cs* avec le code suivant :
 
@@ -251,7 +253,7 @@ L’application affiche actuellement un formulaire de base pour envoyer des mess
 
     Dans cet exemple, le client TypeScript envoie un message identifié comme `newMessage`. La méthode C# `NewMessage` attend les données envoyées par le client. Un appel est effectué sur [SendAsync](/dotnet/api/microsoft.aspnetcore.signalr.clientproxyextensions.sendasync) sur les [clients. All](/dotnet/api/microsoft.aspnetcore.signalr.ihubclients-1.all). Les messages reçus sont envoyés à tous les clients connectés au hub.
 
-## <a name="test-the-app"></a>Tester l'application
+## <a name="test-the-app"></a>Test de l'application
 
 Vérifiez que l’application fonctionne avec les étapes suivantes.
 
@@ -328,7 +330,7 @@ Configurez Visual Studio pour rechercher npm dans la variable d'environnement *P
 La configuration de Visual Studio est terminée. Nous allons maintenant créer le projet.
 
 1. Utilisez l’option de menu **Fichier** > **Nouveau** > **Projet** et choisissez le modèle **Application web ASP.NET Core**.
-1. Nommez le projet *SignalRWebPack*, puis sélectionnez **créer**.
+1. Nommez le projet * SignalR WebPack*, puis sélectionnez **créer**.
 1. Sélectionnez *.NET Core* dans la liste déroulante du framework cible, puis *ASP.NET Core 2.2* dans la liste déroulante du sélecteur de framework. Sélectionnez le modèle **vide** , puis sélectionnez **créer**.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -339,7 +341,7 @@ Exécutez la commande suivante dans le **Terminal intégré** :
 dotnet new web -o SignalRWebPack
 ```
 
-Une application web ASP.NET Core vide, ciblant .NET Core, est créée dans un répertoire *SignalRWebPack*.
+Une application Web ASP.NET Core vide, ciblant .NET Core, est créée dans un répertoire * SignalR WebPack* .
 
 ---
 
@@ -436,7 +438,7 @@ Les étapes suivantes configurent la conversion de TypeScript en JavaScript et l
 
     Le code précédent permet au serveur de localiser et traiter le fichier *index.html*, que l’utilisateur entre son URL complète ou l’URL racine de l’application web.
 
-1. Appelez [AddSignalR](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_) dans `Startup.ConfigureServices` . Il ajoute les SignalR services au projet.
+1. Appelez [Add SignalR ](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_) in `Startup.ConfigureServices` . Il ajoute les SignalR services au projet.
 
     [!code-csharp[Startup](signalr-typescript-webpack/sample/2.x/Startup.cs?name=snippet_AddSignalR)]
 
@@ -488,7 +490,7 @@ Actuellement, l’application affiche un formulaire simple pour envoyer des mess
 
     Dans cet exemple, le client TypeScript envoie un message identifié comme `newMessage`. La méthode C# `NewMessage` attend les données envoyées par le client. Un appel est effectué sur [SendAsync](/dotnet/api/microsoft.aspnetcore.signalr.clientproxyextensions.sendasync) sur les [clients. All](/dotnet/api/microsoft.aspnetcore.signalr.ihubclients-1.all). Les messages reçus sont envoyés à tous les clients connectés au hub.
 
-## <a name="test-the-app"></a>Tester l'application
+## <a name="test-the-app"></a>Test de l'application
 
 Vérifiez que l’application fonctionne avec les étapes suivantes.
 
