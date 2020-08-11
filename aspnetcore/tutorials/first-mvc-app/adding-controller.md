@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: 6a2c9fe6dde725129e293a3137c1281bfb1a30ef
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 46f8cbc5ef3d9fe00a5151160a9119f68a9fe572
+ms.sourcegitcommit: 68d03d1aee8906b53bda66f8f1e0747efc3007e6
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021053"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88051808"
 ---
 # <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>Partie 2 : ajouter un contrôleur à une application ASP.NET Core MVC
 
@@ -47,7 +47,7 @@ Nous présentons ces concepts dans cette série de didacticiels et nous vous mon
 * Dans **Explorateur de solutions**, cliquez avec le bouton droit sur **contrôleurs >** 
    ![ menu contextuel ajouter un contrôleur de >](adding-controller/_static/add_controller.png)
 
-* Dans la boîte de dialogue **Ajouter un modèle automatique**, sélectionnez **Contrôleur MVC - vide**
+* Dans la boîte de dialogue **Ajouter une structure** , sélectionnez **contrôleur classe-vide**
 
   ![Ajouter un contrôleur MVC et le nommer](adding-controller/_static/ac.png)
 
@@ -64,7 +64,7 @@ Sélectionnez l’icône **EXPLORATEUR** et cliquez en maintenant enfoncée la t
 Dans **l’Explorateur de solutions**, cliquez avec le bouton droit sur **Contrôleurs > Ajouter > Nouveau fichier**.
 ![Menu contextuel](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
 
-Sélectionnez **ASP.NET Core** et **Classe de contrôleur MVC**.
+Sélectionnez **ASP.net Core** et **classe de contrôleur**.
 
 Nommez le contrôleur **HelloWorldController**.
 

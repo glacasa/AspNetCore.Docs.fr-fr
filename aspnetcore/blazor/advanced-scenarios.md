@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/advanced-scenarios
-ms.openlocfilehash: d6446447a51e22b7df1289e7ef20a4a6381c2b20
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 4bd73acd821a8791d7f6cc93545edc2e39a6f2c7
+ms.sourcegitcommit: 68d03d1aee8906b53bda66f8f1e0747efc3007e6
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012525"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88051782"
 ---
 # <a name="aspnet-core-no-locblazor-advanced-scenarios"></a>ASP.NET Core des Blazor scénarios avancés
 
@@ -97,7 +97,7 @@ Prenons le `PetDetails` composant suivant, qui peut être intégré manuellement
 }
 ```
 
-Dans l’exemple suivant, la boucle de la `CreateComponent` méthode génère trois `PetDetails` composants. Lors <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> de l’appel de méthodes pour créer les composants ( `OpenComponent` et `AddAttribute` ), les numéros de séquence sont des numéros de ligne de code source. L' Blazor algorithme de différence s’appuie sur les numéros de séquence correspondant à des lignes de code distinctes, et non sur des appels d’appel distincts. Lors de la création d’un composant avec des <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> méthodes, coder en dur les arguments pour les numéros de séquence. **L’utilisation d’un calcul ou d’un compteur pour générer le numéro de séquence peut entraîner des performances médiocres.** Pour plus d’informations, consultez la section [numéros de séquence liés à des numéros de ligne de code et non à un ordre d’exécution](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) .
+Dans l’exemple suivant, la boucle de la `CreateComponent` méthode génère trois `PetDetails` composants. Dans <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> les méthodes avec un numéro de séquence, les numéros de séquence sont les numéros de ligne de code source. L' Blazor algorithme de différence s’appuie sur les numéros de séquence correspondant à des lignes de code distinctes, et non sur des appels d’appel distincts. Lors de la création d’un composant avec des <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> méthodes, coder en dur les arguments pour les numéros de séquence. **L’utilisation d’un calcul ou d’un compteur pour générer le numéro de séquence peut entraîner des performances médiocres.** Pour plus d’informations, consultez la section [numéros de séquence liés à des numéros de ligne de code et non à un ordre d’exécution](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) .
 
 `BuiltContent`-
 
