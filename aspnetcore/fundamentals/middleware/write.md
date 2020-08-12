@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/write
-ms.openlocfilehash: dd6a26d07e20f9795bbe3fbe6da59027e757782e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 480120718959a364ce8008949c3b76c558c0e995
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016916"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130585"
 ---
 # <a name="write-custom-aspnet-core-middleware"></a>Écrire un intergiciel (middleware) ASP.NET Core personnalisé
 
@@ -85,6 +85,8 @@ public class CustomMiddleware
 }
 ```
 
+[Les options de durée de vie et d’inscription](xref:fundamentals/dependency-injection#lifetime-and-registration-options) contiennent un exemple complet d’intergiciel (middleware) avec des services de durée de vie *délimités* .
+
 ## <a name="middleware-extension-method"></a>Méthode d’extension d’intergiciel
 
 La méthode d’extension suivante expose le middleware par le biais de <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> :
@@ -97,6 +99,7 @@ Le code suivant appelle l’intergiciel à partir de `Startup.Configure` :
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
+* Les [options de durée de vie et d’inscription](xref:fundamentals/dependency-injection#lifetime-and-registration-options) contiennent un exemple complet d’intergiciel (middleware) avec des services de durée de vie *délimités*, *transitoires*et *singletons* .
 * <xref:fundamentals/middleware/index>
 * <xref:test/middleware>
 * <xref:migration/http-modules>

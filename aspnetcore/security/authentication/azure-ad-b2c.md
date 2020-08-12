@@ -3,7 +3,7 @@ title: Authentification Cloud avec Azure Active Directory B2C dans ASP.NET Core
 author: camsoper
 description: Découvrez comment configurer l’authentification Azure Active Directory B2C avec ASP.NET Core.
 ms.author: casoper
-ms.custom: mvc
+ms.custom: devx-track-csharp, mvc
 ms.date: 01/21/2019
 no-loc:
 - cookie
@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: 78fe4d5dd9e3f64789956e58a4490bef6bdbca1e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ccd3868c4b3294098e692f7a20e06d59ba482e7c
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021703"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130520"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>Authentification Cloud avec Azure Active Directory B2C dans ASP.NET Core
 
@@ -60,11 +60,11 @@ Utilisez les valeurs suivantes :
 | Paramètre                       | Valeur                     | Notes                                                                                                                                                                                              |
 |-------------------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nom**                      | *&lt;nom de l’application&gt;*        | Entrez un **nom** pour l’application qui décrit votre application aux consommateurs.                                                                                                                                 |
-| **Inclure une application/API web** | Yes                       |                                                                                                                                                                                                    |
-| **Autoriser le flux implicite**       | Yes                       |                                                                                                                                                                                                    |
+| **Inclure une application/API web** | Oui                       |                                                                                                                                                                                                    |
+| **Autoriser le flux implicite**       | Oui                       |                                                                                                                                                                                                    |
 | **URL de réponse**                 | `https://localhost:44300/signin-oidc` | Les URL de réponse sont des points de terminaison auxquels Azure AD B2C retourne les jetons demandés par votre application. Visual Studio fournit l’URL de réponse à utiliser. Pour le moment, entrez `https://localhost:44300/signin-oidc` pour remplir le formulaire. |
 | **URI ID de l’application**                | Laisser vide               | Non requis pour ce didacticiel.                                                                                                                                                                    |
-| **Inclure le client natif**     | No                        |                                                                                                                                                                                                    |
+| **Inclure le client natif**     | Non                        |                                                                                                                                                                                                    |
 
 > [!WARNING]
 > Si vous configurez une URL de réponse non-localhost, tenez compte des [contraintes sur ce qui est autorisé dans la liste des URL de réponse](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application). 

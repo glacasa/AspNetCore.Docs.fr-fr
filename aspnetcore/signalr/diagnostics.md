@@ -4,7 +4,7 @@ author: anurse
 description: Découvrez Comment collecter des diagnostics à partir de votre SignalR application ASP.net core.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
-ms.custom: signalr
+ms.custom: devx-track-csharp, signalr
 ms.date: 06/12/2020
 no-loc:
 - cookie
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 61733fe4fbcd7b94662404a39a288ff2ce75ec53
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 922b2ca0aa7933e1010db7ca319631766ffbf753
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021833"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130533"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>Journalisation et diagnostics dans ASP.NET CoreSignalR
 

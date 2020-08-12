@@ -3,7 +3,7 @@ title: Publier une application ASP.NET Core sur Azure avec Visual Studio Code
 author: rick-anderson
 description: Découvrez comment publier une application ASP.NET Core sur Azure App Service à l’aide de Visual Studio Code.
 ms.author: riserrad
-ms.custom: mvc
+ms.custom: devx-track-csharp, mvc
 ms.date: 07/10/2019
 no-loc:
 - cookie
@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-azure-webapp-using-vscode
-ms.openlocfilehash: a07786b1ae7e92e73d4336d0dd0bdbf99b571a0a
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 28074d64e9d4d0ec35af06e8b6daae939e316b2b
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022314"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130208"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio-code"></a>Publier une application ASP.NET Core sur Azure avec Visual Studio Code
 
@@ -155,7 +155,7 @@ L’extension déploiera le contenu mis à jour dans l’application web. Une fo
 
 - [Créer votre premier pipeline Azure DevOps](/azure/devops/pipelines/create-first-pipeline)
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 - [Azure App Service](/azure/app-service/app-service-web-overview)
 - [Groupes de ressources Azure](/azure/azure-resource-manager/resource-group-overview#resource-groups)

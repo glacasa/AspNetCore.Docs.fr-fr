@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 2352bbaa3c4123cd588609e22b65cd9e268f5637
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8f39d6f460faaab3d54178daf3730f5a6662df40
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017660"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130689"
 ---
 # <a name="configuration-in-aspnet-core"></a>Configuration dans ASP.NET Core
 
@@ -81,7 +81,7 @@ Le code suivant de l' [exemple de téléchargement](https://github.com/dotnet/As
 La configuration par défaut <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> charge dans l’ordre suivant :
 
 1. *appsettings.json*
-1. *appSettings.* `Environment` *. JSON* : par exemple, *appSettings*. ***Production***. *JSON* et *appSettings*. ***Développement***. fichiers *JSON* . La version de l’environnement du fichier est chargée à partir de [IHostingEnvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*). Pour plus d'informations, consultez <xref:fundamentals/environments>.
+1. *appSettings.* `Environment` *. JSON* : par exemple, *appSettings*. ***Production***. *JSON* et *appSettings*. ***Développement***. fichiers *JSON* . La version de l’environnement du fichier est chargée à partir de [IHostingEnvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*). Pour plus d’informations, consultez <xref:fundamentals/environments>.
 
 *appSettings*. `Environment` . les valeurs *JSON* remplacent les clés dans *appsettings.js*. Par exemple, par défaut :
 
@@ -97,6 +97,8 @@ La configuration par défaut <xref:Microsoft.Extensions.Configuration.Json.JsonC
 À l’aide de la configuration [par défaut](#default) , le *appsettings.jssur* et *appSettings.* `Environment` les fichiers *. JSON* sont activés avec [reloadOnChange : true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75). Les modifications apportées à la *appsettings.jssur* et *appSettings.* `Environment` le fichier *. JSON* ***après*** le démarrage de l’application est lu par le [fournisseur de configuration JSON](#jcp).
 
 Pour plus d’informations sur l’ajout de fichiers de configuration JSON supplémentaires, consultez [fournisseur de configuration JSON](#jcp) dans ce document.
+
+[!INCLUDE[](~/includes/combine-di.md)]
 
 <a name="security"></a>
 
@@ -115,7 +117,7 @@ Pour plus d’informations sur le stockage des mots de passe ou d’autres donn�
 * <xref:fundamentals/environments>
 * <xref:security/app-secrets>: Fournit des conseils sur l’utilisation de variables d’environnement pour stocker des données sensibles. Le gestionnaire de secret utilise le [fournisseur de configuration de fichiers](#fcp) pour stocker les secrets de l’utilisateur dans un fichier JSON sur le système local.
 
-[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) stocke en toute sécurité des secrets d’application pour les applications ASP.NET Core. Pour plus d'informations, consultez <xref:security/key-vault-configuration>.
+[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) stocke en toute sécurité des secrets d’application pour les applications ASP.NET Core. Pour plus d’informations, consultez <xref:security/key-vault-configuration>.
 
 <a name="evcp"></a>
 
@@ -763,9 +765,9 @@ Pour plus d’informations sur la migration de la configuration d’application 
 
 ## <a name="add-configuration-from-an-external-assembly"></a>Ajouter la configuration à partir d’un assembly externe
 
-Une implémentation de <xref:Microsoft.AspNetCore.Hosting.IHostingStartup> permet d’ajouter des améliorations à une application au démarrage à partir d’un assembly externe, en dehors de la classe `Startup` de l’application. Pour plus d'informations, consultez <xref:fundamentals/configuration/platform-specific-configuration>.
+Une implémentation de <xref:Microsoft.AspNetCore.Hosting.IHostingStartup> permet d’ajouter des améliorations à une application au démarrage à partir d’un assembly externe, en dehors de la classe `Startup` de l’application. Pour plus d’informations, consultez <xref:fundamentals/configuration/platform-specific-configuration>.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Code source de configuration](https://github.com/dotnet/extensions/tree/master/src/Configuration)
 * <xref:fundamentals/configuration/options>
@@ -794,7 +796,7 @@ Les exemples de code qui suivent et dans l’échantillon d’application utilis
 using Microsoft.Extensions.Configuration;
 ```
 
-Le *modèle d’options* est une extension des concepts de configuration décrits dans cette rubrique. Les options utilisent des classes pour représenter les groupes de paramètres associés. Pour plus d'informations, consultez <xref:fundamentals/configuration/options>.
+Le *modèle d’options* est une extension des concepts de configuration décrits dans cette rubrique. Les options utilisent des classes pour représenter les groupes de paramètres associés. Pour plus d’informations, consultez <xref:fundamentals/configuration/options>.
 
 [Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
@@ -844,7 +846,7 @@ Pour plus d'informations, voir les rubriques suivantes :
 * <xref:fundamentals/environments>
 * <xref:security/app-secrets>: Fournit des conseils sur l’utilisation de variables d’environnement pour stocker des données sensibles. Secret Manager utilise le fournisseur de configuration de fichier pour stocker les secrets utilisateur dans un fichier JSON sur le système local. Le fournisseur de configuration de fichier est décrit plus loin dans cette rubrique.
 
-[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) stocke en toute sécurité des secrets d’application pour les applications ASP.NET Core. Pour plus d'informations, consultez <xref:security/key-vault-configuration>.
+[Azure Key Vault](https://azure.microsoft.com/services/key-vault/) stocke en toute sécurité des secrets d’application pour les applications ASP.NET Core. Pour plus d’informations, consultez <xref:security/key-vault-configuration>.
 
 ## <a name="hierarchical-configuration-data"></a>Données de configuration hiérarchiques
 
@@ -1845,7 +1847,7 @@ Dans une vue MVC :
 
 ## <a name="add-configuration-from-an-external-assembly"></a>Ajouter la configuration à partir d’un assembly externe
 
-Une implémentation de <xref:Microsoft.AspNetCore.Hosting.IHostingStartup> permet d’ajouter des améliorations à une application au démarrage à partir d’un assembly externe, en dehors de la classe `Startup` de l’application. Pour plus d'informations, consultez <xref:fundamentals/configuration/platform-specific-configuration>.
+Une implémentation de <xref:Microsoft.AspNetCore.Hosting.IHostingStartup> permet d’ajouter des améliorations à une application au démarrage à partir d’un assembly externe, en dehors de la classe `Startup` de l’application. Pour plus d’informations, consultez <xref:fundamentals/configuration/platform-specific-configuration>.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

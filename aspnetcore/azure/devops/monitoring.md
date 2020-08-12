@@ -3,7 +3,7 @@ title: Surveiller et déboguer-DevOps avec ASP.NET Core et Azure
 author: CamSoper
 description: Surveillance et débogage de votre code dans le cadre d’une solution DevOps avec ASP.NET Core et Azure
 ms.author: casoper
-ms.custom: mvc, seodec18
+ms.custom: devx-track-csharp, mvc, seodec18
 ms.date: 07/10/2019
 no-loc:
 - cookie
@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/monitor
-ms.openlocfilehash: 9e8b48df5a3ecf78e315c7f33b5ab75d6f329cc2
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 98d7c820b20f4f4c6b57f283ef718ce056dcdcae
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012772"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130494"
 ---
 # <a name="monitor-and-debug"></a>Surveiller et déboguer
 

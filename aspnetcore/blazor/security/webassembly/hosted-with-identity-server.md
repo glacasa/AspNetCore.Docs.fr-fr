@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 630425c4efd5fc4dfffd402018b90d45056f5d46
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 36047844c8c2624c6fd0ee085dfad4a7af0367c5
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013825"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130286"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Sécuriser une Blazor WebAssembly application hébergée ASP.net core avec le Identity serveur
 
 Par [Javier Calvarro Nelson](https://github.com/javiercn) et [Luke Latham](https://github.com/guardrex)
 
-Cet article explique comment créer une solution hébergée Blazor qui utilise le [ Identity serveur](https://identityserver.io/) pour authentifier les utilisateurs et les appels d’API.
+Cet article explique comment créer une [ Blazor WebAssembly application hébergée](xref:blazor/hosting-models#blazor-webassembly) qui utilise le [ Identity serveur](https://identityserver.io/) pour authentifier les utilisateurs et les appels d’API.
 
 > [!NOTE]
 > Pour configurer une application autonome ou hébergée Blazor WebAssembly afin d’utiliser une instance de serveur externe existante Identity , suivez les instructions dans <xref:blazor/security/webassembly/standalone-with-authentication-library> .
@@ -466,7 +466,7 @@ Dans l’application cliente, les approches d’autorisation des composants sont
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Déploiement sur Azure App Service](xref:security/authentication/identity/spa#deploy-to-production)
 * [Importer un certificat à partir d’Key Vault (documentation Azure)](/azure/app-service/configure-ssl-certificate#import-a-certificate-from-key-vault)
