@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: 32f794d498533e846343831d2360e98939105fb1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b1f84a936ee1327498abce660cd64f8d7d0a2864
+ms.sourcegitcommit: ec41ab354952b75557240923756a8c2ac79b49f8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016673"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88202795"
 ---
 # <a name="static-files-in-aspnet-core"></a>Fichiers statiques dans ASP.NET Core
 
@@ -117,8 +117,8 @@ L’exploration des répertoires est désactivée par défaut pour des raisons d
 
 Activer l’exploration des répertoires avec :
 
-* <xref:Microsoft.Extensions.DependencyInjection.DirectoryBrowserServiceExtensions.AddDirectoryBrowser%2A>dans `Startup.ConfigureServices` .
-* <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser%2A>dans `Startup.Configure` .
+* <xref:Microsoft.Extensions.DependencyInjection.DirectoryBrowserServiceExtensions.AddDirectoryBrowser%2A> dans `Startup.ConfigureServices` .
+* <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser%2A> dans `Startup.Configure` .
 
 [!code-csharp[](~/fundamentals/static-files/samples/3.x/StaticFilesSample/StartupBrowse.cs?name=snippet_ClassMembers&highlight=4,21-35)]
 
@@ -132,7 +132,7 @@ La définition d’une page par défaut fournit aux visiteurs un point de dépar
 
 [!code-csharp[](~/fundamentals/static-files/samples/3.x/StaticFilesSample/StartupEmpty.cs?name=snippet_Configure&highlight=15)]
 
-`UseDefaultFiles` doit être appelé avant `UseStaticFiles` pour délivrer le fichier par défaut. `UseDefaultFiles`est un ReWriter d’URL qui ne traite pas le fichier.
+`UseDefaultFiles` doit être appelé avant `UseStaticFiles` pour délivrer le fichier par défaut. `UseDefaultFiles` est un ReWriter d’URL qui ne traite pas le fichier.
 
 Avec `UseDefaultFiles` , les demandes à un dossier dans `wwwroot` Rechercher sont les suivantes :
 
@@ -153,7 +153,7 @@ Le code suivant est affiché `Startup.Configure` avec le code précédent :
 
 ### <a name="usefileserver-for-default-documents"></a>UseFileServer pour les documents par défaut
 
-<xref:Microsoft.AspNetCore.Builder.FileServerExtensions.UseFileServer*>combine les fonctionnalités de `UseStaticFiles` , `UseDefaultFiles` et éventuellement `UseDirectoryBrowser` .
+<xref:Microsoft.AspNetCore.Builder.FileServerExtensions.UseFileServer*> combine les fonctionnalités de `UseStaticFiles` , `UseDefaultFiles` et éventuellement `UseDirectoryBrowser` .
 
 Appelez `app.UseFileServer` pour activer le service des fichiers statiques et le fichier par défaut. L’exploration des répertoires n’est pas activée. Le code suivant est affiché `Startup.Configure` avec `UseFileServer` :
 
@@ -184,11 +184,11 @@ Le code suivant permet le service des fichiers statiques, le fichier par défaut
 
 [!code-csharp[](~/fundamentals/static-files/samples/3.x/StaticFilesSample/StartupFileServer.cs?name=snippet_ClassMembers&highlight=4,21-31)]
 
-<xref:Microsoft.Extensions.DependencyInjection.DirectoryBrowserServiceExtensions.AddDirectoryBrowser%2A>doit être appelé lorsque la `EnableDirectoryBrowsing` valeur de la propriété est `true` .
+<xref:Microsoft.Extensions.DependencyInjection.DirectoryBrowserServiceExtensions.AddDirectoryBrowser%2A> doit être appelé lorsque la `EnableDirectoryBrowsing` valeur de la propriété est `true` .
 
 En utilisant la hiérarchie de fichiers et le code précédent, les URL sont résolues comme suit :
 
-| URI            |      response  |
+| URI            |      Réponse  |
 | ------- | ------|
 | `https://<hostname>/StaticFiles/images/MyImage.jpg` | *MyStaticFiles/images/MyImage.jpg* |
 | `https://<hostname>/StaticFiles` | *MyStaticFiles/default.html* |
@@ -197,7 +197,7 @@ Si aucun fichier nommé par défaut n’existe dans le répertoire *MyStaticFile
 
 ![Liste des fichiers statiques](static-files/_static/db2.png)
 
-<xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles*>et <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser*> effectuent une redirection côté client à partir de l’URI cible sans fin `/` vers l’URI cible avec une fin `/` . Par exemple, de `https://<hostname>/StaticFiles` à `https://<hostname>/StaticFiles/` . Les URL relatives dans le répertoire *StaticFiles* ne sont pas valides sans barre oblique finale ( `/` ).
+<xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles*> et <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser*> effectuent une redirection côté client à partir de l’URI cible sans fin `/`  vers l’URI cible avec une fin `/` . Par exemple, de `https://<hostname>/StaticFiles` à `https://<hostname>/StaticFiles/` . Les URL relatives dans le répertoire *StaticFiles* ne sont pas valides sans barre oblique finale ( `/` ).
 
 ## <a name="fileextensioncontenttypeprovider"></a>FileExtensionContentTypeProvider
 
@@ -230,7 +230,7 @@ Avec le code précédent, une requête pour un fichier avec un type de contenu i
 
 ## <a name="serve-files-from-multiple-locations"></a>Servir des fichiers à partir de plusieurs emplacements
 
-`UseStaticFiles`et `UseFileServer` par défaut, le fournisseur de fichiers pointe sur `wwwroot` . Des instances supplémentaires de `UseStaticFiles` et `UseFileServer` peuvent être fournies avec d’autres fournisseurs de fichiers pour servir des fichiers à partir d’autres emplacements. Pour plus d’informations, consultez [ce problème GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/15578).
+`UseStaticFiles` et `UseFileServer` par défaut, le fournisseur de fichiers pointe sur `wwwroot` . Des instances supplémentaires de `UseStaticFiles` et `UseFileServer` peuvent être fournies avec d’autres fournisseurs de fichiers pour servir des fichiers à partir d’autres emplacements. Pour plus d’informations, consultez [ce problème GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/15578).
 
 <a name="sc"></a>
 
@@ -253,7 +253,7 @@ Avec le code précédent, une requête pour un fichier avec un type de contenu i
 
 * Placez les fichiers de code, y compris les fichiers *. cs* et *. cshtml*, en dehors de la [racine Web](xref:fundamentals/index#web-root)du projet d’application. Par conséquent, une séparation logique est créée entre le contenu côté client et le code basé sur le serveur de l’application. Ceci empêche la fuite de code côté serveur.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Middleware](xref:fundamentals/middleware/index)
 * [Introduction à ASP.NET Core](xref:index)
@@ -391,7 +391,7 @@ Le code suivant change le nom de fichier par défaut en *mydefault.html* :
 
 ## <a name="usefileserver"></a>UseFileServer
 
-<xref:Microsoft.AspNetCore.Builder.FileServerExtensions.UseFileServer*>combine les fonctionnalités de `UseStaticFiles` , `UseDefaultFiles` et éventuellement `UseDirectoryBrowser` .
+<xref:Microsoft.AspNetCore.Builder.FileServerExtensions.UseFileServer*> combine les fonctionnalités de `UseStaticFiles` , `UseDefaultFiles` et éventuellement `UseDirectoryBrowser` .
 
 Le code suivant active la possibilité de délivrer des fichiers statiques et le fichier par défaut. L’exploration des répertoires n’est pas activée.
 
@@ -426,7 +426,7 @@ Le code suivant active les fichiers statiques, les fichiers par défaut et l’e
 
 En utilisant la hiérarchie de fichiers et le code précédent, les URL sont résolues comme suit :
 
-| URI            |                             response  |
+| URI            |                             Réponse  |
 | ------- | ------|
 | *http:// \<server_address> /StaticFiles/images/banner1.svg*    |      MyStaticFiles/images/banner1.svg |
 | *http:// \<server_address> /StaticFiles*             |     MyStaticFiles/default.html |
@@ -445,6 +445,8 @@ La <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> clas
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupFileExtensionContentTypeProvider.cs?name=snippet_ConfigureMethod&highlight=3-12,19)]
 
 Consultez [Types de contenu MIME](https://www.iana.org/assignments/media-types/media-types.xhtml).
+
+Pour plus d’informations sur l’utilisation d’un personnalisé <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> ou pour configurer d’autres <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> Blazor applications serveur, consultez <xref:blazor/fundamentals/additional-scenarios#static-files> .
 
 ## <a name="non-standard-content-types"></a>Types de contenu non standard
 
@@ -482,7 +484,7 @@ Avec le code précédent, une requête pour un fichier avec un type de contenu i
 
 * Placez les fichiers de code (y compris les fichiers *. cs* et *. cshtml*) en dehors de la [racine Web](xref:fundamentals/index#web-root)du projet d’application. Par conséquent, une séparation logique est créée entre le contenu côté client et le code basé sur le serveur de l’application. Ceci empêche la fuite de code côté serveur.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Middleware](xref:fundamentals/middleware/index)
 * [Introduction à ASP.NET Core](xref:index)

@@ -1,11 +1,11 @@
 ---
-title: Appeler des méthodes .NET à partir de fonctions JavaScript dans ASP.NET CoreBlazor
+title: Appeler des méthodes .NET à partir de fonctions JavaScript dans ASP.NET Core Blazor
 author: guardrex
 description: Découvrez comment appeler des méthodes .NET à partir de fonctions JavaScript dans des Blazor applications.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/07/2020
+ms.date: 08/12/2020
 no-loc:
 - cookie
 - Cookie
@@ -17,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: 5a0731b45424ffd8560bb3b0d9123c686ae9e247
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 65a339bc7b246ab1825ad9bad5a2b5523259b488
+ms.sourcegitcommit: ec41ab354952b75557240923756a8c2ac79b49f8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012564"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88202731"
 ---
-# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a>Appeler des méthodes .NET à partir de fonctions JavaScript dans ASP.NET CoreBlazor
+# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a>Appeler des méthodes .NET à partir de fonctions JavaScript dans ASP.NET Core Blazor
 
 Par [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27), [Shashikant Rudrawadi](http://wisne.co)et [Luke Latham](https://github.com/guardrex)
 
@@ -129,7 +129,7 @@ Lorsque le **`Trigger .NET instance method HelloHelper.SayHello`** bouton est s�
 }
 ```
 
-`CallHelloHelperSayHello`appelle la fonction JavaScript `sayHello` avec une nouvelle instance de `HelloHelper` .
+`CallHelloHelperSayHello` appelle la fonction JavaScript `sayHello` avec une nouvelle instance de `HelloHelper` .
 
 `JsInteropClasses/ExampleJsInterop.cs`:
 
@@ -233,11 +233,16 @@ Pour appeler les méthodes .NET d’un composant :
 * Utilisez la `invokeMethod` `invokeMethodAsync` fonction ou pour effectuer un appel de méthode statique au composant.
 * La méthode statique du composant encapsule l’appel à sa méthode d’instance en tant que appelé <xref:System.Action> .
 
+> [!NOTE]
+> Pour les Blazor Server applications, où plusieurs utilisateurs peuvent utiliser le même composant simultanément, utilisez une classe d’assistance pour appeler des méthodes d’instance.
+>
+> Pour plus d’informations, consultez la section de la [classe d’assistance de la méthode d’instance de composant](#component-instance-method-helper-class) .
+
 Dans le code JavaScript côté client :
 
 ```javascript
 function updateMessageCallerJS() {
-  DotNet.invokeMethod('{APP ASSEMBLY}', 'UpdateMessageCaller');
+  DotNet.invokeMethodAsync('{APP ASSEMBLY}', 'UpdateMessageCaller');
 }
 ```
 
@@ -279,7 +284,70 @@ L’espace réservé `{APP ASSEMBLY}` est le nom de l’assembly d’application
 }
 ```
 
-Lorsqu’il existe plusieurs composants, chacun avec des méthodes d’instance à appeler, utilisez une classe d’assistance pour appeler les méthodes d’instance (en tant que <xref:System.Action> s) de chaque composant.
+Pour passer des arguments à la méthode d’instance :
+
+* Ajoutez des paramètres à l’appel de méthode JS. Dans l’exemple suivant, un nom est passé à la méthode. Des paramètres supplémentaires peuvent être ajoutés à la liste en fonction des besoins.
+
+  ```javascript
+  function updateMessageCallerJS(name) {
+    DotNet.invokeMethodAsync('{APP ASSEMBLY}', 'UpdateMessageCaller', name);
+  }
+  ```
+  
+  L’espace réservé `{APP ASSEMBLY}` est le nom de l’assembly d’application de l’application (par exemple, `BlazorSample` ).
+
+* Fournissez les types corrects au <xref:System.Action> pour les paramètres. Fournissez la liste de paramètres aux méthodes C#. Appelez <xref:System.Action> ( `UpdateMessage` ) avec les paramètres ( `action.Invoke(name)` ).
+
+  `Pages/JSInteropComponent.razor`:
+
+  ```razor
+  @page "/JSInteropComponent"
+
+  <p>
+      Message: @message
+  </p>
+
+  <p>
+      <button onclick="updateMessageCallerJS('Sarah Jane')">
+          Call JS Method
+      </button>
+  </p>
+
+  @code {
+      private static Action<string> action;
+      private string message = "Select the button.";
+
+      protected override void OnInitialized()
+      {
+          action = UpdateMessage;
+      }
+
+      private void UpdateMessage(string name)
+      {
+          message = $"{name}, UpdateMessage Called!";
+          StateHasChanged();
+      }
+
+      [JSInvokable]
+      public static void UpdateMessageCaller(string name)
+      {
+          action.Invoke(name);
+      }
+  }
+  ```
+
+  Sortie `message` lorsque le bouton **Call js Method** est sélectionné :
+
+  ```
+  Sarah Jane, UpdateMessage Called!
+  ```
+
+## <a name="component-instance-method-helper-class"></a>Classe d’assistance de méthode d’instance de composant
+
+La classe d’assistance est utilisée pour appeler une méthode d’instance en tant que <xref:System.Action> . Les classes d’assistance sont utiles dans les cas suivants :
+
+* Plusieurs composants du même type sont rendus sur la même page.
+* Une Blazor Server application est utilisée, où plusieurs utilisateurs peuvent utiliser un composant simultanément.
 
 Dans l’exemple suivant :
 
@@ -385,8 +453,8 @@ Pour plus d’informations, consultez les problèmes suivants :
 * [Les références circulaires ne sont pas prises en charge, prennent deux (dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525)
 * [Proposition : ajouter un mécanisme pour gérer les références circulaires lors de la sérialisation (dotnet/Runtime #30820)](https://github.com/dotnet/runtime/issues/30820)
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:blazor/call-javascript-from-dotnet>
-* [`InteropComponent.razor`exemple (référentiel GitHub dotnet/AspNetCore, branche de version 3,1)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
+* [`InteropComponent.razor` exemple (référentiel GitHub dotnet/AspNetCore, branche de version 3,1)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
 * [Effectuer des transferts de données volumineux dans des Blazor Server applications](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)

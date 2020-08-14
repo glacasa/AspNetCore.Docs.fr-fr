@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 08e202f0876d01a98c099424fd65b06cbe82a3b2
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 407dab96216149178abd5bdd21ef318154f414da
+ms.sourcegitcommit: ec41ab354952b75557240923756a8c2ac79b49f8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130338"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88202726"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory"></a>Sécuriser une Blazor WebAssembly application hébergée ASP.net core avec Azure Active Directory
 
@@ -154,7 +154,7 @@ services.AddAuthentication(AzureADDefaults.BearerAuthenticationScheme)
     .AddAzureADBearer(options => Configuration.Bind("AzureAd", options));
 ```
 
-<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A>et <xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A> Assurez-vous que :
+<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A> et <xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A> Assurez-vous que :
 
 * L’application tente d’analyser et de valider les jetons sur les demandes entrantes.
 * Toute demande d’accès à une ressource protégée sans informations d’identification appropriées échoue.
@@ -327,6 +327,13 @@ Pour plus d’informations, consultez les sections suivantes de l’article rela
 * [Demander des jetons d’accès supplémentaires](xref:blazor/security/webassembly/additional-scenarios#request-additional-access-tokens)
 * [Attacher des jetons aux demandes sortantes](xref:blazor/security/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
 
+::: moniker range=">= aspnetcore-5.0"
+
+### <a name="login-mode"></a>Mode de connexion
+
+[!INCLUDE[](~/includes/blazor-security/msal-login-mode.md)]
+
+::: moniker-end
 
 ### <a name="imports-file"></a>Fichier d’importation
 

@@ -5,7 +5,7 @@ description: En savoir plus sur les scénarios supplémentaires pour ASP.NET Cor
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/10/2020
+ms.date: 08/12/2020
 no-loc:
 - cookie
 - Cookie
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: dbad91e46a95d9ab5ec62d66e0d9a18938ff4520
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 618e451f5cb8a4e8eaf355d398fdeb80190cf559
+ms.sourcegitcommit: ec41ab354952b75557240923756a8c2ac79b49f8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014462"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88202708"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>BlazorConfiguration du modèle d’hébergement ASP.net Core
 
@@ -30,7 +30,7 @@ Par [Daniel Roth](https://github.com/danroth27), [MacKinnon argent](https://gith
 
 Cet article traite de l’hébergement de la configuration du modèle.
 
-### <a name="no-locsignalr-cross-origin-negotiation-for-authentication"></a>SignalRnégociation Cross-Origin pour l’authentification
+### <a name="no-locsignalr-cross-origin-negotiation-for-authentication"></a>SignalR négociation Cross-Origin pour l’authentification
 
 *Cette section s’applique à Blazor WebAssembly .*
 
@@ -61,7 +61,7 @@ Pour configurer le SignalR client sous-jacent pour envoyer des informations d’
       }).Build();
   ```
 
-Pour plus d'informations, consultez <xref:signalr/configuration#configure-additional-options>.
+Pour plus d’informations, consultez <xref:signalr/configuration#configure-additional-options>.
 
 ## <a name="reflect-the-connection-state-in-the-ui"></a>Refléter l’état de la connexion dans l’interface utilisateur
 
@@ -102,7 +102,7 @@ Le tableau suivant décrit les classes CSS appliquées à l' `components-reconne
 
 *Cette section s’applique à Blazor Server .*
 
-Blazor Serverles applications sont configurées par défaut pour prérestituer l’interface utilisateur sur le serveur avant que la connexion cliente au serveur soit établie. Il est configuré dans la `_Host.cshtml` Razor page :
+Blazor Server les applications sont configurées par défaut pour prérestituer l’interface utilisateur sur le serveur avant que la connexion cliente au serveur soit établie. Il est configuré dans la `_Host.cshtml` Razor page :
 
 ```cshtml
 <body>
@@ -114,7 +114,7 @@ Blazor Serverles applications sont configurées par défaut pour prérestituer l
 </body>
 ```
 
-<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode>Configure si le composant :
+<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> Configure si le composant :
 
 * Est prérendu dans la page.
 * Est rendu en HTML statique sur la page ou s’il contient les informations nécessaires pour démarrer une Blazor application à partir de l’agent utilisateur.
@@ -263,6 +263,46 @@ Quand l’un des composants de l’infrastructure est utilisé dans un composant
 
 * Peut être modifié par l’état de l’application. Une balise HTML codée en dur ne peut pas être modifiée par l’état de l’application.
 * Est supprimé du code HTML `<head>` lorsque le composant parent n’est plus rendu.
+
+## <a name="static-files"></a>Fichiers statiques
+
+*Cette section s’applique à Blazor Server .*
+
+Pour créer des mappages de fichiers supplémentaires avec <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> ou configurer autre <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> , utilisez l' **une** des approches suivantes. Dans les exemples suivants, l' `{EXTENSION}` espace réservé est l’extension de fichier et l' `{CONTENT TYPE}` espace réservé est le type de contenu.
+
+* Configurez les options par [injection de dépendance (di)](xref:blazor/fundamentals/dependency-injection) dans `Startup.ConfigureServices` ( `Startup.cs` ) à l’aide de <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> :
+
+  ```csharp
+  using Microsoft.AspNetCore.StaticFiles;
+
+  ...
+
+  var provider = new FileExtensionContentTypeProvider();
+  provider.Mappings["{EXTENSION}"] = "{CONTENT TYPE}";
+
+  services.Configure<StaticFileOptions>(options =>
+  {
+      options.ContentTypeProvider = provider;
+  });
+  ```
+
+  Étant donné que cette approche configure le même fournisseur de fichiers que celui utilisé, assurez-vous `blazor.server.js` que votre configuration personnalisée n’interfère pas avec service `blazor.server.js` . Par exemple, ne supprimez pas le mappage des fichiers JavaScript en configurant le fournisseur avec `provider.Mappings.Remove(".js")` .
+
+* Utilisez deux appels à <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A> in `Startup.Configure` ( `Startup.cs` ) :
+  * Configurez le fournisseur de fichiers personnalisé dans le premier appel avec <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> .
+  * Le deuxième intergiciel sert `blazor.server.js` , qui utilise la configuration de fichiers statiques par défaut fournie par l' Blazor infrastructure.
+
+  ```csharp
+  using Microsoft.AspNetCore.StaticFiles;
+
+  ...
+
+  var provider = new FileExtensionContentTypeProvider();
+  provider.Mappings["{EXTENSION}"] = "{CONTENT TYPE}";
+
+  app.UseStaticFiles(new StaticFileOptions { ContentTypeProvider = provider });
+  app.UseStaticFiles();
+  ```
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: 8b8cf77cde281b8ea6a09d8edaec6606383a4c04
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: dd7b7881ac44f8e80d2b32617594bca259fe08bc
+ms.sourcegitcommit: ec41ab354952b75557240923756a8c2ac79b49f8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130455"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88202777"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Sécuriser une Blazor WebAssembly application hébergée ASP.net core avec Azure Active Directory B2C
 
@@ -163,7 +163,7 @@ services.AddAuthentication(AzureADB2CDefaults.BearerAuthenticationScheme)
     .AddAzureADB2CBearer(options => Configuration.Bind("AzureAdB2C", options));
 ```
 
-<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A>et <xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A> Assurez-vous que :
+<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A> et <xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A> Assurez-vous que :
 
 * L’application tente d’analyser et de valider les jetons sur les demandes entrantes.
 * Toute demande d’accès à une ressource protégée sans informations d’identification appropriées échoue.
@@ -336,6 +336,13 @@ Pour plus d’informations, consultez les sections suivantes de l’article rela
 * [Demander des jetons d’accès supplémentaires](xref:blazor/security/webassembly/additional-scenarios#request-additional-access-tokens)
 * [Attacher des jetons aux demandes sortantes](xref:blazor/security/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
 
+::: moniker range=">= aspnetcore-5.0"
+
+### <a name="login-mode"></a>Mode de connexion
+
+[!INCLUDE[](~/includes/blazor-security/msal-login-mode.md)]
+
+::: moniker-end
 
 ### <a name="imports-file"></a>Fichier d’importation
 
