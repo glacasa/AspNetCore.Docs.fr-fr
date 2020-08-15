@@ -4,7 +4,7 @@ author: rick-anderson
 description: Apprendre à créer une API web avec ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
-ms.date: 2/25/2020
+ms.date: 08/13/2020
 no-loc:
 - cookie
 - Cookie
@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: ad6eac246e5bc7039158981bbe96036389512e4f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 15e5c838e6dae824a189f170b28730a63f8c3ea7
+ms.sourcegitcommit: 4df445e7d49a99f81625430f728c28e5d6bf2107
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019233"
+ms.lasthandoff: 08/15/2020
+ms.locfileid: "88253640"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Didacticiel : créer une API Web avec ASP.NET Core
 
@@ -48,10 +48,10 @@ Ce didacticiel crée l’API suivante :
 
 |API | Description | Corps de la demande | Response body |
 |--- | ---- | ---- | ---- |
-|`GET /api/TodoItems` | Obtenir toutes les tâches | Aucun | Tableau de tâches|
-|`GET /api/TodoItems/{id}` | Obtenir un élément par ID | Aucun | Tâche|
+|`GET /api/TodoItems` | Obtenir toutes les tâches | None | Tableau de tâches|
+|`GET /api/TodoItems/{id}` | Obtenir un élément par ID | None | Tâche|
 |`POST /api/TodoItems` | Ajouter un nouvel élément | Tâche | Tâche |
-|`PUT /api/TodoItems/{id}` | Mettre à jour un élément existant &nbsp; | Tâche | Aucun |
+|`PUT /api/TodoItems/{id}` | Mettre à jour un élément existant &nbsp; | Tâche | None |
 |`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Supprimer un élément &nbsp;&nbsp; | None | None|
 
 Le diagramme suivant illustre la conception de l’application.
@@ -112,11 +112,11 @@ Le diagramme suivant illustre la conception de l’application.
 
   ![macOS - Nouvelle solution](first-web-api-mac/_static/sln.png)
 
-* Dans Visual Studio pour Mac antérieure à la version 8,6, sélectionnez API de l’application **.net Core**  >  **App**  >  **API**  >  **suivant**. Dans la version 8,6 ou une version ultérieure, sélectionnez application **Web et**  >  **App**  >  **API**application console  >  **suivant** .
+* Dans Visual Studio pour Mac antérieure à la version 8,6, sélectionnez API de l’application **.net Core**  >  **App**  >  **API**  >  **suivant**. Dans la version 8,6 ou une version ultérieure, sélectionnez application **Web et**  >  **App**  >  **API**application console  >  **suivant**.
 
   ![sélection du modèle d’API macOS](first-web-api-mac/_static/api_template.png)
 
-* Dans la boîte de dialogue **configurer votre nouvelle API Web ASP.net Core** , sélectionnez la version la plus récente de .net Core 3. x **Target Framework**. Sélectionnez **Suivant**.
+* Dans la boîte de dialogue **configurer la nouvelle API Web ASP.net Core** , sélectionnez la version la plus récente de .net Core 3. x **Target Framework**. Sélectionnez **Suivant**.
 
 * Entrez *TodoApi* comme **Nom du projet**, puis sélectionnez **Créer**.
 
@@ -293,7 +293,8 @@ Exécutez les commandes suivantes :
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet tool install --global dotnet-aspnet-codegenerator
-dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
+dotnet tool update -g Dotnet-aspnet-codegenerator
+dotnet-aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
 ```
 
 Les commandes précédentes :
@@ -324,6 +325,8 @@ Remplacez l’instruction return dans `PostTodoItem` pour utiliser l’opérateu
 
 Le code précédent est une méthode HTTP Après, comme indiqué par l' [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) attribut. La méthode obtient la valeur de la tâche dans le corps de la requête HTTP.
 
+Pour plus d’informations, consultez [Routage par attributs avec des attributs Http[Verbe]](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).
+
 La méthode <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> :
 
 * Retourne un code d’état HTTP 201 en cas de réussite. HTTP 201 est la réponse standard d’une méthode HTTP POST qui crée une ressource sur le serveur.
@@ -348,6 +351,7 @@ Ce tutoriel utilise Postman pour tester l’API web.
 
 * Créez une requête.
 * Affectez `POST` à la méthode HTTP.
+* Définissez l’URI sur `https://localhost:<port>/api/TodoItem` . Par exemple : `https://localhost:5001/api/TodoItem`.
 * Sélectionnez l’onglet **Corps** .
 * Sélectionnez la case d’option **raw** (données brutes).
 * Définissez le type sur **JSON (application/json)**.
@@ -364,15 +368,15 @@ Ce tutoriel utilise Postman pour tester l’API web.
 
   ![Postman avec requête de création](first-web-api/_static/3/create.png)
 
-### <a name="test-the-location-header-uri"></a>Tester l’URI de l’en-tête d’emplacement
+### <a name="test-the-location-header-uri-with-postman"></a>Tester l’URI d’en-tête d’emplacement avec le poster
 
 * Sélectionnez l’onglet **Headers** (En-têtes) dans le volet **Response** (Réponse).
 * Copiez la valeur d’en-tête **Location** (Emplacement) :
 
   ![Onglet Headers de la console Postman](first-web-api/_static/3/create.png)
 
-* Définissez la méthode sur GET.
-* Collez l’URI (par exemple, `https://localhost:5001/api/TodoItems/1` ).
+* Affectez `GET` à la méthode HTTP.
+* Définissez l’URI sur `https://localhost:<port>/api/TodoItems/1` . Par exemple : `https://localhost:5001/api/TodoItems/1`.
 * Sélectionnez **Envoyer**.
 
 ## <a name="examine-the-get-methods"></a>Examiner les méthodes GET
@@ -403,7 +407,7 @@ Une réponse semblable à la suivante est produite par l’appel à `GetTodoItem
 
 * Créez une requête.
 * Définissez la méthode HTTP sur **GET**.
-* Définissez l’URL de la requête sur `https://localhost:<port>/api/TodoItems`. Par exemple, `https://localhost:5001/api/TodoItems`.
+* Définissez l’URI de la demande sur `https://localhost:<port>/api/TodoItems` . Par exemple : `https://localhost:5001/api/TodoItems`.
 * Définissez l’**affichage à deux volets** dans Postman.
 * Sélectionnez **Envoyer**.
 
@@ -534,10 +538,10 @@ Ce didacticiel crée l’API suivante :
 
 |API | Description | Corps de la demande | Response body |
 |--- | ---- | ---- | ---- |
-|GET /api/TodoItems | Obtenir toutes les tâches | Aucun | Tableau de tâches|
-|GET /api/TodoItems/{id} | Obtenir un élément par ID | Aucun | Tâche|
+|GET /api/TodoItems | Obtenir toutes les tâches | None | Tableau de tâches|
+|GET /api/TodoItems/{id} | Obtenir un élément par ID | None | Tâche|
 |POST /api/TodoItems | Ajouter un nouvel élément | Tâche | Tâche |
-|PUT /api/TodoItems/{id} | Mettre à jour un élément existant &nbsp; | Tâche | Aucun |
+|PUT /api/TodoItems/{id} | Mettre à jour un élément existant &nbsp; | Tâche | None |
 |SUPPRIMER/api/TodoItems/{id} &nbsp;&nbsp; | Supprimer un élément &nbsp;&nbsp; | None | None|
 
 Le diagramme suivant illustre la conception de l’application.
@@ -594,7 +598,7 @@ Le diagramme suivant illustre la conception de l’application.
 
 * Dans Visual Studio pour Mac antérieure à la version 8,6, sélectionnez API de l’application **.net Core**  >  **App**  >  **API**  >  **suivant**. Dans la version 8,6 ou une version ultérieure, sélectionnez application **Web et**  >  **App**  >  **API**application console  >  **suivant**.
   
-* Dans la boîte de dialogue **configurer votre nouvelle API Web ASP.net Core** , sélectionnez la version la plus récente de .net Core 2. x **Target Framework**. Sélectionnez **Suivant**.
+* Dans la boîte de dialogue **configurer la nouvelle API Web ASP.net Core** , sélectionnez la version la plus récente de .net Core 2. x **Target Framework**. Sélectionnez **Suivant**.
 
 * Entrez *TodoApi* comme **Nom du projet**, puis sélectionnez **Créer**.
 
@@ -804,7 +808,7 @@ Ce tutoriel utilise Postman pour tester l’API web.
 
 * Créez une requête.
   * Définissez la méthode HTTP sur **GET**.
-  * Définissez l’URL de la requête sur `https://localhost:<port>/api/todo`. Par exemple, `https://localhost:5001/api/todo`.
+  * Définissez l’URI de la demande sur `https://localhost:<port>/api/todo` . Par exemple : `https://localhost:5001/api/todo`.
 * Définissez l’**affichage à deux volets** dans Postman.
 * Sélectionnez **Envoyer**.
 
@@ -830,6 +834,7 @@ La méthode `CreatedAtAction` :
 
 * Créez le projet.
 * Dans Postman, définissez la méthode HTTP sur `POST`.
+* Définissez l’URI sur `https://localhost:<port>/api/TodoItem` . Par exemple : `https://localhost:5001/api/TodoItem`.
 * Sélectionnez l’onglet **Corps** .
 * Sélectionnez la case d’option **raw** (données brutes).
 * Définissez le type sur **JSON (application/json)**.
@@ -856,7 +861,7 @@ La méthode `CreatedAtAction` :
   ![Onglet Headers de la console Postman](first-web-api/_static/pmc2.png)
 
 * Définissez la méthode sur GET.
-* Collez l’URI (par exemple, `https://localhost:5001/api/Todo/2` ).
+* Définissez l’URI sur  `https://localhost:<port>/api/TodoItems/2` .Par exemple,  `https://localhost:5001/api/TodoItems/2` .
 * Sélectionnez **Envoyer**.
 
 ## <a name="add-a-puttodoitem-method"></a>Ajouter une méthode PutTodoItem
@@ -962,7 +967,7 @@ Pour supprimer une tâche, vous devez définir le `type` sur l’appel AJAX avec
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 [Affichez ou téléchargez l’exemple de code de ce tutoriel](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples). Consultez [Guide pratique pour télécharger](xref:index#how-to-download-a-sample).
 
