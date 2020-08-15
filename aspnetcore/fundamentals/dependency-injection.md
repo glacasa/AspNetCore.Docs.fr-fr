@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 0d8b349d0381e2902907ea841e07bbc96db5b847
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: b0ba7c7598df13413c00934a30e03681129de98a
+ms.sourcegitcommit: 503b348e9046fcd969de85898394a1ea8274ec38
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130643"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227577"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>Injection de dépendances dans ASP.NET Core
 
@@ -111,9 +111,9 @@ La méthode mise à jour `ConfigureServices` inscrit la nouvelle `IMyDependency`
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/StartupMyDependency2.cs?name=snippet1)]
 
-`MyDependency2`demande un <xref:Microsoft.Extensions.Logging.ILogger`1> dans le constructeur. Il n’est pas rare que l’injection de dépendances soit utilisée de manière chaînée. Dans ce cas, chaque dépendance demandée demande à son tour ses propres dépendances. Le conteneur résout les dépendances dans le graphique et retourne le service entièrement résolu. L’ensemble collectif de dépendances qui doivent être résolues est généralement appelé *arborescence des dépendances*, *graphique de dépendance* ou *graphique d’objet*.
+`MyDependency2` demande un <xref:Microsoft.Extensions.Logging.ILogger`1> dans le constructeur. Il n’est pas rare que l’injection de dépendances soit utilisée de manière chaînée. Dans ce cas, chaque dépendance demandée demande à son tour ses propres dépendances. Le conteneur résout les dépendances dans le graphique et retourne le service entièrement résolu. L’ensemble collectif de dépendances qui doivent être résolues est généralement appelé *arborescence des dépendances*, *graphique de dépendance* ou *graphique d’objet*.
 
-`ILogger<TCategoryName>`est un [service fourni par le Framework](#framework-provided-services).
+`ILogger<TCategoryName>` est un [service fourni par le Framework](#framework-provided-services).
 
 Le conteneur se résout `ILogger<TCategoryName>` en tirant parti de [types ouverts (génériques)](/dotnet/csharp/language-reference/language-specification/types#open-and-closed-types), ce qui évite d’avoir à inscrire chaque [type construit (Générique)](/dotnet/csharp/language-reference/language-specification/types#constructed-types).
 
@@ -194,7 +194,7 @@ Utilisez les services délimités dans l’intergiciel (middleware) avec l’une
 * Injectez le service dans `Invoke` la `InvokeAsync` méthode ou. L’injection par [injection de constructeur](xref:mvc/controllers/dependency-injection#constructor-injection) lève une exception au moment de l’exécution, car elle force le service à se comporter comme un singleton. L’exemple dans les [options de durée de vie et d’inscription](#lifetime-and-registration-options) utilise l' `InvokeAsync` approche.
 * [Intergiciel (middleware) basé sur l’usine](<xref:fundamentals/middleware/extensibility>). Les méthodes d’extension de <xref:Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.UseMiddleware*> vérifient si le type inscrit d’un middleware implémente <xref:Microsoft.AspNetCore.Http.IMiddleware>. Si c’est le cas, l’instance de <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> inscrite dans le conteneur est utilisée pour résoudre l’implémentation de <xref:Microsoft.AspNetCore.Http.IMiddleware>, au lieu de la logique d’activation de middleware basée sur une convention. Le middleware est inscrit comme service délimité ou temporaire dans le conteneur de service de l’application.
 
-Pour plus d’informations, consultez <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
+Pour plus d'informations, consultez <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
 
 Ne résolvez ***pas*** un service étendu à partir d’un singleton. L’état du service risque de ne pas être correct lors du traitement des requêtes suivantes. Il convient d’effectuer les opérations suivantes :
 
@@ -234,7 +234,7 @@ Les méthodes d’extension d’inscription de service offrent des surcharges qu
 
 Pour plus d’informations sur la suppression de type, consultez la section [Suppression des services](#disposal-of-services). Un scénario courant d’implémentations multiples est la [simulation de types à des fins de test](xref:test/integration-tests#inject-mock-services).
 
-`TryAdd{LIFETIME}`les méthodes inscrivent le service si aucune implémentation n’est déjà inscrite.
+`TryAdd{LIFETIME}` les méthodes inscrivent le service si aucune implémentation n’est déjà inscrite.
 
 Dans l’exemple suivant, la première ligne inscrit `MyDependency` pour `IMyDependency`. La deuxième ligne n’a aucun effet car `IMyDependency` a déjà une implémentation inscrite :
 
@@ -268,7 +268,7 @@ services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDep1, MyDep>());
 
 L’inscription de service est généralement indépendante de l’ordre, sauf lors de l’inscription de plusieurs implémentations du même type.
 
-`IServiceCollection`est une collection de <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor> . Le code suivant montre comment ajouter un service à l’aide d’un constructeur :
+`IServiceCollection` est une collection de <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor> . Le code suivant montre comment ajouter un service à l’aide d’un constructeur :
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Startup5.cs?name=snippet)]
 
@@ -608,6 +608,7 @@ La `Startup.ConfigureServices` méthode est chargée de définir les services ut
 * <xref:mvc/controllers/dependency-injection>
 * <xref:security/authorization/dependencyinjection>
 * <xref:blazor/fundamentals/dependency-injection>
+* [Modèles de conférence norvégiens pour le développement d’applications DI](https://www.youtube.com/watch?v=x-C-CNBVTaY)
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/extensibility>
 * [Quatre méthodes pour supprimer des IDisposable dans ASP.NET Core](https://andrewlock.net/four-ways-to-dispose-idisposables-in-asp-net-core/)
@@ -740,7 +741,7 @@ public void Configure(IApplicationBuilder app, IOptions<MyOptions> options)
 }
 ```
 
-Pour plus d’informations, consultez <xref:fundamentals/startup>.
+Pour plus d'informations, consultez <xref:fundamentals/startup>.
 
 ## <a name="framework-provided-services"></a>Services fournis par le framework
 
@@ -802,7 +803,7 @@ Les services à durée de vie délimitée (<xref:Microsoft.Extensions.Dependency
 Dans les applications qui traitent les requêtes, les services délimités sont supprimés à la fin de la demande.
 
 > [!WARNING]
-> Si vous utilisez un service Scoped dans un middleware, injectez le service dans la méthode `Invoke` ou `InvokeAsync`. N’injectez pas via l' [injection de constructeur](xref:mvc/controllers/dependency-injection#constructor-injection) , car cela force le service à se comporter comme un singleton. Pour plus d’informations, consultez <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
+> Si vous utilisez un service Scoped dans un middleware, injectez le service dans la méthode `Invoke` ou `InvokeAsync`. N’injectez pas via l' [injection de constructeur](xref:mvc/controllers/dependency-injection#constructor-injection) , car cela force le service à se comporter comme un singleton. Pour plus d'informations, consultez <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
 
 ### <a name="singleton"></a>Singleton
 
@@ -999,7 +1000,7 @@ Le fournisseur de services racine est créé quand <xref:Microsoft.Extensions.De
 
 Les services Scoped sont supprimés par le conteneur qui les a créés. Si un service Scoped est créé dans le conteneur racine, la durée de vie du service est promue en singleton, car elle est supprimée par le conteneur racine seulement quand l’application/le serveur est arrêté. La validation des étendues du service permet de traiter ces situations quand `BuildServiceProvider` est appelé.
 
-Pour plus d’informations, consultez <xref:fundamentals/host/web-host#scope-validation>.   
+Pour plus d'informations, consultez <xref:fundamentals/host/web-host#scope-validation>.   
 
 ## <a name="request-services"></a>Services de requête
 

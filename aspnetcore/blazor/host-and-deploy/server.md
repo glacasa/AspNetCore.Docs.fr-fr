@@ -1,11 +1,11 @@
 ---
-title: Héberger et déployer des ASP.NET CoreBlazor Server
+title: Héberger et déployer des ASP.NET Core Blazor Server
 author: guardrex
 description: Découvrez comment héberger et déployer une Blazor Server application à l’aide de ASP.net core.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/04/2020
+ms.date: 08/14/2020
 no-loc:
 - cookie
 - Cookie
@@ -17,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: e7c8627cd27fd30288b4bcfa1ac2ffe3e9b46e29
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ce767e591bd87ccb293f4698308e0bdbd6817d1f
+ms.sourcegitcommit: 503b348e9046fcd969de85898394a1ea8274ec38
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014215"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227616"
 ---
-# <a name="host-and-deploy-no-locblazor-server"></a>Héberger et déployerBlazor Server
+# <a name="host-and-deploy-no-locblazor-server"></a>Héberger et déployer Blazor Server
 
 Par [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com) et [Daniel Roth](https://github.com/danroth27)
 
@@ -56,11 +56,11 @@ Pour obtenir des conseils sur la création d’applications serveur sécurisées
 
 Chaque circuit utilise environ 250 Ko de mémoire pour une application de type *Hello World*minimale. La taille d’un circuit dépend du code de l’application et des exigences de maintenance d’état associées à chaque composant. Nous vous recommandons de mesurer les demandes de ressources pendant le développement de votre application et de votre infrastructure, mais la ligne de base suivante peut être un point de départ pour la planification de votre cible de déploiement : Si vous pensez que votre application prend en charge 5 000 utilisateurs simultanés, envisagez de budgétiser au moins 1,3 Go de mémoire serveur vers l’application (ou ~ 273 Ko par utilisateur)
 
-### <a name="no-locsignalr-configuration"></a>SignalRconfiguré
+### <a name="no-locsignalr-configuration"></a>SignalR configuré
 
-Blazor Serverles applications utilisent ASP.NET Core SignalR pour communiquer avec le navigateur. [ SignalR les conditions d’hébergement et de mise à l’échelle de](xref:signalr/publish-to-azure-web-app) s’appliquent aux Blazor Server applications.
+Blazor Server les applications utilisent ASP.NET Core SignalR pour communiquer avec le navigateur. [ SignalR les conditions d’hébergement et de mise à l’échelle de](xref:signalr/publish-to-azure-web-app) s’appliquent aux Blazor Server applications.
 
-Blazorfonctionne mieux lorsque vous utilisez WebSocket en tant que SignalR transport en raison d’une latence, d’une fiabilité et d’une [sécurité](xref:signalr/security)moindres. L’interrogation longue est utilisée par SignalR lorsque WebSocket n’est pas disponible ou lorsque l’application est configurée explicitement pour utiliser une interrogation longue. Lors du déploiement sur Azure App Service, configurez l’application pour qu’elle utilise WebSockets dans les paramètres Portail Azure pour le service. Pour plus d’informations sur la configuration de l’application pour Azure App Service, consultez les [ SignalR instructions de publication](xref:signalr/publish-to-azure-web-app).
+Blazor fonctionne mieux lorsque vous utilisez WebSocket en tant que SignalR transport en raison d’une latence, d’une fiabilité et d’une [sécurité](xref:signalr/security)moindres. L’interrogation longue est utilisée par SignalR lorsque WebSocket n’est pas disponible ou lorsque l’application est configurée explicitement pour utiliser une interrogation longue. Lors du déploiement sur Azure App Service, configurez l’application pour qu’elle utilise WebSockets dans les paramètres Portail Azure pour le service. Pour plus d’informations sur la configuration de l’application pour Azure App Service, consultez les [ SignalR instructions de publication](xref:signalr/publish-to-azure-web-app).
 
 #### <a name="azure-no-locsignalr-service"></a>SignalRService Azure
 
@@ -120,7 +120,7 @@ metadata:
 Pour que SignalR WebSocket fonctionne correctement, vérifiez que les `Upgrade` `Connection` en-têtes et du proxy sont définis sur les valeurs suivantes et qu’ils sont `$connection_upgrade` mappés à l’un ou l’autre des éléments suivants :
 
 * Valeur d’en-tête de mise à niveau par défaut.
-* `close`Lorsque l’en-tête de mise à niveau est manquant ou vide.
+* `close` Lorsque l’en-tête de mise à niveau est manquant ou vide.
 
 ```
 http {
@@ -203,16 +203,19 @@ else
     <span>@(latency.Value.TotalMilliseconds)ms</span>
 }
 
-@code
-{
+@code {
     private DateTime startTime;
     private TimeSpan? latency;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        startTime = DateTime.UtcNow;
-        var _ = await JS.InvokeAsync<string>("toString");
-        latency = DateTime.UtcNow - startTime;
+        if (firstRender)
+        {
+            startTime = DateTime.UtcNow;
+            var _ = await JS.InvokeAsync<string>("toString");
+            latency = DateTime.UtcNow - startTime;
+            StateHasChanged();
+        }
     }
 }
 ```

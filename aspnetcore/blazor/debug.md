@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core de débogageBlazor WebAssembly
+title: ASP.NET Core de débogage Blazor WebAssembly
 author: guardrex
 description: Découvrez comment déboguer des Blazor applications.
 monikerRange: '>= aspnetcore-3.1'
@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 225916411550cc8e89c604e1426316843bb0ff52
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 838ed1a10ab3312e449782a29c305a976265550c
+ms.sourcegitcommit: 503b348e9046fcd969de85898394a1ea8274ec38
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014540"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227590"
 ---
-# <a name="debug-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core de débogageBlazor WebAssembly
+# <a name="debug-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core de débogage Blazor WebAssembly
 
 [Daniel Roth](https://github.com/danroth27)
 
-Blazor WebAssemblyles applications peuvent être déboguées à l’aide des outils de développement de navigateur dans les navigateurs basés sur le chrome (Edge/chrome). Vous pouvez également déboguer votre application à l’aide de Visual Studio ou Visual Studio Code.
+Blazor WebAssembly les applications peuvent être déboguées à l’aide des outils de développement de navigateur dans les navigateurs basés sur le chrome (Edge/chrome). Vous pouvez également déboguer votre application à l’aide de Visual Studio ou Visual Studio Code.
 
 Les scénarios disponibles sont les suivants :
 
@@ -80,7 +80,7 @@ Pour déboguer une Blazor WebAssembly application dans Visual Studio :
 1. Appuyez sur <kbd>F5</kbd> pour exécuter l’application dans le débogueur.
 
    > [!NOTE]
-   > **Exécuter sans débogage** (<kbd>CTRL</kbd> + <kbd>F5</kbd>) n’est pas pris en charge.
+   > **Exécuter sans débogage** (<kbd>CTRL</kbd> + <kbd>F5</kbd>) n’est pas pris en charge. Lorsque l’application est exécutée dans la configuration Debug, le débogage entraîne toujours une réduction des performances minime.
 
 1. Définissez un point d’arrêt dans `Pages/Counter.razor` la `IncrementCount` méthode.
 1. Accédez à l' **`Counter`** onglet et sélectionnez le bouton pour atteindre le point d’arrêt :
@@ -111,7 +111,7 @@ Lors du débogage de votre Blazor WebAssembly application, vous pouvez égalemen
 
 ## <a name="visual-studio-code"></a>Visual Studio Code
 
-### <a name="debug-standalone-no-locblazor-webassembly"></a>Déboguer autonomeBlazor WebAssembly
+### <a name="debug-standalone-no-locblazor-webassembly"></a>Déboguer autonome Blazor WebAssembly
 
 1. Ouvrez l' Blazor WebAssembly application autonome dans vs code.
 
@@ -128,7 +128,7 @@ Lors du débogage de votre Blazor WebAssembly application, vous pouvez égalemen
 1. Démarrez le débogage à l’aide du raccourci clavier <kbd>F5</kbd> ou de l’élément de menu.
 
    > [!NOTE]
-   > L' **exécution sans débogage** (<kbd>CTRL</kbd> + <kbd>F5</kbd>) n’est pas prise en charge.
+   > **Exécuter sans débogage** (<kbd>CTRL</kbd> + <kbd>F5</kbd>) n’est pas pris en charge. Lorsque l’application est exécutée dans la configuration Debug, le débogage entraîne toujours une réduction des performances minime.
 
 1. Quand vous y êtes invité, sélectionnez l’option de ** Blazor WebAssembly débogage** pour démarrer le débogage.
 
@@ -140,7 +140,7 @@ Lors du débogage de votre Blazor WebAssembly application, vous pouvez égalemen
 
    ![Déboguer le compteur dans VS Code](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-debug-counter.png)
 
-### <a name="debug-hosted-no-locblazor-webassembly"></a>Débogage hébergéBlazor WebAssembly
+### <a name="debug-hosted-no-locblazor-webassembly"></a>Débogage hébergé Blazor WebAssembly
 
 1. Ouvrez le Blazor WebAssembly dossier de solution de l’application hébergée dans vs code.
 
@@ -241,7 +241,7 @@ Dans l’exemple précédent, `MyHostedApp.Server.dll` est l’assembly de l’a
 
 1. Dans le code du composant ( `.razor` fichiers) et les fichiers de code C# ( `.cs` ), les points d’arrêt que vous définissez sont atteints lors de l’exécution du code. Une fois le point d’arrêt atteint, une seule étape (<kbd>F10</kbd>) passe par l’exécution du code ou de la reprise (<kbd>F8</kbd>).
 
-Blazorfournit un proxy de débogage qui implémente le [protocole chrome devtools](https://chromedevtools.github.io/devtools-protocol/) et augmente le protocole avec. Informations spécifiques à .net. Quand le raccourci clavier de débogage est enfoncé, Blazor pointe le devtools chrome au niveau du proxy. Le proxy se connecte à la fenêtre du navigateur que vous cherchez à déboguer (par conséquent, il est nécessaire d’activer le débogage distant).
+Blazor fournit un proxy de débogage qui implémente le [protocole chrome devtools](https://chromedevtools.github.io/devtools-protocol/) et augmente le protocole avec. Informations spécifiques à .net. Quand le raccourci clavier de débogage est enfoncé, Blazor pointe le devtools chrome au niveau du proxy. Le proxy se connecte à la fenêtre du navigateur que vous cherchez à déboguer (par conséquent, il est nécessaire d’activer le débogage distant).
 
 ## <a name="browser-source-maps"></a>Mappages des sources du navigateur
 
