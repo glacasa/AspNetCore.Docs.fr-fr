@@ -1,5 +1,5 @@
 ---
-title: Héberger et déployer des ASP.NET CoreBlazor WebAssembly
+title: Héberger et déployer des ASP.NET Core Blazor WebAssembly
 author: guardrex
 description: Découvrez comment héberger et déployer une Blazor application à l’aide de ASP.net Core, de réseaux de distribution de contenu (CDN), de serveurs de fichiers et de pages github.
 monikerRange: '>= aspnetcore-3.1'
@@ -17,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 06059e0f9ff6a3f4073d8d01d1ac541c30ad1ab1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e66a470bf5bd23950bdb0ccf61c6743916ed9349
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014189"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504552"
 ---
-# <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>Héberger et déployer des ASP.NET CoreBlazor WebAssembly
+# <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>Héberger et déployer des ASP.NET Core Blazor WebAssembly
 
 Par [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com), [Daniel Roth](https://github.com/danroth27), [Ben Adams](https://twitter.com/ben_a_adams)et [safia Abdalla](https://safia.rocks)
 
@@ -45,7 +45,7 @@ Quand une Blazor WebAssembly application est publiée, la sortie est compressée
 * [Brotli](https://tools.ietf.org/html/rfc7932) (niveau le plus élevé)
 * [Gzip](https://tools.ietf.org/html/rfc1952)
 
-Blazors’appuie sur l’hôte pour servir les fichiers compressés appropriés. Lors de l’utilisation d’un projet hébergé ASP.NET Core, le projet hôte peut effectuer la négociation de contenu et traiter les fichiers compressés statiquement. Lors de l’hébergement d’une Blazor WebAssembly application autonome, un travail supplémentaire peut être nécessaire pour s’assurer que les fichiers compressés statiquement sont pris en charge :
+Blazor s’appuie sur l’hôte pour servir les fichiers compressés appropriés. Lors de l’utilisation d’un projet hébergé ASP.NET Core, le projet hôte peut effectuer la négociation de contenu et traiter les fichiers compressés statiquement. Lors de l’hébergement d’une Blazor WebAssembly application autonome, un travail supplémentaire peut être nécessaire pour s’assurer que les fichiers compressés statiquement sont pris en charge :
 
 * Pour `web.config` la configuration de la compression IIS, consultez la section [IIS : Brotli et compression gzip](#brotli-and-gzip-compression) . 
 * Lors de l’hébergement sur des solutions d’hébergement statiques qui ne prennent pas en charge la négociation de contenu de fichier compressée statiquement, telles que les pages GitHub, envisagez de configurer l’application pour extraire et décoder les fichiers compressés Brotli :
@@ -87,6 +87,12 @@ Pour désactiver la compression, ajoutez la `BlazorEnableCompression` propriét�
 </PropertyGroup>
 ```
 
+La `BlazorEnableCompression` propriété peut être passée à la [`dotnet publish`](/dotnet/core/tools/dotnet-publish) commande avec la syntaxe suivante dans une interface de commande :
+
+```dotnetcli
+dotnet publish -p:BlazorEnableCompression=false
+```
+
 ## <a name="rewrite-urls-for-correct-routing"></a>Réécriture d’URL pour un routage correct
 
 Le routage des requêtes pour les composants de page dans une Blazor WebAssembly application n’est pas aussi simple que les demandes de routage dans une Blazor Server application hébergée. Prenons l’exemple d’une Blazor WebAssembly application avec deux composants :
@@ -98,7 +104,7 @@ Quand le document par défaut de l’application est demandé à l’aide de la 
 
 1. Le navigateur effectue une requête.
 1. La page par défaut est retournée, qui est généralement `index.html` .
-1. `index.html`amorce l’application.
+1. `index.html` amorce l’application.
 1. Blazorle routeur est chargé et le Razor `Main` composant est rendu.
 
 Dans la page principale, le fait de sélectionner le lien vers le `About` composant fonctionne sur le client car le Blazor routeur empêche le navigateur d’effectuer une requête sur Internet pour `www.contoso.com` `About` et sert le `About` composant rendu lui-même. Toutes les demandes de points de terminaison internes *au sein de l' Blazor WebAssembly application* fonctionnent de la même façon : les demandes ne déclenchent pas de requêtes basées sur un navigateur vers des ressources hébergées sur le serveur sur Internet. Le routeur gère les requêtes en interne.
@@ -410,7 +416,7 @@ Les ressources de déploiement autonomes sont publiées dans le `/bin/Release/{T
 
 ### <a name="azure-app-service"></a>Azure App Service
 
-Blazor WebAssemblyles applications peuvent être déployées sur Azure App services sur Windows, qui héberge l’application sur [IIS](#iis).
+Blazor WebAssembly les applications peuvent être déployées sur Azure App services sur Windows, qui héberge l’application sur [IIS](#iis).
 
 Le déploiement d’une Blazor WebAssembly application autonome sur Azure App service pour Linux n’est pas pris en charge actuellement. Une image de serveur Linux pour héberger l’application n’est pas disponible pour l’instant. Le travail est en cours pour activer ce scénario.
 
@@ -491,7 +497,7 @@ La suppression du gestionnaire ou la désactivation de l’héritage est effectu
 
 IIS peut être configuré via `web.config` pour servir des ressources compressées Brotli ou gzip Blazor . Pour obtenir un exemple de configuration, consultez [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true) .
 
-#### <a name="troubleshooting"></a>Dépannage
+#### <a name="troubleshooting"></a>Résolution des problèmes
 
 Si vous recevez un message *500 – Erreur interne du serveur* et que le Gestionnaire IIS lève des erreurs quand vous tentez d’accéder à la configuration du site web, vérifiez que le module de réécriture d’URL est installé. Lorsque le module n’est pas installé, le `web.config` fichier ne peut pas être analysé par IIS. Cela empêche le gestionnaire des services Internet de charger la configuration du site Web et le site Web à partir des Blazor fichiers statiques de service.
 
@@ -504,7 +510,7 @@ L’hébergement de fichiers statiques [Azure Storage](/azure/storage/) permet l
 Lorsque le service blob est activé pour l’hébergement de site Web statique sur un compte de stockage :
 
 * Définissez le **nom du document d’index** sur `index.html`.
-* Définissez le **chemin d’accès au document d’erreur** sur `index.html`. Razorles composants et autres points de terminaison non-fichier ne résident pas sur des chemins d’accès physiques dans le contenu statique stocké par le service BLOB. Lorsqu’une demande pour l’une de ces ressources est reçue que le Blazor routeur doit gérer, l’erreur *404-introuvable* générée par le service BLOB achemine la requête vers le **chemin du document d’erreur**. L' `index.html` objet blob est retourné et le Blazor routeur charge et traite le chemin d’accès.
+* Définissez le **chemin d’accès au document d’erreur** sur `index.html`. Razor les composants et autres points de terminaison non-fichier ne résident pas sur des chemins d’accès physiques dans le contenu statique stocké par le service BLOB. Lorsqu’une demande pour l’une de ces ressources est reçue que le Blazor routeur doit gérer, l’erreur *404-introuvable* générée par le service BLOB achemine la requête vers le **chemin du document d’erreur**. L' `index.html` objet blob est retourné et le Blazor routeur charge et traite le chemin d’accès.
 
 Si les fichiers ne sont pas chargés au moment de l’exécution en raison de types MIME inappropriés dans les `Content-Type` en-têtes des fichiers, effectuez l’une des actions suivantes :
 
@@ -703,7 +709,7 @@ L’argument `--urls` définit les adresses IP ou les adresses d’hôtes avec 
 
 ## <a name="configure-the-linker"></a>Configurer l'éditeur de liens
 
-Blazoreffectue une liaison IL (Intermediate Language) sur chaque version de mise en production pour supprimer l’IL inutile des assemblys de sortie. Pour plus d'informations, consultez <xref:blazor/host-and-deploy/configure-linker>.
+Blazor effectue une liaison IL (Intermediate Language) sur chaque version de mise en production pour supprimer l’IL inutile des assemblys de sortie. Pour plus d'informations, consultez <xref:blazor/host-and-deploy/configure-linker>.
 
 ## <a name="custom-boot-resource-loading"></a>Chargement des ressources de démarrage personnalisé
 
@@ -713,16 +719,16 @@ Une Blazor WebAssembly application peut être initialisée avec la `loadBootReso
 * Chargez les assemblys compressés à l’aide d’une requête HTTP et décompressez-les sur le client pour les hôtes qui ne prennent pas en charge l’extraction du contenu compressé à partir du serveur.
 * Alias des ressources à un autre nom en redirigeant chaque `fetch` requête vers un nouveau nom.
 
-`loadBootResource`les paramètres s’affichent dans le tableau suivant.
+`loadBootResource` les paramètres s’affichent dans le tableau suivant.
 
 | Paramètre    | Description |
 | ------------ | ----------- |
-| `type`       | Type de la ressource. Types permissables : `assembly` , `pdb` , `dotnetjs` , `dotnetwasm` ,`timezonedata` |
+| `type`       | Type de la ressource. Types permissables : `assembly` , `pdb` , `dotnetjs` , `dotnetwasm` , `timezonedata` |
 | `name`       | Nom de la ressource. |
 | `defaultUri` | URI relatif ou absolu de la ressource. |
 | `integrity`  | Chaîne d’intégrité représentant le contenu attendu dans la réponse. |
 
-`loadBootResource`retourne l’un des éléments suivants pour remplacer le processus de chargement :
+`loadBootResource` retourne l’un des éléments suivants pour remplacer le processus de chargement :
 
 * Chaîne d’URI. Dans l’exemple suivant ( `wwwroot/index.html` ), les fichiers suivants sont pris en charge à partir d’un CDN à l’adresse `https://my-awesome-cdn.com/` :
 

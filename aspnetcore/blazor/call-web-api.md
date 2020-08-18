@@ -1,5 +1,5 @@
 ---
-title: Appeler une API Web à partir de ASP.NET CoreBlazor WebAssembly
+title: Appeler une API Web à partir de ASP.NET Core Blazor WebAssembly
 author: guardrex
 description: Découvrez comment appeler une API Web à partir d’une Blazor WebAssembly application à l’aide des applications auxiliaires JSON, y compris la création de demandes de partage des ressources Cross-Origin (cors).
 monikerRange: '>= aspnetcore-3.1'
@@ -17,21 +17,21 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: ef31d3d9b3914f3c86aa397ff214778fe295964b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f8c105624506d13f3ea8e963ceb49aeaf6d22a66
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012581"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504565"
 ---
-# <a name="call-a-web-api-from-aspnet-core-no-locblazor"></a>Appeler une API Web à partir de ASP.NET CoreBlazor
+# <a name="call-a-web-api-from-aspnet-core-no-locblazor"></a>Appeler une API Web à partir de ASP.NET Core Blazor
 
 Par [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27)et [Juan de la Cruz](https://github.com/juandelacruz23)
 
 > [!NOTE]
-> Cette rubrique s’applique à Blazor WebAssembly . [Blazor Server](xref:blazor/hosting-models#blazor-server)les applications appellent des API Web à l’aide d' <xref:System.Net.Http.HttpClient> instances, généralement créées à l’aide de <xref:System.Net.Http.IHttpClientFactory> . Pour obtenir des instructions qui s’appliquent à Blazor Server , consultez <xref:fundamentals/http-requests> .
+> Cette rubrique s’applique à Blazor WebAssembly . [Blazor Server](xref:blazor/hosting-models#blazor-server) les applications appellent des API Web à l’aide d' <xref:System.Net.Http.HttpClient> instances, généralement créées à l’aide de <xref:System.Net.Http.IHttpClientFactory> . Pour obtenir des instructions qui s’appliquent à Blazor Server , consultez <xref:fundamentals/http-requests> .
 
-[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly)les applications appellent des API Web à l’aide d’un <xref:System.Net.Http.HttpClient> service préconfiguré. Composez des requêtes, qui peuvent inclure des options de l' [API d’extraction](https://developer.mozilla.org/docs/Web/API/Fetch_API) JavaScript, à l’aide Blazor des applications auxiliaires JSON ou de <xref:System.Net.Http.HttpRequestMessage> . Le <xref:System.Net.Http.HttpClient> service dans les Blazor WebAssembly applications est axé sur l’exécution de requêtes sur le serveur d’origine. Les instructions de cette rubrique concernent uniquement les Blazor WebAssembly applications.
+[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) les applications appellent des API Web à l’aide d’un <xref:System.Net.Http.HttpClient> service préconfiguré. Composez des requêtes, qui peuvent inclure des options de l' [API d’extraction](https://developer.mozilla.org/docs/Web/API/Fetch_API) JavaScript, à l’aide Blazor des applications auxiliaires JSON ou de <xref:System.Net.Http.HttpRequestMessage> . Le <xref:System.Net.Http.HttpClient> service dans les Blazor WebAssembly applications est axé sur l’exécution de requêtes sur le serveur d’origine. Les instructions de cette rubrique concernent uniquement les Blazor WebAssembly applications.
 
 [Affichez ou téléchargez l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([procédure de téléchargement](xref:index#how-to-download-a-sample)) : sélectionnez l' `BlazorWebAssemblySample` application.
 
@@ -42,7 +42,7 @@ Consultez les composants suivants dans l' `BlazorWebAssemblySample` exemple d’
 
 ## <a name="packages"></a>Paquets
 
-Référencez le [`System.Net.Http.Json`](https://www.nuget.org/packages/System.Net.Http.Json/) package NuGet dans le fichier projet.
+Référencez le [`System.Net.Http.Json`](https://www.nuget.org/packages/System.Net.Http.Json) package NuGet dans le fichier projet.
 
 ## <a name="add-the-httpclient-service"></a>Ajouter le service HttpClient
 
@@ -62,7 +62,7 @@ Dans une Blazor WebAssembly application, [`HttpClient`](xref:fundamentals/http-r
 
 Une Blazor Server application n’inclut pas <xref:System.Net.Http.HttpClient> de service par défaut. Fournissez un <xref:System.Net.Http.HttpClient> à l’application à l’aide de l' [ `HttpClient` infrastructure de fabrique](xref:fundamentals/http-requests).
 
-<xref:System.Net.Http.HttpClient>et les auxiliaires JSON sont également utilisés pour appeler des points de terminaison d’API Web tiers. <xref:System.Net.Http.HttpClient>est implémenté à l’aide de l' [API FETCH](https://developer.mozilla.org/docs/Web/API/Fetch_API) du navigateur et est soumis à ses limitations, y compris l’application de la même stratégie d’origine.
+<xref:System.Net.Http.HttpClient> et les auxiliaires JSON sont également utilisés pour appeler des points de terminaison d’API Web tiers. <xref:System.Net.Http.HttpClient> est implémenté à l’aide de l' [API FETCH](https://developer.mozilla.org/docs/Web/API/Fetch_API) du navigateur et est soumis à ses limitations, y compris l’application de la même stratégie d’origine.
 
 L’adresse de base du client est définie sur l’adresse du serveur d’origine. Injecter une <xref:System.Net.Http.HttpClient> instance à l’aide de la [`@inject`](xref:mvc/views/razor#inject) directive :
 
@@ -163,7 +163,7 @@ Les méthodes d’assistance JSON envoient des demandes à un URI (une API Web d
   var content = response.Content.ReadFromJsonAsync<WeatherForecast>();
   ```
 
-<xref:System.Net.Http>contient des méthodes d’extension supplémentaires pour envoyer des requêtes HTTP et recevoir des réponses HTTP. <xref:System.Net.Http.HttpClient.DeleteAsync%2A?displayProperty=nameWithType>est utilisé pour envoyer une requête HTTP DELETE à une API Web.
+<xref:System.Net.Http> contient des méthodes d’extension supplémentaires pour envoyer des requêtes HTTP et recevoir des réponses HTTP. <xref:System.Net.Http.HttpClient.DeleteAsync%2A?displayProperty=nameWithType> est utilisé pour envoyer une requête HTTP DELETE à une API Web.
 
 Dans le code suivant, l' `<button>` élément delete appelle la `DeleteItem` méthode. L' `<input>` élément lié fournit le `id` de l’élément à supprimer. Pour obtenir un exemple complet, consultez l’exemple d’application.
 
@@ -184,9 +184,9 @@ Dans le code suivant, l' `<button>` élément delete appelle la `DeleteItem` mé
 
 ## <a name="named-httpclient-with-ihttpclientfactory"></a>Nommé HttpClient avec IHttpClientFactory
 
-<xref:System.Net.Http.IHttpClientFactory>les services et la configuration d’un nommé <xref:System.Net.Http.HttpClient> sont pris en charge.
+<xref:System.Net.Http.IHttpClientFactory> les services et la configuration d’un nommé <xref:System.Net.Http.HttpClient> sont pris en charge.
 
-Référencez le [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/) package NuGet dans le fichier projet.
+Référencez le [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) package NuGet dans le fichier projet.
 
 `Program.Main` (`Program.cs`):
 
@@ -195,7 +195,7 @@ builder.Services.AddHttpClient("ServerAPI", client =>
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 ```
 
-`FetchData`composant ( `Pages/FetchData.razor` ) :
+`FetchData` composant ( `Pages/FetchData.razor` ) :
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -263,7 +263,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client =>
 
 Les composants injectent le typé <xref:System.Net.Http.HttpClient> pour appeler l’API Web.
 
-`FetchData`composant ( `Pages/FetchData.razor` ) :
+`FetchData` composant ( `Pages/FetchData.razor` ) :
 
 ```razor
 @inject WeatherForecastClient Client
@@ -320,7 +320,7 @@ Pour plus d’informations sur CORS avec des demandes sécurisées dans les Blaz
 
 Pour obtenir des informations générales sur CORS avec les applications ASP.NET Core, consultez <xref:security/cors> .
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:blazor/security/webassembly/additional-scenarios>: Comprend la couverture de l’utilisation <xref:System.Net.Http.HttpClient> de pour créer des demandes d’API Web sécurisées.
 * <xref:fundamentals/http-requests>

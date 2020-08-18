@@ -5,7 +5,7 @@ description: Découvrez comment déboguer des Blazor applications.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/14/2020
+ms.date: 08/17/2020
 no-loc:
 - cookie
 - Cookie
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 7b5dac5c634ae3eef180ef2c7c7287da94342169
-ms.sourcegitcommit: 4df445e7d49a99f81625430f728c28e5d6bf2107
+ms.openlocfilehash: ac649b80a6cb1106de8acbb4764b53017afaa238
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/15/2020
-ms.locfileid: "88253575"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504591"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core de débogage Blazor WebAssembly
 
@@ -42,7 +42,7 @@ Les scénarios disponibles sont les suivants :
 Pour le moment, vous *ne pouvez pas*:
 
 * Arrêt sur les exceptions non gérées.
-* Atteindre les points d’arrêt pendant le démarrage de l’application.
+* Atteindre les points d’arrêt pendant le démarrage de l’application avant l’exécution du proxy de débogage. Cela comprend les points d’arrêt dans `Program.Main` ( `Program.cs` ) et les points d’arrêt dans les [ `OnInitialized{Async}` méthodes](xref:blazor/components/lifecycle#component-initialization-methods) des composants qui sont chargés par la première page demandée à partir de l’application.
 
 Nous continuerons à améliorer l’expérience de débogage dans les versions à venir.
 
@@ -247,7 +247,7 @@ Blazor fournit un proxy de débogage qui implémente le [protocole chrome devtoo
 
 Les mappages de source de navigateur permettent au navigateur de mapper les fichiers compilés à leurs fichiers sources d’origine et sont couramment utilisés pour le débogage côté client. Toutefois, Blazor ne mappe actuellement pas C# directement à JavaScript/WASM. Au lieu de cela, Blazor fait l’interprétation du langage intermédiaire dans le navigateur, les mappages de source ne sont donc pas pertinents.
 
-## <a name="troubleshoot"></a>Dépanner
+## <a name="troubleshoot"></a>Résoudre les problèmes
 
 Si vous rencontrez des erreurs, les conseils suivants peuvent vous aider :
 
