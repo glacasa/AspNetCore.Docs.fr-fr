@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 15531c39a66a9f6dfd0f5c20cf960e4db5a78074
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8cb09b9ecf8fc67652125e92aa15b484526c121e
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013799"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504656"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly des scénarios de sécurité supplémentaires
 
@@ -30,7 +30,7 @@ Par [Javier Calvarro Nelson](https://github.com/javiercn) et [Luke Latham](https
 
 ## <a name="attach-tokens-to-outgoing-requests"></a>Attacher des jetons aux demandes sortantes
 
-<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>est <xref:System.Net.Http.DelegatingHandler> utilisé pour attacher des jetons d’accès aux instances sortantes <xref:System.Net.Http.HttpResponseMessage> . Les jetons sont acquis à l’aide du <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> service, qui est enregistré par le Framework. Si un jeton ne peut pas être acquis, une <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> exception est levée. <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException>dispose d’une <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> méthode qui peut être utilisée pour accéder au fournisseur d’identité de l’utilisateur afin d’acquérir un nouveau jeton.
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> est <xref:System.Net.Http.DelegatingHandler> utilisé pour attacher des jetons d’accès aux instances sortantes <xref:System.Net.Http.HttpResponseMessage> . Les jetons sont acquis à l’aide du <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> service, qui est enregistré par le Framework. Si un jeton ne peut pas être acquis, une <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> exception est levée. <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> dispose d’une <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A> méthode qui peut être utilisée pour accéder au fournisseur d’identité de l’utilisateur afin d’acquérir un nouveau jeton.
 
 Pour plus de commodité, le Framework fournit l' <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> adresse préconfigurée avec l’adresse de base de l’application en tant qu’URL autorisée. **Les jetons d’accès sont ajoutés uniquement lorsque l’URI de la demande se trouve dans l’URI de base de l’application.** Lorsque les URI de demande sortants ne se trouvent pas dans l’URI de base de l’application, utilisez une [ `AuthorizationMessageHandler` classe personnalisée (*recommandé*)](#custom-authorizationmessagehandler-class) ou [configurez le `AuthorizationMessageHandler` ](#configure-authorizationmessagehandler).
 
@@ -39,9 +39,9 @@ Pour plus de commodité, le Framework fournit l' <xref:Microsoft.AspNetCore.Comp
 
 Dans l’exemple suivant :
 
-* <xref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient%2A>Ajoute <xref:System.Net.Http.IHttpClientFactory> des services connexes à la collection de services et configure un nommé <xref:System.Net.Http.HttpClient> ( `ServerAPI` ). <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType>adresse de base de l’URI de la ressource lors de l’envoi des demandes. <xref:System.Net.Http.IHttpClientFactory>est fourni par le [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) package NuGet.
-* <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler>est <xref:System.Net.Http.DelegatingHandler> utilisé pour attacher des jetons d’accès aux instances sortantes <xref:System.Net.Http.HttpResponseMessage> . Les jetons d’accès sont ajoutés uniquement lorsque l’URI de la demande se trouve dans l’URI de base de l’application.
-* <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A?displayProperty=nameWithType>crée et configure une <xref:System.Net.Http.HttpClient> instance pour les demandes sortantes à l’aide de la configuration qui correspond au nommé <xref:System.Net.Http.HttpClient> ( `ServerAPI` ).
+* <xref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient%2A> Ajoute <xref:System.Net.Http.IHttpClientFactory> des services connexes à la collection de services et configure un nommé <xref:System.Net.Http.HttpClient> ( `ServerAPI` ). <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> adresse de base de l’URI de la ressource lors de l’envoi des demandes. <xref:System.Net.Http.IHttpClientFactory> est fourni par le [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) package NuGet.
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> est <xref:System.Net.Http.DelegatingHandler> utilisé pour attacher des jetons d’accès aux instances sortantes <xref:System.Net.Http.HttpResponseMessage> . Les jetons d’accès sont ajoutés uniquement lorsque l’URI de la demande se trouve dans l’URI de base de l’application.
+* <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A?displayProperty=nameWithType> crée et configure une <xref:System.Net.Http.HttpClient> instance pour les demandes sortantes à l’aide de la configuration qui correspond au nommé <xref:System.Net.Http.HttpClient> ( `ServerAPI` ).
 
 ```csharp
 using System.Net.Http;
@@ -89,7 +89,7 @@ protected override async Task OnInitializedAsync()
 
 *Ce guide de cette section est recommandé pour les applications clientes qui effectuent des requêtes sortantes vers des URI qui ne se trouvent pas dans l’URI de base de l’application.*
 
-Dans l’exemple suivant, une classe personnalisée étend <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> pour une utilisation en tant que <xref:System.Net.Http.DelegatingHandler> pour un <xref:System.Net.Http.HttpClient> . <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A>Configure ce gestionnaire pour autoriser les requêtes HTTP sortantes à l’aide d’un jeton d’accès. Le jeton d’accès est attaché uniquement si au moins l’une des URL autorisées est une base de l’URI de la demande ( <xref:System.Net.Http.HttpRequestMessage.RequestUri?displayProperty=nameWithType> ).
+Dans l’exemple suivant, une classe personnalisée étend <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> pour une utilisation en tant que <xref:System.Net.Http.DelegatingHandler> pour un <xref:System.Net.Http.HttpClient> . <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> Configure ce gestionnaire pour autoriser les requêtes HTTP sortantes à l’aide d’un jeton d’accès. Le jeton d’accès est attaché uniquement si au moins l’une des URL autorisées est une base de l’URI de la demande ( <xref:System.Net.Http.HttpRequestMessage.RequestUri?displayProperty=nameWithType> ).
 
 ```csharp
 using Microsoft.AspNetCore.Components;
@@ -151,7 +151,7 @@ Le configuré <xref:System.Net.Http.HttpClient> est utilisé pour effectuer des 
 
 ### <a name="configure-authorizationmessagehandler"></a>Configurer `AuthorizationMessageHandler`
 
-<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>peut être configuré avec des URL, des étendues et une URL de retour autorisées à l’aide de la <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> méthode. <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A>configure le gestionnaire pour autoriser les requêtes HTTP sortantes à l’aide d’un jeton d’accès. Le jeton d’accès est attaché uniquement si au moins l’une des URL autorisées est une base de l’URI de la demande ( <xref:System.Net.Http.HttpRequestMessage.RequestUri?displayProperty=nameWithType> ). Si l’URI de la demande est un URI relatif, il est associé au <xref:System.Net.Http.HttpClient.BaseAddress> .
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> peut être configuré avec des URL, des étendues et une URL de retour autorisées à l’aide de la <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> méthode. <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> configure le gestionnaire pour autoriser les requêtes HTTP sortantes à l’aide d’un jeton d’accès. Le jeton d’accès est attaché uniquement si au moins l’une des URL autorisées est une base de l’URI de la demande ( <xref:System.Net.Http.HttpRequestMessage.RequestUri?displayProperty=nameWithType> ). Si l’URI de la demande est un URI relatif, il est associé au <xref:System.Net.Http.HttpClient.BaseAddress> .
 
 Dans l’exemple suivant, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> configure un <xref:System.Net.Http.HttpClient> dans `Program.Main` ( `Program.cs` ) :
 
@@ -176,7 +176,7 @@ Pour une Blazor application basée sur le Blazor WebAssembly modèle de projet h
 * <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType>( `new Uri(builder.HostEnvironment.BaseAddress)` ).
 * URL du `authorizedUrls` tableau.
 
-## <a name="typed-httpclient"></a>Tapé`HttpClient`
+## <a name="typed-httpclient"></a>Tapé `HttpClient`
 
 Vous pouvez définir un client typé qui gère tous les problèmes d’acquisition de jetons et HTTP dans une même classe.
 
@@ -234,7 +234,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(
 
 Pour une Blazor application basée sur le Blazor WebAssembly modèle de projet hébergé, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `new Uri(builder.HostEnvironment.BaseAddress)` ) est assigné à <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> par défaut.
 
-`FetchData`composant ( `Pages/FetchData.razor` ) :
+`FetchData` composant ( `Pages/FetchData.razor` ) :
 
 ```razor
 @inject WeatherForecastClient Client
@@ -352,12 +352,12 @@ if (tokenResult.TryGetToken(out var token))
 }
 ```
 
-<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken%2A?displayProperty=nameWithType>Cette
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken%2A?displayProperty=nameWithType> Cette
 
-* `true`avec le `token` à utiliser.
-* `false`Si le jeton n’est pas récupéré.
+* `true` avec le `token` à utiliser.
+* `false` Si le jeton n’est pas récupéré.
 
-## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>`HttpClient`et `HttpRequestMessage` avec les options de requête de l’API Fetch
+## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>`HttpClient` et `HttpRequestMessage` avec les options de requête de l’API Fetch
 
 Lors de l’exécution sur webassembly dans une Blazor WebAssembly application, [`HttpClient`](xref:fundamentals/http-requests) (documentation de l'[API](xref:System.Net.Http.HttpClient)) et <xref:System.Net.Http.HttpRequestMessage> peut être utilisé pour personnaliser les demandes. Par exemple, vous pouvez spécifier la méthode HTTP et les en-têtes de demande. Le composant suivant envoie une `POST` demande à un point de terminaison d’API de liste de tâches sur le serveur et affiche le corps de la réponse :
 
@@ -452,7 +452,7 @@ La stratégie suivante comprend la configuration pour :
 
 * Origines des demandes ( `http://localhost:5000` , `https://localhost:5001` ).
 * Toute méthode (verbe).
-* `Content-Type`et `Authorization` en-têtes. Pour autoriser un en-tête personnalisé (par exemple, `x-custom-header` ), répertoriez l’en-tête lors de l’appel de <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> .
+* `Content-Type` et `Authorization` en-têtes. Pour autoriser un en-tête personnalisé (par exemple, `x-custom-header` ), répertoriez l’en-tête lors de l’appel de <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> .
 * Informations d’identification définies par le code JavaScript côté client (la `credentials` propriété a la valeur `include` ).
 
 ```csharp
@@ -697,7 +697,7 @@ builder.Services.AddSingleton<StateContainer>();
 
 ## <a name="customize-app-routes"></a>Personnaliser les itinéraires de l’application
 
-Par défaut, la [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) bibliothèque utilise les itinéraires indiqués dans le tableau suivant pour représenter des États d’authentification différents.
+Par défaut, la [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) bibliothèque utilise les itinéraires indiqués dans le tableau suivant pour représenter des États d’authentification différents.
 
 | Routage                            | Objectif |
 | -------------------------------- | ------- |
@@ -715,7 +715,7 @@ Les itinéraires indiqués dans le tableau précédent sont configurables via <x
 
 Dans l’exemple suivant, tous les chemins d’accès ont pour préfixe `/security` .
 
-`Authentication`composant ( `Pages/Authentication.razor` ) :
+`Authentication` composant ( `Pages/Authentication.razor` ) :
 
 ```razor
 @page "/security/{action}"
@@ -757,9 +757,9 @@ Si vous le souhaitez, vous avez la possibilité de scinder l’interface utilisa
 
 ## <a name="customize-the-authentication-user-interface"></a>Personnaliser l’interface utilisateur de l’authentification
 
-<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>comprend un ensemble par défaut de parties de l’interface utilisateur pour chaque État d’authentification. Chaque État peut être personnalisé en passant un personnalisé <xref:Microsoft.AspNetCore.Components.RenderFragment> . Pour personnaliser le texte affiché pendant le processus de connexion initial, peut modifier le <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> comme suit.
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> comprend un ensemble par défaut de parties de l’interface utilisateur pour chaque État d’authentification. Chaque État peut être personnalisé en passant un personnalisé <xref:Microsoft.AspNetCore.Components.RenderFragment> . Pour personnaliser le texte affiché pendant le processus de connexion initial, peut modifier le <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> comme suit.
 
-`Authentication`composant ( `Pages/Authentication.razor` ) :
+`Authentication` composant ( `Pages/Authentication.razor` ) :
 
 ```razor
 @page "/security/{action}"

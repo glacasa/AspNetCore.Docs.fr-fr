@@ -14,17 +14,21 @@ no-loc:
 - Razor
 - SignalR
 uid: data/entity-framework-6
-ms.openlocfilehash: c65a1ae7cc67ec7e15a2b732184bc05803eb40ce
-ms.sourcegitcommit: ec41ab354952b75557240923756a8c2ac79b49f8
+ms.openlocfilehash: 7e7a07a080d2feefb994396c689279545ce5432f
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/13/2020
-ms.locfileid: "88202757"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504695"
 ---
 # <a name="aspnet-core-and-entity-framework-6"></a>ASP.NET Core et Entity Framework 6
 ::: moniker range=">= aspnetcore-3.0"
 
-[Entity Framework](/ef/ef6/) 6,3 et versions ultérieures fonctionnent avec ASP.net Core 3,1 et versions ultérieures. Pour plus d’informations, consultez le billet de blog [annonçant Entity Framework 6,3 avec prise en charge de .net Core](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-6-3-preview-with-net-core-support/).
+De [Patrick Goode](https://github.com/attrib75)
+
+## <a name="using-entity-framework-6-with-aspnet-core"></a>Utilisation de Entity Framework 6 avec ASP.NET Core
+
+[Entity Framework Core](/ef/) doit être utilisé pour un nouveau développement. L' [exemple Download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/entity-framework-6/3.xsample) utilise [Entity Framework 6 (EF6)](/ef/ef6), qui peut être utilisé pour migrer les applications de sortie vers ASP.net core.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
