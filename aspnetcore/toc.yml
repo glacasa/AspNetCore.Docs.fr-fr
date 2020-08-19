@@ -1156,7 +1156,7 @@
       uid: security/anti-request-forgery
     - name: Bloquer les attaques par redirection ouverte
       uid: security/preventing-open-redirects
-    - name: Bloquer les scripts intersites
+    - name: Bloquer les scripts intersites (XSS)
       uid: security/cross-site-scripting
     - name: Activer les requêtes d’origines différentes
       uid: security/cors
