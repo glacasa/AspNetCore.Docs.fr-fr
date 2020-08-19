@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 07/20/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/index
-ms.openlocfilehash: 7c59867f6d6fbf0f4d8207eb5d2919967d825e8b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 594d3dcbf55ed0a3476bb580df8e122cedb1dcd3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021300"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634369"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>Créer des API web avec ASP.NET Core
 
@@ -230,7 +231,7 @@ Avec une version de compatibilité 2,2 ou ultérieure, le type de réponse par d
 
 ::: moniker-end
 
-Pour assurer la cohérence des réponses automatiques et personnalisées, appelez la méthode à la <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem%2A> place de <xref:System.Web.Http.ApiController.BadRequest%2A> . `ValidationProblem`retourne un <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> objet ainsi que la réponse automatique.
+Pour assurer la cohérence des réponses automatiques et personnalisées, appelez la méthode à la <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem%2A> place de <xref:System.Web.Http.ApiController.BadRequest%2A> . `ValidationProblem` retourne un <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> objet ainsi que la réponse automatique.
 
 ### <a name="log-automatic-400-responses"></a>Consigner automatiquement 400 réponses
 

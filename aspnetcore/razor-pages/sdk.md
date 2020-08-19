@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 03/26/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/sdk
-ms.openlocfilehash: b960460a50558a11bc47f9a1844931aa32e3d696
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d11600af88d499d63adf9eae90d6deb929f9d92a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021417"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632913"
 ---
 # <a name="aspnet-core-no-locrazor-sdk"></a>RazorSDK ASP.net Core
 
@@ -185,7 +186,7 @@ Le Razor Kit de développement logiciel (SDK) définit deux cibles principales 
 
 * Pour une application Web, vérifiez que votre application cible le `Microsoft.NET.Sdk.Web` Kit de développement logiciel (SDK).
 
-## <a name="no-locrazor-language-version"></a>Razorversion du langage
+## <a name="no-locrazor-language-version"></a>Razor version du langage
 
 Lorsque vous ciblez le `Microsoft.NET.Sdk.Web` Kit de développement logiciel (SDK), la Razor version du langage est déduite de la version du Framework cible de l’application. Pour les projets ciblant le `Microsoft.NET.Sdk.Razor` Kit de développement logiciel (SDK) ou dans le cas rare où l’application requiert une version de langue différente de Razor la valeur déduite, une version peut être configurée en définissant la `<RazorLangVersion>` propriété dans le fichier projet de l’application :
 

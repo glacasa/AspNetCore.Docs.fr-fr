@@ -1,11 +1,12 @@
 ---
-title: Prise en main de ASP.NET CoreSignalR
+title: Prise en main de ASP.NET Core SignalR
 author: bradygaster
 description: Dans ce didacticiel, vous allez créer une application de conversation qui utilise ASP.NET Core SignalR .
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/21/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr
-ms.openlocfilehash: 51b9eae0d4746001696e0795467eaf4c0ab2c990
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e98cfc5e95233ce4d1001ab1225fc15e5fd23733
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022028"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634499"
 ---
-# <a name="tutorial-get-started-with-aspnet-core-no-locsignalr"></a>Didacticiel : prise en main de ASP.NET CoreSignalR
+# <a name="tutorial-get-started-with-aspnet-core-no-locsignalr"></a>Didacticiel : prise en main de ASP.NET Core SignalR
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -185,7 +186,7 @@ Un *hub* est une classe servant de pipeline global qui gère les communications 
 
   La classe `ChatHub` hérite de la classe SignalR `Hub`. La classe `Hub` gère les connexions, les groupes et la messagerie.
 
-  La méthode `SendMessage` peut être appelée par un client connecté afin d’envoyer un message à tous les clients. Le code client JavaScript qui appelle la méthode est indiqué plus loin dans le didacticiel. SignalRle code est asynchrone pour fournir une évolutivité maximale.
+  La méthode `SendMessage` peut être appelée par un client connecté afin d’envoyer un message à tous les clients. Le code client JavaScript qui appelle la méthode est indiqué plus loin dans le didacticiel. SignalR le code est asynchrone pour fournir une évolutivité maximale.
 
 ## <a name="configure-no-locsignalr"></a>Configurer SignalR
 
@@ -418,7 +419,7 @@ Un *hub* est une classe servant de pipeline global qui gère les communications 
 
   La classe `ChatHub` hérite de la classe SignalR `Hub`. La classe `Hub` gère les connexions, les groupes et la messagerie.  
 
-  La méthode `SendMessage` peut être appelée par un client connecté afin d’envoyer un message à tous les clients. Le code client JavaScript qui appelle la méthode est indiqué plus loin dans le didacticiel. SignalRle code est asynchrone pour fournir une évolutivité maximale.    
+  La méthode `SendMessage` peut être appelée par un client connecté afin d’envoyer un message à tous les clients. Le code client JavaScript qui appelle la méthode est indiqué plus loin dans le didacticiel. SignalR le code est asynchrone pour fournir une évolutivité maximale.    
 
 ## <a name="configure-no-locsignalr"></a>Configurer SignalR  
 

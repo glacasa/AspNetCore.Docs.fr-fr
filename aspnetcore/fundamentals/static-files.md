@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 6/23/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -14,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: 2dcde5a88bbd70e70cacac41822d54543ef51577
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: 24fda96dbe48945d172eb36e8a91af31f168ff7f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504786"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627661"
 ---
 # <a name="static-files-in-aspnet-core"></a>Fichiers statiques dans ASP.NET Core
 
@@ -201,7 +202,7 @@ Le code suivant permet le service des fichiers statiques, le fichier par défaut
 
 En utilisant la hiérarchie de fichiers et le code précédent, les URL sont résolues comme suit :
 
-| URI            |      Réponse  |
+| URI            |      response  |
 | ------- | ------|
 | `https://<hostname>/StaticFiles/images/MyImage.jpg` | *MyStaticFiles/images/MyImage.jpg* |
 | `https://<hostname>/StaticFiles` | *MyStaticFiles/default.html* |
@@ -266,7 +267,7 @@ Avec le code précédent, une requête pour un fichier avec un type de contenu i
 
 * Placez les fichiers de code, y compris les fichiers *. cs* et *. cshtml*, en dehors de la [racine Web](xref:fundamentals/index#web-root)du projet d’application. Par conséquent, une séparation logique est créée entre le contenu côté client et le code basé sur le serveur de l’application. Ceci empêche la fuite de code côté serveur.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Middleware](xref:fundamentals/middleware/index)
 * [Introduction à ASP.NET Core](xref:index)
@@ -439,7 +440,7 @@ Le code suivant active les fichiers statiques, les fichiers par défaut et l’e
 
 En utilisant la hiérarchie de fichiers et le code précédent, les URL sont résolues comme suit :
 
-| URI            |                             Réponse  |
+| URI            |                             response  |
 | ------- | ------|
 | *http:// \<server_address> /StaticFiles/images/banner1.svg*    |      MyStaticFiles/images/banner1.svg |
 | *http:// \<server_address> /StaticFiles*             |     MyStaticFiles/default.html |
@@ -497,7 +498,7 @@ Avec le code précédent, une requête pour un fichier avec un type de contenu i
 
 * Placez les fichiers de code (y compris les fichiers *. cs* et *. cshtml*) en dehors de la [racine Web](xref:fundamentals/index#web-root)du projet d’application. Par conséquent, une séparation logique est créée entre le contenu côté client et le code basé sur le serveur de l’application. Ceci empêche la fuite de code côté serveur.
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Middleware](xref:fundamentals/middleware/index)
 * [Introduction à ASP.NET Core](xref:index)

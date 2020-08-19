@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: bb29001e30578e0992e578c2f98cda82c5dcf185
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e03711d970c83c2b7d6cc76039cb0d556a751018
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018661"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628909"
 ---
 # <a name="part-8-no-locrazor-pages-with-ef-core-in-aspnet-core---concurrency"></a>Partie 8, Razor pages avec EF Core dans ASP.net Core-concurrence
 
@@ -293,7 +294,7 @@ Mettez à jour *Pages/Departments/Edit.cshtml* avec le code suivant :
 Le code précédent :
 
 * Il met à jour la directive `page` en remplaçant `@page` par `@page "{id:int}"`.
-* Ajoute une version de ligne masquée. `RowVersion`doit être ajouté de sorte que la publication (postback) lie la valeur.
+* Ajoute une version de ligne masquée. `RowVersion` doit être ajouté de sorte que la publication (postback) lie la valeur.
 * Affiche le dernier octet de `RowVersion` à des fins de débogage.
 * Remplace `ViewData` par le `InstructorNameSL` fortement typé.
 
@@ -349,7 +350,7 @@ Le code précédent apporte les modifications suivantes :
 * Il ajoute un message d’erreur.
 * Il remplace FirstMidName par FullName dans le champ **Administrator**.
 * Il change `RowVersion` pour afficher le dernier octet.
-* Ajoute une version de ligne masquée. `RowVersion`doit être ajouté de sorte que la publication (postback) lie la valeur.
+* Ajoute une version de ligne masquée. `RowVersion` doit être ajouté de sorte que la publication (postback) lie la valeur.
 
 ### <a name="test-concurrency-conflicts"></a>Tester les conflits d'accès concurrentiel
 
@@ -528,7 +529,7 @@ Suivez les instructions fournies dans [Générer automatiquement le modèle d’
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
- Exécutez la commande suivante :
+ Exécutez la commande suivante :
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Department -dc SchoolContext -udl -outDir Pages\Departments --referenceScriptLibraries

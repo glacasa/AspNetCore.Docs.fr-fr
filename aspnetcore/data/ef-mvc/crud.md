@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 2c71ea0eaccf4daeb8937dd5839481a506864fbe
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c17461f8d1d43335230a967a4b62943c055c06b9
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012850"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629208"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Didacticiel : implémenter la fonctionnalité CRUD-ASP.NET MVC avec EF Core
 
@@ -130,7 +131,7 @@ Vous avez supprimé `ID` de l’attribut `Bind`, car ID est la valeur de clé pr
 
 À part l’attribut `Bind`, le bloc try-catch est la seule modification que vous avez apportée au code du modèle généré automatiquement. Si une exception qui dérive de `DbUpdateException` est interceptée lors de l’enregistrement des modifications, un message d’erreur générique est affiché. Les exceptions `DbUpdateException` sont parfois dues à quelque chose d’externe à l’application et non pas à une erreur de programmation : il est donc conseillé à l’utilisateur de réessayer. Bien que ceci ne soit pas implémenté dans cet exemple, une application destinée à la production doit consigner l’exception. Pour plus d’informations, consultez la section **Journal pour obtenir un aperçu** de [Surveillance et télémétrie (génération d’applications Cloud du monde réel avec Azure)](/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/monitoring-and-telemetry).
 
-L’attribut `ValidateAntiForgeryToken` aide à éviter les attaques par falsification de requête intersites (CSRF, Cross-Site Request Forgery). Le jeton est automatiquement injecté dans la vue par le [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) et est inclus quand le formulaire est envoyé par l’utilisateur. Le jeton est validé par l’attribut `ValidateAntiForgeryToken`. Pour plus d’informations sur la falsification de requête intersites, consultez [Protection contre la falsification de requête](../../security/anti-request-forgery.md).
+L’attribut `ValidateAntiForgeryToken` aide à éviter les attaques par falsification de requête intersites (CSRF, Cross-Site Request Forgery). Le jeton est automatiquement injecté dans la vue par le [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) et est inclus quand le formulaire est envoyé par l’utilisateur. Le jeton est validé par l’attribut `ValidateAntiForgeryToken`. Pour plus d'informations, consultez <xref:security/anti-request-forgery>.
 
 <a id="overpost"></a>
 
