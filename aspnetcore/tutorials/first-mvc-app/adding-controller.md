@@ -5,6 +5,7 @@ description: Partie 2 de la série de didacticiels sur ASP.NET Core MVC.
 ms.author: riande
 ms.date: 08/05/2017
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: 46f8cbc5ef3d9fe00a5151160a9119f68a9fe572
-ms.sourcegitcommit: 68d03d1aee8906b53bda66f8f1e0747efc3007e6
+ms.openlocfilehash: b5ef99d5645e0bbd453d09809a446bf4af38a975
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/10/2020
-ms.locfileid: "88051808"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634044"
 ---
 # <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>Partie 2 : ajouter un contrôleur à une application ASP.NET Core MVC
 
@@ -102,7 +103,7 @@ Accédez à `https://localhost:{PORT}/HelloWorld/Welcome`. La méthode `Welcome`
 
 ![Fenêtre de navigateur montrant une réponse de la méthode d’action « This is the Welcome action »](~/tutorials/first-mvc-app/adding-controller/_static/welcome.png)
 
-Modifiez le code pour passer des informations sur les paramètres de l’URL au contrôleur. Par exemple, `/HelloWorld/Welcome?name=Rick&numtimes=4`. Modifiez la méthode `Welcome` en y incluant les deux paramètres, comme indiqué dans le code suivant.
+Modifiez le code pour passer des informations sur les paramètres de l’URL au contrôleur. Par exemple : `/HelloWorld/Welcome?name=Rick&numtimes=4`. Modifiez la méthode `Welcome` en y incluant les deux paramètres, comme indiqué dans le code suivant.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_2)]
 
@@ -221,7 +222,7 @@ Accédez à `https://localhost:{PORT}/HelloWorld/Welcome`. La méthode `Welcome`
 
 ![Fenêtre de navigateur montrant une réponse de la méthode d’action « This is the Welcome action »](~/tutorials/first-mvc-app/adding-controller/_static/welcome.png)
 
-Modifiez le code pour passer des informations sur les paramètres de l’URL au contrôleur. Par exemple, `/HelloWorld/Welcome?name=Rick&numtimes=4`. Modifiez la méthode `Welcome` en y incluant les deux paramètres, comme indiqué dans le code suivant.
+Modifiez le code pour passer des informations sur les paramètres de l’URL au contrôleur. Par exemple : `/HelloWorld/Welcome?name=Rick&numtimes=4`. Modifiez la méthode `Welcome` en y incluant les deux paramètres, comme indiqué dans le code suivant.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_2)]
 

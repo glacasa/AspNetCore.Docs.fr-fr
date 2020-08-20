@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/04/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 7d2d563eef60cb8eead95c6792bcac2cda16a859
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 9516410399ce69f1d69b09781b2530d052a11e7a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021339"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631873"
 ---
 # <a name="response-caching-in-aspnet-core"></a>Mise en cache des réponses dans ASP.NET Core
 
@@ -44,7 +45,7 @@ La [spécification de mise en cache HTTP 1,1](https://tools.ietf.org/html/rfc723
 | Directive                                                       | Action |
 | --------------------------------------------------------------- | ------ |
 | [public](https://tools.ietf.org/html/rfc7234#section-5.2.2.5)   | Un cache peut stocker la réponse. |
-| [private](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | La réponse ne doit pas être stockée par un cache partagé. Un cache privé peut stocker et réutiliser la réponse. |
+| [priv](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | La réponse ne doit pas être stockée par un cache partagé. Un cache privé peut stocker et réutiliser la réponse. |
 | [âge maximal](https://tools.ietf.org/html/rfc7234#section-5.2.1.1)  | Le client n’accepte pas de réponse dont l’âge est supérieur au nombre de secondes spécifié. Exemples : `max-age=60` (60 secondes), `max-age=2592000` (1 mois) |
 | [non-cache](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **Sur les demandes**: un cache ne doit pas utiliser une réponse stockée pour satisfaire la demande. Le serveur d’origine régénère la réponse pour le client, et l’intergiciel met à jour la réponse stockée dans son cache.<br><br>**Sur les réponses**: la réponse ne doit pas être utilisée pour une demande ultérieure sans validation sur le serveur d’origine. |
 | [non-Store](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **Sur les demandes**: un cache ne doit pas stocker la demande.<br><br>**Sur les réponses**: un cache ne doit pas stocker une partie de la réponse. |
@@ -99,7 +100,7 @@ Pour plus d'informations, consultez <xref:mvc/views/tag-helpers/builtin-th/distr
 > [!WARNING]
 > Désactivez la mise en cache pour le contenu qui contient des informations pour les clients authentifiés. La mise en cache ne doit être activée que pour le contenu qui ne change pas en fonction de l’identité d’un utilisateur ou si un utilisateur est connecté.
 
-<xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys>fait varier la réponse stockée en fonction des valeurs de la liste donnée des clés de requête. Quand une seule valeur `*` est fournie, l’intergiciel (middleware) varie les réponses par tous les paramètres de chaîne de requête de la demande.
+<xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> fait varier la réponse stockée en fonction des valeurs de la liste donnée des clés de requête. Quand une seule valeur `*` est fournie, l’intergiciel (middleware) varie les réponses par tous les paramètres de chaîne de requête de la demande.
 
 L' [intergiciel de mise en cache des réponses](xref:performance/caching/middleware) doit être activé pour définir la <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> propriété. Dans le cas contraire, une exception Runtime est levée. Il n’existe pas d’en-tête HTTP correspondant pour la <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> propriété. La propriété est une fonctionnalité HTTP gérée par l’intergiciel (middleware) de mise en cache des réponses. Pour que l’intergiciel serve une réponse mise en cache, la chaîne de requête et la valeur de chaîne de requête doivent correspondre à une demande précédente. Par exemple, considérez la séquence de requêtes et les résultats présentés dans le tableau suivant.
 
@@ -132,14 +133,14 @@ Vary: User-Agent
 
 ### <a name="nostore-and-locationnone"></a>NoStore et location. None
 
-<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore>remplace la plupart des autres propriétés. Quand cette propriété a la valeur `true` , l' `Cache-Control` en-tête a la valeur `no-store` . Si <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> a la valeur `None` :
+<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> remplace la plupart des autres propriétés. Quand cette propriété a la valeur `true` , l' `Cache-Control` en-tête a la valeur `no-store` . Si <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> a la valeur `None` :
 
-* `Cache-Control` est défini sur `no-store,no-cache`.
-* `Pragma` est défini sur `no-cache`.
+* `Cache-Control` a la valeur `no-store,no-cache`.
+* `Pragma` a la valeur `no-cache`.
 
 Si <xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> est `false` et <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> est `None` , et `Cache-Control` ont la `Pragma` valeur `no-cache` .
 
-<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore>est généralement défini sur `true` pour les pages d’erreur. La page cache2 de l’exemple d’application génère des en-têtes de réponse qui indiquent au client de ne pas stocker la réponse.
+<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> est généralement défini sur `true` pour les pages d’erreur. La page cache2 de l’exemple d’application génère des en-têtes de réponse qui indiquent au client de ne pas stocker la réponse.
 
 [!code-csharp[](response/samples/2.x/ResponseCacheSample/Pages/Cache2.cshtml.cs?name=snippet)]
 
@@ -156,9 +157,9 @@ Pour activer la mise en cache, <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Durat
 
 <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location>les options de `Any` et se `Client` traduisent en `Cache-Control` valeurs d’en-tête de `public` et `private` , respectivement. Comme indiqué dans la section [NoStore et location. None](#nostore-and-locationnone) , le paramètre <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> pour `None` définit les deux `Cache-Control` et `Pragma` en-têtes sur `no-cache` .
 
-`Location.Any`( `Cache-Control` défini sur `public` ) indique que le *client ou un proxy intermédiaire* peut mettre en cache la valeur, y compris l' [intergiciel de mise en](xref:performance/caching/middleware)cache des réponses.
+`Location.Any` ( `Cache-Control` défini sur `public` ) indique que le *client ou un proxy intermédiaire* peut mettre en cache la valeur, y compris l' [intergiciel de mise en](xref:performance/caching/middleware)cache des réponses.
 
-`Location.Client`( `Cache-Control` défini sur `private` ) indique que *seul le client* peut mettre en cache la valeur. Aucun cache intermédiaire ne doit mettre en cache la valeur, y compris l' [intergiciel de mise en](xref:performance/caching/middleware)cache des réponses.
+`Location.Client` ( `Cache-Control` défini sur `private` ) indique que *seul le client* peut mettre en cache la valeur. Aucun cache intermédiaire ne doit mettre en cache la valeur, y compris l' [intergiciel de mise en](xref:performance/caching/middleware)cache des réponses.
 
 Les en-têtes de contrôle de cache fournissent simplement des conseils aux clients et aux proxies intermédiaires quand et comment mettre en cache des réponses. Il n’y a aucune garantie que les clients et les proxys honoreront la [spécification de mise en cache HTTP 1,1](https://tools.ietf.org/html/rfc7234). L’intergiciel (middleware) de [mise en cache des réponses](xref:performance/caching/middleware) suit toujours les règles de mise en cache établies par la spécification.
 
@@ -196,7 +197,7 @@ Le modèle de page cache4 de l’exemple d’application fait référence au `De
 
 Le <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> peut être appliqué aux éléments suivants :
 
-* RazorPages : les attributs ne peuvent pas être appliqués aux méthodes de gestionnaire.
+* Razor Pages : les attributs ne peuvent pas être appliqués aux méthodes de gestionnaire.
 * Contrôleurs MVC.
 * Méthodes d’action MVC : les attributs au niveau de la méthode remplacent les paramètres spécifiés dans les attributs de niveau classe.
 

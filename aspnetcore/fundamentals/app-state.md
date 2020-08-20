@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/06/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: c05129c0f239fb28c83ab1c561dd910305eeb54b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 95035ec372ab6adb5bafb40f2b939c549ac6f839
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017634"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633810"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>Gestion de session et d’état dans ASP.NET Core
 
@@ -33,13 +34,13 @@ HTTP est un protocole sans état. Par défaut, les requêtes HTTP sont des messa
 
 [Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/app-state/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
-## <a name="state-management"></a>Gestion de l’état
+## <a name="state-management"></a>Gestion de l'état
 
 L’état peut être stocké à l’aide de plusieurs approches. Chacune d’elles est abordée plus loin dans cette rubrique.
 
 | Approche du stockage | Mécanisme de stockage |
 | ---------------- | ----------------- |
-| [Cookies](#cookies) | HTTP cookie s. Peut inclure des données stockées à l’aide du code d’application côté serveur. |
+| [Cookiex](#cookies) | HTTP cookie s. Peut inclure des données stockées à l’aide du code d’application côté serveur. |
 | [État de session](#session-state) | HTTP cookie s et code d’application côté serveur |
 | [TempData](#tempdata) | HTTP cookie s ou état de session |
 | [Chaînes de requête](#query-strings) | Chaînes de requête HTTP |
@@ -128,7 +129,7 @@ Pour remplacer les valeurs par défaut de la session, utilisez <xref:Microsoft.A
 
 | Option | Description |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | Détermine les paramètres utilisés pour créer le cookie . <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name>la valeur par défaut est <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> ( `.AspNetCore.Session` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path>la valeur par défaut est <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> ( `/` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite>la valeur par défaut est <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> ( `1` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly>la valeur par défaut est `true` . <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential>la valeur par défaut est `false` . |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | Détermine les paramètres utilisés pour créer le cookie . <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name> la valeur par défaut est <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> ( `.AspNetCore.Session` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path> la valeur par défaut est <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> ( `/` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite> la valeur par défaut est <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> ( `1` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> la valeur par défaut est `true` . <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> la valeur par défaut est `false` . |
 | <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> | `IdleTimeout` indique la durée pendant laquelle la session peut être inactive avant que son contenu soit abandonné. Chaque accès à la session réinitialise le délai d’expiration. Ce paramètre s’applique uniquement au contenu de la session, pas au cookie . La valeur par défaut est 20 minutes. |
 | <xref:Microsoft.AspNetCore.Builder.SessionOptions.IOTimeout> | Durée maximale autorisée pour charger une session à partir du magasin ou pour la valider dans le magasin. Ce paramètre peut s’appliquer uniquement aux opérations asynchrones. Ce délai d’expiration peut être désactivé à l’aide de <xref:System.Threading.Timeout.InfiniteTimeSpan> . La valeur par défaut est de 1 minute. |
 
@@ -239,7 +240,7 @@ Pour activer le fournisseur TempData basé sur une session, utilisez la <xref:Mi
 
 Vous pouvez passer une quantité limitée de données d’une requête à une autre en l’ajoutant à la chaîne de la nouvelle requête. Cela est utile pour capturer l’état de manière persistante et permettre ainsi le partage de liens avec état incorporé par e-mail ou sur les réseaux sociaux. Les chaînes de requête URL étant publiques, vous ne devez jamais utiliser de chaînes de requête pour des données sensibles.
 
-En plus du partage inattendu, les données des chaînes de requête peuvent exposer l’application à des attaques de [falsification de requête intersites (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) . Tout état de session préservé doit se protéger contre les attaques CSRF. Pour plus d’informations, consultez [Empêcher les attaques par falsification de requête intersites (XSRF/CSRF)](xref:security/anti-request-forgery).
+En plus du partage inattendu, les données des chaînes de requête peuvent exposer l’application à des attaques de [falsification de requête intersites (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) . Tout état de session préservé doit se protéger contre les attaques CSRF. Pour plus d'informations, consultez <xref:security/anti-request-forgery>.
 
 ## <a name="hidden-fields"></a>Champs masqués
 
@@ -284,11 +285,11 @@ Si le middleware de session ne parvient pas à rendre une session persistante :
 
 L’intergiciel de session ne peut pas conserver une session si le magasin de stockage n’est pas disponible. Par exemple, imaginez qu’un utilisateur stocke un panier d’achat dans la session. Il ajoute un élément au panier, mais la validation échoue. L’application n’a pas connaissance de l’échec et signale donc à l’utilisateur que l’élément a été ajouté au panier, ce qui est faux.
 
-L’approche recommandée pour rechercher des erreurs consiste à appeler `await feature.Session.CommitAsync` lorsque l’application a terminé l’écriture dans la session. <xref:Microsoft.AspNetCore.Http.ISession.CommitAsync*> lève une exception si le magasin de stockage n’est pas disponible. Si `CommitAsync` échoue, l’application peut traiter l’exception. <xref:Microsoft.AspNetCore.Http.ISession.LoadAsync*>lève une exception dans les mêmes conditions lorsque le magasin de données n’est pas disponible.
+L’approche recommandée pour rechercher des erreurs consiste à appeler `await feature.Session.CommitAsync` lorsque l’application a terminé l’écriture dans la session. <xref:Microsoft.AspNetCore.Http.ISession.CommitAsync*> lève une exception si le magasin de stockage n’est pas disponible. Si `CommitAsync` échoue, l’application peut traiter l’exception. <xref:Microsoft.AspNetCore.Http.ISession.LoadAsync*> lève une exception dans les mêmes conditions lorsque le magasin de données n’est pas disponible.
   
-## <a name="no-locsignalr-and-session-state"></a>SignalRet état de session
+## <a name="no-locsignalr-and-session-state"></a>SignalR et état de session
 
-SignalRles applications ne doivent pas utiliser l’état de session pour stocker des informations. SignalRles applications peuvent stocker par État de connexion dans `Context.Items` le Hub. <!-- https://github.com/aspnet/SignalR/issues/2139 -->
+SignalR les applications ne doivent pas utiliser l’état de session pour stocker des informations. SignalR les applications peuvent stocker par État de connexion dans `Context.Items` le Hub. <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 
 ## <a name="additional-resources"></a>Ressources complémentaires
 
@@ -303,13 +304,13 @@ HTTP est un protocole sans état. Sans effectuer des étapes supplémentaires, l
 
 [Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/app-state/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
-## <a name="state-management"></a>Gestion de l’état
+## <a name="state-management"></a>Gestion de l'état
 
 L’état peut être stocké à l’aide de plusieurs approches. Chacune d’elles est abordée plus loin dans cette rubrique.
 
 | Approche du stockage | Mécanisme de stockage |
 | ---------------- | ----------------- |
-| [Cookies](#cookies) | HTTP cookie s (peut inclure des données stockées à l’aide du code d’application côté serveur) |
+| [Cookiex](#cookies) | HTTP cookie s (peut inclure des données stockées à l’aide du code d’application côté serveur) |
 | [État de session](#session-state) | HTTP cookie s et code d’application côté serveur |
 | [TempData](#tempdata) | HTTP cookie s ou état de session |
 | [Chaînes de requête](#query-strings) | Chaînes de requête HTTP |
@@ -370,7 +371,7 @@ Le code suivant montre comment configurer le fournisseur de session en mémoire 
 
 L’ordre des middlewares est important. Dans l’exemple précédent, une exception `InvalidOperationException` se produit quand `UseSession` est appelée après `UseMvc`. Pour plus d’informations, consultez [Ordre des intergiciels (middleware)](xref:fundamentals/middleware/index#order).
 
-<xref:Microsoft.AspNetCore.Http.HttpContext.Session?displayProperty=nameWithType>est disponible après la configuration de l’état de session.
+<xref:Microsoft.AspNetCore.Http.HttpContext.Session?displayProperty=nameWithType> est disponible après la configuration de l’état de session.
 
 `HttpContext.Session` n’est pas accessible avant que `UseSession` ait été appelée.
 
@@ -388,7 +389,7 @@ Pour remplacer les valeurs par défaut de la session, utilisez <xref:Microsoft.A
 
 | Option | Description |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | Détermine les paramètres utilisés pour créer le cookie . <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name>la valeur par défaut est <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> ( `.AspNetCore.Session` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path>la valeur par défaut est <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> ( `/` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite>la valeur par défaut est <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> ( `1` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly>la valeur par défaut est `true` . <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential>la valeur par défaut est `false` . |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | Détermine les paramètres utilisés pour créer le cookie . <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name> la valeur par défaut est <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> ( `.AspNetCore.Session` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path> la valeur par défaut est <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> ( `/` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite> la valeur par défaut est <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> ( `1` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> la valeur par défaut est `true` . <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> la valeur par défaut est `false` . |
 | <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> | `IdleTimeout` indique la durée pendant laquelle la session peut être inactive avant que son contenu soit abandonné. Chaque accès à la session réinitialise le délai d’expiration. Ce paramètre s’applique uniquement au contenu de la session, pas au cookie . La valeur par défaut est 20 minutes. |
 | <xref:Microsoft.AspNetCore.Builder.SessionOptions.IOTimeout> | Durée maximale autorisée pour charger une session à partir du magasin ou pour la valider dans le magasin. Ce paramètre peut s’appliquer uniquement aux opérations asynchrones. Ce délai d’expiration peut être désactivé à l’aide de <xref:System.Threading.Timeout.InfiniteTimeSpan> . La valeur par défaut est de 1 minute. |
 
@@ -444,7 +445,7 @@ L’exemple suivant montre comment définir et obtenir un objet sérialisable av
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core expose les Razor pages [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) ou Controller <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> . Cette propriété stocke les données jusqu’à ce qu’elles soient lues dans une autre requête. Les méthodes [Keep (String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) et [Peek (String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) peuvent être utilisées pour examiner les données sans suppression à la fin de la requête. [Keep ()](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) marque tous les éléments du dictionnaire pour la rétention. `TempData`est particulièrement utile pour la redirection quand des données sont requises pour plus d’une requête unique. `TempData`est implémenté par les `TempData` fournisseurs à l’aide de ou de l' cookie État de session.
+ASP.NET Core expose les Razor pages [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) ou Controller <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> . Cette propriété stocke les données jusqu’à ce qu’elles soient lues dans une autre requête. Les méthodes [Keep (String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) et [Peek (String)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) peuvent être utilisées pour examiner les données sans suppression à la fin de la requête. [Keep ()](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) marque tous les éléments du dictionnaire pour la rétention. `TempData` est particulièrement utile pour la redirection quand des données sont requises pour plus d’une requête unique. `TempData` est implémenté par les `TempData` fournisseurs à l’aide de ou de l' cookie État de session.
 
 ## <a name="tempdata-samples"></a>Exemples TempData
 
@@ -502,7 +503,7 @@ L’ordre des middlewares est important. Dans l’exemple précédent, une excep
 
 Vous pouvez passer une quantité limitée de données d’une requête à une autre en l’ajoutant à la chaîne de la nouvelle requête. Cela est utile pour capturer l’état de manière persistante et permettre ainsi le partage de liens avec état incorporé par e-mail ou sur les réseaux sociaux. Les chaînes de requête URL étant publiques, vous ne devez jamais utiliser de chaînes de requête pour des données sensibles.
 
-En plus du partage accidentel, l’ajout de données dans des chaînes de requête peut favoriser les attaques par [falsification de requête intersites (CSRF, Cross Site Request Forgery)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) et conduire des utilisateurs authentifiés à visiter des sites malveillants. Les attaquants peuvent ensuite dérober des données utilisateur à partir de l’application ou effectuer des actions malveillantes en utilisant un compte d’utilisateur. Chaque état de session ou d’application conservé doit garantir une protection contre les attaques CSRF. Pour plus d’informations, consultez [Empêcher les attaques par falsification de requête intersites (XSRF/CSRF)](xref:security/anti-request-forgery).
+En plus du partage accidentel, l’ajout de données dans des chaînes de requête peut favoriser les attaques par [falsification de requête intersites (CSRF, Cross Site Request Forgery)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) et conduire des utilisateurs authentifiés à visiter des sites malveillants. Les attaquants peuvent ensuite dérober des données utilisateur à partir de l’application ou effectuer des actions malveillantes en utilisant un compte d’utilisateur. Chaque état de session ou d’application conservé doit garantir une protection contre les attaques CSRF. Pour plus d'informations, consultez <xref:security/anti-request-forgery>.
 
 ## <a name="hidden-fields"></a>Champs masqués
 
@@ -597,9 +598,9 @@ Utilisez [l’injection de dépendances](xref:fundamentals/dependency-injection)
 
   L’approche recommandée pour rechercher les erreurs de ce type consiste à appeler `await feature.Session.CommitAsync();` à partir du code d’application quand l’application a terminé d’écrire dans la session. `CommitAsync` lève une exception si le magasin de stockage n’est pas disponible. Si `CommitAsync` échoue, l’application peut traiter l’exception. `LoadAsync` lève une exception dans les mêmes conditions, quand le magasin de données n’est pas disponible.
   
-## <a name="no-locsignalr-and-session-state"></a>SignalRet état de session
+## <a name="no-locsignalr-and-session-state"></a>SignalR et état de session
 
-SignalRles applications ne doivent pas utiliser l’état de session pour stocker des informations. SignalRles applications peuvent stocker par État de connexion dans `Context.Items` le Hub. <!-- https://github.com/aspnet/SignalR/issues/2139 -->
+SignalR les applications ne doivent pas utiliser l’état de session pour stocker des informations. SignalR les applications peuvent stocker par État de connexion dans `Context.Items` le Hub. <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

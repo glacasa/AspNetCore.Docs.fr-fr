@@ -5,6 +5,7 @@ description: 'Partie 6 : ajouter un modèle à une application ASP.NET Core MVC
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: b5b54adb1d86e4ab982647dc8207839cc9afdac9
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 07b67cd7c267c39b99277114b73642b5caa3e312
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021066"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632835"
 ---
 # <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>Partie 6, méthodes et vues de contrôleur dans ASP.NET Core
 
@@ -110,7 +111,7 @@ L’attribut `ValidateAntiForgeryToken` est utilisé pour [lutter contre la fals
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
 
-Le [Tag Helper Form](xref:mvc/views/working-with-forms) génère un jeton anti-contrefaçon masqué qui doit correspondre au jeton anti-contrefaçon généré par `[ValidateAntiForgeryToken]` dans la méthode `Edit` du contrôleur Movies. Pour plus d’informations, consultez [Protection contre la falsification de requête](xref:security/anti-request-forgery).
+Le [Tag Helper Form](xref:mvc/views/working-with-forms) génère un jeton anti-contrefaçon masqué qui doit correspondre au jeton anti-contrefaçon généré par `[ValidateAntiForgeryToken]` dans la méthode `Edit` du contrôleur Movies. Pour plus d'informations, consultez <xref:security/anti-request-forgery>.
 
 La méthode `HttpGet Edit` prend le paramètre `ID` du film, recherche le film à l’aide de la méthode Entity Framework `FindAsync`, et retourne le film sélectionné à la vue Edit. Si un film est introuvable, l’erreur `NotFound` (HTTP 404) est retournée.
 
@@ -161,7 +162,7 @@ Toutes les méthodes `HttpGet` du contrôleur Movies suivent un modèle similair
 * [Globalisation et localisation](xref:fundamentals/localization)
 * [Introduction aux Tag Helpers](xref:mvc/views/tag-helpers/intro)
 * [Créer des Tag Helpers](xref:mvc/views/tag-helpers/authoring)
-* [Falsification anti-requête](xref:security/anti-request-forgery)
+* <xref:security/anti-request-forgery>
 * Protéger votre contrôleur contre la [sur-publication](/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-basic-crud-functionality-with-the-entity-framework-in-asp-net-mvc-application)
 * [ViewModels](https://rachelappel.com/use-viewmodels-to-manage-data-amp-organize-code-in-asp-net-mvc-applications/)
 * [Tag Helper Form](xref:mvc/views/working-with-forms)

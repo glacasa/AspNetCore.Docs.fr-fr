@@ -5,6 +5,7 @@ description: Découvrez les détails de l’implémentation du chiffrement à cl
 ms.author: riande
 ms.date: 07/16/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-encryption-at-rest
-ms.openlocfilehash: 6e767c5a34f8bf4c512147e7966f7e2c363c57c5
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 4ca2d998141639406a8283c4c756c05a93251928
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018414"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633678"
 ---
 # <a name="key-encryption-at-rest-in-windows-and-azure-using-aspnet-core"></a>Chiffrement à clé au repos dans Windows et Azure à l’aide de ASP.NET Core
 

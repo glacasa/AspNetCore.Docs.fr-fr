@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/28/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: 1c4b1def75a76b8392427fd6916a7b5927737cac
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a7bbc3f3a0a0d5a320bd290d325f0c01390828b4
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015450"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634161"
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>Profils de publication Visual Studio (. pubxml) pour le déploiement d’applications ASP.NET Core
 
@@ -198,7 +199,7 @@ dotnet build WebApplication.csproj /p:DeployOnBuild=true /p:PublishProfile=<MsDe
 
 Dans les exemples précédents :
 
-* `dotnet publish`et `dotnet build` prennent en charge les API Kudu pour publier sur Azure à partir de n’importe quelle plateforme. La publication Visual Studio prend en charge les API Kudu, mais avec la prise en charge par WebSDK pour la publication multiplateforme sur Azure.
+* `dotnet publish` et `dotnet build` prennent en charge les API Kudu pour publier sur Azure à partir de n’importe quelle plateforme. La publication Visual Studio prend en charge les API Kudu, mais avec la prise en charge par WebSDK pour la publication multiplateforme sur Azure.
 * Ne pas passer `DeployOnBuild` à la `dotnet publish` commande.
 
 Pour plus d’informations, consultez [Microsoft.NET.Sdk.Publish](https://github.com/dotnet/websdk#microsoftnetsdkpublish).
@@ -266,7 +267,7 @@ MSBuild file.
 Dans l’exemple précédent :
 
 * La propriété `<ExcludeApp_Data>` est présente simplement pour satisfaire une exigence de schéma XML. La propriété `<ExcludeApp_Data>` n’a aucun effet sur le processus de publication, même s’il y a un dossier *App_Data* à la racine du projet. Le dossier *App_Data* ne reçoit pas de traitement spécial comme c’est le cas dans les projets ASP.NET 4.x.
-* La propriété `<LastUsedBuildConfiguration>` est définie sur `Release`. En cas de publication à partir de Visual Studio, la valeur de `<LastUsedBuildConfiguration>` est définie sur la valeur existante au démarrage du processus de publication. La propriété `<LastUsedBuildConfiguration>` est spéciale et ne doit pas être remplacée dans un fichier MSBuild importé. Cette propriété peut, toutefois, être remplacée à partir de la ligne de commande avec l’une des approches suivantes.
+* La propriété `<LastUsedBuildConfiguration>` a la valeur `Release`. En cas de publication à partir de Visual Studio, la valeur de `<LastUsedBuildConfiguration>` est définie sur la valeur existante au démarrage du processus de publication. La propriété `<LastUsedBuildConfiguration>` est spéciale et ne doit pas être remplacée dans un fichier MSBuild importé. Cette propriété peut, toutefois, être remplacée à partir de la ligne de commande avec l’une des approches suivantes.
   * À l’aide de CLI .NET Core :
 
     ```dotnetcli

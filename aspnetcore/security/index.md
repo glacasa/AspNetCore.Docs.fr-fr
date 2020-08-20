@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,16 +17,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/index
-ms.openlocfilehash: ead5863f0656e182d395fc1e0deaf63ff66034cb
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 0378fd06b5cae5b8911e8a2f41937b28d5444538
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021365"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632861"
 ---
 # <a name="overview-of-aspnet-core-security"></a>Vue d’ensemble de la sécurité ASP.NET Core
 
-ASP.NET Core permet aux développeurs de configurer et de gérer facilement la sécurité de leurs applications. ASP.NET Core comporte des fonctionnalités de gestion de l’authentification, des autorisations et des secrets des applications, de protection des données, d’application du protocole HTTPS, de protection contre la falsification de requête et de gestion CORS. Ces fonctionnalités de sécurité vous permettent de générer des applications ASP.NET Core robustes et néanmoins sécurisées.
+ASP.NET Core permet aux développeurs de configurer et de gérer facilement la sécurité de leurs applications. ASP.NET Core contient des fonctionnalités de gestion de l’authentification, de l’autorisation, de la protection des données, de la contrainte HTTPs, des secrets d’application, de la prévention XSRF/CSRF et de la gestion CORS. Ces fonctionnalités de sécurité vous permettent de générer des applications ASP.NET Core robustes et néanmoins sécurisées.
 
 ## <a name="aspnet-core-security-features"></a>Fonctionnalités de sécurité ASP.NET Core
 
@@ -41,9 +42,9 @@ Vous pouvez aussi vous représenter l’authentification comme un moyen d’entr
 
 ASP.NET Core et Entity Framework contiennent des fonctionnalités qui vous aident à sécuriser vos applications et à empêcher les violations de sécurité. La liste de liens ci-après vous permet d’accéder à une documentation décrivant en détail des techniques destinées à éviter les failles de sécurité les plus courantes dans les applications web :
 
-* [Attaques par exécution de scripts de site à site](xref:security/cross-site-scripting)
+* [Attaques de script entre sites (XSS)](xref:security/cross-site-scripting)
 * [Attaques par injection de code SQL](/ef/core/querying/raw-sql)
-* [Falsification de requête intersites (CSRF, Cross Site Request Forgery)](xref:security/anti-request-forgery)
+* [Attaques de falsification de requête intersites (XSRF/CSRF)](xref:security/anti-request-forgery)
 * [Attaques par redirection ouverte](xref:security/preventing-open-redirects)
 
 Il existe d’autres failles de sécurité que vous devez connaître. Pour plus d’informations, reportez-vous aux autres Articles de la section **sécurité et Identity ** de la table des matières.

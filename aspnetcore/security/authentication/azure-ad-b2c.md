@@ -6,6 +6,7 @@ ms.author: casoper
 ms.custom: devx-track-csharp, mvc
 ms.date: 01/21/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: ccd3868c4b3294098e692f7a20e06d59ba482e7c
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: a1bac04944d9671df3f804a9724c9f0fd6f1fb27
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130520"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633628"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>Authentification Cloud avec Azure Active Directory B2C dans ASP.NET Core
 
@@ -44,8 +45,8 @@ Dans ce tutoriel, vous allez apprendre à effectuer les actions suivantes :
 
 Les éléments suivants sont requis pour cette procédure pas à pas :
 
-* [Abonnement Microsoft Azure](https://azure.microsoft.com/free/dotnet/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
-* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
+* [Abonnement Microsoft Azure](https://azure.microsoft.com/free/dotnet/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
+* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 
 ## <a name="create-the-azure-active-directory-b2c-tenant"></a>Créer le locataire Azure Active Directory B2C
 
@@ -91,7 +92,7 @@ Dans Visual Studio :
 
 5. Remplissez le formulaire avec les valeurs suivantes :
     
-    | Paramètre                       | Valeur                                                 |
+    | Paramètre                       | Value                                                 |
     |-------------------------------|-------------------------------------------------------|
     | **Nom de domaine**               | *&lt;nom de domaine de votre client B2C&gt;*          |
     | **ID d’application**            | *&lt;coller l’ID d’application à partir du presse-papiers&gt;* |

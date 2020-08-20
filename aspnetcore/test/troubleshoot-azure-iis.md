@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 7b82947c40d8e3fb46042ee5a3a32af9126623c9
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 117c777dc9ae1b8c6448f097132454b714a1b5dc
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020026"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632159"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Résoudre les problèmes de ASP.NET Core sur Azure App Service et IIS
 
@@ -76,7 +77,7 @@ Effectuez les étapes suivantes :
 
 Pour plus d’informations sur la disposition d’une application ASP.NET Core publiée, consultez <xref:host-and-deploy/directory-structure> . Pour plus d’informations sur le fichier *web.config* , consultez <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig> .
 
-### <a name="500-internal-server-error"></a>500 erreur interne du serveur
+### <a name="500-internal-server-error"></a>500 Erreur interne du serveur
 
 L’application démarre, mais une erreur empêche le serveur de répondre à la requête.
 
@@ -311,7 +312,7 @@ Le journal stdout du module ASP.NET Core enregistre souvent des messages d’err
 1. Dans le portail Azure, accédez à l’application Web.
 1. Dans le panneau **app service** , entrez **Kudu** dans la zone de recherche.
 1. Sélectionnez **Outils avancés** > **Go**.
-1. Sélectionnez **console de débogage > cmd**.
+1. Sélectionnez  **console de débogage > cmd**.
 1. Accédez à *site/wwwroot*
 1. Sélectionnez l’icône de crayon pour modifier le fichier *web.config* .
 1. Dans l' `<aspNetCore />` élément, définissez `stdoutLogEnabled="true"` et sélectionnez **Enregistrer**.
@@ -641,7 +642,7 @@ Effectuez les étapes suivantes :
 
 Pour plus d’informations sur la disposition d’une application ASP.NET Core publiée, consultez <xref:host-and-deploy/directory-structure> . Pour plus d’informations sur le fichier *web.config* , consultez <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig> .
 
-### <a name="500-internal-server-error"></a>500 erreur interne du serveur
+### <a name="500-internal-server-error"></a>500 Erreur interne du serveur
 
 L’application démarre, mais une erreur empêche le serveur de répondre à la requête.
 
@@ -1134,7 +1135,7 @@ Effectuez les étapes suivantes :
 
 Pour plus d’informations sur la disposition d’une application ASP.NET Core publiée, consultez <xref:host-and-deploy/directory-structure> . Pour plus d’informations sur le fichier *web.config* , consultez <xref:host-and-deploy/aspnet-core-module#configuration-with-webconfig> .
 
-### <a name="500-internal-server-error"></a>500 erreur interne du serveur
+### <a name="500-internal-server-error"></a>500 Erreur interne du serveur
 
 L’application démarre, mais une erreur empêche le serveur de répondre à la requête.
 

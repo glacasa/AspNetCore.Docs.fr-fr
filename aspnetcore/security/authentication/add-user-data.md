@@ -6,6 +6,7 @@ ms.author: riande
 ms.date: 03/26/2020
 ms.custom: mvc, seodec18
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/add-user-data
-ms.openlocfilehash: d65974e9ff8e2f5be52ab79b063ed9d2dca557ea
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a71395e82ed15dae753888a438471495208a14da
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020858"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631847"
 ---
 # <a name="add-download-and-delete-custom-user-data-to-no-locidentity-in-an-aspnet-core-project"></a>Ajouter, télécharger et supprimer des données utilisateur personnalisées Identity dans un projet ASP.net Core
 
@@ -90,7 +91,7 @@ dotnet new webapp -o WebApp1
 * Dans **Explorateur de solutions**, cliquez avec le bouton droit sur le projet > **Ajouter**  >  **un nouvel élément de génération de modèles**automatique.
 * Dans le volet gauche de la boîte de dialogue **Ajouter une structure** , sélectionnez **Identity**  >  **Ajouter**.
 * Dans la boîte de dialogue **ajouter Identity ** , les options suivantes sont disponibles :
-  * Sélectionner le fichier de disposition existant *~/Pages/Shared/_Layout. cshtml*
+  * Sélectionner le fichier de disposition existant  *~/Pages/Shared/_Layout. cshtml*
   * Sélectionnez les fichiers suivants à remplacer :
     * **Compte/inscription**
     * **Compte/gestion/index**
@@ -244,7 +245,7 @@ Testez l’application :
 > [!NOTE]
 > Cette section n’est pas une extension du didacticiel précédent. Pour appliquer les étapes suivantes à l’application générée à l’aide du didacticiel, consultez [ce problème GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/18797).
 
-Des revendications supplémentaires peuvent être ajoutées à ASP.NET Core à Identity l’aide de l' `IUserClaimsPrincipalFactory<T>` interface. Cette classe peut être ajoutée à l’application dans la `Startup.ConfigureServices` méthode. Ajoutez l’implémentation personnalisée de la classe comme suit :
+Des revendications supplémentaires peuvent être ajoutées à à ASP.NET Core Identity l’aide de l' `IUserClaimsPrincipalFactory<T>` interface. Cette classe peut être ajoutée à l’application dans la `Startup.ConfigureServices` méthode. Ajoutez l’implémentation personnalisée de la classe comme suit :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

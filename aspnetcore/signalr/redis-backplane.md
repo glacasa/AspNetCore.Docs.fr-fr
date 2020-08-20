@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/redis-backplane
-ms.openlocfilehash: d80bce204b467d436a3580933718147bc3fbe75c
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: bc28eb3096e88455347f68ca381c9a280d5a153e
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022483"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633654"
 ---
 # <a name="set-up-a-redis-backplane-for-aspnet-core-no-locsignalr-scale-out"></a>Configurer un backplane ReDim pour ASP.NET Core SignalR montée en puissance parallèle
 
@@ -73,8 +74,8 @@ Cet article explique SignalR les aspects spécifiques de la configuration d’un
 
 * Dans l' SignalR application, installez l’un des packages NuGet suivants :
 
-  * `Microsoft.AspNetCore.SignalR.StackExchangeRedis`Dépend de StackExchange. Redims 2. X.X. Il s’agit du package recommandé pour ASP.NET Core 2,2 et versions ultérieures.
-  * `Microsoft.AspNetCore.SignalR.Redis`Dépend de StackExchange. Redims 1. X.X. Ce package n’est pas inclus dans ASP.NET Core 3,0 et versions ultérieures.
+  * `Microsoft.AspNetCore.SignalR.StackExchangeRedis` Dépend de StackExchange. Redims 2. X.X. Il s’agit du package recommandé pour ASP.NET Core 2,2 et versions ultérieures.
+  * `Microsoft.AspNetCore.SignalR.Redis` Dépend de StackExchange. Redims 1. X.X. Ce package n’est pas inclus dans ASP.NET Core 3,0 et versions ultérieures.
 
 * Dans la `Startup.ConfigureServices` méthode, appelez <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis*> :
 
@@ -155,9 +156,9 @@ Lorsqu’un serveur ReDim tombe en panne, SignalR lève des exceptions qui indiq
 * *Échec de l’appel de la méthode de concentrateur’MethodName'*
 * *Échec de la connexion aux ReDim*
 
-SignalRne met pas en mémoire tampon les messages pour les envoyer lorsque le serveur est rétabli. Tous les messages envoyés pendant que le serveur Redims est défaillant sont perdus.
+SignalR ne met pas en mémoire tampon les messages pour les envoyer lorsque le serveur est rétabli. Tous les messages envoyés pendant que le serveur Redims est défaillant sont perdus.
 
-SignalRse reconnecte automatiquement lorsque le serveur Redims est à nouveau disponible.
+SignalR se reconnecte automatiquement lorsque le serveur Redims est à nouveau disponible.
 
 ### <a name="custom-behavior-for-connection-failures"></a>Comportement personnalisé pour les échecs de connexion
 

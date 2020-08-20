@@ -5,6 +5,7 @@ description: En savoir plus sur la Razor syntaxe de balisage pour incorporer du 
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 4b418c53535965eae6b41f3297b0c6336fb993d5
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b62fcb685b1c6d0c504c685c600d0316b32d7f57
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020585"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632497"
 ---
-# <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>RazorRéférence de syntaxe pour ASP.NET Core
+# <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor Référence de syntaxe pour ASP.NET Core
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen)et [Dan Vicarel](https://github.com/Rabadash8820)
 
-Razorest une syntaxe de balisage pour incorporer du code basé sur le serveur dans des pages Web. La Razor syntaxe se compose du Razor balisage, de C# et du code html. Les fichiers contenant Razor ont généralement une extension de fichier *. cshtml* . Razorse trouve également dans les fichiers de [ Razor composants](xref:blazor/components/index) (*. Razor*).
+Razor est une syntaxe de balisage pour incorporer du code basé sur le serveur dans des pages Web. La Razor syntaxe se compose du Razor balisage, de C# et du code html. Les fichiers contenant Razor ont généralement une extension de fichier *. cshtml* . Razorse trouve également dans les fichiers de [ Razor composants](xref:blazor/components/index) (*. Razor*).
 
 ## <a name="rendering-html"></a>Rendu HTML
 
@@ -34,7 +35,7 @@ La langue par défaut Razor est html. Le rendu HTML à partir du Razor balisage 
 
 ## <a name="no-locrazor-syntax"></a>Syntaxe de Razor
 
-Razorprend en charge C# et utilise le `@` symbole pour passer du code HTML à c#. Razorévalue les expressions C# et les restitue dans la sortie HTML.
+Razor prend en charge C# et utilise le `@` symbole pour passer du code HTML à c#. Razor évalue les expressions C# et les restitue dans la sortie HTML.
 
 Quand un `@` symbole est suivi d’un [ Razor mot clé réservé](#razor-reserved-keywords), il passe à un Razor balisage spécifique. Sinon, il est converti en code C# brut.
 
@@ -157,9 +158,9 @@ Le code s’affiche en HTML de la façon suivante :
 <span>Hello World</span>
 ```
 
-## <a name="no-locrazor-code-blocks"></a>Razorblocs de code
+## <a name="no-locrazor-code-blocks"></a>Razor blocs de code
 
-Razorles blocs de code commencent par `@` et sont encadrés par `{}` . Contrairement aux expressions, le code C# figurant dans des blocs de code n’est pas affiché. Les blocs de code et les expressions dans une vue ont la même étendue et sont définis dans l’ordre :
+Razor les blocs de code commencent par `@` et sont encadrés par `{}` . Contrairement aux expressions, le code C# figurant dans des blocs de code n’est pas affiché. Les blocs de code et les expressions dans une vue ont la même étendue et sont définis dans l’ordre :
 
 ```cshtml
 @{
@@ -257,7 +258,7 @@ Sans le `@:` dans le code, une Razor erreur d’exécution est générée.
 
 Les structures de contrôle sont une extension des blocs de code. Toutes les caractéristiques des blocs de code (conversion de balisage, Inline C#) valent aussi pour les structures suivantes :
 
-### <a name="conditionals-if-else-if-else-and-switch"></a>Conditions`@if, else if, else, and @switch`
+### <a name="conditionals-if-else-if-else-and-switch"></a>Conditions `@if, else if, else, and @switch`
 
 `@if` contrôle l’exécution du code :
 
@@ -302,7 +303,7 @@ Le balisage suivant montre comment utiliser une instruction switch :
 }
 ```
 
-### <a name="looping-for-foreach-while-and-do-while"></a>Bouclage`@for, @foreach, @while, and @do while`
+### <a name="looping-for-foreach-while-and-do-while"></a>Bouclage `@for, @foreach, @while, and @do while`
 
 Le rendu HTML peut être réalisé à partir d'instructions de contrôle de boucle. Pour afficher une liste de personnes :
 
@@ -390,7 +391,7 @@ La gestion des exceptions est similaire à C# :
 
 ### `@lock`
 
-Razora la possibilité de protéger des sections critiques avec des instructions Lock :
+Razor a la possibilité de protéger des sections critiques avec des instructions Lock :
 
 ```cshtml
 @lock (SomeLock)
@@ -401,7 +402,7 @@ Razora la possibilité de protéger des sections critiques avec des instructions
 
 ### <a name="comments"></a>Commentaires
 
-Razorprend en charge les commentaires HTML et C# :
+Razor prend en charge les commentaires HTML et C# :
 
 ```cshtml
 @{
@@ -417,7 +418,7 @@ Le code s’affiche en HTML de la façon suivante :
 <!-- HTML comment -->
 ```
 
-RazorLes commentaires sont supprimés par le serveur avant le rendu de la page Web. Razorutilise `@*  *@` pour délimiter les commentaires. Le code suivant est commenté pour indiquer au serveur de ne pas afficher le balisage :
+Razor Les commentaires sont supprimés par le serveur avant le rendu de la page Web. Razor utilise `@*  *@` pour délimiter les commentaires. Le code suivant est commenté pour indiquer au serveur de ne pas afficher le balisage :
 
 ```cshtml
 @*
@@ -431,7 +432,7 @@ RazorLes commentaires sont supprimés par le serveur avant le rendu de la page W
 
 ## <a name="directives"></a>Directives
 
-Razorles directives sont représentées par des expressions implicites avec des mots clés réservés après le `@` symbole. En règle générale, une directive change la manière dont une vue est analysée ou active une fonctionnalité différente.
+Razor les directives sont représentées par des expressions implicites avec des mots clés réservés après le `@` symbole. En règle générale, une directive change la manière dont une vue est analysée ou active une fonctionnalité différente.
 
 Comprendre comment Razor génère du code pour une vue facilite la compréhension du fonctionnement des directives.
 
@@ -637,7 +638,7 @@ La classe générée hérite de `RazorPage<dynamic>` :
 public class _Views_Account_Login_cshtml : RazorPage<LoginViewModel>
 ```
 
-Razorexpose une `Model` propriété pour accéder au modèle passé à la vue :
+Razor expose une `Model` propriété pour accéder au modèle passé à la vue :
 
 ```cshtml
 <div>The Login Email: @Model.Email</div>
@@ -719,7 +720,7 @@ Dans [ Razor composants](xref:blazor/components/index), `@using` contrôle égal
 
 ## <a name="directive-attributes"></a>Attributs de directive
 
-Razorles attributs de directive sont représentés par des expressions implicites avec des mots clés réservés qui suivent le `@` symbole. Un attribut de directive change généralement la manière dont un élément est analysé ou active des fonctionnalités différentes.
+Razor les attributs de directive sont représentés par des expressions implicites avec des mots clés réservés qui suivent le `@` symbole. Un attribut de directive change généralement la manière dont un élément est analysé ou active des fonctionnalités différentes.
 
 ### `@attributes`
 
@@ -737,7 +738,7 @@ La liaison de données dans des composants s’effectue avec l’attribut `@bind
 
 *Ce scénario s’applique uniquement aux Razor composants (. Razor).*
 
-Razorfournit des fonctionnalités de gestion des événements pour les composants. Pour plus d'informations, consultez <xref:blazor/components/event-handling>.
+Razor fournit des fonctionnalités de gestion des événements pour les composants. Pour plus d'informations, consultez <xref:blazor/components/event-handling>.
 
 ::: moniker-end
 
@@ -781,7 +782,7 @@ La `@typeparam` directive déclare un paramètre de type générique pour la cla
 
 ## <a name="templated-no-locrazor-delegates"></a>Délégués basés sur un modèle Razor
 
-Razorles modèles vous permettent de définir un extrait de code d’interface utilisateur au format suivant :
+Razor les modèles vous permettent de définir un extrait de code d’interface utilisateur au format suivant :
 
 ```cshtml
 @<tag>...</tag>
@@ -890,19 +891,19 @@ Il existe trois directives spécifiques aux [Tag Helpers](xref:mvc/views/tag-hel
 | [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | Supprime les Tag Helpers précédemment ajoutés à une vue. |
 | [`@tagHelperPrefix`](xref:mvc/views/tag-helpers/intro#prefix-razor-directives-label) | Spécifie un préfixe de balise pour activer la prise en charge des Tag Helpers et rendre leur usage explicite. |
 
-## <a name="no-locrazor-reserved-keywords"></a>RazorMots clés réservés
+## <a name="no-locrazor-reserved-keywords"></a>Razor Mots clés réservés
 
-### <a name="no-locrazor-keywords"></a>Razormot
+### <a name="no-locrazor-keywords"></a>Razor mot
 
-* `page`(Nécessite ASP.NET Core 2,1 ou version ultérieure)
+* `page` (Nécessite ASP.NET Core 2,1 ou version ultérieure)
 * `namespace`
 * `functions`
 * `inherits`
 * `model`
 * `section`
-* `helper`(Actuellement pris en charge par ASP.NET Core)
+* `helper` (Actuellement pris en charge par ASP.NET Core)
 
-Razorles mots clés sont placés dans une séquence d’échappement `@(Razor Keyword)` (par exemple, `@(functions)` ).
+Razor les mots clés sont placés dans une séquence d’échappement `@(Razor Keyword)` (par exemple, `@(functions)` ).
 
 ### <a name="c-no-locrazor-keywords"></a>RazorMots clés C#
 
@@ -923,7 +924,7 @@ Razorles mots clés sont placés dans une séquence d’échappement `@(Razor Ke
 
 Les Razor Mots clés C# doivent être double-échappés par `@(@C# Razor Keyword)` (par exemple, `@(@case)` ). Le premier `@` échappe l' Razor analyseur. La seconde séquence d’échappement `@` est pour l’analyseur C#.
 
-### <a name="reserved-keywords-not-used-by-no-locrazor"></a>Mots clés réservés non utilisés parRazor
+### <a name="reserved-keywords-not-used-by-no-locrazor"></a>Mots clés réservés non utilisés par Razor
 
 * `class`
 
@@ -1001,7 +1002,7 @@ Le Razor moteur d’affichage effectue des recherches respectant la casse pour l
 Les développeurs doivent s’efforcer d’utiliser la même casse pour les noms de fichiers et de répertoires que pour les noms des éléments suivants :
 
 * Zone, contrôleur et action
-* RazorPages.
+* Razor Pages.
 
 L’utilisation d’une casse identique garantit que les déploiements trouvent toujours les vues associées, indépendamment du système de fichiers sous-jacent.
 

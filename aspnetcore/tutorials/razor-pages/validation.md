@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: dad2e667cb6fa3ace7cb5e5dcb982511357ed49b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 86c523c69d3ee85f56bf1a51719a0bd93cbe97fc
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021521"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633550"
 ---
 # <a name="part-8-add-validation-to-an-aspnet-core-no-locrazor-page"></a>Partie 8, ajouter une validation à une Razor Page ASP.net Core
 
@@ -31,7 +32,7 @@ Dans cette section, une logique de validation est ajoutée au modèle `Movie`. L
 
 ## <a name="validation"></a>Validation
 
-[DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself) (« **D**on't **R**epeat **Y**ourself », Ne vous répétez pas) constitue un principe clé du développement de logiciel. RazorLes pages encouragent le développement dans lequel la fonctionnalité est spécifiée une seule fois, et elle est reflétée dans l’application. DRY peut aider à :
+[DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself) (« **D**on't **R**epeat **Y**ourself », Ne vous répétez pas) constitue un principe clé du développement de logiciel. Razor Les pages encouragent le développement dans lequel la fonctionnalité est spécifiée une seule fois, et elle est reflétée dans l’application. DRY peut aider à :
 
 * Réduire la quantité de code dans une application.
 * Rendre le code moins sujet aux erreurs, et plus facile à tester et à maintenir.

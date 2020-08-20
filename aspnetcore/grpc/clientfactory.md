@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 05/26/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/clientfactory
-ms.openlocfilehash: 3ba7130f532777da72e3c84c9b0f6a375c2f1814
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: dfdcb8d73017c0c1ccb4cf2aaffdbe7c49030179
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016256"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633732"
 ---
 # <a name="grpc-client-factory-integration-in-net-core"></a>intégration de la fabrique de clients gRPC dans .NET Core
 
@@ -30,7 +31,7 @@ l’intégration de gRPC avec `HttpClientFactory` offre un moyen centralisé de 
 La fabrique offre les avantages suivants :
 
 * Fournit un emplacement central pour la configuration des instances de client gRPC logiques
-* Gère la durée de vie du sous-jacent`HttpClientMessageHandler`
+* Gère la durée de vie du sous-jacent `HttpClientMessageHandler`
 * Propagation automatique de l’échéance et de l’annulation dans un service ASP.NET Core gRPC
 
 ## <a name="register-grpc-clients"></a>Inscrire les clients gRPC
@@ -73,7 +74,7 @@ public class AggregatorService : Aggregator.AggregatorBase
 
 ## <a name="configure-httpclient"></a>Configurer HttpClient
 
-`HttpClientFactory`crée le `HttpClient` utilisé par le client gRPC. Les `HttpClientFactory` méthodes standard peuvent être utilisées pour ajouter un intergiciel (middleware) de demandes sortantes ou pour configurer le sous-jacent `HttpClientHandler` du `HttpClient` :
+`HttpClientFactory` crée le `HttpClient` utilisé par le client gRPC. Les `HttpClientFactory` méthodes standard peuvent être utilisées pour ajouter un intergiciel (middleware) de demandes sortantes ou pour configurer le sous-jacent `HttpClientHandler` du `HttpClient` :
 
 ```csharp
 services

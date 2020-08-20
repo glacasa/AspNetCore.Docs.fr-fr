@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/03/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/aspnetcore
-ms.openlocfilehash: bd97ece1d42b1b90d0b8740e33924d80b91bf49a
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 11237c93832e095abb03d761773d213dfa336052
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016438"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633888"
 ---
 # <a name="grpc-services-with-aspnet-core"></a>Services gRPC avec ASP.NET Core
 
@@ -92,7 +93,7 @@ Kestrel [prend en charge http/2](xref:fundamentals/servers/kestrel#http2-support
 
 Les points de terminaison Kestrel utilisés pour gRPC doivent être sécurisés avec TLS. En cours de développement, un point de terminaison sécurisé avec TLS est automatiquement créé `https://localhost:5001` lorsque le certificat de développement ASP.net Core est présent. Aucune configuration n'est requise. Un `https` préfixe vérifie que le point de terminaison Kestrel utilise TLS.
 
-En production, TLS doit être configuré de manière explicite. Dans l'appsettings.jssuivant, un point *de* terminaison http/2 sécurisé avec TLS est fourni :
+En production, TLS doit être configuré de manière explicite. Dans l'appsettings.jssuivant, un point * de* terminaison http/2 sécurisé avec TLS est fourni :
 
 [!code-json[](~/grpc/aspnetcore/sample/appsettings.json?highlight=4)]
 
@@ -132,7 +133,7 @@ L’API gRPC permet d’accéder à certaines données de message HTTP/2, telles
 
 [!code-csharp[](~/grpc/aspnetcore/sample/GrcpService/GreeterService.cs?highlight=3-4&name=snippet)]
 
-`ServerCallContext`ne fournit pas un accès complet à `HttpContext` dans toutes les api ASP.net. La `GetHttpContext` méthode d’extension fournit un accès complet au `HttpContext` représentant le message http/2 sous-jacent dans les API ASP.net :
+`ServerCallContext` ne fournit pas un accès complet à `HttpContext` dans toutes les api ASP.net. La `GetHttpContext` méthode d’extension fournit un accès complet au `HttpContext` représentant le message http/2 sous-jacent dans les API ASP.net :
 
 [!code-csharp[](~/grpc/aspnetcore/sample/GrcpService/GreeterService2.cs?highlight=6-7&name=snippet)]
 

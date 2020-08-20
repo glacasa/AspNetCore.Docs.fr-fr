@@ -5,6 +5,7 @@ description: Partie 3 de la série de didacticiels sur les Razor pages.
 ms.author: riande
 ms.date: 08/17/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: f8942e52b3b438817e3d1041a2c6b568eb662469
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 9fc44d228a31b8ae6c78dc12988392806dd95823
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020390"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633433"
 ---
 # <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>Partie 3, Razor pages de génération de modèles automatique dans ASP.net Core
 
@@ -38,23 +39,23 @@ Examinez le modèle de page *Pages/Movies/Index.cshtml.cs* :
 
 [!code-csharp[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs)]
 
-RazorLes pages sont dérivées de `PageModel` . Par convention, la classe dérivée de `PageModel` s’appelle `<PageName>Model`. Le constructeur utilise l’[injection de dépendances](xref:fundamentals/dependency-injection) pour ajouter `RazorPagesMovieContext` à la page. Toutes les pages obtenues par génération de modèles automatique suivent ce modèle. Consultez [Code asynchrone](xref:data/ef-rp/intro#asynchronous-code) pour plus d’informations sur la programmation asynchrone avec Entity Framework.
+Razor Les pages sont dérivées de `PageModel` . Par convention, la classe dérivée de `PageModel` s’appelle `<PageName>Model`. Le constructeur utilise l’[injection de dépendances](xref:fundamentals/dependency-injection) pour ajouter `RazorPagesMovieContext` à la page. Toutes les pages obtenues par génération de modèles automatique suivent ce modèle. Consultez [Code asynchrone](xref:data/ef-rp/intro#asynchronous-code) pour plus d’informations sur la programmation asynchrone avec Entity Framework.
 
-Quand une demande est effectuée pour la page, la `OnGetAsync` méthode retourne une liste de films à la Razor page. `OnGetAsync`ou `OnGet` est appelé pour initialiser l’état de la page. Dans ce cas, `OnGetAsync` obtient une liste de films et les affiche.
+Quand une demande est effectuée pour la page, la `OnGetAsync` méthode retourne une liste de films à la Razor page. `OnGetAsync` ou `OnGet` est appelé pour initialiser l’état de la page. Dans ce cas, `OnGetAsync` obtient une liste de films et les affiche.
 
 Lorsque `OnGet` retourne `void` ou `OnGetAsync` retourne une valeur `Task` , aucune instruction return n’est utilisée. Lorsque le type de retour est `IActionResult` ou `Task<IActionResult>`, une instruction de retour doit être spécifiée. Par exemple, la méthode *Pages/Movies/Create.cshtml.cs* `OnPostAsync` :
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippet)]
 
-<a name="index"></a>Examinez la page *pages/movies/index. cshtml* Razor :
+<a name="index"></a> Examinez la page *pages/movies/index. cshtml* Razor :
 
 [!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Index.cshtml)]
 
-Razorpeut passer du code HTML au langage C# ou à Razor un balisage spécifique. Quand un `@` symbole est suivi d’un [ Razor mot clé réservé](xref:mvc/views/razor#razor-reserved-keywords), il passe dans le Razor balisage spécifique, sinon il passe en C#.
+Razor peut passer du code HTML au langage C# ou à Razor un balisage spécifique. Quand un `@` symbole est suivi d’un [ Razor mot clé réservé](xref:mvc/views/razor#razor-reserved-keywords), il passe dans le Razor balisage spécifique, sinon il passe en C#.
 
 ### <a name="the-page-directive"></a>Directive @page
 
-La `@page` Razor directive fait du fichier une action MVC, ce qui signifie qu’elle peut gérer les demandes. `@page`doit être la première Razor directive sur une page. `@page`est un exemple de transition vers un Razor balisage spécifique. Pour plus d’informations, consultez [ Razor syntaxe](xref:mvc/views/razor#razor-syntax) .
+La `@page` Razor directive fait du fichier une action MVC, ce qui signifie qu’elle peut gérer les demandes. `@page` doit être la première Razor directive sur une page. `@page` est un exemple de transition vers un Razor balisage spécifique. Pour plus d’informations, consultez [ Razor syntaxe](xref:mvc/views/razor#razor-syntax) .
 
 Examinez l’expression lambda utilisée dans le HTML Helper suivant :
 
@@ -231,21 +232,21 @@ Examinez le modèle de page *Pages/Movies/Index.cshtml.cs* :
 
 [!code-csharp[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml.cs)]
 
-RazorLes pages sont dérivées de `PageModel` . Par convention, la classe dérivée de `PageModel` s’appelle `<PageName>Model`. Le constructeur utilise l’[injection de dépendances](xref:fundamentals/dependency-injection) pour ajouter `RazorPagesMovieContext` à la page. Toutes les pages obtenues par génération de modèles automatique suivent ce modèle. Consultez [Code asynchrone](xref:data/ef-rp/intro#asynchronous-code) pour plus d’informations sur la programmation asynchrone avec Entity Framework.
+Razor Les pages sont dérivées de `PageModel` . Par convention, la classe dérivée de `PageModel` s’appelle `<PageName>Model`. Le constructeur utilise l’[injection de dépendances](xref:fundamentals/dependency-injection) pour ajouter `RazorPagesMovieContext` à la page. Toutes les pages obtenues par génération de modèles automatique suivent ce modèle. Consultez [Code asynchrone](xref:data/ef-rp/intro#asynchronous-code) pour plus d’informations sur la programmation asynchrone avec Entity Framework.
 
-Quand une demande est effectuée pour la page, la `OnGetAsync` méthode retourne une liste de films à la Razor page. `OnGetAsync`ou `OnGet` est appelé sur une Razor page pour initialiser l’état de la page. Dans ce cas, `OnGetAsync` obtient une liste de films et les affiche.
+Quand une demande est effectuée pour la page, la `OnGetAsync` méthode retourne une liste de films à la Razor page. `OnGetAsync` ou `OnGet` est appelé sur une Razor page pour initialiser l’état de la page. Dans ce cas, `OnGetAsync` obtient une liste de films et les affiche.
 
 Si `OnGet` retourne `void` ou que `OnGetAsync` retourne `Task`, aucune méthode de retour n’est utilisée. Lorsque le type de retour est `IActionResult` ou `Task<IActionResult>`, une instruction de retour doit être spécifiée. Par exemple, la méthode *Pages/Movies/Create.cshtml.cs* `OnPostAsync` :
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml.cs?name=snippet)]
 
-<a name="index"></a>Examinez la page *pages/movies/index. cshtml* Razor :
+<a name="index"></a> Examinez la page *pages/movies/index. cshtml* Razor :
 
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml)]
 
-Razorpeut passer du code HTML au langage C# ou à Razor un balisage spécifique. Quand un `@` symbole est suivi d’un [ Razor mot clé réservé](xref:mvc/views/razor#razor-reserved-keywords), il passe dans le Razor balisage spécifique, sinon il passe en C#.
+Razor peut passer du code HTML au langage C# ou à Razor un balisage spécifique. Quand un `@` symbole est suivi d’un [ Razor mot clé réservé](xref:mvc/views/razor#razor-reserved-keywords), il passe dans le Razor balisage spécifique, sinon il passe en C#.
 
-La `@page` Razor directive convertit le fichier en action MVC, ce qui signifie qu’il peut gérer les demandes. `@page`doit être la première Razor directive sur une page. `@page`est un exemple de transition vers un Razor balisage spécifique. Pour plus d’informations, consultez [ Razor syntaxe](xref:mvc/views/razor#razor-syntax) .
+La `@page` Razor directive convertit le fichier en action MVC, ce qui signifie qu’il peut gérer les demandes. `@page` doit être la première Razor directive sur une page. `@page` est un exemple de transition vers un Razor balisage spécifique. Pour plus d’informations, consultez [ Razor syntaxe](xref:mvc/views/razor#razor-syntax) .
 
 Examinez l’expression lambda utilisée dans le HTML Helper suivant :
 
@@ -267,7 +268,7 @@ La `@model` directive spécifie le type du modèle passé à la Razor page. Dans
 
 Sélectionnez les liens de menu (** Razor PagesMovie**, **début**et **confidentialité**). Chaque page affiche la même disposition de menu. La disposition du menu est implémentée dans le fichier *Pages/Shared/_Layout.cshtml*. Ouvrez le fichier *Pages/Shared/_Layout.cshtml*.
 
-Les modèles de [disposition](xref:mvc/views/layout) vous permettent de spécifier la disposition du conteneur HTML de votre site dans un emplacement unique, puis de l’appliquer sur plusieurs pages de votre site. Recherchez la ligne `@RenderBody()`. `RenderBody`est un espace réservé dans lequel tous les affichages spécifiques à la page que vous créez s’affichent, *inclus* dans la page de disposition. Par exemple, si vous sélectionnez le lien **Confidentialité**, la vue **Pages/Privacy.cshtml** est restituée dans la méthode `RenderBody`.
+Les modèles de [disposition](xref:mvc/views/layout) vous permettent de spécifier la disposition du conteneur HTML de votre site dans un emplacement unique, puis de l’appliquer sur plusieurs pages de votre site. Recherchez la ligne `@RenderBody()`. `RenderBody` est un espace réservé dans lequel tous les affichages spécifiques à la page que vous créez s’affichent, *inclus* dans la page de disposition. Par exemple, si vous sélectionnez le lien **Confidentialité**, la vue **Pages/Privacy.cshtml** est restituée dans la méthode `RenderBody`.
 
 <a name="vd"></a>
 

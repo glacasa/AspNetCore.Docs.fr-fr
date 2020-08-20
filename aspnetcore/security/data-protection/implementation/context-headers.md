@@ -5,6 +5,7 @@ description: Découvrez les détails de l’implémentation des en-têtes de con
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/context-headers
-ms.openlocfilehash: 572f930dbf78aaef1ed47d1a154b5ba56633b4f1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 2f07db4b7d8bca9f64aee5d60e88fc92dc8965eb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018817"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633706"
 ---
 # <a name="context-headers-in-aspnet-core"></a>En-têtes de contexte dans ASP.NET Core
 
@@ -95,15 +96,15 @@ DB 6F D4 79 11 84 B9 96 09 2E E1 20 2F 36 E8 60
 
 Cet en-tête de contexte est l’empreinte numérique de la paire d’algorithmes de chiffrement authentifiée (AES-192-CBC Encryption + HMACSHA256 validation). Les composants, comme décrit [ci-dessus](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers-cbc-components) , sont les suivants :
 
-* le marqueur`(00 00)`
+* le marqueur `(00 00)`
 
-* longueur de la clé de chiffrement par bloc`(00 00 00 18)`
+* longueur de la clé de chiffrement par bloc `(00 00 00 18)`
 
-* taille du bloc de chiffrement par bloc`(00 00 00 10)`
+* taille du bloc de chiffrement par bloc `(00 00 00 10)`
 
-* longueur de clé HMAC`(00 00 00 20)`
+* longueur de clé HMAC `(00 00 00 20)`
 
-* taille du condensé HMAC`(00 00 00 20)`
+* taille du condensé HMAC `(00 00 00 20)`
 
 * sortie de chiffrement par bloc `(F4 74 - DB 6F)` et
 
@@ -140,15 +141,15 @@ Cela génère l’en-tête de contexte complet qui est une empreinte de la paire
 
 Les composants s’interrompent comme suit :
 
-* le marqueur`(00 00)`
+* le marqueur `(00 00)`
 
-* longueur de la clé de chiffrement par bloc`(00 00 00 18)`
+* longueur de la clé de chiffrement par bloc `(00 00 00 18)`
 
-* taille du bloc de chiffrement par bloc`(00 00 00 08)`
+* taille du bloc de chiffrement par bloc `(00 00 00 08)`
 
-* longueur de clé HMAC`(00 00 00 14)`
+* longueur de clé HMAC `(00 00 00 14)`
 
-* taille du condensé HMAC`(00 00 00 14)`
+* taille du condensé HMAC `(00 00 00 14)`
 
 * sortie de chiffrement par bloc `(AB B1 - E1 0E)` et
 
@@ -170,7 +171,7 @@ L’en-tête de contexte est constitué des composants suivants :
 
 * [128 bits] La balise de `Enc_GCM (K_E, nonce, "")` , qui est la sortie de l’algorithme de chiffrement par bloc symétrique en fonction d’une entrée de chaîne vide et où nonce est un vecteur tout-zéro 96 bits.
 
-`K_E`est dérivé à l’aide du même mécanisme que dans le scénario d’authentification CBC Encryption + HMAC. Toutefois, étant donné qu’il n’y a aucun `K_H` dans la lecture ici, nous avons essentiellement `| K_H | = 0` , et l’algorithme est réduit au formulaire ci-dessous.
+`K_E` est dérivé à l’aide du même mécanisme que dans le scénario d’authentification CBC Encryption + HMAC. Toutefois, étant donné qu’il n’y a aucun `K_H` dans la lecture ici, nous avons essentiellement `| K_H | = 0` , et l’algorithme est réduit au formulaire ci-dessous.
 
 `K_E = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")`
 
@@ -194,13 +195,13 @@ BE 45
 
 Les composants s’interrompent comme suit :
 
-* le marqueur`(00 01)`
+* le marqueur `(00 01)`
 
-* longueur de la clé de chiffrement par bloc`(00 00 00 20)`
+* longueur de la clé de chiffrement par bloc `(00 00 00 20)`
 
-* la taille de la valeur à usage unique`(00 00 00 0C)`
+* la taille de la valeur à usage unique `(00 00 00 0C)`
 
-* taille du bloc de chiffrement par bloc`(00 00 00 10)`
+* taille du bloc de chiffrement par bloc `(00 00 00 10)`
 
 * la taille de la balise d’authentification `(00 00 00 10)` et
 

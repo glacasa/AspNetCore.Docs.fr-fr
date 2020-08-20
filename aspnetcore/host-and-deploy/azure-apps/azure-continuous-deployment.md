@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: devx-track-csharp, mvc
 ms.date: 12/06/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/azure-continuous-deployment
-ms.openlocfilehash: 0def05f73fd5264b1fb01e0a2ae4fd8d70588d9c
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 1f3fca62b39125d9f23042c5929de829ab243865
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130559"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633173"
 ---
 # <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a>Déploiement continu sur Azure avec Visual Studio et Git avec ASP.NET Core
 
@@ -236,7 +237,7 @@ Après avoir apporté des modifications au code local, effectuez une republicati
 
 Affichez l’application web mise à jour en sélectionnant **Parcourir** dans le panneau Application web du portail Azure, ou en ouvrant un navigateur et en entrant l’URL de l’application web. Exemple : `http://SampleWebAppDemo.azurewebsites.net`
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Créer son premier pipeline avec Azure Pipelines](/azure/devops/pipelines/get-started-yaml)
 * [Project Kudu](https://github.com/projectkudu/kudu/wiki)

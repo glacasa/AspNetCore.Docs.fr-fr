@@ -5,6 +5,7 @@ description: Partie 4 de la série de didacticiels sur ASP.NET Core MVC.
 ms.author: riande
 ms.date: 01/13/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: cc9c0447dc032ff0a88d379cd9d542e3406777bf
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ddd517ef8fbf8cb4bb8765cb3caab4724c0205f0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021963"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631964"
 ---
 # <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a>Partie 4 : ajouter un modèle à une application ASP.NET Core MVC
 
@@ -192,7 +193,7 @@ Renseignez la boîte de dialogue **Ajouter un contrôleur** :
 Visual Studio crée :
 
 * Un contrôleur de films (*Controllers/MoviesController.cs*)
-* Razorafficher des fichiers pour les pages Create, Delete, Details, Edit et index (*views/movies/ \* . cshtml*)
+* Razor afficher des fichiers pour les pages Create, Delete, Details, Edit et index (*views/movies/ \* . cshtml*)
 
 La création automatique de ces fichiers est appelée *génération de modèles automatique*.
 
@@ -206,7 +207,7 @@ La création automatique de ces fichiers est appelée *génération de modèles 
   export PATH=$HOME/.dotnet/tools:$PATH
   ```
 
-* Exécutez la commande suivante :
+* Exécutez la commande suivante :
 
   ```dotnetcli
   dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -218,7 +219,7 @@ La création automatique de ces fichiers est appelée *génération de modèles 
 
 * Ouvrez une fenêtre Commande dans le répertoire de projet (répertoire qui contient les fichiers *Program.cs*, *Startup.cs* et *.csproj*).
 
-* Exécutez la commande suivante :
+* Exécutez la commande suivante :
 
   ```dotnetcli
   dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -336,7 +337,7 @@ Le constructeur utilise une [injection de dépendance](xref:fundamentals/depende
 
 ### <a name="use-sqlite-for-development-sql-server-for-production"></a>Utiliser SQLite pour le développement, SQL Server pour la production
 
-Lorsque SQLite est sélectionné, le code généré par le modèle est prêt pour le développement. Le code suivant montre comment injecter au <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> démarrage. `IWebHostEnvironment`est injecté afin de `ConfigureServices` pouvoir utiliser SQLite dans le développement et SQL Server en production.
+Lorsque SQLite est sélectionné, le code généré par le modèle est prêt pour le développement. Le code suivant montre comment injecter au <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> démarrage. `IWebHostEnvironment` est injecté afin de `ConfigureServices` pouvoir utiliser SQLite dans le développement et SQL Server en production.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/StartupDevProd.cs?name=snippet_StartupClass&highlight=5,10,16-28)]
 
@@ -470,7 +471,7 @@ Visual Studio crée :
 
 * Une [classe de contexte de base de données](xref:data/ef-mvc/intro#create-the-database-context) Entity Framework Core (*Data/MvcMovieContext.cs*)
 * Un contrôleur de films (*Controllers/MoviesController.cs*)
-* Razorafficher des fichiers pour les pages Create, Delete, Details, Edit et index (*views/movies/ \* . cshtml*)
+* Razor afficher des fichiers pour les pages Create, Delete, Details, Edit et index (*views/movies/ \* . cshtml*)
 
 La création automatique du contexte de base de données et de méthodes d’action et de vues [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (créer, lire, mettre à jour et supprimer) porte le nom de *génération de modèles automatique*.
 
@@ -492,7 +493,7 @@ La création automatique du contexte de base de données et de méthodes d’act
     export PATH=$HOME/.dotnet/tools:$PATH
   ```
 
-* Exécutez la commande suivante :
+* Exécutez la commande suivante :
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -511,7 +512,7 @@ La création automatique du contexte de base de données et de méthodes d’act
    dotnet tool install --global dotnet-aspnet-codegenerator
    ```
 
-* Exécutez la commande suivante :
+* Exécutez la commande suivante :
 
   ```dotnetcli
    dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
@@ -642,7 +643,7 @@ Examiner la classe `Startup` :
 Le code précédent mis en surbrillance montre le contexte de la base de données des films qui est ajouté au conteneur [d’injection de dépendance](xref:fundamentals/dependency-injection) :
 
 * `services.AddDbContext<MvcMovieContext>(options =>` spécifie la base de données à utiliser et la chaîne de connexion.
-* `=>`est un [opérateur lambda](/dotnet/articles/csharp/language-reference/operators/lambda-operator)
+* `=>` est un [opérateur lambda](/dotnet/articles/csharp/language-reference/operators/lambda-operator)
 
 Ouvrez le fichier *Controllers/MoviesController.cs* et examinez le constructeur :
 

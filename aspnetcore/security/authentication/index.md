@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/03/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/index
-ms.openlocfilehash: b0258118e116b1686abbebf1c8d89135ae3cb1f6
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 2511d68dd049ca47dea002d8960e7d2fd0207383
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019314"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632640"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>Vue d’ensemble de l’authentification ASP.NET Core
 
@@ -51,7 +52,7 @@ Le `AddAuthentication` paramètre `JwtBearerDefaults.AuthenticationScheme` est l
 
 Si plusieurs schémas sont utilisés, les stratégies d’autorisation (ou attributs d’autorisation) peuvent [spécifier le schéma d’authentification (ou les schémas)](xref:security/authorization/limitingidentitybyscheme) dont ils dépendent pour authentifier l’utilisateur. Dans l’exemple ci-dessus, le cookie schéma d’authentification peut être utilisé en spécifiant son nom ( `CookieAuthenticationDefaults.AuthenticationScheme` par défaut, bien qu’un autre nom puisse être fourni lors de l’appel de `AddCookie` ).
 
-Dans certains cas, l’appel à `AddAuthentication` est automatiquement effectué par d’autres méthodes d’extension. Par exemple, lors de l’utilisation de [ASP.net Core Identity ](xref:security/authentication/identity), `AddAuthentication` est appelé en interne.
+Dans certains cas, l’appel à `AddAuthentication` est automatiquement effectué par d’autres méthodes d’extension. Par exemple, lors de l’utilisation de [ASP.NET Core Identity](xref:security/authentication/identity) , `AddAuthentication` est appelé en interne.
 
 L’intergiciel d’authentification est ajouté dans `Startup.Configure` en appelant la <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> méthode d’extension sur le de l’application `IApplicationBuilder` . `UseAuthentication`L’appel de enregistre l’intergiciel (middleware) qui utilise les schémas d’authentification précédemment enregistrés. Appelez `UseAuthentication` avant tout middleware dépendant des utilisateurs authentifiés. Lorsque vous utilisez le routage de point de terminaison, l’appel à `UseAuthentication` doit atteindre :
 
@@ -95,7 +96,7 @@ L’action d’authentification d’un schéma d’authentification est responsa
 * Un cookie schéma d’authentification qui construit l’identité de l’utilisateur à partir de cookie s.
 * Un modèle de porteur JWT qui désérialise et valide un jeton de porteur JWT pour construire l’identité de l’utilisateur.
 
-### <a name="challenge"></a>Défi
+### <a name="challenge"></a>Problème
 
 Une demande d’authentification est appelée par l’autorisation lorsqu’un utilisateur non authentifié demande un point de terminaison qui requiert une authentification. Une demande d’authentification est émise, par exemple, lorsqu’un utilisateur anonyme demande une ressource restreinte ou clique sur un lien de connexion. L’autorisation appelle un défi à l’aide du ou des schémas d’authentification spécifiés, ou la valeur par défaut si aucun n’est spécifié. Consultez <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ChallengeAsync%2A>. Les exemples de demande d’authentification sont les suivants :
 

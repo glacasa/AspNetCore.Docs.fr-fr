@@ -1,11 +1,12 @@
 ---
-title: Configurer ASP.NET CoreIdentity
+title: Configurer ASP.NET Core Identity
 author: AdrienTorris
-description: Comprenez ASP.NET Core Identity valeurs par défaut et apprenez à configurer des Identity Propriétés pour utiliser des valeurs personnalisées.
+description: Comprenez ASP.NET Core Identity les valeurs par défaut et apprenez à configurer des Identity Propriétés pour utiliser des valeurs personnalisées.
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/11/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,22 +17,22 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: b7f6eaba1a0e819a077e3d63b4f997e75b8cd317
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ae4a2eb9d95339651c3810a9f8489d703d73a3fe
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020598"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632679"
 ---
-# <a name="configure-aspnet-core-no-locidentity"></a>Configurer ASP.NET CoreIdentity
+# <a name="configure-no-locaspnet-core-identity"></a>Configurer ASP.NET Core Identity
 
 ASP.NET Core Identity utilise les valeurs par défaut pour les paramètres tels que la stratégie de mot de passe, le verrouillage et la cookie Configuration. Ces paramètres peuvent être remplacés dans la `Startup` classe.
 
-## <a name="no-locidentity-options"></a>IdentityOptions
+## <a name="no-locidentity-options"></a>Identity Options
 
-La classe [ Identity options](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) représente les options qui peuvent être utilisées pour configurer le Identity système. `IdentityOptions`doit être défini **après** l’appel `AddIdentity` de ou de `AddDefaultIdentity` .
+La classe [ Identity options](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) représente les options qui peuvent être utilisées pour configurer le Identity système. `IdentityOptions` doit être défini **après** l’appel `AddIdentity` de ou de `AddDefaultIdentity` .
 
-### <a name="claims-no-locidentity"></a>LégitimitéIdentity
+### <a name="claims-no-locidentity"></a>Légitimité Identity
 
 [ Identity Options. les Identity revendications](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.claimsidentity) spécifient les [ Identity options de revendications](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions) avec les propriétés indiquées dans le tableau suivant.
 
@@ -72,7 +73,7 @@ Par défaut, Identity exige que les mots de passe contiennent un caractère maju
 
 Les mots de passe sont configurés avec :
 
-* <xref:Microsoft.AspNetCore.Identity.PasswordOptions>dans `Startup.ConfigureServices` .
+* <xref:Microsoft.AspNetCore.Identity.PasswordOptions> dans `Startup.ConfigureServices` .
 * [ `[StringLength]` attributs](xref:System.ComponentModel.DataAnnotations.StringLengthAttribute) de `Password` Propriétés si Identity est généré automatiquement [au sein de l’application](xref:security/authentication/scaffold-identity). `InputModel``Password`les propriétés se trouvent dans les fichiers suivants :
   * `Areas/Identity/Pages/Account/Register.cshtml.cs`
   * `Areas/Identity/Pages/Account/ResetPassword.cshtml.cs`
@@ -137,7 +138,7 @@ Pour plus d’informations, consultez [ Cookie AuthenticationOptions](/dotnet/ap
 
 ## <a name="password-hasher-options"></a>Options de hachage de mot de passe
 
-<xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions>Obtient et définit les options de hachage de mot de passe.
+<xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions> Obtient et définit les options de hachage de mot de passe.
 
 | Option | Description |
 | ------ | ----------- |

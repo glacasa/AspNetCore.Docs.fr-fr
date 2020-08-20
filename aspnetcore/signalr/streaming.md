@@ -1,5 +1,5 @@
 ---
-title: Utiliser la diffusion en continu dans ASP.NET CoreSignalR
+title: Utiliser la diffusion en continu dans ASP.NET Core SignalR
 author: bradygaster
 description: Découvrez comment diffuser en continu des données entre le client et le serveur.
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/streaming
-ms.openlocfilehash: e0eabe711fd69e42bd9bfa5e03a92e1df780e4db
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 29748ebe24fea03415b5a01b21300433e3fbc0f0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022509"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634213"
 ---
-# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a>Utiliser la diffusion en continu dans ASP.NET CoreSignalR
+# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a>Utiliser la diffusion en continu dans ASP.NET Core SignalR
 
 Par [Brennan Conroy](https://github.com/BrennanConroy)
 
@@ -269,7 +270,7 @@ Les clients JavaScript appellent des méthodes de streaming de serveur à client
 * Nom de la méthode de concentrateur. Dans l’exemple suivant, le nom de la méthode de concentrateur est `Counter` .
 * Arguments définis dans la méthode de concentrateur. Dans l’exemple suivant, les arguments représentent le nombre d’éléments de flux à recevoir et le délai entre les éléments de flux.
 
-`connection.stream`retourne un `IStreamResult` , qui contient une `subscribe` méthode. Transmettez un `IStreamSubscriber` à `subscribe` et définissez `next` les `error` `complete` rappels, et pour recevoir des notifications de l' `stream` appel.
+`connection.stream` retourne un `IStreamResult` , qui contient une `subscribe` méthode. Transmettez un `IStreamSubscriber` à `subscribe` et définissez `next` les `error` `complete` rappels, et pour recevoir des notifications de l' `stream` appel.
 
 ::: moniker range=">= aspnetcore-2.2"
 
@@ -303,7 +304,7 @@ Pour terminer le flux, appelez `subject.complete()` .
 
 ### <a name="server-to-client-streaming"></a>Streaming de serveur à client
 
-Le SignalR client Java utilise la `stream` méthode pour appeler des méthodes de diffusion en continu. `stream`accepte au moins trois arguments :
+Le SignalR client Java utilise la `stream` méthode pour appeler des méthodes de diffusion en continu. `stream` accepte au moins trois arguments :
 
 * Type attendu des éléments de flux.
 * Nom de la méthode de concentrateur.
@@ -326,4 +327,4 @@ La `stream` méthode sur `HubConnection` retourne un observable du type d’él�
 * [Hubs](xref:signalr/hubs)
 * [Client .NET](xref:signalr/dotnet-client)
 * [Client JavaScript](xref:signalr/javascript-client)
-* [Publication dans Azure](xref:signalr/publish-to-azure-web-app)
+* [Publier sur Azure](xref:signalr/publish-to-azure-web-app)

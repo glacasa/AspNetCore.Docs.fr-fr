@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: 203d77a2caaba9156419a04754fe162dd57052c1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8058cc3c3461d72c713c8be53c3667112adb2ae5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012707"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634122"
 ---
 # <a name="introduction-to-no-locrazor-pages-in-aspnet-core"></a>Présentation Razor des pages dans ASP.net Core
 
@@ -29,7 +30,7 @@ ms.locfileid: "88012707"
 
 De [Rick Anderson](https://twitter.com/RickAndMSFT) et [Ryan Nowak](https://github.com/rynowak)
 
-RazorLes pages peuvent rendre le codage des scénarios orientés page plus facile et plus productif que l’utilisation de contrôleurs et de vues.
+Razor Les pages peuvent rendre le codage des scénarios orientés page plus facile et plus productif que l’utilisation de contrôleurs et de vues.
 
 Si vous cherchez un didacticiel qui utilise l’approche Model-View-Controller, consultez [Bien démarrer avec ASP.NET Core MVC](xref:tutorials/first-mvc-app/start-mvc).
 
@@ -69,9 +70,9 @@ Pour obtenir des instructions détaillées sur la création d’un projet de pag
 
 ---
 
-## <a name="no-locrazor-pages"></a>RazorPages
+## <a name="no-locrazor-pages"></a>Razor Pages
 
-RazorPages est activée dans *Startup.cs*:
+Razor Pages est activée dans *Startup.cs*:
 
 [!code-csharp[](index/3.0sample/RazorPagesIntro/Startup.cs?name=snippet_Startup&highlight=12,36)]
 
@@ -79,7 +80,7 @@ Considérez une page de base : <a name="OnGet"></a>
 
 [!code-cshtml[](index/3.0sample/RazorPagesIntro/Pages/Index.cshtml?highlight=1)]
 
-Le code précédent ressemble beaucoup à un [ Razor fichier de vue](xref:tutorials/first-mvc-app/adding-view) utilisé dans une application ASP.net core avec des contrôleurs et des vues. Ce qui le rend différent est la [`@page`](xref:mvc/views/razor#page) directive. `@page` fait du fichier une action MVC, ce qui signifie qu’il gère les demandes directement, sans passer par un contrôleur. `@page`doit être la première Razor directive sur une page. `@page`affecte le comportement d’autres [Razor](xref:mvc/views/razor) constructions. RazorLes noms de fichiers de pages ont un suffixe *. cshtml* .
+Le code précédent ressemble beaucoup à un [ Razor fichier de vue](xref:tutorials/first-mvc-app/adding-view) utilisé dans une application ASP.net core avec des contrôleurs et des vues. Ce qui le rend différent est la [`@page`](xref:mvc/views/razor#page) directive. `@page` fait du fichier une action MVC, ce qui signifie qu’il gère les demandes directement, sans passer par un contrôleur. `@page` doit être la première Razor directive sur une page. `@page` affecte le comportement d’autres [Razor](xref:mvc/views/razor) constructions. Razor Les noms de fichiers de pages ont un suffixe *. cshtml* .
 
 Une page similaire, utilisant une classe `PageModel`, est illustrée dans les deux fichiers suivants. Le fichier *Pages/Index2.cshtml* :
 
@@ -107,7 +108,7 @@ Remarques :
 
 ## <a name="write-a-basic-form"></a>Écrire un formulaire de base
 
-RazorLes pages sont conçues pour rendre les modèles courants utilisés avec les navigateurs Web faciles à implémenter lors de la création d’une application. La [liaison de modèle](xref:mvc/models/model-binding), les [tag helpers](xref:mvc/views/tag-helpers/intro)et les applications auxiliaires HTML *fonctionnent tout simplement* avec les propriétés définies dans une classe de Razor page. Considérez une page qui implémente un formulaire « Nous contacter » de base pour le modèle `Contact` :
+Razor Les pages sont conçues pour rendre les modèles courants utilisés avec les navigateurs Web faciles à implémenter lors de la création d’une application. La [liaison de modèle](xref:mvc/models/model-binding), les [tag helpers](xref:mvc/views/tag-helpers/intro)et les applications auxiliaires HTML *fonctionnent tout simplement* avec les propriétés définies dans une classe de Razor page. Considérez une page qui implémente un formulaire « Nous contacter » de base pour le modèle `Contact` :
 
 Pour les exemples de ce document, le `DbContext` est initialisé dans le fichier [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/3.0sample/RazorPagesContacts/Startup.cs#L23-L24).
 
@@ -177,11 +178,11 @@ Dans le code précédent, la publication du formulaire :
 
     * Est un résultat d’action.
     * Est semblable à `RedirectToAction` ou `RedirectToRoute` (utilisé dans les contrôleurs et les vues).
-    * Est personnalisé pour les pages. Dans l’exemple précédent, il redirige vers la page Index racine (`/Index`). `RedirectToPage`est détaillé dans la section [génération d’URL pour les pages](#url_gen) .
+    * Est personnalisé pour les pages. Dans l’exemple précédent, il redirige vers la page Index racine (`/Index`). `RedirectToPage` est détaillé dans la section [génération d’URL pour les pages](#url_gen) .
 
 * Avec les erreurs de validation qui sont transmises au serveur :
 
-  * La `OnPostAsync` méthode de gestionnaire appelle la <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageBase.Page*> méthode d’assistance. `Page` retourne une instance de <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageResult>. Le retour de `Page` est similaire à la façon dont les actions dans les contrôleurs retournent `View`. `PageResult`est le type de retour par défaut pour une méthode de gestionnaire. Une méthode de gestionnaire qui retourne `void` restitue la page.
+  * La `OnPostAsync` méthode de gestionnaire appelle la <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageBase.Page*> méthode d’assistance. `Page` retourne une instance de <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageResult>. Le retour de `Page` est similaire à la façon dont les actions dans les contrôleurs retournent `View`. `PageResult` est le type de retour par défaut pour une méthode de gestionnaire. Une méthode de gestionnaire qui retourne `void` restitue la page.
   * Dans l’exemple précédent, la publication du formulaire sans valeur entraîne le renvoi de la valeur false à [ModelState. IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) . Dans cet exemple, aucune erreur de validation n’est affichée sur le client. La gestion des erreurs de validation est traitée plus loin dans ce document.
 
   [!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=3-6)]
@@ -195,9 +196,9 @@ La `Customer` propriété utilise l' [`[BindProperty]`](xref:Microsoft.AspNetCor
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_PageModel&highlight=15-16)]
 
-`[BindProperty]`ne doit **pas** être utilisé sur les modèles contenant des propriétés qui ne doivent pas être modifiées par le client. Pour plus d’informations, consultez [survalidation](xref:data/ef-rp/crud#overposting).
+`[BindProperty]` ne doit **pas** être utilisé sur les modèles contenant des propriétés qui ne doivent pas être modifiées par le client. Pour plus d’informations, consultez [survalidation](xref:data/ef-rp/crud#overposting).
 
-RazorLes pages, par défaut, lient les propriétés uniquement avec des non- `GET` verbes. La liaison aux propriétés évite d’avoir à écrire du code pour convertir des données HTTP en type de modèle. Elle réduit la quantité de code en utilisant la même propriété pour afficher les champs de formulaire (`<input asp-for="Customer.Name">`) et accepter l’entrée.
+Razor Les pages, par défaut, lient les propriétés uniquement avec des non- `GET` verbes. La liaison aux propriétés évite d’avoir à écrire du code pour convertir des données HTTP en type de modèle. Elle réduit la quantité de code en utilisant la même propriété pour afficher les champs de formulaire (`<input asp-for="Customer.Name">`) et accepter l’entrée.
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
@@ -206,7 +207,7 @@ Examen du fichier de vue *pages/Create. cshtml* :
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml?highlight=3,9)]
 
 * Dans le code précédent, le [tag Helper d’entrée](xref:mvc/views/working-with-forms#the-input-tag-helper) `<input asp-for="Customer.Name" />` lie l’élément HTML `<input>` à l' `Customer.Name` expression de modèle.
-* [`@addTagHelper`](xref:mvc/views/tag-helpers/intro#addtaghelper-makes-tag-helpers-available)rend les tag helpers disponibles.
+* [`@addTagHelper`](xref:mvc/views/tag-helpers/intro#addtaghelper-makes-tag-helpers-available) rend les tag helpers disponibles.
 
 ### <a name="the-home-page"></a>La page d’accueil
 
@@ -222,7 +223,7 @@ Le fichier *index. cshtml* contient le balisage suivant :
 
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Index.cshtml?range=21)]
 
-Le `<a /a>` [tag Helper ancre](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) a utilisé l' `asp-route-{value}` attribut pour générer un lien vers la page de modification. Le lien contient des données d’itinéraire avec l’ID de contact. Par exemple, `https://localhost:5001/Edit/1`. Les [tag helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les Razor fichiers.
+Le `<a /a>` [tag Helper ancre](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) a utilisé l' `asp-route-{value}` attribut pour générer un lien vers la page de modification. Le lien contient des données d’itinéraire avec l’ID de contact. Par exemple : `https://localhost:5001/Edit/1`. Les [tag helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les Razor fichiers.
 
 Le fichier *index. cshtml* contient un balisage pour créer un bouton Supprimer pour chaque contact client :
 
@@ -297,7 +298,7 @@ Le code précédent :
 
 La publication de la valeur créer un formulaire sans nom affiche le message d’erreur « le champ nom est obligatoire. » sur le formulaire. Si JavaScript est activé sur le client, le navigateur affiche l’erreur sans la publier sur le serveur.
 
-L' `[StringLength(10)]` attribut génère `data-val-length-max="10"` sur le rendu HTML. `data-val-length-max`empêche les navigateurs d’entrer une valeur supérieure à la longueur maximale spécifiée. Si un outil tel que [Fiddler](https://www.telerik.com/fiddler) est utilisé pour modifier et relire la publication :
+L' `[StringLength(10)]` attribut génère `data-val-length-max="10"` sur le rendu HTML. `data-val-length-max` empêche les navigateurs d’entrer une valeur supérieure à la longueur maximale spécifiée. Si un outil tel que [Fiddler](https://www.telerik.com/fiddler) est utilisé pour modifier et relire la publication :
 
 * Avec le nom plus long que 10.
 * Le message d’erreur « le nom du champ doit être une chaîne d’une longueur maximale de 10 ». » est renvoyé.
@@ -334,19 +335,19 @@ Pour plus d'informations, consultez les pages suivantes :
 
 ## <a name="handle-head-requests-with-an-onget-handler-fallback"></a>Gérer les requêtes HEAD avec un gestionnaire OnGet de secours
 
-`HEAD`les requêtes permettent de récupérer les en-têtes pour une ressource spécifique. Contrairement aux requêtes `GET`, les requêtes `HEAD` ne retournent pas un corps de réponse.
+`HEAD` les requêtes permettent de récupérer les en-têtes pour une ressource spécifique. Contrairement aux requêtes `GET`, les requêtes `HEAD` ne retournent pas un corps de réponse.
 
 En règle générale, un gestionnaire `OnHead` est créé et appelé pour les requêtes `HEAD` :
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Privacy.cshtml.cs?name=snippet)]
 
-RazorLes pages reviennent à appeler le `OnGet` Gestionnaire si aucun `OnHead` gestionnaire n’est défini.
+Razor Les pages reviennent à appeler le `OnGet` Gestionnaire si aucun `OnHead` gestionnaire n’est défini.
 
 <a name="xsrf"></a>
 
 ## <a name="xsrfcsrf-and-no-locrazor-pages"></a>XSRF/CSRF et Razor pages
 
-RazorLes pages sont protégées par la validation anti- [contrefaçon](xref:security/anti-request-forgery). Le [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) injecte des jetons anti-contrefaçon dans des éléments de formulaire HTML.
+Razor Les pages sont protégées par la validation anti- [contrefaçon](xref:security/anti-request-forgery). Le [FormTagHelper](xref:mvc/views/working-with-forms#the-form-tag-helper) injecte des jetons anti-contrefaçon dans des éléments de formulaire HTML.
 
 <a name="layout"></a>
 
@@ -376,7 +377,7 @@ La disposition est dans le dossier *Pages/Shared*. Les pages recherchent d’aut
 
 Le fichier de disposition doit être placé dans le dossier *Pages/Shared*.
 
-Nous vous recommandons de **ne pas** placer le fichier de disposition dans le dossier *Views/Shared*. *Views/Shared* est un modèle de vues MVC. RazorLes pages sont conçues pour s’appuyer sur la hiérarchie des dossiers, et non sur les conventions de chemin.
+Nous vous recommandons de **ne pas** placer le fichier de disposition dans le dossier *Views/Shared*. *Views/Shared* est un modèle de vues MVC. Razor Les pages sont conçues pour s’appuyer sur la hiérarchie des dossiers, et non sur les conventions de chemin.
 
 L’affichage de la recherche à partir d’une Razor page comprend le dossier *pages* . Les mises en page, les modèles et les partiels utilisés avec les contrôleurs MVC et les Razor vues conventionnelles *fonctionnent simplement*.
 
@@ -518,7 +519,7 @@ Dans la disposition, le titre est lu à partir du dictionnaire ViewData :
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core expose <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> . Cette propriété stocke les données jusqu’à ce qu’elles soient lues. Vous pouvez utiliser les méthodes <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Keep*> et <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Peek*> pour examiner les données sans suppression. `TempData`est utile pour la redirection, quand des données sont nécessaires pour plusieurs requêtes.
+ASP.NET Core expose <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> . Cette propriété stocke les données jusqu’à ce qu’elles soient lues. Vous pouvez utiliser les méthodes <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Keep*> et <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Peek*> pour examiner les données sans suppression. `TempData` est utile pour la redirection, quand des données sont nécessaires pour plusieurs requêtes.
 
 Le code suivant définit la valeur de `Message` à l’aide de `TempData` :
 
@@ -622,7 +623,7 @@ Ajouter <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuild
 
 De [Rick Anderson](https://twitter.com/RickAndMSFT) et [Ryan Nowak](https://github.com/rynowak)
 
-RazorPages est un nouvel aspect de ASP.NET Core MVC qui rend le codage des scénarios orientés page plus facile et plus productif.
+Razor Pages est un nouvel aspect de ASP.NET Core MVC qui rend le codage des scénarios orientés page plus facile et plus productif.
 
 Si vous cherchez un didacticiel qui utilise l’approche Model-View-Controller, consultez [Bien démarrer avec ASP.NET Core MVC](xref:tutorials/first-mvc-app/start-mvc).
 
@@ -664,9 +665,9 @@ Exécutez `dotnet new webapp` à partir de la ligne de commande.
 
 ---
 
-## <a name="no-locrazor-pages"></a>RazorPages
+## <a name="no-locrazor-pages"></a>Razor Pages
 
-RazorPages est activée dans *Startup.cs*:
+Razor Pages est activée dans *Startup.cs*:
 
 [!code-csharp[](index/sample/RazorPagesIntro/Startup.cs?name=snippet_Startup)]
 
@@ -674,7 +675,7 @@ Considérez une page de base : <a name="OnGet"></a>
 
 [!code-cshtml[](index/sample/RazorPagesIntro/Pages/Index.cshtml)]
 
-Le code précédent ressemble beaucoup à un [ Razor fichier de vue](xref:tutorials/first-mvc-app/adding-view) utilisé dans une application ASP.net core avec des contrôleurs et des vues. Ce qui le rend différent est la directive `@page`. `@page` fait du fichier une action MVC, ce qui signifie qu’il gère les demandes directement, sans passer par un contrôleur. `@page`doit être la première Razor directive sur une page. `@page`affecte le comportement d’autres Razor constructions.
+Le code précédent ressemble beaucoup à un [ Razor fichier de vue](xref:tutorials/first-mvc-app/adding-view) utilisé dans une application ASP.net core avec des contrôleurs et des vues. Ce qui le rend différent est la directive `@page`. `@page` fait du fichier une action MVC, ce qui signifie qu’il gère les demandes directement, sans passer par un contrôleur. `@page` doit être la première Razor directive sur une page. `@page` affecte le comportement d’autres Razor constructions.
 
 Une page similaire, utilisant une classe `PageModel`, est illustrée dans les deux fichiers suivants. Le fichier *Pages/Index2.cshtml* :
 
@@ -702,7 +703,7 @@ Remarques :
 
 ## <a name="write-a-basic-form"></a>Écrire un formulaire de base
 
-RazorLes pages sont conçues pour rendre les modèles courants utilisés avec les navigateurs Web faciles à implémenter lors de la création d’une application. La [liaison de modèle](xref:mvc/models/model-binding), les [tag helpers](xref:mvc/views/tag-helpers/intro)et les applications auxiliaires HTML *fonctionnent tout simplement* avec les propriétés définies dans une classe de Razor page. Considérez une page qui implémente un formulaire « Nous contacter » de base pour le modèle `Contact` :
+Razor Les pages sont conçues pour rendre les modèles courants utilisés avec les navigateurs Web faciles à implémenter lors de la création d’une application. La [liaison de modèle](xref:mvc/models/model-binding), les [tag helpers](xref:mvc/views/tag-helpers/intro)et les applications auxiliaires HTML *fonctionnent tout simplement* avec les propriétés définies dans une classe de Razor page. Considérez une page qui implémente un formulaire « Nous contacter » de base pour le modèle `Contact` :
 
 Pour les exemples de ce document, le `DbContext` est initialisé dans le fichier [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/sample/RazorPagesContacts/Startup.cs#L15-L16).
 
@@ -754,15 +755,15 @@ Vérifiez s’il y a des erreurs de validation.
 * S’il n’y a aucune erreur, enregistrez les données et redirigez.
 * S’il y a des erreurs, réaffichez la page avec des messages de validation. La validation côté client est identique à celle des applications ASP.NET Core MVC traditionnelles. Dans de nombreux cas, les erreurs de validation seraient détectées sur le client et jamais envoyées au serveur.
 
-Quand les données sont entrées correctement, la méthode de gestionnaire `OnPostAsync` appelle la méthode d’assistance `RedirectToPage` pour retourner une instance de `RedirectToPageResult`. `RedirectToPage` est un nouveau résultat d’action, semblable à `RedirectToAction` ou `RedirectToRoute`, mais personnalisé pour les pages. Dans l’exemple précédent, il redirige vers la page Index racine (`/Index`). `RedirectToPage`est détaillé dans la section [génération d’URL pour les pages](#url_gen) .
+Quand les données sont entrées correctement, la méthode de gestionnaire `OnPostAsync` appelle la méthode d’assistance `RedirectToPage` pour retourner une instance de `RedirectToPageResult`. `RedirectToPage` est un nouveau résultat d’action, semblable à `RedirectToAction` ou `RedirectToRoute`, mais personnalisé pour les pages. Dans l’exemple précédent, il redirige vers la page Index racine (`/Index`). `RedirectToPage` est détaillé dans la section [génération d’URL pour les pages](#url_gen) .
 
-Quand le formulaire envoyé comporte des erreurs de validation (qui sont passées au serveur), la méthode de gestionnaire `OnPostAsync` appelle la méthode d’assistance `Page`. `Page` retourne une instance de `PageResult`. Le retour de `Page` est similaire à la façon dont les actions dans les contrôleurs retournent `View`. `PageResult`est le type de retour par défaut pour une méthode de gestionnaire. Une méthode de gestionnaire qui retourne `void` restitue la page.
+Quand le formulaire envoyé comporte des erreurs de validation (qui sont passées au serveur), la méthode de gestionnaire `OnPostAsync` appelle la méthode d’assistance `Page`. `Page` retourne une instance de `PageResult`. Le retour de `Page` est similaire à la façon dont les actions dans les contrôleurs retournent `View`. `PageResult` est le type de retour par défaut pour une méthode de gestionnaire. Une méthode de gestionnaire qui retourne `void` restitue la page.
 
 La propriété `Customer` utilise l’attribut `[BindProperty]` pour accepter la liaison de modèle.
 
 [!code-csharp[](index/sample/RazorPagesContacts/Pages/Create.cshtml.cs?name=snippet_PageModel&highlight=10-11)]
 
-RazorLes pages, par défaut, lient les propriétés uniquement avec des non- `GET` verbes. La liaison à des propriétés peut réduire la quantité de code à écrire. Elle réduit la quantité de code en utilisant la même propriété pour afficher les champs de formulaire (`<input asp-for="Customer.Name">`) et accepter l’entrée.
+Razor Les pages, par défaut, lient les propriétés uniquement avec des non- `GET` verbes. La liaison à des propriétés peut réduire la quantité de code à écrire. Elle réduit la quantité de code en utilisant la même propriété pour afficher les champs de formulaire (`<input asp-for="Customer.Name">`) et accepter l’entrée.
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
@@ -778,7 +779,7 @@ Le fichier *Index.cshtml* contient le balisage suivant pour créer un lien d’�
 
 [!code-cshtml[](index/sample/RazorPagesContacts/Pages/Index.cshtml?range=21)]
 
-Le `<a asp-page="./Edit" asp-route-id="@contact.Id">Edit</a>` [tag Helper ancre](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) a utilisé l' `asp-route-{value}` attribut pour générer un lien vers la page de modification. Le lien contient des données d’itinéraire avec l’ID de contact. Par exemple, `https://localhost:5001/Edit/1`. Les [tag helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les Razor fichiers. Les Tag Helpers sont activés par `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
+Le `<a asp-page="./Edit" asp-route-id="@contact.Id">Edit</a>` [tag Helper ancre](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) a utilisé l' `asp-route-{value}` attribut pour générer un lien vers la page de modification. Le lien contient des données d’itinéraire avec l’ID de contact. Par exemple : `https://localhost:5001/Edit/1`. Les [tag helpers](xref:mvc/views/tag-helpers/intro) permettent au code côté serveur de participer à la création et au rendu des éléments HTML dans les Razor fichiers. Les Tag Helpers sont activés par `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
 
 Le fichier *Pages/Edit.cshtml* :
 
@@ -850,7 +851,7 @@ services.AddMvc()
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 ```
 
-Les modèles par défaut génèrent l'appel `SetCompatibilityVersion` dans ASP.NET Core 2.1 et 2.2. `SetCompatibilityVersion`affecte efficacement Razor à l’option pages la `AllowMappingHeadRequestsToGetHandler` valeur `true` .
+Les modèles par défaut génèrent l'appel `SetCompatibilityVersion` dans ASP.NET Core 2.1 et 2.2. `SetCompatibilityVersion` affecte efficacement Razor à l’option pages la `AllowMappingHeadRequestsToGetHandler` valeur `true` .
 
 Au lieu d’adhérer à tous les comportements avec `SetCompatibilityVersion`, vous pouvez adhérer explicitement à des comportements *spécifiques*. Le code suivant adhère à l’autorisation de mappage des requêtes `HEAD` au gestionnaire `OnGet` :
 
@@ -895,7 +896,7 @@ La disposition est dans le dossier *Pages/Shared*. Les pages recherchent d’aut
 
 Le fichier de disposition doit être placé dans le dossier *Pages/Shared*.
 
-Nous vous recommandons de **ne pas** placer le fichier de disposition dans le dossier *Views/Shared*. *Views/Shared* est un modèle de vues MVC. RazorLes pages sont conçues pour s’appuyer sur la hiérarchie des dossiers, et non sur les conventions de chemin.
+Nous vous recommandons de **ne pas** placer le fichier de disposition dans le dossier *Views/Shared*. *Views/Shared* est un modèle de vues MVC. Razor Les pages sont conçues pour s’appuyer sur la hiérarchie des dossiers, et non sur les conventions de chemin.
 
 L’affichage de la recherche à partir d’une Razor page comprend le dossier *pages* . Les mises en page, les modèles et les partiels que vous utilisez avec les contrôleurs MVC et les Razor vues conventionnelles *fonctionnent simplement*.
 
@@ -975,7 +976,7 @@ La génération d’URL pour les pages prend en charge les noms relatifs. Le tab
 | RedirectToPage("../Index") | *Pages/Index* |
 | RedirectToPage("Index")  | *Pages/Customers/Index* |
 
-`RedirectToPage("Index")`, `RedirectToPage("./Index")` et `RedirectToPage("../Index")` sont des *noms relatifs*. Le paramètre `RedirectToPage` est *combiné* avec le chemin de la page active pour calculer le nom de la page de destination.  <!-- Review: Original had The provided string is combined with the page name of the current page to compute the name of the destination page.  page name, not page path -->
+`RedirectToPage("Index")`, `RedirectToPage("./Index")` et `RedirectToPage("../Index")`  sont des *noms relatifs*. Le paramètre `RedirectToPage` est *combiné* avec le chemin de la page active pour calculer le nom de la page de destination.  <!-- Review: Original had The provided string is combined with the page name of the current page to compute the name of the destination page.  page name, not page path -->
 
 La liaison de nom relatif est utile lors de la création de sites avec une structure complexe. Si vous utilisez des noms relatifs pour établir une liaison entre les pages d’un dossier, vous pouvez renommer ce dossier. Tous les liens fonctionneront encore (car ils n’incluent pas le nom du dossier).
 

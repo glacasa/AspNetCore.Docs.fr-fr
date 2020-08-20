@@ -6,6 +6,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/client-features
-ms.openlocfilehash: 4f5fa2f4ff1ac3d00b04845aedc26fb0118b9991
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: df0084411134167df31506a01362a0520821e577
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021469"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631756"
 ---
 # <a name="aspnet-core-no-locsignalr-clients"></a>SignalRClients ASP.net Core
 
 ## <a name="versioning-support-and-compatibility"></a>Contrôle de version, prise en charge et compatibilité
 
-Les SignalR clients sont livrés avec les composants serveur et les versions sont mises en correspondance. Tout client pris en charge peut se connecter en toute sécurité à n’importe quel serveur pris en charge, et les problèmes de compatibilité seraient considérés comme des bogues à résoudre. SignalRles clients sont pris en charge dans le même cycle de vie du support que le reste de .NET Core. Pour plus d’informations, consultez [la stratégie de prise en charge de .net Core](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) .
+Les SignalR clients sont livrés avec les composants serveur et les versions sont mises en correspondance. Tout client pris en charge peut se connecter en toute sécurité à n’importe quel serveur pris en charge, et les problèmes de compatibilité seraient considérés comme des bogues à résoudre. SignalR les clients sont pris en charge dans le même cycle de vie du support que le reste de .NET Core. Pour plus d’informations, consultez [la stratégie de prise en charge de .net Core](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) .
 
 De nombreuses fonctionnalités requièrent un client **et** un serveur compatibles. Reportez-vous à la section ci-dessous pour un tableau présentant les versions minimales de différentes fonctionnalités.
 

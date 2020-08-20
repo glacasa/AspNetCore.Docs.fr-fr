@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/14/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/dotnet-client
-ms.openlocfilehash: e27748e8267a931390f831119a3fd1d45e87745a
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: f56beb634689b42aec3fe193c389e52de746c92a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504734"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634005"
 ---
 # <a name="aspnet-core-no-locsignalr-net-client"></a>SignalRClient .net ASP.net Core
 
@@ -264,9 +265,9 @@ Gérer les erreurs à l’aide d’une instruction try-catch. Inspectez l' `Exce
 
 [!code-csharp[Logging](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_ErrorHandling)]
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Hubs](xref:signalr/hubs)
 * [Client JavaScript](xref:signalr/javascript-client)
-* [Publication dans Azure](xref:signalr/publish-to-azure-web-app)
+* [Publier sur Azure](xref:signalr/publish-to-azure-web-app)
 * [SignalRDocumentation sans serveur de service Azure](/azure/azure-signalr/signalr-concept-serverless-development-config)

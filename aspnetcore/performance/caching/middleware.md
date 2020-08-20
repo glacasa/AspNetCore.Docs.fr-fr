@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/middleware
-ms.openlocfilehash: 7e1463671323cddd2b95c03de994d497449d7884
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 43b0ef1dcbf6d0137b14be9e58eb056f06ae093d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019090"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633446"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>Intergiciel de mise en cache des réponses dans ASP.NET Core
 
@@ -47,7 +48,7 @@ Configurez l’application pour utiliser l’intergiciel avec la <xref:Microsoft
 [!code-csharp[](middleware/samples/3.x/ResponseCachingMiddleware/Startup.cs?name=snippet2&highlight=17)]
 
 > [!WARNING]
-> <xref:Owin.CorsExtensions.UseCors%2A>doit être appelé avant <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A> lors de l’utilisation de l' [intergiciel (middleware) cors](xref:security/cors).
+> <xref:Owin.CorsExtensions.UseCors%2A> doit être appelé avant <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A> lors de l’utilisation de l' [intergiciel (middleware) cors](xref:security/cors).
 
 L’exemple d’application ajoute des en-têtes pour contrôler la mise en cache lors des requêtes suivantes :
 
@@ -149,10 +150,10 @@ Lors du test et du dépannage du comportement de mise en cache, un navigateur pe
 * La méthode de demande doit être obtenir ou HEAD.
 * Dans `Startup.Configure` , l’intergiciel de mise en cache des réponses doit être placé avant l’intergiciel (middleware) qui requiert la mise en cache. Pour plus d'informations, consultez <xref:fundamentals/middleware/index>.
 * L' `Authorization` en-tête ne doit pas être présent.
-* `Cache-Control`les paramètres d’en-tête doivent être valides et la réponse doit être marquée `public` et non marquée `private` .
+* `Cache-Control` les paramètres d’en-tête doivent être valides et la réponse doit être marquée `public` et non marquée `private` .
 * L’en- `Pragma: no-cache` tête ne doit pas être présent si l' `Cache-Control` en-tête n’est pas présent, car l’en `Cache-Control` -tête remplace l' `Pragma` en-tête lorsqu’il est présent.
 * L' `Set-Cookie` en-tête ne doit pas être présent.
-* `Vary`les paramètres d’en-tête doivent être valides et ne doivent pas être égaux à `*` .
+* `Vary` les paramètres d’en-tête doivent être valides et ne doivent pas être égaux à `*` .
 * La `Content-Length` valeur d’en-tête (si définie) doit correspondre à la taille du corps de la réponse.
 * Le <xref:Microsoft.AspNetCore.Http.Features.IHttpSendFileFeature> n’est pas utilisé.
 * La réponse ne doit pas être périmée comme spécifié par l' `Expires` en-tête et les `max-age` `s-maxage` directives de cache et.
@@ -293,10 +294,10 @@ Lors du test et du dépannage du comportement de mise en cache, un navigateur pe
 * La méthode de demande doit être obtenir ou HEAD.
 * Dans `Startup.Configure` , l’intergiciel de mise en cache des réponses doit être placé avant l’intergiciel (middleware) qui requiert la mise en cache. Pour plus d'informations, consultez <xref:fundamentals/middleware/index>.
 * L' `Authorization` en-tête ne doit pas être présent.
-* `Cache-Control`les paramètres d’en-tête doivent être valides et la réponse doit être marquée `public` et non marquée `private` .
+* `Cache-Control` les paramètres d’en-tête doivent être valides et la réponse doit être marquée `public` et non marquée `private` .
 * L’en- `Pragma: no-cache` tête ne doit pas être présent si l' `Cache-Control` en-tête n’est pas présent, car l’en `Cache-Control` -tête remplace l' `Pragma` en-tête lorsqu’il est présent.
 * L' `Set-Cookie` en-tête ne doit pas être présent.
-* `Vary`les paramètres d’en-tête doivent être valides et ne doivent pas être égaux à `*` .
+* `Vary` les paramètres d’en-tête doivent être valides et ne doivent pas être égaux à `*` .
 * La `Content-Length` valeur d’en-tête (si définie) doit correspondre à la taille du corps de la réponse.
 * Le <xref:Microsoft.AspNetCore.Http.Features.IHttpSendFileFeature> n’est pas utilisé.
 * La réponse ne doit pas être périmée comme spécifié par l' `Expires` en-tête et les `max-age` `s-maxage` directives de cache et.

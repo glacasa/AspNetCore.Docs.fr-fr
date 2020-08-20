@@ -7,6 +7,7 @@ ms.author: riande
 ms.date: 09/22/2018
 ms.custom: mvc, seodec18
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/2fa
-ms.openlocfilehash: 28aef65234eaf162ba6e18a2594feb575c93b02f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e5e606afaf0219f3a0eb7301203b7142a00322be
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019486"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634109"
 ---
 # <a name="two-factor-authentication-with-sms-in-aspnet-core"></a>Authentification à deux facteurs avec SMS dans ASP.NET Core
 
@@ -96,7 +97,7 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 **ASPSMS:**  
 [!code-csharp[](2fa/sample/Web2FA/Services/MessageServices_ASPSMS.cs)]
 
-### <a name="configure-startup-to-use-smsoptions"></a>Configurer le démarrage à utiliser`SMSoptions`
+### <a name="configure-startup-to-use-smsoptions"></a>Configurer le démarrage à utiliser `SMSoptions`
 
 Ajoutez `SMSoptions` au conteneur de service dans la `ConfigureServices` méthode de *Startup.cs*:
 
@@ -146,7 +147,7 @@ Si vous n’obtenez pas de SMS, consultez la page du journal Twilio.
 
 * Entrez le code que vous recevez dans le message SMS.
 
-* Si vous cliquez sur la case à cocher **mémoriser ce navigateur** , vous ne devez pas utiliser 2FA pour vous connecter lorsque vous utilisez le même appareil et le même navigateur. L’activation de 2FA et le clic sur **mémoriser ce navigateur** vous offriront une protection 2FA renforcée contre les utilisateurs malveillants qui essaient d’accéder à votre compte, tant qu’ils n’ont pas accès à votre appareil. Vous pouvez le faire sur n’importe quel appareil privé que vous utilisez régulièrement. En définissant **mémoriser ce navigateur**, vous bénéficiez de la sécurité supplémentaire de 2FA à partir des appareils que vous n’utilisez pas régulièrement, et vous avez l’avantage de ne pas devoir passer par 2FA sur vos propres appareils.
+* Si vous cliquez sur la case à cocher **mémoriser ce navigateur** , vous ne devez pas utiliser 2FA pour vous connecter lorsque vous utilisez le même appareil et le même navigateur. L’activation de 2FA et le clic sur **mémoriser ce navigateur** vous offriront une protection 2FA renforcée contre les utilisateurs malveillants qui essaient d’accéder à votre compte, tant qu’ils n’ont pas accès à votre appareil. Vous pouvez le faire sur n’importe quel appareil privé que vous utilisez régulièrement. En définissant  **mémoriser ce navigateur**, vous bénéficiez de la sécurité supplémentaire de 2FA à partir des appareils que vous n’utilisez pas régulièrement, et vous avez l’avantage de ne pas devoir passer par 2FA sur vos propres appareils.
 
 ![Vérifier l’affichage](2fa/_static/login2fa8.png)
 

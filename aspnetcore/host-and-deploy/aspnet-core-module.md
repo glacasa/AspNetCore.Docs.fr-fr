@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/aspnet-core-module
-ms.openlocfilehash: c5c26c72af8103167b421cfa4aa06c23c242c1d7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 9197f8509141b30dffcc2ccc11979f8853b37d39
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015905"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633134"
 ---
 # <a name="aspnet-core-module"></a>Module ASP.NET Core
 
@@ -202,7 +203,7 @@ Pour plus d’informations sur la configuration d’une sous-application IIS, co
 
 Des variables d’environnement peuvent être spécifiées pour le processus dans l’attribut `processPath`. Spécifiez une variable d’environnement à l’aide de l’élément enfant `<environmentVariable>` d’un élément de collection `<environmentVariables>`. Les variables d’environnement définies dans cette section prévalent sur les variables d’environnement système.
 
-L’exemple suivant définit deux variables d’environnement dans *web.config*. `ASPNETCORE_ENVIRONMENT`configure l’environnement de l’application sur `Development` . Un développeur peut définir temporairement cette valeur dans le fichier *web.config* afin de forcer le chargement de la [Page d’exception de développeur](xref:fundamentals/error-handling) lors du débogage d’une exception d’application. `CONFIG_DIR` est un exemple de variable d’environnement définie par l’utilisateur, dans laquelle le développeur a écrit du code qui lit la valeur de démarrage afin de former un chemin d’accès pour le chargement du fichier de configuration de l’application.
+L’exemple suivant définit deux variables d’environnement dans *web.config*. `ASPNETCORE_ENVIRONMENT` configure l’environnement de l’application sur `Development` . Un développeur peut définir temporairement cette valeur dans le fichier *web.config* afin de forcer le chargement de la [Page d’exception de développeur](xref:fundamentals/error-handling) lors du débogage d’une exception d’application. `CONFIG_DIR` est un exemple de variable d’environnement définie par l’utilisateur, dans laquelle le développeur a écrit du code qui lit la valeur de démarrage afin de former un chemin d’accès pour le chargement du fichier de configuration de l’application.
 
 ```xml
 <aspNetCore processPath="dotnet"

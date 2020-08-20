@@ -6,6 +6,7 @@ ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: riande
 ms.date: 12/18/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: 6ec531a04a220f75f5793cb2c7b5232908dbd883
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ec36ff6d646e0554550a4372389aed89aa267b1f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019155"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633979"
 ---
 # <a name="model-binding-in-aspnet-core"></a>Liaison de données dans ASP.NET Core
 
@@ -108,11 +109,11 @@ Pour chaque paramètre ou propriété cible, les sources sont analysées dans l�
 
 Si la source par défaut n’est pas correcte, utilisez l’un des attributs suivants pour spécifier la source :
 
-* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute)-Obtient des valeurs à partir de la chaîne de requête. 
-* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute)-Obtient des valeurs à partir des données d’itinéraire.
-* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)-Obtient des valeurs à partir de champs de formulaire publiés.
-* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute)-Obtient les valeurs du corps de la demande.
-* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute)-Obtient des valeurs à partir des en-têtes HTTP.
+* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute) -Obtient des valeurs à partir de la chaîne de requête. 
+* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute) -Obtient des valeurs à partir des données d’itinéraire.
+* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) -Obtient des valeurs à partir de champs de formulaire publiés.
+* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute) -Obtient les valeurs du corps de la demande.
+* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) -Obtient des valeurs à partir des en-têtes HTTP.
 
 Ces attributs :
 
@@ -209,7 +210,7 @@ Les types simples que le lieur de modèle peut convertir en chaînes sources son
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
 * [Décimal](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
-* [Énumération](xref:System.ComponentModel.EnumConverter)
+* [Variables](xref:System.ComponentModel.EnumConverter)
 * [Uniques](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
 * [Unique](xref:System.ComponentModel.SingleConverter)
@@ -273,30 +274,16 @@ La liaison de modèle commence par rechercher dans les sources la clé `Instruct
 
 Plusieurs attributs intégrés sont disponibles pour contrôler la liaison de modèle des types complexes :
 
+* `[Bind]`
 * `[BindRequired]`
 * `[BindNever]`
-* `[Bind]`
 
-> [!NOTE]
-> Ces attributs affectent la liaison de modèle quand les données de formulaire postées représentent la source des valeurs. Ils n’affectent pas les formateurs d’entrée, qui traitent les corps de requête JSON et XML postés. Les formateurs d’entrée sont décrits [plus loin dans cet article](#input-formatters).
->
-> Consultez également la discussion sur l’attribut `[Required]` dans [Validation de modèle](xref:mvc/models/validation#required-attribute).
-
-### <a name="bindrequired-attribute"></a>Attribut [BindRequired]
-
-Il s’applique uniquement aux propriétés de modèle, pas aux paramètres de méthode. Il oblige la liaison de modèle à ajouter une erreur d’état de modèle si la liaison est impossible pour la propriété d’un modèle. Voici un exemple :
-
-[!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
-
-### <a name="bindnever-attribute"></a>Attribut [BindNever]
-
-Il s’applique uniquement aux propriétés de modèle, pas aux paramètres de méthode. Il empêche la liaison de modèle de définir la propriété d’un modèle. Voici un exemple :
-
-[!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
+> [!WARNING]
+> Ces attributs affectent la liaison de modèle quand les données de formulaire postées représentent la source des valeurs. Ils n’affectent ***pas*** les formateurs d’entrée qui traitent les corps de requête JSON et XML publiés. Les formateurs d’entrée sont décrits [plus loin dans cet article](#input-formatters).
 
 ### <a name="bind-attribute"></a>Attribut [Bind]
 
-Il peut être appliqué à une classe ou à un paramètre de méthode. Il spécifie les propriétés d’un modèle à inclure dans la liaison de modèle.
+Il peut être appliqué à une classe ou à un paramètre de méthode. Il spécifie les propriétés d’un modèle à inclure dans la liaison de modèle. `[Bind]` n’affecte ***pas*** les formateurs d’entrée.
 
 Dans l’exemple suivant, seules les propriétés spécifiées du modèle `Instructor` sont liées quand une méthode de gestionnaire ou une méthode d’action est appelée :
 
@@ -313,6 +300,20 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 ```
 
 Vous pouvez utiliser l’attribut `[Bind]` pour éviter le surpostage dans les scénarios de *création*. Il ne fonctionne pas bien dans les scénarios de modification, car les propriétés exclues ont une valeur null ou une valeur par défaut au lieu de rester inchangées. Pour empêcher le surpostage, il est recommandé d’utiliser des modèles de vues à la place de l’attribut `[Bind]`. Pour plus d’informations, consultez [Remarque sur la sécurité concernant le surpostage](xref:data/ef-mvc/crud#security-note-about-overposting).
+
+### <a name="bindrequired-attribute"></a>Attribut [BindRequired]
+
+Il s’applique uniquement aux propriétés de modèle, pas aux paramètres de méthode. Il oblige la liaison de modèle à ajouter une erreur d’état de modèle si la liaison est impossible pour la propriété d’un modèle. Voici un exemple :
+
+[!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
+
+Consultez également la discussion sur l’attribut `[Required]` dans [Validation de modèle](xref:mvc/models/validation#required-attribute).
+
+### <a name="bindnever-attribute"></a>Attribut [BindNever]
+
+Il s’applique uniquement aux propriétés de modèle, pas aux paramètres de méthode. Il empêche la liaison de modèle de définir la propriété d’un modèle. Voici un exemple :
+
+[!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
 
 ## <a name="collections"></a>Collections
 
@@ -494,7 +495,7 @@ Vous pouvez appeler la liaison de modèle manuellement à l’aide de la méthod
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
 
-<xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*>utilise des fournisseurs de valeurs pour obtenir des données à partir du corps du formulaire, la chaîne de requête et les données d’itinéraire. `TryUpdateModelAsync`est généralement : 
+<xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*>  utilise des fournisseurs de valeurs pour obtenir des données à partir du corps du formulaire, la chaîne de requête et les données d’itinéraire. `TryUpdateModelAsync` est généralement : 
 
 * Utilisé avec les Razor pages et les applications MVC à l’aide de contrôleurs et de vues pour empêcher la survalidation.
 * Non utilisé avec une API Web, sauf s’il est consommé à partir des données de formulaire, des chaînes de requête et des données de routage. Les points de terminaison de l’API Web qui utilisent JSON utilisent des [formateurs d’entrée](#input-formatters) pour désérialiser le corps de la requête dans un objet.
@@ -594,11 +595,11 @@ Pour chaque paramètre ou propriété cible, les sources sont analysées dans l�
 
 Si la source par défaut n’est pas correcte, utilisez l’un des attributs suivants pour spécifier la source :
 
-* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute)-Obtient des valeurs à partir de la chaîne de requête. 
-* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute)-Obtient des valeurs à partir des données d’itinéraire.
-* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)-Obtient des valeurs à partir de champs de formulaire publiés.
-* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute)-Obtient les valeurs du corps de la demande.
-* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute)-Obtient des valeurs à partir des en-têtes HTTP.
+* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute) -Obtient des valeurs à partir de la chaîne de requête. 
+* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute) -Obtient des valeurs à partir des données d’itinéraire.
+* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) -Obtient des valeurs à partir de champs de formulaire publiés.
+* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute) -Obtient les valeurs du corps de la demande.
+* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) -Obtient des valeurs à partir des en-têtes HTTP.
 
 Ces attributs :
 
@@ -695,7 +696,7 @@ Les types simples que le lieur de modèle peut convertir en chaînes sources son
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
 * [Décimal](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
-* [Énumération](xref:System.ComponentModel.EnumConverter)
+* [Variables](xref:System.ComponentModel.EnumConverter)
 * [Uniques](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
 * [Unique](xref:System.ComponentModel.SingleConverter)

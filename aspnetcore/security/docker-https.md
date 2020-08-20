@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-https
-ms.openlocfilehash: bba72a8c795312b3f7fe3fbf16514ba9f2448fbf
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5e29882414d49c0971bc11c688067878714d3b2d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020338"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634187"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>Hébergement d’images ASP.NET Core avec l’arrimeur sur HTTPs
 
@@ -42,7 +43,7 @@ Le [Kit de développement logiciel (SDK) .net Core 2,2](https://dotnet.microsoft
 
 ## <a name="certificates"></a>Certificats
 
-Un certificat d’une [autorité de certification](https://wikipedia.org/wiki/Certificate_authority) est requis pour l' [Hébergement de production](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) pour un domaine. [Let's Encrypt](https://letsencrypt.org/)est une autorité de certification qui offre des certificats gratuits.
+Un certificat d’une [autorité de certification](https://wikipedia.org/wiki/Certificate_authority) est requis pour l' [Hébergement de production](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) pour un domaine. [Let's Encrypt](https://letsencrypt.org/) est une autorité de certification qui offre des certificats gratuits.
 
 Ce document utilise des [certificats de développement auto-signés](https://en.wikipedia.org/wiki/Self-signed_certificate) pour héberger des images prégénérées sur `localhost` . Les instructions sont similaires à l’utilisation de certificats de production.
 
@@ -92,7 +93,7 @@ dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p { password her
 dotnet dev-certs https --trust
 ```
 
-`dotnet dev-certs https --trust`est pris en charge uniquement sur macOS et Windows. Vous devez faire confiance aux certificats sur Linux de la même façon que votre distribution. Il est probable que vous ayez besoin d’approuver le certificat dans votre navigateur.
+`dotnet dev-certs https --trust` est pris en charge uniquement sur macOS et Windows. Vous devez faire confiance aux certificats sur Linux de la même façon que votre distribution. Il est probable que vous ayez besoin d’approuver le certificat dans votre navigateur.
 
 Dans les commandes précédentes, remplacez `{ password here }` par un mot de passe.
 

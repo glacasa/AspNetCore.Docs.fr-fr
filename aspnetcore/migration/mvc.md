@@ -5,6 +5,7 @@ description: Découvrez comment démarrer la migration d’un projet ASP.NET MVC
 ms.author: wpickett
 ms.date: 06/18/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc
-ms.openlocfilehash: 17f2a2532c58c3796835328260231d63f8fb2e40
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: cd1a7ff57d911f96f0adfe4b548fa80ec844886d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015047"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632237"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>Migrer ASP.NET MVC vers ASP.NET Core MVC
 
@@ -108,7 +109,7 @@ Pour plus d’informations, consultez <xref:mvc/controllers/actions> et <xref:mv
 Chaque point de terminaison de contrôleur peut être testé ; Toutefois, la disposition et les styles sont traités plus loin dans le document.
 
 1. Exécutez l’application ASP.NET Core.
-1. Appelez les vues rendues à partir du navigateur sur l’application ASP.NET Core en cours en remplaçant le numéro de port actuel par le numéro de port utilisé dans le projet ASP.NET Core. Par exemple, `https://localhost:44375/home/about`.
+1. Appelez les vues rendues à partir du navigateur sur l’application ASP.NET Core en cours en remplaçant le numéro de port actuel par le numéro de port utilisé dans le projet ASP.NET Core. Par exemple : `https://localhost:44375/home/about`.
 
 ## <a name="migrate-static-content"></a>Migrer le contenu statique
 
@@ -230,7 +231,7 @@ Créez une application Web ASP.NET Core *vide* portant le même nom que le proje
 
 * Quand vous ciblez .NET Core, le [AspNetCore Microsoft.. app](xref:fundamentals/metapackage-app) est référencé par défaut. Ce package contient des packages couramment utilisés par les applications MVC. Si vous ciblez .NET Framework, les références de package doivent être listées individuellement dans le fichier projet.
 
-`Microsoft.AspNetCore.Mvc`est l’infrastructure MVC ASP.NET Core. `Microsoft.AspNetCore.StaticFiles`est le gestionnaire de fichiers statiques. ASP.NET Core applications s’abonnent explicitement à des intergiciels (middleware), comme pour le traitement des fichiers statiques. Pour plus d’informations, consultez [Fichiers statiques](xref:fundamentals/static-files).
+`Microsoft.AspNetCore.Mvc` est l’infrastructure MVC ASP.NET Core. `Microsoft.AspNetCore.StaticFiles` est le gestionnaire de fichiers statiques. ASP.NET Core applications s’abonnent explicitement à des intergiciels (middleware), comme pour le traitement des fichiers statiques. Pour plus d’informations, consultez [Fichiers statiques](xref:fundamentals/static-files).
 
 * Ouvrez le fichier *Startup.cs* et modifiez le code pour qu’il corresponde à ce qui suit :
 
@@ -290,7 +291,7 @@ Les fonctionnalités suivantes requièrent la migration à partir de l’exemple
 
 ## <a name="controllers-and-views"></a>Contrôleurs et vues
 
-* Copiez chacune des méthodes du MVC ASP.NET `HomeController` vers le nouveau `HomeController` . Dans ASP.NET MVC, le type de retour de la méthode d’action du contrôleur intégré est [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); dans ASP.NET Core MVC, les méthodes d’action retournent à la `IActionResult` place. `ActionResult`implémente `IActionResult` , il n’est donc pas nécessaire de modifier le type de retour des méthodes d’action.
+* Copiez chacune des méthodes du MVC ASP.NET `HomeController` vers le nouveau `HomeController` . Dans ASP.NET MVC, le type de retour de la méthode d’action du contrôleur intégré est [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); dans ASP.NET Core MVC, les méthodes d’action retournent à la `IActionResult` place. `ActionResult` implémente `IActionResult` , il n’est donc pas nécessaire de modifier le type de retour des méthodes d’action.
 
 * Copiez les fichiers de vue *about. cshtml*, *contact. cshtml*et *index. cshtml* Razor du projet MVC ASP.net dans le projet ASP.net core.
 
@@ -298,7 +299,7 @@ Les fonctionnalités suivantes requièrent la migration à partir de l’exemple
 
 Le fichier de disposition et les styles n’ont pas encore été migrés, donc les vues rendues contiennent uniquement le contenu des fichiers de vue. Les liens générés par le fichier de disposition pour les `About` vues et ne sont `Contact` pas encore disponibles.
 
-Appelez les vues rendues à partir du navigateur sur l’application ASP.NET Core en cours d’exécution en remplaçant le numéro de port actuel par le numéro de port utilisé dans le projet ASP.NET Core. Par exemple : `https://localhost:44375/home/about`.
+Appelez les vues rendues à partir du navigateur sur l’application ASP.NET Core en cours d’exécution en remplaçant le numéro de port actuel par le numéro de port utilisé dans le projet ASP.NET Core. Par exemple : `https://localhost:44375/home/about`.
 
 ![Page de contact](mvc/_static/contact-page.png)
 
@@ -416,7 +417,7 @@ Créez une application Web ASP.NET Core *vide* portant le même nom que le proje
 
 * Quand vous ciblez .NET Core, le [AspNetCore Microsoft.. app](xref:fundamentals/metapackage-app) est référencé par défaut. Ce package contient des packages couramment utilisés par les applications MVC. Si vous ciblez .NET Framework, les références de package doivent être listées individuellement dans le fichier projet.
 
-`Microsoft.AspNetCore.Mvc`est l’infrastructure MVC ASP.NET Core. `Microsoft.AspNetCore.StaticFiles`est le gestionnaire de fichiers statiques. ASP.NET Core applications s’abonnent explicitement à des intergiciels (middleware), comme pour le traitement des fichiers statiques. Pour plus d’informations, consultez [Fichiers statiques](xref:fundamentals/static-files).
+`Microsoft.AspNetCore.Mvc` est l’infrastructure MVC ASP.NET Core. `Microsoft.AspNetCore.StaticFiles` est le gestionnaire de fichiers statiques. ASP.NET Core applications s’abonnent explicitement à des intergiciels (middleware), comme pour le traitement des fichiers statiques. Pour plus d’informations, consultez [Fichiers statiques](xref:fundamentals/static-files).
 
 * Ouvrez le fichier *Startup.cs* et modifiez le code pour qu’il corresponde à ce qui suit :
 
@@ -476,7 +477,7 @@ Les fonctionnalités suivantes requièrent la migration à partir de l’exemple
 
 ## <a name="controllers-and-views"></a>Contrôleurs et vues
 
-* Copiez chacune des méthodes du MVC ASP.NET `HomeController` vers le nouveau `HomeController` . Dans ASP.NET MVC, le type de retour de la méthode d’action du contrôleur intégré est [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); dans ASP.NET Core MVC, les méthodes d’action retournent à la `IActionResult` place. `ActionResult`implémente `IActionResult` , il n’est donc pas nécessaire de modifier le type de retour des méthodes d’action.
+* Copiez chacune des méthodes du MVC ASP.NET `HomeController` vers le nouveau `HomeController` . Dans ASP.NET MVC, le type de retour de la méthode d’action du contrôleur intégré est [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); dans ASP.NET Core MVC, les méthodes d’action retournent à la `IActionResult` place. `ActionResult` implémente `IActionResult` , il n’est donc pas nécessaire de modifier le type de retour des méthodes d’action.
 
 * Copiez les fichiers de vue *about. cshtml*, *contact. cshtml*et *index. cshtml* Razor du projet MVC ASP.net dans le projet ASP.net core.
 
@@ -484,7 +485,7 @@ Les fonctionnalités suivantes requièrent la migration à partir de l’exemple
 
 Le fichier de disposition et les styles n’ont pas encore été migrés, donc les vues rendues contiennent uniquement le contenu des fichiers de vue. Les liens générés par le fichier de disposition pour les `About` vues et ne sont `Contact` pas encore disponibles.
 
-* Appelez les vues rendues à partir du navigateur sur l’application ASP.NET Core en cours d’exécution en remplaçant le numéro de port actuel par le numéro de port utilisé dans le projet ASP.NET Core. Par exemple : `https://localhost:44375/home/about`.
+* Appelez les vues rendues à partir du navigateur sur l’application ASP.NET Core en cours d’exécution en remplaçant le numéro de port actuel par le numéro de port utilisé dans le projet ASP.NET Core. Par exemple : `https://localhost:44375/home/about`.
 
 ![Page de contact](mvc/_static/contact-page.png)
 

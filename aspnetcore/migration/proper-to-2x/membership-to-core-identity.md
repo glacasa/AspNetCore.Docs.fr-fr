@@ -1,11 +1,12 @@
 ---
-title: Migrer de l’authentification d’appartenance ASP.NET vers ASP.NET Core 2,0Identity
+title: Migrer de l’authentification d’appartenance ASP.NET vers ASP.NET Core 2,0 Identity
 author: isaac2004
 description: Découvrez comment migrer des applications ASP.NET existantes à l’aide de l’authentification d’appartenance vers ASP.NET Core 2,0 Identity .
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/10/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: 97039ac1c7bcd6a1ff7b53e1579c623b26564d26
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: de9d1e5f6f595269595212fbab60d12dfd5a29e4
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014891"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633641"
 ---
-# <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-no-locidentity"></a>Migrer de l’authentification d’appartenance ASP.NET vers ASP.NET Core 2,0Identity
+# <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-no-locidentity"></a>Migrer de l’authentification d’appartenance ASP.NET vers ASP.NET Core 2,0 Identity
 
 De [Isaac Levin](https://isaaclevin.com)
 
@@ -40,7 +41,7 @@ Avant ASP.NET 2,0, les développeurs devaient créer l’intégralité du proces
 
 Pour migrer des applications existantes vers ASP.NET Core 2,0 Identity , les données de ces tables doivent être migrées vers les tables utilisées par le nouveau Identity schéma.
 
-## <a name="aspnet-core-no-locidentity-20-schema"></a>IdentitySchéma ASP.NET Core 2,0
+## <a name="no-locaspnet-core-identity-20-schema"></a>ASP.NET Core Identity schéma 2,0
 
 ASP.NET Core 2,0 suit le [Identity](/aspnet/identity/index) principe introduit dans ASP.NET 4,5. Bien que le principe soit partagé, l’implémentation entre les frameworks est différente, même entre les versions de ASP.NET Core (consultez [migrer l’authentification et Identity vers ASP.net Core 2,0](xref:migration/1x-to-2x/index)).
 
@@ -49,7 +50,7 @@ La façon la plus rapide d’afficher le schéma pour ASP.NET Core 2,0 Identity 
 1. Sélectionnez **Fichier** > **Nouveau** > **Projet**.
 1. Créez un projet d' **application Web ASP.net Core** nommé *Core Identity Sample*.
 1. Sélectionnez **ASP.NET Core 2,0** dans la liste déroulante, puis sélectionnez **application Web**. Ce modèle produit une application [ Razor pages](xref:razor-pages/index) . Avant de cliquer sur **OK**, cliquez sur **modifier l’authentification**.
-1. Choisissez des **comptes d’utilisateur individuels** pour les Identity modèles. Enfin, cliquez sur **OK**, puis sur **OK**. Visual Studio crée un projet à l’aide du Identity modèle ASP.net core.
+1. Choisissez des **comptes d’utilisateur individuels** pour les Identity modèles. Enfin, cliquez sur **OK**, puis sur **OK**. Visual Studio crée un projet à l’aide du ASP.NET Core Identity modèle.
 1. Sélectionnez **Outils**  >  **Gestionnaire de package NuGet**  >  **console du gestionnaire** de package pour ouvrir la fenêtre **console du gestionnaire de package** (PMC).
 1. Accédez à la racine du projet dans PMC, puis exécutez la commande [Entity Framework (EF) Core](/ef/core) `Update-Database` .
 
@@ -73,7 +74,7 @@ La façon la plus rapide d’afficher le schéma pour ASP.NET Core 2,0 Identity 
 
 ## <a name="migrate-the-schema"></a>Migrer le schéma
 
-Il existe des différences subtiles entre les structures et les champs de table pour l’appartenance et les ASP.NET Core Identity . Le modèle a changé de manière substantielle pour l’authentification/l’autorisation avec les applications ASP.NET et ASP.NET Core. Les objets clés qui sont toujours utilisés avec Identity sont *les utilisateurs et les* *rôles*. Voici les tables de mappage pour *les utilisateurs, les* *rôles*et les *UserRoles*.
+Il existe des différences subtiles entre les structures et les champs de table pour l’appartenance et ASP.NET Core Identity . Le modèle a changé de manière substantielle pour l’authentification/l’autorisation avec les applications ASP.NET et ASP.NET Core. Les objets clés qui sont toujours utilisés avec Identity sont *les utilisateurs et les* *rôles*. Voici les tables de mappage pour *les utilisateurs, les* *rôles*et les *UserRoles*.
 
 ### <a name="users"></a>Utilisateurs
 
@@ -88,7 +89,7 @@ Il existe des différences subtiles entre les structures et les champs de table 
 | `LockoutEnabled`                | `bit`   | `aspnet_Membership.IsLockedOut`                            | `bit`    |
 
 > [!NOTE]
-> Tous les mappages de champs ne ressemblent pas aux relations un-à-un de l’appartenance à ASP.NET Core Identity . Le tableau précédent prend le schéma de l’utilisateur d’appartenance par défaut et le mappe au Identity schéma ASP.net core. Tous les autres champs personnalisés qui ont été utilisés pour l’appartenance doivent être mappés manuellement. Dans ce mappage, il n’existe pas de mappage pour les mots de passe, car les critères de mot de passe et les sels de mot de passe ne migrent pas entre les deux. **Il est recommandé de conserver la valeur null pour le mot de passe et de demander aux utilisateurs de réinitialiser leur mot de passe.** Dans ASP.NET Core Identity , `LockoutEnd` doit être défini à une date ultérieure si l’utilisateur est verrouillé. Cela est illustré dans le script de migration.
+> Tous les mappages de champs ne ressemblent pas aux relations un-à-un de l’appartenance à ASP.NET Core Identity . Le tableau précédent prend le schéma de l’utilisateur d’appartenance par défaut et le mappe au ASP.NET Core Identity schéma. Tous les autres champs personnalisés qui ont été utilisés pour l’appartenance doivent être mappés manuellement. Dans ce mappage, il n’existe pas de mappage pour les mots de passe, car les critères de mot de passe et les sels de mot de passe ne migrent pas entre les deux. **Il est recommandé de conserver la valeur null pour le mot de passe et de demander aux utilisateurs de réinitialiser leur mot de passe.** Dans ASP.NET Core Identity , `LockoutEnd` doit être défini à une date ultérieure si l’utilisateur est verrouillé. Cela est illustré dans le script de migration.
 
 ### <a name="roles"></a>Rôles
 
@@ -194,7 +195,7 @@ IF @@ERROR <> 0
 COMMIT TRANSACTION MigrateUsersAndRoles
 ```
 
-Une fois le script précédent terminé, l' Identity application ASP.net Core créée précédemment est remplie avec les utilisateurs d’appartenance. Les utilisateurs doivent modifier leur mot de passe avant de se connecter.
+Une fois le script précédent terminé, l' ASP.NET Core Identity application créée précédemment est remplie avec les utilisateurs d’appartenance. Les utilisateurs doivent modifier leur mot de passe avant de se connecter.
 
 > [!NOTE]
 > Si le système d’appartenance avait des utilisateurs dont les noms d’utilisateur ne correspondaient pas à leur adresse de messagerie, les modifications sont requises pour l’application créée précédemment pour s’adapter à cette opération. Le modèle par défaut `UserName` est attendu et `Email` doit être le même. Dans les situations où elles sont différentes, le processus de connexion doit être modifié pour utiliser `UserName` au lieu de `Email` .
@@ -205,4 +206,4 @@ Dans le `PageModel` de la page de connexion, situé dans *Pages\Account\Login.cs
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce didacticiel, vous avez appris comment porter les utilisateurs de l’appartenance SQL vers ASP.NET Core 2,0 Identity . Pour plus d’informations sur les ASP.NET Core Identity , consultez [Introduction à Identity ](xref:security/authentication/identity).
+Dans ce didacticiel, vous avez appris comment porter les utilisateurs de l’appartenance SQL vers ASP.NET Core 2,0 Identity . Pour plus d’informations sur ASP.NET Core Identity , consultez [présentation Identity de ](xref:security/authentication/identity).

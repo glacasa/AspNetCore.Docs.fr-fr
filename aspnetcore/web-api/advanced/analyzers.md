@@ -7,6 +7,7 @@ ms.author: prkrishn
 ms.custom: mvc
 ms.date: 09/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/analyzers
-ms.openlocfilehash: 571046052dbe131e9cdcf981aaee0921ed8c2ea1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 1bc76f3965009dbdd66c58b197f4c12bd44faf18
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021846"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633030"
 ---
 # <a name="use-web-api-analyzers"></a>Utiliser les analyseurs d’API web
 
@@ -60,7 +61,7 @@ Installez le package NuGet [Microsoft. AspNetCore. Mvc. API. Analyzers](https://
 À partir de la fenêtre **Console du Gestionnaire de package** :
   * Accédez à **Affichage** > **Autres fenêtres** > **Console du Gestionnaire de package**.
   * Accédez au répertoire où se trouve le fichier *ApiConventions.csproj*.
-  * Exécutez la commande suivante :
+  * Exécutez la commande suivante :
 
     ```powershell
     Install-Package Microsoft.AspNetCore.Mvc.Api.Analyzers
@@ -83,7 +84,7 @@ dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers
 
 ### <a name="net-core-cli"></a>[CLI .NET Core](#tab/netcore-cli)
 
-Exécutez la commande suivante :
+Exécutez la commande suivante :
 
 ```dotnetcli
 dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers
@@ -95,7 +96,7 @@ dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers
 
 ## <a name="analyzers-for-web-api-conventions"></a>Analyseurs pour les conventions d’API Web
 
-Les documents sur les API ouvertes contiennent les codes d’état et les types de réponse qu’une action peut retourner. Dans ASP.NET Core MVC, des attributs comme <xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute> et <xref:Microsoft.AspNetCore.Mvc.ProducesAttribute> sont utilisés pour documenter une action. <xref:tutorials/web-api-help-pages-using-swagger>Pour plus d’informations sur la documentation de votre API Web.
+Les documents sur les API ouvertes contiennent les codes d’état et les types de réponse qu’une action peut retourner. Dans ASP.NET Core MVC, des attributs comme <xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute> et <xref:Microsoft.AspNetCore.Mvc.ProducesAttribute> sont utilisés pour documenter une action. <xref:tutorials/web-api-help-pages-using-swagger> Pour plus d’informations sur la documentation de votre API Web.
 
 Un des analyseurs du package inspecte les contrôleurs annotés avec <xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute> et identifie les actions qui ne document pas entièrement leurs réponses. Prenons l’exemple suivant :
 

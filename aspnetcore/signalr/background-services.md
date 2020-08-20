@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/background-services
-ms.openlocfilehash: 409ace5e3eaa4ab1de0b9d5f0cbd0e10d9243ea9
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d2ac5ebf6c469c9ec842e7f3ea4f37069b4efdcb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022379"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631593"
 ---
 # <a name="host-aspnet-core-no-locsignalr-in-background-services"></a>ASP.NET Core SignalR des hôtes dans les services d’arrière-plan
 
@@ -160,5 +161,5 @@ Pendant la `IHostedService.StopAsync` méthode, le `HubConnection` est supprimé
 
 * [Prise en main](xref:tutorials/signalr)
 * [Hubs](xref:signalr/hubs)
-* [Publication dans Azure](xref:signalr/publish-to-azure-web-app)
+* [Publier sur Azure](xref:signalr/publish-to-azure-web-app)
 * [Hubs fortement typés](xref:signalr/hubs#strongly-typed-hubs)

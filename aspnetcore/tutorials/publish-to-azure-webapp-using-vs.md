@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: devx-track-csharp, mvc
 ms.date: 07/10/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-azure-webapp-using-vs
-ms.openlocfilehash: 1fced12700fcd5910c1484ebb9190c7652b2646e
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 380e18d1826159fa0780909aba58fe8334ede8bb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130702"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631938"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>Publier une application ASP.NET Core sur Azure avec Visual Studio
 
@@ -196,7 +197,7 @@ Cliquez sur **Publier**. Visual Studio publie votre application sur Azure. Quand
 
 ![Vérifiez que la tâche est terminée](publish-to-azure-webapp-using-vs/_static/final.png)
 
-### <a name="clean-up"></a>Nettoyer
+### <a name="clean-up"></a>Nettoyage
 
 Après avoir testé l’application, accédez au [portail Azure](https://portal.azure.com/), puis supprimez l’application.
 
@@ -214,7 +215,7 @@ Après avoir testé l’application, accédez au [portail Azure](https://portal.
 
 * <xref:host-and-deploy/azure-apps/azure-continuous-deployment>
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * Pour Visual Studio Code, consultez [Profils de publication](xref:host-and-deploy/visual-studio-publish-profiles#publish-profiles).
 * [Azure App Service](/azure/app-service/app-service-web-overview)

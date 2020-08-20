@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 05/20/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: 0fb19aa19703e68812b83f0631f029dd66a3d64e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e6263f19cdb7f9957fa8360f9e782e622589ea18
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021326"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633316"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>Tester des API web avec la boucle REPL HTTP
 
@@ -39,7 +40,7 @@ Les [verbes HTTP](https://github.com/microsoft/api-guidelines/blob/vNext/Guideli
 * [DELETE](#test-http-delete-requests)
 * [GET](#test-http-get-requests)
 * [SIÈGE](#test-http-head-requests)
-* [Options](#test-http-options-requests)
+* [OPTIONS](#test-http-options-requests)
 * [CORRECTIF](#test-http-patch-requests)
 * [POST](#test-http-post-requests)
 * [PUT](#test-http-put-requests)
@@ -60,7 +61,7 @@ dotnet tool install -g Microsoft.dotnet-httprepl
 
 Un [outil global .NET Core](/dotnet/core/tools/global-tools#install-a-global-tool) est installé à partir du package NuGet [Microsoft.dotnet-httprepl](https://www.nuget.org/packages/Microsoft.dotnet-httprepl).
 
-## <a name="usage"></a>Utilisation
+## <a name="usage"></a>Usage
 
 Une fois l’installation de l’outil réussie, exécutez la commande suivante pour démarrer la boucle REPL HTTP :
 
@@ -365,7 +366,7 @@ pref set editor.command.default "C:\Program Files\Microsoft VS Code\Code.exe"
 
 ---
 
-Pour lancer l’éditeur de texte par défaut avec des arguments CLI spécifiques, définissez la clé `editor.command.default.arguments`. Par exemple, supposons que Visual Studio Code est l’éditeur de texte par défaut et que vous voulez que la boucle REPL HTTP ouvre toujours Visual Studio Code dans une nouvelle session avec les extensions désactivées. Exécutez la commande suivante :
+Pour lancer l’éditeur de texte par défaut avec des arguments CLI spécifiques, définissez la clé `editor.command.default.arguments`. Par exemple, supposons que Visual Studio Code est l’éditeur de texte par défaut et que vous voulez que la boucle REPL HTTP ouvre toujours Visual Studio Code dans une nouvelle session avec les extensions désactivées. Exécutez la commande suivante :
 
 ```console
 pref set editor.command.default.arguments "--disable-extensions --new-window"

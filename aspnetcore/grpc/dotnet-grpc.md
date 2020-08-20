@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 10/17/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/dotnet-grpc
-ms.openlocfilehash: d41958d586f54d5944af187933f2b0248f763171
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 18d504d7a130aeaa9f8ab6cca6c92dab5febfae6
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016127"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633238"
 ---
 # <a name="manage-protobuf-references-with-dotnet-grpc"></a>Gérer les références Protobuf avec dotnet-GRPC
 
 Par [John Luo](https://github.com/juntaoluo)
 
-`dotnet-grpc`est un outil Global .NET Core pour la gestion des références [Protobuf (*. proto*)](xref:grpc/basics#proto-file) dans un projet .net gRPC. L’outil peut être utilisé pour ajouter, actualiser, supprimer et répertorier des références Protobuf.
+`dotnet-grpc` est un outil Global .NET Core pour la gestion des références [Protobuf (*. proto*)](xref:grpc/basics#proto-file) dans un projet .net gRPC. L’outil peut être utilisé pour ajouter, actualiser, supprimer et répertorier des références Protobuf.
 
 ## <a name="installation"></a>Installation
 
@@ -39,7 +40,7 @@ dotnet tool install -g dotnet-grpc
 
 ## <a name="add-references"></a>Ajouter des références
 
-`dotnet-grpc`peut être utilisé pour ajouter des références Protobuf en tant qu' `<Protobuf />` éléments au fichier *. csproj* :
+`dotnet-grpc` peut être utilisé pour ajouter des références Protobuf en tant qu' `<Protobuf />` éléments au fichier *. csproj* :
 
 ```xml
 <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
@@ -51,7 +52,7 @@ Les références Protobuf sont utilisées pour générer les ressources du clien
 * Crée une référence Protobuf à partir d’un fichier distant spécifié par une URL.
 * Vérifiez que les dépendances de package gRPC correctes sont ajoutées au projet.
 
-Par exemple, le `Grpc.AspNetCore` package est ajouté à une application Web. `Grpc.AspNetCore`contient les bibliothèques clientes et de serveur gRPC et la prise en charge des outils. Les `Grpc.Net.Client` `Grpc.Tools` packages, et `Google.Protobuf` , qui contiennent uniquement les bibliothèques clientes gRPC et la prise en charge des outils, sont également ajoutés à une application console.
+Par exemple, le `Grpc.AspNetCore` package est ajouté à une application Web. `Grpc.AspNetCore` contient les bibliothèques clientes et de serveur gRPC et la prise en charge des outils. Les `Grpc.Net.Client` `Grpc.Tools` packages, et `Google.Protobuf` , qui contiennent uniquement les bibliothèques clientes gRPC et la prise en charge des outils, sont également ajoutés à une application console.
 
 ### <a name="add-file"></a>Ajouter un fichier
 
@@ -166,7 +167,7 @@ dotnet-grpc refresh [options] [<references>...]
 
 La `list` commande est utilisée pour afficher toutes les références Protobuf dans le fichier projet. Si toutes les valeurs d’une colonne sont des valeurs par défaut, la colonne peut être omise.
 
-### <a name="usage"></a>Utilisation
+### <a name="usage"></a>Usage
 
 ```dotnetcli
 dotnet-grpc list [options]

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/startup
-ms.openlocfilehash: 84b2aa6185654789b925dc4a9262f446de6c0a3c
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b10ddf52ea7d22ea98c295da61c09da8c87fc7a7
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016594"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633745"
 ---
 # <a name="app-startup-in-aspnet-core"></a>Démarrage d’une application dans ASP.NET Core
 
@@ -122,7 +123,7 @@ Pour configurer les services et le pipeline de traitement de requête sans utili
 
 Utilisez <xref:Microsoft.AspNetCore.Hosting.IStartupFilter> :
 
-* Pour configurer l’intergiciel (middleware) au début ou à la fin du pipeline de [configuration](#the-configure-method) d’une application sans appel explicite à `Use{Middleware}` . `IStartupFilter`est utilisé par ASP.NET Core pour ajouter des valeurs par défaut au début du pipeline sans avoir à faire en sorte que l’auteur de l’application enregistre explicitement l’intergiciel par défaut. `IStartupFilter`autorise un autre appel de composant `Use{Middleware}` pour le compte de l’auteur de l’application.
+* Pour configurer l’intergiciel (middleware) au début ou à la fin du pipeline de [configuration](#the-configure-method) d’une application sans appel explicite à `Use{Middleware}` . `IStartupFilter` est utilisé par ASP.NET Core pour ajouter des valeurs par défaut au début du pipeline sans avoir à faire en sorte que l’auteur de l’application enregistre explicitement l’intergiciel par défaut. `IStartupFilter` autorise un autre appel de composant `Use{Middleware}` pour le compte de l’auteur de l’application.
 * Pour créer un pipeline de `Configure` méthodes. [IStartupFilter.Configure](xref:Microsoft.AspNetCore.Hosting.IStartupFilter.Configure*) peut définir un middleware à exécuter avant ou après les middlewares qui sont ajoutés par les bibliothèques.
 
 `IStartupFilter` implémente <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>, qui reçoit et retourne un `Action<IApplicationBuilder>`. <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> définit une classe pour configurer le pipeline de requête d’une application. Pour plus d’informations, consultez [Créer un pipeline de middlewares avec IApplicationBuilder](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder).
@@ -254,7 +255,7 @@ Pour configurer les services et le pipeline de traitement de requête sans utili
 
 Utilisez <xref:Microsoft.AspNetCore.Hosting.IStartupFilter> :
 
-* Pour configurer l’intergiciel (middleware) au début ou à la fin du pipeline de [configuration](#the-configure-method) d’une application sans appel explicite à `Use{Middleware}` . `IStartupFilter`est utilisé par ASP.NET Core pour ajouter des valeurs par défaut au début du pipeline sans avoir à faire en sorte que l’auteur de l’application enregistre explicitement l’intergiciel par défaut. `IStartupFilter`autorise un autre appel de composant `Use{Middleware}` pour le compte de l’auteur de l’application.
+* Pour configurer l’intergiciel (middleware) au début ou à la fin du pipeline de [configuration](#the-configure-method) d’une application sans appel explicite à `Use{Middleware}` . `IStartupFilter` est utilisé par ASP.NET Core pour ajouter des valeurs par défaut au début du pipeline sans avoir à faire en sorte que l’auteur de l’application enregistre explicitement l’intergiciel par défaut. `IStartupFilter` autorise un autre appel de composant `Use{Middleware}` pour le compte de l’auteur de l’application.
 * Pour créer un pipeline de `Configure` méthodes. [IStartupFilter.Configure](xref:Microsoft.AspNetCore.Hosting.IStartupFilter.Configure*) peut définir un middleware à exécuter avant ou après les middlewares qui sont ajoutés par les bibliothèques.
 
 `IStartupFilter` implémente <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>, qui reçoit et retourne un `Action<IApplicationBuilder>`. <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> définit une classe pour configurer le pipeline de requête d’une application. Pour plus d’informations, consultez [Créer un pipeline de middlewares avec IApplicationBuilder](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder).

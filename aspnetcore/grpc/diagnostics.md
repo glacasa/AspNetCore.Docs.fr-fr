@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/diagnostics
-ms.openlocfilehash: bf8068375da81288f2fbfa2c1bfafe97c03c70fc
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5c4c05e74a8223db3ade03b067bd66921439c99f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016178"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633264"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>Journalisation et diagnostics dans gRPC sur .NET
 
@@ -29,7 +30,7 @@ Par [James Newton-King](https://twitter.com/jamesnk)
 
 Cet article fournit des conseils pour la collecte des diagnostics à partir d’une application gRPC afin de vous aider à résoudre les problèmes. Sont abordés les sujets suivants :
 
-* Journaux structurés en **Journal** écrits dans la [journalisation .net Core](xref:fundamentals/logging/index). <xref:Microsoft.Extensions.Logging.ILogger>est utilisé par les infrastructures d’application pour écrire des journaux et par les utilisateurs pour leur propre journalisation dans une application.
+* Journaux structurés en **Journal** écrits dans la [journalisation .net Core](xref:fundamentals/logging/index). <xref:Microsoft.Extensions.Logging.ILogger> est utilisé par les infrastructures d’application pour écrire des journaux et par les utilisateurs pour leur propre journalisation dans une application.
 * **Suivi** -événements liés à une opération écrite à l’aide `DiaganosticSource` de et de `Activity` . Les traces à partir de la source de diagnostic sont couramment utilisées pour collecter des données de télémétrie d’application par des bibliothèques telles que [application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) et [OpenTelemetry](https://github.com/open-telemetry/opentelemetry-dotnet).
 * **Métriques** : représentation des mesures de données sur des intervalles de temps, par exemple, les demandes par seconde. Les métriques sont émises à l’aide `EventCounter` de et peuvent être observées à l’aide de l’outil en ligne de commande [dotnet-Counters](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) ou avec [application Insights](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters).
 
@@ -130,7 +131,7 @@ dbug: Grpc.Net.Client.Internal.GrpcCall[4]
       Finished gRPC call.
 ```
 
-## <a name="tracing"></a>Suivi
+## <a name="tracing"></a>Traçage
 
 les services gRPC et le client gRPC fournissent des informations sur les appels gRPC à l’aide de [DiagnosticSource](https://docs.microsoft.com/dotnet/api/system.diagnostics.diagnosticsource) et de l' [activité](https://docs.microsoft.com/dotnet/api/system.diagnostics.activity).
 
@@ -162,7 +163,7 @@ Le moyen le plus simple d’utiliser `DiagnosticSource` est de configurer une bi
 
 Le suivi peut être affiché dans un service géré comme Application Insights, ou vous pouvez choisir d’exécuter votre propre système de traçage distribué. OpenTelemetry prend en charge l’exportation des données de suivi vers [Jaeger](https://www.jaegertracing.io/) et [Zipkin](https://zipkin.io/).
 
-`DiagnosticSource`peut consommer des événements de suivi dans le code à l’aide de `DiagnosticListener` . Pour plus d’informations sur l’écoute d’une source de diagnostic avec du code, consultez le [Guide de l’utilisateur DiagnosticSource](https://github.com/dotnet/corefx/blob/d3942d4671919edb0cca6ddc1840190f524a809d/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md#consuming-data-with-diagnosticlistener).
+`DiagnosticSource` peut consommer des événements de suivi dans le code à l’aide de `DiagnosticListener` . Pour plus d’informations sur l’écoute d’une source de diagnostic avec du code, consultez le [Guide de l’utilisateur DiagnosticSource](https://github.com/dotnet/corefx/blob/d3942d4671919edb0cca6ddc1840190f524a809d/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md#consuming-data-with-diagnosticlistener).
 
 > [!NOTE]
 > Les bibliothèques de télémétrie ne capturent pas actuellement les données de télémétrie spécifiques à gRPC `Grpc.Net.Client.GrpcOut` . Travailler pour améliorer les bibliothèques de télémétrie la capture de ce suivi est en cours.

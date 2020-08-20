@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/middleware
-ms.openlocfilehash: 235010c95cdd0c7ce1368b4abd91e75d81ae094b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ed0925259bf3d4fee6c903ff55cdf1dae2355af7
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021898"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631899"
 ---
 # <a name="test-aspnet-core-middleware"></a>Tester l’intergiciel (middleware) ASP.NET Core
 
@@ -123,7 +124,7 @@ public async Task TestMiddleware_ExpectedResponse()
 }
 ```
 
-<xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A>autorise la configuration directe d’un <xref:Microsoft.AspNetCore.Http.HttpContext> objet plutôt que l’utilisation des <xref:System.Net.Http.HttpClient> abstractions. Utilisez <xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A> pour manipuler des structures uniquement disponibles sur le serveur, telles que [HttpContext. Items](xref:Microsoft.AspNetCore.Http.HttpContext.Items) ou [HttpContext. Features](xref:Microsoft.AspNetCore.Http.HttpContext.Features).
+<xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A> autorise la configuration directe d’un <xref:Microsoft.AspNetCore.Http.HttpContext> objet plutôt que l’utilisation des <xref:System.Net.Http.HttpClient> abstractions. Utilisez <xref:Microsoft.AspNetCore.TestHost.TestServer.SendAsync%2A> pour manipuler des structures uniquement disponibles sur le serveur, telles que [HttpContext. Items](xref:Microsoft.AspNetCore.Http.HttpContext.Items) ou [HttpContext. Features](xref:Microsoft.AspNetCore.Http.HttpContext.Features).
 
 Comme dans l’exemple précédent qui a testé une réponse *404-introuvable* , vérifiez l’inverse pour chaque `Assert` instruction du test précédent. La vérification confirme que le test échoue correctement lorsque l’intergiciel fonctionne normalement. Une fois que vous avez confirmé que le test de faux positif fonctionne, définissez les `Assert` instructions finales pour les conditions et les valeurs attendues du test. Exécutez-le à nouveau pour confirmer que le test réussit.
 
