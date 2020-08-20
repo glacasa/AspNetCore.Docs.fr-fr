@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/17/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: ac649b80a6cb1106de8acbb4764b53017afaa238
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: 5aeb333dc36ebc4c3a324b397793343e0335b1e1
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504591"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628363"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core de débogage Blazor WebAssembly
 
@@ -247,7 +248,7 @@ Blazor fournit un proxy de débogage qui implémente le [protocole chrome devtoo
 
 Les mappages de source de navigateur permettent au navigateur de mapper les fichiers compilés à leurs fichiers sources d’origine et sont couramment utilisés pour le débogage côté client. Toutefois, Blazor ne mappe actuellement pas C# directement à JavaScript/WASM. Au lieu de cela, Blazor fait l’interprétation du langage intermédiaire dans le navigateur, les mappages de source ne sont donc pas pertinents.
 
-## <a name="troubleshoot"></a>Résoudre les problèmes
+## <a name="troubleshoot"></a>Dépanner
 
 Si vous rencontrez des erreurs, les conseils suivants peuvent vous aider :
 

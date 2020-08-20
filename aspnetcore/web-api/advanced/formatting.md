@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 04/17/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 8aa94bd1f33d1dd8ce8e7f50468ed60b4ccb2515
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 618bb60ea382437b2787adb814f319b1f0cea4ca
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019935"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626530"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>Mettre en forme les données des réponses dans l’API web ASP.NET Core
 
@@ -37,7 +38,7 @@ Certains types de résultats d’action sont spécifiques à un format particuli
 
 Une action n’est pas requise pour retourner un type spécifique. ASP.NET Core prend en charge toute valeur de retour d’objet.  Les résultats des actions qui retournent des objets qui ne sont pas des <xref:Microsoft.AspNetCore.Mvc.IActionResult> types sont sérialisés à l’aide de l' <xref:Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter> implémentation appropriée. Pour plus d'informations, consultez <xref:web-api/action-return-types>.
 
-La méthode d’assistance intégrée retourne des <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Ok*> données au format JSON :[!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_get)]
+La méthode d’assistance intégrée retourne des <xref:Microsoft.AspNetCore.Mvc.ControllerBase.Ok*> données au format JSON : [!code-csharp[](./formatting/sample/Controllers/AuthorsController.cs?name=snippet_get)]
 
 L’exemple de téléchargement retourne la liste des auteurs. À l’aide des outils de développement du navigateur F12 ou du [poster](https://www.getpostman.com/tools) avec le code précédent :
 
@@ -258,7 +259,7 @@ Le mappage du chemin de la requête doit être spécifié dans la route utilisé
 
 L’itinéraire précédent permet de spécifier le format demandé en tant qu’extension de fichier facultative. L' [`[FormatFilter]`](xref:Microsoft.AspNetCore.Mvc.FormatFilterAttribute) attribut vérifie l’existence de la valeur de format dans le `RouteData` et mappe le format de réponse au formateur approprié lorsque la réponse est créée.
 
-|           Routage        |             Formateur              |
+|           Route        |             Formateur              |
 |------------------------|------------------------------------|
 |   `/api/products/5`    |    Le formateur de sortie par défaut    |
 | `/api/products/5.json` | Le formateur JSON (s’il est configuré) |

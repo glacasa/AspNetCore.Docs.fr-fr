@@ -5,6 +5,7 @@ description: Utiliser grunt dans ASP.NET Core
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/using-grunt
-ms.openlocfilehash: 019f31c1a6fa3a33783f78f2fee71f710642ce6d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e8e4459f7fe496135d6cfd7f4ff52511a5e1c064
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013201"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628025"
 ---
 # <a name="use-grunt-in-aspnet-core"></a>Utiliser grunt dans ASP.NET Core
 

@@ -1,5 +1,5 @@
 ---
-title: Héberger et déployer des ASP.NET CoreBlazor
+title: Héberger et déployer des ASP.NET Core Blazor
 author: guardrex
 description: Découvrez comment héberger et déployer des Blazor applications.
 monikerRange: '>= aspnetcore-3.1'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/15/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/index
-ms.openlocfilehash: 8a5172db22a17138f7462d140fd97316586e5282
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7bde61b0ff1d122b449ccc9d7ea9629fc8fb6108
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014202"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628090"
 ---
-# <a name="host-and-deploy-aspnet-core-no-locblazor"></a>Héberger et déployer des ASP.NET CoreBlazor
+# <a name="host-and-deploy-aspnet-core-no-locblazor"></a>Héberger et déployer des ASP.NET Core Blazor
 
 Par [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com) et [Daniel Roth](https://github.com/danroth27)
 
@@ -36,7 +37,7 @@ Les applications sont publiées pour le déploiement dans la configuration Relea
 
 1. Sélectionnez **générer**  >  **publier {application}** dans la barre de navigation.
 1. Sélectionnez l’onglet *Cible de publication*. Pour publier localement, sélectionnez **Dossier**.
-1. Acceptez l’emplacement par défaut dans le champ **Choisir un dossier** ou spécifiez un autre emplacement. Sélectionnez le **`Publish`** bouton.
+1. Acceptez l’emplacement par défaut dans le champ **Choisir un dossier** ou spécifiez un autre emplacement. Sélectionner le bouton **`Publish`**.
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
@@ -83,7 +84,7 @@ Pour fournir la configuration du Blazor chemin d’accès de base de l’applica
 <base href="/CoolApp/">
 ```
 
-Blazor Serverles applications définissent également le chemin d’accès de base côté serveur en appelant <xref:Microsoft.AspNetCore.Builder.UsePathBaseExtensions.UsePathBase*> dans le pipeline de demande de l’application `Startup.Configure` :
+Blazor Server les applications définissent également le chemin d’accès de base côté serveur en appelant <xref:Microsoft.AspNetCore.Builder.UsePathBaseExtensions.UsePathBase*> dans le pipeline de demande de l’application `Startup.Configure` :
 
 ```csharp
 app.UsePathBase("/CoolApp");

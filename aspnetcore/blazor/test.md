@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/10/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/test
-ms.openlocfilehash: 30c5ead98c5da934c1e76577c5dc1a39c7224a79
-ms.sourcegitcommit: 4df445e7d49a99f81625430f728c28e5d6bf2107
+ms.openlocfilehash: 8a6fa8f25c8209584488fb2578c70e884877d666
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/15/2020
-ms.locfileid: "88253720"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625867"
 ---
 # <a name="test-components-in-aspnet-core-no-locblazor"></a>Tester des composants dans ASP.NET Core Blazor
 
@@ -150,6 +151,6 @@ Les actions suivantes ont lieu à chaque étape du test :
 > [!NOTE]
 > La `MarkupMatches` méthode Assert diffère d’une assertion de comparaison de chaînes standard (par exemple, `Assert.Equal("Current count: 1", paraElmText);` ) `MarkupMatches` effectue une comparaison sémantique de l’entrée et du balisage HTML attendu. Une comparaison sémantique est consciente de la sémantique HTML, ce qui signifie que les éléments tels que les espaces blancs non significatifs sont ignorés. Cela aboutit à des tests plus stables. Pour plus d’informations, consultez [Personnalisation de la comparaison HTML sémantique](https://bunit.egilhansen.com/docs/verification/semantic-html-comparison).
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * [Prise en main avec bUnit : les](https://bunit.egilhansen.com/docs/getting-started/)instructions bUnit incluent des conseils sur la création d’un projet de test, le référencement de packages d’infrastructure de test et la génération et l’exécution de tests.

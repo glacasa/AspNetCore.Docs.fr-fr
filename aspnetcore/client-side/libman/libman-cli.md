@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/libman/libman-cli
-ms.openlocfilehash: 6e1ab9c540e1714f2f8cd6e6f2603e4d589a7d2b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8b883269a82a1a6e55bf04bd40bfcbab28ae1fb3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013474"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625698"
 ---
 # <a name="use-the-libman-cli-with-aspnet-core"></a>Utiliser l’interface CLI LibMan avec ASP.NET Core
 
@@ -51,7 +52,7 @@ dotnet tool install -g Microsoft.Web.LibraryManager.Cli --version 1.0.94-g606058
 
 Dans l’exemple précédent, un outil Global .NET Core est installé à partir du fichier *C:\Temp\Microsoft.Web.librarymanager.cli.1.0.94-g606058a278.nupkg* de l’ordinateur Windows local.
 
-## <a name="usage"></a>Utilisation
+## <a name="usage"></a>Usage
 
 Une fois l’installation de l’interface CLI réussie, vous pouvez utiliser la commande suivante :
 
@@ -132,7 +133,7 @@ Les options suivantes sont disponibles pour la commande `libman init` :
 Pour créer un *libman.jssur* un fichier dans un projet ASP.net Core :
 
 * Accédez à la racine du projet.
-* Exécutez la commande suivante :
+* Exécutez la commande suivante :
 
   ```console
   libman init
@@ -181,7 +182,7 @@ Les options suivantes sont disponibles pour la commande `libman install` :
 
 * `--files <FILE>`
 
-  Spécifiez le nom du fichier à installer à partir de la bibliothèque. S’il n’est pas spécifié, tous les fichiers de la bibliothèque sont installés. Fournissez une `--files` option par fichier à installer. Les chemins d’accès relatifs sont également pris en charge. Par exemple : `--files dist/browser/signalr.js`.
+  Spécifiez le nom du fichier à installer à partir de la bibliothèque. S’il n’est pas spécifié, tous les fichiers de la bibliothèque sont installés. Fournissez une `--files` option par fichier à installer. Les chemins d’accès relatifs sont également pris en charge. Par exemple : `--files dist/browser/signalr.js`.
 
 * `-p|--provider <PROVIDER>`
 

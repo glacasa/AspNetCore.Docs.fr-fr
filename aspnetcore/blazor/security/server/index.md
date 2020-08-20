@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/02/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,20 +18,20 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: 4dc9040b9410304eb33e5df7c47db2f9a42152d3
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ba9fe3c0149679fa5760c0c9214cd426f1804c31
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013994"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626452"
 ---
 # <a name="secure-aspnet-core-no-locblazor-server-apps"></a>Sécuriser les Blazor Server applications ASP.net Core
 
 Par [Luke Latham](https://github.com/guardrex)
 
-Blazor Serverles applications sont configurées pour la sécurité de la même façon que les applications ASP.NET Core. Pour plus d’informations, consultez les articles sous <xref:security/index> . Les rubriques de cette vue d’ensemble s’appliquent spécifiquement à Blazor Server . 
+Blazor Server les applications sont configurées pour la sécurité de la même façon que les applications ASP.NET Core. Pour plus d’informations, consultez les articles sous <xref:security/index> . Les rubriques de cette vue d’ensemble s’appliquent spécifiquement à Blazor Server . 
 
-## <a name="no-locblazor-server-project-template"></a>Blazor Servermodèle de projet
+## <a name="no-locblazor-server-project-template"></a>Blazor Server modèle de projet
 
 Le Blazor Server modèle de projet peut être configuré pour l’authentification lors de la création du projet.
 
@@ -62,7 +63,7 @@ Les valeurs autorisées d’authentification (`{AUTHENTICATION}`) sont présent�
 | Mécanisme d’authentification | Description |
 | ------------------------ | ----------- |
 | `None` (par défaut)         | Aucune authentification |
-| `Individual`             | Utilisateurs stockés dans l’application avec ASP.NET CoreIdentity |
+| `Individual`             | Utilisateurs stockés dans l’application avec ASP.NET Core Identity |
 | `IndividualB2C`          | Utilisateurs stockés dans [Azure ad B2C](xref:security/authentication/azure-ad-b2c) |
 | `SingleOrg`              | Authentification d’organisation pour un seul locataire |
 | `MultiOrg`               | Authentification d’organisation pour plusieurs locataires |
@@ -96,7 +97,7 @@ Les valeurs autorisées d’authentification (`{AUTHENTICATION}`) sont présent�
 | Mécanisme d’authentification | Description |
 | ------------------------ | ----------- |
 | `None` (par défaut)         | Aucune authentification |
-| `Individual`             | Utilisateurs stockés dans l’application avec ASP.NET CoreIdentity |
+| `Individual`             | Utilisateurs stockés dans l’application avec ASP.NET Core Identity |
 | `IndividualB2C`          | Utilisateurs stockés dans [Azure ad B2C](xref:security/authentication/azure-ad-b2c) |
 | `SingleOrg`              | Authentification d’organisation pour un seul locataire |
 | `MultiOrg`               | Authentification d’organisation pour plusieurs locataires |
@@ -111,7 +112,7 @@ Pour plus d’informations, consultez la [`dotnet new`](/dotnet/core/tools/dotne
 
 ---
 
-## <a name="scaffold-no-locidentity"></a>DestinIdentity
+## <a name="scaffold-no-locidentity"></a>Destin Identity
 
 Génération Identity de modèles automatique dans un Blazor Server projet :
 

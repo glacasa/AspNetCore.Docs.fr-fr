@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 07/16/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,16 +17,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 7a23f2b17cc8fb3a4989b9fddd5c128add13db5b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 54780e2d67c70d945fd875c41c8d6483aa358bbf
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021950"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627193"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>Configurer l’authentification par certificat dans ASP.NET Core
 
-`Microsoft.AspNetCore.Authentication.Certificate`contient une implémentation similaire à [l’authentification par certificat](https://tools.ietf.org/html/rfc5246#section-7.4.4) pour ASP.net core. L’authentification par certificat se produit au niveau du TLS, à long terme avant qu’il ne soit ASP.NET Core. Plus précisément, il s’agit d’un gestionnaire d’authentification qui valide le certificat et vous donne un événement dans lequel vous pouvez résoudre ce certificat en `ClaimsPrincipal` . 
+`Microsoft.AspNetCore.Authentication.Certificate` contient une implémentation similaire à [l’authentification par certificat](https://tools.ietf.org/html/rfc5246#section-7.4.4) pour ASP.net core. L’authentification par certificat se produit au niveau du TLS, à long terme avant qu’il ne soit ASP.NET Core. Plus précisément, il s’agit d’un gestionnaire d’authentification qui valide le certificat et vous donne un événement dans lequel vous pouvez résoudre ce certificat en `ClaimsPrincipal` . 
 
 [Configurez votre serveur](#configure-your-server-to-require-certificates) pour l’authentification par certificat, qu’il soit IIS, Kestrel, Azure Web Apps ou tout autre que vous utilisez.
 
@@ -325,7 +326,7 @@ private static byte[] StringToByteArray(string hex)
 }
 ```
 
-La `Startup.Configure` méthode ajoute ensuite l’intergiciel (middleware). `UseCertificateForwarding`est appelé avant les appels à `UseAuthentication` et `UseAuthorization` :
+La `Startup.Configure` méthode ajoute ensuite l’intergiciel (middleware). `UseCertificateForwarding` est appelé avant les appels à `UseAuthentication` et `UseAuthorization` :
 
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -616,7 +617,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-L’implémentation de la mise en cache par défaut stocke les résultats en mémoire. Vous pouvez fournir votre propre cache en l’implémentant et en l' `ICertificateValidationCache` inscrivant avec l’injection de dépendances. Par exemple, `services.AddSingleton<ICertificateValidationCache, YourCache>()`.
+L’implémentation de la mise en cache par défaut stocke les résultats en mémoire. Vous pouvez fournir votre propre cache en l’implémentant et en l' `ICertificateValidationCache` inscrivant avec l’injection de dépendances. Par exemple : `services.AddSingleton<ICertificateValidationCache, YourCache>()`.
 
 ::: moniker-end
 
@@ -654,4 +655,4 @@ L’approche suivante prend en charge les certificats clients facultatifs :
 
 Laissez des questions, des commentaires et d’autres commentaires sur les certificats clients facultatifs dans ce problème de [discussion GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/18720) .
 
-&dagger;Indication du nom du serveur (SNI) est une extension TLS pour inclure un domaine virtuel dans le cadre de la négociation SSL. Cela signifie que le nom de domaine virtuel, ou un nom d’hôte, peut être utilisé pour identifier le point de terminaison réseau.
+&dagger; Indication du nom du serveur (SNI) est une extension TLS pour inclure un domaine virtuel dans le cadre de la négociation SSL. Cela signifie que le nom de domaine virtuel, ou un nom d’hôte, peut être utilisé pour identifier le point de terminaison réseau.

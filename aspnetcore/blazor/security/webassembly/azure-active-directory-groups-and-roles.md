@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: devx-track-csharp, mvc
 ms.date: 07/28/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: bd0a7c5a905ae4888ea6ad326be5b16cbfaa10fc
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 50d019897310f9edd560069137ab73b39d780be8
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130403"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626231"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Groupes de Azure AD, rôles administratifs et rôles définis par l’utilisateur
 
@@ -54,14 +55,14 @@ Pour autoriser les appels API Graph, accordez à l’application autonome ou cli
 * `Directory.ReadWrite.All`
 * `Directory.AccessAsUser.All`
 
-`Directory.Read.All`est l’autorisation à privilèges minimaux et est l’autorisation utilisée pour l’exemple décrit dans cet article.
+`Directory.Read.All` est l’autorisation à privilèges minimaux et est l’autorisation utilisée pour l’exemple décrit dans cet article.
 
 ## <a name="user-defined-groups-and-built-in-administrative-roles"></a>Groupes définis par l’utilisateur et rôles d’administration intégrés
 
 Pour configurer l’application dans le Portail Azure pour fournir une `groups` revendication d’appartenance, consultez les articles Azure suivants. Affecter des utilisateurs à des groupes AAD définis par l’utilisateur et à des rôles d’administration intégrés.
 
 * [Rôles utilisant les groupes de sécurité Azure AD](/azure/architecture/multitenant-identity/app-roles#roles-using-azure-ad-security-groups)
-* [`groupMembershipClaims`attribut](/azure/active-directory/develop/reference-app-manifest#groupmembershipclaims-attribute)
+* [`groupMembershipClaims` attribut](/azure/active-directory/develop/reference-app-manifest#groupmembershipclaims-attribute)
 
 Les exemples suivants partent du principe qu’un utilisateur est affecté au rôle d' *administrateur de facturation* intégré AAD.
 
@@ -400,7 +401,7 @@ Les ID d’objet présentés dans le tableau suivant sont utilisés pour créer 
 Rôle d’administration AAD | ID de l'objet
 --- | ---
 Administrateur d’application | fa11557b-4f15-4ddd-85d5-313c7cd74047
-Développeur d’applications | 68adcbb8-9504-44f6-89f2-5cd48dc74a2c
+Développeur d’application | 68adcbb8-9504-44f6-89f2-5cd48dc74a2c
 Administrateur d’authentification | 02d110a1-96b1-419e-af87-746461b60ed7
 Administrateur Azure DevOps | a5311ace-ca41-44cd-b833-8d22caa0b34f
 Administrateur Azure Information Protection | 18632dce-f9b5-4f01-abb5-37051f06860e

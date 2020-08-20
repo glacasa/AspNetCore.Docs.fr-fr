@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/03/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: e66a470bf5bd23950bdb0ccf61c6743916ed9349
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: 9e3933d8800c00eb135c041bb1c65fbf01d4ef83
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504552"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628038"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>Héberger et déployer des ASP.NET Core Blazor WebAssembly
 
@@ -497,7 +498,7 @@ La suppression du gestionnaire ou la désactivation de l’héritage est effectu
 
 IIS peut être configuré via `web.config` pour servir des ressources compressées Brotli ou gzip Blazor . Pour obtenir un exemple de configuration, consultez [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true) .
 
-#### <a name="troubleshooting"></a>Résolution des problèmes
+#### <a name="troubleshooting"></a>Dépannage
 
 Si vous recevez un message *500 – Erreur interne du serveur* et que le Gestionnaire IIS lève des erreurs quand vous tentez d’accéder à la configuration du site web, vérifiez que le module de réécriture d’URL est installé. Lorsque le module n’est pas installé, le `web.config` fichier ne peut pas être analysé par IIS. Cela empêche le gestionnaire des services Internet de charger la configuration du site Web et le site Web à partir des Blazor fichiers statiques de service.
 
@@ -620,7 +621,7 @@ Pour déployer une Blazor WebAssembly application sur CentOS 7 ou version ultér
 
 1. Redémarrez le service Apache.
 
-Pour plus d’informations, consultez [`mod_mime`](https://httpd.apache.org/docs/2.4/mod/mod_mime.html) et [`mod_deflate`](https://httpd.apache.org/docs/current/mod/mod_deflate.html) .
+Pour plus d’informations, consultez [`mod_mime`](https://httpd.apache.org/docs/2.4/mod/mod_mime.html) et [`mod_deflate`](https://httpd.apache.org/docs/current/mod/mod_deflate.html).
 
 ### <a name="github-pages"></a>GitHub Pages
 

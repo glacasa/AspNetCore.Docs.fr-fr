@@ -1,5 +1,5 @@
 ---
-title: Chargement différé d’assemblys dans ASP.NET CoreBlazor WebAssembly
+title: Chargement différé d’assemblys dans ASP.NET Core Blazor WebAssembly
 author: guardrex
 description: Découvrez comment charger en différé des assemblys dans des Blazor WebAssembly applications ASP.net core.
 monikerRange: '>= aspnetcore-5.0'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/16/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: 0ce03badccad4e06aa3c316580ab82be38a806c6
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 31e6c9638d3262d3cb0a5e0fbcf34d24e2d1e91c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013370"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625802"
 ---
-# <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>Chargement différé d’assemblys dans ASP.NET CoreBlazor WebAssembly
+# <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>Chargement différé d’assemblys dans ASP.NET Core Blazor WebAssembly
 
 Par [safia Abdalla](https://safia.rocks) et [Luke Latham](https://github.com/guardrex)
 
-Blazor WebAssemblyles performances de démarrage de l’application peuvent être améliorées en différant le chargement de certains assemblys d’application jusqu’à ce qu’ils soient nécessaires, ce qui s’appelle le *chargement différé*. Par exemple, les assemblys qui sont utilisés uniquement pour le rendu d’un seul composant peuvent être configurés pour être chargés uniquement si l’utilisateur accède à ce composant. Après le chargement, les assemblys sont mis en cache côté client et sont disponibles pour toutes les navigations ultérieures.
+Blazor WebAssembly les performances de démarrage de l’application peuvent être améliorées en différant le chargement de certains assemblys d’application jusqu’à ce qu’ils soient nécessaires, ce qui s’appelle le *chargement différé*. Par exemple, les assemblys qui sont utilisés uniquement pour le rendu d’un seul composant peuvent être configurés pour être chargés uniquement si l’utilisateur accède à ce composant. Après le chargement, les assemblys sont mis en cache côté client et sont disponibles pour toutes les navigations ultérieures.
 
 Blazorla fonctionnalité de chargement différé de vous permet de marquer des assemblys d’application pour le chargement différé, qui charge les assemblys lors de l’exécution lorsque l’utilisateur accède à un itinéraire particulier. La fonctionnalité est constituée de modifications apportées au fichier projet et des modifications apportées au routeur de l’application.
 
@@ -77,19 +78,19 @@ Dans le composant de l’application `Router` ( `App.razor` ) :
 
 Si le `OnNavigateAsync` rappel lève une exception non gérée, l' [ Blazor interface utilisateur d’erreur](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development) est appelée.
 
-### <a name="assembly-load-logic-in-onnavigateasync"></a>Logique de chargement d’assembly dans`OnNavigateAsync`
+### <a name="assembly-load-logic-in-onnavigateasync"></a>Logique de chargement d’assembly dans `OnNavigateAsync`
 
-`OnNavigateAsync`a un `NavigationContext` paramètre qui fournit des informations sur l’événement de navigation asynchrone actuel, y compris le chemin d’accès cible ( `Path` ) et le jeton d’annulation ( `CancellationToken` ) :
+`OnNavigateAsync` a un `NavigationContext` paramètre qui fournit des informations sur l’événement de navigation asynchrone actuel, y compris le chemin d’accès cible ( `Path` ) et le jeton d’annulation ( `CancellationToken` ) :
 
 * La `Path` propriété est le chemin d’accès de destination de l’utilisateur par rapport au chemin d’accès de base de l’application, par exemple `/robot` .
-* Le `CancellationToken` peut être utilisé pour observer l’annulation de la tâche asynchrone. `OnNavigateAsync`annule automatiquement la tâche de navigation en cours d’exécution lorsque l’utilisateur accède à une autre page.
+* Le `CancellationToken` peut être utilisé pour observer l’annulation de la tâche asynchrone. `OnNavigateAsync` annule automatiquement la tâche de navigation en cours d’exécution lorsque l’utilisateur accède à une autre page.
 
 Dans `OnNavigateAsync` , implémentez une logique pour déterminer les assemblys à charger. Options disponibles :
 
 * Vérifications conditionnelles à l’intérieur de la `OnNavigateAsync` méthode.
 * Table de recherche qui mappe des itinéraires à des noms d’assemblys, soit injectés dans le composant, soit implémentée dans le [`@code`](xref:mvc/views/razor#code) bloc.
 
-`LazyAssemblyLoader`est un service Singleton fourni par l’infrastructure pour le chargement d’assemblys. Injecter `LazyAssemblyLoader` dans le `Router` composant :
+`LazyAssemblyLoader` est un service Singleton fourni par l’infrastructure pour le chargement d’assemblys. Injecter `LazyAssemblyLoader` dans le `Router` composant :
 
 ```razor
 ...
@@ -130,7 +131,7 @@ Lors du chargement des assemblys, ce qui peut prendre plusieurs secondes, le `Ro
 ...
 ```
 
-### <a name="handle-cancellations-in-onnavigateasync"></a>Gérer les annulations dans`OnNavigateAsync`
+### <a name="handle-cancellations-in-onnavigateasync"></a>Gérer les annulations dans `OnNavigateAsync`
 
 L' `NavigationContext` objet passé au `OnNavigateAsync` rappel contient un `CancellationToken` qui est défini lorsqu’un nouvel événement de navigation se produit. Le `OnNavigateAsync` rappel doit lever une exception quand ce jeton d’annulation est défini pour éviter de continuer à exécuter le `OnNavigateAsync` rappel sur une navigation obsolète.
 

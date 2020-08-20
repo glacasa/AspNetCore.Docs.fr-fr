@@ -6,6 +6,7 @@ ms.author: riande
 ms.date: 7/18/2020
 ms.custom: mvc, seodec18
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/secure-data
-ms.openlocfilehash: 44777369693f9eb29d78c3ba638db2e692f430ae
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5f86e514ee6339888171d83ab3117e9b3fcf107e
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021183"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627817"
 ---
 # <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>Créer une application Web ASP.NET Core avec les données utilisateur protégées par l’autorisation
 
@@ -103,7 +104,7 @@ Utilisez l' [Identity](xref:security/authentication/identity) ID d’utilisateur
 
 [!code-csharp[](secure-data/samples/final3/Models/Contact.cs?name=snippet1&highlight=5-6,16-999)]
 
-`OwnerID`ID de l’utilisateur de la `AspNetUser` table dans la [Identity](xref:security/authentication/identity) base de données. Le `Status` champ détermine si un contact est visible par les utilisateurs généraux.
+`OwnerID` ID de l’utilisateur de la `AspNetUser` table dans la [Identity](xref:security/authentication/identity) base de données. Le `Status` champ détermine si un contact est visible par les utilisateurs généraux.
 
 Créez une nouvelle migration et mettez à jour la base de données :
 
@@ -112,7 +113,7 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-no-locidentity"></a>Ajouter des services de rôle àIdentity
+### <a name="add-role-services-to-no-locidentity"></a>Ajouter des services de rôle à Identity
 
 Ajoutez [rôles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) pour ajouter des services de rôle :
 
@@ -134,7 +135,7 @@ Stratégie d’authentification de secours :
 
 La définition de la stratégie d’authentification de secours pour exiger que les utilisateurs soient authentifiés protège les pages et les contrôleurs qui viennent d’être ajoutés Razor . L’authentification requise par défaut est plus sécurisée que le fait de s’appuyer sur de nouveaux contrôleurs et Razor pages pour inclure l' `[Authorize]` attribut.
 
-La <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions> classe contient également <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.DefaultPolicy?displayProperty=nameWithType> . `DefaultPolicy`Est la stratégie utilisée avec l' `[Authorize]` attribut quand aucune stratégie n’est spécifiée. `[Authorize]`ne contient pas de stratégie nommée, contrairement à `[Authorize(PolicyName="MyPolicy")]` .
+La <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions> classe contient également <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.DefaultPolicy?displayProperty=nameWithType> . `DefaultPolicy`Est la stratégie utilisée avec l' `[Authorize]` attribut quand aucune stratégie n’est spécifiée. `[Authorize]` ne contient pas de stratégie nommée, contrairement à `[Authorize(PolicyName="MyPolicy")]` .
 
 Pour plus d’informations sur les stratégies, consultez <xref:security/authorization/policies> .
 
@@ -181,11 +182,11 @@ Créez une `ContactIsOwnerAuthorizationHandler` classe dans le dossier *authoriz
 `ContactIsOwnerAuthorizationHandler`Contexte des appels [. Réussie](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.succeed#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_Succeed_Microsoft_AspNetCore_Authorization_IAuthorizationRequirement_) si l’utilisateur authentifié actuel est le propriétaire du contact. Les gestionnaires d’autorisations sont généralement :
 
 * Retourne `context.Succeed` lorsque les spécifications sont satisfaites.
-* Retourne `Task.CompletedTask` lorsque les spécifications ne sont pas remplies. `Task.CompletedTask`n’est pas un succès ou un échec &mdash; . il permet l’exécution d’autres gestionnaires d’autorisations.
+* Retourne `Task.CompletedTask` lorsque les spécifications ne sont pas remplies. `Task.CompletedTask` n’est pas un succès ou un échec &mdash; . il permet l’exécution d’autres gestionnaires d’autorisations.
 
 Si vous devez faire échouer explicitement, retournez le [contexte. Échoue](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.fail).
 
-L’application permet aux propriétaires de contacts de modifier/supprimer/créer leurs propres données. `ContactIsOwnerAuthorizationHandler`n’a pas besoin de vérifier l’opération passée dans le paramètre d’exigence.
+L’application permet aux propriétaires de contacts de modifier/supprimer/créer leurs propres données. `ContactIsOwnerAuthorizationHandler` n’a pas besoin de vérifier l’opération passée dans le paramètre d’exigence.
 
 ### <a name="create-a-manager-authorization-handler"></a>Créer un gestionnaire d’autorisations de gestionnaire
 
@@ -205,7 +206,7 @@ Les services qui utilisent Entity Framework Core doivent être inscrits pour l' 
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet_defaultPolicy&highlight=23-99)]
 
-`ContactAdministratorsAuthorizationHandler`et `ContactManagerAuthorizationHandler` sont ajoutés en tant que singletons. Il s’agit de singletons, car ils n’utilisent pas EF et toutes les informations nécessaires sont dans le `Context` paramètre de la `HandleRequirementAsync` méthode.
+`ContactAdministratorsAuthorizationHandler` et `ContactManagerAuthorizationHandler` sont ajoutés en tant que singletons. Il s’agit de singletons, car ils n’utilisent pas EF et toutes les informations nécessaires sont dans le `Context` paramètre de la `HandleRequirementAsync` méthode.
 
 ## <a name="support-authorization"></a>Autorisation du support
 
@@ -332,9 +333,9 @@ Un moyen simple de tester l’application terminée consiste à lancer trois nav
 
 | Utilisateur                | Amorcé par l’application | Options                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | No                | Modifiez/supprimez les données.                |
-| manager@contoso.com | Yes               | Approuver/refuser et modifier/supprimer des données. |
-| admin@contoso.com   | Yes               | Approuver/refuser et modifier/supprimer toutes les données. |
+| test@example.com    | Non                | Modifiez/supprimez les données.                |
+| manager@contoso.com | Oui               | Approuver/refuser et modifier/supprimer des données. |
+| admin@contoso.com   | Oui               | Approuver/refuser et modifier/supprimer toutes les données. |
 
 Créez un contact dans le navigateur de l’administrateur. Copiez l’URL de la suppression et de la modification à partir du contact de l’administrateur. Collez ces liens dans le navigateur de l’utilisateur de test pour vérifier que l’utilisateur de test ne peut pas effectuer ces opérations.
 
@@ -343,7 +344,7 @@ Créez un contact dans le navigateur de l’administrateur. Copiez l’URL de la
 * Créer une Razor application pages nommée « ContactManager »
   * Créez l’application avec des **comptes d’utilisateur individuels**.
   * Nommez-la « ContactManager » pour que l’espace de noms corresponde à l’espace de noms utilisé dans l’exemple.
-  * `-uld`spécifie la base de données locale au lieu de SQLite
+  * `-uld` spécifie la base de données locale au lieu de SQLite
 
   ```dotnetcli
   dotnet new webapp -o ContactManager -au Individual -uld
@@ -457,7 +458,7 @@ Utilisez l' [Identity](xref:security/authentication/identity) ID d’utilisateur
 
 [!code-csharp[](secure-data/samples/final2.1/Models/Contact.cs?name=snippet1&highlight=5-6,16-999)]
 
-`OwnerID`ID de l’utilisateur de la `AspNetUser` table dans la [Identity](xref:security/authentication/identity) base de données. Le `Status` champ détermine si un contact est visible par les utilisateurs généraux.
+`OwnerID` ID de l’utilisateur de la `AspNetUser` table dans la [Identity](xref:security/authentication/identity) base de données. Le `Status` champ détermine si un contact est visible par les utilisateurs généraux.
 
 Créez une nouvelle migration et mettez à jour la base de données :
 
@@ -466,7 +467,7 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-no-locidentity"></a>Ajouter des services de rôle àIdentity
+### <a name="add-role-services-to-no-locidentity"></a>Ajouter des services de rôle à Identity
 
 Ajoutez [rôles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) pour ajouter des services de rôle :
 
@@ -517,11 +518,11 @@ Créez un dossier *authorization* et créez une `ContactIsOwnerAuthorizationHand
 `ContactIsOwnerAuthorizationHandler`Contexte des appels [. Réussie](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.succeed#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_Succeed_Microsoft_AspNetCore_Authorization_IAuthorizationRequirement_) si l’utilisateur authentifié actuel est le propriétaire du contact. Les gestionnaires d’autorisations sont généralement :
 
 * Retourne `context.Succeed` lorsque les spécifications sont satisfaites.
-* Retourne `Task.CompletedTask` lorsque les spécifications ne sont pas remplies. `Task.CompletedTask`n’est pas un succès ou un échec &mdash; . il permet l’exécution d’autres gestionnaires d’autorisations.
+* Retourne `Task.CompletedTask` lorsque les spécifications ne sont pas remplies. `Task.CompletedTask` n’est pas un succès ou un échec &mdash; . il permet l’exécution d’autres gestionnaires d’autorisations.
 
 Si vous devez faire échouer explicitement, retournez le [contexte. Échoue](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.fail).
 
-L’application permet aux propriétaires de contacts de modifier/supprimer/créer leurs propres données. `ContactIsOwnerAuthorizationHandler`n’a pas besoin de vérifier l’opération passée dans le paramètre d’exigence.
+L’application permet aux propriétaires de contacts de modifier/supprimer/créer leurs propres données. `ContactIsOwnerAuthorizationHandler` n’a pas besoin de vérifier l’opération passée dans le paramètre d’exigence.
 
 ### <a name="create-a-manager-authorization-handler"></a>Créer un gestionnaire d’autorisations de gestionnaire
 
@@ -541,7 +542,7 @@ Les services qui utilisent Entity Framework Core doivent être inscrits pour l' 
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet_defaultPolicy&highlight=27-99)]
 
-`ContactAdministratorsAuthorizationHandler`et `ContactManagerAuthorizationHandler` sont ajoutés en tant que singletons. Il s’agit de singletons, car ils n’utilisent pas EF et toutes les informations nécessaires sont dans le `Context` paramètre de la `HandleRequirementAsync` méthode.
+`ContactAdministratorsAuthorizationHandler` et `ContactManagerAuthorizationHandler` sont ajoutés en tant que singletons. Il s’agit de singletons, car ils n’utilisent pas EF et toutes les informations nécessaires sont dans le `Context` paramètre de la `HandleRequirementAsync` méthode.
 
 ## <a name="support-authorization"></a>Autorisation du support
 
@@ -659,9 +660,9 @@ Un moyen simple de tester l’application terminée consiste à lancer trois nav
 
 | Utilisateur                | Amorcé par l’application | Options                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | No                | Modifiez/supprimez les données.                |
-| manager@contoso.com | Yes               | Approuver/refuser et modifier/supprimer des données. |
-| admin@contoso.com   | Yes               | Approuver/refuser et modifier/supprimer toutes les données. |
+| test@example.com    | Non                | Modifiez/supprimez les données.                |
+| manager@contoso.com | Oui               | Approuver/refuser et modifier/supprimer des données. |
+| admin@contoso.com   | Oui               | Approuver/refuser et modifier/supprimer toutes les données. |
 
 Créez un contact dans le navigateur de l’administrateur. Copiez l’URL de la suppression et de la modification à partir du contact de l’administrateur. Collez ces liens dans le navigateur de l’utilisateur de test pour vérifier que l’utilisateur de test ne peut pas effectuer ces opérations.
 
@@ -670,7 +671,7 @@ Créez un contact dans le navigateur de l’administrateur. Copiez l’URL de la
 * Créer une Razor application pages nommée « ContactManager »
   * Créez l’application avec des **comptes d’utilisateur individuels**.
   * Nommez-la « ContactManager » pour que l’espace de noms corresponde à l’espace de noms utilisé dans l’exemple.
-  * `-uld`spécifie la base de données locale au lieu de SQLite
+  * `-uld` spécifie la base de données locale au lieu de SQLite
 
   ```dotnetcli
   dotnet new webapp -o ContactManager -au Individual -uld

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/platform-specific-configuration
-ms.openlocfilehash: 13728bca9d382bad39a85144ae9efd5b63a05dc4
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: fadd93cf28603653e20ed6c7dceadcabf0dfb9a5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017387"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627518"
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>Utiliser des assemblys de démarrage d’hébergement dans ASP.NET Core
 
@@ -106,7 +107,7 @@ Une amélioration de l’hébergement au démarrage peut être fournie dans une 
 
 L' [exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) comprend une Razor application pages, *HostingStartupApp*et une bibliothèque de classes, *HostingStartupLibrary*. La bibliothèque de classes :
 
-* Contient une classe d’hébergement au démarrage, `ServiceKeyInjection`, qui implémente `IHostingStartup`. `ServiceKeyInjection`Ajoute une paire de chaînes de service à la configuration de l’application à l’aide du fournisseur de configuration en mémoire ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)).
+* Contient une classe d’hébergement au démarrage, `ServiceKeyInjection`, qui implémente `IHostingStartup`. `ServiceKeyInjection` Ajoute une paire de chaînes de service à la configuration de l’application à l’aide du fournisseur de configuration en mémoire ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)).
 * Inclut un attribut `HostingStartup` qui identifie l’espace de noms et la classe d’hébergement au démarrage.
 
 La `ServiceKeyInjection` méthode de la classe <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> utilise un <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> pour ajouter des améliorations à une application.
@@ -504,7 +505,7 @@ Une amélioration de l’hébergement au démarrage peut être fournie dans une 
 
 L' [exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) comprend une Razor application pages, *HostingStartupApp*et une bibliothèque de classes, *HostingStartupLibrary*. La bibliothèque de classes :
 
-* Contient une classe d’hébergement au démarrage, `ServiceKeyInjection`, qui implémente `IHostingStartup`. `ServiceKeyInjection`Ajoute une paire de chaînes de service à la configuration de l’application à l’aide du fournisseur de configuration en mémoire ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)).
+* Contient une classe d’hébergement au démarrage, `ServiceKeyInjection`, qui implémente `IHostingStartup`. `ServiceKeyInjection` Ajoute une paire de chaînes de service à la configuration de l’application à l’aide du fournisseur de configuration en mémoire ([AddInMemoryCollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)).
 * Inclut un attribut `HostingStartup` qui identifie l’espace de noms et la classe d’hébergement au démarrage.
 
 La `ServiceKeyInjection` méthode de la classe <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> utilise un <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> pour ajouter des améliorations à une application.

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/25/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
-ms.openlocfilehash: 7abf15b240c0acdae159784a8863b2988758c916
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e2045d7d169e81c85f4c7dbd97357455ecd70ea3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014553"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628480"
 ---
 # <a name="integrate-aspnet-core-no-locrazor-components-into-no-locrazor-pages-and-mvc-apps"></a>Intégrer Razor des composants de ASP.net core dans Razor des pages et des applications MVC
 
 Par [Luke Latham](https://github.com/guardrex) et [Daniel Roth](https://github.com/danroth27)
 
-Razorles composants peuvent être intégrés dans Razor des pages et des applications MVC. Lorsque la page ou la vue est restituée, les composants peuvent être prérendus en même temps.
+Razor les composants peuvent être intégrés dans Razor des pages et des applications MVC. Lorsque la page ou la vue est restituée, les composants peuvent être prérendus en même temps.
 
 Après avoir [préparé l’application](#prepare-the-app), suivez les instructions des sections suivantes en fonction des exigences de l’application :
 
@@ -127,7 +128,7 @@ Pour prendre en charge les composants routables Razor dans les Razor application
 
    Les composants utilisent le `_Layout.cshtml` fichier partagé pour leur disposition.
 
-   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>Configure si le `App` composant :
+   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> Configure si le `App` composant :
 
    * Est prérendu dans la page.
    * Est rendu en HTML statique sur la page ou s’il contient les informations nécessaires pour démarrer une Blazor application à partir de l’agent utilisateur.
@@ -201,7 +202,7 @@ Pour prendre en charge les composants routables Razor dans les applications MVC�
 
    Les composants utilisent le `_Layout.cshtml` fichier partagé pour leur disposition.
    
-   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>Configure si le `App` composant :
+   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode> Configure si le `App` composant :
 
    * Est prérendu dans la page.
    * Est rendu en HTML statique sur la page ou s’il contient les informations nécessaires pour démarrer une Blazor application à partir de l’agent utilisateur.

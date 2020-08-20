@@ -5,6 +5,7 @@ description: Partie 2 de Razor pages et Entity Framework série de didacticiels.
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: f205e7741c8e901e9219bec2028c7bee98129161
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a6a99d736a60a55b81eb7e852413dc52b733d2fb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018362"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627531"
 ---
 # <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a>Partie 2, Razor pages avec EF Core dans ASP.net Core-CRUD
 
@@ -89,7 +90,7 @@ Le code précédent crée un objet Student, puis utilise des champs de formulair
 
 * Utilise les valeurs de formulaire publiées de la propriété [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) de [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel).
 * Met à jour uniquement les propriétés listées (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`).
-* Recherche les champs de formulaire dotés d’un préfixe « Student ». Par exemple, `Student.FirstMidName`. Il ne respecte pas la casse.
+* Recherche les champs de formulaire dotés d’un préfixe « Student ». Par exemple : `Student.FirstMidName`. Il ne respecte pas la casse.
 * Utilise le système de [liaison de modèles](xref:mvc/models/model-binding) pour convertir les valeurs de formulaire de chaînes en types dans le modèle `Student`. Par exemple, `EnrollmentDate` doit être converti en DateTime.
 
 Exécutez l’application, puis créez une entité Student pour tester la page Create.

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/23/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/handle-errors
-ms.openlocfilehash: 5f7112d9a072f28d387e07bdf69ec0b7595ff6b4
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: dfe6f1ac79732d158e31fb5250645d4ff98d1c0b
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014436"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628337"
 ---
 # <a name="handle-errors-in-aspnet-core-no-locblazor-apps"></a>Gérer les erreurs dans les Blazor applications ASP.net Core
 
@@ -89,14 +90,14 @@ L' `blazor-error-ui` élément est masqué par les styles inclus dans les Blazor
 
 ## <a name="how-a-no-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Comment une Blazor Server application réagit aux exceptions non gérées
 
-Blazor Serverest une infrastructure avec état. Tandis que les utilisateurs interagissent avec une application, ils maintiennent une connexion au serveur appelé « *circuit*». Le circuit contient des instances de composant actives, ainsi que de nombreux autres aspects de l’État, tels que :
+Blazor Server est une infrastructure avec état. Tandis que les utilisateurs interagissent avec une application, ils maintiennent une connexion au serveur appelé « *circuit*». Le circuit contient des instances de composant actives, ainsi que de nombreux autres aspects de l’État, tels que :
 
 * Sortie du rendu le plus récent des composants.
 * Ensemble actuel de délégués de gestion d’événements qui peuvent être déclenchés par les événements côté client.
 
 Si un utilisateur ouvre l’application dans plusieurs onglets de navigateur, il dispose de plusieurs circuits indépendants.
 
-Blazortraite la plupart des exceptions non gérées comme étant irrécupérables par le circuit dans lequel elles se produisent. Si un circuit est arrêté en raison d’une exception non gérée, l’utilisateur ne peut continuer à interagir avec l’application qu’en rechargeant la page pour créer un nouveau circuit. Les circuits en dehors de celui qui est terminé, qui sont des circuits pour d’autres utilisateurs ou d’autres onglets de navigateur, ne sont pas affectés. Ce scénario est similaire à une application de bureau qui se bloque. L’application bloquée doit être redémarrée, mais les autres applications ne sont pas affectées.
+Blazor traite la plupart des exceptions non gérées comme étant irrécupérables par le circuit dans lequel elles se produisent. Si un circuit est arrêté en raison d’une exception non gérée, l’utilisateur ne peut continuer à interagir avec l’application qu’en rechargeant la page pour créer un nouveau circuit. Les circuits en dehors de celui qui est terminé, qui sont des circuits pour d’autres utilisateurs ou d’autres onglets de navigateur, ne sont pas affectés. Ce scénario est similaire à une application de bureau qui se bloque. L’application bloquée doit être redémarrée, mais les autres applications ne sont pas affectées.
 
 Un circuit se termine lorsqu’une exception non gérée se produit pour les raisons suivantes :
 
@@ -133,7 +134,7 @@ Le code d’infrastructure et d’application peut déclencher des exceptions no
 * [Gestionnaires d’événements](#event-handlers)
 * [Suppression de composants](#component-disposal)
 * [Interopérabilité JavaScript](#javascript-interop)
-* [Blazor Serverrerendu](#blazor-server-prerendering)
+* [Blazor Server rerendu](#blazor-server-prerendering)
 
 Les exceptions non gérées précédentes sont décrites dans les sections suivantes de cet article.
 
@@ -161,7 +162,7 @@ Dans l’exemple suivant, où <xref:Microsoft.AspNetCore.Components.ComponentBas
 
 * Une exception levée dans la `ProductRepository.GetProductByIdAsync` méthode est gérée par une [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) instruction.
 * Lorsque le `catch` bloc est exécuté :
-  * `loadFailed`a la valeur `true` , qui est utilisée pour afficher un message d’erreur à l’utilisateur.
+  * `loadFailed` a la valeur `true` , qui est utilisée pour afficher un message d’erreur à l’utilisateur.
   * L’erreur est consignée.
 
 [!code-razor[](handle-errors/samples_snapshot/3.x/product-details.razor?highlight=11,27-39)]
@@ -203,7 +204,7 @@ Pour plus d’informations sur la suppression de composants, consultez <xref:bla
 
 ### <a name="javascript-interop"></a>Interopérabilité JavaScript
 
-<xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType>permet au code .NET d’effectuer des appels asynchrones au runtime JavaScript dans le navigateur de l’utilisateur.
+<xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> permet au code .NET d’effectuer des appels asynchrones au runtime JavaScript dans le navigateur de l’utilisateur.
 
 Les conditions suivantes s’appliquent à la gestion des erreurs avec <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> :
 
@@ -223,9 +224,9 @@ Pour plus d’informations, consultez les articles suivants :
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 
-### <a name="no-locblazor-server-prerendering"></a>Blazor Serverpréaffichant
+### <a name="no-locblazor-server-prerendering"></a>Blazor Server préaffichant
 
-Blazorles composants peuvent être prérendus à l’aide du [tag Helper du composant](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) , afin que le balisage HTML rendu soit renvoyé dans le cadre de la requête http initiale de l’utilisateur. Cela fonctionne de la façon suivante :
+Blazor les composants peuvent être prérendus à l’aide du [tag Helper du composant](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) , afin que le balisage HTML rendu soit renvoyé dans le cadre de la requête http initiale de l’utilisateur. Cela fonctionne de la façon suivante :
 
 * Création d’un nouveau circuit pour tous les composants prérendus qui font partie de la même page.
 * Génération du code HTML initial.

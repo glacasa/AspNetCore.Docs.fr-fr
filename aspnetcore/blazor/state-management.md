@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -18,12 +19,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 28ca3b5c4472dc21e709d01705dc64168107ca61
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 43794fad36efe44cad6fbb2f1a1cae293a2ddad1
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013552"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625958"
 ---
 # <a name="aspnet-core-no-locblazor-state-management"></a>Gestion de l’état des ASP.NET Core Blazor
 
@@ -74,7 +75,7 @@ Pour la persistance des données permanente qui s’étend sur plusieurs utilisa
 
 Une fois les données enregistrées, l’état de l’utilisateur est conservé et disponible dans toute nouvelle session de navigateur.
 
-Étant donné que Blazor WebAssembly les applications s’exécutent entièrement dans le navigateur de l’utilisateur, elles nécessitent des mesures supplémentaires pour accéder à des systèmes externes sécurisés, tels que les services de stockage et les bases de données. Blazor WebAssemblyles applications sont sécurisées de la même façon que les applications à page unique (SPAs). En règle générale, une application authentifie un utilisateur via [OAuth](https://oauth.net) / [OpenID Connect (OIDC)](https://openid.net/connect/) , puis interagit avec les services de stockage et les bases de données par le biais d’appels d’API Web à une application côté serveur. L’application côté serveur convertit le transfert de données entre l' Blazor WebAssembly application et le service de stockage ou la base de données. L' Blazor WebAssembly application maintient une connexion éphémère à l’application côté serveur, tandis que l’application côté serveur dispose d’une connexion permanente au stockage.
+Étant donné que Blazor WebAssembly les applications s’exécutent entièrement dans le navigateur de l’utilisateur, elles nécessitent des mesures supplémentaires pour accéder à des systèmes externes sécurisés, tels que les services de stockage et les bases de données. Blazor WebAssembly les applications sont sécurisées de la même façon que les applications à page unique (SPAs). En règle générale, une application authentifie un utilisateur via [OAuth](https://oauth.net) / [OpenID Connect (OIDC)](https://openid.net/connect/) , puis interagit avec les services de stockage et les bases de données par le biais d’appels d’API Web à une application côté serveur. L’application côté serveur convertit le transfert de données entre l' Blazor WebAssembly application et le service de stockage ou la base de données. L' Blazor WebAssembly application maintient une connexion éphémère à l’application côté serveur, tandis que l’application côté serveur dispose d’une connexion permanente au stockage.
 
 Pour plus d’informations, consultez les ressources suivantes :
 
@@ -102,18 +103,18 @@ Pour plus d’informations sur la définition de modèles d’URL avec la [`@pag
 
 Pour les données temporaires que l’utilisateur crée activement, un emplacement de stockage couramment utilisé est celui des [`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) [`sessionStorage`](https://developer.mozilla.org/docs/Web/API/Window/sessionStorage) regroupements et du navigateur :
 
-* `localStorage`est limité à la fenêtre du navigateur. Si l’utilisateur recharge la page ou ferme et ouvre à nouveau le navigateur, l’état persiste. Si l’utilisateur ouvre plusieurs onglets de navigateur, l’État est partagé à travers les onglets. Les données sont conservées dans `localStorage` jusqu’à ce qu’elles soient explicitement effacées.
-* `sessionStorage`est étendu à l’onglet navigateur. Si l’utilisateur recharge l’onglet, l’état persiste. Si l’utilisateur ferme l’onglet ou le navigateur, l’État est perdu. Si l’utilisateur ouvre plusieurs onglets de navigateur, chaque onglet possède sa propre version indépendante des données.
+* `localStorage` est limité à la fenêtre du navigateur. Si l’utilisateur recharge la page ou ferme et ouvre à nouveau le navigateur, l’état persiste. Si l’utilisateur ouvre plusieurs onglets de navigateur, l’État est partagé à travers les onglets. Les données sont conservées dans `localStorage` jusqu’à ce qu’elles soient explicitement effacées.
+* `sessionStorage` est étendu à l’onglet navigateur. Si l’utilisateur recharge l’onglet, l’état persiste. Si l’utilisateur ferme l’onglet ou le navigateur, l’État est perdu. Si l’utilisateur ouvre plusieurs onglets de navigateur, chaque onglet possède sa propre version indépendante des données.
 
 > [!NOTE]
-> `localStorage`et `sessionStorage` peuvent être utilisés dans les Blazor WebAssembly applications, mais uniquement en écrivant du code personnalisé ou à l’aide d’un package tiers.
+> `localStorage` et `sessionStorage` peuvent être utilisés dans les Blazor WebAssembly applications, mais uniquement en écrivant du code personnalisé ou à l’aide d’un package tiers.
 
-En règle générale, `sessionStorage` il est plus sûr d’utiliser. `sessionStorage`évite le risque qu’un utilisateur ouvre plusieurs onglets et rencontre les éléments suivants :
+En règle générale, `sessionStorage` il est plus sûr d’utiliser. `sessionStorage` évite le risque qu’un utilisateur ouvre plusieurs onglets et rencontre les éléments suivants :
 
 * Bogues dans le stockage d’État sur les onglets.
 * Comportement confus quand une tabulation remplace l’état d’autres onglets.
 
-`localStorage`est le meilleur choix si l’application doit conserver l’État dans la fermeture et la réouverture du navigateur.
+`localStorage` est le meilleur choix si l’application doit conserver l’État dans la fermeture et la réouverture du navigateur.
 
 > [!WARNING]
 > Les utilisateurs peuvent afficher ou altérer les données stockées dans `localStorage` et `sessionStorage` .
@@ -128,7 +129,7 @@ En règle générale, `sessionStorage` il est plus sûr d’utiliser. `sessionSt
 
 ::: zone pivot="server"
 
-Blazor Serverest une infrastructure d’application avec état. La plupart du temps, l’application maintient une connexion au serveur. L’état de l’utilisateur est conservé dans la mémoire du serveur dans un *circuit*. 
+Blazor Server est une infrastructure d’application avec état. La plupart du temps, l’application maintient une connexion au serveur. L’état de l’utilisateur est conservé dans la mémoire du serveur dans un *circuit*. 
 
 Voici des exemples d’état utilisateur contenu dans un circuit :
 
@@ -201,15 +202,15 @@ Pour plus d’informations sur la définition de modèles d’URL avec la [`@pag
 
 Pour les données temporaires que l’utilisateur crée activement, un emplacement de stockage couramment utilisé est celui des [`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) [`sessionStorage`](https://developer.mozilla.org/docs/Web/API/Window/sessionStorage) regroupements et du navigateur :
 
-* `localStorage`est limité à la fenêtre du navigateur. Si l’utilisateur recharge la page ou ferme et ouvre à nouveau le navigateur, l’état persiste. Si l’utilisateur ouvre plusieurs onglets de navigateur, l’État est partagé à travers les onglets. Les données sont conservées dans `localStorage` jusqu’à ce qu’elles soient explicitement effacées.
-* `sessionStorage`est étendu à l’onglet navigateur. Si l’utilisateur recharge l’onglet, l’état persiste. Si l’utilisateur ferme l’onglet ou le navigateur, l’État est perdu. Si l’utilisateur ouvre plusieurs onglets de navigateur, chaque onglet possède sa propre version indépendante des données.
+* `localStorage` est limité à la fenêtre du navigateur. Si l’utilisateur recharge la page ou ferme et ouvre à nouveau le navigateur, l’état persiste. Si l’utilisateur ouvre plusieurs onglets de navigateur, l’État est partagé à travers les onglets. Les données sont conservées dans `localStorage` jusqu’à ce qu’elles soient explicitement effacées.
+* `sessionStorage` est étendu à l’onglet navigateur. Si l’utilisateur recharge l’onglet, l’état persiste. Si l’utilisateur ferme l’onglet ou le navigateur, l’État est perdu. Si l’utilisateur ouvre plusieurs onglets de navigateur, chaque onglet possède sa propre version indépendante des données.
 
-En règle générale, `sessionStorage` il est plus sûr d’utiliser. `sessionStorage`évite le risque qu’un utilisateur ouvre plusieurs onglets et rencontre les éléments suivants :
+En règle générale, `sessionStorage` il est plus sûr d’utiliser. `sessionStorage` évite le risque qu’un utilisateur ouvre plusieurs onglets et rencontre les éléments suivants :
 
 * Bogues dans le stockage d’État sur les onglets.
 * Comportement confus quand une tabulation remplace l’état d’autres onglets.
 
-`localStorage`est le meilleur choix si l’application doit conserver l’État dans la fermeture et la réouverture du navigateur.
+`localStorage` est le meilleur choix si l’application doit conserver l’État dans la fermeture et la réouverture du navigateur.
 
 Avertissements relatifs à l’utilisation du stockage du navigateur :
 
@@ -264,7 +265,7 @@ private async Task IncrementCount()
 }
 ```
 
-Dans les applications plus volumineuses et plus réalistes, le stockage de champs individuels est un scénario peu probable. Les applications sont plus susceptibles de stocker des objets de modèle entiers qui incluent un État complexe. `ProtectedSessionStore`sérialise et désérialise automatiquement des données JSON pour stocker des objets d’État complexes.
+Dans les applications plus volumineuses et plus réalistes, le stockage de champs individuels est un scénario peu probable. Les applications sont plus susceptibles de stocker des objets de modèle entiers qui incluent un État complexe. `ProtectedSessionStore` sérialise et désérialise automatiquement des données JSON pour stocker des objets d’État complexes.
 
 Dans l’exemple de code précédent, les `currentCount` données sont stockées sous `sessionStorage['count']` la forme dans le navigateur de l’utilisateur. Les données ne sont pas stockées en texte brut mais sont protégées à l’aide d’ASP.NET Core protection des données. Les données chiffrées peuvent être inspectées si la `sessionStorage['count']` est évaluée dans la console de développement du navigateur.
 
@@ -278,7 +279,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-Si les paramètres du composant incluent l’état de navigation, appelez `ProtectedSessionStore.GetAsync` et assignez un non- `null` résultat dans <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> , et non <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> . <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>la méthode est appelée une seule fois lors de la première instanciation du composant. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>n’est pas rappelée ultérieurement si l’utilisateur accède à une autre URL tout en restant sur la même page. Pour plus d'informations, consultez <xref:blazor/components/lifecycle>.
+Si les paramètres du composant incluent l’état de navigation, appelez `ProtectedSessionStore.GetAsync` et assignez un non- `null` résultat dans <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> , et non <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> . <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> la méthode est appelée une seule fois lors de la première instanciation du composant. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> n’est pas rappelée ultérieurement si l’utilisateur accède à une autre URL tout en restant sur la même page. Pour plus d'informations, consultez <xref:blazor/components/lifecycle>.
 
 > [!WARNING]
 > Les exemples de cette section ne fonctionnent que si le prérendu n’est pas activé sur le serveur. Quand le prérendu est activé, une erreur est générée, expliquant que les appels Interop JavaScript ne peuvent pas être émis car le composant est en cours de prérendu.
@@ -316,7 +317,7 @@ Lors du prérendu :
 * Une connexion interactive au navigateur de l’utilisateur n’existe pas.
 * Le navigateur ne dispose pas encore d’une page dans laquelle il peut exécuter du code JavaScript.
 
-`localStorage`ou `sessionStorage` ne sont pas disponibles pendant le prérendu. Si le composant tente d’interagir avec le stockage, une erreur est générée, expliquant que les appels Interop JavaScript ne peuvent pas être émis car le composant est en cours de prérendu.
+`localStorage` ou `sessionStorage` ne sont pas disponibles pendant le prérendu. Si le composant tente d’interagir avec le stockage, une erreur est générée, expliquant que les appels Interop JavaScript ne peuvent pas être émis car le composant est en cours de prérendu.
 
 L’une des méthodes permettant de résoudre l’erreur consiste à désactiver le prérendu. C’est généralement le meilleur choix si l’application utilise beaucoup le stockage basé sur le navigateur. Le prérendu ajoute de la complexité et ne tire pas parti de l’application, car l’application ne peut pas prérestituer de contenu utile tant que `localStorage` ou `sessionStorage` n’est pas disponible.
 
@@ -465,7 +466,7 @@ Pour conserver un grand nombre d’objets d’état différents et utiliser diff
 ASP.NET Core le stockage protégé du navigateur tire parti de [ASP.net Core protection des données](xref:security/data-protection/introduction) pour [`localStorage`](https://developer.mozilla.org/docs/Web/API/Window/localStorage) et [`sessionStorage`](https://developer.mozilla.org/docs/Web/API/Window/sessionStorage) .
 
 > [!WARNING]
-> `Microsoft.AspNetCore.ProtectedBrowserStorage`est un package expérimental non pris en charge et inapproprié pour une utilisation en production.
+> `Microsoft.AspNetCore.ProtectedBrowserStorage` est un package expérimental non pris en charge et inapproprié pour une utilisation en production.
 >
 > Le package n’est disponible que pour une utilisation dans les applications ASP.NET Core 3,1 Blazor Server .
 
@@ -510,7 +511,7 @@ private async Task IncrementCount()
 }
 ```
 
-Dans les applications plus volumineuses et plus réalistes, le stockage de champs individuels est un scénario peu probable. Les applications sont plus susceptibles de stocker des objets de modèle entiers qui incluent un État complexe. `ProtectedSessionStore`sérialise et désérialise automatiquement les données JSON.
+Dans les applications plus volumineuses et plus réalistes, le stockage de champs individuels est un scénario peu probable. Les applications sont plus susceptibles de stocker des objets de modèle entiers qui incluent un État complexe. `ProtectedSessionStore` sérialise et désérialise automatiquement les données JSON.
 
 Dans l’exemple de code précédent, les `currentCount` données sont stockées sous `sessionStorage['count']` la forme dans le navigateur de l’utilisateur. Les données ne sont pas stockées en texte brut mais sont protégées à l’aide d’ASP.NET Core protection des données. Les données chiffrées peuvent être inspectées si la `sessionStorage['count']` est évaluée dans la console de développement du navigateur.
 
@@ -523,7 +524,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-Si les paramètres du composant incluent l’état de navigation, appelez `ProtectedSessionStore.GetAsync` et assignez le résultat dans <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> , et non <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> . <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>la méthode est appelée une seule fois lors de la première instanciation du composant. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>n’est pas rappelée ultérieurement si l’utilisateur accède à une autre URL tout en restant sur la même page. Pour plus d'informations, consultez <xref:blazor/components/lifecycle>.
+Si les paramètres du composant incluent l’état de navigation, appelez `ProtectedSessionStore.GetAsync` et assignez le résultat dans <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A> , et non <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> . <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> la méthode est appelée une seule fois lors de la première instanciation du composant. <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> n’est pas rappelée ultérieurement si l’utilisateur accède à une autre URL tout en restant sur la même page. Pour plus d'informations, consultez <xref:blazor/components/lifecycle>.
 
 > [!WARNING]
 > Les exemples de cette section ne fonctionnent que si le prérendu n’est pas activé sur le serveur. Quand le prérendu est activé, une erreur est générée, expliquant que les appels Interop JavaScript ne peuvent pas être émis car le composant est en cours de prérendu.
@@ -561,7 +562,7 @@ Lors du prérendu :
 * Une connexion interactive au navigateur de l’utilisateur n’existe pas.
 * Le navigateur ne dispose pas encore d’une page dans laquelle il peut exécuter du code JavaScript.
 
-`localStorage`ou `sessionStorage` ne sont pas disponibles pendant le prérendu. Si le composant tente d’interagir avec le stockage, une erreur est générée, expliquant que les appels Interop JavaScript ne peuvent pas être émis car le composant est en cours de prérendu.
+`localStorage` ou `sessionStorage` ne sont pas disponibles pendant le prérendu. Si le composant tente d’interagir avec le stockage, une erreur est générée, expliquant que les appels Interop JavaScript ne peuvent pas être émis car le composant est en cours de prérendu.
 
 L’une des méthodes permettant de résoudre l’erreur consiste à désactiver le prérendu. C’est généralement le meilleur choix si l’application utilise beaucoup le stockage basé sur le navigateur. Le prérendu ajoute de la complexité et ne tire pas parti de l’application, car l’application ne peut pas prérestituer de contenu utile tant que `localStorage` ou `sessionStorage` n’est pas disponible.
 

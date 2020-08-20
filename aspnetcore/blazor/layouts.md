@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/23/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 68fc4c9bd516948eeb2c46c67fdb5bde7cfeefca
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f41b41194f597505d775c95f1e65960c2f827e3b
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014150"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628012"
 ---
 # <a name="aspnet-core-no-locblazor-layouts"></a>Dispositions de ASP.NET Core Blazor
 
@@ -73,7 +74,7 @@ La spécification de la disposition directement dans un composant remplace un en
 
 ## <a name="centralized-layout-selection"></a>Sélection de la disposition centralisée
 
-Chaque dossier d’une application peut éventuellement contenir un fichier de modèle nommé `_Imports.razor` . Le compilateur comprend les directives spécifiées dans le fichier Imports dans tous les Razor modèles du même dossier et de manière récursive dans tous ses sous-dossiers. Par conséquent, un `_Imports.razor` fichier contenant `@layout MyCoolLayout` s’assure que tous les composants d’un dossier utilisent `MyCoolLayout` . Il n’est pas nécessaire d’ajouter à plusieurs reprises `@layout MyCoolLayout` à tous les `.razor` fichiers dans le dossier et les sous-dossiers. `@using`les directives sont également appliquées aux composants de la même façon.
+Chaque dossier d’une application peut éventuellement contenir un fichier de modèle nommé `_Imports.razor` . Le compilateur comprend les directives spécifiées dans le fichier Imports dans tous les Razor modèles du même dossier et de manière récursive dans tous ses sous-dossiers. Par conséquent, un `_Imports.razor` fichier contenant `@layout MyCoolLayout` s’assure que tous les composants d’un dossier utilisent `MyCoolLayout` . Il n’est pas nécessaire d’ajouter à plusieurs reprises `@layout MyCoolLayout` à tous les `.razor` fichiers dans le dossier et les sous-dossiers. `@using` les directives sont également appliquées aux composants de la même façon.
 
 Les `_Imports.razor` importations de fichiers suivantes :
 
@@ -98,11 +99,11 @@ L’exemple suivant montre comment utiliser des dispositions imbriquées. Le `Ep
 
 [!code-razor[](layouts/sample_snapshot/3.x/EpisodesComponent.razor?highlight=1)]
 
-Le `MasterListLayout.razor` fichier fournit le `MasterListLayout` . La disposition fait référence à une autre disposition, `MasterLayout` , où elle est rendue. `EpisodesComponent`l’emplacement est affiché `@Body` :
+Le `MasterListLayout.razor` fichier fournit le `MasterListLayout` . La disposition fait référence à une autre disposition, `MasterLayout` , où elle est rendue. `EpisodesComponent` l’emplacement est affiché `@Body` :
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterListLayout.razor?highlight=1,9)]
 
-Enfin, `MasterLayout` dans `MasterLayout.razor` contient les éléments de disposition de niveau supérieur, tels que l’en-tête, le menu principal et le pied de page. `MasterListLayout`avec `EpisodesComponent` est rendu où `@Body` s’affiche :
+Enfin, `MasterLayout` dans `MasterLayout.razor` contient les éléments de disposition de niveau supérieur, tels que l’en-tête, le menu principal et le pied de page. `MasterListLayout` avec `EpisodesComponent` est rendu où `@Body` s’affiche :
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterLayout.razor?highlight=6)]
 

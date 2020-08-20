@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/16/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: fe9bd270ce509e8389dd3d4f3f6f3a6dda03d425
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: 391a38e9af42b162fc74bac803e6aa3cf687e7d5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504539"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626062"
 ---
 # <a name="secure-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core sécurisé Blazor WebAssembly
 
@@ -32,7 +33,7 @@ Blazor WebAssembly les applications sont sécurisées de la même façon que les
 
 ## <a name="authentication-library"></a>Bibliothèque d’authentification
 
-Blazor WebAssembly prend en charge l’authentification et l’autorisation d’applications à l’aide de OIDC via la [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) bibliothèque. La bibliothèque fournit un ensemble de primitives pour l’authentification en toute transparence par rapport aux principaux de ASP.NET Core. La bibliothèque intègre ASP.NET Core Identity avec la prise en charge des autorisations d’API basée sur le [ Identity serveur](https://identityserver.io/). La bibliothèque peut s’authentifier auprès d’un Identity fournisseur tiers (IP) qui prend en charge OIDC, qui sont appelés fournisseurs OpenID (op).
+Blazor WebAssembly prend en charge l’authentification et l’autorisation d’applications à l’aide de OIDC via la [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) bibliothèque. La bibliothèque fournit un ensemble de primitives pour l’authentification en toute transparence par rapport aux principaux de ASP.NET Core. La bibliothèque s’intègre ASP.NET Core Identity à la prise en charge des autorisations d’API basée sur le [ Identity serveur](https://identityserver.io/). La bibliothèque peut s’authentifier auprès d’un Identity fournisseur tiers (IP) qui prend en charge OIDC, qui sont appelés fournisseurs OpenID (op).
 
 La prise en charge de l’authentification dans Blazor WebAssembly est basée sur la `oidc-client.js` bibliothèque, qui est utilisée pour gérer les détails du protocole d’authentification sous-jacent.
 
@@ -52,7 +53,7 @@ La [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nu
 
 * Lorsqu’un utilisateur anonyme sélectionne le bouton de connexion ou demande une page pour laquelle l' [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) attribut est appliqué, l’utilisateur est redirigé vers la page de connexion de l’application ( `/authentication/login` ).
 * Dans la page de connexion, la bibliothèque d’authentification prépare une redirection vers le point de terminaison d’autorisation. Le point de terminaison d’autorisation est en dehors de l' Blazor WebAssembly application et peut être hébergé à une origine distincte. Le point de terminaison est chargé de déterminer si l’utilisateur est authentifié et d’émettre un ou plusieurs jetons en réponse. La bibliothèque d’authentification fournit un rappel de connexion pour recevoir la réponse d’authentification.
-  * Si l’utilisateur n’est pas authentifié, l’utilisateur est redirigé vers le système d’authentification sous-jacent, qui est généralement ASP.NET Core Identity .
+  * Si l’utilisateur n’est pas authentifié, l’utilisateur est redirigé vers le système d’authentification sous-jacent, ce qui est généralement le cas ASP.NET Core Identity .
   * Si l’utilisateur a déjà été authentifié, le point de terminaison d’autorisation génère les jetons appropriés et redirige le navigateur vers le point de terminaison de rappel de connexion ( `/authentication/login-callback` ).
 * Lorsque l' Blazor WebAssembly application charge le point de terminaison de rappel de connexion ( `/authentication/login-callback` ), la réponse d’authentification est traitée.
   * Si le processus d’authentification se termine correctement, l’utilisateur est authentifié et éventuellement renvoyé à l’URL protégée d’origine que l’utilisateur a demandée.

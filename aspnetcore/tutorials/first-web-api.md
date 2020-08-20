@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/13/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: 15e5c838e6dae824a189f170b28730a63f8c3ea7
-ms.sourcegitcommit: 4df445e7d49a99f81625430f728c28e5d6bf2107
+ms.openlocfilehash: ce0dfdf1ce88b55790d33918a2d20bc19a09b288
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/15/2020
-ms.locfileid: "88253640"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626894"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Didacticiel : créer une API Web avec ASP.NET Core
 
@@ -48,10 +49,10 @@ Ce didacticiel crée l’API suivante :
 
 |API | Description | Corps de la demande | Response body |
 |--- | ---- | ---- | ---- |
-|`GET /api/TodoItems` | Obtenir toutes les tâches | None | Tableau de tâches|
-|`GET /api/TodoItems/{id}` | Obtenir un élément par ID | None | Tâche|
+|`GET /api/TodoItems` | Obtenir toutes les tâches | Aucun | Tableau de tâches|
+|`GET /api/TodoItems/{id}` | Obtenir un élément par ID | Aucun | Tâche|
 |`POST /api/TodoItems` | Ajouter un nouvel élément | Tâche | Tâche |
-|`PUT /api/TodoItems/{id}` | Mettre à jour un élément existant &nbsp; | Tâche | None |
+|`PUT /api/TodoItems/{id}` | Mettre à jour un élément existant &nbsp; | Tâche | Aucun |
 |`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Supprimer un élément &nbsp;&nbsp; | None | None|
 
 Le diagramme suivant illustre la conception de l’application.
@@ -351,7 +352,7 @@ Ce tutoriel utilise Postman pour tester l’API web.
 
 * Créez une requête.
 * Affectez `POST` à la méthode HTTP.
-* Définissez l’URI sur `https://localhost:<port>/api/TodoItem` . Par exemple : `https://localhost:5001/api/TodoItem`.
+* Définissez l’URI sur `https://localhost:<port>/api/TodoItems` . Par exemple : `https://localhost:5001/api/TodoItems`.
 * Sélectionnez l’onglet **Corps** .
 * Sélectionnez la case d’option **raw** (données brutes).
 * Définissez le type sur **JSON (application/json)**.
@@ -538,10 +539,10 @@ Ce didacticiel crée l’API suivante :
 
 |API | Description | Corps de la demande | Response body |
 |--- | ---- | ---- | ---- |
-|GET /api/TodoItems | Obtenir toutes les tâches | None | Tableau de tâches|
-|GET /api/TodoItems/{id} | Obtenir un élément par ID | None | Tâche|
+|GET /api/TodoItems | Obtenir toutes les tâches | Aucun | Tableau de tâches|
+|GET /api/TodoItems/{id} | Obtenir un élément par ID | Aucun | Tâche|
 |POST /api/TodoItems | Ajouter un nouvel élément | Tâche | Tâche |
-|PUT /api/TodoItems/{id} | Mettre à jour un élément existant &nbsp; | Tâche | None |
+|PUT /api/TodoItems/{id} | Mettre à jour un élément existant &nbsp; | Tâche | Aucun |
 |SUPPRIMER/api/TodoItems/{id} &nbsp;&nbsp; | Supprimer un élément &nbsp;&nbsp; | None | None|
 
 Le diagramme suivant illustre la conception de l’application.
@@ -967,7 +968,7 @@ Pour supprimer une tâche, vous devez définir le `type` sur l’appel AJAX avec
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 [Affichez ou téléchargez l’exemple de code de ce tutoriel](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples). Consultez [Guide pratique pour télécharger](xref:index#how-to-download-a-sample).
 

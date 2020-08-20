@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/dangerous-unprotect
-ms.openlocfilehash: 29bd9010bc9f2d9799d079e44e7b3faa359699b2
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a6ced7341967362ace9537ad0124ccca6fbe79b0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019714"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626699"
 ---
 # <a name="unprotect-payloads-whose-keys-have-been-revoked-in-aspnet-core"></a>Annuler la protection des charges utiles dont les clés ont été révoquées dans ASP.NET Core
 
@@ -38,7 +39,7 @@ Pour prendre en charge le scénario permettant d’empêcher la protection des c
 > [!NOTE]
 > Toutes les `IDataProtector` instances ne peuvent pas être converties en `IPersistedDataProtector` . Les développeurs doivent utiliser l’opérateur as C# ou similaire pour éviter les exceptions d’exécution provoquées par des casts non valides, et ils doivent être prêts à gérer le cas d’échec de manière appropriée.
 
-`IPersistedDataProtector`expose la surface d’API suivante :
+`IPersistedDataProtector` expose la surface d’API suivante :
 
 ```csharp
 DangerousUnprotect(byte[] protectedData, bool ignoreRevocationErrors,

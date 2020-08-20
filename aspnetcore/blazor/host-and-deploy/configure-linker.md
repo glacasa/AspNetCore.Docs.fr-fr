@@ -1,5 +1,5 @@
 ---
-title: Configurer l’éditeur de liens pour ASP.NET CoreBlazor
+title: Configurer l’éditeur de liens pour ASP.NET Core Blazor
 author: guardrex
 description: Découvrez comment contrôler l’éditeur de liens en langage intermédiaire (IL) lors de la génération d’une Blazor application.
 monikerRange: '>= aspnetcore-3.1'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/configure-linker
-ms.openlocfilehash: e76d25dbbf5c7a166e5f58a5ad1f9b5a2ecacf79
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 27a7edf0de1acc107d324afe07db63624615e550
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014252"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628129"
 ---
-# <a name="configure-the-linker-for-aspnet-core-no-locblazor"></a>Configurer l’éditeur de liens pour ASP.NET CoreBlazor
+# <a name="configure-the-linker-for-aspnet-core-no-locblazor"></a>Configurer l’éditeur de liens pour ASP.NET Core Blazor
 
 Par [Luke Latham](https://github.com/guardrex)
 
-Blazor WebAssemblyeffectue une liaison [il (Intermediate Language)](/dotnet/standard/managed-code#intermediate-language--execution) au cours d’une génération pour supprimer l’il inutile des assemblys de sortie de l’application. L’éditeur de liens est désactivé lors de la génération dans la configuration Debug. Les applications doivent être générées dans la configuration Release pour activer l’éditeur de liens. Nous vous recommandons de créer la version finale lors du déploiement de vos Blazor WebAssembly applications. 
+Blazor WebAssembly effectue une liaison [il (Intermediate Language)](/dotnet/standard/managed-code#intermediate-language--execution) au cours d’une génération pour supprimer l’il inutile des assemblys de sortie de l’application. L’éditeur de liens est désactivé lors de la génération dans la configuration Debug. Les applications doivent être générées dans la configuration Release pour activer l’éditeur de liens. Nous vous recommandons de créer la version finale lors du déploiement de vos Blazor WebAssembly applications. 
 
 La liaison d’une application optimise sa taille, mais peut avoir des effets néfastes. Les applications qui utilisent la réflexion ou les fonctionnalités dynamiques associées peuvent s’arrêter en cas de troncation, car l’éditeur de liens ne connaît pas ce comportement dynamique et ne peut pas déterminer en général les types requis pour la réflexion au moment de l’exécution. Pour supprimer de telles applications, l’éditeur de liens doit être informé des types requis par la réflexion dans le code et dans les packages ou infrastructures dont dépend l’application. 
 

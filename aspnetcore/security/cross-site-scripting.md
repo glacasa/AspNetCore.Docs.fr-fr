@@ -5,6 +5,7 @@ description: Découvrez les scripts inter-sites (XSS) et les techniques permetta
 ms.author: riande
 ms.date: 10/02/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cross-site-scripting
-ms.openlocfilehash: 24fab313c3af30cfd4143ba29a33ba25bfcdf9a9
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ec8b321be08447ca634a1e28799f790f723f17d1
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021807"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625620"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>Empêcher les scripts entre sites (XSS) dans ASP.NET Core
 
@@ -42,7 +43,7 @@ XSS (cross-site scripting) est une faille de sécurité qui permet à une person
 
 5. Avant de placer des données non fiables dans une chaîne de requête d’URL, assurez-vous qu’elles sont encodées dans l’URL.
 
-## <a name="html-encoding-using-no-locrazor"></a>Encodage HTML à l’aide deRazor
+## <a name="html-encoding-using-no-locrazor"></a>Encodage HTML à l’aide de Razor
 
 Le Razor moteur utilisé dans MVC encode automatiquement toute la sortie source à partir de variables, sauf si vous travaillez vraiment difficile pour l’empêcher. Elle utilise des règles d’encodage d’attribut HTML chaque fois que vous utilisez la *@* directive. Comme l’encodage d’attribut HTML est un sur-ensemble de l’encodage HTML, vous n’avez pas à vous soucier de savoir si vous devez utiliser l’encodage HTML ou l’encodage d’attribut HTML. Vous devez vous assurer que vous utilisez uniquement @ dans un contexte HTML, et non pas lors d’une tentative d’insertion d’une entrée non approuvée directement dans JavaScript. Les tag helpers encodent également l’entrée que vous utilisez dans les paramètres de balise.
 
@@ -65,7 +66,7 @@ Cette vue renvoie le contenu de la variable *untrustedInput* . Cette variable co
 >[!WARNING]
 > ASP.NET Core MVC fournit une `HtmlString` classe qui n’est pas automatiquement encodée au moment de la sortie. Cela ne doit jamais être utilisé en combinaison avec une entrée non fiable, car cela expose une vulnérabilité XSS.
 
-## <a name="javascript-encoding-using-no-locrazor"></a>Encodage JavaScript à l’aide deRazor
+## <a name="javascript-encoding-using-no-locrazor"></a>Encodage JavaScript à l’aide de Razor
 
 Il peut arriver que vous souhaitiez insérer une valeur dans JavaScript à traiter dans votre vue. Il existe deux façons d'effectuer cette opération. Le moyen le plus sûr d’insérer des valeurs consiste à placer la valeur dans un attribut de données d’une balise et à la récupérer dans votre code JavaScript. Par exemple :
 
@@ -176,7 +177,7 @@ public class HomeController : Controller
 
 ## <a name="encoding-url-parameters"></a>Encodage des paramètres d’URL
 
-Si vous souhaitez créer une chaîne de requête d’URL avec une entrée non approuvée comme valeur, utilisez `UrlEncoder` pour encoder la valeur. Par exemple :
+Si vous souhaitez créer une chaîne de requête d’URL avec une entrée non approuvée comme valeur, utilisez `UrlEncoder` pour encoder la valeur. Par exemple,
 
 ```csharp
 var example = "\"Quoted Value with spaces and &\"";

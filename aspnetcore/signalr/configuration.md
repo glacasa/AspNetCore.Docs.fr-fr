@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/configuration
-ms.openlocfilehash: d451e8807d761ab11509d33951009a98845f7e5e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: fc0e6398884bb5c3b806a587a8a361d7f279461f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021859"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625555"
 ---
 # <a name="aspnet-core-no-locsignalr-configuration"></a>Configuration de ASP.NET Core SignalR
 
@@ -200,8 +201,8 @@ Le tableau suivant répertorie les niveaux de journalisation disponibles. La val
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info` **ou** `information` | `LogLevel.Information` |
-| `warn` **ou** `warning`     | `LogLevel.Warning`     |
+| `info`**ou**`information` | `LogLevel.Information` |
+| `warn`**ou**`warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -394,7 +395,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-Dans le client Java, ces options peuvent être configurées avec les méthodes sur le `HttpHubConnectionBuilder` retourné à partir de l’option`HubConnectionBuilder.create("HUB URL")`
+Dans le client Java, ces options peuvent être configurées avec les méthodes sur le `HttpHubConnectionBuilder` retourné à partir de l’option `HubConnectionBuilder.create("HUB URL")`
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/chathub")
@@ -588,8 +589,8 @@ Le tableau suivant répertorie les niveaux de journalisation disponibles. La val
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info` **ou** `information` | `LogLevel.Information` |
-| `warn` **ou** `warning`     | `LogLevel.Warning`     |
+| `info`**ou**`information` | `LogLevel.Information` |
+| `warn`**ou**`warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -780,7 +781,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-Dans le client Java, ces options peuvent être configurées avec les méthodes sur le `HttpHubConnectionBuilder` retourné à partir de l’option`HubConnectionBuilder.create("HUB URL")`
+Dans le client Java, ces options peuvent être configurées avec les méthodes sur le `HttpHubConnectionBuilder` retourné à partir de l’option `HubConnectionBuilder.create("HUB URL")`
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/chathub")
@@ -973,8 +974,8 @@ Le tableau suivant répertorie les niveaux de journalisation disponibles. La val
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info` **ou** `information` | `LogLevel.Information` |
-| `warn` **ou** `warning`     | `LogLevel.Warning`     |
+| `info`**ou**`information` | `LogLevel.Information` |
+| `warn`**ou**`warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -1165,7 +1166,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-Dans le client Java, ces options peuvent être configurées avec les méthodes sur le `HttpHubConnectionBuilder` retourné à partir de l’option`HubConnectionBuilder.create("HUB URL")`
+Dans le client Java, ces options peuvent être configurées avec les méthodes sur le `HttpHubConnectionBuilder` retourné à partir de l’option `HubConnectionBuilder.create("HUB URL")`
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/chathub")
@@ -1514,7 +1515,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-Dans le client Java, ces options peuvent être configurées avec les méthodes sur le `HttpHubConnectionBuilder` retourné à partir de l’option`HubConnectionBuilder.create("HUB URL")`
+Dans le client Java, ces options peuvent être configurées avec les méthodes sur le `HttpHubConnectionBuilder` retourné à partir de l’option `HubConnectionBuilder.create("HUB URL")`
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/chathub")
@@ -1857,7 +1858,7 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-Dans le client Java, ces options peuvent être configurées avec les méthodes sur le `HttpHubConnectionBuilder` retourné à partir de l’option`HubConnectionBuilder.create("HUB URL")`
+Dans le client Java, ces options peuvent être configurées avec les méthodes sur le `HttpHubConnectionBuilder` retourné à partir de l’option `HubConnectionBuilder.create("HUB URL")`
 
 ```java
 HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/chathub")

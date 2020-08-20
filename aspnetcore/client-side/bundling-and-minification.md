@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 07/23/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: a29ee483a68211d779b167fe167deea917c26f70
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 84123464e8f01f8a3caa65035b3174cc04aea7cf
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013409"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625854"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>Regrouper et réduire les ressources statiques dans ASP.NET Core
 
@@ -63,7 +64,7 @@ Original | Affectation d'un nouveau nom
 
 Le tableau suivant présente les différences entre le chargement individuel des ressources et l’utilisation du regroupement et de la minimisation :
 
-Action | Avec B/M | Sans B/M | Modification
+Action | Avec B/M | Sans B/M | Modifier
 --- | :---: | :---: | :---:
 Demandes de fichier  | 7   | 18     | 157%
 Ko transférés | 156 | 264,68 | 70 %

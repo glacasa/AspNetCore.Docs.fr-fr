@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: 7d6745d616242a54dd2424a3a291b8c9039ec789
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: f198cef0cf990dcc2806d3967130db64af47c1d0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504526"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627830"
 ---
 # <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>BlazorAuthentification et autorisation ASP.net Core
 
@@ -493,7 +494,7 @@ Il est probable que le projet n’a pas été créé à l’aide d’un Blazor S
 
 Le <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> fournit le `Task<` <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> `>` paramètre en cascade, qui à son tour est reçu du service di sous-jacent <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> .
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * <xref:security/index>
 * <xref:security/authentication/windowsauth>

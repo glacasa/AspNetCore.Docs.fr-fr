@@ -1,5 +1,5 @@
 ---
-title: Appeler des fonctions JavaScript à partir de méthodes .NET dans ASP.NET CoreBlazor
+title: Appeler des fonctions JavaScript à partir de méthodes .NET dans ASP.NET Core Blazor
 author: guardrex
 description: Découvrez comment appeler des fonctions JavaScript à partir de méthodes .NET dans des Blazor applications.
 monikerRange: '>= aspnetcore-3.1'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 04876976340ff440bb739100f891d8d3612b3754
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e7f23a4b44a0adb1d0b97c88e1d17f96aa2d28bd
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012605"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625386"
 ---
-# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>Appeler des fonctions JavaScript à partir de méthodes .NET dans ASP.NET CoreBlazor
+# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>Appeler des fonctions JavaScript à partir de méthodes .NET dans ASP.NET Core Blazor
 
 Par [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27)et [Luke Latham](https://github.com/guardrex)
 
@@ -34,7 +35,7 @@ Cet article traite de l’appel de fonctions JavaScript à partir de .NET. Pour 
 
 [Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
-Pour appeler JavaScript à partir de .NET, utilisez l' <xref:Microsoft.JSInterop.IJSRuntime> abstraction. Pour émettre des appels d’interopérabilité JS, injectez l' <xref:Microsoft.JSInterop.IJSRuntime> abstraction dans votre composant. <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A>prend un identificateur pour la fonction JavaScript que vous souhaitez appeler, ainsi que n’importe quel nombre d’arguments sérialisables JSON. L’identificateur de fonction est relatif à la portée globale ( `window` ). Si vous souhaitez appeler `window.someScope.someFunction` , l’identificateur est `someScope.someFunction` . Il n’est pas nécessaire d’inscrire la fonction avant qu’elle ne soit appelée. Le type de retour `T` doit également être sérialisable JSON. `T`doit correspondre au type .NET qui correspond le mieux au type JSON retourné.
+Pour appeler JavaScript à partir de .NET, utilisez l' <xref:Microsoft.JSInterop.IJSRuntime> abstraction. Pour émettre des appels d’interopérabilité JS, injectez l' <xref:Microsoft.JSInterop.IJSRuntime> abstraction dans votre composant. <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> prend un identificateur pour la fonction JavaScript que vous souhaitez appeler, ainsi que n’importe quel nombre d’arguments sérialisables JSON. L’identificateur de fonction est relatif à la portée globale ( `window` ). Si vous souhaitez appeler `window.someScope.someFunction` , l’identificateur est `someScope.someFunction` . Il n’est pas nécessaire d’inscrire la fonction avant qu’elle ne soit appelée. Le type de retour `T` doit également être sérialisable JSON. `T` doit correspondre au type .NET qui correspond le mieux au type JSON retourné.
 
 Pour Blazor Server les applications pour lesquelles le prérendu est activé, l’appel à JavaScript n’est pas possible pendant le prérendu initial. Les appels Interop JavaScript doivent être différés jusqu’à ce que la connexion avec le navigateur soit établie. Pour plus d’informations, consultez la section [détecter le Blazor Server prérendu d’une application](#detect-when-a-blazor-server-app-is-prerendering) .
 
@@ -241,7 +242,7 @@ public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef,
 }
 ```
 
-`GenericMethod`est appelé directement sur l’objet avec un type. L’exemple suivant suppose que le `GenericMethod` est disponible à partir de l' `JsInteropClasses` espace de noms :
+`GenericMethod` est appelé directement sur l’objet avec un type. L’exemple suivant suppose que le `GenericMethod` est disponible à partir de l' `JsInteropClasses` espace de noms :
 
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/component3.razor?highlight=17)]
 
@@ -276,7 +277,7 @@ Dans le `<body>` de `wwwroot/index.html` :
 </script>
 ```
 
-`Pages/Index.razor`(composant parent) :
+`Pages/Index.razor` (composant parent) :
 
 ```razor
 @page "/"
@@ -374,7 +375,7 @@ namespace {APP ASSEMBLY}.Pages
 
 L’espace réservé `{APP ASSEMBLY}` est le nom de l’assembly d’application de l’application (par exemple, `BlazorSample` ).
 
-`Shared/SurveyPrompt.razor`(composant enfant) :
+`Shared/SurveyPrompt.razor` (composant enfant) :
 
 ```razor
 @inject IJSRuntime JS

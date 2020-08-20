@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: 68373c39461be896a52627e21577fdda89cbb661
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f25cb38a3390600664980933caaf1003b533b2b6
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019586"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627570"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>Nouveautés de ASP.NET Core 3,1
 
@@ -29,9 +30,9 @@ Cet article met en évidence les modifications les plus importantes apportées �
 
 ## <a name="partial-class-support-for-no-locrazor-components"></a>Prise en charge des classes partielles pour les Razor composants
 
-Razorles composants sont maintenant générés en tant que classes partielles. Le code d’un Razor composant peut être écrit à l’aide d’un fichier code-behind défini en tant que classe partielle, plutôt que de définir tout le code du composant dans un fichier unique. Pour plus d’informations, consultez [prise en charge des classes partielles](xref:blazor/components/index#partial-class-support).
+Razor les composants sont maintenant générés en tant que classes partielles. Le code d’un Razor composant peut être écrit à l’aide d’un fichier code-behind défini en tant que classe partielle, plutôt que de définir tout le code du composant dans un fichier unique. Pour plus d’informations, consultez [prise en charge des classes partielles](xref:blazor/components/index#partial-class-support).
 
-## <a name="no-locblazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>BlazorTag Helper de composant et passer des paramètres à des composants de niveau supérieur
+## <a name="no-locblazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>Blazor Tag Helper de composant et passer des paramètres à des composants de niveau supérieur
 
 Dans Blazor avec ASP.NET Core 3,0, les composants étaient rendus dans des pages et des vues à l’aide d’un programme d’assistance HTML ( `Html.RenderComponentAsync` ). Dans ASP.NET Core 3,1, restituez un composant à partir d’une page ou d’une vue avec le nouveau tag Helper du composant :
 
@@ -41,7 +42,7 @@ Dans Blazor avec ASP.NET Core 3,0, les composants étaient rendus dans des pages
 
 Le programme d’assistance HTML reste pris en charge dans ASP.NET Core 3,1, mais le tag Helper Component est recommandé.
 
-Blazor Serverles applications peuvent désormais passer des paramètres à des composants de niveau supérieur pendant le rendu initial. Auparavant, vous pouviez uniquement passer des paramètres à un composant de niveau supérieur avec [RenderMode. static](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static). Avec cette version, [RenderMode. Server](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server) et [RenderMode. ServerPrerendered](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered) sont pris en charge. Toute valeur de paramètre spécifiée est sérialisée au format JSON et incluse dans la réponse initiale.
+Blazor Server les applications peuvent désormais passer des paramètres à des composants de niveau supérieur pendant le rendu initial. Auparavant, vous pouviez uniquement passer des paramètres à un composant de niveau supérieur avec [RenderMode. static](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static). Avec cette version, [RenderMode. Server](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server) et [RenderMode. ServerPrerendered](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered) sont pris en charge. Toute valeur de paramètre spécifiée est sérialisée au format JSON et incluse dans la réponse initiale.
 
 Par exemple, prérendez un `Counter` composant avec un volume d’incrément ( `IncrementAmount` ) :
 

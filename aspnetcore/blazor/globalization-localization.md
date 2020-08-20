@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,25 +18,25 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 59b6e4cb2f466594d8a105a239e175e9c7b37ad8
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: deb68b50f408532af22d20ba9b06a9ee3eccb335
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014242"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628220"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>BlazorGlobalisation et localisation ASP.net Core
 
 Par [Luke Latham](https://github.com/guardrex) et [Daniel Roth](https://github.com/danroth27)
 
-Razorles composants peuvent être rendus accessibles aux utilisateurs dans plusieurs cultures et langues. Les scénarios de globalisation et de localisation .NET suivants sont disponibles :
+Razor les composants peuvent être rendus accessibles aux utilisateurs dans plusieurs cultures et langues. Les scénarios de globalisation et de localisation .NET suivants sont disponibles :
 
 * . Système de ressources du réseau
 * Mise en forme des nombres et des dates spécifiques à la culture
 
 Un ensemble limité de scénarios de localisation de ASP.NET Core est actuellement pris en charge :
 
-* <xref:Microsoft.Extensions.Localization.IStringLocalizer>et <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> *sont pris en charge* dans les Blazor applications.
+* <xref:Microsoft.Extensions.Localization.IStringLocalizer> et <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> *sont pris en charge* dans les Blazor applications.
 * <xref:Microsoft.AspNetCore.Mvc.Localization.IHtmlLocalizer>la <xref:Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer> localisation des annotations de données, et est ASP.net Core les scénarios MVC et **non pris en charge** dans les Blazor applications.
 
 Pour plus d'informations, consultez <xref:fundamentals/localization>.
@@ -46,7 +47,7 @@ Blazor[`@bind`](xref:mvc/views/razor#bind)la fonctionnalité de effectue des mis
 
 La culture actuelle est accessible à partir de la <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=fullName> propriété.
 
-<xref:System.Globalization.CultureInfo.InvariantCulture?displayProperty=nameWithType>est utilisé pour les types de champ suivants ( `<input type="{TYPE}" />` ) :
+<xref:System.Globalization.CultureInfo.InvariantCulture?displayProperty=nameWithType> est utilisé pour les types de champ suivants ( `<input type="{TYPE}" />` ) :
 
 * `date`
 * `number`
@@ -63,13 +64,13 @@ Les types de champs suivants ont des exigences de mise en forme spécifiques et 
 * `month`
 * `week`
 
-[`@bind`](xref:mvc/views/razor#bind)prend en charge le `@bind:culture` paramètre pour fournir un <xref:System.Globalization.CultureInfo?displayProperty=fullName> pour l’analyse et la mise en forme d’une valeur. La spécification d’une culture n’est pas recommandée lors de l’utilisation des `date` `number` types de champ et. `date`et `number` disposent d’une Blazor prise en charge intégrée qui fournit la culture requise.
+[`@bind`](xref:mvc/views/razor#bind) prend en charge le `@bind:culture` paramètre pour fournir un <xref:System.Globalization.CultureInfo?displayProperty=fullName> pour l’analyse et la mise en forme d’une valeur. La spécification d’une culture n’est pas recommandée lors de l’utilisation des `date` `number` types de champ et. `date` et `number` disposent d’une Blazor prise en charge intégrée qui fournit la culture requise.
 
 ## <a name="localization"></a>Localisation
 
 ### Blazor WebAssembly
 
-Blazor WebAssemblyles applications définissent la culture à l’aide de la [préférence de langue](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)de l’utilisateur.
+Blazor WebAssembly les applications définissent la culture à l’aide de la [préférence de langue](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)de l’utilisateur.
 
 Pour configurer explicitement la culture, définissez <xref:System.Globalization.CultureInfo.DefaultThreadCurrentCulture?displayProperty=nameWithType> et <xref:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture?displayProperty=nameWithType> dans `Program.Main` .
 
@@ -79,11 +80,11 @@ Alors que la culture qui Blazor sélectionne par défaut peut être suffisante p
 
 ### Blazor Server
 
-Blazor Serverles applications sont localisées à l’aide de l' [intergiciel (middleware](xref:fundamentals/localization#localization-middleware)) de localisation. L’intergiciel sélectionne la culture appropriée pour les utilisateurs qui demandent des ressources à partir de l’application.
+Blazor Server les applications sont localisées à l’aide de l' [intergiciel (middleware](xref:fundamentals/localization#localization-middleware)) de localisation. L’intergiciel sélectionne la culture appropriée pour les utilisateurs qui demandent des ressources à partir de l’application.
 
 La culture peut être définie à l’aide de l’une des approches suivantes :
 
-* [Cookies](#cookies)
+* [Cookiex](#cookies)
 * [Fournir l’interface utilisateur pour choisir la culture](#provide-ui-to-choose-the-culture)
 
 Pour plus d’informations et d’exemples, consultez <xref:fundamentals/localization>.

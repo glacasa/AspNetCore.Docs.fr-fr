@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/03/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 8cb09b9ecf8fc67652125e92aa15b484526c121e
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: e1f7e8b85537f0671451d9975487645a1c005e74
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504656"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626283"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly des scénarios de sécurité supplémentaires
 
@@ -699,7 +700,7 @@ builder.Services.AddSingleton<StateContainer>();
 
 Par défaut, la [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) bibliothèque utilise les itinéraires indiqués dans le tableau suivant pour représenter des États d’authentification différents.
 
-| Routage                            | Objectif |
+| Route                            | Objectif |
 | -------------------------------- | ------- |
 | `authentication/login`           | Déclenche une opération de connexion. |
 | `authentication/login-callback`  | Gère le résultat de toute opération de connexion. |
@@ -779,7 +780,7 @@ Si vous le souhaitez, vous avez la possibilité de scinder l’interface utilisa
 
 Le <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> a un fragment qui peut être utilisé par itinéraire d’authentification, comme indiqué dans le tableau suivant.
 
-| Routage                            | Fragment                |
+| Route                            | Fragment                |
 | -------------------------------- | ----------------------- |
 | `authentication/login`           | `<LoggingIn>`           |
 | `authentication/login-callback`  | `<CompletingLoggingIn>` |

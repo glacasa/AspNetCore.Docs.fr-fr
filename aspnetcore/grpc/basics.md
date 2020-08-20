@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 07/09/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/basics
-ms.openlocfilehash: 782343341b8b08b469179c73000a78d1dc5a05ed
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 61ac7b84ec6a5eeb344cbf6f9a6712366be7d3c9
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016282"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627076"
 ---
 # <a name="grpc-services-with-c"></a>services gRPC avec C\#
 
@@ -42,7 +43,7 @@ Par exemple, considérez le fichier *Greeter. proto* utilisé dans [prise en mai
 
 * Définit un `Greeter` service.
 * Le `Greeter` service définit un `SayHello` appel.
-* `SayHello`envoie un `HelloRequest` message et reçoit un `HelloReply` message :
+* `SayHello` envoie un `HelloRequest` message et reçoit un `HelloReply` message :
 
 [!code-protobuf[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/Protos/greet.proto)]
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
@@ -55,7 +56,7 @@ Le fichier * \* . proto* est inclus dans un projet en l’ajoutant au `<Protobuf
 
 Par défaut, une `<Protobuf>` référence génère un client concret et une classe de base de service. L’attribut de l’élément de référence `GrpcServices` peut être utilisé pour limiter la génération d’éléments C#. `GrpcServices`Les options valides sont les suivantes :
 
-* `Both`(valeur par défaut absente)
+* `Both` (valeur par défaut absente)
 * `Server`
 * `Client`
 * `None`

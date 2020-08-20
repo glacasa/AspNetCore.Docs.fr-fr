@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/14/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 2e0c1a479554b704b4a8cd87bc177d0f76ddc7e2
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 0c878a05a50e5a6879278ee737ada167669ee0ff
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014345"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626478"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>Routage de ASP.NET Core Blazor
 
@@ -32,7 +33,7 @@ Découvrez comment acheminer les demandes et comment utiliser le <xref:Microsoft
 
 ## <a name="aspnet-core-endpoint-routing-integration"></a>Intégration du routage du point de terminaison ASP.NET Core
 
-Blazor Serverest intégré dans [ASP.net core le routage du point de terminaison](xref:fundamentals/routing). Une application ASP.NET Core est configurée pour accepter les connexions entrantes pour les composants interactifs avec <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> dans `Startup.Configure` :
+Blazor Server est intégré dans [ASP.net core le routage du point de terminaison](xref:fundamentals/routing). Une application ASP.NET Core est configurée pour accepter les connexions entrantes pour les composants interactifs avec <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A> dans `Startup.Configure` :
 
 [!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
@@ -62,7 +63,7 @@ Au moment de l’exécution, le <xref:Microsoft.AspNetCore.Components.RouteView>
 * Reçoit du avec les <xref:Microsoft.AspNetCore.Components.RouteData> <xref:Microsoft.AspNetCore.Components.Routing.Router> paramètres souhaités.
 * Restitue le composant spécifié avec sa disposition (ou une disposition par défaut facultative) à l’aide des paramètres spécifiés.
 
-Vous pouvez éventuellement spécifier un <xref:Microsoft.AspNetCore.Components.RouteView.DefaultLayout> paramètre avec une classe de disposition à utiliser pour les composants qui ne spécifient pas de disposition. Les modèles par défaut Blazor spécifient le `MainLayout` composant. `MainLayout.razor`se trouve dans le dossier du projet de modèle `Shared` . Pour plus d’informations sur les mises en page, consultez <xref:blazor/layouts> .
+Vous pouvez éventuellement spécifier un <xref:Microsoft.AspNetCore.Components.RouteView.DefaultLayout> paramètre avec une classe de disposition à utiliser pour les composants qui ne spécifient pas de disposition. Les modèles par défaut Blazor spécifient le `MainLayout` composant. `MainLayout.razor` se trouve dans le dossier du projet de modèle `Shared` . Pour plus d’informations sur les mises en page, consultez <xref:blazor/layouts> .
 
 Plusieurs modèles de routage peuvent être appliqués à un composant. Le composant suivant répond aux demandes pour `/BlazorRoute` et `/DifferentBlazorRoute` :
 
@@ -146,14 +147,14 @@ Les contraintes de routage indiquées dans le tableau suivant sont disponibles. 
 
 | Contrainte | Exemple           | Exemples de correspondances                                                                  | Invariant<br>culture<br>correspondance |
 | ---------- | ----------------- | -------------------------------------------------------------------------------- | :------------------------------: |
-| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | No                               |
-| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Yes                              |
-| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Yes                              |
-| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Yes                              |
-| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Yes                              |
-| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | No                               |
-| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Yes                              |
-| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Yes                              |
+| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | Non                               |
+| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Oui                              |
+| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Oui                              |
+| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Oui                              |
+| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Oui                              |
+| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Non                               |
+| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Oui                              |
+| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Oui                              |
 
 > [!WARNING]
 > Les contraintes de routage qui vérifient que l’URL peut être convertie en type CLR (comme `int` ou <xref:System.DateTime>) utilisent toujours la culture invariant. ces contraintes partent du principe que l’URL n’est pas localisable.
@@ -169,7 +170,7 @@ Dans Blazor Server les applications, l’itinéraire par défaut dans `_Host.csh
 Le `"/{**path}"` modèle comprend les éléments suivants :
 
 * Double-astérisque syntaxe *catch-all* ( `**` ) pour capturer le chemin d’accès dans plusieurs limites de dossiers sans encodage des barres obliques ( `/` ).
-* `path`nom du paramètre d’itinéraire.
+* `path` nom du paramètre d’itinéraire.
 
 > [!NOTE]
 > La syntaxe de paramètre *catch-all* ( `*` / `**` ) n’est **pas** prise en charge dans les Razor composants ( `.razor` ).
@@ -187,7 +188,7 @@ Le `NavMenu` composant suivant crée une [`Bootstrap`](https://getbootstrap.com/
 Il existe deux <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch> options que vous pouvez assigner à l' `Match` attribut de l' `<NavLink>` élément :
 
 * <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.All?displayProperty=nameWithType>: Le <xref:Microsoft.AspNetCore.Components.Routing.NavLink> est actif lorsqu’il correspond à la totalité de l’URL actuelle.
-* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.Prefix?displayProperty=nameWithType>(*valeur par défaut*) : le <xref:Microsoft.AspNetCore.Components.Routing.NavLink> est actif lorsqu’il correspond à n’importe quel préfixe de l’URL actuelle.
+* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.Prefix?displayProperty=nameWithType> (*valeur par défaut*) : le <xref:Microsoft.AspNetCore.Components.Routing.NavLink> est actif lorsqu’il correspond à n’importe quel préfixe de l’URL actuelle.
 
 Dans l’exemple précédent, la page <xref:Microsoft.AspNetCore.Components.Routing.NavLink> `href=""` d’hébergement correspond à l’URL de base et reçoit uniquement la `active` classe CSS à l’URL du chemin de base par défaut de l’application (par exemple, `https://localhost:5001/` ). Le deuxième <xref:Microsoft.AspNetCore.Components.Routing.NavLink> reçoit la `active` classe lorsque l’utilisateur visite une URL avec un `MyComponent` préfixe (par exemple, `https://localhost:5001/MyComponent` et `https://localhost:5001/MyComponent/AnotherSegment` ).
 
@@ -235,7 +236,7 @@ Le balisage HTML suivant est rendu :
 
 ## <a name="uri-and-navigation-state-helpers"></a>Aide des URI et de l’état de navigation
 
-Utilisez <xref:Microsoft.AspNetCore.Components.NavigationManager> pour travailler avec les URI et la navigation dans le code C#. <xref:Microsoft.AspNetCore.Components.NavigationManager>fournit l’événement et les méthodes répertoriées dans le tableau suivant.
+Utilisez <xref:Microsoft.AspNetCore.Components.NavigationManager> pour travailler avec les URI et la navigation dans le code C#. <xref:Microsoft.AspNetCore.Components.NavigationManager> fournit l’événement et les méthodes répertoriées dans le tableau suivant.
 
 | Membre | Description |
 | ------ | ----------- |
@@ -290,7 +291,7 @@ public void Dispose()
 }
 ```
 
-<xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs>fournit les informations suivantes sur l’événement :
+<xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs> fournit les informations suivantes sur l’événement :
 
 * <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.Location>: URL du nouvel emplacement.
 * <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted>: Si `true` , a Blazor intercepté la navigation à partir du navigateur. Si `false` <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A?displayProperty=nameWithType> la valeur est, la navigation a eu lieu.

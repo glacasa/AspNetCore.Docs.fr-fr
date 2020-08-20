@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/25/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 64205dcf7aeecbe594b0164a7966b7f96bcca68b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 819947be90e7f09c7ba853df1af1f3c7066c0219
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013357"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625815"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>Blazor WebAssemblyMeilleures pratiques en matière de performances de ASP.net Core
 
@@ -46,7 +47,7 @@ La plupart des applications n’ont pas besoin d’un contrôle affiné, mais el
 
 Dans l’exemple suivant :
 
-* <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>est substitué et défini sur la valeur du <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> champ, qui est initialement le `false` moment où le composant est chargé.
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> est substitué et défini sur la valeur du <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> champ, qui est initialement le `false` moment où le composant est chargé.
 * Lorsque le bouton est sélectionné, <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> a la valeur `true` , ce qui force le rendu du composant avec le mis à jour `currentCount` .
 * Immédiatement après le rerendu, <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> affecte à la valeur de retour la valeur <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> `false` pour empêcher un nouveau rendu jusqu’à la prochaine sélection du bouton.
 
@@ -82,8 +83,8 @@ Les composants offrent une approche pratique pour créer des fragments réutilis
 
 Par exemple, une grille ou une liste qui restitue des centaines de lignes contenant des composants nécessite une utilisation intensive du processeur pour le rendu. Envisagez de virtualiser une disposition de grille ou de liste afin que seul un sous-ensemble des composants soit rendu à un moment donné. Pour obtenir un exemple de rendu de sous-ensemble de composants, consultez les composants suivants dans l' [ `Virtualization` exemple d’application (référentiel GitHub ASPNET/Samples)](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/Virtualization):
 
-* `Virtualize`Component ( [`Shared/Virtualize.razor`](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Shared/Virtualize.cs) ) : composant écrit en C# qui implémente <xref:Microsoft.AspNetCore.Components.ComponentBase> pour afficher un ensemble de lignes de données météorologiques en fonction du défilement de l’utilisateur.
-* `FetchData`Component ( [`Pages/FetchData.razor`](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Pages/FetchData.razor) ) : utilise le `Virtualize` composant pour afficher 25 lignes de données météorologiques à la fois.
+* `Virtualize` Component ( [`Shared/Virtualize.razor`](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Shared/Virtualize.cs) ) : composant écrit en C# qui implémente <xref:Microsoft.AspNetCore.Components.ComponentBase> pour afficher un ensemble de lignes de données météorologiques en fonction du défilement de l’utilisateur.
+* `FetchData` Component ( [`Pages/FetchData.razor`](https://github.com/aspnet/samples/blob/master/samples/aspnetcore/blazor/Virtualization/Pages/FetchData.razor) ) : utilise le `Virtualize` composant pour afficher 25 lignes de données météorologiques à la fois.
 
 ## <a name="avoid-javascript-interop-to-marshal-data"></a>Éviter l’interopérabilité JavaScript pour marshaler des données
 
@@ -97,9 +98,9 @@ Pour obtenir des conseils sur la migration, consultez [Comment migrer de `Newton
 
 ## <a name="use-synchronous-and-unmarshalled-js-interop-apis-where-appropriate"></a>Utiliser les API d’interopérabilité JS synchrones et démarshalées lorsque cela est approprié
 
-Blazor WebAssemblyoffre deux versions supplémentaires de <xref:Microsoft.JSInterop.IJSRuntime> sur la version unique disponible pour les Blazor Server applications :
+Blazor WebAssembly offre deux versions supplémentaires de <xref:Microsoft.JSInterop.IJSRuntime> sur la version unique disponible pour les Blazor Server applications :
 
-* <xref:Microsoft.JSInterop.IJSInProcessRuntime>permet d’appeler des appels d’interopérabilité JS de manière synchrone, ce qui a moins de surcharge que les versions asynchrones :
+* <xref:Microsoft.JSInterop.IJSInProcessRuntime> permet d’appeler des appels d’interopérabilité JS de manière synchrone, ce qui a moins de surcharge que les versions asynchrones :
 
   ```razor
   @inject IJSRuntime JS
@@ -114,7 +115,7 @@ Blazor WebAssemblyoffre deux versions supplémentaires de <xref:Microsoft.JSInte
   }
   ```
 
-* <xref:Microsoft.JSInterop.WebAssembly.WebAssemblyJSRuntime>autorise les appels Interop JS démarshalés :
+* <xref:Microsoft.JSInterop.WebAssembly.WebAssemblyJSRuntime> autorise les appels Interop JS démarshalés :
 
   ```javascript
   function jsInteropCall() {
@@ -154,7 +155,7 @@ Chargez les assemblys au moment de l’exécution lorsque les assemblys sont req
 
 ### <a name="compression"></a>Compression
 
-Quand une Blazor WebAssembly application est publiée, la sortie est compressée de manière statique lors de la publication afin de réduire la taille de l’application et de supprimer la surcharge liée à la compression du Runtime. Blazors’appuie sur le serveur pour effectuer des negotation de contenu et traiter des fichiers compressés statiquement.
+Quand une Blazor WebAssembly application est publiée, la sortie est compressée de manière statique lors de la publication afin de réduire la taille de l’application et de supprimer la surcharge liée à la compression du Runtime. Blazor s’appuie sur le serveur pour effectuer des negotation de contenu et traiter des fichiers compressés statiquement.
 
 Une fois qu’une application a été déployée, vérifiez que l’application dessert des fichiers compressés. Examinez l’onglet réseau dans le Outils de développement d’un navigateur et vérifiez que les fichiers sont pris en charge avec `Content-Encoding: br` ou `Content-Encoding: gz` . Si l’hôte ne dessert pas de fichiers compressés, suivez les instructions de la procédure <xref:blazor/host-and-deploy/webassembly#compression> .
 

@@ -1,5 +1,5 @@
 ---
-title: Créez des applications Web progressifs avec ASP.NET CoreBlazor WebAssembly
+title: Créez des applications Web progressifs avec ASP.NET Core Blazor WebAssembly
 author: guardrex
 description: Découvrez comment créer une Blazor application Web progressive (PWA) qui utilise des fonctionnalités de navigateur modernes pour se comporter comme une application de bureau.
 monikerRange: '>= aspnetcore-3.1'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 1c33a3abd2ebee60a4025d4598495d276663dc9b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 230b2a801a76e2d719fba8e2b97fddb0b32a9634
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014163"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627960"
 ---
-# <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>Créez des applications Web progressifs avec ASP.NET CoreBlazor WebAssembly
+# <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>Créez des applications Web progressifs avec ASP.NET Core Blazor WebAssembly
 
 Par [Steve Sanderson](https://github.com/SteveSandersonMS)
 
-Une application Web progressive (PWA) est généralement une application à page unique (SPA) qui utilise des API et des fonctionnalités de navigateur modernes pour se comporter comme une application de bureau. Blazor WebAssemblyest une plate-forme d’application Web côté client basée sur des normes. elle peut donc utiliser n’importe quelle API de navigateur, y compris les API PWA requises pour les fonctionnalités suivantes :
+Une application Web progressive (PWA) est généralement une application à page unique (SPA) qui utilise des API et des fonctionnalités de navigateur modernes pour se comporter comme une application de bureau. Blazor WebAssembly est une plate-forme d’application Web côté client basée sur des normes. elle peut donc utiliser n’importe quelle API de navigateur, y compris les API PWA requises pour les fonctionnalités suivantes :
 
 * Travailler en mode hors connexion et se charger instantanément, indépendamment de la vitesse du réseau.
 * S’exécutant dans sa propre fenêtre d’application, et pas seulement dans une fenêtre de navigateur.
@@ -161,8 +162,8 @@ Si les composants de l’application s' Razor appuient sur la demande de donnée
 
 Réfléchissez à ce qui se passe quand l’utilisateur accède pour la première fois à une URL telle que `/counter` ou à tout autre lien profond dans l’application. Dans ce cas, vous ne souhaitez pas renvoyer le contenu mis en cache en tant que `/counter` , mais vous avez besoin du navigateur pour charger le contenu mis en cache en tant que `/index.html` pour démarrer votre Blazor WebAssembly application. Ces demandes initiales sont appelées demandes de *navigation* , par opposition à :
 
-* `subresource`demandes d’images, de feuilles de style ou d’autres fichiers.
-* `fetch/XHR`demandes de données d’API.
+* `subresource` demandes d’images, de feuilles de style ou d’autres fichiers.
+* `fetch/XHR` demandes de données d’API.
 
 Le service Worker par défaut contient une logique de cas spéciale pour les demandes de navigation. Le Worker de service résout les demandes en retournant le contenu mis en cache pour `/index.html` , quelle que soit l’URL demandée. Cette logique est implémentée dans la `onFetch` fonction à l’intérieur de `service-worker.published.js` .
 
@@ -295,8 +296,8 @@ L' [`CarChecker`](https://github.com/SteveSandersonMS/CarChecker) exemple d’ap
 
 * `OfflineAccountClaimsPrincipalFactory` (`Client/Data/OfflineAccountClaimsPrincipalFactory.cs`)
 * `LocalVehiclesStore` (`Client/Data/LocalVehiclesStore.cs`)
-* `LoginStatus`composant ( `Client/Shared/LoginStatus.razor` )
+* `LoginStatus` composant ( `Client/Shared/LoginStatus.razor` )
 
 ## <a name="additional-resources"></a>Ressources complémentaires
 
-* [SignalRnégociation Cross-Origin pour l’authentification](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)
+* [SignalR négociation Cross-Origin pour l’authentification](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)

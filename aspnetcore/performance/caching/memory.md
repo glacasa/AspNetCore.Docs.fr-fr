@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/02/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/memory
-ms.openlocfilehash: 131fd5f2d09b20814cbd557d6b6d873ce15501db
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c4d21992695828e81e03eca92f167c0a3d69c724
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021222"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627284"
 ---
 # <a name="cache-in-memory-in-aspnet-core"></a>Cache en mémoire dans ASP.NET Core
 
@@ -35,7 +36,7 @@ Par [Rick Anderson](https://twitter.com/RickAndMSFT), [John Luo](https://github.
 
 La mise en cache peut améliorer considérablement les performances et l’extensibilité d’une application en réduisant le travail requis pour générer du contenu. La mise en cache fonctionne mieux avec les données qui changent rarement **et** qui sont coûteuses à générer. La mise en cache crée une copie des données qui peuvent être retournées beaucoup plus rapidement qu’à partir de la source. Les applications doivent être écrites et testées pour **ne** pas dépendre des données mises en cache.
 
-ASP.NET Core prend en charge plusieurs caches différents. Le cache le plus simple est basé sur [IMemoryCache](/dotnet/api/microsoft.extensions.caching.memory.imemorycache). `IMemoryCache`représente un cache stocké dans la mémoire du serveur Web. Les applications qui s’exécutent sur une batterie de serveurs (plusieurs serveurs) doivent s’assurer que les sessions sont permanentes lors de l’utilisation du cache en mémoire. Les sessions rémanentes garantissent que les demandes suivantes d’un client sont toutes dirigées vers le même serveur. Par exemple, Azure Web Apps utilise [application Request Routing](https://www.iis.net/learn/extensions/planning-for-arr) (arr) pour acheminer toutes les requêtes suivantes vers le même serveur.
+ASP.NET Core prend en charge plusieurs caches différents. Le cache le plus simple est basé sur [IMemoryCache](/dotnet/api/microsoft.extensions.caching.memory.imemorycache). `IMemoryCache` représente un cache stocké dans la mémoire du serveur Web. Les applications qui s’exécutent sur une batterie de serveurs (plusieurs serveurs) doivent s’assurer que les sessions sont permanentes lors de l’utilisation du cache en mémoire. Les sessions rémanentes garantissent que les demandes suivantes d’un client sont toutes dirigées vers le même serveur. Par exemple, Azure Web Apps utilise [application Request Routing](https://www.iis.net/learn/extensions/planning-for-arr) (arr) pour acheminer toutes les requêtes suivantes vers le même serveur.
 
 Les sessions non rémanentes dans une batterie de serveurs Web requièrent un [cache distribué](distributed.md) pour éviter les problèmes de cohérence du cache. Pour certaines applications, un cache distribué peut prendre en charge une montée en puissance parallèle supérieure à celle d’un cache en mémoire. L’utilisation d’un cache distribué décharge la mémoire cache dans un processus externe.
 
@@ -43,7 +44,7 @@ Le cache en mémoire peut stocker n’importe quel objet. L’interface du cache
 
 ## <a name="systemruntimecachingmemorycache"></a>System. Runtime. Caching/MemoryCache
 
-<xref:System.Runtime.Caching>/<xref:System.Runtime.Caching.MemoryCache>([Package NuGet](https://www.nuget.org/packages/System.Runtime.Caching/)) peut être utilisé avec :
+<xref:System.Runtime.Caching>/<xref:System.Runtime.Caching.MemoryCache> ([Package NuGet](https://www.nuget.org/packages/System.Runtime.Caching/)) peut être utilisé avec :
 
 * .NET Standard 2,0 ou version ultérieure.
 * Toute [implémentation .net](/dotnet/standard/net-standard#net-implementation-support) qui cible .NET standard 2,0 ou version ultérieure. Par exemple, ASP.NET Core 2,0 ou version ultérieure.
@@ -134,13 +135,13 @@ Le code suivant crée une taille fixe sans unité <xref:Microsoft.Extensions.Cac
 
 [!code-csharp[](memory/sample/RPcache/Services/MyMemoryCache.cs?name=snippet)]
 
-`SizeLimit`n’a pas d’unités. Les entrées mises en cache doivent spécifier la taille des unités qu’elles estiment le plus approprié si la limite de taille du cache a été définie. Tous les utilisateurs d’une instance de cache doivent utiliser le même système d’unité. Une entrée ne sera pas mise en cache si la somme des tailles d’entrée mises en cache dépasse la valeur spécifiée par `SizeLimit` . Si aucune limite de taille du cache n’est définie, la taille du cache définie sur l’entrée sera ignorée.
+`SizeLimit` n’a pas d’unités. Les entrées mises en cache doivent spécifier la taille des unités qu’elles estiment le plus approprié si la limite de taille du cache a été définie. Tous les utilisateurs d’une instance de cache doivent utiliser le même système d’unité. Une entrée ne sera pas mise en cache si la somme des tailles d’entrée mises en cache dépasse la valeur spécifiée par `SizeLimit` . Si aucune limite de taille du cache n’est définie, la taille du cache définie sur l’entrée sera ignorée.
 
 Le code suivant s’inscrit `MyMemoryCache` auprès du conteneur d' [injection de dépendances](xref:fundamentals/dependency-injection) .
 
 [!code-csharp[](memory/3.0sample/RPcache/Startup.cs?name=snippet)]
 
-`MyMemoryCache`est créé en tant que cache mémoire indépendant pour les composants qui connaissent ce cache de taille limitée et savent comment définir la taille d’entrée du cache de manière appropriée.
+`MyMemoryCache` est créé en tant que cache mémoire indépendant pour les composants qui connaissent ce cache de taille limitée et savent comment définir la taille d’entrée du cache de manière appropriée.
 
 Le code suivant utilise `MyMemoryCache` :
 
@@ -152,7 +153,7 @@ La taille de l’entrée de cache peut être définie par <xref:Microsoft.Extens
 
 ### <a name="memorycachecompact"></a>MemoryCache. compact
 
-`MemoryCache.Compact`tente de supprimer le pourcentage spécifié du cache dans l’ordre suivant :
+`MemoryCache.Compact` tente de supprimer le pourcentage spécifié du cache dans l’ordre suivant :
 
 * Tous les éléments arrivés à expiration.
 * Éléments par priorité. Les éléments de priorité la plus basse sont supprimés en premier.
@@ -224,7 +225,7 @@ Le cache en mémoire peut stocker n’importe quel objet. L’interface du cache
 
 ## <a name="systemruntimecachingmemorycache"></a>System. Runtime. Caching/MemoryCache
 
-<xref:System.Runtime.Caching>/<xref:System.Runtime.Caching.MemoryCache>([Package NuGet](https://www.nuget.org/packages/System.Runtime.Caching/)) peut être utilisé avec :
+<xref:System.Runtime.Caching>/<xref:System.Runtime.Caching.MemoryCache> ([Package NuGet](https://www.nuget.org/packages/System.Runtime.Caching/)) peut être utilisé avec :
 
 * .NET Standard 2,0 ou version ultérieure.
 * Toute [implémentation .net](/dotnet/standard/net-standard#net-implementation-support) qui cible .NET standard 2,0 ou version ultérieure. Par exemple, ASP.NET Core 2,0 ou version ultérieure.
@@ -256,7 +257,7 @@ Demandez l' `IMemoryCache` instance dans le constructeur :
 
 [!code-csharp[](memory/sample/WebCache/Controllers/HomeController.cs?name=snippet_ctor)]
 
-`IMemoryCache`requiert le package NuGet [Microsoft. extensions. Caching. Memory](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/), qui est disponible dans le [produit Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app).
+`IMemoryCache` requiert le package NuGet [Microsoft. extensions. Caching. Memory](https://www.nuget.org/packages/Microsoft.Extensions.Caching.Memory/), qui est disponible dans le [produit Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app).
 
 Le code suivant utilise [TryGetValue](/dotnet/api/microsoft.extensions.caching.memory.imemorycache.trygetvalue?view=aspnetcore-2.0#Microsoft_Extensions_Caching_Memory_IMemoryCache_TryGetValue_System_Object_System_Object__) pour vérifier si une heure se trouve dans le cache. Si une heure n’est pas mise en cache, une nouvelle entrée est créée et ajoutée au cache avec [Set](/dotnet/api/microsoft.extensions.caching.memory.cacheextensions.set?view=aspnetcore-2.0#Microsoft_Extensions_Caching_Memory_CacheExtensions_Set__1_Microsoft_Extensions_Caching_Memory_IMemoryCache_System_Object___0_Microsoft_Extensions_Caching_Memory_MemoryCacheEntryOptions_).
 
@@ -310,13 +311,13 @@ Le code suivant crée une taille fixe sans unité <xref:Microsoft.Extensions.Cac
 
 [!code-csharp[](memory/sample/RPcache/Services/MyMemoryCache.cs?name=snippet)]
 
-`SizeLimit`n’a pas d’unités. Les entrées mises en cache doivent spécifier la taille des unités qu’elles estiment le plus approprié si la limite de taille du cache a été définie. Tous les utilisateurs d’une instance de cache doivent utiliser le même système d’unité. Une entrée ne sera pas mise en cache si la somme des tailles d’entrée mises en cache dépasse la valeur spécifiée par `SizeLimit` . Si aucune limite de taille du cache n’est définie, la taille du cache définie sur l’entrée sera ignorée.
+`SizeLimit` n’a pas d’unités. Les entrées mises en cache doivent spécifier la taille des unités qu’elles estiment le plus approprié si la limite de taille du cache a été définie. Tous les utilisateurs d’une instance de cache doivent utiliser le même système d’unité. Une entrée ne sera pas mise en cache si la somme des tailles d’entrée mises en cache dépasse la valeur spécifiée par `SizeLimit` . Si aucune limite de taille du cache n’est définie, la taille du cache définie sur l’entrée sera ignorée.
 
 Le code suivant s’inscrit `MyMemoryCache` auprès du conteneur d' [injection de dépendances](xref:fundamentals/dependency-injection) .
 
 [!code-csharp[](memory/sample/RPcache/Startup.cs?name=snippet&highlight=5)]
 
-`MyMemoryCache`est créé en tant que cache mémoire indépendant pour les composants qui connaissent ce cache de taille limitée et savent comment définir la taille d’entrée du cache de manière appropriée.
+`MyMemoryCache` est créé en tant que cache mémoire indépendant pour les composants qui connaissent ce cache de taille limitée et savent comment définir la taille d’entrée du cache de manière appropriée.
 
 Le code suivant utilise `MyMemoryCache` :
 
@@ -328,7 +329,7 @@ La taille de l’entrée de cache peut être définie par [taille](/dotnet/api/m
 
 ### <a name="memorycachecompact"></a>MemoryCache. compact
 
-`MemoryCache.Compact`tente de supprimer le pourcentage spécifié du cache dans l’ordre suivant :
+`MemoryCache.Compact` tente de supprimer le pourcentage spécifié du cache dans l’ordre suivant :
 
 * Tous les éléments arrivés à expiration.
 * Éléments par priorité. Les éléments de priorité la plus basse sont supprimés en premier.

@@ -1,5 +1,5 @@
 ---
-title: RazorConventions de routage et d’application des pages dans ASP.NET Core
+title: Razor Conventions de routage et d’application des pages dans ASP.NET Core
 author: rick-anderson
 description: Découvrez comment les conventions du fournisseur de modèles de routes et d’applications vous permettent de gérer le routage, la découverte et le traitement des pages.
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/razor-pages-conventions
-ms.openlocfilehash: 5fbb72d2195ca9fc1494f15ba0045cbb2707f72c
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: fc639178fc29438e16ad0989e61bd8dd32cf7590
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019506"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625490"
 ---
-# <a name="no-locrazor-pages-route-and-app-conventions-in-aspnet-core"></a>RazorConventions de routage et d’application des pages dans ASP.NET Core
+# <a name="no-locrazor-pages-route-and-app-conventions-in-aspnet-core"></a>Razor Conventions de routage et d’application des pages dans ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -44,7 +45,7 @@ Il existe des mots réservés qui ne peuvent pas être utilisés en tant que seg
 | [Conventions d’actions de routage de pages](#page-route-action-conventions)<ul><li>AddFolderRouteModelConvention</li><li>AddPageRouteModelConvention</li><li>AddPageRoute</li></ul> | Ajouter un modèle de route aux pages d’un dossier et à une page unique. |
 | [Conventions d’actions de modèle de page](#page-model-action-conventions)<ul><li>AddFolderApplicationModelConvention</li><li>AddPageApplicationModelConvention</li><li>ConfigureFilter (classe de filtre, expression lambda ou fabrique de filtres)</li></ul> | Ajouter un en-tête dans les pages d’un dossier, ajouter un en-tête dans une page unique et configurer une [fabrique de filtres](xref:mvc/controllers/filters#ifilterfactory) pour ajouter un en-tête dans les pages d’une application. |
 
-RazorLes conventions de pages sont configurées à l’aide d’une <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages%2A> surcharge configure <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions> dans `Startup.ConfigureServices` . Les exemples de convention suivants sont expliqués plus loin dans cette rubrique :
+Razor Les conventions de pages sont configurées à l’aide d’une <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages%2A> surcharge configure <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions> dans `Startup.ConfigureServices` . Les exemples de convention suivants sont expliqués plus loin dans cette rubrique :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -86,7 +87,7 @@ Le traitement des itinéraires est établi par Convention :
 
 Si possible, évitez de dépendre d’un ordre de traitement des itinéraires établi. En règle générale, le routage sélectionne l’itinéraire correct avec la correspondance d’URL. Si vous devez définir des `Order` Propriétés de routage pour acheminer les demandes correctement, le schéma de routage de l’application est sans doute confus pour les clients et fragiles à gérer. Cherchez à simplifier le schéma de routage de l’application. L’exemple d’application requiert un ordre de traitement des itinéraires explicites pour illustrer plusieurs scénarios de routage à l’aide d’une seule application. Toutefois, vous devez tenter d’éviter d’avoir à définir l’itinéraire `Order` dans les applications de production.
 
-RazorLe routage des pages et le routage du contrôleur MVC partagent une implémentation. Des informations sur l’ordre des itinéraires dans les rubriques MVC sont disponibles dans [routage vers actions du contrôleur : classement des itinéraires des attributs](xref:mvc/controllers/routing#ordering-attribute-routes).
+Razor Le routage des pages et le routage du contrôleur MVC partagent une implémentation. Des informations sur l’ordre des itinéraires dans les rubriques MVC sont disponibles dans [routage vers actions du contrôleur : classement des itinéraires des attributs](xref:mvc/controllers/routing#ordering-attribute-routes).
 
 ## <a name="model-conventions"></a>Conventions de modèle
 
@@ -108,7 +109,7 @@ La propriété <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteMo
 
 Dans la mesure du possible, ne définissez pas `Order` , ce qui donne `Order = 0` . Utilisez le routage pour sélectionner l’itinéraire correct.
 
-RazorLes options de pages, telles que l’ajout <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> , sont ajoutées lorsque des Razor pages sont ajoutées à la collection de services dans `Startup.ConfigureServices` . Pour obtenir un exemple, consultez [l’exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/).
+Razor Les options de pages, telles que l’ajout <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> , sont ajoutées lorsque des Razor pages sont ajoutées à la collection de services dans `Startup.ConfigureServices` . Pour obtenir un exemple, consultez [l’exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/).
 
 [!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet1)]
 
@@ -186,7 +187,7 @@ Les itinéraires de page générés par ASP.NET Core peuvent être personnalisé
 
 La `PageRouteTransformerConvention` Convention de modèle de routage de page applique un transformateur de paramètre aux segments de nom de dossier et de fichier des itinéraires de page générés automatiquement dans une application. Par exemple, le Razor fichier de pages sur */pages/SubscriptionManagement/viewall.cshtml* aurait son itinéraire réécrit de `/SubscriptionManagement/ViewAll` à `/subscription-management/view-all` .
 
-`PageRouteTransformerConvention`convertit uniquement les segments générés automatiquement d’un itinéraire de page provenant du Razor dossier pages et du nom de fichier. Elle ne transforme pas les segments de routage ajoutés avec la `@page` directive. La Convention ne transforme pas non plus les itinéraires ajoutés par <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AddPageRoute*> .
+`PageRouteTransformerConvention` convertit uniquement les segments générés automatiquement d’un itinéraire de page provenant du Razor dossier pages et du nom de fichier. Elle ne transforme pas les segments de routage ajoutés avec la `@page` directive. La Convention ne transforme pas non plus les itinéraires ajoutés par <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AddPageRoute*> .
 
 Le `PageRouteTransformerConvention` est inscrit en tant qu’option dans `Startup.ConfigureServices` :
 
@@ -266,7 +267,7 @@ Demandez la page About de l’exemple sur `localhost:5000/About` et examinez les
 
 **Configurer un filtre**
 
-<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*>configure le filtre spécifié à appliquer. Vous pouvez implémenter une classe de filtre. Toutefois, l’exemple d’application montre comment implémenter un filtre dans une expression lambda, laquelle est implémentée en arrière-plan en tant que fabrique qui retourne un filtre :
+<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> configure le filtre spécifié à appliquer. Vous pouvez implémenter une classe de filtre. Toutefois, l’exemple d’application montre comment implémenter un filtre dans une expression lambda, laquelle est implémentée en arrière-plan en tant que fabrique qui retourne un filtre :
 
 [!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet8)]
 
@@ -280,7 +281,7 @@ Demandez la page Page2 de l’exemple sur `localhost:5000/OtherPages/Page2` et e
 
 **Configurer une fabrique de filtres**
 
-<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*>configure la fabrique spécifiée pour appliquer des [filtres](xref:mvc/controllers/filters) à toutes les Razor pages.
+<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> configure la fabrique spécifiée pour appliquer des [filtres](xref:mvc/controllers/filters) à toutes les Razor pages.
 
 L’exemple d’application illustre l’utilisation d’une [fabrique de filtres](xref:mvc/controllers/filters#ifilterfactory) en ajoutant un en-tête, `FilterFactoryHeader`, et deux valeurs aux pages de l’application :
 
@@ -325,7 +326,7 @@ Il existe des mots réservés qui ne peuvent pas être utilisés en tant que seg
 | [Conventions d’actions de routage de pages](#page-route-action-conventions)<ul><li>AddFolderRouteModelConvention</li><li>AddPageRouteModelConvention</li><li>AddPageRoute</li></ul> | Ajouter un modèle de route aux pages d’un dossier et à une page unique. |
 | [Conventions d’actions de modèle de page](#page-model-action-conventions)<ul><li>AddFolderApplicationModelConvention</li><li>AddPageApplicationModelConvention</li><li>ConfigureFilter (classe de filtre, expression lambda ou fabrique de filtres)</li></ul> | Ajouter un en-tête dans les pages d’un dossier, ajouter un en-tête dans une page unique et configurer une [fabrique de filtres](xref:mvc/controllers/filters#ifilterfactory) pour ajouter un en-tête dans les pages d’une application. |
 
-RazorLes conventions de pages sont ajoutées et configurées à l’aide de la <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> méthode d’extension to <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc*> sur la collection de services dans la `Startup` classe. Les exemples de convention suivants sont expliqués plus loin dans cette rubrique :
+Razor Les conventions de pages sont ajoutées et configurées à l’aide de la <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> méthode d’extension to <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc*> sur la collection de services dans la `Startup` classe. Les exemples de convention suivants sont expliqués plus loin dans cette rubrique :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -368,7 +369,7 @@ Le traitement des itinéraires est établi par Convention :
 
 Si possible, évitez de dépendre d’un ordre de traitement des itinéraires établi. En règle générale, le routage sélectionne l’itinéraire correct avec la correspondance d’URL. Si vous devez définir des `Order` Propriétés de routage pour acheminer les demandes correctement, le schéma de routage de l’application est sans doute confus pour les clients et fragiles à gérer. Cherchez à simplifier le schéma de routage de l’application. L’exemple d’application requiert un ordre de traitement des itinéraires explicites pour illustrer plusieurs scénarios de routage à l’aide d’une seule application. Toutefois, vous devez tenter d’éviter d’avoir à définir l’itinéraire `Order` dans les applications de production.
 
-RazorLe routage des pages et le routage du contrôleur MVC partagent une implémentation. Des informations sur l’ordre des itinéraires dans les rubriques MVC sont disponibles dans [routage vers actions du contrôleur : classement des itinéraires des attributs](xref:mvc/controllers/routing#ordering-attribute-routes).
+Razor Le routage des pages et le routage du contrôleur MVC partagent une implémentation. Des informations sur l’ordre des itinéraires dans les rubriques MVC sont disponibles dans [routage vers actions du contrôleur : classement des itinéraires des attributs](xref:mvc/controllers/routing#ordering-attribute-routes).
 
 ## <a name="model-conventions"></a>Conventions de modèle
 
@@ -390,7 +391,7 @@ La propriété <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteMo
 
 Dans la mesure du possible, ne définissez pas `Order` , ce qui donne `Order = 0` . Utilisez le routage pour sélectionner l’itinéraire correct.
 
-RazorLes options de pages, telles que l’ajout <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> , sont ajoutées lorsque MVC est ajouté à la collection de services dans `Startup.ConfigureServices` . Pour obtenir un exemple, consultez [l’exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/).
+Razor Les options de pages, telles que l’ajout <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> , sont ajoutées lorsque MVC est ajouté à la collection de services dans `Startup.ConfigureServices` . Pour obtenir un exemple, consultez [l’exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/).
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet1)]
 
@@ -468,7 +469,7 @@ Les itinéraires de page générés par ASP.NET Core peuvent être personnalisé
 
 La `PageRouteTransformerConvention` Convention de modèle de routage de page applique un transformateur de paramètre aux segments de nom de dossier et de fichier des itinéraires de page générés automatiquement dans une application. Par exemple, le Razor fichier de pages sur */pages/SubscriptionManagement/viewall.cshtml* aurait son itinéraire réécrit de `/SubscriptionManagement/ViewAll` à `/subscription-management/view-all` .
 
-`PageRouteTransformerConvention`convertit uniquement les segments générés automatiquement d’un itinéraire de page provenant du Razor dossier pages et du nom de fichier. Elle ne transforme pas les segments de routage ajoutés avec la `@page` directive. La Convention ne transforme pas non plus les itinéraires ajoutés par <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AddPageRoute*> .
+`PageRouteTransformerConvention` convertit uniquement les segments générés automatiquement d’un itinéraire de page provenant du Razor dossier pages et du nom de fichier. Elle ne transforme pas les segments de routage ajoutés avec la `@page` directive. La Convention ne transforme pas non plus les itinéraires ajoutés par <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AddPageRoute*> .
 
 Le `PageRouteTransformerConvention` est inscrit en tant qu’option dans `Startup.ConfigureServices` :
 
@@ -556,7 +557,7 @@ Demandez la page About de l’exemple sur `localhost:5000/About` et examinez les
 
 **Configurer un filtre**
 
-<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*>configure le filtre spécifié à appliquer. Vous pouvez implémenter une classe de filtre. Toutefois, l’exemple d’application montre comment implémenter un filtre dans une expression lambda, laquelle est implémentée en arrière-plan en tant que fabrique qui retourne un filtre :
+<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> configure le filtre spécifié à appliquer. Vous pouvez implémenter une classe de filtre. Toutefois, l’exemple d’application montre comment implémenter un filtre dans une expression lambda, laquelle est implémentée en arrière-plan en tant que fabrique qui retourne un filtre :
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet8)]
 
@@ -570,7 +571,7 @@ Demandez la page Page2 de l’exemple sur `localhost:5000/OtherPages/Page2` et e
 
 **Configurer une fabrique de filtres**
 
-<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*>configure la fabrique spécifiée pour appliquer des [filtres](xref:mvc/controllers/filters) à toutes les Razor pages.
+<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> configure la fabrique spécifiée pour appliquer des [filtres](xref:mvc/controllers/filters) à toutes les Razor pages.
 
 L’exemple d’application illustre l’utilisation d’une [fabrique de filtres](xref:mvc/controllers/filters#ifilterfactory) en ajoutant un en-tête, `FilterFactoryHeader`, et deux valeurs aux pages de l’application :
 
@@ -615,7 +616,7 @@ Il existe des mots réservés qui ne peuvent pas être utilisés en tant que seg
 | [Conventions d’actions de routage de pages](#page-route-action-conventions)<ul><li>AddFolderRouteModelConvention</li><li>AddPageRouteModelConvention</li><li>AddPageRoute</li></ul> | Ajouter un modèle de route aux pages d’un dossier et à une page unique. |
 | [Conventions d’actions de modèle de page](#page-model-action-conventions)<ul><li>AddFolderApplicationModelConvention</li><li>AddPageApplicationModelConvention</li><li>ConfigureFilter (classe de filtre, expression lambda ou fabrique de filtres)</li></ul> | Ajouter un en-tête dans les pages d’un dossier, ajouter un en-tête dans une page unique et configurer une [fabrique de filtres](xref:mvc/controllers/filters#ifilterfactory) pour ajouter un en-tête dans les pages d’une application. |
 
-RazorLes conventions de pages sont ajoutées et configurées à l’aide de la <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> méthode d’extension to <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc*> sur la collection de services dans la `Startup` classe. Les exemples de convention suivants sont expliqués plus loin dans cette rubrique :
+Razor Les conventions de pages sont ajoutées et configurées à l’aide de la <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> méthode d’extension to <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc*> sur la collection de services dans la `Startup` classe. Les exemples de convention suivants sont expliqués plus loin dans cette rubrique :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -658,7 +659,7 @@ Le traitement des itinéraires est établi par Convention :
 
 Si possible, évitez de dépendre d’un ordre de traitement des itinéraires établi. En règle générale, le routage sélectionne l’itinéraire correct avec la correspondance d’URL. Si vous devez définir des `Order` Propriétés de routage pour acheminer les demandes correctement, le schéma de routage de l’application est sans doute confus pour les clients et fragiles à gérer. Cherchez à simplifier le schéma de routage de l’application. L’exemple d’application requiert un ordre de traitement des itinéraires explicites pour illustrer plusieurs scénarios de routage à l’aide d’une seule application. Toutefois, vous devez tenter d’éviter d’avoir à définir l’itinéraire `Order` dans les applications de production.
 
-RazorLe routage des pages et le routage du contrôleur MVC partagent une implémentation. Des informations sur l’ordre des itinéraires dans les rubriques MVC sont disponibles dans [routage vers actions du contrôleur : classement des itinéraires des attributs](xref:mvc/controllers/routing#ordering-attribute-routes).
+Razor Le routage des pages et le routage du contrôleur MVC partagent une implémentation. Des informations sur l’ordre des itinéraires dans les rubriques MVC sont disponibles dans [routage vers actions du contrôleur : classement des itinéraires des attributs](xref:mvc/controllers/routing#ordering-attribute-routes).
 
 ## <a name="model-conventions"></a>Conventions de modèle
 
@@ -680,7 +681,7 @@ La propriété <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.AttributeRouteMo
 
 Dans la mesure du possible, ne définissez pas `Order` , ce qui donne `Order = 0` . Utilisez le routage pour sélectionner l’itinéraire correct.
 
-RazorLes options de pages, telles que l’ajout <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> , sont ajoutées lorsque MVC est ajouté à la collection de services dans `Startup.ConfigureServices` . Pour obtenir un exemple, consultez [l’exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/).
+Razor Les options de pages, telles que l’ajout <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> , sont ajoutées lorsque MVC est ajouté à la collection de services dans `Startup.ConfigureServices` . Pour obtenir un exemple, consultez [l’exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/).
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet1)]
 
@@ -812,7 +813,7 @@ Demandez la page About de l’exemple sur `localhost:5000/About` et examinez les
 
 **Configurer un filtre**
 
-<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*>configure le filtre spécifié à appliquer. Vous pouvez implémenter une classe de filtre. Toutefois, l’exemple d’application montre comment implémenter un filtre dans une expression lambda, laquelle est implémentée en arrière-plan en tant que fabrique qui retourne un filtre :
+<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> configure le filtre spécifié à appliquer. Vous pouvez implémenter une classe de filtre. Toutefois, l’exemple d’application montre comment implémenter un filtre dans une expression lambda, laquelle est implémentée en arrière-plan en tant que fabrique qui retourne un filtre :
 
 [!code-csharp[](razor-pages-conventions/samples/2.x/SampleApp/Startup.cs?name=snippet8)]
 
@@ -826,7 +827,7 @@ Demandez la page Page2 de l’exemple sur `localhost:5000/OtherPages/Page2` et e
 
 **Configurer une fabrique de filtres**
 
-<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*>configure la fabrique spécifiée pour appliquer des [filtres](xref:mvc/controllers/filters) à toutes les Razor pages.
+<xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.ConfigureFilter*> configure la fabrique spécifiée pour appliquer des [filtres](xref:mvc/controllers/filters) à toutes les Razor pages.
 
 L’exemple d’application illustre l’utilisation d’une [fabrique de filtres](xref:mvc/controllers/filters#ifilterfactory) en ajoutant un en-tête, `FilterFactoryHeader`, et deux valeurs aux pages de l’application :
 

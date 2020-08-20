@@ -6,6 +6,7 @@ ms.author: casoper
 ms.custom: devx-track-csharp, mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,16 +17,16 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/next-steps
-ms.openlocfilehash: a9a6b0a588b7813f9d6e2b215630a1b9100be890
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 59c6bba7e5d05bbb6ef7db65bbedf70c4524b092
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130429"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625347"
 ---
 # <a name="next-steps"></a>Étapes suivantes
 
-Dans ce guide, vous avez créé un pipeline DevOps pour un exemple d’application ASP.NET Core. Félicitations ! Nous espérons que vous avez apprécié l’apprentissage de la publication de ASP.NET Core Web Apps pour Azure App Service et automatiser l’intégration continue des modifications.
+Dans ce guide, vous avez créé un pipeline DevOps pour un exemple d’application ASP.NET Core. Félicitations ! Nous espérons que vous avez apprécié l’apprentissage de la publication de ASP.NET Core Web Apps pour Azure App Service et automatiser l’intégration continue des modifications.
 
 Au-delà de l’hébergement Web et de DevOps, Azure dispose d’un vaste éventail de services de plateforme en tant que service (PaaS) utiles pour ASP.NET Core les développeurs. Cette section donne un bref aperçu des services les plus couramment utilisés.
 

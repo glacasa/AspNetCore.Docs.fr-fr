@@ -6,6 +6,7 @@ ms.author: rybrande
 ms.date: 09/26/2019
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/Microsoft.dotnet-openapi
-ms.openlocfilehash: 6a9b80e868a54bd76503a6421c34ae159421699b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 45921deb35452876b0a92a8731da68539a880c1d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022236"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626556"
 ---
 # <a name="develop-aspnet-core-apps-using-openapi-tools"></a>Développer des applications ASP.NET Core à l’aide des outils OpenAPI
 
@@ -93,7 +94,7 @@ La référence précédente est requise pour que l’application appelle le code
 
 |  Argument  | Description | Exemple |
 |-------------|-------------|---------|
-| URL source | Source à partir de laquelle créer une référence. Doit être une URL. |URL d’ajout de dotnet openapi`https://contoso.com/openapi.json` |
+| URL source | Source à partir de laquelle créer une référence. Doit être une URL. |URL d’ajout de dotnet openapi `https://contoso.com/openapi.json` |
 
 ## <a name="remove"></a>Supprimer
 
@@ -127,4 +128,4 @@ Actualise la version locale d’un fichier qui a été téléchargé à l’aide
 
 |  Argument  | Description | Exemple |
 | ------------|-------------|---------|
-| URL source | URL à partir de laquelle actualiser la référence. | actualisation de dotnet openapi`https://contoso.com/openapi.json` |
+| URL source | URL à partir de laquelle actualiser la référence. | actualisation de dotnet openapi `https://contoso.com/openapi.json` |

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/24/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: f8c105624506d13f3ea8e963ceb49aeaf6d22a66
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: cffd9e33636f98d50300de851d696ae753c10a0d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504565"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625334"
 ---
 # <a name="call-a-web-api-from-aspnet-core-no-locblazor"></a>Appeler une API Web à partir de ASP.NET Core Blazor
 
@@ -40,7 +41,7 @@ Consultez les composants suivants dans l' `BlazorWebAssemblySample` exemple d’
 * Appeler l’API Web ( `Pages/CallWebAPI.razor` )
 * Testeur de requêtes HTTP ( `Components/HTTPRequestTester.razor` )
 
-## <a name="packages"></a>Paquets
+## <a name="packages"></a>.
 
 Référencez le [`System.Net.Http.Json`](https://www.nuget.org/packages/System.Net.Http.Json) package NuGet dans le fichier projet.
 
@@ -320,7 +321,7 @@ Pour plus d’informations sur CORS avec des demandes sécurisées dans les Blaz
 
 Pour obtenir des informations générales sur CORS avec les applications ASP.NET Core, consultez <xref:security/cors> .
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * <xref:blazor/security/webassembly/additional-scenarios>: Comprend la couverture de l’utilisation <xref:System.Net.Http.HttpClient> de pour créer des demandes d’API Web sécurisées.
 * <xref:fundamentals/http-requests>
