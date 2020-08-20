@@ -5,6 +5,7 @@ description: Découvrez comment limiter la durée de vie d’une charge utile pr
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/limited-lifetime-payloads
-ms.openlocfilehash: c7bc86cd42a725f21cf66187c033376a8c5a9e65
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f76aca460c293b5f814ba10ee6c8ac68b3d147bb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014826"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634421"
 ---
 # <a name="limit-the-lifetime-of-protected-payloads-in-aspnet-core"></a>Limiter la durée de vie des charges utiles protégées dans ASP.NET Core
 
@@ -32,7 +33,7 @@ Pour faciliter cette tâche pour les développeurs, le package [Microsoft. AspNe
 
 L' `ITimeLimitedDataProtector` interface est l’interface principale pour la protection et la déprotection des charges utiles limitées dans le temps ou à l’expiration automatique. Pour créer une instance d’un `ITimeLimitedDataProtector` objet, vous avez d’abord besoin d’une instance d’un [IDataProtector](xref:security/data-protection/consumer-apis/overview) standard construit avec un objectif spécifique. Une fois l' `IDataProtector` instance disponible, appelez la `IDataProtector.ToTimeLimitedDataProtector` méthode d’extension pour obtenir un protecteur avec des fonctionnalités d’expiration intégrées.
 
-`ITimeLimitedDataProtector`expose les méthodes d’extension et la surface d’API suivantes :
+`ITimeLimitedDataProtector` expose les méthodes d’extension et la surface d’API suivantes :
 
 * CreateProtector (String Purpose) : ITimeLimitedDataProtector : cette API est similaire à la existante `IDataProtectionProvider.CreateProtector` dans la mesure où elle peut être utilisée pour créer des [chaînes d’objectif](xref:security/data-protection/consumer-apis/purpose-strings) à partir d’un protecteur à durée limitée.
 

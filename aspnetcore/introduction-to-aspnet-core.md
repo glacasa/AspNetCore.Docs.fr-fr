@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: index
-ms.openlocfilehash: 9cf721b381d3c4c737c15225edcf7918dd1fcf5b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f1235337748bacdb6eaa775a5853238bf729e605
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015346"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634551"
 ---
 # <a name="introduction-to-aspnet-core"></a>Présentation d’ASP.NET Core
 
@@ -82,16 +83,16 @@ Pour une introduction au développement d’applications ASP.NET Core, nous vous
    |----------|----------|----------|
    |Application web                   | Nouveau développement de l’interface utilisateur Web côté serveur |[Prise en main des Razor pages](xref:tutorials/razor-pages/razor-pages-start) |
    |Application web                   | Maintenance d’une application MVC |[Bien démarrer avec MVC](xref:tutorials/first-mvc-app/start-mvc)|
-   |Application web                   | Développement de l’interface utilisateur Web côté client |[Prise en main deBlazor](https://dotnet.microsoft.com/learn/aspnet/blazor-tutorial/intro) |
+   |Application web                   | Développement de l’interface utilisateur Web côté client |[Prise en main de Blazor](https://dotnet.microsoft.com/learn/aspnet/blazor-tutorial/intro) |
    |API web                   | Services HTTP RESTful |[Créer une API Web](xref:tutorials/first-web-api)&dagger; |
    |Application d’appel de procédure distante | Services contrat en premier à l’aide de mémoires tampons de protocole |[Bien démarrer avec un service gRPC](xref:tutorials/grpc/grpc-start) |
-   |Application en temps réel             | Communication bidirectionnelle entre les serveurs et les clients connectés |[Prise en main deSignalR](xref:tutorials/signalr) |
+   |Application en temps réel             | Communication bidirectionnelle entre les serveurs et les clients connectés |[Prise en main de SignalR](xref:tutorials/signalr) |
 
 1. Suivez un didacticiel qui montre comment effectuer un accès aux données de base.
 
    |Scénario  |Didacticiel  |
    |----------|----------|
-   |Nouveau développement        |[RazorPages avec Entity Framework Core](xref:data/ef-rp/intro) |
+   |Nouveau développement        |[Razor Pages avec Entity Framework Core](xref:data/ef-rp/intro) |
    |Maintenance d’une application MVC |[MVC avec Entity Framework Core](xref:data/ef-mvc/intro) |
 
 1. Lisez une vue d’ensemble de ASP.NET Core [notions de base](xref:fundamentals/index) qui s’appliquent à tous les types d’applications.
@@ -171,13 +172,13 @@ Nous vous recommandons la séquence de tutoriels et d’articles suivante comme 
    |Application web                   | Pour un nouveau développement        |[Prise en main des Razor pages](xref:tutorials/razor-pages/razor-pages-start) |
    |Application web                   | Pour maintenir une application MVC |[Bien démarrer avec MVC](xref:tutorials/first-mvc-app/start-mvc)|
    |API web                   |                            |[Créer une API Web](xref:tutorials/first-web-api)&dagger; |
-   |Application en temps réel             |                            |[Prise en main deSignalR](xref:tutorials/signalr) |
+   |Application en temps réel             |                            |[Prise en main de SignalR](xref:tutorials/signalr) |
 
 1. Suivez un didacticiel qui montre comment effectuer un accès aux données de base.
 
    |Scénario  |Didacticiel  |
    |----------|----------|
-   | Pour un nouveau développement        |[RazorPages avec Entity Framework Core](xref:data/ef-rp/intro) |
+   | Pour un nouveau développement        |[Razor Pages avec Entity Framework Core](xref:data/ef-rp/intro) |
    | Pour maintenir une application MVC |[MVC avec Entity Framework Core](xref:data/ef-mvc/intro) |
 
 1. Lisez une vue d’ensemble de ASP.NET Core [notions de base](xref:fundamentals/index) qui s’appliquent à tous les types d’applications.

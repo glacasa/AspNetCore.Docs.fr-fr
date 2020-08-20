@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 2/18/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/filter
-ms.openlocfilehash: b8942020e98d0f985e5445bb1816c540bcb7829b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b6d6585c0cbd52715c4192d4ab3bee756dbb41b3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021404"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635045"
 ---
 # <a name="filter-methods-for-no-locrazor-pages-in-aspnet-core"></a>Méthodes de filtre pour les Razor pages dans ASP.net Core
 
@@ -29,9 +30,9 @@ ms.locfileid: "88021404"
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-RazorFiltres de page [IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) et [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) permettent Razor aux pages d’exécuter du code avant et après l’exécution d’un Razor Gestionnaire de page. RazorLes filtres de page sont similaires aux [filtres d’action MVC ASP.net Core](xref:mvc/controllers/filters#action-filters), sauf qu’ils ne peuvent pas être appliqués aux méthodes de gestionnaire de page individuelles.
+Razor Filtres de page [IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) et [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) permettent Razor aux pages d’exécuter du code avant et après l’exécution d’un Razor Gestionnaire de page. Razor Les filtres de page sont similaires aux [filtres d’action MVC ASP.net Core](xref:mvc/controllers/filters#action-filters), sauf qu’ils ne peuvent pas être appliqués aux méthodes de gestionnaire de page individuelles.
 
-RazorFiltres de page :
+Razor Filtres de page :
 
 * Exécutent le code après la sélection d’une méthode de gestionnaire, mais avant la liaison de données.
 * Exécutent le code avant l’exécution de la méthode de gestionnaire, une fois la liaison de données terminée.
@@ -44,7 +45,7 @@ Alors que les constructeurs de page et l’intergiciel (middleware) activent l�
 
 [Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/3.1sample) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
-RazorLes filtres de page fournissent les méthodes suivantes, qui peuvent être appliquées globalement ou au niveau de la page :
+Razor Les filtres de page fournissent les méthodes suivantes, qui peuvent être appliquées globalement ou au niveau de la page :
 
 * Méthodes synchrones :
 
@@ -121,9 +122,9 @@ L’attribut [Authorize](/dotnet/api/microsoft.aspnetcore.authorization.authoriz
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-RazorFiltres de page [IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) et [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) permettent Razor aux pages d’exécuter du code avant et après l’exécution d’un Razor Gestionnaire de page. RazorLes filtres de page sont similaires aux [filtres d’action MVC ASP.net Core](xref:mvc/controllers/filters#action-filters), sauf qu’ils ne peuvent pas être appliqués aux méthodes de gestionnaire de page individuelles.
+Razor Filtres de page [IPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) et [IAsyncPageFilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) permettent Razor aux pages d’exécuter du code avant et après l’exécution d’un Razor Gestionnaire de page. Razor Les filtres de page sont similaires aux [filtres d’action MVC ASP.net Core](xref:mvc/controllers/filters#action-filters), sauf qu’ils ne peuvent pas être appliqués aux méthodes de gestionnaire de page individuelles.
 
-RazorFiltres de page :
+Razor Filtres de page :
 
 * Exécutent le code après la sélection d’une méthode de gestionnaire, mais avant la liaison de données.
 * Exécutent le code avant l’exécution de la méthode de gestionnaire, une fois la liaison de données terminée.
@@ -135,7 +136,7 @@ Le code peut être exécuté avant l’exécution d’une méthode de gestionnai
 
 [Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/sample/PageFilter) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
-RazorLes filtres de page fournissent les méthodes suivantes, qui peuvent être appliquées globalement ou au niveau de la page :
+Razor Les filtres de page fournissent les méthodes suivantes, qui peuvent être appliquées globalement ou au niveau de la page :
 
 * Méthodes synchrones :
 

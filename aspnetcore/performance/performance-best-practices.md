@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 04/06/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 0d99c5881b1ca786287d8643c82cab6a3f98f988
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 94ae9e52ed99c3fe8e7044f474cdf5b702dc5adf
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019857"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634460"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>Meilleures pratiques en matière de performances de ASP.NET Core
 
@@ -110,7 +111,7 @@ Recommandations :
 
 ## <a name="keep-common-code-paths-fast"></a>Conserver les chemins de code communs rapidement
 
-Vous souhaitez que tout votre code soit rapide. Les chemins de code fréquemment appelés sont les plus importants à optimiser. Il s’agit des tables suivantes :
+Vous souhaitez que tout votre code soit rapide. Les chemins de code fréquemment appelés sont les plus importants à optimiser. Il s’agit notamment des paramètres suivants :
 
 * Composants de l’intergiciel (middleware) dans le pipeline de traitement des demandes de l’application, en particulier les intergiciels (middleware) exécutés au début du pipeline. Ces composants ont un impact important sur les performances.
 * Code qui est exécuté pour chaque demande ou plusieurs fois par demande. Par exemple, la journalisation personnalisée, les gestionnaires d’autorisation ou l’initialisation de services temporaires.
@@ -195,12 +196,12 @@ Le code précédent désérialise de manière asynchrone le corps de la requête
 ## <a name="prefer-readformasync-over-requestform"></a>Préférer ReadFormAsync sur Request. Form
 
 Utilisez `HttpContext.Request.ReadFormAsync` au lieu de `HttpContext.Request.Form`.
-`HttpContext.Request.Form`peut être lu en toute sécurité uniquement avec les conditions suivantes :
+`HttpContext.Request.Form` peut être lu en toute sécurité uniquement avec les conditions suivantes :
 
 * Le formulaire a été lu par un appel à `ReadFormAsync` , et
-* La valeur du formulaire mis en cache est lue à l’aide de`HttpContext.Request.Form`
+* La valeur du formulaire mis en cache est lue à l’aide de `HttpContext.Request.Form`
 
-N' **effectuez pas cette opération :** L’exemple suivant utilise `HttpContext.Request.Form` .  `HttpContext.Request.Form`utilise la [synchronisation sur Async](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
+N' **effectuez pas cette opération :** L’exemple suivant utilise `HttpContext.Request.Form` .  `HttpContext.Request.Form` utilise la [synchronisation sur Async](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
 ) et peut entraîner une insuffisance du pool de threads.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MySecondController.cs?name=snippet1)]
@@ -229,7 +230,7 @@ Naïvement stockant un grand corps de requête ou de réponse dans un seul `byte
 
 ## <a name="working-with-a-synchronous-data-processing-api"></a>Utilisation d’une API de traitement de données synchrone
 
-Lors de l’utilisation d’un sérialiseur/désérialiseur qui prend uniquement en charge les lectures et écritures synchrones (par exemple, [JSON.net](https://www.newtonsoft.com/json/help/html/Introduction.htm)) :
+Lors de l’utilisation d’un sérialiseur/désérialiseur qui prend uniquement en charge les lectures et écritures synchrones (par exemple,  [JSON.net](https://www.newtonsoft.com/json/help/html/Introduction.htm)) :
 
 * Mettez les données en mémoire tampon de manière asynchrone avant de les transmettre au sérialiseur/désérialiseur.
 
@@ -261,7 +262,7 @@ Le code précédent capture souvent une valeur null ou incorrecte `HttpContext` 
 
 ## <a name="do-not-access-httpcontext-from-multiple-threads"></a>N’accédez pas à HttpContext à partir de plusieurs threads
 
-`HttpContext`n’est *pas* thread-safe. L’accès `HttpContext` à partir de plusieurs threads en parallèle peut entraîner un comportement indéfini, tel que les blocages, les blocages et les données endommagées.
+`HttpContext` n’est *pas* thread-safe. L’accès `HttpContext` à partir de plusieurs threads en parallèle peut entraîner un comportement indéfini, tel que les blocages, les blocages et les données endommagées.
 
 N' **effectuez pas cette opération :** L’exemple suivant effectue trois demandes parallèles et journalise le chemin d’accès de la requête entrante avant et après la requête HTTP sortante. Le chemin d’accès de la requête est accessible à partir de plusieurs threads, éventuellement en parallèle.
 
@@ -273,7 +274,7 @@ N' **effectuez pas cette opération :** L’exemple suivant effectue trois dema
 
 ## <a name="do-not-use-the-httpcontext-after-the-request-is-complete"></a>N’utilisez pas HttpContext une fois la demande terminée
 
-`HttpContext`n’est valide qu’à condition qu’il y ait une requête HTTP active dans le pipeline ASP.NET Core. L’ensemble du pipeline ASP.NET Core est une chaîne asynchrone de délégués qui exécute chaque requête. Lorsque le `Task` retourné à partir de cette chaîne se termine, le `HttpContext` est recyclé.
+`HttpContext` n’est valide qu’à condition qu’il y ait une requête HTTP active dans le pipeline ASP.NET Core. L’ensemble du pipeline ASP.NET Core est une chaîne asynchrone de délégués qui exécute chaque requête. Lorsque le `Task` retourné à partir de cette chaîne se termine, le `HttpContext` est recyclé.
 
 N' **effectuez pas cette opération :** L’exemple suivant utilise `async void` qui rend la requête http terminée lorsque le premier `await` est atteint :
 
@@ -313,7 +314,7 @@ N' **effectuez pas cette opération :** L’exemple suivant montre qu’une fer
 
 **Procédez comme suit :** L’exemple suivant :
 
-* Injecte un <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory> afin de créer une portée dans l’élément de travail d’arrière-plan. `IServiceScopeFactory`est un singleton.
+* Injecte un <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory> afin de créer une portée dans l’élément de travail d’arrière-plan. `IServiceScopeFactory` est un singleton.
 * Crée une nouvelle étendue d’injection de dépendance dans le thread d’arrière-plan.
 * Ne fait référence à rien du contrôleur.
 * Ne capture pas le `ContosoDbContext` de la requête entrante.

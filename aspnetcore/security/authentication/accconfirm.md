@@ -5,6 +5,7 @@ description: Découvrez comment créer une application ASP.NET Core avec une con
 ms.author: riande
 ms.date: 03/11/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: 7016c2c1997d961f4b3d3cf513fc1769bd65247b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 57607390e7d5e58df9f27437faecd57504ad64df
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021612"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635370"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>Account confirmation and password recovery in ASP.NET Core (Confirmation de compte et récupération de mot de passe dans ASP.NET Core)
 
@@ -52,7 +53,7 @@ dotnet run
 
 Exécutez l’application, sélectionnez le lien **Register** et inscrivez un utilisateur. Une fois inscrit, vous êtes redirigé vers la `/Identity/Account/RegisterConfirmation` page vers qui contient un lien pour simuler la confirmation de l’e-mail :
 
-* Sélectionnez le `Click here to confirm your account` lien.
+* Sélectionnez le lien `Click here to confirm your account`.
 * Sélectionnez le lien de **connexion** et connectez-vous avec les mêmes informations d’identification.
 * Sélectionnez le `Hello YourEmail@provider.com!` lien, qui vous redirige vers la `/Identity/Account/Manage/PersonalData` page.
 * Sélectionnez l’onglet **données personnelles** sur la gauche, puis sélectionnez **supprimer**.
@@ -237,7 +238,7 @@ L’activation de la confirmation de compte sur un site avec des utilisateurs ve
 
 [.NET Core 2,2 SDK ou version ultérieure](https://dotnet.microsoft.com/download/dotnet-core)
 
-## <a name="create-a-web--app-and-scaffold-no-locidentity"></a>Créer une application Web et une structureIdentity
+## <a name="create-a-web--app-and-scaffold-no-locidentity"></a>Créer une application Web et une structure Identity
 
 Exécutez les commandes suivantes pour créer une application Web avec l’authentification.
 
@@ -273,11 +274,11 @@ Il est recommandé de confirmer l’e-mail d’une nouvelle inscription d’util
 
 En général, vous souhaitez empêcher les nouveaux utilisateurs de publier des données sur votre site Web avant qu’ils n’aient un e-mail confirmé.
 
-Mise à jour `Startup.ConfigureServices` pour exiger un e-mail confirmé :
+Mise à jour `Startup.ConfigureServices`  pour exiger un e-mail confirmé :
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/Startup.cs?name=snippet1&highlight=8-11)]
 
-`config.SignIn.RequireConfirmedEmail = true;`empêche les utilisateurs inscrits de se connecter jusqu’à ce que leur adresse de messagerie soit confirmée.
+`config.SignIn.RequireConfirmedEmail = true;` empêche les utilisateurs inscrits de se connecter jusqu’à ce que leur adresse de messagerie soit confirmée.
 
 ### <a name="configure-email-provider"></a>Configurer le fournisseur de messagerie
 

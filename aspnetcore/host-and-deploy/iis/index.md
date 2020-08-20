@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/7/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 0594303f3ae8c57a0a7776900e6b2a6781c919db
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 1338ecd6205a351b54a58522b1713a6d70e2d22a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015827"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634746"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>Héberger ASP.NET Core sur Windows avec IIS
 
@@ -486,7 +487,7 @@ La configuration d’IIS est influencée par la section `<system.webServer>` de 
 
 Pour plus d'informations, voir les rubriques suivantes :
 
-* [Référence de configuration pour\<system.webServer>](/iis/configuration/system.webServer/)
+* [Référence de configuration pour \<system.webServer>](/iis/configuration/system.webServer/)
 * <xref:host-and-deploy/aspnet-core-module>
 * <xref:host-and-deploy/iis/modules>
 
@@ -512,7 +513,7 @@ L’isolation des pools d’applications est déterminée par le modèle d’hé
 
 La boîte de dialogue **Ajouter un site web** d’IIS applique un seul pool d’applications par application par défaut. Quand un **Nom du site** est fourni, le texte est automatiquement transféré vers la zone de texte **Pool d’applications**. Un nouveau pool d’applications est créé avec le nom du site une fois qu’il est ajouté.
 
-## <a name="application-pool-no-locidentity"></a>Pool d’applicationsIdentity
+## <a name="application-pool-no-locidentity"></a>Pool d’applications Identity
 
 Un compte d’identité du pool d’applications permet à une application de s’exécuter sous un compte unique sans qu’il soit nécessaire de créer et de gérer des domaines ou des comptes locaux. Sur IIS 8.0 ou version ultérieure, le processus Worker d’administration IIS (WAS) crée un compte virtuel avec le nom du nouveau pool d’applications et exécute les processus Worker du pool d’applications sous ce compte par défaut. Dans la console de gestion IIS, sous **Paramètres avancés** pour le pool d’applications, assurez-vous que le **Identity** est configuré pour utiliser **ApplicationPool Identity **:
 
@@ -889,7 +890,7 @@ Installez le *bundle d’hébergement .NET Core* sur le système hôte. L’offr
 >
 > Si le bundle d’hébergement est installé après l’installation de la version 64 bits (x 64) de .NET Core, les SDK peuvent apparaître manquants ([Aucun SDK .NET Core n’a été détecté](xref:test/troubleshoot#no-net-core-sdks-were-detected)). Pour résoudre le problème, consultez <xref:test/troubleshoot#missing-sdk-after-installing-the-net-core-hosting-bundle>.
 
-### <a name="download"></a>Télécharger
+### <a name="download"></a>Téléchargement
 
 1. Accédez à la page [Télécharger .net Core](https://dotnet.microsoft.com/download/dotnet-core) .
 1. Sélectionnez la version .NET Core de votre choix.
@@ -1086,7 +1087,7 @@ La configuration d’IIS est influencée par la section `<system.webServer>` de 
 
 Pour plus d'informations, voir les rubriques suivantes :
 
-* [Référence de configuration pour\<system.webServer>](/iis/configuration/system.webServer/)
+* [Référence de configuration pour \<system.webServer>](/iis/configuration/system.webServer/)
 * <xref:host-and-deploy/aspnet-core-module>
 * <xref:host-and-deploy/iis/modules>
 
@@ -1112,7 +1113,7 @@ L’isolation des pools d’applications est déterminée par le modèle d’hé
 
 La boîte de dialogue **Ajouter un site web** d’IIS applique un seul pool d’applications par application par défaut. Quand un **Nom du site** est fourni, le texte est automatiquement transféré vers la zone de texte **Pool d’applications**. Un nouveau pool d’applications est créé avec le nom du site une fois qu’il est ajouté.
 
-## <a name="application-pool-no-locidentity"></a>Pool d’applicationsIdentity
+## <a name="application-pool-no-locidentity"></a>Pool d’applications Identity
 
 Un compte d’identité du pool d’applications permet à une application de s’exécuter sous un compte unique sans qu’il soit nécessaire de créer et de gérer des domaines ou des comptes locaux. Sur IIS 8.0 ou version ultérieure, le processus Worker d’administration IIS (WAS) crée un compte virtuel avec le nom du nouveau pool d’applications et exécute les processus Worker du pool d’applications sous ce compte par défaut. Dans la console de gestion IIS, sous **Paramètres avancés** pour le pool d’applications, assurez-vous que le **Identity** est configuré pour utiliser **ApplicationPool Identity **:
 
@@ -1457,7 +1458,7 @@ Installez le *bundle d’hébergement .NET Core* sur le système hôte. L’offr
 >
 > Si le bundle d’hébergement est installé après l’installation de la version 64 bits (x 64) de .NET Core, les SDK peuvent apparaître manquants ([Aucun SDK .NET Core n’a été détecté](xref:test/troubleshoot#no-net-core-sdks-were-detected)). Pour résoudre le problème, consultez <xref:test/troubleshoot#missing-sdk-after-installing-the-net-core-hosting-bundle>.
 
-### <a name="download"></a>Télécharger
+### <a name="download"></a>Téléchargement
 
 1. Accédez à la page [Télécharger .net Core](https://dotnet.microsoft.com/download/dotnet-core) .
 1. Sélectionnez la version .NET Core de votre choix.
@@ -1687,7 +1688,7 @@ La configuration d’IIS est influencée par la section `<system.webServer>` de 
 
 Pour plus d'informations, voir les rubriques suivantes :
 
-* [Référence de configuration pour\<system.webServer>](/iis/configuration/system.webServer/)
+* [Référence de configuration pour \<system.webServer>](/iis/configuration/system.webServer/)
 * <xref:host-and-deploy/aspnet-core-module>
 * <xref:host-and-deploy/iis/modules>
 
@@ -1708,7 +1709,7 @@ Les applications ASP.NET Core sont configurées à l’aide d’autres fournisse
 
 Quand vous hébergez plusieurs sites Web sur un même serveur, nous vous recommandons d’isoler les applications les unes des autres en exécutant chaque application dans son propre pool d’applications. La boîte de dialogue **Ajouter un site Web** d’IIS applique cette configuration par défaut. Quand un **Nom du site** est fourni, le texte est automatiquement transféré vers la zone de texte **Pool d’applications**. Un nouveau pool d’applications est créé avec le nom du site une fois qu’il est ajouté.
 
-## <a name="application-pool-no-locidentity"></a>Pool d’applicationsIdentity
+## <a name="application-pool-no-locidentity"></a>Pool d’applications Identity
 
 Un compte d’identité du pool d’applications permet à une application de s’exécuter sous un compte unique sans qu’il soit nécessaire de créer et de gérer des domaines ou des comptes locaux. Sur IIS 8.0 ou version ultérieure, le processus Worker d’administration IIS (WAS) crée un compte virtuel avec le nom du nouveau pool d’applications et exécute les processus Worker du pool d’applications sous ce compte par défaut. Dans la console de gestion IIS, sous **Paramètres avancés** pour le pool d’applications, assurez-vous que le **Identity** est configuré pour utiliser **ApplicationPool Identity **:
 

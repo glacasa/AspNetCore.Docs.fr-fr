@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/ip-safelist
-ms.openlocfilehash: 75c1ea3a6087f89a200d1f73b1ff65080c819ccd
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 621be5351acb251335a42f57e8ea670af1b35a87
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021768"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634447"
 ---
 # <a name="client-ip-safelist-for-aspnet-core"></a>Client IP safelier pour ASP.NET Core
 
@@ -32,7 +33,7 @@ Cet article présente trois façons d’implémenter une adresse IP safelit (ég
 
 * Intergiciel pour vérifier l’adresse IP distante de chaque demande.
 * Filtres d’action MVC pour vérifier l’adresse IP distante des demandes pour des contrôleurs ou des méthodes d’action spécifiques.
-* RazorPages filtres pour vérifier l’adresse IP distante des demandes de Razor pages.
+* Razor Pages filtres pour vérifier l’adresse IP distante des demandes de Razor pages.
 
 Dans chaque cas, une chaîne contenant des adresses IP clientes approuvées est stockée dans un paramètre d’application. Le middleware ou le filtre :
 
@@ -101,7 +102,7 @@ Dans l’exemple d’application, le filtre d’action est appliqué à la `Get`
 
 * Un verbe de requête HTTP autre que obtenir, l' `AdminSafeListMiddleware` intergiciel (middleware) valide l’adresse IP du client.
 
-## <a name="no-locrazor-pages-filter"></a>RazorFiltre de pages
+## <a name="no-locrazor-pages-filter"></a>Razor Filtre de pages
 
 Si vous souhaitez un contrôle d’accès piloté par safelis pour une Razor application pages, utilisez un Razor filtre pages. Par exemple :
 

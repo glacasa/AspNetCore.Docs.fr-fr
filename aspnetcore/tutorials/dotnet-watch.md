@@ -5,6 +5,7 @@ description: Ce tutoriel montre comment installer et utiliser l’outil Observat
 ms.author: riande
 ms.date: 05/31/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,24 +16,24 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: f4987e7eef496f3ba4b8f9bb084816be3b17ada7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: cc152c2ca553b00619ddbf829f6044867c53bb98
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022444"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635136"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>Développer des applications ASP.NET Core à l’aide d’un observateur de fichiers
 
 Par [Rick Anderson](https://twitter.com/RickAndMSFT) et [Victor Hurdugaci](https://twitter.com/victorhurdugaci)
 
-`dotnet watch`est un outil qui exécute une commande [CLI .net Core](/dotnet/core/tools) lorsque les fichiers sources changent. Par exemple, un changement de fichier peut déclencher la compilation, l’exécution de tests ou le déploiement.
+`dotnet watch` est un outil qui exécute une commande [CLI .net Core](/dotnet/core/tools) lorsque les fichiers sources changent. Par exemple, un changement de fichier peut déclencher la compilation, l’exécution de tests ou le déploiement.
 
 Ce tutoriel utilise une API web existante avec deux points de terminaison : un qui retourne une somme et un qui retourne un produit. La méthode du produit comporte un bogue, qui est résolu dans ce tutoriel.
 
 Téléchargez l' [exemple d’application](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/dotnet-watch/sample). Elle se compose de deux projets : *WebApp* (API web ASP.NET Core) et *WebAppTests* (API de tests unitaires pour le web).
 
-Dans une interface de commande, accédez au dossier *WebApp*. Exécutez la commande suivante :
+Dans une interface de commande, accédez au dossier *WebApp*. Exécutez la commande suivante :
 
 ```dotnetcli
 dotnet run
@@ -115,7 +116,7 @@ Vérifiez que `http://localhost:<port number>/api/math/product?a=4&b=5` retourne
 1. Changez la méthode `Product` de *MathController.cs* pour qu’elle retourne à nouveau la somme. Enregistrez le fichier .
 1. Dans une interface de commande, accédez au dossier *WebAppTests*.
 1. Exécutez [dotnet restore](/dotnet/core/tools/dotnet-restore).
-1. Exécuter `dotnet watch test`. Sa sortie indique qu’un test a échoué et que l’observateur est en attente de changement de fichier :
+1. Exécutez `dotnet watch test`. Sa sortie indique qu’un test a échoué et que l’observateur est en attente de changement de fichier :
 
      ```console
      Total tests: 2. Passed: 1. Failed: 1. Skipped: 0.
@@ -185,7 +186,7 @@ Si l’objectif est d’observer les deux projets, créez un fichier projet pers
 </Project>
 ```
 
-Pour démarrer l’observation de fichiers sur les deux projets, passez au dossier *test*. Exécutez la commande suivante :
+Pour démarrer l’observation de fichiers sur les deux projets, passez au dossier *test*. Exécutez la commande suivante :
 
 ```dotnetcli
 dotnet watch msbuild /t:Test
@@ -195,4 +196,4 @@ VSTest s’exécute quand n’importe quel fichier change dans un des projets de
 
 ## <a name="dotnet-watch-in-github"></a>`dotnet-watch` dans GitHub
 
-`dotnet-watch`fait partie du référentiel GitHub [dotnet/AspNetCore](https://github.com/dotnet/AspNetCore/tree/master/src/Tools/dotnet-watch).
+`dotnet-watch` fait partie du référentiel GitHub [dotnet/AspNetCore](https://github.com/dotnet/AspNetCore/tree/master/src/Tools/dotnet-watch).

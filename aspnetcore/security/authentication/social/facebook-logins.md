@@ -7,6 +7,7 @@ ms.custom: seoapril2019, mvc, seodec18
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/facebook-logins
-ms.openlocfilehash: ef664645768dac11d0ed68db03cfbaebbcb8c0d3
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ce0e7ad30c137562b74dc9fe5c53235e3599e575
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021716"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634356"
 ---
 # <a name="facebook-external-login-setup-in-aspnet-core"></a>Configuration de la connexion externe Facebook dans ASP.NET Core
 
@@ -114,7 +115,7 @@ Vous êtes maintenant connecté à l’aide de vos informations d’identificati
 
 ## <a name="react-to-cancel-authorize-external-sign-in"></a>Réagir pour annuler autoriser la connexion externe
 
-<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.AccessDeniedPath>peut fournir un chemin de redirection vers l’agent utilisateur lorsque l’utilisateur n’approuve pas la demande d’autorisation demandée.
+<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.AccessDeniedPath> peut fournir un chemin de redirection vers l’agent utilisateur lorsque l’utilisateur n’approuve pas la demande d’autorisation demandée.
 
 Le code suivant affecte `AccessDeniedPath` à la valeur `"/AccessDeniedPathInfo"` :
 

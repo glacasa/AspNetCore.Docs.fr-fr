@@ -5,6 +5,7 @@ description: Découvrez les services et intergiciels (middleware) fournis par AS
 ms.author: riande
 ms.date: 11/30/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: 9fd68d3b412c2cef6125c657653f605689ca6e70
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 254cae2b66773d7bb71aa6313fd08b6f739b7682
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017218"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634642"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalisation et localisation dans ASP.NET Core
 
@@ -44,7 +45,7 @@ La localisation d’une application implique les étapes suivantes :
 
 ## <a name="make-the-apps-content-localizable"></a>Rendre le contenu de l’application localisable
 
-<xref:Microsoft.Extensions.Localization.IStringLocalizer>et <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> ont été conçus pour améliorer la productivité lors du développement d’applications localisées. `IStringLocalizer`utilise <xref:System.Resources.ResourceManager> et <xref:System.Resources.ResourceReader> pour fournir des ressources spécifiques à la culture au moment de l’exécution. L’interface possède un indexeur et un `IEnumerable` pour retourner des chaînes localisées. `IStringLocalizer`ne nécessite pas le stockage des chaînes de langue par défaut dans un fichier de ressources. Vous pouvez développer une application ciblée pour la localisation sans avoir besoin de créer des fichiers de ressources au tout début du développement. Le code ci-dessous montre comment inclure dans un wrapper la chaîne « About Title » à des fins de localisation.
+<xref:Microsoft.Extensions.Localization.IStringLocalizer> et <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> ont été conçus pour améliorer la productivité lors du développement d’applications localisées. `IStringLocalizer` utilise <xref:System.Resources.ResourceManager> et <xref:System.Resources.ResourceReader> pour fournir des ressources spécifiques à la culture au moment de l’exécution. L’interface possède un indexeur et un `IEnumerable` pour retourner des chaînes localisées. `IStringLocalizer` ne nécessite pas le stockage des chaînes de langue par défaut dans un fichier de ressources. Vous pouvez développer une application ciblée pour la localisation sans avoir besoin de créer des fichiers de ressources au tout début du développement. Le code ci-dessous montre comment inclure dans un wrapper la chaîne « About Title » à des fins de localisation.
 
 [!code-csharp[](localization/sample/3.x/Localization/Controllers/AboutController.cs)]
 
@@ -77,7 +78,7 @@ Le service `IViewLocalizer` fournit des chaînes localisées à une [vue](xref:m
 
 [!code-cshtml[](localization/sample/3.x/Localization/Views/Home/About.cshtml)]
 
-L’implémentation par défaut de `IViewLocalizer` recherche le fichier de ressources en fonction du nom de fichier de l’affichage. Il n’existe aucune option pour utiliser un fichier de ressources partagées globales. `ViewLocalizer`implémente le localisateur à l’aide `IHtmlLocalizer` de, donc Razor n’encode pas le code HTML de la chaîne localisée. Vous pouvez paramétrer des chaînes de ressources pour que `IViewLocalizer` encode en HTML les paramètres, mais pas les chaînes de ressources. Examinez le Razor balisage suivant :
+L’implémentation par défaut de `IViewLocalizer` recherche le fichier de ressources en fonction du nom de fichier de l’affichage. Il n’existe aucune option pour utiliser un fichier de ressources partagées globales. `ViewLocalizer` implémente le localisateur à l’aide `IHtmlLocalizer` de, donc Razor n’encode pas le code HTML de la chaîne localisée. Vous pouvez paramétrer des chaînes de ressources pour que `IViewLocalizer` encode en HTML les paramètres, mais pas les chaînes de ressources. Examinez le Razor balisage suivant :
 
 ```cshtml
 @Localizer["<i>Hello</i> <b>{0}!</b>", UserManager.GetUserName(User)]
@@ -165,7 +166,7 @@ Dans l’exemple de projet, la méthode `ConfigureServices` affecte à `Resource
 | Resources/Controllers.HomeController.fr.resx | Points  |
 | Resources/Controllers/HomeController.fr.resx  | Chemin d’accès |
 
-Les fichiers de ressources utilisant `@inject IViewLocalizer` dans les Razor vues suivent un modèle similaire. Le fichier de ressources d’une vue peut être nommé selon la convention avec des points ou un chemin. Razorles fichiers de ressources d’affichage imitent le chemin d’accès de leur fichier de vue associé. Si nous affectons à `ResourcesPath` la valeur « Resources », le fichier de ressources en français associé à l’affichage *Views/Home/About.cshtml* peut porter l’un des noms suivants :
+Les fichiers de ressources utilisant `@inject IViewLocalizer` dans les Razor vues suivent un modèle similaire. Le fichier de ressources d’une vue peut être nommé selon la convention avec des points ou un chemin. Razor les fichiers de ressources d’affichage imitent le chemin d’accès de leur fichier de vue associé. Si nous affectons à `ResourcesPath` la valeur « Resources », le fichier de ressources en français associé à l’affichage *Views/Home/About.cshtml* peut porter l’un des noms suivants :
 
 * Resources/Views/Home/About.fr.resx
 
@@ -225,11 +226,11 @@ La localisation est configurée dans la méthode `Startup.ConfigureServices` :
 
 [!code-csharp[](localization/sample/3.x/Localization/Startup.cs?name=snippet1)]
 
-* `AddLocalization`Ajoute les services de localisation au conteneur de services. Le code ci-dessus affecte également au chemin des ressources la valeur « Resources ».
+* `AddLocalization` Ajoute les services de localisation au conteneur de services. Le code ci-dessus affecte également au chemin des ressources la valeur « Resources ».
 
-* `AddViewLocalization`Ajoute la prise en charge des fichiers de vue localisés. Dans cet exemple d’affichage, la localisation se base sur le suffixe du fichier d’affichage. Par exemple, « fr » dans le fichier *Index.fr.cshtml*.
+* `AddViewLocalization` Ajoute la prise en charge des fichiers de vue localisés. Dans cet exemple d’affichage, la localisation se base sur le suffixe du fichier d’affichage. Par exemple, « fr » dans le fichier *Index.fr.cshtml*.
 
-* `AddDataAnnotationsLocalization`Ajoute la prise en charge des messages de validation localisés `DataAnnotations` via des `IStringLocalizer` abstractions.
+* `AddDataAnnotationsLocalization` Ajoute la prise en charge des messages de validation localisés `DataAnnotations` via des `IStringLocalizer` abstractions.
 
 ### <a name="localization-middleware"></a>Intergiciel (middleware) de localisation
 
@@ -398,7 +399,7 @@ La localisation d’une application implique les étapes suivantes :
 
 ## <a name="make-the-apps-content-localizable"></a>Rendre le contenu de l’application localisable
 
-<xref:Microsoft.Extensions.Localization.IStringLocalizer>et <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> ont été conçus pour améliorer la productivité lors du développement d’applications localisées. `IStringLocalizer`utilise <xref:System.Resources.ResourceManager> et <xref:System.Resources.ResourceReader> pour fournir des ressources spécifiques à la culture au moment de l’exécution. L’interface possède un indexeur et un `IEnumerable` pour retourner des chaînes localisées. `IStringLocalizer`ne nécessite pas le stockage des chaînes de langue par défaut dans un fichier de ressources. Vous pouvez développer une application ciblée pour la localisation sans avoir besoin de créer des fichiers de ressources au tout début du développement. Le code ci-dessous montre comment inclure dans un wrapper la chaîne « About Title » à des fins de localisation.
+<xref:Microsoft.Extensions.Localization.IStringLocalizer> et <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> ont été conçus pour améliorer la productivité lors du développement d’applications localisées. `IStringLocalizer` utilise <xref:System.Resources.ResourceManager> et <xref:System.Resources.ResourceReader> pour fournir des ressources spécifiques à la culture au moment de l’exécution. L’interface possède un indexeur et un `IEnumerable` pour retourner des chaînes localisées. `IStringLocalizer` ne nécessite pas le stockage des chaînes de langue par défaut dans un fichier de ressources. Vous pouvez développer une application ciblée pour la localisation sans avoir besoin de créer des fichiers de ressources au tout début du développement. Le code ci-dessous montre comment inclure dans un wrapper la chaîne « About Title » à des fins de localisation.
 
 [!code-csharp[](localization/sample/3.x/Localization/Controllers/AboutController.cs)]
 
@@ -431,7 +432,7 @@ Le service `IViewLocalizer` fournit des chaînes localisées à une [vue](xref:m
 
 [!code-cshtml[](localization/sample/3.x/Localization/Views/Home/About.cshtml)]
 
-L’implémentation par défaut de `IViewLocalizer` recherche le fichier de ressources en fonction du nom de fichier de l’affichage. Il n’existe aucune option pour utiliser un fichier de ressources partagées globales. `ViewLocalizer`implémente le localisateur à l’aide `IHtmlLocalizer` de, donc Razor n’encode pas le code HTML de la chaîne localisée. Vous pouvez paramétrer des chaînes de ressources pour que `IViewLocalizer` encode en HTML les paramètres, mais pas les chaînes de ressources. Examinez le Razor balisage suivant :
+L’implémentation par défaut de `IViewLocalizer` recherche le fichier de ressources en fonction du nom de fichier de l’affichage. Il n’existe aucune option pour utiliser un fichier de ressources partagées globales. `ViewLocalizer` implémente le localisateur à l’aide `IHtmlLocalizer` de, donc Razor n’encode pas le code HTML de la chaîne localisée. Vous pouvez paramétrer des chaînes de ressources pour que `IViewLocalizer` encode en HTML les paramètres, mais pas les chaînes de ressources. Examinez le Razor balisage suivant :
 
 ```cshtml
 @Localizer["<i>Hello</i> <b>{0}!</b>", UserManager.GetUserName(User)]
@@ -519,7 +520,7 @@ Dans l’exemple de projet, la méthode `ConfigureServices` affecte à `Resource
 | Resources/Controllers.HomeController.fr.resx | Points  |
 | Resources/Controllers/HomeController.fr.resx  | Chemin d’accès |
 
-Les fichiers de ressources utilisant `@inject IViewLocalizer` dans les Razor vues suivent un modèle similaire. Le fichier de ressources d’une vue peut être nommé selon la convention avec des points ou un chemin. Razorles fichiers de ressources d’affichage imitent le chemin d’accès de leur fichier de vue associé. Si nous affectons à `ResourcesPath` la valeur « Resources », le fichier de ressources en français associé à l’affichage *Views/Home/About.cshtml* peut porter l’un des noms suivants :
+Les fichiers de ressources utilisant `@inject IViewLocalizer` dans les Razor vues suivent un modèle similaire. Le fichier de ressources d’une vue peut être nommé selon la convention avec des points ou un chemin. Razor les fichiers de ressources d’affichage imitent le chemin d’accès de leur fichier de vue associé. Si nous affectons à `ResourcesPath` la valeur « Resources », le fichier de ressources en français associé à l’affichage *Views/Home/About.cshtml* peut porter l’un des noms suivants :
 
 * Resources/Views/Home/About.fr.resx
 
@@ -579,11 +580,11 @@ La localisation est configurée dans la méthode `Startup.ConfigureServices` :
 
 [!code-csharp[](localization/sample/3.x/Localization/Startup.cs?name=snippet1)]
 
-* `AddLocalization`Ajoute les services de localisation au conteneur de services. Le code ci-dessus affecte également au chemin des ressources la valeur « Resources ».
+* `AddLocalization` Ajoute les services de localisation au conteneur de services. Le code ci-dessus affecte également au chemin des ressources la valeur « Resources ».
 
-* `AddViewLocalization`Ajoute la prise en charge des fichiers de vue localisés. Dans cet exemple d’affichage, la localisation se base sur le suffixe du fichier d’affichage. Par exemple, « fr » dans le fichier *Index.fr.cshtml*.
+* `AddViewLocalization` Ajoute la prise en charge des fichiers de vue localisés. Dans cet exemple d’affichage, la localisation se base sur le suffixe du fichier d’affichage. Par exemple, « fr » dans le fichier *Index.fr.cshtml*.
 
-* `AddDataAnnotationsLocalization`Ajoute la prise en charge des messages de validation localisés `DataAnnotations` via des `IStringLocalizer` abstractions.
+* `AddDataAnnotationsLocalization` Ajoute la prise en charge des messages de validation localisés `DataAnnotations` via des `IStringLocalizer` abstractions.
 
 ### <a name="localization-middleware"></a>Intergiciel (middleware) de localisation
 
@@ -753,7 +754,7 @@ La localisation d’une application implique les étapes suivantes :
 
 ## <a name="make-the-apps-content-localizable"></a>Rendre le contenu de l’application localisable
 
-<xref:Microsoft.Extensions.Localization.IStringLocalizer>et <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> ont été conçus pour améliorer la productivité lors du développement d’applications localisées. `IStringLocalizer`utilise <xref:System.Resources.ResourceManager> et <xref:System.Resources.ResourceReader> pour fournir des ressources spécifiques à la culture au moment de l’exécution. L’interface possède un indexeur et un `IEnumerable` pour retourner des chaînes localisées. `IStringLocalizer`ne nécessite pas le stockage des chaînes de langue par défaut dans un fichier de ressources. Vous pouvez développer une application ciblée pour la localisation sans avoir besoin de créer des fichiers de ressources au tout début du développement. Le code ci-dessous montre comment inclure dans un wrapper la chaîne « About Title » à des fins de localisation.
+<xref:Microsoft.Extensions.Localization.IStringLocalizer> et <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> ont été conçus pour améliorer la productivité lors du développement d’applications localisées. `IStringLocalizer` utilise <xref:System.Resources.ResourceManager> et <xref:System.Resources.ResourceReader> pour fournir des ressources spécifiques à la culture au moment de l’exécution. L’interface possède un indexeur et un `IEnumerable` pour retourner des chaînes localisées. `IStringLocalizer` ne nécessite pas le stockage des chaînes de langue par défaut dans un fichier de ressources. Vous pouvez développer une application ciblée pour la localisation sans avoir besoin de créer des fichiers de ressources au tout début du développement. Le code ci-dessous montre comment inclure dans un wrapper la chaîne « About Title » à des fins de localisation.
 
 [!code-csharp[](localization/sample/3.x/Localization/Controllers/AboutController.cs)]
 
@@ -786,7 +787,7 @@ Le service `IViewLocalizer` fournit des chaînes localisées à une [vue](xref:m
 
 [!code-cshtml[](localization/sample/3.x/Localization/Views/Home/About.cshtml)]
 
-L’implémentation par défaut de `IViewLocalizer` recherche le fichier de ressources en fonction du nom de fichier de l’affichage. Il n’existe aucune option pour utiliser un fichier de ressources partagées globales. `ViewLocalizer`implémente le localisateur à l’aide `IHtmlLocalizer` de, donc Razor n’encode pas le code HTML de la chaîne localisée. Vous pouvez paramétrer des chaînes de ressources pour que `IViewLocalizer` encode en HTML les paramètres, mais pas les chaînes de ressources. Examinez le Razor balisage suivant :
+L’implémentation par défaut de `IViewLocalizer` recherche le fichier de ressources en fonction du nom de fichier de l’affichage. Il n’existe aucune option pour utiliser un fichier de ressources partagées globales. `ViewLocalizer` implémente le localisateur à l’aide `IHtmlLocalizer` de, donc Razor n’encode pas le code HTML de la chaîne localisée. Vous pouvez paramétrer des chaînes de ressources pour que `IViewLocalizer` encode en HTML les paramètres, mais pas les chaînes de ressources. Examinez le Razor balisage suivant :
 
 ```cshtml
 @Localizer["<i>Hello</i> <b>{0}!</b>", UserManager.GetUserName(User)]
@@ -874,7 +875,7 @@ Dans l’exemple de projet, la méthode `ConfigureServices` affecte à `Resource
 | Resources/Controllers.HomeController.fr.resx | Points  |
 | Resources/Controllers/HomeController.fr.resx  | Chemin d’accès |
 
-Les fichiers de ressources utilisant `@inject IViewLocalizer` dans les Razor vues suivent un modèle similaire. Le fichier de ressources d’une vue peut être nommé selon la convention avec des points ou un chemin. Razorles fichiers de ressources d’affichage imitent le chemin d’accès de leur fichier de vue associé. Si nous affectons à `ResourcesPath` la valeur « Resources », le fichier de ressources en français associé à l’affichage *Views/Home/About.cshtml* peut porter l’un des noms suivants :
+Les fichiers de ressources utilisant `@inject IViewLocalizer` dans les Razor vues suivent un modèle similaire. Le fichier de ressources d’une vue peut être nommé selon la convention avec des points ou un chemin. Razor les fichiers de ressources d’affichage imitent le chemin d’accès de leur fichier de vue associé. Si nous affectons à `ResourcesPath` la valeur « Resources », le fichier de ressources en français associé à l’affichage *Views/Home/About.cshtml* peut porter l’un des noms suivants :
 
 * Resources/Views/Home/About.fr.resx
 
@@ -934,11 +935,11 @@ La localisation est configurée dans la méthode `Startup.ConfigureServices` :
 
 [!code-csharp[](localization/sample/3.x/Localization/Startup.cs?name=snippet1)]
 
-* `AddLocalization`Ajoute les services de localisation au conteneur de services. Le code ci-dessus affecte également au chemin des ressources la valeur « Resources ».
+* `AddLocalization` Ajoute les services de localisation au conteneur de services. Le code ci-dessus affecte également au chemin des ressources la valeur « Resources ».
 
-* `AddViewLocalization`Ajoute la prise en charge des fichiers de vue localisés. Dans cet exemple d’affichage, la localisation se base sur le suffixe du fichier d’affichage. Par exemple, « fr » dans le fichier *Index.fr.cshtml*.
+* `AddViewLocalization` Ajoute la prise en charge des fichiers de vue localisés. Dans cet exemple d’affichage, la localisation se base sur le suffixe du fichier d’affichage. Par exemple, « fr » dans le fichier *Index.fr.cshtml*.
 
-* `AddDataAnnotationsLocalization`Ajoute la prise en charge des messages de validation localisés `DataAnnotations` via des `IStringLocalizer` abstractions.
+* `AddDataAnnotationsLocalization` Ajoute la prise en charge des messages de validation localisés `DataAnnotations` via des `IStringLocalizer` abstractions.
 
 ### <a name="localization-middleware"></a>Intergiciel (middleware) de localisation
 

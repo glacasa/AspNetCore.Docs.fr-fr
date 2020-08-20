@@ -1,5 +1,5 @@
 ---
-title: RazorPages tests unitaires dans ASP.NET Core
+title: Razor Pages tests unitaires dans ASP.NET Core
 author: rick-anderson
 description: Découvrez comment créer des tests unitaires pour les Razor applications de pages.
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/22/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: test/razor-pages-tests
-ms.openlocfilehash: 21810f00548ad9f9c399ec4e453dd914dc186f5d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: bb376412daafd49b307c3c13ea7c88f34628f1c3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018947"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634837"
 ---
-# <a name="no-locrazor-pages-unit-tests-in-aspnet-core"></a>RazorPages tests unitaires dans ASP.NET Core
+# <a name="no-locrazor-pages-unit-tests-in-aspnet-core"></a>Razor Pages tests unitaires dans ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -182,7 +183,7 @@ Quand la `OnGetAsync` méthode est exécutée dans l’étape Act, elle appelle 
 
 [!code-csharp[](razor-pages-tests/samples/3.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet2)]
 
-`IndexPage`méthode du modèle de page `OnGetAsync` (*src/ Razor PagesTestSample/pages/index. cshtml. cs*) :
+`IndexPage` méthode du modèle de page `OnGetAsync` (*src/ Razor PagesTestSample/pages/index. cshtml. cs*) :
 
 [!code-csharp[](razor-pages-tests/samples/3.x/src/RazorPagesTestSample/Pages/Index.cshtml.cs?name=snippet1&highlight=3)]
 
@@ -366,7 +367,7 @@ Quand la `OnGetAsync` méthode est exécutée dans l’étape Act, elle appelle 
 
 [!code-csharp[](razor-pages-tests/samples/2.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet2)]
 
-`IndexPage`méthode du modèle de page `OnGetAsync` (*src/ Razor PagesTestSample/pages/index. cshtml. cs*) :
+`IndexPage` méthode du modèle de page `OnGetAsync` (*src/ Razor PagesTestSample/pages/index. cshtml. cs*) :
 
 [!code-csharp[](razor-pages-tests/samples/2.x/src/RazorPagesTestSample/Pages/Index.cshtml.cs?name=snippet1&highlight=3)]
 

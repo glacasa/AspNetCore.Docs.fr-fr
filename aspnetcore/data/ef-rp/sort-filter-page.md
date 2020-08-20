@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 5bfea63cc1ff85adbe5ce572858b78a8e86b2280
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5e073845acbecdf0db4c30c4725f12033cfc42ac
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017725"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634681"
 ---
 # <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Partie 3 : Razor pages avec EF Core dans ASP.net Core-Trier, filtrer, pagination
 
@@ -55,7 +56,7 @@ Le paramètre `sortOrder` est « Name » ou « Date ». Le paramètre `sortOrder
 
 Quand la page Index est demandée à partir du lien **Students**, il n’existe aucune chaîne de requête. Les étudiants sont affichés par nom de famille dans l’ordre croissant. Le tri croissant par nom de famille est la valeur par défaut dans l’instruction `switch`. Quand l’utilisateur clique sur un lien d’en-tête de colonne, la valeur `sortOrder` appropriée est fournie dans la valeur de chaîne de requête.
 
-`NameSort`et `DateSort` sont utilisés par la Razor page pour configurer les liens hypertexte d’en-tête de colonne avec les valeurs de chaîne de requête appropriées :
+`NameSort` et `DateSort` sont utilisés par la Razor page pour configurer les liens hypertexte d’en-tête de colonne avec les valeurs de chaîne de requête appropriées :
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
@@ -304,7 +305,7 @@ Le paramètre `sortOrder` est « Name » ou « Date ». Le paramètre `sortOrder
 
 Quand la page Index est demandée à partir du lien **Students**, il n’existe aucune chaîne de requête. Les étudiants sont affichés par nom de famille dans l’ordre croissant. Le tri croissant par nom de famille est la valeur par défaut dans l’instruction `switch`. Quand l’utilisateur clique sur un lien d’en-tête de colonne, la valeur `sortOrder` appropriée est fournie dans la valeur de chaîne de requête.
 
-`NameSort`et `DateSort` sont utilisés par la Razor page pour configurer les liens hypertexte d’en-tête de colonne avec les valeurs de chaîne de requête appropriées :
+`NameSort` et `DateSort` sont utilisés par la Razor page pour configurer les liens hypertexte d’en-tête de colonne avec les valeurs de chaîne de requête appropriées :
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortOnly&highlight=3-4)]
 
@@ -449,9 +450,9 @@ Tous les paramètres sont null quand :
 
 Quand l’utilisateur clique sur un lien de pagination, la variable d’index de page contient le numéro de page à afficher.
 
-`CurrentSort`fournit la Razor page avec l’ordre de tri actuel. L’ordre de tri actuel doit être inclus dans les liens de pagination afin de conserver l’ordre de tri lors de la pagination.
+`CurrentSort` fournit la Razor page avec l’ordre de tri actuel. L’ordre de tri actuel doit être inclus dans les liens de pagination afin de conserver l’ordre de tri lors de la pagination.
 
-`CurrentFilter`fournit la Razor page avec la chaîne de filtre actuelle. La valeur `CurrentFilter` :
+`CurrentFilter` fournit la Razor page avec la chaîne de filtre actuelle. La valeur `CurrentFilter` :
 
 * Doit être incluse dans les liens de pagination afin de conserver les paramètres de filtre lors de la pagination.
 * Doit être restaurée à la zone de texte quand la page est réaffichée.

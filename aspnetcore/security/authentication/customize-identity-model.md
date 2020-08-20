@@ -5,6 +5,7 @@ description: Cet article explique comment personnaliser le modèle de données E
 ms.author: avickers
 ms.date: 07/01/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 7c325bbc96ad4a8c5e4686073266d730eb924c10
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: 71f532aa00c2afeeb0d6b93c01cb6a1fbd0a686c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504669"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634304"
 ---
 # <a name="no-locidentity-model-customization-in-aspnet-core"></a>Identity personnalisation de modèle dans ASP.NET Core
 
 Par [Arthur Vickers](https://github.com/ajcvickers)
 
-ASP.NET Core Identity fournit une infrastructure pour la gestion et le stockage des comptes d’utilisateur dans les applications ASP.net core. Identity est ajouté à votre projet lorsque **des comptes d’utilisateur individuels** est sélectionné comme mécanisme d’authentification. Par défaut, utilise Identity un modèle de données de base Entity Framework (EF). Cet article explique comment personnaliser le Identity modèle.
+ASP.NET Core Identity fournit une infrastructure pour la gestion et le stockage des comptes d’utilisateur dans les applications ASP.NET Core. Identity est ajouté à votre projet lorsque **des comptes d’utilisateur individuels** est sélectionné comme mécanisme d’authentification. Par défaut, utilise Identity un modèle de données de base Entity Framework (EF). Cet article explique comment personnaliser le Identity modèle.
 
 ## <a name="no-locidentity-and-ef-core-migrations"></a>Identity Migrations et EF Core
 

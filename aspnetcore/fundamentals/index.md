@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/30/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/index
-ms.openlocfilehash: f141e9248a702ad9a1d9737f82543a0ccc8fb573
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8fa44f567906ecf36a9bbaa5076cd36c75c10781
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017205"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634876"
 ---
 # <a name="aspnet-core-fundamentals"></a>Notions de base d’ASP.NET Core
 
@@ -136,7 +137,7 @@ Pour plus d'informations, consultez <xref:fundamentals/servers/index>.
 
 ASP.NET Core fournit une infrastructure de configuration qui obtient des paramètres en tant que paires nom-valeur à partir d’un ensemble ordonné de fournisseurs de configuration. Les fournisseurs de configuration intégrés sont disponibles pour diverses sources, telles que les fichiers *. JSON* , les fichiers *. xml* , les variables d’environnement et les arguments de ligne de commande. Écrivez des fournisseurs de configuration personnalisés pour prendre en charge d’autres sources.
 
-Par [défaut](xref:fundamentals/configuration/index#default), les applications ASP.net Core sont configurées pour lire à partir d'appsettings.js, de variables *d'* environnement, de la ligne de commande, etc. Lorsque la configuration de l’application est chargée, les valeurs des variables d’environnement remplacent les valeurs de *appsettings.js*.
+Par [défaut](xref:fundamentals/configuration/index#default), les applications ASP.net Core sont configurées pour lire à partir d'appsettings.js, de variables * d'* environnement, de la ligne de commande, etc. Lorsque la configuration de l’application est chargée, les valeurs des variables d’environnement remplacent les valeurs de *appsettings.js*.
 
 La méthode recommandée pour lire les valeurs de configuration associées utilise le [modèle d’options](xref:fundamentals/configuration/options). Pour plus d’informations, consultez [lier des données de configuration hiérarchiques à l’aide du modèle options](xref:fundamentals/configuration/index#optpat).
 
@@ -210,7 +211,7 @@ La racine du contenu est le chemin de base pour :
 * Exécutable qui héberge l’application (*. exe*).
 * Assemblys compilés qui composent l’application (*. dll*).
 * Fichiers de contenu utilisés par l’application, tels que :
-  * Razorfichiers (*. cshtml*, *. Razor*)
+  * Razor fichiers (*. cshtml*, *. Razor*)
   * Fichiers de configuration (*. JSON*, *. xml*)
   * Fichiers de données (*. db*)
 * [Racine Web](#web-root), généralement le dossier *wwwroot* .
@@ -459,7 +460,7 @@ La racine du contenu est le chemin d’accès de base à :
 * Exécutable hébergeant l’application (*. exe*).
 * Assemblys compilés qui composent l’application (*. dll*).
 * Fichiers de contenu sans code utilisés par l’application, tels que :
-  * Razorfichiers (*. cshtml*, *. Razor*)
+  * Razor fichiers (*. cshtml*, *. Razor*)
   * Fichiers de configuration (*. JSON*, *. xml*)
   * Fichiers de données (*. db*)
 * [Racine Web](#web-root), en général le dossier *wwwroot* publié.

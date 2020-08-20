@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 06/30/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: f995fdaee1009ff51359df720c39d664aea6e3b1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8d1f761731ab3840d009eba1ff5316808bafec40
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016269"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634408"
 ---
 # <a name="use-grpc-in-browser-apps"></a>Utiliser gRPC dans les applications de navigateur
 
@@ -120,12 +121,12 @@ Le code précédent :
 * Configure un canal pour utiliser gRPC-Web.
 * Crée un client et effectue un appel à l’aide du canal.
 
-`GrpcWebHandler`possède les options de configuration suivantes :
+`GrpcWebHandler` possède les options de configuration suivantes :
 
 * **InnerHandler**: sous-jacent <xref:System.Net.Http.HttpMessageHandler> qui effectue la requête http gRPC, par exemple, `HttpClientHandler` .
 * **GrpcWebMode**: type énumération qui spécifie si la requête http gRPC `Content-Type` est `application/grpc-web` ou `application/grpc-web-text` .
-    * `GrpcWebMode.GrpcWeb`configure le contenu à envoyer sans encodage. Valeur par défaut.
-    * `GrpcWebMode.GrpcWebText`configure le contenu pour qu’il soit encodé en base64. Requis pour les appels de diffusion en continu du serveur dans les navigateurs.
+    * `GrpcWebMode.GrpcWeb` configure le contenu à envoyer sans encodage. Valeur par défaut.
+    * `GrpcWebMode.GrpcWebText` configure le contenu pour qu’il soit encodé en base64. Requis pour les appels de diffusion en continu du serveur dans les navigateurs.
 * **HttpVersion**: protocole http `Version` utilisé pour définir [HttpRequestMessage. version](xref:System.Net.Http.HttpRequestMessage.Version) sur la requête http gRPC sous-jacente. gRPC-Web n’a pas besoin d’une version spécifique et ne remplace pas la valeur par défaut, sauf indication contraire.
 
 > [!IMPORTANT]

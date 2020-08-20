@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 05/26/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/webapi
-ms.openlocfilehash: 4888de6ad55037be540cb62b6e4f02878e2b57ab
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e3e46f8050ba87c3108885341675c9d2a2cb7847
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014813"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635162"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>Migrer de API Web ASP.NET vers ASP.NET Core
 
@@ -205,7 +206,7 @@ Dans ASP.NET Core MVC, le routage des attributs est inclus par défaut quand <xr
 
 ## <a name="migrate-models-and-controllers"></a>Migrer les modèles et les contrôleurs
 
-Le code suivant illustre la `ProductsController` mise à jour de ASP.net Core :[!code-csharp[](webapi/sample/2.x/ProductsApp/Controllers/ProductsController.cs)]
+Le code suivant illustre la `ProductsController` mise à jour de ASP.net Core : [!code-csharp[](webapi/sample/2.x/ProductsApp/Controllers/ProductsController.cs)]
 
 Mettez à jour le `ProductsController` pour ASP.net Core :
 
@@ -272,7 +273,7 @@ Les fonctionnalités de compatibilité incluses dans `Microsoft.AspNetCore.Mvc.W
 * Étend la liaison de modèle afin que les actions du contrôleur puissent prendre des paramètres de type `HttpRequestMessage` .
 * Ajoute des formateurs de message permettant aux actions de retourner des résultats de type `HttpResponseMessage` .
 * Ajoute des méthodes de réponse supplémentaires que les actions de l’API Web 2 peuvent avoir utilisées pour répondre aux réponses :
-  * `HttpResponseMessage`générateurs
+  * `HttpResponseMessage` générateurs
     * `CreateResponse<T>`
     * `CreateErrorResponse`
   * Méthodes de résultat d’action :

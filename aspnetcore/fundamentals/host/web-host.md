@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/07/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/web-host
-ms.openlocfilehash: 06135d57ca6d0bceb9c53af61cc9aaca2ec46f30
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 67831237ab1f95c6535cf586681150a230b491d0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017283"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635266"
 ---
 # <a name="aspnet-core-web-host"></a>Hôte web ASP.NET Core
 
@@ -144,7 +145,7 @@ Lors de la configuration d’un hôte, les méthodes [Configure](/dotnet/api/mic
 
 [WebHostBuilder](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilder) s’appuie sur les approches suivantes pour définir les valeurs de configuration de l’hôte :
 
-* Configuration du générateur de l’hôte, qui inclut des variables d’environnement au format `ASPNETCORE_{configurationKey}`. Par exemple, `ASPNETCORE_ENVIRONMENT`.
+* Configuration du générateur de l’hôte, qui inclut des variables d’environnement au format `ASPNETCORE_{configurationKey}`. Par exemple : `ASPNETCORE_ENVIRONMENT`.
 * Des extensions comme [UseContentRoot](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.usecontentroot) et [UseConfiguration](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useconfiguration) (voir la section [Remplacer la configuration](#override-configuration)).
 * [UseSetting](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilder.usesetting) et la clé associée. Quand une valeur est définie avec `UseSetting`, elle est définie au format chaîne indépendamment du type.
 
@@ -167,8 +168,8 @@ La propriété [IHostingEnvironment.ApplicationName](/dotnet/api/microsoft.exten
 **Clé** : applicationName  
 **Type**: *chaîne*  
 **Par défaut** : nom de l’assembly contenant le point d’entrée de l’application.  
-**Définir à l’aide**de :`UseSetting`  
-**Variable d’environnement**:`ASPNETCORE_APPLICATIONNAME`
+**Définir à l’aide**de : `UseSetting`  
+**Variable d’environnement**: `ASPNETCORE_APPLICATIONNAME`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -182,8 +183,8 @@ Ce paramètre contrôle la capture des erreurs de démarrage.
 **Clé** : captureStartupErrors  
 **Type** : *bool* (`true` ou `1`)  
 **Valeur par défaut** : `false`, ou `true` si l’application s’exécute avec Kestrel derrière IIS.  
-**Définir à l’aide**de :`CaptureStartupErrors`  
-**Variable d’environnement**:`ASPNETCORE_CAPTURESTARTUPERRORS`
+**Définir à l’aide**de : `CaptureStartupErrors`  
+**Variable d’environnement**: `ASPNETCORE_CAPTURESTARTUPERRORS`
 
 Avec la valeur `false`, la survenue d’erreurs au démarrage entraîne la fermeture de l’hôte. Avec la valeur `true`, l’hôte capture les exceptions levées au démarrage et tente de démarrer le serveur.
 
@@ -199,8 +200,8 @@ Ce paramètre détermine où ASP.NET Core commence à rechercher les fichiers de
 **Clé** : contentRoot  
 **Type**: *chaîne*  
 **Valeur par défaut** : dossier où réside l’assembly de l’application.  
-**Définir à l’aide**de :`UseContentRoot`  
-**Variable d’environnement**:`ASPNETCORE_CONTENTROOT`
+**Définir à l’aide**de : `UseContentRoot`  
+**Variable d’environnement**: `ASPNETCORE_CONTENTROOT`
 
 La racine du contenu est également utilisée comme chemin de base pour la [racine Web](xref:fundamentals/index#web-root). Si le chemin d’accès racine du contenu n’existe pas, le démarrage de l’hôte échoue.
 
@@ -221,8 +222,8 @@ Détermine si les erreurs détaillées doivent être capturées.
 **Clé** : detailedErrors  
 **Type** : *bool* (`true` ou `1`)  
 **Valeur par défaut**: false  
-**Définir à l’aide**de :`UseSetting`  
-**Variable d’environnement**:`ASPNETCORE_DETAILEDERRORS`
+**Définir à l’aide**de : `UseSetting`  
+**Variable d’environnement**: `ASPNETCORE_DETAILEDERRORS`
 
 Quand cette fonctionnalité est activée (ou que <a href="#environment">l’environnement</a> est défini sur `Development`), l’application capture les exceptions détaillées.
 
@@ -238,8 +239,8 @@ Définit l’environnement de l’application.
 **Clé** : environment  
 **Type**: *chaîne*  
 **Valeur par défaut** : Production  
-**Définir à l’aide**de :`UseEnvironment`  
-**Variable d’environnement**:`ASPNETCORE_ENVIRONMENT`
+**Définir à l’aide**de : `UseEnvironment`  
+**Variable d’environnement**: `ASPNETCORE_ENVIRONMENT`
 
 L’environnement peut être défini à n’importe quelle valeur. Les valeurs définies par le framework sont `Development`, `Staging` et `Production`. Les valeurs ne respectent pas la casse. Par défaut, *l’environnement* est fourni par la variable d’environnement `ASPNETCORE_ENVIRONMENT`. Si vous utilisez [Visual Studio](https://visualstudio.microsoft.com), les variables d’environnement peuvent être définies dans le fichier *launchSettings.json*. Pour plus d'informations, consultez <xref:fundamentals/environments>.
 
@@ -255,8 +256,8 @@ Définit les assemblys d’hébergement au démarrage de l’application.
 **Clé** : hostingStartupAssemblies  
 **Type**: *chaîne*  
 **Valeur par défaut**: chaîne vide  
-**Définir à l’aide**de :`UseSetting`  
-**Variable d’environnement**:`ASPNETCORE_HOSTINGSTARTUPASSEMBLIES`
+**Définir à l’aide**de : `UseSetting`  
+**Variable d’environnement**: `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES`
 
 Chaîne délimitée par des points-virgules qui spécifie les assemblys d’hébergement à charger au démarrage.
 
@@ -288,8 +289,8 @@ Chaîne délimitée par des points-virgules qui spécifie les assemblys d’héb
 **Clé** : hostingStartupExcludeAssemblies  
 **Type**: *chaîne*  
 **Valeur par défaut**: chaîne vide  
-**Définir à l’aide**de :`UseSetting`  
-**Variable d’environnement**:`ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
+**Définir à l’aide**de : `UseSetting`  
+**Variable d’environnement**: `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -303,8 +304,8 @@ Indique si l’hôte doit écouter les URL configurées avec `WebHostBuilder` au
 **Clé** : preferHostingUrls  
 **Type** : *bool* (`true` ou `1`)  
 **Valeur par défaut**: true  
-**Définir à l’aide**de :`PreferHostingUrls`  
-**Variable d’environnement**:`ASPNETCORE_PREFERHOSTINGURLS`
+**Définir à l’aide**de : `PreferHostingUrls`  
+**Variable d’environnement**: `ASPNETCORE_PREFERHOSTINGURLS`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -318,8 +319,8 @@ Empêche le chargement automatique des assemblys d’hébergement au démarrage,
 **Clé** : preventHostingStartup  
 **Type** : *bool* (`true` ou `1`)  
 **Valeur par défaut**: false  
-**Définir à l’aide**de :`UseSetting`  
-**Variable d’environnement**:`ASPNETCORE_PREVENTHOSTINGSTARTUP`
+**Définir à l’aide**de : `UseSetting`  
+**Variable d’environnement**: `ASPNETCORE_PREVENTHOSTINGSTARTUP`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -332,11 +333,11 @@ Indique les adresses IP ou les adresses d’hôte avec les ports et protocoles s
 
 **Clé** : urls  
 **Type**: *chaîne*  
-**Par défaut**:http://localhost:5000  
-**Définir à l’aide**de :`UseUrls`  
-**Variable d’environnement**:`ASPNETCORE_URLS`
+**Par défaut**: http://localhost:5000  
+**Définir à l’aide**de : `UseUrls`  
+**Variable d’environnement**: `ASPNETCORE_URLS`
 
-Liste de préfixes d’URL séparés par des points-virgules (;) correspondant aux URL auxquelles le serveur doit répondre. Par exemple, `http://localhost:123`. Utilisez « \* » pour indiquer que le serveur doit écouter les requêtes sur toutes les adresses IP ou tous les noms d’hôte qui utilisent le port et le protocole spécifiés (par exemple, `http://*:5000`). Le protocole (`http://` ou `https://`) doit être inclus avec chaque URL. Les formats pris en charge varient selon les serveurs.
+Liste de préfixes d’URL séparés par des points-virgules (;) correspondant aux URL auxquelles le serveur doit répondre. Par exemple : `http://localhost:123`. Utilisez « \* » pour indiquer que le serveur doit écouter les requêtes sur toutes les adresses IP ou tous les noms d’hôte qui utilisent le port et le protocole spécifiés (par exemple, `http://*:5000`). Le protocole (`http://` ou `https://`) doit être inclus avec chaque URL. Les formats pris en charge varient selon les serveurs.
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -352,8 +353,8 @@ Spécifie le délai d’attente avant l’arrêt de l’hôte web.
 **Clé** : shutdownTimeoutSeconds  
 **Type**: *int*  
 **Valeur par défaut**: 5  
-**Définir à l’aide**de :`UseShutdownTimeout`  
-**Variable d’environnement**:`ASPNETCORE_SHUTDOWNTIMEOUTSECONDS`
+**Définir à l’aide**de : `UseShutdownTimeout`  
+**Variable d’environnement**: `ASPNETCORE_SHUTDOWNTIMEOUTSECONDS`
 
 La clé accepte une valeur *int* avec `UseSetting` (par exemple, `.UseSetting(WebHostDefaults.ShutdownTimeoutKey, "10")`), mais la méthode d’extension [UseShutdownTimeout](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useshutdowntimeout) prend une valeur [TimeSpan](/dotnet/api/system.timespan).
 
@@ -376,8 +377,8 @@ Détermine l’assembly à rechercher pour la classe `Startup`.
 **Clé** : startupAssembly  
 **Type**: *chaîne*  
 **Valeur par défaut** : l’assembly de l’application  
-**Définir à l’aide**de :`UseStartup`  
-**Variable d’environnement**:`ASPNETCORE_STARTUPASSEMBLY`
+**Définir à l’aide**de : `UseStartup`  
+**Variable d’environnement**: `ASPNETCORE_STARTUPASSEMBLY`
 
 L’assembly peut être référencé par nom (`string`) ou type (`TStartup`). Si plusieurs méthodes `UseStartup` sont appelées, la dernière prévaut.
 
@@ -398,8 +399,8 @@ Définit le chemin relatif des ressources statiques de l’application.
 **Clé** : webroot  
 **Type**: *chaîne*  
 **Valeur par défaut**: la valeur par défaut est `wwwroot` . Le chemin d’accès à *{root content}/wwwroot* doit exister. Si ce chemin n’existe pas, un fournisseur de fichiers no-op est utilisé.  
-**Définir à l’aide**de :`UseWebRoot`  
-**Variable d’environnement**:`ASPNETCORE_WEBROOT`
+**Définir à l’aide**de : `UseWebRoot`  
+**Variable d’environnement**: `ASPNETCORE_WEBROOT`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -827,7 +828,7 @@ public async Task Invoke(HttpContext context, IHostingEnvironment env)
 
 ## <a name="ihostapplicationlifetime-interface"></a>Interface IHostApplicationLifetime
 
-`IHostApplicationLifetime`permet les activités postérieures au démarrage et à l’arrêt. Trois propriétés de l’interface sont des jetons d’annulation utilisés pour inscrire les méthodes `Action` qui définissent les événements de démarrage et d’arrêt.
+`IHostApplicationLifetime` permet les activités postérieures au démarrage et à l’arrêt. Trois propriétés de l’interface sont des jetons d’annulation utilisés pour inscrire les méthodes `Action` qui définissent les événements de démarrage et d’arrêt.
 
 | Jeton d’annulation    | Événement déclencheur |
 | --------------------- | --------------------- |

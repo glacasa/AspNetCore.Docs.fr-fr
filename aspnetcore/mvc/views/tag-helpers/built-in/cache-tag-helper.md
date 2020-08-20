@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
-ms.openlocfilehash: 7d2ff774b7654993e2cd9b126db252f81a3032d3
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b1cab7ab8b491529ee4208d92fb30082be795eda
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018752"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635058"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>Tag Helper Cache dans ASP.NET Core MVC
 
@@ -47,7 +48,7 @@ La première requête à la page qui contient le Tag Helper affiche la date actu
 | --------------- | --------------- | ------- |
 | Boolean         | `true`, `false` | `true`  |
 
-`enabled` détermine si le contenu joint par le Tag Helper Cache est mis en cache. Par défaut, il s’agit de `true`. Si la valeur est `false`, la sortie rendue n’est **pas** mise en cache.
+`enabled` détermine si le contenu joint par le Tag Helper Cache est mis en cache. La valeur par défaut est `true`. Si la valeur est `false`, la sortie rendue n’est **pas** mise en cache.
 
 Exemple :
 
@@ -75,7 +76,7 @@ L’exemple suivant met en cache le contenu du Tag Helper Cache jusqu’à 17:02
 
 ### <a name="expires-after"></a>expires-after
 
-| Type d’attribut | Exemple                      | Par défaut    |
+| Type d’attribut | Exemple                      | Default    |
 | -------------- | ---------------------------- | ---------- |
 | `TimeSpan`     | `@TimeSpan.FromSeconds(120)` | 20 minutes |
 
@@ -171,9 +172,9 @@ routes.MapRoute(
 | -------------- | -------------------------------------------------------------------------------- |
 | String         | `.AspNetCore.Identity.Application`, `.AspNetCore.Identity.Application,HairColor` |
 
-`vary-by-cookie`accepte une liste de noms délimités par des virgules cookie qui déclenchent une actualisation du cache lorsque les cookie valeurs changent.
+`vary-by-cookie` accepte une liste de noms délimités par des virgules cookie qui déclenchent une actualisation du cache lorsque les cookie valeurs changent.
 
-L’exemple suivant analyse le cookie associé à ASP.net Core Identity . Lorsqu’un utilisateur est authentifié, une modification du Identity cookie déclenche une actualisation du cache :
+L’exemple suivant analyse le cookie associé à ASP.NET Core Identity . Lorsqu’un utilisateur est authentifié, une modification du Identity cookie déclenche une actualisation du cache :
 
 ```cshtml
 <cache vary-by-cookie=".AspNetCore.Identity.Application">

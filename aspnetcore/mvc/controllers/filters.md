@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 11d0c514dd15e787224510991ffb81680c9fc479
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7134344abb5bc724aceb9a2adb117b3749435f55
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019340"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634850"
 ---
 # <a name="filters-in-aspnet-core"></a>Filtres dans ASP.NET Core
 
@@ -60,8 +61,8 @@ Chaque type de filtre est exécuté dans une étape différente du pipeline de f
 * [Filtres de ressources](#resource-filters):
 
   * Exécuter après l’autorisation.  
-  * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*>exécute du code avant le reste du pipeline de filtre. Par exemple, `OnResourceExecuting` exécute le code avant la liaison de modèle.
-  * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted*>exécute du code une fois que le reste du pipeline est terminé.
+  * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*> exécute du code avant le reste du pipeline de filtre. Par exemple, `OnResourceExecuting` exécute le code avant la liaison de modèle.
+  * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted*> exécute du code une fois que le reste du pipeline est terminé.
 
 * [Filtres d’action](#action-filters):
 
@@ -98,8 +99,8 @@ Dans le code précédent, `SampleAsyncActionFilter` a un <xref:Microsoft.AspNetC
 
 Vous pouvez implémenter des interfaces pour plusieurs étapes de filtres dans une même classe. Par exemple, la <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> classe implémente :
 
-* Synchrone : <xref:Microsoft.AspNetCore.Mvc.Filters.IActionFilter> et<xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter>
-* Asynchrone : <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter> et<xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>
+* Synchrone : <xref:Microsoft.AspNetCore.Mvc.Filters.IActionFilter> et  <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter>
+* Asynchrone : <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter> et <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter>
 
 Implémentez la version synchrone ou asynchrone d’une interface de filtre, mais **pas** **les deux** . Le runtime vérifie d’abord si le filtre implémente l’interface asynchrone et, le cas échéant, il appelle cette interface. Dans le cas contraire, il appelle la ou les méthodes de l’interface synchrone. Si des interfaces synchrones et asynchrones sont implémentées dans une classe, seule la méthode asynchrone est appelée. Lorsque vous utilisez des classes abstraites telles que <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> , remplacez uniquement les méthodes synchrones ou la méthode asynchrone pour chaque type de filtre.
@@ -408,7 +409,7 @@ Exemples de filtre de ressources :
 
 ## <a name="action-filters"></a>Filtres d’actions
 
-Les filtres d’action ne s’appliquent **pas** aux Razor pages. RazorLes pages prennent en charge <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> et <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> . Pour plus d’informations, consultez [méthodes de filtre pour les Razor pages](xref:razor-pages/filter).
+Les filtres d’action ne s’appliquent **pas** aux Razor pages. Razor Les pages prennent en charge <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> et <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> . Pour plus d’informations, consultez [méthodes de filtre pour les Razor pages](xref:razor-pages/filter).
 
 Filtres d'actions :
 
@@ -421,7 +422,7 @@ Le code suivant montre un exemple de filtre d’actions :
 
 <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext> fournit les propriétés suivantes :
 
-* <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext.ActionArguments>-active la lecture des entrées dans une méthode d’action.
+* <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext.ActionArguments> -active la lecture des entrées dans une méthode d’action.
 * <xref:Microsoft.AspNetCore.Mvc.Controller> : permet de manipuler l’instance de contrôleur.
 * <xref:System.Web.Mvc.ActionExecutingContext.Result> : la définition de `Result` court-circuite l’exécution de la méthode d’action et les filtres d’actions suivants.
 
@@ -441,7 +442,7 @@ Levée d’une exception dans une méthode d’action :
 Pour un `IAsyncActionFilter`, un appel à <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate> :
 
 * Exécute tous les filtres d’actions suivants et la méthode d’action.
-* retourne `ActionExecutedContext` ;
+* Retourne `ActionExecutedContext`.
 
 Pour court-circuiter, attribuez <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext.Result?displayProperty=fullName> à une instance de résultat et n’appelez pas le `next` (le `ActionExecutionDelegate`).
 
@@ -942,7 +943,7 @@ Exemples de filtre de ressources :
 ## <a name="action-filters"></a>Filtres d’actions
 
 > [!IMPORTANT]
-> Les filtres d’action ne s’appliquent **pas** aux Razor pages. RazorLes pages prennent en charge <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> et <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> . Pour plus d’informations, consultez [méthodes de filtre pour les Razor pages](xref:razor-pages/filter).
+> Les filtres d’action ne s’appliquent **pas** aux Razor pages. Razor Les pages prennent en charge <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> et <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> . Pour plus d’informations, consultez [méthodes de filtre pour les Razor pages](xref:razor-pages/filter).
 
 Filtres d'actions :
 
@@ -975,7 +976,7 @@ Levée d’une exception dans une méthode d’action :
 Pour un `IAsyncActionFilter`, un appel à <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate> :
 
 * Exécute tous les filtres d’actions suivants et la méthode d’action.
-* retourne `ActionExecutedContext` ;
+* Retourne `ActionExecutedContext`.
 
 Pour court-circuiter, attribuez <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext.Result?displayProperty=fullName> à une instance de résultat et n’appelez pas le `next` (le `ActionExecutionDelegate`).
 
