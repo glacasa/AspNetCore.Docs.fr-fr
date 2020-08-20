@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/29/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,38 +18,38 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/configuration
-ms.openlocfilehash: 159b6da106ab21946ae02a970a28e1f0309acf6c
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: 1607a80ea12cedd82b5996cf1b09e02e1aada2fd
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504578"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628805"
 ---
-# <a name="aspnet-core-no-locblazor-configuration"></a><span data-ttu-id="0cf91-103">Configuration de ASP.NET Core Blazor</span><span class="sxs-lookup"><span data-stu-id="0cf91-103">ASP.NET Core Blazor configuration</span></span>
+# <a name="aspnet-core-no-locblazor-configuration"></a><span data-ttu-id="4a221-103">Configuration de ASP.NET Core Blazor</span><span class="sxs-lookup"><span data-stu-id="4a221-103">ASP.NET Core Blazor configuration</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="0cf91-104">Cette rubrique s’applique à Blazor WebAssembly .</span><span class="sxs-lookup"><span data-stu-id="0cf91-104">This topic applies to Blazor WebAssembly.</span></span> <span data-ttu-id="0cf91-105">Pour obtenir des instructions générales sur ASP.NET Core configuration des applications, consultez <xref:fundamentals/configuration/index> .</span><span class="sxs-lookup"><span data-stu-id="0cf91-105">For general guidance on ASP.NET Core app configuration, see <xref:fundamentals/configuration/index>.</span></span>
+> <span data-ttu-id="4a221-104">Cette rubrique s’applique à Blazor WebAssembly .</span><span class="sxs-lookup"><span data-stu-id="4a221-104">This topic applies to Blazor WebAssembly.</span></span> <span data-ttu-id="4a221-105">Pour obtenir des instructions générales sur ASP.NET Core configuration des applications, consultez <xref:fundamentals/configuration/index> .</span><span class="sxs-lookup"><span data-stu-id="4a221-105">For general guidance on ASP.NET Core app configuration, see <xref:fundamentals/configuration/index>.</span></span>
 
-<span data-ttu-id="0cf91-106">Blazor WebAssembly charge la configuration à partir des fichiers de paramètres d’application par défaut :</span><span class="sxs-lookup"><span data-stu-id="0cf91-106">Blazor WebAssembly loads configuration from app settings files by default:</span></span>
+<span data-ttu-id="4a221-106">Blazor WebAssembly charge la configuration à partir des fichiers de paramètres d’application par défaut :</span><span class="sxs-lookup"><span data-stu-id="4a221-106">Blazor WebAssembly loads configuration from app settings files by default:</span></span>
 
 * `wwwroot/appsettings.json`
 * `wwwroot/appsettings.{ENVIRONMENT}.json`
 
-<span data-ttu-id="0cf91-107">D’autres fournisseurs de configuration inscrits par l’application peuvent également fournir une configuration.</span><span class="sxs-lookup"><span data-stu-id="0cf91-107">Other configuration providers registered by the app can also provide configuration.</span></span>
+<span data-ttu-id="4a221-107">D’autres fournisseurs de configuration inscrits par l’application peuvent également fournir une configuration.</span><span class="sxs-lookup"><span data-stu-id="4a221-107">Other configuration providers registered by the app can also provide configuration.</span></span>
 
-<span data-ttu-id="0cf91-108">Les fonctionnalités des fournisseurs ou du fournisseur ne sont pas toutes appropriées pour les Blazor WebAssembly applications :</span><span class="sxs-lookup"><span data-stu-id="0cf91-108">Not all providers or provider features are appropriate for Blazor WebAssembly apps:</span></span>
+<span data-ttu-id="4a221-108">Les fonctionnalités des fournisseurs ou du fournisseur ne sont pas toutes appropriées pour les Blazor WebAssembly applications :</span><span class="sxs-lookup"><span data-stu-id="4a221-108">Not all providers or provider features are appropriate for Blazor WebAssembly apps:</span></span>
 
-* <span data-ttu-id="0cf91-109">[Fournisseur de configuration Azure Key Vault](xref:security/key-vault-configuration): le fournisseur n’est pas pris en charge pour l’identité managée et l’ID d’application (ID client) avec des scénarios de clé secrète client.</span><span class="sxs-lookup"><span data-stu-id="0cf91-109">[Azure Key Vault configuration provider](xref:security/key-vault-configuration): The provider isn't supported for managed identity and application ID (client ID) with client secret scenarios.</span></span> <span data-ttu-id="0cf91-110">L’ID d’application avec une clé secrète client n’est pas recommandé pour une application ASP.NET Core, en particulier pour les Blazor WebAssembly applications, car la clé secrète client ne peut pas être sécurisée côté client pour accéder au service.</span><span class="sxs-lookup"><span data-stu-id="0cf91-110">Application ID with a client secret isn't recommended for any ASP.NET Core app, especially Blazor WebAssembly apps because the client secret can't be secured client-side to access to the service.</span></span>
-* <span data-ttu-id="0cf91-111">[Fournisseur de configuration Azure App](/azure/azure-app-configuration/quickstart-aspnet-core-app): le fournisseur n’est pas approprié pour les Blazor WebAssembly applications, car les Blazor WebAssembly applications ne s’exécutent pas sur un serveur dans Azure.</span><span class="sxs-lookup"><span data-stu-id="0cf91-111">[Azure App configuration provider](/azure/azure-app-configuration/quickstart-aspnet-core-app): The provider isn't appropriate for Blazor WebAssembly apps because Blazor WebAssembly apps don't run on a server in Azure.</span></span>
+* <span data-ttu-id="4a221-109">[Fournisseur de configuration Azure Key Vault](xref:security/key-vault-configuration): le fournisseur n’est pas pris en charge pour l’identité managée et l’ID d’application (ID client) avec des scénarios de clé secrète client.</span><span class="sxs-lookup"><span data-stu-id="4a221-109">[Azure Key Vault configuration provider](xref:security/key-vault-configuration): The provider isn't supported for managed identity and application ID (client ID) with client secret scenarios.</span></span> <span data-ttu-id="4a221-110">L’ID d’application avec une clé secrète client n’est pas recommandé pour une application ASP.NET Core, en particulier pour les Blazor WebAssembly applications, car la clé secrète client ne peut pas être sécurisée côté client pour accéder au service.</span><span class="sxs-lookup"><span data-stu-id="4a221-110">Application ID with a client secret isn't recommended for any ASP.NET Core app, especially Blazor WebAssembly apps because the client secret can't be secured client-side to access to the service.</span></span>
+* <span data-ttu-id="4a221-111">[Fournisseur de configuration Azure App](/azure/azure-app-configuration/quickstart-aspnet-core-app): le fournisseur n’est pas approprié pour les Blazor WebAssembly applications, car les Blazor WebAssembly applications ne s’exécutent pas sur un serveur dans Azure.</span><span class="sxs-lookup"><span data-stu-id="4a221-111">[Azure App configuration provider](/azure/azure-app-configuration/quickstart-aspnet-core-app): The provider isn't appropriate for Blazor WebAssembly apps because Blazor WebAssembly apps don't run on a server in Azure.</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="0cf91-112">La configuration dans une Blazor WebAssembly application est visible pour les utilisateurs.</span><span class="sxs-lookup"><span data-stu-id="0cf91-112">Configuration in a Blazor WebAssembly app is visible to users.</span></span> <span data-ttu-id="0cf91-113">**Ne stockez pas les secrets ou les informations d’identification de l’application dans la configuration.**</span><span class="sxs-lookup"><span data-stu-id="0cf91-113">**Don't store app secrets or credentials in configuration.**</span></span>
+> <span data-ttu-id="4a221-112">La configuration dans une Blazor WebAssembly application est visible pour les utilisateurs.</span><span class="sxs-lookup"><span data-stu-id="4a221-112">Configuration in a Blazor WebAssembly app is visible to users.</span></span> <span data-ttu-id="4a221-113">**Ne stockez pas les secrets ou les informations d’identification de l’application dans la configuration.**</span><span class="sxs-lookup"><span data-stu-id="4a221-113">**Don't store app secrets or credentials in configuration.**</span></span>
 
-<span data-ttu-id="0cf91-114">Pour plus d’informations sur les fournisseurs de configuration, consultez <xref:fundamentals/configuration/index> .</span><span class="sxs-lookup"><span data-stu-id="0cf91-114">For more information on configuration providers, see <xref:fundamentals/configuration/index>.</span></span>
+<span data-ttu-id="4a221-114">Pour plus d’informations sur les fournisseurs de configuration, consultez <xref:fundamentals/configuration/index> .</span><span class="sxs-lookup"><span data-stu-id="4a221-114">For more information on configuration providers, see <xref:fundamentals/configuration/index>.</span></span>
 
-## <a name="app-settings-configuration"></a><span data-ttu-id="0cf91-115">Configuration des paramètres de l’application</span><span class="sxs-lookup"><span data-stu-id="0cf91-115">App settings configuration</span></span>
+## <a name="app-settings-configuration"></a><span data-ttu-id="4a221-115">Configuration des paramètres de l’application</span><span class="sxs-lookup"><span data-stu-id="4a221-115">App settings configuration</span></span>
 
-<span data-ttu-id="0cf91-116">`wwwroot/appsettings.json`:</span><span class="sxs-lookup"><span data-stu-id="0cf91-116">`wwwroot/appsettings.json`:</span></span>
+<span data-ttu-id="4a221-116">`wwwroot/appsettings.json`:</span><span class="sxs-lookup"><span data-stu-id="4a221-116">`wwwroot/appsettings.json`:</span></span>
 
 ```json
 {
@@ -56,7 +57,7 @@ ms.locfileid: "88504578"
 }
 ```
 
-<span data-ttu-id="0cf91-117">Injecter une <xref:Microsoft.Extensions.Configuration.IConfiguration> instance dans un composant pour accéder aux données de configuration :</span><span class="sxs-lookup"><span data-stu-id="0cf91-117">Inject an <xref:Microsoft.Extensions.Configuration.IConfiguration> instance into a component to access the configuration data:</span></span>
+<span data-ttu-id="4a221-117">Injecter une <xref:Microsoft.Extensions.Configuration.IConfiguration> instance dans un composant pour accéder aux données de configuration :</span><span class="sxs-lookup"><span data-stu-id="4a221-117">Inject an <xref:Microsoft.Extensions.Configuration.IConfiguration> instance into a component to access the configuration data:</span></span>
 
 ```razor
 @page "/"
@@ -68,18 +69,18 @@ ms.locfileid: "88504578"
 <p>Message: @Configuration["message"]</p>
 ```
 
-## <a name="custom-configuration-provider-with-ef-core"></a><span data-ttu-id="0cf91-118">Fournisseur de configuration personnalisé avec EF Core</span><span class="sxs-lookup"><span data-stu-id="0cf91-118">Custom configuration provider with EF Core</span></span>
+## <a name="custom-configuration-provider-with-ef-core"></a><span data-ttu-id="4a221-118">Fournisseur de configuration personnalisé avec EF Core</span><span class="sxs-lookup"><span data-stu-id="4a221-118">Custom configuration provider with EF Core</span></span>
 
-<span data-ttu-id="0cf91-119">Le fournisseur de configuration personnalisé avec EF Core illustré dans <xref:fundamentals/configuration/index#custom-configuration-provider> fonctionne avec les Blazor WebAssembly applications.</span><span class="sxs-lookup"><span data-stu-id="0cf91-119">The custom configuration provider with EF Core demonstrated in <xref:fundamentals/configuration/index#custom-configuration-provider> works with Blazor WebAssembly apps.</span></span>
+<span data-ttu-id="4a221-119">Le fournisseur de configuration personnalisé avec EF Core illustré dans <xref:fundamentals/configuration/index#custom-configuration-provider> fonctionne avec les Blazor WebAssembly applications.</span><span class="sxs-lookup"><span data-stu-id="4a221-119">The custom configuration provider with EF Core demonstrated in <xref:fundamentals/configuration/index#custom-configuration-provider> works with Blazor WebAssembly apps.</span></span>
 
-<span data-ttu-id="0cf91-120">Ajoutez le fournisseur de configuration de l’exemple avec le code suivant dans `Program.Main` ( `Program.cs` ) :</span><span class="sxs-lookup"><span data-stu-id="0cf91-120">Add the example's configuration provider with the following code in `Program.Main` (`Program.cs`):</span></span>
+<span data-ttu-id="4a221-120">Ajoutez le fournisseur de configuration de l’exemple avec le code suivant dans `Program.Main` ( `Program.cs` ) :</span><span class="sxs-lookup"><span data-stu-id="4a221-120">Add the example's configuration provider with the following code in `Program.Main` (`Program.cs`):</span></span>
 
 ```csharp
 builder.Configuration.AddEFConfiguration(
     options => options.UseInMemoryDatabase("InMemoryDb"));
 ```
 
-<span data-ttu-id="0cf91-121">Injecter une <xref:Microsoft.Extensions.Configuration.IConfiguration> instance dans un composant pour accéder aux données de configuration :</span><span class="sxs-lookup"><span data-stu-id="0cf91-121">Inject an <xref:Microsoft.Extensions.Configuration.IConfiguration> instance into a component to access the configuration data:</span></span>
+<span data-ttu-id="4a221-121">Injecter une <xref:Microsoft.Extensions.Configuration.IConfiguration> instance dans un composant pour accéder aux données de configuration :</span><span class="sxs-lookup"><span data-stu-id="4a221-121">Inject an <xref:Microsoft.Extensions.Configuration.IConfiguration> instance into a component to access the configuration data:</span></span>
 
 ```razor
 @using Microsoft.Extensions.Configuration
@@ -92,11 +93,11 @@ builder.Configuration.AddEFConfiguration(
 </ul>
 ```
 
-## <a name="memory-configuration-source"></a><span data-ttu-id="0cf91-122">Source de la configuration de la mémoire</span><span class="sxs-lookup"><span data-stu-id="0cf91-122">Memory Configuration Source</span></span>
+## <a name="memory-configuration-source"></a><span data-ttu-id="4a221-122">Source de la configuration de la mémoire</span><span class="sxs-lookup"><span data-stu-id="4a221-122">Memory Configuration Source</span></span>
 
-<span data-ttu-id="0cf91-123">L’exemple suivant utilise un <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> pour fournir une configuration supplémentaire :</span><span class="sxs-lookup"><span data-stu-id="0cf91-123">The following example uses a <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> to supply additional configuration:</span></span>
+<span data-ttu-id="4a221-123">L’exemple suivant utilise un <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> pour fournir une configuration supplémentaire :</span><span class="sxs-lookup"><span data-stu-id="4a221-123">The following example uses a <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> to supply additional configuration:</span></span>
 
-<span data-ttu-id="0cf91-124">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="0cf91-124">`Program.Main`:</span></span>
+<span data-ttu-id="4a221-124">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="4a221-124">`Program.Main`:</span></span>
 
 ```csharp
 using Microsoft.Extensions.Configuration.Memory;
@@ -120,7 +121,7 @@ var memoryConfig = new MemoryConfigurationSource { InitialData = vehicleData };
 builder.Configuration.Add(memoryConfig);
 ```
 
-<span data-ttu-id="0cf91-125">Injecter une <xref:Microsoft.Extensions.Configuration.IConfiguration> instance dans un composant pour accéder aux données de configuration :</span><span class="sxs-lookup"><span data-stu-id="0cf91-125">Inject an <xref:Microsoft.Extensions.Configuration.IConfiguration> instance into a component to access the configuration data:</span></span>
+<span data-ttu-id="4a221-125">Injecter une <xref:Microsoft.Extensions.Configuration.IConfiguration> instance dans un composant pour accéder aux données de configuration :</span><span class="sxs-lookup"><span data-stu-id="4a221-125">Inject an <xref:Microsoft.Extensions.Configuration.IConfiguration> instance into a component to access the configuration data:</span></span>
 
 ```razor
 @page "/"
@@ -148,9 +149,9 @@ builder.Configuration.Add(memoryConfig);
 }
 ```
 
-<span data-ttu-id="0cf91-126">Pour lire d’autres fichiers de configuration du `wwwroot` dossier dans la configuration, utilisez un <xref:System.Net.Http.HttpClient> pour obtenir le contenu du fichier.</span><span class="sxs-lookup"><span data-stu-id="0cf91-126">To read other configuration files from the `wwwroot` folder into configuration, use an <xref:System.Net.Http.HttpClient> to obtain the file's content.</span></span> <span data-ttu-id="0cf91-127">Lors de l’utilisation de cette approche, l' <xref:System.Net.Http.HttpClient> inscription de service existante peut utiliser le client local créé pour lire le fichier, comme le montre l’exemple suivant :</span><span class="sxs-lookup"><span data-stu-id="0cf91-127">When using this approach, the existing <xref:System.Net.Http.HttpClient> service registration can use the local client created to read the file, as the following example shows:</span></span>
+<span data-ttu-id="4a221-126">Pour lire d’autres fichiers de configuration du `wwwroot` dossier dans la configuration, utilisez un <xref:System.Net.Http.HttpClient> pour obtenir le contenu du fichier.</span><span class="sxs-lookup"><span data-stu-id="4a221-126">To read other configuration files from the `wwwroot` folder into configuration, use an <xref:System.Net.Http.HttpClient> to obtain the file's content.</span></span> <span data-ttu-id="4a221-127">Lors de l’utilisation de cette approche, l' <xref:System.Net.Http.HttpClient> inscription de service existante peut utiliser le client local créé pour lire le fichier, comme le montre l’exemple suivant :</span><span class="sxs-lookup"><span data-stu-id="4a221-127">When using this approach, the existing <xref:System.Net.Http.HttpClient> service registration can use the local client created to read the file, as the following example shows:</span></span>
 
-<span data-ttu-id="0cf91-128">`wwwroot/cars.json`:</span><span class="sxs-lookup"><span data-stu-id="0cf91-128">`wwwroot/cars.json`:</span></span>
+<span data-ttu-id="4a221-128">`wwwroot/cars.json`:</span><span class="sxs-lookup"><span data-stu-id="4a221-128">`wwwroot/cars.json`:</span></span>
 
 ```json
 {
@@ -158,7 +159,7 @@ builder.Configuration.Add(memoryConfig);
 }
 ```
 
-<span data-ttu-id="0cf91-129">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="0cf91-129">`Program.Main`:</span></span>
+<span data-ttu-id="4a221-129">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="4a221-129">`Program.Main`:</span></span>
 
 ```csharp
 using Microsoft.Extensions.Configuration;
@@ -178,9 +179,9 @@ using var stream = await response.Content.ReadAsStreamAsync();
 builder.Configuration.AddJsonStream(stream);
 ```
 
-## <a name="authentication-configuration"></a><span data-ttu-id="0cf91-130">Configuration de l’authentification</span><span class="sxs-lookup"><span data-stu-id="0cf91-130">Authentication configuration</span></span>
+## <a name="authentication-configuration"></a><span data-ttu-id="4a221-130">Configuration de l’authentification</span><span class="sxs-lookup"><span data-stu-id="4a221-130">Authentication configuration</span></span>
 
-<span data-ttu-id="0cf91-131">`wwwroot/appsettings.json`:</span><span class="sxs-lookup"><span data-stu-id="0cf91-131">`wwwroot/appsettings.json`:</span></span>
+<span data-ttu-id="4a221-131">`wwwroot/appsettings.json`:</span><span class="sxs-lookup"><span data-stu-id="4a221-131">`wwwroot/appsettings.json`:</span></span>
 
 ```json
 {
@@ -191,24 +192,24 @@ builder.Configuration.AddJsonStream(stream);
 }
 ```
 
-<span data-ttu-id="0cf91-132">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="0cf91-132">`Program.Main`:</span></span>
+<span data-ttu-id="4a221-132">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="4a221-132">`Program.Main`:</span></span>
 
 ```csharp
 builder.Services.AddOidcAuthentication(options =>
     builder.Configuration.Bind("Local", options.ProviderOptions));
 ```
 
-## <a name="logging-configuration"></a><span data-ttu-id="0cf91-133">Configuration de la journalisation</span><span class="sxs-lookup"><span data-stu-id="0cf91-133">Logging configuration</span></span>
+## <a name="logging-configuration"></a><span data-ttu-id="4a221-133">Configuration de la journalisation</span><span class="sxs-lookup"><span data-stu-id="4a221-133">Logging configuration</span></span>
 
-<span data-ttu-id="0cf91-134">Ajoutez une référence de package pour [`Microsoft.Extensions.Logging.Configuration`](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration) :</span><span class="sxs-lookup"><span data-stu-id="0cf91-134">Add a package reference for [`Microsoft.Extensions.Logging.Configuration`](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration):</span></span>
+<span data-ttu-id="4a221-134">Ajoutez une référence de package pour [`Microsoft.Extensions.Logging.Configuration`](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration) :</span><span class="sxs-lookup"><span data-stu-id="4a221-134">Add a package reference for [`Microsoft.Extensions.Logging.Configuration`](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration):</span></span>
 
 ```xml
 <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="{VERSION}" />
 ```
 
-<span data-ttu-id="0cf91-135">Pour l’espace réservé `{VERSION}` , la dernière version stable du package qui correspond à la version du Framework partagé de l’application est disponible dans l' **historique des versions** du package sur [NuGet.org](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration).</span><span class="sxs-lookup"><span data-stu-id="0cf91-135">For the placeholder `{VERSION}`, the latest stable version of the package that matches the app's shared framework version can be found in the package's **Version History** at [NuGet.org](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration).</span></span>
+<span data-ttu-id="4a221-135">Pour l’espace réservé `{VERSION}` , la dernière version stable du package qui correspond à la version du Framework partagé de l’application est disponible dans l' **historique des versions** du package sur [NuGet.org](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration).</span><span class="sxs-lookup"><span data-stu-id="4a221-135">For the placeholder `{VERSION}`, the latest stable version of the package that matches the app's shared framework version can be found in the package's **Version History** at [NuGet.org](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration).</span></span>
 
-<span data-ttu-id="0cf91-136">`wwwroot/appsettings.json`:</span><span class="sxs-lookup"><span data-stu-id="0cf91-136">`wwwroot/appsettings.json`:</span></span>
+<span data-ttu-id="4a221-136">`wwwroot/appsettings.json`:</span><span class="sxs-lookup"><span data-stu-id="4a221-136">`wwwroot/appsettings.json`:</span></span>
 
 ```json
 {
@@ -222,7 +223,7 @@ builder.Services.AddOidcAuthentication(options =>
 }
 ```
 
-<span data-ttu-id="0cf91-137">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="0cf91-137">`Program.Main`:</span></span>
+<span data-ttu-id="4a221-137">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="4a221-137">`Program.Main`:</span></span>
 
 ```csharp
 using Microsoft.Extensions.Logging;
@@ -233,19 +234,19 @@ builder.Logging.AddConfiguration(
     builder.Configuration.GetSection("Logging"));
 ```
 
-## <a name="host-builder-configuration"></a><span data-ttu-id="0cf91-138">Configuration du générateur d’ordinateurs hôtes</span><span class="sxs-lookup"><span data-stu-id="0cf91-138">Host builder configuration</span></span>
+## <a name="host-builder-configuration"></a><span data-ttu-id="4a221-138">Configuration du générateur d’ordinateurs hôtes</span><span class="sxs-lookup"><span data-stu-id="4a221-138">Host builder configuration</span></span>
 
-<span data-ttu-id="0cf91-139">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="0cf91-139">`Program.Main`:</span></span>
+<span data-ttu-id="4a221-139">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="4a221-139">`Program.Main`:</span></span>
 
 ```csharp
 var hostname = builder.Configuration["HostName"];
 ```
 
-## <a name="cached-configuration"></a><span data-ttu-id="0cf91-140">Configuration mise en cache</span><span class="sxs-lookup"><span data-stu-id="0cf91-140">Cached configuration</span></span>
+## <a name="cached-configuration"></a><span data-ttu-id="4a221-140">Configuration mise en cache</span><span class="sxs-lookup"><span data-stu-id="4a221-140">Cached configuration</span></span>
 
-<span data-ttu-id="0cf91-141">Les fichiers de configuration sont mis en cache pour une utilisation hors connexion.</span><span class="sxs-lookup"><span data-stu-id="0cf91-141">Configuration files are cached for offline use.</span></span> <span data-ttu-id="0cf91-142">Avec les [applications Web progressives (PWA)](xref:blazor/progressive-web-app), vous pouvez uniquement mettre à jour les fichiers de configuration lors de la création d’un déploiement.</span><span class="sxs-lookup"><span data-stu-id="0cf91-142">With [Progressive Web Applications (PWAs)](xref:blazor/progressive-web-app), you can only update configuration files when creating a new deployment.</span></span> <span data-ttu-id="0cf91-143">La modification des fichiers de configuration entre les déploiements n’a aucun effet, car :</span><span class="sxs-lookup"><span data-stu-id="0cf91-143">Editing configuration files between deployments has no effect because:</span></span>
+<span data-ttu-id="4a221-141">Les fichiers de configuration sont mis en cache pour une utilisation hors connexion.</span><span class="sxs-lookup"><span data-stu-id="4a221-141">Configuration files are cached for offline use.</span></span> <span data-ttu-id="4a221-142">Avec les [applications Web progressives (PWA)](xref:blazor/progressive-web-app), vous pouvez uniquement mettre à jour les fichiers de configuration lors de la création d’un déploiement.</span><span class="sxs-lookup"><span data-stu-id="4a221-142">With [Progressive Web Applications (PWAs)](xref:blazor/progressive-web-app), you can only update configuration files when creating a new deployment.</span></span> <span data-ttu-id="4a221-143">La modification des fichiers de configuration entre les déploiements n’a aucun effet, car :</span><span class="sxs-lookup"><span data-stu-id="4a221-143">Editing configuration files between deployments has no effect because:</span></span>
 
-* <span data-ttu-id="0cf91-144">Les utilisateurs ont des versions mises en cache des fichiers qu’ils continuent d’utiliser.</span><span class="sxs-lookup"><span data-stu-id="0cf91-144">Users have cached versions of the files that they continue to use.</span></span>
-* <span data-ttu-id="0cf91-145">Les `service-worker.js` fichiers et de PWA `service-worker-assets.js` doivent être reconstruits lors de la compilation, qui signalent à l’application à la prochaine visite en ligne de l’utilisateur que l’application a été redéployée.</span><span class="sxs-lookup"><span data-stu-id="0cf91-145">The PWA's `service-worker.js` and `service-worker-assets.js` files must be rebuilt on compilation, which signal to the app on the user's next online visit that the app has been redeployed.</span></span>
+* <span data-ttu-id="4a221-144">Les utilisateurs ont des versions mises en cache des fichiers qu’ils continuent d’utiliser.</span><span class="sxs-lookup"><span data-stu-id="4a221-144">Users have cached versions of the files that they continue to use.</span></span>
+* <span data-ttu-id="4a221-145">Les `service-worker.js` fichiers et de PWA `service-worker-assets.js` doivent être reconstruits lors de la compilation, qui signalent à l’application à la prochaine visite en ligne de l’utilisateur que l’application a été redéployée.</span><span class="sxs-lookup"><span data-stu-id="4a221-145">The PWA's `service-worker.js` and `service-worker-assets.js` files must be rebuilt on compilation, which signal to the app on the user's next online visit that the app has been redeployed.</span></span>
 
-<span data-ttu-id="0cf91-146">Pour plus d’informations sur la façon dont les mises à jour en arrière-plan sont gérées par PWA, consultez <xref:blazor/progressive-web-app#background-updates> .</span><span class="sxs-lookup"><span data-stu-id="0cf91-146">For more information on how background updates are handled by PWAs, see <xref:blazor/progressive-web-app#background-updates>.</span></span>
+<span data-ttu-id="4a221-146">Pour plus d’informations sur la façon dont les mises à jour en arrière-plan sont gérées par PWA, consultez <xref:blazor/progressive-web-app#background-updates> .</span><span class="sxs-lookup"><span data-stu-id="4a221-146">For more information on how background updates are handled by PWAs, see <xref:blazor/progressive-web-app#background-updates>.</span></span>
