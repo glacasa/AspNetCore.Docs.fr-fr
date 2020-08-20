@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 06/26/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: 5ecb6379f00c3ad505a447dfc0d3fac5f857cb09
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 84094dce306e10470ec7b7be3efe6da024470330
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022184"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628844"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Bien démarrer avec Swashbuckle et ASP.NET Core
 
@@ -46,7 +47,7 @@ Vous pouvez ajouter Swashbuckle en adoptant l’une des approches suivantes :
 * À partir de la fenêtre **Console du Gestionnaire de package** :
   * Accéder à **la**  >  console du gestionnaire de**Other Windows**  >  **package** Windows
   * Accédez au répertoire où se trouve le fichier *TodoApi.csproj*.
-  * Exécutez la commande suivante :
+  * Exécutez la commande suivante :
 
     ```powershell
     Install-Package Swashbuckle.AspNetCore -Version 5.5.0
@@ -77,7 +78,7 @@ dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.5.0
 
 ### <a name="net-core-cli"></a>[CLI .NET Core](#tab/netcore-cli)
 
-Exécutez la commande suivante :
+Exécutez la commande suivante :
 
 ```dotnetcli
 dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.5.0
@@ -135,7 +136,7 @@ L’interface utilisateur Swagger se trouve à l’adresse `http://localhost:<po
 >
 > [!code-csharp[](../tutorials/web-api-help-pages-using-swagger/samples/2.0/TodoApi.Swashbuckle/Startup3.cs?name=snippet_UseSwaggerUI&highlight=4)]
 
-Si vous utilisez des répertoires avec IIS ou un proxy inverse, définissez le point de terminaison Swagger sur un chemin relatif avec le préfixe `./`. Par exemple, `./swagger/v1/swagger.json`. L’utilisation de `/swagger/v1/swagger.json` indique à l’application de rechercher le fichier JSON à la racine réelle de l’URL (plus le préfixe de la route s’il est utilisé). Par exemple, utilisez `http://localhost:<port>/<route_prefix>/swagger/v1/swagger.json` au lieu de `http://localhost:<port>/<virtual_directory>/<route_prefix>/swagger/v1/swagger.json`.
+Si vous utilisez des répertoires avec IIS ou un proxy inverse, définissez le point de terminaison Swagger sur un chemin relatif avec le préfixe `./`. Par exemple : `./swagger/v1/swagger.json`. L’utilisation de `/swagger/v1/swagger.json` indique à l’application de rechercher le fichier JSON à la racine réelle de l’URL (plus le préfixe de la route s’il est utilisé). Par exemple, utilisez `http://localhost:<port>/<route_prefix>/swagger/v1/swagger.json` au lieu de `http://localhost:<port>/<virtual_directory>/<route_prefix>/swagger/v1/swagger.json`.
 
 > [!NOTE]
 > Par défaut, Swashbuckle génère et expose Swagger JSON dans la version 3,0 de la spécification &mdash; officiellement appelée spécification openapi. Pour prendre en charge la compatibilité descendante, vous pouvez choisir d’exposer JSON au format 2,0 à la place. Ce format 2,0 est important pour les intégrations telles que Microsoft Power Apps et Microsoft Flow qui prennent actuellement en charge OpenAPI version 2,0. Pour choisir le format 2,0, définissez la `SerializeAsV2` propriété dans `Startup.Configure` :

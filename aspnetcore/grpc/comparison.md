@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: cdddb14e62f42bc9c0ec0bbe2a8595fe1cb27ceb
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d20740950f7ac56a3a3b2951b474151aaf9c6f5a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016204"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631223"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>Comparer les services gRPC avec les API HTTP
 
@@ -40,7 +41,7 @@ Le tableau suivant présente une comparaison de haut niveau des fonctionnalités
 | Payload          | [Protobuf (petit, binaire)](#performance)           | JSON (grand, lisible par l’utilisateur)  |
 | Prescriptiveness | [Spécification stricte](#strict-specification)      | Compatibilité. Tout HTTP est valide.     |
 | Diffusion en continu        | [Client, serveur, bidirectionnel](#streaming)       | Client, serveur                |
-| Prise en charge des navigateurs  | [Non (requiert GRPC-Web)](#limited-browser-support) | Yes                           |
+| Prise en charge des navigateurs  | [Non (requiert GRPC-Web)](#limited-browser-support) | Oui                           |
 | Sécurité         | Transport (TLS)                                    | Transport (TLS)               |
 | Génération de code client | [Oui](#code-generation)                      | OpenAPI + outils tiers |
 
@@ -121,7 +122,7 @@ Des fonctionnalités telles que la [réflexion de serveur](https://github.com/gr
 D’autres infrastructures sont recommandées par rapport à gRPC dans les scénarios suivants :
 
 * **API accessibles**par le navigateur : gRPC n’est pas entièrement pris en charge dans le navigateur. gRPC-Web peut offrir la prise en charge des navigateurs, mais il présente des limitations et introduit un serveur proxy.
-* **Communication en temps réel de diffusion**: gRPC prend en charge la communication en temps réel via la diffusion en continu, mais le concept de diffusion d’un message à des connexions inscrites n’existe pas. Par exemple, dans un scénario de salle de conversation dans lequel de nouveaux messages de conversation doivent être envoyés à tous les clients dans la salle de conversation, chaque appel gRPC est requis pour diffuser individuellement de nouveaux messages de conversation au client. [SignalR](xref:signalr/introduction)est une infrastructure utile pour ce scénario. SignalRdispose du concept de connexions persistantes et de la prise en charge intégrée de la diffusion des messages.
+* **Communication en temps réel de diffusion**: gRPC prend en charge la communication en temps réel via la diffusion en continu, mais le concept de diffusion d’un message à des connexions inscrites n’existe pas. Par exemple, dans un scénario de salle de conversation dans lequel de nouveaux messages de conversation doivent être envoyés à tous les clients dans la salle de conversation, chaque appel gRPC est requis pour diffuser individuellement de nouveaux messages de conversation au client. [SignalR](xref:signalr/introduction) est une infrastructure utile pour ce scénario. SignalR dispose du concept de connexions persistantes et de la prise en charge intégrée de la diffusion des messages.
 * **Communication entre processus**: un processus doit héberger un serveur http/2 pour accepter les appels gRPC entrants. Pour Windows, les [canaux](/dotnet/standard/io/pipe-operations) de communication entre processus sont une méthode de communication rapide et légère.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires

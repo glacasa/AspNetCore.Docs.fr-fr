@@ -1,5 +1,5 @@
 ---
-title: Utiliser des hubs dans ASP.NET CoreSignalR
+title: Utiliser des hubs dans ASP.NET Core SignalR
 author: bradygaster
 description: Découvrez comment utiliser des hubs dans ASP.NET Core SignalR .
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hubs
-ms.openlocfilehash: bd7432fc29d0cda003abed1f0e522bdddf2e4efc
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 71ca0896bc645b7625f60c3a9e8fe321079d524a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022210"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631275"
 ---
 # <a name="use-hubs-in-no-locsignalr-for-aspnet-core"></a>Utiliser des hubs dans SignalR pour ASP.net Core
 
@@ -32,7 +33,7 @@ Par [Rachel appel](https://twitter.com/rachelappel) et [Kevin Griffin](https://t
 
 ## <a name="what-is-a-no-locsignalr-hub"></a>Qu’est-ce qu’un SignalR Hub ?
 
-L' SignalR API hubs vous permet d’appeler des méthodes sur des clients connectés à partir du serveur. Dans le code serveur, vous définissez des méthodes qui sont appelées par le client. Dans le code client, vous définissez des méthodes qui sont appelées à partir du serveur. SignalRs’occupe de tout en arrière-plan qui rend possible les communications de client à serveur et de serveur à client en temps réel.
+L' SignalR API hubs vous permet d’appeler des méthodes sur des clients connectés à partir du serveur. Dans le code serveur, vous définissez des méthodes qui sont appelées par le client. Dans le code client, vous définissez des méthodes qui sont appelées à partir du serveur. SignalR s’occupe de tout en arrière-plan qui rend possible les communications de client à serveur et de serveur à client en temps réel.
 
 ## <a name="configure-no-locsignalr-hubs"></a>Configurer des SignalR hubs
 
@@ -76,7 +77,7 @@ public class ChatHub : Hub
 }
 ```
 
-Vous pouvez spécifier un type de retour et des paramètres, y compris des types complexes et des tableaux, comme vous le feriez dans une méthode C#. SignalRgère la sérialisation et la désérialisation d’objets et de tableaux complexes dans vos paramètres et valeurs de retour.
+Vous pouvez spécifier un type de retour et des paramètres, y compris des types complexes et des tableaux, comme vous le feriez dans une méthode C#. SignalR gère la sérialisation et la désérialisation d’objets et de tableaux complexes dans vos paramètres et valeurs de retour.
 
 > [!NOTE]
 > Les concentrateurs sont temporaires :
@@ -97,7 +98,7 @@ La `Hub` classe a une `Context` propriété qui contient les propriétés suivan
 | `Features` | Obtient la collection de fonctionnalités disponibles sur la connexion. Pour le moment, cette collection n’est pas nécessaire dans la plupart des scénarios. elle n’est donc pas encore documentée en détail. |
 | `ConnectionAborted` | Obtient un `CancellationToken` qui notifie lorsque la connexion est abandonnée. |
 
-`Hub.Context`contient également les méthodes suivantes :
+`Hub.Context` contient également les méthodes suivantes :
 
 | Méthode | Description |
 | ------ | ----------- |
@@ -114,7 +115,7 @@ La `Hub` classe a une `Clients` propriété qui contient les propriétés suivan
 | `Caller` | Appelle une méthode sur le client qui a appelé la méthode de concentrateur |
 | `Others` | Appelle une méthode sur tous les clients connectés, à l’exception du client qui a appelé la méthode. |
 
-`Hub.Clients`contient également les méthodes suivantes :
+`Hub.Clients` contient également les méthodes suivantes :
 
 | Méthode | Description |
 | ------ | ----------- |
@@ -134,9 +135,9 @@ Chaque propriété ou méthode dans les tables précédentes retourne un objet a
 
 Pour effectuer des appels à des clients spécifiques, utilisez les propriétés de l' `Clients` objet. Dans l’exemple suivant, il existe trois méthodes de concentrateur :
 
-* `SendMessage`envoie un message à tous les clients connectés à l’aide de `Clients.All` .
-* `SendMessageToCaller`renvoie un message à l’appelant à l’aide de `Clients.Caller` .
-* `SendMessageToGroups`envoie un message à tous les clients du `SignalR Users` groupe.
+* `SendMessage` envoie un message à tous les clients connectés à l’aide de `Clients.All` .
+* `SendMessageToCaller` renvoie un message à l’appelant à l’aide de `Clients.Caller` .
+* `SendMessageToGroups` envoie un message à tous les clients du `SignalR Users` groupe.
 
 [!code-csharp[Send messages](hubs/sample/hubs/chathub.cs?name=HubMethods)]
 
@@ -196,17 +197,17 @@ Si votre Hub lève une exception, les connexions ne sont pas fermées. Par défa
 Microsoft.AspNetCore.SignalR.HubException: An unexpected error occurred invoking 'MethodName' on the server.
 ```
 
-Les exceptions inattendues contiennent souvent des informations sensibles, telles que le nom d’un serveur de base de données dans une exception déclenchée lorsque la connexion à la base de données échoue. SignalRn’expose pas ces messages d’erreur détaillés par défaut en tant que mesure de sécurité. Pour plus d’informations sur la raison pour laquelle les détails de l’exception sont supprimés, consultez l' [article considérations](xref:signalr/security#exceptions) sur la sécurité.
+Les exceptions inattendues contiennent souvent des informations sensibles, telles que le nom d’un serveur de base de données dans une exception déclenchée lorsque la connexion à la base de données échoue. SignalR n’expose pas ces messages d’erreur détaillés par défaut en tant que mesure de sécurité. Pour plus d’informations sur la raison pour laquelle les détails de l’exception sont supprimés, consultez l' [article considérations](xref:signalr/security#exceptions) sur la sécurité.
 
 Si vous avez une condition *exceptionnelle que vous souhaitez* propager au client, vous pouvez utiliser la `HubException` classe. Si vous levez un `HubException` à partir de votre méthode de concentrateur, enverra SignalR **will** l’intégralité du message au client, sans modification.
 
 [!code-csharp[ThrowHubException](hubs/sample/hubs/chathub.cs?name=ThrowHubException&highlight=3)]
 
 > [!NOTE]
-> SignalRenvoie uniquement la `Message` propriété de l’exception au client. La trace de la pile et les autres propriétés de l’exception ne sont pas disponibles pour le client.
+> SignalR envoie uniquement la `Message` propriété de l’exception au client. La trace de la pile et les autres propriétés de l’exception ne sont pas disponibles pour le client.
 
 ## <a name="related-resources"></a>Ressources associées
 
-* [Introduction à ASP.NET CoreSignalR](xref:signalr/introduction)
+* [Introduction à ASP.NET Core SignalR](xref:signalr/introduction)
 * [Client JavaScript](xref:signalr/javascript-client)
-* [Publication dans Azure](xref:signalr/publish-to-azure-web-app)
+* [Publier sur Azure](xref:signalr/publish-to-azure-web-app)

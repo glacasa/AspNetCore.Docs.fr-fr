@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 826d7cf96d95ee7eb98b0f05a233401a1e3bff33
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7a370042520adfe5b06784b76acf41a81eb2c72d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020832"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630625"
 ---
 # <a name="partial-views-in-aspnet-core"></a>Vues partielles dans ASP.NET Core
 
@@ -147,7 +148,7 @@ Si une extension de fichier est spécifiée, la vue partielle référencée par 
 
 L’exemple suivant référence une vue partielle à la racine de l’application. Les chemins qui commencent par un tilde et une barre oblique (`~/`) ou par une barre oblique seule (`/`) renvoient à la racine de l’application :
 
-**RazorPages**
+**Razor Pages**
 
 ```cshtml
 <partial name="~/Pages/Folder/_PartialName.cshtml" />
@@ -189,7 +190,7 @@ L’exemple suivant référence une vue partielle à la racine de l’applicatio
 
 ::: moniker range=">= aspnetcore-2.1"
 
-**RazorPages**
+**Razor Pages**
 
 ```cshtml
 @await Html.PartialAsync("~/Pages/Folder/_PartialName.cshtml")
@@ -240,7 +241,7 @@ Quand une vue partielle est référencée par son nom sans extension de fichier,
 
 ::: moniker range=">= aspnetcore-2.1"
 
-**RazorPages**
+**Razor Pages**
 
 1. Dossier de la page en cours d’exécution
 1. Directory Graph au-dessus du dossier de la page
@@ -296,7 +297,7 @@ Vous pouvez passer un modèle dans une vue partielle. Le modèle peut être un o
 
 ::: moniker range=">= aspnetcore-2.1"
 
-**RazorPages**
+**Razor Pages**
 
 Le balisage suivant dans l’exemple d’application est extrait de la page *Pages/ArticlesRP/ReadRP.cshtml*. La page contient deux vues partielles. La seconde vue partielle passe un modèle et `ViewData` à la vue partielle. La surcharge de constructeur `ViewDataDictionary` passe un nouveau dictionnaire `ViewData` tout en conservant le dictionnaire `ViewData` existant.
 

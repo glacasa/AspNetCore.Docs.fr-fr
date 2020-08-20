@@ -7,6 +7,7 @@ ms.author: rick-anderson
 ms.custom: mvc
 ms.date: 03/17/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/mfa
-ms.openlocfilehash: 4538030b4ce6aba6c78edb69cf44fc5812ddff76
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 048d88a121d0a4a7ab3d3adee9b426b95fd68a80
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017855"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629585"
 ---
 # <a name="multi-factor-authentication-in-aspnet-core"></a>Multi-Factor Authentication dans ASP.NET Core
 
@@ -33,7 +34,7 @@ Multi-Factor Authentication (MFA) est un processus dans lequel un utilisateur es
 Cet article aborde les sujets suivants :
 
 * Qu’est-ce que MFA et quels flux MFA sont recommandés
-* Configurer l’authentification MFA pour les pages d’administration à l’aide de ASP.NET CoreIdentity
+* Configurer l’authentification MFA pour les pages d’administration à l’aide de ASP.NET Core Identity
 * Envoyer une exigence de connexion MFA au serveur OpenID Connect
 * Forcer ASP.NET Core client OpenID Connect à exiger l’authentification MFA
 
@@ -71,9 +72,9 @@ L’authentification MFA avec SMS augmente la sécurité massivement comparée �
 
 [Instructions du NIST](https://pages.nist.gov/800-63-3/sp800-63b.html)
 
-## <a name="configure-mfa-for-administration-pages-using-aspnet-core-no-locidentity"></a>Configurer l’authentification MFA pour les pages d’administration à l’aide de ASP.NET CoreIdentity
+## <a name="configure-mfa-for-administration-pages-using-no-locaspnet-core-identity"></a>Configurer l’authentification MFA pour les pages d’administration à l’aide de ASP.NET Core Identity
 
-L’authentification multifacteur peut être forcée sur les utilisateurs qui accèdent à des pages sensibles au sein d’une Identity application ASP.net core. Cela peut être utile pour les applications où différents niveaux d’accès existent pour les différentes identités. Par exemple, les utilisateurs peuvent être en mesure d’afficher les données de profil à l’aide d’une connexion de mot de passe, mais un administrateur doit utiliser l’authentification multifacteur pour accéder aux pages d’administration.
+L’authentification multifacteur peut être forcée sur les utilisateurs qui accèdent à des pages sensibles au sein d’une ASP.NET Core Identity application. Cela peut être utile pour les applications où différents niveaux d’accès existent pour les différentes identités. Par exemple, les utilisateurs peuvent être en mesure d’afficher les données de profil à l’aide d’une connexion de mot de passe, mais un administrateur doit utiliser l’authentification multifacteur pour accéder aux pages d’administration.
 
 ### <a name="extend-the-login-with-an-mfa-claim"></a>Étendre la connexion avec une revendication MFA
 
@@ -304,9 +305,9 @@ public void ConfigureServices(IServiceCollection services)
     });
 ```
 
-### <a name="example-openid-connect-no-locidentityserver-4-server-with-aspnet-core-no-locidentity"></a>Exemple de OpenID Connect Identity Server 4 Server avec ASP.net CoreIdentity
+### <a name="example-openid-connect-no-locidentityserver-4-server-with-no-locaspnet-core-identity"></a>Exemple OpenID Connect Identity Server 4 Server avec ASP.NET Core Identity
 
-Sur le serveur OpenID Connect, qui est implémenté à l’aide Identity de ASP.net core avec les vues MVC, une nouvelle vue nommée *ErrorEnable2FA. cshtml* est créée. La vue :
+Sur le serveur OpenID Connect, qui est implémenté à l’aide ASP.NET Core Identity de avec les vues MVC, une nouvelle vue nommée *ErrorEnable2FA. cshtml* est créée. La vue :
 
 * Indique si le Identity provient d’une application qui requiert l’authentification MFA, mais que l’utilisateur n’a pas activé cette fonctionnalité dans Identity .
 * Informe l’utilisateur et ajoute un lien pour activer cette.
@@ -329,7 +330,7 @@ You can enable MFA to login here:
 
 Dans la `Login` méthode, l' `IIdentityServerInteractionService` implémentation de l’interface `_interaction` est utilisée pour accéder aux paramètres de la demande de connexion OpenID. Le `acr_values` paramètre est accessible à l’aide de la `AcrValues` propriété. À mesure que le client l' `mfa` a envoyé avec set, cette valeur peut ensuite être vérifiée.
 
-Si l’authentification multifacteur est requise et que l’utilisateur de ASP.NET Core Identity a l’authentification MFA activée, la connexion se poursuit. Lorsque l’option MFA n’est pas activée pour l’utilisateur, l’utilisateur est redirigé vers la vue personnalisée *ErrorEnable2FA. cshtml*. Ensuite ASP.NET Core Identity connecte l’utilisateur.
+Si l’authentification multifacteur est requise et que l’authentification MFA est activée pour l’utilisateur dans ASP.NET Core Identity , la connexion se poursuit. Lorsque l’option MFA n’est pas activée pour l’utilisateur, l’utilisateur est redirigé vers la vue personnalisée *ErrorEnable2FA. cshtml*. ASP.NET Core IdentityConnecte ensuite l’utilisateur.
 
 ```csharp
 //
@@ -410,7 +411,7 @@ public async Task<IActionResult> ExternalLoginCallback(
 Si l’utilisateur est déjà connecté, l’application cliente :
 
 * Valide toujours la `amr` revendication.
-* Peut configurer l’authentification multifacteur avec un lien vers la Identity vue ASP.net core.
+* Peut configurer l’authentification multifacteur avec un lien vers la ASP.NET Core Identity vue.
 
 ![acr_values-1](mfa/_static/acr_values-1.png)
 
@@ -433,7 +434,7 @@ Un `AuthorizationHandler` est implémenté qui utilisera la `amr` revendication 
 
 La valeur retournée dépend de la manière dont l’identité a été authentifiée et de l’implémentation du serveur OpenID Connect.
 
-Le `AuthorizationHandler` utilise la `RequireMfa` spécification et valide la `amr` revendication. Le serveur OpenID Connect peut être implémenté à l’aide Identity de 4 avec ASP.net Core Identity . Lorsqu’un utilisateur se connecte à l’aide de TOTP, la `amr` revendication est retournée avec une valeur mfa. Si vous utilisez une autre implémentation de serveur OpenID Connect ou un autre type d’authentification multifacteur, la `amr` revendication peut avoir une valeur différente. Le code doit être étendu pour accepter cela également.
+Le `AuthorizationHandler` utilise la `RequireMfa` spécification et valide la `amr` revendication. Le serveur OpenID Connect peut être implémenté à l’aide Identity de 4 avec ASP.NET Core Identity . Lorsqu’un utilisateur se connecte à l’aide de TOTP, la `amr` revendication est retournée avec une valeur mfa. Si vous utilisez une autre implémentation de serveur OpenID Connect ou un autre type d’authentification multifacteur, la `amr` revendication peut avoir une valeur différente. Le code doit être étendu pour accepter cela également.
 
 ```csharp
 using Microsoft.AspNetCore.Authorization;

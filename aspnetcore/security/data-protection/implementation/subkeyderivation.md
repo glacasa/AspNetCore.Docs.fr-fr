@@ -5,6 +5,7 @@ description: Découvrez les détails de l’implémentation de la dérivation de
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/subkeyderivation
-ms.openlocfilehash: ef9c100df69f9f7a1b51819ebb5721cb4f875ffd
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d8038142ccb2597eb1c98738307b8b9a842dae5a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019688"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630118"
 ---
 # <a name="subkey-derivation-and-authenticated-encryption-in-aspnet-core"></a>Dérivation de sous-clé et chiffrement authentifié dans ASP.NET Core
 
@@ -49,7 +50,7 @@ L' `IAuthenticatedEncryptor` interface sert d’interface principale pour toutes
 
 Ici, nous appelons le NIST SP800-108 KDF en mode compteur (voir [NIST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), Sec. 5,1) avec les paramètres suivants :
 
-* Clé de dérivation de clé (KDK) =`K_M`
+* Clé de dérivation de clé (KDK) = `K_M`
 
 * PRF = HMACSHA512
 

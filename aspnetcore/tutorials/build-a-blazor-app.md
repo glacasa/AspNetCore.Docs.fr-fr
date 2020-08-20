@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/30/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 42c4f94869586bfcd4e8b27e4bdf4ef226094072
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 769b3bda591252c51bec3ffd72a43eaa5929349e
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022496"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630833"
 ---
 # <a name="build-a-no-locblazor-todo-list-app"></a>Créer une Blazor application de liste de tâches
 
@@ -63,7 +64,7 @@ Ce didacticiel vous montre comment créer et modifier une Blazor application. Vo
    ```
 
    > [!IMPORTANT]
-   > Razorles noms de fichiers de composant requièrent une première lettre majuscule, donc confirmez que le `Todo` nom de fichier du composant commence par une lettre majuscule `T` .
+   > Razor les noms de fichiers de composant requièrent une première lettre majuscule, donc confirmez que le `Todo` nom de fichier du composant commence par une lettre majuscule `T` .
 
 1. Dans `Pages/Todo.razor` fournir le balisage initial pour le composant :
 

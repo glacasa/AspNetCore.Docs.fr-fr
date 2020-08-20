@@ -5,6 +5,7 @@ description: Découvrez comment les vues gèrent la présentation des données e
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/overview
-ms.openlocfilehash: 8630df0ad8ea556c6edf0ab251b3c86493f751e2
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 6afd69414f2dc0158f724c6e6f7b3a3e51c1e92c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020871"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630677"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>Vues dans ASP.NET Core MVC
 
@@ -28,7 +29,7 @@ Par [Steve Smith](https://ardalis.com/)
 
 Ce document explique l’utilisation des vues dans les applications ASP.NET Core MVC. Pour plus d’informations sur les Razor pages, consultez [Présentation des Razor pages](xref:razor-pages/index).
 
-Selon le schéma MVC (Modèle-Vue-Contrôleur, la *vue* gère la présentation des données et les interactions utilisateur dans l’application. Une vue est un modèle HTML avec [ Razor balisage](xref:mvc/views/razor)incorporé. Razorle balisage est du code qui interagit avec le balisage HTML pour générer une page Web envoyée au client.
+Selon le schéma MVC (Modèle-Vue-Contrôleur, la *vue* gère la présentation des données et les interactions utilisateur dans l’application. Une vue est un modèle HTML avec [ Razor balisage](xref:mvc/views/razor)incorporé. Razor le balisage est du code qui interagit avec le balisage HTML pour générer une page Web envoyée au client.
 
 Dans ASP.NET Core MVC, les vues sont des fichiers *. cshtml* qui utilisent le [langage de programmation C#](/dotnet/csharp/) dans le Razor balisage. En règle générale, les fichiers de vue sont regroupés dans des dossiers nommés correspondant aux différents [contrôleurs](xref:mvc/controllers/actions) de l’application. Ces dossiers sont eux-mêmes regroupés sous le dossier *Vues* situé à la racine de l’application :
 
@@ -298,7 +299,7 @@ Dans la disposition, le titre est lu à partir du dictionnaire ViewData :
 
 `ViewBag`*n’est pas disponible dans Razor Pages.*
 
-`ViewBag`est un objet [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) qui fournit un accès dynamique aux objets stockés dans `ViewData` . `ViewBag` est parfois plus pratique à utiliser, car il ne nécessite pas de cast. L’exemple suivant montre comment utiliser `ViewBag` pour obtenir le même résultat qu’avec l’objet `ViewData` ci-dessus :
+`ViewBag` est un objet [DynamicViewData](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) qui fournit un accès dynamique aux objets stockés dans `ViewData` . `ViewBag` est parfois plus pratique à utiliser, car il ne nécessite pas de cast. L’exemple suivant montre comment utiliser `ViewBag` pour obtenir le même résultat qu’avec l’objet `ViewData` ci-dessus :
 
 ```csharp
 public IActionResult SomeAction()
@@ -369,7 +370,7 @@ L’utilisation simultanée de `ViewData` et `ViewBag` est possible, de la même
 
 **Récapitulatif des différences entre ViewData et ViewBag**
 
- `ViewBag`n’est pas disponible dans les Razor pages.
+ `ViewBag` n’est pas disponible dans les Razor pages.
 
 * `ViewData`
   * Dérivé de [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary), il possède des propriétés de dictionnaire qui peuvent être utiles, telles que `ContainsKey` , `Add` , `Remove` et `Clear` .

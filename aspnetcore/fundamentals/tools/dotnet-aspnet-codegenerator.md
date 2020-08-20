@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 07/04/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: 071f2269081e63ad1355547bccb449180c59c997
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 12825c13e1c9de984251b5554833f7194edff8c3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016503"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629936"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
 
@@ -66,7 +67,7 @@ Le générateur de code à effectuer. Les générateurs suivants sont disponible
 | ---------- | -------------------------------------------------------------------- |
 | superficie       | [Génération de modèles automatique pour une zone](xref:mvc/controllers/areas)                      |
 | contrôleur | [Génération de modèles automatique pour un contrôleur](xref:tutorials/first-mvc-app/adding-model)  |
-| identité   | [StructureIdentity](xref:security/authentication/scaffold-identity) |
+| identité   | [Structure Identity](xref:security/authentication/scaffold-identity) |
 | razorpage  | [Pages de modèles Razor](xref:tutorials/razor-pages/model)            |
 | vue       | [Génération de modèles automatique pour une vue](xref:mvc/views/overview)                          |
 
@@ -82,7 +83,7 @@ Définit la configuration de build. La valeur par défaut est `Debug`.
 
 `-tfm|--target-framework`
 
-[Framework](/dotnet/standard/frameworks) cible à utiliser. Par exemple, `net46`.
+[Framework](/dotnet/standard/frameworks) cible à utiliser. Par exemple : `net46`.
 
 `-b|--build-base-path`
 
@@ -131,7 +132,7 @@ La commande précédente génère les dossiers suivants :
 
 ### <a name="controller-options"></a>Options de contrôleur
 
-Le tableau suivant répertorie les options pour `aspnet-codegenerator` `controller` et `razorpage` :
+Le tableau suivant répertorie les options pour  `aspnet-codegenerator` `controller` et `razorpage` :
 
 [!INCLUDE [aspnet-codegenerator-args-md.md](~/includes/aspnet-codegenerator-args-md.md)]
 
@@ -157,7 +158,7 @@ Consultez [Générer automatiquement le modèle de film](xref:tutorials/first-mv
 
 <a name="rp"></a>
 
-RazorLes pages peuvent être structurées individuellement en spécifiant le nom de la nouvelle page et le modèle à utiliser. Les modèles pris en charge sont :
+Razor Les pages peuvent être structurées individuellement en spécifiant le nom de la nouvelle page et le modèle à utiliser. Les modèles pris en charge sont :
 
 * `Empty`
 * `Create`
@@ -180,7 +181,7 @@ En règle générale, le modèle et le nom de fichier générés ne sont pas sp�
 * `Details`
 * `List`
 
-Le tableau suivant répertorie les options pour `aspnet-codegenerator` `razorpage` et `controller` :
+Le tableau suivant répertorie les options pour  `aspnet-codegenerator` `razorpage` et `controller` :
 
 [!INCLUDE [aspnet-codegenerator-args-md.md](~/includes/aspnet-codegenerator-args-md.md)]
 

@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/16/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/target-aspnetcore
-ms.openlocfilehash: a6c20c61f7f33706e620fcbc239b2cc4bace15f0
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 571e6c66f60bbc09b902ff9064d2fb1c18c433dc
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016490"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630053"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>Utiliser des API ASP.NET Core dans une bibliothèque de classes
 
@@ -52,7 +53,7 @@ Le fait de référencer ASP.NET Core de cette manière est pris en charge unique
 
 ## <a name="include-no-locblazor-extensibility"></a>Inclure l' Blazor extensibilité
 
-Blazorprend en charge webassembly (WASM) et les [modèles d’hébergement](xref:blazor/hosting-models)de serveur. À moins qu’il y ait une raison spécifique de ne pas le faire, une bibliothèque de [ Razor composants](xref:blazor/components/index) doit prendre en charge les deux modèles d’hébergement. Une Razor bibliothèque de composants doit utiliser le [Kit de développement logiciel (SDK) Razor Microsoft. net. SDK](xref:razor-pages/sdk).
+Blazor prend en charge webassembly (WASM) et les [modèles d’hébergement](xref:blazor/hosting-models)de serveur. À moins qu’il y ait une raison spécifique de ne pas le faire, une bibliothèque de [ Razor composants](xref:blazor/components/index) doit prendre en charge les deux modèles d’hébergement. Une Razor bibliothèque de composants doit utiliser le [Kit de développement logiciel (SDK) Razor Microsoft. net. SDK](xref:razor-pages/sdk).
 
 ### <a name="support-both-hosting-models"></a>Prendre en charge les modèles d’hébergement
 
@@ -79,7 +80,7 @@ Utilisez le modèle de projet ** Razor bibliothèque de classes** .
 Le projet généré à partir du modèle effectue les opérations suivantes :
 
 * Cible .NET Standard 2,0.
-* Affecte la valeur `RazorLangVersion` à la propriété `3.0`. `3.0`est la valeur par défaut pour .NET Core 3. x.
+* Affecte la valeur `RazorLangVersion` à la propriété `3.0`. `3.0` est la valeur par défaut pour .NET Core 3. x.
 * Ajoute les références de package suivantes :
   * [Microsoft. AspNetCore. Components](https://www.nuget.org/packages/Microsoft.AspNetCore.Components)
   * [Microsoft. AspNetCore. Components. Web](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Web)
@@ -105,13 +106,13 @@ Pour plus d’informations sur les bibliothèques contenant des Razor composants
 
 Cette section décrit les recommandations pour les bibliothèques qui incluent :
 
-* [Razorvues ou Razor pages](#razor-views-or-razor-pages)
+* [Razor vues ou Razor pages](#razor-views-or-razor-pages)
 * [Tag Helpers](#tag-helpers)
 * [Composants de vue](#view-components)
 
 Cette section n’aborde pas le multi-ciblage pour prendre en charge plusieurs versions de MVC. Pour obtenir des conseils sur la prise en charge de plusieurs versions de ASP.NET Core, consultez [prise en charge de plusieurs versions de ASP.net Core](#support-multiple-aspnet-core-versions).
 
-### <a name="no-locrazor-views-or-no-locrazor-pages"></a>Razorvues ou Razor pages
+### <a name="no-locrazor-views-or-no-locrazor-pages"></a>Razor vues ou Razor pages
 
 Un projet qui comprend des [ Razor affichages](xref:mvc/views/overview) ou des [ Razor pages](xref:razor-pages/index) doit utiliser le [Kit de développement logiciel (SDK) Razor Microsoft. net. SDK](xref:razor-pages/sdk).
 
@@ -222,7 +223,7 @@ Par exemple, les lectures et écritures synchrones sur les flux de requête et d
 
 ## <a name="use-an-api-introduced-in-30"></a>Utiliser une API introduite dans 3,0
 
-Imaginez que vous souhaitez utiliser une API ASP.NET Core qui a été introduite dans ASP.NET Core 3,0. Posez-vous les questions suivantes :
+Imaginez que vous souhaitez utiliser une API ASP.NET Core qui a été introduite dans ASP.NET Core 3,0. Considérez les questions suivantes :
 
 1. La bibliothèque a-t-elle besoin de la nouvelle API ?
 1. La bibliothèque peut-elle implémenter cette fonctionnalité de manière différente ?

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/22/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: a74d31107d30ce04448e30f1c53e5ac475127870
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: fcd6a679c5401ec58cc219f56b5dce1cfee07372
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015684"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629689"
 ---
 # <a name="health-checks-in-aspnet-core"></a>Contrôles d’intégrité dans ASP.NET Core
 
@@ -183,7 +184,7 @@ private class TestHealthCheckWithArgs : IHealthCheck
 }
 ```
 
-`TestHealthCheckWithArgs`est inscrit en appelant `AddTypeActivatedCheck` avec l’entier et la chaîne passés à l’implémentation :
+`TestHealthCheckWithArgs` est inscrit en appelant `AddTypeActivatedCheck` avec l’entier et la chaîne passés à l’implémentation :
 
 ```csharp
 services.AddHealthChecks()
@@ -294,7 +295,7 @@ app.UseEndpoints(endpoints =>
 
 ### <a name="suppress-cache-headers"></a>Supprimer les en-têtes de cache
 
-<xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.AllowCachingResponses>contrôle si l’intergiciel (middleware) de contrôles d’intégrité ajoute des en-têtes HTTP à une réponse de sondage pour empêcher la mise en cache des réponses. Si la valeur est `false` (par défaut), le middleware définit ou substitue les en-têtes `Cache-Control`, `Expires` et `Pragma` afin d’empêcher la mise en cache de la réponse. Si la valeur est `true`, le middleware ne modifie pas les en-têtes de cache de la réponse.
+<xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.AllowCachingResponses> contrôle si l’intergiciel (middleware) de contrôles d’intégrité ajoute des en-têtes HTTP à une réponse de sondage pour empêcher la mise en cache des réponses. Si la valeur est `false` (par défaut), le middleware définit ou substitue les en-têtes `Cache-Control`, `Expires` et `Pragma` afin d’empêcher la mise en cache de la réponse. Si la valeur est `true`, le middleware ne modifie pas les en-têtes de cache de la réponse.
 
 Dans `Startup.Configure` :
 
@@ -465,8 +466,8 @@ Le contrôle d’intégrité est inscrit auprès de <xref:Microsoft.Extensions.D
 
 Un point de terminaison de contrôle d’intégrité est créé en appelant `MapHealthChecks` dans `Startup.Configure` . Dans l’exemple d’application, les points de terminaison de contrôle d’intégrité sont créés à l’adresse :
 
-* `/health/ready`pour la vérification de la disponibilité. Le test qui permet de vérifier si l’application est prête filtre les contrôles d’intégrité pour n’afficher que celui dont l’étiquette est `ready`.
-* `/health/live`pour la vérification de l’activité. La vérification d’activité filtre le `StartupHostedServiceHealthCheck` en retournant `false` dans le [prédicat HealthCheckOptions.](xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.Predicate) (pour plus d’informations, consultez [contrôles d’intégrité de filtre](#filter-health-checks)).
+* `/health/ready` pour la vérification de la disponibilité. Le test qui permet de vérifier si l’application est prête filtre les contrôles d’intégrité pour n’afficher que celui dont l’étiquette est `ready`.
+* `/health/live` pour la vérification de l’activité. La vérification d’activité filtre le `StartupHostedServiceHealthCheck` en retournant `false` dans le [prédicat HealthCheckOptions.](xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.Predicate) (pour plus d’informations, consultez [contrôles d’intégrité de filtre](#filter-health-checks)).
 
 Dans l’exemple de code suivant :
 
@@ -659,8 +660,8 @@ Pour distribuer une bibliothèque comme un contrôle d’intégrité :
 
    Dans la logique des contrôles d’intégrité de `CheckHealthAsync` :
 
-   * `data1`et `data2` sont utilisés dans la méthode pour exécuter la logique de contrôle d’intégrité de la sonde.
-   * `AccessViolationException`est géré.
+   * `data1` et `data2` sont utilisés dans la méthode pour exécuter la logique de contrôle d’intégrité de la sonde.
+   * `AccessViolationException` est géré.
 
    Lorsqu’un <xref:System.AccessViolationException> se produit, <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration.FailureStatus> est retourné avec le <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> pour permettre aux utilisateurs de configurer l’état d’échec des contrôles d’intégrité.
 
@@ -714,7 +715,7 @@ Pour distribuer une bibliothèque comme un contrôle d’intégrité :
    * Nom du contrôle d’intégrité (`name`). Si `null`, `example_health_check` est utilisé.
    * Point de données de chaîne du contrôle d’intégrité (`data1`).
    * Point de données Integer du contrôle d’intégrité (`data2`). Si `null`, `1` est utilisé.
-   * État d’échec (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus>). Par défaut, il s’agit de `null`. Si `null`, [HealthStatus.Unhealthy](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) est signalé pour un état d’échec.
+   * État d’échec (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus>). La valeur par défaut est `null`. Si `null`, [HealthStatus.Unhealthy](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) est signalé pour un état d’échec.
    * Étiquettes (`IEnumerable<string>`).
 
    ```csharp
@@ -1003,7 +1004,7 @@ app.UseHealthChecks("/health", new HealthCheckOptions()
 
 ### <a name="suppress-cache-headers"></a>Supprimer les en-têtes de cache
 
-<xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.AllowCachingResponses>contrôle si l’intergiciel (middleware) de contrôles d’intégrité ajoute des en-têtes HTTP à une réponse de sondage pour empêcher la mise en cache des réponses. Si la valeur est `false` (par défaut), le middleware définit ou substitue les en-têtes `Cache-Control`, `Expires` et `Pragma` afin d’empêcher la mise en cache de la réponse. Si la valeur est `true`, le middleware ne modifie pas les en-têtes de cache de la réponse.
+<xref:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.AllowCachingResponses> contrôle si l’intergiciel (middleware) de contrôles d’intégrité ajoute des en-têtes HTTP à une réponse de sondage pour empêcher la mise en cache des réponses. Si la valeur est `false` (par défaut), le middleware définit ou substitue les en-têtes `Cache-Control`, `Expires` et `Pragma` afin d’empêcher la mise en cache de la réponse. Si la valeur est `true`, le middleware ne modifie pas les en-têtes de cache de la réponse.
 
 Dans `Startup.Configure` :
 
@@ -1227,7 +1228,7 @@ spec:
 
 L’exemple d’application montre un contrôle d’intégrité de mémoire avec un enregistreur de réponse personnalisé.
 
-`MemoryHealthCheck`signale un État non sain si l’application utilise plus d’un seuil de mémoire donné (1 Go dans l’exemple d’application). <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> inclut des informations de récupérateur de mémoire pour l’application (*MemoryHealthCheck.cs*) :
+`MemoryHealthCheck` signale un État non sain si l’application utilise plus d’un seuil de mémoire donné (1 Go dans l’exemple d’application). <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> inclut des informations de récupérateur de mémoire pour l’application (*MemoryHealthCheck.cs*) :
 
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/MemoryHealthCheck.cs?name=snippet1)]
 
@@ -1337,8 +1338,8 @@ Pour distribuer une bibliothèque comme un contrôle d’intégrité :
 
    Dans la logique des contrôles d’intégrité de `CheckHealthAsync` :
 
-   * `data1`et `data2` sont utilisés dans la méthode pour exécuter la logique de contrôle d’intégrité de la sonde.
-   * `AccessViolationException`est géré.
+   * `data1` et `data2` sont utilisés dans la méthode pour exécuter la logique de contrôle d’intégrité de la sonde.
+   * `AccessViolationException` est géré.
 
    Lorsqu’un <xref:System.AccessViolationException> se produit, <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration.FailureStatus> est retourné avec le <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> pour permettre aux utilisateurs de configurer l’état d’échec des contrôles d’intégrité.
 
@@ -1389,7 +1390,7 @@ Pour distribuer une bibliothèque comme un contrôle d’intégrité :
    * Nom du contrôle d’intégrité (`name`). Si `null`, `example_health_check` est utilisé.
    * Point de données de chaîne du contrôle d’intégrité (`data1`).
    * Point de données Integer du contrôle d’intégrité (`data2`). Si `null`, `1` est utilisé.
-   * État d’échec (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus>). Par défaut, il s’agit de `null`. Si `null`, [HealthStatus.Unhealthy](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) est signalé pour un état d’échec.
+   * État d’échec (<xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus>). La valeur par défaut est `null`. Si `null`, [HealthStatus.Unhealthy](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) est signalé pour un état d’échec.
    * Étiquettes (`IEnumerable<string>`).
 
    ```csharp

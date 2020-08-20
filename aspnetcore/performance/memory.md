@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: 09df67657c9b6e4e59d6a1379bf801c289028819
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c409eaaf07109d363581ee7d61dc76521d6818d0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020936"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630664"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>Gestion de la mémoire et garbage collection (GC) dans ASP.NET Core
 
 Par [Sébastien Ros](https://github.com/sebastienros) et [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-La gestion de la mémoire est complexe, même dans une infrastructure gérée telle que .NET. L’analyse et la compréhension des problèmes de mémoire peuvent être difficiles. Cet article :
+La gestion de la mémoire est complexe, même dans une infrastructure gérée telle que .NET. L’analyse et la compréhension des problèmes de mémoire peuvent être difficiles. Cet article :
 
 * A été motivée par de nombreuses *fuites de mémoire* et les problèmes de *GC ne fonctionnaient pas* . La plupart de ces problèmes ont été provoqués par le fait de ne pas comprendre comment fonctionne la consommation de mémoire dans .NET Core, ou de ne pas comprendre comment elle est mesurée.
 * Illustre l’utilisation de la mémoire problématique et suggère d’autres approches.
@@ -305,9 +306,9 @@ Une utilisation incorrecte <xref:System.Net.Http.HttpClient> de peut entraîner 
 
 Les développeurs .NET expérimentés savent appeler <xref:System.IDisposable.Dispose*> sur les objets qui implémentent <xref:System.IDisposable> . Ne pas supprimer des objets qui implémentent `IDisposable` en général entraîne une fuite de mémoire ou une fuite de ressources système.
 
-`HttpClient`implémente `IDisposable` , mais ne doit **pas** être supprimé à chaque appel. Au lieu de cela, `HttpClient` doit être réutilisé.
+`HttpClient` implémente `IDisposable` , mais ne doit **pas** être supprimé à chaque appel. Au lieu de cela, `HttpClient` doit être réutilisé.
 
-Le point de terminaison suivant crée et supprime une nouvelle `HttpClient` instance à chaque demande :
+Le point de terminaison suivant crée et supprime une nouvelle  `HttpClient` instance à chaque demande :
 
 ```csharp
 [HttpGet("httpclient1")]
@@ -402,7 +403,7 @@ Pour configurer la suppression de l’objet :
 * Encapsulez le tableau mis en pool dans un objet jetable.
 * Enregistrez l’objet regroupé avec [HttpContext. Response. RegisterForDispose](xref:Microsoft.AspNetCore.Http.HttpResponse.RegisterForDispose*).
 
-`RegisterForDispose`prend en charge l’appel de `Dispose` sur l’objet cible afin qu’il ne soit libéré qu’à la fin de la requête http.
+`RegisterForDispose` prend en charge l’appel de `Dispose` sur l’objet cible afin qu’il ne soit libéré qu’à la fin de la requête http.
 
 ```csharp
 private static ArrayPool<byte> _arrayPool = ArrayPool<byte>.Create();

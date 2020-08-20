@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/15/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: a9f158bf875da75afbccc1a6d226bc842fa1c62c
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 32a4e54a46f062f3ff45d0b840237be53406dbdb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130507"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630885"
 ---
 # <a name="aspnet-core-middleware"></a>Intergiciel (middleware) ASP.NET Core
 
@@ -67,7 +68,7 @@ Quand un délégué ne passe pas une requête au délégué suivant, on parle al
 >
 > <xref:Microsoft.AspNetCore.Http.HttpResponse.HasStarted%2A> est un indice utile pour indiquer si les en-têtes ont été envoyés ou si le corps a fait l’objet d’écritures.
 
-<xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A>les délégués ne reçoivent pas de `next` paramètre. Le premier `Run` délégué est toujours terminal et met fin au pipeline. `Run`est une convention. Certains composants de l’intergiciel (middleware) peuvent exposer des `Run[Middleware]` méthodes qui s’exécutent à la fin du pipeline :
+<xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A> les délégués ne reçoivent pas de `next` paramètre. Le premier `Run` délégué est toujours terminal et met fin au pipeline. `Run` est une convention. Certains composants de l’intergiciel (middleware) peuvent exposer des `Run[Middleware]` méthodes qui s’exécutent à la fin du pipeline :
 
 [!code-csharp[](index/snapshot/Chain/Startup.cs?highlight=12-15)]
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
@@ -110,7 +111,7 @@ La méthode `Startup.Configure` suivante ajoute des composants middleware utiles
      * Le middleware Protocole HSTS (HTTP Strict Transport Security) (<xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts%2A>) ajoute l’en-tête `Strict-Transport-Security`.
 1. Le middleware Redirection HTTPS (<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A>) redirige les requêtes HTTP vers HTTPS.
 1. Le middleware Fichier statique (<xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A>) retourne des fichiers statiques et court-circuite tout traitement supplémentaire de la requête.
-1. CookieL’intergiciel ( <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A> ) de stratégie convertit l’application en RGPD (union Règlement général sur la protection des données européenne).
+1. Cookie L’intergiciel ( <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A> ) de stratégie convertit l’application en RGPD (union Règlement général sur la protection des données européenne).
 1. Intergiciel (middleware <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting%2A> ) de routage () pour acheminer les demandes.
 1. Le middleware Authentification (<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A>) tente d’authentifier l’utilisateur avant qu’il ne soit autorisé à accéder aux ressources sécurisées.
 1. L’intergiciel () d’autorisation <xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A> autorise un utilisateur à accéder à des ressources sécurisées.
@@ -239,7 +240,7 @@ Le tableau suivant présente les requêtes et les réponses de `http://localhost
 | localhost:1234                | Hello from non-Map delegate. |
 | localhost:1234/?branch=master | Branch used = master         |
 
-<xref:Microsoft.AspNetCore.Builder.UseWhenExtensions.UseWhen%2A>branche également le pipeline de requêtes en fonction du résultat du prédicat donné. Contrairement à `MapWhen` , cette branche est rejointe au pipeline principal s’il n’y a pas de court-circuit ou qu’il contient un intergiciel (middleware) de terminal :
+<xref:Microsoft.AspNetCore.Builder.UseWhenExtensions.UseWhen%2A> branche également le pipeline de requêtes en fonction du résultat du prédicat donné. Contrairement à `MapWhen` , cette branche est rejointe au pipeline principal s’il n’y a pas de court-circuit ou qu’il contient un intergiciel (middleware) de terminal :
 
 [!code-csharp[](index/snapshot/Chain/StartupUseWhen.cs?highlight=25-26)]
 
@@ -253,7 +254,7 @@ ASP.NET Core est fourni avec les composants de middleware suivant. La colonne *O
 | ---------- | ----------- | ----- |
 | [Authentification](xref:security/authentication/identity) | Prend en charge l’authentification. | Avant que `HttpContext.User` ne soit nécessaire. Terminal pour les rappels OAuth. |
 | [Autorisation](xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A) | Fournit la prise en charge des autorisations. | Immédiatement après l’intergiciel (middleware) d’authentification. |
-| [CookieRenvoi](xref:security/gdpr) | Effectue le suivi du consentement des utilisateurs pour le stockage des informations personnelles et applique les normes minimales pour les cookie champs, tels que `secure` et `SameSite` . | Avant l’intergiciel (middleware) qui émet cookie s. Exemples : authentification, session, MVC (TempData). |
+| [Cookie Renvoi](xref:security/gdpr) | Effectue le suivi du consentement des utilisateurs pour le stockage des informations personnelles et applique les normes minimales pour les cookie champs, tels que `secure` et `SameSite` . | Avant l’intergiciel (middleware) qui émet cookie s. Exemples : authentification, session, MVC (TempData). |
 | [CORS](xref:security/cors) | Configure le partage des ressources cross-origin (CORS). | Avant les composants qui utilisent CORS. `UseCors``UseResponseCaching`la valeur doit être antérieure à [la suite de ce bogue](https://github.com/dotnet/aspnetcore/issues/23218).|
 | [Diagnostics](xref:fundamentals/error-handling) | Plusieurs intergiciels distincts qui fournissent une page d’exception de développeur, la gestion des exceptions, les pages de codes d’État et la page Web par défaut pour les nouvelles applications. | Avant les composants qui génèrent des erreurs. Terminal pour les exceptions ou service de la page Web par défaut pour les nouvelles applications. |
 | [En-têtes transférés](xref:host-and-deploy/proxy-load-balancer) | Transfère les en-têtes en proxy vers la requête actuelle. | Avant les composants qui consomment les champs mis à jour. Exemples : schéma, hôte, IP du client, méthode. |
@@ -264,7 +265,7 @@ ASP.NET Core est fourni avec les composants de middleware suivant. La colonne *O
 | [HSTS (HTTP Strict Transport Security)](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts) | Middleware d’amélioration de la sécurité qui ajoute un en-tête de réponse spécial. | Avant l’envoi des réponses et après les composants qui modifient les requêtes. Exemples : en-têtes transférés, réécriture d’URL. |
 | [MVC](xref:mvc/overview) | Traite les demandes avec MVC/ Razor pages. | Terminal si une requête correspond à un itinéraire. |
 | [OWIN](xref:fundamentals/owin) | Interopérabilité avec le middleware, les serveurs et les applications OWIN. | Terminal si le middleware OWIN traite entièrement la requête. |
-| [Mise en cache des réponses](xref:performance/caching/middleware) | Prend en charge la mise en cache des réponses. | Avant les composants qui nécessitent la mise en cache. `UseCORS`doit être antérieur `UseResponseCaching` .|
+| [Mise en cache des réponses](xref:performance/caching/middleware) | Prend en charge la mise en cache des réponses. | Avant les composants qui nécessitent la mise en cache. `UseCORS` doit être antérieur `UseResponseCaching` .|
 | [Compression de la réponse](xref:performance/response-compression) | Prend en charge la compression des réponses. | Avant les composants qui nécessitent la compression. |
 | [Localisation des requêtes](xref:fundamentals/localization) | Prend en charge la localisation. | Avant la localisation des composants sensibles. |
 | [Routage de point de terminaison](xref:fundamentals/routing) | Définit et contraint des routes de requête. | Terminal pour les routes correspondantes. |
@@ -274,7 +275,7 @@ ASP.NET Core est fourni avec les composants de middleware suivant. La colonne *O
 | [URL Rewrite](xref:fundamentals/url-rewriting) | Prend en charge la réécriture d’URL et la redirection des requêtes. | Avant les composants qui consomment l’URL. |
 | [WebSockets](xref:fundamentals/websockets) | Autorise le protocole WebSockets. | Avant les composants qui sont nécessaires pour accepter les requêtes WebSocket. |
 
-## <a name="additional-resources"></a>Ressources supplémentaires
+## <a name="additional-resources"></a>Ressources complémentaires
 
 * Les [options de durée de vie et d’inscription](xref:fundamentals/dependency-injection#lifetime-and-registration-options) contiennent un exemple complet d’intergiciel (middleware) avec des services de durée de vie *délimités*, *transitoires*et *singletons* .
 * <xref:fundamentals/middleware/write>
@@ -356,7 +357,7 @@ La méthode `Startup.Configure` suivante ajoute des composants middleware utiles
      * Le middleware Protocole HSTS (HTTP Strict Transport Security) (<xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts%2A>) ajoute l’en-tête `Strict-Transport-Security`.
 1. Le middleware Redirection HTTPS (<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A>) redirige les requêtes HTTP vers HTTPS.
 1. Le middleware Fichier statique (<xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A>) retourne des fichiers statiques et court-circuite tout traitement supplémentaire de la requête.
-1. CookieL’intergiciel ( <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A> ) de stratégie convertit l’application en RGPD (union Règlement général sur la protection des données européenne).
+1. Cookie L’intergiciel ( <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A> ) de stratégie convertit l’application en RGPD (union Règlement général sur la protection des données européenne).
 1. Le middleware Authentification (<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A>) tente d’authentifier l’utilisateur avant qu’il ne soit autorisé à accéder aux ressources sécurisées.
 1. Le middleware Session (<xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession%2A>) établit et maintient l’état de la session. Si l’application utilise l’état de session, appelez l’intergiciel (middleware) de session après l’intergiciel (middleware) Cookie de stratégie et avant l’intergiciel (middleware) Mvc.
 1. MVC (<xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A>) pour ajouter MVC au pipeline de requête.
@@ -460,7 +461,7 @@ ASP.NET Core est fourni avec les composants de middleware suivant. La colonne *O
 | Intergiciel (middleware) | Description | JSON |
 | ---------- | ----------- | ----- |
 | [Authentification](xref:security/authentication/identity) | Prend en charge l’authentification. | Avant que `HttpContext.User` ne soit nécessaire. Terminal pour les rappels OAuth. |
-| [CookieRenvoi](xref:security/gdpr) | Effectue le suivi du consentement des utilisateurs pour le stockage des informations personnelles et applique les normes minimales pour les cookie champs, tels que `secure` et `SameSite` . | Avant l’intergiciel (middleware) qui émet cookie s. Exemples : authentification, session, MVC (TempData). |
+| [Cookie Renvoi](xref:security/gdpr) | Effectue le suivi du consentement des utilisateurs pour le stockage des informations personnelles et applique les normes minimales pour les cookie champs, tels que `secure` et `SameSite` . | Avant l’intergiciel (middleware) qui émet cookie s. Exemples : authentification, session, MVC (TempData). |
 | [CORS](xref:security/cors) | Configure le partage des ressources cross-origin (CORS). | Avant les composants qui utilisent CORS. |
 | [Diagnostics](xref:fundamentals/error-handling) | Plusieurs intergiciels distincts qui fournissent une page d’exception de développeur, la gestion des exceptions, les pages de codes d’État et la page Web par défaut pour les nouvelles applications. | Avant les composants qui génèrent des erreurs. Terminal pour les exceptions ou service de la page Web par défaut pour les nouvelles applications. |
 | [En-têtes transférés](xref:host-and-deploy/proxy-load-balancer) | Transfère les en-têtes en proxy vers la requête actuelle. | Avant les composants qui consomment les champs mis à jour. Exemples : schéma, hôte, IP du client, méthode. |

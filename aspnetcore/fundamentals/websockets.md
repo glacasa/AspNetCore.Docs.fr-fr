@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/websockets
-ms.openlocfilehash: d0116a50051c1e9ddc9783e0102a3b32fb20cdce
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 685e694a3d974a8a51255bdbb83d33459137a3d9
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016451"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629013"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>Prise en charge des WebSockets dans ASP.NET Core
 
@@ -36,7 +37,7 @@ Cet article explique comment commencer avec les WebSockets dans ASP.NET Core. [W
 
 [ASP.net Core SignalR ](xref:signalr/introduction) est une bibliothèque qui simplifie l’ajout de fonctionnalités Web en temps réel aux applications. Elle utilise des WebSockets dans la mesure du possible.
 
-Pour la plupart des applications, nous vous recommandons d’utiliser des SignalR WebSockets bruts. SignalRfournit le secours de transport pour les environnements où WebSockets n’est pas disponible. Il fournit également un modèle d’application d’appel de procédure distante simple. Et dans la plupart des scénarios, ne présente pas de dépassements SignalR significatifs en matière de performances par rapport à l’utilisation de WebSocket RAW.
+Pour la plupart des applications, nous vous recommandons d’utiliser des SignalR WebSockets bruts. SignalR fournit le secours de transport pour les environnements où WebSockets n’est pas disponible. Il fournit également un modèle d’application d’appel de procédure distante simple. Et dans la plupart des scénarios, ne présente pas de dépassements SignalR significatifs en matière de performances par rapport à l’utilisation de WebSocket RAW.
 
 ## <a name="prerequisites"></a>Prérequis
 

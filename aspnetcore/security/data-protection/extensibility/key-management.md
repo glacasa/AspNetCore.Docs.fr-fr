@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/key-management
-ms.openlocfilehash: 5f55b56bd35a583e1f078a5a281788b68412e4f7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 797df457a5584233043210e9ba2657b7fd7f3893
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021690"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631002"
 ---
 # <a name="key-management-extensibility-in-aspnet-core"></a>Extensibilité de la gestion des clés dans ASP.NET Core
 
@@ -31,7 +32,7 @@ ms.locfileid: "88021690"
 > [!WARNING]
 > Les types qui implémentent l’une des interfaces suivantes doivent être thread-safe pour plusieurs appelants.
 
-## <a name="key"></a>Clé :
+## <a name="key"></a>Clé
 
 L' `IKey` interface est la représentation de base d’une clé dans chiffrement. Le terme clé est utilisé ici dans le sens abstrait, et non dans le sens littéral du « matériel de clé de chiffrement ». Une clé a les propriétés suivantes :
 
@@ -73,7 +74,7 @@ L' `IKeyManager` interface représente un objet responsable du stockage, de la r
 
 Le `XmlKeyManager` type est l’implémentation concrète de `IKeyManager` . Il offre plusieurs fonctionnalités utiles, dont le dépôt de clés et le chiffrement des clés au repos. Les clés de ce système sont représentées en tant qu’éléments XML (en particulier, [XElement](/dotnet/csharp/programming-guide/concepts/linq/xelement-class-overview)).
 
-`XmlKeyManager`dépend de plusieurs autres composants dans le cadre de la réalisation de ses tâches :
+`XmlKeyManager` dépend de plusieurs autres composants dans le cadre de la réalisation de ses tâches :
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -81,9 +82,9 @@ Le `XmlKeyManager` type est l’implémentation concrète de `IKeyManager` . Il 
 
 * `IXmlRepository`, qui contrôle les emplacements où les clés sont conservées dans le stockage.
 
-* `IXmlEncryptor`[facultatif], qui autorise le chiffrement des clés au repos.
+* `IXmlEncryptor` [facultatif], qui autorise le chiffrement des clés au repos.
 
-* `IKeyEscrowSink`[facultatif], qui fournit des services de dépôt de clés.
+* `IKeyEscrowSink` [facultatif], qui fournit des services de dépôt de clés.
 
 ::: moniker-end
 
@@ -91,9 +92,9 @@ Le `XmlKeyManager` type est l’implémentation concrète de `IKeyManager` . Il 
 
 * `IXmlRepository`, qui contrôle les emplacements où les clés sont conservées dans le stockage.
 
-* `IXmlEncryptor`[facultatif], qui autorise le chiffrement des clés au repos.
+* `IXmlEncryptor` [facultatif], qui autorise le chiffrement des clés au repos.
 
-* `IKeyEscrowSink`[facultatif], qui fournit des services de dépôt de clés.
+* `IKeyEscrowSink` [facultatif], qui fournit des services de dépôt de clés.
 
 ::: moniker-end
 
@@ -125,7 +126,7 @@ Dans l’implémentation de `CreateNewKey` , le `IAuthenticatedEncryptorConfigur
 
 *Récupération de clé/GetAllKeys*
 
-Dans l’implémentation de `GetAllKeys` , les documents XML représentant les clés et les révocations sont lus à partir du sous-jacent `IXmlRepository` . Si ces documents sont chiffrés, le système les déchiffre automatiquement. `XmlKeyManager`crée les `IAuthenticatedEncryptorDescriptorDeserializer` instances appropriées pour désérialiser les documents en `IAuthenticatedEncryptorDescriptor` instances, qui sont ensuite encapsulées dans des `IKey` instances individuelles. Cette collection d' `IKey` instances est retournée à l’appelant.
+Dans l’implémentation de `GetAllKeys` , les documents XML représentant les clés et les révocations sont lus à partir du sous-jacent `IXmlRepository` . Si ces documents sont chiffrés, le système les déchiffre automatiquement. `XmlKeyManager` crée les `IAuthenticatedEncryptorDescriptorDeserializer` instances appropriées pour désérialiser les documents en `IAuthenticatedEncryptorDescriptor` instances, qui sont ensuite encapsulées dans des `IKey` instances individuelles. Cette collection d' `IKey` instances est retournée à l’appelant.
 
 Vous trouverez plus d’informations sur les éléments XML particuliers dans le [document de format de stockage de clés](xref:security/data-protection/implementation/key-storage-format#data-protection-implementation-key-storage-format).
 

@@ -5,6 +5,7 @@ description: Apprenez à utiliser des dispositions communes, à partager des dir
 ms.author: riande
 ms.date: 07/30/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: 4d5032f02db28341d7781dd57d58d776636fd16d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 308e567e0480f83972ab7a55c7b957af83a164fd
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020442"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630690"
 ---
 # <a name="layout-in-aspnet-core"></a>Disposition dans ASP.NET Core
 
@@ -34,7 +35,7 @@ Les pages et les vues ont souvent des éléments visuels et programmatiques en c
 
 Ce document décrit les dispositions pour les deux approches différentes de ASP.NET Core MVC : Razor pages et contrôleurs avec des vues. Pour cette rubrique, les différences sont minimes :
 
-* RazorLes pages se trouvent dans le dossier *pages* .
+* Razor Les pages se trouvent dans le dossier *pages* .
 * Les contrôleurs avec vues utilisent un dossier *Views* pour les vues.
 
 ## <a name="what-is-a-layout"></a>Qu’est-ce qu’une disposition ?
@@ -47,7 +48,7 @@ Les structures HTML courantes, comme les scripts et les feuilles de style, sont 
 
 Par convention, la disposition par défaut d’une application ASP.NET Core se nomme *_Layout.cshtml*. Les fichiers de disposition pour les projets ASP.NET Core créés avec les modèles sont les suivants :
 
-* RazorPages : *pages/Shared/_Layout. cshtml*
+* Razor Pages : *pages/Shared/_Layout. cshtml*
 
   ![Dossier Pages dans l’Explorateur de solutions](layout/_static/rp-web-project-views.png)
 
@@ -63,7 +64,7 @@ Le code suivant montre le fichier de disposition pour un projet créé avec un m
 
 ## <a name="specifying-a-layout"></a>Spécification d’une disposition
 
-Razorles vues ont une `Layout` propriété. Chaque vue spécifie une disposition en définissant cette propriété :
+Razor les vues ont une `Layout` propriété. Chaque vue spécifie une disposition en définissant cette propriété :
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 

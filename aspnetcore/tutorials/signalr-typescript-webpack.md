@@ -6,6 +6,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 02/10/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-typescript-webpack
-ms.openlocfilehash: 48b59fea5da3872fb29cacd9edbedd14de9e602f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 912f6f5d20add99cd0173b6d1ebcf06161c448f5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019415"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629676"
 ---
 # <a name="use-aspnet-core-no-locsignalr-with-typescript-and-webpack"></a>Utiliser ASP.NET Core SignalR avec la machine à écrire et WebPack
 
@@ -237,7 +238,7 @@ L’application affiche actuellement un formulaire de base pour envoyer des mess
 
     Le code précédent prend en charge la réception de messages du serveur. La classe `HubConnectionBuilder` crée un générateur pour configurer la connexion de serveur. La fonction `withUrl` configure l’URL du hub.
 
-    SignalRpermet l’échange de messages entre un client et un serveur. Chaque message a un nom spécifique. Par exemple, les messages portant le nom `messageReceived` peuvent exécuter la logique responsable de l’affichage du nouveau message dans la zone de messages. L’écoute d’un message spécifique peut être effectuée au moyen de la fonction `on`. N’importe quel nombre de noms de messages peut être écouté. Vous pouvez aussi passer des paramètres au message, comme le nom de l’auteur et le contenu du message reçu. Dès que le client reçoit un message, un élément `div` est créé avec le nom de l’auteur et le contenu du message dans son attribut `innerHTML`. Il est ajouté à l’élément `div` principal qui affiche les messages.
+    SignalR permet l’échange de messages entre un client et un serveur. Chaque message a un nom spécifique. Par exemple, les messages portant le nom `messageReceived` peuvent exécuter la logique responsable de l’affichage du nouveau message dans la zone de messages. L’écoute d’un message spécifique peut être effectuée au moyen de la fonction `on`. N’importe quel nombre de noms de messages peut être écouté. Vous pouvez aussi passer des paramètres au message, comme le nom de l’auteur et le contenu du message reçu. Dès que le client reçoit un message, un élément `div` est créé avec le nom de l’auteur et le contenu du message dans son attribut `innerHTML`. Il est ajouté à l’élément `div` principal qui affiche les messages.
 
 1. Maintenant que le client peut recevoir un message, configurez-le pour en envoyer. Ajoutez le code en surbrillance au fichier *src/index.ts* :
 
@@ -474,7 +475,7 @@ Actuellement, l’application affiche un formulaire simple pour envoyer des mess
 
     Le code précédent prend en charge la réception de messages du serveur. La classe `HubConnectionBuilder` crée un générateur pour configurer la connexion de serveur. La fonction `withUrl` configure l’URL du hub.
 
-    SignalRpermet l’échange de messages entre un client et un serveur. Chaque message a un nom spécifique. Par exemple, les messages portant le nom `messageReceived` peuvent exécuter la logique responsable de l’affichage du nouveau message dans la zone de messages. L’écoute d’un message spécifique peut être effectuée au moyen de la fonction `on`. Vous pouvez écouter n’importe quel nombre de noms de message. Vous pouvez aussi passer des paramètres au message, comme le nom de l’auteur et le contenu du message reçu. Dès que le client reçoit un message, un élément `div` est créé avec le nom de l’auteur et le contenu du message dans son attribut `innerHTML`. Le nouveau message est ajouté à l’élément principal qui `div` affiche les messages.
+    SignalR permet l’échange de messages entre un client et un serveur. Chaque message a un nom spécifique. Par exemple, les messages portant le nom `messageReceived` peuvent exécuter la logique responsable de l’affichage du nouveau message dans la zone de messages. L’écoute d’un message spécifique peut être effectuée au moyen de la fonction `on`. Vous pouvez écouter n’importe quel nombre de noms de message. Vous pouvez aussi passer des paramètres au message, comme le nom de l’auteur et le contenu du message reçu. Dès que le client reçoit un message, un élément `div` est créé avec le nom de l’auteur et le contenu du message dans son attribut `innerHTML`. Le nouveau message est ajouté à l’élément principal qui `div` affiche les messages.
 
 1. Maintenant que le client peut recevoir un message, configurez-le pour en envoyer. Ajoutez le code en surbrillance au fichier *src/index.ts* :
 

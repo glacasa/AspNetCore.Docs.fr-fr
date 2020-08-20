@@ -5,6 +5,7 @@ description: Découvrez comment hacher les mots de passe à l’aide des API de 
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/password-hashing
-ms.openlocfilehash: 643d468763c6a935fc618a22920cb79119258087
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 19263400397a9dfe2d9e6044109d6d063023f6f4
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018388"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629858"
 ---
 # <a name="hash-passwords-in-aspnet-core"></a>Hacher les mots de passe dans ASP.NET Core
 
@@ -36,4 +37,4 @@ Le package offre actuellement une méthode `KeyDerivation.Pbkdf2` qui autorise l
 
 [!code-csharp[](password-hashing/samples/passwordhasher.cs)]
 
-Consultez le [code source](https://github.com/dotnet/AspNetCore/blob/master/src/Identity/Extensions.Core/src/PasswordHasher.cs) du type de ASP.net Core Identity `PasswordHasher` pour un cas d’usage réel.
+Consultez le [code source](https://github.com/dotnet/AspNetCore/blob/master/src/Identity/Extensions.Core/src/PasswordHasher.cs) du ASP.NET Core Identity `PasswordHasher` type de pour un cas d’usage réel.

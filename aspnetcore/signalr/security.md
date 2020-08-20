@@ -1,5 +1,5 @@
 ---
-title: Considérations relatives à la sécurité dans ASP.NET CoreSignalR
+title: Considérations relatives à la sécurité dans ASP.NET Core SignalR
 author: bradygaster
 description: Découvrez comment utiliser l’authentification et l’autorisation dans ASP.NET Core SignalR .
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: anurse
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: e004899e334738f723cb98638cb31de8d314a830
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 12293c5cb3dc49d505225f1b44e824e9273cfffc
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022470"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630989"
 ---
-# <a name="security-considerations-in-aspnet-core-no-locsignalr"></a>Considérations relatives à la sécurité dans ASP.NET CoreSignalR
+# <a name="security-considerations-in-aspnet-core-no-locsignalr"></a>Considérations relatives à la sécurité dans ASP.NET Core SignalR
 
 Par [Andrew Stanton-infirmière](https://twitter.com/anurse)
 
@@ -34,8 +35,8 @@ Cet article fournit des informations sur la sécurisation de SignalR .
 
 Le [partage des ressources Cross-Origin (cors)](https://www.w3.org/TR/cors/) peut être utilisé pour autoriser les connexions Cross-Origin SignalR dans le navigateur. Si le code JavaScript est hébergé sur un domaine différent de l' SignalR application, l' [intergiciel (middleware) cors](xref:security/cors) doit être activé pour permettre au JavaScript de se connecter à l' SignalR application. Autorisez les requêtes Cross-Origin uniquement à partir des domaines que vous approuvez ou contrôlez. Par exemple :
 
-* Votre site est hébergé sur`http://www.example.com`
-* Votre SignalR application est hébergée sur`http://signalr.example.com`
+* Votre site est hébergé sur `http://www.example.com`
+* Votre SignalR application est hébergée sur `http://signalr.example.com`
 
 CORS doit être configuré dans l' SignalR application afin d’autoriser uniquement l’origine `www.example.com` .
 
@@ -137,7 +138,7 @@ Les messages d’exception sont généralement considérés comme des données s
 
 ## <a name="buffer-management"></a>Gestion des tampons
 
-SignalRutilise des tampons par connexion pour gérer les messages entrants et sortants. Par défaut, SignalR limite ces mémoires tampons à 32 Ko. Le plus grand message qu’un client ou un serveur peut envoyer est de 32 Ko. La mémoire maximale consommée par une connexion pour les messages est de 32 Ko. Si vos messages sont toujours inférieurs à 32 Ko, vous pouvez réduire la limite, qui :
+SignalR utilise des tampons par connexion pour gérer les messages entrants et sortants. Par défaut, SignalR limite ces mémoires tampons à 32 Ko. Le plus grand message qu’un client ou un serveur peut envoyer est de 32 Ko. La mémoire maximale consommée par une connexion pour les messages est de 32 Ko. Si vos messages sont toujours inférieurs à 32 Ko, vous pouvez réduire la limite, qui :
 
 * Empêche un client d’envoyer un message plus volumineux.
 * Le serveur n’a jamais besoin d’allouer de grandes mémoires tampons pour accepter des messages.
@@ -149,7 +150,7 @@ Si vos messages sont supérieurs à 32 Ko, vous pouvez augmenter la limite. L’
 
 Il existe des limites pour les messages entrants et sortants, qui peuvent être configurés sur l’objet [HttpConnectionDispatcherOptions](xref:signalr/configuration#configure-server-options) configuré dans `MapHub` :
 
-* `ApplicationMaxBufferSize`représente le nombre maximal d’octets du client que le serveur met en mémoire tampon. Si le client tente d’envoyer un message d’une taille supérieure à cette limite, la connexion peut être fermée.
-* `TransportMaxBufferSize`représente le nombre maximal d’octets que le serveur peut envoyer. Si le serveur tente d’envoyer un message (y compris les valeurs de retour des méthodes de concentrateur) supérieures à cette limite, une exception est levée.
+* `ApplicationMaxBufferSize` représente le nombre maximal d’octets du client que le serveur met en mémoire tampon. Si le client tente d’envoyer un message d’une taille supérieure à cette limite, la connexion peut être fermée.
+* `TransportMaxBufferSize` représente le nombre maximal d’octets que le serveur peut envoyer. Si le serveur tente d’envoyer un message (y compris les valeurs de retour des méthodes de concentrateur) supérieures à cette limite, une exception est levée.
 
 La définition de la limite à `0` désactive la limite. La suppression de la limite permet à un client d’envoyer un message de toute taille. Les clients malveillants qui envoient des messages volumineux peuvent entraîner l’allocation de mémoire supplémentaire. L’utilisation excessive de la mémoire peut réduire de manière significative le nombre de connexions simultanées.

@@ -1,5 +1,5 @@
 ---
-title: Journalisation et diagnostics dans ASP.NET CoreSignalR
+title: Journalisation et diagnostics dans ASP.NET Core SignalR
 author: anurse
 description: Découvrez Comment collecter des diagnostics à partir de votre SignalR application ASP.net core.
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: anurse
 ms.custom: devx-track-csharp, signalr
 ms.date: 06/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 922b2ca0aa7933e1010db7ca319631766ffbf753
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 649398a3868117b2e7f3358aa25544c99cc625b3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130533"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631340"
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>Journalisation et diagnostics dans ASP.NET CoreSignalR
+# <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>Journalisation et diagnostics dans ASP.NET Core SignalR
 
 Par [Andrew Stanton-infirmière](https://twitter.com/anurse)
 
@@ -37,7 +38,7 @@ Cet article fournit des conseils pour la collecte de diagnostics à partir de vo
 
 Étant donné que SignalR fait partie de ASP.net Core, il utilise le système de journalisation ASP.net core. Dans la configuration par défaut, SignalR enregistre très peu d’informations, mais cela peut être configuré. Pour plus d’informations sur la configuration de la journalisation des ASP.NET Core, consultez la documentation sur [ASP.net Core Logging](xref:fundamentals/logging/index#configuration) .
 
-SignalRutilise deux catégories d’enregistreur d’événements :
+SignalR utilise deux catégories d’enregistreur d’événements :
 
 * `Microsoft.AspNetCore.SignalR`: Pour les journaux liés aux protocoles de concentrateur, l’activation de hubs, l’appel de méthodes et d’autres activités liées au Hub.
 * `Microsoft.AspNetCore.Http.Connections`: Pour les journaux liés aux transports, tels que les WebSockets, l’interrogation longue, les événements envoyés par le serveur et l’infrastructure de bas niveau SignalR .
@@ -65,7 +66,7 @@ La façon dont vous accédez aux journaux côté serveur dépend de l’environn
 
 ### <a name="as-a-console-app-outside-iis"></a>En tant qu’application console en dehors d’IIS
 
-Si vous exécutez dans une application console, l’enregistreur d’événements de [console](xref:fundamentals/logging/index#console) doit être activé par défaut. SignalRles journaux s’affichent dans la console.
+Si vous exécutez dans une application console, l’enregistreur d’événements de [console](xref:fundamentals/logging/index#console) doit être activé par défaut. SignalR les journaux s’affichent dans la console.
 
 ### <a name="within-iis-express-from-visual-studio"></a>Dans IIS Express à partir de Visual Studio
 
@@ -131,7 +132,7 @@ Vous pouvez également configurer les journaux pour accéder à la fenêtre **so
 
 ### <a name="other-logging-providers"></a>Autres fournisseurs de journalisation
 
-SignalRprend en charge d’autres fournisseurs de journalisation tels que Serilog, Seq, NLog ou tout autre système de journalisation qui s’intègre à `Microsoft.Extensions.Logging` . Si votre système de journalisation fournit un `ILoggerProvider` , vous pouvez l’inscrire auprès des `AddProvider` éléments suivants :
+SignalR prend en charge d’autres fournisseurs de journalisation tels que Serilog, Seq, NLog ou tout autre système de journalisation qui s’intègre à `Microsoft.Extensions.Logging` . Si votre système de journalisation fournit un `ILoggerProvider` , vous pouvez l’inscrire auprès des `AddProvider` éléments suivants :
 
 [!code-csharp[](diagnostics/net-client-custom-log.cs?highlight=6)]
 
@@ -220,9 +221,9 @@ Vous pouvez joindre des fichiers de diagnostic à des problèmes de GitHub en le
 
 Les métriques sont une représentation de mesures de données sur des intervalles de temps. Par exemple, les demandes par seconde. Les données de métriques permettent l’observation de l’état d’une application à un niveau élevé. Les métriques .NET gRPC sont émises à l’aide de <xref:System.Diagnostics.Tracing.EventCounter> .
 
-### <a name="no-locsignalr-server-metrics"></a>SignalRmétriques du serveur
+### <a name="no-locsignalr-server-metrics"></a>SignalR métriques du serveur
 
-SignalRles métriques du serveur sont signalées sur la source de l' <xref:Microsoft.AspNetCore.Http.Connections> événement.
+SignalR les métriques du serveur sont signalées sur la source de l' <xref:Microsoft.AspNetCore.Http.Connections> événement.
 
 | Nom                    | Description                 |
 |-------------------------|-----------------------------|

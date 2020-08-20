@@ -5,6 +5,7 @@ description: Découvrez les zones, fonctionnalité d’ASP.NET MVC utilisée pou
 ms.author: riande
 ms.date: 03/21/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/areas
-ms.openlocfilehash: af765eebfa8bfd147bd3b721508b5794d15d64a7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 033b57f5406d0344347b2f787fa2b2fbb2da8604
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018440"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630248"
 ---
 # <a name="areas-in-aspnet-core"></a>Zones dans ASP.NET Core
 
@@ -65,11 +66,11 @@ Imaginez une application qui contient deux groupes logiques, *Produits* et *Serv
 
 * Nom du projet
   * Zones (Areas)
-    * Produits
+    * Products
       * Contrôleurs
         * HomeController.cs
         * ManageController.cs
-      * Affichages
+      * Les vues
         * Accueil
           * Index.cshtml
         * Gérer
@@ -78,7 +79,7 @@ Imaginez une application qui contient deux groupes logiques, *Produits* et *Serv
     * Services
       * Contrôleurs
         * HomeController.cs
-      * Affichages
+      * Les vues
         * Accueil
           * Index.cshtml
 
@@ -101,7 +102,7 @@ Les contrôleurs de zone sont désignés avec l’attribut [ &lbrack; Area &rbra
 
 ### <a name="add-area-route"></a>Ajouter une route de zone
 
-Les itinéraires de zone utilisent généralement le [routage conventionnel](xref:mvc/controllers/routing#cr) plutôt que le [routage d’attributs](xref:mvc/controllers/routing#ar). Le routage conventionnel est dépendant de l’ordre. En général, les routes avec des zones doivent être placées plus haut dans la table de routage, car elles sont plus spécifiques que les routes sans zone.
+Les itinéraires de zone utilisent généralement le  [routage conventionnel](xref:mvc/controllers/routing#cr) plutôt que le [routage d’attributs](xref:mvc/controllers/routing#ar). Le routage conventionnel est dépendant de l’ordre. En général, les routes avec des zones doivent être placées plus haut dans la table de routage, car elles sont plus spécifiques que les routes sans zone.
 
 `{area:...}` peut être utilisé comme jeton dans les modèles de route si l’espace d’url est uniforme dans toutes les zones :
 
@@ -170,7 +171,7 @@ Les zones avec Razor pages requièrent un `Areas/<area name>/Pages` dossier à l
 
 * Nom du projet
   * Zones (Areas)
-    * Produits
+    * Products
       * Pages
         * _ViewImports
         * À propos de
@@ -267,11 +268,11 @@ Imaginez une application qui contient deux groupes logiques, *Produits* et *Serv
 
 * Nom du projet
   * Zones (Areas)
-    * Produits
+    * Products
       * Contrôleurs
         * HomeController.cs
         * ManageController.cs
-      * Affichages
+      * Les vues
         * Accueil
           * Index.cshtml
         * Gérer
@@ -280,7 +281,7 @@ Imaginez une application qui contient deux groupes logiques, *Produits* et *Serv
     * Services
       * Contrôleurs
         * HomeController.cs
-      * Affichages
+      * Les vues
         * Accueil
           * Index.cshtml
 
@@ -357,7 +358,7 @@ Les zones avec Razor pages requièrent un `Areas/<area name>/Pages` dossier à l
 
 * Nom du projet
   * Zones (Areas)
-    * Produits
+    * Products
       * Pages
         * _ViewImports
         * À propos de

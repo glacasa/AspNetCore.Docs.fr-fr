@@ -1,11 +1,12 @@
 ---
-title: RazorPages avec Entity Framework Core dans ASP.NET Core-didacticiel 1 sur 8
+title: Razor Pages avec Entity Framework Core dans ASP.NET Core-didacticiel 1 sur 8
 author: rick-anderson
 description: Montre comment créer une Razor application pages à l’aide de Entity Framework Core
 ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: cd6624d107fb19da92a7e58a747cc85e876a6ba4
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 00d5c348b7ab06f9044e6705026e43feb7807ae3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018635"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630300"
 ---
-# <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>RazorPages avec Entity Framework Core dans ASP.NET Core-didacticiel 1 sur 8
+# <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor Pages avec Entity Framework Core dans ASP.NET Core-didacticiel 1 sur 8
 
 Par [Tom Dykstra](https://github.com/tdykstra) et [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -89,7 +90,7 @@ Pour exécuter l’application après avoir téléchargé le projet terminé :
 Pour exécuter l’application après avoir téléchargé le projet terminé :
 
 * Supprimez *ContosoUniversity.csproj*, puis renommez *ContosoUniversitySQLite.csproj* en *ContosoUniversity.csproj*.
-* Supprimez *Startup.cs* et renommez *StartupSQLite.cs* en *Startup.cs*.
+* Dans *Program.cs*, commentez-le `#define Startup` pour qu’il `StartupSQLite` soit utilisé.
 * Supprimez *appSettings.json* et renommez *appSettingsSQLite.json* en *appSettings.json*.
 * Supprimez le dossier *Migrations* et renommez *MigrationsSQL* en *Migrations*.
 * Effectuez une recherche globale `#if SQLiteVersion` et supprimez `#if SQLiteVersion` et l' `#endif` instruction associée.
@@ -214,7 +215,7 @@ Générez le projet pour vérifier qu’il n’y a pas d’erreurs du compilateu
 Dans cette section, vous allez utiliser l’outil de génération de modèles automatique ASP.NET Core pour générer :
 
 * Une classe de *contexte* EF Core. Le contexte est la classe principale qui coordonne les fonctionnalités d’Entity Framework pour un modèle de données déterminé. Il dérive de la classe `Microsoft.EntityFrameworkCore.DbContext`.
-* Razorles pages qui gèrent les opérations de création, lecture, mise à jour et suppression (CRUD) pour l' `Student` entité.
+* Razor les pages qui gèrent les opérations de création, lecture, mise à jour et suppression (CRUD) pour l' `Student` entité.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -349,7 +350,7 @@ L’outil de génération de modèles automatique a inscrit automatiquement la c
 
 Le nom de la chaîne de connexion est transmis au contexte en appelant une méthode sur un objet [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions). Pour le développement local, le [système de configuration ASP.NET Core](xref:fundamentals/configuration/index) lit la chaîne de connexion à partir du fichier *appsettings.json*.
 
-## <a name="create-the-database"></a>Créer la base de données
+## <a name="create-the-database"></a>Création de la base de données
 
 Mettez à jour *Program.cs* pour créer la base de données si elle n’existe pas :
 
