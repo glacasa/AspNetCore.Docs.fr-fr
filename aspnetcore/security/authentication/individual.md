@@ -94,7 +94,7 @@ Le tableau suivant présente les options d’authentification disponibles lors d
 | Cloud professionnel ou scolaire/organisation multiple |  Authentification d’organisation pour plusieurs locataires | [Azure AD](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp) |
 | Windows         |  Authentification Windows | [Authentification Windows](xref:security/authentication/windowsauth)
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 Les articles suivants montrent comment utiliser le code généré dans ASP.NET Core modèles qui utilisent des comptes d’utilisateur individuels :
 

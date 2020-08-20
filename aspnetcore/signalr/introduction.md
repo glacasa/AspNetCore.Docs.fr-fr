@@ -67,9 +67,9 @@ Un Hub est un pipeline de haut niveau qui permet à un client et un serveur d’
 
 Les hubs appellent le code côté client en envoyant des messages qui contiennent le nom et les paramètres de la méthode côté client. Les objets envoyés en tant que paramètres de méthode sont désérialisés à l’aide du protocole configuré. Le client tente de faire correspondre le nom à une méthode dans le code côté client. Lorsque le client trouve une correspondance, il appelle la méthode et lui passe les données de paramètre désérialisées.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Prise en main SignalR de pour ASP.net Core](xref:tutorials/signalr)
 * [Plateformes prises en charge](xref:signalr/supported-platforms)
-* [Hubs](xref:signalr/hubs)
+* [Concentr](xref:signalr/hubs)
 * [Client JavaScript](xref:signalr/javascript-client)

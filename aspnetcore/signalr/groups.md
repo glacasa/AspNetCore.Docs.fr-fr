@@ -62,5 +62,5 @@ Pour protéger l’accès aux ressources lors de l’utilisation de groupes, uti
 ## <a name="related-resources"></a>Ressources associées
 
 * [Prise en main](xref:tutorials/signalr)
-* [Hubs](xref:signalr/hubs)
+* [Concentr](xref:signalr/hubs)
 * [Publier sur Azure](xref:signalr/publish-to-azure-web-app)

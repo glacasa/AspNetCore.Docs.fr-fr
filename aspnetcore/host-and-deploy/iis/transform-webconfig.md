@@ -191,7 +191,7 @@ Pour empêcher les transformations du fichier *web.config*, définissez la propr
 dotnet publish /p:IsWebConfigTransformDisabled=true
 ```
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Syntaxe de transformation d'un fichier Web.config pour le déploiement d'un projet d'application Web](/previous-versions/dd465326(v=vs.100))
 * [Syntaxe de transformation d'un fichier Web.config pour le déploiement d'un projet Web à l'aide de Visual Studio](/previous-versions/aspnet/dd465326(v=vs.110))

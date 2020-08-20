@@ -126,7 +126,7 @@ Pour plus d’informations sur l’hébergement des applications ASP.NET Core su
 > [!div class="nextstepaction"]
 > <xref:host-and-deploy/iis/index>
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 ### <a name="articles-in-the-aspnet-core-documentation-set"></a>Articles de la documentation ASP.NET Core
 
