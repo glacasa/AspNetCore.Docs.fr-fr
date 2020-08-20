@@ -17,15 +17,15 @@ L’une des méthodes permettant d’empêcher les cookies en attente et les don
   * Ouvrez la boîte de dialogue **naviguer avec** à partir du bouton **exécuter** de Visual Studio.
   * Sélectionnez le bouton **Ajouter**.
   * Indiquez le chemin d’accès à votre navigateur dans le champ **programme** . Les chemins d’accès exécutables suivants sont des emplacements d’installation typiques pour Windows 10. Si votre navigateur est installé à un autre emplacement ou si vous n’utilisez pas Windows 10, indiquez le chemin d’accès à l’exécutable du navigateur.
-    * Microsoft Edge :`C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`
-    * Google Chrome :`C:\Program Files (x86)\Google\Chrome\Application\chrome.exe`
-    * Mozilla Firefox :`C:\Program Files\Mozilla Firefox\firefox.exe`
+    * Microsoft Edge : `C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`
+    * Google Chrome : `C:\Program Files (x86)\Google\Chrome\Application\chrome.exe`
+    * Mozilla Firefox : `C:\Program Files\Mozilla Firefox\firefox.exe`
   * Dans le champ **arguments** , indiquez l’option de ligne de commande utilisée par le navigateur pour ouvrir en mode Incognito ou privé. Certains navigateurs requièrent l’URL de l’application.
-    * Microsoft Edge :`-inprivate`
-    * Google Chrome :`--incognito --new-window https://localhost:5001`
-    * Mozilla Firefox :`-private -url https://localhost:5001`
+    * Microsoft Edge : `-inprivate`
+    * Google Chrome : `--incognito --new-window https://localhost:5001`
+    * Mozilla Firefox : `-private -url https://localhost:5001`
   * Entrez un nom dans le champ **nom convivial** . Par exemple : `Firefox Auth Testing`.
-  * Sélectionnez le bouton **OK** .
+  * Cliquez sur le bouton **OK**.
   * Pour éviter d’avoir à sélectionner le profil de navigateur pour chaque itération de test avec une application, définissez le profil par défaut avec le bouton **définir comme valeur par défaut** .
   * Assurez-vous que le navigateur est fermé par l’IDE entre toute modification apportée à l’application, à l’utilisateur de test ou à la configuration du fournisseur.
 
@@ -33,7 +33,7 @@ L’une des méthodes permettant d’empêcher les cookies en attente et les don
 
 Lors du test et du dépannage d’une application éblouissante hébergée, assurez-vous que vous exécutez l’application à partir du **`Server`** projet. Par exemple, dans Visual Studio, vérifiez que le projet serveur est mis en surbrillance dans **Explorateur de solutions** avant de démarrer l’application avec l’une des approches suivantes :
 
-* Sélectionnez le bouton **Exécuter**.
+* Sélectionnez le bouton **Run**.
 * Utilisez **débogage**  >  **Démarrer le débogage** à partir du menu.
 * Appuyez sur <kbd>F5</kbd>.
 
