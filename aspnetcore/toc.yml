@@ -320,7 +320,7 @@
               uid: blazor/fundamentals/additional-scenarios
         - name: Composants
           items:
-            - name: Vue d'ensemble
+            - name: Vue d’ensemble
               uid: blazor/components/index
             - name: Composants intégrés
               items:
@@ -1152,7 +1152,7 @@
       uid: security/docker-compose-https
     - name: Prise en charge du règlement général sur la protection des données (RGPD) de l’Union Européenne
       uid: security/gdpr
-    - name: Protection contre la falsification de requête
+    - name: Éviter les attaques de falsification de requête intersites (XSRF/CSRF)
       uid: security/anti-request-forgery
     - name: Bloquer les attaques par redirection ouverte
       uid: security/preventing-open-redirects
