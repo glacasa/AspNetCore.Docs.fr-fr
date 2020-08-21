@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: 7f5d2835d93631ac73b3da0c3dc26d87ef64c57d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: f1a5af60f8dce83d9622ed9d2c6bcb4b8fc22b73
+ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634759"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88712491"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>Migrer d’ASP.NET vers ASP.NET Core
 
@@ -204,6 +204,12 @@ Structure de répertoire :
     └── web.config
 ```
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="bind-and-input-formatters"></a>[BIND] et formateurs d’entrée
+
+Les [versions précédentes de ASP.net](/aspnet/mvc/overview/getting-started/introduction/examining-the-edit-methods-and-edit-view) utilisaient l' `[Bind]` attribut pour vous protéger contre les attaques de survalidation. Les [formateurs d’entrée](xref:mvc/models/model-binding#input-formatters) fonctionnent différemment dans ASP.net core. L' `[Bind]` attribut n’est plus conçu pour empêcher la survalidation lorsqu’il est utilisé avec des formateurs d’entrée pour analyser JSON ou XML. Ces attributs affectent la liaison de modèle lorsque la source de données est une donnée de formulaire publiée avec le `x-www-form-urlencoded` type de contenu.
+
+Pour les applications qui publient des informations JSON sur les contrôleurs et utilisent des formateurs d’entrée JSON pour analyser les données, nous vous recommandons de remplacer l' `[Bind]` attribut par un modèle de vue qui correspond aux propriétés définies par l' `[Bind]` attribut.
+
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 - [Portage des bibliothèques vers le .NET Core](/dotnet/core/porting/libraries)

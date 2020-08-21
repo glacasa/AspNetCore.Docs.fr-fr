@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/distributed
-ms.openlocfilehash: a25cbaf9a4e7dc5f1bd3706d01f409208a39aaa3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0d27206412a098f4ea749ec10189bf24d2322de1
+ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626725"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88712478"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>Mise en cache distribuée dans ASP.NET Core
 
@@ -116,16 +116,13 @@ L’exemple d’application implémente <xref:Microsoft.Extensions.Caching.SqlSe
 
 ### <a name="distributed-redis-cache"></a>Cache Redims distribué
 
-[Redims](https://redis.io/) est un magasin de données en mémoire Open source, qui est souvent utilisé comme un cache distribué. Vous pouvez utiliser des ReDim localement, et vous pouvez configurer un [cache redims Azure](https://azure.microsoft.com/services/cache/) pour une application ASP.net Core hébergée sur Azure.
+[Redims](https://redis.io/) est un magasin de données en mémoire Open source, qui est souvent utilisé comme un cache distribué.  Vous pouvez configurer un [cache redims Azure](https://azure.microsoft.com/services/cache/) pour une application ASP.net Core hébergée sur Azure et utiliser un cache redims Azure pour le développement local.
 
-Une application configure l’implémentation du cache à l’aide d’une <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> instance ( <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*> ) dans un environnement de non-développement dans `Startup.ConfigureServices` :
+Une application configure l’implémentation du cache à l’aide d’une <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> instance ( <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*> ).
 
-[!code-csharp[](distributed/samples/3.x/DistCacheSample/Startup.cs?name=snippet_AddStackExchangeRedisCache)]
+Pour plus d’informations, consultez [Cache Azure pour Redis](/azure/azure-cache-for-redis/cache-overview).
 
-Pour installer les éléments ReDim sur votre ordinateur local :
-
-1. Installez le [package redims en chocolat](https://chocolatey.org/packages/redis-64/).
-1. Exécutez `redis-server` à partir d’une invite de commandes.
+Consultez [ce problème GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/19542) pour une discussion sur les autres approches d’un cache redims local.
 
 ### <a name="distributed-ncache-cache"></a>Cache NCache distribué
 
@@ -184,7 +181,7 @@ En règle générale, un cache Redims fournit un débit plus élevé et une late
 
 Lorsque SQL Server est utilisé en tant que magasin de stockage de cache distribué, l’utilisation de la même base de données pour le cache et du stockage et de la récupération de données ordinaires de l’application peut avoir un impact négatif sur les performances des deux. Nous vous recommandons d’utiliser une instance de SQL Server dédiée pour le magasin de stockage de cache distribué.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Cache redims sur Azure](/azure/azure-cache-for-redis/)
 * [SQL Database sur Azure](/azure/sql-database/)
@@ -354,7 +351,7 @@ En règle générale, un cache Redims fournit un débit plus élevé et une late
 
 Lorsque SQL Server est utilisé en tant que magasin de stockage de cache distribué, l’utilisation de la même base de données pour le cache et du stockage et de la récupération de données ordinaires de l’application peut avoir un impact négatif sur les performances des deux. Nous vous recommandons d’utiliser une instance de SQL Server dédiée pour le magasin de stockage de cache distribué.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Cache redims sur Azure](/azure/azure-cache-for-redis/)
 * [SQL Database sur Azure](/azure/sql-database/)
@@ -530,7 +527,7 @@ En règle générale, un cache Redims fournit un débit plus élevé et une late
 
 Lorsque SQL Server est utilisé en tant que magasin de stockage de cache distribué, l’utilisation de la même base de données pour le cache et du stockage et de la récupération de données ordinaires de l’application peut avoir un impact négatif sur les performances des deux. Nous vous recommandons d’utiliser une instance de SQL Server dédiée pour le magasin de stockage de cache distribué.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Cache redims sur Azure](/azure/azure-cache-for-redis/)
 * [SQL Database sur Azure](/azure/sql-database/)
@@ -544,4 +541,3 @@ Lorsque SQL Server est utilisé en tant que magasin de stockage de cache distrib
 * <xref:host-and-deploy/web-farm>
 
 ::: moniker-end
- 

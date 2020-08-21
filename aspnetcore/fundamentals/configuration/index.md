@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: fe0a0d3dbb87455be602234825d702fab02df936
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ed40800f3e363cc3fd6f57492d76a42095e5b97b
+ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634590"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88712556"
 ---
 # <a name="configuration-in-aspnet-core"></a>Configuration dans ASP.NET Core
 
@@ -98,6 +98,8 @@ La configuration par défaut <xref:Microsoft.Extensions.Configuration.Json.JsonC
 À l’aide de la configuration [par défaut](#default) , le *appsettings.jssur* et *appSettings.* `Environment` les fichiers *. JSON* sont activés avec [reloadOnChange : true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75). Les modifications apportées à la *appsettings.jssur* et *appSettings.* `Environment` le fichier *. JSON* ***après*** le démarrage de l’application est lu par le [fournisseur de configuration JSON](#jcp).
 
 Pour plus d’informations sur l’ajout de fichiers de configuration JSON supplémentaires, consultez [fournisseur de configuration JSON](#jcp) dans ce document.
+
+## <a name="combining-service-collection"></a>Combinaison de la collection de services
 
 [!INCLUDE[](~/includes/combine-di.md)]
 
@@ -349,9 +351,9 @@ Quand une variable d’environnement est découverte et chargée dans la configu
 | Clé de variable d’environnement | Clé de configuration convertie | Entrée de configuration de fournisseur                                                    |
 | ------------------------ | --------------------------- | ------------------------------------------------------------------------------- |
 | `CUSTOMCONNSTR_{KEY} `   | `ConnectionStrings:{KEY}`   | Entrée de configuration non créée.                                                |
-| `MYSQLCONNSTR_{KEY}`     | `ConnectionStrings:{KEY}`   | Clé : `ConnectionStrings:{KEY}_ProviderName` :<br>Valeur : `MySql.Data.MySqlClient` |
-| `SQLAZURECONNSTR_{KEY}`  | `ConnectionStrings:{KEY}`   | Clé : `ConnectionStrings:{KEY}_ProviderName` :<br>Valeur : `System.Data.SqlClient`  |
-| `SQLCONNSTR_{KEY}`       | `ConnectionStrings:{KEY}`   | Clé : `ConnectionStrings:{KEY}_ProviderName` :<br>Valeur : `System.Data.SqlClient`  |
+| `MYSQLCONNSTR_{KEY}`     | `ConnectionStrings:{KEY}`   | Clé : `ConnectionStrings:{KEY}_ProviderName` :<br>Valeur: `MySql.Data.MySqlClient` |
+| `SQLAZURECONNSTR_{KEY}`  | `ConnectionStrings:{KEY}`   | Clé : `ConnectionStrings:{KEY}_ProviderName` :<br>Valeur: `System.Data.SqlClient`  |
+| `SQLCONNSTR_{KEY}`       | `ConnectionStrings:{KEY}`   | Clé : `ConnectionStrings:{KEY}_ProviderName` :<br>Valeur: `System.Data.SqlClient`  |
 
 <a name="fcp"></a>
 
@@ -760,7 +762,7 @@ Pour plus d’informations sur la migration de la configuration d’application 
 
 Une implémentation de <xref:Microsoft.AspNetCore.Hosting.IHostingStartup> permet d’ajouter des améliorations à une application au démarrage à partir d’un assembly externe, en dehors de la classe `Startup` de l’application. Pour plus d'informations, consultez <xref:fundamentals/configuration/platform-specific-configuration>.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Code source de configuration](https://github.com/dotnet/extensions/tree/master/src/Configuration)
 * <xref:fundamentals/configuration/options>
@@ -1203,9 +1205,9 @@ Quand une variable d’environnement est découverte et chargée dans la configu
 | Clé de variable d’environnement | Clé de configuration convertie | Entrée de configuration de fournisseur                                                    |
 | ------------------------ | --------------------------- | ------------------------------------------------------------------------------- |
 | `CUSTOMCONNSTR_{KEY} `   | `ConnectionStrings:{KEY}`   | Entrée de configuration non créée.                                                |
-| `MYSQLCONNSTR_{KEY}`     | `ConnectionStrings:{KEY}`   | Clé : `ConnectionStrings:{KEY}_ProviderName` :<br>Valeur : `MySql.Data.MySqlClient` |
-| `SQLAZURECONNSTR_{KEY}`  | `ConnectionStrings:{KEY}`   | Clé : `ConnectionStrings:{KEY}_ProviderName` :<br>Valeur : `System.Data.SqlClient`  |
-| `SQLCONNSTR_{KEY}`       | `ConnectionStrings:{KEY}`   | Clé : `ConnectionStrings:{KEY}_ProviderName` :<br>Valeur : `System.Data.SqlClient`  |
+| `MYSQLCONNSTR_{KEY}`     | `ConnectionStrings:{KEY}`   | Clé : `ConnectionStrings:{KEY}_ProviderName` :<br>Valeur: `MySql.Data.MySqlClient` |
+| `SQLAZURECONNSTR_{KEY}`  | `ConnectionStrings:{KEY}`   | Clé : `ConnectionStrings:{KEY}_ProviderName` :<br>Valeur: `System.Data.SqlClient`  |
+| `SQLCONNSTR_{KEY}`       | `ConnectionStrings:{KEY}`   | Clé : `ConnectionStrings:{KEY}_ProviderName` :<br>Valeur: `System.Data.SqlClient`  |
 
 **Exemple**
 
