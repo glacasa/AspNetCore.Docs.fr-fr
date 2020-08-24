@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 94ae9e52ed99c3fe8e7044f474cdf5b702dc5adf
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 587872b269d897d7c86eb77c110a4b6432218ed3
+ms.sourcegitcommit: dd0e87abf2bb50ee992d9185bb256ed79d48f545
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634460"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88746557"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>Meilleures pratiques en matière de performances de ASP.NET Core
 
@@ -57,6 +57,12 @@ Un problème de performances courant dans les applications de ASP.NET Core consi
 * Rendez les actions de contrôleur/ Razor page asynchrones. L’ensemble de la pile des appels est asynchrone afin de tirer parti des modèles [Async/await](/dotnet/csharp/programming-guide/concepts/async/) .
 
 Un profileur, tel que [PerfView](https://github.com/Microsoft/perfview), peut être utilisé pour rechercher les threads ajoutés fréquemment au [pool de threads](/windows/desktop/procthread/thread-pools). L' `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` événement indique qu’un thread a été ajouté au pool de threads. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
+
+## <a name="return-ienumerablet-or-iasyncenumerablet"></a>Retourne IEnumerable \<T> ou IAsyncEnumerable\<T>
+
+`IEnumerable<T>`Le retour à partir d’une action entraîne une itération de collection synchrone par le sérialiseur. Le résultat est le blocage des appels et un potentiel pour la privation du pool de threads. Pour éviter l’énumération synchrone, utilisez `ToListAsync` avant de retourner l’énumérable.
+
+À partir de ASP.NET Core 3,0, `IAsyncEnumerable<T>` peut être utilisé comme alternative à l' `IEnumerable<T>` énumération asynchrone. Pour plus d’informations, consultez [types de retours d’action de contrôleur](xref:web-api/action-return-types#return-ienumerablet-or-iasyncenumerablet).
 
 ## <a name="minimize-large-object-allocations"></a>Réduire les allocations d’objets volumineux
 
@@ -111,7 +117,7 @@ Recommandations :
 
 ## <a name="keep-common-code-paths-fast"></a>Conserver les chemins de code communs rapidement
 
-Vous souhaitez que tout votre code soit rapide. Les chemins de code fréquemment appelés sont les plus importants à optimiser. Il s’agit notamment des paramètres suivants :
+Vous souhaitez que tout votre code soit rapide. Les chemins de code fréquemment appelés sont les plus importants à optimiser. Elles incluent notamment :
 
 * Composants de l’intergiciel (middleware) dans le pipeline de traitement des demandes de l’application, en particulier les intergiciels (middleware) exécutés au début du pipeline. Ces composants ont un impact important sur les performances.
 * Code qui est exécuté pour chaque demande ou plusieurs fois par demande. Par exemple, la journalisation personnalisée, les gestionnaires d’autorisation ou l’initialisation de services temporaires.
@@ -357,3 +363,11 @@ Le fait de vérifier si la réponse n’a pas démarré permet d’inscrire un r
 ## <a name="do-not-call-next-if-you-have-already-started-writing-to-the-response-body"></a>N’appelez pas Next () si vous avez déjà commencé à écrire dans le corps de la réponse
 
 Les composants s’attendent à être appelés uniquement s’ils peuvent gérer et manipuler la réponse.
+
+## <a name="use-in-process-hosting-with-iis"></a>Utiliser l’hébergement in-process avec IIS
+
+En utilisant l’hébergement in-process, une application ASP.NET Core s’exécute dans le même processus que son processus de travail IIS. L’hébergement en cours offre des performances améliorées par rapport à l’hébergement hors processus, car les demandes ne sont pas transmises par proxy sur la carte de bouclage. La carte de bouclage est une interface réseau qui renvoie le trafic réseau sortant vers le même ordinateur. IIS s’occupe de la gestion des processus par l’intermédiaire du [service d’activation des processus Windows (WAS)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was).
+
+Les projets sont par défaut du modèle d’hébergement in-process dans ASP.NET Core 3,0 et versions ultérieures.
+
+Pour plus d’informations, consultez [ASP.net core d’hôte sur Windows avec IIS](xref:host-and-deploy/iis/index) .
