@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/cookie
-ms.openlocfilehash: 48b9c41b468f04134164a9c499e7fadca107cab2
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 04d2f0d289e2c9ec13aeb880df47240bec19d3ec
+ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865107"
+ms.locfileid: "88876761"
 ---
 # <a name="use-no-loccookie-authentication-without-no-locaspnet-core-identity"></a>Utiliser cookie l’authentification sans ASP.NET Core Identity
 
@@ -116,6 +116,8 @@ Pour déconnecter l’utilisateur actuel et supprimer son cookie , appelez <xref
 [!code-csharp[](cookie/samples/3.x/CookieSample/Pages/Account/Login.cshtml.cs?name=snippet2)]
 
 Si `CookieAuthenticationDefaults.AuthenticationScheme` (ou « Cookie s ») n’est pas utilisé comme modèle (par exemple, « Contoso Cookie »), fournissez le schéma utilisé lors de la configuration du fournisseur d’authentification. Dans le cas contraire, le schéma par défaut est utilisé.
+
+Le serveur n’a aucun contrôle sur le navigateur des clients. Si l’utilisateur ferme le navigateur ou l’onglet, le serveur ne peut pas déconnecter l’utilisateur. Pour implémenter la déconnexion de l’utilisateur lorsque le navigateur est fermé, vous devez le détecter avec JavaScript. Recherchez « comment détecter l’événement de fermeture de l’onglet de fenêtre de navigateur ? ».
 
 ## <a name="react-to-back-end-changes"></a>Réagir aux modifications principales
 

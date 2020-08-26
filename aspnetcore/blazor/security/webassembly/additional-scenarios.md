@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: e1f7e8b85537f0671451d9975487645a1c005e74
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 889e7b4736157b1bb563bd3e606c0d5d855c2226
+ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626283"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88876709"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly des scénarios de sécurité supplémentaires
 
@@ -358,93 +358,6 @@ if (tokenResult.TryGetToken(out var token))
 * `true` avec le `token` à utiliser.
 * `false` Si le jeton n’est pas récupéré.
 
-## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>`HttpClient` et `HttpRequestMessage` avec les options de requête de l’API Fetch
-
-Lors de l’exécution sur webassembly dans une Blazor WebAssembly application, [`HttpClient`](xref:fundamentals/http-requests) (documentation de l'[API](xref:System.Net.Http.HttpClient)) et <xref:System.Net.Http.HttpRequestMessage> peut être utilisé pour personnaliser les demandes. Par exemple, vous pouvez spécifier la méthode HTTP et les en-têtes de demande. Le composant suivant envoie une `POST` demande à un point de terminaison d’API de liste de tâches sur le serveur et affiche le corps de la réponse :
-
-```razor
-@page "/todorequest"
-@using System.Net.Http
-@using System.Net.Http.Headers
-@using System.Net.Http.Json
-@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-@inject HttpClient Http
-@inject IAccessTokenProvider TokenProvider
-
-<h1>ToDo Request</h1>
-
-<button @onclick="PostRequest">Submit POST request</button>
-
-<p>Response body returned by the server:</p>
-
-<p>@responseBody</p>
-
-@code {
-    private string responseBody;
-
-    private async Task PostRequest()
-    {
-        var requestMessage = new HttpRequestMessage()
-        {
-            Method = new HttpMethod("POST"),
-            RequestUri = new Uri("https://localhost:10000/api/TodoItems"),
-            Content =
-                JsonContent.Create(new TodoItem
-                {
-                    Name = "My New Todo Item",
-                    IsComplete = false
-                })
-        };
-
-        var tokenResult = await TokenProvider.RequestAccessToken();
-
-        if (tokenResult.TryGetToken(out var token))
-        {
-            requestMessage.Headers.Authorization =
-                new AuthenticationHeaderValue("Bearer", token.Value);
-
-            requestMessage.Content.Headers.TryAddWithoutValidation(
-                "x-custom-header", "value");
-
-            var response = await Http.SendAsync(requestMessage);
-            var responseStatusCode = response.StatusCode;
-
-            responseBody = await response.Content.ReadAsStringAsync();
-        }
-    }
-
-    public class TodoItem
-    {
-        public long Id { get; set; }
-        public string Name { get; set; }
-        public bool IsComplete { get; set; }
-    }
-}
-```
-
-L’implémentation de .NET webassembly de <xref:System.Net.Http.HttpClient> utilise [WindowOrWorkerGlobalScope. Fetch ()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch). L’extraction permet de configurer plusieurs [options spécifiques à la demande](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters). 
-
-Les options de requête HTTP FETCH peuvent être configurées avec <xref:System.Net.Http.HttpRequestMessage> les méthodes d’extension indiquées dans le tableau suivant.
-
-| Méthode d’extension | Propriété de requête Fetch |
-| --- | --- |
-| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> | [`credentials`](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
-| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCache%2A> | [`cache`](https://developer.mozilla.org/docs/Web/API/Request/cache) |
-| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestMode%2A> | [`mode`](https://developer.mozilla.org/docs/Web/API/Request/mode) |
-| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestIntegrity%2A> | [`integrity`](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
-
-Vous pouvez définir des options supplémentaires à l’aide de la méthode d’extension plus générique <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestOption%2A> .
- 
-La réponse HTTP est généralement mise en mémoire tampon dans une Blazor WebAssembly application pour permettre la prise en charge des lectures de synchronisation sur le contenu de la réponse. Pour activer la prise en charge de la diffusion en continu de réponse, utilisez la <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserResponseStreamingEnabled%2A> méthode d’extension sur la demande.
-
-Pour inclure des informations d’identification dans une demande Cross-Origin, utilisez la <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> méthode d’extension :
-
-```csharp
-requestMessage.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
-```
-
-Pour plus d’informations sur les options de l’API FETCH, consultez [MDN Web docs : WindowOrWorkerGlobalScope. Fetch () :P arameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).
-
 ## <a name="cross-origin-resource-sharing-cors"></a>Partage des ressources cross-origin (CORS)
 
 Lors de l’envoi d’informations d’identification ( cookie s/en-têtes d’autorisation) sur les demandes cors, l' `Authorization` en-tête doit être autorisé par la stratégie cors.
@@ -700,7 +613,7 @@ builder.Services.AddSingleton<StateContainer>();
 
 Par défaut, la [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) bibliothèque utilise les itinéraires indiqués dans le tableau suivant pour représenter des États d’authentification différents.
 
-| Route                            | Objectif |
+| Routage                            | Objectif |
 | -------------------------------- | ------- |
 | `authentication/login`           | Déclenche une opération de connexion. |
 | `authentication/login-callback`  | Gère le résultat de toute opération de connexion. |
@@ -780,7 +693,7 @@ Si vous le souhaitez, vous avez la possibilité de scinder l’interface utilisa
 
 Le <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> a un fragment qui peut être utilisé par itinéraire d’authentification, comme indiqué dans le tableau suivant.
 
-| Route                            | Fragment                |
+| Routage                            | Fragment                |
 | -------------------------------- | ----------------------- |
 | `authentication/login`           | `<LoggingIn>`           |
 | `authentication/login-callback`  | `<CompletingLoggingIn>` |
@@ -1128,3 +1041,7 @@ Server response: <strong>@serverResponse</strong>
 L’espace réservé `{APP ASSEMBLY}` est le nom de l’assembly de l’application (par exemple, `BlazorSample` ). Pour utiliser la `Status.DebugException` propriété, utilisez [GRPC .net. client](https://www.nuget.org/packages/Grpc.Net.Client) version 2.30.0 ou ultérieure.
 
 Pour plus d'informations, consultez <xref:grpc/browser>.
+
+## <a name="additional-resources"></a>Ressources supplémentaires
+
+* [`HttpClient` et `HttpRequestMessage` avec les options de requête de l’API Fetch](xref:blazor/call-web-api#httpclient-and-httprequestmessage-with-fetch-api-request-options)

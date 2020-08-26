@@ -1,5 +1,5 @@
 ---
-title: Meilleures pratiques relatives aux performances
+title: Meilleures pratiques en matière de performances dans gRPC pour ASP.NET Core
 author: jamesnk
 description: Découvrez les meilleures pratiques pour créer des services gRPC à hautes performances.
 monikerRange: '>= aspnetcore-3.0'
@@ -17,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: c6f6a9e5c9aa2f01209c8457a848dc6ec1f5ed88
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: f9cefa89ec6e533920b33223b34333f6ebe38428
+ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 08/26/2020
-ms.locfileid: "88866188"
+ms.locfileid: "88876722"
 ---
-# <a name="performance-best-practices"></a>Meilleures pratiques relatives aux performances
+# <a name="performance-best-practices-in-grpc-for-aspnet-core"></a>Meilleures pratiques en matière de performances dans gRPC pour ASP.NET Core
 
 Par [James Newton-King](https://twitter.com/jamesnk)
 

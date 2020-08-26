@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: ce0dfdf1ce88b55790d33918a2d20bc19a09b288
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 3d83141b8b638a369b08b0fadafccd96c0b48214
+ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626894"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88876787"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Didacticiel : créer une API Web avec ASP.NET Core
 
@@ -49,17 +49,17 @@ Ce didacticiel crée l’API suivante :
 
 |API | Description | Corps de la demande | Response body |
 |--- | ---- | ---- | ---- |
-|`GET /api/TodoItems` | Obtenir toutes les tâches | Aucun | Tableau de tâches|
-|`GET /api/TodoItems/{id}` | Obtenir un élément par ID | Aucun | Tâche|
+|`GET /api/TodoItems` | Obtenir toutes les tâches | None | Tableau de tâches|
+|`GET /api/TodoItems/{id}` | Obtenir un élément par ID | None | Tâche|
 |`POST /api/TodoItems` | Ajouter un nouvel élément | Tâche | Tâche |
-|`PUT /api/TodoItems/{id}` | Mettre à jour un élément existant &nbsp; | Tâche | Aucun |
+|`PUT /api/TodoItems/{id}` | Mettre à jour un élément existant &nbsp; | Tâche | None |
 |`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Supprimer un élément &nbsp;&nbsp; | None | None|
 
 Le diagramme suivant illustre la conception de l’application.
 
 ![Le client est représenté par une zone située à gauche. Il envoie une demande et reçoit une réponse de l’application, représentée par une zone dessinée à droite. Dans la zone de l’application, trois zones représentent le contrôleur, le modèle et la couche d’accès aux données. La requête provient du contrôleur de l’application, et les opérations de lecture/écriture se produisent entre le contrôleur et la couche d’accès aux données. Le modèle est sérialisé et retourné au client dans la réponse.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Prérequis
+## <a name="prerequisites"></a>Conditions préalables
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -295,7 +295,7 @@ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet tool install --global dotnet-aspnet-codegenerator
 dotnet tool update -g Dotnet-aspnet-codegenerator
-dotnet-aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
+dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
 ```
 
 Les commandes précédentes :
@@ -539,17 +539,17 @@ Ce didacticiel crée l’API suivante :
 
 |API | Description | Corps de la demande | Response body |
 |--- | ---- | ---- | ---- |
-|GET /api/TodoItems | Obtenir toutes les tâches | Aucun | Tableau de tâches|
-|GET /api/TodoItems/{id} | Obtenir un élément par ID | Aucun | Tâche|
+|GET /api/TodoItems | Obtenir toutes les tâches | None | Tableau de tâches|
+|GET /api/TodoItems/{id} | Obtenir un élément par ID | None | Tâche|
 |POST /api/TodoItems | Ajouter un nouvel élément | Tâche | Tâche |
-|PUT /api/TodoItems/{id} | Mettre à jour un élément existant &nbsp; | Tâche | Aucun |
+|PUT /api/TodoItems/{id} | Mettre à jour un élément existant &nbsp; | Tâche | None |
 |SUPPRIMER/api/TodoItems/{id} &nbsp;&nbsp; | Supprimer un élément &nbsp;&nbsp; | None | None|
 
 Le diagramme suivant illustre la conception de l’application.
 
 ![Le client est représenté par une zone située à gauche. Il envoie une demande et reçoit une réponse de l’application, représentée par une zone dessinée à droite. Dans la zone de l’application, trois zones représentent le contrôleur, le modèle et la couche d’accès aux données. La requête provient du contrôleur de l’application, et les opérations de lecture/écriture se produisent entre le contrôleur et la couche d’accès aux données. Le modèle est sérialisé et retourné au client dans la réponse.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Prérequis
+## <a name="prerequisites"></a>Conditions préalables
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -968,7 +968,7 @@ Pour supprimer une tâche, vous devez définir le `type` sur l’appel AJAX avec
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 [Affichez ou téléchargez l’exemple de code de ce tutoriel](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-web-api/samples). Consultez [Guide pratique pour télécharger](xref:index#how-to-download-a-sample).
 

@@ -5,7 +5,7 @@ description: Découvrez comment déboguer des Blazor applications.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/17/2020
+ms.date: 08/26/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,43 +18,53 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 5aeb333dc36ebc4c3a324b397793343e0335b1e1
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7681deb70610a8fbc27ccda7317b73921646794a
+ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628363"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88876774"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core de débogage Blazor WebAssembly
 
 [Daniel Roth](https://github.com/danroth27)
 
-Blazor WebAssembly les applications peuvent être déboguées à l’aide des outils de développement de navigateur dans les navigateurs basés sur le chrome (Edge/chrome). Vous pouvez également déboguer votre application à l’aide de Visual Studio ou Visual Studio Code.
+Blazor WebAssembly les applications peuvent être déboguées à l’aide des outils de développement de navigateur dans les navigateurs basés sur le chrome (Edge/chrome). Vous pouvez également déboguer votre application à l’aide des environnements de développement intégré (IDE) suivants :
+
+* Visual Studio
+* Visual Studio pour Mac
+* Visual Studio Code
 
 Les scénarios disponibles sont les suivants :
 
 * Définir et supprimer des points d’arrêt.
-* Exécutez l’application avec prise en charge du débogage dans Visual Studio et Visual Studio Code (prise en charge de<kbd>F5</kbd> ).
-* Une étape (<kbd>F10</kbd>) à l’aide du code.
-* Reprendre l’exécution du code avec <kbd>F8</kbd> dans un navigateur ou <kbd>F5</kbd> dans Visual Studio ou Visual Studio code.
-* Dans l' *affichage des variables locales,* observez les valeurs des variables locales.
-* Consultez la pile des appels, y compris les chaînes d’appel qui passent de JavaScript à .NET et de .NET à JavaScript.
+* Exécutez l’application avec prise en charge du débogage dans les IDE.
+* Pas à pas détaillé dans le code.
+* Reprendre l’exécution du code à l’aide d’un raccourci clavier dans IDE.
+* Dans la fenêtre variables *locales* , observez les valeurs des variables locales.
+* Consultez la pile des appels, y compris les chaînes d’appels entre JavaScript et .NET.
 
 Pour le moment, vous *ne pouvez pas*:
 
 * Arrêt sur les exceptions non gérées.
 * Atteindre les points d’arrêt pendant le démarrage de l’application avant l’exécution du proxy de débogage. Cela comprend les points d’arrêt dans `Program.Main` ( `Program.cs` ) et les points d’arrêt dans les [ `OnInitialized{Async}` méthodes](xref:blazor/components/lifecycle#component-initialization-methods) des composants qui sont chargés par la première page demandée à partir de l’application.
 
-Nous continuerons à améliorer l’expérience de débogage dans les versions à venir.
-
-## <a name="prerequisites"></a>Prérequis
+## <a name="prerequisites"></a>Conditions préalables
 
 Le débogage requiert l’un des navigateurs suivants :
 
 * Google Chrome (version 70 ou ultérieure) (par défaut)
 * Microsoft Edge (version 80 ou ultérieure)
 
-## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Activer le débogage pour Visual Studio et Visual Studio Code
+Visual Studio pour Mac nécessite la version 8,8 (Build 1532) ou version ultérieure :
+
+1. Installez la dernière version de Visual Studio pour Mac en sélectionnant le bouton **télécharger Visual Studio pour Mac** sur [Microsoft : Visual Studio pour Mac](https://visualstudio.microsoft.com/vs/mac/).
+1. Sélectionnez le canal de l' *Aperçu* dans Visual Studio. Pour plus d’informations, consultez [installer une version préliminaire de Visual Studio pour Mac](/visualstudio/mac/install-preview).
+
+> [!NOTE]
+> Apple Safari sur macOS n’est pas pris en charge actuellement.
+
+## <a name="enable-debugging"></a>Activer le débogage
 
 Pour activer le débogage d’une Blazor WebAssembly application existante, mettez à jour le `launchSettings.json` fichier dans le projet de démarrage pour inclure la `inspectUri` propriété suivante dans chaque profil de lancement :
 
@@ -73,7 +83,7 @@ La `inspectUri` propriété :
 
 Les valeurs d’espace réservé pour le protocole WebSockets ( `wsProtocol` ), l’hôte ( `url.hostname` ), le port ( `url.port` ) et l’URI de l’inspecteur sur le navigateur lancé ( `browserInspectUri` ) sont fournies par l’infrastructure.
 
-## <a name="visual-studio"></a>Visual Studio
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Pour déboguer une Blazor WebAssembly application dans Visual Studio :
 
@@ -83,43 +93,34 @@ Pour déboguer une Blazor WebAssembly application dans Visual Studio :
    > [!NOTE]
    > **Exécuter sans débogage** (<kbd>CTRL</kbd> + <kbd>F5</kbd>) n’est pas pris en charge. Lorsque l’application est exécutée dans la configuration Debug, le débogage entraîne toujours une réduction des performances minime.
 
-1. Définissez un point d’arrêt dans `Pages/Counter.razor` la `IncrementCount` méthode.
-1. Accédez à l' **`Counter`** onglet et sélectionnez le bouton pour atteindre le point d’arrêt :
-
-   ![Compteur de débogage](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-counter.png)
-
-1. Examinez la valeur du `currentCount` champ dans la fenêtre variables locales :
-
-   ![Afficher les variables locales](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-locals.png)
-
+1. Dans l’application *cliente* , définissez un point d’arrêt sur la `currentCount++;` ligne dans `Pages/Counter.razor` .
+1. Dans le navigateur, accédez à la `Counter` page et sélectionnez le bouton **Click Me** pour atteindre le point d’arrêt.
+1. Dans Visual Studio, examinez la valeur du `currentCount` champ dans la fenêtre **variables locales** .
 1. Appuyez sur <kbd>F5</kbd> pour poursuivre l’exécution.
 
-Lors du débogage de votre Blazor WebAssembly application, vous pouvez également déboguer votre code serveur :
+Lors du débogage d’une Blazor WebAssembly application, vous pouvez également déboguer le code serveur :
 
 1. Définissez un point d’arrêt dans la `Pages/FetchData.razor` page de <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> .
 1. Définissez un point d’arrêt dans la `WeatherForecastController` `Get` méthode d’action.
-1. Accédez à l' **`Fetch Data`** onglet pour atteindre le premier point d’arrêt dans le `FetchData` composant juste avant qu’il envoie une requête HTTP au serveur :
+1. Accédez à la `Fetch Data` page pour atteindre le premier point d’arrêt dans le `FetchData` composant juste avant qu’il ne envoie une requête HTTP au serveur.
+1. Appuyez sur <kbd>F5</kbd> pour poursuivre l’exécution, puis appuyez sur le point d’arrêt sur le serveur dans le `WeatherForecastController` .
+1. Appuyez de nouveau sur <kbd>F5</kbd> pour permettre à l’exécution de se poursuivre et consultez le tableau prévisions météo rendu dans le navigateur.
 
-   ![Déboguer extraire des données](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-fetch-data.png)
+> [!NOTE]
+> Les points d’arrêt ne sont **pas** atteints pendant le démarrage de l’application avant l’exécution du proxy de débogage. Cela comprend les points d’arrêt dans `Program.Main` ( `Program.cs` ) et les points d’arrêt dans les [ `OnInitialized{Async}` méthodes](xref:blazor/components/lifecycle#component-initialization-methods) des composants qui sont chargés par la première page demandée à partir de l’application.
 
-1. Appuyez sur <kbd>F5</kbd> pour poursuivre l’exécution, puis appuyez sur le point d’arrêt sur le serveur dans le `WeatherForecastController` :
-
-   ![Serveur de débogage](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-server.png)
-
-1. Appuyez de nouveau sur <kbd>F5</kbd> pour permettre à l’exécution de se poursuivre et consultez le tableau prévisions météo rendu.
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 <a id="vscode"></a>
 
-## <a name="visual-studio-code"></a>Visual Studio Code
-
-### <a name="debug-standalone-no-locblazor-webassembly"></a>Déboguer autonome Blazor WebAssembly
+## <a name="debug-standalone-no-locblazor-webassembly"></a>Déboguer autonome Blazor WebAssembly
 
 1. Ouvrez l' Blazor WebAssembly application autonome dans vs code.
 
-   Vous pouvez recevoir la notification suivante indiquant qu’une configuration supplémentaire est requise pour activer le débogage :
-   
-   ![Configuration supplémentaire requise](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-additional-setup.png)
-   
+   Vous pouvez recevoir une notification indiquant qu’une configuration supplémentaire est requise pour activer le débogage :
+
+   > Une configuration supplémentaire est requise pour déboguer des Blazor WebAssembly applications.
+
    Si vous recevez la notification :
 
    * Vérifiez que la dernière [extension C# pour Visual Studio code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) est installée. Pour inspecter les extensions installées, ouvrez **Afficher**les  >  **Extensions** à partir de la barre de menus ou sélectionnez l’icône **Extensions** dans l’encadré **activité** .
@@ -133,27 +134,28 @@ Lors du débogage de votre Blazor WebAssembly application, vous pouvez égalemen
 
 1. Quand vous y êtes invité, sélectionnez l’option de ** Blazor WebAssembly débogage** pour démarrer le débogage.
 
-   ![Liste des options de débogage disponibles](index/_static/blazor-vscode-debugtypes.png)
-
 1. L’application autonome est lancée et un navigateur de débogage est ouvert.
 
-1. Définissez un point d’arrêt dans la `IncrementCount` méthode du `Counter` composant, puis sélectionnez le bouton pour atteindre le point d’arrêt :
+1. Dans l’application *cliente* , définissez un point d’arrêt sur la `currentCount++;` ligne dans `Pages/Counter.razor` .
 
-   ![Déboguer le compteur dans VS Code](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-debug-counter.png)
+1. Dans le navigateur, accédez à la `Counter` page et sélectionnez le bouton **Click Me** pour atteindre le point d’arrêt.
 
-### <a name="debug-hosted-no-locblazor-webassembly"></a>Débogage hébergé Blazor WebAssembly
+> [!NOTE]
+> Les points d’arrêt ne sont **pas** atteints pendant le démarrage de l’application avant l’exécution du proxy de débogage. Cela comprend les points d’arrêt dans `Program.Main` ( `Program.cs` ) et les points d’arrêt dans les [ `OnInitialized{Async}` méthodes](xref:blazor/components/lifecycle#component-initialization-methods) des composants qui sont chargés par la première page demandée à partir de l’application.
+
+## <a name="debug-hosted-no-locblazor-webassembly"></a>Débogage hébergé Blazor WebAssembly
 
 1. Ouvrez le Blazor WebAssembly dossier de solution de l’application hébergée dans vs code.
 
 1. Si aucune configuration de lancement n’est définie pour le projet, la notification suivante s’affiche. Sélectionnez **Oui**.
 
-   ![Ajouter les ressources requises](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-required-assets.png)
+   > Les ressources requises pour la génération et le débogage sont manquantes dans « {nom de l’APPLICATION} ». Faut-il les ajouter ?  »
 
 1. Dans la palette de commandes en haut de la fenêtre, sélectionnez le projet *serveur* dans la solution hébergée.
 
 Un `launch.json` fichier est généré à l’aide de la configuration de lancement pour le lancement du débogueur.
 
-### <a name="attach-to-an-existing-debugging-session"></a>Attacher à une session de débogage existante
+## <a name="attach-to-an-existing-debugging-session"></a>Attacher à une session de débogage existante
 
 Pour attacher une application en cours d’exécution Blazor , créez un `launch.json` fichier avec la configuration suivante :
 
@@ -168,7 +170,7 @@ Pour attacher une application en cours d’exécution Blazor , créez un `launch
 > [!NOTE]
 > L’attachement à une session de débogage est pris en charge uniquement pour les applications autonomes. Pour utiliser le débogage de pile complète, vous devez lancer l’application à partir de VS Code.
 
-### <a name="launch-configuration-options"></a>Lancer les options de configuration
+## <a name="launch-configuration-options"></a>Lancer les options de configuration
 
 Les options de configuration de lancement suivantes sont prises en charge pour le `blazorwasm` type de débogage ( `.vscode/launch.json` ).
 
@@ -185,9 +187,9 @@ Les options de configuration de lancement suivantes sont prises en charge pour l
 | `cwd`     | Répertoire de travail dans lequel l’application doit être lancée. Doit être défini si `hosted` a la valeur `true` . |
 | `env`     | Variables d’environnement à fournir au processus lancé. Applicable uniquement si `hosted` a la valeur `true` . |
 
-### <a name="example-launch-configurations"></a>Exemples de configurations de lancement
+## <a name="example-launch-configurations"></a>Exemples de configurations de lancement
 
-#### <a name="launch-and-debug-a-standalone-no-locblazor-webassembly-app"></a>Lancer et déboguer une Blazor WebAssembly application autonome
+### <a name="launch-and-debug-a-standalone-no-locblazor-webassembly-app"></a>Lancer et déboguer une Blazor WebAssembly application autonome
 
 ```json
 {
@@ -197,7 +199,7 @@ Les options de configuration de lancement suivantes sont prises en charge pour l
 }
 ```
 
-#### <a name="attach-to-a-running-app-at-a-specified-url"></a>Attacher à une application en cours d’exécution à une URL spécifiée
+### <a name="attach-to-a-running-app-at-a-specified-url"></a>Attacher à une application en cours d’exécution à une URL spécifiée
 
 ```json
 {
@@ -208,7 +210,7 @@ Les options de configuration de lancement suivantes sont prises en charge pour l
 }
 ```
 
-#### <a name="launch-and-debug-a-hosted-no-locblazor-webassembly-app-with-microsoft-edge"></a>Lancer et déboguer une application hébergée Blazor WebAssembly avec Microsoft Edge
+### <a name="launch-and-debug-a-hosted-no-locblazor-webassembly-app-with-microsoft-edge"></a>Lancer et déboguer une application hébergée Blazor WebAssembly avec Microsoft Edge
 
 La configuration du navigateur est par défaut Google Chrome. Lorsque vous utilisez Microsoft Edge pour le débogage, affectez à la valeur `browser` `edge` . Pour utiliser Google Chrome, vous ne devez pas définir l' `browser` option ou définir la valeur de l’option sur `chrome` .
 
@@ -226,17 +228,61 @@ La configuration du navigateur est par défaut Google Chrome. Lorsque vous utili
 
 Dans l’exemple précédent, `MyHostedApp.Server.dll` est l’assembly de l’application *serveur* . Le `.vscode` dossier se trouve dans le dossier de la solution, en regard des `Client` `Server` dossiers, et `Shared` .
 
+# <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
+
+Pour déboguer une Blazor WebAssembly application dans Visual Studio pour Mac :
+
+1. Créez une nouvelle ASP.NET Core application hébergée Blazor WebAssembly .
+1. Appuyez sur <kbd>&#8984;</kbd> + <kbd>&#8617;</kbd> pour exécuter l’application dans le débogueur.
+
+   > [!NOTE]
+   > **Exécuter sans débogage** (<kbd>&#8997;</kbd> + <kbd>&#8984;</kbd> + <kbd>&#8617;</kbd>) n’est pas pris en charge. Lorsque l’application est exécutée dans la configuration Debug, le débogage entraîne toujours une réduction des performances minime.
+
+   > [!IMPORTANT]
+   > Google Chrome ou Microsoft Edge doit être le navigateur sélectionné pour la session de débogage.
+
+1. Dans l’application *cliente* , définissez un point d’arrêt sur la `currentCount++;` ligne dans `Pages/Counter.razor` .
+1. Dans le navigateur, accédez à la `Counter` page, puis sélectionnez le bouton **Click Me** pour atteindre le point d’arrêt :
+1. Dans Visual Studio, examinez la valeur du `currentCount` champ dans la fenêtre **variables locales** .
+1. Appuyez sur <kbd>&#8984;</kbd> + <kbd>&#8617;</kbd> pour poursuivre l’exécution.
+
+Lors du débogage d’une Blazor WebAssembly application, vous pouvez également déboguer le code serveur :
+
+1. Définissez un point d’arrêt dans la `Pages/FetchData.razor` page de <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> .
+1. Définissez un point d’arrêt dans la `WeatherForecastController` `Get` méthode d’action.
+1. Accédez à la `Fetch Data` page pour atteindre le premier point d’arrêt dans le `FetchData` composant juste avant qu’il ne envoie une requête HTTP au serveur.
+1. Appuyez sur <kbd>&#8984;</kbd> + <kbd>&#8617;</kbd> pour poursuivre l’exécution, puis appuyez sur le point d’arrêt sur le serveur dans le `WeatherForecastController` .
+1. Appuyez de nouveau sur <kbd>&#8984;</kbd> + <kbd>&#8617;</kbd> pour permettre à l’exécution de se poursuivre et consultez le tableau prévisions météorologiques rendu dans le navigateur.
+
+> [!NOTE]
+> Les points d’arrêt ne sont **pas** atteints pendant le démarrage de l’application avant l’exécution du proxy de débogage. Cela comprend les points d’arrêt dans `Program.Main` ( `Program.cs` ) et les points d’arrêt dans les [ `OnInitialized{Async}` méthodes](xref:blazor/components/lifecycle#component-initialization-methods) des composants qui sont chargés par la première page demandée à partir de l’application.
+
+Pour plus d’informations, consultez [débogage avec Visual Studio pour Mac](/visualstudio/mac/debugging?view=vsmac-2019).
+
+---
+
 ## <a name="debug-in-the-browser"></a>Déboguer dans le navigateur
+
+*Les instructions de cette section s’appliquent à Google Chrome et à Microsoft Edge s’exécutant sur Windows.*
 
 1. Exécutez une version Debug de l’application dans l’environnement de développement.
 
 1. Lancez un navigateur et accédez à l’URL de l’application (par exemple, `https://localhost:5001` ).
 
-1. Dans le navigateur, essayez de commencer le débogage à distance en appuyant sur <kbd>MAJ</kbd> + <kbd>ALT</kbd> + <kbd>D</kbd>.
+1. Dans le navigateur, essayez de commencer le débogage à distance en appuyant sur <kbd>MAJ</kbd> + <kbd>ALT</kbd> + <kbd>d</kbd>.
 
    Le navigateur doit s’exécuter avec le débogage à distance activé, qui n’est pas le paramètre par défaut. Si le débogage distant est désactivé, une page d’erreur **Impossible de trouver un onglet de navigateur pouvant être débogué** est affichée avec des instructions pour lancer le navigateur avec le port de débogage ouvert. Suivez les instructions de votre navigateur pour ouvrir une nouvelle fenêtre de navigateur. Fermez la fenêtre de navigateur précédente.
 
-1. Une fois que le navigateur est en cours d’exécution avec le débogage distant activé, le raccourci clavier de débogage (<kbd>MAJ</kbd> + <kbd>ALT</kbd> + <kbd>D</kbd>) ouvre un nouvel onglet du débogueur.
+<!-- HOLD 
+1. In the browser, attempt to commence remote debugging by pressing:
+
+   * <kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>d</kbd> on Windows.
+   * <kbd>Shift</kbd>+<kbd>&#8984;</kbd>+<kbd>d</kbd> on macOS.
+
+   The browser must be running with remote debugging enabled, which isn't the default. If remote debugging is disabled, an **Unable to find debuggable browser tab** error page is rendered with instructions for launching the browser with the debugging port open. Follow the instructions for your browser, which opens a new browser window. Close the previous browser window.
+-->
+
+1. Une fois que le navigateur est en cours d’exécution avec le débogage distant activé, le raccourci clavier de débogage de l’étape précédente ouvre un nouvel onglet du débogueur.
 
 1. Après un moment, l’onglet **sources** affiche une liste des assemblys .net de l’application dans le `file://` nœud.
 
@@ -286,7 +332,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-### <a name="visual-studio-timeout"></a>Délai d’expiration de Visual Studio
+### <a name="visual-studio-windows-timeout"></a>Délai d’attente de Visual Studio (Windows)
 
 Si Visual Studio lève une exception indiquant que l’adaptateur de débogage n’a pas pu lancer la mention indiquant que le délai d’attente a été atteint, vous pouvez ajuster le délai d’expiration à l’aide d’un paramètre de Registre :
 

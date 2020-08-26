@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/entity-framework-6
-ms.openlocfilehash: d01c0a1bdf29dbb79c04504d747b319fff710d89
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 64d420d7076f1da453ee423cc4a3732eeb47b221
+ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633758"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88876696"
 ---
 # <a name="aspnet-core-and-entity-framework-6"></a>ASP.NET Core et Entity Framework 6
 ::: moniker range=">= aspnetcore-3.0"
@@ -31,7 +31,7 @@ De [Patrick Goode](https://github.com/attrib75)
 
 [Entity Framework Core](/ef/) doit être utilisé pour un nouveau développement. L' [exemple Download](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/entity-framework-6/3.xsample) utilise [Entity Framework 6 (EF6)](/ef/ef6), qui peut être utilisé pour migrer les applications de sortie vers ASP.net core.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Entity Framework - Configuration basée sur le code](/ef/ef6/fundamentals/configuring/code-based)
 
@@ -51,7 +51,7 @@ La méthode recommandée pour utiliser Entity Framework 6 dans une application A
 
 Vous ne pouvez pas mettre un contexte EF6 dans un projet ASP.NET Core, car les projets .NET Core ne prennent pas en charge toutes les fonctionnalités nécessaires pour les commandes EF6, comme *Enable-Migrations*.    
 
-Quel que soit le type de projet où vous placez votre contexte EF6, seuls les outils en ligne de commande EF6 fonctionnent avec un contexte EF6. Par exemple, `Scaffold-DbContext` est disponible seulement dans Entity Framework Core. Si vous devez effectuer une ingénierie à rebours pour une base de données dans un modèle EF6, consultez [Code First pour une base de données existante](https://msdn.microsoft.com/jj200620).  
+Quel que soit le type de projet où vous placez votre contexte EF6, seuls les outils en ligne de commande EF6 fonctionnent avec un contexte EF6. Par exemple, `Scaffold-DbContext` est disponible seulement dans Entity Framework Core. Si vous devez effectuer une ingénierie à rebours d’une base de données dans un modèle EF6, consultez <https://docs.microsoft.com/ef/ef6/modeling/code-first/workflows/existing-database> .    
 
 ## <a name="reference-full-framework-and-ef6-in-the-aspnet-core-project"></a>Référencer le framework complet et EF6 dans le projet ASP.NET Core 
 
@@ -67,7 +67,7 @@ Les outils en ligne de commande EF6 que vous allez utiliser dans le projet de bi
 
 [!code-csharp[](entity-framework-6/sample/EF6/SchoolContext.cs?name=snippet_Constructor)]   
 
-Comme votre contexte EF6 n’a pas de constructeur sans paramètre, votre projet EF6 doit fournir une implémentation de [IDbContextFactory](https://msdn.microsoft.com/library/hh506876). Les outils en ligne de commande EF6 trouvent et utilisent cette implémentation : ils peuvent donc instancier le contexte. Voici un exemple.    
+Étant donné que votre contexte EF6 n’a pas de constructeur sans paramètre, votre projet EF6 doit fournir une implémentation de <https://docs.microsoft.com/dotnet/api/system.data.entity.infrastructure.idbcontextfactory-1?view=entity-framework-6.2.0> . Les outils en ligne de commande EF6 trouvent et utilisent cette implémentation : ils peuvent donc instancier le contexte. Voici un exemple.   
 
 [!code-csharp[](entity-framework-6/sample/EF6/SchoolContextFactory.cs?name=snippet_IDbContextFactory)]  
 
