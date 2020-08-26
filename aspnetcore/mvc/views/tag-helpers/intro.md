@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 42a7231b529dd9f8ecbce4f8116111e1c96c830d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 345d20494111b808dac9678637de060169730a53
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633095"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865356"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>Tag Helpers dans ASP.NET Core
 
@@ -254,9 +254,9 @@ L’éditeur Visual Studio vous aide à écrire **tout** le balisage dans l’ap
 
 ## <a name="tag-helpers-compared-to-web-server-controls"></a>Comparaison des Tag Helpers aux contrôles de serveur web
 
-* Les Tag Helpers ne sont pas propriétaires de l’élément auquel ils sont associés ; ils participent simplement au rendu de l’élément et du contenu. Les [contrôles de serveur web](https://msdn.microsoft.com/library/7698y1f0.aspx) ASP.NET sont déclarés et appelés dans une page.
+* Les Tag Helpers ne sont pas propriétaires de l’élément auquel ils sont associés ; ils participent simplement au rendu de l’élément et du contenu. <https://docs.microsoft.com/previous-versions/dotnet/netframework-3.0/7698y1f0(v=vs.85)>Les ASP.net sont déclarés et appelés sur une page.
 
-* Les [contrôles de serveur web](https://msdn.microsoft.com/library/zsyt68f1.aspx) ont un cycle de vie non trivial qui peut rendre le développement et le débogage difficiles.
+* <https://docs.microsoft.com/previous-versions/zsyt68f1(v=vs.140)> avoir un cycle de vie non trivial qui peut compliquer le développement et le débogage.
 
 * Les contrôles de serveur web vous permettent d’ajouter des fonctionnalités aux éléments DOM (Document Object Model) à l’aide d’un contrôle client. Les Tag Helpers n’ont pas de DOM.
 
@@ -278,7 +278,7 @@ Vous pouvez personnaliser la police et la coloration à partir des options **Out
 
 [!INCLUDE[](~/includes/built-in-TH.md)]
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Créer des Tag Helpers](xref:mvc/views/tag-helpers/authoring)
 * [Utilisation des formulaires](xref:mvc/views/working-with-forms)

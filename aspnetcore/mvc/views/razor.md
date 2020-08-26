@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: b62fcb685b1c6d0c504c685c600d0316b32d7f57
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e42ee7a80475e784ea4791395d9b0665aca94a03
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632497"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865169"
 ---
 # <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor Référence de syntaxe pour ASP.NET Core
 
@@ -687,7 +687,7 @@ Si le dossier *EvenMorePages* dans l’exemple précédent comprend un fichier d
 
 La directive `@page` a des effets différents selon le type du fichier dans lequel elle apparaît. La directive :
 
-* Dans, un fichier *. cshtml* indique que le fichier est une Razor page. Pour plus d’informations, consultez [itinéraires personnalisés](xref:razor-pages/index#custom-routes) et <xref:razor-pages/index> .
+* Dans un fichier *. cshtml* indique que le fichier est une Razor page. Pour plus d’informations, consultez [itinéraires personnalisés](xref:razor-pages/index#custom-routes) et <xref:razor-pages/index> .
 * Spécifie qu’un Razor composant doit gérer les demandes directement. Pour plus d'informations, consultez <xref:blazor/fundamentals/routing>.
 
 ::: moniker-end
@@ -1006,6 +1006,6 @@ Les développeurs doivent s’efforcer d’utiliser la même casse pour les noms
 
 L’utilisation d’une casse identique garantit que les déploiements trouvent toujours les vues associées, indépendamment du système de fichiers sous-jacent.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 [Présentation de la programmation Web ASP.net à l’aide de Razor La syntaxe](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) fournit de nombreux exemples de programmation à l’aide de la Razor syntaxe.

@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 8be09171991964540cd41a1324fb87503591151f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 213807634a2a6990e9025de7871295cf97a81faf
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632172"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865589"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>Migrer des gestionnaires et des modules HTTP vers ASP.NET Core intergiciel
 
@@ -55,7 +55,7 @@ Avant de passer à ASP.NET Core intergiciel, nous allons tout d’abord récapit
 
 **L’ordre dans lequel les modules traitent les demandes entrantes est déterminé par :**
 
-1. Le [cycle de vie](https://msdn.microsoft.com/library/ms227673.aspx)de l’application, qui est un événement de série déclenché par ASP.net : [beginRequest](/dotnet/api/system.web.httpapplication.beginrequest), [AuthenticateRequest](/dotnet/api/system.web.httpapplication.authenticaterequest), etc. Chaque module peut créer un gestionnaire pour un ou plusieurs événements.
+1. <https://docs.microsoft.com/previous-versions/ms227673(v=vs.140)>, Qui est un événement de série déclenché par ASP.net : [beginRequest](/dotnet/api/system.web.httpapplication.beginrequest), [AuthenticateRequest](/dotnet/api/system.web.httpapplication.authenticaterequest), etc. Chaque module peut créer un gestionnaire pour un ou plusieurs événements.
 
 2. Pour le même événement, ordre dans lequel ils sont configurés dans *Web.config*.
 
@@ -92,13 +92,13 @@ En plus des modules, vous pouvez ajouter des gestionnaires pour les événements
 
 **Les intergiciels et les modules sont traités dans un ordre différent :**
 
-* L’ordre des intergiciels est basé sur l’ordre dans lequel ils sont insérés dans le pipeline de demande, tandis que l’ordre des modules est principalement basé sur les événements du [cycle de vie](https://msdn.microsoft.com/library/ms227673.aspx) de l’application.
+* L’ordre des intergiciels est basé sur l’ordre dans lequel ils sont insérés dans le pipeline de demande, alors que l’ordre des modules est principalement basé sur les <https://docs.microsoft.com/previous-versions/ms227673(v=vs.140)> événements
 
 * L’ordre de l’intergiciel pour les réponses est l’inverse par rapport à celui des demandes, tandis que l’ordre des modules est le même pour les demandes et les réponses
 
 * Consultez [création d’un pipeline d’intergiciel (middleware) avec IApplicationBuilder](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder)
 
-![Intergiciel (middleware)](http-modules/_static/middleware.png)
+![Middlewares](http-modules/_static/middleware.png)
 
 Notez comment dans l’image ci-dessus, l’intergiciel (middleware) d’authentification a court-circuité la demande.
 
@@ -393,7 +393,7 @@ La `SetCookies` méthode de rappel ressemble à ce qui suit :
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetCookies)]
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Vue d’ensemble des gestionnaires HTTP et des modules HTTP](/iis/configuration/system.webserver/)
 * [Configuration](xref:fundamentals/configuration/index)

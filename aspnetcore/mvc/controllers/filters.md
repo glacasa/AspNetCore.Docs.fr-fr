@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 7134344abb5bc724aceb9a2adb117b3749435f55
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: c97e3afbbf94a4cb721c5d814a377eec3e26a03b
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634850"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865409"
 ---
 # <a name="filters-in-aspnet-core"></a>Filtres dans ASP.NET Core
 
@@ -103,7 +103,7 @@ Vous pouvez implémenter des interfaces pour plusieurs étapes de filtres dans u
 * Asynchrone : <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter> et <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter>
 
-Implémentez la version synchrone ou asynchrone d’une interface de filtre, mais **pas** **les deux** . Le runtime vérifie d’abord si le filtre implémente l’interface asynchrone et, le cas échéant, il appelle cette interface. Dans le cas contraire, il appelle la ou les méthodes de l’interface synchrone. Si des interfaces synchrones et asynchrones sont implémentées dans une classe, seule la méthode asynchrone est appelée. Lorsque vous utilisez des classes abstraites telles que <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> , remplacez uniquement les méthodes synchrones ou la méthode asynchrone pour chaque type de filtre.
+Implémentez la version synchrone ou asynchrone d’une interface de filtre, mais **pas** **les deux** . Le runtime vérifie d’abord si le filtre implémente l’interface asynchrone et, le cas échéant, il appelle cette interface. Dans le cas contraire, il appelle la ou les méthodes de l’interface synchrone. Si des interfaces synchrones et asynchrones sont implémentées dans une classe, seule la méthode asynchrone est appelée. Lorsque vous utilisez des classes abstraites telles que <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> , remplacez uniquement les méthodes synchrones ou les méthodes asynchrones pour chaque type de filtre.
 
 ### <a name="built-in-filter-attributes"></a>Attributs de filtre intégrés
 

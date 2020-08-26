@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 0c878a05a50e5a6879278ee737ada167669ee0ff
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: eb9e3cbddd2eaca8fef9a6782c28bbce4c029f58
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626478"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865332"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>Routage de ASP.NET Core Blazor
 
@@ -169,13 +169,43 @@ Dans Blazor Server les applications, l’itinéraire par défaut dans `_Host.csh
 
 Le `"/{**path}"` modèle comprend les éléments suivants :
 
-* Double-astérisque syntaxe *catch-all* ( `**` ) pour capturer le chemin d’accès dans plusieurs limites de dossiers sans encodage des barres obliques ( `/` ).
+* Double-astérisque syntaxe *catch-all* ( `**` ) pour capturer le chemin d’accès dans plusieurs limites de dossiers sans décoder les barres obliques ( `/` ).
 * `path` nom du paramètre d’itinéraire.
 
-> [!NOTE]
-> La syntaxe de paramètre *catch-all* ( `*` / `**` ) n’est **pas** prise en charge dans les Razor composants ( `.razor` ).
-
 Pour plus d'informations, consultez <xref:fundamentals/routing>.
+
+## <a name="catch-all-route-parameters"></a>Paramètres d’itinéraire de rattrapage
+
+::: moniker range=">= aspnetcore-5.0"
+
+*Cette section s’applique à .NET 5 Release Candidate 1 (RC1) ou version ultérieure, qui sera publiée le mi-septembre.*
+
+Les paramètres d’itinéraire Catch-All, qui capturent les chemins d’accès dans plusieurs limites de dossiers, sont pris en charge dans les composants. Le paramètre d’itinéraire Catch-All doit être :
+
+* Nommée pour correspondre au nom du segment de routage. Le nom ne respecte pas la casse.
+* Type `string`. L’infrastructure ne fournit pas de conversion automatique.
+* À la fin de l’URL.
+
+```razor
+@page "/page/{*pageRoute}"
+
+@code {
+    [Parameter]
+    public string PageRoute { get; set; }
+}
+```
+
+Pour l’URL `/page/this/is/a/test` avec un modèle de routage de `/page/{*pageRoute}` , la valeur de `PageRoute` est définie sur `this/is/a/test` .
+
+Les barres obliques et les segments du chemin capturé sont décodés. Pour un modèle de routage de `/page/{*pageRoute}` , l’URL `/page/this/is/a%2Ftest%2A` génère `this/is/a/test*` .
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+Les paramètres de routage de rattrapage sont pris en charge dans .NET 5 version Release Candidate 1 (RC1) ou version ultérieure, qui sera publiée le mi-septembre. *
+
+::: moniker-end
 
 ## <a name="navlink-component"></a>Composant NavLink
 

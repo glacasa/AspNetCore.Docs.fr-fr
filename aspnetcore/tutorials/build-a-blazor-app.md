@@ -5,7 +5,7 @@ description: Générez une Blazor application pas à pas.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/30/2020
+ms.date: 08/22/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 769b3bda591252c51bec3ffd72a43eaa5929349e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7335b68ad06b9d2b8d7e056cfc1a6d8214119b21
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630833"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865413"
 ---
 # <a name="build-a-no-locblazor-todo-list-app"></a>Créer une Blazor application de liste de tâches
 
@@ -51,7 +51,7 @@ Ce didacticiel vous montre comment créer et modifier une Blazor application. Vo
    dotnet new blazorserver -o TodoList
    ```
 
-   La commande précédente crée un dossier nommé `TodoList` pour contenir l’application. Accédez au dossier à l' `TodoList` aide de la commande suivante :
+   La commande précédente crée un dossier nommé `TodoList` pour contenir l’application. Le `TodoList` dossier est le *dossier racine* du projet. Accédez au dossier à l' `TodoList` aide de la commande suivante :
 
    ```dotnetcli
    cd TodoList
@@ -64,7 +64,7 @@ Ce didacticiel vous montre comment créer et modifier une Blazor application. Vo
    ```
 
    > [!IMPORTANT]
-   > Razor les noms de fichiers de composant requièrent une première lettre majuscule, donc confirmez que le `Todo` nom de fichier du composant commence par une lettre majuscule `T` .
+   > Razor les noms de fichiers de composant requièrent une première lettre capitalisée. Ouvrez le `Pages` dossier et vérifiez que le `Todo` nom de fichier du composant commence par une lettre majuscule `T` . Le nom de fichier doit être `Todo.razor` .
 
 1. Dans `Pages/Todo.razor` fournir le balisage initial pour le composant :
 
@@ -88,9 +88,9 @@ Ce didacticiel vous montre comment créer et modifier une Blazor application. Vo
    </li>
    ```
 
-1. Régénérez et exécutez l'application. Consultez la nouvelle page Todo pour vérifier que le lien vers le composant `Todo` fonctionne.
+1. Générez et exécutez l’application en exécutant la `dotnet run` commande dans l’interface de commande à partir du `TodoList` dossier. Consultez la nouvelle page Todo pour vérifier que le lien vers le composant `Todo` fonctionne.
 
-1. Ajoutez un `TodoItem.cs` fichier à la racine du projet pour contenir une classe qui représente un élément TODO. Utilisez le code C# suivant pour la classe `TodoItem` :
+1. Ajoutez un `TodoItem.cs` fichier à la racine du projet (le `TodoList` dossier) pour contenir une classe qui représente un élément TODO. Utilisez le code C# suivant pour la classe `TodoItem` :
 
    [!code-csharp[](build-a-blazor-app/samples_snapshot/3.x/TodoItem.cs)]
 
@@ -105,7 +105,7 @@ Ce didacticiel vous montre comment créer et modifier une Blazor application. Vo
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/ToDo5.razor?highlight=12-13)]
 
-1. Régénérez et exécutez l'application. Lorsque le **`Add todo`** bouton est sélectionné, rien ne se produit, car un gestionnaire d’événements n’est pas relié au bouton.
+1. Arrêtez l’application en cours d’exécution dans l’interface de commande. De nombreux interpréteurs de commandes acceptent la commande de clavier <kbd>CTRL</kbd> + <kbd>c</kbd> pour arrêter une application. Régénérez et exécutez l’application avec la `dotnet run` commande. Lorsque le **`Add todo`** bouton est sélectionné, rien ne se produit, car un gestionnaire d’événements n’est pas relié au bouton.
 
 1. Ajoutez une méthode `AddTodo` au composant `Todo` et enregistrez-la pour les sélections du bouton à l’aide de l’attribut `@onclick`. La méthode C# `AddTodo` est appelée lorsque le bouton est sélectionné :
 
@@ -123,7 +123,7 @@ Ce didacticiel vous montre comment créer et modifier une Blazor application. Vo
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/ToDo8.razor?highlight=19-26)]
 
-1. Régénérez et exécutez l'application. Ajoutez quelques éléments todo à la liste Todo pour tester le nouveau code.
+1. Arrêtez l’application en cours d’exécution dans l’interface de commande. Régénérez et exécutez l’application avec la `dotnet run` commande. Ajoutez quelques éléments todo à la liste Todo pour tester le nouveau code.
 
 1. Le texte du titre pour chaque élément todo peut être rendu modifiable et une case à cocher peut aider l’utilisateur à effectuer le suivi des éléments terminés. Ajoutez une entrée de case à cocher pour chaque élément todo et liez sa valeur à la propriété `IsDone`. Remplacez `@todo.Title` par un élément `<input>` lié à `@todo.Title` :
 
@@ -139,7 +139,7 @@ Ce didacticiel vous montre comment créer et modifier une Blazor application. Vo
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/Todo.razor)]
 
-1. Régénérez et exécutez l'application. Ajoutez des éléments todo pour tester le nouveau code.
+1. Arrêtez l’application en cours d’exécution dans l’interface de commande. Régénérez et exécutez l’application avec la `dotnet run` commande. Ajoutez des éléments todo pour tester le nouveau code.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

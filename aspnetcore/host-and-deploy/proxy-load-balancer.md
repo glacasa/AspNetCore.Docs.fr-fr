@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/proxy-load-balancer
-ms.openlocfilehash: 737575667be0e6b776a4d9ec9fb75bc0d11309dc
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 209f75edc2901422b94c619a505e0b8316aec699
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634174"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865394"
 ---
 # <a name="configure-aspnet-core-to-work-with-proxy-servers-and-load-balancers"></a>Configurer ASP.NET Core pour l’utilisation de serveurs proxy et d’équilibreurs de charge
 
@@ -208,7 +208,7 @@ Vous pouvez également fournir l’adresse au format hexadécimal (`10.11.12.1` 
 
 ```csharp
 // To access IPNetwork and IPAddress, add the following namespaces:
-// using using System.Net;
+// using System.Net;
 // using Microsoft.AspNetCore.HttpOverrides;
 services.Configure<ForwardedHeadersOptions>(options =>
 {
@@ -380,7 +380,7 @@ services.Configure<ForwardedHeadersOptions>(options =>
 > [!IMPORTANT]
 > Autorisez uniquement des réseaux et des proxies approuvés pour transférer des en-têtes. Sinon, des attaques d’[usurpation d’adresse IP](https://www.iplocation.net/ip-spoofing) sont possibles.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:host-and-deploy/web-farm>
 * [Microsoft Security Advisory CVE-2018-0787 : vulnérabilité d’élévation de privilèges ASP.NET Core](https://github.com/aspnet/Announcements/issues/295)
@@ -586,7 +586,7 @@ Vous pouvez également fournir l’adresse au format hexadécimal (`10.11.12.1` 
 
 ```csharp
 // To access IPNetwork and IPAddress, add the following namespaces:
-// using using System.Net;
+// using System.Net;
 // using Microsoft.AspNetCore.HttpOverrides;
 services.Configure<ForwardedHeadersOptions>(options =>
 {
@@ -708,7 +708,7 @@ services.Configure<ForwardedHeadersOptions>(options =>
 > [!IMPORTANT]
 > Autorisez uniquement des réseaux et des proxies approuvés pour transférer des en-têtes. Sinon, des attaques d’[usurpation d’adresse IP](https://www.iplocation.net/ip-spoofing) sont possibles.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:host-and-deploy/web-farm>
 * [Microsoft Security Advisory CVE-2018-0787 : vulnérabilité d’élévation de privilèges ASP.NET Core](https://github.com/aspnet/Announcements/issues/295)

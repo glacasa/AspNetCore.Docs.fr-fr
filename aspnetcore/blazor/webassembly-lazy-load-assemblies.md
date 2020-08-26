@@ -5,7 +5,7 @@ description: Découvrez comment charger en différé des assemblys dans des Blaz
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/16/2020
+ms.date: 08/25/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: 31e6c9638d3262d3cb0a5e0fbcf34d24e2d1e91c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 46f98080ad40f614f9cb1af2190f263d205c1016
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625802"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865157"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>Chargement différé d’assemblys dans ASP.NET Core Blazor WebAssembly
 
@@ -47,6 +47,15 @@ Marquez les assemblys pour le chargement différé dans le fichier projet de l�
 ```
 
 Seuls les assemblys utilisés par l’application peuvent être chargés de manière différée. L’éditeur de liens supprime les assemblys inutilisés de la sortie publiée.
+
+> [!NOTE]
+> Dans .NET 5 version Release Candidate 1 (RC1) ou version ultérieure, qui sera publiée le mi-septembre, le nom de l’assembly nécessitera l' `.dll` extension suivante :
+>
+> ```xml
+> <ItemGroup>
+>  <BlazorWebAssemblyLazyLoad Include="GrantImaharaRobotControls.dll" />
+> </ItemGroup>
+> ```
 
 ## <a name="router-component"></a>Composant `Router`
 
@@ -85,7 +94,7 @@ Si le `OnNavigateAsync` rappel lève une exception non gérée, l' [ Blazor inte
 * La `Path` propriété est le chemin d’accès de destination de l’utilisateur par rapport au chemin d’accès de base de l’application, par exemple `/robot` .
 * Le `CancellationToken` peut être utilisé pour observer l’annulation de la tâche asynchrone. `OnNavigateAsync` annule automatiquement la tâche de navigation en cours d’exécution lorsque l’utilisateur accède à une autre page.
 
-Dans `OnNavigateAsync` , implémentez une logique pour déterminer les assemblys à charger. Options disponibles :
+Dans `OnNavigateAsync` , implémentez une logique pour déterminer les assemblys à charger. Les options sont les suivantes :
 
 * Vérifications conditionnelles à l’intérieur de la `OnNavigateAsync` méthode.
 * Table de recherche qui mappe des itinéraires à des noms d’assemblys, soit injectés dans le composant, soit implémentée dans le [`@code`](xref:mvc/views/razor#code) bloc.
@@ -170,6 +179,15 @@ Si un utilisateur accède à l’itinéraire A, puis immédiatement à l’itin�
 
 > [!NOTE]
 > Ne pas lever la valeur si le jeton d’annulation dans `NavigationContext` est annulé peut entraîner un comportement inattendu, tel que le rendu d’un composant à partir d’une navigation précédente.
+
+### <a name="onnavigateasync-events-and-renamed-assembly-files"></a>`OnNavigateAsync` événements et fichiers d’assembly renommés
+
+Le chargeur de ressource s’appuie sur les noms d’assemblys qui sont définis dans le `blazor.boot.json` fichier. Si les [assemblys sont renommés](xref:blazor/host-and-deploy/webassembly#change-the-filename-extension-of-dll-files), les noms d’assembly utilisés dans `OnNavigateAsync` les méthodes et les noms d’assembly dans le `blazor.boot.json` fichier ne sont pas synchronisés.
+
+Pour rectifier ce qui suit :
+
+* Vérifiez si l’application s’exécute dans l’environnement de production lorsque vous déterminez les noms d’assembly à utiliser.
+* Stockez les noms d’assemblys renommés dans un fichier distinct et lisez-les à partir de ce fichier pour déterminer le nom de l’assembly à utiliser dans les `LazyLoadAssemblyService` `OnNavigateAsync` méthodes et.
 
 ### <a name="complete-example"></a>Exemple complet
 

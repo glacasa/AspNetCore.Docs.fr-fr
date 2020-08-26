@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 9fc44d228a31b8ae6c78dc12988392806dd95823
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 03febbd71df19cd3524d26e229a8bd8798a874b5
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633433"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865123"
 ---
 # <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>Partie 3, Razor pages de génération de modèles automatique dans ASP.net Core
 
@@ -98,9 +98,8 @@ La `PageModel` classe de base contient une `ViewData` propriété de dictionnair
 
 La propriété `"Title"` est utilisée dans le fichier * Pages/Shared/_Layout.cshtml*. La balise suivante montre les premières lignes du fichier *_Layout.cshtml*.
 
-<!-- we need a snapshot copy of layout because we are
-changing in in the next step.
--->
+<!-- We need a snapshot copy of layout because we are changing in the next step. -->
+
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/NU/_Layout.cshtml?highlight=6)]
 
 La ligne `@*Markup removed for brevity.*@` est un Razor commentaire. Contrairement aux commentaires HTML ( `<!-- -->` ), Razor les commentaires ne sont pas envoyés au client.
@@ -210,7 +209,7 @@ Le [tag Helper d’entrée](xref:mvc/views/working-with-forms) ( `<input asp-for
 
 Pour plus d’informations sur les Tag Helpers, comme `<form method="post">`, consultez [Tag Helpers dans ASP.NET Core](xref:mvc/views/tag-helpers/intro).
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 > [!div class="step-by-step"]
 > [Précédent : ajout d’un modèle](xref:tutorials/razor-pages/model) 
@@ -284,9 +283,8 @@ La classe de base `PageModel` a une propriété de dictionnaire `ViewData` qui p
 
 La propriété « Title » est utilisée dans le fichier *Pages/Shared/_Layout.cshtml*. La balise suivante montre les premières lignes du fichier *_Layout.cshtml*.
 
-<!-- we need a snapshot copy of layout because we are
-changing in in the next step.
--->
+<!-- We need a snapshot copy of layout because we are changing in the next step. -->
+
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/NU/_Layout.cshtml?highlight=6-99)]
 
 La ligne `@*Markup removed for brevity.*@` est un Razor commentaire qui n’apparaît pas dans votre fichier de disposition. Contrairement aux commentaires HTML ( `<!-- -->` ), Razor les commentaires ne sont pas envoyés au client.
@@ -376,7 +374,7 @@ Le [tag Helper étiquette](xref:mvc/views/working-with-forms#the-label-tag-helpe
 
 Le [tag Helper d’entrée](xref:mvc/views/working-with-forms) ( `<input asp-for="Movie.Title" class="form-control">` ) utilise les attributs [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) et produit les attributs HTML nécessaires à la validation jQuery côté client.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Version YouTube de ce tutoriel](https://youtu.be/zxgKjPYnOMM)
 

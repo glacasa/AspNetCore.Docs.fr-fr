@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc
-ms.openlocfilehash: cd1a7ff57d911f96f0adfe4b548fa80ec844886d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d615f67fc5cb23499ee7e14b747390a7a1b5a693
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632237"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865136"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>Migrer ASP.NET MVC vers ASP.NET Core MVC
 
@@ -97,7 +97,7 @@ Dans le projet ASP.NET Core, une nouvelle classe de contrôleur vide et une nouv
 
 Le projet ASP.NET Core *application Web 1* contient déjà un exemple de contrôleur et un affichage minimaux du même nom que le projet MVC ASP.net. Ils serviront donc d’espaces réservés pour le contrôleur MVC ASP.NET et les vues à migrer à partir du projet ASP.NET MVC *application Web 1* .
 
-1. Copiez les méthodes à partir du MVC ASP.NET `HomeController` pour remplacer les nouvelles `HomeController` méthodes ASP.net core. Il n’est pas nécessaire de modifier le type de retour des méthodes d’action. Le type de retour de la méthode d’action du contrôleur du modèle intégré ASP.NET MVC est [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); dans ASP.NET Core MVC, les méthodes d’action retournent à la `IActionResult` place. L'objet `ActionResult` implémente l'objet `IActionResult`.
+1. Copiez les méthodes à partir du MVC ASP.NET `HomeController` pour remplacer les nouvelles `HomeController` méthodes ASP.net core. Il n’est pas nécessaire de modifier le type de retour des méthodes d’action. Le type de retour de la méthode d’action du contrôleur du modèle intégré ASP.NET MVC est <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> ; dans ASP.net Core MVC, les méthodes d’action retournent à la `IActionResult` place. L'objet `ActionResult` implémente l'objet `IActionResult`.
 1. Dans le projet ASP.net Core, cliquez avec le bouton droit sur le répertoire *views/racine* , puis sélectionnez **Ajouter** un > **élément existant**.
 1. Dans la boîte de dialogue **Ajouter un élément existant** , accédez au répertoire *views/* ASP.net du projet *application Web 1* Mvc.
 1. Sélectionnez les fichiers *de vue about. cshtml*, *contact. cshtml*et *index. cshtml* Razor , puis sélectionnez **Ajouter**, en remplaçant les fichiers existants.
@@ -186,7 +186,7 @@ ASP.NET Core convertit les exceptions non gérées en réponses d’erreur HTTP 
 
 * <xref:migration/identity>
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:blazor/index>
 * <xref:mvc/views/tag-helpers/intro>
@@ -291,7 +291,7 @@ Les fonctionnalités suivantes requièrent la migration à partir de l’exemple
 
 ## <a name="controllers-and-views"></a>Contrôleurs et vues
 
-* Copiez chacune des méthodes du MVC ASP.NET `HomeController` vers le nouveau `HomeController` . Dans ASP.NET MVC, le type de retour de la méthode d’action du contrôleur intégré est [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); dans ASP.NET Core MVC, les méthodes d’action retournent à la `IActionResult` place. `ActionResult` implémente `IActionResult` , il n’est donc pas nécessaire de modifier le type de retour des méthodes d’action.
+* Copiez chacune des méthodes du MVC ASP.NET `HomeController` vers le nouveau `HomeController` . Dans ASP.NET MVC, le type de retour de la méthode d’action du contrôleur intégré au modèle est <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> ; dans ASP.net Core MVC, les méthodes d’action retournent à la `IActionResult` place. `ActionResult` implémente `IActionResult` , il n’est donc pas nécessaire de modifier le type de retour des méthodes d’action.
 
 * Copiez les fichiers de vue *about. cshtml*, *contact. cshtml*et *index. cshtml* Razor du projet MVC ASP.net dans le projet ASP.net core.
 
@@ -372,7 +372,7 @@ De nombreux problèmes peuvent provoquer des messages d’erreur HTTP 500 qui ne
 
 ASP.NET Core convertit les exceptions non gérées en réponses d’erreur HTTP 500. Normalement, les détails de l’erreur ne sont pas inclus dans ces réponses pour empêcher la divulgation d’informations potentiellement sensibles sur le serveur. Pour plus d’informations, consultez la [page exception du développeur](xref:fundamentals/error-handling#developer-exception-page).
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:blazor/index>
 * <xref:mvc/views/tag-helpers/intro>
@@ -477,7 +477,7 @@ Les fonctionnalités suivantes requièrent la migration à partir de l’exemple
 
 ## <a name="controllers-and-views"></a>Contrôleurs et vues
 
-* Copiez chacune des méthodes du MVC ASP.NET `HomeController` vers le nouveau `HomeController` . Dans ASP.NET MVC, le type de retour de la méthode d’action du contrôleur intégré est [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); dans ASP.NET Core MVC, les méthodes d’action retournent à la `IActionResult` place. `ActionResult` implémente `IActionResult` , il n’est donc pas nécessaire de modifier le type de retour des méthodes d’action.
+* Copiez chacune des méthodes du MVC ASP.NET `HomeController` vers le nouveau `HomeController` . Dans ASP.NET MVC, le type de retour de la méthode d’action du contrôleur intégré au modèle est <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> ; dans ASP.net Core MVC, les méthodes d’action retournent à la `IActionResult` place. `ActionResult` implémente `IActionResult` , il n’est donc pas nécessaire de modifier le type de retour des méthodes d’action.
 
 * Copiez les fichiers de vue *about. cshtml*, *contact. cshtml*et *index. cshtml* Razor du projet MVC ASP.net dans le projet ASP.net core.
 

@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: 254cae2b66773d7bb71aa6313fd08b6f739b7682
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d5be01c67f455a2706a654574ef9f5e273551e70
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634642"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865446"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalisation et localisation dans ASP.NET Core
 
@@ -164,7 +164,7 @@ Dans l’exemple de projet, la méthode `ConfigureServices` affecte à `Resource
 | Nom de la ressource | Affectation de noms avec des points ou un chemin |
 | ------------   | ------------- |
 | Resources/Controllers.HomeController.fr.resx | Points  |
-| Resources/Controllers/HomeController.fr.resx  | Chemin d’accès |
+| Resources/Controllers/HomeController.fr.resx  | Path |
 
 Les fichiers de ressources utilisant `@inject IViewLocalizer` dans les Razor vues suivent un modèle similaire. Le fichier de ressources d’une vue peut être nommé selon la convention avec des points ou un chemin. Razor les fichiers de ressources d’affichage imitent le chemin d’accès de leur fichier de vue associé. Si nous affectons à `ResourcesPath` la valeur « Resources », le fichier de ressources en français associé à l’affichage *Views/Home/About.cshtml* peut porter l’un des noms suivants :
 
@@ -250,7 +250,7 @@ La liste par défaut va du plus spécifique au moins spécifique. Plus loin dans
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-Certaines applications utilisent une chaîne de requête pour définir la [culture et la culture d’interface utilisateur](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx). Pour les applications qui utilisent l' cookie approche d’en-tête Accept-Language, l’ajout d’une chaîne de requête à l’URL est utile pour déboguer et tester le code. Par défaut, `QueryStringRequestCultureProvider` est inscrit en tant que premier fournisseur de localisation dans la liste `RequestCultureProvider`. Vous passez les paramètres de chaîne de requête `culture` et `ui-culture`. L’exemple suivant affecte à la culture spécifique (langue et région) la valeur espagnol/Mexique :
+Certaines applications utiliseront une chaîne de requête pour définir <https://docs.microsoft.com/dotnet/api/system.globalization.cultureinfo?view=netcore-3.1> . Pour les applications qui utilisent l' cookie approche d’en-tête Accept-Language, l’ajout d’une chaîne de requête à l’URL est utile pour déboguer et tester le code. Par défaut, `QueryStringRequestCultureProvider` est inscrit en tant que premier fournisseur de localisation dans la liste `RequestCultureProvider`. Vous passez les paramètres de chaîne de requête `culture` et `ui-culture`. L’exemple suivant affecte à la culture spécifique (langue et région) la valeur espagnol/Mexique :
 
    `http://localhost:5000/?culture=es-MX&ui-culture=es-MX`
 
@@ -349,7 +349,7 @@ Le processus de localisation de votre application exige également une compréhe
 
 L’[adaptabilité](/dotnet/standard/globalization-localization/localizability-review) est un processus intermédiaire permettant de vérifier qu’une application globalisée est prête à être localisée.
 
-Le format [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) du nom de la culture est `<languagecode2>-<country/regioncode2>`, où `<languagecode2>` correspond au code de la langue et `<country/regioncode2>` au code de la sous-culture. Par exemple, `es-CL` pour l’espagnol (Chili), `en-US` pour l’anglais (États-Unis) et `en-AU` pour l’anglais (Australie). Le format [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) est la combinaison d’un code de culture à deux lettres minuscules de norme ISO 639 associé à une langue et d’un code de sous-culture à deux lettres majuscules de norme ISO 3166 associé à un pays ou une région. Consultez [Nom de culture de la langue](https://msdn.microsoft.com/library/ee825488(v=cs.20).aspx).
+Le format [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) du nom de la culture est `<languagecode2>-<country/regioncode2>`, où `<languagecode2>` correspond au code de la langue et `<country/regioncode2>` au code de la sous-culture. Par exemple, `es-CL` pour l’espagnol (Chili), `en-US` pour l’anglais (États-Unis) et `en-AU` pour l’anglais (Australie). Le format [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) est la combinaison d’un code de culture à deux lettres minuscules de norme ISO 639 associé à une langue et d’un code de sous-culture à deux lettres majuscules de norme ISO 3166 associé à un pays ou une région. Consultez <https://docs.microsoft.com/previous-versions/commerce-server/ee825488(v=cs.20)>.
 
 L’internationalisation est souvent abrégée par « I18N ». Cette abréviation prend les première et dernière lettres du mot ainsi que le nombre de lettres entre elles, 18 représentant ainsi le nombre de lettres le « I » initial et le « N » final. Il en va de même pour la globalisation (G11N) et la localisation (L10N).
 
@@ -368,7 +368,7 @@ Termes :
 
 [!INCLUDE[](~/includes/localization/unsupported-culture-log-level.md)]
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:fundamentals/troubleshoot-aspnet-core-localization>
 * [Projet Localization.StarterWeb](https://github.com/aspnet/Entropy/tree/master/samples/Localization.StarterWeb) utilisé dans l’article.
@@ -518,7 +518,7 @@ Dans l’exemple de projet, la méthode `ConfigureServices` affecte à `Resource
 | Nom de la ressource | Affectation de noms avec des points ou un chemin |
 | ------------   | ------------- |
 | Resources/Controllers.HomeController.fr.resx | Points  |
-| Resources/Controllers/HomeController.fr.resx  | Chemin d’accès |
+| Resources/Controllers/HomeController.fr.resx  | Path |
 
 Les fichiers de ressources utilisant `@inject IViewLocalizer` dans les Razor vues suivent un modèle similaire. Le fichier de ressources d’une vue peut être nommé selon la convention avec des points ou un chemin. Razor les fichiers de ressources d’affichage imitent le chemin d’accès de leur fichier de vue associé. Si nous affectons à `ResourcesPath` la valeur « Resources », le fichier de ressources en français associé à l’affichage *Views/Home/About.cshtml* peut porter l’un des noms suivants :
 
@@ -604,7 +604,7 @@ La liste par défaut va du plus spécifique au moins spécifique. Plus loin dans
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-Certaines applications utilisent une chaîne de requête pour définir la [culture et la culture d’interface utilisateur](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx). Pour les applications qui utilisent l' cookie approche d’en-tête Accept-Language, l’ajout d’une chaîne de requête à l’URL est utile pour déboguer et tester le code. Par défaut, `QueryStringRequestCultureProvider` est inscrit en tant que premier fournisseur de localisation dans la liste `RequestCultureProvider`. Vous passez les paramètres de chaîne de requête `culture` et `ui-culture`. L’exemple suivant affecte à la culture spécifique (langue et région) la valeur espagnol/Mexique :
+Certaines applications utiliseront une chaîne de requête pour définir <https://docs.microsoft.com/dotnet/api/system.globalization.cultureinfo?view=netcore-3.1> . Pour les applications qui utilisent l' cookie approche d’en-tête Accept-Language, l’ajout d’une chaîne de requête à l’URL est utile pour déboguer et tester le code. Par défaut, `QueryStringRequestCultureProvider` est inscrit en tant que premier fournisseur de localisation dans la liste `RequestCultureProvider`. Vous passez les paramètres de chaîne de requête `culture` et `ui-culture`. L’exemple suivant affecte à la culture spécifique (langue et région) la valeur espagnol/Mexique :
 
 ```
 http://localhost:5000/?culture=es-MX&ui-culture=es-MX
@@ -705,7 +705,7 @@ Le processus de localisation de votre application exige également une compréhe
 
 L’[adaptabilité](/dotnet/standard/globalization-localization/localizability-review) est un processus intermédiaire permettant de vérifier qu’une application globalisée est prête à être localisée.
 
-Le format [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) du nom de la culture est `<languagecode2>-<country/regioncode2>`, où `<languagecode2>` correspond au code de la langue et `<country/regioncode2>` au code de la sous-culture. Par exemple, `es-CL` pour l’espagnol (Chili), `en-US` pour l’anglais (États-Unis) et `en-AU` pour l’anglais (Australie). Le format [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) est la combinaison d’un code de culture à deux lettres minuscules de norme ISO 639 associé à une langue et d’un code de sous-culture à deux lettres majuscules de norme ISO 3166 associé à un pays ou une région. Consultez [Nom de culture de la langue](https://msdn.microsoft.com/library/ee825488(v=cs.20).aspx).
+Le format [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) du nom de la culture est `<languagecode2>-<country/regioncode2>`, où `<languagecode2>` correspond au code de la langue et `<country/regioncode2>` au code de la sous-culture. Par exemple, `es-CL` pour l’espagnol (Chili), `en-US` pour l’anglais (États-Unis) et `en-AU` pour l’anglais (Australie). Le format [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) est la combinaison d’un code de culture à deux lettres minuscules de norme ISO 639 associé à une langue et d’un code de sous-culture à deux lettres majuscules de norme ISO 3166 associé à un pays ou une région. Consultez <https://docs.microsoft.com/previous-versions/commerce-server/ee825488(v=cs.20)>.
 
 L’internationalisation est souvent abrégée par « I18N ». Cette abréviation prend les première et dernière lettres du mot ainsi que le nombre de lettres entre elles, 18 représentant ainsi le nombre de lettres le « I » initial et le « N » final. Il en va de même pour la globalisation (G11N) et la localisation (L10N).
 
@@ -722,7 +722,7 @@ Termes :
 
 [!INCLUDE[](~/includes/localization/currency.md)]
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:fundamentals/troubleshoot-aspnet-core-localization>
 * [Projet Localization.StarterWeb](https://github.com/aspnet/Entropy/tree/master/samples/Localization.StarterWeb) utilisé dans l’article.
@@ -873,7 +873,7 @@ Dans l’exemple de projet, la méthode `ConfigureServices` affecte à `Resource
 | Nom de la ressource | Affectation de noms avec des points ou un chemin |
 | ------------   | ------------- |
 | Resources/Controllers.HomeController.fr.resx | Points  |
-| Resources/Controllers/HomeController.fr.resx  | Chemin d’accès |
+| Resources/Controllers/HomeController.fr.resx  | Path |
 
 Les fichiers de ressources utilisant `@inject IViewLocalizer` dans les Razor vues suivent un modèle similaire. Le fichier de ressources d’une vue peut être nommé selon la convention avec des points ou un chemin. Razor les fichiers de ressources d’affichage imitent le chemin d’accès de leur fichier de vue associé. Si nous affectons à `ResourcesPath` la valeur « Resources », le fichier de ressources en français associé à l’affichage *Views/Home/About.cshtml* peut porter l’un des noms suivants :
 
@@ -959,7 +959,7 @@ La liste par défaut va du plus spécifique au moins spécifique. Plus loin dans
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-Certaines applications utilisent une chaîne de requête pour définir la [culture et la culture d’interface utilisateur](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx). Pour les applications qui utilisent l' cookie approche d’en-tête Accept-Language, l’ajout d’une chaîne de requête à l’URL est utile pour déboguer et tester le code. Par défaut, `QueryStringRequestCultureProvider` est inscrit en tant que premier fournisseur de localisation dans la liste `RequestCultureProvider`. Vous passez les paramètres de chaîne de requête `culture` et `ui-culture`. L’exemple suivant affecte à la culture spécifique (langue et région) la valeur espagnol/Mexique :
+Certaines applications utiliseront une chaîne de requête pour définir <https://docs.microsoft.com/dotnet/api/system.globalization.cultureinfo?view=netcore-3.1> . Pour les applications qui utilisent l' cookie approche d’en-tête Accept-Language, l’ajout d’une chaîne de requête à l’URL est utile pour déboguer et tester le code. Par défaut, `QueryStringRequestCultureProvider` est inscrit en tant que premier fournisseur de localisation dans la liste `RequestCultureProvider`. Vous passez les paramètres de chaîne de requête `culture` et `ui-culture`. L’exemple suivant affecte à la culture spécifique (langue et région) la valeur espagnol/Mexique :
 
 ```
 http://localhost:5000/?culture=es-MX&ui-culture=es-MX
@@ -1007,7 +1007,7 @@ L’[en-tête Accept-Language](https://www.w3.org/International/questions/qa-acc
 
 ### <a name="the-content-language-http-header"></a>En-tête HTTP Content-Language
 
-En-tête d’entité [Content-Language](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Language) :
+En-tête d’entité [Content-Language](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Language) :
 
 * Est utilisé pour décrire la ou les langues destinées au public.
 * Permet à un utilisateur de faire la distinction en fonction de la langue préférée de l’utilisateur.
@@ -1083,7 +1083,7 @@ Le processus de localisation de votre application exige également une compréhe
 
 L’[adaptabilité](/dotnet/standard/globalization-localization/localizability-review) est un processus intermédiaire permettant de vérifier qu’une application globalisée est prête à être localisée.
 
-Le format [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) du nom de la culture est `<languagecode2>-<country/regioncode2>`, où `<languagecode2>` correspond au code de la langue et `<country/regioncode2>` au code de la sous-culture. Par exemple, `es-CL` pour l’espagnol (Chili), `en-US` pour l’anglais (États-Unis) et `en-AU` pour l’anglais (Australie). Le format [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) est la combinaison d’un code de culture à deux lettres minuscules de norme ISO 639 associé à une langue et d’un code de sous-culture à deux lettres majuscules de norme ISO 3166 associé à un pays ou une région. Consultez [Nom de culture de la langue](https://msdn.microsoft.com/library/ee825488(v=cs.20).aspx).
+Le format [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) du nom de la culture est `<languagecode2>-<country/regioncode2>`, où `<languagecode2>` correspond au code de la langue et `<country/regioncode2>` au code de la sous-culture. Par exemple, `es-CL` pour l’espagnol (Chili), `en-US` pour l’anglais (États-Unis) et `en-AU` pour l’anglais (Australie). Le format [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) est la combinaison d’un code de culture à deux lettres minuscules de norme ISO 639 associé à une langue et d’un code de sous-culture à deux lettres majuscules de norme ISO 3166 associé à un pays ou une région. Consultez <https://docs.microsoft.com/previous-versions/commerce-server/ee825488(v=cs.20)>.
 
 L’internationalisation est souvent abrégée par « I18N ». Cette abréviation prend les première et dernière lettres du mot ainsi que le nombre de lettres entre elles, 18 représentant ainsi le nombre de lettres le « I » initial et le « N » final. Il en va de même pour la globalisation (G11N) et la localisation (L10N).
 
@@ -1102,7 +1102,7 @@ Termes :
 
 [!INCLUDE[](~/includes/localization/unsupported-culture-log-level.md)]
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:fundamentals/troubleshoot-aspnet-core-localization>
 * [Projet Localization.StarterWeb](https://github.com/aspnet/Entropy/tree/master/samples/Localization.StarterWeb) utilisé dans l’article.

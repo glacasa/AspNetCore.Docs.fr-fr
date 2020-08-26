@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 230b2a801a76e2d719fba8e2b97fddb0b32a9634
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 4f184a1264614b16ce98ba5474aacd60f175bd8a
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627960"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865209"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>Créez des applications Web progressifs avec ASP.NET Core Blazor WebAssembly
 
@@ -72,7 +72,7 @@ dotnet new blazorwasm -o MyNewProject --pwa
 
 Quand vous visitez une application créée à l’aide du modèle PWA, les utilisateurs ont la possibilité d’installer l’application dans le menu Démarrer, l’ancre ou l’écran d’accueil de son système d’exploitation. La façon dont cette option est présentée dépend du navigateur de l’utilisateur. Quand vous utilisez des navigateurs basés sur Desktop chrome, tels que Edge ou chrome, un bouton **Ajouter** apparaît dans la barre d’URL. Une fois que l’utilisateur a sélectionné le bouton **Ajouter** , une boîte de dialogue de confirmation s’affiche :
 
-![Le diaglog de confirmation de Google Chrome présente un bouton installer pour l’utilisateur de l’application « my ::: No-Loc (éblouissant) :::P wa ».](progressive-web-app/_static/image2.png)
+![La boîte de dialogue de confirmation de Google Chrome présente un bouton installer pour l’utilisateur de l’application « my ::: No-Loc (éblouissant) :::P wa ».](progressive-web-app/_static/image2.png)
 
 Sur iOS, les visiteurs peuvent installer le PWA à l’aide du bouton de **partage** de Safari et de l’option **Ajouter à homescreen** . Sur chrome pour Android, les utilisateurs doivent sélectionner le bouton de **menu** dans l’angle supérieur droit, puis **Ajouter à l’écran d’accueil**.
 
@@ -298,6 +298,6 @@ L' [`CarChecker`](https://github.com/SteveSandersonMS/CarChecker) exemple d’ap
 * `LocalVehiclesStore` (`Client/Data/LocalVehiclesStore.cs`)
 * `LoginStatus` composant ( `Client/Shared/LoginStatus.razor` )
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [SignalR négociation Cross-Origin pour l’authentification](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)

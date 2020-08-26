@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/advanced/custom-model-binding
-ms.openlocfilehash: 4bef68fffbdfaff023f71964a27ead56863e4192
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7e1151b04f39f637f889e690bccc97eb6f0c91ea
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630430"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865568"
 ---
 # <a name="custom-model-binding-in-aspnet-core"></a>Liaison de données personnalisée dans ASP.NET Core
 
@@ -127,7 +127,7 @@ Pour utiliser un fournisseur de classeurs de modèles personnalisé, ajoutez-le 
 
 [!code-csharp[](custom-model-binding/samples/3.x/CustomModelBindingSample/Startup.cs?name=snippet_ConfigureServices&highlight=5-8)]
 
-Durant l’évaluation des classeurs de modèles, la collection de fournisseurs est examinée dans un certain ordre. Le premier fournisseur qui retourne un classeur est utilisé. L’ajout de votre fournisseur à la fin de la collection peut entraîner l’appel d’un classeur de modèles intégré avant votre classeur personnalisé. Dans cet exemple, le fournisseur personnalisé est ajouté au début de la collection afin qu’il soit utilisé pour les arguments d’action `Author`.
+Durant l’évaluation des classeurs de modèles, la collection de fournisseurs est examinée dans un certain ordre. Le premier fournisseur qui retourne un Binder qui correspond au modèle d’entrée est utilisé. L’ajout de votre fournisseur à la fin de la collection peut donc entraîner l’appel d’un classeur de modèles intégré avant que votre Binder personnalisé ait une chance. Dans cet exemple, le fournisseur personnalisé est ajouté au début de la collection pour garantir qu’il est toujours utilisé pour les `Author` arguments d’action.
 
 ### <a name="polymorphic-model-binding"></a>Liaison de modèle polymorphe
 
