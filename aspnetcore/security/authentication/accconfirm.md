@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: 57607390e7d5e58df9f27437faecd57504ad64df
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d6ea37ceb83ffbaa94187e0c541c79428594e4b4
+ms.sourcegitcommit: 2039e60eb7b482da8298f82dcd5eda27cf747f32
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635370"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88906447"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>Account confirmation and password recovery in ASP.NET Core (Confirmation de compte et récupération de mot de passe dans ASP.NET Core)
 
@@ -160,7 +160,13 @@ Exécutez l’application Web et testez le processus de confirmation et de récu
 * Entrez l’adresse de messagerie que vous avez utilisée pour inscrire le compte.
 * Un e-mail contenant un lien pour réinitialiser votre mot de passe est envoyé. Vérifiez votre adresse de messagerie, puis cliquez sur le lien pour réinitialiser votre mot de passe. Une fois que votre mot de passe a été réinitialisé avec succès, vous pouvez vous connecter avec votre adresse de messagerie et votre nouveau mot de passe.
 
-## <a name="change-email-and-activity-timeout"></a>Modifier le délai d’expiration de l’e-mail et de l’activité
+<a name="resend"></a>
+
+## <a name="resend-email-confirmation"></a>Renvoyer l’e-mail de confirmation
+
+Dans ASP.NET Core 5,0 et versions ultérieures, sélectionnez le lien **renvoyer un e-mail de confirmation** sur la page de **connexion** .
+
+### <a name="change-email-and-activity-timeout"></a>Modifier le délai d’expiration de l’e-mail et de l’activité
 
 Le délai d’inactivité par défaut est de 14 jours. Le code suivant définit le délai d’expiration d’inactivité sur 5 jours :
 
@@ -185,10 +191,6 @@ Ajoutez un [DataProtectorTokenProvider \<TUser> ](/dotnet/api/microsoft.aspnetco
 Ajoutez le fournisseur personnalisé au conteneur de service :
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/StartupEmail.cs?name=snippet1&highlight=10-16)]
-
-### <a name="resend-email-confirmation"></a>Renvoyer l’e-mail de confirmation
-
-Consultez [ce problème GitHub](https://github.com/dotnet/AspNetCore/issues/5410).
 
 <a name="debug"></a>
 
