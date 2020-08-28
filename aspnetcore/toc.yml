@@ -710,6 +710,8 @@
           uid: grpc/basics
         - name: Créer des services gRPC
           uid: grpc/services
+        - name: Créer des messages Protobuf
+          uid: grpc/protobuf
     - name: Services gRPC avec ASP.NET Core
       uid: grpc/aspnetcore
     - name: Appeler les services gRPC avec le client .NET
@@ -728,8 +730,6 @@
       uid: grpc/diagnostics
     - name: Considérations relatives à la sécurité
       uid: grpc/security
-    - name: Créer des messages Protobuf
-      uid: grpc/protobuf
     - name: Meilleures pratiques relatives aux performances
       uid: grpc/performance
     - name: Contrôle de version des services gRPC
