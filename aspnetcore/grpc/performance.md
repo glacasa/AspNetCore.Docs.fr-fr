@@ -1,5 +1,5 @@
 ---
-title: Meilleures pratiques en matière de performances dans gRPC pour ASP.NET Core
+title: Meilleures pratiques en matière de performances avec gRPC
 author: jamesnk
 description: Découvrez les meilleures pratiques pour créer des services gRPC à hautes performances.
 monikerRange: '>= aspnetcore-3.0'
@@ -17,24 +17,24 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: f9cefa89ec6e533920b33223b34333f6ebe38428
-ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
+ms.openlocfilehash: 7d4d5732e6edb0d0a156fdcec5f59cc09a69d7de
+ms.sourcegitcommit: 111b4e451da2e275fb074cde5d8a84b26a81937d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88876722"
+ms.lasthandoff: 08/27/2020
+ms.locfileid: "89040877"
 ---
-# <a name="performance-best-practices-in-grpc-for-aspnet-core"></a>Meilleures pratiques en matière de performances dans gRPC pour ASP.NET Core
+# <a name="performance-best-practices-with-grpc"></a>Meilleures pratiques en matière de performances avec gRPC
 
 Par [James Newton-King](https://twitter.com/jamesnk)
 
 gRPC est conçu pour les services à hautes performances. Ce document explique comment obtenir les meilleures performances possibles à partir de gRPC.
 
-## <a name="reuse-channel"></a>Réutiliser le canal
+## <a name="reuse-grpc-channels"></a>Réutiliser les canaux gRPC
 
 Un canal gRPC doit être réutilisé pour effectuer des appels gRPC. La réutilisation d’un canal permet de multiplexer les appels par le biais d’une connexion HTTP/2 existante.
 
-Si un canal est créé pour chaque appel gRPC, le temps nécessaire à l’exécution peut augmenter de manière significative. Chaque appel nécessite plusieurs allers-retours sur le réseau entre le client et le serveur pour créer une connexion HTTP/2 :
+Si un canal est créé pour chaque appel gRPC, le temps nécessaire à l’exécution peut augmenter de manière significative. Chaque appel nécessite plusieurs allers-retours sur le réseau entre le client et le serveur pour créer une nouvelle connexion HTTP/2 :
 
 1. Ouverture d’un socket
 2. Établissement d’une connexion TCP
@@ -86,7 +86,45 @@ Il existe deux solutions de contournement pour les applications .NET Core 3,1 :
 > * Conflit de threads entre les flux tentant d’écrire dans la connexion.
 > * La perte de paquets de connexion entraîne le blocage de tous les appels au niveau de la couche TCP.
 
+## <a name="load-balancing"></a>Équilibrage de la charge
+
+Certains équilibrages de charge ne fonctionnent pas efficacement avec gRPC. Les équilibreurs de charge L4 (transport) fonctionnent à un niveau de connexion, en répartissant les connexions TCP entre les points de terminaison. Cette approche fonctionne bien pour le chargement des appels d’API d’équilibrage effectués avec HTTP/1.1. Les appels simultanés effectués avec HTTP/1.1 sont envoyés sur des connexions différentes, ce qui permet d’équilibrer la charge des appels entre les points de terminaison.
+
+Étant donné que les équilibreurs de charge L4 fonctionnent au niveau de la connexion, ils ne fonctionnent pas correctement avec gRPC. gRPC utilise le protocole HTTP/2, qui multiplexe plusieurs appels sur une seule connexion TCP. Tous les appels gRPC sur cette connexion sont dirigés vers un point de terminaison.
+
+Il existe deux options pour équilibrer la charge de manière efficace gRPC :
+
+1. Équilibrage de charge côté client
+2. Équilibrage de charge du proxy L7 (application)
+
+> [!NOTE]
+> Seuls les appels gRPC peuvent faire l’équilibrage de charge entre les points de terminaison. Une fois qu’un appel gRPC de diffusion en continu est établi, tous les messages envoyés via le flux sont dirigés vers un point de terminaison.
+
+### <a name="client-side-load-balancing"></a>Équilibrage de charge côté client
+
+Avec l’équilibrage de charge côté client, le client connaît les points de terminaison. Pour chaque appel gRPC, il sélectionne un autre point de terminaison auquel envoyer l’appel. L’équilibrage de charge côté client est un bon choix lorsque la latence est importante. Il n’y a pas de proxy entre le client et le service afin que l’appel soit envoyé directement au service. L’inconvénient de l’équilibrage de charge côté client est que chaque client doit effectuer le suivi des points de terminaison disponibles qu’il doit utiliser.
+
+L’équilibrage de la charge du client en parallèle est une technique dans laquelle l’état de l’équilibrage de charge est stocké dans un emplacement central. Les clients interrogent régulièrement l’emplacement central pour rechercher les informations à utiliser lors de la prise de décision d’équilibrage de charge.
+
+`Grpc.Net.Client` actuellement, ne prend pas en charge l’équilibrage de charge côté client. [GRPC. Core](https://www.nuget.org/packages/Grpc.Core) est un bon choix si l’équilibrage de charge côté client est requis dans .net.
+
+### <a name="proxy-load-balancing"></a>Équilibrage de charge du proxy
+
+Un proxy L7 (application) fonctionne à un niveau supérieur à celui d’un proxy L4 (transport). Les proxys L7 comprennent HTTP/2 et peuvent distribuer les appels gRPC multiplexés au proxy sur une connexion HTTP/2 sur plusieurs points de terminaison. L’utilisation d’un proxy est plus simple que l’équilibrage de charge côté client, mais peut ajouter une latence supplémentaire aux appels gRPC.
+
+De nombreux proxys L7 sont disponibles. Certaines options sont les suivantes :
+
+1. [Envoi](https://www.envoyproxy.io/) proxy-un proxy Open source populaire.
+2. [Linkerd](https://linkerd.io/) -service Mesh pour Kubernetes.
+2. [YARP : proxy inversé](https://microsoft.github.io/reverse-proxy/) -un proxy Open source en version préliminaire écrit en .net.
+
 ::: moniker range=">= aspnetcore-5.0"
+
+## <a name="inter-process-communication"></a>Communication entre processus
+
+les appels gRPC entre un client et un service sont généralement envoyés via des sockets TCP. TCP est idéal pour la communication sur un réseau, mais la [communication entre processus (IPC)](https://wikipedia.org/wiki/Inter-process_communication) est plus efficace lorsque le client et le service se trouvent sur le même ordinateur.
+
+Envisagez d’utiliser un transport comme les sockets de domaine UNIX ou les canaux nommés pour les appels gRPC entre les processus sur le même ordinateur. Pour plus d’informations, consultez <xref:grpc/interprocess>.
 
 ## <a name="keep-alive-pings"></a>Conserver les pings actifs
 

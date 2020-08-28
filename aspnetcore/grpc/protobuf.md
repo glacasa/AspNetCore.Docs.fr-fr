@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/protobuf
-ms.openlocfilehash: b8149b79c1e7b204e52cc8595d1193b623bb0008
-ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
+ms.openlocfilehash: f898907e5bae7c67cfca72c70dc8497f36de2622
+ms.sourcegitcommit: 111b4e451da2e275fb074cde5d8a84b26a81937d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 08/27/2020
-ms.locfileid: "88945704"
+ms.locfileid: "89040851"
 ---
 # <a name="create-protobuf-messages-for-net-apps"></a>Créer des messages Protobuf pour les applications .NET
 
@@ -338,7 +338,7 @@ Les champs de l' `oneof` ensemble doivent avoir des numéros de champ uniques da
 Lors de l’utilisation de `oneof` , le code C# généré inclut une énumération qui spécifie les champs qui ont été définis. Vous pouvez tester l’énumération pour rechercher le champ défini. Les champs qui ne sont pas définis retournent `null` ou la valeur par défaut, plutôt que de lever une exception.
 
 ```csharp
-var response = client.GetPersonAsync(new RequestMessage());
+var response = await client.GetPersonAsync(new RequestMessage());
 
 switch (response.ResultCase)
 {
@@ -353,7 +353,7 @@ switch (response.ResultCase)
 }
 ```
 
-### <a name="value"></a>Valeur
+### <a name="value"></a>Value
 
 Le `Value` type représente une valeur typée dynamiquement. Il peut s’agir d' `null` un nombre, d’une chaîne, d’une valeur booléenne, d’un dictionnaire de valeurs ( `Struct` ) ou d’une liste de valeurs ( `ValueList` ). `Value` est un type bien connu qui utilise la fonctionnalité décrite précédemment `oneof` . Pour utiliser le `Value` type, importez `struct.proto` .
 
