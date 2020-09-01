@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: c409eaaf07109d363581ee7d61dc76521d6818d0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9bb055670b73c9a1ae04083bc326200a42151708
+ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630664"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89102794"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>Gestion de la mémoire et garbage collection (GC) dans ASP.NET Core
 
@@ -235,7 +235,7 @@ La même fuite peut se produire dans le code utilisateur, par l’un des éléme
 
 ### <a name="large-objects-heap"></a>Tas d’objets volumineux
 
-Les cycles d’allocation de mémoire/libre fréquents peuvent fragmenter la mémoire, en particulier lors de l’allocation de gros blocs de mémoire. Les objets sont alloués dans des blocs de mémoire contigus. Pour limiter la fragmentation, lorsque le garbage collector libère de la mémoire, il trys de le défragmenter. Ce processus est appelé **compactage**. Le compactage implique le déplacement d’objets. Le déplacement d’objets volumineux impose une baisse des performances. Pour cette raison, le GC crée une zone de mémoire spéciale pour les objets _volumineux_ , appelée tas d’objets [volumineux](/dotnet/standard/garbage-collection/large-object-heap) (LOH). Les objets dont la taille est supérieure à 85 000 octets (environ 83 Ko) sont :
+Les cycles d’allocation de mémoire/libre fréquents peuvent fragmenter la mémoire, en particulier lors de l’allocation de gros blocs de mémoire. Les objets sont alloués dans des blocs de mémoire contigus. Pour limiter la fragmentation, lorsque le garbage collector libère de la mémoire, il tente de le défragmenter. Ce processus est appelé **compactage**. Le compactage implique le déplacement d’objets. Le déplacement d’objets volumineux impose une baisse des performances. Pour cette raison, le GC crée une zone de mémoire spéciale pour les objets _volumineux_ , appelée tas d’objets [volumineux](/dotnet/standard/garbage-collection/large-object-heap) (LOH). Les objets dont la taille est supérieure à 85 000 octets (environ 83 Ko) sont :
 
 * Placé sur le LOH.
 * Non compacté.
@@ -443,7 +443,7 @@ L’application de la même charge que la version non regroupée produit le grap
 
 La principale différence est le nombre d’octets alloués et, par conséquent, beaucoup moins de collections de génération 0.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Garbage collection](/dotnet/standard/garbage-collection/)
 * [Fonctionnement de différents modes GC avec le visualiseur concurrentiel](https://blogs.msdn.microsoft.com/seteplia/2017/01/05/understanding-different-gc-modes-with-concurrency-visualizer/)

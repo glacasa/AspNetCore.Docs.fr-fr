@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/owin
-ms.openlocfilehash: d766ba3387edbfb9298b6f3cf8a485738b7d7139
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 817eb652f4feedf19dd60873b480917c320272a3
+ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628597"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89102755"
 ---
 # <a name="open-web-interface-for-net-owin-with-aspnet-core"></a>OWIN (Open Web Interface for .NET) avec ASP.NET Core
 
@@ -104,80 +104,6 @@ app.UseOwin(pipeline =>
 
 <a name="hosting-on-owin"></a>
 
-## <a name="using-aspnet-core-hosting-on-an-owin-based-server"></a>Utilisation de l’hébergement ASP.NET Core sur un serveur OWIN
-
-Les serveurs OWIN peuvent héberger des applications ASP.NET Core. [Nowin](https://github.com/Bobris/Nowin), serveur web OWIN .NET, est l’un de ces serveurs. Dans l’exemple de cet article, j’ai inclus un projet qui fait référence à Nowin et qui l’utilise pour créer un `IServer` capable d’auto-héberger ASP.NET Core.
-
-[!code-csharp[](owin/sample/src/NowinSample/Program.cs?highlight=15)]
-
-`IServer` est une interface qui nécessite une propriété `Features` et une méthode `Start`.
-
-`Start` est chargé de configurer et de démarrer le serveur, ce qui, dans le cas présent, s’effectue à l’aide d’une série d’appels d’API Fluent qui définissent des adresses analysées à partir d’IServerAddressesFeature. Notez que la configuration Fluent de la variable `_builder` spécifie que les requêtes seront traitées par le `appFunc` défini précédemment dans la méthode. Ce `Func` est appelé sur chaque requête pour traiter les requêtes entrantes.
-
-Nous allons également ajouter une extension `IWebHostBuilder` pour faciliter l’ajout et la configuration du serveur Nowin.
-
-```csharp
-using System;
-using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.Extensions.DependencyInjection;
-using Nowin;
-using NowinSample;
-
-namespace Microsoft.AspNetCore.Hosting
-{
-    public static class NowinWebHostBuilderExtensions
-    {
-        public static IWebHostBuilder UseNowin(this IWebHostBuilder builder)
-        {
-            return builder.ConfigureServices(services =>
-            {
-                services.AddSingleton<IServer, NowinServer>();
-            });
-        }
-
-        public static IWebHostBuilder UseNowin(this IWebHostBuilder builder, Action<ServerBuilder> configure)
-        {
-            builder.ConfigureServices(services =>
-            {
-                services.Configure(configure);
-            });
-            return builder.UseNowin();
-        }
-    }
-}
-```
-
-Ceci étant en place, appelez l’extension dans *Program.cs* pour exécuter une application ASP.NET Core avec ce serveur personnalisé :
-
-```csharp
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-
-namespace NowinSample
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var host = new WebHostBuilder()
-                .UseNowin()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .Build();
-
-            host.Run();
-        }
-    }
-}
-```
-
-Découvrez des informations supplémentaires sur les [serveurs ASP.NET Core](xref:fundamentals/servers/index).
-
 ## <a name="run-aspnet-core-on-an-owin-based-server-and-use-its-websockets-support"></a>Exécuter ASP.NET Core sur un serveur OWIN et utiliser sa prise en charge des WebSockets
 
 L’accès à des fonctionnalités comme les WebSockets constitue un autre exemple de la façon dont les fonctionnalités de serveurs OWIN peuvent être exploitées par ASP.NET Core. Le serveur web .NET OWIN utilisé dans l’exemple précédent prend en charge les WebSockets intégrés, qui peuvent être exploités par une application ASP.NET Core. L’exemple ci-dessous montre une application web simple qui prend en charge les WebSockets et renvoie tout ce qui est envoyé au serveur via des WebSockets.
@@ -227,10 +153,6 @@ public class Startup
     }
 }
 ```
-
-Cet [exemple](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/owin/sample) est configuré avec le même `NowinServer` que le précédent ; la seule différence réside dans la façon dont l’application est configurée dans sa méthode `Configure`. Un test utilisant [un client WebSocket simple](https://chrome.google.com/webstore/detail/simple-websocket-client/pfdhoblngboilpfeibdedpjgfnlcodoo?hl=en) présente l’application :
-
-![Client test WebSocket](owin/_static/websocket-test.png)
 
 ## <a name="owin-environment"></a>Environnement OWIN
 
@@ -324,7 +246,7 @@ OWIN dépend d’un objet `IDictionary<string,object>` pour communiquer des info
 | websocket.ClientCloseStatus | `int` | Facultatif |
 | websocket.ClientCloseDescription | `String` | Facultatif |
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Middleware](xref:fundamentals/middleware/index)
 * [Serveurs](xref:fundamentals/servers/index)

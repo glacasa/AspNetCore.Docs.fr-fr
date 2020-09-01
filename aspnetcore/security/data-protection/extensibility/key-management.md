@@ -17,20 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/key-management
-ms.openlocfilehash: 797df457a5584233043210e9ba2657b7fd7f3893
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: db718b8d4c305b75ad52054efde6b2d03f6825ed
+ms.sourcegitcommit: 4cce99cbd44372fd4575e8da8c0f4345949f4d9a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631002"
+ms.lasthandoff: 08/31/2020
+ms.locfileid: "89153530"
 ---
 # <a name="key-management-extensibility-in-aspnet-core"></a>Extensibilité de la gestion des clés dans ASP.NET Core
 
-> [!TIP]
-> Lisez la section [gestion des clés](xref:security/data-protection/implementation/key-management#data-protection-implementation-key-management) avant de lire cette section, car elle explique certains concepts fondamentaux sous-jacents à ces API.
+Lisez la section [gestion des clés](xref:security/data-protection/implementation/key-management#data-protection-implementation-key-management) avant de lire cette section, car elle explique certains concepts fondamentaux sous-jacents à ces API.
 
-> [!WARNING]
-> Les types qui implémentent l’une des interfaces suivantes doivent être thread-safe pour plusieurs appelants.
+**Avertissement**: les types qui implémentent l’une des interfaces suivantes doivent être thread-safe pour plusieurs appelants.
 
 ## <a name="key"></a>Clé
 

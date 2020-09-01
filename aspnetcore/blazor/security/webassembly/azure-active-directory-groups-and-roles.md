@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: 50d019897310f9edd560069137ab73b39d780be8
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: adc16989e5b4e2e639896e5fe9562e42cb8ceeb4
+ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626231"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89102742"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Groupes de Azure AD, rôles administratifs et rôles définis par l’utilisateur
 
@@ -33,7 +33,7 @@ Azure Active Directory (AAD) fournit plusieurs approches d’autorisation qui pe
 
 * Groupes définis par l’utilisateur
   * Sécurité
-  * O365
+  * Microsoft 365
   * Distribution
 * Rôles
   * Rôles d’administration intégrés
@@ -401,7 +401,7 @@ Les ID d’objet présentés dans le tableau suivant sont utilisés pour créer 
 Rôle d’administration AAD | ID de l'objet
 --- | ---
 Administrateur d’application | fa11557b-4f15-4ddd-85d5-313c7cd74047
-Développeur d’application | 68adcbb8-9504-44f6-89f2-5cd48dc74a2c
+Développeur d’applications | 68adcbb8-9504-44f6-89f2-5cd48dc74a2c
 Administrateur d’authentification | 02d110a1-96b1-419e-af87-746461b60ed7
 Administrateur Azure DevOps | a5311ace-ca41-44cd-b833-8d22caa0b34f
 Administrateur Azure Information Protection | 18632dce-f9b5-4f01-abb5-37051f06860e

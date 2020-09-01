@@ -2,6 +2,7 @@
 title: Tester l’intergiciel (middleware) ASP.NET Core
 author: tratcher
 description: Découvrez comment tester ASP.NET Core intergiciel avec TestServer.
+monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 5/12/2020
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/middleware
-ms.openlocfilehash: ed0925259bf3d4fee6c903ff55cdf1dae2355af7
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1a5259f65261fb95fcfaa59df3f04da14d3f1ae3
+ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631899"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89102863"
 ---
 # <a name="test-aspnet-core-middleware"></a>Tester l’intergiciel (middleware) ASP.NET Core
 
@@ -59,6 +60,7 @@ Dans le projet de test, créez un test :
 [!code-csharp[](middleware/samples_snapshot/3.x/setup.cs?highlight=4-18)]
 
 ## <a name="send-requests-with-httpclient"></a>Envoyer des demandes avec HttpClient
+
 Envoyer une demande à l’aide de <xref:System.Net.Http.HttpClient> :
 
 [!code-csharp[](middleware/samples_snapshot/3.x/request.cs?highlight=20)]

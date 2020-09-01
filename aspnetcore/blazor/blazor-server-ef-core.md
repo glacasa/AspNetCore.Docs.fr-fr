@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/blazor-server-ef-core
-ms.openlocfilehash: b71b742c8a60b4b563649baa181b8c332ff02501
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 7627d6981fbee66ba19a7065cefb197e50a5fd25
+ms.sourcegitcommit: 4cce99cbd44372fd4575e8da8c0f4345949f4d9a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865191"
+ms.lasthandoff: 08/31/2020
+ms.locfileid: "89153517"
 ---
 # <a name="aspnet-core-no-locblazor-server-with-entity-framework-core-efcore"></a>ASP.NET Core Blazor Server avec Entity Framework Core (EFCore)
 
@@ -36,7 +36,7 @@ Blazor Server est une infrastructure d’application avec état. L’application
 > [!NOTE]
 > Cet article traite de EF Core dans les Blazor Server applications. Blazor WebAssembly les applications s’exécutent dans un bac à sable (sandbox) webassembly qui empêche la plupart des connexions directes. L’exécution de EF Core dans Blazor WebAssembly dépasse le cadre de cet article.
 
-## <a name="sample-app"></a>Exemple d’application
+## <a name="sample-app"></a>Exemple d'application
 
 L’exemple d’application a été créé en tant que référence pour les Blazor Server applications qui utilisent EF Core. L’exemple d’application comprend une grille avec des opérations de tri et de filtrage, de suppression, d’ajout et de mise à jour. L’exemple illustre l’utilisation de EF Core pour gérer l’accès concurrentiel optimiste.
 
@@ -107,7 +107,8 @@ La fabrique est injectée dans des composants et utilisée pour créer de nouvel
 
 [!code-csharp[](./common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor?name=snippet1)]
 
-> ! [Remarque] `Wrapper` est une [référence de composant](xref:blazor/components/index#capture-references-to-components) au `GridWrapper` composant. Consultez le `Index` composant ( `Pages/Index.razor` ) dans l' [exemple d’application](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor).
+> [!NOTE]
+> `Wrapper` est une [référence de composant](xref:blazor/components/index#capture-references-to-components) au `GridWrapper` composant. Consultez le `Index` composant ( `Pages/Index.razor` ) dans l' [exemple d’application](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor).
 
 ### <a name="scope-to-the-component-lifetime"></a>Portée à la durée de vie du composant
 
@@ -136,7 +137,7 @@ Blazor Server est une infrastructure d’application avec état. L’application
 > [!NOTE]
 > Cet article traite de EF Core dans les Blazor Server applications. Blazor WebAssembly les applications s’exécutent dans un bac à sable (sandbox) webassembly qui empêche la plupart des connexions directes. L’exécution de EF Core dans Blazor WebAssembly dépasse le cadre de cet article.
 
-## <a name="sample-app"></a>Exemple d’application
+## <a name="sample-app"></a>Exemple d'application
 
 L’exemple d’application a été créé en tant que référence pour les Blazor Server applications qui utilisent EF Core. L’exemple d’application comprend une grille avec des opérations de tri et de filtrage, de suppression, d’ajout et de mise à jour. L’exemple illustre l’utilisation de EF Core pour gérer l’accès concurrentiel optimiste.
 
@@ -213,7 +214,8 @@ La fabrique est injectée dans des composants et utilisée pour créer de nouvel
 
 [!code-csharp[](./common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor?name=snippet1)]
 
-> ! [Remarque] `Wrapper` est une [référence de composant](xref:blazor/components/index#capture-references-to-components) au `GridWrapper` composant. Consultez le `Index` composant ( `Pages/Index.razor` ) dans l' [exemple d’application](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor).
+> [!NOTE]
+> `Wrapper` est une [référence de composant](xref:blazor/components/index#capture-references-to-components) au `GridWrapper` composant. Consultez le `Index` composant ( `Pages/Index.razor` ) dans l' [exemple d’application](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor).
 
 ### <a name="scope-to-the-component-lifetime"></a>Portée à la durée de vie du composant
 
@@ -242,4 +244,4 @@ Dans l’exemple précédent :
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-> [Documentation EF Core](/ef/)
+* [Documentation EF Core](/ef/)

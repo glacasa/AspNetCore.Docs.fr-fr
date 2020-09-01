@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: e42ee7a80475e784ea4791395d9b0665aca94a03
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 9c2bbd2d463af8a2ea7db716d01bf1436338ea77
+ms.sourcegitcommit: cd861463faf44956855e3c4b3669483bbc4a7463
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865169"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89101359"
 ---
 # <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor Référence de syntaxe pour ASP.NET Core
 
@@ -131,17 +131,15 @@ Les expressions C# évaluées qui correspondent à une chaîne sont encodées en
 @("<span>Hello World</span>")
 ```
 
-Le code s’affiche en HTML de la façon suivante :
+Le code précédent génère le code HTML suivant :
 
 ```html
 &lt;span&gt;Hello World&lt;/span&gt;
 ```
 
-Le code HTML s’affiche dans le navigateur de cette façon :
+Le code HTML est affiché sous forme de texte brut dans le navigateur :
 
-```html
-<span>Hello World</span>
-```
+&lt;span &gt; Hello World &lt; /span&gt;
 
 La sortie `HtmlHelper.Raw` n’est pas encodée, mais elle est affichée sous forme de balisage HTML.
 

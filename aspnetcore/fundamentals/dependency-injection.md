@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 0a51647463362d6cfac335688d42d4be013f8b9c
-ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
+ms.openlocfilehash: 98c43eda002abc96fe3c2f031c429ccaa70cee3e
+ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88712509"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89102781"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>Injection de dépendances dans ASP.NET Core
 
@@ -214,7 +214,7 @@ Le Framework fournit des méthodes d’extension d’inscription de service qui 
 
 <!-- Review: Auto disposal at end of app lifetime is not what you think of auto disposal  -->
 
-| Méthode                                                                                                                                                                              | Automatique<br>object<br>suppression | Plusieurs<br>implémentations | Passage d’args |
+| Méthode                                                                                                                                                                              | Automatique<br>object<br>suppression | Multiple<br>implémentations | Passage d’args |
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------:|:---------------------------:|:---------:|
 | `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>Exemple :<br>`services.AddSingleton<IMyDep, MyDep>();`                                                                             | Oui                             | Oui                         | Non        |
 | `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>Exemples :<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep(99));` | Oui                             | Oui                         | Oui       |
@@ -345,7 +345,6 @@ Lorsque l’application s’exécute dans l' [environnement de développement](x
 
 * Les services délimités ne sont pas résolus à partir du fournisseur de services racine.
 * Les services délimités ne sont pas injectés dans les singletons.
-* Les services temporaires ne sont pas injectés dans les singletons ou les services délimités.
 
 Le fournisseur de services racine est créé quand <xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider%2A> est appelé. La durée de vie du fournisseur de services racine correspond à la durée de vie de l’application lorsque le fournisseur démarre avec l’application et est supprimée lorsque l’application s’arrête.
 
@@ -769,7 +768,7 @@ Dans les applications qui traitent les requêtes, les services Singleton sont su
 
 Les méthodes d’extension d’inscription de service offrent des surcharges qui sont utiles dans des scénarios spécifiques.
 
-| Méthode | Automatique<br>object<br>suppression | Plusieurs<br>implémentations | Passage d’args |
+| Méthode | Automatique<br>object<br>suppression | Multiple<br>implémentations | Passage d’args |
 | ------ | :-----------------------------: | :-------------------------: | :-------: |
 | `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>Exemple :<br>`services.AddSingleton<IMyDep, MyDep>();` | Oui | Oui | Non |
 | `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>Exemples :<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep("A string!"));` | Oui | Oui | Oui |

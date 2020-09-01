@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: 8d1f761731ab3840d009eba1ff5316808bafec40
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: fd4cae386b8c9654192cd0c66e095500290c4aa0
+ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634408"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89102690"
 ---
 # <a name="use-grpc-in-browser-apps"></a>Utiliser gRPC dans les applications de navigateur
 
@@ -136,3 +136,4 @@ Le code précédent :
 
 * [gRPC pour le projet GitHub des clients Web](https://github.com/grpc/grpc-web)
 * <xref:security/cors>
+* <xref:grpc/httpapi>
