@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 98c43eda002abc96fe3c2f031c429ccaa70cee3e
-ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
+ms.openlocfilehash: 2d002e075f9d57654589b540e522307c363d9660
+ms.sourcegitcommit: 4cce99cbd44372fd4575e8da8c0f4345949f4d9a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89102781"
+ms.lasthandoff: 08/31/2020
+ms.locfileid: "89153543"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>Injection de dépendances dans ASP.NET Core
 
@@ -517,7 +517,7 @@ La méthode de fabrique d’un service unique, telle que le deuxième argument d
   [!code-csharp[](dependency-injection/samples/3.x/AntiPattern3/Startup.cs?name=snippet)]
 
 * Les services transitoires jetables sont capturés par le conteneur pour la suppression. Cela peut entraîner une fuite de mémoire si elle est résolue à partir du conteneur de niveau supérieur.
-* Activez la validation d’étendue pour vous assurer que l’application n’a pas de services délimités qui capturent des singletons. Pour plus d’informations, consultez [Validation de l’étendue](#scope-validation).
+* Activez la validation de l’étendue pour vous assurer que l’application n’a pas de singletons qui capturent les services délimités. Pour plus d’informations, consultez [Validation de l’étendue](#scope-validation).
 
 Comme pour toutes les recommandations, vous pouvez vous trouver dans des situations où il est nécessaire d’ignorer une recommandation. Les exceptions sont rares, principalement des cas spéciaux dans l’infrastructure elle-même.
 

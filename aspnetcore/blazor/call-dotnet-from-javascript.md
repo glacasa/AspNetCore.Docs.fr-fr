@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: 50b79cdb17542e4db57154274f9a7356967253bd
-ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
+ms.openlocfilehash: 2a3685dbc654fb8be3420da73e5a62fe729092e6
+ms.sourcegitcommit: ad63e131224f3217bbafff4eb0e6fa1b25294460
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89102703"
+ms.lasthandoff: 08/31/2020
+ms.locfileid: "89199691"
 ---
 # <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a>Appeler des méthodes .NET à partir de fonctions JavaScript dans ASP.NET Core Blazor
 
@@ -222,7 +222,7 @@ Pour éviter une fuite de mémoire et autoriser garbage collection sur un compos
 
   ```javascript
   window.myFunction = (dotnetHelper) => {
-    dotnetHelper.invokeMethod('{APP ASSEMBLY}', 'MyMethod');
+    dotnetHelper.invokeMethodAsync('{APP ASSEMBLY}', 'MyMethod');
     dotnetHelper.dispose();
   }
   ```
@@ -371,7 +371,7 @@ public class MessageUpdateInvokeHelper
         this.action = action;
     }
 
-    [JSInvokable]
+    [JSInvokable("{APP ASSEMBLY}")]
     public void UpdateMessageCaller()
     {
         action.Invoke();
@@ -379,11 +379,13 @@ public class MessageUpdateInvokeHelper
 }
 ```
 
+L’espace réservé `{APP ASSEMBLY}` est le nom de l’assembly d’application de l’application (par exemple, `BlazorSample` ).
+
 Dans le code JavaScript côté client :
 
 ```javascript
 window.updateMessageCallerJS = (dotnetHelper) => {
-    dotnetHelper.invokeMethod('{APP ASSEMBLY}', 'UpdateMessageCaller');
+    dotnetHelper.invokeMethodAsync('{APP ASSEMBLY}', 'UpdateMessageCaller');
     dotnetHelper.dispose();
 }
 ```
