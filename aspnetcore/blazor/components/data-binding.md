@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 3b41aedcbd0d2c22b20d8fa3a21b8af97d1fbb2c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d88cad10314872271250cd43212a64698f485381
+ms.sourcegitcommit: 8ed9a413bdc2d665ad11add8828898d726ccb106
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628558"
+ms.lasthandoff: 09/01/2020
+ms.locfileid: "89280398"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>BlazorLiaison de données ASP.net Core
 
@@ -79,27 +79,7 @@ Liez une propriété ou un champ à d’autres événements en incluant égaleme
 
 Contrairement à `onchange` , qui se déclenche lorsque l’élément perd le focus, `oninput` se déclenche lorsque la valeur de la zone de texte change.
 
-Utilisez `@bind-{ATTRIBUTE}` avec la `@bind-{ATTRIBUTE}:event` syntaxe pour lier des attributs d’élément autres que `value` . Dans l’exemple suivant :
-
-* Le style du paragraphe est **rouge** lorsque le composant se charge ( `style="color:red"` ).
-* L’utilisateur modifie la valeur de la zone de texte pour qu’elle reflète un style de couleur CSS différent et modifie le focus de l’élément de la page. Par exemple, l’utilisateur modifie la valeur de la zone de texte en `color:blue` et appuie sur la touche <kbd>Tab</kbd> du clavier.
-* Lorsque le focus de l’élément est modifié :
-  * La valeur de `paragraphStyle` est assignée à partir de la valeur de l' `<input>` élément.
-  * Le style de paragraphe est mis à jour pour refléter le nouveau style dans `paragraphStyle` . Si le style est mis à jour vers `color:blue` , la couleur du texte devient **bleue**.
-
-```razor
-<p>
-    <input type="text" @bind="paragraphStyle" />
-</p>
-
-<p @bind-style="paragraphStyle" @bind-style:event="onchange">
-    Blazorify the app!
-</p>
-
-@code {
-    private string paragraphStyle = "color:red";
-}
-```
+<!-- Hold location for resolution of https://github.com/dotnet/AspNetCore.Docs/issues/19721 -->
 
 La liaison d’attribut respecte la casse :
 
@@ -362,7 +342,7 @@ Password:
 }
 ```
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Lier à des cases d’option dans un formulaire](xref:blazor/forms-validation#radio-buttons)
 * [Liaison `<select>` d’options d’éléments à `null` des valeurs d’objet C# dans un formulaire](xref:blazor/forms-validation#binding-select-element-options-to-c-object-null-values)
