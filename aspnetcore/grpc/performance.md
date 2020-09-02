@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: 7d4d5732e6edb0d0a156fdcec5f59cc09a69d7de
-ms.sourcegitcommit: 111b4e451da2e275fb074cde5d8a84b26a81937d
+ms.openlocfilehash: a0a1a6901e07fb0074ca403870378f267d3d4403
+ms.sourcegitcommit: c9b03d8a6a4dcc59e4aacb30a691f349235a74c8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "89040877"
+ms.lasthandoff: 09/02/2020
+ms.locfileid: "89379443"
 ---
 # <a name="performance-best-practices-with-grpc"></a>Meilleures pratiques en matière de performances avec gRPC
 
@@ -48,6 +48,8 @@ Les canaux peuvent être partagés et réutilisés en toute sécurité entre les
 * Plusieurs clients gRPC peuvent être créés à partir d’un canal, y compris différents types de clients.
 * Un canal et des clients créés à partir du canal peuvent être utilisés en toute sécurité par plusieurs threads.
 * Les clients créés à partir du canal peuvent effectuer plusieurs appels simultanés.
+
+la fabrique de clients gRPC offre une méthode centralisée pour configurer les canaux. Il réutilise automatiquement les canaux sous-jacents. Pour plus d'informations, consultez <xref:grpc/clientfactory>.
 
 ## <a name="connection-concurrency"></a>Accès concurrentiel de la connexion
 
@@ -94,8 +96,8 @@ Certains équilibrages de charge ne fonctionnent pas efficacement avec gRPC. Les
 
 Il existe deux options pour équilibrer la charge de manière efficace gRPC :
 
-1. Équilibrage de charge côté client
-2. Équilibrage de charge du proxy L7 (application)
+* Équilibrage de charge côté client
+* Équilibrage de charge du proxy L7 (application)
 
 > [!NOTE]
 > Seuls les appels gRPC peuvent faire l’équilibrage de charge entre les points de terminaison. Une fois qu’un appel gRPC de diffusion en continu est établi, tous les messages envoyés via le flux sont dirigés vers un point de terminaison.
@@ -114,17 +116,11 @@ Un proxy L7 (application) fonctionne à un niveau supérieur à celui d’un pro
 
 De nombreux proxys L7 sont disponibles. Certaines options sont les suivantes :
 
-1. [Envoi](https://www.envoyproxy.io/) proxy-un proxy Open source populaire.
-2. [Linkerd](https://linkerd.io/) -service Mesh pour Kubernetes.
-2. [YARP : proxy inversé](https://microsoft.github.io/reverse-proxy/) -un proxy Open source en version préliminaire écrit en .net.
+* [Envoy](https://www.envoyproxy.io/) -un proxy Open source populaire.
+* [Linkerd](https://linkerd.io/) -service Mesh pour Kubernetes.
+* [YARP : proxy inversé](https://microsoft.github.io/reverse-proxy/) -un proxy Open source en version préliminaire écrit en .net.
 
 ::: moniker range=">= aspnetcore-5.0"
-
-## <a name="inter-process-communication"></a>Communication entre processus
-
-les appels gRPC entre un client et un service sont généralement envoyés via des sockets TCP. TCP est idéal pour la communication sur un réseau, mais la [communication entre processus (IPC)](https://wikipedia.org/wiki/Inter-process_communication) est plus efficace lorsque le client et le service se trouvent sur le même ordinateur.
-
-Envisagez d’utiliser un transport comme les sockets de domaine UNIX ou les canaux nommés pour les appels gRPC entre les processus sur le même ordinateur. Pour plus d’informations, consultez <xref:grpc/interprocess>.
 
 ## <a name="keep-alive-pings"></a>Conserver les pings actifs
 

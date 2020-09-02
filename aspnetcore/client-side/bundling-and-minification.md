@@ -4,7 +4,7 @@ author: scottaddie
 description: Découvrez comment optimiser les ressources statiques dans une application Web ASP.NET Core en appliquant des techniques de regroupement et de minimisation.
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 07/23/2020
+ms.date: 09/02/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: 84123464e8f01f8a3caa65035b3174cc04aea7cf
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: f696df0b421e5aab6f50cfaec3ca8edac894cea9
+ms.sourcegitcommit: c9b03d8a6a4dcc59e4aacb30a691f349235a74c8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625854"
+ms.lasthandoff: 09/02/2020
+ms.locfileid: "89379391"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>Regrouper et réduire les ressources statiques dans ASP.NET Core
 
@@ -64,7 +64,7 @@ Original | Affectation d'un nouveau nom
 
 Le tableau suivant présente les différences entre le chargement individuel des ressources et l’utilisation du regroupement et de la minimisation :
 
-Action | Avec B/M | Sans B/M | Modifier
+Action | Avec B/M | Sans B/M | Changement
 --- | :---: | :---: | :---:
 Demandes de fichier  | 7   | 18     | 157%
 Ko transférés | 156 | 264,68 | 70 %
@@ -77,6 +77,9 @@ Les navigateurs sont relativement détaillés en ce qui concerne les en-têtes d
 Les modèles de Razor projet MVC et pages fournissent une solution pour le regroupement et la minimisation consistant en un fichier de configuration JSON. Des outils tiers, tels que le testeur de tâches [grunt](xref:client-side/using-grunt) , accomplissent les mêmes tâches avec un peu plus de complexité. Un outil tiers est une solution idéale lorsque votre flux de travail de développement nécessite un traitement au-delà du regroupement et de la minimisation &mdash; , tels que le tissu et l’optimisation d’image. En utilisant le regroupement et la minimisation au moment du design, les fichiers minimisés sont créés avant le déploiement de l’application. Le regroupement et le minimisation avant le déploiement offrent l’avantage de réduire la charge du serveur. Toutefois, il est important de reconnaître que le regroupement et la minimisation au moment du design augmentent la complexité de la génération et ne fonctionne qu’avec les fichiers statiques.
 
 ## <a name="configure-bundling-and-minification"></a>Configurer le regroupement et la minimisation
+
+> [!NOTE]
+> Pour que cela fonctionne, le package NuGet [BuildBundlerMinifier](https://www.nuget.org/packages/BuildBundlerMinifier) doit être ajouté à votre projet.
 
 ::: moniker range="<= aspnetcore-2.0"
 
