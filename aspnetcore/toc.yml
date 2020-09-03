@@ -720,8 +720,6 @@
       uid: grpc/clientfactory
     - name: Utiliser gRPC dans les applications de navigateur
       uid: grpc/browser
-    - name: Communication entre processus avec gRPC
-      uid: grpc/interprocess
     - name: Créer des API web JSON à partir de gRPC
       uid: grpc/httpapi
     - name: Configuration
