@@ -4,7 +4,7 @@ author: rick-anderson
 description: Découvrez comment configurer la protection des données dans ASP.NET Core.
 ms.author: riande
 ms.custom: mvc
-ms.date: 10/07/2019
+ms.date: 09/04/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/overview
-ms.openlocfilehash: aa7f6f3c1ff8042bd11bba485a2d7b8aaa6ef88a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 72aa7c210bdff2729be3dabe7a630e578334aef9
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626712"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009711"
 ---
 # <a name="configure-aspnet-core-data-protection"></a>Configurer la protection des données ASP.NET Core
 
@@ -42,8 +42,8 @@ Pour ces scénarios, le système de protection des données offre une API de con
 
 Les packages NuGet suivants sont requis pour les extensions de protection des données utilisées dans cet article :
 
-* [Microsoft. AspNetCore. DataProtection. AzureStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/)
-* [Microsoft. AspNetCore. DataProtection. AzureKeyVault](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureKeyVault/)
+* [Azure. extensions. AspNetCore. DataProtection. blob](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs)
+* [Azure. extensions. AspNetCore. DataProtection. Keys](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Keys)
 
 ::: moniker-end
 
@@ -51,7 +51,7 @@ Les packages NuGet suivants sont requis pour les extensions de protection des do
 
 ## <a name="protectkeyswithazurekeyvault"></a>ProtectKeysWithAzureKeyVault
 
-Pour stocker des clés dans [Azure Key Vault](https://azure.microsoft.com/services/key-vault/), configurez le système avec [ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) dans la `Startup` classe :
+Pour stocker des clés dans [Azure Key Vault](https://azure.microsoft.com/services/key-vault/), configurez le système avec [ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) dans la `Startup` classe. `blobUriWithSasToken` URI complet dans lequel le fichier de clé doit être stocké. L’URI doit contenir le jeton SAS en tant que paramètre de chaîne de requête :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -72,7 +72,14 @@ Définissez l’emplacement de stockage de la sonnerie de clé (par exemple, [Pe
 * [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder, String, String, X509Certificate2)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_Security_Cryptography_X509Certificates_X509Certificate2_) autorise l’utilisation d’un `ClientId` et de [X509Certificate](/dotnet/api/system.security.cryptography.x509certificates.x509certificate2) pour permettre au système de protection des données d’utiliser le coffre de clés.
 * [ProtectKeysWithAzureKeyVault (IDataProtectionBuilder, String, String, String)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_String_) autorise l’utilisation d’un `ClientId` et `ClientSecret` pour permettre au système de protection des données d’utiliser le coffre de clés.
 
-Lorsque vous utilisez une combinaison du coffre de clés et du stockage Azure pour stocker et protéger des clés, une `System.UriFormatException` est levée si l’objet BLOB pour stocker les clés dans n’existe pas déjà. Cela peut être créé manuellement avant d’exécuter l’application ou `.ProtectKeysWithAzureKeyVault()` peut être supprimé pour la première exécution pour créer l’objet BLOB en place, puis l’ajouter à pour les exécutions suivantes. `.ProtectKeysWithAzureKeyVault()`Il est recommandé de supprimer, car cela permet de s’assurer que le fichier est créé avec le schéma et les valeurs appropriés.
+Si l’application utilise les packages Azure précédents ( [`Microsoft.AspNetCore.DataProtection.AzureStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage) et [`Microsoft.AspNetCore.DataProtection.AzureKeyVault`](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureKeyVault) ) et une combinaison de Azure Key Vault et de stockage Azure pour stocker et protéger des clés, <xref:System.UriFormatException?displayProperty=nameWithType> est levée si l’objet BLOB pour le stockage de clés n’existe pas. L’objet BLOB peut être créé manuellement avant d’exécuter l’application dans le Portail Azure, ou utilisez la procédure suivante :
+
+1. Supprimez l’appel à `ProtectKeysWithAzureKeyVault` pour la première exécution afin de créer l’objet BLOB sur place.
+1. Ajoutez l’appel à `ProtectKeysWithAzureKeyVault` pour les exécutions suivantes.
+
+La suppression `ProtectKeysWithAzureKeyVault` de la première exécution est recommandée, car elle permet de s’assurer que le fichier est créé avec le schéma et les valeurs appropriés. 
+
+Nous vous recommandons d’effectuer la mise à niveau vers les packages [Azure. extensions. AspNetCore. dataprotection. blobs](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs) et [Azure. extensions. AspNetCore. dataprotection. Keys](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Keys) , car l’API fournie crée automatiquement l’objet BLOB s’il n’existe pas.
 
 ```csharp
 var storageAccount = CloudStorageAccount.Parse("<storage account connection string">);

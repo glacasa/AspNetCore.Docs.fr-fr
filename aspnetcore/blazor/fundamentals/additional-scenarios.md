@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: 6f092f3f9a18883c31b217b59d0b0abe802aff01
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 870509a3cbbcbea9b1c4804185c49a831af22630
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628298"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009633"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>BlazorConfiguration du modèle d’hébergement ASP.net Core
 
@@ -62,7 +62,7 @@ Pour configurer le SignalR client sous-jacent pour envoyer des informations d’
       }).Build();
   ```
 
-Pour plus d'informations, consultez <xref:signalr/configuration#configure-additional-options>.
+Pour plus d’informations, consultez <xref:signalr/configuration#configure-additional-options>.
 
 ## <a name="reflect-the-connection-state-in-the-ui"></a>Refléter l’état de la connexion dans l’interface utilisateur
 
@@ -128,20 +128,62 @@ Blazor Server les applications sont configurées par défaut pour prérestituer 
 
 Le rendu des composants serveur à partir d’une page HTML statique n’est pas pris en charge.
 
-## <a name="configure-the-no-locsignalr-client-for-no-locblazor-server-apps"></a>Configurer le SignalR client pour les Blazor Server applications
+## <a name="initialize-the-no-locblazor-circuit"></a>Initialiser le Blazor circuit
 
 *Cette section s’applique à Blazor Server .*
 
-Configurez le SignalR client utilisé par Blazor Server les applications dans le `Pages/_Host.cshtml` fichier. Placez un script qui appelle `Blazor.start` après le `_framework/blazor.server.js` script et à l’intérieur de la `</body>` balise.
-
-### <a name="logging"></a>Journalisation
-
-Pour configurer la SignalR journalisation du client :
+Configurez le démarrage manuel du Blazor Server [ SignalR circuit](xref:blazor/hosting-models#circuits) d’une application dans le `Pages/_Host.cshtml` fichier :
 
 * Ajoutez un `autostart="false"` attribut à la `<script>` balise pour le `blazor.server.js` script.
-* Transmettez un objet de configuration ( `configureSignalR` ) qui appelle `configureLogging` avec le niveau de journalisation sur le générateur client.
+* Placez un script qui appelle `Blazor.start` après la `blazor.server.js` balise du script et à l’intérieur de la `</body>` balise de fermeture.
+
+Lorsque `autostart` est désactivé, tous les aspects de l’application qui ne dépendent pas du circuit fonctionnent normalement. Par exemple, le routage côté client est opérationnel. Toutefois, tous les aspects qui dépendent du circuit ne sont pas opérationnels tant que `Blazor.start` n’est pas appelé. Le comportement de l’application n’est pas prévisible sans circuit établi. Par exemple, les méthodes de composant ne peuvent pas s’exécuter pendant que le circuit est déconnecté.
+
+### <a name="initialize-no-locblazor-when-the-document-is-ready"></a>Initialiser Blazor lorsque le document est prêt
+
+Pour initialiser l' Blazor application lorsque le document est prêt :
 
 ```cshtml
+<body>
+
+    ...
+
+    <script autostart="false" src="_framework/blazor.server.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        Blazor.start();
+      });
+    </script>
+</body>
+```
+
+### <a name="chain-to-the-promise-that-results-from-a-manual-start"></a>Chaîne à `Promise` qui résulte d’un démarrage manuel
+
+Pour effectuer des tâches supplémentaires, telles que l’initialisation de l’interopérabilité JS, utilisez `then` pour chaîner à `Promise` qui résulte d’un démarrage manuel de l' Blazor application :
+
+```cshtml
+<body>
+
+    ...
+
+    <script autostart="false" src="_framework/blazor.server.js"></script>
+    <script>
+      Blazor.start().then(function () {
+        ...
+      });
+    </script>
+</body>
+```
+
+### <a name="configure-the-no-locsignalr-client"></a>Configurer le SignalR client
+
+#### <a name="logging"></a>Journalisation
+
+Pour configurer SignalR la journalisation du client, transmettez un objet de configuration ( `configureSignalR` ) qui appelle `configureLogging` avec le niveau de journalisation sur le générateur client :
+
+```cshtml
+<body>
+
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -164,12 +206,16 @@ Les événements de connexion du circuit du gestionnaire de reconnexion peuvent 
 * Pour avertir l’utilisateur si la connexion est abandonnée.
 * Pour effectuer la journalisation (à partir du client) lorsqu’un circuit est connecté.
 
-Pour modifier les événements de connexion :
+Pour modifier les événements de connexion, enregistrez les rappels pour les modifications de connexion suivantes :
 
-* Ajoutez un `autostart="false"` attribut à la `<script>` balise pour le `blazor.server.js` script.
-* Enregistrer les rappels pour les modifications de connexion pour les connexions abandonnées ( `onConnectionDown` ) et les connexions établies/rétablies ( `onConnectionUp` ). **Les deux** `onConnectionDown` et `onConnectionUp` doivent être spécifiés.
+* Utilisation de connexions abandonnées `onConnectionDown` .
+* Les connexions établies/rétablies utilisent `onConnectionUp` .
+
+**Les deux** `onConnectionDown` et `onConnectionUp` doivent être spécifiés :
 
 ```cshtml
+<body>
+
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -186,12 +232,11 @@ Pour modifier les événements de connexion :
 
 ### <a name="adjust-the-reconnection-retry-count-and-interval"></a>Ajuster le nombre et l’intervalle de tentatives de reconnexion
 
-Pour régler le nombre et l’intervalle de nouvelles tentatives de connexion :
-
-* Ajoutez un `autostart="false"` attribut à la `<script>` balise pour le `blazor.server.js` script.
-* Définissez le nombre de tentatives ( `maxRetries` ) et la période en millisecondes autorisées pour chaque tentative de nouvelle tentative ( `retryIntervalMilliseconds` ).
+Pour régler le nombre et l’intervalle de tentatives de reconnexion, définissez le nombre de nouvelles tentatives ( `maxRetries` ) et le délai (en millisecondes) autorisé pour chaque nouvelle tentative ( `retryIntervalMilliseconds` ) :
 
 ```cshtml
+<body>
+
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -206,14 +251,13 @@ Pour régler le nombre et l’intervalle de nouvelles tentatives de connexion :
 </body>
 ```
 
-### <a name="hide-or-replace-the-reconnection-display"></a>Masquer ou remplacer l’affichage de reconnexion
+## <a name="hide-or-replace-the-reconnection-display"></a>Masquer ou remplacer l’affichage de reconnexion
 
-Pour masquer l’affichage de reconnexion :
-
-* Ajoutez un `autostart="false"` attribut à la `<script>` balise pour le `blazor.server.js` script.
-* Définissez le gestionnaire de reconnexion `_reconnectionDisplay` sur un objet vide ( `{}` ou `new Object()` ).
+Pour masquer l’affichage de reconnexion, définissez le gestionnaire de reconnexion `_reconnectionDisplay` sur un objet vide ( `{}` ou `new Object()` ) :
 
 ```cshtml
+<body>
+
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -221,6 +265,8 @@ Pour masquer l’affichage de reconnexion :
       window.addEventListener('beforeunload', function () {
         Blazor.defaultReconnectionHandler._reconnectionDisplay = {};
       });
+
+      Blazor.start();
     </script>
 </body>
 ```
@@ -233,6 +279,18 @@ Blazor.defaultReconnectionHandler._reconnectionDisplay =
 ```
 
 L’espace réservé `{ELEMENT ID}` est l’ID de l’élément HTML à afficher.
+
+::: moniker range=">= aspnetcore-5.0"
+
+Personnalisez le délai avant que l’affichage de reconnexion ne s’affiche en définissant la `transition-delay` propriété dans le CSS () de l’application `wwwroot/css/site.css` pour l’élément modal. L’exemple suivant définit le délai de transition de 500 ms (par défaut) à 1 000 MS (1 seconde) :
+
+```css
+#components-reconnect-modal {
+    transition: visibility 0s linear 1000ms;
+}
+```
+
+::: moniker-end
 
 ## <a name="influence-html-head-tag-elements"></a>Influencer les `<head>` éléments de balise HTML
 

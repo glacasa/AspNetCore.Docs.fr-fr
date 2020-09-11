@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 83ddb49f60058ecc744163faa2f5c454abc7b42d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 08cd6396cca78488827dfa7c2cca62a35c500dbd
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630309"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009698"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>Routage vers les actions du contrôleur dans ASP.NET Core
 
@@ -152,7 +152,7 @@ La plupart des applications doivent choisir un schéma de routage de base et des
 
 * Prend en charge un schéma de routage de base et descriptif.
 * Est un point de départ pratique pour les applications basées sur une interface utilisateur.
-* Est le seul modèle de routage nécessaire pour de nombreuses applications d’interface utilisateur Web. Pour les applications d’interface utilisateur Web plus volumineuses, un autre itinéraire utilise des [zones](#areas) si tout cela est nécessaire.
+* Est le seul modèle de routage nécessaire pour de nombreuses applications d’interface utilisateur Web. Pour les applications d’interface utilisateur Web plus volumineuses, un autre itinéraire utilisant des [zones](#areas) est souvent le plus nécessaire.
 
 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> et <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute%2A> :
 
@@ -434,7 +434,7 @@ Le tableau suivant décrit les `[Route]` attributs dans le code précédent :
 | `[Route("")]` | Oui | `"Home"` |
 | `[Route("Index")]` | Oui | `"Home/Index"` |
 | `[Route("/")]` | **Non** | `""` |
-| `[Route("About")]` | Oui | `"Home/About"` |
+| `[Route("About")]` | Yes | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>
 <a name="oar"></a>

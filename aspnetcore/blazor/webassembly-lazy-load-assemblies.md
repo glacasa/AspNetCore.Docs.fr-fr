@@ -5,7 +5,7 @@ description: Découvrez comment charger en différé des assemblys dans des Blaz
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/25/2020
+ms.date: 09/09/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: 46f98080ad40f614f9cb1af2190f263d205c1016
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: f9b6766c2f46274e06cab18fd35b5e417e9bfa97
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865157"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009607"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>Chargement différé d’assemblys dans ASP.NET Core Blazor WebAssembly
 
@@ -94,7 +94,7 @@ Si le `OnNavigateAsync` rappel lève une exception non gérée, l' [ Blazor inte
 * La `Path` propriété est le chemin d’accès de destination de l’utilisateur par rapport au chemin d’accès de base de l’application, par exemple `/robot` .
 * Le `CancellationToken` peut être utilisé pour observer l’annulation de la tâche asynchrone. `OnNavigateAsync` annule automatiquement la tâche de navigation en cours d’exécution lorsque l’utilisateur accède à une autre page.
 
-Dans `OnNavigateAsync` , implémentez une logique pour déterminer les assemblys à charger. Les options sont les suivantes :
+Dans `OnNavigateAsync` , implémentez une logique pour déterminer les assemblys à charger. Options disponibles :
 
 * Vérifications conditionnelles à l’intérieur de la `OnNavigateAsync` méthode.
 * Table de recherche qui mappe des itinéraires à des noms d’assemblys, soit injectés dans le composant, soit implémentée dans le [`@code`](xref:mvc/views/razor#code) bloc.
@@ -114,8 +114,11 @@ Le `LazyAssemblyLoader` fournit la `LoadAssembliesAsync` méthode qui :
 * Utilise l’interopérabilité JS pour extraire des assemblys via un appel réseau.
 * Charge les assemblys dans le runtime s’exécutant sur webassembly dans le navigateur.
 
-> [!NOTE]
-> L’implémentation du chargement différé de l’infrastructure prend en charge le prérendu sur le serveur. Lors du prérendu, tous les assemblys, y compris ceux marqués pour le chargement différé, sont supposés être chargés.
+L’implémentation du chargement différé de l’infrastructure prend en charge le chargement différé avec prérendu dans une solution hébergée Blazor . Lors du prérendu, tous les assemblys, y compris ceux marqués pour le chargement différé, sont supposés être chargés. Inscrivez-vous manuellement `LazyAssemblyLoader` dans la méthode du projet *serveur* `Startup.ConfigureServices` ( `Startup.cs` ) :
+
+```csharp
+services.AddSingleton<LazyAssemblyLoader>();
+```
 
 ### <a name="user-interaction-with-navigating-content"></a>Interaction de l’utilisateur avec le `<Navigating>` contenu
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 26e8239634c3edb99c7606ab2e250c69af4e746f
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: be1584e72fc1504ac9f8ca10a6b084c95a579b5b
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865284"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009620"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>Créer et utiliser des Razor composants ASP.net Core
 
@@ -52,7 +52,7 @@ Le nom d’un composant doit commencer par un caractère majuscule. Par exemple,
 
 ### <a name="routing"></a>Routage
 
-Le routage dans Blazor est effectué en fournissant un modèle de routage à chaque composant accessible dans l’application. Lorsqu’un Razor fichier avec une [`@page`][9] directive est compilé, la classe générée reçoit un <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> qui spécifie le modèle de routage. Lors de l’exécution, le routeur recherche les classes de composant avec un <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> et rend le composant qui a un modèle de routage correspondant à l’URL demandée. Pour plus d'informations, consultez <xref:blazor/fundamentals/routing>.
+Le routage dans Blazor est effectué en fournissant un modèle de routage à chaque composant accessible dans l’application. Lorsqu’un Razor fichier avec une [`@page`][9] directive est compilé, la classe générée reçoit un <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> qui spécifie le modèle de routage. Lors de l’exécution, le routeur recherche les classes de composant avec un <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> et rend le composant qui a un modèle de routage correspondant à l’URL demandée. Pour plus d’informations, consultez <xref:blazor/fundamentals/routing>.
 
 ```razor
 @page "/ParentComponent"
@@ -266,7 +266,7 @@ Dans l’exemple suivant tiré de l’exemple d’application, le `ParentCompone
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
 
 > [!WARNING]
-> Ne créez pas de composants qui écrivent dans leurs propres *paramètres de composant* lorsque le contenu du composant est rendu avec un <xref:Microsoft.AspNetCore.Components.RenderFragment> , utilisez un champ privé à la place. Pour plus d’informations, consultez la section [paramètres remplacés `RenderFragment` par](#overwritten-parameters-with-renderfragment) .
+> Ne créez pas de composants qui écrivent dans leurs propres *paramètres de composant*, utilisez un champ privé à la place. Pour plus d’informations, consultez la section [paramètres remplacés](#overwritten-parameters) .
 
 ## <a name="child-content"></a>Contenu enfant
 
@@ -555,7 +555,7 @@ Dans l’exemple précédent, `NotifierService` appelle la méthode du composant
 
 Lors du rendu d’une liste d’éléments ou de composants, et si les éléments ou les composants changent par la suite, l' Blazor algorithme de différenciation de doit décider quels éléments ou composants précédents peuvent être conservés et comment les objets de modèle doivent être mappés à eux. Normalement, ce processus est automatique et peut être ignoré, mais dans certains cas, il peut être utile de contrôler le processus.
 
-Prenez l’exemple suivant :
+Prenons l’exemple suivant :
 
 ```csharp
 @foreach (var person in People)
@@ -625,14 +625,9 @@ En règle générale, il est logique de fournir l’un des types de valeur suiva
 
 Vérifiez que les valeurs utilisées pour [`@key`][5] ne sont pas en conflit. Si les valeurs en conflit sont détectées dans le même élément parent, Blazor lève une exception, car il ne peut pas mapper de manière déterministe les anciens éléments ou composants aux nouveaux éléments ou composants. Utilisez uniquement des valeurs distinctes, telles que des instances d’objets ou des valeurs de clé primaire.
 
-## <a name="overwritten-parameters-with-renderfragment"></a>Paramètres remplacés par `RenderFragment`
+## <a name="overwritten-parameters"></a>Paramètres remplacés
 
-Les paramètres sont remplacés dans les conditions suivantes :
-
-* Le contenu d’un composant enfant est rendu avec un <xref:Microsoft.AspNetCore.Components.RenderFragment> .
-* <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> est appelé dans le composant parent.
-
-Les paramètres sont réinitialisés, car le composant parent <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> est restitué à nouveau lorsque est appelé et de nouvelles valeurs de paramètres sont fournies au composant enfant.
+Les nouvelles valeurs de paramètre sont fournies, en remplaçant en général celles existantes, lors du rerendu du composant parent.
 
 Prenons le `Expander` composant suivant :
 
@@ -760,7 +755,7 @@ Si `IsCompleted` est `false` , la case à cocher s’affiche comme suit :
 <input type="checkbox" />
 ```
 
-Pour plus d'informations, consultez <xref:mvc/views/razor>.
+Pour plus d’informations, consultez <xref:mvc/views/razor>.
 
 > [!WARNING]
 > Certains attributs HTML, tels que [`aria-pressed`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/Roles/button_role#Toggle_buttons) , ne fonctionnent pas correctement quand le type .net est un `bool` . Dans ce cas, utilisez un `string` type au lieu d’un `bool` .

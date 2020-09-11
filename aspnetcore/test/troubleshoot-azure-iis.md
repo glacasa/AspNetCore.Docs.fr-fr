@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 117c777dc9ae1b8c6448f097132454b714a1b5dc
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: bc968489a35405c1be0a4ac2e52e6dff4c3af050
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632159"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009737"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Résoudre les problèmes de ASP.NET Core sur Azure App Service et IIS
 
@@ -167,7 +167,7 @@ Pour corriger cette erreur, réparez l’installation du [bundle d’hébergemen
 
 ### <a name="50037-ancm-failed-to-start-within-startup-time-limit"></a>500.37 - Échec du démarrage d’ANCM dans le délai imparti
 
-ANCM n’a pas pu démarrer dans le délai imparti spécifié. Par défaut, le délai d’expiration est de 120 secondes.
+ANCM n’a pas pu démarrer dans le délai imparti pour le démarrage. Par défaut, le délai d’expiration est de 120 secondes.
 
 Cette erreur peut se produire quand un grand nombre d’applications démarrent sur la même machine. Recherchez les pics d’utilisation du processeur/de la mémoire sur le serveur durant le démarrage. Vous devrez peut-être décaler le processus de démarrage de plusieurs applications.
 
@@ -319,7 +319,7 @@ Le journal stdout du module ASP.NET Core enregistre souvent des messages d’err
 
 Désactivez la journalisation stdout lorsque la résolution des problèmes est terminée en définissant `stdoutLogEnabled="false"` .
 
-Pour plus d'informations, consultez <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
+Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
 
 ### <a name="aspnet-core-module-debug-log-azure-app-service"></a>Journal de débogage du module ASP.NET Core (Azure App Service)
 
@@ -343,7 +343,7 @@ Pour désactiver la journalisation de débogage améliorée, effectuez l’une d
 * Supprimez `<handlerSettings>` du fichier *web.config* localement, puis redéployez l’application.
 * Utilisez la console Kudu pour modifier le fichier *web.config* et supprimer la section `<handlerSettings>`. Enregistrez le fichier .
 
-Pour plus d'informations, consultez <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>.
+Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>.
 
 > [!WARNING]
 > Si le journal de débogage n’est pas désactivé, cela peut entraîner une défaillance de l’application ou du serveur. Il n’existe aucune limite à la taille du fichier journal. Utilisez uniquement la journalisation de débogage pour résoudre les problèmes de démarrage d’application.
@@ -455,7 +455,7 @@ Désactivez la journalisation stdout, une fois les problèmes résolus :
 1. Définissez **stdoutLogEnabled** sur `false`.
 1. Enregistrez le fichier .
 
-Pour plus d'informations, consultez <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
+Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
 
 > [!WARNING]
 > Si vous ne désactivez pas le journal stdout, l’application ou le serveur risque d’échouer. Il n’existe aucune limite quant à la taille du fichier journal ou au nombre de fichiers journaux créés.
@@ -477,7 +477,7 @@ Ajoutez les paramètres de gestionnaire suivants au fichier *web.config* de l’
 
 Vérifiez que le chemin spécifié pour le journal existe, et que l’identité du pool d’applications dispose des autorisations en écriture pour l’emplacement.
 
-Pour plus d'informations, consultez <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>.
+Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>.
 
 ### <a name="enable-the-developer-exception-page"></a>Afficher la page d’exception de développeur
 
@@ -562,7 +562,7 @@ Une application fonctionnelle peut échouer immédiatement après la mise à niv
 1. Restaurez et regénérez le projet.
 1. Supprimez tous les fichiers du dossier de déploiement sur le serveur avant de redéployer l’application.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:test/troubleshoot>
 * <xref:host-and-deploy/azure-iis-errors-reference>
@@ -795,7 +795,7 @@ Le journal stdout du module ASP.NET Core enregistre souvent des messages d’err
 1. Définissez **stdoutLogEnabled** sur `true` et remplacez le chemin **stdoutLogFile** par : `\\?\%home%\LogFiles\stdout`.
 1. Sélectionnez **Enregistrer** pour enregistrer le fichier *web.config* mis à jour.
 1. Adressez une requête à l’application.
-1. Revenez au Portail Azure. Sélectionnez le panneau **Outils avancés** dans la zone **OUTILS DE DÉVELOPPEMENT**. Sélectionnez le **bouton &rarr; OK** . La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
+1. Revenez au portail Azure. Sélectionnez le panneau **Outils avancés** dans la zone **OUTILS DE DÉVELOPPEMENT**. Sélectionnez le **bouton &rarr; OK** . La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
 1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
 1. Sélectionnez le dossier **LogFiles**.
 1. Inspectez la colonne **Modifié** et sélectionnez l’icône en forme de crayon pour modifier le journal stdout avec la date de dernière modification.
@@ -807,7 +807,7 @@ Désactivez la journalisation stdout, une fois les problèmes résolus :
 1. Définissez **stdoutLogEnabled** sur `false`.
 1. Sélectionnez **Enregistrer** pour enregistrer le fichier.
 
-Pour plus d'informations, consultez <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
+Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
 
 > [!WARNING]
 > Si vous ne désactivez pas le journal stdout, l’application ou le serveur risque d’échouer. Il n’existe aucune limite quant à la taille du fichier journal ou au nombre de fichiers journaux créés. N’utilisez la journalisation stdout que pour résoudre les problèmes de démarrage de l’application.
@@ -836,7 +836,7 @@ Pour désactiver la journalisation de débogage améliorée, effectuez l’une d
 * Supprimez `<handlerSettings>` du fichier *web.config* localement, puis redéployez l’application.
 * Utilisez la console Kudu pour modifier le fichier *web.config* et supprimer la section `<handlerSettings>`. Enregistrez le fichier .
 
-Pour plus d'informations, consultez <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>.
+Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>.
 
 > [!WARNING]
 > Si le journal de débogage n’est pas désactivé, cela peut entraîner une défaillance de l’application ou du serveur. Il n’existe aucune limite à la taille du fichier journal. Utilisez uniquement la journalisation de débogage pour résoudre les problèmes de démarrage d’application.
@@ -948,7 +948,7 @@ Désactivez la journalisation stdout, une fois les problèmes résolus :
 1. Définissez **stdoutLogEnabled** sur `false`.
 1. Enregistrez le fichier .
 
-Pour plus d'informations, consultez <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
+Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
 
 > [!WARNING]
 > Si vous ne désactivez pas le journal stdout, l’application ou le serveur risque d’échouer. Il n’existe aucune limite quant à la taille du fichier journal ou au nombre de fichiers journaux créés.
@@ -970,7 +970,7 @@ Ajoutez les paramètres de gestionnaire suivants au fichier *web.config* de l’
 
 Vérifiez que le chemin spécifié pour le journal existe, et que l’identité du pool d’applications dispose des autorisations en écriture pour l’emplacement.
 
-Pour plus d'informations, consultez <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>.
+Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#enhanced-diagnostic-logs>.
 
 ### <a name="enable-the-developer-exception-page"></a>Afficher la page d’exception de développeur
 
@@ -1055,7 +1055,7 @@ Une application fonctionnelle peut échouer immédiatement après la mise à niv
 1. Restaurez et regénérez le projet.
 1. Supprimez tous les fichiers du dossier de déploiement sur le serveur avant de redéployer l’application.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:test/troubleshoot>
 * <xref:host-and-deploy/azure-iis-errors-reference>
@@ -1273,7 +1273,7 @@ Le journal stdout du module ASP.NET Core enregistre souvent des messages d’err
 1. Définissez **stdoutLogEnabled** sur `true` et remplacez le chemin **stdoutLogFile** par : `\\?\%home%\LogFiles\stdout`.
 1. Sélectionnez **Enregistrer** pour enregistrer le fichier *web.config* mis à jour.
 1. Adressez une requête à l’application.
-1. Revenez au Portail Azure. Sélectionnez le panneau **Outils avancés** dans la zone **OUTILS DE DÉVELOPPEMENT**. Sélectionnez le **bouton &rarr; OK** . La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
+1. Revenez au portail Azure. Sélectionnez le panneau **Outils avancés** dans la zone **OUTILS DE DÉVELOPPEMENT**. Sélectionnez le **bouton &rarr; OK** . La console Kudu s’ouvre dans un nouvel onglet ou une nouvelle fenêtre du navigateur.
 1. Dans la barre de navigation en haut de la page, ouvrez **Console de débogage** et sélectionnez **CMD**.
 1. Sélectionnez le dossier **LogFiles**.
 1. Inspectez la colonne **Modifié** et sélectionnez l’icône en forme de crayon pour modifier le journal stdout avec la date de dernière modification.
@@ -1285,7 +1285,7 @@ Désactivez la journalisation stdout, une fois les problèmes résolus :
 1. Définissez **stdoutLogEnabled** sur `false`.
 1. Sélectionnez **Enregistrer** pour enregistrer le fichier.
 
-Pour plus d'informations, consultez <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
+Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
 
 > [!WARNING]
 > Si vous ne désactivez pas le journal stdout, l’application ou le serveur risque d’échouer. Il n’existe aucune limite quant à la taille du fichier journal ou au nombre de fichiers journaux créés. N’utilisez la journalisation stdout que pour résoudre les problèmes de démarrage de l’application.
@@ -1397,7 +1397,7 @@ Désactivez la journalisation stdout, une fois les problèmes résolus :
 1. Définissez **stdoutLogEnabled** sur `false`.
 1. Enregistrez le fichier .
 
-Pour plus d'informations, consultez <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
+Pour plus d’informations, consultez <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
 
 > [!WARNING]
 > Si vous ne désactivez pas le journal stdout, l’application ou le serveur risque d’échouer. Il n’existe aucune limite quant à la taille du fichier journal ou au nombre de fichiers journaux créés.
@@ -1486,7 +1486,7 @@ Une application fonctionnelle peut échouer immédiatement après la mise à niv
 1. Restaurez et regénérez le projet.
 1. Supprimez tous les fichiers du dossier de déploiement sur le serveur avant de redéployer l’application.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:test/troubleshoot>
 * <xref:host-and-deploy/azure-iis-errors-reference>
