@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: abebd5fde514975b1dcb642a3d378e33c3836fa9
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ace2285e3265e7bb2ec50c8afce2eb9c296fd524
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628064"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080340"
 ---
 # <a name="introduction-to-aspnet-core-no-locblazor"></a>Présentation de ASP.NET Core Blazor
 
@@ -131,9 +131,21 @@ Quand une Blazor WebAssembly application est générée et exécutée dans un na
 
 La taille de l’application publiée, sa *taille de charge utile*, est un facteur de performance essentiel pour qu’une application soit facile à utiliser. Le téléchargement d’une application volumineuse dans un navigateur prend un certain temps, ce qui nuit à l’expérience utilisateur. Blazor WebAssembly optimise la taille de la charge utile pour réduire les temps de téléchargement :
 
+::: moniker range=">= aspnetcore-5.0"
+
+* Le code inutilisé est supprimé de l’application lorsqu’elle est publiée par le [découpage en langage intermédiaire (il)](xref:blazor/host-and-deploy/configure-trimmer).
+* Réponses HTTP compressées.
+* Le runtime .NET et les assemblys sont mis en cache dans le navigateur.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 * Du code inutilisé est extrait de l’application lorsqu’elle est publiée par l’[éditeur de liens de langage intermédiaire (IL)](xref:blazor/host-and-deploy/configure-linker).
 * Réponses HTTP compressées.
 * Le runtime .NET et les assemblys sont mis en cache dans le navigateur.
+
+::: moniker-end
 
 ## Blazor Server
 
@@ -158,12 +170,12 @@ Blazor implémente [.NET Standard 2,1](/dotnet/standard/net-standard), qui perme
 
 Les API qui ne sont pas applicables à l’intérieur d’un navigateur web (par exemple l’accès au système de fichiers, l’ouverture d’un socket et le threading) lèvent une <xref:System.PlatformNotSupportedException>.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [WebAssembly](https://webassembly.org/)
 * <xref:blazor/hosting-models>
 * <xref:tutorials/signalr-blazor-webassembly>
-* [Guide C#](/dotnet/csharp/)
+* [C# Guide](/dotnet/csharp/)
 * <xref:mvc/views/razor>
 * [HTML](https://www.w3.org/html/)
 * [Isard Blazor ](https://github.com/AdrienTorris/awesome-blazor) Liens vers la communauté

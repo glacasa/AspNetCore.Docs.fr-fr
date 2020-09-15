@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 91d0eb7b4910d1cf19b179372546afa63cd3f9c1
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: 5d3cd1480dd37f437b2d6d5a89af0a842286be95
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009594"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080262"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>Blazor WebAssemblyMeilleures pratiques en matière de performances de ASP.net Core
 
@@ -75,7 +75,7 @@ Dans l’exemple suivant :
 }
 ```
 
-Pour plus d’informations, consultez <xref:blazor/components/lifecycle#after-component-render>.
+Pour plus d'informations, consultez <xref:blazor/components/lifecycle#after-component-render>.
 
 ## <a name="virtualize-re-usable-fragments"></a>Virtualiser les fragments réutilisables
 
@@ -141,9 +141,21 @@ Blazor WebAssembly offre deux versions supplémentaires de <xref:Microsoft.JSInt
 
 ## <a name="reduce-app-size"></a>Réduire la taille de l’application
 
+::: moniker range=">= aspnetcore-5.0"
+
+### <a name="intermediate-language-il-trimming"></a>Découpage en langage intermédiaire (IL)
+
+Le [découpage des assemblys inutilisés d’une Blazor WebAssembly application](xref:blazor/host-and-deploy/configure-trimmer) réduit la taille de l’application en supprimant le code inutilisé dans les fichiers binaires de l’application. Par défaut, le massicot est exécuté lors de la publication d’une application. Pour tirer parti de la suppression, publiez l’application pour le déploiement à l’aide de la [`dotnet publish`](/dotnet/core/tools/dotnet-publish) commande avec l’option [-c |--configuration](/dotnet/core/tools/dotnet-publish#options) définie sur `Release` :
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 ### <a name="intermediate-language-il-linking"></a>Liaison en langage intermédiaire (IL)
 
-La [liaison d’une Blazor WebAssembly application](xref:blazor/host-and-deploy/configure-linker) réduit la taille de l’application en découpant le code inutilisé dans les fichiers binaires de l’application. Par défaut, l’éditeur de liens est activé uniquement lors de la génération de la `Release` Configuration. Pour tirer parti de ce, publiez l’application pour le déploiement à l’aide de la [`dotnet publish`](/dotnet/core/tools/dotnet-publish) commande avec l’option [-c |--configuration](/dotnet/core/tools/dotnet-publish#options) définie sur `Release` :
+La [liaison d’une Blazor WebAssembly application](xref:blazor/host-and-deploy/configure-linker) réduit la taille de l’application en découpant le code inutilisé dans les fichiers binaires de l’application. Par défaut, l’éditeur de liens de langage intermédiaire (IL) est activé uniquement lors de la génération de la `Release` Configuration. Pour tirer parti de ce, publiez l’application pour le déploiement à l’aide de la [`dotnet publish`](/dotnet/core/tools/dotnet-publish) commande avec l’option [-c |--configuration](/dotnet/core/tools/dotnet-publish#options) définie sur `Release` :
+
+::: moniker-end
 
 ```dotnetcli
 dotnet publish -c Release
@@ -151,7 +163,7 @@ dotnet publish -c Release
 
 ### <a name="lazy-load-assemblies"></a>Charger des assemblys en différé
 
-Chargez les assemblys au moment de l’exécution lorsque les assemblys sont requis par un itinéraire. Pour plus d’informations, consultez <xref:blazor/webassembly-lazy-load-assemblies>.
+Chargez les assemblys au moment de l’exécution lorsque les assemblys sont requis par un itinéraire. Pour plus d'informations, consultez <xref:blazor/webassembly-lazy-load-assemblies>.
 
 ### <a name="compression"></a>Compression
 
@@ -173,13 +185,14 @@ Blazor WebAssemblyle runtime de comprend les fonctionnalités .NET suivantes qui
 
 ::: moniker range=">= aspnetcore-5.0"
 
-* Par défaut, Blazor WebAssembly transporte les ressources de globalisation requises pour afficher des valeurs, telles que les dates et les devises, dans la culture de l’utilisateur. Si l’application ne nécessite pas de localisation, vous pouvez configurer l’application pour qu’elle prenne en charge la culture dite indifférente, qui est basée sur la `en-US` culture :
+* Par défaut, Blazor WebAssembly transporte les ressources de globalisation requises pour afficher des valeurs, telles que les dates et les devises, dans la culture de l’utilisateur. Si l’application ne nécessite pas de localisation, vous pouvez [configurer l’application pour qu’elle prenne en charge la culture dite indifférente](xref:blazor/globalization-localization), qui est basée sur la `en-US` culture :
 
   ```xml
   <PropertyGroup>
     <InvariantGlobalization>true</InvariantGlobalization>
   </PropertyGroup>
   ```
+
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
