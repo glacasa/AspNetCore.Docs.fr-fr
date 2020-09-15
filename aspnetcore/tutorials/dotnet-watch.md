@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: cc152c2ca553b00619ddbf829f6044867c53bb98
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 3569e9440b8e431ec0e5357e548af2e3783481ac
+ms.sourcegitcommit: 422e02bad384775bfe19a90910737340ad106c5b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635136"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90083451"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>Développer des applications ASP.NET Core à l’aide d’un observateur de fichiers
 
@@ -80,16 +80,30 @@ L’outil Observateur de fichiers `dotnet watch` est inclus dans la version 2.1.
 
 ## <a name="run-net-core-cli-commands-using-dotnet-watch"></a>Exécuter les commandes de l’interface CLI de .NET Core avec `dotnet watch`
 
-Toutes les [commandes de l’interface CLI de .NET Core](/dotnet/core/tools#cli-commands) peuvent être exécutées avec `dotnet watch`. Par exemple :
+Toutes les [commandes de l’interface CLI de .NET Core](/dotnet/core/tools#cli-commands) peuvent être exécutées avec `dotnet watch`. Exemple :
 
 | Commande | Commande avec watch |
 | ---- | ----- |
 | dotnet run | dotnet watch run |
-| dotnet run -f netcoreapp2.0 | dotnet watch run -f netcoreapp2.0 |
-| dotnet run -f netcoreapp2.0 -- --arg1 | dotnet watch run -f netcoreapp2.0 -- --arg1 |
+| dotnet Run-f netcoreapp 3.1 | exécution de dotnet Watch-f netcoreapp 3.1 |
+| dotnet Run-f netcoreapp 3.1----Arg1 | dotnet Watch Run-f netcoreapp 3.1----Arg1 |
 | dotnet test | dotnet watch test |
 
 Exécutez `dotnet watch run` dans le dossier *WebApp*. La sortie de la console indique que `watch` a démarré.
+
+::: moniker range=">= aspnetcore-5.0"
+`dotnet watch run`L’exécution sur une application Web lance un navigateur qui navigue jusqu’à l’URL de l’application une fois que vous êtes prêt. `dotnet watch` pour cela, il lit la sortie de la console de l’application et attend le message Ready affiché par <xref:Microsoft.AspNetCore.WebHost> .
+
+`dotnet watch` actualise le navigateur lorsqu’il détecte des modifications apportées aux fichiers surveillés. Pour ce faire, la commande Watch injecte un intergiciel (middleware) à l’application qui modifie les réponses HTML créées par l’application. L’intergiciel ajoute un bloc de script JavaScript à la page qui permet `dotnet watch` d’indiquer au navigateur d’actualiser. Actuellement, les modifications apportées à tous les fichiers surveillés, y compris le contenu statique tel que les fichiers. *HTML* et *. CSS* , provoquent la reconstruction de l’application.
+
+`dotnet watch`:
+
+* Surveille uniquement les fichiers qui ont un impact sur les builds par défaut.
+* Tous les fichiers surveillés en plus (via la configuration) entraînent toujours une génération.
+
+Pour plus d’informations sur la configuration, consultez la section relative à la [configuration de dotnet-Watch](#dotnet-watch-configuration) dans ce document.
+
+::: moniker-end
 
 > [!NOTE]
 > Vous pouvez utiliser `dotnet watch --project <PROJECT>` pour spécifier un projet à surveiller. Par exemple, `dotnet watch --project WebApp run` à la racine de l’exemple d’application aura également pour effet d’exécuter le projet *WebApp* et d’en effectuer le suivi.
@@ -193,6 +207,17 @@ dotnet watch msbuild /t:Test
 ```
 
 VSTest s’exécute quand n’importe quel fichier change dans un des projets de test.
+
+## <a name="dotnet-watch-configuration"></a>configuration de dotnet-Watch
+
+Certaines options de configuration peuvent être passées à `dotnet watch` via des variables d’environnement. Les variables disponibles sont les suivantes :
+
+| Paramètre  | Description |
+| ------------- | ------------- |
+| `DOTNET_USE_POLLING_FILE_WATCHER`                | Si la valeur est « 1 » ou « true », `dotnet watch` utilise un observateur de fichiers d’interrogation au lieu de CoreFx `FileSystemWatcher` . Utilisé lors de l’observation de fichiers sur des partages réseau ou des volumes montés par l’amarrage.                       |
+| `DOTNET_WATCH_SUPPRESS_MSBUILD_INCREMENTALISM`   | Par défaut, `dotnet watch` optimise la génération en évitant certaines opérations, telles que l’exécution de la restauration ou la réévaluation de l’ensemble des fichiers surveillés à chaque modification de fichier. Si la valeur est « 1 » ou « true », ces optimisations sont désactivées. |
+| `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER`   | `dotnet watch run` tente de lancer des navigateurs pour les applications Web avec `launchBrowser` configuré dans *launchSettings.jssur*. Si la valeur est « 1 » ou « true », ce comportement est supprimé. |
+| `DOTNET_WATCH_SUPPRESS_BROWSER_REFRESH`   | `dotnet watch run` tente d’actualiser les navigateurs lorsqu’il détecte des modifications de fichier. Si la valeur est « 1 » ou « true », ce comportement est supprimé. Ce comportement est également supprimé si `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER` est défini. |
 
 ## <a name="dotnet-watch-in-github"></a>`dotnet-watch` dans GitHub
 

@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cross-site-scripting
-ms.openlocfilehash: ec8b321be08447ca634a1e28799f790f723f17d1
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 03bdfe9260ef6433456ba53d0cab8c7bf9f86377
+ms.sourcegitcommit: 422e02bad384775bfe19a90910737340ad106c5b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625620"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90083464"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>Empêcher les scripts entre sites (XSS) dans ASP.NET Core
 
@@ -68,88 +68,106 @@ Cette vue renvoie le contenu de la variable *untrustedInput* . Cette variable co
 
 ## <a name="javascript-encoding-using-no-locrazor"></a>Encodage JavaScript à l’aide de Razor
 
-Il peut arriver que vous souhaitiez insérer une valeur dans JavaScript à traiter dans votre vue. Il existe deux façons d'effectuer cette opération. Le moyen le plus sûr d’insérer des valeurs consiste à placer la valeur dans un attribut de données d’une balise et à la récupérer dans votre code JavaScript. Par exemple :
+Il peut arriver que vous souhaitiez insérer une valeur dans JavaScript à traiter dans votre vue. Il existe deux façons d'effectuer cette opération. Le moyen le plus sûr d’insérer des valeurs consiste à placer la valeur dans un attribut de données d’une balise et à la récupérer dans votre code JavaScript. Exemple :
 
 ```cshtml
 @{
-       var untrustedInput = "<\"123\">";
-   }
+    var untrustedInput = "<script>alert(1)</script>";
+}
 
-   <div
-       id="injectedData"
-       data-untrustedinput="@untrustedInput" />
+<div id="injectedData"
+     data-untrustedinput="@untrustedInput" />
 
-   <script>
-     var injectedData = document.getElementById("injectedData");
+<div id="scriptedWrite" />
+<div id="scriptedWrite-html5" />
 
-     // All clients
-     var clientSideUntrustedInputOldStyle =
-         injectedData.getAttribute("data-untrustedinput");
-
-     // HTML 5 clients only
-     var clientSideUntrustedInputHtml5 =
-         injectedData.dataset.untrustedinput;
-
-     document.write(clientSideUntrustedInputOldStyle);
-     document.write("<br />")
-     document.write(clientSideUntrustedInputHtml5);
-   </script>
-   ```
-
-Le code HTML suivant est généré
-
-```html
-<div
-     id="injectedData"
-     data-untrustedinput="&lt;&quot;123&quot;&gt;" />
-
-   <script>
-     var injectedData = document.getElementById("injectedData");
-
-     var clientSideUntrustedInputOldStyle =
-         injectedData.getAttribute("data-untrustedinput");
-
-     var clientSideUntrustedInputHtml5 =
-         injectedData.dataset.untrustedinput;
-
-     document.write(clientSideUntrustedInputOldStyle);
-     document.write("<br />")
-     document.write(clientSideUntrustedInputHtml5);
-   </script>
-   ```
-
-Qui, lorsqu’il s’exécute, affiche ce qui suit :
-
-```
-<"123">
-   <"123">
-```
-
-Vous pouvez également appeler l’encodeur JavaScript directement :
-
-```cshtml
-@using System.Text.Encodings.Web;
-   @inject JavaScriptEncoder encoder;
-
-   @{
-       var untrustedInput = "<\"123\">";
-   }
-
-   <script>
-       document.write("@encoder.Encode(untrustedInput)");
-   </script>
-```
-
-Cela s’affiche dans le navigateur comme suit :
-
-```html
 <script>
-    document.write("\u003C\u0022123\u0022\u003E");
+    var injectedData = document.getElementById("injectedData");
+
+    // All clients
+    var clientSideUntrustedInputOldStyle =
+        injectedData.getAttribute("data-untrustedinput");
+
+    // HTML 5 clients only
+    var clientSideUntrustedInputHtml5 =
+        injectedData.dataset.untrustedinput;
+
+    // Put the injected, untrusted data into the scriptedWrite div tag.
+    // Do NOT use document.write() on dynamically generated data as it
+    // can lead to XSS.
+
+    document.getElementById("scriptedWrite").innerText += clientSideUntrustedInputOldStyle;
+
+    // Or you can use createElement() to dynamically create document elements
+    // This time we're using textContent to ensure the data is properly encoded.
+    var x = document.createElement("div");
+    x.textContent = clientSideUntrustedInputHtml5;
+    document.body.appendChild(x);
+
+    // You can also use createTextNode on an element to ensure data is properly encoded.
+    var y = document.createElement("div");
+    y.appendChild(document.createTextNode(clientSideUntrustedInputHtml5));
+    document.body.appendChild(y);
+
 </script>
+   ```
+
+Le balisage ci-dessus génère le code HTML suivant :
+
+```html
+<div id="injectedData"
+     data-untrustedinput="&lt;script&gt;alert(1)&lt;/script&gt;" />
+
+<div id="scriptedWrite" />
+<div id="scriptedWrite-html5" />
+
+<script>
+    var injectedData = document.getElementById("injectedData");
+
+    // All clients
+    var clientSideUntrustedInputOldStyle =
+        injectedData.getAttribute("data-untrustedinput");
+
+    // HTML 5 clients only
+    var clientSideUntrustedInputHtml5 =
+        injectedData.dataset.untrustedinput;
+
+    // Put the injected, untrusted data into the scriptedWrite div tag.
+// Do NOT use document.write() on dynamically generated data as it can
+// lead to XSS.
+
+    document.getElementById("scriptedWrite").innerText += clientSideUntrustedInputOldStyle;
+
+    // Or you can use createElement() to dynamically create document elements
+    // This time we're using textContent to ensure the data is properly encoded.
+    var x = document.createElement("div");
+    x.textContent = clientSideUntrustedInputHtml5;
+    document.body.appendChild(x);
+
+    // You can also use createTextNode on an element to ensure data is properly encoded.
+    var y = document.createElement("div");
+    y.appendChild(document.createTextNode(clientSideUntrustedInputHtml5));
+    document.body.appendChild(y);
+
+</script>
+   ```
+
+Le code précédent génère la sortie suivante :
+
+```
+<script>alert(1)</script>
+<script>alert(1)</script>
+<script>alert(1)</script>
 ```
 
 >[!WARNING]
-> Ne concaténez pas d’entrée non fiable dans JavaScript pour créer des éléments DOM. Vous devez utiliser `createElement()` et assigner des valeurs de propriété de manière appropriée, par exemple `node.TextContent=` , ou vous pouvez les utiliser `element.SetAttribute()` / `element[attribute]=` pour vous exposer au XSS.
+> Ne concaténez ***pas*** d’entrée non fiable dans JavaScript pour créer des éléments DOM ou utiliser `document.write()` sur du contenu généré dynamiquement.
+>
+> Utilisez l’une des approches suivantes pour empêcher l’exposition du code au XSS basé sur DOM :
+> * `createElement()` et assignent des valeurs de propriété avec des méthodes ou des propriétés appropriées, telles que `node.textContent=` ou node. InnerText = '.
+> * `document.CreateTextNode()` et l’ajouter à l’emplacement DOM approprié.
+> * `element.SetAttribute()`
+> * `element[attribute]=`
 
 ## <a name="accessing-encoders-in-code"></a>Accès aux encodeurs dans le code
 
