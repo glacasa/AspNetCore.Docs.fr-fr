@@ -447,6 +447,8 @@
               uid: blazor/host-and-deploy/server
             - name: Configurer l'éditeur de liens
               uid: blazor/host-and-deploy/configure-linker
+            - name: Configurer l’outil de découpage
+              uid: blazor/host-and-deploy/configure-trimmer
         - name: Blazor Server et EF Core
           uid: blazor/blazor-server-ef-core
         - name: Scénarios avancés
