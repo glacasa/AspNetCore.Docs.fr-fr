@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: 391a38e9af42b162fc74bac803e6aa3cf687e7d5
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e1af8f1de61edd934505a44e75ea07e0f09a67b5
+ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626062"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90592954"
 ---
 # <a name="secure-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core sécurisé Blazor WebAssembly
 
@@ -98,6 +98,13 @@ Appliquez l' [ `[Authorize]` attribut](xref:blazor/security/index#authorize-attr
 Les jetons d’actualisation ne peuvent pas être sécurisés côté client dans les Blazor WebAssembly applications. Par conséquent, les jetons d’actualisation ne doivent pas être envoyés à l’application pour une utilisation directe.
 
 Les jetons d’actualisation peuvent être conservés et utilisés par l’application côté serveur dans une solution hébergée Blazor WebAssembly pour accéder aux API tierces. Pour plus d'informations, consultez <xref:blazor/security/webassembly/additional-scenarios#authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party>.
+
+## <a name="establish-claims-for-users"></a>Établir des revendications pour les utilisateurs
+
+Les applications requièrent souvent des revendications pour les utilisateurs en fonction d’un appel d’API Web à un serveur. Par exemple, les revendications sont fréquemment utilisées pour [établir une autorisation](xref:blazor/security/index#authorization) dans une application. Dans ces scénarios, l’application demande un jeton d’accès pour accéder au service et utilise le jeton pour obtenir les données utilisateur pour les revendications. Pour obtenir des exemples, consultez les ressources suivantes :
+
+* [Scénarios supplémentaires : personnaliser l’utilisateur](xref:blazor/security/webassembly/additional-scenarios#customize-the-user)
+* <xref:blazor/security/webassembly/aad-groups-roles>
 
 ## <a name="implementation-guidance"></a>Conseils d’implémentation
 

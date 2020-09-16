@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/additional-scenarios
-ms.openlocfilehash: 4d3aa2db7939313088fbc7b20e7cba2d75463b84
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: c8bce9572f0c21fdbd7ed585772c2b7965f40598
+ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865146"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90592941"
 ---
 # <a name="aspnet-core-no-locblazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor Server des scénarios de sécurité supplémentaires
 
@@ -33,7 +33,7 @@ Par [Javier Calvarro Nelson](https://github.com/javiercn)
 
 Les jetons disponibles en dehors des Razor composants d’une Blazor Server application peuvent être passés aux composants avec l’approche décrite dans cette section. Pour obtenir un exemple de code, y compris un `Startup.ConfigureServices` exemple complet, consultez la page [transmission de jetons à une Blazor application côté serveur](https://github.com/javiercn/blazor-server-aad-sample).
 
-Authentifiez l' Blazor Server application comme vous le feriez avec une Razor application de pages ou MVC standard. Approvisionnez et enregistrez les jetons dans l’authentification cookie . Par exemple :
+Authentifiez l' Blazor Server application comme vous le feriez avec une Razor application de pages ou MVC standard. Approvisionnez et enregistrez les jetons dans l’authentification cookie . Exemple :
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -123,25 +123,31 @@ Dans le `App` composant ( `App.razor` ), résolvez le service et initialisez-le 
 }
 ```
 
+Ajoutez une référence de package à l’application pour le package NuGet [Microsoft. Aspnet. WebApi. client](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Client) .
+
 Dans le service qui effectue une demande d’API sécurisée, injectez le fournisseur de jetons et récupérez le jeton pour appeler l’API :
 
 ```csharp
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+
 public class WeatherForecastService
 {
-    private readonly TokenProvider _store;
+    private readonly TokenProvider store;
 
     public WeatherForecastService(IHttpClientFactory clientFactory, 
         TokenProvider tokenProvider)
     {
         Client = clientFactory.CreateClient();
-        _store = tokenProvider;
+        store = tokenProvider;
     }
 
     public HttpClient Client { get; }
 
     public async Task<WeatherForecast[]> GetForecastAsync(DateTime startDate)
     {
-        var token = _store.AccessToken;
+        var token = store.AccessToken;
         var request = new HttpRequestMessage(HttpMethod.Get, 
             "https://localhost:5003/WeatherForecast");
         request.Headers.Add("Authorization", $"Bearer {token}");

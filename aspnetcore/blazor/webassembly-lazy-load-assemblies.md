@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: f9b6766c2f46274e06cab18fd35b5e417e9bfa97
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: eb4aaa2f3d412cdf650ed2daf7c12166991d92a1
+ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009607"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90592902"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>Chargement différé d’assemblys dans ASP.NET Core Blazor WebAssembly
 
@@ -42,20 +42,9 @@ Marquez les assemblys pour le chargement différé dans le fichier projet de l�
 
 ```xml
 <ItemGroup>
-  <BlazorWebAssemblyLazyLoad Include="GrantImaharaRobotControls" />
+  <BlazorWebAssemblyLazyLoad Include="GrantImaharaRobotControls.dll" />
 </ItemGroup>
 ```
-
-Seuls les assemblys utilisés par l’application peuvent être chargés de manière différée. L’éditeur de liens supprime les assemblys inutilisés de la sortie publiée.
-
-> [!NOTE]
-> Dans .NET 5 version Release Candidate 1 (RC1) ou version ultérieure, qui sera publiée le mi-septembre, le nom de l’assembly nécessitera l' `.dll` extension suivante :
->
-> ```xml
-> <ItemGroup>
->  <BlazorWebAssemblyLazyLoad Include="GrantImaharaRobotControls.dll" />
-> </ItemGroup>
-> ```
 
 ## <a name="router-component"></a>Composant `Router`
 
@@ -94,7 +83,7 @@ Si le `OnNavigateAsync` rappel lève une exception non gérée, l' [ Blazor inte
 * La `Path` propriété est le chemin d’accès de destination de l’utilisateur par rapport au chemin d’accès de base de l’application, par exemple `/robot` .
 * Le `CancellationToken` peut être utilisé pour observer l’annulation de la tâche asynchrone. `OnNavigateAsync` annule automatiquement la tâche de navigation en cours d’exécution lorsque l’utilisateur accède à une autre page.
 
-Dans `OnNavigateAsync` , implémentez une logique pour déterminer les assemblys à charger. Options disponibles :
+Dans `OnNavigateAsync` , implémentez une logique pour déterminer les assemblys à charger. Les options sont les suivantes :
 
 * Vérifications conditionnelles à l’intérieur de la `OnNavigateAsync` méthode.
 * Table de recherche qui mappe des itinéraires à des noms d’assemblys, soit injectés dans le composant, soit implémentée dans le [`@code`](xref:mvc/views/razor#code) bloc.

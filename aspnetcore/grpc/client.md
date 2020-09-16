@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: 28e4f372e301a673644bfa97763ebc930f2d0ad5
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9406c2a34126f3e5cd1406a55c3585e7a28f3dd9
+ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634330"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90593045"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>Appeler les services gRPC avec le client .NET
 
@@ -260,7 +260,18 @@ catch (RpcException ex)
 }
 ```
 
+## <a name="configure-deadline"></a>Configurer l’échéance
+
+La configuration d’une échéance d’appel gRPC est recommandée, car elle fournit une limite supérieure à la durée pendant laquelle un appel peut s’exécuter. Il empêche les services incorrects de s’exécuter de façon permanente et d’épuiser les ressources du serveur. Les échéances sont un outil utile pour créer des applications fiables.
+
+Configurez `CallOptions.Deadline` pour définir une échéance pour un appel gRPC :
+
+[!code-csharp[](~/grpc/deadlines-cancellation/deadline-client.cs?highlight=7,12)]
+
+Pour plus d'informations, consultez <xref:grpc/deadlines-cancellation#deadlines>.
+
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:grpc/clientfactory>
+* <xref:grpc/deadlines-cancellation>
 * <xref:grpc/basics>
