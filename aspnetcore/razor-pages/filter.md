@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/filter
-ms.openlocfilehash: b6d6585c0cbd52715c4192d4ab3bee756dbb41b3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 436d640130b378e2c770322186020c6e252872ef
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635045"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722512"
 ---
 # <a name="filter-methods-for-no-locrazor-pages-in-aspnet-core"></a>Méthodes de filtre pour les Razor pages dans ASP.net Core
 
@@ -39,7 +39,7 @@ Razor Filtres de page :
 * Exécutent le code après l’exécution de la méthode de gestionnaire.
 * Peuvent être implémentés dans une page ou globalement.
 * Ne peuvent pas être appliqués à des méthodes de gestionnaire de page spécifiques.
-* Peut avoir des dépendances de constructeur remplies par [injection de dépendance](xref:fundamentals/dependency-injection) (di). Pour plus d’informations, consultez [ServiceFilterAttribute](/aspnet/core/mvc/controllers/filters#servicefilterattribute) et [TypeFilterAttribute](/aspnet/core/mvc/controllers/filters#typefilterattribute).
+* Peut avoir des dépendances de constructeur remplies par [injection de dépendance](xref:fundamentals/dependency-injection) (di). Pour plus d’informations, consultez [ServiceFilterAttribute](../mvc/controllers/filters.md#servicefilterattribute) et [TypeFilterAttribute](../mvc/controllers/filters.md#typefilterattribute).
 
 Alors que les constructeurs de page et l’intergiciel (middleware) activent l’exécution de code personnalisé avant l’exécution d’une méthode de gestionnaire, seuls Razor les filtres de page permettent l’accès à <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> et à la page. L’intergiciel a accès à `HttpContext` , mais pas au « contexte de page ». Les filtres ont un <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> paramètre dérivé, qui fournit l’accès à `HttpContext` . Voici un exemple de filtre de page : [implémentez un attribut de filtre](#ifa) qui ajoute un en-tête à la réponse, ce qui ne peut pas être fait avec des constructeurs ou des intergiciels (middleware). L’accès au contexte de page, qui comprend l’accès aux instances de la page et de son modèle, sont disponibles uniquement lors de l’exécution de filtres, de gestionnaires ou du corps d’une Razor page.
 

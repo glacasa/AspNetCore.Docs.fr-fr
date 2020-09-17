@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: bba965e14058663c3ed9c0f15afc6a8d78997aea
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: 2bfe05748e6740043be7f1ccc6dbe22ad4b0ca44
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009750"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722564"
 ---
 # <a name="aspnet-core-no-locsignalr-hosting-and-scaling"></a>SignalRHébergement et mise à l’échelle ASP.net Core
 
@@ -33,7 +33,7 @@ Cet article explique les considérations relatives à l’hébergement et à la 
 
 ## <a name="sticky-sessions"></a>Sessions rémanentes
 
-SignalR requiert que toutes les requêtes HTTP pour une connexion spécifique soient gérées par le même processus serveur. Lorsque SignalR s’exécute sur une batterie de serveurs (plusieurs serveurs), vous devez utiliser des « sessions rémanentes ». Les « sessions rémanentes » sont également appelées « affinité de session » par certains équilibrages de charge. Azure App Service utilise [application Request Routing](https://docs.microsoft.com/iis/extensions/planning-for-arr/application-request-routing-version-2-overview) (arr) pour acheminer les demandes. L’activation du paramètre « affinité ARR » dans votre Azure App Service permet d’activer les « sessions rémanentes ». Les sessions rémanentes ne sont pas nécessaires dans les cas suivants :
+SignalR requiert que toutes les requêtes HTTP pour une connexion spécifique soient gérées par le même processus serveur. Lorsque SignalR s’exécute sur une batterie de serveurs (plusieurs serveurs), vous devez utiliser des « sessions rémanentes ». Les « sessions rémanentes » sont également appelées « affinité de session » par certains équilibrages de charge. Azure App Service utilise [application Request Routing](/iis/extensions/planning-for-arr/application-request-routing-version-2-overview) (arr) pour acheminer les demandes. L’activation du paramètre « affinité ARR » dans votre Azure App Service permet d’activer les « sessions rémanentes ». Les sessions rémanentes ne sont pas nécessaires dans les cas suivants :
 
 1. En cas d’hébergement sur un seul serveur, dans un seul processus.
 1. Lors de l’utilisation du SignalR service Azure.
@@ -51,7 +51,7 @@ Les connexions persistantes consomment également de la mémoire supplémentaire
 
 L’utilisation intensive des ressources liées à la connexion par SignalR peut affecter les autres applications Web qui sont hébergées sur le même serveur. Lorsque SignalR ouvre et contient les dernières connexions TCP disponibles, les autres applications Web sur le même serveur n’ont pas non plus de connexions disponibles.
 
-Si un serveur est à court de connexions, vous verrez des erreurs de socket aléatoires et des erreurs de réinitialisation de la connexion. Par exemple :
+Si un serveur est à court de connexions, vous verrez des erreurs de socket aléatoires et des erreurs de réinitialisation de la connexion. Exemple :
 
 ```
 An attempt was made to access a socket in a way forbidden by its access permissions...

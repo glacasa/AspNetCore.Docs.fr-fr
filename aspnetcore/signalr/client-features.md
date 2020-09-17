@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/client-features
-ms.openlocfilehash: df0084411134167df31506a01362a0520821e577
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: bb8352b11e78582c4a32b67da7dcb701d020b0d9
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631756"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90721708"
 ---
 # <a name="aspnet-core-no-locsignalr-clients"></a>SignalRClients ASP.net Core
 
@@ -51,7 +51,7 @@ Le tableau ci-dessous présente les fonctionnalités et la prise en charge des c
 | SignalRSupport du service Azure |2.1.0|1.0.0|1.0.0|1.0.0|
 | [Streaming de serveur à client](xref:signalr/streaming)          |2.1.0|1.0.0|1.0.0|1.0.0|
 | [Streaming client à serveur](xref:signalr/streaming)          |3.0.0|3.0.0|3.0.0|3.0.0|
-| Reconnexion automatique ([.net](/aspnet/core/signalr/dotnet-client?view=aspnetcore-3.0&tabs=visual-studio#handle-lost-connection), [JavaScript](/aspnet/core/signalr/javascript-client?view=aspnetcore-3.0#reconnect-clients))          |3.0.0|3.0.0|3.0.0|❌|
+| Reconnexion automatique ([.net](./dotnet-client.md?tabs=visual-studio&view=aspnetcore-3.0#handle-lost-connection), [JavaScript](./javascript-client.md?view=aspnetcore-3.0#reconnect-clients))          |3.0.0|3.0.0|3.0.0|❌|
 | Transport WebSockets |2.1.0|1.0.0|1.0.0|1.0.0|
 | Transport des événements envoyés par le serveur |2.1.0|1.0.0|1.0.0|❌|
 | Transport d’interrogation longue |2.1.0|1.0.0|1.0.0|3.0.0|
@@ -60,7 +60,7 @@ Le tableau ci-dessous présente les fonctionnalités et la prise en charge des c
 
 La prise en charge de l’activation de fonctionnalités supplémentaires du client est suivie dans [notre suivi des problèmes](https://github.com/dotnet/AspNetCore/issues).
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Prise en main SignalR de pour ASP.net Core](xref:tutorials/signalr)
 * [Plateformes prises en charge](xref:signalr/supported-platforms)

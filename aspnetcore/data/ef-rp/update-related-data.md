@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: 603c5e7c9f095c380461f8c6e4ead783ad35abe2
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 17b200f0ba90035c417c96689798263af16551de
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630859"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722817"
 ---
 # <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>Partie 7, Razor pages avec EF Core dans ASP.net Core mettre à jour les données associées
 
@@ -46,7 +46,7 @@ Créez un fichier *Pages/Courses/DepartmentNamePageModel.cs* comportant le code 
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/DepartmentNamePageModel.cs)]
 
-Le code précédent crée un [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist?view=aspnetcore-2.0) pour contenir la liste des noms de département.  Si `selectedDepartment` est spécifié, ce département est sélectionné dans le `SelectList`. 
+Le code précédent crée un [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist) pour contenir la liste des noms de département.  Si `selectedDepartment` est spécifié, ce département est sélectionné dans le `SelectList`. 
 
 Les classes de modèle de page Create et Edit doivent dériver de `DepartmentNamePageModel`.
 
@@ -111,7 +111,7 @@ La page contient un champ masqué (`<input type="hidden">`) pour le numéro de c
 
 ## <a name="update-the-course-details-and-delete-pages"></a>Mettre à jour les pages de détails et de suppression du cours
 
-[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking?view=efcore-2.0#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) peut améliorer les performances quand le suivi n’est pas nécessaire.
+[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) peut améliorer les performances quand le suivi n’est pas nécessaire.
 
 ### <a name="update-the-course-page-models"></a>Mettre à jour les modèles de pages du cours
 
@@ -263,7 +263,7 @@ Les pages de création et de modification de cours ont chacune besoin d’une li
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/DepartmentNamePageModel.cshtml.cs?highlight=9,11,20-21)]
 
-Le code précédent crée un [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist?view=aspnetcore-2.0) pour contenir la liste des noms de département.  Si `selectedDepartment` est spécifié, ce département est sélectionné dans le `SelectList`. 
+Le code précédent crée un [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist) pour contenir la liste des noms de département.  Si `selectedDepartment` est spécifié, ce département est sélectionné dans le `SelectList`. 
 
 Les classes de modèle de page Create et Edit doivent dériver de `DepartmentNamePageModel`.
 
@@ -328,7 +328,7 @@ Testez le code mis à jour. Créez, modifiez et supprimez un cours.
 
 ## <a name="add-asnotracking-to-the-details-and-delete-page-models"></a>Ajouter AsNoTracking aux modèles de page Details et Delete
 
-[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking?view=efcore-2.0#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) peut améliorer les performances quand le suivi n’est pas nécessaire. Ajoutez `AsNoTracking` dans les modèles de page Details et Delete. Le code suivant montre le modèle de page Delete mis à jour :
+[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) peut améliorer les performances quand le suivi n’est pas nécessaire. Ajoutez `AsNoTracking` dans les modèles de page Details et Delete. Le code suivant montre le modèle de page Delete mis à jour :
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Delete.cshtml.cs?name=snippet&highlight=21,23,40,41)]
 
@@ -455,7 +455,7 @@ Le code précédent apporte les modifications suivantes :
 
 * Si le formateur à supprimer est attribué en tant qu’administrateur d’un département, supprime l’attribution de l'instructeur de ces départements.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Version YouTube de ce tutoriel (Partie 1)](https://www.youtube.com/watch?v=Csh6gkmwc9E)
 * [Version YouTube de ce tutoriel (Partie 2)](https://www.youtube.com/watch?v=mOAankB_Zgc)

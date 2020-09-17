@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 587872b269d897d7c86eb77c110a4b6432218ed3
-ms.sourcegitcommit: dd0e87abf2bb50ee992d9185bb256ed79d48f545
+ms.openlocfilehash: 01575ec87d2d346da7367523ca5e257d53de4983
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88746557"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722616"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>Meilleures pratiques en matière de performances de ASP.NET Core
 
@@ -42,7 +42,7 @@ Dans ce document, un *chemin de code réactif* est défini comme un chemin de co
 
 ASP.NET Core applications doivent être conçues pour traiter plusieurs demandes simultanément. Les API asynchrones permettent à un petit pool de threads de gérer des milliers de demandes simultanées en n’attendant pas les appels de blocage. Au lieu d’attendre la fin d’une tâche synchrone de longue durée, le thread peut travailler sur une autre requête.
 
-Un problème de performances courant dans les applications de ASP.NET Core consiste à bloquer les appels qui pourraient être asynchrones. De nombreux appels de blocage synchrones conduisent à la [privation de pool de threads](https://blogs.msdn.microsoft.com/vancem/2018/10/16/diagnosing-net-core-threadpool-starvation-with-perfview-why-my-service-is-not-saturating-all-cores-or-seems-to-stall/) et aux temps de réponse dégradés.
+Un problème de performances courant dans les applications de ASP.NET Core consiste à bloquer les appels qui pourraient être asynchrones. De nombreux appels de blocage synchrones conduisent à la [privation de pool de threads](/archive/blogs/vancem/diagnosing-net-core-threadpool-starvation-with-perfview-why-my-service-is-not-saturating-all-cores-or-seems-to-stall) et aux temps de réponse dégradés.
 
 **Ne pas**:
 
@@ -117,7 +117,7 @@ Recommandations :
 
 ## <a name="keep-common-code-paths-fast"></a>Conserver les chemins de code communs rapidement
 
-Vous souhaitez que tout votre code soit rapide. Les chemins de code fréquemment appelés sont les plus importants à optimiser. Elles incluent notamment :
+Vous souhaitez que tout votre code soit rapide. Les chemins de code fréquemment appelés sont les plus importants à optimiser. En voici quelques-uns :
 
 * Composants de l’intergiciel (middleware) dans le pipeline de traitement des demandes de l’application, en particulier les intergiciels (middleware) exécutés au début du pipeline. Ces composants ont un impact important sur les performances.
 * Code qui est exécuté pour chaque demande ou plusieurs fois par demande. Par exemple, la journalisation personnalisée, les gestionnaires d’autorisation ou l’initialisation de services temporaires.

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/middleware
-ms.openlocfilehash: 43b0ef1dcbf6d0137b14be9e58eb056f06ae093d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7fe9629e1c60a6156c69e546736049653a4229b7
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633446"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722642"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>Intergiciel de mise en cache des réponses dans ASP.NET Core
 
@@ -59,7 +59,7 @@ L’exemple d’application ajoute des en-têtes pour contrôler la mise en cach
 
 Les en-têtes précédents ne sont pas écrits dans la réponse et sont remplacés lorsqu’un contrôleur, une action ou une Razor page :
 
-* A un attribut [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) . Cela s’applique même si une propriété n’est pas définie. Par exemple, si vous omettez la propriété [VaryByHeader](/aspnet/core/performance/caching/response#vary) , l’en-tête correspondant sera supprimé de la réponse.
+* A un attribut [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) . Cela s’applique même si une propriété n’est pas définie. Par exemple, si vous omettez la propriété [VaryByHeader](./response.md#vary) , l’en-tête correspondant sera supprimé de la réponse.
 
 L’intergiciel (middleware) de mise en cache des réponses met uniquement en cache les réponses du serveur qui génèrent un code d’état 200 (OK). Toutes les autres réponses, y compris les [pages d’erreur](xref:fundamentals/error-handling), sont ignorées par l’intergiciel (middleware).
 
@@ -163,7 +163,7 @@ Lors du test et du dépannage du comportement de mise en cache, un navigateur pe
 > [!NOTE]
 > Le système anti-contrefaçon pour générer des jetons sécurisés afin d’empêcher les attaques par falsification de requête intersites (CSRF) définit les `Cache-Control` `Pragma` en-têtes et afin `no-cache` que les réponses ne soient pas mises en cache. Pour plus d’informations sur la façon de désactiver des jetons anti-contrefaçon pour les éléments de formulaire HTML, consultez <xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration> .
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/index>
@@ -203,7 +203,7 @@ L’exemple d’application ajoute des en-têtes pour contrôler la mise en cach
 
 Les en-têtes précédents ne sont pas écrits dans la réponse et sont remplacés lorsqu’un contrôleur, une action ou une Razor page :
 
-* A un attribut [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) . Cela s’applique même si une propriété n’est pas définie. Par exemple, si vous omettez la propriété [VaryByHeader](/aspnet/core/performance/caching/response#vary) , l’en-tête correspondant sera supprimé de la réponse.
+* A un attribut [[ResponseCache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) . Cela s’applique même si une propriété n’est pas définie. Par exemple, si vous omettez la propriété [VaryByHeader](./response.md#vary) , l’en-tête correspondant sera supprimé de la réponse.
 
 L’intergiciel (middleware) de mise en cache des réponses met uniquement en cache les réponses du serveur qui génèrent un code d’état 200 (OK). Toutes les autres réponses, y compris les [pages d’erreur](xref:fundamentals/error-handling), sont ignorées par l’intergiciel (middleware).
 

@@ -5,7 +5,7 @@ description: Découvrez comment utiliser des formulaires et des scénarios de va
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/18/2020
+ms.date: 09/17/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 5efea1728a1460c728a0d90002fb1504fe5b3bbb
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 63cda3348073418e95dd9a0cbdb62e0b5f606383
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90593019"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90721799"
 ---
 # <a name="aspnet-core-no-locblazor-forms-and-validation"></a>ASP.NET Core Blazor les formulaires et la validation
 
@@ -86,6 +86,7 @@ Un ensemble de composants intégrés est disponible pour recevoir et valider les
 | --------------- | ------------------- |
 | <xref:Microsoft.AspNetCore.Components.Forms.InputCheckbox> | `<input type="checkbox">` |
 | <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> | `<input type="date">` |
+| [`InputFile`](xref:blazor/file-uploads) | `<input type="file">` |
 | <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> | `<input type="number">` |
 | [`InputRadio`](#radio-buttons) | `<input type="radio">` |
 | [`InputRadioGroup`](#radio-buttons) | `<input type="radio">` |
@@ -239,7 +240,7 @@ Dans l’exemple suivant :
 * Du code supplémentaire est exécuté en fonction du résultat de la validation. Placez la logique métier dans la méthode assignée à <xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnSubmit> .
 
 ```razor
-<EditForm EditContext="@editContext" OnSubmit="HandleSubmit">
+<EditForm EditContext="@editContext" OnSubmit="@HandleSubmit">
 
     ...
 
@@ -1030,6 +1031,32 @@ private class CustomValidator : ValidationAttribute
 > [!NOTE]
 > <xref:System.ComponentModel.DataAnnotations.ValidationContext.GetService%2A?displayProperty=nameWithType> a la valeur `null`. L’injection de services pour la validation dans la `IsValid` méthode n’est pas prise en charge.
 
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="custom-validation-class-attributes"></a>Attributs de classe de validation personnalisée
+
+Les noms des classes de validation personnalisées sont utiles lors de l’intégration avec des frameworks CSS, tels que [bootstrap](https://getbootstrap.com/). Pour spécifier des noms de classe de validation personnalisés, créez une classe dérivée de `FieldCssClassProvider` et définissez la classe sur l' <xref:Microsoft.AspNetCore.Components.Forms.EditContext> instance :
+
+```csharp
+var editContext = new EditContext(model);
+editContext.SetFieldCssClassProvider(new MyFieldClassProvider());
+
+...
+
+private class MyFieldClassProvider : FieldCssClassProvider
+{
+    public override string GetFieldCssClass(EditContext editContext, 
+        in FieldIdentifier fieldIdentifier)
+    {
+        var isValid = !editContext.GetValidationMessages(fieldIdentifier).Any();
+
+        return isValid ? "good field" : "bad field";
+    }
+}
+```
+
+::: moniker-end
+
 ### <a name="no-locblazor-data-annotations-validation-package"></a>Blazor package de validation des annotations de données
 
 Le [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) est un package qui remplit les lacunes de l’expérience de validation à l’aide du <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> composant. Le package est actuellement *expérimental*.
@@ -1085,7 +1112,7 @@ public class ShipDescription
     [Required]
     [StringLength(40, ErrorMessage = "Description too long (40 char).")]
     public string ShortDescription { get; set; }
-    
+
     [Required]
     [StringLength(240, ErrorMessage = "Description too long (240 char).")]
     public string LongDescription { get; set; }
@@ -1171,7 +1198,7 @@ L’un des effets secondaires de l’approche précédente est qu’un <xref:Mic
 }
 ```
 
-## <a name="troubleshoot"></a>Dépanner
+## <a name="troubleshoot"></a>Résoudre les problèmes
 
 > InvalidOperationException : EditForm requiert un paramètre de modèle, ou un paramètre EditContext, mais pas les deux.
 
@@ -1182,3 +1209,7 @@ Quand vous assignez un <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Mode
 ```csharp
 private ExampleModel exampleModel = new ExampleModel();
 ```
+
+## <a name="additional-resources"></a>Ressources supplémentaires
+
+* <xref:blazor/file-uploads>

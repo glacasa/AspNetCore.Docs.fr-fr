@@ -4,7 +4,7 @@ author: rick-anderson
 description: Montre comment créer une Razor application pages à l’aide de Entity Framework Core
 ms.author: riande
 ms.custom: mvc, seodec18
-ms.date: 09/26/2019
+ms.date: 9/26/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 00d5c348b7ab06f9044e6705026e43feb7807ae3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9dd8d293e189eebe6b61f6f0b35aee71977d2f77
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630300"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722551"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor Pages avec Entity Framework Core dans ASP.NET Core-didacticiel 1 sur 8
 
 Par [Tom Dykstra](https://github.com/tdykstra) et [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-::: moniker range=">= aspnetcore-3.0"
+::: moniker range=">= aspnetcore-5.0"
 
 Il s’agit de la première d’une série de didacticiels qui montrent comment utiliser Entity Framework (EF) Core dans une application [ASP.net Core Razor pages](xref:razor-pages/index) . Dans ces tutoriels, un site web est créé pour une université fictive nommée Contoso. Le site comprend des fonctionnalités comme l’admission des étudiants, la création de cours et les affectations des formateurs. Le didacticiel utilise l’approche code First. Pour plus d’informations sur ce didacticiel avec la première approche basée sur la base de données, consultez [ce problème GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/16897).
 
@@ -38,7 +38,7 @@ Il s’agit de la première d’une série de didacticiels qui montrent comment 
 
 * Si vous Razor débutez avec des pages, consultez la série de didacticiels [prise en main des Razor pages](xref:tutorials/razor-pages/razor-pages-start) avant de commencer celle-ci.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE[VS prereqs](~/includes/net-core-prereqs-vs-3.0.md)]
 
@@ -72,7 +72,7 @@ Le style de l’interface utilisateur de ce site repose sur les modèles de proj
 
 Suivez le lien en haut de la page pour obtenir le code source du projet terminé. Le dossier *cu30* contient le code de la version 3.0 d’ASP.NET Core. Les fichiers qui reflètent l’état du code pour les tutoriels 1-7 se trouvent dans le dossier *cu30snapshots*.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Pour exécuter l’application après avoir téléchargé le projet terminé :
 
@@ -114,7 +114,7 @@ Pour exécuter l’application après avoir téléchargé le projet terminé :
 
 ## <a name="create-the-web-app-project"></a>Créer le projet d’application web
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Dans Visual Studio, dans le menu **Fichier**, sélectionnez **Nouveau** > **Projet**.
 * Sélectionnez **Application web ASP.NET Core**.
@@ -188,7 +188,7 @@ Créez *Models/Enrollment.cs* avec le code suivant :
 
 La propriété `EnrollmentID` est la clé primaire ; cette entité utilise le modèle `classnameID` à la place de `ID` par lui-même. Pour un modèle de données de production, choisissez un modèle et utilisez-le systématiquement. Ce tutoriel utilise les deux pour montrer qu’ils fonctionnent tous les deux. L’utilisation de `ID` sans `classname` facilite l’implémentation de certaines modifications du modèle de données.
 
-La propriété `Grade` est un `enum`. La présence du point d’interrogation après la déclaration de type `Grade` indique que la propriété `Grade`[accepte les valeurs Null](https://docs.microsoft.com/dotnet/csharp/programming-guide/nullable-types/). Une note (Grade) de valeur Null est différente d’une note zéro : la valeur Null signifie que la note n’est pas connue ou qu’elle n’a pas encore été attribuée.
+La propriété `Grade` est un `enum`. La présence du point d’interrogation après la déclaration de type `Grade` indique que la propriété `Grade`[accepte les valeurs Null](/dotnet/csharp/programming-guide/nullable-types/). Une note (Grade) de valeur Null est différente d’une note zéro : la valeur Null signifie que la note n’est pas connue ou qu’elle n’a pas encore été attribuée.
 
 La propriété `StudentID` est une clé étrangère, et la propriété de navigation correspondante est `Student`. Une entité `Enrollment` est associée à une entité `Student`. Par conséquent, la propriété contient une seule entité `Student`.
 
@@ -217,7 +217,7 @@ Dans cette section, vous allez utiliser l’outil de génération de modèles au
 * Une classe de *contexte* EF Core. Le contexte est la classe principale qui coordonne les fonctionnalités d’Entity Framework pour un modèle de données déterminé. Il dérive de la classe `Microsoft.EntityFrameworkCore.DbContext`.
 * Razor les pages qui gèrent les opérations de création, lecture, mise à jour et suppression (CRUD) pour l' `Student` entité.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Créez un dossier *Students* dans le dossier *Pages*.
 * Dans l’**Explorateur de solutions**, cliquez avec le bouton droit sur le dossier *Pages/Students*, puis sélectionnez **Ajouter** > **Nouvel élément généré automatiquement**.
@@ -293,7 +293,7 @@ Le processus de génération de modèles automatique :
 
 ## <a name="database-connection-string"></a>Chaîne de connexion de base de données
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 La chaîne de connexion spécifie [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb). 
 
@@ -334,7 +334,7 @@ ASP.NET Core comprend [l’injection de dépendances](xref:fundamentals/dependen
 
 L’outil de génération de modèles automatique a inscrit automatiquement la classe du contexte dans le conteneur d’injection de dépendances.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Dans `ConfigureServices`, les lignes en surbrillance ont été ajoutées par l’outil de génération de modèles automatique :
 
@@ -350,7 +350,7 @@ L’outil de génération de modèles automatique a inscrit automatiquement la c
 
 Le nom de la chaîne de connexion est transmis au contexte en appelant une méthode sur un objet [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions). Pour le développement local, le [système de configuration ASP.NET Core](xref:fundamentals/configuration/index) lit la chaîne de connexion à partir du fichier *appsettings.json*.
 
-## <a name="create-the-database"></a>Création de la base de données
+## <a name="create-the-database"></a>Créer la base de données
 
 Mettez à jour *Program.cs* pour créer la base de données si elle n’existe pas :
 
@@ -367,7 +367,7 @@ Ce workflow fonctionne bien à un stade précoce du développement, quand le sch
 
 Plus tard dans cette série de tutoriels, vous supprimerez la base de données créée par `EnsureCreated` et procéderez à des migrations. Une base de données créée par `EnsureCreated` ne peut pas être mise à jour via des migrations.
 
-### <a name="test-the-app"></a>Test de l'application
+### <a name="test-the-app"></a>Tester l’application
 
 * Exécutez l'application.
 * Sélectionnez le lien **Students**, puis **Créer nouveau**.
@@ -390,7 +390,7 @@ Créez *Data/DbInitializer.cs* avec le code suivant :
   DbInitializer.Initialize(context);
   ```
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Arrêtez l’application si elle est en cours d’exécution et exécutez la commande suivante dans la **Console du gestionnaire de package** :
 
@@ -410,7 +410,442 @@ Drop-Database
 
 ## <a name="view-the-database"></a>Afficher la base de données
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+* Ouvrez **l’Explorateur d’objets SQL Server** (SSOX) à partir du menu **Affichage** de Visual Studio.
+* Dans SSOX, sélectionnez **(localdb)\MSSQLLocalDB > Databases > SchoolContext-{GUID}**. Le nom de la base de données est généré à partir du nom de contexte indiqué précédemment, ainsi que d’un tiret et d’un GUID.
+* Développez le nœud **Tables**.
+* Cliquez avec le bouton droit sur la table **Student** et cliquez sur **Afficher les données** pour voir les colonnes créées et les lignes insérées dans la table.
+* Cliquez avec le bouton droit sur la table **Student** et cliquez sur **Afficher le code** pour voir comment le modèle `Student` est mappé au schéma de la table `Student`.
+
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+Utilisez votre outil SQLite pour examiner le schéma de base de données et les données amorcées. Le fichier de base de données est nommé *CU.db* et se trouve dans le dossier du projet.
+
+---
+
+## <a name="asynchronous-code"></a>Code asynchrone
+
+La programmation asynchrone est le mode par défaut pour ASP.NET Core et EF Core.
+
+Un serveur web a un nombre limité de threads disponibles et, dans les situations de forte charge, tous les threads disponibles peuvent être utilisés. Quand cela se produit, le serveur ne peut pas traiter de nouvelle requête tant que les threads ne sont pas libérés. Avec le code synchrone, plusieurs threads peuvent être bloqués alors qu’ils n’effectuent en fait aucun travail, car ils attendent que des E/S se terminent. Avec le code asynchrone, quand un processus attend que des E/S se terminent, son thread est libéré afin d’être utilisé par le serveur pour traiter d’autres demandes. Il permet ainsi d’utiliser les ressources serveur plus efficacement, et le serveur peut gérer plus de trafic sans retard.
+
+Le code asynchrone introduit néanmoins une petite surcharge au moment de l’exécution. Dans les situations de faible trafic, le gain de performances est négligeable, tandis qu’en cas de trafic élevé l’amélioration potentielle des performances est importante.
+
+Dans le code suivant, le mot clé [async](/dotnet/csharp/language-reference/keywords/async), la valeur renvoyée `Task<T>`, le mot clé `await` et la méthode `ToListAsync` déclenchent l’exécution asynchrone du code.
+
+```csharp
+public async Task OnGetAsync()
+{
+    Students = await _context.Students.ToListAsync();
+}
+```
+
+* Le mot clé `async` fait en sorte que le compilateur :
+  * Génère des rappels pour les parties du corps de méthode.
+  * Crée l’objet [Task](/dotnet/csharp/programming-guide/concepts/async/async-return-types#BKMK_TaskReturnType) qui est retourné.
+* Le type de retour `Task<T>` représente le travail en cours.
+* Le mot clé `await` indique au compilateur de fractionner la méthode en deux parties. La première partie se termine par l’opération qui est démarrée de façon asynchrone. La seconde partie est placée dans une méthode de rappel qui est appelée quand l’opération se termine.
+* `ToListAsync` est la version asynchrone de la méthode d’extension `ToList`.
+
+Voici quelques éléments à connaître lors de l’écriture de code asynchrone qui utilise EF Core :
+
+* Seules les instructions qui provoquent l’envoi de requêtes ou de commandes vers la base de données sont exécutées de façon asynchrone. Cela inclut `ToListAsync`, `SingleOrDefaultAsync`, `FirstOrDefaultAsync` et `SaveChangesAsync`, mais pas les instructions qui ne font que changer un `IQueryable`, telles que `var students = context.Students.Where(s => s.LastName == "Davolio")`.
+* Un contexte EF Core n’est pas thread-safe : n’essayez pas d’effectuer plusieurs opérations en parallèle.
+* Pour tirer parti des avantages de performances du code asynchrone, vérifiez que les packages de bibliothèque (par exemple pour la pagination) utilisent le mode asynchrone s’ils appellent des méthodes EF Core qui envoient des requêtes à la base de données.
+
+Pour plus d’informations sur la programmation asynchrone dans .NET, consultez [Vue d’ensemble d’Async](/dotnet/standard/async) et [Programmation asynchrone avec async et await](/dotnet/csharp/programming-guide/concepts/async/).
+
+## <a name="next-steps"></a>Étapes suivantes
+
+> [!div class="step-by-step"]
+> [Didacticiel suivant](xref:data/ef-rp/crud)
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
+
+Il s’agit de la première d’une série de didacticiels qui montrent comment utiliser Entity Framework (EF) Core dans une application [ASP.net Core Razor pages](xref:razor-pages/index) . Dans ces tutoriels, un site web est créé pour une université fictive nommée Contoso. Le site comprend des fonctionnalités comme l’admission des étudiants, la création de cours et les affectations des formateurs. Le didacticiel utilise l’approche code First. Pour plus d’informations sur ce didacticiel avec la première approche basée sur la base de données, consultez [ce problème GitHub](https://github.com/dotnet/AspNetCore.Docs/issues/16897).
+
+[Télécharger ou afficher l’application terminée.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [Instructions de téléchargement](xref:index#how-to-download-a-sample).
+
+## <a name="prerequisites"></a>Prérequis
+
+* Si vous Razor débutez avec des pages, consultez la série de didacticiels [prise en main des Razor pages](xref:tutorials/razor-pages/razor-pages-start) avant de commencer celle-ci.
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+[!INCLUDE[VS prereqs](~/includes/net-core-prereqs-vs-3.0.md)]
+
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+[!INCLUDE[VS Code prereqs](~/includes/net-core-prereqs-vsc-3.0.md)]
+
+---
+
+## <a name="database-engines"></a>Moteurs de base de données
+
+Les instructions Visual Studio utilisent la [Base de données locale SQL Server](/sql/database-engine/configure-windows/sql-server-2016-express-localdb), version de SQL Server Express qui s’exécute uniquement sur Windows.
+
+Les instructions Visual Studio Code utilisent [SQLite](https://www.sqlite.org/), moteur de base de données multiplateforme.
+
+Si vous choisissez d’utiliser SQLite, téléchargez et installez un outil tiers pour la gestion et l’affichage d’une base de données SQLite, comme [Browser for SQLite](https://sqlitebrowser.org/).
+
+## <a name="troubleshooting"></a>Dépannage
+
+Si vous rencontrez un problème que vous ne pouvez pas résoudre, comparez votre code au [projet terminé](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples). Un bon moyen d’obtenir de l’aide est de poster une question sur StackOverflow.com en utilisant le [mot-clé ASP.NET Core](https://stackoverflow.com/questions/tagged/asp.net-core) ou le [mot-clé EF Core](https://stackoverflow.com/questions/tagged/entity-framework-core).
+
+## <a name="the-sample-app"></a>Exemple d’application
+
+L’application générée dans ces didacticiels est le site web de base d’une université. Les utilisateurs peuvent afficher et mettre à jour les informations relatives aux étudiants, aux cours et aux formateurs. Voici quelques-uns des écrans créés dans le didacticiel.
+
+![Page d’index des étudiants](intro/_static/students-index30.png)
+
+![Page de modification des étudiants](intro/_static/student-edit30.png)
+
+Le style de l’interface utilisateur de ce site repose sur les modèles de projet intégrés. Le tutoriel traite essentiellement de l’utilisation d’EF Core, et non de la façon de personnaliser l’interface utilisateur.
+
+Suivez le lien en haut de la page pour obtenir le code source du projet terminé. Le dossier *cu30* contient le code de la version 3.0 d’ASP.NET Core. Les fichiers qui reflètent l’état du code pour les tutoriels 1-7 se trouvent dans le dossier *cu30snapshots*.
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+Pour exécuter l’application après avoir téléchargé le projet terminé :
+
+* Créez le projet.
+* Dans la console du Gestionnaire de package (PMC), exécutez la commande suivante :
+
+  ```powershell
+  Update-Database
+  ```
+
+* Exécutez le projet pour amorcer la base de données.
+
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+Pour exécuter l’application après avoir téléchargé le projet terminé :
+
+* Supprimez *ContosoUniversity.csproj*, puis renommez *ContosoUniversitySQLite.csproj* en *ContosoUniversity.csproj*.
+* Dans *Program.cs*, commentez-le `#define Startup` pour qu’il `StartupSQLite` soit utilisé.
+* Supprimez *appSettings.json* et renommez *appSettingsSQLite.json* en *appSettings.json*.
+* Supprimez le dossier *Migrations* et renommez *MigrationsSQL* en *Migrations*.
+* Effectuez une recherche globale `#if SQLiteVersion` et supprimez `#if SQLiteVersion` et l' `#endif` instruction associée.
+* Créez le projet.
+* Dans une invite de commandes, exécutez la commande suivante dans le dossier du projet :
+
+  ```dotnetcli
+  dotnet tool install --global dotnet-ef
+  dotnet ef database update
+  ```
+
+* Dans votre outil SQLite, exécutez l’instruction SQL suivante :
+
+  ```sql
+  UPDATE Department SET RowVersion = randomblob(8)
+  ```
+
+* Exécutez le projet pour amorcer la base de données.
+
+---
+
+## <a name="create-the-web-app-project"></a>Créer le projet d’application web
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+* Dans Visual Studio, dans le menu **Fichier**, sélectionnez **Nouveau** > **Projet**.
+* Sélectionnez **Application web ASP.NET Core**.
+* Nommez le projet *ContosoUniversity*. Il est important d’utiliser ce nom exact, en respectant l’utilisation des majuscules, de sorte que les espaces de noms correspondent au moment où le code est copié et collé.
+* Sélectionnez **.NET Core** et **ASP.NET Core 3.0** dans les listes déroulantes, puis **Application web**.
+
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+* Dans un terminal, accédez au dossier dans lequel le dossier de projet doit être créé.
+
+* Exécutez les commandes suivantes pour créer un Razor projet de pages et `cd` dans le dossier du nouveau projet :
+
+  ```dotnetcli
+  dotnet new webapp -o ContosoUniversity
+  cd ContosoUniversity
+  ```
+
+---
+
+## <a name="set-up-the-site-style"></a>Configurer le style du site
+
+Configurez l’en-tête, le pied de page et le menu du site en mettant à jour *Pages/Shared/_Layout.cshtml* :
+
+* Remplacez chaque occurrence de « ContosoUniversity » par « Contoso University ». Il y a trois occurrences.
+
+* Supprimez les entrées de menu **Home** et **Privacy** et ajoutez les entrées **About**, **Students**, **Courses**, **Instructors** et **Departments**.
+
+Les modifications sont mises en surbrillance.
+
+[!code-cshtml[Main](intro/samples/cu30/Pages/Shared/_Layout.cshtml?highlight=6,14,21-35,49)]
+
+Dans *Pages/Index.cshtml*, remplacez le contenu du fichier par le code suivant de façon à remplacer le texte relatif à ASP.NET Core par le texte se rapportant à cette application :
+
+[!code-cshtml[Main](intro/samples/cu30/Pages/Index.cshtml)]
+
+Exécutez l’application pour vérifier que la page d’accueil (« Home ») s’affiche.
+
+## <a name="the-data-model"></a>Modèle de données
+
+Les sections suivantes créent un modèle de données :
+
+![Diagramme du modèle de données Course-Enrollment-Student](intro/_static/data-model-diagram.png)
+
+Un étudiant peut s’inscrire à un nombre quelconque de cours et un cours peut avoir un nombre quelconque d’élèves inscrits.
+
+## <a name="the-student-entity"></a>L’entité Student
+
+![Diagramme de l’entité Student](intro/_static/student-entity.png)
+
+* Créez un dossier *Models* dans le dossier de projet. 
+
+* Créez *Models/Student.cs* avec le code suivant :
+
+  [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Student.cs)]
+
+La propriété `ID` devient la colonne de clé primaire de la table de base de données qui correspond à cette classe. Par défaut, EF Core interprète une propriété nommée `ID` ou `classnameID` comme clé primaire. L’autre nom reconnu automatiquement de la clé primaire de classe `Student` est `StudentID`. Pour plus d’informations, consultez [EF Core-Keys](/ef/core/modeling/keys?tabs=data-annotations).
+
+La `Enrollments` propriété est une [propriété de navigation](/ef/core/modeling/relationships). Les propriétés de navigation contiennent d’autres entités qui sont associées à cette entité. Dans ce cas, la propriété `Enrollments` d’une entité `Student` contient toutes les entités `Enrollment` associées à cet étudiant. Par exemple, si une ligne Student dans la base de données est associée à deux lignes Enrollment, la propriété de navigation `Enrollments` contient ces deux entités Enrollment. 
+
+Dans la base de données, une ligne Enrollment est associée à une ligne Student si sa colonne StudentID contient la valeur d’ID de l’étudiant. Par exemple, supposez qu’une ligne Student présente un ID égal à 1. Les lignes Enrollment associées auront un StudentID égal à 1. StudentID est une *clé étrangère* dans la table Enrollment. 
+
+La propriété `Enrollments` est définie en tant que `ICollection<Enrollment>`, car plusieurs entités Enrollment associées peuvent exister. Vous pouvez utiliser d’autres types de collection, comme `List<Enrollment>` ou `HashSet<Enrollment>`. Quand vous utilisez `ICollection<Enrollment>`, EF Core crée une collection `HashSet<Enrollment>` par défaut.
+
+## <a name="the-enrollment-entity"></a>L’entité Enrollment
+
+![Diagramme de l’entité Enrollment](intro/_static/enrollment-entity.png)
+
+Créez *Models/Enrollment.cs* avec le code suivant :
+
+[!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Enrollment.cs)]
+
+La propriété `EnrollmentID` est la clé primaire ; cette entité utilise le modèle `classnameID` à la place de `ID` par lui-même. Pour un modèle de données de production, choisissez un modèle et utilisez-le systématiquement. Ce tutoriel utilise les deux pour montrer qu’ils fonctionnent tous les deux. L’utilisation de `ID` sans `classname` facilite l’implémentation de certaines modifications du modèle de données.
+
+La propriété `Grade` est un `enum`. La présence du point d’interrogation après la déclaration de type `Grade` indique que la propriété `Grade`[accepte les valeurs Null](/dotnet/csharp/programming-guide/nullable-types/). Une note (Grade) de valeur Null est différente d’une note zéro : la valeur Null signifie que la note n’est pas connue ou qu’elle n’a pas encore été attribuée.
+
+La propriété `StudentID` est une clé étrangère, et la propriété de navigation correspondante est `Student`. Une entité `Enrollment` est associée à une entité `Student`. Par conséquent, la propriété contient une seule entité `Student`.
+
+La propriété `CourseID` est une clé étrangère, et la propriété de navigation correspondante est `Course`. Une entité `Enrollment` est associée à une entité `Course`.
+
+EF Core interprète une propriété en tant que clé étrangère si elle se nomme `<navigation property name><primary key property name>`. Par exemple, `StudentID` est la clé étrangère pour la propriété de navigation `Student`, car la clé primaire de l’entité `Student` est `ID`. Les propriétés de clé étrangère peuvent également se nommer `<primary key property name>`. Par exemple, `CourseID` puisque la clé primaire de l’entité `Course` est `CourseID`.
+
+## <a name="the-course-entity"></a>L’entité Course
+
+![Diagramme de l’entité Course](intro/_static/course-entity.png)
+
+Créez *Models/Course.cs* avec le code suivant :
+
+[!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Course.cs)]
+
+La propriété `Enrollments` est une propriété de navigation. Une entité `Course` peut être associée à un nombre quelconque d’entités `Enrollment`.
+
+L’attribut `DatabaseGenerated` permet à l’application de spécifier la clé primaire, plutôt que de la faire générer par la base de données.
+
+Générez le projet pour vérifier qu’il n’y a pas d’erreurs du compilateur.
+
+## <a name="scaffold-student-pages"></a>Générer automatiquement des modèles de pages Student
+
+Dans cette section, vous allez utiliser l’outil de génération de modèles automatique ASP.NET Core pour générer :
+
+* Une classe de *contexte* EF Core. Le contexte est la classe principale qui coordonne les fonctionnalités d’Entity Framework pour un modèle de données déterminé. Il dérive de la classe `Microsoft.EntityFrameworkCore.DbContext`.
+* Razor les pages qui gèrent les opérations de création, lecture, mise à jour et suppression (CRUD) pour l' `Student` entité.
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+* Créez un dossier *Students* dans le dossier *Pages*.
+* Dans l’**Explorateur de solutions**, cliquez avec le bouton droit sur le dossier *Pages/Students*, puis sélectionnez **Ajouter** > **Nouvel élément généré automatiquement**.
+* Dans la boîte de dialogue **Ajouter une structure** , sélectionnez ** Razor pages à l’aide de Entity Framework (CRUD)** > **Ajouter**.
+* Dans la boîte de dialogue **Ajouter des Razor pages à l’aide de Entity Framework (CRUD)** :
+  * Dans la liste déroulante **Classe de modèle**, sélectionnez **Student (ContosoUniversity.Models)**.
+  * Dans la ligne **Classe du contexte de données**, sélectionnez le signe **+** (plus).
+  * Remplacez le nom du contexte de données *ContosoUniversity.Models.ContosoUniversityContext* par *ContosoUniversity.Data.SchoolContext*.
+  * Sélectionnez **Ajouter**.
+
+Les packages suivants sont automatiquement installés :
+
+* `Microsoft.VisualStudio.Web.CodeGeneration.Design`
+* `Microsoft.EntityFrameworkCore.SqlServer`
+* `Microsoft.Extensions.Logging.Debug`
+* `Microsoft.EntityFrameworkCore.Tools`
+
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+* Exécutez les commandes CLI .NET Core suivantes pour installer les packages NuGet nécessaires :
+<!-- TO DO  After testing, Replace with
+[!INCLUDE[](~/includes/includes/add-EF-NuGet-SQLite-CLI.md)]
+remove dotnet tool install --global  below
+ -->
+  ```dotnetcli
+  dotnet add package Microsoft.EntityFrameworkCore.SQLite
+  dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+  dotnet add package Microsoft.EntityFrameworkCore.Design
+  dotnet add package Microsoft.EntityFrameworkCore.Tools
+  dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+  dotnet add package Microsoft.Extensions.Logging.Debug
+  ```
+
+  Le package Microsoft.VisualStudio.Web.CodeGeneration.Design est requis pour la génération de modèles automatique. Bien que l’application ne soit pas appelée à utiliser SQL Server, l’outil de génération de modèles automatique a besoin du package SQL Server.
+
+* Créez un dossier *Pages/Students*.
+
+* Exécutez la commande suivante pour installer l’[outil de génération de modèles automatique aspnet-codegenerator](xref:fundamentals/tools/dotnet-aspnet-codegenerator).
+
+  ```dotnetcli
+  dotnet tool install --global dotnet-aspnet-codegenerator
+  ```
+
+* Exécutez la commande suivante pour générer automatiquement des modèles de pages Student.
+
+  **Sur Windows**
+
+  ```dotnetcli
+  dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Data.SchoolContext -udl -outDir Pages\Students --referenceScriptLibraries
+  ```
+
+  **Sur macOS ou Linux**
+
+  ```dotnetcli
+  dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Data.SchoolContext -udl -outDir Pages/Students --referenceScriptLibraries
+  ```
+
+---
+
+Si vous rencontrez un problème à l’étape précédente, générez le projet et recommencez l’étape de génération de modèles automatique.
+
+Le processus de génération de modèles automatique :
+
+* Crée Razor des pages dans le dossier *pages/élèves* :
+  * *Create.cshtml* et *Create.cshtml.cs*
+  * *Delete.cshtml* et *Delete.cshtml.cs*
+  * *Details.cshtml* et *Details.cshtml.cs*
+  * *Edit.cshtml* et *Edit.cshtml.cs*
+  * *Index.cshtml* et *Index.cshtml.cs*
+* Crée *Data/SchoolContext. cs*.
+* Ajoute le contexte à l’injection de dépendances dans *Startup.cs*.
+* Ajoute une chaîne de connexion de base de données à *appsettings.json*.
+
+## <a name="database-connection-string"></a>Chaîne de connexion de base de données
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+La chaîne de connexion spécifie [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb). 
+
+[!code-json[Main](intro/samples/cu30/appsettings.json?highlight=11)]
+
+LocalDB est une version allégée du moteur de base de données SQL Server Express. Elle est destinée au développement d’applications, et non à une utilisation en production. Par défaut, la Base de données locale crée des fichiers *.mdf* dans le répertoire `C:/Users/<user>`.
+
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+Modifiez la chaîne de connexion de sorte qu’elle pointe vers un fichier de base de données SQLite nommé *CU.db* :
+
+[!code-json[Main](intro/samples/cu30/appsettingsSQLite.json?highlight=11)]
+
+---
+
+## <a name="update-the-database-context-class"></a>Mettre à jour la classe du contexte de base de données
+
+La classe principale qui coordonne les fonctionnalités d’EF Core pour un modèle de données déterminé est la classe du contexte de base de données. Le contexte est dérivé de [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext). Il spécifie les entités qui sont incluses dans le modèle de données. Dans ce projet, la classe est nommée `SchoolContext`.
+
+Mettez à jour *SchoolContext.cs* avec le code suivant :
+
+[!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/SchoolContext.cs?highlight=13-22)]
+
+Le code en surbrillance crée une propriété [DbSet \<TEntity> ](/dotnet/api/microsoft.entityframeworkcore.dbset-1) pour chaque jeu d’entités. Dans la terminologie d’EF Core :
+
+* Un jeu d’entités correspond généralement à une table de base de données.
+* Une entité correspond à une ligne dans la table.
+
+Comme un jeu d’entités contient plusieurs entités, les propriétés DBSet doivent être des noms au pluriel. Comme l’outil de génération de modèles automatique a créé un DBSet `Student`, cette étape le remplace par le pluriel `Students`. 
+
+Pour que le Razor Code des pages corresponde au nouveau nom de DBSet, effectuez une modification globale sur l’ensemble du projet de `_context.Student` à `_context.Students` .  Il y a 8 occurrences.
+
+Générez le projet pour vérifier qu’il n’y a pas d’erreurs du compilateur.
+
+## <a name="startupcs"></a>Startup.cs
+
+ASP.NET Core comprend [l’injection de dépendances](xref:fundamentals/dependency-injection). Certains services (comme le contexte de base de données EF Core) sont inscrits avec l’injection de dépendances au démarrage de l’application. Ces services sont fournis par les composants qui requièrent ces services (tels que les Razor pages) par le biais de paramètres de constructeur. Le code de constructeur qui obtient une instance de contexte de base de données est indiqué plus loin dans le tutoriel.
+
+L’outil de génération de modèles automatique a inscrit automatiquement la classe du contexte dans le conteneur d’injection de dépendances.
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+* Dans `ConfigureServices`, les lignes en surbrillance ont été ajoutées par l’outil de génération de modèles automatique :
+
+  [!code-csharp[Main](intro/samples/cu30/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
+
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+* Dans `ConfigureServices`, vérifiez que le code ajouté par l’outil de génération de modèles automatique appelle `UseSqlite`.
+
+  [!code-csharp[Main](intro/samples/cu30/StartupSQLite.cs?name=snippet_ConfigureServices&highlight=5-6)]
+
+---
+
+Le nom de la chaîne de connexion est transmis au contexte en appelant une méthode sur un objet [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions). Pour le développement local, le [système de configuration ASP.NET Core](xref:fundamentals/configuration/index) lit la chaîne de connexion à partir du fichier *appsettings.json*.
+
+## <a name="create-the-database"></a>Créer la base de données
+
+Mettez à jour *Program.cs* pour créer la base de données si elle n’existe pas :
+
+[!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Program.cs?highlight=1-2,14-18,21-38)]
+
+La méthode [EnsureCreated](/dotnet/api/microsoft.entityframeworkcore.infrastructure.databasefacade.ensurecreated#Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_EnsureCreated) n’effectue aucune action s’il existe une base de données pour le contexte. S’il n’existe pas de base de données, elle crée la base de données et le schéma. `EnsureCreated` active le workflow suivant pour gérer les modifications du modèle de données :
+
+* Supprimez la base de données. Toutes les données existantes sont perdues.
+* Modifiez le modèle de données. Par exemple, ajoutez un champ `EmailAddress`.
+* Exécutez l'application.
+* `EnsureCreated` crée une base de données avec le nouveau schéma.
+
+Ce workflow fonctionne bien à un stade précoce du développement, quand le schéma évolue rapidement, aussi longtemps que vous n’avez pas besoin de conserver les données. La situation est différente quand les données qui ont été entrées dans la base de données doivent être conservées. Dans ce cas, procédez à des migrations.
+
+Plus tard dans cette série de tutoriels, vous supprimerez la base de données créée par `EnsureCreated` et procéderez à des migrations. Une base de données créée par `EnsureCreated` ne peut pas être mise à jour via des migrations.
+
+### <a name="test-the-app"></a>Tester l’application
+
+* Exécutez l'application.
+* Sélectionnez le lien **Students**, puis **Créer nouveau**.
+* Testez les liens Edit, Details et Delete.
+
+## <a name="seed-the-database"></a>Amorcer la base de données
+
+La méthode `EnsureCreated` crée une base de données vide. Cette section ajoute du code qui remplit la base de données avec des données de test.
+
+Créez *Data/DbInitializer.cs* avec le code suivant :
+<!-- next update, keep this file in the project and surround with #if -->
+  [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/DbInitializer.cs)]
+
+  Le code vérifie si des étudiants figurent dans la base de données. S’il n’y a pas d’étudiants, il ajoute des données de test à la base de données. Il crée les données de test dans des tableaux et non dans des collections `List<T>` afin d’optimiser les performances.
+
+* Dans *Program.cs*, remplacez l’appel `EnsureCreated` par un appel `DbInitializer.Initialize` :
+
+  ```csharp
+  // context.Database.EnsureCreated();
+  DbInitializer.Initialize(context);
+  ```
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+Arrêtez l’application si elle est en cours d’exécution et exécutez la commande suivante dans la **Console du gestionnaire de package** :
+
+```powershell
+Drop-Database
+```
+
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+* Arrêtez l’application si elle est en cours d’exécution, puis supprimez le fichier *CU.db*.
+
+---
+
+* Redémarrez l’application.
+
+* Sélectionnez la page Students pour examiner les données amorcées.
+
+## <a name="view-the-database"></a>Afficher la base de données
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Ouvrez **l’Explorateur d’objets SQL Server** (SSOX) à partir du menu **Affichage** de Visual Studio.
 * Dans SSOX, sélectionnez **(localdb)\MSSQLLocalDB > Databases > SchoolContext-{GUID}**. Le nom de la base de données est généré à partir du nom de contexte indiqué précédemment, ainsi que d’un tiret et d’un GUID.
@@ -473,7 +908,7 @@ L’exemple d’application est un site web pour une université Contoso fictive
 
 ## <a name="prerequisites"></a>Prérequis
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 [!INCLUDE [](~/includes/net-core-prereqs-windows.md)]
 
@@ -503,7 +938,7 @@ Le style de l’interface utilisateur de ce site est proche de ce qui est géné
 
 ## <a name="create-the-contosouniversity-no-locrazor-pages-web-app"></a>Créer l' Razor application Web ContosoUniversity pages
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Dans Visual Studio, dans le menu **Fichier**, sélectionnez **Nouveau** > **Projet**.
 * Créez une application web ASP.NET Core. Nommez le projet **ContosoUniversity**. Il est important de nommer le projet *ContosoUniversity* afin que les espaces de noms correspondent quand le code est copié/collé.
@@ -599,7 +1034,7 @@ Dans cette section, le modèle d’étudiant est généré automatiquement. Autr
 * Créez le projet.
 * Créez le dossier *Pages/Students*.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Dans **l’Explorateur de solutions**, cliquez avec le bouton droit sur le dossier *Pages/Students* > **Ajouter** > **Nouvel élément généré automatiquement**.
 * Dans la boîte de dialogue **Ajouter une structure** , sélectionnez ** Razor pages à l’aide de Entity Framework (CRUD)** > **Ajouter**.
@@ -674,7 +1109,7 @@ Le code suivant montre le fichier *Program.cs* mis à jour.
 
 `EnsureCreated` est pratique au début du développement quand le schéma évolue rapidement. Plus loin dans le tutoriel, la base de données est supprimée et les migrations sont utilisées.
 
-### <a name="test-the-app"></a>Test de l'application
+### <a name="test-the-app"></a>Tester l’application
 
 Exécutez l’application et acceptez la cookie stratégie. Cette application ne conserve pas les informations personnelles. Pour en savoir plus sur la cookie stratégie au niveau de la [prise en charge de l’union européenne règlement général sur la protection des données (RGPD)](xref:security/gdpr).
 
@@ -718,7 +1153,7 @@ Dans *Program.cs*, modifiez la méthode `Main` pour appeler `Initialize` :
 
 [!code-csharp[](intro/samples/cu21/Program.cs?name=snippet2&highlight=14-15)]
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Arrêtez l’application si elle est en cours d’exécution et exécutez la commande suivante dans la **Console du gestionnaire de package** :
 
@@ -774,7 +1209,7 @@ Dans le didacticiel suivant, nous allons examiner les opérations CRUD de base (
 
 
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Version YouTube de ce tutoriel](https://www.youtube.com/watch?v=P7iTtQnkrNs)
 

@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: d5be01c67f455a2706a654574ef9f5e273551e70
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 478e9e58f265a8c372dd048f9ba8593424050e01
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865446"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722668"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>Globalisation et localisation dans ASP.NET Core
 
@@ -66,7 +66,7 @@ Le code ci-dessus illustre chacune des deux méthodes de création.
 
 Vous pouvez partitionner vos chaînes localisées par contrôleur, par zone ou avoir un seul conteneur. Dans l’exemple d’application, une classe fictive nommée `SharedResource` est utilisée pour les ressources partagées.
 
-[!code-csharp[](localization/sample/3.x/Localization/Resources/SharedResource.cs)]
+[!code-csharp[](localization/sample/3.x/Localization/SharedResource.cs)]
 
 Certains développeurs utilisent la classe `Startup` pour contenir des chaînes globales ou partagées. Dans l’exemple ci-dessous, les localiseurs `InfoController` et `SharedResource` sont utilisés :
 
@@ -164,7 +164,7 @@ Dans l’exemple de projet, la méthode `ConfigureServices` affecte à `Resource
 | Nom de la ressource | Affectation de noms avec des points ou un chemin |
 | ------------   | ------------- |
 | Resources/Controllers.HomeController.fr.resx | Points  |
-| Resources/Controllers/HomeController.fr.resx  | Path |
+| Resources/Controllers/HomeController.fr.resx  | Chemin d’accès |
 
 Les fichiers de ressources utilisant `@inject IViewLocalizer` dans les Razor vues suivent un modèle similaire. Le fichier de ressources d’une vue peut être nommé selon la convention avec des points ou un chemin. Razor les fichiers de ressources d’affichage imitent le chemin d’accès de leur fichier de vue associé. Si nous affectons à `ResourcesPath` la valeur « Resources », le fichier de ressources en français associé à l’affichage *Views/Home/About.cshtml* peut porter l’un des noms suivants :
 
@@ -420,7 +420,7 @@ Le code ci-dessus illustre chacune des deux méthodes de création.
 
 Vous pouvez partitionner vos chaînes localisées par contrôleur, par zone ou avoir un seul conteneur. Dans l’exemple d’application, une classe fictive nommée `SharedResource` est utilisée pour les ressources partagées.
 
-[!code-csharp[](localization/sample/3.x/Localization/Resources/SharedResource.cs)]
+[!code-csharp[](localization/sample/3.x/Localization/SharedResource.cs)]
 
 Certains développeurs utilisent la classe `Startup` pour contenir des chaînes globales ou partagées. Dans l’exemple ci-dessous, les localiseurs `InfoController` et `SharedResource` sont utilisés :
 
@@ -518,7 +518,7 @@ Dans l’exemple de projet, la méthode `ConfigureServices` affecte à `Resource
 | Nom de la ressource | Affectation de noms avec des points ou un chemin |
 | ------------   | ------------- |
 | Resources/Controllers.HomeController.fr.resx | Points  |
-| Resources/Controllers/HomeController.fr.resx  | Path |
+| Resources/Controllers/HomeController.fr.resx  | Chemin d’accès |
 
 Les fichiers de ressources utilisant `@inject IViewLocalizer` dans les Razor vues suivent un modèle similaire. Le fichier de ressources d’une vue peut être nommé selon la convention avec des points ou un chemin. Razor les fichiers de ressources d’affichage imitent le chemin d’accès de leur fichier de vue associé. Si nous affectons à `ResourcesPath` la valeur « Resources », le fichier de ressources en français associé à l’affichage *Views/Home/About.cshtml* peut porter l’un des noms suivants :
 
@@ -775,7 +775,7 @@ Le code ci-dessus illustre chacune des deux méthodes de création.
 
 Vous pouvez partitionner vos chaînes localisées par contrôleur, par zone ou avoir un seul conteneur. Dans l’exemple d’application, une classe fictive nommée `SharedResource` est utilisée pour les ressources partagées.
 
-[!code-csharp[](localization/sample/3.x/Localization/Resources/SharedResource.cs)]
+[!code-csharp[](localization/sample/3.x/Localization/SharedResource.cs)]
 
 Certains développeurs utilisent la classe `Startup` pour contenir des chaînes globales ou partagées. Dans l’exemple ci-dessous, les localiseurs `InfoController` et `SharedResource` sont utilisés :
 
@@ -873,7 +873,7 @@ Dans l’exemple de projet, la méthode `ConfigureServices` affecte à `Resource
 | Nom de la ressource | Affectation de noms avec des points ou un chemin |
 | ------------   | ------------- |
 | Resources/Controllers.HomeController.fr.resx | Points  |
-| Resources/Controllers/HomeController.fr.resx  | Path |
+| Resources/Controllers/HomeController.fr.resx  | Chemin d’accès |
 
 Les fichiers de ressources utilisant `@inject IViewLocalizer` dans les Razor vues suivent un modèle similaire. Le fichier de ressources d’une vue peut être nommé selon la convention avec des points ou un chemin. Razor les fichiers de ressources d’affichage imitent le chemin d’accès de leur fichier de vue associé. Si nous affectons à `ResourcesPath` la valeur « Resources », le fichier de ressources en français associé à l’affichage *Views/Home/About.cshtml* peut porter l’un des noms suivants :
 

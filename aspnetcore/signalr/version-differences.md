@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: a8336a6c13c502f5a0fad150785cd9d484064618
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 965fbb3d8007cb64aaf51d82d87ed7a3a5298e9b
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633004"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90721786"
 ---
 # <a name="differences-between-aspnet-no-locsignalr-and-aspnet-core-no-locsignalr"></a>Différences entre ASP.NET SignalR et ASP.net Core SignalR
 
@@ -156,7 +156,7 @@ La possibilité de passer un état arbitraire entre les clients et le Hub (souve
 
 ### <a name="persistentconnection-removal"></a>Suppression de PersistentConnection
 
-Dans ASP.NET Core SignalR , la classe [PersistentConnection](https://docs.microsoft.com/previous-versions/aspnet/jj919047(v%3dvs.118)) a été supprimée.
+Dans ASP.NET Core SignalR , la classe [PersistentConnection](/previous-versions/aspnet/jj919047(v=vs.118)) a été supprimée.
 
 ### <a name="globalhost"></a>GlobalHost
 
@@ -289,7 +289,7 @@ ASP.NET SignalR prend en charge les SQL Server et les ReDim. ASP.NET Core Signal
 * [SignalRService Azure](/azure/azure-signalr/)
 * [Fond de panier ReDim](xref:signalr/redis-backplane)
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Hubs](xref:signalr/hubs)
 * [Client JavaScript](xref:signalr/javascript-client)

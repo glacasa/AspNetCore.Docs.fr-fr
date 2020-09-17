@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/modules
-ms.openlocfilehash: 7ddc1b0f80625fbc39ac49f305f745b005cbce46
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6936071339786262fa8eeb669a59225a695d7488
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634668"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722804"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>Modules IIS avec ASP.NET Core
 
@@ -174,9 +174,9 @@ Le module de mise en cache d’URI (`UriCacheModule`) permet à IIS de mettre en
 
 Le module de mise en cache HTTP (`HttpCacheModule`) implémente le cache de sortie IIS, ainsi que la logique de mise en cache des éléments dans le cache HTTP.sys. Sans ce module, le contenu n’est plus mis en cache en mode noyau, et les profils de cache sont ignorés. En règle générale, la suppression du module de mise en cache HTTP a des effets négatifs sur les performances et l’utilisation des ressources. *Bien que le module de mise en cache HTTP ne soit pas absolument nécessaire à l’exécution d’une application ASP.NET Core hébergée, nous vous recommandons de l’activer pour tous les déploiements ASP.NET Core.*
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Présentation des architectures IIS : modules dans IIS](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture#modules-in-iis)
 * [Vue d’ensemble des modules IIS](/iis/get-started/introduction-to-iis/iis-modules-overview)
-* [Customizing IIS 7.0 Roles and Modules](https://technet.microsoft.com/library/cc627313.aspx) (Personnalisation des rôles et des modules dans IIS 7.0)
+* [Customizing IIS 7.0 Roles and Modules](/previous-versions/tn-archive/cc627313(v=technet.10)) (Personnalisation des rôles et des modules dans IIS 7.0)
 * [INFORMATION \<system.webServer>](/iis/configuration/system.webServer/)

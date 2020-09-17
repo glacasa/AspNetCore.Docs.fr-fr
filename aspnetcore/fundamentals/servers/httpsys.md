@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 29af28f512764b9efec682b44c8de1d2ae03ee04
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e5346c1e58127747d777b5040fe7bc7d99b9a489
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631132"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722869"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>Implémentation du serveur web HTTP.sys dans ASP.NET Core
 
@@ -255,7 +255,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
    Documentation de référence de *netsh.exe* :
 
-   * [Commandes netsh pour le protocole HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
+   * [Commandes netsh pour le protocole HTTP (Hypertext Transfer Protocol)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [Chaînes UrlPrefix](/windows/win32/http/urlprefix-strings)
 
 1. Exécutez l'application.
@@ -272,12 +272,12 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
 Pour les applications hébergées par HTTP.sys qui interagissent avec les demandes provenant d’Internet ou d’un réseau d’entreprise, une configuration supplémentaire peut être nécessaire en cas d’hébergement derrière des serveurs proxy et des équilibreurs de charge. Pour plus d’informations, consultez l’article [Configurer ASP.NET Core pour l’utilisation de serveurs proxy et d’équilibreurs de charge](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Activer l’authentification Windows avec HTTP.sys](xref:security/authentication/windowsauth#httpsys)
 * [API de serveur HTTP](/windows/win32/http/http-api-start-page)
 * [Référentiel GitHub aspnet/HttpSysServer (code source)](https://github.com/aspnet/HttpSysServer/)
-* [Hôte](xref:fundamentals/index#host)
+* [L’hôte](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>
 
 ::: moniker-end
@@ -506,7 +506,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
    Documentation de référence de *netsh.exe* :
 
-   * [Commandes netsh pour le protocole HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
+   * [Commandes netsh pour le protocole HTTP (Hypertext Transfer Protocol)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [Chaînes UrlPrefix](/windows/win32/http/urlprefix-strings)
 
 1. Exécutez l'application.
@@ -523,12 +523,12 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
 Pour les applications hébergées par HTTP.sys qui interagissent avec les demandes provenant d’Internet ou d’un réseau d’entreprise, une configuration supplémentaire peut être nécessaire en cas d’hébergement derrière des serveurs proxy et des équilibreurs de charge. Pour plus d’informations, consultez l’article [Configurer ASP.NET Core pour l’utilisation de serveurs proxy et d’équilibreurs de charge](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Activer l’authentification Windows avec HTTP.sys](xref:security/authentication/windowsauth#httpsys)
 * [API de serveur HTTP](/windows/win32/http/http-api-start-page)
 * [Référentiel GitHub aspnet/HttpSysServer (code source)](https://github.com/aspnet/HttpSysServer/)
-* [Hôte](xref:fundamentals/index#host)
+* [L’hôte](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>
 
 ::: moniker-end
@@ -759,7 +759,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
    Documentation de référence de *netsh.exe* :
 
-   * [Commandes netsh pour le protocole HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
+   * [Commandes netsh pour le protocole HTTP (Hypertext Transfer Protocol)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [Chaînes UrlPrefix](/windows/win32/http/urlprefix-strings)
 
 1. Exécutez l'application.
@@ -776,12 +776,12 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
 Pour les applications hébergées par HTTP.sys qui interagissent avec les demandes provenant d’Internet ou d’un réseau d’entreprise, une configuration supplémentaire peut être nécessaire en cas d’hébergement derrière des serveurs proxy et des équilibreurs de charge. Pour plus d’informations, consultez l’article [Configurer ASP.NET Core pour l’utilisation de serveurs proxy et d’équilibreurs de charge](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Activer l’authentification Windows avec HTTP.sys](xref:security/authentication/windowsauth#httpsys)
 * [API de serveur HTTP](/windows/win32/http/http-api-start-page)
 * [Référentiel GitHub aspnet/HttpSysServer (code source)](https://github.com/aspnet/HttpSysServer/)
-* [Hôte](xref:fundamentals/index#host)
+* [L’hôte](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>
 
 ::: moniker-end
@@ -1012,7 +1012,7 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
    Documentation de référence de *netsh.exe* :
 
-   * [Commandes netsh pour le protocole HTTP (Hypertext Transfer Protocol)](https://technet.microsoft.com/library/cc725882.aspx)
+   * [Commandes netsh pour le protocole HTTP (Hypertext Transfer Protocol)](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [Chaînes UrlPrefix](/windows/win32/http/urlprefix-strings)
 
 1. Exécutez l'application.
@@ -1029,12 +1029,12 @@ Dans Visual Studio, le profil de démarrage par défaut est destiné à IIS Expr
 
 Pour les applications hébergées par HTTP.sys qui interagissent avec les demandes provenant d’Internet ou d’un réseau d’entreprise, une configuration supplémentaire peut être nécessaire en cas d’hébergement derrière des serveurs proxy et des équilibreurs de charge. Pour plus d’informations, consultez l’article [Configurer ASP.NET Core pour l’utilisation de serveurs proxy et d’équilibreurs de charge](xref:host-and-deploy/proxy-load-balancer).
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Activer l’authentification Windows avec HTTP.sys](xref:security/authentication/windowsauth#httpsys)
 * [API de serveur HTTP](/windows/win32/http/http-api-start-page)
 * [Référentiel GitHub aspnet/HttpSysServer (code source)](https://github.com/aspnet/HttpSysServer/)
-* [Hôte](xref:fundamentals/index#host)
+* [L’hôte](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>
 
 ::: moniker-end

@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/migrations
-ms.openlocfilehash: d922e3a4ad3660bdd1c70dc262acc2f87bdd4214
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 78eb466fcfeb130e411df490f033114b3fdebeef
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626998"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722629"
 ---
 # <a name="part-4-no-locrazor-pages-with-ef-core-migrations-in-aspnet-core"></a>Partie 4 : Razor pages avec EF Core migrations dans ASP.net Core
 
@@ -43,7 +43,7 @@ Au lieu de supprimer et de recréer la base de données quand le modèle de donn
 
 ## <a name="drop-the-database"></a>Supprimer la base de données
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Utilisez l’**Explorateur d’objets SQL Server** (SSOX) pour supprimer la base de données ou exécutez la commande suivante dans la **console du Gestionnaire de package** (PMC) :
 
@@ -71,7 +71,7 @@ Drop-Database
 
 ## <a name="create-an-initial-migration"></a>Créer une migration initiale
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Exécutez les commandes suivantes dans PMC :
 
@@ -132,7 +132,7 @@ Exécutez l’application et vérifiez que la base de données est amorcée.
 
 ## <a name="applying-migrations-in-production"></a>Application de migrations en production
 
-Nous **déconseillons** l’appel de [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) dans les applications de production pendant leur démarrage. `Migrate` ne doit pas être appelé à partir d’une application déployée sur une batterie de serveurs. Si un scale-out de plusieurs instances de serveur a lieu sur l’application, il est difficile de vérifier que les mises à jour du schéma de base de données ne se produisent pas à partir de plusieurs serveurs ou qu’elles ne sont pas en conflit avec un accès en lecture/écriture.
+Nous **déconseillons** l’appel de [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) dans les applications de production pendant leur démarrage. `Migrate` ne doit pas être appelé à partir d’une application déployée sur une batterie de serveurs. Si un scale-out de plusieurs instances de serveur a lieu sur l’application, il est difficile de vérifier que les mises à jour du schéma de base de données ne se produisent pas à partir de plusieurs serveurs ou qu’elles ne sont pas en conflit avec un accès en lecture/écriture.
 
 La migration de base de données doit être effectuée dans le cadre du déploiement et de manière contrôlée. Parmi les approches de migration de base de données de production, citons :
 
@@ -151,7 +151,7 @@ Login failed for user 'user name'.
 
 La solution peut consister à exécuter `dotnet ef database update` à partir d’une invite de commandes.
 
-### <a name="additional-resources"></a>Ressources complémentaires
+### <a name="additional-resources"></a>Ressources supplémentaires
 
 * [CLI EF Core](/ef/core/miscellaneous/cli/dotnet)
 * [Console du Gestionnaire de package (Visual Studio)](/ef/core/miscellaneous/cli/powershell)
@@ -187,7 +187,7 @@ Plutôt que de supprimer et de recréer la base de données quand le modèle de 
 
 Utilisez **l’Explorateur d’objets SQL Server** (SSOX) ou la commande `database drop` :
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Dans la **console du Gestionnaire de package**, exécutez la commande suivante :
 
@@ -213,7 +213,7 @@ Entrez ce qui suit dans la fenêtre de commande :
 
 Générez le projet et créez la première migration.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ```powershell
 Add-Migration InitialCreate
@@ -254,7 +254,7 @@ Les migrations créent un *instantané* du schéma de base de données actuel da
 
 Pour supprimer une migration, utilisez la commande suivante :
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 Remove-Migration
 
@@ -295,7 +295,7 @@ Exécutez l’application et vérifiez que tout fonctionne.
 
 ## <a name="applying-migrations-in-production"></a>Application de migrations en production
 
-Nous vous recommandons de faire en sorte que les applications de production n’appellent **pas**[Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) au démarrage de l’application. `Migrate` ne doit pas être appelée à partir d’une application dans la batterie de serveurs, par exemple si l’application a été déployée dans le cloud avec montée en puissance parallèle (plusieurs instances de l’application sont en cours d’exécution).
+Nous vous recommandons de faire en sorte que les applications de production n’appellent **pas**[Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) au démarrage de l’application. `Migrate` ne doit pas être appelée à partir d’une application dans la batterie de serveurs, par exemple si l’application a été déployée dans le cloud avec montée en puissance parallèle (plusieurs instances de l’application sont en cours d’exécution).
 
 La migration de base de données doit être effectuée dans le cadre du déploiement et de manière contrôlée. Parmi les approches de migration de base de données de production, citons :
 
@@ -319,7 +319,7 @@ Login failed for user 'user name'.
 
 Solution : Exécutez `dotnet ef database update`.
 
-### <a name="additional-resources"></a>Ressources complémentaires
+### <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Version YouTube de ce tutoriel](https://www.youtube.com/watch?v=OWSUuMLKTJo)
 * [CLI .net Core](/ef/core/miscellaneous/cli/dotnet).

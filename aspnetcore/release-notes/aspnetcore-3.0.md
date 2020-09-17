@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: a53ba22c301b04aafa1eeb53d91f82f90dab0bad
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a1cbd8f434214ce488fc3febe63d8aaf54db71a3
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631548"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722785"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>Nouveautés de ASP.NET Core 3,0
 
@@ -397,7 +397,7 @@ Configuration requise pour l’ordinateur hôte :
 * Les hôtes Windows doivent avoir des [noms de principal du service](/windows/win32/ad/service-principal-names) (SPN) ajoutés au compte d’utilisateur qui héberge l’application.
 * Les ordinateurs Linux et macOS doivent être joints au domaine.
   * Les noms de principal du service doivent être créés pour le processus Web.
-  * Les [fichiers keytab](https://blogs.technet.microsoft.com/pie/2018/01/03/all-you-need-to-know-about-keytab-files/) doivent être générés et configurés sur l’ordinateur hôte.
+  * Les [fichiers keytab](/archive/blogs/pie/all-you-need-to-know-about-keytab-files) doivent être générés et configurés sur l’ordinateur hôte.
 
 Pour plus d'informations, consultez <xref:security/authentication/windowsauth>.
 
@@ -550,4 +550,3 @@ Pour obtenir la liste complète des assemblys supprimés de l’infrastructure p
 ## Additional information
 For the complete list of changes, see the [ASP.NET Core 3.0 Release Notes](WHERE IS THIS????).
 -->
- 

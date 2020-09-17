@@ -1,8 +1,8 @@
 ---
-title: Tester les services avec les outils gRPC
+title: Tester gRPC services avec gRPCurl dans ASP.NET Core
 author: jamesnk
 description: Découvrez comment tester les services avec les outils gRPC. gRPCurl un outil en ligne de commande pour interagir avec les services gRPC. gRPCui est une interface utilisateur Web interactive.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: jamesnk
 ms.date: 08/09/2020
 no-loc:
@@ -17,23 +17,26 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/test-tools
-ms.openlocfilehash: ba51d9b5db2e9fbc7583856d79ab8658eff9b586
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 15652431ea4bebc879af4c57667cbf854c49330c
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90594417"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90721816"
 ---
-# <a name="test-services-with-grpc-tools"></a>Tester les services avec les outils gRPC
+# <a name="test-grpc-services-with-grpcurl-in-aspnet-core"></a>Tester gRPC services avec gRPCurl dans ASP.NET Core
 
 Par [James Newton-King](https://twitter.com/jamesnk)
 
-Les outils sont disponibles pour gRPC qui permet aux développeurs de tester les services sans générer d’applications clientes. [gRPCurl](https://github.com/fullstorydev/grpcurl) est un outil de ligne de commande qui fournit une interaction avec les services gRPC. [gRPCui](https://github.com/fullstorydev/grpcui) ajoute une interface utilisateur Web interactive pour gRPC.
+Les outils sont disponibles pour gRPC qui permet aux développeurs de tester les services sans générer d’applications clientes :
+
+* [gRPCurl](https://github.com/fullstorydev/grpcurl) est un outil de ligne de commande qui fournit une interaction avec les services gRPC.
+* [gRPCui](https://github.com/fullstorydev/grpcui) s’appuie sur gRPCurl et ajoute une interface utilisateur Web interactive pour gRPC, semblable à des outils tels que le billet et l’interface utilisateur Swagger.
 
 Cet article explique comment :
 
 * Téléchargez et installez gRPCurl et gRPCui.
-* Configurer la réflexion gRPC avec une application gRPC ASP.NET Core.
+* Configurez la réflexion gRPC avec une application gRPC ASP.NET Core.
 * Découvrez et testez les services gRPC avec `grpcurl` .
 * Interagissez avec les services gRPC via un navigateur à l’aide de `grpcui` .
 
@@ -48,21 +51,31 @@ gRPCurl est un outil de ligne de commande créé par la communauté gRPC. Ses fo
 
 Pour plus d’informations sur le téléchargement et l’installation de `grpcurl` , consultez la [page d’accueil gRPCurl GitHub](https://github.com/fullstorydev/grpcurl#installation).
 
-## <a name="setup-grpc-reflection"></a>Configurer la réflexion gRPC
+![ligne de commande gRPCurl](~/grpc/test-tools/static/grpcurl.png)
+
+## <a name="set-up-grpc-reflection"></a>Configurer la réflexion gRPC
 
 `grpcurl` doit connaître le contrat Protobuf des services avant de pouvoir les appeler. Il existe deux façons d'effectuer cette opération :
 
-* Utilisez la réflexion gRPC pour découvrir les contrats de service.
-* Spécifiez les fichiers *. proto* dans les arguments de ligne de commande.
+* Configurez la [réflexion gRPC](https://github.com/grpc/grpc/blob/master/doc/server-reflection.md) sur le serveur. gRPCurl Découvre automatiquement les contrats de service.
+* Spécifiez `.proto` les fichiers dans les arguments de ligne de commande de gRPCurl.
 
-Il est plus facile d’utiliser gRPCurl avec la réflexion gRPC et la découverte de service. gRPC ASP.NET Core offre une prise en charge intégrée de la réflexion gRPC avec le package [gRPC. AspNetCore. Server. Reflection](https://www.nuget.org/packages/Grpc.AspNetCore.Server.Reflection) . Pour configurer la réflexion dans une application :
+Il est plus facile d’utiliser gRPCurl avec la réflexion gRPC. la réflexion gRPC ajoute un nouveau service gRPC à l’application que les clients peuvent appeler pour découvrir les services.
+
+gRPC ASP.NET Core offre une prise en charge intégrée de la réflexion gRPC avec le [`Grpc.AspNetCore.Server.Reflection`](https://www.nuget.org/packages/Grpc.AspNetCore.Server.Reflection) Package. Pour configurer la réflexion dans une application :
 
 * Ajoutez une `Grpc.AspNetCore.Server.Reflection` référence de package.
-* Inscrire la réflexion dans *Startup.cs*:
+* Inscrire la réflexion dans `Startup.cs` :
   * `AddGrpcReflection` pour inscrire des services qui activent la réflexion.
-  * `MapGrpcReflectionService` pour ajouter le point de terminaison du service de réflexion.
+  * `MapGrpcReflectionService` pour ajouter un point de terminaison de service de réflexion.
 
-[!code-csharp[](~/grpc/test-tools/Startup.cs?name=snippet_1&highlight=4,14)]
+[!code-csharp[](~/grpc/test-tools/Startup.cs?name=snippet_1&highlight=4,15-18)]
+
+Quand la réflexion gRPC est configurée :
+
+* Un service de réflexion gRPC est ajouté à l’application serveur.
+* Les applications clientes qui prennent en charge la réflexion gRPC peuvent appeler le service de réflexion pour découvrir les services hébergés par le serveur.
+* les services gRPC sont toujours appelés depuis le client. La réflexion active uniquement la détection de service et ne contourne pas la sécurité côté serveur. Les points de terminaison protégés par l' [authentification et l’autorisation](xref:grpc/authn-and-authz) requièrent que l’appelant transmette les informations d’identification pour que le point de terminaison soit appelé avec succès.
 
 ## <a name="use-grpcurl"></a>Utilisez `grpcurl`.
 
@@ -91,7 +104,7 @@ service ServerReflection {
 
 L’exemple précédent :
 
-* Exécute un `describe` verbe sur le serveur `localhost:5001` .
+* Exécute le `describe` verbe sur le serveur `localhost:5001` .
 * Imprime les services et les méthodes retournés par la réflexion gRPC.
   * `Greeter` est un service implémenté par l’application.
   * `ServerReflection` est le service ajouté par le `Grpc.AspNetCore.Server.Reflection` Package.
@@ -108,7 +121,7 @@ message HelloRequest {
 
 ### <a name="call-grpc-services"></a>Appeler gRPC services
 
-Appelez un service gRPC en spécifiant un nom de service et de méthode, ainsi qu’un argument JSON qui représente le message de demande. Le JSON est converti en Protobuf et envoyé au service.
+Appelez un service gRPC en spécifiant un nom de service et de méthode avec un argument JSON qui représente le message de demande. Le JSON est converti en Protobuf et envoyé au service.
 
 ```powershell
 > grpcurl.exe -d '{ \"name\": \"World\" }' localhost:5001 greet.Greeter/SayHello
@@ -117,21 +130,21 @@ Appelez un service gRPC en spécifiant un nom de service et de méthode, ainsi q
 }
 ```
 
-L’exemple précédent :
+Dans l’exemple précédent :
 
-* `-d` l’argument spécifie un message de demande avec JSON. Cet argument doit précéder l’adresse du serveur et le nom de la méthode.
+* L' `-d` argument spécifie un message de demande avec JSON. Cet argument doit précéder l’adresse du serveur et le nom de la méthode.
 * Appelle la `SayHello` méthode sur le `greeter.Greeter` service.
 * Imprime le message de réponse au format JSON.
 
 ## <a name="about-grpcui"></a>À propos de gRPCui
 
-gRPCui est une interface utilisateur Web interactive pour gRPC. Il s’appuie sur gRPCurl et offre une interface graphique utilisateur pour la découverte et le test des services gRPC, à l’instar des outils HTTP tels que le poster.
+gRPCui est une interface utilisateur Web interactive pour gRPC. Il s’appuie sur gRPCurl et offre une interface graphique utilisateur pour la découverte et le test des services gRPC, à l’instar des outils HTTP tels que l’interface utilisateur poster ou Swagger.
 
 Pour plus d’informations sur le téléchargement et l’installation de `grpcui` , consultez la [page d’accueil gRPCui GitHub](https://github.com/fullstorydev/grpcui#installation).
 
 ## <a name="using-grpcui"></a>Utilisation de `grpcui`
 
-Exécutez `grpcui` avec l’adresse du serveur pour interagir comme un argument.
+Exécutez `grpcui` avec l’adresse de serveur pour interagir comme argument :
 
 ```powershell
 > grpcui.exe localhost:5001
@@ -146,4 +159,4 @@ L’outil lance une fenêtre de navigateur avec l’interface utilisateur Web in
 
 * [Page d’accueil gRPCurl GitHub](https://github.com/fullstorydev/grpcurl)
 * [Page d’accueil gRPCui GitHub](https://github.com/fullstorydev/grpcui)
-* [GRPC. AspNetCore. Server. Reflection](https://www.nuget.org/packages/Grpc.AspNetCore.Server.Reflection)
+* [`Grpc.AspNetCore.Server.Reflection`](https://www.nuget.org/packages/Grpc.AspNetCore.Server.Reflection)

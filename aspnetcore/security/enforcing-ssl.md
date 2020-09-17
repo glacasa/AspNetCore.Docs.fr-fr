@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: 1cb2c2d18b717dc99c6ef4dac9954fef149c6deb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b5260084c2fdd296168e918f06d8b54faf1865d5
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631561"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722655"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>Appliquer le protocole HTTPs en ASP.NET Core
 
@@ -109,7 +109,7 @@ Spécifiez le port HTTPs à l’aide de l’une des approches suivantes :
 
 ::: moniker range=">= aspnetcore-3.0"
 
-* Définissez le `https_port` [paramètre d’ordinateur hôte](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#https_port):
+* Définissez le `https_port` [paramètre d’ordinateur hôte](../fundamentals/host/generic-host.md?view=aspnetcore-3.0#https_port):
 
   * Dans la configuration de l’hôte.
   * En définissant la `ASPNETCORE_HTTPS_PORT` variable d’environnement.
@@ -117,7 +117,7 @@ Spécifiez le port HTTPs à l’aide de l’une des approches suivantes :
 
     [!code-json[](enforcing-ssl/sample-snapshot/3.x/appsettings.json?highlight=2)]
 
-* Indiquez un port avec le schéma sécurisé à l’aide de la [variable d’environnement ASPNETCORE_URLS](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#urls). La variable d’environnement configure le serveur. L’intergiciel Découvre indirectement le port HTTPs via <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> . Cette approche ne fonctionne pas dans les déploiements de proxy inverse.
+* Indiquez un port avec le schéma sécurisé à l’aide de la [variable d’environnement ASPNETCORE_URLS](../fundamentals/host/generic-host.md?view=aspnetcore-3.0#urls). La variable d’environnement configure le serveur. L’intergiciel Découvre indirectement le port HTTPs via <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> . Cette approche ne fonctionne pas dans les déploiements de proxy inverse.
 
 ::: moniker-end
 
@@ -305,7 +305,7 @@ Dans certains scénarios de service backend où la sécurité de connexion est g
 
 Pour désactiver HTTPs/HSTS :
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio) 
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio) 
 
 Désactivez la case à cocher **configurer pour HTTPS** .
 
@@ -398,7 +398,7 @@ Cette section fournit de l’aide lorsque le certificat de développement HTTPs 
 
 ### <a name="all-platforms---certificate-not-trusted"></a>Toutes les plateformes-certificat non approuvé
 
-Exécutez les commandes suivantes :
+Exécutez les commandes suivantes :
 
 ```dotnetcli
 dotnet dev-certs https --clean
@@ -419,7 +419,7 @@ Les commandes précédentes résolvent la plupart des problèmes d’approbation
 
 * Vérifiez les certificats dans le magasin de certificats. Il doit y avoir un `localhost` certificat avec le `ASP.NET Core HTTPS development certificate` nom convivial à la fois sous `Current User > Personal > Certificates` et `Current User > Trusted root certification authorities > Certificates`
 * Supprimez tous les certificats détectés des autorités de certification racines personnelles et de confiance. Ne supprimez **pas** le certificat IIS Express localhost.
-* Exécutez les commandes suivantes :
+* Exécutez les commandes suivantes :
 
 ```dotnetcli
 dotnet dev-certs https --clean
@@ -435,7 +435,7 @@ Fermez toutes les instances de navigateur ouvertes. Ouvrez une nouvelle fenêtre
 * Vérifiez la présence d’un certificat localhost.
 * Vérifiez qu’il contient un `+` symbole sur l’icône pour indiquer qu’il est approuvé pour tous les utilisateurs.
 * Supprimez le certificat du trousseau système.
-* Exécutez les commandes suivantes :
+* Exécutez les commandes suivantes :
 
 ```dotnetcli
 dotnet dev-certs https --clean
