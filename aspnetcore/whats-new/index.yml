@@ -6,12 +6,12 @@ metadata:
   description: En savoir plus sur le contenu nouveau et mis à jour dans ASP.NET Core docs.
   ms.topic: landing-page
   ms.date: 08/03/2020
-  ms.openlocfilehash: 5d8bc150d91010cce31d885b3a15e80a8efc7ac3
-  ms.sourcegitcommit: 8ed9a413bdc2d665ad11add8828898d726ccb106
+  ms.openlocfilehash: cb0db16ae400573fb5dafb1d2295037f15e0b9e9
+  ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 09/01/2020
-  ms.locfileid: "89280411"
+  ms.lasthandoff: 09/17/2020
+  ms.locfileid: "90721643"
 landingContent:
 - title: Rechercher les mises à jour de ASP.NET Core docs
   linkLists:
@@ -27,7 +27,7 @@ landingContent:
       url: 2020-05.md
     - text: Avril 2020
       url: 2020-04.md
-    - text: Mars 2020
+    - text: Mars 2020
       url: 2020-03.md
 - title: Participer-contribuer à ASP.NET Core docs
   linkLists:
@@ -40,7 +40,7 @@ landingContent:
   - linkListType: concept
     links:
     - text: Guide du contributeur Microsoft docs
-      url: https://docs.microsoft.com/contribute
+      url: /contribute
     - text: Guide du contributeur ASP.NET Core docs
       url: https://github.com/dotnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md
     - text: Guide du contributeur de documentation de référence sur les API ASP.NET Core
@@ -60,7 +60,7 @@ landingContent:
     - text: Notes de publication de .NET Core
       url: https://github.com/dotnet/core/blob/master/release-notes/README.md
     - text: Notes de publication de ASP.NET Core
-      url: /aspnet/core/release-notes/aspnetcore-3.1
+      url: ../release-notes/aspnetcore-3.1.md
     - text: Notes de publication du compilateur C# (Roslyn)
       url: https://github.com/dotnet/roslyn/tree/master/docs/ide
     - text: Notes de publication de Visual Studio
