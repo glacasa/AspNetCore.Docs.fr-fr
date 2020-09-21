@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr
-ms.openlocfilehash: e98cfc5e95233ce4d1001ab1225fc15e5fd23733
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b69d60e7d0e24f6d3c8032b391c98a6cd1589305
+ms.sourcegitcommit: 9c031530d2e652fe422e786bd43392bc500d622f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634499"
+ms.lasthandoff: 09/18/2020
+ms.locfileid: "90770179"
 ---
 # <a name="tutorial-get-started-with-aspnet-core-no-locsignalr"></a>Didacticiel : prise en main de ASP.NET Core SignalR
 
@@ -43,23 +43,23 @@ Ce didacticiel enseigne les bases de la création d’une application en temps r
 
 ## <a name="prerequisites"></a>Prérequis
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vs-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-vsc-3.1.md)]
 
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
-[!INCLUDE[](~/includes/net-core-prereqs-mac-3.0.md)]
+[!INCLUDE[](~/includes/net-core-prereqs-mac-3.1.md)]
 
 ---
 
 ## <a name="create-a-web-app-project"></a>Créer un projet d’application web
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
 * Dans le menu, sélectionnez **Fichier > Nouveau projet**.
 
@@ -67,7 +67,7 @@ Ce didacticiel enseigne les bases de la création d’une application en temps r
 
 * Dans la boîte de dialogue **configurer votre nouveau projet** , nommez la * SignalR conversation*de projet, puis sélectionnez **créer**.
 
-* Dans la boîte de dialogue **créer une application web ASP.net Core** , sélectionnez **.net Core** et **ASP.net Core 3,0**. 
+* Dans la boîte de dialogue **créer une application web ASP.net Core** , sélectionnez **.net Core** et **ASP.net Core 3,1**. 
 
 * Sélectionnez **application Web** pour créer un projet qui utilise des Razor pages, puis sélectionnez **créer**.
 
@@ -77,7 +77,7 @@ Ce didacticiel enseigne les bases de la création d’une application en temps r
 
 * Ouvrez le [terminal intégré](https://code.visualstudio.com/docs/editor/integrated-terminal) dans le dossier dans lequel le nouveau dossier de projet va être créé.
 
-* Exécutez les commandes suivantes :
+* Exécutez les commandes suivantes :
 
    ```dotnetcli
    dotnet new webapp -o SignalRChat
@@ -90,7 +90,7 @@ Ce didacticiel enseigne les bases de la création d’une application en temps r
 
 * Sélectionnez **.NET Core > Application > Application web** (ne sélectionnez pas **Application web (modèle-vue-contrôleur)**), puis **Suivant**.
 
-* Veillez à sélectionner **.NET Core 3.0** comme **Framework cible**, puis sélectionnez **Suivant**.
+* Assurez-vous que la version cible du .NET **Framework** est définie sur **.net Core 3,1**, puis sélectionnez **suivant**.
 
 * Nommez la * SignalR conversation*de projet, puis sélectionnez **créer**.
 
@@ -98,9 +98,9 @@ Ce didacticiel enseigne les bases de la création d’une application en temps r
 
 ## <a name="add-the-no-locsignalr-client-library"></a>Ajouter la SignalR bibliothèque cliente
 
-La SignalR bibliothèque serveur est incluse dans l’infrastructure partagée ASP.NET Core 3,0. La bibliothèque cliente JavaScript n’est pas incluse automatiquement dans le projet. Pour ce tutoriel, vous utilisez le Gestionnaire de bibliothèque (LibMan) pour obtenir la bibliothèque cliente à partir de *unpkg*. unpkg est un réseau de distribution de contenu (CDN) qui peut fournir tout ce qui se trouve dans NPM, le gestionnaire de package Node.js.
+La SignalR bibliothèque serveur est incluse dans l’infrastructure partagée ASP.NET Core 3,1. La bibliothèque cliente JavaScript n’est pas incluse automatiquement dans le projet. Pour ce tutoriel, vous utilisez le Gestionnaire de bibliothèque (LibMan) pour obtenir la bibliothèque cliente à partir de *unpkg*. unpkg est un réseau de distribution de contenu (CDN) qui peut fournir tout ce qui se trouve dans NPM, le gestionnaire de package Node.js.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
 * Dans **l’Explorateur de solutions**, cliquez avec le bouton droit sur le projet, puis sélectionnez **Ajouter** > **Bibliothèque côté client**.
 
@@ -220,9 +220,9 @@ Le SignalR serveur doit être configuré pour transmettre les SignalR demandes �
   * Ajoute au bouton Envoyer un gestionnaire qui envoie des messages au hub.
   * Ajoute à l’objet de connexion un gestionnaire qui reçoit des messages à partir du hub et les ajoute à la liste.
 
-## <a name="run-the-app"></a>Exécuter l’application
+## <a name="run-the-app"></a>Exécuter l'application
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Appuyez sur **Ctrl+F5** pour exécuter l’application sans débogage.
 
@@ -274,7 +274,7 @@ Ce didacticiel enseigne les bases de la création d’une application en temps r
 
 ## <a name="prerequisites"></a>Prérequis    
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)   
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)   
 
 [!INCLUDE[](~/includes/net-core-prereqs-vs2017-2.2.md)] 
 
@@ -290,7 +290,7 @@ Ce didacticiel enseigne les bases de la création d’une application en temps r
 
 ## <a name="create-a-web-project"></a>Créer un projet web 
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)  
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)  
 
 * Dans le menu, sélectionnez **Fichier > Nouveau projet**. 
 
@@ -308,7 +308,7 @@ Ce didacticiel enseigne les bases de la création d’une application en temps r
 
 * Ouvrez le [terminal intégré](https://code.visualstudio.com/docs/editor/integrated-terminal) dans le dossier dans lequel le nouveau dossier de projet va être créé.  
 
-* Exécutez les commandes suivantes :   
+* Exécutez les commandes suivantes :   
 
    ```dotnetcli 
    dotnet new webapp -o SignalRChat   
@@ -331,7 +331,7 @@ Ce didacticiel enseigne les bases de la création d’une application en temps r
 
 La SignalR bibliothèque serveur est incluse dans le `Microsoft.AspNetCore.App` Package. La bibliothèque cliente JavaScript n’est pas incluse automatiquement dans le projet. Pour ce tutoriel, vous utilisez le Gestionnaire de bibliothèque (LibMan) pour obtenir la bibliothèque cliente à partir de *unpkg*. unpkg est un réseau de distribution de contenu (CDN) qui peut fournir tout ce qui se trouve dans NPM, le gestionnaire de package Node.js.   
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)  
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)  
 
 * Dans **l’Explorateur de solutions**, cliquez avec le bouton droit sur le projet, puis sélectionnez **Ajouter** > **Bibliothèque côté client**.  
 
@@ -453,9 +453,9 @@ Le SignalR serveur doit être configuré pour transmettre les SignalR demandes �
   * Ajoute au bouton Envoyer un gestionnaire qui envoie des messages au hub. 
   * Ajoute à l’objet de connexion un gestionnaire qui reçoit des messages à partir du hub et les ajoute à la liste.  
 
-## <a name="run-the-app"></a>Exécuter l’application  
+## <a name="run-the-app"></a>Exécuter l'application  
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)   
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)   
 
 * Appuyez sur **Ctrl+F5** pour exécuter l’application sans débogage.   
 
@@ -484,7 +484,7 @@ Le SignalR serveur doit être configuré pour transmettre les SignalR demandes �
 > [!TIP]    
 > Si l’application ne fonctionne pas, ouvrez vos outils de développement (F12) de navigateur et accédez à la console. Vous pouvez observer des erreurs liées à votre code HTML et JavaScript. Par exemple, supposez que vous placez *signalr.js* dans un dossier autre que celui stipulé. Dans ce cas, la référence à ce fichier ne fonctionnera pas et vous verrez une erreur 404 dans la console.   
 > ![Erreur de fichier SignalR.js introuvable](signalr/_static/2.x/f12-console.png)    
-## <a name="additional-resources"></a>Ressources complémentaires 
+## <a name="additional-resources"></a>Ressources supplémentaires 
 * [Version YouTube de ce didacticiel](https://www.youtube.com/watch?v=iKlVmu-r0JQ)   
 
 ::: moniker-end

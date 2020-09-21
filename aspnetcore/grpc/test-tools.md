@@ -2,7 +2,7 @@
 title: Tester gRPC services avec gRPCurl dans ASP.NET Core
 author: jamesnk
 description: Découvrez comment tester les services avec les outils gRPC. gRPCurl un outil en ligne de commande pour interagir avec les services gRPC. gRPCui est une interface utilisateur Web interactive.
-monikerRange: '>= aspnetcore-3.1'
+monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 08/09/2020
 no-loc:
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/test-tools
-ms.openlocfilehash: 15652431ea4bebc879af4c57667cbf854c49330c
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 800b320413552e73f05e0359e67eeb2caf4e0e2a
+ms.sourcegitcommit: 9c031530d2e652fe422e786bd43392bc500d622f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90721816"
+ms.lasthandoff: 09/18/2020
+ms.locfileid: "90770166"
 ---
 # <a name="test-grpc-services-with-grpcurl-in-aspnet-core"></a>Tester gRPC services avec gRPCurl dans ASP.NET Core
 
@@ -81,16 +81,16 @@ Quand la réflexion gRPC est configurée :
 
 L' `-help` argument décrit les `grpcurl` options de ligne de commande :
 
-```powershell
-> grpcurl.exe -help
+```console
+$ grpcurl -help
 ```
 
 ### <a name="discover-services"></a>Découvrir les services
 
 Utilisez le `describe` verbe pour afficher les services définis par le serveur :
 
-```powershell
-> grpcurl.exe localhost:5001 describe
+```console
+$ grpcurl localhost:5001 describe
 greet.Greeter is a service:
 service Greeter {
   rpc SayHello ( .greet.HelloRequest ) returns ( .greet.HelloReply );
@@ -112,7 +112,7 @@ L’exemple précédent :
 Combiner `describe` avec un service, une méthode ou un nom de message pour afficher ses détails :
 
 ```powershell
-> grpcurl.exe localhost:5001 describe greet.HelloRequest
+$ grpcurl localhost:5001 describe greet.HelloRequest
 greet.HelloRequest is a message:
 message HelloRequest {
   string name = 1;
@@ -123,8 +123,8 @@ message HelloRequest {
 
 Appelez un service gRPC en spécifiant un nom de service et de méthode avec un argument JSON qui représente le message de demande. Le JSON est converti en Protobuf et envoyé au service.
 
-```powershell
-> grpcurl.exe -d '{ \"name\": \"World\" }' localhost:5001 greet.Greeter/SayHello
+```console
+$ grpcurl -d '{ \"name\": \"World\" }' localhost:5001 greet.Greeter/SayHello
 {
   "message": "Hello World"
 }
@@ -147,7 +147,7 @@ Pour plus d’informations sur le téléchargement et l’installation de `grpcu
 Exécutez `grpcui` avec l’adresse de serveur pour interagir comme argument :
 
 ```powershell
-> grpcui.exe localhost:5001
+$ grpcui localhost:5001
 gRPC Web UI available at http://127.0.0.1:55038/
 ```
 
