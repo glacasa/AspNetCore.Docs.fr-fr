@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: 3430d842b6a4f7da30370977f72e6f132e28bb7f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 36341a0e439be57d7da4f787aa6103b92c624e96
+ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634252"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90847583"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>Configuration de la connexion externe à un compte Microsoft avec ASP.NET Core
 
@@ -41,6 +41,8 @@ Si vous n’avez pas de compte Microsoft, sélectionnez en **créer un**. Une fo
 * Sélectionner une **nouvelle inscription**
 * Saisissez un **Nom**.
 * Sélectionnez une option pour les **types de comptes pris en charge**.  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts. It took 24 hours after setting this up for the keys to work -->
+  * Par `MicrosoftAccount` défaut, le package prend en charge les inscriptions d’application créées à l’aide de l’option « comptes dans n’importe quel annuaire d’organisation » ou « comptes dans les annuaires d’organisation et les comptes Microsoft ».
+  * Pour utiliser d’autres options, définissez `AuthorizationEndpoint` et les `TokenEndpoint` membres de `MicrosoftAccountOptions` utilisés pour initialiser l’authentification du compte Microsoft à la page URL affichée sur les **points de terminaison** de l’inscription de l’application après sa création (disponible en cliquant sur points de terminaison dans la page **vue d’ensemble** ).
 * Sous **URI de redirection**, entrez votre URL de développement avec le `/signin-microsoft` suffixe. Par exemple : `https://localhost:5001/signin-microsoft`. Le schéma d’authentification Microsoft configuré plus tard dans cet exemple gère automatiquement les demandes à `/signin-microsoft` l’itinéraire pour implémenter le Flow OAuth.
 * Sélectionnez **Inscrire**.
 

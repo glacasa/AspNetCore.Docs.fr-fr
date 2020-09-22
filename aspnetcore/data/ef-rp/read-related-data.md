@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: 41b2ce35a6910df7587af7ebabe8a4984cda6ae5
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: dd00b9d7faf467857ec1e47f4cfb0296d84e5d3f
+ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634967"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90847700"
 ---
 # <a name="part-6-no-locrazor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>Partie 6, Razor pages avec EF Core dans ASP.net Core-lire les données associées
 
@@ -63,7 +63,7 @@ EF Core peut charger des données associées dans les propriétés de navigation
 
   ![Exemple de chargement explicite](read-related-data/_static/explicit-loading.png)
 
-* [Chargement différé](/ef/core/querying/related-data#lazy-loading). [Le chargement différé a été ajouté à EF Core dans la version 2.1](/ef/core/querying/related-data#lazy-loading). Quand l’entité est lue pour la première fois, les données associées ne sont pas récupérées. Lors du premier accès à une propriété de navigation, les données requises pour cette propriété de navigation sont récupérées automatiquement. Une requête est envoyée à la base de données chaque fois qu’une propriété de navigation fait pour la première fois l’objet d’un accès.
+* [Chargement différé](/ef/core/querying/related-data#lazy-loading). Quand l’entité est lue pour la première fois, les données associées ne sont pas récupérées. Lors du premier accès à une propriété de navigation, les données requises pour cette propriété de navigation sont récupérées automatiquement. Une requête est envoyée à la base de données chaque fois qu’une propriété de navigation fait pour la première fois l’objet d’un accès. Le chargement différé peut nuire aux performances, par exemple lorsque les développeurs utilisent des modèles N + 1, en chargeant un parent et en énumérant les enfants.
 
 ## <a name="create-course-pages"></a>Créer des pages Course
 
@@ -653,7 +653,7 @@ Tester l'application. Du point de vue des utilisateurs, l’application se compo
 
 Le didacticiel suivant montre comment mettre à jour les données associées.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Version YouTube de ce tutoriel (partie 1)](https://www.youtube.com/watch?v=PzKimUDmrvE)
 * [Version YouTube de ce tutoriel (partie 2)](https://www.youtube.com/watch?v=xvDDrIHv5ko)
