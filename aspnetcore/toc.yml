@@ -174,6 +174,9 @@
             - name: Implémenter la résilience >>
               displayName: 'tutorial, kubernetes, aks, acr, docker'
               href: /learn/modules/microservices-resiliency-aspnet-core/
+            - name: Déployer avec GitHub Actions >>
+              display: 'tutorial, kubernetes, aks, acr, docker, devops'
+              href: /learn/modules/microservices-devops-aspnet-core/
         - name: Accès aux données >>
           displayName: 'tutorial, ef, entity framework'
           href: /learn/modules/persist-data-ef-core/
