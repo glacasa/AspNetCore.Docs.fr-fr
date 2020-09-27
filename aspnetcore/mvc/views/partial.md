@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 7a370042520adfe5b06784b76acf41a81eb2c72d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: bb75d8b7d78c82c9c32605ac645b8895fdfb78e3
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630625"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393650"
 ---
 # <a name="partial-views-in-aspnet-core"></a>Vues partielles dans ASP.NET Core
 
 Par [Steve Smith](https://ardalis.com/), [Maher JENDOUBI](https://twitter.com/maherjend), [Rick Anderson](https://twitter.com/RickAndMSFT) et [Scott Sauber](https://twitter.com/scottsauber)
 
-Une vue partielle est un [Razor](xref:mvc/views/razor) fichier de balisage (*. cshtml*) qui affiche la sortie HTML *dans* la sortie rendue d’un autre fichier de balisage.
+Une vue partielle est un [Razor](xref:mvc/views/razor) fichier de balisage (*. cshtml*) sans [`@page`](xref:mvc/views/razor#page) directive qui restitue la sortie HTML *dans* la sortie rendue d’un autre fichier de balisage.
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -57,7 +57,7 @@ N’utilisez pas une vue partielle quand du code ou une logique de rendu complex
 
 ::: moniker range=">= aspnetcore-2.0"
 
-Une vue partielle est un fichier de balisage *. cshtml* géré dans le dossier *views* (MVC) ou le dossier *pages* ( Razor pages).
+Une vue partielle est un fichier de balisage *. cshtml* sans [`@page`](xref:mvc/views/razor#page) directive gérée dans le dossier *views* (MVC) ou le dossier *pages* ( Razor pages).
 
 Dans ASP.NET Core MVC, le <xref:Microsoft.AspNetCore.Mvc.ViewResult> d’un contrôleur peut retourner une vue ou une vue partielle. Dans Razor les pages, un <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> peut retourner une vue partielle représentée comme un <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> objet. Le référencement et le rendu des vues partielles sont décrits dans la section [Référencer une vue partielle](#reference-a-partial-view).
 

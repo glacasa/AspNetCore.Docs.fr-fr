@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/additional-scenarios
-ms.openlocfilehash: c8bce9572f0c21fdbd7ed585772c2b7965f40598
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 9b3698489300e45cf77c3d51611ff44e2f4e16a5
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90592941"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393663"
 ---
 # <a name="aspnet-core-no-locblazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor Server des scénarios de sécurité supplémentaires
 
@@ -33,7 +33,7 @@ Par [Javier Calvarro Nelson](https://github.com/javiercn)
 
 Les jetons disponibles en dehors des Razor composants d’une Blazor Server application peuvent être passés aux composants avec l’approche décrite dans cette section. Pour obtenir un exemple de code, y compris un `Startup.ConfigureServices` exemple complet, consultez la page [transmission de jetons à une Blazor application côté serveur](https://github.com/javiercn/blazor-server-aad-sample).
 
-Authentifiez l' Blazor Server application comme vous le feriez avec une Razor application de pages ou MVC standard. Approvisionnez et enregistrez les jetons dans l’authentification cookie . Exemple :
+Authentifiez l' Blazor Server application comme vous le feriez avec une Razor application de pages ou MVC standard. Approvisionnez et enregistrez les jetons dans l’authentification cookie . Par exemple :
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -208,15 +208,15 @@ Si l’ajout d’un segment à l’autorité n’est pas approprié pour le four
           options.Resource = "...";    // REMOVE THIS LINE
           ...
       }
-      ```
+  ```
 
-  For more information, see [Scopes, not resources](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison#scopes-not-resources) in the Azure documentation.
+  Pour plus d’informations, consultez [étendues, et non pas les ressources](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison#scopes-not-resources) dans la documentation Azure.
 
-### App ID URI
+### <a name="app-id-uri"></a>URI ID de l’application
 
-* When using v2.0 endpoints, APIs define an *`App ID URI`*, which is meant to represent a unique identifier for the API.
-* All scopes include the App ID URI as a prefix, and v2.0 endpoints emit access tokens with the App ID URI as the audience.
-* When using V2.0 endpoints, the client ID configured in the Server API changes from the API Application ID (Client ID) to the App ID URI.
+* Lors de l’utilisation de points de terminaison v 2.0, les API définissent un *`App ID URI`* , qui est destiné à représenter un identificateur unique pour l’API.
+* Toutes les étendues incluent l’URI ID d’application en tant que préfixe, et les points de terminaison v 2.0 émettent des jetons d’accès avec l’URI ID d’application en tant que public.
+* Lors de l’utilisation de points de terminaison V 2.0, l’ID client configuré dans l’API du serveur passe de l’ID d’application API (ID client) à l’URI ID d’application.
 
 `appsettings.json`:
 

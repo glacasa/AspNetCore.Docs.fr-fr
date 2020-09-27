@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/streaming
-ms.openlocfilehash: 29748ebe24fea03415b5a01b21300433e3fbc0f0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 5a172818f8910a637b731dc1b1315965f448b2ba
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634213"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393572"
 ---
 # <a name="use-streaming-in-aspnet-core-no-locsignalr"></a>Utiliser la diffusion en continu dans ASP.NET Core SignalR
 
@@ -74,7 +74,7 @@ L’exemple suivant montre les bases de la diffusion en continu de données au c
 > [!NOTE]
 > Écrivez dans `ChannelWriter<T>` sur un thread d’arrière-plan et retournez le dès `ChannelReader` que possible. D’autres appels de concentrateur sont bloqués jusqu’à ce qu’un `ChannelReader` soit retourné.
 >
-> Encapsuler la logique dans un `try ... catch` . Complétez le `Channel` dans `catch` et en dehors de `catch` pour vérifier que l’appel de la méthode de concentrateur est correctement effectué.
+> Encapsulez la logique dans une [ `try ... catch` instruction](/dotnet/csharp/language-reference/keywords/try-catch). Complétez la `Channel` dans un [ `finally` bloc](/dotnet/csharp/language-reference/keywords/try-catch-finally). Si vous souhaitez transmettre une erreur, capturez-la à l’intérieur du `catch` bloc et écrivez-la dans le `finally` bloc.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -322,9 +322,9 @@ La `stream` méthode sur `HubConnection` retourne un observable du type d’él�
 
 ::: moniker-end
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Hubs](xref:signalr/hubs)
 * [Client .NET](xref:signalr/dotnet-client)
 * [Client JavaScript](xref:signalr/javascript-client)
-* [Publier sur Azure](xref:signalr/publish-to-azure-web-app)
+* [Publication dans Azure](xref:signalr/publish-to-azure-web-app)

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: eef08d8236241d2930a1a1a45ca0181669f2432c
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: 493aa7f9cfbf2b47ffcb7d6f8e40de7b62ecfce3
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009646"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393819"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>BlazorLiaison de données ASP.net Core
 
@@ -110,7 +110,7 @@ Par défaut, la liaison s’applique à l’événement de l’élément `onchan
 
 * N’utilisez pas l' `oninput` événement. Utilisez l’événement par défaut `onchange` (spécifiez uniquement `@bind="{PROPERTY OR FIELD}"` ), où une valeur non valide n’est pas rétablie tant que l’élément n’a pas perdu le focus.
 * Effectuer une liaison à un type Nullable, tel que `int?` ou, `string` et fournir une logique personnalisée pour gérer les entrées non valides.
-* Utilisez un [composant de validation de formulaire](xref:blazor/forms-validation), tel que <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> ou <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> . Les composants de validation de formulaire offrent une prise en charge intégrée pour gérer les entrées non valides. Pour plus d’informations, consultez <xref:blazor/forms-validation>. Composants de validation de formulaire :
+* Utilisez un [composant de validation de formulaire](xref:blazor/forms-validation), tel que <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> ou <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> . Les composants de validation de formulaire offrent une prise en charge intégrée pour gérer les entrées non valides. Pour plus d'informations, consultez <xref:blazor/forms-validation>. Composants de validation de formulaire :
   * Permet à l’utilisateur de fournir une entrée non valide et de recevoir des erreurs de validation sur le associé <xref:Microsoft.AspNetCore.Components.Forms.EditContext> .
   * Affichez les erreurs de validation dans l’interface utilisateur sans interférer avec l’utilisateur qui saisit des données Webform supplémentaires.
 
@@ -208,7 +208,7 @@ Le `PasswordField` composant suivant ( `PasswordField.razor` ) :
 
 * Définit `<input>` la valeur d’un élément sur `password` un champ.
 * Expose les modifications d’une `Password` propriété à un composant parent avec un [`EventCallback`](xref:blazor/components/event-handling#eventcallback) qui passe la valeur actuelle du champ de l’enfant `password` comme argument.
-* Utilise l' `onclick` événement pour déclencher la `ToggleShowPassword` méthode. Pour plus d’informations, consultez <xref:blazor/components/event-handling>.
+* Utilise l' `onclick` événement pour déclencher la `ToggleShowPassword` méthode. Pour plus d'informations, consultez <xref:blazor/components/event-handling>.
 
 ```razor
 <h1>Provide your password</h1>

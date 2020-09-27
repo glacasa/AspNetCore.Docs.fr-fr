@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/configuration
-ms.openlocfilehash: fc0e6398884bb5c3b806a587a8a361d7f279461f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 579491cfe60a26593ca038a1691f9b52f0fb1d06
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625555"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393871"
 ---
 # <a name="aspnet-core-no-locsignalr-configuration"></a>Configuration de ASP.NET Core SignalR
 
@@ -85,6 +85,7 @@ Le tableau suivant décrit les options de configuration des SignalR hubs :
 | `EnableDetailedErrors` | `false` | Si `true` la valeur est, les messages d’exception détaillés sont retournés aux clients lorsqu’une exception est levée dans une méthode de concentrateur. La valeur par défaut est `false` , car ces messages d’exception peuvent contenir des informations sensibles. |
 | `StreamBufferCapacity` | `10` | Nombre maximal d’éléments pouvant être mis en mémoire tampon pour les flux de téléchargement du client. Si cette limite est atteinte, le traitement des appels est bloqué jusqu’à ce que le serveur traite les éléments de flux.|
 | `MaximumReceiveMessageSize` | 32 Ko | Taille maximale d’un seul message de concentrateur entrant. |
+| `MaximumParallelInvocationsPerClient` | 1 | Nombre maximal de méthodes de concentrateur que chaque client peut appeler en parallèle avant d’être mis en file d’attente. |
 
 Les options peuvent être configurées pour tous les hubs en fournissant un délégué d’options à l' `AddSignalR` appel dans `Startup.ConfigureServices` .
 
@@ -342,11 +343,11 @@ Des options supplémentaires peuvent être configurées dans la `WithUrl` `withU
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | Fonction qui retourne une chaîne fournie en tant que jeton d’authentification du porteur dans les requêtes HTTP. |
 | `SkipNegotiation` | `false` | Affectez `true` la valeur pour ignorer l’étape de négociation. **Pris en charge uniquement lorsque le transport WebSockets est le seul transport activé**. Ce paramètre ne peut pas être activé lors de l’utilisation du SignalR service Azure. |
-| `ClientCertificates` | Vide | Collection de certificats TLS à envoyer aux demandes d’authentification. |
-| `Cookies` | Vide | Collection de HTTP cookie s à envoyer avec chaque requête http. |
-| `Credentials` | Vide | Informations d’identification à envoyer avec chaque requête HTTP. |
+| `ClientCertificates` | Empty | Collection de certificats TLS à envoyer aux demandes d’authentification. |
+| `Cookies` | Empty | Collection de HTTP cookie s à envoyer avec chaque requête http. |
+| `Credentials` | Empty | Informations d’identification à envoyer avec chaque requête HTTP. |
 | `CloseTimeout` | 5 secondes | WebSocket uniquement. Durée d’attente maximale du client après la fermeture du serveur pour accuser réception de la demande de fermeture. Si le serveur n’accuse pas réception de la fermeture dans ce délai, le client se déconnecte. |
-| `Headers` | Vide | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
+| `Headers` | Empty | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
 | `HttpMessageHandlerFactory` | `null` | Délégué qui peut être utilisé pour configurer ou remplacer le `HttpMessageHandler` utilisé pour envoyer des requêtes http. Non utilisé pour les connexions WebSocket. Ce délégué doit retourner une valeur non null et il reçoit la valeur par défaut en tant que paramètre. Modifiez les paramètres de cette valeur par défaut et renvoyez-la, ou retournez une nouvelle `HttpMessageHandler` instance. **Lors du remplacement du gestionnaire, veillez à copier les paramètres que vous souhaitez conserver à partir du gestionnaire fourni. dans le cas contraire, les options configurées (telles que Cookie s et en-têtes) ne s’appliqueront pas au nouveau gestionnaire.** |
 | `Proxy` | `null` | Proxy HTTP à utiliser lors de l’envoi de requêtes HTTP. |
 | `UseDefaultCredentials` | `false` | Définissez cette valeur booléenne pour envoyer les informations d’identification par défaut pour les requêtes HTTP et WebSocket. Cela permet l’utilisation de l’authentification Windows. |
@@ -368,7 +369,7 @@ Des options supplémentaires peuvent être configurées dans la `WithUrl` `withU
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | Fonction qui retourne une chaîne fournie en tant que jeton d’authentification du porteur dans les requêtes HTTP. |
 | `shouldSkipNegotiate` | `false` | Affectez `true` la valeur pour ignorer l’étape de négociation. **Pris en charge uniquement lorsque le transport WebSockets est le seul transport activé**. Ce paramètre ne peut pas être activé lors de l’utilisation du SignalR service Azure. |
-| `withHeader` `withHeaders` | Vide | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
+| `withHeader` `withHeaders` | Empty | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
 
 ---
 
@@ -405,7 +406,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -730,11 +731,11 @@ Des options supplémentaires peuvent être configurées dans la `WithUrl` `withU
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | Fonction qui retourne une chaîne fournie en tant que jeton d’authentification du porteur dans les requêtes HTTP. |
 | `SkipNegotiation` | `false` | Affectez `true` la valeur pour ignorer l’étape de négociation. **Pris en charge uniquement lorsque le transport WebSockets est le seul transport activé**. Ce paramètre ne peut pas être activé lors de l’utilisation du SignalR service Azure. |
-| `ClientCertificates` | Vide | Collection de certificats TLS à envoyer aux demandes d’authentification. |
-| `Cookies` | Vide | Collection de HTTP cookie s à envoyer avec chaque requête http. |
-| `Credentials` | Vide | Informations d’identification à envoyer avec chaque requête HTTP. |
+| `ClientCertificates` | Empty | Collection de certificats TLS à envoyer aux demandes d’authentification. |
+| `Cookies` | Empty | Collection de HTTP cookie s à envoyer avec chaque requête http. |
+| `Credentials` | Empty | Informations d’identification à envoyer avec chaque requête HTTP. |
 | `CloseTimeout` | 5 secondes | WebSocket uniquement. Durée d’attente maximale du client après la fermeture du serveur pour accuser réception de la demande de fermeture. Si le serveur n’accuse pas réception de la fermeture dans ce délai, le client se déconnecte. |
-| `Headers` | Vide | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
+| `Headers` | Empty | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
 | `HttpMessageHandlerFactory` | `null` | Délégué qui peut être utilisé pour configurer ou remplacer le `HttpMessageHandler` utilisé pour envoyer des requêtes http. Non utilisé pour les connexions WebSocket. Ce délégué doit retourner une valeur non null et il reçoit la valeur par défaut en tant que paramètre. Modifiez les paramètres de cette valeur par défaut et renvoyez-la, ou retournez une nouvelle `HttpMessageHandler` instance. **Lors du remplacement du gestionnaire, veillez à copier les paramètres que vous souhaitez conserver à partir du gestionnaire fourni. dans le cas contraire, les options configurées (telles que Cookie s et en-têtes) ne s’appliqueront pas au nouveau gestionnaire.** |
 | `Proxy` | `null` | Proxy HTTP à utiliser lors de l’envoi de requêtes HTTP. |
 | `UseDefaultCredentials` | `false` | Définissez cette valeur booléenne pour envoyer les informations d’identification par défaut pour les requêtes HTTP et WebSocket. Cela permet l’utilisation de l’authentification Windows. |
@@ -754,7 +755,7 @@ Des options supplémentaires peuvent être configurées dans la `WithUrl` `withU
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | Fonction qui retourne une chaîne fournie en tant que jeton d’authentification du porteur dans les requêtes HTTP. |
 | `shouldSkipNegotiate` | `false` | Affectez `true` la valeur pour ignorer l’étape de négociation. **Pris en charge uniquement lorsque le transport WebSockets est le seul transport activé**. Ce paramètre ne peut pas être activé lors de l’utilisation du SignalR service Azure. |
-| `withHeader` `withHeaders` | Vide | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
+| `withHeader` `withHeaders` | Empty | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
 
 ---
 
@@ -791,7 +792,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -1115,11 +1116,11 @@ Des options supplémentaires peuvent être configurées dans la `WithUrl` `withU
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | Fonction qui retourne une chaîne fournie en tant que jeton d’authentification du porteur dans les requêtes HTTP. |
 | `SkipNegotiation` | `false` | Affectez `true` la valeur pour ignorer l’étape de négociation. **Pris en charge uniquement lorsque le transport WebSockets est le seul transport activé**. Ce paramètre ne peut pas être activé lors de l’utilisation du SignalR service Azure. |
-| `ClientCertificates` | Vide | Collection de certificats TLS à envoyer aux demandes d’authentification. |
-| `Cookies` | Vide | Collection de HTTP cookie s à envoyer avec chaque requête http. |
-| `Credentials` | Vide | Informations d’identification à envoyer avec chaque requête HTTP. |
+| `ClientCertificates` | Empty | Collection de certificats TLS à envoyer aux demandes d’authentification. |
+| `Cookies` | Empty | Collection de HTTP cookie s à envoyer avec chaque requête http. |
+| `Credentials` | Empty | Informations d’identification à envoyer avec chaque requête HTTP. |
 | `CloseTimeout` | 5 secondes | WebSocket uniquement. Durée d’attente maximale du client après la fermeture du serveur pour accuser réception de la demande de fermeture. Si le serveur n’accuse pas réception de la fermeture dans ce délai, le client se déconnecte. |
-| `Headers` | Vide | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
+| `Headers` | Empty | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
 | `HttpMessageHandlerFactory` | `null` | Délégué qui peut être utilisé pour configurer ou remplacer le `HttpMessageHandler` utilisé pour envoyer des requêtes http. Non utilisé pour les connexions WebSocket. Ce délégué doit retourner une valeur non null et il reçoit la valeur par défaut en tant que paramètre. Modifiez les paramètres de cette valeur par défaut et renvoyez-la, ou retournez une nouvelle `HttpMessageHandler` instance. **Lors du remplacement du gestionnaire, veillez à copier les paramètres que vous souhaitez conserver à partir du gestionnaire fourni. dans le cas contraire, les options configurées (telles que Cookie s et en-têtes) ne s’appliqueront pas au nouveau gestionnaire.** |
 | `Proxy` | `null` | Proxy HTTP à utiliser lors de l’envoi de requêtes HTTP. |
 | `UseDefaultCredentials` | `false` | Définissez cette valeur booléenne pour envoyer les informations d’identification par défaut pour les requêtes HTTP et WebSocket. Cela permet l’utilisation de l’authentification Windows. |
@@ -1139,7 +1140,7 @@ Des options supplémentaires peuvent être configurées dans la `WithUrl` `withU
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | Fonction qui retourne une chaîne fournie en tant que jeton d’authentification du porteur dans les requêtes HTTP. |
 | `shouldSkipNegotiate` | `false` | Affectez `true` la valeur pour ignorer l’étape de négociation. **Pris en charge uniquement lorsque le transport WebSockets est le seul transport activé**. Ce paramètre ne peut pas être activé lors de l’utilisation du SignalR service Azure. |
-| `withHeader` `withHeaders` | Vide | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
+| `withHeader` `withHeaders` | Empty | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
 
 ---
 
@@ -1176,7 +1177,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -1464,11 +1465,11 @@ Des options supplémentaires peuvent être configurées dans la `WithUrl` `withU
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | Fonction qui retourne une chaîne fournie en tant que jeton d’authentification du porteur dans les requêtes HTTP. |
 | `SkipNegotiation` | `false` | Affectez `true` la valeur pour ignorer l’étape de négociation. **Pris en charge uniquement lorsque le transport WebSockets est le seul transport activé**. Ce paramètre ne peut pas être activé lors de l’utilisation du SignalR service Azure. |
-| `ClientCertificates` | Vide | Collection de certificats TLS à envoyer aux demandes d’authentification. |
-| `Cookies` | Vide | Collection de HTTP cookie s à envoyer avec chaque requête http. |
-| `Credentials` | Vide | Informations d’identification à envoyer avec chaque requête HTTP. |
+| `ClientCertificates` | Empty | Collection de certificats TLS à envoyer aux demandes d’authentification. |
+| `Cookies` | Empty | Collection de HTTP cookie s à envoyer avec chaque requête http. |
+| `Credentials` | Empty | Informations d’identification à envoyer avec chaque requête HTTP. |
 | `CloseTimeout` | 5 secondes | WebSocket uniquement. Durée d’attente maximale du client après la fermeture du serveur pour accuser réception de la demande de fermeture. Si le serveur n’accuse pas réception de la fermeture dans ce délai, le client se déconnecte. |
-| `Headers` | Vide | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
+| `Headers` | Empty | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
 | `HttpMessageHandlerFactory` | `null` | Délégué qui peut être utilisé pour configurer ou remplacer le `HttpMessageHandler` utilisé pour envoyer des requêtes http. Non utilisé pour les connexions WebSocket. Ce délégué doit retourner une valeur non null et il reçoit la valeur par défaut en tant que paramètre. Modifiez les paramètres de cette valeur par défaut et renvoyez-la, ou retournez une nouvelle `HttpMessageHandler` instance. **Lors du remplacement du gestionnaire, veillez à copier les paramètres que vous souhaitez conserver à partir du gestionnaire fourni. dans le cas contraire, les options configurées (telles que Cookie s et en-têtes) ne s’appliqueront pas au nouveau gestionnaire.** |
 | `Proxy` | `null` | Proxy HTTP à utiliser lors de l’envoi de requêtes HTTP. |
 | `UseDefaultCredentials` | `false` | Définissez cette valeur booléenne pour envoyer les informations d’identification par défaut pour les requêtes HTTP et WebSocket. Cela permet l’utilisation de l’authentification Windows. |
@@ -1488,7 +1489,7 @@ Des options supplémentaires peuvent être configurées dans la `WithUrl` `withU
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | Fonction qui retourne une chaîne fournie en tant que jeton d’authentification du porteur dans les requêtes HTTP. |
 | `shouldSkipNegotiate` | `false` | Affectez `true` la valeur pour ignorer l’étape de négociation. **Pris en charge uniquement lorsque le transport WebSockets est le seul transport activé**. Ce paramètre ne peut pas être activé lors de l’utilisation du SignalR service Azure. |
-| `withHeader` `withHeaders` | Vide | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
+| `withHeader` `withHeaders` | Empty | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
 
 ---
 
@@ -1525,7 +1526,7 @@ HubConnection hubConnection = HubConnectionBuilder.create("https://example.com/c
         .build();
 ```
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:tutorials/signalr>
 * <xref:signalr/hubs>
@@ -1807,11 +1808,11 @@ Des options supplémentaires peuvent être configurées dans la `WithUrl` `withU
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | Fonction qui retourne une chaîne fournie en tant que jeton d’authentification du porteur dans les requêtes HTTP. |
 | `SkipNegotiation` | `false` | Affectez `true` la valeur pour ignorer l’étape de négociation. **Pris en charge uniquement lorsque le transport WebSockets est le seul transport activé**. Ce paramètre ne peut pas être activé lors de l’utilisation du SignalR service Azure. |
-| `ClientCertificates` | Vide | Collection de certificats TLS à envoyer aux demandes d’authentification. |
-| `Cookies` | Vide | Collection de HTTP cookie s à envoyer avec chaque requête http. |
-| `Credentials` | Vide | Informations d’identification à envoyer avec chaque requête HTTP. |
+| `ClientCertificates` | Empty | Collection de certificats TLS à envoyer aux demandes d’authentification. |
+| `Cookies` | Empty | Collection de HTTP cookie s à envoyer avec chaque requête http. |
+| `Credentials` | Empty | Informations d’identification à envoyer avec chaque requête HTTP. |
 | `CloseTimeout` | 5 secondes | WebSocket uniquement. Durée d’attente maximale du client après la fermeture du serveur pour accuser réception de la demande de fermeture. Si le serveur n’accuse pas réception de la fermeture dans ce délai, le client se déconnecte. |
-| `Headers` | Vide | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
+| `Headers` | Empty | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
 | `HttpMessageHandlerFactory` | `null` | Délégué qui peut être utilisé pour configurer ou remplacer le `HttpMessageHandler` utilisé pour envoyer des requêtes http. Non utilisé pour les connexions WebSocket. Ce délégué doit retourner une valeur non null et il reçoit la valeur par défaut en tant que paramètre. Modifiez les paramètres de cette valeur par défaut et renvoyez-la, ou retournez une nouvelle `HttpMessageHandler` instance. **Lors du remplacement du gestionnaire, veillez à copier les paramètres que vous souhaitez conserver à partir du gestionnaire fourni. dans le cas contraire, les options configurées (telles que Cookie s et en-têtes) ne s’appliqueront pas au nouveau gestionnaire.** |
 | `Proxy` | `null` | Proxy HTTP à utiliser lors de l’envoi de requêtes HTTP. |
 | `UseDefaultCredentials` | `false` | Définissez cette valeur booléenne pour envoyer les informations d’identification par défaut pour les requêtes HTTP et WebSocket. Cela permet l’utilisation de l’authentification Windows. |
@@ -1831,7 +1832,7 @@ Des options supplémentaires peuvent être configurées dans la `WithUrl` `withU
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | Fonction qui retourne une chaîne fournie en tant que jeton d’authentification du porteur dans les requêtes HTTP. |
 | `shouldSkipNegotiate` | `false` | Affectez `true` la valeur pour ignorer l’étape de négociation. **Pris en charge uniquement lorsque le transport WebSockets est le seul transport activé**. Ce paramètre ne peut pas être activé lors de l’utilisation du SignalR service Azure. |
-| `withHeader` `withHeaders` | Vide | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
+| `withHeader` `withHeaders` | Empty | Mappage d’en-têtes HTTP supplémentaires à envoyer avec chaque requête HTTP. |
 
 ---
 

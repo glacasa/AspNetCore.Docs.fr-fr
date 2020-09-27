@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 08cd6396cca78488827dfa7c2cca62a35c500dbd
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: e451d511ab7791a05024d88635d8005132ad4edd
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009698"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393923"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>Routage vers les actions du contrôleur dans ASP.NET Core
 
@@ -353,7 +353,7 @@ Prenons le contrôleur suivant :
 Dans le code précédent :
 
 * Chaque action contient l' `[HttpGet]` attribut, qui limite la correspondance aux requêtes http obtient uniquement.
-* L' `GetProduct` action comprend le `"{id}"` modèle. par conséquent, `id` est ajouté au `"api/[controller]"` modèle sur le contrôleur. Le modèle de méthode est `"api/[controller]/"{id}""` . Par conséquent, cette action correspond uniquement aux demandes d’extraction de pour le formulaire `/api/test2/xyz` ,, `/api/test2/123` `/api/test2/{any string}` , etc.
+* L' `GetProduct` action comprend le `"{id}"` modèle. par conséquent, `id` est ajouté au `"api/[controller]"` modèle sur le contrôleur. Le modèle de méthode est `"api/[controller]/"{id}""` . Par conséquent, cette action correspond uniquement aux demandes d’extraction pour le formulaire `/api/test2/xyz` ,, `/api/test2/123` `/api/test2/{any string}` , etc.
   [!code-csharp[](routing/samples/3.x/main/Controllers/Test2Controller.cs?name=snippet2)]
 * L' `GetIntProduct` action contient le `"int/{id:int}")` modèle. La `:int` partie du modèle limite les `id` valeurs d’itinéraire aux chaînes qui peuvent être converties en un entier. Une demande d’accès à `/api/test2/int/abc` :
   * Ne correspond pas à cette action.
@@ -434,7 +434,7 @@ Le tableau suivant décrit les `[Route]` attributs dans le code précédent :
 | `[Route("")]` | Oui | `"Home"` |
 | `[Route("Index")]` | Oui | `"Home/Index"` |
 | `[Route("/")]` | **Non** | `""` |
-| `[Route("About")]` | Yes | `"Home/About"` |
+| `[Route("About")]` | Oui | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>
 <a name="oar"></a>

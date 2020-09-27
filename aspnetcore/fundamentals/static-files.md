@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: 24fda96dbe48945d172eb36e8a91af31f168ff7f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 36eeb3532ed5ea6f5f75c20cbe14331ed840a788
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627661"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393936"
 ---
 # <a name="static-files-in-aspnet-core"></a>Fichiers statiques dans ASP.NET Core
 
@@ -127,7 +127,7 @@ Une autre approche pour traiter les fichiers en fonction de l’autorisation :
 
 L’exploration des répertoires permet la liste des répertoires dans les répertoires spécifiés.
 
-L’exploration des répertoires est désactivée par défaut pour des raisons de sécurité. Pour plus d’informations, consultez [considérations](#sc).
+L’exploration des répertoires est désactivée par défaut pour des raisons de sécurité. Pour plus d’informations, consultez [considérations](#considerations).
 
 Activer l’exploration des répertoires avec :
 
@@ -267,7 +267,7 @@ Avec le code précédent, une requête pour un fichier avec un type de contenu i
 
 * Placez les fichiers de code, y compris les fichiers *. cs* et *. cshtml*, en dehors de la [racine Web](xref:fundamentals/index#web-root)du projet d’application. Par conséquent, une séparation logique est créée entre le contenu côté client et le code basé sur le serveur de l’application. Ceci empêche la fuite de code côté serveur.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Middleware](xref:fundamentals/middleware/index)
 * [Introduction à ASP.NET Core](xref:index)
@@ -363,7 +363,7 @@ Le middleware de fichiers statiques ne fournit pas de vérification des autorisa
 
 ## <a name="enable-directory-browsing"></a>Activer l’exploration des répertoires
 
-L’exploration des répertoires permet aux utilisateurs de votre application web de voir une liste des répertoires et des fichiers dans un répertoire spécifié. L’exploration des répertoires est désactivée par défaut pour des raisons de sécurité (consultez [Considérations](#sc)). Activez l’exploration des répertoires en appelant la <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser%2A> méthode dans `Startup.Configure` :
+L’exploration des répertoires permet aux utilisateurs de votre application web de voir une liste des répertoires et des fichiers dans un répertoire spécifié. L’exploration des répertoires est désactivée par défaut pour des raisons de sécurité (consultez [Considérations](#considerations)). Activez l’exploration des répertoires en appelant la <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser%2A> méthode dans `Startup.Configure` :
 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupBrowse.cs?name=snippet_ConfigureMethod&highlight=12-17)]
 
@@ -498,7 +498,7 @@ Avec le code précédent, une requête pour un fichier avec un type de contenu i
 
 * Placez les fichiers de code (y compris les fichiers *. cs* et *. cshtml*) en dehors de la [racine Web](xref:fundamentals/index#web-root)du projet d’application. Par conséquent, une séparation logique est créée entre le contenu côté client et le code basé sur le serveur de l’application. Ceci empêche la fuite de code côté serveur.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Middleware](xref:fundamentals/middleware/index)
 * [Introduction à ASP.NET Core](xref:index)

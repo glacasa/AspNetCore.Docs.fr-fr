@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: ec36ff6d646e0554550a4372389aed89aa267b1f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ca2f071ccb84fdb2eb06f533fc4d088ad1b1c785
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633979"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393884"
 ---
 # <a name="model-binding-in-aspnet-core"></a>Liaison de données dans ASP.NET Core
 
@@ -41,7 +41,7 @@ Les contrôleurs et les Razor pages fonctionnent avec des données provenant de 
 * Convertit les données de chaîne en types .NET
 * Met à jour les propriétés des types complexes
 
-## <a name="example"></a>Exemple
+## <a name="example"></a> Exemple
 
 Supposons que vous ayez la méthode d’action suivante :
 
@@ -210,7 +210,7 @@ Les types simples que le lieur de modèle peut convertir en chaînes sources son
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
 * [Décimal](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
-* [Variables](xref:System.ComponentModel.EnumConverter)
+* [Énumération](xref:System.ComponentModel.EnumConverter)
 * [Uniques](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
 * [Unique](xref:System.ComponentModel.SingleConverter)
@@ -393,6 +393,47 @@ Pour les cibles `Dictionary`, la liaison de modèle recherche les correspondance
 
   * selectedCourses["1050"]="Chemistry"
   * selectedCourses["2000"]="Economics"
+  
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="constructor-binding-and-record-types"></a>Liaison de constructeur et types d’enregistrements
+
+La liaison de modèle requiert que les types complexes aient un constructeur sans paramètre. `System.Text.Json`Et les `Newtonsoft.Json` formateurs d’entrée de base prennent en charge la désérialisation des classes qui n’ont pas de constructeur sans paramètre. 
+
+C# 9 introduit les types d’enregistrements, qui constituent un excellent moyen de représenter succinctement les données sur le réseau. ASP.NET Core ajoute la prise en charge de la liaison de modèle et de la validation des types d’enregistrements avec un constructeur unique :
+
+```csharp
+public record Person([Required] string Name, [Range(0, 150)] int Age);
+
+public class PersonController
+{
+   public IActionResult Index() => View();
+
+   [HttpPost]
+   public IActionResult Index(Person person)
+   {
+       ...
+   }
+}
+```
+
+`Person/Index.cshtml`:
+
+```cshtml
+@model Person
+
+Name: <input asp-for="Name" />
+...
+Age: <input asp-for="Age" />
+```
+
+Lors de la validation des types d’enregistrements, le runtime recherche les métadonnées de validation spécifiquement sur les paramètres plutôt que sur les propriétés.
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
 
 <a name="glob"></a>
 
@@ -506,12 +547,13 @@ Pour plus d’informations, consultez [TryUpdateModelAsync](xref:data/ef-rp/crud
 
 Le nom de cet attribut suit le modèle des attributs de liaison de modèle qui spécifient une source de données. Toutefois, il ne permet pas de lier les données d’un fournisseur de valeurs. Il obtient une instance d’un type à partir du conteneur d’[injection de dépendances](xref:fundamentals/dependency-injection). Son objectif est de fournir une alternative à l’injection de constructeurs quand vous avez besoin d’un service uniquement si une méthode particulière est appelée.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:mvc/models/validation>
 * <xref:mvc/advanced/custom-model-binding>
 
 ::: moniker-end
+
 ::: moniker range="< aspnetcore-3.0"
 
 Cet article explique ce qu’est la liaison de modèle, comment elle fonctionne et comment personnaliser son comportement.
@@ -527,7 +569,7 @@ Les contrôleurs et les Razor pages fonctionnent avec des données provenant de 
 * Convertit les données de chaîne en types .NET
 * Met à jour les propriétés des types complexes
 
-## <a name="example"></a>Exemple
+## <a name="example"></a> Exemple
 
 Supposons que vous ayez la méthode d’action suivante :
 
@@ -696,7 +738,7 @@ Les types simples que le lieur de modèle peut convertir en chaînes sources son
 * [DateTimeOffset](xref:System.ComponentModel.DateTimeOffsetConverter)
 * [Décimal](xref:System.ComponentModel.DecimalConverter)
 * [Double](xref:System.ComponentModel.DoubleConverter)
-* [Variables](xref:System.ComponentModel.EnumConverter)
+* [Énumération](xref:System.ComponentModel.EnumConverter)
 * [Uniques](xref:System.ComponentModel.GuidConverter)
 * [Int16](xref:System.ComponentModel.Int16Converter), [Int32](xref:System.ComponentModel.Int32Converter), [Int64](xref:System.ComponentModel.Int64Converter)
 * [Unique](xref:System.ComponentModel.SingleConverter)
