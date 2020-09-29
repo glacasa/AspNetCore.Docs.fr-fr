@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: 92287c7205e67d7f2000b53506ec18475517325b
-ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
+ms.openlocfilehash: e874ec6f24d8b03fc6c7133013147498cbbc293a
+ms.sourcegitcommit: 4febe4efaf6e1a7be65d772b500c00fca0af216a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 09/29/2020
-ms.locfileid: "91424085"
+ms.locfileid: "91451159"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>Chargement différé d’assemblys dans ASP.NET Core Blazor WebAssembly
 
@@ -38,7 +38,7 @@ Blazorla fonctionnalité de chargement différé de vous permet de marquer des a
 
 ## <a name="project-file"></a>Fichier projet
 
-Marquez les assemblys pour le chargement différé dans le fichier projet de l’application ( `.csproj` ) à l’aide de l' `BlazorWebAssemblyLazyLoad` élément. Utilisez le nom de l’assembly sans l' `.dll` extension. L' Blazor infrastructure empêche le chargement des assemblys spécifiés par ce groupe d’éléments au lancement de l’application. L’exemple suivant marque un grand assembly personnalisé ( `GrantImaharaRobotControls.dll` ) pour le chargement différé. Si un assembly marqué pour le chargement différé a des dépendances, il doit également être marqué pour le chargement différé dans le fichier projet.
+Marquez les assemblys pour le chargement différé dans le fichier projet de l’application ( `.csproj` ) à l’aide de l' `BlazorWebAssemblyLazyLoad` élément. Utilisez le nom de l’assembly avec l' `.dll` extension. L' Blazor infrastructure empêche le chargement des assemblys spécifiés par ce groupe d’éléments au lancement de l’application. L’exemple suivant marque un grand assembly personnalisé ( `GrantImaharaRobotControls.dll` ) pour le chargement différé. Si un assembly marqué pour le chargement différé a des dépendances, il doit également être marqué pour le chargement différé dans le fichier projet.
 
 ```xml
 <ItemGroup>
@@ -230,7 +230,7 @@ Le composant complet suivant `Router` montre le chargement de l' `GrantImaharaRo
 }
 ```
 
-## <a name="troubleshoot"></a>Dépanner
+## <a name="troubleshoot"></a>Dépannage
 
 * Si un rendu inattendu se produit (par exemple, un composant d’une navigation précédente est rendu), confirmez que le code lève si le jeton d’annulation est défini.
 * Si les assemblys sont toujours chargés au démarrage de l’application, vérifiez que l’assembly est marqué comme étant différé dans le fichier projet.
