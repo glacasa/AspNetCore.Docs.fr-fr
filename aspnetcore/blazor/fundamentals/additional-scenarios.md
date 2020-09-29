@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: 870509a3cbbcbea9b1c4804185c49a831af22630
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: 236d95e54b772ea522911421084ec0d9022c45ff
+ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009633"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91424137"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>BlazorConfiguration du modèle d’hébergement ASP.net Core
 
@@ -62,7 +62,7 @@ Pour configurer le SignalR client sous-jacent pour envoyer des informations d’
       }).Build();
   ```
 
-Pour plus d’informations, consultez <xref:signalr/configuration#configure-additional-options>.
+Pour plus d'informations, consultez <xref:signalr/configuration#configure-additional-options>.
 
 ## <a name="reflect-the-connection-state-in-the-ui"></a>Refléter l’état de la connexion dans l’interface utilisateur
 
@@ -290,7 +290,15 @@ Personnalisez le délai avant que l’affichage de reconnexion ne s’affiche en
 }
 ```
 
-::: moniker-end
+## <a name="disconnect-the-no-locblazor-circuit-from-the-client"></a>Déconnecter le Blazor circuit du client
+
+Par défaut, un Blazor circuit est déconnecté lorsque l' [ `unload` événement de page](https://developer.mozilla.org/docs/Web/API/Window/unload_event) est déclenché. Pour déconnecter le circuit d’autres scénarios sur le client, appelez `Blazor.disconnect` dans le gestionnaire d’événements approprié. Dans l’exemple suivant, le circuit est déconnecté lorsque la page est masquée ([ `pagehide` événement](https://developer.mozilla.org/docs/Web/API/Window/pagehide_event)) :
+
+```javascript
+window.addEventListener('pagehide', () => {
+  Blazor.disconnect();
+});
+```
 
 ## <a name="influence-html-head-tag-elements"></a>Influencer les `<head>` éléments de balise HTML
 
@@ -322,6 +330,8 @@ Quand l’un des composants de l’infrastructure est utilisé dans un composant
 
 * Peut être modifié par l’état de l’application. Une balise HTML codée en dur ne peut pas être modifiée par l’état de l’application.
 * Est supprimé du code HTML `<head>` lorsque le composant parent n’est plus rendu.
+
+::: moniker-end
 
 ## <a name="static-files"></a>Fichiers statiques
 

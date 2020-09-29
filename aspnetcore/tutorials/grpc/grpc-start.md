@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 5f4d9a105ad6d0ab53b23d8c1e9f645d69d25888
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 13eb57bbe671dcc70a1678222a98590f4edc6e6f
+ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630274"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91424254"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>Didacticiel : créer un client et un serveur gRPC dans ASP.NET Core
 
@@ -73,7 +73,7 @@ Dans ce tutoriel, vous allez :
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* Ouvrez le [terminal intégré](https://code.visualstudio.com/docs/editor/integrated-terminal).
+* Ouvrez le [Terminal intégré](https://code.visualstudio.com/docs/editor/integrated-terminal).
 * Accédez à un répertoire (`cd`) destiné à contenir le projet.
 * Exécutez les commandes suivantes :
 
@@ -145,7 +145,7 @@ Fichiers projet *GrpcGreeter* :
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* Ouvrez le [terminal intégré](https://code.visualstudio.com/docs/editor/integrated-terminal).
+* Ouvrez le [Terminal intégré](https://code.visualstudio.com/docs/editor/integrated-terminal).
 * Accédez à un répertoire (`cd`) destiné à contenir le projet.
 * Exécutez les commandes suivantes :
 
@@ -215,6 +215,12 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 
 * Créez un dossier *Protos* dans le projet du client gRPC.
 * Copiez le fichier *Protos\greet.proto* du service Greeter gRPC vers le projet du client gRPC.
+* Mettez à jour l’espace de noms à l’intérieur du `greet.proto` fichier vers l’espace de noms du projet :
+
+  ```
+  option csharp_namespace = "GrpcGreeterClient";
+  ```
+
 * Modifiez le fichier projet *GrpcGreeterClient.csproj* :
 
   # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)

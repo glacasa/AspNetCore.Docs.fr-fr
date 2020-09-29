@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: eb4aaa2f3d412cdf650ed2daf7c12166991d92a1
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 92287c7205e67d7f2000b53506ec18475517325b
+ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90592902"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91424085"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>Chargement différé d’assemblys dans ASP.NET Core Blazor WebAssembly
 
@@ -106,7 +106,7 @@ Le `LazyAssemblyLoader` fournit la `LoadAssembliesAsync` méthode qui :
 L’implémentation du chargement différé de l’infrastructure prend en charge le chargement différé avec prérendu dans une solution hébergée Blazor . Lors du prérendu, tous les assemblys, y compris ceux marqués pour le chargement différé, sont supposés être chargés. Inscrivez-vous manuellement `LazyAssemblyLoader` dans la méthode du projet *serveur* `Startup.ConfigureServices` ( `Startup.cs` ) :
 
 ```csharp
-services.AddSingleton<LazyAssemblyLoader>();
+services.AddScoped<LazyAssemblyLoader>();
 ```
 
 ### <a name="user-interaction-with-navigating-content"></a>Interaction de l’utilisateur avec le `<Navigating>` contenu

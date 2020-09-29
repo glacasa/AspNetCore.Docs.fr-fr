@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: 82ed4cc2ce47d3bd85ca9c2ba2bbeb075eaefcef
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: af282ec1f82b2ac31fd0b46b2406110e24e9211b
+ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635331"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91424241"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>Autorisation basée sur la stratégie dans ASP.NET Core
 
@@ -193,7 +193,7 @@ Notez que la `Handle` méthode dans l' [exemple de gestionnaire](#security-autho
 
 * Pour garantir la défaillance, même si d’autres gestionnaires de spécifications sont correctement exécutés, appelez `context.Fail` .
 
-Si un gestionnaire appelle `context.Succeed` ou `context.Fail` , tous les autres gestionnaires sont toujours appelés. Cela permet aux exigences de produire des effets secondaires, tels que la journalisation, qui se produit même si un autre gestionnaire a validé ou échoué avec succès. Quand la valeur `false` est affectée à, la propriété [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) (disponible dans ASP.net Core 1,1 et versions ultérieures) réduit les courts-circuits de l’exécution des gestionnaires lorsque `context.Fail` est appelé. `InvokeHandlersAfterFailure` la valeur par défaut `true` est, auquel cas tous les gestionnaires sont appelés.
+Si un gestionnaire appelle `context.Succeed` ou `context.Fail` , tous les autres gestionnaires sont toujours appelés. Cela permet aux exigences de produire des effets secondaires, tels que la journalisation, qui se produit même si un autre gestionnaire a validé ou échoué avec succès. Lorsque la valeur `false` est définie sur, la propriété [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) les courts-circuits de l’exécution des gestionnaires lorsque `context.Fail` est appelé. `InvokeHandlersAfterFailure` la valeur par défaut `true` est, auquel cas tous les gestionnaires sont appelés.
 
 > [!NOTE]
 > Les gestionnaires d’autorisations sont appelés même si l’authentification échoue.
@@ -427,7 +427,7 @@ Notez que la `Handle` méthode dans l' [exemple de gestionnaire](#security-autho
 
 * Pour garantir la défaillance, même si d’autres gestionnaires de spécifications sont correctement exécutés, appelez `context.Fail` .
 
-Si un gestionnaire appelle `context.Succeed` ou `context.Fail` , tous les autres gestionnaires sont toujours appelés. Cela permet aux exigences de produire des effets secondaires, tels que la journalisation, qui se produit même si un autre gestionnaire a validé ou échoué avec succès. Quand la valeur `false` est affectée à, la propriété [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) (disponible dans ASP.net Core 1,1 et versions ultérieures) réduit les courts-circuits de l’exécution des gestionnaires lorsque `context.Fail` est appelé. `InvokeHandlersAfterFailure` la valeur par défaut `true` est, auquel cas tous les gestionnaires sont appelés.
+Si un gestionnaire appelle `context.Succeed` ou `context.Fail` , tous les autres gestionnaires sont toujours appelés. Cela permet aux exigences de produire des effets secondaires, tels que la journalisation, qui se produit même si un autre gestionnaire a validé ou échoué avec succès. Lorsque la valeur `false` est définie sur, la propriété [InvokeHandlersAfterFailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) les courts-circuits de l’exécution des gestionnaires lorsque `context.Fail` est appelé. `InvokeHandlersAfterFailure` la valeur par défaut `true` est, auquel cas tous les gestionnaires sont appelés.
 
 > [!NOTE]
 > Les gestionnaires d’autorisations sont appelés même si l’authentification échoue.
