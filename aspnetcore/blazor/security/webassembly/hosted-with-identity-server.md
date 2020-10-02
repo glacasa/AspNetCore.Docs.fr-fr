@@ -5,7 +5,7 @@ description: Découvrez comment sécuriser une application ASP.NET Core héberg�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/09/2020
+ms.date: 09/02/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 58c21f4dbe831e99570ca8b0d7bc78616c1e5bfb
-ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
+ms.openlocfilehash: 0d63ddbc730d3feef0682f6e49dd1b1b4d5e0301
+ms.sourcegitcommit: c026bf76a0e14a5ee68983519a63574c674e9ff7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88712374"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91636814"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Sécuriser une Blazor WebAssembly application hébergée ASP.net core avec le Identity serveur
 
@@ -52,7 +52,7 @@ Pour créer un Blazor WebAssembly projet avec un mécanisme d’authentification
 dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 ```
 
-| Espace réservé  | Exemple        |
+| Espace réservé  |  Exemple        |
 | ------------ | -------------- |
 | `{APP NAME}` | `BlazorSample` |
 
@@ -154,7 +154,7 @@ Pour obtenir le contrôle total du schéma de base de données, héritez de l’
 
 Dans le `OidcConfigurationController` ( `Controllers/OidcConfigurationController.cs` ), le point de terminaison client est approvisionné pour servir les paramètres OIDC.
 
-### <a name="app-settings"></a>Paramètres de l’application
+### <a name="app-settings"></a>Paramètres d’application
 
 Dans le fichier de paramètres d’application ( `appsettings.json` ) à la racine du projet, la `IdentityServer` section décrit la liste des clients configurés. Dans l’exemple suivant, il existe un seul client. Le nom du client correspond au nom de l’application et est mappé par Convention au `ClientId` paramètre OAuth. Le profil indique le type d’application en cours de configuration. Le profil est utilisé en interne pour générer des conventions qui simplifient le processus de configuration du serveur. <!-- There are several profiles available, as explained in the [Application profiles](#application-profiles) section. -->
 
@@ -466,6 +466,105 @@ Dans l’application cliente, les approches d’autorisation des composants sont
 `User.Identity.Name` est renseigné dans l’application cliente avec le nom d’utilisateur de l’utilisateur, qui est généralement l’adresse de messagerie de connexion.
 
 [!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]
+
+## <a name="host-in-azure-app-service-with-a-custom-domain"></a>Héberger dans Azure App Service avec un domaine personnalisé
+
+Les instructions suivantes expliquent comment déployer une application hébergée Blazor WebAssembly avec le Identity serveur pour [Azure App service](https://azure.microsoft.com/services/app-service/) avec un domaine personnalisé.
+
+Pour ce scénario d’hébergement, n’utilisez **pas** le même certificat pour la [ Identity clé de signature de jeton du serveur](https://docs.identityserver.io/en/latest/topics/crypto.html#token-signing-and-validation) et la communication sécurisée HTTPS du site avec les navigateurs :
+
+* L’utilisation de différents certificats pour ces deux exigences est une bonne pratique de sécurité, car elle isole les clés privées pour chaque objectif.
+* Les certificats TLS pour la communication avec les navigateurs sont gérés indépendamment sans affecter Identity la signature des jetons du serveur.
+* Lorsque [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) fournit un certificat à une application App service pour une liaison de domaine personnalisée, Identity le serveur ne peut pas obtenir le même certificat auprès d’Azure Key Vault pour la signature de jetons. Bien qu’il Identity soit possible de configurer le serveur pour qu’il utilise le même certificat TLS à partir d’un chemin d’accès physique, il est déconseillé de placer des certificats de sécurité dans le contrôle de code source **et de les éviter dans la plupart des scénarios**.
+
+Dans les instructions suivantes, un certificat auto-signé est créé dans Azure Key Vault uniquement pour la Identity signature de jeton de serveur. La Identity configuration du serveur utilise le certificat de coffre de clés via le magasin de certificats de l’application `My`  >  `CurrentUser` . D’autres certificats utilisés pour le trafic HTTPs avec des domaines personnalisés sont créés et configurés séparément du Identity certificat de signature du serveur.
+
+Pour configurer une application, Azure App Service et Azure Key Vault pour héberger avec un domaine personnalisé et HTTPs :
+
+1. Créez un [plan de App service](/azure/app-service/overview-hosting-plans) avec un niveau de plan `Basic B1` supérieur ou égal à. App Service nécessite un `Basic B1` niveau de service ou supérieur pour utiliser des domaines personnalisés.
+1. Créez un certificat PFX pour la communication sécurisée du navigateur du site (protocole HTTPs) avec un nom commun du nom de domaine complet (FQDN) du site que votre organisation contrôle (par exemple, `www.contoso.com` ). Créez le certificat avec :
+   * Utilisations de la clé
+     * Validation de signature numérique ( `digitalSignature` )
+     * Chiffrement de la clé ( `keyEncipherment` )
+   * Utilisations de la clé améliorée/étendue
+     * Authentification du client (1.3.6.1.5.5.7.3.2)
+     * Authentification du serveur (1.3.6.1.5.5.7.3.1)
+
+   Pour créer le certificat, utilisez l’une des approches suivantes ou tout autre outil approprié ou service en ligne :
+
+   * [Azure Key Vault](/azure/key-vault/certificates/quick-create-portal#add-a-certificate-to-key-vault)
+   * [MakeCert sur Windows](/windows/desktop/seccrypto/makecert)
+   * [OpenSSL](https://www.openssl.org)
+
+   Notez le mot de passe, qui est utilisé ultérieurement pour importer le certificat dans Azure Key Vault.
+
+   Pour plus d’informations sur les certificats Azure Key Vault, consultez [Azure Key Vault : certificats](/azure/key-vault/certificates/).
+1. Créez un Azure Key Vault ou utilisez un coffre de clés existant dans votre abonnement Azure.
+1. Dans la zone **certificats** du coffre de clés, importez le certificat de site pfx. Notez l’empreinte numérique du certificat, qui est utilisée ultérieurement dans la configuration de l’application.
+1. Dans Azure Key Vault, générez un nouveau certificat auto-signé pour la Identity signature de jetons du serveur. Attribuez un **nom** et un **objet**au certificat. Le **sujet** est spécifié en tant que `CN={COMMON NAME}` , où l' `{COMMON NAME}` espace réservé est le nom commun du certificat. Le nom commun peut être n’importe quelle chaîne alphanumérique. Par exemple, `CN=IdentityServerSigning` est un **objet**de certificat valide. Utilisez les paramètres de **configuration de stratégie avancée** par défaut. Notez l’empreinte numérique du certificat, qui est utilisée ultérieurement dans la configuration de l’application.
+1. Accédez à Azure App Service dans le Portail Azure et créez une nouvelle App Service avec la configuration suivante :
+   * **Publication** définie sur `Code` .
+   * **Pile d’exécution** définie sur le runtime de l’application.
+   * Pour la **référence SKU et la taille**, vérifiez que le niveau de App service est `Basic B1` ou supérieur.  App Service nécessite un `Basic B1` niveau de service ou supérieur pour utiliser des domaines personnalisés.
+1. Une fois que Azure a créé le App Service, ouvrez la **configuration** de l’application et ajoutez un nouveau paramètre d’application en spécifiant les empreintes numériques de certificat enregistrées précédemment. La clé du paramètre d’application est `WEBSITE_LOAD_CERTIFICATES` . Séparez les empreintes numériques du certificat dans la valeur du paramètre de l’application par une virgule, comme le montre l’exemple suivant :
+   * Clé :`WEBSITE_LOAD_CERTIFICATES`
+   * Valeur : `57443A552A46DB...D55E28D412B943565,29F43A772CB6AF...1D04F0C67F85FB0B1`
+
+   Dans la Portail Azure, l’enregistrement des paramètres de l’application est un processus en deux étapes : enregistrer le `WEBSITE_LOAD_CERTIFICATES` paramètre clé-valeur, puis sélectionner le bouton **Enregistrer** en haut du panneau.
+1. Sélectionnez les **paramètres TLS/SSL**de l’application. Sélectionnez **certificats de clé privée (. pfx)**. Utilisez le processus d' **importation Key Vault certificat** à deux reprises pour importer le certificat du site pour la communication HTTPS et le certificat de signature de jetons de serveur auto-signé du site Identity .
+1. Accédez au panneau **domaines personnalisés** . Sur le site Web de votre bureau d’enregistrement de domaines, utilisez l' **adresse IP** et l' **ID de vérification du domaine personnalisé** pour configurer le domaine. Une configuration de domaine classique comprend les éléments suivants :
+   * Un **enregistrement a** avec un **hôte** `@` et une valeur d’adresse IP de la portail Azure.
+   * Un **enregistrement txt** avec un **hôte** de `asuid` et la valeur de l’ID de vérification généré par Azure et fourni par le portail Azure.
+
+   Veillez à enregistrer correctement les modifications sur le site Web de votre bureau d’enregistrement de domaines. Certains sites Web du Bureau d’enregistrement nécessitent un processus en deux étapes pour enregistrer les enregistrements de domaine : un ou plusieurs enregistrements sont enregistrés individuellement, puis mis à jour l’inscription du domaine avec un bouton distinct.
+1. Revenez au panneau **domaines personnalisés** dans le portail Azure. Sélectionnez **Ajouter un domaine personnalisé**. Sélectionnez l’option **A record** . Fournissez le domaine et sélectionnez **valider**. Si les enregistrements de domaine sont corrects et propagés sur Internet, le portail vous permet de sélectionner le bouton **Ajouter un domaine personnalisé** .
+
+   Plusieurs jours peuvent être nécessaires pour que les modifications apportées à l’inscription du domaine se propagent sur les serveurs DNS (Internet Domain Name Server) une fois qu’ils sont traités par votre bureau d’enregistrement de domaines. Si les enregistrements de domaine ne sont pas mis à jour dans les trois jours ouvrables, vérifiez que les enregistrements sont correctement définis avec le Bureau d’enregistrement de domaines et contactez le support technique.
+1. Dans le panneau **domaines personnalisés** , l' **État SSL** pour le domaine est marqué `Not Secure` . Sélectionnez le lien **Ajouter une liaison** . Sélectionnez le certificat HTTPs du site dans le coffre de clés pour la liaison de domaine personnalisée.
+1. Dans Visual Studio, ouvrez le fichier de paramètres d’application du projet *serveur* ( `appsettings.json` ou `appsettings.Production.json` ). Dans la Identity configuration du serveur, ajoutez la `Key` section suivante. Spécifiez le **sujet** du certificat auto-signé pour la `Name` clé. Dans l’exemple suivant, le nom commun du certificat affecté dans le coffre de clés est `IdentityServerSigning` , qui donne l' **objet** `CN=IdentityServerSigning` :
+
+   ```json
+   "IdentityServer": {
+
+     ...
+
+     "Key": {
+       "Type": "Store",
+       "StoreName": "My",
+       "StoreLocation": "CurrentUser",
+       "Name": "CN=IdentityServerSigning"
+     }
+   },
+   ```
+
+1. Dans Visual Studio, créez un Azure App Service [profil de publication](xref:host-and-deploy/visual-studio-publish-profiles#publish-profiles) pour le projet *serveur* . Dans la barre de menus, sélectionnez : **générer**  >  **publier**  >  **de nouveaux**  >  **Azure**  >  **Azure App service** Azure (Windows ou Linux). Lorsque Visual Studio est connecté à un abonnement Azure, vous pouvez définir l' **affichage** des ressources Azure par **type de ressource**. Naviguez dans la liste des **applications Web** pour rechercher les app service de l’application et sélectionnez-la. Sélectionnez **Terminer**.
+1. Lorsque Visual Studio revient à la fenêtre de **publication** , les dépendances du coffre de clés et du service de base de données SQL Server sont détectées automatiquement.
+
+   Aucune modification de la configuration des paramètres par défaut n’est requise pour le service de coffre de clés.
+
+   À des fins de test, la base de données [SQLite](https://www.sqlite.org/index.html) locale d’une application, qui est configurée par défaut par le Blazor modèle, peut être déployée avec l’application sans configuration supplémentaire. La configuration d’une base de données différente pour Identity le serveur en production dépasse le cadre de cet article. Pour plus d’informations, consultez les ressources de base de données dans les ensembles de documentation suivants :
+   * [App Service](/azure/app-service/)
+   * [Identity Serveurs](https://identityserver4.readthedocs.io/en/latest/)
+
+1. Sélectionnez le lien **modifier** sous le nom du profil de déploiement en haut de la fenêtre. Remplacez l’URL de destination par l’URL de domaine personnalisée du site (par exemple, `https://www.contoso.com` ). Enregistrez les paramètres.
+1. Publiez l’application. Visual Studio ouvre une fenêtre de navigateur et demande le site dans son domaine personnalisé.
+
+La documentation Azure contient des informations supplémentaires sur l’utilisation des services Azure et des domaines personnalisés avec une liaison TLS dans App Service, y compris des informations sur l’utilisation d’enregistrements CNAMe à la place d’enregistrements A. Pour plus d’informations, consultez les ressources suivantes :
+
+* [Documentation App Service](/azure/app-service/)
+* [Tutoriel : Mapper un nom DNS personnalisé existant à Azure App Service](/azure/app-service/app-service-web-tutorial-custom-domain)
+* [Sécuriser un nom DNS personnalisé avec une liaison TLS/SSL dans Azure App Service](/azure/app-service/configure-ssl-bindings)
+* [Azure Key Vault](/azure/key-vault/)
+
+Nous vous recommandons d’utiliser une nouvelle fenêtre de navigateur incognito ou privée pour chaque exécution de test d’application après une modification de l’application, la configuration de l’application ou les services Azure dans la Portail Azure. cookieLes s en attente d’une série de tests précédente peuvent entraîner l’échec de l’authentification ou de l’autorisation lors du test du site, même lorsque la configuration du site est correcte. Pour plus d’informations sur la configuration de Visual Studio pour ouvrir une nouvelle fenêtre de navigateur dans incognito ou privée pour chaque série de tests, consultez la section [ Cookie s et données de site](#cookies-and-site-data) .
+
+Lorsque App Service configuration est modifiée dans le Portail Azure, les mises à jour prennent généralement effet rapidement mais ne sont pas instantanées. Parfois, vous devez attendre un peu de temps pour qu’un App Service redémarre afin que la modification de la configuration prenne effet.
+
+Si vous résolvez un problème de chargement de certificat, exécutez la commande suivante dans une interface de commande PowerShell Portail Azure [Kudu](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service) . La commande fournit une liste de certificats auxquels l’application peut accéder à partir du `My`  >  `CurrentUser` magasin de certificats. La sortie comprend les objets de certificat et les empreintes numériques utiles lors du débogage d’une application :
+
+```powershell
+Get-ChildItem -path Cert:\CurrentUser\My -Recurse | Format-List DnsNameList, Subject, Thumbprint, EnhancedKeyUsageList
+```
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 

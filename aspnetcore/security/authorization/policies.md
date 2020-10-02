@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: af282ec1f82b2ac31fd0b46b2406110e24e9211b
-ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
+ms.openlocfilehash: 140969c80191c9549bc19507b9c4818b88fed0d1
+ms.sourcegitcommit: c026bf76a0e14a5ee68983519a63574c674e9ff7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91424241"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91636801"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>Autorisation basée sur la stratégie dans ASP.NET Core
 
@@ -36,7 +36,7 @@ Une stratégie d’autorisation se compose d’une ou de plusieurs exigences. El
 
 Dans l’exemple précédent, une stratégie « AtLeast21 » est créée. Il a une exigence unique &mdash; qui correspond à une ancienneté minimale, qui est fournie en tant que paramètre à la spécification.
 
-## <a name="iauthorizationservice"></a>IAuthorizationService 
+## <a name="iauthorizationservice"></a>IAuthorizationService
 
 Le service principal qui détermine si l’autorisation est réussie est le <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> suivant :
 
@@ -122,13 +122,13 @@ Utilisez <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> ou `[Au
 
 Si vous utilisez des Razor pages, consultez [appliquer des stratégies à des Razor pages](#apply-policies-to-razor-pages) de ce document.
 
-Les stratégies sont appliquées aux contrôleurs à l’aide de l' `[Authorize]` attribut avec le nom de la stratégie. Par exemple :
+Les stratégies sont appliquées aux contrôleurs à l’aide de l' `[Authorize]` attribut avec le nom de la stratégie. Exemple :
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
 ## <a name="apply-policies-to-no-locrazor-pages"></a>Appliquer des stratégies à des Razor pages
 
-Les stratégies sont appliquées aux pages à l' Razor aide de l' `[Authorize]` attribut avec le nom de la stratégie. Par exemple :
+Les stratégies sont appliquées aux pages à l' Razor aide de l' `[Authorize]` attribut avec le nom de la stratégie. Exemple :
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
@@ -136,7 +136,7 @@ Les stratégies ***ne peuvent pas*** être appliquées au Razor niveau du gestio
 
 Les stratégies peuvent être appliquées à Razor des pages à l’aide d’une [Convention d’autorisation](xref:security/authorization/razor-pages-authorization).
 
-## <a name="requirements"></a>Spécifications
+## <a name="requirements"></a>Exigences
 
 Une spécification d’autorisation est une collection de paramètres de données qu’une stratégie peut utiliser pour évaluer le principal d’utilisateur actuel. Dans notre stratégie « AtLeast21 », l’exigence est un paramètre unique de &mdash; l’âge minimal. Une spécification implémente [IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement), qui est une interface de marqueur vide. Une exigence d’ancienneté minimale paramétrable peut être implémentée comme suit :
 
@@ -177,7 +177,7 @@ Le code précédent parcourt [PendingRequirements](/dotnet/api/microsoft.aspnetc
 
 ### <a name="handler-registration"></a>Inscription du gestionnaire
 
-Les gestionnaires sont inscrits dans la collection de services pendant la configuration. Par exemple :
+Les gestionnaires sont inscrits dans la collection de services pendant la configuration. Exemple :
 
 [!code-csharp[](policies/samples/3.0PoliciesAuthApp1/Startup.cs?range=31-32,39-40,42-45, 53-55, 58)]
 
@@ -230,7 +230,7 @@ Par exemple, la précédente `BadgeEntryHandler` peut être réécrite comme sui
 
 La `HandleRequirementAsync` méthode que vous implémentez dans un gestionnaire d’autorisations a deux paramètres : un `AuthorizationHandlerContext` et le `TRequirement` que vous gérez. Les infrastructures telles que MVC ou SignalR sont libres d’ajouter n’importe quel objet à la `Resource` propriété sur le `AuthorizationHandlerContext` pour passer des informations supplémentaires.
 
-Lorsque vous utilisez le routage de point de terminaison, l’autorisation est généralement gérée par l’intergiciel (middleware) d’autorisation. Dans ce cas, la `Resource` propriété est une instance de <xref:Microsoft.AspNetCore.Http.Endpoint> . Le point de terminaison peut être utilisé pour sonder la ressource sous-jacente vers laquelle vous effectuez le routage. Par exemple :
+Lorsque vous utilisez le routage de point de terminaison, l’autorisation est généralement gérée par l’intergiciel (middleware) d’autorisation. Dans ce cas, la `Resource` propriété est une instance de <xref:Microsoft.AspNetCore.Http.Endpoint> . Le point de terminaison peut être utilisé pour sonder la ressource sous-jacente vers laquelle vous effectuez le routage. Exemple :
 
 ```csharp
 if (context.Resource is Endpoint endpoint)
@@ -358,19 +358,19 @@ Utilisez <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> ou `[Au
 
 Si vous utilisez des Razor pages, consultez [appliquer des stratégies à des Razor pages](#apply-policies-to-razor-pages) de ce document.
 
-Les stratégies sont appliquées aux contrôleurs à l’aide de l' `[Authorize]` attribut avec le nom de la stratégie. Par exemple :
+Les stratégies sont appliquées aux contrôleurs à l’aide de l' `[Authorize]` attribut avec le nom de la stratégie. Exemple :
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
 ## <a name="apply-policies-to-no-locrazor-pages"></a>Appliquer des stratégies à des Razor pages
 
-Les stratégies sont appliquées aux pages à l' Razor aide de l' `[Authorize]` attribut avec le nom de la stratégie. Par exemple :
+Les stratégies sont appliquées aux pages à l' Razor aide de l' `[Authorize]` attribut avec le nom de la stratégie. Exemple :
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
 Les stratégies peuvent également être appliquées aux Razor pages à l’aide d’une [Convention d’autorisation](xref:security/authorization/razor-pages-authorization).
 
-## <a name="requirements"></a>Spécifications
+## <a name="requirements"></a>Exigences
 
 Une spécification d’autorisation est une collection de paramètres de données qu’une stratégie peut utiliser pour évaluer le principal d’utilisateur actuel. Dans notre stratégie « AtLeast21 », l’exigence est un paramètre unique de &mdash; l’âge minimal. Une spécification implémente [IAuthorizationRequirement](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationrequirement), qui est une interface de marqueur vide. Une exigence d’ancienneté minimale paramétrable peut être implémentée comme suit :
 
@@ -411,7 +411,7 @@ Le code précédent parcourt [PendingRequirements](/dotnet/api/microsoft.aspnetc
 
 ### <a name="handler-registration"></a>Inscription du gestionnaire
 
-Les gestionnaires sont inscrits dans la collection de services pendant la configuration. Par exemple :
+Les gestionnaires sont inscrits dans la collection de services pendant la configuration. Exemple :
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=32-33,48-53,61,62-63,66)]
 
