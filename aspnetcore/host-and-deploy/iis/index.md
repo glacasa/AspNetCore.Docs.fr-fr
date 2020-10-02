@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 1338ecd6205a351b54a58522b1713a6d70e2d22a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: f648837ce42bef4a828d7eda1a6abdfdd8ac07a2
+ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634746"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91654034"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>Héberger ASP.NET Core sur Windows avec IIS
 
@@ -549,24 +549,6 @@ ICACLS C:\sites\MyWebApp /grant "IIS AppPool\DefaultAppPool":F
 
 Pour plus d’informations, consultez la rubrique [icacls](/windows-server/administration/windows-commands/icacls).
 
-## <a name="http2-support"></a>Assistance HTTP/2
-
-[HTTP/2](https://httpwg.org/specs/rfc7540.html) est pris en charge avec ASP.NET Core dans les scénarios de déploiement IIS suivants :
-
-* In-process
-  * Windows Server 2016/Windows 10 ou version ultérieure ; IIS 10 ou version ultérieure
-  * TLS 1.2 ou connexion ultérieure
-* Out-of-process
-  * Windows Server 2016/Windows 10 ou version ultérieure ; IIS 10 ou version ultérieure
-  * Les connexions au serveur périphérique public utilisent HTTP/2, mais la connexion de proxy inverse pour le [serveur Kestrel](xref:fundamentals/servers/kestrel) utilise HTTP/1.1.
-  * TLS 1.2 ou connexion ultérieure
-
-Pour un déploiement in-process lorsqu’une connexion HTTP/2 est établie, [HttpRequest.Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) retourne `HTTP/2`. Pour un déploiement in-process lorsqu’une connexion HTTP/2 est établie, [HttpRequest.Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) retourne `HTTP/1.1`.
-
-Pour plus d’informations sur les modèles d’hébergement in-process et out-of-process, consultez <xref:host-and-deploy/aspnet-core-module>.
-
-HTTP/2 est activé par défaut. Les connexions reviennent à HTTP/1.1 si une connexion HTTP/2 n’est pas établie. Pour plus d’informations sur la configuration de HTTP/2 avec les déploiements IIS, consultez [HTTP/2 sur IIS](/iis/get-started/whats-new-in-iis-10/http2-on-iis).
-
 ## <a name="cors-preflight-requests"></a>Requêtes préliminaires CORS
 
 *Cette section s’applique uniquement aux applications ASP.NET Core qui ciblent le .NET Framework.*
@@ -657,7 +639,7 @@ Pour empêcher les applications hébergées [hors processus](#out-of-process-hos
 * <xref:test/troubleshoot-azure-iis>
 * <xref:host-and-deploy/azure-iis-errors-reference>
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:test/troubleshoot>
 * <xref:index>
@@ -1257,7 +1239,7 @@ Pour empêcher les applications hébergées [hors processus](#out-of-process-hos
 * <xref:test/troubleshoot-azure-iis>
 * <xref:host-and-deploy/azure-iis-errors-reference>
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:test/troubleshoot>
 * <xref:index>
@@ -1775,7 +1757,7 @@ Pour une application ASP.NET Core qui cible le .NET Framework, les requêtes OPT
 * <xref:test/troubleshoot-azure-iis>
 * <xref:host-and-deploy/azure-iis-errors-reference>
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:test/troubleshoot>
 * <xref:index>

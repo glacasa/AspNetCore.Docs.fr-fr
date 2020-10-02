@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 5e073845acbecdf0db4c30c4725f12033cfc42ac
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e01704cb10c88f3e9442e74034f5e5d39787f300
+ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634681"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91653891"
 ---
 # <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Partie 3 : Razor pages avec EF Core dans ASP.net Core-Trier, filtrer, pagination
 
@@ -42,25 +42,26 @@ L’illustration suivante présente une page complète. Les en-têtes de colonne
 
 Remplacez le code de *Pages/Students/Index.cshtml.cs* par le code suivant pour ajouter la fonctionnalité de tri.
 
-[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_All&highlight=21-24,26,28-52)]
+[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_All)]
 
 Le code précédent :
 
+* Nécessite l’ajout de `using System;` .
 * Ajoute des propriétés devant contenir les paramètres de tri.
 * Remplace le nom de la propriété `Student` par `Students`.
 * Remplace le code de la méthode `OnGetAsync`.
 
-La méthode `OnGetAsync` reçoit un paramètre `sortOrder` à partir de la chaîne de requête dans l’URL. L’URL (y compris la chaîne de requête) est générée par le [Tag Helper Anchor](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper).
+La méthode `OnGetAsync` reçoit un paramètre `sortOrder` à partir de la chaîne de requête dans l’URL. L’URL et la chaîne de requête sont générées par le [tag Helper ancre](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper).
 
-Le paramètre `sortOrder` est « Name » ou « Date ». Le paramètre `sortOrder` peut être suivi de « _desc » pour spécifier l’ordre décroissant. L’ordre de tri par défaut est croissant.
+Le `sortOrder` paramètre a la valeur `Name` ou `Date` . Le `sortOrder` paramètre est éventuellement suivi `_desc` de pour spécifier l’ordre décroissant. L’ordre de tri par défaut est croissant.
 
-Quand la page Index est demandée à partir du lien **Students**, il n’existe aucune chaîne de requête. Les étudiants sont affichés par nom de famille dans l’ordre croissant. Le tri croissant par nom de famille est la valeur par défaut dans l’instruction `switch`. Quand l’utilisateur clique sur un lien d’en-tête de colonne, la valeur `sortOrder` appropriée est fournie dans la valeur de chaîne de requête.
+Quand la page Index est demandée à partir du lien **Students**, il n’existe aucune chaîne de requête. Les étudiants sont affichés par nom de famille dans l’ordre croissant. L’ordre croissant par nom de famille est le `default` dans l' `switch` instruction. Quand l’utilisateur clique sur un lien d’en-tête de colonne, la valeur `sortOrder` appropriée est fournie dans la valeur de chaîne de requête.
 
 `NameSort` et `DateSort` sont utilisés par la Razor page pour configurer les liens hypertexte d’en-tête de colonne avec les valeurs de chaîne de requête appropriées :
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
-Le code utilise l’opérateur conditionnel C# [?:](/dotnet/csharp/language-reference/operators/conditional-operator). L’opérateur `?:` est un opérateur ternaire (il prend trois opérandes). La première ligne indique que quand `sortOrder` est null ou vide, `NameSort` prend la valeur « name_desc ». Si `sortOrder` n’est **pas** null ou vide, `NameSort` prend pour valeur une chaîne vide.
+Le code utilise l' [opérateur conditionnel C# ?:](/dotnet/csharp/language-reference/operators/conditional-operator). L' `?:` opérateur est un opérateur ternaire qui prend trois opérandes. La première ligne spécifie que lorsque `sortOrder` a la valeur null ou est vide, `NameSort` a la valeur `name_desc` . Si `sortOrder` n’est ***pas*** null ou vide, `NameSort` prend pour valeur une chaîne vide.
 
 Ces deux instructions permettent à la page de définir les liens hypertexte d’en-tête de colonne comme suit :
 
@@ -75,7 +76,7 @@ La méthode utilise LINQ to Entities pour spécifier la colonne d’après laque
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_IQueryable)]
 
-Quand un `IQueryable` est créé ou modifié, aucune requête n’est envoyée à la base de données. La requête n’est pas exécutée tant que l’objet `IQueryable` n’a pas été converti en collection. Les `IQueryable` sont convertis en collection en appelant une méthode telle que `ToListAsync`. Ainsi, le code `IQueryable` génère une requête unique qui n’est pas exécutée avant l’instruction suivante :
+Lorsqu’une `IQueryable` est créée ou modifiée, aucune requête n’est envoyée à la base de données. La requête n’est pas exécutée tant que l’objet `IQueryable` n’a pas été converti en collection. Les `IQueryable` sont convertis en collection en appelant une méthode telle que `ToListAsync`. Ainsi, le code `IQueryable` génère une requête unique qui n’est pas exécutée avant l’instruction suivante :
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_SortOnlyRtn)]
 
@@ -110,7 +111,7 @@ Pour ajouter le filtrage à la page d’index des étudiants :
 
 Remplacez le code de *Students/Index.cshtml.cs* par le code suivant pour ajouter la fonctionnalité de filtrage :
 
-[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml.cs?name=snippet_All&highlight=28,33,37-41)]
+[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml.cs?name=snippet_All&highlight=17,22,26-30)]
 
 Le code précédent :
 
@@ -119,7 +120,7 @@ Le code précédent :
 
 ### <a name="iqueryable-vs-ienumerable"></a>IQueryable et IEnumerable
 
-Le code appelle la méthode `Where` de l’objet `IQueryable`, et le filtre est traité sur le serveur. Dans certains scénarios, l’application peut appeler la méthode `Where` en tant que méthode d’extension sur une collection en mémoire. Par exemple, supposez que `_context.Students` passe de `DbSet` EF Core à une méthode de référentiel qui retourne une collection `IEnumerable`. Le résultat serait normalement le même, mais dans certains cas il peut être différent.
+Le code appelle la méthode <xref:System.Linq.Queryable.Where%2A> de l’objet `IQueryable`, et le filtre est traité sur le serveur. Dans certains scénarios, l’application peut appeler la méthode `Where` en tant que méthode d’extension sur une collection en mémoire. Par exemple, supposez que `_context.Students` passe de `DbSet` EF Core à une méthode de référentiel qui retourne une collection `IEnumerable`. Le résultat serait normalement le même, mais dans certains cas il peut être différent.
 
 Par exemple, l’implémentation .NET Framework de `Contains` effectue par défaut une comparaison respectant la casse. Dans SQL Server, le respect de la casse de `Contains` est déterminé par le paramètre de classement de l’instance de SQL Server. Par défaut, SQL Server ne respecte pas la casse. Par défaut, SQLite est sensible à la casse. `ToUpper` peut être appelée pour que le test ne respecte pas la casse de manière explicite :
 
@@ -139,7 +140,7 @@ Pour plus d’informations, consultez [How to use case-insensitive query with Sq
 
 ### <a name="update-the-no-locrazor-page"></a>Mettre à jour la Razor page
 
-Remplacez le code de *Pages/Students/Index.cshtml* pour créer un bouton **Search** et le chrome assorti.
+Remplacez le code dans *pages/Students/index. cshtml* pour ajouter un bouton de **recherche** .
 
 [!code-cshtml[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml?highlight=14-23)]
 
@@ -153,8 +154,8 @@ Testez l’application :
 
 Notez que l’URL contient la chaîne de recherche. Par exemple :
 
-```
-https://localhost:<port>/Students?SearchString=an
+```browser-address-bar
+https://localhost:5001/Students?SearchString=an
 ```
 
 Si la page est dans les favoris, le favori contient l’URL de la page et la chaîne de requête `SearchString`. `method="get"` dans la balise `form` est ce qui a provoqué la génération de la chaîne de requête.
@@ -181,15 +182,16 @@ La méthode `CreateAsync` est utilisée pour créer le `PaginatedList<T>`. Un co
 
 Remplacez le code de *Students/Index.cshtml.cs* pour ajouter la fonctionnalité de pagination.
 
-[!code-csharp[Main](intro/samples/cu30/Pages/Students/Index.cshtml.cs?name=snippet_All&highlight=26,28-29,31,34-41,68-70)]
+[!code-csharp[Main](intro/samples/cu30/Pages/Students/Index.cshtml.cs?name=snippet_All&highlight=15-20,23-30,57-59)]
 
 Le code précédent :
 
 * Remplace le type `IList<Student>` de la propriété `Students` par le type `PaginatedList<Student>`.
 * Ajoute l’index de page, le `sortOrder` actuel et le `currentFilter` à la signature de méthode `OnGetAsync`.
-* Enregistre l’ordre de tri dans la propriété CurrentSort.
+* Enregistre l’ordre de tri dans la `CurrentSort` propriété.
 * Rétablit la valeur 1 pour l’index de la page lorsqu’il existe une nouvelle chaîne de recherche.
 * Utilise la classe `PaginatedList` pour accéder aux entités d’étudiants.
+* Définit `pageSize` sur 3. Une application réelle utilise la [configuration](xref:fundamentals/configuration/index) pour définir la valeur de taille de page.
 
 Tous les paramètres reçus par `OnGetAsync` sont Null si :
 
@@ -212,7 +214,7 @@ Si la chaîne de recherche est modifiée pendant la pagination, la page est réi
 
   La méthode `PaginatedList.CreateAsync` convertit la requête d’étudiant en une seule page d’étudiants dans un type de collection qui prend en charge la pagination. Cette seule page d’élèves est transmise à la Razor page.
 
-  Les deux points d’interrogation situés après `pageIndex` dans l’appel `PaginatedList.CreateAsync` représentent l’[opérateur de fusion avec valeur Null](/dotnet/csharp/language-reference/operators/null-conditional-operator). L’opérateur de fusion de Null définit une valeur par défaut pour un type nullable. L’expression `(pageIndex ?? 1)` signifie qu’il faut retourner la valeur de `pageIndex` s’il a une valeur. Si `pageIndex` n’a pas de valeur, il faut retourner 1.
+  Les deux points d’interrogation situés après `pageIndex` dans l’appel `PaginatedList.CreateAsync` représentent l’[opérateur de fusion avec valeur Null](/dotnet/csharp/language-reference/operators/null-conditional-operator). L’opérateur de fusion de Null définit une valeur par défaut pour un type nullable. L’expression `pageIndex ?? 1` retourne la valeur de `pageIndex` si elle a une valeur ; sinon, elle retourne la valeur 1.
 
 ### <a name="add-paging-links-to-the-no-locrazor-page"></a>Ajouter des liens de pagination à la Razor page
 
@@ -258,7 +260,7 @@ Créez un fichier *Pages/About.cshtml* avec le code suivant :
 
 ### <a name="create-the-page-model"></a>Créer le modèle de page
 
-Créez un fichier *Pages/About.cshtml.cs* avec le code suivant :
+Mettez à jour le fichier *Pages/About.cshtml.cs* avec le code suivant :
 
 [!code-csharp[Main](intro/samples/cu30/Pages/About.cshtml.cs)]
 
@@ -536,7 +538,7 @@ Si vous rencontrez des problèmes que vous ne pouvez pas résoudre, télécharge
 
 ![Page About](sort-filter-page/_static/about.png)
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Débogage d’une source ASP.NET Core 2.x](https://github.com/dotnet/AspNetCore.Docs/issues/4155)
 * [Version YouTube de ce tutoriel](https://www.youtube.com/watch?v=MDs7PFpoMqI)

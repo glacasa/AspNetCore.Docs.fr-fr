@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 5890e56f65712bcd781a3aad278a5aaa7914d0ea
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 44558a0f2fdc61eb860223658f5bef1d0117ba87
+ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635019"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91653940"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>Implémentation du serveur web Kestrel dans ASP.NET Core
 
@@ -354,6 +354,14 @@ webBuilder.ConfigureKestrel(serverOptions =>
 ```
 
 La valeur par défaut est 96 Ko (98 304).
+
+### <a name="trailers"></a>Bandes-annonce
+
+[!INCLUDE[](~/includes/trailers.md)]
+
+### <a name="reset"></a>Réinitialiser
+
+[!INCLUDE[](~/includes/reset.md)]
 
 ### <a name="synchronous-io"></a>E/S synchrone
 
@@ -2753,7 +2761,7 @@ Ce processus est différent pour HTTP/2, car le protocole prend en charge l’ab
 
 Si possible, il est préférable que les clients utilisent l’en-tête de demande [expect : 100-continue](https://developer.mozilla.org/docs/Web/HTTP/Status/100) et attendent que le serveur réponde avant de commencer à envoyer le corps de la demande. Cela donne au client la possibilité d’examiner la réponse et de l’abandonner avant d’envoyer des données inutiles.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * Lorsque vous utilisez des sockets UNIX sur Linux, le socket n’est pas supprimé automatiquement lors de l’arrêt de l’application. Pour plus d’informations, consultez [ce problème GitHub](https://github.com/dotnet/aspnetcore/issues/14134).
 * <xref:test/troubleshoot>
