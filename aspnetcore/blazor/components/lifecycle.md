@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: a43268acdb53bf811148fe795ef0434662ddb32f
-ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
+ms.openlocfilehash: 100007a5757c1a54333c57adf573bcb8cc4fdd85
+ms.sourcegitcommit: 652aefa1e0d570df42e8bca15ca43b2d250009f3
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 10/06/2020
-ms.locfileid: "91762201"
+ms.locfileid: "91764058"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>BlazorCycle de vie ASP.net Core
 
@@ -41,14 +41,14 @@ Les diagrammes suivants illustrent le Blazor cycle de vie. Les méthodes de cycl
    * Appelez [`OnInitialized{Async}`](#component-initialization-methods) . Si un <xref:System.Threading.Tasks.Task> est retourné, <xref:System.Threading.Tasks.Task> est attendu, puis le composant est rendu. Si un <xref:System.Threading.Tasks.Task> n’est pas retourné, restituez le composant.
 1. Appelez [`OnParametersSet{Async}`](#after-parameters-are-set) . Si un <xref:System.Threading.Tasks.Task> est retourné, <xref:System.Threading.Tasks.Task> est attendu, puis le composant est rendu. Si un <xref:System.Threading.Tasks.Task> n’est pas retourné, restituez le composant.
 
-![Événements de cycle de vie d’un composant ::: No-Loc (Razor) ::: Component dans ::: No-Loc (éblouissant) :::](lifecycle/_static/lifecycle1.png)
+<img src="lifecycle/_static/lifecycle1.png" alt="Component lifecycle events of a Razor component in Blazor" data-linktype="relative-path" style="max-width:50%;display:block;margin:0 auto">
 
 Traitement des événements Document Object Model (DOM) :
 
 1. Le gestionnaire d’événements est exécuté.
 1. Si un <xref:System.Threading.Tasks.Task> est retourné, <xref:System.Threading.Tasks.Task> est attendu, puis le composant est rendu. Si un <xref:System.Threading.Tasks.Task> n’est pas retourné, le composant est rendu.
 
-![Traitement des événements Document Object Model (DOM)](lifecycle/_static/lifecycle2.png)
+<img src="lifecycle/_static/lifecycle2.png" alt="Document Object Model (DOM) event processing" data-linktype="relative-path" style="max-width:50%;display:block;margin:0 auto">
 
 Le `Render` cycle de vie :
 
@@ -57,7 +57,7 @@ Le `Render` cycle de vie :
 1. Attendez le DOM à mettre à jour.
 1. Appelez [`OnAfterRender{Async}`](#after-component-render) .
 
-![Cycle de vie du rendu](lifecycle/_static/lifecycle3.png)
+<img src="lifecycle/_static/lifecycle3.png" alt="Render lifecycle" data-linktype="relative-path" style="max-width:50%;display:block;margin:0 auto">
 
 Les développeurs appellent pour [`StateHasChanged`](#state-changes) générer un rendu.
 
