@@ -1,7 +1,7 @@
 ---
-title: Hôte générique .NET
+title: Hôte générique .NET dans ASP.NET Core
 author: rick-anderson
-description: Découvrez l’hôte générique .NET Core, qui est responsable de la gestion du démarrage et de la durée de vie des applications.
+description: Utilisez l’hôte générique .NET Core dans les applications ASP.NET Core.  L’hôte générique est responsable du démarrage de l’application et de la gestion de la durée de vie.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
@@ -18,18 +18,20 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: 59cfae9ff619f8de894686c4b773d66e5cbe10ad
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: d3de81ce7248372279b423da865513ee5db73c79
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: MT
 ms.contentlocale: fr-FR
 ms.lasthandoff: 10/06/2020
-ms.locfileid: "91754734"
+ms.locfileid: "91762319"
 ---
-# <a name="net-generic-host"></a>Hôte générique .NET
+# <a name="net-generic-host-in-aspnet-core"></a>Hôte générique .NET dans ASP.NET Core
 
 ::: moniker range=">= aspnetcore-5.0"
 
 Les modèles ASP.NET Core créent un hôte générique .NET Core ( <xref:Microsoft.Extensions.Hosting.HostBuilder> ).
+
+Cette rubrique fournit des informations sur l’utilisation de l’hôte générique .NET dans ASP.NET Core. Pour plus d’informations sur l’utilisation de l’hôte générique .NET dans les applications de console, consultez [hôte générique .net](/dotnet/core/extensions/generic-host).
 
 ## <a name="host-definition"></a>Définition de l’hôte
 
@@ -529,6 +531,8 @@ public class Program
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
 Les modèles ASP.NET Core créent un hôte générique .NET Core ( <xref:Microsoft.Extensions.Hosting.HostBuilder> ).
+
+Cette rubrique fournit des informations sur l’utilisation de l’hôte générique .NET dans ASP.NET Core. Pour plus d’informations sur l’utilisation de l’hôte générique .NET dans les applications de console, consultez [hôte générique .net](/dotnet/core/extensions/generic-host).
 
 ## <a name="host-definition"></a>Définition de l’hôte
 

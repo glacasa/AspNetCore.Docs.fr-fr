@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 2d002e075f9d57654589b540e522307c363d9660
-ms.sourcegitcommit: 4cce99cbd44372fd4575e8da8c0f4345949f4d9a
+ms.openlocfilehash: 99e0109ea4c2526e9f91a8a4df23c4557e9be83a
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/31/2020
-ms.locfileid: "89153543"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91762306"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>Injection de dépendances dans ASP.NET Core
 
@@ -34,6 +34,8 @@ ASP.NET Core prend en charge le modèle de conception logicielle d’injection d
 Pour plus d’informations spécifiques à l’injection de dépendances au sein des contrôleurs MVC, consultez <xref:mvc/controllers/dependency-injection>.
 
 Pour plus d’informations sur l’injection de dépendances d’options, consultez <xref:fundamentals/configuration/options> .
+
+Cette rubrique fournit des informations sur l’injection de dépendances dans ASP.NET Core. Pour plus d’informations sur l’utilisation de l’injection de dépendances dans les applications console, consultez [injection de dépendances dans .net](/dotnet/core/extensions/dependency-injection).
 
 [Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
@@ -190,7 +192,7 @@ Pour utiliser les services délimités dans des intergiciels (middleware), utili
 * Injectez le service dans la méthode ou l’intergiciel (middleware) `Invoke` `InvokeAsync` . L’utilisation de l' [injection de constructeur](xref:mvc/controllers/dependency-injection#constructor-injection) lève une exception Runtime, car elle force le service de portée à se comporter comme un singleton. L’exemple de la section [options de durée de vie et d’inscription](#lifetime-and-registration-options) illustre l' `InvokeAsync` approche.
 * Utilisez [un intergiciel (middleware) basé sur l’usine](xref:fundamentals/middleware/extensibility). Les intergiciels (middleware) inscrits à l’aide de cette approche sont activés par demande du client (connexion), ce qui permet d’injecter des services étendus dans la méthode de l’intergiciel (middleware) `InvokeAsync` .
 
-Pour plus d'informations, consultez <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
+Pour plus d’informations, consultez <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
 
 ### <a name="singleton"></a>Singleton
 
@@ -216,9 +218,9 @@ Le Framework fournit des méthodes d’extension d’inscription de service qui 
 
 | Méthode                                                                                                                                                                              | Automatique<br>object<br>suppression | Multiple<br>implémentations | Passage d’args |
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------:|:---------------------------:|:---------:|
-| `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>Exemple :<br>`services.AddSingleton<IMyDep, MyDep>();`                                                                             | Oui                             | Oui                         | Non        |
+| `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>Exemple :<br>`services.AddSingleton<IMyDep, MyDep>();`                                                                             | Oui                             | Oui                         | Non        |
 | `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>Exemples :<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep(99));` | Oui                             | Oui                         | Oui       |
-| `Add{LIFETIME}<{IMPLEMENTATION}>()`<br>Exemple :<br>`services.AddSingleton<MyDep>();`                                                                                                | Oui                             | Non                          | Non        |
+| `Add{LIFETIME}<{IMPLEMENTATION}>()`<br>Exemple :<br>`services.AddSingleton<MyDep>();`                                                                                                | Oui                             | Non                          | Non        |
 | `AddSingleton<{SERVICE}>(new {IMPLEMENTATION})`<br>Exemples :<br>`services.AddSingleton<IMyDep>(new MyDep());`<br>`services.AddSingleton<IMyDep>(new MyDep(99));`                    | Non                              | Oui                         | Oui       |
 | `AddSingleton(new {IMPLEMENTATION})`<br>Exemples :<br>`services.AddSingleton(new MyDep());`<br>`services.AddSingleton(new MyDep(99));`                                               | Non                              | Non                          | Oui       |
 
@@ -691,7 +693,7 @@ public void Configure(IApplicationBuilder app, IOptions<MyOptions> options)
 }
 ```
 
-Pour plus d'informations, consultez <xref:fundamentals/startup>.
+Pour plus d’informations, consultez <xref:fundamentals/startup>.
 
 ## <a name="framework-provided-services"></a>Services fournis par le framework
 
@@ -753,7 +755,7 @@ Les services à durée de vie délimitée (<xref:Microsoft.Extensions.Dependency
 Dans les applications qui traitent les requêtes, les services délimités sont supprimés à la fin de la demande.
 
 > [!WARNING]
-> Si vous utilisez un service Scoped dans un middleware, injectez le service dans la méthode `Invoke` ou `InvokeAsync`. N’injectez pas via l' [injection de constructeur](xref:mvc/controllers/dependency-injection#constructor-injection) , car cela force le service à se comporter comme un singleton. Pour plus d'informations, consultez <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
+> Si vous utilisez un service Scoped dans un middleware, injectez le service dans la méthode `Invoke` ou `InvokeAsync`. N’injectez pas via l' [injection de constructeur](xref:mvc/controllers/dependency-injection#constructor-injection) , car cela force le service à se comporter comme un singleton. Pour plus d’informations, consultez <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
 
 ### <a name="singleton"></a>Singleton
 
@@ -770,9 +772,9 @@ Les méthodes d’extension d’inscription de service offrent des surcharges qu
 
 | Méthode | Automatique<br>object<br>suppression | Multiple<br>implémentations | Passage d’args |
 | ------ | :-----------------------------: | :-------------------------: | :-------: |
-| `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>Exemple :<br>`services.AddSingleton<IMyDep, MyDep>();` | Oui | Oui | Non |
+| `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>Exemple :<br>`services.AddSingleton<IMyDep, MyDep>();` | Oui | Oui | Non |
 | `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>Exemples :<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep("A string!"));` | Oui | Oui | Oui |
-| `Add{LIFETIME}<{IMPLEMENTATION}>()`<br>Exemple :<br>`services.AddSingleton<MyDep>();` | Oui | Non | Non |
+| `Add{LIFETIME}<{IMPLEMENTATION}>()`<br>Exemple :<br>`services.AddSingleton<MyDep>();` | Oui | Non | Non |
 | `AddSingleton<{SERVICE}>(new {IMPLEMENTATION})`<br>Exemples :<br>`services.AddSingleton<IMyDep>(new MyDep());`<br>`services.AddSingleton<IMyDep>(new MyDep("A string!"));` | Non | Oui | Oui |
 | `AddSingleton(new {IMPLEMENTATION})`<br>Exemples :<br>`services.AddSingleton(new MyDep());`<br>`services.AddSingleton(new MyDep("A string!"));` | Non | Non | Oui |
 
@@ -950,7 +952,7 @@ Le fournisseur de services racine est créé quand <xref:Microsoft.Extensions.De
 
 Les services Scoped sont supprimés par le conteneur qui les a créés. Si un service Scoped est créé dans le conteneur racine, la durée de vie du service est promue en singleton, car elle est supprimée par le conteneur racine seulement quand l’application/le serveur est arrêté. La validation des étendues du service permet de traiter ces situations quand `BuildServiceProvider` est appelé.
 
-Pour plus d'informations, consultez <xref:fundamentals/host/web-host#scope-validation>.   
+Pour plus d’informations, consultez <xref:fundamentals/host/web-host#scope-validation>.   
 
 ## <a name="request-services"></a>Services de requête
 

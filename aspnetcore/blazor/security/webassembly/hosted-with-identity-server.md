@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 0d63ddbc730d3feef0682f6e49dd1b1b4d5e0301
-ms.sourcegitcommit: c026bf76a0e14a5ee68983519a63574c674e9ff7
+ms.openlocfilehash: 91cc7ffc46f5f1f68efd7e481479b19938476cb0
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91636814"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91762241"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Sécuriser une Blazor WebAssembly application hébergée ASP.net core avec le Identity serveur
 
@@ -52,7 +52,7 @@ Pour créer un Blazor WebAssembly projet avec un mécanisme d’authentification
 dotnet new blazorwasm -au Individual -ho -o {APP NAME}
 ```
 
-| Espace réservé  |  Exemple        |
+| Espace réservé  | Exemple        |
 | ------------ | -------------- |
 | `{APP NAME}` | `BlazorSample` |
 
@@ -154,7 +154,7 @@ Pour obtenir le contrôle total du schéma de base de données, héritez de l’
 
 Dans le `OidcConfigurationController` ( `Controllers/OidcConfigurationController.cs` ), le point de terminaison client est approvisionné pour servir les paramètres OIDC.
 
-### <a name="app-settings"></a>Paramètres d’application
+### <a name="app-settings"></a>Paramètres de l’application
 
 Dans le fichier de paramètres d’application ( `appsettings.json` ) à la racine du projet, la `IdentityServer` section décrit la liste des clients configurés. Dans l’exemple suivant, il existe un seul client. Le nom du client correspond au nom de l’application et est mappé par Convention au `ClientId` paramètre OAuth. Le profil indique le type d’application en cours de configuration. Le profil est utilisé en interne pour générer des conventions qui simplifient le processus de configuration du serveur. <!-- There are several profiles available, as explained in the [Application profiles](#application-profiles) section. -->
 
@@ -316,7 +316,7 @@ public class CustomUserFactory
         if (user.Identity.IsAuthenticated)
         {
             var identity = (ClaimsIdentity)user.Identity;
-            var roleClaims = identity.FindAll(identity.RoleClaimType);
+            var roleClaims = identity.FindAll(identity.RoleClaimType).ToArray();
 
             if (roleClaims != null && roleClaims.Any())
             {
@@ -508,7 +508,7 @@ Pour configurer une application, Azure App Service et Azure Key Vault pour hébe
    * Pour la **référence SKU et la taille**, vérifiez que le niveau de App service est `Basic B1` ou supérieur.  App Service nécessite un `Basic B1` niveau de service ou supérieur pour utiliser des domaines personnalisés.
 1. Une fois que Azure a créé le App Service, ouvrez la **configuration** de l’application et ajoutez un nouveau paramètre d’application en spécifiant les empreintes numériques de certificat enregistrées précédemment. La clé du paramètre d’application est `WEBSITE_LOAD_CERTIFICATES` . Séparez les empreintes numériques du certificat dans la valeur du paramètre de l’application par une virgule, comme le montre l’exemple suivant :
    * Clé :`WEBSITE_LOAD_CERTIFICATES`
-   * Valeur : `57443A552A46DB...D55E28D412B943565,29F43A772CB6AF...1D04F0C67F85FB0B1`
+   * Valeur: `57443A552A46DB...D55E28D412B943565,29F43A772CB6AF...1D04F0C67F85FB0B1`
 
    Dans la Portail Azure, l’enregistrement des paramètres de l’application est un processus en deux étapes : enregistrer le `WEBSITE_LOAD_CERTIFICATES` paramètre clé-valeur, puis sélectionner le bouton **Enregistrer** en haut du panneau.
 1. Sélectionnez les **paramètres TLS/SSL**de l’application. Sélectionnez **certificats de clé privée (. pfx)**. Utilisez le processus d' **importation Key Vault certificat** à deux reprises pour importer le certificat du site pour la communication HTTPS et le certificat de signature de jetons de serveur auto-signé du site Identity .

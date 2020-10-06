@@ -5,7 +5,7 @@ description: En savoir plus sur les outils disponibles pour créer des Blazor ap
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/07/2020
+ms.date: 09/28/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
-ms.openlocfilehash: d7e3743d12c235c20cc27f6a3263e2994a9e160a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d1626fe753782d524bf75c398c11235c3110633a
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625828"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91762150"
 ---
 # <a name="tooling-for-aspnet-core-no-locblazor"></a>Outils pour ASP.NET Core Blazor
 
@@ -52,13 +52,13 @@ Pour plus d’informations sur l’approbation du certificat de développement H
 
 ::: zone pivot="linux"
 
-1. Installez la dernière version du [Kit de développement logiciel (SDK) .net Core 3,1](https://dotnet.microsoft.com/download/dotnet-core/3.1). Si vous avez déjà installé le kit de développement logiciel (SDK), vous pouvez déterminer la version installée en exécutant la commande suivante dans une interface de commande :
+1. Installez la dernière version du [Kit SDK .net Core](https://dotnet.microsoft.com/download). Si vous avez déjà installé le kit de développement logiciel (SDK), vous pouvez déterminer la version installée en exécutant la commande suivante dans une interface de commande :
 
    ```dotnetcli
    dotnet --version
    ```
 
-1. Installez la dernière version de [Visual Studio code](https://code.visualstudio.com/).
+1. Installez la dernière version de [Visual Studio code](https://code.visualstudio.com).
 
 1. Installez la dernière [extension C# for Visual Studio code](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp).
 
@@ -90,7 +90,7 @@ Il n’existe pas de méthode centralisée pour approuver un certificat sur Linu
 * Faites confiance à tous les certificats auto-signés pour `localhost` .
 * Ajoutez le certificat à la liste des certificats approuvés dans le navigateur.
 
-Pour plus d’informations, reportez-vous aux conseils fournis par votre navigateur et votre distribution Linux.
+Pour plus d’informations, consultez les conseils fournis par le fabricant de votre navigateur et la distribution Linux.
 
 ::: zone-end
 

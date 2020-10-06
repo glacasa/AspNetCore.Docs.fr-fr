@@ -5,7 +5,7 @@ description: Découvrez comment utiliser les Razor méthodes de cycle de vie des
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/06/2020
+ms.date: 10/06/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,18 +18,48 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 00573f87b65e53a7bfd9cc2aed1d2ed7772b9a4a
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: a43268acdb53bf811148fe795ef0434662ddb32f
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847609"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91762201"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>BlazorCycle de vie ASP.net Core
 
 Par [Luke Latham](https://github.com/guardrex) et [Daniel Roth](https://github.com/danroth27)
 
 L' Blazor infrastructure comprend des méthodes de cycle de vie synchrones et asynchrones. Substituez les méthodes de cycle de vie pour effectuer des opérations supplémentaires sur les composants lors de l’initialisation et du rendu des composants.
+
+Les diagrammes suivants illustrent le Blazor cycle de vie. Les méthodes de cycle de vie sont définies avec des exemples dans les sections suivantes de cet article.
+
+Événements de cycle de vie des composants :
+
+1. Si le composant est rendu pour la première fois sur une demande :
+   * Créez l’instance du composant.
+   * Effectuez l’injection de propriété. Exécutez [`SetParametersAsync`](#before-parameters-are-set) .
+   * Appelez [`OnInitialized{Async}`](#component-initialization-methods) . Si un <xref:System.Threading.Tasks.Task> est retourné, <xref:System.Threading.Tasks.Task> est attendu, puis le composant est rendu. Si un <xref:System.Threading.Tasks.Task> n’est pas retourné, restituez le composant.
+1. Appelez [`OnParametersSet{Async}`](#after-parameters-are-set) . Si un <xref:System.Threading.Tasks.Task> est retourné, <xref:System.Threading.Tasks.Task> est attendu, puis le composant est rendu. Si un <xref:System.Threading.Tasks.Task> n’est pas retourné, restituez le composant.
+
+![Événements de cycle de vie d’un composant ::: No-Loc (Razor) ::: Component dans ::: No-Loc (éblouissant) :::](lifecycle/_static/lifecycle1.png)
+
+Traitement des événements Document Object Model (DOM) :
+
+1. Le gestionnaire d’événements est exécuté.
+1. Si un <xref:System.Threading.Tasks.Task> est retourné, <xref:System.Threading.Tasks.Task> est attendu, puis le composant est rendu. Si un <xref:System.Threading.Tasks.Task> n’est pas retourné, le composant est rendu.
+
+![Traitement des événements Document Object Model (DOM)](lifecycle/_static/lifecycle2.png)
+
+Le `Render` cycle de vie :
+
+1. Si ce n’est pas le premier rendu du composant ou [`ShouldRender`](#suppress-ui-refreshing) s’il est évalué comme `false` , n’effectuez pas d’opérations supplémentaires sur le composant.
+1. Générez la diffation de l’arborescence de rendu (différence) et le rendu du composant.
+1. Attendez le DOM à mettre à jour.
+1. Appelez [`OnAfterRender{Async}`](#after-component-render) .
+
+![Cycle de vie du rendu](lifecycle/_static/lifecycle3.png)
+
+Les développeurs appellent pour [`StateHasChanged`](#state-changes) générer un rendu.
 
 ## <a name="lifecycle-methods"></a>Méthodes de cycle de vie
 
@@ -175,13 +205,13 @@ protected override bool ShouldRender()
 
 Même si <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> est substitué, le composant est toujours restitué initialement.
 
-Pour plus d'informations, consultez <xref:blazor/webassembly-performance-best-practices#avoid-unnecessary-component-renders>.
+Pour plus d’informations, consultez <xref:blazor/webassembly-performance-best-practices#avoid-unnecessary-component-renders>.
 
 ## <a name="state-changes"></a>Modifications d'état
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> notifie le composant que son état a changé. Le cas échéant, <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> l’appel de entraîne le rerendu du composant.
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> est appelé automatiquement pour les <xref:Microsoft.AspNetCore.Components.EventCallback> méthodes. Pour plus d'informations, consultez <xref:blazor/components/event-handling#eventcallback>.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> est appelé automatiquement pour les <xref:Microsoft.AspNetCore.Components.EventCallback> méthodes. Pour plus d’informations, consultez <xref:blazor/components/event-handling#eventcallback>.
 
 ## <a name="handle-incomplete-async-actions-at-render"></a>Gérer les actions asynchrones incomplètes au rendu
 
@@ -191,7 +221,7 @@ Dans le `FetchData` composant des Blazor modèles, <xref:Microsoft.AspNetCore.Co
 
 `Pages/FetchData.razor` dans le Blazor Server modèle :
 
-[!code-razor[](lifecycle/samples_snapshot/3.x/FetchData.razor?highlight=9,21,25)]
+[!code-razor[](lifecycle/samples_snapshot/FetchData.razor?highlight=9,21,25)]
 
 ## <a name="handle-errors"></a>Gérer les erreurs
 
@@ -286,11 +316,11 @@ Annule l’abonnement des gestionnaires d’événements des événements .NET. 
 
 * Approche de champ privé et lambda
 
-  [!code-razor[](lifecycle/samples_snapshot/3.x/event-handler-disposal-1.razor?highlight=23,28)]
+  [!code-razor[](lifecycle/samples_snapshot/event-handler-disposal-1.razor?highlight=23,28)]
 
 * Approche de la méthode privée
 
-  [!code-razor[](lifecycle/samples_snapshot/3.x/event-handler-disposal-2.razor?highlight=16,26)]
+  [!code-razor[](lifecycle/samples_snapshot/event-handler-disposal-2.razor?highlight=16,26)]
 
 ## <a name="cancelable-background-work"></a>Travail en arrière-plan annulable
 

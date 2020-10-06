@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/options
-ms.openlocfilehash: a6af5a7b1b4bc066a563c7cac59274fd39594cf6
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6eafad63bd4c49cee6a85108b37a8b61e1214bce
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632588"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91762332"
 ---
 # <a name="options-pattern-in-aspnet-core"></a>Modèle d’options dans ASP.NET Core
 
@@ -37,6 +37,8 @@ Le modèle d’options utilise des classes pour fournir un accès fortement typ�
 * [Séparation des préoccupations](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns) : les paramètres des différentes parties de l’application ne sont pas dépendants ou associés les uns aux autres.
 
 Ces options fournissent également un mécanisme de validation des données de configuration. Pour plus d'informations, reportez-vous à la section [Validation des options](#options-validation).
+
+Cette rubrique fournit des informations sur le modèle d’options dans ASP.NET Core. Pour plus d’informations sur l’utilisation du modèle options dans les applications console, consultez [modèle d’options dans .net](/dotnet/core/extensions/options).
 
 [Afficher ou télécharger l’exemple de code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/options/samples) ([procédure de téléchargement](xref:index#how-to-download-a-sample))
 
@@ -378,7 +380,7 @@ Dans le code suivant, un second service <xref:Microsoft.Extensions.Options.IConf
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?name=snippet_Example2)]
 
-Vous pouvez ajouter plusieurs fournisseurs de configuration. Des fournisseurs de configuration sont disponibles à partir de packages NuGet et sont appliqués dans l’ordre de leur inscription. Pour plus d'informations, consultez <xref:fundamentals/configuration/index>.
+Vous pouvez ajouter plusieurs fournisseurs de configuration. Des fournisseurs de configuration sont disponibles à partir de packages NuGet et sont appliqués dans l’ordre de leur inscription. Pour plus d’informations, consultez <xref:fundamentals/configuration/index>.
 
 Chaque appel à <xref:Microsoft.Extensions.Options.IConfigureOptions%601.Configure*> ajoute un service <xref:Microsoft.Extensions.Options.IConfigureOptions%601> au conteneur de services. Dans l’exemple précédent, les valeurs de `Option1` et `Option2` sont toutes deux spécifiées dans *appsettings.json*, mais les valeurs de `Option1` et `Option2` sont remplacées par le délégué configuré.
 
@@ -800,7 +802,7 @@ Dans le code suivant, un second service <xref:Microsoft.Extensions.Options.IConf
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?name=snippet_Example2)]
 
-Vous pouvez ajouter plusieurs fournisseurs de configuration. Des fournisseurs de configuration sont disponibles à partir de packages NuGet et sont appliqués dans l’ordre de leur inscription. Pour plus d'informations, consultez <xref:fundamentals/configuration/index>.
+Vous pouvez ajouter plusieurs fournisseurs de configuration. Des fournisseurs de configuration sont disponibles à partir de packages NuGet et sont appliqués dans l’ordre de leur inscription. Pour plus d’informations, consultez <xref:fundamentals/configuration/index>.
 
 Chaque appel à <xref:Microsoft.Extensions.Options.IConfigureOptions%601.Configure*> ajoute un service <xref:Microsoft.Extensions.Options.IConfigureOptions%601> au conteneur de services. Dans l’exemple précédent, les valeurs de `Option1` et `Option2` sont toutes deux spécifiées dans *appsettings.json*, mais les valeurs de `Option1` et `Option2` sont remplacées par le délégué configuré.
 
