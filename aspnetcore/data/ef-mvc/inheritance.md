@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: 34c4ea28103b9eb12601b383a46091084391f120
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: fabb0ed9c0f64a529b516d521d60a7d862e2654a
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847596"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754565"
 ---
 # <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>Didacticiel : implémenter l’héritage-ASP.NET MVC avec EF Core
 
@@ -64,7 +64,7 @@ Ce modèle de génération d’une structure d’héritage d’entité à partir
 Une alternative consiste à faire en sorte que la base de données ressemble plus à la structure d’héritage. Par exemple, vous pouvez avoir uniquement les champs de nom dans la table Person, et des tables Instructor et Student distinctes avec les champs de date.
 
 > [!WARNING]
-> La table par type (TPT) n’est pas prise en charge par EF Core 3. x, mais elle a été implémentée dans [EF Core 5,0](https://docs.microsoft.com/ef/core/what-is-new/ef-core-5.0/plan).
+> La table par type (TPT) n’est pas prise en charge par EF Core 3. x, mais elle a été implémentée dans [EF Core 5,0](/ef/core/what-is-new/ef-core-5.0/plan).
 
 ![Héritage TPT (table par type)](inheritance/_static/tpt.png)
 

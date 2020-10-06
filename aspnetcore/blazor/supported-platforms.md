@@ -5,7 +5,7 @@ description: En savoir plus sur les plateformes prises en charge pour ASP.NET Co
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 10/01/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,43 +18,63 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/supported-platforms
-ms.openlocfilehash: 692ab63bb48dbfa29021d59cdf035e9549d3039c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1ffe98636ed200adbf00e89c2c3499eb69792d3f
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625945"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754539"
 ---
 # <a name="aspnet-core-no-locblazor-supported-platforms"></a>BlazorPlateformes prises en charge ASP.net Core
 
 Par [Luke Latham](https://github.com/guardrex)
 
-## <a name="browser-requirements"></a>Configuration requise des navigateurs
+::: moniker range=">= aspnetcore-5.0"
 
-### Blazor WebAssembly
+Blazor WebAssembly et Blazor Server sont pris en charge dans les navigateurs présentés dans le tableau suivant.
 
-| Browser                          | Version               |
-| -------------------------------- | :-------------------: |
-| Microsoft Edge                   | Current               |
-| Mozilla Firefox                  | Current               |
-| Google Chrome, y compris Android | Current               |
-| Safari, y compris iOS            | Current               |
-| Microsoft Internet Explorer      | Non pris en charge&dagger; |
+| Navigateur                          | Version         |
+| -------------------------------- | --------------- |
+| Apple Safari, y compris iOS      | Actif&dagger; |
+| Google Chrome, y compris Android | Actif&dagger; |
+| Microsoft Edge                   | Actif&dagger; |
+| Mozilla Firefox                  | Actif&dagger; |  
 
-&dagger;Microsoft Internet Explorer ne prend pas en charge [Webassembly](https://webassembly.org).
+&dagger;*Current* fait référence à la dernière version du navigateur.  
 
-### Blazor Server
+::: moniker-end
 
-| Browser                          | Version    |
-| -------------------------------- | :--------: |
-| Microsoft Edge                   | Current    |
-| Mozilla Firefox                  | Current    |
-| Google Chrome, y compris Android | Current    |
-| Safari, y compris iOS            | Current    |
-| Microsoft Internet Explorer      | 11&dagger; |
+::: moniker range="< aspnetcore-5.0"
 
-&dagger;Des polyremplissages supplémentaires sont nécessaires (par exemple, des promesses peuvent être ajoutées via un [`Polyfill.io`](https://polyfill.io/v3/) Bundle).
+## Blazor WebAssembly
+
+| Navigateur                          | Version               |
+| -------------------------------- | --------------------- |
+| Apple Safari, y compris iOS      | Actif&dagger;       |
+| Google Chrome, y compris Android | Actif&dagger;       |
+| Microsoft Edge                   | Actif&dagger;       |
+| Microsoft Internet Explorer      | Non pris en charge&Dagger; |
+| Mozilla Firefox                  | Actif&dagger;       |  
+
+&dagger;*Current* fait référence à la dernière version du navigateur.  
+&Dagger;Microsoft Internet Explorer ne prend pas en charge [Webassembly](https://webassembly.org).
+
+## Blazor Server
+
+| Navigateur                          | Version         |
+| -------------------------------- | --------------- |
+| Apple Safari, y compris iOS      | Actif&dagger; |
+| Google Chrome, y compris Android | Actif&dagger; |
+| Microsoft Edge                   | Actif&dagger; |
+| Microsoft Internet Explorer      | 11&Dagger;      |
+| Mozilla Firefox                  | Actif&dagger; |
+
+&dagger;*Current* fait référence à la dernière version du navigateur.  
+&Dagger;Des polyremplissages supplémentaires sont nécessaires. Par exemple, les promesses peuvent être ajoutées via un [`Polyfill.io`](https://polyfill.io/v3/) bundle.
+
+::: moniker-end
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
 * <xref:blazor/hosting-models>
+* <xref:signalr/supported-platforms>

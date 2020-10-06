@@ -18,16 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 913f8f1e43586ce71353c080e72be3b80f4c0573
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1e50fb2f2f5e3621b189f756c53e80a2dd64c8a6
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634265"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754526"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>Authentification et autorisation pour SPAs
 
-ASP.NET Core 3,0 ou version ultérieure offre une authentification dans les applications à page unique (SPAs) à l’aide de la prise en charge de l’autorisation de l’API. ASP.NET Core Identitypour l’authentification et le stockage des utilisateurs est associé au [ Identity serveur](https://identityserver.io/) pour l’implémentation de OpenID Connect.
+Les modèles ASP.NET Core 3,1 et versions ultérieures offrent une authentification dans les applications à page unique (SPAs) à l’aide de la prise en charge de l’autorisation de l’API. ASP.NET Core Identitypour l’authentification et le stockage des utilisateurs est associé au [ Identity serveur](https://identityserver.io/) pour l’implémentation de OpenID Connect.
 
 Un paramètre d’authentification a été ajouté aux modèles de projet **angulaire** et **REACT** qui est similaire au paramètre d’authentification dans les modèles de projet **application Web (Model-View-Controller)** et **application Web** ( Razor pages). Les valeurs de paramètre autorisées sont **None** et **Individual**. Le modèle de projet **React.js et Redux** ne prend pas en charge le paramètre d’authentification pour l’instant.
 

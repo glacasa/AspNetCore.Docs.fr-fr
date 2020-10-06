@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: a8b1e7cd94836e89c438045df4bb8dd049da7f72
-ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
+ms.openlocfilehash: e4c77bd5bf5a26a11cdd23664ac24ae50986969b
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91653982"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754708"
 ---
 # <a name="use-aspnet-core-no-locsignalr-with-no-locblazor-webassembly"></a>Utiliser ASP.NET Core SignalR avec Blazor WebAssembly
 
@@ -59,7 +59,7 @@ Ce didacticiel enseigne les bases de la création d’une application en temps r
 # <a name="visual-studio-for-mac"></a>[Visual Studio pour Mac](#tab/visual-studio-mac)
 
 <!-- * [Visual Studio for Mac version 8.8 or later (in preview)](https://visualstudio.microsoft.com/vs/mac/) -->
-* [Visual Studio pour Mac version 8,8 ou ultérieure (en préversion)](https://docs.microsoft.com/visualstudio/releasenotes/vs2019-mac-preview-relnotes)
+* [Visual Studio pour Mac version 8,8 ou ultérieure (en préversion)](/visualstudio/releasenotes/vs2019-mac-preview-relnotes)
 * [!INCLUDE [.NET Core 5.0 SDK](~/includes/5.0-SDK.md)]
 
 # <a name="net-core-cli"></a>[CLI .NET Core](#tab/netcore-cli/)
@@ -118,13 +118,13 @@ Suivez les instructions de votre choix d’outils :
 
 1. Sélectionnez ** Blazor application** , puis sélectionnez **suivant**.
 
-1. Tapez `BlazorSignalRApp` dans le champ **nom du projet** . Confirmez que l’entrée d' **emplacement** est correcte ou indiquez un emplacement pour le projet. Sélectionnez **Create** (Créer).
+1. Tapez `BlazorSignalRApp` dans le champ **nom du projet** . Confirmez que l’entrée d' **emplacement** est correcte ou indiquez un emplacement pour le projet. Sélectionnez **Créer**.
 
 1. Choisissez le modèle d' ** Blazor WebAssembly application** .
 
 1. Sous **avancé**, activez la case à cocher **ASP.net Core hébergé** .
 
-1. Sélectionnez **Create** (Créer).
+1. Sélectionnez **Créer**.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -150,7 +150,7 @@ Suivez les instructions de votre choix d’outils :
 
 1. Vérifiez que **l’authentification** est définie sur **aucune authentification**. Activez la case à cocher **ASP.net Core hébergé** . Sélectionnez **Suivant**.
 
-1. Dans le champ **nom du projet** , nommez l’application `BlazorSignalRApp` . Sélectionnez **Create** (Créer).
+1. Dans le champ **nom du projet** , nommez l’application `BlazorSignalRApp` . Sélectionnez **Créer**.
 
    Si une invite s’affiche pour faire confiance au certificat de développement, approuvez le certificat et continuez. Les mots de passe utilisateur et trousseau sont requis pour approuver le certificat.
 

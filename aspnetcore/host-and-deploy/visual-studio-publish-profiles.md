@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: a7bbc3f3a0a0d5a320bd290d325f0c01390828b4
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e86a648e2707e808452e3bc92d991058c8fde480
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634161"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754643"
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>Profils de publication Visual Studio (. pubxml) pour le déploiement d’applications ASP.NET Core
 
@@ -119,7 +119,7 @@ La commande `dotnet publish` appelle MSBuild, qui appelle la cible de `Publish`.
 
 Les propriétés MSBuild peuvent être passées à l’aide de l’un des formats suivants :
 
-* `p:<NAME>=<VALUE>`
+* `-p:<NAME>=<VALUE>`
 * `/p:<NAME>=<VALUE>`
 
 Par exemple, la commande suivante publie une build `Release` sur un partage réseau. Le partage réseau est spécifié avec des barres obliques (*//r8/*) et fonctionne sur toutes les plateformes .NET Core prises en charge.
@@ -509,7 +509,7 @@ Pour afficher les fichiers dans un déploiement d’application web Azure App Se
 
 Sélectionnez l’élément de menu [Console de débogage](https://github.com/projectkudu/kudu/wiki/Kudu-console) pour afficher, modifier, supprimer ou ajouter des fichiers.
 
-## <a name="additional-resources"></a>Ressources complémentaires
+## <a name="additional-resources"></a>Ressources supplémentaires
 
 * [Web Deploy](https://www.iis.net/downloads/microsoft/web-deploy) (MSDeploy) simplifie le déploiement des applications web et des sites web sur les serveurs IIS.
 * [Référentiel github du kit de développement logiciel (SDK) Web](https://github.com/dotnet/websdk/issues): problèmes de fichier et demande de déploiement.

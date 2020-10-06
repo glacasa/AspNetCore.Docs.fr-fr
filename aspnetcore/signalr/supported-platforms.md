@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/supported-platforms
-ms.openlocfilehash: 91fd2553803d855b338b1d1b46d55e1d1e4cc21e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a342dd787eceadd22ac26b57a3615a6b0b21f461
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635149"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754500"
 ---
 # <a name="aspnet-core-no-locsignalr-supported-platforms"></a>SignalRPlateformes prises en charge ASP.net Core
 
@@ -35,13 +35,12 @@ SignalR pour ASP.NET Core prend en charge toutes les plateformes de serveur pris
 
 Le [client JavaScript](xref:signalr/javascript-client) s’exécute sur NodeJS 8 et versions ultérieures, ainsi que sur les navigateurs suivants :
 
-| Browser                         | Version         |
-| ------------------------------- | --------------- |
-| Microsoft Edge                  | Actif&dagger; |
-| Mozilla Firefox                 | Actif&dagger; |
-| Google Chrome ; comprend Android | Actif&dagger; |
-| Safari comprend iOS            | Actif&dagger; |
-| Microsoft Internet Explorer     | 11              |
+| Navigateur                          | Version         |
+| -------------------------------- | --------------- |
+| Apple Safari, y compris iOS      | Actif&dagger; |
+| Google Chrome, y compris Android | Actif&dagger; |
+| Microsoft Edge                   | Actif&dagger; |
+| Mozilla Firefox                  | Actif&dagger; |
 
 &dagger;*Current* fait référence à la dernière version du navigateur.
 
