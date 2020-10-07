@@ -5,7 +5,7 @@ description: Découvrez comment configurer Blazor Server pour d’autres scénar
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/04/2020
+ms.date: 10/06/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,37 +18,190 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/additional-scenarios
-ms.openlocfilehash: 9b3698489300e45cf77c3d51611ff44e2f4e16a5
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: 89288f3fce2dbb6f2647693ba8aaf29500b5bb2b
+ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393663"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91805490"
 ---
 # <a name="aspnet-core-no-locblazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor Server des scénarios de sécurité supplémentaires
 
 Par [Javier Calvarro Nelson](https://github.com/javiercn)
 
-## <a name="pass-tokens-to-a-no-locblazor-server-app"></a>Passer des jetons à une Blazor Server application
+::: moniker range=">= aspnetcore-5.0"
 
-Les jetons disponibles en dehors des Razor composants d’une Blazor Server application peuvent être passés aux composants avec l’approche décrite dans cette section. Pour obtenir un exemple de code, y compris un `Startup.ConfigureServices` exemple complet, consultez la page [transmission de jetons à une Blazor application côté serveur](https://github.com/javiercn/blazor-server-aad-sample).
+<h2 id="pass-tokens-to-a-blazor-server-app">Passer des jetons à une Blazor Server application</h2>
+
+Les jetons disponibles en dehors des Razor composants d’une Blazor Server application peuvent être passés aux composants avec l’approche décrite dans cette section.
 
 Authentifiez l' Blazor Server application comme vous le feriez avec une Razor application de pages ou MVC standard. Approvisionnez et enregistrez les jetons dans l’authentification cookie . Par exemple :
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 ...
 
 services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =>
 {
-    options.ResponseType = "code";
+    options.ResponseType = OpenIdConnectResponseType.Code;
     options.SaveTokens = true;
 
     options.Scope.Add("offline_access");
-    options.Scope.Add("{SCOPE}");
-    options.Resource = "{RESOURCE}";
 });
+```
+
+Si vous le souhaitez, des étendues supplémentaires sont ajoutées avec `options.Scope.Add("{SCOPE}");` , où l’espace réservé `{SCOPE}` est l’étendue supplémentaire à ajouter.
+
+Définissez un service de fournisseur de jetons **délimités** qui peut être utilisé dans l' Blazor application pour résoudre les jetons à partir de l' [injection de dépendances (di)](xref:blazor/fundamentals/dependency-injection):
+
+```csharp
+public class TokenProvider
+{
+    public string AccessToken { get; set; }
+    public string RefreshToken { get; set; }
+}
+```
+
+Dans `Startup.ConfigureServices` , ajoutez des services pour :
+
+* `IHttpClientFactory`
+* `TokenProvider`
+
+```csharp
+services.AddHttpClient();
+services.AddScoped<TokenProvider>();
+```
+
+Définissez une classe à passer à l’état initial de l’application avec les jetons d’accès et d’actualisation :
+
+```csharp
+public class InitialApplicationState
+{
+    public string AccessToken { get; set; }
+    public string RefreshToken { get; set; }
+}
+```
+
+Dans le `_Host.cshtml` fichier, créez l’instance et, `InitialApplicationState` puis transmettez-la en tant que paramètre à l’application :
+
+```cshtml
+@using Microsoft.AspNetCore.Authentication
+
+...
+
+@{
+    var tokens = new InitialApplicationState
+    {
+        AccessToken = await HttpContext.GetTokenAsync("access_token"),
+        RefreshToken = await HttpContext.GetTokenAsync("refresh_token")
+    };
+}
+
+<component type="typeof(App)" param-InitialState="tokens" 
+    render-mode="ServerPrerendered" />
+```
+
+Dans le `App` composant ( `App.razor` ), résolvez le service et initialisez-le avec les données du paramètre :
+
+```razor
+@inject TokenProvider TokenProvider
+
+...
+
+@code {
+    [Parameter]
+    public InitialApplicationState InitialState { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        TokenProvider.AccessToken = InitialState.AccessToken;
+        TokenProvider.RefreshToken = InitialState.RefreshToken;
+
+        return base.OnInitializedAsync();
+    }
+}
+```
+
+Ajoutez une référence de package à l’application pour le [`Microsoft.AspNet.WebApi.Client`](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Client) package NuGet.
+
+Dans le service qui effectue une demande d’API sécurisée, injectez le fournisseur de jetons et récupérez le jeton pour la demande d’API :
+
+```csharp
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+public class WeatherForecastService
+{
+    private readonly HttpClient client;
+    private readonly TokenProvider tokenProvider;
+
+    public WeatherForecastService(IHttpClientFactory clientFactory, 
+        TokenProvider tokenProvider)
+    {
+        client = clientFactory.CreateClient();
+        this.tokenProvider = tokenProvider;
+    }
+
+    public async Task<WeatherForecast[]> GetForecastAsync()
+    {
+        var token = tokenProvider.AccessToken;
+        var request = new HttpRequestMessage(HttpMethod.Get, 
+            "https://localhost:5003/WeatherForecast");
+        request.Headers.Add("Authorization", $"Bearer {token}");
+        var response = await client.SendAsync(request);
+        response.EnsureSuccessStatusCode();
+
+        return await response.Content.ReadAsAsync<WeatherForecast[]>();
+    }
+}
+```
+
+<h2 id="set-the-authentication-scheme">Définir le schéma d’authentification</h2>
+
+Pour une application qui utilise plusieurs intergiciels (middleware) d’authentification et qui possède donc plusieurs schémas d’authentification, le schéma qui Blazor utilise peut être défini explicitement dans la configuration de point de terminaison de `Startup.Configure` . L’exemple suivant définit le schéma de Azure Active Directory :
+
+```csharp
+endpoints.MapBlazorHub().RequireAuthorization(
+    new AuthorizeAttribute 
+    {
+        AuthenticationSchemes = AzureADDefaults.AuthenticationScheme
+    });
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+<h2 id="pass-tokens-to-a-blazor-server-app">Passer des jetons à une Blazor Server application</h2>
+
+Les jetons disponibles en dehors des Razor composants d’une Blazor Server application peuvent être passés aux composants avec l’approche décrite dans cette section.
+
+Authentifiez l' Blazor Server application comme vous le feriez avec une Razor application de pages ou MVC standard. Approvisionnez et enregistrez les jetons dans l’authentification cookie . Par exemple :
+
+```csharp
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+
+...
+
+services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =>
+{
+    options.ResponseType = OpenIdConnectResponseType.Code;
+    options.SaveTokens = true;
+
+    options.Scope.Add("offline_access");
+});
+```
+
+Si vous le souhaitez, des étendues supplémentaires sont ajoutées avec `options.Scope.Add("{SCOPE}");` , où l’espace réservé `{SCOPE}` est l’étendue supplémentaire à ajouter.
+
+Si vous le souhaitez, la ressource est spécifiée avec `options.Resource = "{RESOURCE}";` , où l’espace réservé `{RESOURCE}` est la ressource. Par exemple :
+
+```csharp
+options.Resource = "https://graph.microsoft.com";
 ```
 
 Définissez une classe à passer à l’état initial de l’application avec les jetons d’accès et d’actualisation :
@@ -123,9 +276,9 @@ Dans le `App` composant ( `App.razor` ), résolvez le service et initialisez-le 
 }
 ```
 
-Ajoutez une référence de package à l’application pour le package NuGet [Microsoft. Aspnet. WebApi. client](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Client) .
+Ajoutez une référence de package à l’application pour le [`Microsoft.AspNet.WebApi.Client`](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Client) package NuGet.
 
-Dans le service qui effectue une demande d’API sécurisée, injectez le fournisseur de jetons et récupérez le jeton pour appeler l’API :
+Dans le service qui effectue une demande d’API sécurisée, injectez le fournisseur de jetons et récupérez le jeton pour la demande d’API :
 
 ```csharp
 using System;
@@ -134,24 +287,23 @@ using System.Threading.Tasks;
 
 public class WeatherForecastService
 {
-    private readonly TokenProvider store;
+    private readonly HttpClient client;
+    private readonly TokenProvider tokenProvider;
 
     public WeatherForecastService(IHttpClientFactory clientFactory, 
         TokenProvider tokenProvider)
     {
-        Client = clientFactory.CreateClient();
-        store = tokenProvider;
+        client = clientFactory.CreateClient();
+        this.tokenProvider = tokenProvider;
     }
 
-    public HttpClient Client { get; }
-
-    public async Task<WeatherForecast[]> GetForecastAsync(DateTime startDate)
+    public async Task<WeatherForecast[]> GetForecastAsync()
     {
-        var token = store.AccessToken;
+        var token = tokenProvider.AccessToken;
         var request = new HttpRequestMessage(HttpMethod.Get, 
             "https://localhost:5003/WeatherForecast");
         request.Headers.Add("Authorization", $"Bearer {token}");
-        var response = await Client.SendAsync(request);
+        var response = await client.SendAsync(request);
         response.EnsureSuccessStatusCode();
 
         return await response.Content.ReadAsAsync<WeatherForecast[]>();
@@ -159,7 +311,7 @@ public class WeatherForecastService
 }
 ```
 
-## <a name="set-the-authentication-scheme"></a>Définir le schéma d’authentification
+<h2 id="set-the-authentication-scheme">Définir le schéma d’authentification</h2>
 
 Pour une application qui utilise plusieurs intergiciels (middleware) d’authentification et qui possède donc plusieurs schémas d’authentification, le schéma qui Blazor utilise peut être défini explicitement dans la configuration de point de terminaison de `Startup.Configure` . L’exemple suivant définit le schéma de Azure Active Directory :
 
@@ -173,7 +325,7 @@ endpoints.MapBlazorHub().RequireAuthorization(
 
 ## <a name="use-openid-connect-oidc-v20-endpoints"></a>Utiliser des points de terminaison OpenID Connect (OIDC) v 2.0
 
-La bibliothèque d’authentification et les Blazor modèles utilisent des points de terminaison OpenID Connect (OIDC) v 1.0. Pour utiliser un point de terminaison v 2.0, configurez l' <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> option dans le <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> :
+Dans les versions de ASP.NET Core antérieures à 5,0, la bibliothèque d’authentification et les Blazor modèles utilisent des points de terminaison OpenID Connect (OIDC) v 1.0. Pour utiliser un point de terminaison v 2.0 avec des versions de ASP.NET Core antérieures à 5,0, configurez l' <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> option dans le <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> :
 
 ```csharp
 services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, 
@@ -231,3 +383,5 @@ Si l’ajout d’un segment à l’autorité n’est pas approprié pour le four
 ```
 
 Vous pouvez trouver l’URI ID d’application à utiliser dans la description de l’inscription de l’application du fournisseur OIDC.
+
+::: moniker-end

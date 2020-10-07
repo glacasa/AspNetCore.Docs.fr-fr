@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: e12b0e6d1bf9eab751f6605b9a156f637f2b0c0f
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: d4fd0d501ff14e37bb55b78bb6493ad43f9e5a87
+ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393832"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91805568"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core de débogage Blazor WebAssembly
 
@@ -343,8 +343,11 @@ Les mappages de source de navigateur permettent au navigateur de mapper les fich
 Si vous rencontrez des erreurs, les conseils suivants peuvent vous aider :
 
 * Dans l’onglet **débogueur** , ouvrez les outils de développement de votre navigateur. Dans la console, exécutez `localStorage.clear()` pour supprimer tous les points d’arrêt.
-* Confirmez que vous avez installé et approuvé le certificat de développement ASP.NET Core HTTPs. Pour plus d'informations, consultez <xref:security/enforcing-ssl#troubleshoot-certificate-problems>.
+* Confirmez que vous avez installé et approuvé le certificat de développement ASP.NET Core HTTPs. Pour plus d’informations, consultez <xref:security/enforcing-ssl#troubleshoot-certificate-problems>.
 * Visual Studio requiert l’option **activer le débogage JavaScript pour ASP.net (chrome, Edge et IE)** dans **Outils**  >  **options**  >  **débogage**  >  **général**. Il s’agit du paramètre par défaut pour Visual Studio. Si le débogage ne fonctionne pas, vérifiez que l’option est sélectionnée.
+* Si votre environnement utilise un proxy HTTP, assurez-vous qu' `localhost` il est inclus dans les paramètres de contournement du proxy. Pour ce faire, vous pouvez définir la `NO_PROXY` variable d’environnement dans l’un ou l’autre des éléments suivants :
+  * `launchSettings.json`Fichier pour le projet.
+  * Au niveau des variables d’environnement système ou utilisateur pour qu’il s’applique à toutes les applications. Quand vous utilisez une variable d’environnement, redémarrez Visual Studio pour que la modification prenne effet.
 
 ### <a name="breakpoints-in-oninitializedasync-not-hit"></a>Points d’arrêt `OnInitialized{Async}` non atteints
 

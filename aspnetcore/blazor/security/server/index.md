@@ -5,7 +5,7 @@ description: Découvrez comment sécuriser des applications Blazor Server en tan
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/02/2020
+ms.date: 10/06/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: ba9fe3c0149679fa5760c0c9214cd426f1804c31
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d6d0f6f859dbaef98c6c8a9c53fe9858705cdc0a
+ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626452"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91805503"
 ---
 # <a name="secure-aspnet-core-no-locblazor-server-apps"></a>Sécuriser les Blazor Server applications ASP.net Core
 
 Par [Luke Latham](https://github.com/guardrex)
 
-Blazor Server les applications sont configurées pour la sécurité de la même façon que les applications ASP.NET Core. Pour plus d’informations, consultez les articles sous <xref:security/index> . Les rubriques de cette vue d’ensemble s’appliquent spécifiquement à Blazor Server . 
+Blazor Server les applications sont configurées pour la sécurité de la même façon que les applications ASP.NET Core. Pour plus d’informations, consultez les articles sous <xref:security/index> . Les rubriques de cette vue d’ensemble s’appliquent spécifiquement à Blazor Server .
 
 ## <a name="no-locblazor-server-project-template"></a>Blazor Server modèle de projet
 
@@ -62,7 +62,7 @@ Les valeurs autorisées d’authentification (`{AUTHENTICATION}`) sont présent�
 
 | Mécanisme d’authentification | Description |
 | ------------------------ | ----------- |
-| `None` (par défaut)         | Aucune authentification |
+| `None` (valeur par défaut)         | Aucune authentification |
 | `Individual`             | Utilisateurs stockés dans l’application avec ASP.NET Core Identity |
 | `IndividualB2C`          | Utilisateurs stockés dans [Azure ad B2C](xref:security/authentication/azure-ad-b2c) |
 | `SingleOrg`              | Authentification d’organisation pour un seul locataire |
@@ -96,7 +96,7 @@ Les valeurs autorisées d’authentification (`{AUTHENTICATION}`) sont présent�
 
 | Mécanisme d’authentification | Description |
 | ------------------------ | ----------- |
-| `None` (par défaut)         | Aucune authentification |
+| `None` (valeur par défaut)         | Aucune authentification |
 | `Individual`             | Utilisateurs stockés dans l’application avec ASP.NET Core Identity |
 | `IndividualB2C`          | Utilisateurs stockés dans [Azure ad B2C](xref:security/authentication/azure-ad-b2c) |
 | `SingleOrg`              | Authentification d’organisation pour un seul locataire |
@@ -108,7 +108,14 @@ Les valeurs autorisées d’authentification (`{AUTHENTICATION}`) sont présent�
 * Créez un dossier pour le projet.
 * Nommez ce projet.
 
-Pour plus d’informations, consultez la [`dotnet new`](/dotnet/core/tools/dotnet-new) commande dans le guide .net core.
+Pour plus d'informations :
+
+* Consultez la [`dotnet new`](/dotnet/core/tools/dotnet-new) commande dans le guide .net core.
+* Exécutez la commande help pour le Blazor Server modèle ( `blazorserver` ) dans une interface de commande :
+
+  ```dotnetcli
+  dotnet new blazorserver --help
+  ```
 
 ---
 
@@ -118,3 +125,8 @@ Génération Identity de modèles automatique dans un Blazor Server projet :
 
 * [Sans autorisation existante](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-without-existing-authorization).
 * [Avec autorisation](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-with-authorization).
+
+## <a name="additional-resources"></a>Ressources supplémentaires
+
+* [Démarrage rapide : Ajouter la connexion avec Microsoft à une application web ASP.NET Core](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp)
+* [Démarrage rapide : Protéger une API web ASP.NET Core avec la plateforme d’identités Microsoft](/azure/active-directory/develop/quickstart-v2-aspnet-core-web-api)

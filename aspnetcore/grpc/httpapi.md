@@ -1,5 +1,5 @@
 ---
-title: Créer des API Web JSON à partir de gRPC
+title: Créer des API web JSON à partir de gRPC
 author: jamesnk
 description: Découvrez comment créer des API JSON HTTP pour les services gRPC.
 monikerRange: '>= aspnetcore-3.0'
@@ -17,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/httpapi
-ms.openlocfilehash: 21f47b889014ad4ff66d4cb710aed0159298f0cc
-ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
+ms.openlocfilehash: fa4e7489920338344b78874690e64d4080b5a719
+ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89102890"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91805581"
 ---
-# <a name="create-json-web-apis-from-grpc"></a>Créer des API Web JSON à partir de gRPC
+# <a name="create-json-web-apis-from-grpc"></a>Créer des API web JSON à partir de gRPC
 
 Par [James Newton-King](https://twitter.com/jamesnk)
 
@@ -52,7 +52,7 @@ gRPC HTTP API est une extension expérimentale de ASP.NET Core qui crée des API
 
 gRPC peut toujours être utilisé pour appeler des services.
 
-### <a name="usage"></a>Utilisation
+### <a name="usage"></a>Usage
 
 1. Ajoutez une référence de package à [Microsoft. AspNetCore. GRPC. HttpApi](https://www.nuget.org/packages/Microsoft.AspNetCore.Grpc.HttpApi).
 1. Inscrire des services dans *Startup.cs* avec `AddGrpcHttpApi` .
@@ -69,7 +69,7 @@ package greet;
 service Greeter {
   rpc SayHello (HelloRequest) returns (HelloReply) {
     option (google.api.http) = {
-      get: "v1/greeter/{name}"
+      get: "/v1/greeter/{name}"
     };
   }
 }
@@ -94,11 +94,11 @@ Les journaux du serveur indiquent que l’appel HTTP est exécuté par un servic
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
       Request starting HTTP/1.1 GET https://localhost:5001/v1/greeter/world
 info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
-      Executing endpoint 'gRPC - v1/greeter/{name}'
+      Executing endpoint 'gRPC - /v1/greeter/{name}'
 info: Server.GreeterService[0]
       Sending hello to world
 info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
-      Executed endpoint 'gRPC - v1/greeter/{name}'
+      Executed endpoint 'gRPC - /v1/greeter/{name}'
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
       Request finished in 1.996ms 200 application/json
 ```
