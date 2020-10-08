@@ -125,14 +125,14 @@ Consultez les liens suivants pour connaître les différences entre la stimulati
 ## <a name="authentication-providers-per-tenant"></a>Fournisseurs d’authentification par locataire
 
 ASP.NET Core Framework n’a pas de solution intégrée pour l’authentification mutualisée.
-Bien qu’il soit possible pour les clients d’en écrire un, à l’aide des fonctionnalités intégrées, nous recommandons aux clients d’examiner le [noyau du verger](https://www.orchardcore.net/) à cet effet.
+Bien qu’il soit possible pour les clients d’en écrire un, à l’aide des fonctionnalités intégrées, nous recommandons aux clients d’envisager l’utilisation d'[Orchard Core](https://www.orchardcore.net/) à cet effet.
 
-Noyau du verger :
+Orchard Core est :
 
 * Une infrastructure d’application modulaire et mutualisée Open source générée avec ASP.NET Core.
 * Un système de gestion de contenu (CMS) basé sur ce Framework d’application.
 
-Consultez la source [principale du verger](https://github.com/OrchardCMS/OrchardCore) pour obtenir un exemple de fournisseurs d’authentification par client.
+Consultez le code source d’[Orchard Core](https://github.com/OrchardCMS/OrchardCore) pour obtenir un exemple de fournisseurs d’authentification par client.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
